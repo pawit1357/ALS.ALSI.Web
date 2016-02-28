@@ -1,0 +1,422 @@
+  Library Search Report
+
+  Data Path : I:\02 DHS\MS File\DHS#1\2015\3.Mar\150312W\
+  Data File : ELP_4210_2 .D                                       
+  Acq On    : 12 Mar 2015   4:25
+  Operator  : Rattana/ALS
+  Sample    : ELP-4210,1pc(83.50 cm2),SEI
+  Misc      : Mi 278194
+  ALS Vial  : 73   Sample Multiplier: 1
+
+  Search Libraries:   I:\02 DHS\Library\NIST98.L        Minimum Quality:  80
+                      I:\02 DHS\Library\Wiley7Nist05.L  Minimum Quality:  60
+
+  Unknown Spectrum:   Apex
+  Integration Events: ChemStation Integrator - For 2314.E
+
+Pk#     RT  Area%          Library/ID                 Ref#     CAS#   Qual
+_____________________________________________________________________________
+  1   3.214  0.36 I:\02 DHS\Library\NIST98.L
+                 Heptane                            109668 000142-82-5 91
+                 Heptane                              4133 000142-82-5 64
+                 Heptane                            109303 000142-82-5 64
+ 
+  2   3.852  0.25 I:\02 DHS\Library\Wiley7Nist05.L
+                 Pentane, 2,3,4-trimethyl- (CAS); 2 348190 000565-75-3 64
+                 ,3,4-Trimethylpentane; (CH3)2CHCH(
+                 CH3)CH(CH3)2
+                 Pentane, 2,3,4-trimethyl-          348186 000565-75-3 58
+                 Pentane, 2,3,4-trimethyl-; 2,3,4-T 348189 000565-75-3 58
+                 rimethylpentane; (CH3)2CHCH(CH3)CH
+                 (CH3)2
+ 
+  3   3.927  0.40 I:\02 DHS\Library\NIST98.L
+                 Pentane, 2,3,3-trimethyl-            6364 000560-21-4 90
+                 Pentane, 2,3,3-trimethyl-          109897 000560-21-4 64
+                 Decane, 3,3,4-trimethyl-            24454 049622-18-6 59
+ 
+  4   4.122  4.70 I:\02 DHS\Library\NIST98.L
+                 Toluene                            117292 000108-88-3 95
+                 Toluene                            117282 000108-88-3 91
+                 Toluene                            117283 000108-88-3 91
+ 
+  5   4.603  0.88 I:\02 DHS\Library\NIST98.L
+                 Octane                             110051 000111-65-9 94
+                 Octane                             109231 000111-65-9 90
+                 Octane                             109559 000111-65-9 78
+ 
+  6   6.914  0.34 I:\02 DHS\Library\NIST98.L
+                 Benzene, (1-methylethyl)-          119279 000098-82-8 95
+                 Benzene, (1-methylethyl)-          119280 000098-82-8 91
+                 Benzene, (1-methylethyl)-          119278 000098-82-8 91
+ 
+  7   7.199  0.71 I:\02 DHS\Library\NIST98.L
+                 1,4-Butanediol                     108327 000110-63-4 83
+                 Phenol, 4-[2-(methylamino)ethyl]-    3376 000370-98-9 83
+                 1,4-Butanediol                       3250 000110-63-4 83
+ 
+  8   7.611 10.67 I:\02 DHS\Library\NIST98.L
+                 Benzaldehyde                       119466 000100-52-7 96
+                 Benzaldehyde                       119438 000100-52-7 95
+                 Benzaldehyde                       115722 000100-52-7 94
+ 
+  9   7.956  0.51 I:\02 DHS\Library\NIST98.L
+                 Phenol                              40630 000108-95-2 96
+                 Phenol                             117987 000108-95-2 94
+                 Phenol                             117988 000108-95-2 91
+ 
+ 10   8.039  0.44 I:\02 DHS\Library\NIST98.L
+                 .alpha.-Methylstyrene              120633 000098-83-9 95
+                 .alpha.-Methylstyrene               52903 000098-83-9 93
+                 .alpha.-Methylstyrene              120637 000098-83-9 93
+ 
+ 11   8.302  0.33 I:\02 DHS\Library\NIST98.L
+                 Cyclotetrasiloxane, octamethyl-     97367 000556-67-2 90
+                 2,6-Dimethyl-5-methylphenylaminopy  97353 1000222-06-1 53
+                 ridin-3,4-dicarboxyimide
+                 Benzene, 1-phenyl-4-(2-cyano-2-phe  97311 027869-56-3 53
+                 nylethenyl)
+ 
+ 12   8.362  0.33 I:\02 DHS\Library\NIST98.L
+                 Decane                             112241 000124-18-5 96
+                 Decane                               5445 000124-18-5 91
+                 Decane                             109556 000124-18-5 91
+ 
+ 13   8.602  0.49 I:\02 DHS\Library\Wiley7Nist05.L
+                 2-Propenoic acid, 2-methyl-, 2-hyd 355615 000868-77-9 72
+                 roxyethyl ester; Methacrylic acid,
+                  2-hydroxyethyl ester; .beta.-Hydr
+                 oxyethyl methacrylate; Ethylene gl
+                 ycol methacrylate; Ethylene glycol
+                  monomethacrylate; Glycol methacry
+                 late; Glycol monomethacrylate; Hyd
+                 roxyethyl methacr
+                 1-Octyn-4-ol                         6484 052517-92-7 64
+                 2-Butenoic acid, butyl ester; Crot 363193 007299-91-4 64
+                 onic acid, butyl ester; Butyl crot
+                 onate; Butyl 2-butenoate; (E)-2-Bu
+                 tenoic acid butyl ester; Crotonic 
+                 acid n-butyl ester; Butyl (2E)-2-b
+                 utenoate #
+ 
+ 14   8.909  1.36 I:\02 DHS\Library\NIST98.L
+                 1-Hexanol, 2-ethyl-                 15889 000104-76-7 90
+                 1-Hexanol, 2-ethyl-                112637 000104-76-7 90
+                 1-Hexanol, 2-ethyl-                112165 000104-76-7 72
+ 
+ 15   9.089  0.53 I:\02 DHS\Library\NIST98.L
+                 Benzene, 1,4-dichloro-             123236 000106-46-7 95
+                 Benzene, 1,2-dichloro-              65665 000095-50-1 94
+                 Benzene, 1,4-dichloro-             123237 000106-46-7 94
+ 
+ 16   9.165  0.93 I:\02 DHS\Library\Wiley7Nist05.L
+                 2-Propenoic acid, 2-methyl-, methy 342025 000080-62-6 58
+                 l ester
+                 2-Propenoic acid, 2-methyl-, methy 342029 000080-62-6 50
+                 l ester (CAS); Methyl methacrylate
+                 ; Mme; Methyl ester of 2-methyl-2-
+                 propenoic acid; Diakon; Pegalan; M
+                 ethyl 2-methylpropenoate; Methyl 2
+                 -methyl-2-propenoate; Methacrylic 
+                 acid methyl ester; methyl 2-methyl
+                 -1-propenoate; CH
+                 2-Propenoic acid, 2-methyl-, methy 342030 000080-62-6 50
+                 l ester (CAS); Methyl methacrylate
+                 ; Mme; Methyl ester of 2-methyl-2-
+                 propenoic acid; Diakon; Pegalan; M
+                 ethyl 2-methylpropenoate; Methyl 2
+                 -methyl-2-propenoate; Methacrylic 
+                 acid methyl ester; methyl 2-methyl
+                 -1-propenoate; CH
+ 
+ 17   9.262  0.39 I:\02 DHS\Library\Wiley7Nist05.L
+                 2-Propenoic acid, 2-methyl-, ethyl 347493 000097-63-2 59
+                  ester
+                 Methyl 2-butenoate; 2-Butenoic aci 342179 018707-60-3 53
+                 d, methyl ester; Crotonic acid, me
+                 thyl ester; Methyl crotonate; Meth
+                 yl (2E)-2-butenoate #; Methyl (2E)
+                 -2-butenoate (computer-generated n
+                 ame)
+                 2-Butenoic acid, methyl ester, (E) 342008 000623-43-8 53
+                 - (CAS); Methyl trans-crotonate; M
+                 ETHYL ESTER OF (E)-2-BUTENOIC ACID
+                 ; Methyl trans-2-butenoate; Croton
+                 ic acid, methyl ester, (E)-; trans
+                 -2-Butenoic acid methyl ester
+ 
+ 18   9.510  0.41 I:\02 DHS\Library\Wiley7Nist05.L
+                 1-Dodecene                         381319 000112-41-4 52
+                 2-Hexene, 2,5-dimethyl- (CAS); 2,5 346729 003404-78-2 43
+                 -Dimethyl-2-hexene
+                 1-Heptanol, 4-methyl-; 4-Methyl-1- 356331 000817-91-4 38
+                 heptanol
+ 
+ 19   9.682  1.45 I:\02 DHS\Library\NIST98.L
+                 Acetophenone                       119123 000098-86-2 95
+                 Acetophenone                       119045 000098-86-2 95
+                 Acetophenone                       119121 000098-86-2 94
+ 
+ 20   9.817  1.03 I:\02 DHS\Library\NIST98.L
+                 Phenol, 3-methyl-                   48961 000108-39-4 96
+                 Phenol, 3-methyl-                  119784 000108-39-4 95
+                 Phenol, 3-methyl-                  119786 000108-39-4 94
+ 
+ 21  10.050  2.91 I:\02 DHS\Library\NIST98.L
+                 Benzenemethanol, .alpha.,.alpha.-d 110296 000617-94-7 83
+                 imethyl-
+                 .alpha.-Ethyl-.alpha.-methylbenzyl   8324 001565-75-9 72
+                  alcohol
+                 dl-2-Phenyl-1,2-propanediol        110295 004217-66-7 72
+ 
+ 22  10.403  1.71 I:\02 DHS\Library\NIST98.L
+                 2-Pyrrolidinone, 1-ethenyl-        111976 000088-12-0 91
+                 2-Pyrrolidinone, 1-ethenyl-        111975 000088-12-0 86
+                 2-Pyrrolidinone, 1-ethenyl-         14949 000088-12-0 83
+ 
+ 23  11.340  0.35 I:\02 DHS\Library\NIST98.L
+                 Undecane, 5-methyl-                109657 001632-70-8 86
+                 Undecane, 5-methyl-                  5633 001632-70-8 81
+                 Undecane, 5-methyl-                109658 001632-70-8 76
+ 
+ 24  11.551  0.23 I:\02 DHS\Library\Wiley7Nist05.L
+                 Decane, 5-ethyl-5-methyl-; 5-Ethyl  47353 017312-74-2 72
+                 -5-methyldecane #
+                 Sulfurous acid, 2-ethylhexyl octad 300119 000000-00-0 64
+                 ecyl ester
+                 Sulfurous acid, dodecyl 2-ethylhex 253244 000000-00-0 64
+                 yl ester
+ 
+ 25  11.618  0.34 I:\02 DHS\Library\Wiley7Nist05.L
+                 Undecane, 3-methyl-; 3-Methylundec 382643 001002-43-3 91
+                 ane
+                 Undecane, 3-methyl- (CAS); 3-Methy 382641 001002-43-3 78
+                 lundecane
+                 Dodecane, 3-methyl-                391010 017312-57-1 64
+ 
+ 26  12.001  0.41 I:\02 DHS\Library\NIST98.L
+                 1-Dodecene                           1720 000112-41-4 95
+                 2-Tetradecene, (E)-                 13030 035953-53-8 94
+                 5-Tetradecene, (E)-                111257 041446-66-6 94
+ 
+ 27  12.151  1.62 I:\02 DHS\Library\NIST98.L
+                 Dodecane                           112317 000112-40-3 96
+                 Dodecane                           109555 000112-40-3 91
+                 Tetradecane                        112357 000629-59-4 91
+ 
+ 28  13.411  0.60 I:\02 DHS\Library\NIST98.L
+                 1-Undecene                         108529 000821-95-4 94
+                 1-Dodecanol                         13544 000112-53-8 91
+                 1-Dodecene                         109529 000112-41-4 91
+ 
+ 29  13.907  0.72 I:\02 DHS\Library\NIST98.L
+                 Tridecane                          112308 000629-50-5 97
+                 Tridecane                           16403 000629-50-5 91
+                 Tridecane                          112309 000629-50-5 91
+ 
+ 30  14.072  0.39 I:\02 DHS\Library\Wiley7Nist05.L
+                 Octane, 1,1'-oxybis-; Octyl ether; 418318 000629-82-3 47
+                  n-Octyl ether; Antar; Caprylic et
+                 her; Di-n-octyl ether; Dioctyl eth
+                 er; Ether, di-n-octyl-; 1-(Octylox
+                 y)octane #
+                 Oxalic acid, 2-ethylhexyl hexyl es 172648 000000-00-0 47
+                 ter
+                 Octane, 3-ethyl-; 3-Ethyloctane    363672 005881-17-4 43
+ 
+ 31  14.604  0.26 I:\02 DHS\Library\Wiley7Nist05.L
+                 Nonane, 5-methyl-5-propyl-; 5-Meth  47383 017312-75-3 64
+                 yl-5-propylnonane #
+                 Nonane, 5-butyl-; 5-Butylnonane; 5 391035 017312-63-9 58
+                 -n-Butylnonane
+                 Sulfurous acid, decyl 2-pentyl est 179528 000000-00-0 53
+                 er
+ 
+ 32  14.649  0.64 I:\02 DHS\Library\Wiley7Nist05.L
+                 Ethyl 3-cyclohexenecarboxylate     371571 015111-56-5 78
+                 3-Cyclohexene-1-carboxylic acid, m 361994 006493-77-2 64
+                 ethyl ester
+                 2-Pyridinemethanamine; Pyridine, 2 344918 003731-51-9 64
+                 -(aminomethyl)-; .beta.-Picolylami
+                 ne; 2-(Aminomethyl)pyridine; 2-Pic
+                 olinamine; 2-Picolylamine; 2-Pyrid
+                 inemethylamine; (2-Pyridylmethyl)a
+                 mine; 2-Pyridinylmethanamine #
+ 
+ 33  14.815  0.30 I:\02 DHS\Library\Wiley7Nist05.L
+                 Decanedioic acid, didecyl ester; D 310179 002432-89-5 49
+                 idecyl sebacate
+                 Tetradecanal (CAS); Myristaldehyde 405539 000124-25-4 41
+                 ; Myristylaldehyde; Tetradecylalde
+                 hyde; n-Tetradecanal; Aldehyde C-1
+                 4; Aldehyde C-14, myristic; C-14 A
+                 ldehyde, myristic; Myristic aldehy
+                 de; 1-Tetradecanal; 1-Tetradecyl a
+                 ldehyde
+                 1-Octadecanol (CAS); Stenol; Sipol 427465 000112-92-5 38
+                  S; Stearol; Lanol S; Aldol 62; Al
+                 fol 18; Lorol 28; Atalco S; Sipono
+                 l S; Crodacol-S; Siponol SC; Stera
+                 ffine; Follestrine; n-Octadecanol;
+                  Cachalot S-43; Octadecan-1-ol; n-
+                 1-Octadecanol; Stearyl alcohol; Oc
+                 tadecyl alcohol;
+ 
+ 34  15.437  0.34 I:\02 DHS\Library\NIST98.L
+                 6-tert-Butyl-2,4-dimethylphenol     71880 001879-09-0 98
+                 2-Tetradecene, (E)-                 13030 035953-53-8 55
+                 Benzene, 1-(1,1-dimethylethyl)-4-e  71882 017269-94-2 52
+                 thoxy-
+ 
+ 35  15.565  1.16 I:\02 DHS\Library\NIST98.L
+                 Tetradecane                        112359 000629-59-4 97
+                 Tetradecane                        112358 000629-59-4 97
+                 Tetradecane                        112356 000629-59-4 97
+ 
+ 36  16.735  5.22 I:\02 DHS\Library\NIST98.L
+                 1-Decene                           111296 000872-05-9 95
+                 Cyclopropane, nonyl-                13662 074663-85-7 94
+                 1-Dodecanol                        111442 000112-53-8 94
+ 
+ 37  16.930  0.58 I:\02 DHS\Library\Wiley7Nist05.L
+                 2,6-DI-T-BUTYL-4-METHYLENE-2,5-CYC 408170 002607-52-5 94
+                 LOHEXADIENE-1-ONE; BHT-quinone-met
+                 hide; 4-methylene-2,6-di(t-butyl)-
+                 2,5-cyclohexadien-1-one; 2,5-Cyclo
+                 hexadien-1-one, 2,6-bis(1,1-dimeth
+                 ylethyl)-4-methylene- (CAS); 2,5-C
+                 yclohexadien-1-one, 2,6-di-tert-bu
+                 tyl-4-methylene-
+                 2,6-DI-T-BUTYL-4-METHYLENE-2,5-CYC 408171 002607-52-5 64
+                 LOHEXADIENE-1-ONE; BHT-quinone-met
+                 hide; 4-methylene-2,6-di(t-butyl)-
+                 2,5-cyclohexadien-1-one; 2,5-Cyclo
+                 hexadien-1-one, 2,6-bis(1,1-dimeth
+                 ylethyl)-4-methylene- (CAS); 2,5-C
+                 yclohexadien-1-one, 2,6-di-tert-bu
+                 tyl-4-methylene-
+                 Epizonarene; 4-Isopropyl-1,6-dimet 401517 000000-00-0 41
+                 hyl-1,2,3,7,8,8a-hexahydronaphthal
+                 ene #
+ 
+ 38  17.133  0.56 I:\02 DHS\Library\NIST98.L
+                 Pentadecane                        112371 000629-62-9 96
+                 Pentadecane                         16493 000629-62-9 96
+                 Pentadecane                        112370 000629-62-9 96
+ 
+ 39  17.351  2.22 I:\02 DHS\Library\NIST98.L
+                 Phenol, 2,4-bis(1,1-dimethylethyl) 125782 000096-76-4 97
+                 Phenol, 2,4-bis(1,1-dimethylethyl)  80518 000096-76-4 95
+                 Phenol, 2,4-bis(1,1-dimethylethyl) 125776 000096-76-4 90
+ 
+ 40  17.426  2.01 I:\02 DHS\Library\NIST98.L
+                 Butylated Hydroxytoluene           126409 000128-37-0 97
+                 Butylated Hydroxytoluene            84224 000128-37-0 96
+                 Butylated Hydroxytoluene           126413 000128-37-0 94
+ 
+ 41  18.198  0.24 I:\02 DHS\Library\Wiley7Nist05.L
+                 2,3,5,6-Detetrahydrocyclohexanone, 415215 101100-38-3 64
+                  2,6-di-t-butyl-4-hydroxymethylene
+                 -; 2,6-Ditert-butyl-4-(hydroxymeth
+                 ylene)-2,5-cyclohexadien-1-one #
+                 Phenol, 2,6-bis(1,1-dimethylethyl) 415263 004130-42-1 64
+                 -4-ethyl-
+                 Phenol, 2,6-bis(1,1-dimethylethyl) 415265 004130-42-1 64
+                 -4-ethyl-
+ 
+ 42  18.281 17.55 I:\02 DHS\Library\Wiley7Nist05.L
+                 PERDEUTERIO-PENTADECANE             79425 036340-20-2 74
+                 OCTANE-D18                           3840 017252-77-6 38
+                 4-Brendanol; 1,5-Methanopentalen-2  11042 088762-77-0 38
+                 -ol, octahydro-, (1.alpha.,2.alpha
+                 .,3a.beta.,5.alpha.,6a.beta.)- (CA
+                 S)
+ 
+ 43  18.619  0.68 I:\02 DHS\Library\NIST98.L
+                 Hexadecane                         112409 000544-76-3 98
+                 Hexadecane                          16554 000544-76-3 97
+                 Hexadecane                         112410 000544-76-3 96
+ 
+ 44  18.664  1.85 I:\02 DHS\Library\Wiley7Nist05.L
+                 Pentanoic acid, 2,2,4-trimethyl-3- 172635 000000-00-0 78
+                 carboxyisopropyl, isobutyl ester; 
+                 1-Isobutyl 4-isopropyl 3-isopropyl
+                 -2,2-dimethylsuccinate #
+                 PENTAN-1,3-DIOLDIISOBUTYRATE, 2,2, 432001 006846-50-0 72
+                 4-TRIMETHYL-; 1,3-Di(isobutoxycarb
+                 onyl)-2,4,4-trimethylpentane; 2,2,
+                 4-Trimethyl-1,3-pentanediol diisob
+                 utyrate; Propanoic acid, 2-methyl-
+                 , 2,2-dimethyl-1-(1-methylethyl)-1
+                 ,3-propanediyl ester; 1,3-Pentaned
+                 iol, 2,2,4-trimet
+                 Tetrahydrofuran, 2-propyl-; 2-Prop   3808 003208-22-8 59
+                 yltetrahydrofuran #
+ 
+ 45  19.054  2.19 I:\02 DHS\Library\NIST98.L
+                 Diphenylamine                      124796 000122-39-4 96
+                 Diphenylamine                      124797 000122-39-4 95
+                 Diphenylamine                       74065 000122-39-4 94
+ 
+ 46  19.136  0.61 I:\02 DHS\Library\Wiley7Nist05.L
+                 Benzene, 1,1'-[methylenebis(oxy)]b  64401 004442-41-5 91
+                 is-; (Phenoxymethoxy)benzene #
+                 Benzene, nitroso-                  344558 000586-96-9 64
+                 1-PHENYLPROPANOL-(1)                 9983 000000-00-0 43
+ 
+ 47  20.082 10.19 I:\02 DHS\Library\NIST98.L
+                 Irgacure 184                        43247 1000204-17-9 83
+                 Methanone, (1-hydroxycyclohexyl)ph  43248 000947-19-3 83
+                 enyl-
+                 1-Hydroxycyclohexanecarboxylic aci  43242 001123-28-0 47
+ 
+ 48  20.367  0.26 I:\02 DHS\Library\NIST98.L
+                 Methyl tetradecanoate               28368 000124-10-7 97
+                 Methyl tetradecanoate              115457 000124-10-7 96
+                 Methyl tetradecanoate              115458 000124-10-7 91
+ 
+ 49  21.365  0.50 I:\02 DHS\Library\NIST98.L
+                 Octadecane                         112330 000593-45-3 98
+                 Octadecane                          16439 000593-45-3 97
+                 Octadecane                         112333 000593-45-3 93
+ 
+ 50  21.455 14.03 I:\02 DHS\Library\NIST98.L
+                 Phenanthrene-d10                    79827 001517-22-2 87
+                 Anthracene-d10-                     79826 001719-06-8 58
+                 Antipyrine                         125690 000060-80-0 52
+ 
+ 51  21.695  0.86 I:\02 DHS\Library\NIST98.L
+                 Isopropyl Myristate                110206 000110-27-0 95
+                 Isopropyl Myristate                109762 000110-27-0 46
+                 Isopropyl Palmitate                118751 000142-91-6 30
+ 
+ 52  22.070  0.19 I:\02 DHS\Library\Wiley7Nist05.L
+                 Benzenemethanimine, .alpha.-phenyl 388829 001013-88-3 43
+                 -; Benzophenone imine; Diphenylmet
+                 hanimine #
+                 Benzenemethanimine, .alpha.-phenyl 388831 001013-88-3 38
+                 1-(2-pyridinyl)-1-phenylethylene    43835 000000-00-0 38
+ 
+ 53  22.310  0.17 I:\02 DHS\Library\NIST98.L
+                 1,2-Benzenedicarboxylic acid, bis( 123453 000084-69-5 83
+                 2-methylpropyl) ester
+                 1,2-Benzenedicarboxylic acid, bis( 123451 000084-69-5 80
+                 2-methylpropyl) ester
+                 Benzyl butyl phthalate             123464 000085-68-7 78
+ 
+ 54  22.963  0.98 I:\02 DHS\Library\NIST98.L
+                 Pentadecanoic acid, 14-methyl-, me 115451 005129-60-2 98
+                 thyl ester
+                 Hexadecanoic acid, methyl ester    115420 000112-39-0 97
+                 Hexadecanoic acid, methyl ester    115417 000112-39-0 97
+ 
+ 55  25.057  0.64 I:\02 DHS\Library\NIST98.L
+                 9-Octadecenoic acid (Z)-, methyl e  13261 000112-62-9 99
+                 ster
+                 8-Octadecenoic acid, methyl ester,  13870 026528-50-7 99
+                  (E)-
+                 9-Octadecenoic acid (Z)-, methyl e 111276 000112-62-9 99
+                 ster
+ 
+
+WD.M Thu Mar 12 14:18:13 2015   

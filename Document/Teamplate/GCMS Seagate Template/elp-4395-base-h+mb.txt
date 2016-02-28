@@ -1,0 +1,43 @@
+Area Percent Report
+
+  Data Path : C:\msdchem\1\data\2015\Mar\ELT0269,73,74,77,78\
+  Data File : 26-ELT0278;60ml;BP.D                                
+  Acq On    : 25 Mar 15   7:55 am
+  Operator  : YL-ALS(S)
+  Sample    : ELT0278;NMB;60ml;BP
+  Misc      :  
+  ALS Vial  : 20   Sample Multiplier: 1
+
+  Integration Parameters: events.e
+  Integrator: ChemStation
+
+  Method    : C:\msdchem\1\methods\Seagate.M
+  Title     :  
+
+  Signal     : TIC: 26-ELT0278;60ml;BP.D\data.ms
+
+ peak  R.T. first  max last  PK   peak      corr.   corr.    % of
+   #   min   scan scan scan  TY  height     area    % max.   total
+ ---  ----- ----- ---- ---- ---  -------   -------  ------  -------
+  1  18.098   499 1794 1829   M2 7888087 408477039 100.00%  61.062%
+  2  23.380  1831 2552 2940   M2  668892 260473809  63.77%  38.938%
+ 
+ 
+                        Sum of corrected areas:   668950849
+
+TIC: 26-ELT0278;60ml;BP.D\data.ms
+ELT0278;NMB;60ml;BP
+
+Peak #	Ret Time	Type	Width	Area	Start Time	End Time	
+1	18.098	   M	0.086	    408477039	9.071	18.342	(<=DOP)
+2	23.380	   M	0.649	    260473809	18.356	26.084	(>DOP)
+
+
+TIC: 19-MB;60ml;BP.D\data.ms
+MB;60ml;BP
+
+Peak #	Ret Time	Type	Width	Area	Start Time	End Time	
+1	12.099	   M	0.297	     50708755	9.087	18.338	(<=DOP)
+2	24.392	   M	6.724	     15548828	18.374	26.176	(>DOP)
+
+Seagate.M Mon Mar 30 16:01:42 2015   

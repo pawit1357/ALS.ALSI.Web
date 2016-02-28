@@ -1,0 +1,31 @@
+                                         Area Percent Report
+
+  Data Path : C:\msdchem\1\DATA\2015\9.Sep\150924W\
+  Data File : ELP_1585A_1 .D                                      
+  Acq On    : 25 Sep 2015   2:18
+  Operator  :  
+  Sample    : ELP-1585A,1pc(563.80),Altum
+  Misc      : Mi 278195
+  ALS Vial  : 25   Sample Multiplier: 1
+
+  Integration Parameters: autoint1.e
+  Integrator: ChemStation
+
+  Method    : C:\msdchem\1\METHODS\WD.M
+  Title     :  
+
+  Signal     : TIC: ELP_1585A_1 .D\data.ms
+
+ peak  R.T. first  max last  PK   peak      corr.   corr.    % of
+   #   min   scan scan scan  TY  height     area    % max.   total
+ ---  ----- ----- ---- ---- ---  -------   -------  ------  -------
+  1  18.331   189 1965 4177   M7 6041416 1181791295 100.00% 100.000%
+ 
+ TIC: ELP_1585A_1 .D\data.ms
+
+
+1	18.328	   M	0.326	   1181791295	5.002	34.927	
+
+                        Sum of corrected areas:  1181791295 (Hydrocarbon Hump)
+
+WD.M Fri Sep 25 11:31:51 2015   

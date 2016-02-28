@@ -1,0 +1,34 @@
+Area Percent Report
+
+  Data Path : I:\02 DHS\MS File\DHS#2\2015\150312S\
+  Data File : O2ELP_4252_1.D                                      
+  Acq On    : 13 Mar 15  01:38 am
+  Operator  : Yuwadee/ALS
+  Sample    : ELP_4252, Suspension, 20pcs, NHK
+  Misc      : Mi 235090
+  ALS Vial  : 43   Sample Multiplier: 21
+
+  Integration Parameters: For Sample.E
+  Integrator: ChemStation
+
+  Method    : I:\02 DHS\DHS Method\seagatesing.M
+  Title     :  
+
+  Signal     : TIC: O2ELP_4252_1.D\data.ms
+
+ peak  R.T. first  max last  PK   peak      corr.   corr.    % of
+   #   min   scan scan scan  TY  height     area    % max.   total
+ ---  ----- ----- ---- ---- ---  -------   -------  ------  -------
+  1   6.800   871 1137 3360   M2 2086636 190977022 100.00% 100.000%
+ 
+ 
+                        Sum of corrected areas:   190977022
+
+TIC: O2ELP_4252_1.D\data.ms
+ELP_4252, Suspension, 20pcs, NHK
+
+Peak #	Ret Time	Type	Width	Area	Start Time	End Time	
+
+1	6.800	   M	0.153	    190977022	5.229	19.922	(Hydrocarbon Hump)
+
+seagatesing.M Fri Mar 13 11:59:48 2015   
