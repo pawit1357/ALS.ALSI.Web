@@ -20,7 +20,7 @@ using Microsoft.Reporting.WebForms;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class Seagate_HPA_Boyd : System.Web.UI.UserControl
+    public partial class Seagate_HPA_Siam : System.Web.UI.UserControl
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Seagate_HPA));
@@ -1483,7 +1483,6 @@ namespace ALS.ALSI.Web.view.template
                 foreach (template_seagate_hpa_coverpage _val in lists)
                 {
                     //=ROUND(MAX(0,(C13-B13))*($B$7/$B$9)*($B$3/$B$6)/($B$4*$B$5),1)
-                    //=ROUND(MAX(0,(C13-B13))*($B$7/$B$9)*($B$3/$B$6)/($B$4*$B$5),1)
                     Double _div = (Convert.ToDouble(txtB7.Text) / Convert.ToDouble(txtB9.Text)) * (Convert.ToDouble(txtB3.Text) / Convert.ToDouble(txtB6.Text)) / (Convert.ToDouble(txtB4.Text) * Convert.ToDouble(txtB5.Text));
                     _val.C = Math.Round((CustomUtils.GetMax((Convert.ToDouble(_val.RawCounts) - Convert.ToDouble(_val.BlankCouts))) * _div), 1);
                 }
@@ -1510,7 +1509,14 @@ namespace ALS.ALSI.Web.view.template
             gvClassification.DataBind();
             gvHpa.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq);
             gvHpa.DataBind();
+
+
+            gvTypesOfParticles.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION) && x.data_group.Equals("SST Particles")).OrderBy(x => x.seq);
+            gvTypesOfParticles.DataBind();
+
+
             #endregion
+
 
             #region  "Analysis Details"
             lbC144.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB8.Text) ? "0" : txtB8.Text));
@@ -1629,7 +1635,7 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_seagate_boyd.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_seagate_siam.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.Hpas.OrderBy(x => x.hpa_type).Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here

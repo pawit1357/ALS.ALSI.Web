@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_HPA_Boyd.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_HPA_Boyd" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_HPA_Siam.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_HPA_Siam" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
@@ -62,7 +62,6 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtNumberOfPieces" runat="server" Text="" CssClass="form-control"></asp:TextBox>
-            
                                                 <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderReceiptinAc" TargetControlID="txtNumberOfPieces"
                                                     FilterType="Custom, Numbers" ValidChars="." runat="server" />
                                             </td>
@@ -242,6 +241,32 @@
                                     </EmptyDataTemplate>
                                 </asp:GridView>
                                 <br />
+                                <asp:GridView ID="gvTypesOfParticles" runat="server" AutoGenerateColumns="False"
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type" OnRowDataBound="gvClassification_RowDataBound" OnRowCommand="gvClassification_RowCommand">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Types of Particles" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Number of Particle  (Raw Count)" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Number of Particle (Particle/sqcm)" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Label ID="litC" runat="server" Text='<%# Eval("C")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <EmptyDataTemplate>
+                                        <div class="data-not-found">
+                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+
                                 <table>
                                     <thead></thead>
 

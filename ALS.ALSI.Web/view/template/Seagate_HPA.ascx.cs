@@ -20,7 +20,7 @@ using Microsoft.Reporting.WebForms;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class Seagate_HPA_Boyd : System.Web.UI.UserControl
+    public partial class Seagate_HPA : System.Web.UI.UserControl
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Seagate_HPA));

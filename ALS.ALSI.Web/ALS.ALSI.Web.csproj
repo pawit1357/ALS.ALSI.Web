@@ -5463,6 +5463,8 @@
     <Content Include="view\request\AdminPrint.aspx" />
     <Content Include="view\template\Seagate_Copperwire.ascx" />
     <Content Include="view\template\Seagate_DHS_V2.ascx" />
+    <Content Include="view\template\Seagate_HPA.ascx" />
+    <Content Include="view\template\Seagate_HPA_Siam.ascx" />
     <Content Include="view\template\WD_Corrosion.ascx" />
     <Content Include="view\template\WD_GCMS_CVR.ascx" />
     <Content Include="view\template\WD_HPA_FOR_3.ascx" />
@@ -5658,6 +5660,20 @@
     </Compile>
     <Compile Include="view\template\Seagate_DHS_V2.ascx.designer.cs">
       <DependentUpon>Seagate_DHS_V2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\Seagate_HPA.ascx.cs">
+      <DependentUpon>Seagate_HPA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\Seagate_HPA.ascx.designer.cs">
+      <DependentUpon>Seagate_HPA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\Seagate_HPA_Siam.ascx.cs">
+      <DependentUpon>Seagate_HPA_Siam.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\Seagate_HPA_Siam.ascx.designer.cs">
+      <DependentUpon>Seagate_HPA_Siam.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\WD_Corrosion.ascx.cs">
       <DependentUpon>WD_Corrosion.ascx</DependentUpon>
@@ -6358,12 +6374,13 @@
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_seagate_siam.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_ink_ribbon_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\corrosion_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\lpc_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\lpc_seagate.rdlc" />
-    <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_seagate_boyd.rdlc" />
     <EmbeddedResource Include="ReportObject\dhs_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\dhs_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate.rdlc" />

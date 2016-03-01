@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_HPA_Boyd.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_HPA_Boyd" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_HPA.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_HPA" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
@@ -62,7 +62,6 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtNumberOfPieces" runat="server" Text="" CssClass="form-control"></asp:TextBox>
-            
                                                 <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderReceiptinAc" TargetControlID="txtNumberOfPieces"
                                                     FilterType="Custom, Numbers" ValidChars="." runat="server" />
                                             </td>

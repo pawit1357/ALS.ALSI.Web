@@ -428,7 +428,7 @@ namespace ALS.ALSI.Web.view.template
                     if (isSpecification != null)
                     {
                         List<tb_m_specification> specifications = new List<tb_m_specification>();
-                        for (int row = 4; row <= isSpecification.LastRowNum; row++)
+                        for (int row = 0; row <= isSpecification.LastRowNum; row++)
                         {
                             if (isSpecification.GetRow(row) != null) //null is when the row only contains empty cells 
                             {
