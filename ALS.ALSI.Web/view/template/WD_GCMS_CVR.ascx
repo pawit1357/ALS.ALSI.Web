@@ -276,17 +276,17 @@
                                                             CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Edit">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
-                                                    CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
-                                                    CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
-                                            </EditItemTemplate>
-                                        </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Edit">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                            CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                            CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
                                             </Columns>
 
 
@@ -326,7 +326,11 @@
                         </div>
                     </asp:Panel>
                     <!-- END FORM-->
-                    <div class="form-actions">
+
+
+                            <div class="note note-info">
+<%--                                <h4 class="block">#</h4>--%>
+                                <p>
                         <asp:Panel ID="pSpecification" runat="server">
                             <div class="row">
                                 <div class="col-md-6">
@@ -389,39 +393,50 @@
                             <br />
                         </asp:Panel>
                         <asp:Panel ID="pDownload" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Download:</label>
-                                        <div class="col-md-6">
-                                            <i class="icon-download-alt"></i>
-                                            <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Download: </label>
+
+                                <div class="col-md-3">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="input-group input-large">
+
+                                            <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click" CssClass="btn btn-default">
+                                                <i class="fa fa-download"></i>
                                                 <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
                                             </asp:LinkButton>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <br />
+
                         </asp:Panel>
                         <asp:Panel ID="pUploadfile" runat="server">
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Uplod file:</label>
-                                        <div class="col-md-6">
-                                            <asp:HiddenField ID="HiddenField1" runat="server" />
-                                            <span class="btn green fileinput-button">
-                                                <i class="fa fa-plus"></i>
-                                                <span>Add files...</span>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Uplod file: </label>
+
+                                <div class="col-md-3">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="input-group input-large">
+                                            <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                            </div>
+                                            <span class="input-group-addon btn default btn-file">
+                                                <span class="fileinput-new">Select file </span>
+                                                <span class="fileinput-exists">Change </span>
                                                 <asp:FileUpload ID="FileUpload1" runat="server" />
+
                                             </span>
-                                            <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
+                                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
                             <%--                    <ul>
                         <li>The maximum file size for uploads in this demo is <strong>5 MB</strong> (default file size is unlimited).</li>
                         <li>Only word or pdf files (<strong>DOC, DOCX, PDF</strong>) are allowed in this demo (by default there is no file type restriction).</li>
@@ -430,6 +445,12 @@
                             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                             <br />
                         </asp:Panel>
+
+                                </p>
+                            </div>
+
+
+                    <div class="form-actions">
 
 
                         <div class="modal-wide" id="pnlModalDemo" style="display: none;">

@@ -8,10 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace ALS.ALSI.Web.view.template {
-
-
-    public partial class WD_GCMS_CVR
-    {
+    
+    
+    public partial class WD_GCMS_CVR {
         
         /// <summary>
         /// Form1 control.
@@ -345,15 +344,6 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pUploadfile;
-        
-        /// <summary>
-        /// HiddenField1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
         
         /// <summary>
         /// FileUpload1 control.
