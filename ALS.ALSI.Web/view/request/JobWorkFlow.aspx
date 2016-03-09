@@ -95,50 +95,50 @@
     <script>
         jQuery(document).ready(function () {
 
-            $('#form_wizard_1').bootstrapWizard({
-                'nextSelector': '.button-next',
-                'previousSelector': '.button-previous',
-                onTabClick: function (tab, navigation, index, clickedIndex) {
-                    return false;
-                    /*
-                    success.hide();
-                    error.hide();
-                    if (form.valid() == false) {
-                        return false;
-                    }
-                    handleTitle(tab, navigation, clickedIndex);
-                    */
-                },
-                onNext: function (tab, navigation, index) {
-                    success.hide();
-                    error.hide();
+            //$('#form_wizard_1').bootstrapWizard({
+            //    'nextSelector': '.button-next',
+            //    'previousSelector': '.button-previous',
+            //    onTabClick: function (tab, navigation, index, clickedIndex) {
+            //        return false;
+            //        /*
+            //        success.hide();
+            //        error.hide();
+            //        if (form.valid() == false) {
+            //            return false;
+            //        }
+            //        handleTitle(tab, navigation, clickedIndex);
+            //        */
+            //    },
+            //    onNext: function (tab, navigation, index) {
+            //        success.hide();
+            //        error.hide();
 
-                    if (form.valid() == false) {
-                        return false;
-                    }
+            //        if (form.valid() == false) {
+            //            return false;
+            //        }
 
-                    handleTitle(tab, navigation, index);
-                },
-                onPrevious: function (tab, navigation, index) {
-                    success.hide();
-                    error.hide();
+            //        handleTitle(tab, navigation, index);
+            //    },
+            //    onPrevious: function (tab, navigation, index) {
+            //        success.hide();
+            //        error.hide();
 
-                    handleTitle(tab, navigation, index);
-                },
-                onTabShow: function (tab, navigation, index) {
-                    var total = navigation.find('li').length;
-                    var current = index + 1;
-                    var $percent = (current / total) * 100;
-                    $('#form_wizard_1').find('.progress-bar').css({
-                        width: $percent + '%'
-                    });
-                }
-            });
+            //        handleTitle(tab, navigation, index);
+            //    },
+            //    onTabShow: function (tab, navigation, index) {
+            //        var total = navigation.find('li').length;
+            //        var current = index + 1;
+            //        var $percent = (current / total) * 100;
+            //        $('#form_wizard_1').find('.progress-bar').css({
+            //            width: $percent + '%'
+            //        });
+            //    }
+            //});
 
-            $('#form_wizard_1').find('.button-previous').hide();
-            $('#form_wizard_1 .button-submit').click(function () {
-                alert('Finished! Hope you like it :)');
-            }).hide();
+            //$('#form_wizard_1').find('.button-previous').hide();
+            //$('#form_wizard_1 .button-submit').click(function () {
+            //    alert('Finished! Hope you like it :)');
+            //}).hide();
 
         });
     </script>

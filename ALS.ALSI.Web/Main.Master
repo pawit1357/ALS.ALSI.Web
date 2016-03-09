@@ -35,13 +35,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/alis/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <link href="/alis/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
-
-    <link href="/alis/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/alis/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/alis/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/alis/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-    <link href="/alis/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="/alis/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
-
     <link href="/alis/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
 
     <!-- END PAGE LEVEL PLUGINS -->
@@ -1190,22 +1186,16 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="/alis/assets/global/plugins/moment.min.js" type="text/javascript"></script>
     <script src="/alis/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
-
-<%--    <script src="/alis/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>--%>
     <script src="/alis/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-<%--    <script src="/alis/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>--%>
-<%--    <script src="/alis/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>--%>
-
-
+    <script src="/alis/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <link href="/alis/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
-
     <script src="/alis/assets/global/scripts/app.min.js" type="text/javascript"></script>
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="/alis/assets/pages/scripts/components-bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/alis/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
+
     <script src="/alis/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
     <script src="/alis/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
 
@@ -1213,33 +1203,15 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END PAGE LEVEL SCRIPTS -->
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
     <script src="/alis/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
-    <script src="/alis/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+<%--    <script src="/alis/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>--%>
     <script src="/alis/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
     <!-- END THEME LAYOUT SCRIPTS -->
     <script>
         jQuery(document).ready(function () {
+            // App.init(); // init metronic core componets
 
-            //Metronic.init(); // init metronic core componets
-            //Layout.init(); // init layout
-            /*---include---*/
+            //Layout.init(); // init metronic core componets
 
-            //Datetime Picker
-            //$('.date-picker').datepicker({
-            //    rtl: Metronic.isRTL(),
-            //    orientation: "left",
-            //    autoclose: true
-            //});
-
-            //MultiSelect
-            //$('.bs-select').selectpicker({
-            //    iconBase: 'fa',
-            //    tickIcon: 'fa-check'
-            //});
-
-            //$('.select2_category').select2({
-            //    placeholder: "Select an option",
-            //    allowClear: true
-            //});
         });
     </script>
     <!-- END JAVASCRIPTS -->

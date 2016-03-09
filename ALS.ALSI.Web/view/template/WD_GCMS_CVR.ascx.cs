@@ -325,8 +325,13 @@ namespace ALS.ALSI.Web.view.template
 
             if (!Page.IsPostBack)
             {
+               
                 initialPage();
             }
+
+
+            ddlComponent.ID = Request.Form[ddlComponent.UniqueID];
+            
         }
 
         #region "Button"
