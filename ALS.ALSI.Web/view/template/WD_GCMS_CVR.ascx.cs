@@ -330,7 +330,6 @@ namespace ALS.ALSI.Web.view.template
             }
 
 
-            ddlComponent.ID = Request.Form[ddlComponent.UniqueID];
             
         }
 
