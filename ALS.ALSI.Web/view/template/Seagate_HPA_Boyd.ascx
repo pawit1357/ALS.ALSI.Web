@@ -766,77 +766,107 @@
                                 </div>
                                 <div class="portlet-body">
 
-                        <asp:Panel ID="pSpecification" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Detail Spec:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                    <asp:Panel ID="pSpecification" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Detail Spec:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pStatus" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pStatus" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pRemark" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pRemark" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pDisapprove" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pDisapprove" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pDownload" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Download:</label>
-                                        <div class="col-md-6">
-                                            <i class="icon-download-alt"></i>
-                                            <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pDownload" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Download:</label>
+                                                    <div class="col-md-6">
+                                                        <i class="icon-download-alt"></i>
+                                                        <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
 
-                                                <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                            </asp:LinkButton>
+                                                            <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
+                                                        </asp:LinkButton>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pUploadfile" runat="server">
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pUploadfile" runat="server">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Uplod file: </label>
+
+                                            <div class="col-md-3">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="input-group input-large">
+                                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                        </div>
+                                                        <span class="input-group-addon btn default btn-file">
+                                                            <span class="fileinput-new">Select file </span>
+                                                            <span class="fileinput-exists">Change </span>
+                                                            <asp:FileUpload ID="FileUpload1" runat="server" />
+
+                                                        </span>
+                                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                                    </div>
+                                                </div>
+                                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>
+
+                                            </div>
+                                        </div>
+
+                                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                                        <br />
+                                    </asp:Panel>
+                                    <%--                      <asp:Panel ID="pUploadfile" runat="server">
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -857,9 +887,7 @@
 
                             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                             <br />
-                        </asp:Panel>
-
-
+                        </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -877,7 +905,7 @@
                                             รายการปัญหา</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+                                    <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                                 </div>
                                 <div class="modal-footer">

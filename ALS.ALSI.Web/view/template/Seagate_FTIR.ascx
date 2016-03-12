@@ -390,7 +390,7 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                         <tr>
                                             <th>Unit</th>
                                             <th>
-                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True">
+                                                <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
                                                     <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="2">ug/cm2</asp:ListItem>
                                                 </asp:DropDownList></th>
@@ -562,7 +562,7 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                         <tr>
                                             <th>Unit</th>
                                             <th>
-                                                <asp:DropDownList ID="ddlNvrUnit" runat="server" class="select2_category form-control" AutoPostBack="True">
+                                                <asp:DropDownList ID="ddlNvrUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
                                                     <asp:ListItem Value="1" Selected="True">ug</asp:ListItem>
                                                     <asp:ListItem Value="2">ug/cm2</asp:ListItem>
                                                 </asp:DropDownList>
@@ -818,7 +818,7 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                                     <div class="col-md-6">
-                                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                                        <asp:TextBox ID="txtRemark"  runat="server" CssClass="form-control"></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -831,7 +831,7 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
                                                     <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                             </div>
@@ -855,6 +855,36 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pUploadfile" runat="server">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Uplod file: </label>
+
+                                            <div class="col-md-3">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="input-group input-large">
+                                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                        </div>
+                                                        <span class="input-group-addon btn default btn-file">
+                                                            <span class="fileinput-new">Select file </span>
+                                                            <span class="fileinput-exists">Change </span>
+                                                            <asp:FileUpload ID="btnUpload" runat="server" />
+
+                                                        </span>
+                                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                                    </div>
+                                                </div>
+                                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>
+
+                                            </div>
+                                        </div>
+
+                                        <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
+                                        <br />
+                                    </asp:Panel>
+<%--                                    <asp:Panel ID="pUploadfile" runat="server">
 
                                         <div class="row">
                                             <div class="col-md-6">
@@ -873,7 +903,7 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                             </div>
                                         </div>
                                         <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                                    </asp:Panel>
+                                    </asp:Panel>--%>
 
 
                                 </div>

@@ -579,7 +579,7 @@ namespace ALS.ALSI.Web.view.template
                         btnUpload.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
-                        lbMessage.Text = string.Empty;
+                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {
@@ -607,7 +607,7 @@ namespace ALS.ALSI.Web.view.template
                         btnUpload.SaveAs(source_file);
                         this.jobSample.path_pdf = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                        lbMessage.Text = string.Empty;
+                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {

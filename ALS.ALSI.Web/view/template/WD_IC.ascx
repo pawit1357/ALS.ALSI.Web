@@ -708,6 +708,37 @@
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pUploadfile" runat="server">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Uplod file: </label>
+
+                                            <div class="col-md-3">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="input-group input-large">
+                                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                        </div>
+                                                        <span class="input-group-addon btn default btn-file">
+                                                            <span class="fileinput-new">Select file </span>
+                                                            <span class="fileinput-exists">Change </span>
+                                                            <asp:FileUpload ID="btnUpload" runat="server" />
+
+                                                        </span>
+                                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                                    </div>
+                                                </div>
+                                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>
+
+                                            </div>
+                                        </div>
+
+                                        <asp:Label ID="Label9" runat="server" Text=""></asp:Label>
+                                        <br />
+                                    </asp:Panel>
+
+       <%--                             <asp:Panel ID="pUploadfile" runat="server">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -726,7 +757,7 @@
                                         </div>
                                         <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
                                         <br />
-                                    </asp:Panel>
+                                    </asp:Panel>--%>
 
 
                                 </div>

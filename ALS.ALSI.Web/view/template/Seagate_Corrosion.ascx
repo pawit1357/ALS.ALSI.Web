@@ -4,52 +4,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.date-picker').datepicker();
-
-        var form1 = $('#Form1');
-        var error1 = $('.alert-error', form1);
-        var success1 = $('.alert-success', form1);
-
-        form1.validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-inline', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
-            ignore: "",
-            rules: {
-                ctl00$ContentPlaceHolder2$ctl00$txtDesc: {
-                    required: true,
-                }
-            },
-
-            invalidHandler: function (event, validator) { //display error alert on form submit              
-                success1.hide();
-                error1.show();
-                App.scrollTo(error1, -200);
-            },
-
-            highlight: function (element) { // hightlight error inputs
-                $(element)
-                    .closest('.help-inline').removeClass('ok'); // display OK icon
-                $(element)
-                    .closest('.control-group').removeClass('success').addClass('error'); // set error class to the control group
-            },
-
-            unhighlight: function (element) { // revert the change dony by hightlight
-                $(element)
-                    .closest('.control-group').removeClass('error'); // set error class to the control group
-            },
-
-            success: function (label) {
-                label
-                    .addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
-                .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
-            },
-
-
-            submitHandler: function (form) {
-                form.submit();
-            }
-        });
     });
 </script>
 
@@ -356,6 +310,36 @@
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pUploadfile" runat="server">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Uplod file: </label>
+
+                                            <div class="col-md-3">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="input-group input-large">
+                                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                        </div>
+                                                        <span class="input-group-addon btn default btn-file">
+                                                            <span class="fileinput-new">Select file </span>
+                                                            <span class="fileinput-exists">Change </span>
+                                                            <asp:FileUpload ID="btnUpload" runat="server" />
+
+                                                        </span>
+                                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                                    </div>
+                                                </div>
+                                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>
+
+                                            </div>
+                                        </div>
+
+                                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                                        <br />
+                                    </asp:Panel>
+<%--                                    <asp:Panel ID="pUploadfile" runat="server">
 
                                         <div class="row">
                                             <div class="col-md-6">
@@ -376,7 +360,7 @@
 
                                         <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
                                         <br />
-                                    </asp:Panel>
+                                    </asp:Panel>--%>
 
 
                                 </div>
