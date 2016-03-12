@@ -122,9 +122,9 @@ namespace ALS.ALSI.Web.view.request
             {
                 ID = 0,
                 job_sample_id = this.jobSample.ID,
-                job_status = Convert.ToInt32(this.jobSample.job_status),
+                log_title = String.Format("Change Report Date"),
                 job_remark = txtRemark.Text,
-                get_alerts = "0",
+                is_active = "0",
                 date = DateTime.Now
             };
             tmp.Insert();

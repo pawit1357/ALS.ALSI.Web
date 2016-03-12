@@ -51,7 +51,7 @@ namespace ALS.ALSI.Web.view.sampleLog
 
         private void bindingData()
         {
-            searchResult = obj.SelectNotification();
+            //searchResult = obj.SelectNotification();
 
 
             //Show only 5 Row

@@ -177,20 +177,6 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\SeagateGcmsImg.cs" />
-    <Compile Include="DataAccess\template_seagate_gcms_coverpage_img.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\template_wd_ic_coverpage.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\template_wd_ir_coverpage.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\WDCorrosionImg.cs" />
-    <Compile Include="DataAccess\WDCorrosion.cs" />
-    <Compile Include="DataAccess\SeagateCopperwire.cs" />
-    <Compile Include="DataAccess\SeagateCopperwireImg.cs" />
-    <Compile Include="DataAccess\SeagateGCMS.cs" />
     <Compile Include="DataAccess\tb_m_component.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -233,6 +219,9 @@
     <Compile Include="DataAccess\template_seagate_gcms_coverpage.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\template_seagate_gcms_coverpage_img.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\template_seagate_hpa_coverpage.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -263,6 +252,12 @@
     <Compile Include="DataAccess\template_wd_hpa_for3_coverpage.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\template_wd_ic_coverpage.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\template_wd_ir_coverpage.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\template_wd_lpc_coverpage.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -284,6 +279,11 @@
     <Compile Include="DataAccess\users_role.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\WDCorrosionImg.cs" />
+    <Compile Include="DataAccess\WDCorrosion.cs" />
+    <Compile Include="DataAccess\SeagateCopperwire.cs" />
+    <Compile Include="DataAccess\SeagateCopperwireImg.cs" />
+    <Compile Include="DataAccess\SeagateGCMS.cs" />
     <Compile Include="DataAccess\WdGCMS.cs" />
     <Compile Include="DataAccess\SeagateCorrosion.cs" />
     <Compile Include="DataAccess\SeagateCorrosionImg.cs" />

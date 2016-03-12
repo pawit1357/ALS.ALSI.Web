@@ -15,10 +15,10 @@ namespace ALS.ALSI.Biz.DataAccess
     public partial class job_sample_logs
     {
         public int ID { get; set; }
-        public Nullable<int> job_sample_id { get; set; }
-        public Nullable<int> job_status { get; set; }
+        public int job_sample_id { get; set; }
+        public string log_title { get; set; }
         public string job_remark { get; set; }
-        public string get_alerts { get; set; }
         public Nullable<System.DateTime> date { get; set; }
+        public string is_active { get; set; }
     }
 }

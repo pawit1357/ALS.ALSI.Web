@@ -72,14 +72,14 @@ namespace ALS.ALSI.Web
                     "<span class=\"label label-success\"><i class=\"icon-plus\"></i></span>" +
                     "{0}.{1}-{2} <span class=\"time\">{3}</span></a></li>";
 
-            int countBadge = 0;
-            List<job_sample_logs> logs = new job_sample_logs().SelectNotification();
+            //int countBadge = 0;
+            //List<job_sample_logs> logs = new job_sample_logs().SelectNotification();
 
-            m_status mStatus = new m_status();
-            m_type_of_test mTypeOfTest = new m_type_of_test();
-            job_sample jobSample = new job_sample();
-            foreach (job_sample_logs log in logs)
-            {
+            //m_status mStatus = new m_status();
+            //m_type_of_test mTypeOfTest = new m_type_of_test();
+            //job_sample jobSample = new job_sample();
+            //foreach (job_sample_logs log in logs)
+            //{
                 //Show only 5 Row
                 //if (countBadge < 5)
                 //{
@@ -119,7 +119,7 @@ namespace ALS.ALSI.Web
                 //        //}
                 //    }
                 //}
-            }
+            //}
 
             //lbCountBadge.Text = countBadge.ToString();
             //lbCountBadge_1.Text = lbCountBadge.Text;

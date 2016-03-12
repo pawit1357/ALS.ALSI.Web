@@ -52,15 +52,15 @@ namespace ALS.ALSI.Biz.DataAccess
 
         #region "Custom"
 
-        public job_sample_logs SelectDate(int _sample_Id, int _status)
-        {
-            return _repository.Find(x => x.job_sample_id == _sample_Id && x.job_status == _status).OrderBy(x=>x.date).FirstOrDefault();
-        }
+        //public job_sample_logs SelectDate(int _sample_Id, int _status)
+        //{
+        //    return _repository.Find(x => x.job_sample_id == _sample_Id && x.job_status == _status).OrderBy(x=>x.date).FirstOrDefault();
+        //}
 
-        public List<job_sample_logs> SelectNotification()
-        {
-            return _repository.Find(x => x.get_alerts == "0").OrderByDescending(x => x.ID).ToList();
-        }
+        //public List<job_sample_logs> SelectNotification()
+        //{
+        //    return _repository.Find(x => x.get_alerts == "0").OrderByDescending(x => x.ID).ToList();
+        //}
         public List<job_sample_logs> SearchData()
         {
             return _repository.GetAll().ToList();

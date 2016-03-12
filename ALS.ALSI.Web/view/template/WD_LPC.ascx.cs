@@ -421,6 +421,18 @@ namespace ALS.ALSI.Web.view.template
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                            #region "LOG"
+                            job_sample_logs jobSampleLog = new job_sample_logs
+                            {
+                                ID = 0,
+                                job_sample_id = this.jobSample.ID,
+                                log_title = String.Format("Sr.Chemist DisApprove"),
+                                job_remark = txtRemark.Text,
+                                is_active = "0",
+                                date = DateTime.Now
+                            };
+                            jobSampleLog.Insert();
+                            #endregion
                             break;
                     }
                     this.jobSample.step3owner = userLogin.id;
@@ -434,6 +446,18 @@ namespace ALS.ALSI.Web.view.template
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
                             this.jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
+                            #region "LOG"
+                            job_sample_logs jobSampleLog = new job_sample_logs
+                            {
+                                ID = 0,
+                                job_sample_id = this.jobSample.ID,
+                                log_title = String.Format("Lab Manager DisApprove"),
+                                job_remark = txtRemark.Text,
+                                is_active = "0",
+                                date = DateTime.Now
+                            };
+                            jobSampleLog.Insert();
+                            #endregion
                             break;
                     }
                     this.jobSample.step5owner = userLogin.id;

@@ -167,18 +167,18 @@ namespace ALS.ALSI.Web.view.request
                 }
                 job_sample_logs logs = new job_sample_logs();
 
-                job_sample_logs sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC));
-                lbStep1UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
-                sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.CHEMIST_TESTING));
-                lbStep2UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
-                sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING));
-                lbStep3UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
-                sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD));
-                lbStep4UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
-                sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING));
-                lbStep5UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
-                sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF));
-                lbStep6UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
+                //job_sample_logs sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC));
+                //lbStep1UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
+                //sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.CHEMIST_TESTING));
+                //lbStep2UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
+                //sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING));
+                //lbStep3UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
+                //sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD));
+                //lbStep4UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
+                //sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING));
+                //lbStep5UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
+                //sampleLog = logs.SelectDate(this.jobSample.ID, Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF));
+                //lbStep6UseDate.Text = (sampleLog != null) ? String.Format("({0})", DateTime.Now.Subtract(Convert.ToDateTime(sampleLog.date)).Days.ToString()) : String.Empty;
 
                 lbStep1UseDate.Text = (lbStep1UseDate.Text.Equals("(0)")) ? String.Empty : lbStep1UseDate.Text;
                 lbStep2UseDate.Text = (lbStep2UseDate.Text.Equals("(0)")) ? String.Empty : lbStep2UseDate.Text;

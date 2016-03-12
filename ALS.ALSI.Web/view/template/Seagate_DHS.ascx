@@ -292,7 +292,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                                     <div class="col-md-6">
-                                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                                        <asp:TextBox ID="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
