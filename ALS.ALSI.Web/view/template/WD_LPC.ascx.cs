@@ -79,6 +79,9 @@ namespace ALS.ALSI.Web.view.template
             Session.Remove(GetType().Name + "S5");
         }
 
+        List<String> errors = new List<string>();
+
+
         private void initialPage()
         {
 
@@ -348,61 +351,62 @@ namespace ALS.ALSI.Web.view.template
                         }
                         objWork.DeleteBySampleID(this.SampleID);
                         objWork.InsertList(this.Lpc.ToList());
-                        //switch (this.CommandName)
-                        //{
-                        //    case CommandNameEnum.Add:
-                        //        objWork.InsertList(this.Lpc);
-                        //        break;
-                        //    case CommandNameEnum.Edit:
-                        //        objWork.UpdateList(this.Lpc.Where(x => x.data_type != Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList());
-                        //        break;
-                        //}
                     }
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     if (Convert.ToInt32(ddlSpecification.SelectedValue) == 0)
                     {
-                        ScriptManager.RegisterClientScriptBlock((sender as Control), this.GetType(), "alert", String.Format("alert('{0}')", "ยังไม่ได้เลือก Specificaton"), true);
-                        ddlSpecification.Focus();
-                        isValid = false;
+                        //ScriptManager.RegisterClientScriptBlock((sender as Control), this.GetType(), "alert", String.Format("alert('{0}')", "ยังไม่ได้เลือก Specificaton"), true);
+                        //ddlSpecification.Focus();
+                        //isValid = false;
+                        errors.Add("ยังไม่ได้เลือก Specificaton");
                     }
                     else if (Convert.ToInt32(ddlComponent.SelectedValue) == 0)
                     {
-                        ScriptManager.RegisterClientScriptBlock((sender as Control), this.GetType(), "alert", String.Format("alert('{0}')", "ยังไมได้เลือก Component"), true);
-                        ddlComponent.Focus();
-                        isValid = false;
+                        //ScriptManager.RegisterClientScriptBlock((sender as Control), this.GetType(), "alert", String.Format("alert('{0}')", "ยังไมได้เลือก Component"), true);
+                        //ddlComponent.Focus();
+                        //isValid = false;
+                        errors.Add("ยังไม่ได้เลือก Component");
+
                     }
                     else
                     {
-                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
-                        this.jobSample.step2owner = userLogin.id;
-                        #region ":: STAMP COMPLETE DATE"
-                        this.jobSample.date_test_completed = DateTime.Now;
-                        #endregion
-                        //Add new
-                        foreach (template_wd_lpc_coverpage cov in this.Lpc)
+                        if (this.Lpc.Count > 0)
                         {
-                            cov.sample_id = this.SampleID;
-                            cov.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
-                            cov.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                            cov.ProcedureNo = txtB21.Text;
-                            cov.NumberOfPieces = txtC21.Text;
-                            cov.ExtractionMedium = txtD21.Text;
-                            cov.ExtractionVolume = txtE21.Text;
-                            #region "Test Method: 92-004230 Rev. AK"
-                            cov.ws_b15 = txtB48.Text;
-                            cov.ExtractionVolume = txtB49.Text;
-                            cov.ws_b17 = txtB50.Text;
-                            cov.NumberOfPieces = txtB51.Text;
+                            this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                            this.jobSample.step2owner = userLogin.id;
+                            #region ":: STAMP COMPLETE DATE"
+                            this.jobSample.date_test_completed = DateTime.Now;
                             #endregion
-                            #region "Tank Conditions"
-                            cov.ws_b21 = txtB54.Text;
-                            cov.ws_c21 = txtC54.Text;
-                            cov.ws_d21 = txtD54.Text;
-                            #endregion
+                            //Add new
+                            foreach (template_wd_lpc_coverpage cov in this.Lpc)
+                            {
+                                cov.sample_id = this.SampleID;
+                                cov.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                                cov.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                                cov.ProcedureNo = txtB21.Text;
+                                cov.NumberOfPieces = txtC21.Text;
+                                cov.ExtractionMedium = txtD21.Text;
+                                cov.ExtractionVolume = txtE21.Text;
+                                #region "Test Method: 92-004230 Rev. AK"
+                                cov.ws_b15 = txtB48.Text;
+                                cov.ExtractionVolume = txtB49.Text;
+                                cov.ws_b17 = txtB50.Text;
+                                cov.NumberOfPieces = txtB51.Text;
+                                #endregion
+                                #region "Tank Conditions"
+                                cov.ws_b21 = txtB54.Text;
+                                cov.ws_c21 = txtC54.Text;
+                                cov.ws_d21 = txtD54.Text;
+                                #endregion
+                            }
+                            objWork.DeleteBySampleID(this.SampleID);
+                            objWork.InsertList(this.Lpc.ToList());
                         }
-                        objWork.DeleteBySampleID(this.SampleID);
-                        objWork.InsertList(this.Lpc.ToList());
+                        else
+                        {
+                            errors.Add("ไม่พบข้อมูล WorkSheet");
+                        }
                     }
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
@@ -456,7 +460,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        //lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         isValid = false;
                     }
@@ -484,7 +488,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        //lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         isValid = false;
                     }
@@ -492,8 +496,15 @@ namespace ALS.ALSI.Web.view.template
                     break;
 
             }
-            if (isValid)
+
+            if (errors.Count > 0)
             {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
                 //########
                 this.jobSample.Update();
 
@@ -517,7 +528,6 @@ namespace ALS.ALSI.Web.view.template
         {
 
             string sheetName = string.Empty;
-            List<String> errors = new List<string>();
 
             #region "GET VALUE FROM XLS"
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -648,6 +658,8 @@ namespace ALS.ALSI.Web.view.template
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+
             }
             else
             {

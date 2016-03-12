@@ -68,6 +68,7 @@ namespace ALS.ALSI.Web.view.template
             get { return (List<template_seagate_ic_coverpage>)Session[GetType().Name + "template_seagate_ic_coverpage"]; }
             set { Session[GetType().Name + "template_seagate_ic_coverpage"] = value; }
         }
+        List<String> errors = new List<string>();
 
         private void initialPage()
         {
@@ -584,9 +585,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step4owner = userLogin.id;
                     break;
@@ -612,21 +613,32 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
 
             }
-            //########
-            this.jobSample.Update();
-            //Commit
-            GeneralManager.Commit();
 
-            //removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //########
+                this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
+
+                //removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
+
 
 
         }
@@ -1093,7 +1105,6 @@ namespace ALS.ALSI.Web.view.template
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
             string sheetName = string.Empty;
-            List<String> errors = new List<string>();
 
             for (int i = 0; i < FileUpload1.PostedFiles.Count; i++)
             {
@@ -1453,6 +1464,8 @@ namespace ALS.ALSI.Web.view.template
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+
             }
             else
             {

@@ -201,6 +201,7 @@ namespace ALS.ALSI.Web.view.template
             Session.Remove(GetType().Name + Constants.PREVIOUS_PATH);
             Session.Remove(GetType().Name + "SampleID");
         }
+        List<String> errors = new List<string>();
 
         private void initialPage()
         {
@@ -576,38 +577,35 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_CONVERT_TEMPLATE:
                     break;
                 case StatusEnum.LOGIN_SELECT_SPEC:
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
-                    foreach (template_seagate_hpa_coverpage ws in this.Hpas)
-                    {
-                        ws.sample_id = this.SampleID;
-                        ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
-                        ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
-                        #region "Method/Procedure"
-                        ws.ProcedureNo = txtProcedureNo.Text;
-                        ws.NumberOfPieces = txtNumberOfPieces.Text;
-                        ws.ExtractionMedium = txtExtractionMedium.Text;
-                        ws.ExtractionVolume = txtExtractionVolume.Text;
 
-                        ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
-                        ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
-                        ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
-                        ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
-                        #endregion
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                        foreach (template_seagate_hpa_coverpage ws in this.Hpas)
+                        {
+                            ws.sample_id = this.SampleID;
+                            ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                            ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
+                            #region "Method/Procedure"
+                            ws.ProcedureNo = txtProcedureNo.Text;
+                            ws.NumberOfPieces = txtNumberOfPieces.Text;
+                            ws.ExtractionMedium = txtExtractionMedium.Text;
+                            ws.ExtractionVolume = txtExtractionVolume.Text;
 
-                    }
-                    objWork.DeleteBySampleID(this.SampleID);
-                    //switch (this.CommandName)
-                    //{
-                    //    case CommandNameEnum.Add:
-                    objWork.InsertList(this.Hpas);
-                    //        break;
-                    //    case CommandNameEnum.Edit:
-                    //        objWork.UpdateList(this.Hpas);
-                    //        break;
-                    //}
+                            ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
+                            ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
+                            ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
+                            ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
+                            #endregion
+
+                        }
+                        objWork.DeleteBySampleID(this.SampleID);
+
+                        objWork.InsertList(this.Hpas);
+          
                     break;
                 case StatusEnum.CHEMIST_TESTING:
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                                if (this.Hpas.Count > 0)
+            {
+                this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     #region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_test_completed = DateTime.Now;
                     #endregion
@@ -713,6 +711,11 @@ namespace ALS.ALSI.Web.view.template
 
                     }
                     objWork.UpdateList(this.Hpas);
+                    }
+                    else
+                    {
+                        errors.Add("ไม่พบข้อมูล WorkSheet");
+                    }
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -766,9 +769,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step4owner = userLogin.id;
                     break;
@@ -794,21 +797,32 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
 
             }
-            //########
-            this.jobSample.Update();
-            //Commit
-            GeneralManager.Commit();
 
-            //removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //########
+                this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
+
+                //removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
+
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -820,7 +834,6 @@ namespace ALS.ALSI.Web.view.template
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
             string sheetName = string.Empty;
-            List<String> errors = new List<string>();
 
             if (String.IsNullOrEmpty(txtB3.Text)) { errors.Add(String.Format("กรุณาตรวจสอบ {0}", "Volume of Extraction (ml), Vt")); }
             if (String.IsNullOrEmpty(txtB4.Text)) { errors.Add(String.Format("กรุณาตรวจสอบ {0}", "Surface Area (cm2), C")); }
@@ -1033,6 +1046,8 @@ namespace ALS.ALSI.Web.view.template
                 if (errors.Count > 0)
                 {
                     litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                    modalErrorList.Show();
+
                 }
                 else
                 {
@@ -1078,6 +1093,8 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+
 
             }
 

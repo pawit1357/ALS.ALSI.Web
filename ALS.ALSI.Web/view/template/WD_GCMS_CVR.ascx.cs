@@ -86,6 +86,8 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        List<String> errors = new List<string>();
+
         private void initialPage()
         {
 
@@ -99,6 +101,7 @@ namespace ALS.ALSI.Web.view.template
 
             this.coverpages = template_wd_gcms_coverpage.FindAllBySampleID(this.SampleID);
             this.CommandName = CommandNameEnum.Add;
+
             //this.allowCal = false;
             ddlAssignTo.Items.Clear();
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
@@ -150,8 +153,11 @@ namespace ALS.ALSI.Web.view.template
                 pUploadfile.Visible = false;
                 pDownload.Visible = false;
                 btnSubmit.Visible = false;
+
                 gvCoverPages.Columns[5].Visible = false;
                 gvCoverPages.Columns[6].Visible = false;
+
+
 
                 switch (userRole)
                 {
@@ -446,9 +452,8 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        //lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
-                        //lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
+                        //isValid = false;
                     }
                     this.jobSample.step4owner = userLogin.id;
                     break;
@@ -474,21 +479,31 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        //lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
                         //lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
 
             }
-            //########
-            this.jobSample.Update();
-            //Commit
-            GeneralManager.Commit();
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //########
+                this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
 
-            removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+                removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
+
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -500,7 +515,6 @@ namespace ALS.ALSI.Web.view.template
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
             string sheetName = string.Empty;
-            List<String> errors = new List<string>();
 
             List<tb_m_gcms_cas> _cas = new List<tb_m_gcms_cas>();
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -649,6 +663,7 @@ namespace ALS.ALSI.Web.view.template
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
             }
             else
             {

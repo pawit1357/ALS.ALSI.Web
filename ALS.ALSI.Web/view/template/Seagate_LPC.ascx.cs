@@ -503,6 +503,7 @@ namespace ALS.ALSI.Web.view.template
 
         #endregion
 
+        List<String> errors = new List<String>();
         protected void Page_Load(object sender, EventArgs e)
         {
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
@@ -554,119 +555,126 @@ namespace ALS.ALSI.Web.view.template
 
                     break;
                 case StatusEnum.CHEMIST_TESTING:
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
-                    this.jobSample.step2owner = userLogin.id;
-                    #region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_test_completed = DateTime.Now;
-                    #endregion
-                    foreach (template_seagate_lpc_coverpage _tmp in this.Lpcs)
+                    if (this.Lpcs.Count > 0)
                     {
-                        _tmp.sample_id = this.jobSample.ID;
-                        _tmp.lpc_type = ddlA19.SelectedValue;
-                        _tmp.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
-                        _tmp.ProcedureNo = txtB19.Text;
-
-                        switch (ddlA19.SelectedValue)
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                        this.jobSample.step2owner = userLogin.id;
+                        #region ":: STAMP COMPLETE DATE"
+                        this.jobSample.date_test_completed = DateTime.Now;
+                        #endregion
+                        foreach (template_seagate_lpc_coverpage _tmp in this.Lpcs)
                         {
-                            case "1":
-                                //Extraction Vol. (ml) & No. of Parts Used For (64KHz)
-                                _tmp.NumberOfPieces = txt_UsLPC03_B20.Text;
-                                _tmp.ExtractionVolume = txt_UsLPC03_B22.Text;
-                                break;
-                            case "2":
-                                //Extraction Vol. (ml) & No. of Parts Used For (132KHz)
-                                _tmp.NumberOfPieces = txt_UsLPC06_B20.Text;
-                                _tmp.ExtractionVolume = txt_UsLPC06_B22.Text;
-                                break;
+                            _tmp.sample_id = this.jobSample.ID;
+                            _tmp.lpc_type = ddlA19.SelectedValue;
+                            _tmp.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
+                            _tmp.ProcedureNo = txtB19.Text;
+
+                            switch (ddlA19.SelectedValue)
+                            {
+                                case "1":
+                                    //Extraction Vol. (ml) & No. of Parts Used For (64KHz)
+                                    _tmp.NumberOfPieces = txt_UsLPC03_B20.Text;
+                                    _tmp.ExtractionVolume = txt_UsLPC03_B22.Text;
+                                    break;
+                                case "2":
+                                    //Extraction Vol. (ml) & No. of Parts Used For (132KHz)
+                                    _tmp.NumberOfPieces = txt_UsLPC06_B20.Text;
+                                    _tmp.ExtractionVolume = txt_UsLPC06_B22.Text;
+                                    break;
+                            }
+
+                            _tmp.ExtractionMedium = txtD19.Text;
+                            _tmp.item_visible = getItemStatus();
                         }
+                        #region "US-LPC(0.3)"
+                        template_seagate_lpc_coverpage khz68_03 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_03).ToString());
+                        if (khz68_03 != null)
+                        {
+                            //khz68_03.lpc_type = (cbLPCType68.Checked) ? "1" : "2";
+                            khz68_03.b14 = txt_UsLPC03_B14.Text;
+                            khz68_03.b15 = txt_UsLPC03_B15.Text;
+                            khz68_03.b16 = txt_UsLPC03_B16.Text;
+                            khz68_03.b17 = txt_UsLPC03_B17.Text;
 
-                        _tmp.ExtractionMedium = txtD19.Text;
-                        _tmp.item_visible = getItemStatus();
+                            khz68_03.c14 = txt_UsLPC03_C14.Text;
+                            khz68_03.c15 = txt_UsLPC03_C15.Text;
+                            khz68_03.c16 = txt_UsLPC03_C16.Text;
+                            khz68_03.c17 = txt_UsLPC03_C17.Text;
+
+                            khz68_03.d14 = txt_UsLPC03_D14.Text;
+                            khz68_03.d15 = txt_UsLPC03_D15.Text;
+                            khz68_03.d16 = txt_UsLPC03_D16.Text;
+                            khz68_03.d17 = txt_UsLPC03_D17.Text;
+
+                            khz68_03.e14 = txt_UsLPC03_E14.Text;
+                            khz68_03.e15 = txt_UsLPC03_E15.Text;
+                            khz68_03.e16 = txt_UsLPC03_E16.Text;
+                            khz68_03.e17 = txt_UsLPC03_E17.Text;
+
+                            khz68_03.f14 = txt_UsLPC03_F14.Text;
+                            khz68_03.f15 = txt_UsLPC03_F15.Text;
+                            khz68_03.f16 = txt_UsLPC03_F16.Text;
+                            khz68_03.f17 = txt_UsLPC03_F17.Text;
+
+                            khz68_03.g14 = txt_UsLPC03_G14.Text;
+                            khz68_03.g15 = txt_UsLPC03_G15.Text;
+                            khz68_03.g16 = txt_UsLPC03_G16.Text;
+                            khz68_03.g17 = txt_UsLPC03_G17.Text;
+
+                            khz68_03.b21 = txt_UsLPC03_B21.Text;
+                            khz68_03.b25 = txt_UsLPC03_B25.Text;
+                            khz68_03.d25 = txt_UsLPC03_D25.Text;
+                            khz68_03.f25 = txt_UsLPC03_F25.Text;
+
+
+                        }
+                        #endregion
+                        #region "US-LPC(0.6)"
+                        template_seagate_lpc_coverpage khz68_06 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString());
+                        if (khz68_06 != null)
+                        {
+                            khz68_06.b14 = txt_UsLPC06_B14.Text;
+                            khz68_06.b15 = txt_UsLPC06_B15.Text;
+                            khz68_06.b16 = txt_UsLPC06_B16.Text;
+                            khz68_06.b17 = txt_UsLPC06_B17.Text;
+
+                            khz68_06.c14 = txt_UsLPC06_C14.Text;
+                            khz68_06.c15 = txt_UsLPC06_C15.Text;
+                            khz68_06.c16 = txt_UsLPC06_C16.Text;
+                            khz68_06.c17 = txt_UsLPC06_C17.Text;
+
+                            khz68_06.d14 = txt_UsLPC06_D14.Text;
+                            khz68_06.d15 = txt_UsLPC06_D15.Text;
+                            khz68_06.d16 = txt_UsLPC06_D16.Text;
+                            khz68_06.d17 = txt_UsLPC06_D17.Text;
+
+                            khz68_06.e14 = txt_UsLPC06_E14.Text;
+                            khz68_06.e15 = txt_UsLPC06_E15.Text;
+                            khz68_06.e16 = txt_UsLPC06_E16.Text;
+                            khz68_06.e17 = txt_UsLPC06_E17.Text;
+
+                            khz68_06.f14 = txt_UsLPC06_F14.Text;
+                            khz68_06.f15 = txt_UsLPC06_F15.Text;
+                            khz68_06.f16 = txt_UsLPC06_F16.Text;
+                            khz68_06.f17 = txt_UsLPC06_F17.Text;
+
+                            khz68_06.g14 = txt_UsLPC06_G14.Text;
+                            khz68_06.g15 = txt_UsLPC06_G15.Text;
+                            khz68_06.g16 = txt_UsLPC06_G16.Text;
+                            khz68_06.g17 = txt_UsLPC06_G17.Text;
+
+                            khz68_06.b21 = txt_UsLPC06_B21.Text;
+                            khz68_06.b25 = txt_UsLPC06_B25.Text;
+                            khz68_06.d25 = txt_UsLPC06_D25.Text;
+                            khz68_06.f25 = txt_UsLPC06_F25.Text;
+                        }
+                        #endregion
+                        khz68_03.UpdateList(this.Lpcs);
                     }
-                    #region "US-LPC(0.3)"
-                    template_seagate_lpc_coverpage khz68_03 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_03).ToString());
-                    if (khz68_03 != null)
+                    else
                     {
-                        //khz68_03.lpc_type = (cbLPCType68.Checked) ? "1" : "2";
-                        khz68_03.b14 = txt_UsLPC03_B14.Text;
-                        khz68_03.b15 = txt_UsLPC03_B15.Text;
-                        khz68_03.b16 = txt_UsLPC03_B16.Text;
-                        khz68_03.b17 = txt_UsLPC03_B17.Text;
-
-                        khz68_03.c14 = txt_UsLPC03_C14.Text;
-                        khz68_03.c15 = txt_UsLPC03_C15.Text;
-                        khz68_03.c16 = txt_UsLPC03_C16.Text;
-                        khz68_03.c17 = txt_UsLPC03_C17.Text;
-
-                        khz68_03.d14 = txt_UsLPC03_D14.Text;
-                        khz68_03.d15 = txt_UsLPC03_D15.Text;
-                        khz68_03.d16 = txt_UsLPC03_D16.Text;
-                        khz68_03.d17 = txt_UsLPC03_D17.Text;
-
-                        khz68_03.e14 = txt_UsLPC03_E14.Text;
-                        khz68_03.e15 = txt_UsLPC03_E15.Text;
-                        khz68_03.e16 = txt_UsLPC03_E16.Text;
-                        khz68_03.e17 = txt_UsLPC03_E17.Text;
-
-                        khz68_03.f14 = txt_UsLPC03_F14.Text;
-                        khz68_03.f15 = txt_UsLPC03_F15.Text;
-                        khz68_03.f16 = txt_UsLPC03_F16.Text;
-                        khz68_03.f17 = txt_UsLPC03_F17.Text;
-
-                        khz68_03.g14 = txt_UsLPC03_G14.Text;
-                        khz68_03.g15 = txt_UsLPC03_G15.Text;
-                        khz68_03.g16 = txt_UsLPC03_G16.Text;
-                        khz68_03.g17 = txt_UsLPC03_G17.Text;
-
-                        khz68_03.b21 = txt_UsLPC03_B21.Text;
-                        khz68_03.b25 = txt_UsLPC03_B25.Text;
-                        khz68_03.d25 = txt_UsLPC03_D25.Text;
-                        khz68_03.f25 = txt_UsLPC03_F25.Text;
-
-
+                        errors.Add("ไม่พบข้อมูล WorkSheet");
                     }
-                    #endregion
-                    #region "US-LPC(0.6)"
-                    template_seagate_lpc_coverpage khz68_06 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString());
-                    if (khz68_06 != null)
-                    {
-                        khz68_06.b14 = txt_UsLPC06_B14.Text;
-                        khz68_06.b15 = txt_UsLPC06_B15.Text;
-                        khz68_06.b16 = txt_UsLPC06_B16.Text;
-                        khz68_06.b17 = txt_UsLPC06_B17.Text;
-
-                        khz68_06.c14 = txt_UsLPC06_C14.Text;
-                        khz68_06.c15 = txt_UsLPC06_C15.Text;
-                        khz68_06.c16 = txt_UsLPC06_C16.Text;
-                        khz68_06.c17 = txt_UsLPC06_C17.Text;
-
-                        khz68_06.d14 = txt_UsLPC06_D14.Text;
-                        khz68_06.d15 = txt_UsLPC06_D15.Text;
-                        khz68_06.d16 = txt_UsLPC06_D16.Text;
-                        khz68_06.d17 = txt_UsLPC06_D17.Text;
-
-                        khz68_06.e14 = txt_UsLPC06_E14.Text;
-                        khz68_06.e15 = txt_UsLPC06_E15.Text;
-                        khz68_06.e16 = txt_UsLPC06_E16.Text;
-                        khz68_06.e17 = txt_UsLPC06_E17.Text;
-
-                        khz68_06.f14 = txt_UsLPC06_F14.Text;
-                        khz68_06.f15 = txt_UsLPC06_F15.Text;
-                        khz68_06.f16 = txt_UsLPC06_F16.Text;
-                        khz68_06.f17 = txt_UsLPC06_F17.Text;
-
-                        khz68_06.g14 = txt_UsLPC06_G14.Text;
-                        khz68_06.g15 = txt_UsLPC06_G15.Text;
-                        khz68_06.g16 = txt_UsLPC06_G16.Text;
-                        khz68_06.g17 = txt_UsLPC06_G17.Text;
-
-                        khz68_06.b21 = txt_UsLPC06_B21.Text;
-                        khz68_06.b25 = txt_UsLPC06_B25.Text;
-                        khz68_06.d25 = txt_UsLPC06_D25.Text;
-                        khz68_06.f25 = txt_UsLPC06_F25.Text;
-                    }
-                    #endregion
-                    khz68_03.UpdateList(this.Lpcs);
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -720,7 +728,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        //lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         isValid = false;
                     }
@@ -748,7 +756,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        //lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         isValid = false;
                     }
@@ -756,15 +764,24 @@ namespace ALS.ALSI.Web.view.template
                     break;
 
             }
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //########
+                this.jobSample.Update();
 
-            //########
-            this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
 
-            //Commit
-            GeneralManager.Commit();
+                removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
 
-            removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
 
 
         }
@@ -780,7 +797,6 @@ namespace ALS.ALSI.Web.view.template
         {
 
             string sheetName = string.Empty;
-            List<String> errors = new List<string>();
 
             #region "LOAD"
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -1005,6 +1021,8 @@ namespace ALS.ALSI.Web.view.template
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+
             }
             else
             {

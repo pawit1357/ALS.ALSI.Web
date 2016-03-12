@@ -393,6 +393,9 @@ namespace ALS.ALSI.Web.view.template
 
         #endregion
 
+        List<String> errors = new List<string>();
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
@@ -435,127 +438,134 @@ namespace ALS.ALSI.Web.view.template
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     //CalculateCas(false);
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
-                    this.jobSample.step2owner = userLogin.id;
-                    #region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_test_completed = DateTime.Now;
-                    #endregion
-                    #region "CAS#"
-                    tb_m_gcms_cas.DeleteBySampleID(this.SampleID);
-                    tb_m_gcms_cas.InsertList(this.tbCas);
-                    #endregion
-                    #region "Cover Page#"
-                    foreach (template_seagate_gcms_coverpage cov in this.coverpages)
+                    if (this.tbCas.Count > 0)
                     {
-                        cov.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                        cov.procedure_no = txtProcedure.Text;
-                        cov.sample_size = txtSampleSize.Text;
-                        cov.extraction_medium = txtExtractionMedium.Text;
-                        cov.extraction_volumn = txtExtractionVolumn.Text;
-                        //
-                        cov.B13 = txtB13.Text;
-                        cov.B14 = txtB14.Text;
-                        cov.B15 = lbB15.Text;
-                        cov.B18 = txtB18.Text;
-                        cov.B19 = txtB19.Text;
-                        cov.B20 = lbB20.Text;
-                        cov.B23 = txtB23.Text;
-                        cov.B24 = txtB24.Text;
-                        cov.B25 = txtB25.Text;
-                        cov.B26 = txtB26.Text;
-                        cov.B27 = txtB27.Text;
-                        cov.B28 = txtB28.Text;
-                        cov.C23 = txtC23.Text;
-                        cov.C24 = txtC24.Text;
-                        cov.C25 = txtC25.Text;
-                        cov.C26 = txtC26.Text;
-                        cov.C27 = txtC27.Text;
-                        cov.C28 = txtC28.Text;
-                        cov.B30 = txtB30.Text;
-                        cov.B31 = txtB31.Text;
-                        cov.B32 = lbB32.Text;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                        this.jobSample.step2owner = userLogin.id;
+                        #region ":: STAMP COMPLETE DATE"
+                        this.jobSample.date_test_completed = DateTime.Now;
+                        #endregion
+                        #region "CAS#"
+                        tb_m_gcms_cas.DeleteBySampleID(this.SampleID);
+                        tb_m_gcms_cas.InsertList(this.tbCas);
+                        #endregion
+                        #region "Cover Page#"
+                        foreach (template_seagate_gcms_coverpage cov in this.coverpages)
+                        {
+                            cov.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                            cov.procedure_no = txtProcedure.Text;
+                            cov.sample_size = txtSampleSize.Text;
+                            cov.extraction_medium = txtExtractionMedium.Text;
+                            cov.extraction_volumn = txtExtractionVolumn.Text;
+                            //
+                            cov.B13 = txtB13.Text;
+                            cov.B14 = txtB14.Text;
+                            cov.B15 = lbB15.Text;
+                            cov.B18 = txtB18.Text;
+                            cov.B19 = txtB19.Text;
+                            cov.B20 = lbB20.Text;
+                            cov.B23 = txtB23.Text;
+                            cov.B24 = txtB24.Text;
+                            cov.B25 = txtB25.Text;
+                            cov.B26 = txtB26.Text;
+                            cov.B27 = txtB27.Text;
+                            cov.B28 = txtB28.Text;
+                            cov.C23 = txtC23.Text;
+                            cov.C24 = txtC24.Text;
+                            cov.C25 = txtC25.Text;
+                            cov.C26 = txtC26.Text;
+                            cov.C27 = txtC27.Text;
+                            cov.C28 = txtC28.Text;
+                            cov.B30 = txtB30.Text;
+                            cov.B31 = txtB31.Text;
+                            cov.B32 = lbB32.Text;
 
-                        cov.C30 = txtC30.Text;
-                        cov.C31 = txtC31.Text;
-                        cov.C32 = lbC32.Text;
-                        cov.B34 = txtB34.Text;
-                        cov.B35 = txtB35.Text;
-                        cov.B36 = lbB36.Text;
-                        cov.C34 = txtC34.Text;
-                        cov.C35 = txtC35.Text;
-                        cov.C36 = lbC36.Text;
-                        cov.B39 = txtB39.Text;
-                        cov.B40 = txtB40.Text;
-                        cov.B43 = lbB43.Text;
-                        cov.B44 = lbB44.Text;
-                        cov.C43 = lbC43.Text;
-                        cov.C44 = lbC44.Text;
-                        cov.D43 = lbD43.Text;
-                        cov.D44 = lbD44.Text;
+                            cov.C30 = txtC30.Text;
+                            cov.C31 = txtC31.Text;
+                            cov.C32 = lbC32.Text;
+                            cov.B34 = txtB34.Text;
+                            cov.B35 = txtB35.Text;
+                            cov.B36 = lbB36.Text;
+                            cov.C34 = txtC34.Text;
+                            cov.C35 = txtC35.Text;
+                            cov.C36 = lbC36.Text;
+                            cov.B39 = txtB39.Text;
+                            cov.B40 = txtB40.Text;
+                            cov.B43 = lbB43.Text;
+                            cov.B44 = lbB44.Text;
+                            cov.C43 = lbC43.Text;
+                            cov.C44 = lbC44.Text;
+                            cov.D43 = lbD43.Text;
+                            cov.D44 = lbD44.Text;
 
-                        cov.B47 = txtB47.Text;
-                        cov.B48 = txtB48.Text;
-                        cov.B49 = txtB49.Text;
-                        cov.B51 = txtB51.Text;
-                        cov.B52 = txtB52.Text;
-                        cov.B53 = txtB53.Text;
-                        cov.B54 = txtB54.Text;
-                        cov.B55 = txtB55.Text;
-                        cov.B56 = txtB56.Text;
-                        cov.B57 = txtB57.Text;
-                        cov.B58 = txtB58.Text;
-                        cov.B59 = txtB59.Text;
-                        cov.B60 = txtB60.Text;
-                        cov.B61 = txtB61.Text;
-                        cov.B62 = txtB62.Text;
+                            cov.B47 = txtB47.Text;
+                            cov.B48 = txtB48.Text;
+                            cov.B49 = txtB49.Text;
+                            cov.B51 = txtB51.Text;
+                            cov.B52 = txtB52.Text;
+                            cov.B53 = txtB53.Text;
+                            cov.B54 = txtB54.Text;
+                            cov.B55 = txtB55.Text;
+                            cov.B56 = txtB56.Text;
+                            cov.B57 = txtB57.Text;
+                            cov.B58 = txtB58.Text;
+                            cov.B59 = txtB59.Text;
+                            cov.B60 = txtB60.Text;
+                            cov.B61 = txtB61.Text;
+                            cov.B62 = txtB62.Text;
 
-                        cov.B13_MO = txtB13_MO.Text;
-                        cov.B13_MO = txtB13_MO.Text;
-                        cov.B14_MO = txtB14_MO.Text;
-                        cov.B17_MO = txtB17_MO.Text;
-                        cov.C17_MO = txtC17_MO.Text;
-                        cov.D17_MO = txtD17_MO.Text;
-                        cov.B18_MO = txtB18_MO.Text;
-                        cov.C18_MO = txtC18_MO.Text;
-                        cov.D18_MO = txtD18_MO.Text;
+                            cov.B13_MO = txtB13_MO.Text;
+                            cov.B13_MO = txtB13_MO.Text;
+                            cov.B14_MO = txtB14_MO.Text;
+                            cov.B17_MO = txtB17_MO.Text;
+                            cov.C17_MO = txtC17_MO.Text;
+                            cov.D17_MO = txtD17_MO.Text;
+                            cov.B18_MO = txtB18_MO.Text;
+                            cov.C18_MO = txtC18_MO.Text;
+                            cov.D18_MO = txtD18_MO.Text;
 
-                        cov.B20_MO = txtB20_MO.Text;
-                        cov.B21_MO = txtB21_MO.Text;
-                        cov.B22_MO = txtB22_MO.Text;
-                        cov.B23_MO = txtB23_MO.Text;
-                        cov.B25_MO = txtB26_MO.Text;
-                        cov.B26_MO = txtB26_MO.Text;
+                            cov.B20_MO = txtB20_MO.Text;
+                            cov.B21_MO = txtB21_MO.Text;
+                            cov.B22_MO = txtB22_MO.Text;
+                            cov.B23_MO = txtB23_MO.Text;
+                            cov.B25_MO = txtB26_MO.Text;
+                            cov.B26_MO = txtB26_MO.Text;
 
-                        cov.C20_MO = txtC20_MO.Text;
-                        cov.C21_MO = txtC21_MO.Text;
-                        cov.C22_MO = txtC22_MO.Text;
-                        cov.C23_MO = txtC23_MO.Text;
-                        cov.C25_MO = txtC26_MO.Text;
-                        cov.C26_MO = txtC26_MO.Text;
+                            cov.C20_MO = txtC20_MO.Text;
+                            cov.C21_MO = txtC21_MO.Text;
+                            cov.C22_MO = txtC22_MO.Text;
+                            cov.C23_MO = txtC23_MO.Text;
+                            cov.C25_MO = txtC26_MO.Text;
+                            cov.C26_MO = txtC26_MO.Text;
 
-                        cov.D20_MO = txtD20_MO.Text;
-                        cov.D21_MO = txtD21_MO.Text;
-                        cov.D22_MO = txtD22_MO.Text;
-                        cov.D23_MO = txtD23_MO.Text;
-                        cov.D25_MO = txtD26_MO.Text;
-                        cov.D26_MO = txtD26_MO.Text;
+                            cov.D20_MO = txtD20_MO.Text;
+                            cov.D21_MO = txtD21_MO.Text;
+                            cov.D22_MO = txtD22_MO.Text;
+                            cov.D23_MO = txtD23_MO.Text;
+                            cov.D25_MO = txtD26_MO.Text;
+                            cov.D26_MO = txtD26_MO.Text;
 
-                        cov.B30_MO = lbB30_MO.Text;
-                        cov.C30_MO = lbC30_MO.Text;
-                        cov.D30_MO = lbD30_MO.Text;
-                        //cov.E30_MO = lbE30_MO.Text;
+                            cov.B30_MO = lbB30_MO.Text;
+                            cov.C30_MO = lbC30_MO.Text;
+                            cov.D30_MO = lbD30_MO.Text;
+                            //cov.E30_MO = lbE30_MO.Text;
 
-                        cov.B31_MO = lbB31_MO.Text;
-                        cov.C31_MO = lbC31_MO.Text;
-                        cov.D31_MO = lbD31_MO.Text;
-                        //cov.E31_MO = lbE31_MO.Text;
+                            cov.B31_MO = lbB31_MO.Text;
+                            cov.C31_MO = lbC31_MO.Text;
+                            cov.D31_MO = lbD31_MO.Text;
+                            //cov.E31_MO = lbE31_MO.Text;
 
-                        //cov.selected_base = Convert.ToInt32(ddlBase.SelectedValue);
+                            //cov.selected_base = Convert.ToInt32(ddlBase.SelectedValue);
 
+                        }
+                        template_seagate_gcms_coverpage.UpdateList(this.coverpages);
+
+                        #endregion
                     }
-                    template_seagate_gcms_coverpage.UpdateList(this.coverpages);
-
-                    #endregion
+                    else
+                    {
+                        errors.Add("ไม่พบข้อมูล WorkSheet");
+                    }
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -609,9 +619,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        //lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                         //lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        //isValid = false;
                     }
                     this.jobSample.step4owner = userLogin.id;
                     break;
@@ -637,7 +647,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        //lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         isValid = false;
                     }
@@ -645,15 +655,24 @@ namespace ALS.ALSI.Web.view.template
                     break;
 
             }
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //########
+                this.jobSample.Update();
 
-            //########
-            this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
 
-            //Commit
-            GeneralManager.Commit();
+                removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
 
-            removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
 
         }
 
@@ -666,7 +685,6 @@ namespace ALS.ALSI.Web.view.template
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
             String sheetName = string.Empty;
-            List<String> errors = new List<string>();
 
             List<tb_m_gcms_cas> _cas = new List<tb_m_gcms_cas>();
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -933,13 +951,14 @@ namespace ALS.ALSI.Web.view.template
                 }
                 catch (Exception ex)
                 {
-                    errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}",sheetName,CustomUtils.ErrorIndex));
+                    errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                     Console.WriteLine();
                 }
             }
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
             }
             else
             {

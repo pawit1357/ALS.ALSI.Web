@@ -913,15 +913,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pLoadFile;
         
         /// <summary>
-        /// litErrorMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litErrorMessage;
-        
-        /// <summary>
         /// lbDecimal control.
         /// </summary>
         /// <remarks>
@@ -2144,6 +2135,42 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.ModalPopupExtender ModolPopupExtender;
+        
+        /// <summary>
+        /// litErrorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litErrorMessage;
+        
+        /// <summary>
+        /// btnPopupErrorList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPopupErrorList;
+        
+        /// <summary>
+        /// bnErrListFake control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton bnErrListFake;
+        
+        /// <summary>
+        /// modalErrorList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender modalErrorList;
         
         /// <summary>
         /// btnSubmit control.

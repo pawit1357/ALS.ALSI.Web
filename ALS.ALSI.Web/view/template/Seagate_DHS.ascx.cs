@@ -153,7 +153,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = false;
                             btnSubmit.Visible = true;
-  
+
                         }
                         break;
                     case RoleEnum.CHEMIST:
@@ -194,7 +194,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = true;
                             pDownload.Visible = true;
                             btnSubmit.Visible = true;
- 
+
                         }
                         break;
                     case RoleEnum.LABMANAGER:
@@ -209,7 +209,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = true;
                             btnSubmit.Visible = true;
-      
+
                         }
                         break;
                 }
@@ -294,6 +294,8 @@ namespace ALS.ALSI.Web.view.template
 
         #endregion
 
+        List<String> errors = new List<String>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -338,27 +340,34 @@ namespace ALS.ALSI.Web.view.template
                     #endregion
                     break;
                 case StatusEnum.CHEMIST_TESTING:
-                    //CalculateCas(false);
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
-                    this.jobSample.step2owner = userLogin.id;
-                    #region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_test_completed = DateTime.Now;
-                    #endregion
-                    #region "CAS#"
-                    tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
-                    tb_m_dhs_cas.InsertList(this.tbCas);
-                    #endregion
-                    #region "Cover Page#"
-                    foreach (template_seagate_dhs_coverpage _val in this.coverpages)
+                    if (this.tbCas.Count > 0)
                     {
-                        _val.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                        _val.procedureNo = txtProcedureNo.Text;
-                        _val.sampleSize = txtSampleSize.Text;
-                        _val.SamplingTime = txtSamplingTime.Text;
-                        //_val.unit = this.Unit;
+                        //CalculateCas(false);
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                        this.jobSample.step2owner = userLogin.id;
+                        #region ":: STAMP COMPLETE DATE"
+                        this.jobSample.date_test_completed = DateTime.Now;
+                        #endregion
+                        #region "CAS#"
+                        tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
+                        tb_m_dhs_cas.InsertList(this.tbCas);
+                        #endregion
+                        #region "Cover Page#"
+                        foreach (template_seagate_dhs_coverpage _val in this.coverpages)
+                        {
+                            _val.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                            _val.procedureNo = txtProcedureNo.Text;
+                            _val.sampleSize = txtSampleSize.Text;
+                            _val.SamplingTime = txtSamplingTime.Text;
+                            //_val.unit = this.Unit;
+                        }
+                        template_seagate_dhs_coverpage.UpdateList(this.coverpages);
+                        #endregion
                     }
-                    template_seagate_dhs_coverpage.UpdateList(this.coverpages);
-                    #endregion
+                    else
+                    {
+                        errors.Add("ไม่พบข้อมูล WorkSheet");
+                    }
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -412,9 +421,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step4owner = userLogin.id;
                     break;
@@ -440,23 +449,32 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
 
             }
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //########
+                this.jobSample.Update();
 
-            //########
-            this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
 
-            //Commit
-            GeneralManager.Commit();
+                removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
 
-            removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -467,100 +485,122 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
+            string sheetName = string.Empty;
+
             List<tb_m_dhs_cas> _cas = new List<tb_m_dhs_cas>();
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
             for (int i = 0; i < btnUpload.PostedFiles.Count; i++)
             {
                 HttpPostedFile _postedFile = btnUpload.PostedFiles[i];
-                //try
-                //{
-                if (_postedFile.ContentLength > 0)
+                try
                 {
-                    string yyyy = DateTime.Now.ToString("yyyy");
-                    string MM = DateTime.Now.ToString("MM");
-                    string dd = DateTime.Now.ToString("dd");
-
-                    String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    String source_file_url = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-                    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                    if (_postedFile.ContentLength > 0)
                     {
-                        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    }
-                    _postedFile.SaveAs(source_file);
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
 
-                    if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")))
-                    {
-                        using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
+                        String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file_url = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
-                            HSSFWorkbook wb = new HSSFWorkbook(fs);
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        _postedFile.SaveAs(source_file);
 
-                            ISheet isheet = wb.GetSheet(ConfigurationManager.AppSettings["seagate.dhs.excel.sheetname.dhs"]);
-                            if (isheet == null)
+                        if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")))
+                        {
+                            using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
                             {
-                                MessageBox.Show(this.Page, String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", isheet.SheetName));
-                            }
-                            else
-                            {
-                            for (int j = 15; j < isheet.LastRowNum; j++)
-                            {
-                                if (isheet.GetRow(j) != null)
+                                HSSFWorkbook wb = new HSSFWorkbook(fs);
+
+                                ISheet isheet = wb.GetSheet(ConfigurationManager.AppSettings["seagate.dhs.excel.sheetname.dhs"]);
+                                if (isheet == null)
                                 {
-                                    tb_m_dhs_cas tmp = new tb_m_dhs_cas();
-                                    tmp.ID = j;
-                                    tmp.sample_id = this.SampleID;
-                                    tmp.pk = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(0));
-                                    tmp.rt = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1));
-                                    tmp.library_id = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(2));
-                                    tmp.classification = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(3));
-                                    tmp.cas = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(4));
-                                    tmp.qual = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(5));
-                                    tmp.area = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(6));
-                                    if (isheet.GetRow(j).GetCell(7) != null)
-                                    {
-                                        if (isheet.GetRow(j).GetCell(7).CellType != CellType.Blank)
-                                        {
-                                            if (tmp.library_id.Equals("Total Outgassing") || tmp.library_id.Equals("Total of All Compounds") || tmp.library_id.Equals("Hydrocarbons, Unknowns, Others"))
-                                            {
-                                                tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", isheet.SheetName));
+                                }
+                                else
+                                {
+                                    sheetName = isheet.SheetName;
 
-                                            }
-                                            else
+                                    for (int j = 15; j < isheet.LastRowNum; j++)
+                                    {
+                                        if (isheet.GetRow(j) != null)
+                                        {
+                                            tb_m_dhs_cas tmp = new tb_m_dhs_cas();
+                                            tmp.ID = j;
+                                            tmp.sample_id = this.SampleID;
+                                            tmp.pk = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(0));
+                                            tmp.rt = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1));
+                                            tmp.library_id = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(2));
+                                            tmp.classification = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(3));
+                                            tmp.cas = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(4));
+                                            tmp.qual = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(5));
+                                            tmp.area = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(6));
+                                            if (isheet.GetRow(j).GetCell(7) != null)
                                             {
-                                                tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                if (isheet.GetRow(j).GetCell(7).CellType != CellType.Blank)
+                                                {
+                                                    if (tmp.library_id.Equals("Total Outgassing") || tmp.library_id.Equals("Total of All Compounds") || tmp.library_id.Equals("Hydrocarbons, Unknowns, Others"))
+                                                    {
+                                                        tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+
+                                                    }
+                                                    else
+                                                    {
+                                                        tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    }
+                                                    //tmp.amount = Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7)))+"";
+                                                }
                                             }
-                                            //tmp.amount = Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7)))+"";
+                                            tmp.row_type = (
+
+                                                String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.classification) ||
+
+                                                String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.library_id) && !String.IsNullOrEmpty(tmp.area)) ? Convert.ToInt32(RowTypeEnum.TotalRow) : Convert.ToInt32(RowTypeEnum.Normal);
+
+                                            if (!String.IsNullOrEmpty(tmp.area))
+                                            {
+                                                _cas.Add(tmp);
+                                            }
                                         }
                                     }
-                                    tmp.row_type = (
-
-                                        String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.classification) ||
-
-                                        String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.library_id) && !String.IsNullOrEmpty(tmp.area)) ? Convert.ToInt32(RowTypeEnum.TotalRow) : Convert.ToInt32(RowTypeEnum.Normal);
-
-                                    if (!String.IsNullOrEmpty(tmp.area))
-                                    {
-                                        _cas.Add(tmp);
-                                    }
                                 }
+                                Console.WriteLine();
                             }
                         }
-                            Console.WriteLine();
+                        else
+                        {
+                            errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
                         }
+
+
                     }
 
+                }
+                catch (Exception ex)
+                {
+                    errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
 
+                    Console.WriteLine();
                 }
 
-                //}
-                //catch (Exception ex) {
-                //    Console.WriteLine();
-                //}
-
             }
-            this.tbCas = _cas;
-            gvResult.DataSource = this.tbCas;
-            gvResult.DataBind();
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                this.tbCas = _cas;
+                gvResult.DataSource = this.tbCas;
+                gvResult.DataBind();
+            }
+
+
         }
 
         protected void btnCalculate_Click(object sender, EventArgs e)
@@ -730,7 +770,7 @@ namespace ALS.ALSI.Web.view.template
                                 //        _cover.result = Math.Round(amt).ToString();
                                 //        break;
                                 //    default:
-                                        _cover.result = amt.ToString();
+                                _cover.result = amt.ToString();
                                 //        break;
                                 //}
                                 break;
@@ -775,103 +815,103 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
-   
-
-                DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-                ReportHeader reportHeader = new ReportHeader();
-                reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-                ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-                reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-                reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-                reportParameters.Add(new ReportParameter("Company", reportHeader.addr1 + reportHeader.addr2));
-                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
-                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-                reportParameters.Add(new ReportParameter("Test", "DHS"));
-                reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
-
-                // Variables
-                Warning[] warnings;
-                string[] streamIds;
-                string mimeType = string.Empty;
-                string encoding = string.Empty;
-                string extension = string.Empty;
 
 
-                // Setup the report viewer object and get the array of bytes
-                ReportViewer viewer = new ReportViewer();
-                viewer.ProcessingMode = ProcessingMode.Local;
-                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_seagate.rdlc");
-                viewer.LocalReport.SetParameters(reportParameters);
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
+            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1 + reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", "DHS"));
+            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
 
 
-
-
-                string download = String.Empty;
-
-                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-                switch (status)
-                {
-                    case StatusEnum.ADMIN_CONVERT_WORD:
-                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                        {
-                            Response.Redirect(String.Format("{0}{1}", ALS.ALSI.Biz.Constant.Configurations.HOST, this.jobSample.path_word));
-                        }
-                        else
-                        {
-                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-                            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-                            Response.Buffer = true;
-                            Response.Clear();
-                            Response.ContentType = mimeType;
-                            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-                            Response.BinaryWrite(bytes); // create the file
-                            Response.Flush(); // send it to the client to download
-                        }
-                        break;
-                    case StatusEnum.LABMANAGER_CHECKING:
-                    case StatusEnum.LABMANAGER_APPROVE:
-                    case StatusEnum.LABMANAGER_DISAPPROVE:
-                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                        {
-                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-                        }
-                        break;
-                    case StatusEnum.ADMIN_CONVERT_PDF:
-                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                        {
-                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-                        }
-                        //if (!String.IsNullOrEmpty(this.jobSample.path_pdf))
-                        //{
-                        //    Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_pdf));
-                        //}
-                        //else
-                        //{
-                        //    byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-                        //    // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-                        //    Response.Buffer = true;
-                        //    Response.Clear();
-                        //    Response.ContentType = mimeType;
-                        //    Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-                        //    Response.BinaryWrite(bytes); // create the file
-                        //    Response.Flush(); // send it to the client to download
-
-                        //}
-                        break;
-                }
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_seagate.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
 
 
 
- 
+
+            string download = String.Empty;
+
+            StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+            switch (status)
+            {
+                case StatusEnum.ADMIN_CONVERT_WORD:
+                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    {
+                        Response.Redirect(String.Format("{0}{1}", ALS.ALSI.Biz.Constant.Configurations.HOST, this.jobSample.path_word));
+                    }
+                    else
+                    {
+                        byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+                        // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+                        Response.Buffer = true;
+                        Response.Clear();
+                        Response.ContentType = mimeType;
+                        Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                        Response.BinaryWrite(bytes); // create the file
+                        Response.Flush(); // send it to the client to download
+                    }
+                    break;
+                case StatusEnum.LABMANAGER_CHECKING:
+                case StatusEnum.LABMANAGER_APPROVE:
+                case StatusEnum.LABMANAGER_DISAPPROVE:
+                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    {
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                    }
+                    break;
+                case StatusEnum.ADMIN_CONVERT_PDF:
+                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    {
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                    }
+                    //if (!String.IsNullOrEmpty(this.jobSample.path_pdf))
+                    //{
+                    //    Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_pdf));
+                    //}
+                    //else
+                    //{
+                    //    byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+                    //    // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+                    //    Response.Buffer = true;
+                    //    Response.Clear();
+                    //    Response.ContentType = mimeType;
+                    //    Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                    //    Response.BinaryWrite(bytes); // create the file
+                    //    Response.Flush(); // send it to the client to download
+
+                    //}
+                    break;
+            }
+
+
+
+
 
 
         }

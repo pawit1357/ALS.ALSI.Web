@@ -315,7 +315,6 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                         </div>
                     </asp:Panel>
                     <asp:Panel ID="pLoadFile" runat="server">
-                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                         <div class="form-group">
                             <label class="control-label col-md-3">ทศนิยม</label>
@@ -774,97 +773,116 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                         </div>
                     </asp:Panel>
                     <!-- END FORM-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BEGIN Portlet PORTLET-->
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-puzzle font-grey-gallery"></i>
+                                        <span class="caption-subject bold font-grey-gallery uppercase">Operation </span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+
+
+                                    <asp:Panel ID="pSpecification" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="B" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pStatus" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pRemark" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pDisapprove" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pDownload" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Download:</label>
+                                                    <div class="col-md-6">
+                                                        <i class="icon-download-alt"></i>
+                                                        <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                                                            <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
+                                                        </asp:LinkButton>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pUploadfile" runat="server">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Uplod file:</label>
+                                                    <div class="col-md-6">
+                                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
+                                                        <span class="btn green fileinput-button">
+                                                            <i class="fa fa-plus"></i>
+                                                            <span>Add files...</span>
+                                                            <asp:FileUpload ID="btnUpload" runat="server" />
+                                                        </span>
+                                                        <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
+                                    </asp:Panel>
+
+
+                                </div>
+                            </div>
+                            <!-- END Portlet PORTLET-->
+                        </div>
+                    </div>
+
                     <div class="form-actions">
-                        <asp:Panel ID="pSpecification" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="B" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pStatus" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pRemark" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pDisapprove" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pDownload" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Download:</label>
-                                        <div class="col-md-6">
-                                            <i class="icon-download-alt"></i>
-                                            <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                            </asp:LinkButton>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pUploadfile" runat="server">
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Uplod file:</label>
-                                        <div class="col-md-6">
-                                            <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                            <span class="btn green fileinput-button">
-                                                <i class="fa fa-plus"></i>
-                                                <span>Add files...</span>
-                                                <asp:FileUpload ID="btnUpload" runat="server" />
-                                            </span>
-                                            <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                            <br />
-                        </asp:Panel>
-
 
                         <div class="modal-wide" id="pnlModalDemo" style="display: none;">
                             <div class="modal-content">
@@ -937,6 +955,33 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                         <asp:ModalPopupExtender ID="ModolPopupExtender" runat="server" PopupControlID="pnlModalDemo"
                             TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
                             CancelControlID="btnClose">
+                        </asp:ModalPopupExtender>
+
+                        <!-- POPUP -->
+
+                        <div class="modal-wide" id="popupErrorList" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h class="modal-title">
+                                            รายการปัญหา</h>
+                                </div>
+                                <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button ID="btnPopupErrorList" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+
+                        <asp:LinkButton ID="bnErrListFake" runat="server">
+                        </asp:LinkButton>
+                        <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
+                            TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
+                            CancelControlID="btnPopupErrorList">
                         </asp:ModalPopupExtender>
 
                         <div class="row">

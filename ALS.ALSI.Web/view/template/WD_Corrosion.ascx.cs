@@ -79,6 +79,7 @@ namespace ALS.ALSI.Web.view.template
             Session.Remove(GetType().Name + "SampleID");
             Session.Remove(GetType().Name + "SampleSize");
         }
+        List<String> errors = new List<String>();
 
         private void initialPage()
         {
@@ -222,9 +223,9 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 this.CommandName = CommandNameEnum.Add;
-           
-                    lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", String.Empty);
-                
+
+                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", String.Empty);
+
 
                 this.coverpages = new List<template_wd_corrosion_coverpage>();
                 template_wd_corrosion_coverpage cov = new template_wd_corrosion_coverpage();
@@ -312,18 +313,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
                         _cover.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                     }
-
-                    //switch (this.CommandName)
-                    //{
-                    //    case CommandNameEnum.Add:
                     template_wd_corrosion_coverpage.InsertList(this.coverpages);
-
-                    //break;
-                    //    case CommandNameEnum.Edit:
-                    //        template_wd_corrosion_coverpage.UpdateList(this.coverpages);
-
-                    //        break;
-                    //}
 
                     break;
                 case StatusEnum.CHEMIST_TESTING:
@@ -395,9 +385,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step4owner = userLogin.id;
                     break;
@@ -423,21 +413,32 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
 
             }
-            //########
-            this.jobSample.Update();
-            //Commit
-            GeneralManager.Commit();
 
-            //removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //########
+                this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
+
+                //removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
+
 
         }
 
@@ -757,7 +758,7 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dtResult)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3",dat.ToDataTable() )); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dat.ToDataTable())); // Add datasource here
 
 
 

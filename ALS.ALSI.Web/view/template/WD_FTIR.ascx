@@ -167,7 +167,6 @@ The instrument detection limit for silicone oil is
                     </asp:Panel>
 
                     <asp:Panel ID="pLoadFile" runat="server">
-                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                         <div class="form-group">
                             <label class="control-label col-md-3">ทศนิยม</label>
@@ -212,35 +211,8 @@ The instrument detection limit for silicone oil is
                     </asp:Panel>
                     <%--NVR-FTIR(Hex)--%>
                     <asp:Panel ID="PWorking" runat="server">
-                        <%--               <h4 class="form-section">Manage Source File</h4>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
-                            <div class="col-md-6">
-                                <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                <span class="btn green fileinput-button">
-                                    <i class="fa fa-plus"></i>
-                                    <span>Add files...</span>
-                                    <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="true" />
-                                </span>
-                                <h6>***เลือกไฟล์ที่มี *l.txt,*h.txt,*a.txt</h6>
-                                <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Generate Data</label>
-                            <div class="col-md-6">
-                                <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
-                            </div>
-                        </div>
-                    </div>
-                </div>--%>
                         <div class="row">
                             <div class="col-md-6">
-                                <%--                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click"><i class="fa fa-arrows-h"></i> ทศนิยม</asp:LinkButton>--%>
 
                                 <table class="table table-striped table-hover small" id="tb1" runat="server">
                                     <thead>
@@ -418,107 +390,126 @@ The instrument detection limit for silicone oil is
                             </div>
                         </div>
                     </asp:Panel>
-
                     <!-- END FORM-->
-                    <div class="form-actions">
-                        <asp:Panel ID="pSpecification" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Detail Spec:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlDetailSpec" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlDetailSpec_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                        </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BEGIN Portlet PORTLET-->
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-puzzle font-grey-gallery"></i>
+                                        <span class="caption-subject bold font-grey-gallery uppercase">Operation </span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Component:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlComponent" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                <div class="portlet-body">
 
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pStatus" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                    <asp:Panel ID="pSpecification" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Detail Spec:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlDetailSpec" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlDetailSpec_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Component:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlComponent" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pStatus" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pRemark" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pDisapprove" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
+                                                    <div class="col-md-6">
+                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pDownload" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Download:</label>
+                                                    <div class="col-md-6">
+                                                        <i class="icon-download-alt"></i>
+                                                        <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                                                            <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
+                                                        </asp:LinkButton>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pUploadfile" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Uplod file:</label>
+                                                    <div class="col-md-6">
+                                                        <asp:HiddenField ID="HiddenField1" runat="server" />
+                                                        <span class="btn green fileinput-button">
+                                                            <i class="fa fa-plus"></i>
+                                                            <span>Add files...</span>
+                                                            <asp:FileUpload ID="btnUpload" runat="server" />
+                                                        </span>
+                                                        <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
+                                        <br />
+                                    </asp:Panel>
+
+
                                 </div>
                             </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pRemark" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pDisapprove" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pDownload" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Download:</label>
-                                        <div class="col-md-6">
-                                            <i class="icon-download-alt"></i>
-                                            <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                            </asp:LinkButton>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                        </asp:Panel>
-                        <asp:Panel ID="pUploadfile" runat="server">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Uplod file:</label>
-                                        <div class="col-md-6">
-                                            <asp:HiddenField ID="HiddenField1" runat="server" />
-                                            <span class="btn green fileinput-button">
-                                                <i class="fa fa-plus"></i>
-                                                <span>Add files...</span>
-                                                <asp:FileUpload ID="btnUpload" runat="server" />
-                                            </span>
-                                            <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                            <br />
-                        </asp:Panel>
-                        <br />
+                            <!-- END Portlet PORTLET-->
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions">
 
 
                         <div class="modal-wide" id="pnlModalDemo" style="display: none;">
@@ -597,6 +588,34 @@ The instrument detection limit for silicone oil is
                         </asp:ModalPopupExtender>
 
 
+                        <!-- POPUP -->
+
+                        <div class="modal-wide" id="popupErrorList" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h class="modal-title">
+                                            รายการปัญหา</h>
+                                </div>
+                                <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button ID="btnPopupErrorList" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+
+                        <asp:LinkButton ID="bnErrListFake" runat="server">
+                        </asp:LinkButton>
+                        <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
+                            TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
+                            CancelControlID="btnPopupErrorList">
+                        </asp:ModalPopupExtender>
+
+                        <!-- END POPUP -->
 
                         <div class="row">
                             <div class="col-md-6">
@@ -608,6 +627,7 @@ The instrument detection limit for silicone oil is
                                 </div>
                             </div>
                         </div>
+                    
                     </div>
                 </div>
             </div>

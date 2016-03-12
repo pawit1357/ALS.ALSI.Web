@@ -37,7 +37,6 @@
                         </div>
 
                         <asp:Panel ID="pLoadFile" runat="server">
-                            <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">ทศนิยม</label>
@@ -81,32 +80,7 @@
 
                         </asp:Panel>
 
-                        <%--                        <h4 class="form-section">Manage Source File</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
-                                    <div class="col-md-6">
-                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                        <span class="btn green fileinput-button">
-                                            <i class="fa fa-plus"></i>
-                                            <span>Add files...</span>
-                                            <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
-                                        </span>
-                                        <h6>***เลือกไฟล์ที่มี *.xls</h6>
-                                        <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Generate Data</label>
-                                    <div class="col-md-6">
-                                        <asp:Button ID="btnLoadFile" runat="server" Text="Submit" CssClass="btn blue" OnClick="btnLoadFile_Click" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>--%>
+
                         <h4 class="form-section">Manage CAS# Data</h4>
                         <div class="row">
                             <div class="col-md-12">
@@ -206,9 +180,8 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>
-                                                        GCMS - Hydrocarbon Residue
-<%--                                                        <asp:DropDownList ID="ddlTest" runat="server" AutoPostBack="True" CssClass="select2_category form-control">
+                                                    <td>GCMS - Hydrocarbon Residue
+                                                        <%--                                                        <asp:DropDownList ID="ddlTest" runat="server" AutoPostBack="True" CssClass="select2_category form-control">
                                                             <asp:ListItem Value="1">GCMS - Hydrocarbon Residue</asp:ListItem>
                                                             <asp:ListItem Value="2">CVR</asp:ListItem>
                                                         </asp:DropDownList>--%>
@@ -310,7 +283,18 @@
                         </div>
                     </asp:Panel>
                     <!-- END FORM-->
-                    <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BEGIN Portlet PORTLET-->
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-puzzle font-grey-gallery"></i>
+                                        <span class="caption-subject bold font-grey-gallery uppercase">Operation </span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+
                         <asp:Panel ID="pSpecification" runat="server">
                             <div class="row">
                                 <div class="col-md-6">
@@ -406,14 +390,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <%--                    <ul>
-                        <li>The maximum file size for uploads in this demo is <strong>5 MB</strong> (default file size is unlimited).</li>
-                        <li>Only word or pdf files (<strong>DOC, DOCX, PDF</strong>) are allowed in this demo (by default there is no file type restriction).</li>
-                    </ul>
-                    <br />--%>
+
                             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                             <br />
                         </asp:Panel>
+
+
+                                </div>
+                            </div>
+                            <!-- END Portlet PORTLET-->
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions">
 
 
                         <div class="modal-wide" id="pnlModalDemo" style="display: none;">
@@ -452,6 +442,35 @@
                             TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
                             CancelControlID="btnClose">
                         </asp:ModalPopupExtender>
+
+
+                        <!-- POPUP -->
+
+                        <div class="modal-wide" id="popupErrorList" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h class="modal-title">
+                                            รายการปัญหา</h>
+                                </div>
+                                <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button ID="btnPopupErrorList" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+
+                        <asp:LinkButton ID="bnErrListFake" runat="server">
+                        </asp:LinkButton>
+                        <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
+                            TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
+                            CancelControlID="btnPopupErrorList">
+                        </asp:ModalPopupExtender>
+
 
 
                         <div class="row">

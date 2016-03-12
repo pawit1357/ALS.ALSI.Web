@@ -553,6 +553,9 @@ namespace ALS.ALSI.Web.view.template
 
         #endregion
 
+        List<String> errors = new List<string>();
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
@@ -607,112 +610,119 @@ namespace ALS.ALSI.Web.view.template
                     //}
                     break;
                 case StatusEnum.CHEMIST_TESTING:
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
-                    #region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_test_completed = DateTime.Now;
-                    #endregion
-                    foreach (template_seagate_hpa_coverpage ws in this.Hpas)
+                    if (this.Hpas.Count > 0)
                     {
-                        ws.sample_id = this.SampleID;
-                        ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
-                        ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
-
-                        #region "Method/Procedure"
-                        ws.ProcedureNo = txtProcedureNo.Text;
-                        ws.NumberOfPieces = txtNumberOfPieces.Text;
-                        ws.ExtractionMedium = txtExtractionMedium.Text;
-                        ws.ExtractionVolume = txtExtractionVolume.Text;
-
-                        ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
-                        ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
-                        ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
-                        ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                        #region ":: STAMP COMPLETE DATE"
+                        this.jobSample.date_test_completed = DateTime.Now;
                         #endregion
+                        foreach (template_seagate_hpa_coverpage ws in this.Hpas)
+                        {
+                            ws.sample_id = this.SampleID;
+                            ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                            ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
 
-                        #region "region "US-LPC(0.3)"
-                        ws.us03_b14 = txt_UsLPC03_B14.Text;
-                        ws.us03_b15 = txt_UsLPC03_B15.Text;
-                        ws.us03_b16 = txt_UsLPC03_B16.Text;
-                        ws.us03_b17 = txt_UsLPC03_B17.Text;
+                            #region "Method/Procedure"
+                            ws.ProcedureNo = txtProcedureNo.Text;
+                            ws.NumberOfPieces = txtNumberOfPieces.Text;
+                            ws.ExtractionMedium = txtExtractionMedium.Text;
+                            ws.ExtractionVolume = txtExtractionVolume.Text;
 
-                        ws.us03_c14 = txt_UsLPC03_C14.Text;
-                        ws.us03_c15 = txt_UsLPC03_C15.Text;
-                        ws.us03_c16 = txt_UsLPC03_C16.Text;
-                        ws.us03_c17 = txt_UsLPC03_C17.Text;
+                            ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
+                            ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
+                            ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
+                            ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
+                            #endregion
 
-                        ws.us03_d14 = txt_UsLPC03_D14.Text;
-                        ws.us03_d15 = txt_UsLPC03_D15.Text;
-                        ws.us03_d16 = txt_UsLPC03_D16.Text;
-                        ws.us03_d17 = txt_UsLPC03_D17.Text;
+                            #region "region "US-LPC(0.3)"
+                            ws.us03_b14 = txt_UsLPC03_B14.Text;
+                            ws.us03_b15 = txt_UsLPC03_B15.Text;
+                            ws.us03_b16 = txt_UsLPC03_B16.Text;
+                            ws.us03_b17 = txt_UsLPC03_B17.Text;
 
-                        ws.us03_e14 = txt_UsLPC03_E14.Text;
-                        ws.us03_e15 = txt_UsLPC03_E15.Text;
-                        ws.us03_e16 = txt_UsLPC03_E16.Text;
-                        ws.us03_e17 = txt_UsLPC03_E17.Text;
+                            ws.us03_c14 = txt_UsLPC03_C14.Text;
+                            ws.us03_c15 = txt_UsLPC03_C15.Text;
+                            ws.us03_c16 = txt_UsLPC03_C16.Text;
+                            ws.us03_c17 = txt_UsLPC03_C17.Text;
 
-                        ws.us03_f14 = txt_UsLPC03_F14.Text;
-                        ws.us03_f15 = txt_UsLPC03_F15.Text;
-                        ws.us03_f16 = txt_UsLPC03_F16.Text;
-                        ws.us03_f17 = txt_UsLPC03_F17.Text;
+                            ws.us03_d14 = txt_UsLPC03_D14.Text;
+                            ws.us03_d15 = txt_UsLPC03_D15.Text;
+                            ws.us03_d16 = txt_UsLPC03_D16.Text;
+                            ws.us03_d17 = txt_UsLPC03_D17.Text;
 
-                        ws.us03_g14 = txt_UsLPC03_G14.Text;
-                        ws.us03_g15 = txt_UsLPC03_G15.Text;
-                        ws.us03_g16 = txt_UsLPC03_G16.Text;
-                        ws.us03_g17 = txt_UsLPC03_G17.Text;
+                            ws.us03_e14 = txt_UsLPC03_E14.Text;
+                            ws.us03_e15 = txt_UsLPC03_E15.Text;
+                            ws.us03_e16 = txt_UsLPC03_E16.Text;
+                            ws.us03_e17 = txt_UsLPC03_E17.Text;
 
-                        ws.us03_b25 = txt_UsLPC03_B25_1.Text;
-                        ws.us03_d25 = txt_UsLPC03_D25.Text;
-                        ws.us03_f25 = txt_UsLPC03_F25.Text;
-                        #endregion
+                            ws.us03_f14 = txt_UsLPC03_F14.Text;
+                            ws.us03_f15 = txt_UsLPC03_F15.Text;
+                            ws.us03_f16 = txt_UsLPC03_F16.Text;
+                            ws.us03_f17 = txt_UsLPC03_F17.Text;
 
-                        #region "region "US-LPC(0.6)"
-                        ws.us06_b14 = txt_UsLPC06_B14.Text;
-                        ws.us06_b15 = txt_UsLPC06_B15.Text;
-                        ws.us06_b16 = txt_UsLPC06_B16.Text;
-                        ws.us06_b17 = txt_UsLPC06_B17.Text;
+                            ws.us03_g14 = txt_UsLPC03_G14.Text;
+                            ws.us03_g15 = txt_UsLPC03_G15.Text;
+                            ws.us03_g16 = txt_UsLPC03_G16.Text;
+                            ws.us03_g17 = txt_UsLPC03_G17.Text;
 
-                        ws.us06_c14 = txt_UsLPC06_C14.Text;
-                        ws.us06_c15 = txt_UsLPC06_C15.Text;
-                        ws.us06_c16 = txt_UsLPC06_C16.Text;
-                        ws.us06_c17 = txt_UsLPC06_C17.Text;
+                            ws.us03_b25 = txt_UsLPC03_B25_1.Text;
+                            ws.us03_d25 = txt_UsLPC03_D25.Text;
+                            ws.us03_f25 = txt_UsLPC03_F25.Text;
+                            #endregion
 
-                        ws.us06_d14 = txt_UsLPC06_D14.Text;
-                        ws.us06_d15 = txt_UsLPC06_D15.Text;
-                        ws.us06_d16 = txt_UsLPC06_D16.Text;
-                        ws.us06_d17 = txt_UsLPC06_D17.Text;
+                            #region "region "US-LPC(0.6)"
+                            ws.us06_b14 = txt_UsLPC06_B14.Text;
+                            ws.us06_b15 = txt_UsLPC06_B15.Text;
+                            ws.us06_b16 = txt_UsLPC06_B16.Text;
+                            ws.us06_b17 = txt_UsLPC06_B17.Text;
 
-                        ws.us06_e14 = txt_UsLPC06_E14.Text;
-                        ws.us06_e15 = txt_UsLPC06_E15.Text;
-                        ws.us06_e16 = txt_UsLPC06_E16.Text;
-                        ws.us06_e17 = txt_UsLPC06_E17.Text;
+                            ws.us06_c14 = txt_UsLPC06_C14.Text;
+                            ws.us06_c15 = txt_UsLPC06_C15.Text;
+                            ws.us06_c16 = txt_UsLPC06_C16.Text;
+                            ws.us06_c17 = txt_UsLPC06_C17.Text;
 
-                        ws.us06_f14 = txt_UsLPC06_F14.Text;
-                        ws.us06_f15 = txt_UsLPC06_F15.Text;
-                        ws.us06_f16 = txt_UsLPC06_F16.Text;
-                        ws.us06_f17 = txt_UsLPC06_F17.Text;
+                            ws.us06_d14 = txt_UsLPC06_D14.Text;
+                            ws.us06_d15 = txt_UsLPC06_D15.Text;
+                            ws.us06_d16 = txt_UsLPC06_D16.Text;
+                            ws.us06_d17 = txt_UsLPC06_D17.Text;
 
-                        ws.us06_g14 = txt_UsLPC06_G14.Text;
-                        ws.us06_g15 = txt_UsLPC06_G15.Text;
-                        ws.us06_g16 = txt_UsLPC06_G16.Text;
-                        ws.us06_g17 = txt_UsLPC06_G17.Text;
+                            ws.us06_e14 = txt_UsLPC06_E14.Text;
+                            ws.us06_e15 = txt_UsLPC06_E15.Text;
+                            ws.us06_e16 = txt_UsLPC06_E16.Text;
+                            ws.us06_e17 = txt_UsLPC06_E17.Text;
 
-                        ws.us06_b25 = txt_UsLPC06_B25.Text;
-                        ws.us06_d25 = txt_UsLPC06_D25.Text;
-                        ws.us06_f25 = txt_UsLPC06_F25.Text;
-                        #endregion
+                            ws.us06_f14 = txt_UsLPC06_F14.Text;
+                            ws.us06_f15 = txt_UsLPC06_F15.Text;
+                            ws.us06_f16 = txt_UsLPC06_F16.Text;
+                            ws.us06_f17 = txt_UsLPC06_F17.Text;
 
-                        #region "Worksheet for HPA - Filtration"
-                        ws.ws_b3 = txtB3.Text;
-                        ws.ws_b4 = txtB4.Text;
-                        ws.ws_b5 = txtB5.Text;
-                        ws.ws_b6 = txtB6.Text;
-                        ws.ws_b7 = txtB7.Text;
-                        ws.ws_b8 = txtB8.Text;
-                        ws.ws_b9 = txtB9.Text;
-                        #endregion
+                            ws.us06_g14 = txt_UsLPC06_G14.Text;
+                            ws.us06_g15 = txt_UsLPC06_G15.Text;
+                            ws.us06_g16 = txt_UsLPC06_G16.Text;
+                            ws.us06_g17 = txt_UsLPC06_G17.Text;
 
+                            ws.us06_b25 = txt_UsLPC06_B25.Text;
+                            ws.us06_d25 = txt_UsLPC06_D25.Text;
+                            ws.us06_f25 = txt_UsLPC06_F25.Text;
+                            #endregion
+
+                            #region "Worksheet for HPA - Filtration"
+                            ws.ws_b3 = txtB3.Text;
+                            ws.ws_b4 = txtB4.Text;
+                            ws.ws_b5 = txtB5.Text;
+                            ws.ws_b6 = txtB6.Text;
+                            ws.ws_b7 = txtB7.Text;
+                            ws.ws_b8 = txtB8.Text;
+                            ws.ws_b9 = txtB9.Text;
+                            #endregion
+
+                        }
+                        objWork.UpdateList(this.Hpas);
                     }
-                    objWork.UpdateList(this.Hpas);
+                    else
+                    {
+                        errors.Add("ไม่พบข้อมูล WorkSheet");
+                    }
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -766,9 +776,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step4owner = userLogin.id;
                     break;
@@ -794,21 +804,31 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
 
             }
-            //########
-            this.jobSample.Update();
-            //Commit
-            GeneralManager.Commit();
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //########
+                this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
 
-            //removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+                //removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
+ 
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -820,7 +840,6 @@ namespace ALS.ALSI.Web.view.template
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
             string sheetName = string.Empty;
-            List<String> errors = new List<string>();
 
             if (String.IsNullOrEmpty(txtB3.Text)) { errors.Add(String.Format("กรุณาตรวจสอบ {0}", "Volume of Extraction (ml), Vt")); }
             if (String.IsNullOrEmpty(txtB4.Text)) { errors.Add(String.Format("กรุณาตรวจสอบ {0}", "Surface Area (cm2), C")); }
@@ -1033,6 +1052,8 @@ namespace ALS.ALSI.Web.view.template
                 if (errors.Count > 0)
                 {
                     litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                    modalErrorList.Show();
+
                 }
                 else
                 {
@@ -1078,6 +1099,8 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+
 
             }
 

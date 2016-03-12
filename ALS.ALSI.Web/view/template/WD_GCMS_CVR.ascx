@@ -37,7 +37,6 @@
                         </div>
 
                         <asp:Panel ID="pLoadFile" runat="server">
-                            <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">ทศนิยม</label>
@@ -81,32 +80,6 @@
 
                         </asp:Panel>
 
-                        <%--<h4 class="form-section">Manage Source File</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
-                                    <div class="col-md-6">
-                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                        <span class="btn green fileinput-button">
-                                            <i class="fa fa-plus"></i>
-                                            <span>Add files...</span>
-                                            <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
-                                        </span>
-                                        <h6>***เลือกไฟล์ที่มี *.xls</h6>
-                                        <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Generate Data</label>
-                                    <div class="col-md-6">
-                                        <asp:Button ID="btnLoadFile" runat="server" Text="Submit" CssClass="btn blue" OnClick="btnLoadFile_Click" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>--%>
                         <h4 class="form-section">Manage CAS# Data</h4>
                         <div class="row">
                             <div class="col-md-12">
@@ -334,19 +307,7 @@
                                     <div class="caption">
                                         <i class="icon-puzzle font-grey-gallery"></i>
                                         <span class="caption-subject bold font-grey-gallery uppercase">Operation </span>
-                                        <%--                                        <span class="caption-helper">more samples...</span>--%>
                                     </div>
-                                    <%--                                    <div class="inputs">
-                                        <div class="portlet-input input-inline input-medium">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control input-circle-left" placeholder="search...">
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-circle-right btn-default" type="submit">Go!</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    --%>
                                 </div>
                                 <div class="portlet-body">
 
@@ -517,6 +478,36 @@
                             CancelControlID="btnClose">
                         </asp:ModalPopupExtender>
 
+                        <!-- POPUP -->
+
+                        <div class="modal-wide" id="popupErrorList" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h class="modal-title">
+                                            รายการปัญหา</h>
+                                </div>
+                                <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                                  <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <%--<asp:Button ID="OK" runat="server" CssClass="btn purple" Style="margin-top: 10px; margin-left: 20px;" Text="บันทึก" OnClick="OK_Click" />--%>
+
+                                    <asp:Button ID="Button1" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+
+                        <asp:LinkButton ID="bnErrListFake" runat="server">
+                        </asp:LinkButton>
+                        <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
+                            TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
+                            CancelControlID="btnClose">
+                        </asp:ModalPopupExtender>
+
+                        <!-- END POPUP -->
 
                         <div class="row">
                             <div class="col-md-6">

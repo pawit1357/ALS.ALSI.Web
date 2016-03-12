@@ -62,7 +62,7 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtNumberOfPieces" runat="server" Text="" CssClass="form-control"></asp:TextBox>
-            
+
                                                 <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderReceiptinAc" TargetControlID="txtNumberOfPieces"
                                                     FilterType="Custom, Numbers" ValidChars="." runat="server" />
                                             </td>
@@ -600,7 +600,6 @@
                     <asp:Panel ID="pWorksheetForHPAFiltration" runat="server">
 
                         <asp:Panel ID="pLoadFile" runat="server">
-                            <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">Volume of Extraction (ml), Vt</label>
@@ -755,7 +754,18 @@
                     </asp:Panel>
 
                     <!-- END FORM-->
-                    <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BEGIN Portlet PORTLET-->
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-puzzle font-grey-gallery"></i>
+                                        <span class="caption-subject bold font-grey-gallery uppercase">Operation </span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+
                         <asp:Panel ID="pSpecification" runat="server">
                             <div class="row">
                                 <div class="col-md-6">
@@ -844,15 +854,46 @@
                                     </div>
                                 </div>
                             </div>
-                            <%--                    <ul>
-                        <li>The maximum file size for uploads in this demo is <strong>5 MB</strong> (default file size is unlimited).</li>
-                        <li>Only word or pdf files (<strong>DOC, DOCX, PDF</strong>) are allowed in this demo (by default there is no file type restriction).</li>
-                    </ul>
-                    <br />--%>
+
                             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                             <br />
                         </asp:Panel>
 
+
+                                </div>
+                            </div>
+                            <!-- END Portlet PORTLET-->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+
+                        <!-- POPUP -->
+
+                        <div class="modal-wide" id="popupErrorList" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h class="modal-title">
+                                            รายการปัญหา</h>
+                                </div>
+                                <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button ID="btnPopupErrorList" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+
+                        <asp:LinkButton ID="bnErrListFake" runat="server">
+                        </asp:LinkButton>
+                        <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
+                            TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
+                            CancelControlID="btnPopupErrorList">
+                        </asp:ModalPopupExtender>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">

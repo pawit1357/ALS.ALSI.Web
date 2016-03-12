@@ -82,6 +82,7 @@ namespace ALS.ALSI.Web.view.template
             Session.Remove(GetType().Name + "HumID");
 
         }
+        List<String> errors = new List<string>();
 
         private void initialPage()
         {
@@ -339,26 +340,33 @@ namespace ALS.ALSI.Web.view.template
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     //CalculateCas(false);
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
-                    this.jobSample.step2owner = userLogin.id;
-                    #region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_test_completed = DateTime.Now;
-                    #endregion
-                    #region "CAS#"
-                    tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
-                    tb_m_dhs_cas.InsertList(this.tbCas);
-                    #endregion
-                    #region "Cover Page#"
-                    foreach (template_seagate_dhs_coverpage _val in this.coverpages)
+                    if (this.tbCas.Count > 0)
                     {
-                        _val.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                        _val.procedureNo = txtProcedureNo.Text;
-                        _val.sampleSize = txtSampleSize.Text;
-                        _val.SamplingTime = txtSamplingTime.Text;
-                        //_val.unit = this.Unit;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                        this.jobSample.step2owner = userLogin.id;
+                        #region ":: STAMP COMPLETE DATE"
+                        this.jobSample.date_test_completed = DateTime.Now;
+                        #endregion
+                        #region "CAS#"
+                        tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
+                        tb_m_dhs_cas.InsertList(this.tbCas);
+                        #endregion
+                        #region "Cover Page#"
+                        foreach (template_seagate_dhs_coverpage _val in this.coverpages)
+                        {
+                            _val.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                            _val.procedureNo = txtProcedureNo.Text;
+                            _val.sampleSize = txtSampleSize.Text;
+                            _val.SamplingTime = txtSamplingTime.Text;
+                            //_val.unit = this.Unit;
+                        }
+                        template_seagate_dhs_coverpage.UpdateList(this.coverpages);
+                        #endregion
                     }
-                    template_seagate_dhs_coverpage.UpdateList(this.coverpages);
-                    #endregion
+                    else
+                    {
+                        errors.Add("ไม่พบข้อมูล WorkSheet");
+                    }
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -412,9 +420,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step4owner = userLogin.id;
                     break;
@@ -440,23 +448,32 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
-                        lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
 
             }
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //########
+                this.jobSample.Update();
 
-            //########
-            this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
 
-            //Commit
-            GeneralManager.Commit();
+                removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
 
-            removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -468,7 +485,6 @@ namespace ALS.ALSI.Web.view.template
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
             string sheetName =string.Empty;
-            List<String> errors = new List<string>();
 
             List<tb_m_dhs_cas> _cas = new List<tb_m_dhs_cas>();
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -583,6 +599,8 @@ namespace ALS.ALSI.Web.view.template
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+
             }
             else
             {

@@ -16,7 +16,6 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
                     <asp:Panel ID="pDSH" runat="server">
 
                         <div class="form-group">
@@ -244,8 +243,17 @@
                     </asp:Panel>
 
                     <!-- END FORM-->
-                    <div class="form-actions">
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BEGIN Portlet PORTLET-->
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-puzzle font-grey-gallery"></i>
+                                        <span class="caption-subject bold font-grey-gallery uppercase">Operation </span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
 
                         <asp:Panel ID="pSpecification" runat="server">
                             <div class="row">
@@ -337,6 +345,16 @@
                             <br />
                         </asp:Panel>
 
+
+                                </div>
+                            </div>
+                            <!-- END Portlet PORTLET-->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+
+
                         <div class="modal-wide" id="pnlModalDemo" style="display: none;">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -370,6 +388,34 @@
                         <asp:ModalPopupExtender ID="ModolPopupExtender" runat="server" PopupControlID="pnlModalDemo"
                             TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
                             CancelControlID="btnClose">
+                        </asp:ModalPopupExtender>
+
+
+                        <!-- POPUP -->
+
+                        <div class="modal-wide" id="popupErrorList" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h class="modal-title">
+                                            รายการปัญหา</h>
+                                </div>
+                                <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button ID="btnPopupErrorList" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+
+                        <asp:LinkButton ID="bnErrListFake" runat="server">
+                        </asp:LinkButton>
+                        <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
+                            TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
+                            CancelControlID="btnPopupErrorList">
                         </asp:ModalPopupExtender>
 
                         <div class="row">
