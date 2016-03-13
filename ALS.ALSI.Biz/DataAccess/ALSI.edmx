@@ -84,6 +84,7 @@
           <Property Name="step4owner" Type="int" />
           <Property Name="step5owner" Type="int" />
           <Property Name="step6owner" Type="int" />
+          <Property Name="step7owner" Type="int" />
           <Property Name="internal_reference_remark" Type="varchar" MaxLength="255" />
           <Property Name="date_sample_received" Type="date" />
           <Property Name="date_analyzed_date" Type="date" />
@@ -1735,6 +1736,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="step4owner" Type="Int32" />
           <Property Name="step5owner" Type="Int32" />
           <Property Name="step6owner" Type="Int32" />
+          <Property Name="step7owner" Type="Int32" />
           <Property Name="internal_reference_remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="date_sample_received" Type="DateTime" />
           <Property Name="date_analyzed_date" Type="DateTime" />
@@ -3172,6 +3174,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="date_analyzed_date" ColumnName="date_analyzed_date" />
                 <ScalarProperty Name="date_sample_received" ColumnName="date_sample_received" />
                 <ScalarProperty Name="internal_reference_remark" ColumnName="internal_reference_remark" />
+                <ScalarProperty Name="step7owner" ColumnName="step7owner" />
                 <ScalarProperty Name="step6owner" ColumnName="step6owner" />
                 <ScalarProperty Name="step5owner" ColumnName="step5owner" />
                 <ScalarProperty Name="step4owner" ColumnName="step4owner" />

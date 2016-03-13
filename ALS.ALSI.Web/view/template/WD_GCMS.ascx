@@ -336,7 +336,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                         <div class="col-md-6">
-                                            <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -349,7 +349,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
                                         <div class="col-md-6">
-                                            <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                            <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
                                         </div>
                                     </div>
                                 </div>

@@ -350,9 +350,13 @@ namespace ALS.ALSI.Web.view.template
             switch (status)
             {
                 case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                    this.jobSample.step1owner = userLogin.id;
+
                     break;
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                    this.jobSample.step2owner = userLogin.id;
+
                     #region "Cover Page#"
                     if (this.coverpages != null && this.coverpages.Count > 0)
                     {
@@ -376,6 +380,8 @@ namespace ALS.ALSI.Web.view.template
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                    this.jobSample.step3owner = userLogin.id;
+
                     #region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_test_completed = DateTime.Now;
                     #endregion
@@ -427,7 +433,7 @@ namespace ALS.ALSI.Web.view.template
                             #endregion
                             break;
                     }
-                    this.jobSample.step3owner = userLogin.id;
+                    this.jobSample.step4owner = userLogin.id;
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:
                     StatusEnum labApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -479,7 +485,7 @@ namespace ALS.ALSI.Web.view.template
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                         //isValid = false;
                     }
-                    this.jobSample.step4owner = userLogin.id;
+                    this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
                     if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
@@ -507,7 +513,7 @@ namespace ALS.ALSI.Web.view.template
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         //isValid = false;
                     }
-                    this.jobSample.step6owner = userLogin.id;
+                    this.jobSample.step7owner = userLogin.id;
                     break;
 
             }

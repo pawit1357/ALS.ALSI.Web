@@ -361,9 +361,11 @@ namespace ALS.ALSI.Web.view.template
             switch (status)
             {
                 case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                    this.jobSample.step1owner = userLogin.id;
                     break;
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                    this.jobSample.step2owner = userLogin.id;
                     #region "Cover Page#"
                     if (this.coverpages != null && this.coverpages.Count > 0)
                     {
@@ -389,6 +391,7 @@ namespace ALS.ALSI.Web.view.template
                     if (this.tbCas.Count > 0)
                     {
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                        this.jobSample.step3owner = userLogin.id;
                         #region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_test_completed = DateTime.Now;
                         #endregion
@@ -400,16 +403,11 @@ namespace ALS.ALSI.Web.view.template
                         #region "Cover Page#"
                         foreach (template_wd_gcms_coverpage _cov in this.coverpages)
                         {
-
-
                             _cov.pm_procedure = txtProcedure.Text;
                             _cov.pm_number_of_pieces = txtNumberOfPieces.Text;
                             _cov.pm_extraction_medium = txtExtractionMedium.Text;
                             _cov.pm_extraction_volumn = txtExtractionVolumn.Text;
                             _cov.pm_unit = hProcedureUnit.Value;
-                            //_cov.test = Convert.ToInt32(ddlTest.SelectedValue);
-
-                            //_cov.RowState = this.CommandName;
                         }
                         template_wd_gcms_coverpage.UpdateList(this.coverpages);
                         #endregion
@@ -445,7 +443,7 @@ namespace ALS.ALSI.Web.view.template
                             #endregion
                             break;
                     }
-                    this.jobSample.step3owner = userLogin.id;
+                    this.jobSample.step4owner = userLogin.id;
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:
                     StatusEnum labApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -498,7 +496,7 @@ namespace ALS.ALSI.Web.view.template
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         //isValid = false;
                     }
-                    this.jobSample.step4owner = userLogin.id;
+                    this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
                     if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
@@ -526,7 +524,7 @@ namespace ALS.ALSI.Web.view.template
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         //isValid = false;
                     }
-                    this.jobSample.step6owner = userLogin.id;
+                    this.jobSample.step7owner = userLogin.id;
                     break;
 
             }

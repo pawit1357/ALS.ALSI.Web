@@ -43,6 +43,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> step4owner { get; set; }
         public Nullable<int> step5owner { get; set; }
         public Nullable<int> step6owner { get; set; }
+        public Nullable<int> step7owner { get; set; }
         public string internal_reference_remark { get; set; }
         public Nullable<System.DateTime> date_sample_received { get; set; }
         public Nullable<System.DateTime> date_analyzed_date { get; set; }

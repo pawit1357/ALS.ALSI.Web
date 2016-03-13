@@ -507,7 +507,7 @@ namespace ALS.ALSI.Web.view.template
                     txtB3.Text = _cover.ws_b3;
                     txtB4.Text = _cover.ws_b4;
                     txtB5.Text = _cover.ws_b5;
-                    txtB6.Text = (_cover.ws_b6 == null)? "50": _cover.ws_b6;
+                    txtB6.Text = (_cover.ws_b6 == null) ? "50" : _cover.ws_b6;
                     txtB7.Text = (_cover.ws_b7 == null) ? "7.071" : _cover.ws_b7;
                     txtB8.Text = _cover.ws_b8;
                     txtB9.Text = _cover.ws_b9;
@@ -575,46 +575,17 @@ namespace ALS.ALSI.Web.view.template
             switch (status)
             {
                 case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                    this.jobSample.step1owner = userLogin.id;
                     break;
                 case StatusEnum.LOGIN_SELECT_SPEC:
 
-                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
-                        foreach (template_seagate_hpa_coverpage ws in this.Hpas)
-                        {
-                            ws.sample_id = this.SampleID;
-                            ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
-                            ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
-                            #region "Method/Procedure"
-                            ws.ProcedureNo = txtProcedureNo.Text;
-                            ws.NumberOfPieces = txtNumberOfPieces.Text;
-                            ws.ExtractionMedium = txtExtractionMedium.Text;
-                            ws.ExtractionVolume = txtExtractionVolume.Text;
-
-                            ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
-                            ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
-                            ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
-                            ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
-                            #endregion
-
-                        }
-                        objWork.DeleteBySampleID(this.SampleID);
-
-                        objWork.InsertList(this.Hpas);
-          
-                    break;
-                case StatusEnum.CHEMIST_TESTING:
-                                if (this.Hpas.Count > 0)
-            {
-                this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
-                    #region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_test_completed = DateTime.Now;
-                    #endregion
+                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                    this.jobSample.step2owner = userLogin.id;
                     foreach (template_seagate_hpa_coverpage ws in this.Hpas)
                     {
                         ws.sample_id = this.SampleID;
                         ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
-
                         #region "Method/Procedure"
                         ws.ProcedureNo = txtProcedureNo.Text;
                         ws.NumberOfPieces = txtNumberOfPieces.Text;
@@ -627,90 +598,123 @@ namespace ALS.ALSI.Web.view.template
                         ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
                         #endregion
 
-                        #region "region "US-LPC(0.3)"
-                        ws.us03_b14 = txt_UsLPC03_B14.Text;
-                        ws.us03_b15 = txt_UsLPC03_B15.Text;
-                        ws.us03_b16 = txt_UsLPC03_B16.Text;
-                        ws.us03_b17 = txt_UsLPC03_B17.Text;
-
-                        ws.us03_c14 = txt_UsLPC03_C14.Text;
-                        ws.us03_c15 = txt_UsLPC03_C15.Text;
-                        ws.us03_c16 = txt_UsLPC03_C16.Text;
-                        ws.us03_c17 = txt_UsLPC03_C17.Text;
-
-                        ws.us03_d14 = txt_UsLPC03_D14.Text;
-                        ws.us03_d15 = txt_UsLPC03_D15.Text;
-                        ws.us03_d16 = txt_UsLPC03_D16.Text;
-                        ws.us03_d17 = txt_UsLPC03_D17.Text;
-
-                        ws.us03_e14 = txt_UsLPC03_E14.Text;
-                        ws.us03_e15 = txt_UsLPC03_E15.Text;
-                        ws.us03_e16 = txt_UsLPC03_E16.Text;
-                        ws.us03_e17 = txt_UsLPC03_E17.Text;
-
-                        ws.us03_f14 = txt_UsLPC03_F14.Text;
-                        ws.us03_f15 = txt_UsLPC03_F15.Text;
-                        ws.us03_f16 = txt_UsLPC03_F16.Text;
-                        ws.us03_f17 = txt_UsLPC03_F17.Text;
-
-                        ws.us03_g14 = txt_UsLPC03_G14.Text;
-                        ws.us03_g15 = txt_UsLPC03_G15.Text;
-                        ws.us03_g16 = txt_UsLPC03_G16.Text;
-                        ws.us03_g17 = txt_UsLPC03_G17.Text;
-
-                        ws.us03_b25 = txt_UsLPC03_B25_1.Text;
-                        ws.us03_d25 = txt_UsLPC03_D25.Text;
-                        ws.us03_f25 = txt_UsLPC03_F25.Text;
-                        #endregion
-
-                        #region "region "US-LPC(0.6)"
-                        ws.us06_b14 = txt_UsLPC06_B14.Text;
-                        ws.us06_b15 = txt_UsLPC06_B15.Text;
-                        ws.us06_b16 = txt_UsLPC06_B16.Text;
-                        ws.us06_b17 = txt_UsLPC06_B17.Text;
-
-                        ws.us06_c14 = txt_UsLPC06_C14.Text;
-                        ws.us06_c15 = txt_UsLPC06_C15.Text;
-                        ws.us06_c16 = txt_UsLPC06_C16.Text;
-                        ws.us06_c17 = txt_UsLPC06_C17.Text;
-
-                        ws.us06_d14 = txt_UsLPC06_D14.Text;
-                        ws.us06_d15 = txt_UsLPC06_D15.Text;
-                        ws.us06_d16 = txt_UsLPC06_D16.Text;
-                        ws.us06_d17 = txt_UsLPC06_D17.Text;
-
-                        ws.us06_e14 = txt_UsLPC06_E14.Text;
-                        ws.us06_e15 = txt_UsLPC06_E15.Text;
-                        ws.us06_e16 = txt_UsLPC06_E16.Text;
-                        ws.us06_e17 = txt_UsLPC06_E17.Text;
-
-                        ws.us06_f14 = txt_UsLPC06_F14.Text;
-                        ws.us06_f15 = txt_UsLPC06_F15.Text;
-                        ws.us06_f16 = txt_UsLPC06_F16.Text;
-                        ws.us06_f17 = txt_UsLPC06_F17.Text;
-
-                        ws.us06_g14 = txt_UsLPC06_G14.Text;
-                        ws.us06_g15 = txt_UsLPC06_G15.Text;
-                        ws.us06_g16 = txt_UsLPC06_G16.Text;
-                        ws.us06_g17 = txt_UsLPC06_G17.Text;
-
-                        ws.us06_b25 = txt_UsLPC06_B25.Text;
-                        ws.us06_d25 = txt_UsLPC06_D25.Text;
-                        ws.us06_f25 = txt_UsLPC06_F25.Text;
-                        #endregion
-
-                        #region "Worksheet for HPA - Filtration"
-                        ws.ws_b3 = txtB3.Text;
-                        ws.ws_b4 = txtB4.Text;
-                        ws.ws_b5 = txtB5.Text;
-                        ws.ws_b6 = txtB6.Text;
-                        ws.ws_b7 = txtB7.Text;
-                        ws.ws_b8 = txtB8.Text;
-                        ws.ws_b9 = txtB9.Text;
-                        #endregion
-
                     }
-                    objWork.UpdateList(this.Hpas);
+                    objWork.DeleteBySampleID(this.SampleID);
+
+                    objWork.InsertList(this.Hpas);
+
+                    break;
+                case StatusEnum.CHEMIST_TESTING:
+                    if (this.Hpas.Count > 0)
+                    {
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                        this.jobSample.step3owner = userLogin.id;
+
+                        #region ":: STAMP COMPLETE DATE"
+                        this.jobSample.date_test_completed = DateTime.Now;
+                        #endregion
+                        foreach (template_seagate_hpa_coverpage ws in this.Hpas)
+                        {
+                            ws.sample_id = this.SampleID;
+                            ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                            ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
+
+                            #region "Method/Procedure"
+                            ws.ProcedureNo = txtProcedureNo.Text;
+                            ws.NumberOfPieces = txtNumberOfPieces.Text;
+                            ws.ExtractionMedium = txtExtractionMedium.Text;
+                            ws.ExtractionVolume = txtExtractionVolume.Text;
+
+                            ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
+                            ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
+                            ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
+                            ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
+                            #endregion
+
+                            #region "region "US-LPC(0.3)"
+                            ws.us03_b14 = txt_UsLPC03_B14.Text;
+                            ws.us03_b15 = txt_UsLPC03_B15.Text;
+                            ws.us03_b16 = txt_UsLPC03_B16.Text;
+                            ws.us03_b17 = txt_UsLPC03_B17.Text;
+
+                            ws.us03_c14 = txt_UsLPC03_C14.Text;
+                            ws.us03_c15 = txt_UsLPC03_C15.Text;
+                            ws.us03_c16 = txt_UsLPC03_C16.Text;
+                            ws.us03_c17 = txt_UsLPC03_C17.Text;
+
+                            ws.us03_d14 = txt_UsLPC03_D14.Text;
+                            ws.us03_d15 = txt_UsLPC03_D15.Text;
+                            ws.us03_d16 = txt_UsLPC03_D16.Text;
+                            ws.us03_d17 = txt_UsLPC03_D17.Text;
+
+                            ws.us03_e14 = txt_UsLPC03_E14.Text;
+                            ws.us03_e15 = txt_UsLPC03_E15.Text;
+                            ws.us03_e16 = txt_UsLPC03_E16.Text;
+                            ws.us03_e17 = txt_UsLPC03_E17.Text;
+
+                            ws.us03_f14 = txt_UsLPC03_F14.Text;
+                            ws.us03_f15 = txt_UsLPC03_F15.Text;
+                            ws.us03_f16 = txt_UsLPC03_F16.Text;
+                            ws.us03_f17 = txt_UsLPC03_F17.Text;
+
+                            ws.us03_g14 = txt_UsLPC03_G14.Text;
+                            ws.us03_g15 = txt_UsLPC03_G15.Text;
+                            ws.us03_g16 = txt_UsLPC03_G16.Text;
+                            ws.us03_g17 = txt_UsLPC03_G17.Text;
+
+                            ws.us03_b25 = txt_UsLPC03_B25_1.Text;
+                            ws.us03_d25 = txt_UsLPC03_D25.Text;
+                            ws.us03_f25 = txt_UsLPC03_F25.Text;
+                            #endregion
+
+                            #region "region "US-LPC(0.6)"
+                            ws.us06_b14 = txt_UsLPC06_B14.Text;
+                            ws.us06_b15 = txt_UsLPC06_B15.Text;
+                            ws.us06_b16 = txt_UsLPC06_B16.Text;
+                            ws.us06_b17 = txt_UsLPC06_B17.Text;
+
+                            ws.us06_c14 = txt_UsLPC06_C14.Text;
+                            ws.us06_c15 = txt_UsLPC06_C15.Text;
+                            ws.us06_c16 = txt_UsLPC06_C16.Text;
+                            ws.us06_c17 = txt_UsLPC06_C17.Text;
+
+                            ws.us06_d14 = txt_UsLPC06_D14.Text;
+                            ws.us06_d15 = txt_UsLPC06_D15.Text;
+                            ws.us06_d16 = txt_UsLPC06_D16.Text;
+                            ws.us06_d17 = txt_UsLPC06_D17.Text;
+
+                            ws.us06_e14 = txt_UsLPC06_E14.Text;
+                            ws.us06_e15 = txt_UsLPC06_E15.Text;
+                            ws.us06_e16 = txt_UsLPC06_E16.Text;
+                            ws.us06_e17 = txt_UsLPC06_E17.Text;
+
+                            ws.us06_f14 = txt_UsLPC06_F14.Text;
+                            ws.us06_f15 = txt_UsLPC06_F15.Text;
+                            ws.us06_f16 = txt_UsLPC06_F16.Text;
+                            ws.us06_f17 = txt_UsLPC06_F17.Text;
+
+                            ws.us06_g14 = txt_UsLPC06_G14.Text;
+                            ws.us06_g15 = txt_UsLPC06_G15.Text;
+                            ws.us06_g16 = txt_UsLPC06_G16.Text;
+                            ws.us06_g17 = txt_UsLPC06_G17.Text;
+
+                            ws.us06_b25 = txt_UsLPC06_B25.Text;
+                            ws.us06_d25 = txt_UsLPC06_D25.Text;
+                            ws.us06_f25 = txt_UsLPC06_F25.Text;
+                            #endregion
+
+                            #region "Worksheet for HPA - Filtration"
+                            ws.ws_b3 = txtB3.Text;
+                            ws.ws_b4 = txtB4.Text;
+                            ws.ws_b5 = txtB5.Text;
+                            ws.ws_b6 = txtB6.Text;
+                            ws.ws_b7 = txtB7.Text;
+                            ws.ws_b8 = txtB8.Text;
+                            ws.ws_b9 = txtB9.Text;
+                            #endregion
+
+                        }
+                        objWork.UpdateList(this.Hpas);
                     }
                     else
                     {
@@ -743,7 +747,7 @@ namespace ALS.ALSI.Web.view.template
                             #endregion
                             break;
                     }
-                    this.jobSample.step3owner = userLogin.id;
+                    this.jobSample.step4owner = userLogin.id;
 
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:
@@ -797,7 +801,7 @@ namespace ALS.ALSI.Web.view.template
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         //isValid = false;
                     }
-                    this.jobSample.step4owner = userLogin.id;
+                    this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
                     if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
@@ -825,7 +829,7 @@ namespace ALS.ALSI.Web.view.template
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         //isValid = false;
                     }
-                    this.jobSample.step6owner = userLogin.id;
+                    this.jobSample.step7owner = userLogin.id;
                     break;
 
             }
@@ -1021,9 +1025,11 @@ namespace ALS.ALSI.Web.view.template
                                                                 String CD = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(18));
                                                                 switch (Path.GetFileNameWithoutExtension(source_file))
                                                                 {
-                                                                    case "B": B1_03[index_03] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
+                                                                    case "B":
+                                                                        B1_03[index_03] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
                                                                         break;
-                                                                    case "S": S1_03[index_03] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
+                                                                    case "S":
+                                                                        S1_03[index_03] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
                                                                         break;
                                                                 }
                                                                 index_03++;
@@ -1035,9 +1041,11 @@ namespace ALS.ALSI.Web.view.template
                                                                 String CD = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(18));
                                                                 switch (Path.GetFileNameWithoutExtension(source_file))
                                                                 {
-                                                                    case "B": B1_06[index_06] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
+                                                                    case "B":
+                                                                        B1_06[index_06] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
                                                                         break;
-                                                                    case "S": S1_06[index_06] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
+                                                                    case "S":
+                                                                        S1_06[index_06] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
                                                                         break;
                                                                 }
                                                                 index_06++;
@@ -1050,7 +1058,7 @@ namespace ALS.ALSI.Web.view.template
                                                 {
                                                     errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", "Sheet1"));
                                                 }
-                                                    #endregion
+                                                #endregion
                                                 break;
                                         }
                                     }
