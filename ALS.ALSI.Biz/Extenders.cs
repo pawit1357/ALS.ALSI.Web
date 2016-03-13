@@ -7,8 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ALS.ALSI.Utils
-{
+
     public static class Extenders
     {
         public static DataTable ToDataTable<T>(this IEnumerable<T> collection, string tableName)
@@ -113,4 +112,4 @@ namespace ALS.ALSI.Utils
 
 
     }
-}
+

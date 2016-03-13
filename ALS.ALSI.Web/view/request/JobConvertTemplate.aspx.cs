@@ -63,7 +63,7 @@ namespace ALS.ALSI.Web.view.request
 
         private void initialPage()
         {
-            DataTable dt = Extenders.ObtainDataTableFromIEnumerable(objInfo.SearchData());
+            DataTable dt = Extenders.ObjectToDataTable( objInfo.SearchData());
             //searchResult = objInfo.SearchData();
             gvJob.DataSource = dt;
             gvJob.DataBind();

@@ -323,6 +323,7 @@
     <Compile Include="DataAccess\SeagateIC.cs" />
     <Compile Include="DataAccess\Users.cs" />
     <Compile Include="DataAccess\GeneralManager.cs" />
+    <Compile Include="Extenders.cs" />
     <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
