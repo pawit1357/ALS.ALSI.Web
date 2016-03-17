@@ -29,5 +29,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string pm_extraction_medium { get; set; }
         public string pm_extraction_volumn { get; set; }
         public string pm_unit { get; set; }
+        public Nullable<int> test { get; set; }
     }
 }

@@ -44,6 +44,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="/alis/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
     <link href="/alis/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="/alis/css/paging.css" rel="stylesheet" type="text/css" />
+
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="/alis/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />

@@ -63,17 +63,19 @@ namespace ALS.ALSI.Web.view.request
 
         private void initialPage()
         {
-            DataTable dt = Extenders.ObjectToDataTable( objInfo.SearchData());
+            DataTable dt = Extenders.ObtainDataTableFromIEnumerable( objInfo.SearchData());
             //searchResult = objInfo.SearchData();
             gvJob.DataSource = dt;
             gvJob.DataBind();
 
             m_template template = new m_template();
 
+
+            var data = template.SelectAllByActiveForConvertPage(Convert.ToInt16(dt.Rows[0]["spec_id"].ToString()));
             ddlTemplate.Items.Clear();
-            ddlTemplate.DataSource = template.SelectAllByActiveForConvertPage(Convert.ToInt16(dt.Rows[0]["spec_id"].ToString()));
+            ddlTemplate.DataSource = data;
             ddlTemplate.DataBind();
-            ddlTemplate.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
+            //ddlTemplate.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
             switch (CommandName)
             {

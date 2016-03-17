@@ -79,14 +79,13 @@ namespace ALS.ALSI.Biz.DataAccess
                              where l.is_active == "0"
                              select new
                              {
-                                 isOk = ((j.step1owner.Value == userLogin.id) ||
-                                 (j.step1owner.Value == userLogin.id) ||
-                                 (j.step2owner.Value == userLogin.id) ||
-                                 (j.step3owner.Value == userLogin.id) ||
-                                 (j.step4owner.Value == userLogin.id) ||
-                                 (j.step5owner.Value == userLogin.id) ||
-                                 (j.step6owner.Value == userLogin.id) ||
-                                 (j.step7owner.Value == userLogin.id)),
+                                 j.step1owner,
+                                 j.step2owner,
+                                 j.step3owner,
+                                 j.step4owner,
+                                 j.step5owner,
+                                 j.step6owner,
+                                 j.step7owner,
                                  l.log_title,
                                  l.job_remark,
                                  l.date,
@@ -94,9 +93,21 @@ namespace ALS.ALSI.Biz.DataAccess
                              };
 
                 DataTable dt = result.ToDataTable();
-                foreach( DataRow dr in dt.Rows)
+                foreach (DataRow dr in dt.Rows)
                 {
-                    Boolean isOk = Boolean.Parse(dr["isOk"].ToString());
+
+
+                    bool con1 = (dr["step1owner"] == DBNull.Value) ? false : Convert.ToInt16(dr["step1owner"]) == userLogin.id;
+                    bool con2 = (dr["step2owner"] == DBNull.Value) ? false : Convert.ToInt16(dr["step2owner"]) == userLogin.id;
+                    bool con3 = (dr["step3owner"] == DBNull.Value) ? false : Convert.ToInt16(dr["step3owner"]) == userLogin.id;
+                    bool con4 = (dr["step4owner"] == DBNull.Value) ? false : Convert.ToInt16(dr["step4owner"]) == userLogin.id;
+                    bool con5 = (dr["step5owner"] == DBNull.Value) ? false : Convert.ToInt16(dr["step5owner"]) == userLogin.id;
+                    bool con6 = (dr["step6owner"] == DBNull.Value) ? false : Convert.ToInt16(dr["step6owner"]) == userLogin.id;
+                    bool con7 = (dr["step7owner"] == DBNull.Value) ? false : Convert.ToInt16(dr["step7owner"]) == userLogin.id;
+
+
+                    Boolean isOk = con1 || con2 || con3 || con4 || con5 || con6 || con7;
+
                     int jobStatus = Convert.ToInt16(dr["job_status"]);
                     string logTitle = dr["log_title"].ToString();
                     string jobRemark = dr["job_remark"].ToString();

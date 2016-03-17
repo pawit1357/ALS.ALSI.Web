@@ -5448,7 +5448,7 @@
     <Content Include="images\logo.png" />
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
-    <Content Include="uploads\ELP0138-250X-1.jpg" />
+    <Content Include="template\SEAGATE_HPA_TYPES_OF_PARTICLES.txt" />
     <Content Include="UserControls\CustomerPopup.ascx" />
     <Content Include="UserControls\SampleInfo.ascx" />
     <Content Include="view\customer\Customer.aspx" />
@@ -5968,7 +5968,7 @@
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
-    <Folder Include="uploads\template\" />
+    <Folder Include="uploads\" />
     <Folder Include="view\dashboard\" />
     <Folder Include="view\permission\" />
   </ItemGroup>

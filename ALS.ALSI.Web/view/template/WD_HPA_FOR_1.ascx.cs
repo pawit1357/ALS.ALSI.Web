@@ -27,6 +27,7 @@ namespace ALS.ALSI.Web.view.template
         #region "Property"
 
         //private String[] GetHPAHeader = { "Total Hard Particles", "Total MgSiO Particles", "Total Steel Particles", "Total Magnetic Particles", "Other Particle" };
+        List<String> errors = new List<string>();
 
         private Hashtable GetHPAData()
         {
@@ -306,7 +307,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
 
-                if (status == StatusEnum.CHEMIST_TESTING || status== StatusEnum.SR_CHEMIST_CHECKING
+                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
                     && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
                 {
 
@@ -356,7 +357,7 @@ namespace ALS.ALSI.Web.view.template
                 ddlComponent.SelectedValue = _cover.component_id.ToString();
                 ddlSpecification.SelectedValue = _cover.detail_spec_id.ToString();
 
-                img1.ImageUrl =Configurations.HOST+""+ _cover.img_path;
+                img1.ImageUrl = Configurations.HOST + "" + _cover.img_path;
 
                 gvResult.DataSource = this.HpaFor1.Where(x => x.parent == -1).OrderBy(x => x.seq);
                 gvResult.DataBind();
@@ -404,9 +405,13 @@ namespace ALS.ALSI.Web.view.template
             switch (status)
             {
                 case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                    this.jobSample.step1owner = userLogin.id;
+
                     break;
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                    this.jobSample.step2owner = userLogin.id;
+
                     foreach (template_wd_hpa_for1_coverpage _cover in this.HpaFor1)
                     {
                         _cover.ParticleAnalysisBySEMEDX = txtA23.Text;
@@ -431,6 +436,8 @@ namespace ALS.ALSI.Web.view.template
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                    this.jobSample.step3owner = userLogin.id;
+
                     #region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_test_completed = DateTime.Now;
                     #endregion
@@ -464,7 +471,7 @@ namespace ALS.ALSI.Web.view.template
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                             break;
                     }
-                    this.jobSample.step3owner = userLogin.id;
+                    this.jobSample.step4owner = userLogin.id;
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:
                     StatusEnum labApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -497,15 +504,15 @@ namespace ALS.ALSI.Web.view.template
                         btnUpload.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
-                        lbMessage.Text = string.Empty;
+                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
-                        lbMessage.Attributes["class"] = "alert alert-error";
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
                         isValid = false;
                     }
-                    this.jobSample.step4owner = userLogin.id;
+                    this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
                     if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
@@ -525,15 +532,15 @@ namespace ALS.ALSI.Web.view.template
                         btnUpload.SaveAs(source_file);
                         this.jobSample.path_pdf = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                        lbMessage.Text = string.Empty;
+                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
-                        lbMessage.Attributes["class"] = "alert alert-error";
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
                         isValid = false;
                     }
-                    this.jobSample.step6owner = userLogin.id;
+                    this.jobSample.step7owner = userLogin.id;
                     break;
 
             }
@@ -594,50 +601,107 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                             default:
                                 #region "Raw Data-Arm"
-                                using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
+
+                                using (StreamReader reader = new StreamReader(source_file))
                                 {
-                                    HSSFWorkbook wd = new HSSFWorkbook(fs);
-                                    ISheet sheet = wd.GetSheet("Raw Data-Arm");
-                                    if (sheet == null)
-                                    {
-                                        MessageBox.Show(this.Page, String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", sheet.SheetName));
-                                    }
-                                    else
-                                    {
-                                    if (sheet != null)
+                                    int index = 0;
+                                    string line;
+                                    while ((line = reader.ReadLine()) != null)
                                     {
 
-                                        foreach (template_wd_hpa_for1_coverpage _cov in lists)
+                                        if (index == 0)
                                         {
-                                            int rc = 0;
-                                            for (int c = 0; c < 100; c++)
-                                            {
-                                                String typesOfParticles = CustomUtils.GetCellValue(sheet.GetRow(0).GetCell(c));
-                                                if (_cov.B.Equals(typesOfParticles))
+                                            index++;
+                                            continue;
+                                        }
+
+                                        String[] data = line.Split(',');
+
+                                        string subfix = Path.GetFileNameWithoutExtension(source_file);
+
+                                        switch (subfix.Substring(subfix.Length - 1))
+                                        {
+                                            case "B":
+                                                #region "HPA(B)"
+                                                foreach (template_wd_hpa_for1_coverpage _cov in lists)
                                                 {
-                                                    for (int row = 1; row <= sheet.LastRowNum; row++)
+                                                    if (_cov.B.Equals(data[0]))
                                                     {
-                                                        String rank = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(3));
-                                                        String value = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(c));
-                                                        if (!rank.Equals("Rejected (ED)") && value.Equals("1"))
+                                                        template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
+                                                        if (_hpa != null)
                                                         {
-                                                            rc++;
+                                                            _hpa.C = Convert.ToInt32(data[2]);
                                                         }
                                                     }
-                                                    break;
                                                 }
-                                            }
-                                            template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
-                                            if (_hpa != null)
-                                            {
-                                                _hpa.C = rc;
-                                            }
-                                        }
-                                        Console.WriteLine("");
+                                                Console.WriteLine("");
+                                                #endregion
+                                                break;
+                                            //case "S":
+                                            //    #region "HPA(S)"
+                                            //    foreach (template_wd_hpa_for1_coverpage _cov in lists)
+                                            //    {
+                                            //        if (_cov.B.Equals(data[0]))
+                                            //        {
+                                            //            template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
+                                            //            if (_hpa != null)
+                                            //            {
+                                            //                _hpa.RawCounts = Convert.ToInt32(data[2]);
+                                            //            }
+                                            //        }
+                                            //    }
 
+                                            //    Console.WriteLine("");
+                                            //    #endregion
+                                            //    break;
+                                        }
+                                        index++;
                                     }
                                 }
-                                }
+                                //using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
+                                //{
+                                //    HSSFWorkbook wd = new HSSFWorkbook(fs);
+                                //    ISheet sheet = wd.GetSheet("Raw Data-Arm");
+                                //    if (sheet == null)
+                                //    {
+                                //        MessageBox.Show(this.Page, String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", sheet.SheetName));
+                                //    }
+                                //    else
+                                //    {
+                                //        if (sheet != null)
+                                //        {
+
+                                //            foreach (template_wd_hpa_for1_coverpage _cov in lists)
+                                //            {
+                                //                int rc = 0;
+                                //                for (int c = 0; c < 100; c++)
+                                //                {
+                                //                    String typesOfParticles = CustomUtils.GetCellValue(sheet.GetRow(0).GetCell(c));
+                                //                    if (_cov.B.Equals(typesOfParticles))
+                                //                    {
+                                //                        for (int row = 1; row <= sheet.LastRowNum; row++)
+                                //                        {
+                                //                            String rank = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(3));
+                                //                            String value = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(c));
+                                //                            if (!rank.Equals("Rejected (ED)") && value.Equals("1"))
+                                //                            {
+                                //                                rc++;
+                                //                            }
+                                //                        }
+                                //                        break;
+                                //                    }
+                                //                }
+                                //                template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
+                                //                if (_hpa != null)
+                                //                {
+                                //                    _hpa.C = rc;
+                                //                }
+                                //            }
+                                //            Console.WriteLine("");
+
+                                //        }
+                                //    }
+                                //}
                                 #endregion
                                 break;
                         }
@@ -668,10 +732,10 @@ namespace ALS.ALSI.Web.view.template
                 txtD23.Focus();
 
             }
-            else { 
-                CalculateCas(); 
+            else {
+                CalculateCas();
             }
-            
+
         }
 
         protected void btnCoverPage_Click(object sender, EventArgs e)
@@ -971,7 +1035,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", lbDocNo.Text, lbComponent.Text)));
-            reportParameters.Add(new ReportParameter("img01Url",Configurations.HOST + "" + this.HpaFor1[0].img_path));
+            reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor1[0].img_path));
             // Variables
             Warning[] warnings;
             string[] streamIds;
@@ -990,7 +1054,7 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.HpaFor1.Where(x => x.parent != -1).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
 
 
-     
+
 
 
 
@@ -1157,24 +1221,24 @@ namespace ALS.ALSI.Web.view.template
                 //            e.Row.ForeColor = System.Drawing.Color.Black;
                 //            break;
                 //    }
-                    if (_litB != null)
+                if (_litB != null)
+                {
+                    int parent = Convert.ToInt32(_hParent.Value);
+                    switch (parent)
                     {
-                        int parent = Convert.ToInt32(_hParent.Value);
-                        switch (parent)
-                        {
-                            case -1://Total
-                                _litB.Text = String.Format("{0}", _litB.Text);
-                                _litC.Text = String.Empty;
-                                _litD.Text = String.Empty;
-                                _litE.Text = String.Empty;
-                                e.Row.ForeColor = System.Drawing.Color.Blue;
-                                break;
-                            case -2://Sub Total
-                                _litB.Text = String.Format("Subtotal - {0}", _litB.Text);
-                                e.Row.ForeColor = System.Drawing.Color.Blue;
-                                break;
-                        }
+                        case -1://Total
+                            _litB.Text = String.Format("{0}", _litB.Text);
+                            _litC.Text = String.Empty;
+                            _litD.Text = String.Empty;
+                            _litE.Text = String.Empty;
+                            e.Row.ForeColor = System.Drawing.Color.Blue;
+                            break;
+                        case -2://Sub Total
+                            _litB.Text = String.Format("Subtotal - {0}", _litB.Text);
+                            e.Row.ForeColor = System.Drawing.Color.Blue;
+                            break;
                     }
+                }
                 //}
             }
         }

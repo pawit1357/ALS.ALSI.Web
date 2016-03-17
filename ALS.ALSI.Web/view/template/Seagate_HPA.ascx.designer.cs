@@ -442,7 +442,16 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbC149;
+        protected global::System.Web.UI.WebControls.TextBox lbC149;
+        
+        /// <summary>
+        /// FilteredTextBoxExtender11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender11;
         
         /// <summary>
         /// pUS_LPC03 control.
@@ -1363,15 +1372,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pLoadFile;
         
         /// <summary>
-        /// litErrorMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litErrorMessage;
-        
-        /// <summary>
         /// txtB3 control.
         /// </summary>
         /// <remarks>
@@ -1660,13 +1660,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Literal1 control.
+        /// litErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal1;
+        protected global::System.Web.UI.WebControls.Literal litErrorMessage;
         
         /// <summary>
         /// btnPopupErrorList control.

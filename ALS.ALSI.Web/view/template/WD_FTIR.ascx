@@ -480,7 +480,7 @@ The instrument detection limit for silicone oil is
                                         </div>
                                         <br />
                                     </asp:Panel>
-                                                                        <asp:Panel ID="pUploadfile" runat="server">
+                                    <asp:Panel ID="pUploadfile" runat="server">
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Uplod file: </label>
 
@@ -510,7 +510,7 @@ The instrument detection limit for silicone oil is
                                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-             <%--                       <asp:Panel ID="pUploadfile" runat="server">
+                                    <%--                       <asp:Panel ID="pUploadfile" runat="server">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -530,8 +530,6 @@ The instrument detection limit for silicone oil is
                                         <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>--%>
-
-
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -627,7 +625,7 @@ The instrument detection limit for silicone oil is
                                             รายการปัญหา</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+                                    <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                                 </div>
                                 <div class="modal-footer">
@@ -657,7 +655,7 @@ The instrument detection limit for silicone oil is
                                 </div>
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
             </div>

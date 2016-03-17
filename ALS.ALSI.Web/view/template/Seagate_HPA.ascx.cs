@@ -43,39 +43,45 @@ namespace ALS.ALSI.Web.view.template
                                   };
 
         private String[] ANameKey = {
-                                    "Hard Particles",
-                                    "Magnetic Particles",
-                                    "SST Particles",
-                                    "MgSiO Particles",
-                                    "PZT Particles",
-                                    "Tin Particles",
-                                    "Metal Particles",
-                                    "Ni Particles",
-                                    "Other Particles",
-                                    "Totals"
+                        "Class 1, Total Hard Particle",
+                        "Class 2, Total Magnetic Particle",
+                        "Class 3, Total Semi-hard Metal Particle",
+                        "    3.1  SST + Fe base + FeO",
+                        "    3.2  Sn base Particle",
+                        "    3.3  PZT Particles",
+                        "Class 4, Total Soft-Metal Particle",
+                        "Class 5, Total Environment Particle",
+                        "    5.1  MgSiO Particle",
+                        "Class 6, Other Particle"
                                    };
 
+
+
+
+
+
+        /*
         private Hashtable GetAName()
         {
             Hashtable hashtable = new Hashtable();
             hashtable.Add(ANameKey[0],
                 new String[]{
-                            "AlMgO",
-                            "AlO",
-                            "AlOTiC",
-                            "CrO",
-                            "FeSiO",
-                            "NbB",
-                            "SiC",
-                            "SiO",
-                            "TiB",
-                            "TiC",
-                            "TiO",
-                            "TiSn",
-                            "TiV",
-                            "WC",
-                            "ZrC",
-                            "ZrO"
+"AlArO",
+"AlMgO",
+"AlO",
+"AlOTiC",
+"CrO",
+"NbB",
+"SiC",
+"SiO",
+"TiB",
+"TiC",
+"TiO",
+"TiSn",
+"TiV",
+"WC",
+"ZrC",
+"ZrO"
                            });
             hashtable.Add(ANameKey[1],
                 new String[]{
@@ -85,8 +91,23 @@ namespace ALS.ALSI.Web.view.template
                 });
             hashtable.Add(ANameKey[2],
                 new String[]{
-                            "SST300s (Fe/Cr/Ni) ",
-                            "SST400s (Fe/Cr) "
+                        "SST300s with possible Si",
+                        "SST300s with possible Si and Mn",
+                        "SST400s with possible Si",
+                        "Fe based",
+                        "FeO",
+                        "MnCrS",
+                        "Ni based",
+                        "NiP",
+                        "Sn based",
+                        "Ti based",
+                        "PbZrTi",
+                        "SnPb",
+                        "AlSi (FeCrCuZnMn)",
+                        "CuZn",
+                        "FeMgSiO",
+                        "Pt based",
+                        "CrCoNiP (disc material)"
                 });
             hashtable.Add(ANameKey[3],
                 new String[]{
@@ -101,59 +122,48 @@ namespace ALS.ALSI.Web.view.template
                 });
             hashtable.Add(ANameKey[6],
                 new String[]{
-                    "Ag based",
-                    "Al based",
-                    "Au based",
-                    "Cu based",
-                    "Fe based",
-                    "MnCrS",
-                    "Ni based",
-                    "NiP",
-                    "Pt based",
-                    "Sb based",
-                    "Sn based ",
-                    "SnPb",
-                    "Zn based",
-                    "AlSi(FeCrCuZnMn)",
-                    "NiFe",
-                    "ZnPFe",
-                    "CrCoNiP (disc material)",
-                    "NiPCr",
-                    "NiPCrFe",
-                    "CuZn"
-
+                 "Ag based",
+                 "Al based",
+                 "Au based",
+                 "Cu based",
+                 "Sb based",
+                 "Zn based",
+                 "Bi/SnBi",
+                 "NiFe",
+                 "ZnPFe",
+                 "NiPCr",
+                 "NiPCrFe",
+                 "AlFeO",
+                 "AlNiO",
+                 "Anodised Al",
+                 "Pb based",
+                 "AlSiO",
+                 "FeSiO"
                 });
             hashtable.Add(ANameKey[7],
                 new String[]{
+                        "Cl based",
+                        "MgCaO",
+                        "MgSiO",
+                        "CaSiO",
+                        "S based",
+                        "Ca based",
+                        "Na based",
+                        "K based",
+                        "F based"
+
                            });
             hashtable.Add(ANameKey[8],
                 new String[]{
-                    "FeO",
-                    "AlFeO",
-                    "AlNiO",
-                    "AlSiO",
-                    "Cl based",
-                    "FeMgSiO",
-                    "MgCaO",
-                    "MgSiO",
-                    "S based",
-                    "F based",
-                    "Ca based",
-                    "Na based",
-                    "K based",
-                    "Anodised Al",
-                    "PZT",
-                    "Pb base",
-                    "Others"
 
                 });
             hashtable.Add(ANameKey[9],
                 new String[]{
-
+                    "Others"
                 });
             return hashtable;
         }
-
+        */
         public users_login userLogin
         {
             get
@@ -506,7 +516,7 @@ namespace ALS.ALSI.Web.view.template
                     txtB3.Text = _cover.ws_b3;
                     txtB4.Text = _cover.ws_b4;
                     txtB5.Text = _cover.ws_b5;
-                    txtB6.Text = (_cover.ws_b6 == null)? "50": _cover.ws_b6;
+                    txtB6.Text = (_cover.ws_b6 == null) ? "50" : _cover.ws_b6;
                     txtB7.Text = (_cover.ws_b7 == null) ? "7.071" : _cover.ws_b7;
                     txtB8.Text = _cover.ws_b8;
                     txtB9.Text = _cover.ws_b9;
@@ -857,7 +867,7 @@ namespace ALS.ALSI.Web.view.template
                 //removeSession();
                 MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
             }
- 
+
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -880,7 +890,7 @@ namespace ALS.ALSI.Web.view.template
 
             if (errors.Count == 0)
             {
-                List<template_seagate_hpa_coverpage> lists = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION)).OrderBy(x => x.seq).ToList();
+                List<template_seagate_hpa_coverpage> lists = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
                 #region "LOAD"
                 String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
 
@@ -1032,9 +1042,11 @@ namespace ALS.ALSI.Web.view.template
                                                                 String CD = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(18));
                                                                 switch (Path.GetFileNameWithoutExtension(source_file))
                                                                 {
-                                                                    case "B": B1_03[index_03] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
+                                                                    case "B":
+                                                                        B1_03[index_03] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
                                                                         break;
-                                                                    case "S": S1_03[index_03] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
+                                                                    case "S":
+                                                                        S1_03[index_03] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
                                                                         break;
                                                                 }
                                                                 index_03++;
@@ -1046,9 +1058,11 @@ namespace ALS.ALSI.Web.view.template
                                                                 String CD = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(18));
                                                                 switch (Path.GetFileNameWithoutExtension(source_file))
                                                                 {
-                                                                    case "B": B1_06[index_06] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
+                                                                    case "B":
+                                                                        B1_06[index_06] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
                                                                         break;
-                                                                    case "S": S1_06[index_06] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
+                                                                    case "S":
+                                                                        S1_06[index_06] = String.Format("{0:n2}", Math.Round(Convert.ToDouble(CD), 2));
                                                                         break;
                                                                 }
                                                                 index_06++;
@@ -1061,7 +1075,7 @@ namespace ALS.ALSI.Web.view.template
                                                 {
                                                     errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", "Sheet1"));
                                                 }
-                                                    #endregion
+                                                #endregion
                                                 break;
                                         }
                                     }
@@ -1531,7 +1545,7 @@ namespace ALS.ALSI.Web.view.template
 
                 )
             {
-                List<template_seagate_hpa_coverpage> lists = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION)).OrderBy(x => x.seq).ToList();
+                List<template_seagate_hpa_coverpage> lists = this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
                 foreach (template_seagate_hpa_coverpage _val in lists)
                 {
                     //=ROUND(MAX(0,(C13-B13))*($B$7/$B$9)*($B$3/$B$6)/($B$4*$B$5),1)
@@ -1539,26 +1553,31 @@ namespace ALS.ALSI.Web.view.template
                     Double _div = (Convert.ToDouble(txtB7.Text) / Convert.ToDouble(txtB9.Text)) * (Convert.ToDouble(txtB3.Text) / Convert.ToDouble(txtB6.Text)) / (Convert.ToDouble(txtB4.Text) * Convert.ToDouble(txtB5.Text));
                     _val.C = Math.Round((CustomUtils.GetMax((Convert.ToDouble(_val.RawCounts) - Convert.ToDouble(_val.BlankCouts))) * _div), 1);
                 }
-            }
 
-            for (int i = 0; i < ANameKey.Length; i++)
-            {
-                Double _sum = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION) && x.data_group.Equals(ANameKey[i])).Sum(x => x.C);
 
-                template_seagate_hpa_coverpage _tmp1 = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA) && x.A.Contains(ANameKey[i])).FirstOrDefault();
-                if (_tmp1 != null)
+                foreach (template_seagate_hpa_coverpage _cov in this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_HEAD)))
                 {
-                    _tmp1.C = _sum;
+                    Double _sum = (Double)this.Hpas.Where(x => x.data_group.Equals(_cov.data_group) && x.C.Value != null).Sum(x => x.C);
+                    _cov.C = _sum;
+                    //template_seagate_hpa_coverpage _tmp1 = this.Hpas.Where(x => x.hpa_type = Convert.ToInt16(GVTypeEnum.CLASSIFICATION_TOTAL)).FirstOrDefault();
+                    //if (_tmp1 != null)
+                    //{
+                    //    _tmp1.C = _sum;
+                    //}
                 }
             }
-
             gvLpc03.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).OrderBy(x => x.seq);
             gvLpc03.DataBind();
             gvLpc06.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).OrderBy(x => x.seq);
             gvLpc06.DataBind();
-            gvWsClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION)).OrderBy(x => x.seq);
+            gvWsClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD)||
+            x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
+            x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
+            x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
+            x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)
+            ).OrderBy(x => x.seq);
             gvWsClassification.DataBind();
-            gvClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION)).OrderBy(x => x.seq);
+            gvClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq);
             gvClassification.DataBind();
             gvHpa.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq);
             gvHpa.DataBind();
@@ -1753,8 +1772,12 @@ namespace ALS.ALSI.Web.view.template
 
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+
             List<template_seagate_hpa_coverpage> _Hpas = new List<template_seagate_hpa_coverpage>();
             tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+
+
             if (tem != null)
             {
                 #region "Method"
@@ -1776,7 +1799,8 @@ namespace ALS.ALSI.Web.view.template
                 switch (lpcType)
                 {
                     case LPCTypeEnum.KHz_68://(68 KHz)
-                        #region "68 KHz"
+                        int cOrder = 1;
+                        #region "LPC 0.3"
                         for (int i = 0; i < lpc03A.Length; i++)
                         {
                             String _val = lpc03A[i];
@@ -1792,6 +1816,8 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC03);
                             _Hpas.Add(_tmp);
                         }
+                        #endregion
+                        #region "LPC 0.6"
                         for (int i = 0; i < lpc06A.Length; i++)
                         {
                             String _val = lpc06A[i];
@@ -1807,10 +1833,10 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC06);
                             _Hpas.Add(_tmp);
                         }
-                        int cOrder = 1;
+                        #endregion
+                        #region "Hard Particle Analysis"
                         for (int i = 0; i < ANameKey.Length; i++)
                         {
-                            #region "Hard Particle Analysis"
                             String _val = ANameKey[i];
                             template_seagate_hpa_coverpage _tmp = new template_seagate_hpa_coverpage();
                             _tmp.ID = CustomUtils.GetRandomNumberID();
@@ -1818,50 +1844,30 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.A = _val;
                             switch (i)
                             {
-                                case 0: _tmp.B = tem.L; break;
-                                case 1: _tmp.B = tem.T; break;
-                                case 2: _tmp.B = tem.N; break;
-                                case 3: _tmp.B = tem.AI; break;
-                                case 4: _tmp.B = tem.P; break;
-                                case 5: _tmp.B = tem.V; break;
-                                case 6: _tmp.B = tem.X; break;
-                                case 7: _tmp.B = tem.AA; break;
-                                case 8: _tmp.B = tem.R; break;
-                                case 9: _tmp.B = tem.AC; break;
-                                case 10: _tmp.B = tem.AE; break;
-                                case 11: _tmp.B = tem.AG; break;
+                                case 0: _tmp.B = tem.L; break;// Class 1, Total Hard Particle
+                                case 1: _tmp.B = tem.R; break;// Class 2, Total Magnetic Particle
+                                case 2: _tmp.B = tem.T; break;// Class 3, Total Semi-hard Metal Particle
+                                case 3: _tmp.B = tem.V; break;//3.1  SST + Fe base + FeO
+                                case 4: _tmp.B = tem.X; break;//3.2  Sn base Particle
+                                case 5: _tmp.B = tem.AA; break;//3.3  PZT Particles
+                                case 6: _tmp.B = tem.AC; break;// Class 4, Total Soft-Metal Particle
+                                case 7: _tmp.B = tem.AE; break;// Class 5, Total Environment Particle
+                                case 8: _tmp.B = tem.P; break;//5.1  MgSiO Particle
+                                case 9: _tmp.B = tem.AG; break;// Class 6, Other Particle
                             }
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.HPA);
                             _Hpas.Add(_tmp);
-                            #endregion
-                            #region "Classification"
-                            if (GetAName().ContainsKey(_val))
-                            {
-                                String[] _class = (String[])GetAName()[_val];
-                                if (_class != null && _class.Length > 0)
-                                {
-                                    for (int j = 0; j < _class.Length; j++)
-                                    {
-                                        template_seagate_hpa_coverpage _tmp1 = new template_seagate_hpa_coverpage();
-                                        _tmp1.ID = CustomUtils.GetRandomNumberID();
-                                        _tmp1.seq = cOrder;
-                                        _tmp1.A = (j == 0) ? _val : String.Empty;
-                                        _tmp1.data_group = _val;
-                                        _tmp1.B = _class[j];
-                                        _tmp1.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                        _tmp1.hpa_type = Convert.ToInt32(GVTypeEnum.CLASSIFICATION);
-                                        _Hpas.Add(_tmp1);
-                                        cOrder++;
-                                    }
-                                }
-                            }
-                            #endregion
+
                         }
+                        #endregion
+                        #region "Classification"
+                        _Hpas.AddRange( getTypesOfParticles(cOrder));
                         #endregion
                         break;
                     case LPCTypeEnum.KHz_132://(132 KHz)
-                        #region "132 KHz"
+                        int cOrder132 = 1;
+                        #region "LPC 0.3"
                         for (int i = 0; i < lpc03A.Length; i++)
                         {
                             String _val = lpc03A[i];
@@ -1874,6 +1880,8 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC03);
                             _Hpas.Add(_tmp);
                         }
+                        #endregion
+                        #region "LPC 0.6"
                         for (int i = 0; i < lpc06A.Length; i++)
                         {
                             String _val = lpc06A[i];
@@ -1886,10 +1894,11 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC06);
                             _Hpas.Add(_tmp);
                         }
-                        int cOrder132 = 1;
+                        #endregion
+                        #region "Hard Particle Analysis"
+
                         for (int i = 0; i < ANameKey.Length; i++)
                         {
-                            #region "Hard Particle Analysis"
                             String _val = ANameKey[i];
                             template_seagate_hpa_coverpage _tmp = new template_seagate_hpa_coverpage();
                             _tmp.ID = CustomUtils.GetRandomNumberID();
@@ -1897,46 +1906,44 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.A = _val;
                             switch (i)
                             {
-                                case 0: _tmp.B = tem.M; break;
-                                case 1: _tmp.B = tem.U; break;
-                                case 2: _tmp.B = tem.O; break;
-                                case 3: _tmp.B = tem.AJ; break;
-                                case 4: _tmp.B = tem.Q; break;
-                                case 5: _tmp.B = tem.W; break;
-                                case 6: _tmp.B = tem.Y; break;
-                                case 7: _tmp.B = tem.AB; break;
-                                case 8: _tmp.B = tem.AD; break;
-                                case 9: _tmp.B = tem.S; break;
-                                case 10: _tmp.B = tem.AF; break;
-                                case 11: _tmp.B = tem.AH; break;
+                                case 0: _tmp.B = tem.M; break;// Class 1, Total Hard Particle
+                                case 1: _tmp.B = tem.S; break;// Class 2, Total Magnetic Particle
+                                case 2: _tmp.B = tem.U; break;// Class 3, Total Semi-hard Metal Particle
+                                case 3: _tmp.B = tem.W; break;//3.1  SST + Fe base + FeO
+                                case 4: _tmp.B = tem.Y; break;//3.2  Sn base Particle
+                                case 5: _tmp.B = tem.AB; break;//3.3  PZT Particles
+                                case 6: _tmp.B = tem.AD; break;// Class 4, Total Soft-Metal Particle
+                                case 7: _tmp.B = tem.AF; break;// Class 5, Total Environment Particle
+                                case 8: _tmp.B = tem.Q; break;//5.1  MgSiO Particle
+                                case 9: _tmp.B = tem.AH; break;// Class 6, Other Particle
                             }
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.HPA);
                             _Hpas.Add(_tmp);
-                            #endregion
-                            #region "Classification"
-                            if (GetAName().ContainsKey(_val))
-                            {
-                                String[] _class = (String[])GetAName()[_val];
-                                if (_class != null && _class.Length > 0)
-                                {
-                                    for (int j = 0; j < _class.Length; j++)
-                                    {
-                                        template_seagate_hpa_coverpage _tmp1 = new template_seagate_hpa_coverpage();
-                                        _tmp1.ID = CustomUtils.GetRandomNumberID();
-                                        _tmp.seq = cOrder132;
-                                        _tmp1.A = (j == 0) ? _val : String.Empty;
-                                        _tmp1.data_group = _val;
-                                        _tmp1.B = _class[j];
-                                        _tmp1.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                        _tmp1.hpa_type = Convert.ToInt32(GVTypeEnum.CLASSIFICATION);
-                                        _Hpas.Add(_tmp1);
-                                        cOrder132++;
-                                    }
-                                }
-                            }
-                            #endregion
+                            //if (GetAName().ContainsKey(_val))
+                            //{
+                            //    String[] _class = (String[])GetAName()[_val];
+                            //    if (_class != null && _class.Length > 0)
+                            //    {
+                            //        for (int j = 0; j < _class.Length; j++)
+                            //        {
+                            //            template_seagate_hpa_coverpage _tmp1 = new template_seagate_hpa_coverpage();
+                            //            _tmp1.ID = CustomUtils.GetRandomNumberID();
+                            //            _tmp.seq = cOrder132;
+                            //            _tmp1.A = (j == 0) ? _val : String.Empty;
+                            //            _tmp1.data_group = _val;
+                            //            _tmp1.B = _class[j];
+                            //            _tmp1.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            //            _tmp1.hpa_type = Convert.ToInt32(GVTypeEnum.CLASSIFICATION);
+                            //            _Hpas.Add(_tmp1);
+                            //            cOrder132++;
+                            //        }
+                            //    }
+                            //}
                         }
+                        #endregion
+                        #region "Classification"
+                        _Hpas.AddRange(getTypesOfParticles(cOrder132));
                         #endregion
                         break;
                 }
@@ -1962,7 +1969,7 @@ namespace ALS.ALSI.Web.view.template
                 gvLpc06.DataBind();
                 gvHpa.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA));
                 gvHpa.DataBind();
-                gvClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION));
+                gvClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM));
                 gvClassification.DataBind();
                 #endregion
 
@@ -2206,6 +2213,30 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
+        protected void gvWsClassification_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Literal _litB = (Literal)e.Row.FindControl("litB");
+
+                
+                GVTypeEnum cmd = (GVTypeEnum)Enum.ToObject(typeof(GVTypeEnum), (int)gvWsClassification.DataKeys[e.Row.RowIndex].Values[2]);
+                switch (cmd)
+                {
+                    case GVTypeEnum.CLASSIFICATION_GRAND_TOTAL:
+                    case GVTypeEnum.CLASSIFICATION_TOTAL:
+                        e.Row.BackColor = System.Drawing.Color.Orange;
+                        break;
+                    case GVTypeEnum.CLASSIFICATION_SUB_TOTAL:
+                        e.Row.BackColor = System.Drawing.Color.Yellow;
+                        break;
+                    case GVTypeEnum.CLASSIFICATION_ITEM:
+                        _litB.Text = String.Format("{0}".PadRight(20, ' '), _litB.Text);
+                        break;
+                }
+            }
+        }
+
         private void downloadWord()
         {
             HttpContext.Current.Response.Clear();
@@ -2260,6 +2291,143 @@ namespace ALS.ALSI.Web.view.template
 
             }
         }
+
+
+
+        private List<template_seagate_hpa_coverpage> getTypesOfParticles(int order)
+        {
+            List<template_seagate_hpa_coverpage> _Hpas = new List<template_seagate_hpa_coverpage>();
+
+            List<String> items = new List<string>();
+
+            /*
+            # = Group
+            - = Total
+            $ = Grand Total
+            -------------------------
+            */
+
+            items.Add("#Class 1 Particles,i.e.hard particles, etc.");
+            items.Add("AlArO");
+            items.Add("AlMgO");		
+            items.Add("AlO");		
+            items.Add("AlOTiC");		
+            items.Add("CrO");		
+            items.Add("NbB");		
+            items.Add("SiC");		
+            items.Add("SiO");		
+            items.Add("TiB");		
+            items.Add("TiC");		
+            items.Add("TiO");		
+            items.Add("TiSn");		
+            items.Add("TiV");		
+            items.Add("WC");		
+            items.Add("ZrC");		
+            items.Add("ZrO");		
+            items.Add("-Total Hard Particles");
+            items.Add("#Class 2 Particles,i.e.magnetic particles");		
+            items.Add("Nd based");		
+            items.Add("Sm based");		
+            items.Add("Sr based");		
+            items.Add("-Total Magnetic Particles");
+            items.Add("#Class 3 Particles,i.e.semi - hard metal particles");		
+            items.Add("SST300s with possible Si");		
+            items.Add("SST300s with possible Si and Mn");		
+            items.Add("SST400s with possible Si");		
+            items.Add("*Total SST");
+            items.Add("Fe based");		
+            items.Add("FeO");		
+            items.Add("MnCrS");		
+            items.Add("Ni based");		
+            items.Add("NiP");		
+            items.Add("*Total Ni");
+            items.Add("Sn based");		
+            items.Add("Ti based");		
+            items.Add("PbZrTi");		
+            items.Add("SnPb");		
+            items.Add("AlSi (FeCrCuZnMn)");		
+            items.Add("CuZn");		
+            items.Add("FeMgSiO");		
+            items.Add("Pt based");		
+            items.Add("CrCoNiP (disc material)");		
+            items.Add("-Total Semi-Hard Metal Particles");
+            items.Add("#Class 4 Particles,i.e.soft - metal particles");		
+            items.Add("Ag based");		
+            items.Add("Al based");		
+            items.Add("Au based");		
+            items.Add("Cu based");		
+            items.Add("Sb based"); 		
+            items.Add("Zn based");		
+            items.Add("Bi/SnBi");		
+            items.Add("NiFe");		
+            items.Add("ZnPFe");		
+            items.Add("NiPCr");		
+            items.Add("NiPCrFe");		
+            items.Add("AlFeO");		
+            items.Add("AlNiO");		
+            items.Add("Anodised Al");		
+            items.Add("Pb based");		
+            items.Add("AlSiO");		
+            items.Add("FeSiO");		
+            items.Add("-Total Soft Metal Particles");	
+            items.Add("#Class 5 Particles,i.e.environment particles");		
+            items.Add("Cl based");		
+            items.Add("MgCaO");		
+            items.Add("MgSiO");		
+            items.Add("CaSiO");		
+            items.Add("S based");		
+            items.Add("Ca based");		
+            items.Add("Na based");		
+            items.Add("K based");		
+            items.Add("F based");		
+            items.Add("-Total Environment Particles");
+            items.Add("#Class 6 Particles,i.e.all other particle which not in the above classes");		
+            items.Add("Others");		
+            items.Add("-Total Others");
+            items.Add("$Total Particles");
+
+            String LastGroup = String.Empty;
+            foreach (String item in items)
+            {
+                if (item.StartsWith("#"))
+                {
+                    LastGroup = item;
+                }
+
+                template_seagate_hpa_coverpage _tmp = new template_seagate_hpa_coverpage();
+                _tmp.ID = CustomUtils.GetRandomNumberID();
+                _tmp.seq = order;
+                _tmp.A = LastGroup.Substring(1);
+                _tmp.data_group = LastGroup.Substring(1);
+                _tmp.B = item;
+                _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                _tmp.hpa_type = (item.StartsWith("#")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD) :
+                (item.StartsWith("-")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) :
+                (item.StartsWith("$")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL) :
+                (item.StartsWith("*")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) :Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM);
+                if(_tmp.hpa_type != Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM))
+                {
+                    _tmp.B = item.Substring(1);
+                }
+                _Hpas.Add(_tmp);
+                order++;
+            }
+            String dub = String.Empty;
+            foreach(template_seagate_hpa_coverpage _cov in _Hpas.Where(x=>x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)))
+            {
+                if (!_cov.A.Equals(dub))
+                {
+                    dub = _cov.A;
+                }
+                else
+                {
+                    _cov.A = string.Empty;
+                }
+            }
+
+            return _Hpas;
+        }
+
 
     }
 }

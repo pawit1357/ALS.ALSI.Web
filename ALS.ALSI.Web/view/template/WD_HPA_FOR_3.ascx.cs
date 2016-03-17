@@ -432,6 +432,7 @@ namespace ALS.ALSI.Web.view.template
         }
 
         #endregion
+        List<String> errors = new List<string>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -455,9 +456,13 @@ namespace ALS.ALSI.Web.view.template
             switch (status)
             {
                 case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                    this.jobSample.step1owner = userLogin.id;
+
                     break;
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                    this.jobSample.step2owner = userLogin.id;
+
                     foreach (template_wd_hpa_for3_coverpage _cover in this.HpaFor3)
                     {
                         _cover.ParticleAnalysisBySEMEDX = txtA23.Text;
@@ -494,6 +499,8 @@ namespace ALS.ALSI.Web.view.template
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                    this.jobSample.step3owner = userLogin.id;
+
                     #region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_test_completed = DateTime.Now;
                     #endregion
@@ -538,7 +545,7 @@ namespace ALS.ALSI.Web.view.template
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                             break;
                     }
-                    this.jobSample.step3owner = userLogin.id;
+                    this.jobSample.step4owner = userLogin.id;
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:
                     StatusEnum labApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -571,15 +578,15 @@ namespace ALS.ALSI.Web.view.template
                         btnUpload.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
-                        lbMessage.Text = string.Empty;
+                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .doc|.docx";
-                        lbMessage.Attributes["class"] = "alert alert-error";
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
                         isValid = false;
                     }
-                    this.jobSample.step4owner = userLogin.id;
+                    this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
                     if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
@@ -599,25 +606,32 @@ namespace ALS.ALSI.Web.view.template
                         btnUpload.SaveAs(source_file);
                         this.jobSample.path_pdf = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                        lbMessage.Text = string.Empty;
+                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {
-                        lbMessage.Text = "Invalid File. Please upload a File with extension .pdf";
-                        lbMessage.Attributes["class"] = "alert alert-error";
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
                         isValid = false;
                     }
-                    this.jobSample.step6owner = userLogin.id;
+                    this.jobSample.step7owner = userLogin.id;
                     break;
 
             }
             //########
-            this.jobSample.Update();
-            //Commit
-            GeneralManager.Commit();
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+            }
+            else {
+                this.jobSample.Update();
+                //Commit
+                GeneralManager.Commit();
 
-            //removeSession();
-            MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+                //removeSession();
+                MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            }
 
         }
 

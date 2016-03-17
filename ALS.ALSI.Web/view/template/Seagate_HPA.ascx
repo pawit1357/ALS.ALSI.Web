@@ -66,7 +66,7 @@
                                                     FilterType="Custom, Numbers" ValidChars="." runat="server" />
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtExtractionMedium" runat="server" Text="" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox ID="txtExtractionMedium" runat="server" Text="0.1 um Filtered Degassed DI Water" CssClass="form-control"></asp:TextBox>
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtExtractionVolume" runat="server" Text="" CssClass="form-control"></asp:TextBox>
@@ -85,7 +85,7 @@
                                                     FilterType="Custom, Numbers" ValidChars="." runat="server" />
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtExtractionMedium_hpa" runat="server" Text="" CssClass="form-control"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtExtractionMedium_hpa" runat="server" Text="0.1 um Filtered Degassed DI Water" CssClass="form-control"></asp:TextBox></td>
                                             <td>
                                                 <asp:TextBox ID="txtExtractionVolume_hpa" runat="server" Text="" CssClass="form-control"></asp:TextBox>
                                                 <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" TargetControlID="txtExtractionVolume_hpa"
@@ -215,7 +215,7 @@
                                                 <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Type of Particles" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="Type of Particles" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>'></asp:Literal>
                                             </ItemTemplate>
@@ -285,7 +285,9 @@
                                         <td></td>
                                         <td>Magnification</td>
                                         <td runat="server" id="td108">
-                                            <asp:Label ID="lbC149" runat="server" />
+                                            <asp:TextBox ID="lbC149" runat="server" Text="448" > </asp:TextBox>
+                                                <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender11" TargetControlID="lbC149"
+                                            FilterType="Custom, Numbers" ValidChars="." runat="server" />
                                         </td>
                                     </tr>
                                 </table>
@@ -575,7 +577,6 @@
                     <asp:Panel ID="pWorksheetForHPAFiltration" runat="server">
 
                         <asp:Panel ID="pLoadFile" runat="server">
-                            <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">Volume of Extraction (ml), Vt</label>
@@ -688,14 +689,14 @@
 
                                 <br />
                                 <asp:GridView ID="gvWsClassification" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type">
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type,hpa_type" OnRowDataBound="gvWsClassification_RowDataBound">
                                     <Columns>
-                                        <asp:TemplateField HeaderText="Classification" ItemStyle-HorizontalAlign="Left">
+<%--                                        <asp:TemplateField HeaderText="Classification" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
                                             </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Type of Particles" ItemStyle-HorizontalAlign="Center">
+                                        </asp:TemplateField>--%>
+                                        <asp:TemplateField HeaderText="Type of Particles" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>'></asp:Literal>
                                             </ItemTemplate>
@@ -880,7 +881,7 @@
                                             รายการปัญหา</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                                    <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+                            <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                                 </div>
                                 <div class="modal-footer">
