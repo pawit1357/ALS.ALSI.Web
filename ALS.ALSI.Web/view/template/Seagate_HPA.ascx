@@ -6,16 +6,6 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
 
-
-            <div class="alert alert-danger display-hide">
-                <button class="close" data-close="alert"></button>
-                You have some form errors. Please check below.
-            </div>
-            <div class="alert alert-success display-hide">
-                <button class="close" data-close="alert"></button>
-                Your form validation is successful!
-            </div>
-
             <div class="portlet box blue-dark">
                 <div class="portlet-title">
                     <div class="caption">
@@ -31,7 +21,7 @@
                 </div>
                 <div class="portlet-body">
                     <asp:Panel ID="pCoverPage" runat="server">
-                        <asp:Literal ID="LitErrorMsg2" runat="server"></asp:Literal>
+                        <%--                        <asp:Literal ID="LitErrorMsg2" runat="server"></asp:Literal>--%>
 
                         <div class="row">
                             <div class="col-md-9">
@@ -241,7 +231,7 @@
                                     </EmptyDataTemplate>
                                 </asp:GridView>
                                 <br />
-                                <table>
+                                <table class="table table-striped table-bordered mini">
                                     <thead></thead>
 
                                     <tr runat="server" id="tr103">
@@ -285,9 +275,9 @@
                                         <td></td>
                                         <td>Magnification</td>
                                         <td runat="server" id="td108">
-                                            <asp:TextBox ID="lbC149" runat="server" Text="448" > </asp:TextBox>
-                                                <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender11" TargetControlID="lbC149"
-                                            FilterType="Custom, Numbers" ValidChars="." runat="server" />
+                                            <asp:TextBox ID="lbC149" runat="server" Text="448"> </asp:TextBox>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender11" TargetControlID="lbC149"
+                                                FilterType="Custom, Numbers" ValidChars="." runat="server" />
                                         </td>
                                     </tr>
                                 </table>
@@ -396,17 +386,17 @@
                                         <tr runat="server" id="tr6">
                                             <td>Extraction Vol. (ml)</td>
                                             <td colspan="6">
-                                                <asp:Label ID="txt_UsLPC03_B20" runat="server" CssClass="m-wrap small" ReadOnly="true"></asp:Label></td>
+                                                <asp:Label ID="txt_UsLPC03_B20" runat="server" CssClass="m-wrap small"></asp:Label></td>
                                         </tr>
                                         <tr runat="server" id="tr7">
                                             <td>Surface Area (cm2)</td>
                                             <td colspan="6">
-                                                <asp:Label ID="txt_UsLPC03_B21" runat="server" CssClass="m-wrap small" ReadOnly="true"></asp:Label></td>
+                                                <asp:Label ID="txt_UsLPC03_B21" runat="server" CssClass="m-wrap small"></asp:Label></td>
                                         </tr>
                                         <tr runat="server" id="tr8">
                                             <td>No. of Parts Used</td>
                                             <td colspan="6">
-                                                <asp:Label ID="txt_UsLPC03_B22" runat="server" CssClass="m-wrap small" ReadOnly="true"></asp:Label></td>
+                                                <asp:Label ID="txt_UsLPC03_B22" runat="server" CssClass="m-wrap small"></asp:Label></td>
                                         </tr>
                                         <tr runat="server" id="tr9">
                                             <td>Sample</td>
@@ -534,7 +524,7 @@
                                         <tr runat="server" id="tr17">
                                             <td>Extraction Vol. (ml)</td>
                                             <td colspan="6">
-                                                <asp:Label ID="txt_UsLPC06_B20" runat="server" CssClass="m-wrap small" ReadOnly="true"></asp:Label></td>
+                                                <asp:Label ID="txt_UsLPC06_B20" runat="server" CssClass="m-wrap small"></asp:Label></td>
                                         </tr>
                                         <tr runat="server" id="tr18">
                                             <td>Surface Area (cm2)</td>
@@ -632,14 +622,14 @@
                                 <label class="control-label col-md-3">Percent Area Coverage (%)</label>
                                 <div class="col-md-9">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <asp:TextBox ID="txtB8" runat="server" CssClass="m-wrap small" ReadOnly="True" OnTextChanged="txtB8_TextChanged">50.21</asp:TextBox>
-                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender9" TargetControlID="txtB8"
-                                            FilterType="Custom, Numbers" ValidChars="." runat="server" />
+                                        <asp:Label ID="txtB8" runat="server" CssClass="text-info" Text="0"></asp:Label>
+                                        <%--         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender9" TargetControlID="txtB8"
+                                            FilterType="Custom, Numbers" ValidChars="." runat="server" />--%>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">Number of Parts Extracted, N</label>
+                                <label class="control-label col-md-3">Area of Filter Surveyed (sqmm), As</label>
                                 <div class="col-md-9">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <asp:TextBox ID="txtB9" runat="server" CssClass="m-wrap small" AutoPostBack="True" OnTextChanged="txtB8_TextChanged">3.55</asp:TextBox>
@@ -691,7 +681,7 @@
                                 <asp:GridView ID="gvWsClassification" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type,hpa_type" OnRowDataBound="gvWsClassification_RowDataBound">
                                     <Columns>
-<%--                                        <asp:TemplateField HeaderText="Classification" ItemStyle-HorizontalAlign="Left">
+                                        <%--                                        <asp:TemplateField HeaderText="Classification" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
                                             </ItemTemplate>
@@ -776,7 +766,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                                     <div class="col-md-6">
-                                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                                        <asp:TextBox ID="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -789,7 +779,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
                                                     <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                             </div>
@@ -843,28 +833,6 @@
                                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-                                    <%--                          <asp:Panel ID="pUploadfile" runat="server">
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Uplod file:</label>
-                                                    <div class="col-md-6">
-                                                        <asp:HiddenField ID="HiddenField1" runat="server" />
-                                                        <span class="btn green fileinput-button">
-                                                            <i class="fa fa-plus"></i>
-                                                            <span>Add files...</span>
-                                                            <asp:FileUpload ID="FileUpload1" runat="server" />
-                                                        </span>
-                                                        <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-                                        <br />
-                                    </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -881,7 +849,7 @@
                                             รายการปัญหา</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                            <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+                                    <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                                 </div>
                                 <div class="modal-footer">
@@ -903,7 +871,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <asp:Button ID="btnCalculate" runat="server" Text="Calculate" CssClass="btn green" OnClick="btnCalculate_Click" />
+                                        <%--<asp:Button ID="btnCalculate" runat="server" Text="Calculate" CssClass="btn green" OnClick="btnCalculate_Click" />--%>
                                         <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn green" />
                                         <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="disable btn" OnClick="btnCancel_Click" />
                                     </div>

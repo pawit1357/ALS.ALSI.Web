@@ -98,5 +98,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> BlankCouts { get; set; }
         public Nullable<int> RawCounts { get; set; }
         public string data_group { get; set; }
+        public string img_path { get; set; }
     }
 }

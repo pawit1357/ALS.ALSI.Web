@@ -94,15 +94,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pCoverPage;
         
         /// <summary>
-        /// LitErrorMsg2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LitErrorMsg2;
-        
-        /// <summary>
         /// ddlLpcType control.
         /// </summary>
         /// <remarks>
@@ -442,7 +433,16 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbC149;
+        protected global::System.Web.UI.WebControls.TextBox lbC149;
+        
+        /// <summary>
+        /// FilteredTextBoxExtender11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender11;
         
         /// <summary>
         /// pUS_LPC03 control.
@@ -1459,16 +1459,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtB8;
-        
-        /// <summary>
-        /// FilteredTextBoxExtender9 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender9;
+        protected global::System.Web.UI.WebControls.Label txtB8;
         
         /// <summary>
         /// txtB9 control.
@@ -1685,15 +1676,6 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.ModalPopupExtender modalErrorList;
-        
-        /// <summary>
-        /// btnCalculate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCalculate;
         
         /// <summary>
         /// btnSubmit control.

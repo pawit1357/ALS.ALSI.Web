@@ -55,115 +55,6 @@ namespace ALS.ALSI.Web.view.template
                         "Class 6, Other Particle"
                                    };
 
-
-
-
-
-
-        /*
-        private Hashtable GetAName()
-        {
-            Hashtable hashtable = new Hashtable();
-            hashtable.Add(ANameKey[0],
-                new String[]{
-"AlArO",
-"AlMgO",
-"AlO",
-"AlOTiC",
-"CrO",
-"NbB",
-"SiC",
-"SiO",
-"TiB",
-"TiC",
-"TiO",
-"TiSn",
-"TiV",
-"WC",
-"ZrC",
-"ZrO"
-                           });
-            hashtable.Add(ANameKey[1],
-                new String[]{
-                            "Nd based",
-                            "Sm based",
-                            "Sr based"
-                });
-            hashtable.Add(ANameKey[2],
-                new String[]{
-                        "SST300s with possible Si",
-                        "SST300s with possible Si and Mn",
-                        "SST400s with possible Si",
-                        "Fe based",
-                        "FeO",
-                        "MnCrS",
-                        "Ni based",
-                        "NiP",
-                        "Sn based",
-                        "Ti based",
-                        "PbZrTi",
-                        "SnPb",
-                        "AlSi (FeCrCuZnMn)",
-                        "CuZn",
-                        "FeMgSiO",
-                        "Pt based",
-                        "CrCoNiP (disc material)"
-                });
-            hashtable.Add(ANameKey[3],
-                new String[]{
-                });
-            hashtable.Add(ANameKey[4],
-                new String[]{
-
-                });
-            hashtable.Add(ANameKey[5],
-                new String[]{
-
-                });
-            hashtable.Add(ANameKey[6],
-                new String[]{
-                 "Ag based",
-                 "Al based",
-                 "Au based",
-                 "Cu based",
-                 "Sb based",
-                 "Zn based",
-                 "Bi/SnBi",
-                 "NiFe",
-                 "ZnPFe",
-                 "NiPCr",
-                 "NiPCrFe",
-                 "AlFeO",
-                 "AlNiO",
-                 "Anodised Al",
-                 "Pb based",
-                 "AlSiO",
-                 "FeSiO"
-                });
-            hashtable.Add(ANameKey[7],
-                new String[]{
-                        "Cl based",
-                        "MgCaO",
-                        "MgSiO",
-                        "CaSiO",
-                        "S based",
-                        "Ca based",
-                        "Na based",
-                        "K based",
-                        "F based"
-
-                           });
-            hashtable.Add(ANameKey[8],
-                new String[]{
-
-                });
-            hashtable.Add(ANameKey[9],
-                new String[]{
-                    "Others"
-                });
-            return hashtable;
-        }
-        */
         public users_login userLogin
         {
             get
@@ -243,8 +134,7 @@ namespace ALS.ALSI.Web.view.template
                 pUploadfile.Visible = false;
                 pDownload.Visible = false;
                 btnSubmit.Visible = false;
-                btnCalculate.Visible = false;
-
+                //btnCalculate.Visible = false;
                 switch (userRole)
                 {
                     case RoleEnum.LOGIN:
@@ -257,7 +147,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = false;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = false;
+                            //btnCalculate.Visible = false;
 
                             gvLpc03.Columns[3].Visible = false;
                             gvLpc06.Columns[3].Visible = false;
@@ -273,6 +163,7 @@ namespace ALS.ALSI.Web.view.template
                             txtNumberOfPieces_hpa.ReadOnly = true;
                             txtExtractionMedium_hpa.ReadOnly = true;
                             txtExtractionVolume_hpa.ReadOnly = true;
+                            lbC149.ReadOnly = true;
 
                         }
                         break;
@@ -286,7 +177,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = false;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = true;
+                            //btnCalculate.Visible = true;
 
                             gvLpc03.Columns[3].Visible = true;
                             gvLpc06.Columns[3].Visible = true;
@@ -302,6 +193,7 @@ namespace ALS.ALSI.Web.view.template
                             txtNumberOfPieces_hpa.ReadOnly = false;
                             txtExtractionMedium_hpa.ReadOnly = false;
                             txtExtractionVolume_hpa.ReadOnly = false;
+                            lbC149.ReadOnly = false;
 
                         }
                         break;
@@ -317,7 +209,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = false;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = true;
+                            //btnCalculate.Visible = true;
 
                             gvLpc03.Columns[3].Visible = false;
                             gvLpc06.Columns[3].Visible = false;
@@ -333,6 +225,8 @@ namespace ALS.ALSI.Web.view.template
                             txtNumberOfPieces_hpa.ReadOnly = true;
                             txtExtractionMedium_hpa.ReadOnly = true;
                             txtExtractionVolume_hpa.ReadOnly = true;
+                            lbC149.ReadOnly = true;
+
                         }
                         break;
                     case RoleEnum.ADMIN:
@@ -345,7 +239,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = true;
                             pDownload.Visible = true;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = false;
+                            //btnCalculate.Visible = false;
 
                             gvLpc03.Columns[3].Visible = false;
                             gvLpc06.Columns[3].Visible = false;
@@ -361,6 +255,8 @@ namespace ALS.ALSI.Web.view.template
                             txtNumberOfPieces_hpa.ReadOnly = true;
                             txtExtractionMedium_hpa.ReadOnly = true;
                             txtExtractionVolume_hpa.ReadOnly = true;
+                            lbC149.ReadOnly = true;
+
                         }
                         break;
                     case RoleEnum.LABMANAGER:
@@ -375,7 +271,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = true;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = false;
+                            //btnCalculate.Visible = false;
 
                             gvLpc03.Columns[3].Visible = false;
                             gvLpc06.Columns[3].Visible = false;
@@ -391,6 +287,8 @@ namespace ALS.ALSI.Web.view.template
                             txtNumberOfPieces_hpa.ReadOnly = true;
                             txtExtractionMedium_hpa.ReadOnly = true;
                             txtExtractionVolume_hpa.ReadOnly = true;
+                            lbC149.ReadOnly = true;
+
                         }
                         break;
                 }
@@ -973,37 +871,6 @@ namespace ALS.ALSI.Web.view.template
                                                         }
                                                     }
 
-                                                    //sheet = wd.GetSheet("HPA_S");
-                                                    //if (sheet != null)
-                                                    //{
-                                                    //    foreach (template_seagate_hpa_coverpage _cov in lists)
-                                                    //    {
-                                                    //        int rc = 0;
-                                                    //        for (int c = 0; c < 100; c++)
-                                                    //        {
-                                                    //            String typesOfParticles = CustomUtils.GetCellValue(sheet.GetRow(0).GetCell(c));
-                                                    //            if (_cov.B.Equals(typesOfParticles))
-                                                    //            {
-                                                    //                for (int row = 1; row <= sheet.LastRowNum; row++)
-                                                    //                {
-                                                    //                    String rank = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(3));
-                                                    //                    String value = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(c));
-                                                    //                    if (!rank.Equals("Rejected (ED)") && value.Equals("1"))
-                                                    //                    {
-                                                    //                        rc++;
-                                                    //                    }
-                                                    //                }
-                                                    //                break;
-                                                    //            }
-                                                    //        }
-                                                    //        _cov.RawCounts = rc;
-                                                    //        template_seagate_hpa_coverpage _hpa = this.Hpas.Where(x => x.ID == _cov.ID).FirstOrDefault();
-                                                    //        if (_hpa != null)
-                                                    //        {
-                                                    //            _hpa.RawCounts = rc;
-                                                    //        }
-                                                    //    }
-                                                    //}
                                                     Console.WriteLine("");
                                                     #endregion
                                                     break;
@@ -1136,7 +1003,7 @@ namespace ALS.ALSI.Web.view.template
                     #endregion
                     #endregion
                     CalculateCas();
-                    btnSubmit.Enabled = false;
+                    //btnSubmit.Enabled = false;
                 }
             }
             else
@@ -1236,11 +1103,13 @@ namespace ALS.ALSI.Web.view.template
                     if (String.IsNullOrEmpty(txtExtractionVolume.Text)) { errors.Add(String.Format("กรุณาตรวจสอบ {0}", "Extraction Volumn")); }
                     if (errors.Count > 0)
                     {
-                        LitErrorMsg2.Text = MessageBox.GenWarnning(errors);
+                        
+                        litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                        modalErrorList.Show();
                     }
                     else
                     {
-                        LitErrorMsg2.Text = string.Empty;
+                        litErrorMessage.Text = string.Empty;
 
                         btnCoverPage.CssClass = "btn blue";
                         btnUsLPC03.CssClass = "btn blue";
@@ -1552,19 +1421,120 @@ namespace ALS.ALSI.Web.view.template
                     //=ROUND(MAX(0,(C13-B13))*($B$7/$B$9)*($B$3/$B$6)/($B$4*$B$5),1)
                     Double _div = (Convert.ToDouble(txtB7.Text) / Convert.ToDouble(txtB9.Text)) * (Convert.ToDouble(txtB3.Text) / Convert.ToDouble(txtB6.Text)) / (Convert.ToDouble(txtB4.Text) * Convert.ToDouble(txtB5.Text));
                     _val.C = Math.Round((CustomUtils.GetMax((Convert.ToDouble(_val.RawCounts) - Convert.ToDouble(_val.BlankCouts))) * _div), 1);
+                    _val.BlankCouts = (_val.BlankCouts == null) ? 0 : _val.BlankCouts;
+                    _val.RawCounts = (_val.RawCounts == null) ? 0 : _val.RawCounts;
+
                 }
 
 
                 foreach (template_seagate_hpa_coverpage _cov in this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_HEAD)))
                 {
-                    Double _sum = (Double)this.Hpas.Where(x => x.data_group.Equals(_cov.data_group) && x.C.Value != null).Sum(x => x.C);
-                    _cov.C = _sum;
-                    //template_seagate_hpa_coverpage _tmp1 = this.Hpas.Where(x => x.hpa_type = Convert.ToInt16(GVTypeEnum.CLASSIFICATION_TOTAL)).FirstOrDefault();
-                    //if (_tmp1 != null)
-                    //{
-                    //    _tmp1.C = _sum;
-                    //}
+                    Double _BlankCouts = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.BlankCouts);
+                    Double _RawCounts = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.RawCounts);
+                    Double _sumC = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.C);
+
+                    template_seagate_hpa_coverpage tmp = this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_TOTAL) && x.data_group.Equals(_cov.data_group)).FirstOrDefault();
+                    if (tmp != null)
+                    {
+                        tmp.BlankCouts = Convert.ToInt32(_BlankCouts);
+                        tmp.RawCounts = Convert.ToInt32(_RawCounts);
+                        tmp.C = _sumC ;
+                    }
                 }
+
+                Double _GrandBlankCouts = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => x.BlankCouts);
+                Double _GrandRawCounts = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_ITEM) ).Sum(x => x.RawCounts);
+                Double _GrandsumC = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => x.C);
+
+                template_seagate_hpa_coverpage tmpGrand = this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).FirstOrDefault();
+                if (tmpGrand != null)
+                {
+                    tmpGrand.BlankCouts = Convert.ToInt32(_GrandBlankCouts);
+                    tmpGrand.RawCounts = Convert.ToInt32(_GrandRawCounts);
+                    tmpGrand.C = _GrandsumC;
+                }
+                //Grand Total
+
+                #region "ADHOC"
+                //Total SST
+                List<String> listOfSst = new List<string>();
+                listOfSst.Add("SST300s with possible Si");
+                listOfSst.Add("SST300s with possible Si and Mn");
+                listOfSst.Add("SST400s with possible Si");
+
+                Double _sumTotalSST_BlankCounts = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => x.BlankCouts);
+                Double _sumTotalSST_RawCounts = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => x.RawCounts);
+                Double _sumTotalSST = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => x.C);
+                template_seagate_hpa_coverpage cov = this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total SST")).FirstOrDefault();
+                if (cov != null)
+                {
+                    cov.BlankCouts = Convert.ToInt32(_sumTotalSST_BlankCounts);
+                    cov.RawCounts = Convert.ToInt32(_sumTotalSST_RawCounts);
+                    cov.C = _sumTotalSST;
+                }
+                //Total Ni
+                List<String> listOfNi = new List<string>();
+                listOfNi.Add("Ni based");
+                listOfNi.Add("NiP");
+                Double _sumTotalNi_BlankCounts = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => x.BlankCouts);
+                Double _sumTotalNi_RawCounts = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => x.RawCounts);
+                Double _sumTotalNi = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => x.C);
+                template_seagate_hpa_coverpage covNi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total Ni")).FirstOrDefault();
+                if (covNi != null)
+                {
+                    covNi.BlankCouts = Convert.ToInt32(_sumTotalNi_BlankCounts);
+                    covNi.RawCounts = Convert.ToInt32(_sumTotalNi_RawCounts);
+                    covNi.C = _sumTotalNi;
+                }
+                #endregion
+
+                #region "Hard Particle Analysis"
+
+                /*
+
+                        "[0]Class 1, Total Hard Particle",
+                        "[1]Class 2, Total Magnetic Particle",
+                        "[2]Class 3, Total Semi-hard Metal Particle",
+                        "[3]    3.1  SST + Fe base + FeO",
+                        "[4]    3.2  Sn base Particle",
+                        "[5]    3.3  PZT Particles",
+                        "[6]Class 4, Total Soft-Metal Particle",
+                        "[7]Class 5, Total Environment Particle",
+                        "[8]    5.1  MgSiO Particle",
+                        "[9]Class 6, Other Particle"
+
+
+                */
+
+                List<template_seagate_hpa_coverpage> sumOfHpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.data_group).ToList();
+                List<template_seagate_hpa_coverpage> hpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x=>x.seq).ToList();
+
+
+                double Fe_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Fe based")).FirstOrDefault().C.Value;
+                double FeO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("FeO")).FirstOrDefault().C.Value;
+                double Sn_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Sn based")).FirstOrDefault().C.Value;
+                double PbZrTi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("PbZrTi")).FirstOrDefault().C.Value;
+                double MgSiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgSiO")).FirstOrDefault().C.Value;
+
+                hpas[0].C = sumOfHpas[0].C;//[0]
+                hpas[1].C = sumOfHpas[1].C;//[1]
+                hpas[2].C = sumOfHpas[2].C;//[2]
+                hpas[3].C = Fe_based+FeO;//[3]
+                hpas[4].C = Sn_based;//[4]
+                hpas[5].C = PbZrTi;//[5]
+                hpas[6].C = sumOfHpas[3].C;//[6]
+                hpas[7].C = sumOfHpas[4].C;//[7]
+                hpas[8].C = MgSiO;//[8]
+                hpas[9].C = sumOfHpas[5].C;//[9]
+
+                
+
+
+
+
+
+
+                #endregion
             }
             gvLpc03.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).OrderBy(x => x.seq);
             gvLpc03.DataBind();
@@ -1600,7 +1570,7 @@ namespace ALS.ALSI.Web.view.template
         protected void btnCalculate_Click(object sender, EventArgs e)
         {
             CalculateCas();
-            btnSubmit.Enabled = true;
+            //btnSubmit.Enabled = true;
         }
 
         protected void lbDownload_Click(object sender, EventArgs e)

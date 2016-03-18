@@ -894,6 +894,7 @@
           <Property Name="BlankCouts" Type="int" />
           <Property Name="RawCounts" Type="int" />
           <Property Name="data_group" Type="varchar" MaxLength="150" />
+          <Property Name="img_path" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="template_seagate_ic_coverpage">
           <Key>
@@ -2560,6 +2561,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="BlankCouts" Type="Int32" />
           <Property Name="RawCounts" Type="Int32" />
           <Property Name="data_group" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="img_path" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_seagate_ic_coverpage">
           <Key>
@@ -3949,6 +3951,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_hpa_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_hpa_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_hpa_coverpage">
+                <ScalarProperty Name="img_path" ColumnName="img_path" />
                 <ScalarProperty Name="data_group" ColumnName="data_group" />
                 <ScalarProperty Name="RawCounts" ColumnName="RawCounts" />
                 <ScalarProperty Name="BlankCouts" ColumnName="BlankCouts" />

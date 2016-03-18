@@ -5464,6 +5464,7 @@
     <Content Include="view\template\Seagate_Copperwire.ascx" />
     <Content Include="view\template\Seagate_DHS_V2.ascx" />
     <Content Include="view\template\Seagate_HPA.ascx" />
+    <Content Include="view\template\Seagate_HPA_Siam_Backup.ascx" />
     <Content Include="view\template\Seagate_HPA_Siam.ascx" />
     <Content Include="view\template\WD_Corrosion.ascx" />
     <Content Include="view\template\WD_GCMS_CVR.ascx" />
@@ -5667,6 +5668,13 @@
     </Compile>
     <Compile Include="view\template\Seagate_HPA.ascx.designer.cs">
       <DependentUpon>Seagate_HPA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\Seagate_HPA_Siam_Backup.ascx.cs">
+      <DependentUpon>Seagate_HPA_Siam_Backup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\Seagate_HPA_Siam_Backup.ascx.designer.cs">
+      <DependentUpon>Seagate_HPA_Siam_Backup.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\Seagate_HPA_Siam.ascx.cs">
       <DependentUpon>Seagate_HPA_Siam.ascx</DependentUpon>
