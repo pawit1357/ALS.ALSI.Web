@@ -775,7 +775,7 @@ namespace ALS.ALSI.Web.view.template
         }
 
         protected void btnLoadFile_Click(object sender, EventArgs e)
-        {
+        {  
             string sheetName = string.Empty;
 
             if (String.IsNullOrEmpty(txtB3.Text)) { errors.Add(String.Format("กรุณาตรวจสอบ {0}", "Volume of Extraction (ml), Vt")); }
@@ -845,7 +845,7 @@ namespace ALS.ALSI.Web.view.template
                                                     #region "HPA(B)"
                                                     foreach (template_seagate_hpa_coverpage _cov in lists)
                                                     {
-                                                        if (_cov.B.Equals(data[0]))
+                                                        if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty)))
                                                         {
                                                             template_seagate_hpa_coverpage _hpa = this.Hpas.Where(x => x.ID == _cov.ID).FirstOrDefault();
                                                             if (_hpa != null)
@@ -861,7 +861,7 @@ namespace ALS.ALSI.Web.view.template
                                                     #region "HPA(S)"
                                                     foreach (template_seagate_hpa_coverpage _cov in lists)
                                                     {
-                                                        if (_cov.B.Equals(data[0]))
+                                                        if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty)))
                                                         {
                                                             template_seagate_hpa_coverpage _hpa = this.Hpas.Where(x => x.ID == _cov.ID).FirstOrDefault();
                                                             if (_hpa != null)
@@ -1509,7 +1509,7 @@ namespace ALS.ALSI.Web.view.template
                 List<template_seagate_hpa_coverpage> sumOfHpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.data_group).ToList();
                 List<template_seagate_hpa_coverpage> hpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x=>x.seq).ToList();
 
-
+                double TotalSST = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total SST")).FirstOrDefault().C.Value;
                 double Fe_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Fe based")).FirstOrDefault().C.Value;
                 double FeO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("FeO")).FirstOrDefault().C.Value;
                 double Sn_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Sn based")).FirstOrDefault().C.Value;
@@ -1519,7 +1519,7 @@ namespace ALS.ALSI.Web.view.template
                 hpas[0].C = sumOfHpas[0].C;//[0]
                 hpas[1].C = sumOfHpas[1].C;//[1]
                 hpas[2].C = sumOfHpas[2].C;//[2]
-                hpas[3].C = Fe_based+FeO;//[3]
+                hpas[3].C = TotalSST+Fe_based + FeO;//[3]
                 hpas[4].C = Sn_based;//[4]
                 hpas[5].C = PbZrTi;//[5]
                 hpas[6].C = sumOfHpas[3].C;//[6]
@@ -2396,6 +2396,30 @@ namespace ALS.ALSI.Web.view.template
             }
 
             return _Hpas;
+        }
+
+        private String mappingRawData(String _val)
+        {
+            String result = _val;
+            Hashtable mappingValues = new Hashtable();
+            mappingValues["SST300s with possible Si"] = "SST300s (Fe/Cr/Ni)";
+            //mappingValues["SST300s with possible Si and Mn"] = "SST400s (Fe/Cr)";
+            mappingValues["SST400s with possible Si"] = "SST400s (Fe/Cr)";
+
+
+            //SST400s(Fe / Cr)
+
+
+
+            foreach (DictionaryEntry entry in mappingValues)
+            {
+                if (entry.Key.Equals(_val))
+                {
+                    result = entry.Value.ToString();
+                    break;
+                }
+            }
+            return result;
         }
 
 

@@ -856,7 +856,7 @@ namespace ALS.ALSI.Web.view.template
                                                     #region "HPA(B)"
                                                     foreach (template_seagate_hpa_coverpage _cov in lists)
                                                     {
-                                                        if (_cov.B.Equals(data[0]))
+                                                        if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty)))
                                                         {
                                                             template_seagate_hpa_coverpage _hpa = this.Hpas.Where(x => x.ID == _cov.ID).FirstOrDefault();
                                                             if (_hpa != null)
@@ -872,7 +872,7 @@ namespace ALS.ALSI.Web.view.template
                                                     #region "HPA(S)"
                                                     foreach (template_seagate_hpa_coverpage _cov in lists)
                                                     {
-                                                        if (_cov.B.Equals(data[0]))
+                                                        if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty)))
                                                         {
                                                             template_seagate_hpa_coverpage _hpa = this.Hpas.Where(x => x.ID == _cov.ID).FirstOrDefault();
                                                             if (_hpa != null)
@@ -1470,36 +1470,7 @@ namespace ALS.ALSI.Web.view.template
                 //Grand Total
 
                 #region "ADHOC"
-                ////Total SST
-                //List<String> listOfSst = new List<string>();
-                //listOfSst.Add("SST300s with possible Si");
-                //listOfSst.Add("SST300s with possible Si and Mn");
-                //listOfSst.Add("SST400s with possible Si");
 
-                //Double _sumTotalSST_BlankCounts = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => x.BlankCouts);
-                //Double _sumTotalSST_RawCounts = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => x.RawCounts);
-                //Double _sumTotalSST = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => x.C);
-                //template_seagate_hpa_coverpage cov = this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total SST")).FirstOrDefault();
-                //if (cov != null)
-                //{
-                //    cov.BlankCouts = Convert.ToInt32(_sumTotalSST_BlankCounts);
-                //    cov.RawCounts = Convert.ToInt32(_sumTotalSST_RawCounts);
-                //    cov.C = _sumTotalSST;
-                //}
-                ////Total Ni
-                //List<String> listOfNi = new List<string>();
-                //listOfNi.Add("Ni based");
-                //listOfNi.Add("NiP");
-                //Double _sumTotalNi_BlankCounts = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => x.BlankCouts);
-                //Double _sumTotalNi_RawCounts = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => x.RawCounts);
-                //Double _sumTotalNi = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => x.C);
-                //template_seagate_hpa_coverpage covNi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt16(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total Ni")).FirstOrDefault();
-                //if (covNi != null)
-                //{
-                //    covNi.BlankCouts = Convert.ToInt32(_sumTotalNi_BlankCounts);
-                //    covNi.RawCounts = Convert.ToInt32(_sumTotalNi_RawCounts);
-                //    covNi.C = _sumTotalNi;
-                //}
                 #endregion
 
                 #region "Hard Particle Analysis"
@@ -1518,7 +1489,7 @@ namespace ALS.ALSI.Web.view.template
             "[10]   Totals"
                 */
 
-                List<template_seagate_hpa_coverpage> sumOfHpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.data_group).ToList();
+                List<template_seagate_hpa_coverpage> sumOfHpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.seq).ToList();
                 List<template_seagate_hpa_coverpage> hpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
 
                 //double SST = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgSiO")).FirstOrDefault().C.Value;
@@ -1556,7 +1527,8 @@ namespace ALS.ALSI.Web.view.template
             gvLpc03.DataBind();
             gvLpc06.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).OrderBy(x => x.seq);
             gvLpc06.DataBind();
-            gvWsClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD) ||
+            gvWsClassification.DataSource = this.Hpas.Where(x => 
+            //x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD) ||
             x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
             x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
             x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
@@ -2398,7 +2370,29 @@ namespace ALS.ALSI.Web.view.template
 
             return _Hpas;
         }
+        
+        private String mappingRawData(String _val)
+        {
+            String result = _val;
+            Hashtable mappingValues = new Hashtable();
+            mappingValues["SST300s(Fe / Cr / Ni)"] = "SST300s";
+            mappingValues["SST400s(Fe / Cr)"] = "SST400s";
 
+
+            //SST400s(Fe / Cr)
+
+
+
+            foreach (DictionaryEntry entry in mappingValues)
+            {
+                if (entry.Key.Equals(_val))
+                {
+                    result = entry.Value.ToString();
+                    break;
+                }
+            }
+            return result;
+        }
 
     }
 }
