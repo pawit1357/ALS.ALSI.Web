@@ -45,5 +45,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string NoofTimesTaped_2 { get; set; }
         public string SurfaceAreaAnalysed_2 { get; set; }
         public string ParticleRanges_2 { get; set; }
+        public Nullable<int> hpa_type { get; set; }
     }
 }

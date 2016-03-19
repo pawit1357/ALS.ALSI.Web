@@ -266,22 +266,4 @@
     </form>
 
 
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
-    <!-- END PAGE LEVEL SCRIPTS -->
-    <script>
-        jQuery(document).ready(function () {
-
-            /*
-            var table = $('#ContentPlaceHolder2_gvJob');
-            // begin: third table
-            table.dataTable({
-                // set the initial value
-                "pageLength": 50,
-            });
-            */
-
-        });
-    </script>
-    <!-- END JAVASCRIPTS -->
 </asp:Content>

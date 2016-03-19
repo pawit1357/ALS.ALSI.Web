@@ -1091,6 +1091,8 @@
           <Property Name="SurfaceAreaAnalysed" Type="varchar" MaxLength="45" />
           <Property Name="ParticleRanges" Type="varchar" MaxLength="45" />
           <Property Name="unit" Type="varchar" MaxLength="45" />
+          <Property Name="hpa_type" Type="int" />
+          <Property Name="data_group" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="template_wd_hpa_for3_coverpage">
           <Key>
@@ -1127,6 +1129,7 @@
           <Property Name="NoofTimesTaped_2" Type="varchar" MaxLength="45" />
           <Property Name="SurfaceAreaAnalysed_2" Type="varchar" MaxLength="45" />
           <Property Name="ParticleRanges_2" Type="varchar" MaxLength="45" />
+          <Property Name="hpa_type" Type="int" />
         </EntityType>
         <EntityType Name="template_wd_ic_coverpage">
           <Key>
@@ -2758,6 +2761,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="SurfaceAreaAnalysed" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ParticleRanges" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="hpa_type" Type="Int32" />
+          <Property Name="data_group" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_hpa_for3_coverpage">
           <Key>
@@ -2794,6 +2799,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="NoofTimesTaped_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="SurfaceAreaAnalysed_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ParticleRanges_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="hpa_type" Type="Int32" />
         </EntityType>
         <EntityType Name="template_wd_ic_coverpage">
           <Key>
@@ -4220,6 +4226,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_hpa_for1_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_hpa_for1_coverpage">
               <MappingFragment StoreEntitySet="template_wd_hpa_for1_coverpage">
+                <ScalarProperty Name="data_group" ColumnName="data_group" />
+                <ScalarProperty Name="hpa_type" ColumnName="hpa_type" />
                 <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="ParticleRanges" ColumnName="ParticleRanges" />
                 <ScalarProperty Name="SurfaceAreaAnalysed" ColumnName="SurfaceAreaAnalysed" />
@@ -4245,6 +4253,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_hpa_for3_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_hpa_for3_coverpage">
               <MappingFragment StoreEntitySet="template_wd_hpa_for3_coverpage">
+                <ScalarProperty Name="hpa_type" ColumnName="hpa_type" />
                 <ScalarProperty Name="ParticleRanges_2" ColumnName="ParticleRanges_2" />
                 <ScalarProperty Name="SurfaceAreaAnalysed_2" ColumnName="SurfaceAreaAnalysed_2" />
                 <ScalarProperty Name="NoofTimesTaped_2" ColumnName="NoofTimesTaped_2" />

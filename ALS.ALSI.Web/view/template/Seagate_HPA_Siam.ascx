@@ -309,7 +309,7 @@
                                 </asp:GridView>
                                 <br />
                                            <asp:Label ID="lbImgPath1" runat="server" Text=""></asp:Label></h5>
-
+                                <br />
                                 <asp:Image ID="img1" runat="server" Width="120" Height="120" />
                             </div>
                         </div>

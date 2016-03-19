@@ -1059,7 +1059,7 @@ namespace ALS.ALSI.Web.view.template
                     pWorksheetForHPAFiltration.Visible = false;
                     lbImgPath1.Text = this.Hpas[0].img_path;
 
-                    img1.ImageUrl = this.Hpas[0].img_path;
+                    img1.ImageUrl = Configurations.HOST + "" + this.Hpas[0].img_path;
 
                     break;
                 case "US-LPC(0.3)":

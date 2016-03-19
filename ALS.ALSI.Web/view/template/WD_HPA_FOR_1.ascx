@@ -2,18 +2,10 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ToolkitScriptManager ID="ToolkitScript1" runat="server" />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
 
-            <div class="alert alert-danger display-hide">
-                <button class="close" data-close="alert"></button>
-                You have some form errors. Please check below.
-            </div>
-            <div class="alert alert-success display-hide">
-                <button class="close" data-close="alert"></button>
-                Your form validation is successful!
-            </div>
             <div class="portlet box blue-dark">
                 <div class="portlet-title">
                     <div class="caption">
@@ -90,8 +82,8 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Particle Classification" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
-                                                        <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>'></asp:Literal>
-                                                        <asp:HiddenField ID="hParent" runat="server" Value='<%# Eval("Parent")%>' />
+                                                        <asp:Literal ID="litB" runat="server" Text='<%# Eval("A")%>'></asp:Literal>
+                                                        <%--                                                        <asp:HiddenField ID="hParent" runat="server" Value='<%# Eval("Parent")%>' />--%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Result(Particles/cm2)" ItemStyle-HorizontalAlign="Center">
@@ -136,7 +128,7 @@
                     <asp:Label ID="lbA34" runat="server" Text=""></asp:Label><br />
                                     <asp:Label ID="lbImgPath1" runat="server" Text=""></asp:Label></h5>
 
-                                <asp:Image ID="img1" runat="server" Width="120" Height="120" />
+                                <%--                                <asp:Image ID="img1" runat="server" Width="120" Height="120" />--%>
                                 <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>
                                 <h6>Please refer to attachment for details of results</h6>
                                 <h6>Note: This report was performed test by ALS Singapore.</h6>
@@ -200,39 +192,39 @@
                         </div>
                     </asp:Panel>
                     <asp:Panel ID="pDSH" runat="server">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Select Source File: </label>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Select Source File: </label>
 
-                                <div class="col-md-3">
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <div class="input-group input-large">
-                                            <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
-                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                            <div class="col-md-3">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="input-group input-large">
+                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
                                                                
                                             <span class="fileinput-filename"></span>
-                                            </div>
-                                            <span class="input-group-addon btn default btn-file">
-                                                <span class="fileinput-new">Select file </span>
-                                                <span class="fileinput-exists">Change </span>
-                                                <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
-
-                                            </span>
-                                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
-                                            <asp:Label ID="lbMessage" runat="server"></asp:Label>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3"></label>
-                                <div class="col-md-9">
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+                                        <span class="input-group-addon btn default btn-file">
+                                            <span class="fileinput-new">Select file </span>
+                                            <span class="fileinput-exists">Change </span>
+                                            <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
 
+                                        </span>
+                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                        <asp:Label ID="lbMessage" runat="server"></asp:Label>
                                     </div>
                                 </div>
                             </div>
-<%--                        <h4 class="form-section">Manage Source File</h4>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-9">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <%--                        <h4 class="form-section">Manage Source File</h4>
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -312,7 +304,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                                     <div class="col-md-6">
-                                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                                        <asp:TextBox ID="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,7 +317,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
                                                     <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                             </div>

@@ -88,7 +88,7 @@
                                 <label class="control-label col-md-3">Invoice:</label>
                                 <div class="col-md-6">
                                     <div class="input-group" style="text-align: left">
-                                        <asp:TextBox ID="txtInvoice" name="txtInvoice" runat="server" class="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtInvoice" runat="server" CssClass="form-control"></asp:TextBox>
                                         <span class="input-group-btn"></span>
                                     </div>
                                 </div>
@@ -101,8 +101,8 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <asp:Button ID="btnSave" runat="server" class="btn green" Text="Save" OnClick="btnSave_Click" />
-                                        <asp:Button ID="btnCancel" runat="server" class="cancel btn" Text="Cancel" OnClick="btnCancel_Click" />
+                                        <asp:Button ID="btnSave" runat="server" CssClass="btn green" Text="Save" OnClick="btnSave_Click" />
+                                        <asp:Button ID="btnCancel" runat="server" CssClass="cancel btn" Text="Cancel" OnClick="btnCancel_Click" />
                                     </div>
                                 </div>
                             </div>
