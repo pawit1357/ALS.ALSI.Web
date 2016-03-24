@@ -335,6 +335,7 @@
     <Content Include="Binaries\MySql.Data.Entity.EF5.dll" />
     <Content Include="Binaries\MySql.Web.dll" />
     <Content Include="Binaries\StructureMap.dll" />
+    <Content Include="Binaries\WordToPDF.dll" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

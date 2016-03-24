@@ -37,7 +37,10 @@ namespace ALS.ALSI.Biz.Constant
         {
             get { return ConfigurationManager.AppSettings["HOST"]; }
         }
-
+        public static String PATH_DRIVE
+        {
+            get { return ConfigurationManager.AppSettings["PATH_DRIVE"]; }
+        }
         #region "REPORT"
         public static String ReportPath
         {

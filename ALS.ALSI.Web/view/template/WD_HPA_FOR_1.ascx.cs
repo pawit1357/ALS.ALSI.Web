@@ -17,6 +17,7 @@ using NPOI.SS.UserModel;
 using System.Data;
 using ALS.ALSI.Biz.ReportObjects;
 using Microsoft.Reporting.WebForms;
+using WordToPDF;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -317,6 +318,16 @@ namespace ALS.ALSI.Web.view.template
 
             btnCoverPage.CssClass = "btn green";
             btnWorkSheet.CssClass = "btn blue";
+
+            switch (lbJobStatus.Text)
+            {
+                case "CONVERT_PDF":
+                    litDownloadIcon.Text = "<i class=\"fa fa-file-pdf-o\"></i>";
+                    break;
+                default:
+                    litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
+                    break;
+            }
         }
 
         #endregion
@@ -362,15 +373,17 @@ namespace ALS.ALSI.Web.view.template
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                     }
-                    switch (this.CommandName)
-                    {
-                        case CommandNameEnum.Add:
+                    objWork.DeleteBySampleID(this.SampleID);
+
+                    //switch (this.CommandName)
+                    //{
+                    //    case CommandNameEnum.Add:
                             objWork.InsertList(this.HpaFor1);
-                            break;
-                        case CommandNameEnum.Edit:
-                            objWork.UpdateList(this.HpaFor1);
-                            break;
-                    }
+                    //        break;
+                    //    case CommandNameEnum.Edit:
+                    //        objWork.UpdateList(this.HpaFor1);
+                    //        break;
+                    //}
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
@@ -500,7 +513,8 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
-            List<template_wd_hpa_for1_coverpage> lists = this.HpaFor1.Where(x => x.parent == 0).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> lists = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
+
             #region "LOAD"
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
 
@@ -563,12 +577,14 @@ namespace ALS.ALSI.Web.view.template
                                                 #region "HPA(B)"
                                                 foreach (template_wd_hpa_for1_coverpage _cov in lists)
                                                 {
-                                                    if (_cov.B.Equals(data[0]))
+                                                    int subIndex = data[0].IndexOf('(') == -1 ? data[0].ToUpper().Replace(" ", String.Empty).Length : data[0].ToUpper().Replace(" ", String.Empty).IndexOf('(');
+
+                                                    if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty).Substring(0, subIndex)))
                                                     {
                                                         template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
                                                         if (_hpa != null)
                                                         {
-                                                            _hpa.C = Convert.ToInt32(data[2]);
+                                                            _hpa.C = (_hpa.C == null) ? 0 : _hpa.C + Convert.ToInt32(data[2]);
                                                         }
                                                     }
                                                 }
@@ -814,7 +830,11 @@ namespace ALS.ALSI.Web.view.template
                 gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA));
                 gvResult.DataBind();
 
-                gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)|| x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL));
+                gvResult_1.DataSource = this.HpaFor1.Where(x => 
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL));
                 gvResult_1.DataBind();
 
                 btnSubmit.Enabled = true;
@@ -920,7 +940,21 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.ADMIN_CONVERT_PDF:
                     if (!String.IsNullOrEmpty(this.jobSample.path_word))
                     {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        Word2Pdf objWorPdf = new Word2Pdf();
+                        objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
+                        objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
+                        try
+                        {
+                            objWorPdf.Word2PdfCOnversion();
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine();
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+
+                        }
                     }
                     //if (!String.IsNullOrEmpty(this.jobSample.path_pdf))
                     //{
@@ -1022,6 +1056,28 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvResult_1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Literal _litB = (Literal)e.Row.FindControl("litB");
+                if (gvResult_1.DataKeys[e.Row.RowIndex].Values[2] != null)
+                {
+
+                    GVTypeEnum cmd = (GVTypeEnum)Enum.ToObject(typeof(GVTypeEnum), (int)gvResult_1.DataKeys[e.Row.RowIndex].Values[2]);
+                    switch (cmd)
+                    {
+                        case GVTypeEnum.CLASSIFICATION_GRAND_TOTAL:
+                        case GVTypeEnum.CLASSIFICATION_TOTAL:
+                            e.Row.BackColor = System.Drawing.Color.Orange;
+                            break;
+                        case GVTypeEnum.CLASSIFICATION_SUB_TOTAL:
+                            e.Row.BackColor = System.Drawing.Color.Yellow;
+                            break;
+                        case GVTypeEnum.CLASSIFICATION_ITEM:
+                            _litB.Text = String.Format("{0}".PadRight(20, ' '), _litB.Text);
+                            break;
+                    }
+                }
+            }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 //int PKID = Convert.ToInt32(gvResult_1.DataKeys[e.Row.RowIndex].Values[0].ToString());
@@ -1191,7 +1247,7 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Cu-S-Al-O Base");
             items.Add("Cu-Au");
             items.Add("-Total - Cu-Zn Base Particle");
-            items.Add("#Other");
+            //items.Add("#Other");
             items.Add("Sn Base");
             items.Add("Sb Base");
             items.Add("Ba-S Base");
@@ -1249,6 +1305,32 @@ namespace ALS.ALSI.Web.view.template
 
             return _Hpas;
         }
+
+
+        private String mappingRawData(String _val)
+        {
+            String result = _val;
+            Hashtable mappingValues = new Hashtable();
+            //mappingValues["SST300s with possible Si"] = "SST300s (Fe/Cr/Ni)";
+            //mappingValues["SST300s with possible Si and Mn"] = "SST400s (Fe/Cr)";
+            //mappingValues["SST400s with possible Si"] = "SST400s (Fe/Cr)";
+
+
+            //SST400s(Fe / Cr)
+
+
+
+            foreach (DictionaryEntry entry in mappingValues)
+            {
+                if (entry.Key.Equals(_val))
+                {
+                    result = entry.Value.ToString();
+                    break;
+                }
+            }
+            return result;
+        }
+
 
     }
 }

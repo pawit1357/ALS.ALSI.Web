@@ -18,9 +18,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-
-
+using WordToPDF;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -465,11 +463,25 @@ namespace ALS.ALSI.Web.view.template
             pCoverpage.Visible = true;
             pWorkingIC.Visible = false;
 
+
+            
+            switch (lbJobStatus.Text)
+            {
+                case "CONVERT_PDF":
+                    litDownloadIcon.Text = "<i class=\"fa fa-file-pdf-o\"></i>";
+                    break;
+                default:
+                    litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
+                    break;
+            }
+
+                                                                   
+
         }
 
-        #endregion
+    #endregion
 
-        protected void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)
         {
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
@@ -1085,7 +1097,21 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.ADMIN_CONVERT_PDF:
                     if (!String.IsNullOrEmpty(this.jobSample.path_word))
                     {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        Word2Pdf objWorPdf = new Word2Pdf();
+                        objWorPdf.InputLocation = String.Format("{0}{1}",Configurations.PATH_DRIVE,this.jobSample.path_word);
+                        objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc","pdf");
+                        try
+                        {
+                            objWorPdf.Word2PdfCOnversion();
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine();
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+
+                        }
                     }
                     //if (!String.IsNullOrEmpty(this.jobSample.path_pdf))
                     //{

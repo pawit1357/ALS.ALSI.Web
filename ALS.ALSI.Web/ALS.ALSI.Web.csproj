@@ -96,6 +96,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WordToPDF">
+      <HintPath>..\ALS.ALSI.Biz\Binaries\WordToPDF.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\apps\css\inbox.css" />

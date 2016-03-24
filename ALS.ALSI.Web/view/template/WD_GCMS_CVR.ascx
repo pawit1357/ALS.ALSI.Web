@@ -312,63 +312,63 @@
                                 <div class="portlet-body">
 
                                     <asp:Panel ID="pSpecification" runat="server">
-                                        <div class="row">
+                                        <%--   <div class="row">
+                                            <div class="col-md-6">--%>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Component:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Component:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlComponent" runat="server" CssClass="form-control select2-allow-clear" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                    </div>
-                                                </div>
+                                                <asp:DropDownList ID="ddlComponent" runat="server" CssClass="form-control select2-allow-clear" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
+                                        <%--                                            </div>--%>
+
+                                        <%--                                            <div class="col-md-6">--%>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <%--                                            </div>--%>
+                                        <%--                                        </div>--%>
                                     </asp:Panel>
                                     <asp:Panel ID="pStatus" runat="server">
-                                        <div class="row">
+                                        <%--      <div class="row">
+                                            <div class="col-md-6">--%>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                    </div>
-                                                </div>
+                                                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
+                                        <%--      </div>
+                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pRemark" runat="server">
-                                        <div class="row">
+                                        <%--    <div class="row">
+                                            <div class="col-md-6">--%>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:TextBox ID="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </div>
-                                                </div>
+                                                <asp:TextBox ID="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
                                             </div>
                                         </div>
+                                        <%--   </div>
+                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDisapprove" runat="server">
-                                        <div class="row">
+                                        <%--    <div class="row">
+                                            <div class="col-md-6">--%>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
-                                                    </div>
-                                                </div>
+                                                <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
                                             </div>
                                         </div>
+                                        <%--         </div>
+                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDownload" runat="server">
@@ -380,7 +380,7 @@
                                                     <div class="input-group input-large">
 
                                                         <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click" CssClass="btn btn-default">
-                                                            <i class="fa fa-download"></i>
+                                                            <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
                                                             <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
                                                         </asp:LinkButton>
 
@@ -481,7 +481,7 @@
                                             รายการปัญหา</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                                  <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+                                    <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                                 </div>
                                 <div class="modal-footer">
