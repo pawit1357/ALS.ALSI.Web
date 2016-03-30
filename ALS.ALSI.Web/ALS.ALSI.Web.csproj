@@ -6385,6 +6385,7 @@
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate_siam.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_ink_ribbon_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\corrosion_wd.rdlc" />

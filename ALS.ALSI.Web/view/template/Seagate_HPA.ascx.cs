@@ -300,13 +300,14 @@ namespace ALS.ALSI.Web.view.template
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                     {
-                        if (this.jobSample.date_analyzed_date == null)
+                        if (this.jobSample.date_chemist_alalyze == null)
                         {
-                            this.jobSample.date_analyzed_date = DateTime.Now;
+                            this.jobSample.date_chemist_alalyze = DateTime.Now;
                             this.jobSample.Update();
                         }
                     }
                     #endregion
+
                 }
                 #endregion
 
@@ -537,9 +538,9 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
 
-                        #region ":: STAMP COMPLETE DATE"
-                        this.jobSample.date_test_completed = DateTime.Now;
-                        #endregion
+                        //#region ":: STAMP COMPLETE DATE"
+                        this.jobSample.date_chemist_complete = DateTime.Now;
+                        //#endregion
                         foreach (template_seagate_hpa_coverpage ws in this.Hpas)
                         {
                             ws.sample_id = this.SampleID;
@@ -655,7 +656,9 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                            this.jobSample.sr_approve_date = DateTime.Now;
+                 
+
+                            this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:
@@ -683,6 +686,8 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
+                  
+                            this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
                             this.jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
@@ -1681,13 +1686,19 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_seagate_boyd.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_seagate.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.Hpas.OrderBy(x => x.hpa_type).Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", this.Hpas.Where(x =>
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)
+
+            ).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", dtSummary)); // Add datasource here
 
 

@@ -1294,7 +1294,7 @@
         <Top>3.75167in</Top>
         <Left>0.25in</Left>
         <Height>0.71875in</Height>
-        <Width>8.13607in</Width>
+        <Width>8.13605in</Width>
         <ZIndex>18</ZIndex>
         <Style>
           <Border>
@@ -2007,11 +2007,12 @@
         </TablixRowHierarchy>
         <RepeatColumnHeaders>true</RepeatColumnHeaders>
         <RepeatRowHeaders>true</RepeatRowHeaders>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>DataSet2</DataSetName>
-        <Top>5.05347in</Top>
+        <Top>9.80347in</Top>
         <Left>0.25086in</Left>
         <Height>0.73958in</Height>
-        <Width>8.13521in</Width>
+        <Width>8.13522in</Width>
         <ZIndex>21</ZIndex>
         <Style>
           <Border>
@@ -2079,7 +2080,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>17.99094cm</Top>
+        <Top>30.05594cm</Top>
         <Left>9.6394cm</Left>
         <Height>1.05798cm</Height>
         <Width>6.11622cm</Width>
@@ -2117,7 +2118,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>19.97532cm</Top>
+        <Top>32.04032cm</Top>
         <Left>9.63941cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11621cm</Width>
@@ -2155,7 +2156,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>20.7599cm</Top>
+        <Top>32.8249cm</Top>
         <Left>9.6394cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11622cm</Width>
@@ -2193,7 +2194,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>19.36713cm</Top>
+        <Top>31.43213cm</Top>
         <Left>9.63941cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11621cm</Width>
@@ -2234,7 +2235,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>14.89074cm</Top>
+        <Top>26.95574cm</Top>
         <Left>0.63718cm</Left>
         <Height>1.90465cm</Height>
         <Width>16.30055cm</Width>
@@ -2249,8 +2250,224 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox38">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>COMPANY:</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Top>24.10741cm</Top>
+        <Left>0.63718cm</Left>
+        <Height>0.52881cm</Height>
+        <Width>4.1583cm</Width>
+        <ZIndex>27</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox70">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>DATE:</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Top>23.40221cm</Top>
+        <Left>0.63718cm</Left>
+        <Height>0.52881cm</Height>
+        <Width>4.1583cm</Width>
+        <ZIndex>28</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox71">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ALS THAILAND REF NO.:</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Top>22.61763cm</Top>
+        <Left>0.63718cm</Left>
+        <Height>0.60819cm</Height>
+        <Width>4.76684cm</Width>
+        <ZIndex>29</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox72">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!AlsThailandRefNo.Value</Value>
+                <Style>
+                  <FontSize>11pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Top>22.61763cm</Top>
+        <Left>6.03021cm</Left>
+        <Height>0.60819cm</Height>
+        <Width>8.81292cm</Width>
+        <ZIndex>30</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox73">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=CDate(Parameters!Date.Value).ToString("dd MMMM yyyy")</Value>
+                <Style>
+                  <FontSize>11pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Top>23.40221cm</Top>
+        <Left>6.03021cm</Left>
+        <Height>0.60819cm</Height>
+        <Width>8.81292cm</Width>
+        <ZIndex>31</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox74">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!Company.Value</Value>
+                <Style>
+                  <FontSize>11pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Top>24.11623cm</Top>
+        <Left>6.03021cm</Left>
+        <Height>0.60819cm</Height>
+        <Width>8.81292cm</Width>
+        <ZIndex>32</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>9.9375in</Height>
+    <Height>13.16263in</Height>
     <Style />
   </Body>
   <Width>8.66732in</Width>
@@ -2326,9 +2543,8 @@
           <Value>footer_logo</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.06944in</Top>
-          <Left>0.25in</Left>
           <Height>0.5in</Height>
-          <Width>8.13607in</Width>
+          <Width>8.66732in</Width>
           <Style>
             <Border>
               <Style>None</Style>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="SearchJobRequest.aspx.cs" Inherits="ALS.ALSI.Web.view.request.SearchJobRequest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="SearchJobRequest.aspx.cs" Inherits="ALS.ALSI.Web.view.request.SearchJobRequest" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">สถานะ:</label>
+                                <label class="control-label col-md-3">Status:</label>
                                 <div class="col-md-6">
                                     <div class="form-group" style="text-align: left">
                                         <asp:DropDownList ID="ddlJobStatus" runat="server" class="select2_category form-control" DataTextField="NAME" DataValueField="ID" AutoPostBack="True"></asp:DropDownList>
@@ -78,6 +78,114 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">PO:</label>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="text-align: left">
+                                        <asp:TextBox ID="txtPo" runat="server" class="form-control"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Invoice:</label>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="text-align: left">
+                                        <asp:TextBox ID="txtInvoice" runat="server" class="form-control"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Received Report From:</label>
+                                <div class="col-md-6">
+                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                        <asp:TextBox ID="txtReceivedReportFrom" runat="server" class="form-control"></asp:TextBox>
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Received Report To:</label>
+                                <div class="col-md-6">
+                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                        <asp:TextBox ID="txtReceivedReportTo" runat="server" class="form-control"></asp:TextBox>
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Report To Customer From:</label>
+                                <div class="col-md-6">
+                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                        <asp:TextBox ID="txtReportToCustomerFrom" runat="server" class="form-control"></asp:TextBox>
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Report To Customer To:</label>
+                                <div class="col-md-6">
+                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                        <asp:TextBox ID="txtReportToCustomerTo" runat="server" class="form-control"></asp:TextBox>
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Duedate From:</label>
+                                <div class="col-md-6">
+                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                        <asp:TextBox ID="txtDuedateFrom" runat="server" class="form-control"></asp:TextBox>
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Duedate Customer To:</label>
+                                <div class="col-md-6">
+                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                        <asp:TextBox ID="txtDuedateTo" runat="server" class="form-control"></asp:TextBox>
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-actions">
@@ -111,15 +219,8 @@
 
                         </div>
                         <div class="actions">
-                          <%--  <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                <i class="icon-cloud-upload"></i>
-                            </a>
-                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                <i class="icon-wrench"></i>
-                            </a>
-                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                <i class="icon-trash"></i>
-                            </a>--%>
+               - 
+                      
 
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>
                             <asp:LinkButton ID="btnEls" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELS</asp:LinkButton>
@@ -128,6 +229,12 @@
                             <asp:LinkButton ID="btnGrp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> GRP</asp:LinkButton>
                             <asp:LinkButton ID="btnTrb" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> TRB</asp:LinkButton>
 
+
+                            <asp:LinkButton ID="btnExportExcel" runat="server" class="btn btn-circle btn-icon-only btn-default" OnClick="btnExportExcel_Click">   
+                                <i class=" icon-printer"></i></asp:LinkButton>
+
+
+                
                             <asp:LinkButton ID="lbAddJob" runat="server" class="btn btn-default btn-sm" OnClick="lbAddJob_Click"><i class="fa fa-plus"></i> Add</asp:LinkButton>
 
                         </div>
@@ -167,7 +274,11 @@
                                         <asp:Literal ID="ltJobStatus" runat="server" Text="-"></asp:Literal>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField HeaderText="Received." DataField="date_of_receive" ItemStyle-HorizontalAlign="Center" SortExpression="date_of_receive" DataFormatString="{0:dd-MM-yyyy}">
+                                <asp:BoundField HeaderText="Received." DataField="date_srchemist_complate" ItemStyle-HorizontalAlign="Center" SortExpression="date_srchemist_complate" DataFormatString="{0:dd-MM-yyyy}">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:BoundField>
+
+                                <asp:BoundField HeaderText="Report Sent to Customer" DataField="date_admin_sent_to_cus" ItemStyle-HorizontalAlign="Center" SortExpression="date_admin_sent_to_cus" DataFormatString="{0:dd-MM-yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:BoundField HeaderText="Due Date." DataField="due_date" ItemStyle-HorizontalAlign="Center" SortExpression="due_date" DataFormatString="{0:dd-MM-yyyy}">
@@ -234,26 +345,26 @@
                         </asp:GridView>
 
                         <!-- STATUS BAR -->
-    
+
                         <br />
-                                            <div class="note note-info">
-                  
-                        <p>JOB STATUS:</p>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-desktop">: Convert Template</i></div>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-book"></i>: Select Spec</div>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-flask"></i>: Chemist Testing</div>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-check-square-o">: Sr.Chemist Checking</i></div>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-user-md">: Lab Manager Checking</i></div>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-file-word-o">: Convert to Word</i></div>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-file-pdf-o">: Convert to Pdf</i></div>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-truck">:Complete </i></div>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-lock">: Hold</i></div>
-                        <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-trash-o">:Cancel </i></div>
-                                                     <p>STATUS:</p>
+                        <div class="note note-info">
+
+                            <p>JOB STATUS:</p>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-desktop">: Convert Template</i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-book"></i>: Select Spec</div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-flask"></i>: Chemist Testing</div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-check-square-o">: Sr.Chemist Checking</i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-user-md">: Lab Manager Checking</i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-file-word-o">: Convert to Word</i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-file-pdf-o">: Convert to Pdf</i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-truck">:Complete </i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-lock">: Hold</i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-trash-o">:Cancel </i></div>
+                            <p>STATUS:</p>
                             <button type="button" class="btn red btn-sm">Cancel</button>
                             <button type="button" class="btn green btn-sm">Complete</button>
                             <button type="button" class="btn purple btn-sm">Hold</button>
-                                                  </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -43,16 +43,15 @@ namespace ALS.ALSI.Web.view.request
             get { return (int)Session[GetType().Name + "JobID"]; }
             set { Session[GetType().Name + "JobID"] = value; }
         }
-
-        public job_info objInfo
+        public int SampleID
         {
-            get
-            {
-                job_info tmp = new job_info();
-                tmp.ID = JobID;
-                tmp.job_invoice = String.IsNullOrEmpty(txtInvoice.Text) ? String.Empty : txtInvoice.Text;
-                return tmp;
-            }
+            get { return (int)Session[GetType().Name + "SampleID"]; }
+            set { Session[GetType().Name + "SampleID"] = value; }
+        }
+        public job_sample jobSample
+        {
+            get { return (job_sample)Session[GetType().Name + "job_sample"]; }
+            set { Session[GetType().Name + "job_sample"] = value; }
         }
 
 
@@ -68,11 +67,11 @@ namespace ALS.ALSI.Web.view.request
 
         private void fillinScreen()
         {
-
-            job_info jobInfo = new job_info().SelectByID(this.JobID);
-            if (jobInfo != null)
+            jobSample = new job_sample().SelectByID(this.SampleID);
+            if (jobSample != null)
             {
-                txtInvoice.Text = jobInfo.job_invoice;
+                //txtPo.Text = jobSample.sample_po;
+                txtInvoice.Text = jobSample.sample_invoice;
             }
             else
             {
@@ -83,7 +82,10 @@ namespace ALS.ALSI.Web.view.request
 
         private void bindingData()
         {
-            searchResult = objInfo.SearchData();
+            job_info jobInfo = new job_info();
+
+            jobInfo.sample_id = this.SampleID;
+            searchResult = jobInfo.SearchData();
             gvJob.DataSource = searchResult;
             gvJob.DataBind();
         }
@@ -104,6 +106,8 @@ namespace ALS.ALSI.Web.view.request
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.CommandName = (prvPage == null) ? this.CommandName : prvPage.CommandName;
             this.JobID = (prvPage == null) ? this.JobID : prvPage.JobID;
+            this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
+
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
 
             if (!Page.IsPostBack)
@@ -114,10 +118,11 @@ namespace ALS.ALSI.Web.view.request
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            objInfo.Update();
+            jobSample.sample_invoice = txtInvoice.Text;
+            //jobSample.sample_po = txtPo.Text;
+            jobSample.Update();
             //Commit
             GeneralManager.Commit();
-
             removeSession();
             MessageBox.Show(this, Resources.MSG_SAVE_SUCCESS, PreviousPath);
         }

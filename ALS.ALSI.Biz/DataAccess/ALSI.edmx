@@ -18,8 +18,6 @@
           <Property Name="company_name_to_state_in_report" Type="varchar" MaxLength="255" />
           <Property Name="job_prefix" Type="int" Nullable="false" />
           <Property Name="job_number" Type="int" />
-          <Property Name="job_invoice" Type="varchar" MaxLength="45" />
-          <Property Name="customer_po_ref" Type="varchar" MaxLength="45" />
           <Property Name="s_pore_ref_no" Type="varchar" MaxLength="45" />
           <Property Name="spec_ref_rev_no" Type="varchar" MaxLength="45" />
           <Property Name="sample_diposition" Type="varchar" MaxLength="1" />
@@ -74,7 +72,6 @@
           <Property Name="uncertainty" Type="varchar" MaxLength="1" />
           <Property Name="job_status" Type="int" />
           <Property Name="job_role" Type="int" />
-          <Property Name="due_date" Type="date" />
           <Property Name="path_word" Type="varchar" MaxLength="100" />
           <Property Name="path_pdf" Type="varchar" MaxLength="100" />
           <Property Name="status_completion_scheduled" Type="int" />
@@ -86,11 +83,15 @@
           <Property Name="step6owner" Type="int" />
           <Property Name="step7owner" Type="int" />
           <Property Name="internal_reference_remark" Type="varchar" MaxLength="255" />
-          <Property Name="date_sample_received" Type="date" />
-          <Property Name="date_analyzed_date" Type="date" />
-          <Property Name="date_test_completed" Type="date" />
-          <Property Name="sr_approve_date" Type="date" />
-          <Property Name="report_date" Type="date" />
+          <Property Name="due_date" Type="date" />
+          <Property Name="date_login_received_sample" Type="date" />
+          <Property Name="date_chemist_alalyze" Type="date" />
+          <Property Name="date_chemist_complete" Type="date" />
+          <Property Name="date_srchemist_complate" Type="date" />
+          <Property Name="date_admin_sent_to_cus" Type="date" />
+          <Property Name="date_labman_complete" Type="date" />
+          <Property Name="sample_po" Type="varchar" MaxLength="45" />
+          <Property Name="sample_invoice" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -1669,8 +1670,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="company_name_to_state_in_report" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="job_prefix" Type="Int32" Nullable="false" />
           <Property Name="job_number" Type="Int32" />
-          <Property Name="job_invoice" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="customer_po_ref" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="s_pore_ref_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="spec_ref_rev_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="sample_diposition" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
@@ -1731,7 +1730,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="uncertainty" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="job_status" Type="Int32" />
           <Property Name="job_role" Type="Int32" />
-          <Property Name="due_date" Type="DateTime" />
           <Property Name="path_word" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="path_pdf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status_completion_scheduled" Type="Int32" />
@@ -1743,11 +1741,15 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="step6owner" Type="Int32" />
           <Property Name="step7owner" Type="Int32" />
           <Property Name="internal_reference_remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="date_sample_received" Type="DateTime" />
-          <Property Name="date_analyzed_date" Type="DateTime" />
-          <Property Name="date_test_completed" Type="DateTime" />
-          <Property Name="sr_approve_date" Type="DateTime" />
-          <Property Name="report_date" Type="DateTime" />
+          <Property Name="due_date" Type="DateTime" />
+          <Property Name="date_login_received_sample" Type="DateTime" />
+          <Property Name="date_chemist_alalyze" Type="DateTime" />
+          <Property Name="date_chemist_complete" Type="DateTime" />
+          <Property Name="date_srchemist_complate" Type="DateTime" />
+          <Property Name="date_admin_sent_to_cus" Type="DateTime" />
+          <Property Name="date_labman_complete" Type="DateTime" />
+          <Property Name="sample_po" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="sample_invoice" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="alsiModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
         </EntityType>
         <EntityType Name="job_sample_logs">
@@ -3138,8 +3140,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="sample_diposition" ColumnName="sample_diposition" />
                 <ScalarProperty Name="spec_ref_rev_no" ColumnName="spec_ref_rev_no" />
                 <ScalarProperty Name="s_pore_ref_no" ColumnName="s_pore_ref_no" />
-                <ScalarProperty Name="customer_po_ref" ColumnName="customer_po_ref" />
-                <ScalarProperty Name="job_invoice" ColumnName="job_invoice" />
                 <ScalarProperty Name="job_number" ColumnName="job_number" />
                 <ScalarProperty Name="job_prefix" ColumnName="job_prefix" />
                 <ScalarProperty Name="company_name_to_state_in_report" ColumnName="company_name_to_state_in_report" />
@@ -3178,11 +3178,15 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample">
             <EntityTypeMapping TypeName="alsiModel.job_sample">
               <MappingFragment StoreEntitySet="job_sample">
-                <ScalarProperty Name="report_date" ColumnName="report_date" />
-                <ScalarProperty Name="sr_approve_date" ColumnName="sr_approve_date" />
-                <ScalarProperty Name="date_test_completed" ColumnName="date_test_completed" />
-                <ScalarProperty Name="date_analyzed_date" ColumnName="date_analyzed_date" />
-                <ScalarProperty Name="date_sample_received" ColumnName="date_sample_received" />
+                <ScalarProperty Name="sample_invoice" ColumnName="sample_invoice" />
+                <ScalarProperty Name="sample_po" ColumnName="sample_po" />
+                <ScalarProperty Name="date_labman_complete" ColumnName="date_labman_complete" />
+                <ScalarProperty Name="date_admin_sent_to_cus" ColumnName="date_admin_sent_to_cus" />
+                <ScalarProperty Name="date_srchemist_complate" ColumnName="date_srchemist_complate" />
+                <ScalarProperty Name="date_chemist_complete" ColumnName="date_chemist_complete" />
+                <ScalarProperty Name="date_chemist_alalyze" ColumnName="date_chemist_alalyze" />
+                <ScalarProperty Name="date_login_received_sample" ColumnName="date_login_received_sample" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
                 <ScalarProperty Name="internal_reference_remark" ColumnName="internal_reference_remark" />
                 <ScalarProperty Name="step7owner" ColumnName="step7owner" />
                 <ScalarProperty Name="step6owner" ColumnName="step6owner" />
@@ -3194,7 +3198,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="status_completion_scheduled" ColumnName="status_completion_scheduled" />
                 <ScalarProperty Name="path_pdf" ColumnName="path_pdf" />
                 <ScalarProperty Name="path_word" ColumnName="path_word" />
-                <ScalarProperty Name="due_date" ColumnName="due_date" />
                 <ScalarProperty Name="job_role" ColumnName="job_role" />
                 <ScalarProperty Name="job_status" ColumnName="job_status" />
                 <ScalarProperty Name="uncertainty" ColumnName="uncertainty" />

@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+<%--                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-3">Remark:</label>
@@ -112,7 +112,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div>--%>
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-6">

@@ -2037,7 +2037,7 @@
         <Top>5.21665in</Top>
         <Left>0.40667in</Left>
         <Height>0.71875in</Height>
-        <Width>7.65712in</Width>
+        <Width>7.65711in</Width>
         <ZIndex>21</ZIndex>
         <Style>
           <Border>
@@ -2341,9 +2341,8 @@
           <Value>footer_logo</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.06944in</Top>
-          <Left>0.40754in</Left>
           <Height>0.5in</Height>
-          <Width>5.59375in</Width>
+          <Width>8.06378in</Width>
           <Style>
             <Border>
               <Style>None</Style>

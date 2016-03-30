@@ -28,6 +28,19 @@ namespace ALS.ALSI.Biz.DataAccess
         public String jobRefNo { get; set; }
         public int spec_id { get; set; }
         public String type_of_test_name { get; set; }
+
+        public String sample_po { get; set; }
+        public String sample_invoice { get; set; }
+
+        public DateTime receive_report_from { get; set; }
+        public DateTime receive_report_to { get; set; }
+
+        public DateTime duedate_from { get; set; }
+        public DateTime duedate_to { get; set; }
+
+        public DateTime report_to_customer_from { get; set; }
+        public DateTime report_to_customer_to { get; set; }
+
         #endregion
 
 
@@ -113,11 +126,10 @@ namespace ALS.ALSI.Biz.DataAccess
                              {
                                  ID = j.ID,
                                  job_number = s.job_number,
-                                 date_of_receive = j.date_of_receive,
                                  create_date = j.create_date,
                                  customer_ref_no = j.customer_ref_no,
                                  s_pore_ref_no = j.s_pore_ref_no,
-                                 //customer_po_ref = s.customer_po_ref,
+                                 sample_po = s.sample_po,
                                  customer = c.company_name,
                                  contract_person = cp.name,
                                  sn = s.ID,
@@ -127,12 +139,11 @@ namespace ALS.ALSI.Biz.DataAccess
                                  remarks = s.remarks,
                                  specification = sp.name,
                                  type_of_test = tt.name,
-                                 receive_date = j.date_of_receive,
+                                 //receive_date = j.date_of_receive,
                                  customer_id = c.ID,
                                  contract_person_id = cp.ID,
                                  job_status = s.job_status,
                                  job_role = s.job_role,
-                                 due_date = s.due_date,
                                  status_completion_scheduled = s.status_completion_scheduled,
                                  s.step1owner,
                                  s.step2owner,
@@ -144,7 +155,14 @@ namespace ALS.ALSI.Biz.DataAccess
                                  tt.data_group,
                                  type_of_test_id = tt.ID,
                                  type_of_test_name = tt.name,
-                                 spec_id = sp.ID
+                                 spec_id = sp.ID,
+                                 due_date = s.due_date,
+                                s.date_login_received_sample,
+                                s.date_chemist_alalyze,
+                                s.date_srchemist_complate,
+                                s.date_admin_sent_to_cus,
+                                s.date_labman_complete,
+                                s.sample_invoice
                              };
 
                 if (this.ID > 0)
@@ -202,7 +220,28 @@ namespace ALS.ALSI.Biz.DataAccess
                 {
                     result = result.Where(x => x.type_of_test_name.Contains(this.type_of_test_name));
                 }
-                
+                if (!String.IsNullOrEmpty(this.sample_po))
+                {
+                    result = result.Where(x => x.sample_po.Contains(this.sample_po));
+                }
+                if (!String.IsNullOrEmpty(this.sample_invoice))
+                {
+                    result = result.Where(x => x.sample_invoice.Contains(this.sample_invoice));
+                }
+
+                if (this.receive_report_from != DateTime.MinValue && this.receive_report_to != DateTime.MinValue)
+                {
+                    result = result.Where(x => x.date_srchemist_complate >= this.receive_report_from && x.date_srchemist_complate <= this.receive_report_to);
+                }
+                if (this.duedate_from != DateTime.MinValue && this.duedate_to != DateTime.MinValue)
+                {
+                    result = result.Where(x => x.due_date >= this.duedate_from && x.due_date <= this.duedate_to);
+                }
+                if (this.report_to_customer_from != DateTime.MinValue && this.report_to_customer_to != DateTime.MinValue)
+                {
+                    result = result.Where(x => x.date_admin_sent_to_cus >= this.report_to_customer_from && x.date_admin_sent_to_cus <= this.report_to_customer_to);
+                }
+
                 return result.ToList();
             }
         }

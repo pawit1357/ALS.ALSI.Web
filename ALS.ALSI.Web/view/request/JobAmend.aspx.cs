@@ -50,7 +50,7 @@ namespace ALS.ALSI.Web.view.request
             {
                 job_info tmp = new job_info();
                 tmp.ID = JobID;
-                tmp.job_invoice = String.IsNullOrEmpty(txtInvoice.Text) ? String.Empty : txtInvoice.Text;
+                //tmp.job_invoice = String.IsNullOrEmpty(txtInvoice.Text) ? String.Empty : txtInvoice.Text;
                 return tmp;
             }
         }
@@ -72,7 +72,7 @@ namespace ALS.ALSI.Web.view.request
             job_info jobInfo = new job_info().SelectByID(this.JobID);
             if (jobInfo != null)
             {
-                txtInvoice.Text = jobInfo.job_invoice;
+                //txtInvoice.Text = jobInfo.job_invoice;
             }
             else
             {

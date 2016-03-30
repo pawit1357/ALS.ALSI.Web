@@ -192,13 +192,14 @@ namespace ALS.ALSI.Web.view.template
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                     {
-                        if (this.jobSample.date_analyzed_date == null)
+                        if (this.jobSample.date_chemist_alalyze == null)
                         {
-                            this.jobSample.date_analyzed_date = DateTime.Now;
+                            this.jobSample.date_chemist_alalyze = DateTime.Now;
                             this.jobSample.Update();
                         }
                     }
                     #endregion
+
 
                     txtB21.Visible = true;
                     txtB22.Visible = true;
@@ -505,9 +506,9 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
 
-                    #region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_test_completed = DateTime.Now;
-                    #endregion
+                    //#region ":: STAMP COMPLETE DATE"
+                    this.jobSample.date_chemist_complete = DateTime.Now;
+                    //#endregion
                     #region "NVR-FTIR(Hex)"
                     this.Ftir.sample_id = this.SampleID;
                     this.Ftir.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
@@ -595,7 +596,8 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                            this.jobSample.sr_approve_date = DateTime.Now;
+            
+                            this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:
@@ -622,6 +624,8 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
+                     
+                            this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
                             this.jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);

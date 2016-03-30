@@ -253,13 +253,15 @@ namespace ALS.ALSI.Web.view.template
                 #region ":: STAMP ANALYZED DATE ::"
                 if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
-                    if (this.jobSample.date_analyzed_date == null)
+                    if (this.jobSample.date_chemist_alalyze == null)
                     {
-                        this.jobSample.date_analyzed_date = DateTime.Now;
+                        this.jobSample.date_chemist_alalyze = DateTime.Now;
                         this.jobSample.Update();
                     }
                 }
                 #endregion
+
+
                 txtProcedureNo_Extraction.Visible = true;
                 txtExtractionMedium_Extraction.Visible = true;
                 txtSampleSize_Extraction.Visible = true;
@@ -351,9 +353,9 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
 
-                    #region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_test_completed = DateTime.Now;
-                    #endregion
+                    //#region ":: STAMP COMPLETE DATE"
+                    this.jobSample.date_chemist_complete = DateTime.Now;
+                    //#endregion
                     foreach (template_wd_mesa_coverpage _cover in this.coverpages)
                     {
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
@@ -402,7 +404,9 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                            this.jobSample.sr_approve_date = DateTime.Now;
+                 
+
+                            this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:

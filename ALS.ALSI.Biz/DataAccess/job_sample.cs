@@ -33,7 +33,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string uncertainty { get; set; }
         public Nullable<int> job_status { get; set; }
         public Nullable<int> job_role { get; set; }
-        public Nullable<System.DateTime> due_date { get; set; }
         public string path_word { get; set; }
         public string path_pdf { get; set; }
         public Nullable<int> status_completion_scheduled { get; set; }
@@ -45,11 +44,15 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> step6owner { get; set; }
         public Nullable<int> step7owner { get; set; }
         public string internal_reference_remark { get; set; }
-        public Nullable<System.DateTime> date_sample_received { get; set; }
-        public Nullable<System.DateTime> date_analyzed_date { get; set; }
-        public Nullable<System.DateTime> date_test_completed { get; set; }
-        public Nullable<System.DateTime> sr_approve_date { get; set; }
-        public Nullable<System.DateTime> report_date { get; set; }
+        public Nullable<System.DateTime> due_date { get; set; }
+        public Nullable<System.DateTime> date_login_received_sample { get; set; }
+        public Nullable<System.DateTime> date_chemist_alalyze { get; set; }
+        public Nullable<System.DateTime> date_chemist_complete { get; set; }
+        public Nullable<System.DateTime> date_srchemist_complate { get; set; }
+        public Nullable<System.DateTime> date_admin_sent_to_cus { get; set; }
+        public Nullable<System.DateTime> date_labman_complete { get; set; }
+        public string sample_po { get; set; }
+        public string sample_invoice { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

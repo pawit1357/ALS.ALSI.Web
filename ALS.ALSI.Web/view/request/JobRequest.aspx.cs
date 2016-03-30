@@ -44,7 +44,7 @@ namespace ALS.ALSI.Web.view.request
                 job.date_of_receive = String.IsNullOrEmpty(txtDate_of_receive.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDate_of_receive.Text);
                 job.s_pore_ref_no = txtS_pore_ref_no.Text;
                 job.spec_ref_rev_no = txtSpecRefRevNo.Text;
-                job.customer_po_ref = string.Empty;//invoice
+                //job.customer_po_ref = string.Empty;//invoice
 
                 job.sample_diposition = rdSample_dipositionYes.Checked ? "Y" : "N";
                 job.status_sample_enough = rdSample_enoughNo.Checked ? "Y" : "N";

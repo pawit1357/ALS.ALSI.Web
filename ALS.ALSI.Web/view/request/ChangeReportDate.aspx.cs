@@ -76,7 +76,7 @@ namespace ALS.ALSI.Web.view.request
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             if (this.jobSample != null)
             {
-                txtDuedate.Text = Convert.ToDateTime(this.jobSample.report_date).ToString("dd/MM/yyyy");
+                txtDuedate.Text = Convert.ToDateTime(this.jobSample.date_admin_sent_to_cus).ToString("dd/MM/yyyy");
                 //txtRemark.Text = this.jobSample.remarks;
             }
             else
@@ -116,14 +116,14 @@ namespace ALS.ALSI.Web.view.request
         protected void btnSave_Click(object sender, EventArgs e)
         {
 
-            this.jobSample.report_date = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);// Convert.ToDateTime(txtDuedate.Text);
+            this.jobSample.date_admin_sent_to_cus = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);// Convert.ToDateTime(txtDuedate.Text);
             this.jobSample.Update();
             job_sample_logs tmp = new job_sample_logs
             {
                 ID = 0,
                 job_sample_id = this.jobSample.ID,
                 log_title = String.Format("Change Report Date"),
-                job_remark = txtRemark.Text,
+                //job_remark = txtRemark.Text,
                 is_active = "0",
                 date = DateTime.Now
             };

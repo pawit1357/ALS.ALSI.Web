@@ -76,6 +76,78 @@ namespace ALS.ALSI.Web.view.request {
         protected global::System.Web.UI.WebControls.DropDownList ddlTypeOfTest;
         
         /// <summary>
+        /// txtPo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPo;
+        
+        /// <summary>
+        /// txtInvoice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInvoice;
+        
+        /// <summary>
+        /// txtReceivedReportFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReceivedReportFrom;
+        
+        /// <summary>
+        /// txtReceivedReportTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReceivedReportTo;
+        
+        /// <summary>
+        /// txtReportToCustomerFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReportToCustomerFrom;
+        
+        /// <summary>
+        /// txtReportToCustomerTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReportToCustomerTo;
+        
+        /// <summary>
+        /// txtDuedateFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDuedateFrom;
+        
+        /// <summary>
+        /// txtDuedateTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDuedateTo;
+        
+        /// <summary>
         /// LinkButton1 control.
         /// </summary>
         /// <remarks>
@@ -146,6 +218,15 @@ namespace ALS.ALSI.Web.view.request {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnTrb;
+        
+        /// <summary>
+        /// btnExportExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnExportExcel;
         
         /// <summary>
         /// lbAddJob control.

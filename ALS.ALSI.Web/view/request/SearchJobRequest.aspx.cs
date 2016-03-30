@@ -5,6 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -74,6 +76,17 @@ namespace ALS.ALSI.Web.view.request
                     case RoleEnum.ADMIN:
                         break;
                 }
+                tmp.sample_po = txtPo.Text;
+                tmp.sample_invoice = txtInvoice.Text;
+                tmp.receive_report_from = String.IsNullOrEmpty(txtReceivedReportFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportFrom.Text);
+                tmp.receive_report_to = String.IsNullOrEmpty(txtReceivedReportTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportTo.Text);
+
+                tmp.duedate_from = String.IsNullOrEmpty(txtDuedateFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateFrom.Text);
+                tmp.duedate_to = String.IsNullOrEmpty(txtDuedateTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateTo.Text);
+
+                tmp.report_to_customer_from = String.IsNullOrEmpty(txtReportToCustomerFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerFrom.Text);
+                tmp.report_to_customer_to = String.IsNullOrEmpty(txtReportToCustomerTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerTo.Text);
+
                 return tmp;
             }
         }
@@ -160,6 +173,15 @@ namespace ALS.ALSI.Web.view.request
 
         private void removeSession()
         {
+            txtInvoice.Text = String.Empty;
+            txtPo.Text = String.Empty;
+            txtReceivedReportFrom.Text = String.Empty;
+            txtReceivedReportTo.Text = String.Empty;
+            txtDuedateFrom.Text = String.Empty;
+            txtDuedateTo.Text = String.Empty;
+            txtReceivedReportFrom.Text = String.Empty;
+            txtReceivedReportTo.Text = String.Empty;
+
             Session.Remove(GetType().Name);
             Session.Remove(GetType().Name + "SearchJobRequest");
         }
@@ -626,5 +648,64 @@ namespace ALS.ALSI.Web.view.request
         }
 
 
+
+
+        protected void ExportToExcel()
+        {
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.xls");
+            Response.Charset = "";
+            Response.ContentType = "application/vnd.ms-excel";
+            using (StringWriter sw = new StringWriter())
+            {
+                HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                //To Export all pages
+                gvJob.AllowPaging = false;
+                //this.BindGrid();
+
+                gvJob.HeaderRow.BackColor = Color.White;
+                foreach (TableCell cell in gvJob.HeaderRow.Cells)
+                {
+                    cell.BackColor = gvJob.HeaderStyle.BackColor;
+                }
+                foreach (GridViewRow row in gvJob.Rows)
+                {
+                    row.BackColor = Color.White;
+                    foreach (TableCell cell in row.Cells)
+                    {
+                        if (row.RowIndex % 2 == 0)
+                        {
+                            cell.BackColor = gvJob.AlternatingRowStyle.BackColor;
+                        }
+                        else
+                        {
+                            cell.BackColor = gvJob.RowStyle.BackColor;
+                        }
+                        cell.CssClass = "textmode";
+                    }
+                }
+
+                gvJob.RenderControl(hw);
+
+                //style to format numbers to string
+                string style = @"<style> .textmode { } </style>";
+                Response.Write(style);
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
+            }
+        }
+
+        public override void VerifyRenderingInServerForm(Control control)
+        {
+            /* Verifies that the control is rendered */
+        }
+
+        protected void btnExportExcel_Click(object sender, EventArgs e)
+        {
+            ExportToExcel();
+        }
     }
 }

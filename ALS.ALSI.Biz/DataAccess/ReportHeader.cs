@@ -1,8 +1,6 @@
-﻿using ALS.ALIS.Repository.Interface;
-using ALS.ALSI.Biz.DataAccess;
+﻿using ALS.ALSI.Biz.DataAccess;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ALS.ALSI.Biz.ReportObjects
@@ -38,7 +36,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                              orderby s.job_number ascending
                              select new
                              {
-                                 cusRefNo = i.customer_po_ref,
+                                 cusRefNo = s.sample_po,
                                  alsRefNo = s.job_number,
                                  cur_date = i.date_of_receive,
                                  addr1 = c.company_name,
@@ -76,14 +74,14 @@ namespace ALS.ALSI.Biz.ReportObjects
                     rpt.addr1 = _cus.company_name;
                     rpt.addr2 = addr.address;
                 }
-                rpt.cusRefNo = (_job.customer_po_ref == null) ? String.Empty : _job.customer_po_ref.ToString();
+                rpt.cusRefNo = (_sample.sample_po== null) ? String.Empty : _sample.sample_po.ToString();
                 rpt.cur_date = DateTime.Now;
 
-                rpt.dateOfDampleRecieve = Convert.ToDateTime(_job.date_of_receive);
-                rpt.dateOfAnalyze = Convert.ToDateTime(_job.date_of_request);
-                rpt.dateOfTestComplete = Convert.ToDateTime(_sample.due_date);
+                rpt.dateOfDampleRecieve = Convert.ToDateTime(_sample.date_login_received_sample);
+                rpt.dateOfAnalyze = Convert.ToDateTime(_sample.date_chemist_alalyze);
+                rpt.dateOfTestComplete = Convert.ToDateTime(_sample.date_chemist_complete);
+
                 rpt.alsRefNo = _sample.job_number.ToString();
-                rpt.dateOfTestComplete = Convert.ToDateTime(_sample.due_date);
                 rpt.description = _sample.description;
                 rpt.model = _sample.model;
                 rpt.surface_areas = _sample.surface_area;

@@ -17,7 +17,7 @@ namespace ALS.ALSI.Web.UserControls
             {
                 m_customer cus = new m_customer();
                 cus = cus.SelectByID(_job.customer_id);
-                lbPoNo.Text = (_job.customer_po_ref == null) ? String.Empty : _job.customer_po_ref.ToString();
+                lbPoNo.Text = (_sample.sample_po == null) ? String.Empty : _sample.sample_po.ToString();
                 lbDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
                 lbCompany.Text = String.Format("{0}<br />{1}", cus.company_name, cus.address);
                 lbDateSampleReceived.Text = Convert.ToDateTime(_job.date_of_receive).ToString("MM/dd/yyyy");

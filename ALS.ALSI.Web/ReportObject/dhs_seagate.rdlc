@@ -1621,9 +1621,6 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet2</DataSetName>
-        <PageBreak>
-          <BreakLocation>Start</BreakLocation>
-        </PageBreak>
         <Top>5.05347in</Top>
         <Left>0.25086in</Left>
         <Height>0.73958in</Height>
