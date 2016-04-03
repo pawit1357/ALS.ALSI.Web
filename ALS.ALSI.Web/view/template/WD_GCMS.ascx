@@ -357,8 +357,8 @@
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDownload" runat="server">
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                  <%--      <div class="row">
+                                            <div class="col-md-6">--%>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Download:</label>
                                                     <div class="col-md-6">
@@ -368,8 +368,8 @@
                                                         </asp:LinkButton>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                       <%--     </div>
+                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pUploadfile" runat="server">

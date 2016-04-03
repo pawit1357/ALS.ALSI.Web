@@ -512,12 +512,12 @@ namespace ALS.ALSI.Web.view.template
                         #region "Method/Procedure"
                         ws.ProcedureNo = txtProcedureNo.Text;
                         ws.NumberOfPieces = txtNumberOfPieces.Text;
-                        ws.ExtractionMedium = txtExtractionMedium.Text;
+                        ws.ExtractionMedium = String.IsNullOrEmpty(txtExtractionMedium.Text) ? "0.1 um Filtered  Degassed DI Water" : txtExtractionMedium.Text;
                         ws.ExtractionVolume = txtExtractionVolume.Text;
 
                         ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
                         ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
-                        ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
+                        ws.ExtractionMedium_hpa = String.IsNullOrEmpty(txtExtractionMedium_hpa.Text) ? "0.1 um Filtered  Degassed DI Water" : txtExtractionMedium_hpa.Text;
                         ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
                         #endregion
 
@@ -1810,7 +1810,7 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.A = _val;
                             if (_val.Equals(lpc03A[lpc03A.Length - 1]))//Add value to Total Row
                             {
-                                _tmp.B = tem.G;
+                                _tmp.B = tem.I;
                             }
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC03);
@@ -1827,7 +1827,7 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.A = _val;
                             if (_val.Equals(lpc06A[lpc06A.Length - 1]))//Add value to Total Row
                             {
-                                _tmp.B = tem.H;
+                                _tmp.B = tem.J;
                             }
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC06);

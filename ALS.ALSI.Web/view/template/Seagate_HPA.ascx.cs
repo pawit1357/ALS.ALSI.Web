@@ -511,12 +511,12 @@ namespace ALS.ALSI.Web.view.template
                         #region "Method/Procedure"
                         ws.ProcedureNo = txtProcedureNo.Text;
                         ws.NumberOfPieces = txtNumberOfPieces.Text;
-                        ws.ExtractionMedium = txtExtractionMedium.Text;
+                        ws.ExtractionMedium = String.IsNullOrEmpty(txtExtractionMedium.Text) ? "0.1 um Filtered  Degassed DI Water" : txtExtractionMedium.Text;
                         ws.ExtractionVolume = txtExtractionVolume.Text;
 
                         ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
                         ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
-                        ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
+                        ws.ExtractionMedium_hpa = String.IsNullOrEmpty(txtExtractionMedium_hpa.Text)? "0.1 um Filtered  Degassed DI Water" : txtExtractionMedium_hpa.Text;
                         ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
                         #endregion
 
