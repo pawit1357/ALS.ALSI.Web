@@ -4157,7 +4157,7 @@
   <Width>18.75761cm</Width>
   <Page>
     <PageHeader>
-      <Height>11.7353cm</Height>
+      <Height>9.1522cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -4258,26 +4258,27 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>CUSTOMER PO NO.: </Value>
+                  <Value>REPORT2</Value>
                   <Style>
-                    <FontSize>11pt</FontSize>
+                    <FontStyle>Normal</FontStyle>
+                    <FontSize>15pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>Underline</TextDecoration>
+                    <Color>#000000</Color>
                   </Style>
                 </TextRun>
               </TextRuns>
               <Style>
-                <TextAlign>Left</TextAlign>
+                <TextAlign>Center</TextAlign>
               </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>4.32732cm</Top>
-          <Left>0.64204cm</Left>
+          <Top>4.09749cm</Top>
+          <Left>0.64422cm</Left>
           <Height>0.74048cm</Height>
-          <Width>4.1583cm</Width>
+          <Width>14.20595cm</Width>
           <ZIndex>3</ZIndex>
-          <Visibility>
-            <Hidden>=Globals!PageNumber&gt;1</Hidden>
-          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -4295,26 +4296,27 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Parameters!CustomerPoNo.Value</Value>
+                  <Value>REPORT3</Value>
                   <Style>
-                    <FontSize>11pt</FontSize>
+                    <FontStyle>Normal</FontStyle>
+                    <FontSize>15pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>Underline</TextDecoration>
+                    <Color>#000000</Color>
                   </Style>
                 </TextRun>
               </TextRuns>
               <Style>
-                <TextAlign>Left</TextAlign>
+                <TextAlign>Center</TextAlign>
               </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>4.32732cm</Top>
-          <Left>6.03507cm</Left>
+          <Top>5.18177cm</Top>
+          <Left>0.64422cm</Left>
           <Height>0.74048cm</Height>
-          <Width>8.81292cm</Width>
+          <Width>14.20595cm</Width>
           <ZIndex>4</ZIndex>
-          <Visibility>
-            <Hidden>=iif(Globals!PageNumber =1,true,false)</Hidden>
-          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -4326,33 +4328,36 @@
           </Style>
         </Textbox>
         <Textbox Name="Textbox21">
-          <CanGrow>true</CanGrow>
+          <CanShrink>true</CanShrink>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>COMPANY:</Value>
+                  <Value>REPORT4</Value>
                   <Style>
                     <FontStyle>Normal</FontStyle>
-                    <FontSize>11pt</FontSize>
+                    <FontSize>15pt</FontSize>
                     <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
+                    <TextDecoration>Underline</TextDecoration>
                     <Color>#000000</Color>
                   </Style>
                 </TextRun>
               </TextRuns>
               <Style>
-                <TextAlign>Left</TextAlign>
+                <TextAlign>Center</TextAlign>
               </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>6.73397cm</Top>
-          <Left>0.64204cm</Left>
-          <Height>0.52881cm</Height>
-          <Width>4.1583cm</Width>
+          <Top>6.21568cm</Top>
+          <Left>0.64422cm</Left>
+          <Height>0.74048cm</Height>
+          <Width>14.20595cm</Width>
           <ZIndex>5</ZIndex>
+          <Visibility>
+            <Hidden>=Globals!PageNumber&gt;1</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -4364,33 +4369,36 @@
           </Style>
         </Textbox>
         <Textbox Name="Textbox22">
-          <CanGrow>true</CanGrow>
+          <CanShrink>true</CanShrink>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>DATE:</Value>
+                  <Value>REPORT5</Value>
                   <Style>
                     <FontStyle>Normal</FontStyle>
-                    <FontSize>11pt</FontSize>
+                    <FontSize>15pt</FontSize>
                     <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
+                    <TextDecoration>Underline</TextDecoration>
                     <Color>#000000</Color>
                   </Style>
                 </TextRun>
               </TextRuns>
               <Style>
-                <TextAlign>Left</TextAlign>
+                <TextAlign>Center</TextAlign>
               </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>6.02877cm</Top>
-          <Left>0.64204cm</Left>
-          <Height>0.52881cm</Height>
-          <Width>4.1583cm</Width>
+          <Top>7.32693cm</Top>
+          <Left>0.64422cm</Left>
+          <Height>0.74048cm</Height>
+          <Width>14.20595cm</Width>
           <ZIndex>6</ZIndex>
+          <Visibility>
+            <Hidden>=Globals!PageNumber&gt;1</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -4402,444 +4410,33 @@
           </Style>
         </Textbox>
         <Textbox Name="Textbox23">
-          <CanGrow>true</CanGrow>
+          <CanShrink>true</CanShrink>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>ALS THAILAND REF NO.:</Value>
+                  <Value>REPORT6</Value>
                   <Style>
                     <FontStyle>Normal</FontStyle>
-                    <FontSize>11pt</FontSize>
+                    <FontSize>15pt</FontSize>
                     <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
+                    <TextDecoration>Underline</TextDecoration>
                     <Color>#000000</Color>
                   </Style>
                 </TextRun>
               </TextRuns>
               <Style>
-                <TextAlign>Left</TextAlign>
+                <TextAlign>Center</TextAlign>
               </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>5.24419cm</Top>
-          <Left>0.64204cm</Left>
-          <Height>0.60819cm</Height>
-          <Width>4.76684cm</Width>
+          <Top>8.41172cm</Top>
+          <Left>0.635cm</Left>
+          <Height>0.74048cm</Height>
+          <Width>14.20595cm</Width>
           <ZIndex>7</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox24">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=Parameters!AlsThailandRefNo.Value</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>5.24419cm</Top>
-          <Left>6.03507cm</Left>
-          <Height>0.60819cm</Height>
-          <Width>8.81292cm</Width>
-          <ZIndex>8</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox25">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=CDate(Parameters!Date.Value).ToString("dd MMMM yyyy")</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>6.02877cm</Top>
-          <Left>6.03507cm</Left>
-          <Height>0.60819cm</Height>
-          <Width>8.81292cm</Width>
-          <ZIndex>9</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox26">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=Parameters!Company.Value</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>6.73397cm</Top>
-          <Left>6.03506cm</Left>
-          <Height>0.60819cm</Height>
-          <Width>8.81292cm</Width>
-          <ZIndex>10</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox27">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>DATE SAMPLE RECEIVED:</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontSize>11pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>7.90484cm</Top>
-          <Left>0.64422cm</Left>
-          <Height>0.74048cm</Height>
-          <Width>5.21664cm</Width>
-          <ZIndex>11</ZIndex>
-          <Visibility>
-            <Hidden>=Globals!PageNumber&gt;1</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox28">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=CDate(Parameters!DateSampleReceived.Value).ToString("dd-MMMM-yyyy")</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>7.90484cm</Top>
-          <Left>6.03725cm</Left>
-          <Height>0.74048cm</Height>
-          <Width>8.81292cm</Width>
-          <ZIndex>12</ZIndex>
-          <Visibility>
-            <Hidden>=Globals!PageNumber&gt;1</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox30">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>DATE TEST COMPLETED:</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontSize>11pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>9.60629cm</Top>
-          <Left>0.64422cm</Left>
-          <Height>0.52881cm</Height>
-          <Width>5.21664cm</Width>
-          <ZIndex>13</ZIndex>
-          <Visibility>
-            <Hidden>=iif(Globals!PageNumber&gt;1,true,false)</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox31">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>DATE ANALYZED:</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontSize>11pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>8.82171cm</Top>
-          <Left>0.64422cm</Left>
-          <Height>0.60819cm</Height>
-          <Width>5.21664cm</Width>
-          <ZIndex>14</ZIndex>
-          <Visibility>
-            <Hidden>=Globals!PageNumber&gt;1</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox32">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=CDate(Parameters!DateAnalyzed.Value).ToString("dd-MMMM-yyyy")</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>8.82171cm</Top>
-          <Left>6.03725cm</Left>
-          <Height>0.60819cm</Height>
-          <Width>8.81292cm</Width>
-          <ZIndex>15</ZIndex>
-          <Visibility>
-            <Hidden>=Globals!PageNumber&gt;1</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox33">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=CDate(Parameters!DateTestCompleted.Value).ToString("dd-MMMM-yyyy")</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>9.60629cm</Top>
-          <Left>6.03725cm</Left>
-          <Height>0.60819cm</Height>
-          <Width>8.81292cm</Width>
-          <ZIndex>16</ZIndex>
-          <Visibility>
-            <Hidden>=iif(Globals!PageNumber&gt;1,true,false)</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox34">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=Parameters!SampleDescription.Value</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>10.80961cm</Top>
-          <Left>6.03724cm</Left>
-          <Height>0.60819cm</Height>
-          <Width>8.81292cm</Width>
-          <ZIndex>17</ZIndex>
-          <Visibility>
-            <Hidden>=Globals!PageNumber&gt;1</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox35">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>SAMPLE DESCRIPTION:</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontSize>11pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>10.80961cm</Top>
-          <Left>0.64421cm</Left>
-          <Height>0.52881cm</Height>
-          <Width>5.21664cm</Width>
-          <ZIndex>18</ZIndex>
           <Visibility>
             <Hidden>=Globals!PageNumber&gt;1</Hidden>
           </Visibility>

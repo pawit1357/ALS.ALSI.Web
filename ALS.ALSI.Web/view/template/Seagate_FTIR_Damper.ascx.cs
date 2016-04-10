@@ -20,7 +20,7 @@ using WordToPDF;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class Seagate_FTIR : System.Web.UI.UserControl
+    public partial class Seagate_FTIR_Damper : System.Web.UI.UserControl
     {
 
 
@@ -84,41 +84,36 @@ namespace ALS.ALSI.Web.view.template
         private void initialPage()
         {
 
-            txtProcedureNo.Text = "20800032 - 001 Rev.C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
-            txtNomOfPiece.Text = "5.8109 g /Estimated surface use 774.79 cm²";
-            txtExtractionMedium.Text = "  IPA - 24 Hours(HPLC Grade)";
-            txtExtractionVolumn.Text = "40mL";
+            txtProcedureNo.Text = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+            txtNomOfPiece.Text = "24 pieces";
+            txtExtractionMedium.Text = "n-hexane(HPLC Grade)";
+            txtExtractionVolumn.Text = "10mL";
 
-            txtProcedureNo0.Text = "20800032 - 001 Rev.C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
-            txtNomOfPiece0.Text = "Estimated surface use  cm²";
-            txtExtractionMedium0.Text = "Ultrapure Water";
-            txtExtractionVolumn0.Text = "100mL";
+            txtProcedureNo0.Text = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+            txtNomOfPiece0.Text = "24 pieces";
+            txtExtractionMedium0.Text = "n-hexane(HPLC Grade)";
+            txtExtractionVolumn0.Text = "10mL";
 
-            txtProcedureNo1.Text = "20800032 - 001 Rev.C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
-            txtNomOfPiece1.Text = "Estimated surface use  cm²";
-            txtExtractionMedium1.Text = "n - hexane(HPLC Grade)";
-            txtExtractionVolumn1.Text = "100mL";
+            txtProcedureNo1.Text = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+            txtNomOfPiece1.Text = "20 cm²";
+            txtExtractionMedium1.Text = "n-hexane(HPLC Grade)";
+            txtExtractionVolumn1.Text = "10mL";
 
 
-            txtProcedureNo2.Text = "20800032 - 001 Rev.C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
-            txtNomOfPiece2.Text = "Estimated surface use  cm²";
-            txtExtractionMedium2.Text = "IPA / n - hexane(HPLC Grade)";
-            txtExtractionVolumn2.Text = "100mL";
+            txtProcedureNo2.Text = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+            txtNomOfPiece2.Text = "20 cm²";
+            txtExtractionMedium2.Text = "n-hexane(HPLC Grade)";
+            txtExtractionVolumn2.Text = "10mL";
 
-            txtProcedureNo3.Text = "20800032 - 001 Rev.C,20800014 - 001 Rev.G";
+            txtProcedureNo3.Text = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
             txtNomOfPiece3.Text = "";
-            txtExtractionMedium3.Text = "n - hexane(HPLC Grade)";
+            txtExtractionMedium3.Text = "n-hexane(HPLC Grade)";
             txtExtractionVolumn3.Text = "10mL";
 
-            txtProcedureNo4.Text = "20800032 - 001 Rev.C,20800014 - 001 Rev.G";
+            txtProcedureNo4.Text = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
             txtNomOfPiece4.Text = "";
-            txtExtractionMedium4.Text = "n - hexane(HPLC Grade)";
-            txtExtractionVolumn4.Text = "20mL";
-
-
-
-
-
+            txtExtractionMedium4.Text = "n-hexane(HPLC Grade)";
+            txtExtractionVolumn4.Text = "10mL";
 
 
             ddlAssignTo.Items.Clear();

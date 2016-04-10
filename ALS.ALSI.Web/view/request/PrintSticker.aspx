@@ -15,7 +15,7 @@
 
             //Reset the page's HTML with div's HTML only
             document.body.innerHTML =
-              "<html><head><title></title><style type=\"text/css\" media=\"print\">@page { size: A4; }.printbreak {page-break-before: always;}</style></head><body>" +
+              "<html><head><title></title><style type=\"text/css\" media=\"print\">@page { size: 3.5in 3.5in; }.printbreak {page-break-before: always;}</style></head><body>" +
               divElements + "</body>";
 
             //Print Page

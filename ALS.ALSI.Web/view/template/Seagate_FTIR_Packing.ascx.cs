@@ -20,7 +20,7 @@ using WordToPDF;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class Seagate_FTIR : System.Web.UI.UserControl
+    public partial class Seagate_FTIR_Packing : System.Web.UI.UserControl
     {
 
 
@@ -326,8 +326,11 @@ namespace ALS.ALSI.Web.view.template
                 {
                     this.Ftir.Delete();
                 }
+                this.CommandName = CommandNameEnum.Add;
+                this.Ftir = new template_seagate_ftir_coverpage();
             }
             else {
+
                 if (this.Ftir != null)
                 {
                     this.CommandName = CommandNameEnum.Edit;
@@ -420,17 +423,22 @@ namespace ALS.ALSI.Web.view.template
                         lbDocRev.Text = tem.C;
                         lbDesc.Text = tem.B;
 
+                        lbB34.Text = tem.E;
+                        lbB35.Text = tem.F;
+                        lbB36.Text = tem.D;
+                        lbB37.Text = tem.G;
+                        lbB38.Text = tem.I;
+                        lbB39.Text = tem.J;
 
-                        lbB32.Text = String.Empty;
-                        lbB33.Text = tem.E;
-                        lbB34.Text = tem.F;
-                        lbB35.Text = String.Empty;
-                        lbB36.Text = String.Empty;
+                        lbB30Spec.Text = tem.M;
+                        lbB31Spec.Text = tem.O;
+                        lbB32Spec.Text = tem.N;
 
-                        lbB29Spec.Text = tem.I;
-                        lbB30Spec.Text = tem.J;
-                        lbB31Spec.Text = String.Empty;
-                        lbB32Spec.Text = String.Empty;
+                        lbUnitNvr.Text = tem.L;
+                        lbUnitNvr_1.Text = tem.L;
+
+                        lbUnitFtir.Text = tem.C;
+                        lbUnitFtir_1.Text = tem.C;
 
 
                         ddlSpecification.SelectedValue = tem.ID.ToString();
@@ -783,11 +791,12 @@ namespace ALS.ALSI.Web.view.template
                     PNvr.Visible = false;
                     pLoadFile.Visible = false;
 
-                    lbC32.Text = Constants.GetEnumDescription(ResultEnum.NOT_DETECTED);
-                    lbC33.Text = lbWE26.Text;// this.Ftir.w_e26;
-                    lbC34.Text = Constants.GetEnumDescription(ResultEnum.NOT_DETECTED);
-                    lbC35.Text = lbWD26.Text;// this.Ftir.w_d26;
-                    lbC36.Text = lbWC26.Text;// this.Ftir.w_c26;
+                    lbC34.Text = String.Empty;
+                    lbC35.Text = String.Empty;
+                    lbC36.Text = String.Empty;
+                    lbC37.Text = lbWE26.Text;// this.Ftir.w_e26;
+                    lbC38.Text = lbWD26.Text;// this.Ftir.w_d26;
+                    lbC39.Text = lbWC26.Text;// this.Ftir.w_c26;
 
 
                     CalculateCas();
@@ -1156,22 +1165,22 @@ namespace ALS.ALSI.Web.view.template
                 lbDocRev.Text = tem.C;
                 lbDesc.Text = tem.B;
 
-                lbB32.Text = String.Empty;
-                lbB33.Text = tem.E;
-                lbB34.Text = tem.F;
-                lbB35.Text = String.Empty;
-                lbB36.Text = String.Empty;
+                lbB34.Text = tem.E;
+                lbB35.Text = tem.F;
+                lbB36.Text = tem.D;
+                lbB37.Text = tem.G;
+                lbB38.Text = tem.I;
+                lbB39.Text = tem.J;
 
-                lbB29Spec.Text = tem.I;
-                lbB30Spec.Text = tem.J;
-                lbB31Spec.Text = String.Empty;
-                lbB32Spec.Text = String.Empty;
+                lbB30Spec.Text = tem.M;
+                lbB31Spec.Text = tem.O;
+                lbB32Spec.Text = tem.N;
 
-                lbUnitNvr.Text = tem.H;
-                lbUnitNvr_1.Text = tem.H;
+                lbUnitNvr.Text = tem.L;
+                lbUnitNvr_1.Text = tem.L;
 
-                lbUnitFtir.Text = tem.D;
-                lbUnitFtir_1.Text = tem.D;
+                lbUnitFtir.Text = tem.C;
+                lbUnitFtir_1.Text = tem.C;
 
             }
         }
@@ -1182,28 +1191,31 @@ namespace ALS.ALSI.Web.view.template
         {
 
             //Map FTIR to Cover Page
-            lbC32.Text = String.Empty;// ddlUnit.SelectedValue.Equals("1") ? lbWB26.Text : lbWB27.Text;//Silicone
-            lbC33.Text = ddlUnit.SelectedValue.Equals("1") ? lbWE26.Text : lbWE27.Text;//xHydrocarbon
-            lbC34.Text = ddlUnit.SelectedValue.Equals("1") ? lbWB26.Text : lbWB27.Text;//xSilicone Oil
-            lbC35.Text = ddlUnit.SelectedValue.Equals("1") ? lbWD26.Text : lbWD27.Text;//Phthalate
-            lbC36.Text = ddlUnit.SelectedValue.Equals("1") ? lbWC26.Text : lbWC27.Text;//Amide
+            lbC34.Text = String.Empty;
+            lbC35.Text = String.Empty;
+            lbC36.Text = String.Empty;
+            lbC37.Text = ddlUnit.SelectedValue.Equals("1") ? lbWE26.Text : lbWE27.Text;//Hydrocabon
+            lbC38.Text = ddlUnit.SelectedValue.Equals("1") ? lbWD26.Text : lbWD27.Text;//Phthalate
+            lbC39.Text = ddlUnit.SelectedValue.Equals("1") ? lbWC26.Text : lbWC27.Text;//Amide
 
             //Map NVR to Cover Page
-            lbB29Result.Text = ddlNvrUnit.SelectedValue.Equals("1") ? nvrC36.Text : nvrC37.Text;
             lbB30Result.Text = ddlNvrUnit.SelectedValue.Equals("1") ? nvrC36.Text : nvrC37.Text;
             lbB31Result.Text = ddlNvrUnit.SelectedValue.Equals("1") ? nvrC36.Text : nvrC37.Text;
             lbB32Result.Text = ddlNvrUnit.SelectedValue.Equals("1") ? nvrC36.Text : nvrC37.Text;
+            //lbB32Result.Text = ddlNvrUnit.SelectedValue.Equals("1") ? nvrC36.Text : nvrC37.Text;
 
-            lbC32.Text = CustomUtils.isNumber(lbC32.Text) ? Convert.ToDouble(lbC32.Text).ToString("N3") : lbC32.Text;
-            lbC33.Text = CustomUtils.isNumber(lbC33.Text) ? Convert.ToDouble(lbC33.Text).ToString("N3") : lbC33.Text;
             lbC34.Text = CustomUtils.isNumber(lbC34.Text) ? Convert.ToDouble(lbC34.Text).ToString("N3") : lbC34.Text;
             lbC35.Text = CustomUtils.isNumber(lbC35.Text) ? Convert.ToDouble(lbC35.Text).ToString("N3") : lbC35.Text;
             lbC36.Text = CustomUtils.isNumber(lbC36.Text) ? Convert.ToDouble(lbC36.Text).ToString("N3") : lbC36.Text;
+            lbC37.Text = CustomUtils.isNumber(lbC37.Text) ? Convert.ToDouble(lbC37.Text).ToString("N3") : lbC37.Text;
+            lbC38.Text = CustomUtils.isNumber(lbC38.Text) ? Convert.ToDouble(lbC38.Text).ToString("N3") : lbC38.Text;
+            lbC39.Text = CustomUtils.isNumber(lbC39.Text) ? Convert.ToDouble(lbC39.Text).ToString("N3") : lbC39.Text;
 
-            lbB29Result.Text = CustomUtils.isNumber(lbB29Result.Text) ? Convert.ToDouble(lbB29Result.Text).ToString("N3") : lbB29Result.Text;
+
             lbB30Result.Text = CustomUtils.isNumber(lbB30Result.Text) ? Convert.ToDouble(lbB30Result.Text).ToString("N3") : lbB30Result.Text;
             lbB31Result.Text = CustomUtils.isNumber(lbB31Result.Text) ? Convert.ToDouble(lbB31Result.Text).ToString("N3") : lbB31Result.Text;
             lbB32Result.Text = CustomUtils.isNumber(lbB32Result.Text) ? Convert.ToDouble(lbB32Result.Text).ToString("N3") : lbB32Result.Text;
+            //lbB32Result.Text = CustomUtils.isNumber(lbB32Result.Text) ? Convert.ToDouble(lbB32Result.Text).ToString("N3") : lbB32Result.Text;
 
 
             lbUnitNvr.Text = ddlNvrUnit.SelectedItem.Text;
@@ -1247,20 +1259,10 @@ namespace ALS.ALSI.Web.view.template
             ReportData tmp = new ReportData
             {
                 A = "NVR (DI Water)",
-                B = lbB29Spec.Text,
-                C = lbB29Result.Text
-            };
-            if (item[1] == '1')
-            {
-                reportNVRList.Add(tmp);
-            }
-            tmp = new ReportData
-            {
-                A = "NVR (IPA/Hexane)",
                 B = lbB30Spec.Text,
                 C = lbB30Result.Text
             };
-            if (item[2] == '1')
+            if (item[1] == '1')
             {
                 reportNVRList.Add(tmp);
             }
@@ -1270,20 +1272,30 @@ namespace ALS.ALSI.Web.view.template
                 B = lbB31Spec.Text,
                 C = lbB31Result.Text
             };
-            if (item[3] == '1')
+            if (item[2] == '1')
             {
                 reportNVRList.Add(tmp);
             }
             tmp = new ReportData
             {
-                A = "NVR (Acetone)",
-                B = lbB31Spec.Text,
-                C = lbB31Result.Text
+                A = "NVR (IPA/Hexane)",
+                B = lbB32Spec.Text,
+                C = lbB32Result.Text
             };
-            if (item[4] == '1')
+            if (item[3] == '1')
             {
                 reportNVRList.Add(tmp);
             }
+            //tmp = new ReportData
+            //{
+            //    A = "NVR (Acetone)",
+            //    B = lbB31Spec.Text,
+            //    C = lbB31Result.Text
+            //};
+            //if (item[4] == '1')
+            //{
+            //    reportNVRList.Add(tmp);
+            //}
 
 
 
@@ -1291,9 +1303,29 @@ namespace ALS.ALSI.Web.view.template
             //Create ReportData FTIR
             tmp = new ReportData
             {
+                A = "Silicone (Release side)",
+                B = lbB34.Text,
+                C = lbC34.Text
+            };
+            if (item[4] == '1')
+            {
+                reportFTIRList.Add(tmp);
+            }
+            tmp = new ReportData
+            {
+                A = "Silicone (Non-release side)",
+                B = lbB35.Text,
+                C = lbC35.Text
+            };
+            if (item[5] == '1')
+            {
+                reportFTIRList.Add(tmp);
+            }
+            tmp = new ReportData
+            {
                 A = "Silicone",
-                B = lbB32.Text,
-                C = lbC32.Text
+                B = lbB36.Text,
+                C = lbC36.Text
             };
             if (item[6] == '1')
             {
@@ -1301,9 +1333,9 @@ namespace ALS.ALSI.Web.view.template
             }
             tmp = new ReportData
             {
-                A = "Silicone Oil",
-                B = lbB33.Text,
-                C = lbC33.Text
+                A = "Hydrocarbon",
+                B = lbB37.Text,
+                C = lbC37.Text
             };
             if (item[7] == '1')
             {
@@ -1311,9 +1343,9 @@ namespace ALS.ALSI.Web.view.template
             }
             tmp = new ReportData
             {
-                A = "Hydrocarbon",
-                B = lbB34.Text,
-                C = lbC34.Text
+                A = "Phthalate",
+                B = lbB38.Text,
+                C = lbC38.Text
             };
             if (item[8] == '1')
             {
@@ -1321,21 +1353,11 @@ namespace ALS.ALSI.Web.view.template
             }
             tmp = new ReportData
             {
-                A = "Phthalate",
-                B = lbB35.Text,
-                C = lbC35.Text
+                A = "Amides",
+                B = lbB39.Text,
+                C = lbC39.Text
             };
             if (item[9] == '1')
-            {
-                reportFTIRList.Add(tmp);
-            }
-            tmp = new ReportData
-            {
-                A = "Amides",
-                B = lbB36.Text,
-                C = lbC36.Text
-            };
-            if (item[10] == '1')
             {
                 reportFTIRList.Add(tmp);
             }
@@ -1497,7 +1519,7 @@ namespace ALS.ALSI.Web.view.template
                 ((CheckBox7.Checked) ? "1" : "0") +
                 ((CheckBox13.Checked) ? "1" : "0") +
                 ((CheckBox16.Checked) ? "1" : "0") +
-                ((CheckBox17.Checked) ? "1" : "0") +
+                //((CheckBox17.Checked) ? "1" : "0") +
 
 
                 ((CheckBox15.Checked) ? "1" : "0") +
@@ -1505,7 +1527,9 @@ namespace ALS.ALSI.Web.view.template
                 ((CheckBox9.Checked) ? "1" : "0") +
                 ((CheckBox10.Checked) ? "1" : "0") +
                 ((CheckBox11.Checked) ? "1" : "0") +
-                ((CheckBox12.Checked) ? "1" : "0");
+                ((CheckBox12.Checked) ? "1" : "0")+
+                ((CheckBox17.Checked) ? "1" : "0");
+
 
             return result;
         }
@@ -1528,7 +1552,7 @@ namespace ALS.ALSI.Web.view.template
                             CheckBox7.Visible = true;
                             CheckBox13.Visible = true;
                             CheckBox16.Visible = true;
-                            CheckBox17.Visible = true;
+                            //CheckBox17.Visible = true;
 
 
                             CheckBox15.Visible = true;
@@ -1537,6 +1561,8 @@ namespace ALS.ALSI.Web.view.template
                             CheckBox10.Visible = true;
                             CheckBox11.Visible = true;
                             CheckBox12.Visible = true;
+                            CheckBox17.Visible = true;
+
 
                             break;
                         case StatusEnum.LOGIN_SELECT_SPEC:
@@ -1552,7 +1578,7 @@ namespace ALS.ALSI.Web.view.template
                             CheckBox7.Visible = false;
                             CheckBox13.Visible = false;
                             CheckBox16.Visible = false;
-                            CheckBox17.Visible = false;
+                            //CheckBox17.Visible = false;
 
                             CheckBox15.Visible = false;
                             CheckBox8.Visible = false;
@@ -1560,6 +1586,7 @@ namespace ALS.ALSI.Web.view.template
                             CheckBox10.Visible = false;
                             CheckBox11.Visible = false;
                             CheckBox12.Visible = false;
+                            CheckBox17.Visible = false;
 
                             break;
                     }
@@ -1568,21 +1595,22 @@ namespace ALS.ALSI.Web.view.template
                     CheckBox7.Checked = item[1] == '1' ? true : false;
                     CheckBox13.Checked = item[2] == '1' ? true : false;
                     CheckBox16.Checked = item[3] == '1' ? true : false;
-                    CheckBox17.Checked = item[4] == '1' ? true : false;
+                    //CheckBox17.Checked = item[4] == '1' ? true : false;
 
-                    CheckBox15.Checked = item[5] == '1' ? true : false;
-                    CheckBox8.Checked = item[6] == '1' ? true : false;
-                    CheckBox9.Checked = item[7] == '1' ? true : false;
-                    CheckBox10.Checked = item[8] == '1' ? true : false;
-                    CheckBox11.Checked = item[9] == '1' ? true : false;
-                    CheckBox12.Checked = item[10] == '1' ? true : false;
+                    CheckBox15.Checked = item[4] == '1' ? true : false;
+                    CheckBox8.Checked = item[5] == '1' ? true : false;
+                    CheckBox9.Checked = item[6] == '1' ? true : false;
+                    CheckBox10.Checked = item[7] == '1' ? true : false;
+                    CheckBox11.Checked = item[8] == '1' ? true : false;
+                    CheckBox12.Checked = item[9] == '1' ? true : false;
+                    CheckBox17.Checked = item[10] == '1' ? true : false;
 
 
                     Tr28.Visible = CheckBox14.Checked;
                     Tr29.Visible = CheckBox7.Checked;
                     Tr30.Visible = CheckBox13.Checked;
                     Tr31.Visible = CheckBox16.Checked;
-                    Tr32.Visible = CheckBox17.Checked;
+                    //Tr32.Visible = CheckBox17.Checked;
 
                     tab2_tr0.Visible = CheckBox15.Checked;
                     tab2_tr1.Visible = CheckBox8.Checked;
@@ -1590,6 +1618,8 @@ namespace ALS.ALSI.Web.view.template
                     tab2_tr3.Visible = CheckBox10.Checked;
                     tab2_tr4.Visible = CheckBox11.Checked;
                     tab2_tr5.Visible = CheckBox12.Checked;
+                    tab2_tr6.Visible = CheckBox17.Checked;
+
                 }
             }
 

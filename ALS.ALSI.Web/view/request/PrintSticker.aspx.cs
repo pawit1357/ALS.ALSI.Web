@@ -52,7 +52,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (int)Session[GetType().Name + "JobID"]; }
             set { Session[GetType().Name + "JobID"] = value; }
         }
-
+        public int SampleID
+        {
+            get { return (int)Session[GetType().Name + "SampleID"]; }
+            set { Session[GetType().Name + "SampleID"] = value; }
+        }
         public job_info objInfo
         {
             get
@@ -73,15 +77,16 @@ namespace ALS.ALSI.Web.view.request
 
         private void fillinScreen()
         {
+            job_sample jobSample = new job_sample().SelectByID(this.SampleID);
             job_info jobInfo = new job_info().SelectByID(this.JobID);
             if (jobInfo != null)
             {
 
-
-
-                lbJobNo.Text = String.Format("{0}{1}", jobInfo.job_running.prefix, Convert.ToInt32(jobInfo.job_number).ToString("00000"));
-                lbClient.Text = jobInfo.m_customer.company_name;
-                lbContract.Text = jobInfo.m_customer_contract_person.name;
+                m_customer cus = new m_customer().SelectByID(jobInfo.customer_id);
+                m_customer_contract_person cus_con_per = new m_customer_contract_person().SelectByID(jobInfo.contract_person_id);
+                lbJobNo.Text = jobSample.job_number;// String.Format("{0}{1}", jobSample.job_running.prefix, Convert.ToInt32(jobInfo.job_number).ToString("00000"));
+                lbClient.Text = cus.company_name;// jobInfo.m_customer.company_name;
+                lbContract.Text = cus_con_per.name;// jobInfo.m_customer_contract_person.name;
 
 
                 List<job_sample> samples = job_sample.FindAllByJobID(jobInfo.ID);
@@ -92,13 +97,15 @@ namespace ALS.ALSI.Web.view.request
                     {
                         lbSample.Text += s.description + "<br/>";
 
+                        m_specification spec = new m_specification().SelectByID(s.specification_id);
 
-                        //lbSpec.Text = s.m_specification.name;
-                        //if (spec_id != s.specification_id)
-                        //{
-                        //    spec_id = s.specification_id;
-                        //}
-                        //type_of_test += String.Format("<i class=\"icon-check\"></i> {0} ", s.m_type_of_test.name);
+                        lbSpec.Text = spec.name;
+                        if (spec_id != s.specification_id)
+                        {
+                            spec_id = s.specification_id;
+                        }
+                        m_type_of_test tot = new m_type_of_test().SelectByID(s.type_of_test_id);
+                        type_of_test += String.Format("<i class=\"icon-check\"></i> {0} ", tot.name);
                     }
 
                     if (jobInfo.sample_diposition != null)
@@ -146,6 +153,7 @@ namespace ALS.ALSI.Web.view.request
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.CommandName = (prvPage == null) ? this.CommandName : prvPage.CommandName;
             this.JobID = (prvPage == null) ? this.JobID : prvPage.JobID;
+            this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
 
             if (!Page.IsPostBack)
