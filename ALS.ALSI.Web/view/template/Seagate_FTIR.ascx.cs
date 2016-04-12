@@ -326,6 +326,8 @@ namespace ALS.ALSI.Web.view.template
                 {
                     this.Ftir.Delete();
                 }
+                this.Ftir = new template_seagate_ftir_coverpage();
+
             }
             else {
                 if (this.Ftir != null)

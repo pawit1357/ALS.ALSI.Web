@@ -779,7 +779,13 @@ namespace ALS.ALSI.Web.view.template
             detailSpec.specification_id = this.jobSample.specification_id;
             detailSpec.template_id = this.jobSample.template_id;
 
-            List<tb_m_detail_spec> headerDs = detailSpec.SelectAll().Take(2).ToList(); ;
+
+
+            List<tb_m_detail_spec> _headerDs = detailSpec.SelectAll().Take(3).ToList();
+            List<tb_m_detail_spec> headerDs = new List<tb_m_detail_spec>();
+            headerDs.Add(_headerDs[1]);
+            headerDs.Add(_headerDs[2]);
+
 
             detailSpec = detailSpec.SelectByID(int.Parse(ddlSpecification.SelectedValue));
             if (detailSpec != null)
