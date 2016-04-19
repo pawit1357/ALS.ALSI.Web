@@ -868,8 +868,8 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
             reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1 + reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
@@ -890,7 +890,10 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_wd.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.reportCovers.ToDataTable())); // Add datasource here
+
+            List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0,13).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(13,ds2.Count-13).ToDataTable())); // Add datasource here
 
             string download = String.Empty;
 

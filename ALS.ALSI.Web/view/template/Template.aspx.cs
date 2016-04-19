@@ -199,6 +199,8 @@ namespace ALS.ALSI.Web.view.template
             Boolean bUploadSuccess = false;
             try
             {
+                List<int> listOfSpec = new List<int>();
+
                 using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 {
                     HSSFWorkbook wd = new HSSFWorkbook(fs);
@@ -256,8 +258,10 @@ namespace ALS.ALSI.Web.view.template
                                     String _spectRefId = CustomUtils.GetCellValue(isComponent.GetRow(row).GetCell(Convert.ToInt32(txtSpecRef.Text)-1));
                                     if (!String.IsNullOrEmpty(_spectRefId))
                                     {
+
                                         int spectRefId = Convert.ToInt32(_spectRefId);
                                         int index = 1;
+
                                         for (int row1 = 2; row1 <= isDetailSpecRef.LastRowNum; row1++)
                                         {
                                             if (isDetailSpecRef.GetRow(row1) != null)
@@ -272,7 +276,14 @@ namespace ALS.ALSI.Web.view.template
                                                 detailSpecRef.D = CustomUtils.GetCellValue(isDetailSpecRef.GetRow(row1).GetCell(spectRefId + 2));
 
                                                 detailSpecRef.RowState = CommandNameEnum.Add;
-                                                if (!detailSpecRef.B.Equals("") )
+
+                                                //bool isExist = false;
+                                                //if (!listOfSpec.Contains(spectRefId))
+                                                //{
+                                                //    isExist = true;
+                                                //    listOfSpec.Add(spectRefId);
+                                                //}
+                                                if (!detailSpecRef.B.Equals("") && !detailSpecRef.B.Equals("-"))
                                                 {
                                                     detailSpecRefs.Add(detailSpecRef);
                                                 }

@@ -153,7 +153,7 @@
                                                     <span class="input-group-addon btn default btn-file">
                                                         <span class="fileinput-new">Select file </span>
                                                         <span class="fileinput-exists">Change </span>
-                                                        <asp:FileUpload ID="btnUpload" runat="server" />
+                                                        <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
 
                                                     </span>
                                                     <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>

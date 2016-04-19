@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <br />
-                        <asp:Label ID="lbRemark1" runat="server" Text="Note: This report was performed test by ALS Singapore."></asp:Label><br />
+                        <asp:Label ID="lbRemark1" runat="server" Text=""></asp:Label><br />
                         <asp:Label ID="lbRemark2" runat="server" Text=""></asp:Label><br />
                         <asp:Label ID="lbRemark3" runat="server" Text=""></asp:Label>
                     </asp:Panel>

@@ -263,11 +263,14 @@ namespace ALS.ALSI.Web.view.template
                     //Result Description
                     template_seagate_gcms_coverpage cov = this.coverpages[0];
                     tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);// this.coverpages[0].tb_m_component;
-                    ddlComponent.SelectedValue = component.ID.ToString();
+                    if (component != null)
+                    {
+                        ddlComponent.SelectedValue = component.ID.ToString();
 
-                    gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                    lbDescription.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
+                        gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                        gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        lbDescription.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
+                    }
                     txtProcedure.Text = cov.procedure_no;
                     txtSampleSize.Text = cov.sample_size;
                     txtExtractionMedium.Text = cov.extraction_medium;
@@ -432,7 +435,8 @@ namespace ALS.ALSI.Web.view.template
             {
                 case StatusEnum.LOGIN_CONVERT_TEMPLATE:
                     this.jobSample.step1owner = userLogin.id;
-
+                    template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
+                    tb_m_gcms_cas.DeleteBySampleID(this.SampleID);
                     break;
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
@@ -1264,10 +1268,10 @@ namespace ALS.ALSI.Web.view.template
 
                     List<template_seagate_gcms_coverpage> newCoverPage = new List<template_seagate_gcms_coverpage>();
                     int index = 0;
-                    foreach (tb_m_detail_spec_ref spec in detailSpecRefs)
+                    foreach (tb_m_detail_spec_ref spec in detailSpecRefs.Where(x=>!x.B.Equals("-")).ToList())
                     {
                         template_seagate_gcms_coverpage work = new template_seagate_gcms_coverpage();
-                        work.ID = (this.CommandName == CommandNameEnum.Add) ? index : this.coverpages[index].ID;
+                        work.ID = spec.ID;// (this.CommandName == CommandNameEnum.Add) ? index : this.coverpages[index].ID;
                         work.sample_id = this.SampleID;
                         work.component_id = component.ID;
                         work.A = spec.B;
@@ -1312,8 +1316,8 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
             reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1 + reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));

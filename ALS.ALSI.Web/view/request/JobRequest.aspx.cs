@@ -40,7 +40,7 @@ namespace ALS.ALSI.Web.view.request
                 job.customer_ref_no = txtCustomer_ref_no.Text;
                 job.company_name_to_state_in_report = txtCompany_name_to_state_in_report.InnerText;
                 job.job_number = String.IsNullOrEmpty(txtJob_number.Text) ? 0 : int.Parse(txtJob_number.Text);
-                job.job_prefix = Convert.ToInt32(ddlJobNumber.SelectedValue);
+                job.job_prefix = String.IsNullOrEmpty(ddlJobNumber.SelectedValue)? 0: Convert.ToInt32(ddlJobNumber.SelectedValue);
                 job.date_of_receive = String.IsNullOrEmpty(txtDate_of_receive.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDate_of_receive.Text);
                 job.s_pore_ref_no = txtS_pore_ref_no.Text;
                 job.spec_ref_rev_no = txtSpecRefRevNo.Text;
@@ -579,37 +579,43 @@ namespace ALS.ALSI.Web.view.request
                          * FA,FLWA->Login->Chemist -(แนบไฟล์) ->Sr Chemist-Approve->Admin->LabManager->Admin->Finish
                          * GRP,TRB->Login->Admin->Finish
                          * */
-                        switch (Convert.ToInt32(ddlJobNumber.SelectedValue))
+                        if (!String.IsNullOrEmpty(ddlJobNumber.SelectedValue))
                         {
-                            case 2://ELS
-                                jobSample.template_id = 160;
-                                jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
-                                break;
-                            case 3://FA
-                                jobSample.template_id = 161;
-                                jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
-                                break;
-                            case 4://ELWA
-                                jobSample.template_id = 162;
-                                jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
-                                break;
-                            case 5://GRP
-                                jobSample.template_id = 163;
-                                jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-                                break;
-                            case 6://TRB
-                                jobSample.template_id = 164;
-                                jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-                                break;
-                            default://ELP 
-                                break;
+                            switch (Convert.ToInt32(ddlJobNumber.SelectedValue))
+                            {
+                                case 2://ELS
+                                    jobSample.template_id = 160;
+                                    jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                                    break;
+                                case 3://FA
+                                    jobSample.template_id = 161;
+                                    jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                                    break;
+                                case 4://ELWA
+                                    jobSample.template_id = 162;
+                                    jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                                    break;
+                                case 5://GRP
+                                    jobSample.template_id = 163;
+                                    jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
+                                    break;
+                                case 6://TRB
+                                    jobSample.template_id = 164;
+                                    jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
+                                    break;
+                                default://ELP 
+                                    break;
+                            }
                         }
                         #endregion
 
                         m_completion_scheduled cs = new m_completion_scheduled().SelectByID(Convert.ToInt32(jobSample.status_completion_scheduled));
                         if (cs != null)
                         {
-                            jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
+                            if (objJobInfo != null)
+                            {
+                                jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
+                            }
                         }
                         else
                         {
