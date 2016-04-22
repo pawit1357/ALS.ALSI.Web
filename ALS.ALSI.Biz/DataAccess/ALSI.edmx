@@ -1777,7 +1777,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="customer_code" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="company_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="company_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="sub_district" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="mobile_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />

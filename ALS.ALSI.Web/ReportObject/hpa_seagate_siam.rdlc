@@ -696,7 +696,7 @@
         <Top>2.91834in</Top>
         <Left>0.28805in</Left>
         <Height>0.71875in</Height>
-        <Width>6.51571in</Width>
+        <Width>6.51569in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1698,7 +1698,7 @@
         <Top>5.90778in</Top>
         <Left>0.28718in</Left>
         <Height>0.73958in</Height>
-        <Width>6.51658in</Width>
+        <Width>6.51659in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -2180,7 +2180,7 @@
         <Top>6.71681in</Top>
         <Left>0.28718in</Left>
         <Height>0.73958in</Height>
-        <Width>6.51658in</Width>
+        <Width>6.51659in</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -2594,7 +2594,7 @@
         <Top>8.76381in</Top>
         <Left>0.28805in</Left>
         <Height>0.51041in</Height>
-        <Width>6.51571in</Width>
+        <Width>6.51572in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -2861,7 +2861,7 @@
         <Top>13.06239in</Top>
         <Left>0.28805in</Left>
         <Height>0.25in</Height>
-        <Width>6.62949in</Width>
+        <Width>6.62948in</Width>
         <ZIndex>9</ZIndex>
         <Style>
           <Border>
@@ -3774,7 +3774,7 @@
         <Top>1.51125cm</Top>
         <Left>0.73163cm</Left>
         <Height>4.69416cm</Height>
-        <Width>16.54993cm</Width>
+        <Width>16.54992cm</Width>
         <ZIndex>16</ZIndex>
         <Style>
           <Border>
@@ -4732,7 +4732,7 @@
         <Top>10.1216in</Top>
         <Left>0.28544in</Left>
         <Height>0.51041in</Height>
-        <Width>6.51832in</Width>
+        <Width>6.51833in</Width>
         <ZIndex>20</ZIndex>
         <Style>
           <Border>
@@ -5146,7 +5146,7 @@
         <Top>11.4617in</Top>
         <Left>0.28544in</Left>
         <Height>0.51041in</Height>
-        <Width>6.51832in</Width>
+        <Width>6.51833in</Width>
         <ZIndex>21</ZIndex>
         <Style>
           <Border>
@@ -5426,7 +5426,7 @@
         <Top>23.77784cm</Top>
         <Left>0.72501cm</Left>
         <Height>1.75464cm</Height>
-        <Width>16.55655cm</Width>
+        <Width>16.55656cm</Width>
         <ZIndex>22</ZIndex>
         <Style>
           <Border>
@@ -5688,7 +5688,7 @@
         <Top>27.1817cm</Top>
         <Left>0.60071cm</Left>
         <Height>1.75464cm</Height>
-        <Width>16.68085cm</Width>
+        <Width>16.68086cm</Width>
         <ZIndex>23</ZIndex>
         <Style>
           <Border>
@@ -6027,7 +6027,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.05902in</Height>
+      <Height>1.30902in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -6054,7 +6054,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>2.24048cm</Top>
+          <Top>2.55798cm</Top>
           <Left>0cm</Left>
           <Height>0.44944cm</Height>
           <Width>18.12617cm</Width>
@@ -6072,7 +6072,7 @@
           <Source>Embedded</Source>
           <Value>footer</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.7934cm</Top>
+          <Top>0.96097cm</Top>
           <Left>0.635cm</Left>
           <Height>1.44708cm</Height>
           <Width>16.93555cm</Width>
@@ -6083,187 +6083,24 @@
             </Border>
           </Style>
         </Image>
-        <Textbox Name="Textbox52">
+        <Textbox Name="Textbox57">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>ADDRESS</Value>
+                  <Value>ADDRESS 75/37 Moo 11, Klong Nueng Subdistric, Klong Luang District, Pathumthani, Thailand 12120  ç PHONE +66 2908 1681-5  ç FAX +66 2908 1680
+ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
                   <Style>
                     <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#96a9c9</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value> 75/37 Moo 11, Klong Nueng Subdistric, Klong Luang District, Pathumthani, Thailand 12120  </Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
                     <FontSize>7pt</FontSize>
                     <FontWeight>Normal</FontWeight>
                     <TextDecoration>None</TextDecoration>
-                    <Color>#003b66</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>ç</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Symbol</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#f7c23f</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value xml:space="preserve"> </Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#003b66</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>PHONE</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#96a9c9</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value xml:space="preserve"> </Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#003b66</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>+66 2908 1681-5</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#005387</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value xml:space="preserve">  </Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#003b66</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>ç</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Symbol</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#f7c23f</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value xml:space="preserve"> </Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#003b66</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>FAX</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#96a9c9</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value xml:space="preserve"> </Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#003b66</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>+66 2908 1680</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#005387</Color>
+                    <Color>#000000</Color>
                   </Style>
                 </TextRun>
               </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>ALS Testing Services (Thailand) Co., Ltd.</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>6.5pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#96a9c9</Color>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value> An ALS Limited Company</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontFamily>Lucida Sans</FontFamily>
-                    <FontSize>6.5pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#005387</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <LeftIndent>-0.19722in</LeftIndent>
-              <RightIndent>-0.19722in</RightIndent>
               <Style>
                 <TextAlign>Center</TextAlign>
               </Style>
@@ -6272,7 +6109,7 @@
           <rd:DefaultName>Textbox13</rd:DefaultName>
           <Top>0cm</Top>
           <Left>0cm</Left>
-          <Height>0.7934cm</Height>
+          <Height>0.81986cm</Height>
           <Width>18.12617cm</Width>
           <ZIndex>2</ZIndex>
           <Style>

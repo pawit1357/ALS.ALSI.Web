@@ -513,7 +513,7 @@
                                         <h6>The Specification is based on Seagate's Doc
                                                     <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
                                             <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>
-                                        <h6>This sample is no Seagate specification reference.</h6>
+                                        <%--<h6>This sample is no Seagate specification reference.</h6>--%>
                                         <asp:GridView ID="gvAnionic" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type" OnRowDataBound="gvAnionic_RowDataBound" OnRowCommand="gvAnionic_RowCommand">
                                             <Columns>
