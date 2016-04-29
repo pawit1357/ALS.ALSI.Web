@@ -9,6 +9,7 @@ using Microsoft.Reporting.WebForms;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -804,7 +805,8 @@ namespace ALS.ALSI.Web.view.template
                 List<template_seagate_dhs_coverpage> newCoverPage = new List<template_seagate_dhs_coverpage>();
                 foreach (template_seagate_dhs_coverpage _cover in this.coverpages)
                 {
-                    tb_m_dhs_cas tmp = this.tbCas.Find(x => _cover.name.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
+                    String groupName = mappingRawData(_cover.name);
+                    tb_m_dhs_cas tmp = this.tbCas.Find(x => groupName.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
                     if (tmp != null)
                     {
                         switch (tmp.amount)
@@ -814,15 +816,7 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                             default:
                                 Double amt = Convert.ToDouble(tmp.amount);
-                                //switch (_cover.name)
-                                //{
-                                //    case "Total of All Compounds":
-                                //        _cover.result = Math.Round(amt).ToString();
-                                //        break;
-                                //    default:
                                 _cover.result = amt.ToString();
-                                //        break;
-                                //}
                                 break;
                         }
                     }
@@ -1113,5 +1107,31 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
         }
 
+
+
+
+        private String mappingRawData(String _val)
+        {
+            String result = _val;
+            Hashtable mappingValues = new Hashtable();
+            mappingValues["Others & Unknown"] = "Unknown";
+            //mappingValues["SST300s with possible Si and Mn"] = "SST400s (Fe/Cr)";
+            //mappingValues["SST400s with possible Si"] = "SST400s (Fe/Cr)";
+
+
+            //SST400s(Fe / Cr)
+
+
+
+            foreach (DictionaryEntry entry in mappingValues)
+            {
+                if (entry.Key.Equals(_val.Trim()))
+                {
+                    result = entry.Value.ToString();
+                    break;
+                }
+            }
+            return result;
+        }
     }
 }

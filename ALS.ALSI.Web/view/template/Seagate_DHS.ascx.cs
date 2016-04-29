@@ -256,12 +256,15 @@ namespace ALS.ALSI.Web.view.template
 
 
                     tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
-                    ddlComponent.SelectedValue = component.ID.ToString();
+                    if (component != null)
+                    {
+                        ddlComponent.SelectedValue = component.ID.ToString();
 
-                    gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                    lbDocRev.Text = component.B;
-                    lbDesc.Text = component.A;
+                        gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                        gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        lbDocRev.Text = component.B;
+                        lbDesc.Text = component.A;
+                    }
                     //lbResultDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
 
 
@@ -570,7 +573,7 @@ namespace ALS.ALSI.Web.view.template
                                             {
                                                 if (isheet.GetRow(j).GetCell(7).CellType != CellType.Blank)
                                                 {
-                                                    if (tmp.library_id.Equals("Total Outgassing") || tmp.library_id.Equals("Total of All Compounds") || tmp.library_id.Equals("Hydrocarbons, Unknowns, Others"))
+                                                    if (tmp.library_id.Equals("Total Outgassing") || tmp.library_id.Equals("Total of All Compounds")) // || tmp.library_id.Equals("Hydrocarbons, Unknowns, Others"))
                                                     {
                                                         tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
 

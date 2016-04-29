@@ -690,7 +690,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
-            reportParameters.Add(new ReportParameter("ResultDesc", "-"));
+            reportParameters.Add(new ReportParameter("ResultDesc", ""));
 
             // Variables
             Warning[] warnings;

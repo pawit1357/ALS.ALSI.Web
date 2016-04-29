@@ -47,6 +47,7 @@
                                 </div>
                             </div>
                         </div>
+
 <%--                        <div class="form-group">
                             <label class="control-label col-md-3">Disable Past Dates</label>
                             <div class="col-md-3">
@@ -61,7 +62,8 @@
                                 <!-- /input-group -->
                                 <span class="help-block">Select date </span>
                             </div>
-                        </div>--%>
+                        </div>
+    --%>
 
                     </div>
                     <h4 class="form-section">Customer Information</h4>

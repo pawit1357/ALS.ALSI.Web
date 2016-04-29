@@ -52,7 +52,7 @@ namespace ALS.ALSI.Web.view.template
             "-#- Irgafos",
             "-#- Irgafos-oxidized",
             "G#Total Organic Compound",
-            "D#Phthalate",
+            //"D#Phthalate",
             "D#Diisononyl Phthalate & Isomer",
             "D#Phthalate hump (m/z 149,293)"
         };

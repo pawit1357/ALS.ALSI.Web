@@ -66,32 +66,37 @@
                                     <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>
 
                                 <asp:GridView ID="gvAnionic" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type,B" OnRowDataBound="gvAnionic_RowDataBound" OnRowCommand="gvAnionic_RowCommand">
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="id,row_type,B" OnRowDataBound="gvAnionic_RowDataBound" OnRowCommand="gvAnionic_RowCommand">
                                     <Columns>
-                                        <asp:TemplateField HeaderText="Analytes" ItemStyle-HorizontalAlign="Left">
+                                        <asp:TemplateField HeaderText="Anionic Contamination" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litAnalytes" runat="server" Text='<%# Eval("A")%>' />
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Specification Limits, (µg/cm2)" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litSpecificationLimits" runat="server" Text='<%# Eval("B")%>'></asp:Literal>
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Results, (µg/cm2)" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="litResult" runat="server" Text='<%# Eval("wi")%>'></asp:Label>
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Method Detection Limit, (µg/cm2)" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="litMethodDetectionLimit" runat="server" Text='<%# Eval("wf")%>'></asp:Label>
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="PASS / FAIL" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="litPassFail" runat="server" Text='<%# Eval("E")%>'></asp:Label>
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
 
                                         <asp:TemplateField HeaderText="Hide">
@@ -112,32 +117,37 @@
                                 </asp:GridView>
                                 <br />
                                 <asp:GridView ID="gvCationic" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type,B" OnRowDataBound="gvCationic_RowDataBound" OnRowCommand="gvCationic_RowCommand">
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="id,row_type,B" OnRowDataBound="gvCationic_RowDataBound" OnRowCommand="gvCationic_RowCommand">
                                     <Columns>
-                                        <asp:TemplateField HeaderText="Analytes" ItemStyle-HorizontalAlign="Left">
+                                        <asp:TemplateField HeaderText="Cationic Contamination" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litAnalytes" runat="server" Text='<%# Eval("A")%>' />
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Specification Limits, (µg/cm2)" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litSpecificationLimits" runat="server" Text='<%# Eval("B")%>'></asp:Literal>
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Results, (µg/cm2)" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="litResult" runat="server" Text='<%# Eval("wi")%>'></asp:Label>
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Method Detection Limit, (µg/cm2)" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="litMethodDetectionLimit" runat="server" Text='<%# Eval("wf")%>'></asp:Label>
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="PASS / FAIL" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="litPassFail" runat="server" Text='<%# Eval("E")%>'></asp:Label>
                                             </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
 
                                         <asp:TemplateField HeaderText="Hide">
@@ -317,6 +327,27 @@
                                                 <asp:Label ID="lbAnJ18" runat="server"></asp:Label></td>
 
                                         </tr>
+<%--                                        <tr>
+                                            <td>Nitrite as NO2</td>
+                                            <td>
+                                                <asp:TextBox ID="txtB16_Chem" runat="server"></asp:TextBox></td>
+                                            <td>
+                                                <asp:TextBox ID="txtC16_Chem" runat="server"></asp:TextBox></td>
+                                            <td>
+                                                <asp:TextBox ID="txtD16_Chem" runat="server" Text="1"></asp:TextBox></td>
+                                            <td>
+                                                <asp:Label ID="lbAnE16" runat="server"></asp:Label></td>
+                                            <td>0.5</td>
+                                            <td>
+                                                <asp:Label ID="lbAnG16" runat="server"></asp:Label></td>
+                                            <td>
+                                                <asp:Label ID="lbAnH16" runat="server"></asp:Label></td>
+                                            <td>
+                                                <asp:Label ID="lbAnI16" runat="server"></asp:Label></td>
+                                            <td>
+                                                <asp:Label ID="lbAnJ16" runat="server"></asp:Label></td>
+
+                                        </tr>--%>
                                         <tr>
                                             <td>Bromide, Br</td>
                                             <td>

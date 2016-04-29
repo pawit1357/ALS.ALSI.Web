@@ -864,12 +864,20 @@ namespace ALS.ALSI.Web.view.template
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
             tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
-            if (tem != null)
+            if (tem != null) 
             {
+
+                tb_m_specification mSpec = new tb_m_specification();
+                mSpec.template_id = tem.template_id;
+                List<tb_m_specification> specs = mSpec.SelectBySpecificationID(tem.specification_id.Value,tem.template_id.Value);
+                
                 /*RESULT*/
-                lbDocRev.Text = tem.B;
+                 lbDocRev.Text = tem.B;
                 lbDesc.Text = tem.A;
-                txtB18.Text = tem.B;
+                if (specs.Count > 0)
+                {
+                    txtB18.Text = specs[1].B;
+                }
 
                 gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", tem.C);
                 gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", tem.C);

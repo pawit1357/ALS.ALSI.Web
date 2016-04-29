@@ -139,7 +139,7 @@ namespace ALS.ALSI.Biz.DataAccess
                                  remarks = s.remarks,
                                  specification = sp.name,
                                  type_of_test = tt.name,
-                                 //receive_date = j.date_of_receive,
+                                 receive_date = j.date_of_receive,
                                  customer_id = c.ID,
                                  contract_person_id = cp.ID,
                                  job_status = s.job_status,

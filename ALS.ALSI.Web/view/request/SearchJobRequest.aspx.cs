@@ -159,6 +159,21 @@ namespace ALS.ALSI.Web.view.request
             {
                 lbTotalRecords.Text = String.Format(Constants.TOTAL_RECORDS, gvJob.Rows.Count);
 
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                switch (userRole)
+                {
+                    case RoleEnum.ACCOUNT:
+                    case RoleEnum.ADMIN:
+                        gvJob.Columns[3].Visible = true;
+                        gvJob.Columns[4].Visible = true;
+                        break;
+                    default:
+                        gvJob.Columns[3].Visible = false;
+                        gvJob.Columns[4].Visible = false;
+                        break;
+                }
+
+
                 //DropDownList ddlCompany = (DropDownList)gvJob.HeaderRow.FindControl("ddlCompany");
                 //ddlCompany.DataSource = new m_customer().SelectAll();
                 //ddlCompany.DataBind();
@@ -614,6 +629,10 @@ namespace ALS.ALSI.Web.view.request
                     break;
                 case "btnTrb":
                     hPrefix.Value = "6";
+                    break;
+                case "btnEln":
+                                        hPrefix.Value = "7";
+
                     break;
             }
             bindingData();

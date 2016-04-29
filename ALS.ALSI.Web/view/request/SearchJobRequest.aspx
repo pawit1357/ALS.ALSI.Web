@@ -224,6 +224,8 @@
 
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>
                             <asp:LinkButton ID="btnEls" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELS</asp:LinkButton>
+                            <asp:LinkButton ID="btnEln" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELN</asp:LinkButton>
+
                             <asp:LinkButton ID="btnFa" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> FA</asp:LinkButton>
                             <asp:LinkButton ID="btnElwa" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELWA</asp:LinkButton>
                             <asp:LinkButton ID="btnGrp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> GRP</asp:LinkButton>
@@ -256,7 +258,7 @@
                                         <asp:LinkButton ID="btnChangeDueDate" runat="server" ToolTip="Change DueDate" CommandName="ChangeDueDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calculator"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeReportDate" runat="server" ToolTip="Change Report Date" CommandName="ChangeReportDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calculator"></i></asp:LinkButton>
 
-                                        <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Chnage Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnPrintLabel" runat="server" ToolTip="Print Label" CommandName="Print" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-print"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnAmend" runat="server" ToolTip="Change Amend" CommandName="Amend" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-pencil-square"></i></asp:LinkButton>
@@ -279,6 +281,10 @@
                                 </asp:BoundField>
 
                                 <asp:BoundField HeaderText="Report Sent to Customer" DataField="date_admin_sent_to_cus" ItemStyle-HorizontalAlign="Center" SortExpression="date_admin_sent_to_cus" DataFormatString="{0:dd-MM-yyyy}">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:BoundField>
+                                
+                                <asp:BoundField HeaderText="Receive Date." DataField="receive_date" ItemStyle-HorizontalAlign="Center" SortExpression="receive_date" DataFormatString="{0:dd-MM-yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:BoundField HeaderText="Due Date." DataField="due_date" ItemStyle-HorizontalAlign="Center" SortExpression="due_date" DataFormatString="{0:dd-MM-yyyy}">

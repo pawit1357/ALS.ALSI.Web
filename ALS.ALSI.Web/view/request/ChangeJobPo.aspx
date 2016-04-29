@@ -74,7 +74,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Change PO</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Change PO & Invoice</span>
                     <span class="caption-helper"></span>
                 </div>
                 <div class="tools">

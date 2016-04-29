@@ -39,7 +39,48 @@
                                 </ul>
                             </div>
                         </div>
-                        <h4 class="form-section">Manage Source File</h4>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">ทศนิยม</label>
+                            <div class="col-md-9">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Select Worksheet: </label>
+
+                            <div class="col-md-3">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="input-group input-large">
+                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                        </div>
+                                        <span class="input-group-addon btn default btn-file">
+                                            <span class="fileinput-new">Select file </span>
+                                            <span class="fileinput-exists">Change </span>
+                                            <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
+
+                                        </span>
+                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-9">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+
+                                </div>
+                            </div>
+                        </div>
+
+<%--                        <h4 class="form-section">Manage Source File</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -63,11 +104,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
+
                         <h4 class="form-section">Manage CAS# Data</h4>
                         <div class="row">
                             <div class="col-md-12">
-                                <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click">การแสดงผลทศนิยม</asp:LinkButton>
+<%--                                <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click">การแสดงผลทศนิยม</asp:LinkButton>--%>
 
                                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID" OnRowDataBound="gvResult_RowDataBound">
