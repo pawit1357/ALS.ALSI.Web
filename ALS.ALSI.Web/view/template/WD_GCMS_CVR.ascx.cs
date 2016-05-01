@@ -24,7 +24,7 @@ namespace ALS.ALSI.Web.view.template
     public partial class WD_GCMS_CVR : System.Web.UI.UserControl
     {
 
-        //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_GCMS));
+        private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_GCMS_CVR));
 
         #region "Property"
         public users_login userLogin
@@ -91,7 +91,7 @@ namespace ALS.ALSI.Web.view.template
 
         private void initialPage()
         {
-
+            logger.Debug("TEST");
             tb_m_detail_spec detailSpec = new tb_m_detail_spec();
             detailSpec.specification_id = this.jobSample.specification_id;
             detailSpec.template_id = this.jobSample.template_id;
@@ -1151,6 +1151,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                         catch (Exception ex)
                         {
+                            logger.Debug(ex.Message);
                             Console.WriteLine();
                             Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
 

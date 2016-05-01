@@ -74,7 +74,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Change Due date</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Due date send to customer</span>
                     <span class="caption-helper"></span>
                 </div>
                 <div class="tools">

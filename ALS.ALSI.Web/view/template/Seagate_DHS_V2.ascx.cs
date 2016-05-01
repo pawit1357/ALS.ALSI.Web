@@ -598,6 +598,7 @@ namespace ALS.ALSI.Web.view.template
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
                                                     break;
+                                                case "00110011":
                                                 case "00010011"://TOTAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
@@ -805,7 +806,7 @@ namespace ALS.ALSI.Web.view.template
                 List<template_seagate_dhs_coverpage> newCoverPage = new List<template_seagate_dhs_coverpage>();
                 foreach (template_seagate_dhs_coverpage _cover in this.coverpages)
                 {
-                    String groupName = mappingRawData(_cover.name);
+                    String groupName = mappingRawData(_cover.name.Trim());
                     tb_m_dhs_cas tmp = this.tbCas.Find(x => groupName.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
                     if (tmp != null)
                     {
@@ -1114,7 +1115,7 @@ namespace ALS.ALSI.Web.view.template
         {
             String result = _val;
             Hashtable mappingValues = new Hashtable();
-            mappingValues["Others & Unknown"] = "Unknown";
+            //mappingValues["Others & Unknown"] = "Unknown";
             //mappingValues["SST300s with possible Si and Mn"] = "SST400s (Fe/Cr)";
             //mappingValues["SST400s with possible Si"] = "SST400s (Fe/Cr)";
 
