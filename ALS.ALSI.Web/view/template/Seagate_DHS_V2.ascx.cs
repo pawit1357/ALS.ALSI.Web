@@ -598,11 +598,12 @@ namespace ALS.ALSI.Web.view.template
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
                                                     break;
-                                                case "00110011":
+                                                //case "00110011":
                                                 case "00010011"://TOTAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
                                                     break;
+                                                case "00110011":
                                                 case "00100011"://TOTAL OUT GAS
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalOutGas);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
@@ -816,8 +817,8 @@ namespace ALS.ALSI.Web.view.template
                                 _cover.result = "Not Detected";
                                 break;
                             default:
-                                Double amt = Convert.ToDouble(tmp.amount);
-                                _cover.result = amt.ToString();
+                                //Double amt = Convert.ToDouble(tmp.amount);
+                                _cover.result = tmp.amount;// amt.ToString();
                                 break;
                         }
                     }
@@ -835,8 +836,8 @@ namespace ALS.ALSI.Web.view.template
                                 _cover.result = "Not Detected";
                                 break;
                             default:
-                                Double amt = Convert.ToDouble(tmp.amount);
-                                _cover.result = amt.ToString();
+                                //Double amt = Convert.ToDouble(tmp.amount);
+                                _cover.result = tmp.amount;// amt.ToString();
                                 break;
                         }
                     }

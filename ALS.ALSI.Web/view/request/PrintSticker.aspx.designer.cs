@@ -76,6 +76,33 @@ namespace ALS.ALSI.Web.view.request {
         protected global::System.Web.UI.WebControls.Label lbSpec;
         
         /// <summary>
+        /// lbTot control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTot;
+        
+        /// <summary>
+        /// lbSd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbSd;
+        
+        /// <summary>
+        /// lbPrint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbPrint;
+        
+        /// <summary>
         /// btnCancel control.
         /// </summary>
         /// <remarks>

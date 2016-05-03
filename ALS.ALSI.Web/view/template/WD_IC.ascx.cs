@@ -1157,18 +1157,18 @@ namespace ALS.ALSI.Web.view.template
                         Word2Pdf objWorPdf = new Word2Pdf();
                         objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
                         objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                        try
-                        {
+                        //try
+                        //{
                             objWorPdf.Word2PdfCOnversion();
                             Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
 
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine();
-                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    Console.WriteLine();
+                        //    Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
 
-                        }
+                        //}
                     }
                     //if (!String.IsNullOrEmpty(this.jobSample.path_pdf))
                     //{

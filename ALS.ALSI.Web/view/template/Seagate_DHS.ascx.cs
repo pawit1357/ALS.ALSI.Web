@@ -9,6 +9,7 @@ using Microsoft.Reporting.WebForms;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -569,32 +570,78 @@ namespace ALS.ALSI.Web.view.template
                                             tmp.cas = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(4));
                                             tmp.qual = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(5));
                                             tmp.area = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(6));
-                                            if (isheet.GetRow(j).GetCell(7) != null)
+                                            tmp.amount = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7));
+
+
+                                            String compare_date = (string.IsNullOrEmpty(tmp.pk) ? "0" : "1") + "" +
+                                               (string.IsNullOrEmpty(tmp.rt) ? "0" : "1") + "" +
+                                               (string.IsNullOrEmpty(tmp.library_id) ? "0" : "1") + "" +
+                                               (string.IsNullOrEmpty(tmp.classification) ? "0" : "1") + "" +
+                                               (string.IsNullOrEmpty(tmp.cas) ? "0" : "1") + "" +
+                                               (string.IsNullOrEmpty(tmp.qual) ? "0" : "1") + "" +
+                                               (string.IsNullOrEmpty(tmp.area) ? "0" : "1") + "" +
+                                               (string.IsNullOrEmpty(tmp.amount) ? "0" : "1");
+
+                                            Boolean bAdd = true;
+                                            switch (compare_date)
                                             {
-                                                if (isheet.GetRow(j).GetCell(7).CellType != CellType.Blank)
-                                                {
-                                                    if (tmp.library_id.Equals("Total Outgassing") || tmp.library_id.Equals("Total of All Compounds")) // || tmp.library_id.Equals("Hydrocarbons, Unknowns, Others"))
-                                                    {
-                                                        tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
-
-                                                    }
-                                                    else
-                                                    {
-                                                        tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
-                                                    }
-                                                    //tmp.amount = Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7)))+"";
-                                                }
+                                                case "11111110":
+                                                    tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                                                    break;
+                                                case "01110011"://hydrocarcon hum item
+                                                case "11111111"://NORMAL
+                                                    tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    break;
+                                                
+                                                case "00010011"://TOTAL
+                                                    tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    break;
+                                                case "00110011":
+                                                case "00100011"://TOTAL OUT GAS
+                                                    tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalOutGas);
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                                    break;
+                                                case "00100010"://SAMPLE SIZE
+                                                    tmp.row_type = Convert.ToInt32(RowTypeEnum.SampleSize);
+                                                    break;
+                                                default:
+                                                    bAdd = false;
+                                                    break;
                                             }
-                                            tmp.row_type = (
-
-                                                String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.classification) ||
-
-                                                String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.library_id) && !String.IsNullOrEmpty(tmp.area)) ? Convert.ToInt32(RowTypeEnum.TotalRow) : Convert.ToInt32(RowTypeEnum.Normal);
-
-                                            if (!String.IsNullOrEmpty(tmp.area))
+                                            if (bAdd)
                                             {
                                                 _cas.Add(tmp);
                                             }
+
+                                            //if (isheet.GetRow(j).GetCell(7) != null)
+                                            //{
+                                            //    if (isheet.GetRow(j).GetCell(7).CellType != CellType.Blank)
+                                            //    {
+                                            //        if (tmp.library_id.Equals("Total Outgassing") || tmp.library_id.Equals("Total of All Compounds")) // || tmp.library_id.Equals("Hydrocarbons, Unknowns, Others"))
+                                            //        {
+                                            //            tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+
+                                            //        }
+                                            //        else
+                                            //        {
+                                            //            tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                            //        }
+                                            //        //tmp.amount = Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7)))+"";
+                                            //    }
+                                            //}
+                                            //tmp.row_type = (
+
+                                            //    String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.classification) ||
+
+                                            //    String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.library_id) && !String.IsNullOrEmpty(tmp.area)) ? Convert.ToInt32(RowTypeEnum.TotalRow) : Convert.ToInt32(RowTypeEnum.Normal);
+
+                                            //if (!String.IsNullOrEmpty(tmp.area))
+                                            //{
+                                            //    _cas.Add(tmp);
+                                            //}
+
                                         }
                                     }
                                 }
@@ -758,6 +805,8 @@ namespace ALS.ALSI.Web.view.template
                         case RowTypeEnum.Normal:
                             e.Row.ForeColor = System.Drawing.Color.Black;
                             break;
+                        case RowTypeEnum.TotalOutGas:
+                        case RowTypeEnum.SampleSize:
                         case RowTypeEnum.TotalRow:
                             e.Row.ForeColor = System.Drawing.Color.Blue;
                             e.Row.Font.Bold = true;
@@ -781,11 +830,11 @@ namespace ALS.ALSI.Web.view.template
             //ReFresh Clas# value
             if (this.tbCas != null && this.tbCas.Count > 0)
             {
-
                 List<template_seagate_dhs_coverpage> newCoverPage = new List<template_seagate_dhs_coverpage>();
                 foreach (template_seagate_dhs_coverpage _cover in this.coverpages)
                 {
-                    tb_m_dhs_cas tmp = this.tbCas.Find(x => _cover.name.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
+                    String groupName = mappingRawData(_cover.name.Trim());
+                    tb_m_dhs_cas tmp = this.tbCas.Find(x => groupName.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
                     if (tmp != null)
                     {
                         switch (tmp.amount)
@@ -794,16 +843,8 @@ namespace ALS.ALSI.Web.view.template
                                 _cover.result = "Not Detected";
                                 break;
                             default:
-                                Double amt = Convert.ToDouble(tmp.amount);
-                                //switch (_cover.name)
-                                //{
-                                //    case "Total of All Compounds":
-                                //        _cover.result = Math.Round(amt).ToString();
-                                //        break;
-                                //    default:
-                                _cover.result = amt.ToString();
-                                //        break;
-                                //}
+                                //Double amt = Convert.ToDouble(tmp.amount);
+                                _cover.result = tmp.amount;// amt.ToString();
                                 break;
                         }
                     }
@@ -811,7 +852,8 @@ namespace ALS.ALSI.Web.view.template
                     {
                         _cover.result = "Not Detected";
                     }
-                    tmp = this.tbCas.Find(x => _cover.name.Equals(x.library_id) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
+
+                    tmp = this.tbCas.Find(x => _cover.name.Equals(x.library_id) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalOutGas));
                     if (tmp != null)
                     {
                         switch (tmp.amount)
@@ -820,20 +862,69 @@ namespace ALS.ALSI.Web.view.template
                                 _cover.result = "Not Detected";
                                 break;
                             default:
-                                Double amt = Convert.ToDouble(tmp.amount);
-                                _cover.result = amt.ToString();
+                                //Double amt = Convert.ToDouble(tmp.amount);
+                                _cover.result = tmp.amount;// amt.ToString();
                                 break;
                         }
                     }
-                    else
-                    {
-                        _cover.result = "Not Detected";
-                    }
+
                     newCoverPage.Add(_cover);
                 }
 
                 gvCoverPages.DataSource = newCoverPage;
                 gvCoverPages.DataBind();
+                //List<template_seagate_dhs_coverpage> newCoverPage = new List<template_seagate_dhs_coverpage>();
+                //foreach (template_seagate_dhs_coverpage _cover in this.coverpages)
+                //{
+                //    tb_m_dhs_cas tmp = this.tbCas.Find(x => _cover.name.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
+                //    if (tmp != null)
+                //    {
+                //        switch (tmp.amount)
+                //        {
+                //            case "Not Detected":
+                //                _cover.result = "Not Detected";
+                //                break;
+                //            default:
+                //                //Double amt = Convert.ToDouble(tmp.amount);
+                //                //switch (_cover.name)
+                //                //{
+                //                //    case "Total of All Compounds":
+                //                //        _cover.result = Math.Round(amt).ToString();
+                //                //        break;
+                //                //    default:
+                //                _cover.result = tmp.amount;
+                //                //        break;
+                //                //}
+                //                break;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        _cover.result = "Not Detected";
+                //    }
+                //    tmp = this.tbCas.Find(x => _cover.name.Equals(x.library_id) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
+                //    if (tmp != null)
+                //    {
+                //        switch (tmp.amount)
+                //        {
+                //            case "Not Detected":
+                //                _cover.result = "Not Detected";
+                //                break;
+                //            default:
+                //                //Double amt = Convert.ToDouble(tmp.amount);
+                //                _cover.result = tmp.amount;
+                //                break;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        _cover.result = "Not Detected";
+                //    }
+                //    newCoverPage.Add(_cover);
+                //}
+
+                //gvCoverPages.DataSource = newCoverPage;
+                //gvCoverPages.DataBind();
             }
             else
             {
@@ -1080,6 +1171,28 @@ namespace ALS.ALSI.Web.view.template
         {
             ModolPopupExtender.Show();
         }
+        private String mappingRawData(String _val)
+        {
+            String result = _val;
+            Hashtable mappingValues = new Hashtable();
+            //mappingValues["Others & Unknown"] = "Unknown";
+            //mappingValues["SST300s with possible Si and Mn"] = "SST400s (Fe/Cr)";
+            //mappingValues["SST400s with possible Si"] = "SST400s (Fe/Cr)";
 
+
+            //SST400s(Fe / Cr)
+
+
+
+            foreach (DictionaryEntry entry in mappingValues)
+            {
+                if (entry.Key.Equals(_val.Trim()))
+                {
+                    result = entry.Value.ToString();
+                    break;
+                }
+            }
+            return result;
+        }
     }
 }

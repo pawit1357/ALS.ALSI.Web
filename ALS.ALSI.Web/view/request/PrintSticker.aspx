@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="PrintSticker.aspx.cs" Inherits="ALS.ALSI.Web.view.request.PrintSticker" %>
 
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
     <script type="text/javascript">
@@ -125,7 +127,6 @@
             <div class="portlet-body form">
                 <div class="form-body">
                     <!-- BEGIN FORM-->
-
                     <div class="row">
                         <div class="col-md-6">
                             <div id="divStrickerPreview">
@@ -168,13 +169,14 @@
                                         <tr>
                                             <td>Test:</td>
                                             <td>
-                                                <%=type_of_test%>
+                                              <asp:Label ID="lbTot" runat="server" Text=""></asp:Label>  
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Sample </td>
                                             <td>
-                                                <%=sample_diposition%>
+                                                <asp:Label ID="lbSd" runat="server" Text=""></asp:Label>
+                                            
                                             </td>
                                         </tr>
                                     </table>
@@ -189,7 +191,9 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button onclick="javascript:printDiv('divStricker');" class="cancel btn blue"><i class="icon-print"></i>Print</button>
+                                        <asp:LinkButton ID="lbPrint" runat="server" CssClass="cancel btn blue" OnClick="lbPrint_Click"><i class="icon-print"></i>Print</asp:LinkButton>
+                                       <%-- <button onclick="javascript:printDiv('divStricker');" class="cancel btn blue">--%>
+                                        <%--    <i class="icon-print"></i>Print</button>--%>
                                         <asp:Button ID="btnCancel" runat="server" class="cancel btn" Text="Cancel" OnClick="btnCancel_Click" />
                                     </div>
                                 </div>

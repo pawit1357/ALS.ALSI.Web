@@ -1,9 +1,15 @@
 ﻿using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using System;
-using System.Collections;
+using System.IO;
+using System.Data;
+using System.Text;
+using System.Drawing.Imaging;
+using System.Drawing.Printing;
 using System.Collections.Generic;
-using System.Web.UI;
+using System.Windows.Forms;
+using System.Collections;
+using Microsoft.Reporting.WebForms;
 
 namespace ALS.ALSI.Web.view.request
 {
@@ -11,6 +17,8 @@ namespace ALS.ALSI.Web.view.request
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(PrintSticker));
+        private int m_currentPageIndex;
+        private IList<Stream> m_streams;
 
         #region "Property"
         protected String type_of_test
@@ -92,10 +100,11 @@ namespace ALS.ALSI.Web.view.request
                 List<job_sample> samples = job_sample.FindAllByJobID(jobInfo.ID);
                 if (samples != null && samples.Count > 0)
                 {
+                    lbSample.Text = samples[0].description + "";
                     int spec_id = 0;
                     foreach (job_sample s in samples)
                     {
-                        lbSample.Text += s.description + "<br/>";
+
 
                         m_specification spec = new m_specification().SelectByID(s.specification_id);
 
@@ -105,22 +114,52 @@ namespace ALS.ALSI.Web.view.request
                             spec_id = s.specification_id;
                         }
                         m_type_of_test tot = new m_type_of_test().SelectByID(s.type_of_test_id);
-                        type_of_test += String.Format("<i class=\"icon-check\"></i> {0} ", tot.name);
+                        type_of_test += tot.name + ","; //String.Format("<i class=\"icon-check\"></i> {0} ", tot.name);
                     }
-
+                    lbTot.Text = type_of_test.Substring(0,type_of_test.Length-1);
                     if (jobInfo.sample_diposition != null)
                     {
                         if (jobInfo.sample_diposition.Equals("Y"))
                         {
-                            sample_diposition = "<i class=\"icon-check\"></i>Discard<i class=\"icon-check-empty\"></i>Return";
+                            sample_diposition = "Discard";// "<i class=\"icon-check\"></i>Discard<i class=\"icon-check-empty\"></i>Return";
                         }
                         else
                         {
-                            sample_diposition = "<i class=\"icon-check-empty\"></i>Discard <i class=\"icon-check\"></i>Return";
+                            sample_diposition = "Return";// "<i class=\"icon-check-empty\"></i>Discard <i class=\"icon-check\"></i>Return";
                         }
+                        lbSd.Text = sample_diposition;
                     }
                 }
 
+
+                ///
+                ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+                reportParameters.Add(new ReportParameter("pJobNo", lbJobNo.Text));
+                reportParameters.Add(new ReportParameter("pClient", lbClient.Text));
+                reportParameters.Add(new ReportParameter("pContract", lbContract.Text));
+                reportParameters.Add(new ReportParameter("pSample", lbSample.Text));
+                reportParameters.Add(new ReportParameter("pSpec", lbSpec.Text));
+                reportParameters.Add(new ReportParameter("pTest", lbTot.Text));
+                reportParameters.Add(new ReportParameter("pSampleD", lbSd.Text));
+
+
+
+
+                // Variables
+                Warning[] warnings;
+                string[] streamIds;
+                string mimeType = string.Empty;
+                string encoding = string.Empty;
+                string extension = string.Empty;
+
+
+                // Setup the report viewer object and get the array of bytes
+                ReportViewer viewer = new ReportViewer();
+                viewer.ProcessingMode = ProcessingMode.Local;
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/rptStricker.rdlc");
+                viewer.LocalReport.SetParameters(reportParameters);
+                
             }
             else
             {
@@ -170,6 +209,7 @@ namespace ALS.ALSI.Web.view.request
         protected void btnPrint_Click(object sender, EventArgs e)
         {
 
+
         }
 
 
@@ -178,49 +218,51 @@ namespace ALS.ALSI.Web.view.request
         {
             int key = Convert.ToInt32(gvJob.SelectedDataKey.Value);
 
+            job_sample jobSample = new job_sample().SelectByID(key);
             job_info jobInfo = new job_info().SelectByID(this.JobID);
             if (jobInfo != null)
             {
 
+                m_customer cus = new m_customer().SelectByID(jobInfo.customer_id);
+                m_customer_contract_person cus_con_per = new m_customer_contract_person().SelectByID(jobInfo.contract_person_id);
+                lbJobNo.Text = jobSample.job_number;// String.Format("{0}{1}", jobSample.job_running.prefix, Convert.ToInt32(jobInfo.job_number).ToString("00000"));
+                lbClient.Text = cus.company_name;// jobInfo.m_customer.company_name;
+                lbContract.Text = cus_con_per.name;// jobInfo.m_customer_contract_person.name;
 
 
-                lbJobNo.Text = String.Format("{0}{1}", jobInfo.job_running.prefix, Convert.ToInt32(jobInfo.job_number).ToString("00000"));
-                lbClient.Text = jobInfo.m_customer.company_name;
-                lbContract.Text = jobInfo.m_customer_contract_person.name;
+                List<job_sample> samples = job_sample.FindAllByJobID(jobInfo.ID);
+                if (samples != null && samples.Count > 0)
+                {
+                    lbSample.Text = samples[0].description + "";
+                    int spec_id = 0;
+                    foreach (job_sample s in samples)
+                    {
 
 
-                //List<job_sample> samples = job_sample.FindAllByJobID(jobInfo.ID);
-                //if (samples != null && samples.Count > 0)
-                //{
-                //    int spec_id = 0;
-                //    foreach (job_sample s in samples)
-                //    {
-                //        if (s.ID == 18)
-                //        {
-                //            lbSample.Text += s.description + "<br/>";
+                        m_specification spec = new m_specification().SelectByID(s.specification_id);
 
-
-                //            lbSpec.Text = s.m_specification.name;
-                //            if (spec_id != s.specification_id)
-                //            {
-                //                spec_id = s.specification_id;
-                //            }
-                //            type_of_test += String.Format("<i class=\"icon-check\"></i> {0} ", s.m_type_of_test.name);
-                //        }
-                //    }
-
-                //    if (jobInfo.sample_diposition != null)
-                //    {
-                //        if (jobInfo.sample_diposition.Equals("Y"))
-                //        {
-                //            sample_diposition = "<i class=\"icon-check\"></i>Discard<i class=\"icon-check-empty\"></i>Return";
-                //        }
-                //        else
-                //        {
-                //            sample_diposition = "<i class=\"icon-check-empty\"></i>Discard <i class=\"icon-check\"></i>Return";
-                //        }
-                //    }
-                //}
+                        lbSpec.Text = spec.name;
+                        if (spec_id != s.specification_id)
+                        {
+                            spec_id = s.specification_id;
+                        }
+                        m_type_of_test tot = new m_type_of_test().SelectByID(s.type_of_test_id);
+                        type_of_test += tot.name + ","; //String.Format("<i class=\"icon-check\"></i> {0} ", tot.name);
+                    }
+                    lbTot.Text = type_of_test.Substring(0, type_of_test.Length - 1);
+                    if (jobInfo.sample_diposition != null)
+                    {
+                        if (jobInfo.sample_diposition.Equals("Y"))
+                        {
+                            sample_diposition = "Discard";// "<i class=\"icon-check\"></i>Discard<i class=\"icon-check-empty\"></i>Return";
+                        }
+                        else
+                        {
+                            sample_diposition = "Return";// "<i class=\"icon-check-empty\"></i>Discard <i class=\"icon-check\"></i>Return";
+                        }
+                        lbSd.Text = sample_diposition;
+                    }
+                }
 
             }
             else
@@ -230,5 +272,121 @@ namespace ALS.ALSI.Web.view.request
 
             Console.WriteLine();
         }
+
+        protected void lbPrint_Click(object sender, EventArgs e)
+        {
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("pJobNo", lbJobNo.Text));
+            reportParameters.Add(new ReportParameter("pClient", lbClient.Text));
+            reportParameters.Add(new ReportParameter("pContract", lbContract.Text));
+            reportParameters.Add(new ReportParameter("pSample", lbSample.Text));
+            reportParameters.Add(new ReportParameter("pSpec", lbSpec.Text));
+            reportParameters.Add(new ReportParameter("pTest", lbTot.Text));
+            reportParameters.Add(new ReportParameter("pSampleD", lbSd.Text));
+
+
+
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/rptStricker.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+
+
+
+            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + lbJobNo.Text + "." + extension);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush(); // send it to the client to download
+        }
+
+
+
+
+        // Routine to provide to the report renderer, in order to
+        //    save an image for each page of the report.
+        //private Stream CreateStream(string name,
+        //  string fileNameExtension, Encoding encoding,
+        //  string mimeType, bool willSeek)
+        //{
+        //    Stream stream = new MemoryStream();
+        //    m_streams.Add(stream);
+        //    return stream;
+        //}
+        // Export the given report as an EMF (Enhanced Metafile) file.
+        //private void Export(LocalReport report)
+        //{
+        //    string deviceInfo =
+        //      @"<DeviceInfo>
+        //        <OutputFormat>EMF</OutputFormat>
+        //        <PageWidth>8.5in</PageWidth>
+        //        <PageHeight>11in</PageHeight>
+        //        <MarginTop>0.25in</MarginTop>
+        //        <MarginLeft>0.25in</MarginLeft>
+        //        <MarginRight>0.25in</MarginRight>
+        //        <MarginBottom>0.25in</MarginBottom>
+        //    </DeviceInfo>";
+        //    Warning[] warnings;
+        //    m_streams = new List<Stream>();
+        //    report.Render("Image", deviceInfo, CreateStream,
+        //       out warnings);
+        //    foreach (Stream stream in m_streams)
+        //        stream.Position = 0;
+        //}
+        // Handler for PrintPageEvents
+        //private void PrintPage(object sender, PrintPageEventArgs ev)
+        //{
+        //    Metafile pageImage = new
+        //       Metafile(m_streams[m_currentPageIndex]);
+
+        //    // Adjust rectangular area with printer margins.
+        //    Rectangle adjustedRect = new Rectangle(
+        //        ev.PageBounds.Left - (int)ev.PageSettings.HardMarginX,
+        //        ev.PageBounds.Top - (int)ev.PageSettings.HardMarginY,
+        //        ev.PageBounds.Width,
+        //        ev.PageBounds.Height);
+
+        //    // Draw a white background for the report
+        //    ev.Graphics.FillRectangle(Brushes.White, adjustedRect);
+
+        //    // Draw the report content
+        //    ev.Graphics.DrawImage(pageImage, adjustedRect);
+
+        //    // Prepare for the next page. Make sure we haven't hit the end.
+        //    m_currentPageIndex++;
+        //    ev.HasMorePages = (m_currentPageIndex < m_streams.Count);
+        //}
+
+        //private void Print()
+        //{
+        //    if (m_streams == null || m_streams.Count == 0)
+        //        throw new Exception("Error: no stream to print.");
+        //    PrintDocument printDoc = new PrintDocument();
+        //    if (!printDoc.PrinterSettings.IsValid)
+        //    {
+        //        throw new Exception("Error: cannot find the default printer.");
+        //    }
+        //    else
+        //    {
+        //        printDoc.PrintPage += new PrintPageEventHandler(PrintPage);
+        //        m_currentPageIndex = 0;
+        //        printDoc.Print();
+        //    }
+        //}
     }
 }

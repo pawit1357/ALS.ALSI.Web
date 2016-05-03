@@ -1143,19 +1143,25 @@ namespace ALS.ALSI.Web.view.template
                         Word2Pdf objWorPdf = new Word2Pdf();
                         objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
                         objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                        try
-                        {
-                            objWorPdf.Word2PdfCOnversion();
+                        logger.Debug("InputLocation:" + objWorPdf.InputLocation);
+                        logger.Debug("OutputLocation:" + objWorPdf.OutputLocation);
+
+                        //try
+                        //{
+                        logger.Debug("Begin Convert Pdf job: " + this.jobSample.job_number);
+                        objWorPdf.Word2PdfCOnversion();
+                        logger.Debug("Finish Convert Job:"+this.jobSample.job_number);
+                        logger.Debug("Redirect to :"+ String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
                             Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
 
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.Debug(ex.Message);
-                            Console.WriteLine();
-                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    logger.Debug(ex.Message);
+                        //    Console.WriteLine();
+                        //    Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
 
-                        }
+                        //}
                     }
                     //if (!String.IsNullOrEmpty(this.jobSample.path_pdf))
                     //{

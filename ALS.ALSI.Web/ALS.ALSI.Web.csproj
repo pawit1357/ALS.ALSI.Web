@@ -1681,6 +1681,7 @@
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\rptStricker.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
