@@ -289,12 +289,16 @@ namespace ALS.ALSI.Web.view.template
                         Label7.Text = ddlUnit.SelectedItem.Text;
                         Label8.Text = ddlUnit.SelectedItem.Text;
                     }
-                    template_wd_ic_coverpage A17 = getCoverPageValue("Fluoride");
-                    template_wd_ic_coverpage A18 = getCoverPageValue("Chloride");
-                    template_wd_ic_coverpage A19 = getCoverPageValue("Bromide");
-                    template_wd_ic_coverpage A20 = getCoverPageValue("Nitrate");
-                    template_wd_ic_coverpage A21 = getCoverPageValue("Sulfate");
-                    template_wd_ic_coverpage A22 = getCoverPageValue("Phosphate");
+
+
+                    template_wd_ic_coverpage A17 = getCoverPageValue("Fluoride as F");
+                    template_wd_ic_coverpage A18 = getCoverPageValue("Chloride as Cl");
+                    template_wd_ic_coverpage A19 = getCoverPageValue("Bromide as Br");
+                    template_wd_ic_coverpage A19_1 = getCoverPageValue("Nitrite as NO2");
+
+                    template_wd_ic_coverpage A20 = getCoverPageValue("Nitrate as NO3");
+                    template_wd_ic_coverpage A21 = getCoverPageValue("Sulfate as SO4");
+                    template_wd_ic_coverpage A22 = getCoverPageValue("Phosphate as PO4");
                     template_wd_ic_coverpage A23 = getCoverPageValue("Total Anions");
 
                     template_wd_ic_coverpage C26 = getCoverPageValue("Lithium");
@@ -328,6 +332,23 @@ namespace ALS.ALSI.Web.view.template
                     lbAnI18.Text = A18.wi;
                     lbAnJ18.Text = A18.wj;
                     #endregion
+
+                    #region "Nitrite as NO2"
+                    if (A19_1 != null)
+                    {
+                        txtB19_1.Text = A19_1.wb;
+                        txtC19_1.Text = A19_1.wc;
+                        txtD19_1.Text = A19_1.wd;
+                        txtAnE19.Text = A19_1.we;
+                        txtAnF19.Text = A19_1.wf;
+                        //lbAnG18.TextA17.wg;
+                        txtAnH19.Text = A19_1.wh;
+                        txtAnI19.Text = A19_1.wi;
+                        txtAnJ19.Text = A19_1.wj;
+                    }
+                    #endregion
+
+
                     #region "Bromide as Br"
                     txtB19.Text = A19.wb;
                     txtC19.Text = A19.wc;
@@ -815,16 +836,43 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ18.Text = Math.Round(Convert.ToDecimal(lbAnJ18.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
 
                                 #endregion
+                                #region "Nitrite as NO2"
+                                txtB19_1.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.B));
+                                txtC19_1.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.C));
+                                txtD19_1.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.D));
+                                txtAnE19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.E));
+                                txtAnF19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.F));
+                                //lbAnG18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.G));
+                                txtAnH19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.H));
+                                txtAnI19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.I));
+                                txtAnJ19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.J));
+
+                                //Set Decimal
+                                txtB19_1.Text = Math.Round(Convert.ToDecimal(txtB19_1.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
+                                txtC19_1.Text = Math.Round(Convert.ToDecimal(txtC19_1.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
+                                txtD19_1.Text = Math.Round(Convert.ToDecimal(txtD19_1.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
+                                txtAnE19.Text = Math.Round(Convert.ToDecimal(txtAnE19.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
+                                txtAnF19.Text = Math.Round(Convert.ToDecimal(txtAnF19.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
+                                txtAnH19.Text = Math.Round(Convert.ToDecimal(txtAnH19.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
+                                txtAnI19.Text = lbAnI19.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(txtAnI19.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
+                                txtAnJ19.Text = Math.Round(Convert.ToDecimal(txtAnJ19.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
+
+                                #endregion
+
+
+
+
+
                                 #region "Bromide as Br"
-                                txtB19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.B));
-                                txtC19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.C));
-                                txtD19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.D));
-                                lbAnE19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.E));
-                                lbAnF19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.F));
+                                txtB19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.B));
+                                txtC19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.C));
+                                txtD19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.D));
+                                lbAnE19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.E));
+                                lbAnF19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.F));
                                 //lbAnG19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.G));
-                                lbAnH19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.H));
-                                lbAnI19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.J));
+                                lbAnH19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.H));
+                                lbAnI19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB19.Text = Math.Round(Convert.ToDecimal(txtB19.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -837,15 +885,15 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ19.Text = Math.Round(Convert.ToDecimal(lbAnJ19.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
                                 #endregion
                                 #region "Nitrate as NO3"
-                                txtB20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.B));
-                                txtC20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.C));
-                                txtD20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.D));
-                                lbAnE20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.E));
-                                lbAnF20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.F));
+                                txtB20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.B));
+                                txtC20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.C));
+                                txtD20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.D));
+                                lbAnE20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.E));
+                                lbAnF20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.F));
                                 //lbAnG20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.G));
-                                lbAnH20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.H));
-                                lbAnI20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.J));
+                                lbAnH20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.H));
+                                lbAnI20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB20.Text = Math.Round(Convert.ToDecimal(txtB20.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -858,15 +906,15 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ20.Text = Math.Round(Convert.ToDecimal(lbAnJ20.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
                                 #endregion
                                 #region "Sulfate as SO4"
-                                txtB21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.B));
-                                txtC21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.C));
-                                txtD21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.D));
-                                lbAnE21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.E));
-                                lbAnF21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.F));
+                                txtB21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.B));
+                                txtC21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.C));
+                                txtD21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.D));
+                                lbAnE21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.E));
+                                lbAnF21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.F));
                                 //lbAnG21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.G));
-                                lbAnH21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.H));
-                                lbAnI21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.J));
+                                lbAnH21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.H));
+                                lbAnI21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB21.Text = Math.Round(Convert.ToDecimal(txtB21.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -879,15 +927,15 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ21.Text = Math.Round(Convert.ToDecimal(lbAnJ21.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
                                 #endregion
                                 #region "Phosphate as PO4"
-                                txtB22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.B));
-                                txtC22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.C));
-                                txtD22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.D));
-                                lbAnE22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.E));
-                                lbAnF22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.F));
+                                txtB22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.B));
+                                txtC22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.C));
+                                txtD22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.D));
+                                lbAnE22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.E));
+                                lbAnF22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.F));
                                 //lbAnG22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.G));
-                                lbAnH22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.H));
-                                lbAnI22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.J));
+                                lbAnH22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.H));
+                                lbAnI22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB22.Text = Math.Round(Convert.ToDecimal(txtB22.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -901,23 +949,23 @@ namespace ALS.ALSI.Web.view.template
 
                                 #endregion
                                 #region "Total"
-                                lbAnI23.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ23.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.J));
+                                lbAnI23.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ23.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.J));
                                 lbAnI23.Text = lbAnI23.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI23.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
                                 lbAnJ23.Text = Math.Round(Convert.ToDecimal(lbAnJ23.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
 
                                 #endregion
                                 //-------------
                                 #region "FLithium as Li"
-                                txtB26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.B));
-                                txtC26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.C));
-                                txtD26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.D));
-                                lbAnE26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.E));
-                                lbAnF26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.F));
+                                txtB26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.B));
+                                txtC26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.C));
+                                txtD26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.D));
+                                lbAnE26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.E));
+                                lbAnF26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.F));
 
-                                lbAnH26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.H));
-                                lbAnI26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.J));
+                                lbAnH26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.H));
+                                lbAnI26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB26.Text = Math.Round(Convert.ToDecimal(txtB26.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -930,15 +978,15 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ26.Text = Math.Round(Convert.ToDecimal(lbAnJ26.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
                                 #endregion
                                 #region "FSodium as Na"
-                                txtB27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.B));
-                                txtC27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.C));
-                                txtD27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.D));
-                                lbAnE27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.E));
-                                lbAnF27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.F));
+                                txtB27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.B));
+                                txtC27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.C));
+                                txtD27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.D));
+                                lbAnE27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.E));
+                                lbAnF27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.F));
 
-                                lbAnH27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.H));
-                                lbAnI27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.J));
+                                lbAnH27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.H));
+                                lbAnI27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB27.Text = Math.Round(Convert.ToDecimal(txtB27.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -951,15 +999,15 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ27.Text = Math.Round(Convert.ToDecimal(lbAnJ27.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
                                 #endregion
                                 #region "FAmmonium as NH4"
-                                txtB28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.B));
-                                txtC28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.C));
-                                txtD28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.D));
-                                lbAnE28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.E));
-                                lbAnF28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.F));
+                                txtB28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.B));
+                                txtC28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.C));
+                                txtD28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.D));
+                                lbAnE28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.E));
+                                lbAnF28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.F));
 
-                                lbAnH28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.H));
-                                lbAnI28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.J));
+                                lbAnH28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.H));
+                                lbAnI28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB28.Text = Math.Round(Convert.ToDecimal(txtB28.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -972,15 +1020,15 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ28.Text = Math.Round(Convert.ToDecimal(lbAnJ28.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
                                 #endregion
                                 #region "FPotassium as K"
-                                txtB29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.B));
-                                txtC29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.C));
-                                txtD29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.D));
-                                lbAnE29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.E));
-                                lbAnF29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.F));
+                                txtB29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.B));
+                                txtC29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.C));
+                                txtD29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.D));
+                                lbAnE29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.E));
+                                lbAnF29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.F));
 
-                                lbAnH29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.H));
-                                lbAnI29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.J));
+                                lbAnH29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.H));
+                                lbAnI29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB29.Text = Math.Round(Convert.ToDecimal(txtB29.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -993,15 +1041,15 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ29.Text = Math.Round(Convert.ToDecimal(lbAnJ29.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
                                 #endregion
                                 #region "FMagnesium as Mg"
-                                txtB30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.B));
-                                txtC30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.C));
-                                txtD30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.D));
-                                lbAnE30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.E));
-                                lbAnF30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.F));
+                                txtB30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));
+                                txtC30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.C));
+                                txtD30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.D));
+                                lbAnE30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.E));
+                                lbAnF30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.F));
 
-                                lbAnH30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.H));
-                                lbAnI30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.J));
+                                lbAnH30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.H));
+                                lbAnI30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB30.Text = Math.Round(Convert.ToDecimal(txtB30.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -1014,15 +1062,15 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ30.Text = Math.Round(Convert.ToDecimal(lbAnJ30.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
                                 #endregion
                                 #region "FCalcium as Ca"
-                                txtB31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));
-                                txtC31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.C));
-                                txtD31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.D));
-                                lbAnE31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.E));
-                                lbAnF31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.F));
+                                txtB31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));
+                                txtC31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.C));
+                                txtD31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.D));
+                                lbAnE31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.E));
+                                lbAnF31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.F));
 
-                                lbAnH31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.H));
-                                lbAnI31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.J));
+                                lbAnH31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.H));
+                                lbAnI31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.J));
 
                                 //Set Decimal
                                 txtB31.Text = Math.Round(Convert.ToDecimal(txtB31.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -1035,8 +1083,8 @@ namespace ALS.ALSI.Web.view.template
                                 lbAnJ31.Text = Math.Round(Convert.ToDecimal(lbAnJ31.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
                                 #endregion
                                 #region "FTotal"
-                                lbAnI32.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.I));
-                                lbAnJ32.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.J));
+                                lbAnI32.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.I));
+                                lbAnJ32.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.J));
 
                                 lbAnI32.Text = lbAnI32.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI32.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
                                 lbAnJ32.Text = Math.Round(Convert.ToDecimal(lbAnJ32.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
@@ -1229,8 +1277,18 @@ namespace ALS.ALSI.Web.view.template
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 listCover.Add(_tmp);
+
                 _tmp = new template_wd_ic_coverpage();
                 _tmp.id = 3;
+                _tmp.A = "Nitrite as NO2";
+                _tmp.B = tem.F;
+                _tmp.wunitText = tem.C;
+                _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
+                _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                listCover.Add(_tmp);
+
+                _tmp = new template_wd_ic_coverpage();
+                _tmp.id = 4;
                 _tmp.A = "Bromide as Br";
                 _tmp.B = tem.G;
                 _tmp.wunitText = tem.C;
@@ -1238,7 +1296,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 listCover.Add(_tmp);
                 _tmp = new template_wd_ic_coverpage();
-                _tmp.id = 4;
+                _tmp.id = 5;
                 _tmp.A = "Nitrate as NO3";
                 _tmp.B = tem.H;
                 _tmp.wunitText = tem.C;
@@ -1246,7 +1304,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 listCover.Add(_tmp);
                 _tmp = new template_wd_ic_coverpage();
-                _tmp.id = 5;
+                _tmp.id = 6;
                 _tmp.A = "Sulfate as SO4";
                 _tmp.B = tem.I;
                 _tmp.wunitText = tem.C;
@@ -1254,7 +1312,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 listCover.Add(_tmp);
                 _tmp = new template_wd_ic_coverpage();
-                _tmp.id = 6;
+                _tmp.id = 7;
                 _tmp.A = "Phosphate as PO4";
                 _tmp.B = tem.J;
                 _tmp.wunitText = tem.C;
@@ -1262,7 +1320,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 listCover.Add(_tmp);
                 _tmp = new template_wd_ic_coverpage();
-                _tmp.id = 7;
+                _tmp.id = 8;
                 _tmp.A = "Total Anions";
                 _tmp.B = tem.K;
                 _tmp.wunitText = tem.C;
@@ -1517,13 +1575,15 @@ namespace ALS.ALSI.Web.view.template
                 _val.wc = _wc;
                 _val.wd = _wd;
                 _val.we = _we;
-                _val.wf = CustomUtils.isNumber(_wf)? Math.Round(Convert.ToDouble(_wf),2)+"":String.Empty;
+                _val.wf = String.IsNullOrEmpty(_wf) ? "0" : CustomUtils.isNumber(_wf) ? Math.Round(Convert.ToDouble(_wf), 2) + "" : String.Empty;
                 _val.wg = _wg;
                 _val.wg = _wh;
                 _val.wi = _wi;
-                _val.wj = _wj;
+                _val.wj = String.IsNullOrEmpty(_wj) ? "0" : _wj;
                 //_val.wunit = _k;//unit
-                _val.E = (_val.B.Equals("NA") ? "NA" : (Convert.ToDouble(_wj) < Convert.ToDouble(_val.B)) ? "PASS" : "FAIL");
+                if (!String.IsNullOrEmpty(_val.B)){
+                    _val.E = (_val.B.Equals("NA") ? "NA" : (CustomUtils.isNumber(_wf) ? Convert.ToDouble(_wj) : 0) < Convert.ToDouble(_val.B) ? "PASS" : "FAIL");
+                }
             }
         }
 
@@ -1563,12 +1623,13 @@ namespace ALS.ALSI.Web.view.template
             if (b11 != 0 && b12 != 0 && b13 != 0)
             {
 
-                setCoverPageValue("Fluoride", txtB17.Text, txtC17.Text, txtD17.Text, lbAnE17.Text, lbAnF17.Text, "", lbAnH17.Text, lbAnI17.Text, lbAnJ17.Text);
-                setCoverPageValue("Chloride", txtB18.Text, txtC18.Text, txtD18.Text, lbAnE18.Text, lbAnF18.Text, "", lbAnH18.Text, lbAnI18.Text, lbAnJ18.Text);
-                setCoverPageValue("Bromide", txtB19.Text, txtC19.Text, txtD19.Text, lbAnE19.Text, lbAnF19.Text, "", lbAnH19.Text, lbAnI19.Text, lbAnJ19.Text);
-                setCoverPageValue("Nitrate", txtB20.Text, txtC20.Text, txtD20.Text, lbAnE20.Text, lbAnF20.Text, "", lbAnH20.Text, lbAnI20.Text, lbAnJ20.Text);
-                setCoverPageValue("Sulfate", txtB21.Text, txtC21.Text, txtD21.Text, lbAnE21.Text, lbAnF21.Text, "", lbAnH21.Text, lbAnI21.Text, lbAnJ21.Text);
-                setCoverPageValue("Phosphate", txtB22.Text, txtC22.Text, txtD22.Text, lbAnE22.Text, lbAnF22.Text, "", lbAnH22.Text, lbAnI22.Text, lbAnJ22.Text);
+                setCoverPageValue("Fluoride as F", txtB17.Text, txtC17.Text, txtD17.Text, lbAnE17.Text, lbAnF17.Text, "", lbAnH17.Text, lbAnI17.Text, lbAnJ17.Text);
+                setCoverPageValue("Chloride as Cl", txtB18.Text, txtC18.Text, txtD18.Text, lbAnE18.Text, lbAnF18.Text, "", lbAnH18.Text, lbAnI18.Text, lbAnJ18.Text);
+                setCoverPageValue("Bromide as Br", txtB19.Text, txtC19.Text, txtD19.Text, lbAnE19.Text, lbAnF19.Text, "", lbAnH19.Text, lbAnI19.Text, lbAnJ19.Text);
+                setCoverPageValue("Nitrite as NO2", txtB19_1.Text, txtC19_1.Text, txtD19_1.Text, txtAnE19.Text, txtAnF19.Text, "", txtAnH19.Text, txtAnI19.Text, txtAnJ19.Text);
+                setCoverPageValue("Nitrate as NO3", txtB20.Text, txtC20.Text, txtD20.Text, lbAnE20.Text, lbAnF20.Text, "", lbAnH20.Text, lbAnI20.Text, lbAnJ20.Text);
+                setCoverPageValue("Sulfate as SO4", txtB21.Text, txtC21.Text, txtD21.Text, lbAnE21.Text, lbAnF21.Text, "", lbAnH21.Text, lbAnI21.Text, lbAnJ21.Text);
+                setCoverPageValue("Phosphate as PO4", txtB22.Text, txtC22.Text, txtD22.Text, lbAnE22.Text, lbAnF22.Text, "", lbAnH22.Text, lbAnI22.Text, lbAnJ22.Text);
                 setCoverPageValue("Total Anions","", "", "", "", "", "", "", lbAnI23.Text, lbAnJ23.Text);
                 setCoverPageValue("Lithium", txtB26.Text, txtC26.Text, txtD26.Text, lbAnE26.Text, lbAnF26.Text, "", lbAnH26.Text, lbAnI26.Text, lbAnJ26.Text);
                 setCoverPageValue("Sodium", txtB27.Text, txtC27.Text, txtD27.Text, lbAnE27.Text, lbAnF27.Text, "", lbAnH27.Text, lbAnI27.Text, lbAnJ27.Text);

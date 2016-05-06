@@ -327,27 +327,30 @@
                                                 <asp:Label ID="lbAnJ18" runat="server"></asp:Label></td>
 
                                         </tr>
-<%--                                        <tr>
+                                                                                <tr>
                                             <td>Nitrite as NO2</td>
                                             <td>
-                                                <asp:TextBox ID="txtB16_Chem" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB19_1" runat="server"></asp:TextBox></td>
                                             <td>
-                                                <asp:TextBox ID="txtC16_Chem" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC19_1" runat="server"></asp:TextBox></td>
                                             <td>
-                                                <asp:TextBox ID="txtD16_Chem" runat="server" Text="1"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtD19_1" runat="server">1</asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:Label ID="lbAnE16" runat="server"></asp:Label></td>
+                                                <asp:Label ID="txtAnE19" runat="server"></asp:Label></td>
+
+                                            <td>
+                                                <asp:Label ID="txtAnF19" runat="server"></asp:Label></td>
                                             <td>0.5</td>
                                             <td>
-                                                <asp:Label ID="lbAnG16" runat="server"></asp:Label></td>
+                                                <asp:Label ID="txtAnH19" runat="server"></asp:Label></td>
                                             <td>
-                                                <asp:Label ID="lbAnH16" runat="server"></asp:Label></td>
+                                                <asp:Label ID="txtAnI19" runat="server"></asp:Label></td>
                                             <td>
-                                                <asp:Label ID="lbAnI16" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ16" runat="server"></asp:Label></td>
+                                                <asp:Label ID="txtAnJ19" runat="server"></asp:Label></td>
 
-                                        </tr>--%>
+                                        </tr>
+
                                         <tr>
                                             <td>Bromide, Br</td>
                                             <td>
@@ -821,54 +824,54 @@
                                     <tr>
                                         <td>Conc of water blank,ug/L (B)</td>
                                         <td>
-                                            <asp:TextBox ID="txtDecimal01" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                            <asp:TextBox ID="txtDecimal01" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
                                     </tr>
                                     <tr>
                                         <td>Conc of sample,ug/L (C)</td>
                                         <td>
-                                            <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                            <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
 
                                     </tr>
                                     <tr>
                                         <td>Dilution Factor</td>
                                         <td>
-                                            <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                            <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
 
                                     </tr>
                                     <tr>
                                         <td>Raw Result</td>
                                         <td>
-                                            <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                            <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
 
                                     </tr>
                                     <tr>
                                         <td>Method Detection Limit</td>
                                         <td>
-                                            <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                            <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
 
                                     </tr>
                                     <tr>
                                         <td>Instrument Detection Limi</td>
                                         <td>
-                                            <asp:TextBox ID="txtDecimal06" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                            <asp:TextBox ID="txtDecimal06" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
 
                                     </tr>
                                     <tr>
                                         <td>Below Detection</td>
                                         <td>
-                                            <asp:TextBox ID="txtDecimal07" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                            <asp:TextBox ID="txtDecimal07" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
 
                                     </tr>
                                     <tr>
                                         <td>Final Conc of sample</td>
                                         <td>
-                                            <asp:TextBox ID="txtDecimal08" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                            <asp:TextBox ID="txtDecimal08" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
 
                                     </tr>
                                     <tr>
                                         <td>for use in Total</td>
                                         <td>
-                                            <asp:TextBox ID="txtDecimal09" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                            <asp:TextBox ID="txtDecimal09" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
 
 
                                     </tr>

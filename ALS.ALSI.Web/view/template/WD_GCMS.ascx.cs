@@ -1079,8 +1079,19 @@ namespace ALS.ALSI.Web.view.template
 
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds3.GetRange(0,10).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds3.GetRange(10,ds3.Count-10).ToDataTable())); // Add datasource here
+            if (ds3.Count > 10)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds3.GetRange(0, 10).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds3.GetRange(10, ds3.Count - 10).ToDataTable())); // Add datasource here
+
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds3.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+
+
+            }
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.tbCas.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.MajorCompounds)).ToDataTable())); // Add datasource here
 
 

@@ -1126,7 +1126,7 @@ namespace ALS.ALSI.Web.view.template
 
                     double _limit = CustomUtils.isNumber(_cover.specification_limits.Replace("<", "").Trim()) ? Convert.ToDouble(_cover.specification_limits.Replace("<", "").Trim()) : 0;
                     double _result = CustomUtils.isNumber(_cover.result) ? Convert.ToDouble(_cover.result) : 0;
-                    _cover.result = _cover.result;// CustomUtils.isNumber(_cover.result) ? Convert.ToDouble(_cover.result).ToString() : "Not Detected";
+                    _cover.result = String.IsNullOrEmpty( _cover.result)? "Not Detected" : CustomUtils.isNumber(_cover.result) ? Convert.ToDouble(_cover.result).ToString() : "Not Detected";
 
 
 

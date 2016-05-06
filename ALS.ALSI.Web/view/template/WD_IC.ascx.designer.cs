@@ -409,6 +409,78 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbAnJ18;
         
         /// <summary>
+        /// txtB19_1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtB19_1;
+        
+        /// <summary>
+        /// txtC19_1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtC19_1;
+        
+        /// <summary>
+        /// txtD19_1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtD19_1;
+        
+        /// <summary>
+        /// txtAnE19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtAnE19;
+        
+        /// <summary>
+        /// txtAnF19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtAnF19;
+        
+        /// <summary>
+        /// txtAnH19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtAnH19;
+        
+        /// <summary>
+        /// txtAnI19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtAnI19;
+        
+        /// <summary>
+        /// txtAnJ19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtAnJ19;
+        
+        /// <summary>
         /// txtB19 control.
         /// </summary>
         /// <remarks>

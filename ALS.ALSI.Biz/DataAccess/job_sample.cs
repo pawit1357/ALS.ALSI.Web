@@ -29,6 +29,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public string model { get; set; }
         public string surface_area { get; set; }
         public string remarks { get; set; }
+        public string sample_po { get; set; }
+        public string sample_invoice { get; set; }
         public Nullable<int> no_of_report { get; set; }
         public string uncertainty { get; set; }
         public Nullable<int> job_status { get; set; }
@@ -50,9 +52,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<System.DateTime> date_chemist_complete { get; set; }
         public Nullable<System.DateTime> date_srchemist_complate { get; set; }
         public Nullable<System.DateTime> date_admin_sent_to_cus { get; set; }
+        public Nullable<System.DateTime> sr_approve_date { get; set; }
         public Nullable<System.DateTime> date_labman_complete { get; set; }
-        public string sample_po { get; set; }
-        public string sample_invoice { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

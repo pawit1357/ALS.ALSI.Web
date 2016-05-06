@@ -28,6 +28,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public string company_name_to_state_in_report { get; set; }
         public int job_prefix { get; set; }
         public Nullable<int> job_number { get; set; }
+        public string job_invoice { get; set; }
+        public string customer_po_ref { get; set; }
         public string s_pore_ref_no { get; set; }
         public string spec_ref_rev_no { get; set; }
         public string sample_diposition { get; set; }
