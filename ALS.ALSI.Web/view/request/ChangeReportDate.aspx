@@ -74,7 +74,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Due date send to customer</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Date send to customer</span>
                     <span class="caption-helper"></span>
                 </div>
                 <div class="tools">
@@ -87,7 +87,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Due date:</label>
+                                <label class="control-label col-md-3">Date send to customer:</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtDuedate" name="txtDuedate" runat="server" class="form-control"></asp:TextBox>

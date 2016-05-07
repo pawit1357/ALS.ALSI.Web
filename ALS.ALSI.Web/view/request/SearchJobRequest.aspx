@@ -219,7 +219,7 @@
 
                         </div>
                         <div class="actions">
-               - 
+                            - 
                       
 
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>
@@ -236,7 +236,7 @@
                                 <i class=" icon-printer"></i></asp:LinkButton>
 
 
-                
+
                             <asp:LinkButton ID="lbAddJob" runat="server" class="btn btn-default btn-sm" OnClick="lbAddJob_Click"><i class="fa fa-plus"></i> Add</asp:LinkButton>
 
                         </div>
@@ -283,7 +283,7 @@
                                 <asp:BoundField HeaderText="Report Sent to Customer" DataField="date_admin_sent_to_cus" ItemStyle-HorizontalAlign="Center" SortExpression="date_admin_sent_to_cus" DataFormatString="{0:dd-MM-yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
-                                
+
                                 <asp:BoundField HeaderText="Receive Date." DataField="receive_date" ItemStyle-HorizontalAlign="Center" SortExpression="receive_date" DataFormatString="{0:dd-MM-yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
@@ -314,6 +314,17 @@
                                         <asp:Literal ID="ltCompany" runat="server" Text='<%# Eval("customer")%>'></asp:Literal>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+
+                                <asp:BoundField HeaderText="Invoice" DataField="sample_invoice" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice">
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:BoundField>
+
+                                <asp:BoundField HeaderText="Po" DataField="sample_po" ItemStyle-HorizontalAlign="Left" SortExpression="sample_po">
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:BoundField>
+
+
+
                                 <asp:BoundField HeaderText="Contact" DataField="contract_person" ItemStyle-HorizontalAlign="Left" SortExpression="contract_person">
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>

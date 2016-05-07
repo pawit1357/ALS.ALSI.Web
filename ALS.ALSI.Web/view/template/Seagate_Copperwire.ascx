@@ -220,8 +220,36 @@
 
                     <asp:Panel ID="pRefImage" runat="server">
                         <h4 class="form-section">Photo Before:</h4>
-
                         <div class="row">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Uplod Photo: </label>
+
+                                <div class="col-md-3">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="input-group input-large">
+                                            <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                            </div>
+                                            <span class="input-group-addon btn default btn-file">
+                                                <span class="fileinput-new">Select file </span>
+                                                <span class="fileinput-exists">Change </span>
+                                                <asp:FileUpload ID="FileUpload1" runat="server" />
+
+                                            </span>
+                                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                        </div>
+                                    </div>
+                                    <asp:Button ID="btnLoadFile" runat="server" CssClass="btn blue" OnClick="btnLoadFile_Click" Text="Upload" />
+                                    ***เลือกชนิดไฟล์ที่เป็น *.jpg</span>
+                                    <%--                                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>--%>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%--                        <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
@@ -237,7 +265,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </asp:Panel>
 
                     <div class="row">
@@ -302,75 +330,75 @@
                                 </div>
                                 <div class="portlet-body">
                                     <asp:Panel ID="pSpecification" runat="server">
-                                       <%-- <div class="row">
+                                        <%-- <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlSpecification" runat="server" class="select2_category form-control" DataTextField="C" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged">
-                                                        </asp:DropDownList>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlSpecification" runat="server" class="select2_category form-control" DataTextField="C" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged">
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
                                         <%--    </div>
                                         </div>--%>
                                     </asp:Panel>
                                     <asp:Panel ID="pStatus" runat="server">
-                                       <%-- <div class="row">
+                                        <%-- <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                      <%--      </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <%--      </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pRemark" runat="server">
-                                     <%--   <div class="row">
+                                        <%--   <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                            </div>
+                                        </div>
                                         <%--    </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDisapprove" runat="server">
-                                      <%--  <div class="row">
+                                        <%--  <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                            </div>
+                                        </div>
                                         <%--    </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDownload" runat="server">
-                                      <%--  <div class="row">
+                                        <%--  <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Download:</label>
-                                                    <div class="col-md-6">
-<asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
-                                                                                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                            <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                                        </asp:LinkButton>
-                                                    </div>
-                                                </div>
-                                      <%--      </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Download:</label>
+                                            <div class="col-md-6">
+                                                <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
+                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                                                    <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
+                                        <%--      </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pUploadfile" runat="server">
-                                        <div class="form-group">
+                                        <div class="form-group" >
                                             <label class="control-label col-md-3">Uplod file: </label>
 
                                             <div class="col-md-3">
@@ -399,7 +427,7 @@
                                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-<%--                                    <asp:Panel ID="pUploadfile" runat="server">
+                                    <%--                                    <asp:Panel ID="pUploadfile" runat="server">
 
                                         <div class="row">
                                             <div class="col-md-6">
@@ -420,7 +448,6 @@
                                         <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>--%>
-
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->

@@ -147,9 +147,53 @@
                     </asp:Panel>
 
                     <asp:Panel ID="pRefImage" runat="server">
-                        <h4 class="form-section">Photo Before:</h4>
+                                            <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Help</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>##ขั้นตอนการอัพโหลด</li>
+                                <li>เลือกไฟล์ที่มี </li>
+                                <li>จะอัพโหลดได้แค่ 2 ไฟล์ คือ Before,After โดยอัพโหลดทีละรูป โดย</li>
+                                <li> - รูปแรกที่อัพโหลดจะเป็น Before</li>
+                                <li> - รูปที่สองที่อัพโหลดจะเป็น After</li>
+                                <li> - การแก้คำอธิบายรูปว่าเป็น After หรือ Before สามารถทำได้โดยการกดปุ่ม Edit </li>
+                            </ul>
+                        </div>
+                    </div>
+                         <div class="row">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Uplod Photo: </label>
 
-                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="input-group input-large">
+                                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                        </div>
+                                                        <span class="input-group-addon btn default btn-file">
+                                                            <span class="fileinput-new">Select file </span>
+                                                            <span class="fileinput-exists">Change </span>
+                                                            <asp:FileUpload ID="FileUpload1" runat="server" />
+
+                                                        </span>
+                                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                                    </div>
+                                                </div>
+                                                <asp:Button ID="btnLoadFile" runat="server" CssClass="btn blue" OnClick="btnLoadFile_Click" Text="Upload" />
+                                            ***เลือกชนิดไฟล์ที่เป็น *.jpg</span>
+<%--                                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>--%>
+
+                                            </div>
+                                        </div>
+                             </div>
+                        <%--<h4 class="form-section">Photo Before:</h4>--%>
+
+<%--                        <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
@@ -158,18 +202,18 @@
                                         <span class="btn green fileinput-button">
                                             <i class="fa fa-plus"></i>
                                             <span>Add files...</span>
-                                            <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="true" />
+                                            <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="false" />
                                         </span>
                                         -<span><asp:Button ID="btnLoadFile" runat="server" CssClass="btn blue" OnClick="btnLoadFile_Click" Text="Upload" />
                                             ***เลือกชนิดไฟล์ที่เป็น *.jpg</span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </asp:Panel>
 
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
                                 CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting" OnRowCancelingEdit="gvRefImages_RowCancelingEdit" OnRowDataBound="gvRefImages_RowDataBound" OnRowEditing="gvRefImages_RowEditing" OnRowUpdating="gvRefImages_RowUpdating">
                                 <Columns>

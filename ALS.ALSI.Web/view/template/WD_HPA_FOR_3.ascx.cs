@@ -1699,37 +1699,26 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.ADMIN_CONVERT_PDF:
                     if (!String.IsNullOrEmpty(this.jobSample.path_word))
                     {
-                        Word2Pdf objWorPdf = new Word2Pdf();
-                        objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                        objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                        try
-                        {
-                            objWorPdf.Word2PdfCOnversion();
-                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine();
-                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                        }
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_pdf))
-                    //{
-                    //    Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_pdf));
-                    //}
-                    //else
-                    //{
-                    //    byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 
-                    //    // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-                    //    Response.Buffer = true;
-                    //    Response.Clear();
-                    //    Response.ContentType = mimeType;
-                    //    Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-                    //    Response.BinaryWrite(bytes); // create the file
-                    //    Response.Flush(); // send it to the client to download
+                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    //{
+                    //    Word2Pdf objWorPdf = new Word2Pdf();
+                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
+                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
+                    //    try
+                    //    {
+                    //        objWorPdf.Word2PdfCOnversion();
+                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
+
+                    //    }
+                    //    catch (Exception ex)
+                    //    {
+                    //        Console.WriteLine();
+                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+
+                    //    }
                     //}
                     break;
             }
