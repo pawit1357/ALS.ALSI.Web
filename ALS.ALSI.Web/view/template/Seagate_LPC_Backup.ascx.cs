@@ -18,11 +18,10 @@ using System.Linq;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
 using WordToPDF;
-using ALSALSI.Biz;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class Seagate_LPC : System.Web.UI.UserControl
+    public partial class Seagate_LPC_Backup : System.Web.UI.UserControl
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Seagate_LPC));
@@ -208,7 +207,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     #endregion
 
-
+       
                     ddlA19.Enabled = true;
                     txtB19.Enabled = true;
                     txtCVP_C19.Enabled = true;
@@ -216,28 +215,28 @@ namespace ALS.ALSI.Web.view.template
                     txtCVP_E19.Enabled = true;
 
 
-                    //td5.Visible = true;
+                    td5.Visible = true;
 
-                    //th2.Visible = true;
-                    //td6.Visible = true;
-                    //td7.Visible = true;
-                    //td8.Visible = true;
-                    //td9.Visible = true;
-                    //td10.Visible = true;
+                    th2.Visible = true;
+                    td6.Visible = true;
+                    td7.Visible = true;
+                    td8.Visible = true;
+                    td9.Visible = true;
+                    td10.Visible = true;
 
-                    //th3.Visible = true;
-                    //td11.Visible = true;
-                    //td12.Visible = true;
-                    //td13.Visible = true;
-                    //td14.Visible = true;
-                    //td15.Visible = true;
+                    th3.Visible = true;
+                    td11.Visible = true;
+                    td12.Visible = true;
+                    td13.Visible = true;
+                    td14.Visible = true;
+                    td15.Visible = true;
 
-                    //th4.Visible = true;
-                    //td16.Visible = true;
-                    //td17.Visible = true;
-                    //td18.Visible = true;
-                    //td19.Visible = true;
-                    //td20.Visible = true;
+                    th4.Visible = true;
+                    td16.Visible = true;
+                    td17.Visible = true;
+                    td18.Visible = true;
+                    td19.Visible = true;
+                    td20.Visible = true;
 
                     btnCoverPage.Visible = true;
                     btnWorkSheet.Visible = true;
@@ -250,33 +249,33 @@ namespace ALS.ALSI.Web.view.template
                     txtD19.Enabled = false;
                     txtCVP_E19.Enabled = false;
 
-                    //th1.Visible = false;
-                    //td1.Visible = false;
-                    //td2.Visible = false;
-                    //td3.Visible = false;
-                    //td4.Visible = false;
-                    //td5.Visible = false;
+                    th1.Visible = false;
+                    td1.Visible = false;
+                    td2.Visible = false;
+                    td3.Visible = false;
+                    td4.Visible = false;
+                    td5.Visible = false;
 
-                    //th2.Visible = false;
-                    //td6.Visible = false;
-                    //td7.Visible = false;
-                    //td8.Visible = false;
-                    //td9.Visible = false;
-                    //td10.Visible = false;
+                    th2.Visible = false;
+                    td6.Visible = false;
+                    td7.Visible = false;
+                    td8.Visible = false;
+                    td9.Visible = false;
+                    td10.Visible = false;
 
-                    //th3.Visible = false;
-                    //td11.Visible = false;
-                    //td12.Visible = false;
-                    //td13.Visible = false;
-                    //td14.Visible = false;
-                    //td15.Visible = false;
+                    th3.Visible = false;
+                    td11.Visible = false;
+                    td12.Visible = false;
+                    td13.Visible = false;
+                    td14.Visible = false;
+                    td15.Visible = false;
 
-                    //th4.Visible = false;
-                    //td16.Visible = false;
-                    //td17.Visible = false;
-                    //td18.Visible = false;
-                    //td19.Visible = false;
-                    //td20.Visible = false;
+                    th4.Visible = false;
+                    td16.Visible = false;
+                    td17.Visible = false;
+                    td18.Visible = false;
+                    td19.Visible = false;
+                    td20.Visible = false;
 
                     btnCoverPage.Visible = false;
                     btnWorkSheet.Visible = false;
@@ -296,31 +295,31 @@ namespace ALS.ALSI.Web.view.template
                 tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(Lpcs[0].specification_id));
                 if (tem != null)
                 {
-                    //#region "HEADER"
-                    //lbDocNo.Text = tem.C;
-                    //lbDocRev.Text = tem.D;
-                    //lbCommodity.Text = tem.B;
-                    //lbUnit1.Text = tem.E;//unit
-                    //lbUnit2.Text = tem.E;//unit
-                    //lbUnit3.Text = tem.E;//unit
-                    //lbUnit4.Text = tem.E;//unit
-                    //lbUnit5.Text = tem.E;//unit
-                    //lbUnit6.Text = tem.E;//unit
-                    //lbUnit7.Text = tem.E;//unit
-                    //lbUnit8.Text = tem.E;//unit
-                    //#endregion
-                    //#region "Liquid Particle Count (68 KHz) 0.3"
-                    //lbB28.Text = tem.F;
-                    //#endregion
-                    //#region "Liquid Particle Count (68 KHz) 0.6"
-                    //lbB35.Text = tem.G;
-                    //#endregion
-                    //#region "Liquid Particle Count (132 KHz) 0.3 "
-                    //lbB42.Text = tem.H;
-                    //#endregion
-                    //#region "Liquid Particle Count (132 KHz) 0.6"
-                    //lbB49.Text = tem.I;
-                    //#endregion
+                    #region "HEADER"
+                    lbDocNo.Text = tem.C;
+                    lbDocRev.Text = tem.D;
+                    lbCommodity.Text = tem.B;
+                    lbUnit1.Text = tem.E;//unit
+                    lbUnit2.Text = tem.E;//unit
+                    lbUnit3.Text = tem.E;//unit
+                    lbUnit4.Text = tem.E;//unit
+                    lbUnit5.Text = tem.E;//unit
+                    lbUnit6.Text = tem.E;//unit
+                    lbUnit7.Text = tem.E;//unit
+                    lbUnit8.Text = tem.E;//unit
+                    #endregion
+                    #region "Liquid Particle Count (68 KHz) 0.3"
+                    lbB28.Text = tem.F;
+                    #endregion
+                    #region "Liquid Particle Count (68 KHz) 0.6"
+                    lbB35.Text = tem.G;
+                    #endregion
+                    #region "Liquid Particle Count (132 KHz) 0.3 "
+                    lbB42.Text = tem.H;
+                    #endregion
+                    #region "Liquid Particle Count (132 KHz) 0.6"
+                    lbB49.Text = tem.I;
+                    #endregion
                 }
 
                 LPCTypeEnum lpcType = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(this.Lpcs[0].lpc_type));
@@ -330,51 +329,51 @@ namespace ALS.ALSI.Web.view.template
                 template_seagate_lpc_coverpage khz68_03 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_03).ToString());
                 if (khz68_03 != null)
                 {
-                    //txt_UsLPC03_B14.Text = khz68_03.b14;
-                    //txt_UsLPC03_B15.Text = khz68_03.b15;
-                    //txt_UsLPC03_B16.Text = khz68_03.b16;
-                    //txt_UsLPC03_B17.Text = khz68_03.b17;
-                    //txt_UsLPC03_B18.Text = khz68_03.b18;
+                    txt_UsLPC03_B14.Text = khz68_03.b14;
+                    txt_UsLPC03_B15.Text = khz68_03.b15;
+                    txt_UsLPC03_B16.Text = khz68_03.b16;
+                    txt_UsLPC03_B17.Text = khz68_03.b17;
+                    txt_UsLPC03_B18.Text = khz68_03.b18;
 
-                    //txt_UsLPC03_C14.Text = khz68_03.c14;
-                    //txt_UsLPC03_C15.Text = khz68_03.c15;
-                    //txt_UsLPC03_C16.Text = khz68_03.c16;
-                    //txt_UsLPC03_C17.Text = khz68_03.c17;
-                    //txt_UsLPC03_C18.Text = khz68_03.c18;
+                    txt_UsLPC03_C14.Text = khz68_03.c14;
+                    txt_UsLPC03_C15.Text = khz68_03.c15;
+                    txt_UsLPC03_C16.Text = khz68_03.c16;
+                    txt_UsLPC03_C17.Text = khz68_03.c17;
+                    txt_UsLPC03_C18.Text = khz68_03.c18;
 
-                    //txt_UsLPC03_D14.Text = khz68_03.d14;
-                    //txt_UsLPC03_D15.Text = khz68_03.d15;
-                    //txt_UsLPC03_D16.Text = khz68_03.d16;
-                    //txt_UsLPC03_D17.Text = khz68_03.d17;
-                    //txt_UsLPC03_D18.Text = khz68_03.d18;
+                    txt_UsLPC03_D14.Text = khz68_03.d14;
+                    txt_UsLPC03_D15.Text = khz68_03.d15;
+                    txt_UsLPC03_D16.Text = khz68_03.d16;
+                    txt_UsLPC03_D17.Text = khz68_03.d17;
+                    txt_UsLPC03_D18.Text = khz68_03.d18;
 
-                    //txt_UsLPC03_E14.Text = khz68_03.e14;
-                    //txt_UsLPC03_E15.Text = khz68_03.e15;
-                    //txt_UsLPC03_E16.Text = khz68_03.e16;
-                    //txt_UsLPC03_E17.Text = khz68_03.e17;
-                    //txt_UsLPC03_E18.Text = khz68_03.e18;
+                    txt_UsLPC03_E14.Text = khz68_03.e14;
+                    txt_UsLPC03_E15.Text = khz68_03.e15;
+                    txt_UsLPC03_E16.Text = khz68_03.e16;
+                    txt_UsLPC03_E17.Text = khz68_03.e17;
+                    txt_UsLPC03_E18.Text = khz68_03.e18;
 
-                    //txt_UsLPC03_F14.Text = khz68_03.f14;
-                    //txt_UsLPC03_F15.Text = khz68_03.f15;
-                    //txt_UsLPC03_F16.Text = khz68_03.f16;
-                    //txt_UsLPC03_F17.Text = khz68_03.f17;
-                    //txt_UsLPC03_F18.Text = khz68_03.f18;
+                    txt_UsLPC03_F14.Text = khz68_03.f14;
+                    txt_UsLPC03_F15.Text = khz68_03.f15;
+                    txt_UsLPC03_F16.Text = khz68_03.f16;
+                    txt_UsLPC03_F17.Text = khz68_03.f17;
+                    txt_UsLPC03_F18.Text = khz68_03.f18;
 
-                    //txt_UsLPC03_G14.Text = khz68_03.g14;
-                    //txt_UsLPC03_G15.Text = khz68_03.g15;
-                    //txt_UsLPC03_G16.Text = khz68_03.g16;
-                    //txt_UsLPC03_G17.Text = khz68_03.g17;
-                    //txt_UsLPC03_G18.Text = khz68_03.g18;
+                    txt_UsLPC03_G14.Text = khz68_03.g14;
+                    txt_UsLPC03_G15.Text = khz68_03.g15;
+                    txt_UsLPC03_G16.Text = khz68_03.g16;
+                    txt_UsLPC03_G17.Text = khz68_03.g17;
+                    txt_UsLPC03_G18.Text = khz68_03.g18;
 
-                    //txt_UsLPC03_B26.Text = khz68_03.b26;
+                    txt_UsLPC03_B26.Text = khz68_03.b26;
 
-                    ////txt_UsLPC03_B20.Text = Lpcs[0].cvp_c19;
-                    //txt_UsLPC03_B21.Text = khz68_03.b21;
-                    ////txt_UsLPC03_B22.Text = Lpcs[0].cvp_e19;
+                    //txt_UsLPC03_B20.Text = Lpcs[0].cvp_c19;
+                    txt_UsLPC03_B21.Text = khz68_03.b21;
+                    //txt_UsLPC03_B22.Text = Lpcs[0].cvp_e19;
 
-                    //txt_UsLPC03_B25.Text = khz68_03.b25;
-                    //txt_UsLPC03_D25.Text = khz68_03.d25;
-                    //txt_UsLPC03_F25.Text = khz68_03.f25;
+                    txt_UsLPC03_B25.Text = khz68_03.b25;
+                    txt_UsLPC03_D25.Text = khz68_03.d25;
+                    txt_UsLPC03_F25.Text = khz68_03.f25;
 
                 }
                 #endregion
@@ -382,51 +381,51 @@ namespace ALS.ALSI.Web.view.template
                 template_seagate_lpc_coverpage khz68_06 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString());
                 if (khz68_06 != null)
                 {
-                    //txt_UsLPC06_B14.Text = khz68_06.b14;
-                    //txt_UsLPC06_B15.Text = khz68_06.b15;
-                    //txt_UsLPC06_B16.Text = khz68_06.b16;
-                    //txt_UsLPC06_B17.Text = khz68_06.b17;
-                    //txt_UsLPC06_B18.Text = khz68_06.b18;
+                    txt_UsLPC06_B14.Text = khz68_06.b14;
+                    txt_UsLPC06_B15.Text = khz68_06.b15;
+                    txt_UsLPC06_B16.Text = khz68_06.b16;
+                    txt_UsLPC06_B17.Text = khz68_06.b17;
+                    txt_UsLPC06_B18.Text = khz68_06.b18;
 
-                    //txt_UsLPC06_C14.Text = khz68_06.c14;
-                    //txt_UsLPC06_C15.Text = khz68_06.c15;
-                    //txt_UsLPC06_C16.Text = khz68_06.c16;
-                    //txt_UsLPC06_C17.Text = khz68_06.c17;
-                    //txt_UsLPC06_C18.Text = khz68_06.c18;
+                    txt_UsLPC06_C14.Text = khz68_06.c14;
+                    txt_UsLPC06_C15.Text = khz68_06.c15;
+                    txt_UsLPC06_C16.Text = khz68_06.c16;
+                    txt_UsLPC06_C17.Text = khz68_06.c17;
+                    txt_UsLPC06_C18.Text = khz68_06.c18;
 
-                    //txt_UsLPC06_D14.Text = khz68_06.d14;
-                    //txt_UsLPC06_D15.Text = khz68_06.d15;
-                    //txt_UsLPC06_D16.Text = khz68_06.d16;
-                    //txt_UsLPC06_D17.Text = khz68_06.d17;
-                    //txt_UsLPC06_D18.Text = khz68_06.d18;
+                    txt_UsLPC06_D14.Text = khz68_06.d14;
+                    txt_UsLPC06_D15.Text = khz68_06.d15;
+                    txt_UsLPC06_D16.Text = khz68_06.d16;
+                    txt_UsLPC06_D17.Text = khz68_06.d17;
+                    txt_UsLPC06_D18.Text = khz68_06.d18;
 
-                    //txt_UsLPC06_E14.Text = khz68_06.e14;
-                    //txt_UsLPC06_E15.Text = khz68_06.e15;
-                    //txt_UsLPC06_E16.Text = khz68_06.e16;
-                    //txt_UsLPC06_E17.Text = khz68_06.e17;
-                    //txt_UsLPC06_E18.Text = khz68_06.e18;
+                    txt_UsLPC06_E14.Text = khz68_06.e14;
+                    txt_UsLPC06_E15.Text = khz68_06.e15;
+                    txt_UsLPC06_E16.Text = khz68_06.e16;
+                    txt_UsLPC06_E17.Text = khz68_06.e17;
+                    txt_UsLPC06_E18.Text = khz68_06.e18;
 
-                    //txt_UsLPC06_F14.Text = khz68_06.f14;
-                    //txt_UsLPC06_F15.Text = khz68_06.f15;
-                    //txt_UsLPC06_F16.Text = khz68_06.f16;
-                    //txt_UsLPC06_F17.Text = khz68_06.f17;
-                    //txt_UsLPC06_F18.Text = khz68_06.f18;
+                    txt_UsLPC06_F14.Text = khz68_06.f14;
+                    txt_UsLPC06_F15.Text = khz68_06.f15;
+                    txt_UsLPC06_F16.Text = khz68_06.f16;
+                    txt_UsLPC06_F17.Text = khz68_06.f17;
+                    txt_UsLPC06_F18.Text = khz68_06.f18;
 
-                    //txt_UsLPC06_G14.Text = khz68_06.g14;
-                    //txt_UsLPC06_G15.Text = khz68_06.g15;
-                    //txt_UsLPC06_G16.Text = khz68_06.g16;
-                    //txt_UsLPC06_G17.Text = khz68_06.g17;
-                    //txt_UsLPC06_G18.Text = khz68_06.g18;
+                    txt_UsLPC06_G14.Text = khz68_06.g14;
+                    txt_UsLPC06_G15.Text = khz68_06.g15;
+                    txt_UsLPC06_G16.Text = khz68_06.g16;
+                    txt_UsLPC06_G17.Text = khz68_06.g17;
+                    txt_UsLPC06_G18.Text = khz68_06.g18;
 
-                    //txt_UsLPC06_B26.Text = khz68_06.b26;
+                    txt_UsLPC06_B26.Text = khz68_06.b26;
 
-                    ////txt_UsLPC06_B20.Text = Lpcs[0].cvp_c19;
-                    //txt_UsLPC06_B21.Text = khz68_06.b21;
-                    ////txt_UsLPC06_B22.Text = Lpcs[0].cvp_e19;
+                    //txt_UsLPC06_B20.Text = Lpcs[0].cvp_c19;
+                    txt_UsLPC06_B21.Text = khz68_06.b21;
+                    //txt_UsLPC06_B22.Text = Lpcs[0].cvp_e19;
 
-                    //txt_UsLPC06_B25.Text = khz68_06.b25;
-                    //txt_UsLPC06_D25.Text = khz68_06.d25;
-                    //txt_UsLPC06_F25.Text = khz68_06.f25;
+                    txt_UsLPC06_B25.Text = khz68_06.b25;
+                    txt_UsLPC06_D25.Text = khz68_06.d25;
+                    txt_UsLPC06_F25.Text = khz68_06.f25;
                 }
                 #endregion
 
@@ -444,18 +443,18 @@ namespace ALS.ALSI.Web.view.template
                 switch (lpcType1)
                 {
                     case LPCTypeEnum.KHz_68:
-                        //tb1_1.Visible = true;
-                        //tb2.Visible = true;
-                        //tb3.Visible = false;
-                        //tb4.Visible = false;
+                        tb1_1.Visible = true;
+                        tb2.Visible = true;
+                        tb3.Visible = false;
+                        tb4.Visible = false;
                         //pUS_LPC03.Visible = true;
                         //pUS_LPC06.Visible = false;
                         break;
                     case LPCTypeEnum.KHz_132:
-                        //tb1_1.Visible = false;
-                        //tb2.Visible = false;
-                        //tb3.Visible = true;
-                        //tb4.Visible = true;
+                        tb1_1.Visible = false;
+                        tb2.Visible = false;
+                        tb3.Visible = true;
+                        tb4.Visible = true;
                         //pUS_LPC03.Visible = false;
                         //pUS_LPC06.Visible = true;
                         break;
@@ -589,13 +588,13 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 case "1":
                                     //Extraction Vol. (ml) & No. of Parts Used For (64KHz)
-                                    //_tmp.NumberOfPieces = txt_UsLPC03_B20.Text;
-                                    //_tmp.ExtractionVolume = txt_UsLPC03_B22.Text;
+                                    _tmp.NumberOfPieces = txt_UsLPC03_B20.Text;
+                                    _tmp.ExtractionVolume = txt_UsLPC03_B22.Text;
                                     break;
                                 case "2":
                                     //Extraction Vol. (ml) & No. of Parts Used For (132KHz)
-                                    //_tmp.NumberOfPieces = txt_UsLPC06_B20.Text;
-                                    //_tmp.ExtractionVolume = txt_UsLPC06_B22.Text;
+                                    _tmp.NumberOfPieces = txt_UsLPC06_B20.Text;
+                                    _tmp.ExtractionVolume = txt_UsLPC06_B22.Text;
                                     break;
                             }
 
@@ -607,40 +606,40 @@ namespace ALS.ALSI.Web.view.template
                         if (khz68_03 != null)
                         {
                             //khz68_03.lpc_type = (cbLPCType68.Checked) ? "1" : "2";
-                            //khz68_03.b14 = txt_UsLPC03_B14.Text;
-                            //khz68_03.b15 = txt_UsLPC03_B15.Text;
-                            //khz68_03.b16 = txt_UsLPC03_B16.Text;
-                            //khz68_03.b17 = txt_UsLPC03_B17.Text;
+                            khz68_03.b14 = txt_UsLPC03_B14.Text;
+                            khz68_03.b15 = txt_UsLPC03_B15.Text;
+                            khz68_03.b16 = txt_UsLPC03_B16.Text;
+                            khz68_03.b17 = txt_UsLPC03_B17.Text;
 
-                            //khz68_03.c14 = txt_UsLPC03_C14.Text;
-                            //khz68_03.c15 = txt_UsLPC03_C15.Text;
-                            //khz68_03.c16 = txt_UsLPC03_C16.Text;
-                            //khz68_03.c17 = txt_UsLPC03_C17.Text;
+                            khz68_03.c14 = txt_UsLPC03_C14.Text;
+                            khz68_03.c15 = txt_UsLPC03_C15.Text;
+                            khz68_03.c16 = txt_UsLPC03_C16.Text;
+                            khz68_03.c17 = txt_UsLPC03_C17.Text;
 
-                            //khz68_03.d14 = txt_UsLPC03_D14.Text;
-                            //khz68_03.d15 = txt_UsLPC03_D15.Text;
-                            //khz68_03.d16 = txt_UsLPC03_D16.Text;
-                            //khz68_03.d17 = txt_UsLPC03_D17.Text;
+                            khz68_03.d14 = txt_UsLPC03_D14.Text;
+                            khz68_03.d15 = txt_UsLPC03_D15.Text;
+                            khz68_03.d16 = txt_UsLPC03_D16.Text;
+                            khz68_03.d17 = txt_UsLPC03_D17.Text;
 
-                            //khz68_03.e14 = txt_UsLPC03_E14.Text;
-                            //khz68_03.e15 = txt_UsLPC03_E15.Text;
-                            //khz68_03.e16 = txt_UsLPC03_E16.Text;
-                            //khz68_03.e17 = txt_UsLPC03_E17.Text;
+                            khz68_03.e14 = txt_UsLPC03_E14.Text;
+                            khz68_03.e15 = txt_UsLPC03_E15.Text;
+                            khz68_03.e16 = txt_UsLPC03_E16.Text;
+                            khz68_03.e17 = txt_UsLPC03_E17.Text;
 
-                            //khz68_03.f14 = txt_UsLPC03_F14.Text;
-                            //khz68_03.f15 = txt_UsLPC03_F15.Text;
-                            //khz68_03.f16 = txt_UsLPC03_F16.Text;
-                            //khz68_03.f17 = txt_UsLPC03_F17.Text;
+                            khz68_03.f14 = txt_UsLPC03_F14.Text;
+                            khz68_03.f15 = txt_UsLPC03_F15.Text;
+                            khz68_03.f16 = txt_UsLPC03_F16.Text;
+                            khz68_03.f17 = txt_UsLPC03_F17.Text;
 
-                            //khz68_03.g14 = txt_UsLPC03_G14.Text;
-                            //khz68_03.g15 = txt_UsLPC03_G15.Text;
-                            //khz68_03.g16 = txt_UsLPC03_G16.Text;
-                            //khz68_03.g17 = txt_UsLPC03_G17.Text;
+                            khz68_03.g14 = txt_UsLPC03_G14.Text;
+                            khz68_03.g15 = txt_UsLPC03_G15.Text;
+                            khz68_03.g16 = txt_UsLPC03_G16.Text;
+                            khz68_03.g17 = txt_UsLPC03_G17.Text;
 
-                            //khz68_03.b21 = txt_UsLPC03_B21.Text;
-                            //khz68_03.b25 = txt_UsLPC03_B25.Text;
-                            //khz68_03.d25 = txt_UsLPC03_D25.Text;
-                            //khz68_03.f25 = txt_UsLPC03_F25.Text;
+                            khz68_03.b21 = txt_UsLPC03_B21.Text;
+                            khz68_03.b25 = txt_UsLPC03_B25.Text;
+                            khz68_03.d25 = txt_UsLPC03_D25.Text;
+                            khz68_03.f25 = txt_UsLPC03_F25.Text;
 
 
                         }
@@ -649,40 +648,40 @@ namespace ALS.ALSI.Web.view.template
                         template_seagate_lpc_coverpage khz68_06 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString());
                         if (khz68_06 != null)
                         {
-                            //khz68_06.b14 = txt_UsLPC06_B14.Text;
-                            //khz68_06.b15 = txt_UsLPC06_B15.Text;
-                            //khz68_06.b16 = txt_UsLPC06_B16.Text;
-                            //khz68_06.b17 = txt_UsLPC06_B17.Text;
+                            khz68_06.b14 = txt_UsLPC06_B14.Text;
+                            khz68_06.b15 = txt_UsLPC06_B15.Text;
+                            khz68_06.b16 = txt_UsLPC06_B16.Text;
+                            khz68_06.b17 = txt_UsLPC06_B17.Text;
 
-                            //khz68_06.c14 = txt_UsLPC06_C14.Text;
-                            //khz68_06.c15 = txt_UsLPC06_C15.Text;
-                            //khz68_06.c16 = txt_UsLPC06_C16.Text;
-                            //khz68_06.c17 = txt_UsLPC06_C17.Text;
+                            khz68_06.c14 = txt_UsLPC06_C14.Text;
+                            khz68_06.c15 = txt_UsLPC06_C15.Text;
+                            khz68_06.c16 = txt_UsLPC06_C16.Text;
+                            khz68_06.c17 = txt_UsLPC06_C17.Text;
 
-                            //khz68_06.d14 = txt_UsLPC06_D14.Text;
-                            //khz68_06.d15 = txt_UsLPC06_D15.Text;
-                            //khz68_06.d16 = txt_UsLPC06_D16.Text;
-                            //khz68_06.d17 = txt_UsLPC06_D17.Text;
+                            khz68_06.d14 = txt_UsLPC06_D14.Text;
+                            khz68_06.d15 = txt_UsLPC06_D15.Text;
+                            khz68_06.d16 = txt_UsLPC06_D16.Text;
+                            khz68_06.d17 = txt_UsLPC06_D17.Text;
 
-                            //khz68_06.e14 = txt_UsLPC06_E14.Text;
-                            //khz68_06.e15 = txt_UsLPC06_E15.Text;
-                            //khz68_06.e16 = txt_UsLPC06_E16.Text;
-                            //khz68_06.e17 = txt_UsLPC06_E17.Text;
+                            khz68_06.e14 = txt_UsLPC06_E14.Text;
+                            khz68_06.e15 = txt_UsLPC06_E15.Text;
+                            khz68_06.e16 = txt_UsLPC06_E16.Text;
+                            khz68_06.e17 = txt_UsLPC06_E17.Text;
 
-                            //khz68_06.f14 = txt_UsLPC06_F14.Text;
-                            //khz68_06.f15 = txt_UsLPC06_F15.Text;
-                            //khz68_06.f16 = txt_UsLPC06_F16.Text;
-                            //khz68_06.f17 = txt_UsLPC06_F17.Text;
+                            khz68_06.f14 = txt_UsLPC06_F14.Text;
+                            khz68_06.f15 = txt_UsLPC06_F15.Text;
+                            khz68_06.f16 = txt_UsLPC06_F16.Text;
+                            khz68_06.f17 = txt_UsLPC06_F17.Text;
 
-                            //khz68_06.g14 = txt_UsLPC06_G14.Text;
-                            //khz68_06.g15 = txt_UsLPC06_G15.Text;
-                            //khz68_06.g16 = txt_UsLPC06_G16.Text;
-                            //khz68_06.g17 = txt_UsLPC06_G17.Text;
+                            khz68_06.g14 = txt_UsLPC06_G14.Text;
+                            khz68_06.g15 = txt_UsLPC06_G15.Text;
+                            khz68_06.g16 = txt_UsLPC06_G16.Text;
+                            khz68_06.g17 = txt_UsLPC06_G17.Text;
 
-                            //khz68_06.b21 = txt_UsLPC06_B21.Text;
-                            //khz68_06.b25 = txt_UsLPC06_B25.Text;
-                            //khz68_06.d25 = txt_UsLPC06_D25.Text;
-                            //khz68_06.f25 = txt_UsLPC06_F25.Text;
+                            khz68_06.b21 = txt_UsLPC06_B21.Text;
+                            khz68_06.b25 = txt_UsLPC06_B25.Text;
+                            khz68_06.d25 = txt_UsLPC06_D25.Text;
+                            khz68_06.f25 = txt_UsLPC06_F25.Text;
                         }
                         #endregion
                         khz68_03.UpdateList(this.Lpcs);
@@ -699,7 +698,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-
+                   
 
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
@@ -729,7 +728,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-
+                         
                             this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
@@ -846,9 +845,6 @@ namespace ALS.ALSI.Web.view.template
             #region "LOAD"
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
 
-            List<template_seagate_lpc_coverpage> listSeagateLpc = new List<template_seagate_lpc_coverpage>();
-
-            List<LPC> lpcs = new List<LPC>();
 
             for (int i = 0; i < btnUpload.PostedFiles.Count; i++)
             {
@@ -877,55 +873,189 @@ namespace ALS.ALSI.Web.view.template
                             using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
                             {
                                 HSSFWorkbook wd = new HSSFWorkbook(fs);
-                                ISheet isheet = wd.GetSheet("Sheet1");
-                                int run = 0;
-                                for (int row = 17; row < 120; row++)
+                                ISheet isheet = wd.GetSheet(ConfigurationManager.AppSettings["seagate.lpc.excel.sheetname.working1.03"]);
+                                #region "US-LPC(0.3)"
+                                if (isheet == null)
                                 {
-                                    if (isheet.GetRow(row) != null) //null is when the row only contains empty cells 
-                                    {
-                                        if (CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.F)).Equals("Sample #"))
-                                        {
-                                            run++;
-                                            Console.WriteLine();
-                                        }
-                                        if (String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C))))
-                                        {
-                                            switch (CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J)))
-                                            {
-                                                case "0.200":
-                                                case "0.300":
-                                                case "0.400":
-                                                case "0.500":
-                                                case "0.600":
-                                                case "0.700":
-                                                case "0.800":
-                                                case "0.900":
-                                                case "1.000":
-                                                case "1.500":
-                                                case "2.000":
-                                                    LPC lpc = new LPC();
-                                                    lpc.Run = run;
-                                                    lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
-                                                    lpc.ChannelSize = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
-                                                    lpc.Value = Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S)));
-                                                    lpcs.Add(lpc);
-                                                    break;
-                                            }
-                                        }
-                                    }
+                                    errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", ConfigurationManager.AppSettings["seagate.lpc.excel.sheetname.working1.03"]));
                                 }
+                                else
+                                {
+                                    sheetName = isheet.SheetName;
+
+                                    //sample
+                                    txt_UsLPC03_B14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_B15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_B16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_B17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_B18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    //blank               
+                                    txt_UsLPC03_C14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_C15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_C16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_C17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_C18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    //sample             
+                                    txt_UsLPC03_D14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_D15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_D16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_D17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_D18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    //blank             
+                                    txt_UsLPC03_E14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_E15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_E16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_E17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_E18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    //sample             
+                                    txt_UsLPC03_F14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_F15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_F16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_F17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_F18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    //sample            
+                                    txt_UsLPC03_G14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_G15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_G16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_G17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC03_G18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+
+                                    txt_UsLPC03_B20.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_B21.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC03_B22.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+
+                                    //No of Particles     
+                                    txt_UsLPC03_B25.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal03.Text)).ToString();
+                                    txt_UsLPC03_D25.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal03.Text)).ToString();
+                                    txt_UsLPC03_F25.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal03.Text)).ToString();
+                                    //Average            
+                                    txt_UsLPC03_B26.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal04.Text)).ToString();
+
+
+
+                                }
+                                #endregion
+                                #region "US-LPC(0.6)"
+                                isheet = wd.GetSheet(ConfigurationManager.AppSettings["seagate.lpc.excel.sheetname.working1.06"]);
+
+                                if (isheet == null)
+                                {
+                                    errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", ConfigurationManager.AppSettings["seagate.lpc.excel.sheetname.working1.06"]));
+                                }
+                                else
+                                {
+                                    sheetName = isheet.SheetName;
+
+                                    //sample
+                                    txt_UsLPC06_B14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_B15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_B16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_B17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_B18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    //blank             
+                                    txt_UsLPC06_C14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_C15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_C16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_C17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_C18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    //sample           
+                                    txt_UsLPC06_D14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_D15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_D16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_D17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_D18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    //blank           
+                                    txt_UsLPC06_E14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_E15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_E16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_E17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_E18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.E))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    //sample           
+                                    txt_UsLPC06_F14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_F15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_F16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_F17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_F18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    //sample          
+                                    txt_UsLPC06_G14.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_G15.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_G16.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_G17.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                    txt_UsLPC06_G18.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.G))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+
+                                    txt_UsLPC06_B20.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_B21.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                    txt_UsLPC06_B22.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+
+                                    //No of Particles     
+                                    txt_UsLPC06_B25.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal03.Text)).ToString();
+                                    txt_UsLPC06_D25.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal03.Text)).ToString();
+                                    txt_UsLPC06_F25.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.F))), Convert.ToInt16(txtDecimal03.Text)).ToString();
+                                    //Average          
+                                    txt_UsLPC06_B26.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal04.Text)).ToString();
+
+                                    //txt_UsLPC06_B14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.B));
+                                    //txt_UsLPC06_B15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.B));
+                                    //txt_UsLPC06_B16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.B));
+                                    //txt_UsLPC06_B17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B));
+                                    //txt_UsLPC06_B18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B));
+
+                                    //txt_UsLPC06_C14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.C));
+                                    //txt_UsLPC06_C15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.C));
+                                    //txt_UsLPC06_C16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.C));
+                                    //txt_UsLPC06_C17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C));
+                                    //txt_UsLPC06_C18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C));
+
+                                    //txt_UsLPC06_D14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.D));
+                                    //txt_UsLPC06_D15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.D));
+                                    //txt_UsLPC06_D16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.D));
+                                    //txt_UsLPC06_D17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D));
+                                    //txt_UsLPC06_D18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D));
+
+                                    //txt_UsLPC06_E14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.E));
+                                    //txt_UsLPC06_E15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.E));
+                                    //txt_UsLPC06_E16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.E));
+                                    //txt_UsLPC06_E17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.E));
+                                    //txt_UsLPC06_E18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.E));
+
+                                    //txt_UsLPC06_F14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.F));
+                                    //txt_UsLPC06_F15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.F));
+                                    //txt_UsLPC06_F16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.F));
+                                    //txt_UsLPC06_F17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.F));
+                                    //txt_UsLPC06_F18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.F));
+
+                                    //txt_UsLPC06_G14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.G));
+                                    //txt_UsLPC06_G15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.G));
+                                    //txt_UsLPC06_G16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.G));
+                                    //txt_UsLPC06_G17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.G));
+                                    //txt_UsLPC06_G18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.G));
+
+                                    //txt_UsLPC06_B20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.B));
+                                    //txt_UsLPC06_B21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.B));
+                                    //txt_UsLPC06_B22.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.B));
+
+                                    //txt_UsLPC06_B25.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.B));
+                                    //txt_UsLPC06_D25.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.D));
+                                    //txt_UsLPC06_F25.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.F));
+                                    //txt_UsLPC06_B26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.B));
+
+                                }
+                                #endregion
                             }
+
                         }
                     }
                     else
                     {
                         errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
+
                     }
-                    Console.WriteLine();
+
                 }
                 catch (Exception Ex)
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
+
                     //logger.Error(Ex.Message);
                     Console.WriteLine();
                 }
@@ -942,21 +1072,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
             }
-            //New Order
-            string lastSampleCount = lpcs.Max(x => x.type);
-            lastSampleCount = lastSampleCount.Substring(1, lastSampleCount.Length - 1);
-            List<LPC> newLpcs = new List<LPC>();
-            for(int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
-            {
-                newLpcs.AddRange(lpcs.Where(x => x.type.Equals("B" + i)).ToList());
-                newLpcs.AddRange(lpcs.Where(x => x.type.Equals("S" + i)).ToList());
-
-            }
-            DataTable dt = PivotTable.GetInversedDataTable(newLpcs.Where(x => x.ChannelSize.Equals("0.500")).ToDataTable(), "Type", "Run", "Value", "-", false);
-
-            gvWorkSheet.DataSource = dt;
-            gvWorkSheet.DataBind();
-            //CalculateCas();
+            CalculateCas();
             Console.WriteLine("-END-");
 
         }
@@ -975,13 +1091,13 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case "1":
                             //Extraction Vol. (ml) & No. of Parts Used For (64KHz)
-                            //txtCVP_E19.Text = txt_UsLPC03_B20.Text;
-                            //txtCVP_C19.Text = txt_UsLPC03_B22.Text;
+                            txtCVP_E19.Text = txt_UsLPC03_B20.Text;
+                            txtCVP_C19.Text = txt_UsLPC03_B22.Text;
                             break;
                         case "2":
                             //Extraction Vol. (ml) & No. of Parts Used For (132KHz)
-                            //txtCVP_E19.Text = txt_UsLPC06_B20.Text;
-                            //txtCVP_C19.Text = txt_UsLPC06_B22.Text;
+                            txtCVP_E19.Text = txt_UsLPC06_B20.Text;
+                            txtCVP_C19.Text = txt_UsLPC06_B22.Text;
                             break;
                     }
                     break;
@@ -995,13 +1111,13 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case "1":
                             //Extraction Vol. (ml) & No. of Parts Used For (64KHz)
-                            //txt_UsLPC03_B20.Text = txtCVP_E19.Text;
-                            //txt_UsLPC03_B22.Text = txtCVP_C19.Text;
+                            txt_UsLPC03_B20.Text = txtCVP_E19.Text;
+                            txt_UsLPC03_B22.Text = txtCVP_C19.Text;
                             break;
                         case "2":
                             //Extraction Vol. (ml) & No. of Parts Used For (132KHz)
-                            //txt_UsLPC06_B20.Text = txtCVP_E19.Text;
-                            //txt_UsLPC06_B22.Text = txtCVP_C19.Text;
+                            txt_UsLPC06_B20.Text = txtCVP_E19.Text;
+                            txt_UsLPC06_B22.Text = txtCVP_C19.Text;
                             break;
                     }
                     break;
@@ -1128,48 +1244,48 @@ namespace ALS.ALSI.Web.view.template
             if (khz68_03 != null)
             {
                 //khz68_03.lpc_type = (cbLPCType68.Checked) ? "1" : "2";
-                //khz68_03.b14 = txt_UsLPC03_B14.Text;
-                //khz68_03.b15 = txt_UsLPC03_B15.Text;
-                //khz68_03.b16 = txt_UsLPC03_B16.Text;
-                //khz68_03.b17 = txt_UsLPC03_B17.Text;
-                //khz68_03.b18 = txt_UsLPC03_B18.Text;
+                khz68_03.b14 = txt_UsLPC03_B14.Text;
+                khz68_03.b15 = txt_UsLPC03_B15.Text;
+                khz68_03.b16 = txt_UsLPC03_B16.Text;
+                khz68_03.b17 = txt_UsLPC03_B17.Text;
+                khz68_03.b18 = txt_UsLPC03_B18.Text;
 
-                //khz68_03.c14 = txt_UsLPC03_C14.Text;
-                //khz68_03.c15 = txt_UsLPC03_C15.Text;
-                //khz68_03.c16 = txt_UsLPC03_C16.Text;
-                //khz68_03.c17 = txt_UsLPC03_C17.Text;
-                //khz68_03.c18 = txt_UsLPC03_C18.Text;
+                khz68_03.c14 = txt_UsLPC03_C14.Text;
+                khz68_03.c15 = txt_UsLPC03_C15.Text;
+                khz68_03.c16 = txt_UsLPC03_C16.Text;
+                khz68_03.c17 = txt_UsLPC03_C17.Text;
+                khz68_03.c18 = txt_UsLPC03_C18.Text;
 
-                //khz68_03.d14 = txt_UsLPC03_D14.Text;
-                //khz68_03.d15 = txt_UsLPC03_D15.Text;
-                //khz68_03.d16 = txt_UsLPC03_D16.Text;
-                //khz68_03.d17 = txt_UsLPC03_D17.Text;
-                //khz68_03.d18 = txt_UsLPC03_D18.Text;
+                khz68_03.d14 = txt_UsLPC03_D14.Text;
+                khz68_03.d15 = txt_UsLPC03_D15.Text;
+                khz68_03.d16 = txt_UsLPC03_D16.Text;
+                khz68_03.d17 = txt_UsLPC03_D17.Text;
+                khz68_03.d18 = txt_UsLPC03_D18.Text;
 
 
-                //khz68_03.e14 = txt_UsLPC03_E14.Text;
-                //khz68_03.e15 = txt_UsLPC03_E15.Text;
-                //khz68_03.e16 = txt_UsLPC03_E16.Text;
-                //khz68_03.e17 = txt_UsLPC03_E17.Text;
-                //khz68_03.e18 = txt_UsLPC03_E18.Text;
+                khz68_03.e14 = txt_UsLPC03_E14.Text;
+                khz68_03.e15 = txt_UsLPC03_E15.Text;
+                khz68_03.e16 = txt_UsLPC03_E16.Text;
+                khz68_03.e17 = txt_UsLPC03_E17.Text;
+                khz68_03.e18 = txt_UsLPC03_E18.Text;
 
-                //khz68_03.f14 = txt_UsLPC03_F14.Text;
-                //khz68_03.f15 = txt_UsLPC03_F15.Text;
-                //khz68_03.f16 = txt_UsLPC03_F16.Text;
-                //khz68_03.f17 = txt_UsLPC03_F17.Text;
-                //khz68_03.f18 = txt_UsLPC03_F18.Text;
+                khz68_03.f14 = txt_UsLPC03_F14.Text;
+                khz68_03.f15 = txt_UsLPC03_F15.Text;
+                khz68_03.f16 = txt_UsLPC03_F16.Text;
+                khz68_03.f17 = txt_UsLPC03_F17.Text;
+                khz68_03.f18 = txt_UsLPC03_F18.Text;
 
-                //khz68_03.g14 = txt_UsLPC03_G14.Text;
-                //khz68_03.g15 = txt_UsLPC03_G15.Text;
-                //khz68_03.g16 = txt_UsLPC03_G16.Text;
-                //khz68_03.g17 = txt_UsLPC03_G17.Text;
-                //khz68_03.g18 = txt_UsLPC03_G18.Text;
+                khz68_03.g14 = txt_UsLPC03_G14.Text;
+                khz68_03.g15 = txt_UsLPC03_G15.Text;
+                khz68_03.g16 = txt_UsLPC03_G16.Text;
+                khz68_03.g17 = txt_UsLPC03_G17.Text;
+                khz68_03.g18 = txt_UsLPC03_G18.Text;
 
-                //khz68_03.b21 = txt_UsLPC03_B21.Text;
-                //khz68_03.b25 = txt_UsLPC03_B25.Text;
-                //khz68_03.d25 = txt_UsLPC03_D25.Text;
-                //khz68_03.f25 = txt_UsLPC03_F25.Text;
-                //khz68_03.b26 = txt_UsLPC03_B26.Text;
+                khz68_03.b21 = txt_UsLPC03_B21.Text;
+                khz68_03.b25 = txt_UsLPC03_B25.Text;
+                khz68_03.d25 = txt_UsLPC03_D25.Text;
+                khz68_03.f25 = txt_UsLPC03_F25.Text;
+                khz68_03.b26 = txt_UsLPC03_B26.Text;
 
 
             }
@@ -1178,48 +1294,48 @@ namespace ALS.ALSI.Web.view.template
             template_seagate_lpc_coverpage khz68_06 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString());
             if (khz68_06 != null)
             {
-                //khz68_06.b14 = txt_UsLPC06_B14.Text;
-                //khz68_06.b15 = txt_UsLPC06_B15.Text;
-                //khz68_06.b16 = txt_UsLPC06_B16.Text;
-                //khz68_06.b17 = txt_UsLPC06_B17.Text;
-                //khz68_06.b18 = txt_UsLPC06_B18.Text;
+                khz68_06.b14 = txt_UsLPC06_B14.Text;
+                khz68_06.b15 = txt_UsLPC06_B15.Text;
+                khz68_06.b16 = txt_UsLPC06_B16.Text;
+                khz68_06.b17 = txt_UsLPC06_B17.Text;
+                khz68_06.b18 = txt_UsLPC06_B18.Text;
 
-                //khz68_06.c14 = txt_UsLPC06_C14.Text;
-                //khz68_06.c15 = txt_UsLPC06_C15.Text;
-                //khz68_06.c16 = txt_UsLPC06_C16.Text;
-                //khz68_06.c17 = txt_UsLPC06_C17.Text;
-                //khz68_06.c18 = txt_UsLPC06_C18.Text;
+                khz68_06.c14 = txt_UsLPC06_C14.Text;
+                khz68_06.c15 = txt_UsLPC06_C15.Text;
+                khz68_06.c16 = txt_UsLPC06_C16.Text;
+                khz68_06.c17 = txt_UsLPC06_C17.Text;
+                khz68_06.c18 = txt_UsLPC06_C18.Text;
 
 
-                //khz68_06.d14 = txt_UsLPC06_D14.Text;
-                //khz68_06.d15 = txt_UsLPC06_D15.Text;
-                //khz68_06.d16 = txt_UsLPC06_D16.Text;
-                //khz68_06.d17 = txt_UsLPC06_D17.Text;
-                //khz68_06.d18 = txt_UsLPC06_D18.Text;
+                khz68_06.d14 = txt_UsLPC06_D14.Text;
+                khz68_06.d15 = txt_UsLPC06_D15.Text;
+                khz68_06.d16 = txt_UsLPC06_D16.Text;
+                khz68_06.d17 = txt_UsLPC06_D17.Text;
+                khz68_06.d18 = txt_UsLPC06_D18.Text;
 
-                //khz68_06.e14 = txt_UsLPC06_E14.Text;
-                //khz68_06.e15 = txt_UsLPC06_E15.Text;
-                //khz68_06.e16 = txt_UsLPC06_E16.Text;
-                //khz68_06.e17 = txt_UsLPC06_E17.Text;
-                //khz68_06.e18 = txt_UsLPC06_E18.Text;
+                khz68_06.e14 = txt_UsLPC06_E14.Text;
+                khz68_06.e15 = txt_UsLPC06_E15.Text;
+                khz68_06.e16 = txt_UsLPC06_E16.Text;
+                khz68_06.e17 = txt_UsLPC06_E17.Text;
+                khz68_06.e18 = txt_UsLPC06_E18.Text;
 
-                //khz68_06.f14 = txt_UsLPC06_F14.Text;
-                //khz68_06.f15 = txt_UsLPC06_F15.Text;
-                //khz68_06.f16 = txt_UsLPC06_F16.Text;
-                //khz68_06.f17 = txt_UsLPC06_F17.Text;
-                //khz68_06.f18 = txt_UsLPC06_F18.Text;
+                khz68_06.f14 = txt_UsLPC06_F14.Text;
+                khz68_06.f15 = txt_UsLPC06_F15.Text;
+                khz68_06.f16 = txt_UsLPC06_F16.Text;
+                khz68_06.f17 = txt_UsLPC06_F17.Text;
+                khz68_06.f18 = txt_UsLPC06_F18.Text;
 
-                //khz68_06.g14 = txt_UsLPC06_G14.Text;
-                //khz68_06.g15 = txt_UsLPC06_G15.Text;
-                //khz68_06.g16 = txt_UsLPC06_G16.Text;
-                //khz68_06.g17 = txt_UsLPC06_G17.Text;
-                //khz68_06.g18 = txt_UsLPC06_G18.Text;
+                khz68_06.g14 = txt_UsLPC06_G14.Text;
+                khz68_06.g15 = txt_UsLPC06_G15.Text;
+                khz68_06.g16 = txt_UsLPC06_G16.Text;
+                khz68_06.g17 = txt_UsLPC06_G17.Text;
+                khz68_06.g18 = txt_UsLPC06_G18.Text;
 
-                //khz68_06.b21 = txt_UsLPC06_B21.Text;
-                //khz68_06.b25 = txt_UsLPC06_B25.Text;
-                //khz68_06.d25 = txt_UsLPC06_D25.Text;
-                //khz68_06.f25 = txt_UsLPC06_F25.Text;
-                //khz68_06.b26 = txt_UsLPC06_B26.Text;
+                khz68_06.b21 = txt_UsLPC06_B21.Text;
+                khz68_06.b25 = txt_UsLPC06_B25.Text;
+                khz68_06.d25 = txt_UsLPC06_D25.Text;
+                khz68_06.f25 = txt_UsLPC06_F25.Text;
+                khz68_06.b26 = txt_UsLPC06_B26.Text;
 
             }
             #endregion
@@ -1231,18 +1347,18 @@ namespace ALS.ALSI.Web.view.template
             {
                 if (!String.IsNullOrEmpty(khz68_03.b25))
                 {
-                    //lbC25.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_03.b25)));//='US-LPC(0.3)'!B25
-                    //lbC26.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_03.d25)));//='US-LPC(0.3)'!D25
-                    //lbC27.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_03.f25)));//='US-LPC(0.3)'!F25
-                    //lbC28.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(((Convert.ToDecimal(khz68_03.b25) +
-                    //               Convert.ToDecimal(khz68_03.d25) +
-                    //               Convert.ToDecimal(khz68_03.f25)) / 3).ToString())));
+                    lbC25.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_03.b25)));//='US-LPC(0.3)'!B25
+                    lbC26.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_03.d25)));//='US-LPC(0.3)'!D25
+                    lbC27.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_03.f25)));//='US-LPC(0.3)'!F25
+                    lbC28.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(((Convert.ToDecimal(khz68_03.b25) +
+                                   Convert.ToDecimal(khz68_03.d25) +
+                                   Convert.ToDecimal(khz68_03.f25)) / 3).ToString())));
 
-                    ////132 KHz
-                    //lbC39.Text = lbC25.Text;
-                    //lbC40.Text = lbC26.Text;
-                    //lbC41.Text = lbC27.Text;
-                    //lbC42.Text = lbC28.Text;
+                    //132 KHz
+                    lbC39.Text = lbC25.Text;
+                    lbC40.Text = lbC26.Text;
+                    lbC41.Text = lbC27.Text;
+                    lbC42.Text = lbC28.Text;
                 }
 
                 LPCTypeEnum lpcType = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(khz68_03.lpc_type));
@@ -1256,18 +1372,18 @@ namespace ALS.ALSI.Web.view.template
             {
                 if (!String.IsNullOrEmpty(khz68_06.b25))
                 {
-                    //lbC32.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_06.b25)));//='US-LPC(0.6)'!B25
-                    //lbC33.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_06.d25)));//='US-LPC(0.6)'!D25
-                    //lbC34.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_06.f25)));//='US-LPC(0.6)'!F25
-                    //lbC35.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(((Convert.ToDecimal(khz68_06.b25) +
-                    //               Convert.ToDecimal(khz68_06.d25) +
-                    //               Convert.ToDecimal(khz68_06.f25)) / 3).ToString())));
+                    lbC32.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_06.b25)));//='US-LPC(0.6)'!B25
+                    lbC33.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_06.d25)));//='US-LPC(0.6)'!D25
+                    lbC34.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_06.f25)));//='US-LPC(0.6)'!F25
+                    lbC35.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(((Convert.ToDecimal(khz68_06.b25) +
+                                   Convert.ToDecimal(khz68_06.d25) +
+                                   Convert.ToDecimal(khz68_06.f25)) / 3).ToString())));
 
-                    ////132 KHz
-                    //lbC46.Text = lbC32.Text;
-                    //lbC47.Text = lbC33.Text;
-                    //lbC48.Text = lbC34.Text;
-                    //lbC49.Text = lbC35.Text;
+                    //132 KHz
+                    lbC46.Text = lbC32.Text;
+                    lbC47.Text = lbC33.Text;
+                    lbC48.Text = lbC34.Text;
+                    lbC49.Text = lbC35.Text;
                 }
             }
             #endregion
@@ -1397,31 +1513,31 @@ namespace ALS.ALSI.Web.view.template
             tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
             if (tem != null)
             {
-                //#region "HEADER"
-                //lbDocNo.Text = tem.C;
-                //lbDocRev.Text = tem.D;
-                //lbCommodity.Text = tem.B;
-                //lbUnit1.Text = tem.E;//unit
-                //lbUnit2.Text = tem.E;//unit
-                //lbUnit3.Text = tem.E;//unit
-                //lbUnit4.Text = tem.E;//unit
-                //lbUnit5.Text = tem.E;//unit
-                //lbUnit6.Text = tem.E;//unit
-                //lbUnit7.Text = tem.E;//unit
-                //lbUnit8.Text = tem.E;//unit
-                //#endregion
-                //#region "Liquid Particle Count (68 KHz) 0.3"
-                //lbB28.Text = tem.F;
-                //#endregion
-                //#region "Liquid Particle Count (68 KHz) 0.6"
-                //lbB35.Text = tem.G;
-                //#endregion
-                //#region "Liquid Particle Count (132 KHz) 0.3 "
-                //lbB42.Text = tem.H;
-                //#endregion
-                //#region "Liquid Particle Count (132 KHz) 0.6"
-                //lbB49.Text = tem.I;
-                //#endregion
+                #region "HEADER"
+                lbDocNo.Text = tem.C;
+                lbDocRev.Text = tem.D;
+                lbCommodity.Text = tem.B;
+                lbUnit1.Text = tem.E;//unit
+                lbUnit2.Text = tem.E;//unit
+                lbUnit3.Text = tem.E;//unit
+                lbUnit4.Text = tem.E;//unit
+                lbUnit5.Text = tem.E;//unit
+                lbUnit6.Text = tem.E;//unit
+                lbUnit7.Text = tem.E;//unit
+                lbUnit8.Text = tem.E;//unit
+                #endregion
+                #region "Liquid Particle Count (68 KHz) 0.3"
+                lbB28.Text = tem.F;
+                #endregion
+                #region "Liquid Particle Count (68 KHz) 0.6"
+                lbB35.Text = tem.G;
+                #endregion
+                #region "Liquid Particle Count (132 KHz) 0.3 "
+                lbB42.Text = tem.H;
+                #endregion
+                #region "Liquid Particle Count (132 KHz) 0.6"
+                lbB49.Text = tem.I;
+                #endregion
 
             }
         }
@@ -1450,56 +1566,56 @@ namespace ALS.ALSI.Web.view.template
         private String getItemStatus()
         {
             String result = String.Empty;
-            //result = ((CheckBox1.Checked) ? "1" : "0") +
-            //            ((CheckBox2.Checked) ? "1" : "0") +
-            //            ((CheckBox3.Checked) ? "1" : "0") +
-            //            ((CheckBox4.Checked) ? "1" : "0");
+            result = ((CheckBox1.Checked) ? "1" : "0") +
+                        ((CheckBox2.Checked) ? "1" : "0") +
+                        ((CheckBox3.Checked) ? "1" : "0") +
+                        ((CheckBox4.Checked) ? "1" : "0");
             return result;
         }
 
         private void ShowItem(String _itemVisible)
         {
-            //if (_itemVisible != null)
-            //{
-            //    char[] item = _itemVisible.ToCharArray();
-            //    if (item.Length == 4)
-            //    {
-            //        StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            //        switch (status)
-            //        {
-            //            case StatusEnum.LOGIN_CONVERT_TEMPLATE:
-            //                break;
-            //            case StatusEnum.LOGIN_SELECT_SPEC:
-            //                CheckBox1.Checked = item[0] == '1' ? true : false;
-            //                CheckBox2.Checked = item[1] == '1' ? true : false;
-            //                CheckBox3.Checked = item[2] == '1' ? true : false;
-            //                CheckBox4.Checked = item[3] == '1' ? true : false;
-            //                txtCVP_C19.Visible = true;
-            //                txtCVP_E19.Visible = true;
-            //                break;
-            //            case StatusEnum.CHEMIST_TESTING:
-            //            case StatusEnum.SR_CHEMIST_CHECKING:
-            //            case StatusEnum.SR_CHEMIST_APPROVE:
-            //            case StatusEnum.SR_CHEMIST_DISAPPROVE:
-            //            case StatusEnum.ADMIN_CONVERT_WORD:
-            //            case StatusEnum.LABMANAGER_CHECKING:
-            //            case StatusEnum.LABMANAGER_APPROVE:
-            //            case StatusEnum.LABMANAGER_DISAPPROVE:
-            //            case StatusEnum.ADMIN_CONVERT_PDF:
-            //                tb1.Visible = item[0] == '1' ? true : false;
-            //                tb2.Visible = item[1] == '1' ? true : false;
-            //                tb3.Visible = item[2] == '1' ? true : false;
-            //                tb4.Visible = item[3] == '1' ? true : false;
-            //                txtCVP_C19.Visible = false;
-            //                txtCVP_E19.Visible = false;
-            //                CheckBox1.Visible = false;
-            //                CheckBox2.Visible = false;
-            //                CheckBox3.Visible = false;
-            //                CheckBox4.Visible = false;
-            //                break;
-            //        }
-            //    }
-            //}
+            if (_itemVisible != null)
+            {
+                char[] item = _itemVisible.ToCharArray();
+                if (item.Length == 4)
+                {
+                    StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+                    switch (status)
+                    {
+                        case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                            break;
+                        case StatusEnum.LOGIN_SELECT_SPEC:
+                            CheckBox1.Checked = item[0] == '1' ? true : false;
+                            CheckBox2.Checked = item[1] == '1' ? true : false;
+                            CheckBox3.Checked = item[2] == '1' ? true : false;
+                            CheckBox4.Checked = item[3] == '1' ? true : false;
+                            txtCVP_C19.Visible = true;
+                            txtCVP_E19.Visible = true;
+                            break;
+                        case StatusEnum.CHEMIST_TESTING:
+                        case StatusEnum.SR_CHEMIST_CHECKING:
+                        case StatusEnum.SR_CHEMIST_APPROVE:
+                        case StatusEnum.SR_CHEMIST_DISAPPROVE:
+                        case StatusEnum.ADMIN_CONVERT_WORD:
+                        case StatusEnum.LABMANAGER_CHECKING:
+                        case StatusEnum.LABMANAGER_APPROVE:
+                        case StatusEnum.LABMANAGER_DISAPPROVE:
+                        case StatusEnum.ADMIN_CONVERT_PDF:
+                            tb1.Visible = item[0] == '1' ? true : false;
+                            tb2.Visible = item[1] == '1' ? true : false;
+                            tb3.Visible = item[2] == '1' ? true : false;
+                            tb4.Visible = item[3] == '1' ? true : false;
+                            txtCVP_C19.Visible = false;
+                            txtCVP_E19.Visible = false;
+                            CheckBox1.Visible = false;
+                            CheckBox2.Visible = false;
+                            CheckBox3.Visible = false;
+                            CheckBox4.Visible = false;
+                            break;
+                    }
+                }
+            }
 
         }
 
@@ -1509,16 +1625,16 @@ namespace ALS.ALSI.Web.view.template
             switch (lpcType)
             {
                 case LPCTypeEnum.KHz_68:
-                    //tb1_1.Visible = true;
-                    //tb2.Visible = true;
-                    //tb3.Visible = false;
-                    //tb4.Visible = false;
+                    tb1_1.Visible = true;
+                    tb2.Visible = true;
+                    tb3.Visible = false;
+                    tb4.Visible = false;
                     break;
                 case LPCTypeEnum.KHz_132:
-                    //tb1_1.Visible = false;
-                    //tb2.Visible = false;
-                    //tb3.Visible = true;
-                    //tb4.Visible = true;
+                    tb1_1.Visible = false;
+                    tb2.Visible = false;
+                    tb3.Visible = true;
+                    tb4.Visible = true;
                     break;
             }
         }
@@ -1529,14 +1645,4 @@ namespace ALS.ALSI.Web.view.template
         }
 
     }
-
-    public class LPC
-    {
-        public string type { get; set; }
-        public int Run { get; set; }
-        public string ChannelSize { get; set; }
-        public double Value { get; set; }
-        //public int Sample { get; set; }
-    }
-
 }
