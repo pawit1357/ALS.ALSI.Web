@@ -50,12 +50,15 @@
                                                     </td>
                                                     <td>
                                                         <asp:TextBox ID="txtCVP_C19" runat="server" Text="1" CssClass="form-control"></asp:TextBox>
+                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" TargetControlID="txtCVP_C19" FilterType="Numbers" runat="server" />
+
                                                     </td>
                                                     <td>
                                                         <asp:TextBox ID="txtD19" runat="server" Text="0.1 um Filtered Degassed DI Water" CssClass="form-control"></asp:TextBox>
                                                     </td>
                                                     <td>
                                                         <asp:TextBox ID="txtCVP_E19" runat="server" Text="500" CssClass="form-control"></asp:TextBox>
+                                                        <asp:FilteredTextBoxExtender ID="ftbe" TargetControlID="txtCVP_E19" FilterType="Numbers" runat="server" />
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -77,13 +80,23 @@
 
                                 <asp:GridView ID="gvCoverPage" runat="server"></asp:GridView>
 
-                                 </div>
+                            </div>
                         </div>
                     </asp:Panel>
                     <asp:Panel ID="pDSH" runat="server">
 
                         <asp:Panel ID="pLoadFile" runat="server">
-
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-9">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <asp:DropDownList ID="ddlChannel" runat="server" AutoPostBack="True" CssClass="select2_category form-control" OnSelectedIndexChanged="ddlChannel_SelectedIndexChanged">
+                                            <asp:ListItem Value="0.300">No. of Particles ≥ 0.3 μm (Counts/mL)</asp:ListItem>
+                                            <asp:ListItem Value="0.500">No. of Particles ≥ 0.5 μm (Counts/mL)</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">ทศนิยม</label>
                                 <div class="col-md-9">
@@ -128,11 +141,60 @@
 
                         <h4 class="form-section">Manage Result Data</h4>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-8">
                                 <h6>
                                     <asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label></h6>
-                                <asp:GridView ID="gvWorkSheet" CssClass="table table-striped table-hover table-bordered" runat="server"></asp:GridView>
+                                <br />
+                                <asp:Label ID="lbParticle" runat="server" Text="No. of Particles ≥ 0.3 μm (Counts/mL) "></asp:Label>
 
+
+                                <asp:GridView ID="gvWorkSheet" CssClass="table table-striped table-hover table-bordered" runat="server"></asp:GridView>
+                                <table class="table table-striped table-hover table-bordered">
+                                    <tr>
+                                        <td>Extraction Vol. (mL)</td>
+                                        <td>
+                                            <asp:Label ID="lbExtractionVol" runat="server" Text=""></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surface Area (cm2)
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtSurfaceArea" runat="server" Text="" AutoPostBack="true" OnTextChanged="txtSurfaceArea_TextChanged" CssClass="form-control"></asp:TextBox>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" TargetControlID="txtSurfaceArea" FilterType="Numbers,Custom" ValidChars="." runat="server" />
+
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td>No. of Parts Used
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lbNoOfPartsUsed" runat="server" Text=""></asp:Label></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Dilution Factor (time)
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtDilutionFactor" runat="server" Text="10" AutoPostBack="true" OnTextChanged="txtSurfaceArea_TextChanged" CssClass="form-control"></asp:TextBox>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" TargetControlID="txtDilutionFactor" FilterType="Numbers" runat="server" />
+
+
+
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <asp:GridView ID="gvWorkSheetAverage" CssClass="table table-striped table-hover table-bordered" runat="server"></asp:GridView>
+                                <table class="table table-striped table-hover table-bordered">
+                                    <tr>
+                                        <td>Average</td>
+                                        <td colspan="3">
+                                            <asp:Label ID="lbAverage" runat="server" Text=""></asp:Label></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </asp:Panel>
@@ -310,7 +372,7 @@
                                                 <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
                                         <tr>
-                                            <td>No of Particles</td>
+                                            <td>Average of last 3</td>
                                             <td>
                                                 <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>

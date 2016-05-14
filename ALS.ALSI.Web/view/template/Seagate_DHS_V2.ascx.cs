@@ -579,7 +579,7 @@ namespace ALS.ALSI.Web.view.template
                                             tmp.qual = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(5));
                                             tmp.area = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(6));
                                             tmp.amount = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7));
-
+                                            tmp.chemical_falg = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(8));
                                             String compare_date = (string.IsNullOrEmpty(tmp.pk) ? "0" : "1") + "" +
                                                (string.IsNullOrEmpty(tmp.rt) ? "0" : "1") + "" +
                                                (string.IsNullOrEmpty(tmp.library_id) ? "0" : "1") + "" +
@@ -843,9 +843,78 @@ namespace ALS.ALSI.Web.view.template
                         }
                     }
 
-                    newCoverPage.Add(_cover);
+                    switch (_cover.chemical_id)
+                    {
+                        case "C31.0":
+                            List<template_seagate_dhs_coverpage> c31List = new List<template_seagate_dhs_coverpage>();
+
+                            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.chemical_falg.ToUpper().Equals(_cover.chemical_id)).ToList();
+                            if (childs.Count > 0)
+                            {
+                                foreach (tb_m_dhs_cas child in childs)
+                                {
+                                    template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
+                                    work.sample_id = this.SampleID;
+                                    work.component_id = _cover.component_id;
+                                    work.chemical_id = _cover.chemical_id;
+                                    work.name = "          " + child.library_id;
+                                    work.ng_part = _cover.ng_part;
+                                    work.result = child.amount;
+                                    work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                                    c31List.Add(work);
+                                }
+                                _cover.ng_part = "-";
+                                _cover.result = "-";
+                            }
+                            else
+                            {
+                                _cover.result = "Not significant peak";
+                            }
+                            newCoverPage.Add(_cover);
+                            newCoverPage.AddRange(c31List);
+                            break;
+                        default:
+                            newCoverPage.Add(_cover);
+                            break;
+                    }
+
+
+
                 }
 
+                //List<template_seagate_dhs_coverpage> c31List = new List<template_seagate_dhs_coverpage>();
+                //foreach (template_seagate_dhs_coverpage _cover in newCoverPage)
+                //{
+                //    switch (_cover.chemical_id)
+                //    {
+                //        case "C31.0":
+
+                //            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.chemical_falg.ToUpper().Equals(_cover.chemical_id)).ToList();
+                //            if (childs.Count > 0)
+                //            {
+                //                foreach (tb_m_dhs_cas child in childs)
+                //                {
+                //                    template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
+                //                    work.sample_id = this.SampleID;
+                //                    work.component_id = _cover.component_id;
+                //                    work.chemical_id = _cover.chemical_id;
+                //                    work.name = "          " + child.library_id;
+                //                    work.ng_part = _cover.ng_part;
+                //                    work.result = child.amount;
+                //                    work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                //                    c31List.Add(work);
+                //                }
+                //                _cover.ng_part = "-";
+                //                _cover.result = "-";
+                //            }
+                //            else
+                //            {
+                //                _cover.result = "Not significant peak";
+                //            }
+                //            break;
+                //    }
+                //}
+                //newCoverPage.AddRange(c31List);
                 gvCoverPages.DataSource = newCoverPage;
                 gvCoverPages.DataBind();
             }

@@ -144,7 +144,7 @@
                         <div class="row" id="invDiv" runat="server">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <h5>METHOD/PROCEDURE:</h5>
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
@@ -186,7 +186,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <h6>Results:</h6>
                                         <h6>The specification is based on Western Digital's document no.<asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
                                             for

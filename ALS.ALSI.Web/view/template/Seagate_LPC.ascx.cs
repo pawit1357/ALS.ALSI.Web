@@ -890,27 +890,31 @@ namespace ALS.ALSI.Web.view.template
                                         }
                                         if (String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C))))
                                         {
-                                            switch (CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J)))
+                                            //switch (CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J)))
+                                            //{
+                                            //    case "0.200":
+                                            //    case "0.300":
+                                            //    case "0.400":
+                                            //    case "0.500":
+                                            //    case "0.600":
+                                            //    case "0.700":
+                                            //    case "0.800":
+                                            //    case "0.900":
+                                            //    case "1.000":
+                                            //    case "1.500":
+                                            //case "2.000":
+                                            if (ddlChannel.SelectedValue.Equals(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J))))
                                             {
-                                                case "0.200":
-                                                case "0.300":
-                                                case "0.400":
-                                                case "0.500":
-                                                case "0.600":
-                                                case "0.700":
-                                                case "0.800":
-                                                case "0.900":
-                                                case "1.000":
-                                                case "1.500":
-                                                case "2.000":
-                                                    LPC lpc = new LPC();
-                                                    lpc.Run = run;
-                                                    lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
-                                                    lpc.ChannelSize = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
-                                                    lpc.Value = Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S)));
-                                                    lpcs.Add(lpc);
-                                                    break;
+                                                LPC lpc = new LPC();
+                                                lpc.RunNumber = run;
+                                                lpc.Run = run + "";
+                                                lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
+                                                lpc.ChannelSize = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
+                                                lpc.Value = String.Format("{0:0.00}", Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt16(txtDecimal01.Text) : Convert.ToInt16(txtDecimal02.Text)));
+                                                lpcs.Add(lpc);
                                             }
+                                                    //break;
+                                            //}
                                         }
                                     }
                                 }
@@ -932,6 +936,99 @@ namespace ALS.ALSI.Web.view.template
             }
             #endregion
 
+
+
+            //New Order
+            if (lpcs.Count > 0)
+            {
+                string lastSampleCount = lpcs.Max(x => x.type);
+                lastSampleCount = lastSampleCount.Substring(1, lastSampleCount.Length - 1);
+                List<LPC> newLpcs = new List<LPC>();
+                for (int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
+                {
+                    newLpcs.AddRange(lpcs.Where(x => x.type.Equals("B" + i)).ToList());
+                    newLpcs.AddRange(lpcs.Where(x => x.type.Equals("S" + i)).ToList());
+
+                }
+
+                foreach (LPC _lpc in newLpcs)
+                {
+                    _lpc.type = _lpc.type.Replace("B", "Blank ").Replace("S", "Sample ");
+                }
+
+                var lpcTypeGroup =
+                       from lpc in newLpcs
+                       group lpc by lpc.type into newGroup
+                       orderby newGroup.Key
+                       select newGroup;
+
+
+
+                List<LPC> tmp = new List<LPC>();
+                foreach (var item in lpcTypeGroup)
+                {
+                    LPC lpc = new LPC();
+                    //Average of last 3
+                    lpc.RunNumber = 5;
+                    lpc.Run = "Average of last 3";
+                    lpc.type = item.Key;
+                    lpc.ChannelSize = ddlChannel.SelectedValue;
+                    double _value = newLpcs.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.ChannelSize.Equals(ddlChannel.SelectedValue)).Average(x => Convert.ToDouble(x.Value));
+                    lpc.Value = String.Format("{0:0.000}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+                    tmp.Add(lpc);
+                }
+
+                newLpcs.AddRange(tmp);
+
+                DataTable dt = PivotTable.GetInversedDataTable(newLpcs.Where(x => x.ChannelSize.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Run", "Value", "-", false);
+
+                gvWorkSheet.DataSource = dt;
+                gvWorkSheet.DataBind();
+
+
+                if (String.IsNullOrEmpty(txtSurfaceArea.Text))
+                {
+                    errors.Add("Surface Area (cm2) is empty.");
+                }
+                if (String.IsNullOrEmpty(txtDilutionFactor.Text))
+                {
+                    errors.Add("Dilution Factor (time) is empty.");
+                }
+
+                if (errors.Count == 0)
+                {
+                    List<LPC> listAverages = new List<LPC>();
+                    var lpcTypeGroup1 = from lpc in newLpcs where lpc.type.StartsWith("Blank") group lpc by lpc.type into newGroup orderby newGroup.Key select newGroup;
+                    int index = 1;
+                    foreach (var item in lpcTypeGroup1)
+                    {
+                        LPC lpc = new LPC();
+                        //Average of last 3
+                        lpc.RunNumber = 6;
+                        lpc.Run = "";
+                        lpc.Sample = "";
+                        lpc.type = item.Key.Replace("Blank", "");
+                        lpc.ChannelSize = ddlChannel.SelectedValue;
+                        LPC lpcBlank = newLpcs.Where(x => x.RunNumber == 5 && x.type.Equals("Blank " + index)).FirstOrDefault();
+                        LPC lpcSaple = newLpcs.Where(x => x.RunNumber == 5 && x.type.Equals("Sample " + index)).FirstOrDefault();
+
+
+                        double _value = (Convert.ToDouble(lpcSaple.Value) - Convert.ToDouble(lpcBlank.Value)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor.Text);
+
+                        lpc.Value = String.Format("{0:0}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+                        listAverages.Add(lpc);
+                        index++;
+                    }
+                    DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Sample", "Value", ddlChannel.SelectedItem.Text, false);
+                    gvWorkSheetAverage.DataSource = dtAverages;
+                    gvWorkSheetAverage.DataBind();
+                    Console.WriteLine();
+                    double average = listAverages.Average(x => Convert.ToDouble(x.Value));
+                    lbAverage.Text = average.ToString().Split('.')[0];
+
+                }
+            }
+
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
@@ -942,20 +1039,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
             }
-            //New Order
-            string lastSampleCount = lpcs.Max(x => x.type);
-            lastSampleCount = lastSampleCount.Substring(1, lastSampleCount.Length - 1);
-            List<LPC> newLpcs = new List<LPC>();
-            for(int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
-            {
-                newLpcs.AddRange(lpcs.Where(x => x.type.Equals("B" + i)).ToList());
-                newLpcs.AddRange(lpcs.Where(x => x.type.Equals("S" + i)).ToList());
-
-            }
-            DataTable dt = PivotTable.GetInversedDataTable(newLpcs.Where(x => x.ChannelSize.Equals("0.500")).ToDataTable(), "Type", "Run", "Value", "-", false);
-
-            gvWorkSheet.DataSource = dt;
-            gvWorkSheet.DataBind();
             //CalculateCas();
             Console.WriteLine("-END-");
 
@@ -971,19 +1054,6 @@ namespace ALS.ALSI.Web.view.template
                     btnWorkSheet.CssClass = "btn green";
                     pCoverpage.Visible = true;
                     pDSH.Visible = false;
-                    switch (ddlA19.SelectedValue)
-                    {
-                        case "1":
-                            //Extraction Vol. (ml) & No. of Parts Used For (64KHz)
-                            //txtCVP_E19.Text = txt_UsLPC03_B20.Text;
-                            //txtCVP_C19.Text = txt_UsLPC03_B22.Text;
-                            break;
-                        case "2":
-                            //Extraction Vol. (ml) & No. of Parts Used For (132KHz)
-                            //txtCVP_E19.Text = txt_UsLPC06_B20.Text;
-                            //txtCVP_C19.Text = txt_UsLPC06_B22.Text;
-                            break;
-                    }
                     break;
                 case "WorkSheet":
                     btnCoverPage.CssClass = "btn blue";
@@ -991,19 +1061,9 @@ namespace ALS.ALSI.Web.view.template
 
                     pCoverpage.Visible = false;
                     pDSH.Visible = true;
-                    switch (ddlA19.SelectedValue)
-                    {
-                        case "1":
-                            //Extraction Vol. (ml) & No. of Parts Used For (64KHz)
-                            //txt_UsLPC03_B20.Text = txtCVP_E19.Text;
-                            //txt_UsLPC03_B22.Text = txtCVP_C19.Text;
-                            break;
-                        case "2":
-                            //Extraction Vol. (ml) & No. of Parts Used For (132KHz)
-                            //txt_UsLPC06_B20.Text = txtCVP_E19.Text;
-                            //txt_UsLPC06_B22.Text = txtCVP_C19.Text;
-                            break;
-                    }
+                    lbExtractionVol.Text = txtCVP_E19.Text;
+                    lbNoOfPartsUsed.Text = txtCVP_C19.Text;
+
                     break;
             }
 
@@ -1528,14 +1588,25 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
         }
 
+        protected void ddlChannel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbParticle.Text = ddlChannel.SelectedItem.Text;
+        }
+
+        protected void txtSurfaceArea_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class LPC
     {
         public string type { get; set; }
-        public int Run { get; set; }
+        public string Run { get; set; }
+        public int RunNumber { get; set; }
+        public string Sample { get; set; }
         public string ChannelSize { get; set; }
-        public double Value { get; set; }
+        public string Value { get; set; }
         //public int Sample { get; set; }
     }
 

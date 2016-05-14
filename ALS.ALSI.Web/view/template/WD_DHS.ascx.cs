@@ -394,7 +394,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                 
+
 
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
@@ -423,7 +423,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-                       
+
                             this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
@@ -466,7 +466,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        errors.Add( "Invalid File. Please upload a File with extension .doc|.docx");
+                        errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                         //lbMessage.Attributes["class"] = "alert alert-error";
                         //isValid = false;
                     }
@@ -626,7 +626,7 @@ namespace ALS.ALSI.Web.view.template
                                             {
                                                 _cas.Add(tmp);
                                             }
-                                            
+
 
                                         }
                                     }
@@ -893,8 +893,8 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
 
             List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0,13).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(13,ds2.Count-13).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 13).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(13, ds2.Count - 13).ToDataTable())); // Add datasource here
 
             string download = String.Empty;
 
@@ -1032,7 +1032,7 @@ namespace ALS.ALSI.Web.view.template
 
         #region "Custom method"
 
-       
+
 
         private void GenerrateCoverPage()
         {
@@ -1047,6 +1047,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         _cover.result = _cas.amount.ToString();
                     }
+
                     if (_cover.analytes.Equals("Hydrocarbon Hump"))
                     {
                         _cas = this.tbCas.Where(x => x.classification.Equals(_cover.analytes)).FirstOrDefault();
@@ -1073,7 +1074,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
                         case "Total Others":
                             //Take 2 Max Result
-                            List<tb_m_dhs_cas> childsTake2 = this.tbCas.Where(x => x.classification.Equals(_cover.analytes) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList().OrderByDescending(x => x.amount).Take(2).ToList();
+                            List<tb_m_dhs_cas> childsTake2 = this.tbCas.Where(x => x.classification.Equals("Others")).OrderByDescending(x => Convert.ToDouble(x.amount)).Take(2).ToList().OrderBy(x => x.amoutDecimal).Take(2).ToList();
                             foreach (tb_m_dhs_cas child in childsTake2)
                             {
                                 template_wd_dhs_coverpage work = new template_wd_dhs_coverpage();
@@ -1110,22 +1111,52 @@ namespace ALS.ALSI.Web.view.template
                     }
                     #endregion
                 }
+
                 foreach (template_wd_dhs_coverpage _cover in newCoverPage)
                 {
+                    _cover.result = String.IsNullOrEmpty(_cover.result) ? "Not Detected" : _cover.result;
 
-                    double _limit = CustomUtils.isNumber(_cover.specification_limits.Replace("<", "").Trim()) ? Convert.ToDouble(_cover.specification_limits.Replace("<", "").Trim()) : 0;
-                    double _result = CustomUtils.isNumber(_cover.result) ? Convert.ToDouble(_cover.result) : 0;
-                    _cover.result = String.IsNullOrEmpty( _cover.result)? "Not Detected" : CustomUtils.isNumber(_cover.result) ? Convert.ToDouble(_cover.result).ToString() : "Not Detected";
+                    double spec = (_cover.specification_limits.Equals("NA") || _cover.specification_limits.Equals("ND") ||_cover.specification_limits.Equals("-")) ? 0 : Convert.ToDouble(_cover.specification_limits.Replace("<", "").Trim());
+                    double result = _cover.result.Equals("Not Detected") ? 0 : Convert.ToDouble(_cover.result);
+                    _cover.result_pass_or_false = _cover.specification_limits.Equals("NA") ? "NA" : (_cover.result.Equals("Not Detected") || result < spec) ? "PASS" : "FAIL";
 
 
-
-                    _cover.result_pass_or_false = (_cover.specification_limits.Equals("NA") || _cover.specification_limits.Equals("-")) ? "" :
-                        (_cover.result.Equals("Not Detected") || (_result < _limit) || _cover.specification_limits.Equals("ND")) ? "PASS" : "FAIL";
-
-                    if (_cover.analytes.Equals("Total Acrylate and Methacrylate"))
+                    switch (_cover.analytes)
                     {
-                        _cover.result_pass_or_false = "NA";
+                        case "Total Acrylate and Methacrylate":
+                        case "Total Siloxane":
+                            break;
+                        default:
+                            _cover.result_pass_or_false = _cover.specification_limits.Equals("NA")|| _cover.specification_limits.Equals("-") ? "" : _cover.result_pass_or_false;
+                            break;
                     }
+
+
+
+                    Console.WriteLine();
+                    //if (_cover.specification_limits.StartsWith("<"))
+                    //{
+                    //    _cover.result = String.IsNullOrEmpty(_cover.result) ? "Not Detected" : _cover.result;
+                    //}
+                    //else
+                    //{
+
+                    //}
+
+
+                    //double _limit = CustomUtils.isNumber(_cover.specification_limits.Replace("<", "").Trim()) ? Convert.ToDouble(_cover.specification_limits.Replace("<", "").Trim()) : 0;
+                    //double _result = CustomUtils.isNumber(_cover.result) ? Convert.ToDouble(_cover.result) : 0;
+                    //_cover.result = String.IsNullOrEmpty( _cover.result)? "Not Detected" : CustomUtils.isNumber(_cover.result) ? Convert.ToDouble(_cover.result).ToString() : "Not Detected";
+
+
+
+                    //_cover.result_pass_or_false = (_cover.specification_limits.Equals("NA") || _cover.specification_limits.Equals("-")) ? "" :
+                    //    (_cover.result.Equals("Not Detected") || (_result < _limit) || _cover.specification_limits.Equals("ND")) ? "PASS" : "FAIL";
+
+                    //if (_cover.analytes.Equals("Total Acrylate and Methacrylate")||_cover.analytes.Equals("Total Siloxane"))
+                    //{
+                    //    _cover.result_pass_or_false = "NA";
+                    //}
 
                 }
 
