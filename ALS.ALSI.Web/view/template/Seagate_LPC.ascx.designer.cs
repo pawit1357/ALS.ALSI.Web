@@ -175,6 +175,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbCommodity;
         
         /// <summary>
+        /// ddlChannel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlChannel;
+        
+        /// <summary>
         /// gvCoverPage control.
         /// </summary>
         /// <remarks>
@@ -200,15 +209,6 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pLoadFile;
-        
-        /// <summary>
-        /// ddlChannel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlChannel;
         
         /// <summary>
         /// lbDecimal control.
@@ -344,6 +344,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pSpecification;
+        
+        /// <summary>
+        /// ddlTemplateType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTemplateType;
         
         /// <summary>
         /// ddlSpecification control.

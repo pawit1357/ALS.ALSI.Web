@@ -14,7 +14,8 @@ namespace ALS.ALSI.Biz.DataAccess
     
     public partial class template_seagate_lpc_coverpage
     {
-        public int sample_id { get; set; }
+        public int id { get; set; }
+        public Nullable<int> sample_id { get; set; }
         public string particle_type { get; set; }
         public string lpc_type { get; set; }
         public Nullable<int> specification_id { get; set; }
@@ -53,10 +54,19 @@ namespace ALS.ALSI.Biz.DataAccess
         public string f18 { get; set; }
         public string g18 { get; set; }
         public string b26 { get; set; }
-        public string item_visible { get; set; }
         public string ProcedureNo { get; set; }
         public string NumberOfPieces { get; set; }
         public string ExtractionMedium { get; set; }
         public string ExtractionVolume { get; set; }
+        public Nullable<int> template_type { get; set; }
+        public string channel_size { get; set; }
+        public Nullable<int> row_state { get; set; }
+        public string LiquidParticleCount { get; set; }
+        public string SpecificationLimits { get; set; }
+        public string Results { get; set; }
+        public Nullable<int> RunNumber { get; set; }
+        public string Run { get; set; }
+        public string type { get; set; }
+        public Nullable<double> SurfaceArea { get; set; }
     }
 }

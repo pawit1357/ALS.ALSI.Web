@@ -523,6 +523,12 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columnwunitTextReport;
             
+            private global::System.Data.DataColumn columnLiquidParticleCount;
+            
+            private global::System.Data.DataColumn columnSpecificationLimits;
+            
+            private global::System.Data.DataColumn columnResults;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dataDataTable() {
@@ -694,6 +700,30 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LiquidParticleCountColumn {
+                get {
+                    return this.columnLiquidParticleCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SpecificationLimitsColumn {
+                get {
+                    return this.columnSpecificationLimits;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ResultsColumn {
+                get {
+                    return this.columnResults;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -746,7 +776,10 @@ namespace ALS.ALSI.Web.ReportObject {
                         string F, 
                         string wi, 
                         string wf, 
-                        string wunitTextReport) {
+                        string wunitTextReport, 
+                        string LiquidParticleCount1, 
+                        string SpecificationLimits, 
+                        string Results) {
                 dataRow rowdataRow = ((dataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         A,
@@ -765,7 +798,10 @@ namespace ALS.ALSI.Web.ReportObject {
                         F,
                         wi,
                         wf,
-                        wunitTextReport};
+                        wunitTextReport,
+                        LiquidParticleCount1,
+                        SpecificationLimits,
+                        Results};
                 rowdataRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdataRow);
                 return rowdataRow;
@@ -805,6 +841,9 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columnwi = base.Columns["wi"];
                 this.columnwf = base.Columns["wf"];
                 this.columnwunitTextReport = base.Columns["wunitTextReport"];
+                this.columnLiquidParticleCount = base.Columns["LiquidParticleCount"];
+                this.columnSpecificationLimits = base.Columns["SpecificationLimits"];
+                this.columnResults = base.Columns["Results"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -844,6 +883,12 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columnwf);
                 this.columnwunitTextReport = new global::System.Data.DataColumn("wunitTextReport", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnwunitTextReport);
+                this.columnLiquidParticleCount = new global::System.Data.DataColumn("LiquidParticleCount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLiquidParticleCount);
+                this.columnSpecificationLimits = new global::System.Data.DataColumn("SpecificationLimits", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSpecificationLimits);
+                this.columnResults = new global::System.Data.DataColumn("Results", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnResults);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3545,6 +3590,54 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string LiquidParticleCount {
+                get {
+                    try {
+                        return ((string)(this[this.tabledata.LiquidParticleCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LiquidParticleCount\' in table \'data\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledata.LiquidParticleCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SpecificationLimits {
+                get {
+                    try {
+                        return ((string)(this[this.tabledata.SpecificationLimitsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SpecificationLimits\' in table \'data\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledata.SpecificationLimitsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Results {
+                get {
+                    try {
+                        return ((string)(this[this.tabledata.ResultsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Results\' in table \'data\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledata.ResultsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsANull() {
                 return this.IsNull(this.tabledata.AColumn);
             }
@@ -3745,6 +3838,42 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetwunitTextReportNull() {
                 this[this.tabledata.wunitTextReportColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLiquidParticleCountNull() {
+                return this.IsNull(this.tabledata.LiquidParticleCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLiquidParticleCountNull() {
+                this[this.tabledata.LiquidParticleCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSpecificationLimitsNull() {
+                return this.IsNull(this.tabledata.SpecificationLimitsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSpecificationLimitsNull() {
+                this[this.tabledata.SpecificationLimitsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsResultsNull() {
+                return this.IsNull(this.tabledata.ResultsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetResultsNull() {
+                this[this.tabledata.ResultsColumn] = global::System.Convert.DBNull;
             }
         }
         

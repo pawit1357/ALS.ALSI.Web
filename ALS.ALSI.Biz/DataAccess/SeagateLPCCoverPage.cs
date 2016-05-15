@@ -121,117 +121,117 @@ namespace ALS.ALSI.Biz.DataAccess
         public List<ReportLPC> generateReport(List<template_seagate_lpc_coverpage> covers)
         {
             List<ReportLPC> result = new List<ReportLPC>();
-            template_seagate_lpc_coverpage cover03 = covers[0];
+            //template_seagate_lpc_coverpage cover03 = covers[0];
 
-            tb_m_specification spec = new tb_m_specification().SelectByID(covers[0].specification_id.Value);// covers[0].tb_m_specification;
+            //tb_m_specification spec = new tb_m_specification().SelectByID(covers[0].specification_id.Value);// covers[0].tb_m_specification;
 
-            ReportLPC tmp = new ReportLPC();
-            //0.3
-            tmp.liquidParticleCount = "Total number of particles ≥ 0.3μm ";
-            tmp.specificationLimit = string.Empty;
-            tmp.result = string.Empty;
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
-            tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
-            tmp.unit = spec.E;
-            result.Add(tmp);
-            tmp = new ReportLPC();
-            tmp.liquidParticleCount = "1st Run";
-            tmp.specificationLimit = string.Empty;
-            tmp.result = cover03.b25;
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
-            tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
-            tmp.unit = spec.E;
-            if (cover03.item_visible[0] == '1')
-            {
-                result.Add(tmp);
-            }
-            tmp = new ReportLPC();
-            tmp.liquidParticleCount = "2nd Run";
-            tmp.specificationLimit = string.Empty;
-            tmp.result = cover03.d25;
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
-            tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
-            tmp.unit = spec.E;
-            if (cover03.item_visible[1] == '1')
-            {
-                result.Add(tmp);
-            }
-            tmp = new ReportLPC();
-            tmp.liquidParticleCount = "3rd Run";
-            tmp.specificationLimit = string.Empty;
-            tmp.result = cover03.f25;
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
-            tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
-            tmp.unit = spec.E;
-            if (cover03.item_visible[2] == '1')
-            {
-                result.Add(tmp);
-            }
-            tmp = new ReportLPC();
-            tmp.liquidParticleCount = "Average";
-            tmp.specificationLimit = cover03.lpc_type.Equals("1") ? spec.F : spec.H;
-            tmp.result = Math.Round(Average(new Double[] { Convert.ToDouble(cover03.b25), Convert.ToDouble(cover03.d25), Convert.ToDouble(cover03.f25) }), 0).ToString();
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
-            tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
-            tmp.unit = spec.E;
-            if (cover03.item_visible[3] == '1')
-            {
-                result.Add(tmp);
-            }
-            //0.6
-            template_seagate_lpc_coverpage cover06 = covers[1];
-            tmp = new ReportLPC();
-            tmp.liquidParticleCount = "Total number of particles ≥ 0.6μm ";
-            tmp.specificationLimit = string.Empty;
-            tmp.result = string.Empty;
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
-            tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
-            tmp.unit = spec.E;
-            result.Add(tmp);
-            tmp = new ReportLPC();
-            tmp.liquidParticleCount = "1st Run";
-            tmp.specificationLimit = string.Empty;
-            tmp.result = cover06.b25;
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
-            tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
-            tmp.unit = spec.E;
-            if (cover06.item_visible[0] == '1')
-            {
-                result.Add(tmp);
-            }
-            tmp = new ReportLPC();
-            tmp.liquidParticleCount = "2nd Run";
-            tmp.specificationLimit = string.Empty;
-            tmp.result = cover06.d25;
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
-            tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
-            tmp.unit = spec.E;
-            if (cover06.item_visible[1] == '1')
-            {
-                result.Add(tmp);
-            }
-            tmp = new ReportLPC();
-            tmp.liquidParticleCount = "3rd Run";
-            tmp.specificationLimit = string.Empty;
-            tmp.result = cover06.f25;
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
-            tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
-            tmp.unit = spec.E;
-            if (cover06.item_visible[2] == '1')
-            {
-                result.Add(tmp);
-            }
-            tmp = new ReportLPC();
-            tmp.liquidParticleCount = "Average";
-            tmp.specificationLimit = cover06.lpc_type.Equals("1") ? spec.G : spec.I;
-            tmp.result = Math.Round(Average(new Double[] { Convert.ToDouble(cover06.b25), Convert.ToDouble(cover06.d25), Convert.ToDouble(cover06.f25) }), 0).ToString();
-            tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
-            tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
-            tmp.unit = spec.E;
-            if (cover06.item_visible[3] == '1')
-            {
-                result.Add(tmp);
-            }
+            //ReportLPC tmp = new ReportLPC();
+            ////0.3
+            //tmp.liquidParticleCount = "Total number of particles ≥ 0.3μm ";
+            //tmp.specificationLimit = string.Empty;
+            //tmp.result = string.Empty;
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
+            //tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
+            //tmp.unit = spec.E;
+            //result.Add(tmp);
+            //tmp = new ReportLPC();
+            //tmp.liquidParticleCount = "1st Run";
+            //tmp.specificationLimit = string.Empty;
+            //tmp.result = cover03.b25;
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
+            //tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
+            //tmp.unit = spec.E;
+            //if (cover03.item_visible[0] == '1')
+            //{
+            //    result.Add(tmp);
+            //}
+            //tmp = new ReportLPC();
+            //tmp.liquidParticleCount = "2nd Run";
+            //tmp.specificationLimit = string.Empty;
+            //tmp.result = cover03.d25;
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
+            //tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
+            //tmp.unit = spec.E;
+            //if (cover03.item_visible[1] == '1')
+            //{
+            //    result.Add(tmp);
+            //}
+            //tmp = new ReportLPC();
+            //tmp.liquidParticleCount = "3rd Run";
+            //tmp.specificationLimit = string.Empty;
+            //tmp.result = cover03.f25;
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
+            //tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
+            //tmp.unit = spec.E;
+            //if (cover03.item_visible[2] == '1')
+            //{
+            //    result.Add(tmp);
+            //}
+            //tmp = new ReportLPC();
+            //tmp.liquidParticleCount = "Average";
+            //tmp.specificationLimit = cover03.lpc_type.Equals("1") ? spec.F : spec.H;
+            //tmp.result = Math.Round(Average(new Double[] { Convert.ToDouble(cover03.b25), Convert.ToDouble(cover03.d25), Convert.ToDouble(cover03.f25) }), 0).ToString();
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03);
+            //tmp.lpc_type = Convert.ToInt16(cover03.lpc_type);
+            //tmp.unit = spec.E;
+            //if (cover03.item_visible[3] == '1')
+            //{
+            //    result.Add(tmp);
+            //}
+            ////0.6
+            //template_seagate_lpc_coverpage cover06 = covers[1];
+            //tmp = new ReportLPC();
+            //tmp.liquidParticleCount = "Total number of particles ≥ 0.6μm ";
+            //tmp.specificationLimit = string.Empty;
+            //tmp.result = string.Empty;
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
+            //tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
+            //tmp.unit = spec.E;
+            //result.Add(tmp);
+            //tmp = new ReportLPC();
+            //tmp.liquidParticleCount = "1st Run";
+            //tmp.specificationLimit = string.Empty;
+            //tmp.result = cover06.b25;
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
+            //tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
+            //tmp.unit = spec.E;
+            //if (cover06.item_visible[0] == '1')
+            //{
+            //    result.Add(tmp);
+            //}
+            //tmp = new ReportLPC();
+            //tmp.liquidParticleCount = "2nd Run";
+            //tmp.specificationLimit = string.Empty;
+            //tmp.result = cover06.d25;
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
+            //tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
+            //tmp.unit = spec.E;
+            //if (cover06.item_visible[1] == '1')
+            //{
+            //    result.Add(tmp);
+            //}
+            //tmp = new ReportLPC();
+            //tmp.liquidParticleCount = "3rd Run";
+            //tmp.specificationLimit = string.Empty;
+            //tmp.result = cover06.f25;
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
+            //tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
+            //tmp.unit = spec.E;
+            //if (cover06.item_visible[2] == '1')
+            //{
+            //    result.Add(tmp);
+            //}
+            //tmp = new ReportLPC();
+            //tmp.liquidParticleCount = "Average";
+            //tmp.specificationLimit = cover06.lpc_type.Equals("1") ? spec.G : spec.I;
+            //tmp.result = Math.Round(Average(new Double[] { Convert.ToDouble(cover06.b25), Convert.ToDouble(cover06.d25), Convert.ToDouble(cover06.f25) }), 0).ToString();
+            //tmp.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06);
+            //tmp.lpc_type = Convert.ToInt16(cover06.lpc_type);
+            //tmp.unit = spec.E;
+            //if (cover06.item_visible[3] == '1')
+            //{
+            //    result.Add(tmp);
+            //}
 
             return result;
         }

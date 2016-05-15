@@ -27,7 +27,7 @@ namespace ALS.ALSI.Web.view.template
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Seagate_LPC));
 
-        #region "Property"
+        //#region "Property"
         public users_login userLogin
         {
             get
@@ -52,7 +52,11 @@ namespace ALS.ALSI.Web.view.template
             get { return (List<template_seagate_lpc_coverpage>)Session[GetType().Name + "Lpcs"]; }
             set { Session[GetType().Name + "Lpcs"] = value; }
         }
-
+        //public List<template_seagate_lpc_coverpage> ListResult
+        //{
+        //    get { return (List<template_seagate_lpc_coverpage>)Session[GetType().Name + "ListResult"]; }
+        //    set { Session[GetType().Name + "ListResult"] = value; }
+        //}
         public string PreviousPath
         {
             get { return (string)ViewState[GetType().Name + Constants.PREVIOUS_PATH]; }
@@ -215,30 +219,6 @@ namespace ALS.ALSI.Web.view.template
                     txtD19.Enabled = true;
                     txtCVP_E19.Enabled = true;
 
-
-                    //td5.Visible = true;
-
-                    //th2.Visible = true;
-                    //td6.Visible = true;
-                    //td7.Visible = true;
-                    //td8.Visible = true;
-                    //td9.Visible = true;
-                    //td10.Visible = true;
-
-                    //th3.Visible = true;
-                    //td11.Visible = true;
-                    //td12.Visible = true;
-                    //td13.Visible = true;
-                    //td14.Visible = true;
-                    //td15.Visible = true;
-
-                    //th4.Visible = true;
-                    //td16.Visible = true;
-                    //td17.Visible = true;
-                    //td18.Visible = true;
-                    //td19.Visible = true;
-                    //td20.Visible = true;
-
                     btnCoverPage.Visible = true;
                     btnWorkSheet.Visible = true;
                 }
@@ -250,187 +230,29 @@ namespace ALS.ALSI.Web.view.template
                     txtD19.Enabled = false;
                     txtCVP_E19.Enabled = false;
 
-                    //th1.Visible = false;
-                    //td1.Visible = false;
-                    //td2.Visible = false;
-                    //td3.Visible = false;
-                    //td4.Visible = false;
-                    //td5.Visible = false;
-
-                    //th2.Visible = false;
-                    //td6.Visible = false;
-                    //td7.Visible = false;
-                    //td8.Visible = false;
-                    //td9.Visible = false;
-                    //td10.Visible = false;
-
-                    //th3.Visible = false;
-                    //td11.Visible = false;
-                    //td12.Visible = false;
-                    //td13.Visible = false;
-                    //td14.Visible = false;
-                    //td15.Visible = false;
-
-                    //th4.Visible = false;
-                    //td16.Visible = false;
-                    //td17.Visible = false;
-                    //td18.Visible = false;
-                    //td19.Visible = false;
-                    //td20.Visible = false;
-
                     btnCoverPage.Visible = false;
                     btnWorkSheet.Visible = false;
 
                 }
                 #endregion
 
+                if (status == StatusEnum.LOGIN_SELECT_SPEC)
+                {
+                    template_seagate_lpc_coverpage objWork = new template_seagate_lpc_coverpage();
+                    objWork.DeleteBySampleID(this.SampleID);
+                    GeneralManager.Commit();
+
+                }
+
             }
 
             #endregion
+
             #region "WorkingSheet"
+ 
             this.Lpcs = template_seagate_lpc_coverpage.FindAllBySampleID(this.SampleID);
             if (this.Lpcs != null && this.Lpcs.Count > 0)
             {
-                this.CommandName = CommandNameEnum.Edit;
-                ddlSpecification.SelectedValue = this.Lpcs[0].specification_id.ToString();
-                tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(Lpcs[0].specification_id));
-                if (tem != null)
-                {
-                    //#region "HEADER"
-                    //lbDocNo.Text = tem.C;
-                    //lbDocRev.Text = tem.D;
-                    //lbCommodity.Text = tem.B;
-                    //lbUnit1.Text = tem.E;//unit
-                    //lbUnit2.Text = tem.E;//unit
-                    //lbUnit3.Text = tem.E;//unit
-                    //lbUnit4.Text = tem.E;//unit
-                    //lbUnit5.Text = tem.E;//unit
-                    //lbUnit6.Text = tem.E;//unit
-                    //lbUnit7.Text = tem.E;//unit
-                    //lbUnit8.Text = tem.E;//unit
-                    //#endregion
-                    //#region "Liquid Particle Count (68 KHz) 0.3"
-                    //lbB28.Text = tem.F;
-                    //#endregion
-                    //#region "Liquid Particle Count (68 KHz) 0.6"
-                    //lbB35.Text = tem.G;
-                    //#endregion
-                    //#region "Liquid Particle Count (132 KHz) 0.3 "
-                    //lbB42.Text = tem.H;
-                    //#endregion
-                    //#region "Liquid Particle Count (132 KHz) 0.6"
-                    //lbB49.Text = tem.I;
-                    //#endregion
-                }
-
-                LPCTypeEnum lpcType = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(this.Lpcs[0].lpc_type));
-                ddlA19.SelectedValue = lpcType.ToString();
-
-                #region "US-LPC(0.3)"
-                template_seagate_lpc_coverpage khz68_03 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_03).ToString());
-                if (khz68_03 != null)
-                {
-                    //txt_UsLPC03_B14.Text = khz68_03.b14;
-                    //txt_UsLPC03_B15.Text = khz68_03.b15;
-                    //txt_UsLPC03_B16.Text = khz68_03.b16;
-                    //txt_UsLPC03_B17.Text = khz68_03.b17;
-                    //txt_UsLPC03_B18.Text = khz68_03.b18;
-
-                    //txt_UsLPC03_C14.Text = khz68_03.c14;
-                    //txt_UsLPC03_C15.Text = khz68_03.c15;
-                    //txt_UsLPC03_C16.Text = khz68_03.c16;
-                    //txt_UsLPC03_C17.Text = khz68_03.c17;
-                    //txt_UsLPC03_C18.Text = khz68_03.c18;
-
-                    //txt_UsLPC03_D14.Text = khz68_03.d14;
-                    //txt_UsLPC03_D15.Text = khz68_03.d15;
-                    //txt_UsLPC03_D16.Text = khz68_03.d16;
-                    //txt_UsLPC03_D17.Text = khz68_03.d17;
-                    //txt_UsLPC03_D18.Text = khz68_03.d18;
-
-                    //txt_UsLPC03_E14.Text = khz68_03.e14;
-                    //txt_UsLPC03_E15.Text = khz68_03.e15;
-                    //txt_UsLPC03_E16.Text = khz68_03.e16;
-                    //txt_UsLPC03_E17.Text = khz68_03.e17;
-                    //txt_UsLPC03_E18.Text = khz68_03.e18;
-
-                    //txt_UsLPC03_F14.Text = khz68_03.f14;
-                    //txt_UsLPC03_F15.Text = khz68_03.f15;
-                    //txt_UsLPC03_F16.Text = khz68_03.f16;
-                    //txt_UsLPC03_F17.Text = khz68_03.f17;
-                    //txt_UsLPC03_F18.Text = khz68_03.f18;
-
-                    //txt_UsLPC03_G14.Text = khz68_03.g14;
-                    //txt_UsLPC03_G15.Text = khz68_03.g15;
-                    //txt_UsLPC03_G16.Text = khz68_03.g16;
-                    //txt_UsLPC03_G17.Text = khz68_03.g17;
-                    //txt_UsLPC03_G18.Text = khz68_03.g18;
-
-                    //txt_UsLPC03_B26.Text = khz68_03.b26;
-
-                    ////txt_UsLPC03_B20.Text = Lpcs[0].cvp_c19;
-                    //txt_UsLPC03_B21.Text = khz68_03.b21;
-                    ////txt_UsLPC03_B22.Text = Lpcs[0].cvp_e19;
-
-                    //txt_UsLPC03_B25.Text = khz68_03.b25;
-                    //txt_UsLPC03_D25.Text = khz68_03.d25;
-                    //txt_UsLPC03_F25.Text = khz68_03.f25;
-
-                }
-                #endregion
-                #region "US-LPC(0.6)"
-                template_seagate_lpc_coverpage khz68_06 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString());
-                if (khz68_06 != null)
-                {
-                    //txt_UsLPC06_B14.Text = khz68_06.b14;
-                    //txt_UsLPC06_B15.Text = khz68_06.b15;
-                    //txt_UsLPC06_B16.Text = khz68_06.b16;
-                    //txt_UsLPC06_B17.Text = khz68_06.b17;
-                    //txt_UsLPC06_B18.Text = khz68_06.b18;
-
-                    //txt_UsLPC06_C14.Text = khz68_06.c14;
-                    //txt_UsLPC06_C15.Text = khz68_06.c15;
-                    //txt_UsLPC06_C16.Text = khz68_06.c16;
-                    //txt_UsLPC06_C17.Text = khz68_06.c17;
-                    //txt_UsLPC06_C18.Text = khz68_06.c18;
-
-                    //txt_UsLPC06_D14.Text = khz68_06.d14;
-                    //txt_UsLPC06_D15.Text = khz68_06.d15;
-                    //txt_UsLPC06_D16.Text = khz68_06.d16;
-                    //txt_UsLPC06_D17.Text = khz68_06.d17;
-                    //txt_UsLPC06_D18.Text = khz68_06.d18;
-
-                    //txt_UsLPC06_E14.Text = khz68_06.e14;
-                    //txt_UsLPC06_E15.Text = khz68_06.e15;
-                    //txt_UsLPC06_E16.Text = khz68_06.e16;
-                    //txt_UsLPC06_E17.Text = khz68_06.e17;
-                    //txt_UsLPC06_E18.Text = khz68_06.e18;
-
-                    //txt_UsLPC06_F14.Text = khz68_06.f14;
-                    //txt_UsLPC06_F15.Text = khz68_06.f15;
-                    //txt_UsLPC06_F16.Text = khz68_06.f16;
-                    //txt_UsLPC06_F17.Text = khz68_06.f17;
-                    //txt_UsLPC06_F18.Text = khz68_06.f18;
-
-                    //txt_UsLPC06_G14.Text = khz68_06.g14;
-                    //txt_UsLPC06_G15.Text = khz68_06.g15;
-                    //txt_UsLPC06_G16.Text = khz68_06.g16;
-                    //txt_UsLPC06_G17.Text = khz68_06.g17;
-                    //txt_UsLPC06_G18.Text = khz68_06.g18;
-
-                    //txt_UsLPC06_B26.Text = khz68_06.b26;
-
-                    ////txt_UsLPC06_B20.Text = Lpcs[0].cvp_c19;
-                    //txt_UsLPC06_B21.Text = khz68_06.b21;
-                    ////txt_UsLPC06_B22.Text = Lpcs[0].cvp_e19;
-
-                    //txt_UsLPC06_B25.Text = khz68_06.b25;
-                    //txt_UsLPC06_D25.Text = khz68_06.d25;
-                    //txt_UsLPC06_F25.Text = khz68_06.f25;
-                }
-                #endregion
-
-
 
                 //FORM COVER PAGE
                 txtB19.Text = this.Lpcs[0].ProcedureNo;
@@ -438,52 +260,29 @@ namespace ALS.ALSI.Web.view.template
                 txtD19.Text = this.Lpcs[0].ExtractionMedium;
                 txtCVP_E19.Text = this.Lpcs[0].ExtractionVolume;
 
+                lbExtractionVol.Text = txtCVP_E19.Text;
+                txtSurfaceArea.Text = this.Lpcs[0].SurfaceArea.ToString();
+                lbNoOfPartsUsed.Text = txtCVP_C19.Text;
 
+                ddlA19.SelectedValue = this.Lpcs[0].lpc_type;
+                ddlChannel.SelectedValue = this.Lpcs[0].channel_size;
+                ddlTemplateType.SelectedValue = this.Lpcs[0].template_type.ToString();
 
-                LPCTypeEnum lpcType1 = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(this.Lpcs[0].lpc_type));
-                switch (lpcType1)
+                tb_m_specification tem = new tb_m_specification().SelectByID(this.Lpcs[0].specification_id.Value);
+
+                if (tem != null)
                 {
-                    case LPCTypeEnum.KHz_68:
-                        //tb1_1.Visible = true;
-                        //tb2.Visible = true;
-                        //tb3.Visible = false;
-                        //tb4.Visible = false;
-                        //pUS_LPC03.Visible = true;
-                        //pUS_LPC06.Visible = false;
-                        break;
-                    case LPCTypeEnum.KHz_132:
-                        //tb1_1.Visible = false;
-                        //tb2.Visible = false;
-                        //tb3.Visible = true;
-                        //tb4.Visible = true;
-                        //pUS_LPC03.Visible = false;
-                        //pUS_LPC06.Visible = true;
-                        break;
+                    lbDocNo.Text = tem.C;
+                    lbCommodity.Text = tem.B;
                 }
-                //
+
+                ddlChannel.SelectedValue = this.Lpcs[0].channel_size;
+
+                gvCoverPage.DataSource = this.Lpcs.Where(x => x.row_state == 1).ToList();
+                gvCoverPage.DataBind();
+
+
                 CalculateCas();
-            }
-            else
-            {
-                #region "Initial coverpage value"
-                this.Lpcs = new List<template_seagate_lpc_coverpage>();
-                template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
-                lpc.sample_id = this.SampleID;
-                lpc.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
-                lpc.lpc_type = Convert.ToInt16(LPCTypeEnum.KHz_68).ToString();
-                lpc.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_03).ToString();
-                lpc.item_visible = getItemStatus();
-                Lpcs.Add(lpc);
-                lpc = new template_seagate_lpc_coverpage();
-                lpc.sample_id = this.SampleID;
-                lpc.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
-                lpc.lpc_type = Convert.ToInt16(LPCTypeEnum.KHz_68).ToString();
-                lpc.particle_type = Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString();
-                lpc.item_visible = getItemStatus();
-                Lpcs.Add(lpc);
-
-
-                #endregion
             }
 
             #endregion
@@ -513,7 +312,6 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        #endregion
 
         List<String> errors = new List<String>();
         protected void Page_Load(object sender, EventArgs e)
@@ -538,7 +336,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 case StatusEnum.LOGIN_CONVERT_TEMPLATE:
                     this.jobSample.step1owner = userLogin.id;
-
                     break;
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
@@ -553,21 +350,13 @@ namespace ALS.ALSI.Web.view.template
                         _tmp.NumberOfPieces = txtCVP_C19.Text;
                         _tmp.ExtractionMedium = txtD19.Text;
                         _tmp.ExtractionVolume = txtCVP_E19.Text;
-                        _tmp.item_visible = getItemStatus();
+                        _tmp.channel_size = ddlChannel.SelectedValue;
+                        _tmp.template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
+                        _tmp.row_state = 1;//Cover Page
                     }
-                    if (this.Lpcs.Count > 0)
-                    {
-                        switch (this.CommandName)
-                        {
-                            case CommandNameEnum.Add:
-                                objWork.InsertList(this.Lpcs);
-                                break;
-                            case CommandNameEnum.Edit:
 
-                                objWork.UpdateList(this.Lpcs);
-                                break;
-                        }
-                    }
+                    objWork.DeleteBySampleID(this.SampleID);
+                    objWork.InsertList(this.Lpcs);
 
                     break;
                 case StatusEnum.CHEMIST_TESTING:
@@ -578,114 +367,25 @@ namespace ALS.ALSI.Web.view.template
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         //#endregion
+                        int spec_id = this.Lpcs[0].specification_id.Value;
+                        string lpc_type = this.Lpcs[0].lpc_type;
+                        string ch_size = this.Lpcs[0].channel_size;
                         foreach (template_seagate_lpc_coverpage _tmp in this.Lpcs)
                         {
                             _tmp.sample_id = this.jobSample.ID;
-                            _tmp.lpc_type = ddlA19.SelectedValue;
-                            _tmp.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
+                            _tmp.lpc_type = lpc_type;
+                            _tmp.specification_id = spec_id;
                             _tmp.ProcedureNo = txtB19.Text;
-
-                            switch (ddlA19.SelectedValue)
-                            {
-                                case "1":
-                                    //Extraction Vol. (ml) & No. of Parts Used For (64KHz)
-                                    //_tmp.NumberOfPieces = txt_UsLPC03_B20.Text;
-                                    //_tmp.ExtractionVolume = txt_UsLPC03_B22.Text;
-                                    break;
-                                case "2":
-                                    //Extraction Vol. (ml) & No. of Parts Used For (132KHz)
-                                    //_tmp.NumberOfPieces = txt_UsLPC06_B20.Text;
-                                    //_tmp.ExtractionVolume = txt_UsLPC06_B22.Text;
-                                    break;
-                            }
-
+                            _tmp.NumberOfPieces = txtCVP_C19.Text;
                             _tmp.ExtractionMedium = txtD19.Text;
-                            _tmp.item_visible = getItemStatus();
+                            _tmp.ExtractionVolume = txtCVP_E19.Text;
+                            _tmp.channel_size = ch_size;
+                            _tmp.SurfaceArea =Convert.ToDouble( txtSurfaceArea.Text);
+                            _tmp.template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
                         }
-                        #region "US-LPC(0.3)"
-                        template_seagate_lpc_coverpage khz68_03 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_03).ToString());
-                        if (khz68_03 != null)
-                        {
-                            //khz68_03.lpc_type = (cbLPCType68.Checked) ? "1" : "2";
-                            //khz68_03.b14 = txt_UsLPC03_B14.Text;
-                            //khz68_03.b15 = txt_UsLPC03_B15.Text;
-                            //khz68_03.b16 = txt_UsLPC03_B16.Text;
-                            //khz68_03.b17 = txt_UsLPC03_B17.Text;
 
-                            //khz68_03.c14 = txt_UsLPC03_C14.Text;
-                            //khz68_03.c15 = txt_UsLPC03_C15.Text;
-                            //khz68_03.c16 = txt_UsLPC03_C16.Text;
-                            //khz68_03.c17 = txt_UsLPC03_C17.Text;
-
-                            //khz68_03.d14 = txt_UsLPC03_D14.Text;
-                            //khz68_03.d15 = txt_UsLPC03_D15.Text;
-                            //khz68_03.d16 = txt_UsLPC03_D16.Text;
-                            //khz68_03.d17 = txt_UsLPC03_D17.Text;
-
-                            //khz68_03.e14 = txt_UsLPC03_E14.Text;
-                            //khz68_03.e15 = txt_UsLPC03_E15.Text;
-                            //khz68_03.e16 = txt_UsLPC03_E16.Text;
-                            //khz68_03.e17 = txt_UsLPC03_E17.Text;
-
-                            //khz68_03.f14 = txt_UsLPC03_F14.Text;
-                            //khz68_03.f15 = txt_UsLPC03_F15.Text;
-                            //khz68_03.f16 = txt_UsLPC03_F16.Text;
-                            //khz68_03.f17 = txt_UsLPC03_F17.Text;
-
-                            //khz68_03.g14 = txt_UsLPC03_G14.Text;
-                            //khz68_03.g15 = txt_UsLPC03_G15.Text;
-                            //khz68_03.g16 = txt_UsLPC03_G16.Text;
-                            //khz68_03.g17 = txt_UsLPC03_G17.Text;
-
-                            //khz68_03.b21 = txt_UsLPC03_B21.Text;
-                            //khz68_03.b25 = txt_UsLPC03_B25.Text;
-                            //khz68_03.d25 = txt_UsLPC03_D25.Text;
-                            //khz68_03.f25 = txt_UsLPC03_F25.Text;
-
-
-                        }
-                        #endregion
-                        #region "US-LPC(0.6)"
-                        template_seagate_lpc_coverpage khz68_06 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString());
-                        if (khz68_06 != null)
-                        {
-                            //khz68_06.b14 = txt_UsLPC06_B14.Text;
-                            //khz68_06.b15 = txt_UsLPC06_B15.Text;
-                            //khz68_06.b16 = txt_UsLPC06_B16.Text;
-                            //khz68_06.b17 = txt_UsLPC06_B17.Text;
-
-                            //khz68_06.c14 = txt_UsLPC06_C14.Text;
-                            //khz68_06.c15 = txt_UsLPC06_C15.Text;
-                            //khz68_06.c16 = txt_UsLPC06_C16.Text;
-                            //khz68_06.c17 = txt_UsLPC06_C17.Text;
-
-                            //khz68_06.d14 = txt_UsLPC06_D14.Text;
-                            //khz68_06.d15 = txt_UsLPC06_D15.Text;
-                            //khz68_06.d16 = txt_UsLPC06_D16.Text;
-                            //khz68_06.d17 = txt_UsLPC06_D17.Text;
-
-                            //khz68_06.e14 = txt_UsLPC06_E14.Text;
-                            //khz68_06.e15 = txt_UsLPC06_E15.Text;
-                            //khz68_06.e16 = txt_UsLPC06_E16.Text;
-                            //khz68_06.e17 = txt_UsLPC06_E17.Text;
-
-                            //khz68_06.f14 = txt_UsLPC06_F14.Text;
-                            //khz68_06.f15 = txt_UsLPC06_F15.Text;
-                            //khz68_06.f16 = txt_UsLPC06_F16.Text;
-                            //khz68_06.f17 = txt_UsLPC06_F17.Text;
-
-                            //khz68_06.g14 = txt_UsLPC06_G14.Text;
-                            //khz68_06.g15 = txt_UsLPC06_G15.Text;
-                            //khz68_06.g16 = txt_UsLPC06_G16.Text;
-                            //khz68_06.g17 = txt_UsLPC06_G17.Text;
-
-                            //khz68_06.b21 = txt_UsLPC06_B21.Text;
-                            //khz68_06.b25 = txt_UsLPC06_B25.Text;
-                            //khz68_06.d25 = txt_UsLPC06_D25.Text;
-                            //khz68_06.f25 = txt_UsLPC06_F25.Text;
-                        }
-                        #endregion
-                        khz68_03.UpdateList(this.Lpcs);
+                        objWork.DeleteBySampleID(this.SampleID);
+                        objWork.InsertList(this.Lpcs);
                     }
                     else
                     {
@@ -848,7 +548,7 @@ namespace ALS.ALSI.Web.view.template
 
             List<template_seagate_lpc_coverpage> listSeagateLpc = new List<template_seagate_lpc_coverpage>();
 
-            List<LPC> lpcs = new List<LPC>();
+            List<template_seagate_lpc_coverpage> lpcs = new List<template_seagate_lpc_coverpage>();
 
             for (int i = 0; i < btnUpload.PostedFiles.Count; i++)
             {
@@ -890,31 +590,17 @@ namespace ALS.ALSI.Web.view.template
                                         }
                                         if (String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C))))
                                         {
-                                            //switch (CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J)))
-                                            //{
-                                            //    case "0.200":
-                                            //    case "0.300":
-                                            //    case "0.400":
-                                            //    case "0.500":
-                                            //    case "0.600":
-                                            //    case "0.700":
-                                            //    case "0.800":
-                                            //    case "0.900":
-                                            //    case "1.000":
-                                            //    case "1.500":
-                                            //case "2.000":
                                             if (ddlChannel.SelectedValue.Equals(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J))))
                                             {
-                                                LPC lpc = new LPC();
+                                                template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
                                                 lpc.RunNumber = run;
                                                 lpc.Run = run + "";
                                                 lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
-                                                lpc.ChannelSize = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
-                                                lpc.Value = String.Format("{0:0.00}", Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt16(txtDecimal01.Text) : Convert.ToInt16(txtDecimal02.Text)));
+                                                lpc.channel_size = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
+                                                lpc.Results = String.Format("{0:0.00}", Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt16(txtDecimal01.Text) : Convert.ToInt16(txtDecimal02.Text)));
+                                                lpc.row_state = 2;//WorkSheet
                                                 lpcs.Add(lpc);
                                             }
-                                                    //break;
-                                            //}
                                         }
                                     }
                                 }
@@ -937,54 +623,10 @@ namespace ALS.ALSI.Web.view.template
             #endregion
 
 
-
+            this.Lpcs.AddRange(lpcs);
             //New Order
             if (lpcs.Count > 0)
             {
-                string lastSampleCount = lpcs.Max(x => x.type);
-                lastSampleCount = lastSampleCount.Substring(1, lastSampleCount.Length - 1);
-                List<LPC> newLpcs = new List<LPC>();
-                for (int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
-                {
-                    newLpcs.AddRange(lpcs.Where(x => x.type.Equals("B" + i)).ToList());
-                    newLpcs.AddRange(lpcs.Where(x => x.type.Equals("S" + i)).ToList());
-
-                }
-
-                foreach (LPC _lpc in newLpcs)
-                {
-                    _lpc.type = _lpc.type.Replace("B", "Blank ").Replace("S", "Sample ");
-                }
-
-                var lpcTypeGroup =
-                       from lpc in newLpcs
-                       group lpc by lpc.type into newGroup
-                       orderby newGroup.Key
-                       select newGroup;
-
-
-
-                List<LPC> tmp = new List<LPC>();
-                foreach (var item in lpcTypeGroup)
-                {
-                    LPC lpc = new LPC();
-                    //Average of last 3
-                    lpc.RunNumber = 5;
-                    lpc.Run = "Average of last 3";
-                    lpc.type = item.Key;
-                    lpc.ChannelSize = ddlChannel.SelectedValue;
-                    double _value = newLpcs.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.ChannelSize.Equals(ddlChannel.SelectedValue)).Average(x => Convert.ToDouble(x.Value));
-                    lpc.Value = String.Format("{0:0.000}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
-                    tmp.Add(lpc);
-                }
-
-                newLpcs.AddRange(tmp);
-
-                DataTable dt = PivotTable.GetInversedDataTable(newLpcs.Where(x => x.ChannelSize.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Run", "Value", "-", false);
-
-                gvWorkSheet.DataSource = dt;
-                gvWorkSheet.DataBind();
-
 
                 if (String.IsNullOrEmpty(txtSurfaceArea.Text))
                 {
@@ -997,35 +639,7 @@ namespace ALS.ALSI.Web.view.template
 
                 if (errors.Count == 0)
                 {
-                    List<LPC> listAverages = new List<LPC>();
-                    var lpcTypeGroup1 = from lpc in newLpcs where lpc.type.StartsWith("Blank") group lpc by lpc.type into newGroup orderby newGroup.Key select newGroup;
-                    int index = 1;
-                    foreach (var item in lpcTypeGroup1)
-                    {
-                        LPC lpc = new LPC();
-                        //Average of last 3
-                        lpc.RunNumber = 6;
-                        lpc.Run = "";
-                        lpc.Sample = "";
-                        lpc.type = item.Key.Replace("Blank", "");
-                        lpc.ChannelSize = ddlChannel.SelectedValue;
-                        LPC lpcBlank = newLpcs.Where(x => x.RunNumber == 5 && x.type.Equals("Blank " + index)).FirstOrDefault();
-                        LPC lpcSaple = newLpcs.Where(x => x.RunNumber == 5 && x.type.Equals("Sample " + index)).FirstOrDefault();
-
-
-                        double _value = (Convert.ToDouble(lpcSaple.Value) - Convert.ToDouble(lpcBlank.Value)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor.Text);
-
-                        lpc.Value = String.Format("{0:0}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
-                        listAverages.Add(lpc);
-                        index++;
-                    }
-                    DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Sample", "Value", ddlChannel.SelectedItem.Text, false);
-                    gvWorkSheetAverage.DataSource = dtAverages;
-                    gvWorkSheetAverage.DataBind();
-                    Console.WriteLine();
-                    double average = listAverages.Average(x => Convert.ToDouble(x.Value));
-                    lbAverage.Text = average.ToString().Split('.')[0];
-
+                    CalculateCas();
                 }
             }
 
@@ -1054,6 +668,7 @@ namespace ALS.ALSI.Web.view.template
                     btnWorkSheet.CssClass = "btn green";
                     pCoverpage.Visible = true;
                     pDSH.Visible = false;
+                    CalculateCas();
                     break;
                 case "WorkSheet":
                     btnCoverPage.CssClass = "btn blue";
@@ -1066,272 +681,105 @@ namespace ALS.ALSI.Web.view.template
 
                     break;
             }
-
-
-
-            CalculateCas();
         }
 
         #region "Custom method"
 
-        private String validateDSHFile(IList<HttpPostedFile> _files)
-        {
-            Boolean isFound_b1 = false;
-            Boolean isFound_b2 = false;
-            Boolean isFound_b3 = false;
-
-            Boolean isFound_s1 = false;
-            Boolean isFound_s2 = false;
-            Boolean isFound_s3 = false;
-
-            Boolean isFoundWrongExtension = false;
-
-            String result = String.Empty;
-
-            String[] files = new String[_files.Count];
-            if (files.Length == 6)
-            {
-                for (int i = 0; i < _files.Count; i++)
-                {
-                    files[i] = _files[i].FileName;
-                    if (!Path.GetExtension(_files[i].FileName).Trim().Equals(".xls"))
-                    {
-                        isFoundWrongExtension = true;
-                        break;
-                    }
-                }
-                if (!isFoundWrongExtension)
-                {
-
-                    //Find B1
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B1"))
-                        {
-                            isFound_b1 = true;
-                            break;
-                        }
-                    }
-
-                    //Find B2
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B2"))
-                        {
-                            isFound_b2 = true;
-                            break;
-                        }
-                    }
-                    //Find B3
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B3"))
-                        {
-                            isFound_b3 = true;
-                            break;
-                        }
-                    }
-
-                    //Find S1
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S1"))
-                        {
-                            isFound_s1 = true;
-                            break;
-                        }
-                    }
-
-                    //Find S2
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S2"))
-                        {
-                            isFound_s2 = true;
-                            break;
-                        }
-                    }
-                    //Find S3
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S3"))
-                        {
-                            isFound_s3 = true;
-                            break;
-                        }
-                    }
-
-                    result = (!isFound_b1) ? result += "File not found B1.xls" :
-                                (!isFound_b2) ? result += "File not found B2.xls" :
-                                (!isFound_b3) ? result += "File not found B3.xls" :
-                                (!isFound_s1) ? result += "File not found S1.xls" :
-                                (!isFound_s2) ? result += "File not found S2.xls" :
-                                (!isFound_s3) ? result += "File not found S3.xls" : String.Empty;
-                }
-                else
-                {
-                    result = "File extension must be *.txt";
-                }
-            }
-            else
-            {
-                result = "You must to select 6 files for upload.";
-            }
-            return result;
-        }
 
         private void CalculateCas()
         {
 
-            #region "US-LPC(0.3)"
-            template_seagate_lpc_coverpage khz68_03 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_03).ToString());
-            if (khz68_03 != null)
+            if (this.Lpcs.Count > 0)
             {
-                //khz68_03.lpc_type = (cbLPCType68.Checked) ? "1" : "2";
-                //khz68_03.b14 = txt_UsLPC03_B14.Text;
-                //khz68_03.b15 = txt_UsLPC03_B15.Text;
-                //khz68_03.b16 = txt_UsLPC03_B16.Text;
-                //khz68_03.b17 = txt_UsLPC03_B17.Text;
-                //khz68_03.b18 = txt_UsLPC03_B18.Text;
 
-                //khz68_03.c14 = txt_UsLPC03_C14.Text;
-                //khz68_03.c15 = txt_UsLPC03_C15.Text;
-                //khz68_03.c16 = txt_UsLPC03_C16.Text;
-                //khz68_03.c17 = txt_UsLPC03_C17.Text;
-                //khz68_03.c18 = txt_UsLPC03_C18.Text;
-
-                //khz68_03.d14 = txt_UsLPC03_D14.Text;
-                //khz68_03.d15 = txt_UsLPC03_D15.Text;
-                //khz68_03.d16 = txt_UsLPC03_D16.Text;
-                //khz68_03.d17 = txt_UsLPC03_D17.Text;
-                //khz68_03.d18 = txt_UsLPC03_D18.Text;
-
-
-                //khz68_03.e14 = txt_UsLPC03_E14.Text;
-                //khz68_03.e15 = txt_UsLPC03_E15.Text;
-                //khz68_03.e16 = txt_UsLPC03_E16.Text;
-                //khz68_03.e17 = txt_UsLPC03_E17.Text;
-                //khz68_03.e18 = txt_UsLPC03_E18.Text;
-
-                //khz68_03.f14 = txt_UsLPC03_F14.Text;
-                //khz68_03.f15 = txt_UsLPC03_F15.Text;
-                //khz68_03.f16 = txt_UsLPC03_F16.Text;
-                //khz68_03.f17 = txt_UsLPC03_F17.Text;
-                //khz68_03.f18 = txt_UsLPC03_F18.Text;
-
-                //khz68_03.g14 = txt_UsLPC03_G14.Text;
-                //khz68_03.g15 = txt_UsLPC03_G15.Text;
-                //khz68_03.g16 = txt_UsLPC03_G16.Text;
-                //khz68_03.g17 = txt_UsLPC03_G17.Text;
-                //khz68_03.g18 = txt_UsLPC03_G18.Text;
-
-                //khz68_03.b21 = txt_UsLPC03_B21.Text;
-                //khz68_03.b25 = txt_UsLPC03_B25.Text;
-                //khz68_03.d25 = txt_UsLPC03_D25.Text;
-                //khz68_03.f25 = txt_UsLPC03_F25.Text;
-                //khz68_03.b26 = txt_UsLPC03_B26.Text;
-
-
-            }
-            #endregion
-            #region "US-LPC(0.6)"
-            template_seagate_lpc_coverpage khz68_06 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString());
-            if (khz68_06 != null)
-            {
-                //khz68_06.b14 = txt_UsLPC06_B14.Text;
-                //khz68_06.b15 = txt_UsLPC06_B15.Text;
-                //khz68_06.b16 = txt_UsLPC06_B16.Text;
-                //khz68_06.b17 = txt_UsLPC06_B17.Text;
-                //khz68_06.b18 = txt_UsLPC06_B18.Text;
-
-                //khz68_06.c14 = txt_UsLPC06_C14.Text;
-                //khz68_06.c15 = txt_UsLPC06_C15.Text;
-                //khz68_06.c16 = txt_UsLPC06_C16.Text;
-                //khz68_06.c17 = txt_UsLPC06_C17.Text;
-                //khz68_06.c18 = txt_UsLPC06_C18.Text;
-
-
-                //khz68_06.d14 = txt_UsLPC06_D14.Text;
-                //khz68_06.d15 = txt_UsLPC06_D15.Text;
-                //khz68_06.d16 = txt_UsLPC06_D16.Text;
-                //khz68_06.d17 = txt_UsLPC06_D17.Text;
-                //khz68_06.d18 = txt_UsLPC06_D18.Text;
-
-                //khz68_06.e14 = txt_UsLPC06_E14.Text;
-                //khz68_06.e15 = txt_UsLPC06_E15.Text;
-                //khz68_06.e16 = txt_UsLPC06_E16.Text;
-                //khz68_06.e17 = txt_UsLPC06_E17.Text;
-                //khz68_06.e18 = txt_UsLPC06_E18.Text;
-
-                //khz68_06.f14 = txt_UsLPC06_F14.Text;
-                //khz68_06.f15 = txt_UsLPC06_F15.Text;
-                //khz68_06.f16 = txt_UsLPC06_F16.Text;
-                //khz68_06.f17 = txt_UsLPC06_F17.Text;
-                //khz68_06.f18 = txt_UsLPC06_F18.Text;
-
-                //khz68_06.g14 = txt_UsLPC06_G14.Text;
-                //khz68_06.g15 = txt_UsLPC06_G15.Text;
-                //khz68_06.g16 = txt_UsLPC06_G16.Text;
-                //khz68_06.g17 = txt_UsLPC06_G17.Text;
-                //khz68_06.g18 = txt_UsLPC06_G18.Text;
-
-                //khz68_06.b21 = txt_UsLPC06_B21.Text;
-                //khz68_06.b25 = txt_UsLPC06_B25.Text;
-                //khz68_06.d25 = txt_UsLPC06_D25.Text;
-                //khz68_06.f25 = txt_UsLPC06_F25.Text;
-                //khz68_06.b26 = txt_UsLPC06_B26.Text;
-
-            }
-            #endregion
-
-            //Calculate Result
-            #region "US-LPC(0.3)"
-            khz68_03 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_03).ToString());
-            if (khz68_03 != null)
-            {
-                if (!String.IsNullOrEmpty(khz68_03.b25))
+                string lastSampleCount = this.Lpcs.Where(x => x.row_state.Value == 2 && !String.IsNullOrEmpty(x.type)).Max(x => x.type);
+                if (lastSampleCount != null)
                 {
-                    //lbC25.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_03.b25)));//='US-LPC(0.3)'!B25
-                    //lbC26.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_03.d25)));//='US-LPC(0.3)'!D25
-                    //lbC27.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_03.f25)));//='US-LPC(0.3)'!F25
-                    //lbC28.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(((Convert.ToDecimal(khz68_03.b25) +
-                    //               Convert.ToDecimal(khz68_03.d25) +
-                    //               Convert.ToDecimal(khz68_03.f25)) / 3).ToString())));
+                    #region "RUN RESULT"
+                    List<template_seagate_lpc_coverpage> runResults = new List<template_seagate_lpc_coverpage>();
+                    lastSampleCount = lastSampleCount.Replace("Sample ", "").Trim().Replace("S", "").Trim();
+                    for (int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
+                    {
+                        runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("B" + i)).ToList());
+                        runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("S" + i)).ToList());
 
-                    ////132 KHz
-                    //lbC39.Text = lbC25.Text;
-                    //lbC40.Text = lbC26.Text;
-                    //lbC41.Text = lbC27.Text;
-                    //lbC42.Text = lbC28.Text;
+                    }
+                    var AverageOfLast3 = from lpc in runResults group lpc by lpc.type into newGroup orderby newGroup.Key select newGroup;
+                    List<template_seagate_lpc_coverpage> last3Results = new List<template_seagate_lpc_coverpage>();
+                    foreach (var item in AverageOfLast3)
+                    {
+                        template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
+                        //Average of last 3
+                        lpc.RunNumber = 5;
+                        lpc.Run = "Average of last 3";
+                        lpc.type = item.Key;
+                        lpc.channel_size = ddlChannel.SelectedValue;
+                        double _value = runResults.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.channel_size.Equals(ddlChannel.SelectedValue)).Average(x => Convert.ToDouble(x.Results));
+                        lpc.Results = String.Format("{0:0.000}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+                        last3Results.Add(lpc);
+                    }
+                    runResults.AddRange(last3Results);
+                    DataTable dt = PivotTable.GetInversedDataTable(runResults.Where(x => x.channel_size.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Run", "Results", "-", false);
+                    gvWorkSheet.DataSource = dt;
+                    gvWorkSheet.DataBind();
+                    #endregion
+                    #region "AVERAGE"
+                    var listAverage = from lpc in last3Results where !String.IsNullOrEmpty(lpc.type) && lpc.type.StartsWith("B") group lpc by lpc.type into newGroup orderby newGroup.Key select newGroup;
+                    List<LPC> listAverages = new List<LPC>();
+
+                    int index = 1;
+                    foreach (var item in listAverage)
+                    {
+                        LPC lpc = new LPC();
+                        //Average of last 3
+                        lpc.RunNumber = 6;
+                        lpc.Run = "";
+                        lpc.Sample = "";
+                        lpc.type = item.Key.Replace("Blank", "");
+                        lpc.ChannelSize = ddlChannel.SelectedValue;
+                        template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
+                        template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
+
+
+                        double _value = (Convert.ToDouble(lpcSaple.Results) - Convert.ToDouble(lpcBlank.Results)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor.Text);
+
+                        lpc.Value = String.Format("{0:0}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+                        listAverages.Add(lpc);
+                        index++;
+                    }
+                    DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Sample", "Value", ddlChannel.SelectedItem.Text, false);
+                    gvWorkSheetAverage.DataSource = dtAverages;
+                    gvWorkSheetAverage.DataBind();
+                    #endregion
+                    #region "AVG"
+                    double average = listAverages.Average(x => Convert.ToDouble(x.Value));
+                    lbAverage.Text = average.ToString().Split('.')[0];
+
+                    List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_state == 1).ToList();
+                    if (listCoverPage.Count > 0)
+                    {
+                        listCoverPage[0].Results = listAverages[0].Value;
+                        listCoverPage[1].Results = listAverages[1].Value;
+                        listCoverPage[2].Results = listAverages[2].Value;
+                        listCoverPage[3].Results = lbAverage.Text;
+
+                        gvCoverPage.DataSource = listCoverPage;
+                        gvCoverPage.DataBind();
+                    }
+                
+                #endregion
+
+                Console.WriteLine();
+                    
+
                 }
-
-                LPCTypeEnum lpcType = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(khz68_03.lpc_type));
-
-            }
-            #endregion
-
-            #region "US-LPC(0.6)"
-            khz68_06 = Lpcs.Find(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06).ToString());
-            if (khz68_06 != null)
-            {
-                if (!String.IsNullOrEmpty(khz68_06.b25))
+                else
                 {
-                    //lbC32.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_06.b25)));//='US-LPC(0.6)'!B25
-                    //lbC33.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_06.d25)));//='US-LPC(0.6)'!D25
-                    //lbC34.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(khz68_06.f25)));//='US-LPC(0.6)'!F25
-                    //lbC35.Text = String.Format("{0:n0}", Math.Round(Convert.ToDecimal(((Convert.ToDecimal(khz68_06.b25) +
-                    //               Convert.ToDecimal(khz68_06.d25) +
-                    //               Convert.ToDecimal(khz68_06.f25)) / 3).ToString())));
 
-                    ////132 KHz
-                    //lbC46.Text = lbC32.Text;
-                    //lbC47.Text = lbC33.Text;
-                    //lbC48.Text = lbC34.Text;
-                    //lbC49.Text = lbC35.Text;
+                    gvCoverPage.DataSource = this.Lpcs;
+                    gvCoverPage.DataBind();
                 }
             }
-            #endregion
-
         }
         #endregion
 
@@ -1384,8 +832,8 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/lpc_seagate.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", reportLpcs.Where(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_03)).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportLpcs.Where(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06)).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.Lpcs.Where(x => x.row_state == 1).ToList().ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportLpcs.Where(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06)).ToDataTable())); // Add datasource here
 
 
 
@@ -1451,38 +899,116 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
             tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+
             if (tem != null)
             {
-                //#region "HEADER"
-                //lbDocNo.Text = tem.C;
-                //lbDocRev.Text = tem.D;
-                //lbCommodity.Text = tem.B;
-                //lbUnit1.Text = tem.E;//unit
-                //lbUnit2.Text = tem.E;//unit
-                //lbUnit3.Text = tem.E;//unit
-                //lbUnit4.Text = tem.E;//unit
-                //lbUnit5.Text = tem.E;//unit
-                //lbUnit6.Text = tem.E;//unit
-                //lbUnit7.Text = tem.E;//unit
-                //lbUnit8.Text = tem.E;//unit
-                //#endregion
-                //#region "Liquid Particle Count (68 KHz) 0.3"
-                //lbB28.Text = tem.F;
-                //#endregion
-                //#region "Liquid Particle Count (68 KHz) 0.6"
-                //lbB35.Text = tem.G;
-                //#endregion
-                //#region "Liquid Particle Count (132 KHz) 0.3 "
-                //lbB42.Text = tem.H;
-                //#endregion
-                //#region "Liquid Particle Count (132 KHz) 0.6"
-                //lbB49.Text = tem.I;
-                //#endregion
+                int template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
+                string channel_size = ddlChannel.SelectedValue;
+                string lpc_type = ddlA19.SelectedValue;
 
+                ddlChannel.SelectedValue = channel_size;
+
+                List<template_seagate_lpc_coverpage> results = new List<template_seagate_lpc_coverpage>();
+                results.Add(new template_seagate_lpc_coverpage
+                {
+                    LiquidParticleCount = "1st Run",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+                results.Add(new template_seagate_lpc_coverpage
+                {
+                    LiquidParticleCount = "2nd Run",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+                results.Add(new template_seagate_lpc_coverpage
+                {
+                    LiquidParticleCount = "3rd Run",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+
+                string spec = string.Empty;
+                switch (template_type)
+                {
+                    case 1://Component
+                        switch (lpc_type)
+                        {
+                            case "1"://LPC (68 KHz)
+                                switch (channel_size)
+                                {
+                                    case "0.200": break;
+                                    case "0.300":
+                                        spec = tem.F;
+                                        break;
+                                    case "0.400": break;
+                                    case "0.500": break;
+                                    case "0.600":
+                                        spec = tem.G;
+                                        break;
+                                    case "0.700": break;
+                                    case "0.800": break;
+                                    case "0.900": break;
+                                    case "1.000": break;
+                                }
+                                break;
+                            case "2"://LPC (132 KHz)
+                                switch (channel_size)
+                                {
+                                    case "0.200": break;
+                                    case "0.300":
+                                        spec = tem.H;
+                                        break;
+                                    case "0.400": break;
+                                    case "0.500": break;
+                                    case "0.600":
+                                        spec = tem.I;
+                                        break;
+                                    case "0.700": break;
+                                    case "0.800": break;
+                                    case "0.900": break;
+                                    case "1.000": break;
+                                }
+                                break;
+                        }
+                        lbDocNo.Text = tem.C;
+                        lbCommodity.Text = tem.B;
+                        break;
+                    case 2://IDM
+                        switch (channel_size)
+                        {
+                            case "0.200": break;
+                            case "0.300":
+                                spec = tem.F;
+                                break;
+                            case "0.400": break;
+                            case "0.500":
+                                spec = tem.G;
+                                break;
+                            case "0.600":
+                                spec = tem.H;
+                                break;
+                            case "0.700": break;
+                            case "0.800": break;
+                            case "0.900": break;
+                            case "1.000": break;
+                        }
+                        lbDocNo.Text = tem.B;
+                        lbCommodity.Text = tem.A;
+                        break;
+                }
+                results.Add(new template_seagate_lpc_coverpage
+                {
+                    LiquidParticleCount = "Average",
+                    SpecificationLimits = spec,
+                    Results = ""
+                });
+                this.Lpcs = results;
+                gvCoverPage.DataSource = results;
+                gvCoverPage.DataBind();
             }
         }
 
@@ -1505,82 +1031,6 @@ namespace ALS.ALSI.Web.view.template
                     break;
             }
 
-        }
-
-        private String getItemStatus()
-        {
-            String result = String.Empty;
-            //result = ((CheckBox1.Checked) ? "1" : "0") +
-            //            ((CheckBox2.Checked) ? "1" : "0") +
-            //            ((CheckBox3.Checked) ? "1" : "0") +
-            //            ((CheckBox4.Checked) ? "1" : "0");
-            return result;
-        }
-
-        private void ShowItem(String _itemVisible)
-        {
-            //if (_itemVisible != null)
-            //{
-            //    char[] item = _itemVisible.ToCharArray();
-            //    if (item.Length == 4)
-            //    {
-            //        StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            //        switch (status)
-            //        {
-            //            case StatusEnum.LOGIN_CONVERT_TEMPLATE:
-            //                break;
-            //            case StatusEnum.LOGIN_SELECT_SPEC:
-            //                CheckBox1.Checked = item[0] == '1' ? true : false;
-            //                CheckBox2.Checked = item[1] == '1' ? true : false;
-            //                CheckBox3.Checked = item[2] == '1' ? true : false;
-            //                CheckBox4.Checked = item[3] == '1' ? true : false;
-            //                txtCVP_C19.Visible = true;
-            //                txtCVP_E19.Visible = true;
-            //                break;
-            //            case StatusEnum.CHEMIST_TESTING:
-            //            case StatusEnum.SR_CHEMIST_CHECKING:
-            //            case StatusEnum.SR_CHEMIST_APPROVE:
-            //            case StatusEnum.SR_CHEMIST_DISAPPROVE:
-            //            case StatusEnum.ADMIN_CONVERT_WORD:
-            //            case StatusEnum.LABMANAGER_CHECKING:
-            //            case StatusEnum.LABMANAGER_APPROVE:
-            //            case StatusEnum.LABMANAGER_DISAPPROVE:
-            //            case StatusEnum.ADMIN_CONVERT_PDF:
-            //                tb1.Visible = item[0] == '1' ? true : false;
-            //                tb2.Visible = item[1] == '1' ? true : false;
-            //                tb3.Visible = item[2] == '1' ? true : false;
-            //                tb4.Visible = item[3] == '1' ? true : false;
-            //                txtCVP_C19.Visible = false;
-            //                txtCVP_E19.Visible = false;
-            //                CheckBox1.Visible = false;
-            //                CheckBox2.Visible = false;
-            //                CheckBox3.Visible = false;
-            //                CheckBox4.Visible = false;
-            //                break;
-            //        }
-            //    }
-            //}
-
-        }
-
-        protected void ddlA19_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LPCTypeEnum lpcType = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(ddlA19.SelectedValue));
-            switch (lpcType)
-            {
-                case LPCTypeEnum.KHz_68:
-                    //tb1_1.Visible = true;
-                    //tb2.Visible = true;
-                    //tb3.Visible = false;
-                    //tb4.Visible = false;
-                    break;
-                case LPCTypeEnum.KHz_132:
-                    //tb1_1.Visible = false;
-                    //tb2.Visible = false;
-                    //tb3.Visible = true;
-                    //tb4.Visible = true;
-                    break;
-            }
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
@@ -1607,7 +1057,6 @@ namespace ALS.ALSI.Web.view.template
         public string Sample { get; set; }
         public string ChannelSize { get; set; }
         public string Value { get; set; }
-        //public int Sample { get; set; }
     }
 
 }

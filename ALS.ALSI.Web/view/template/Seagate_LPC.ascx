@@ -38,7 +38,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <asp:DropDownList ID="ddlA19" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlA19_SelectedIndexChanged" CssClass="select2_category form-control">
+                                                        <asp:DropDownList ID="ddlA19" runat="server" CssClass="select2_category form-control">
                                                             <asp:ListItem Value="3">LPC</asp:ListItem>
                                                             <asp:ListItem Value="1">LPC (68 KHz)</asp:ListItem>
                                                             <asp:ListItem Value="2">LPC (132 KHz)</asp:ListItem>
@@ -63,6 +63,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+
                                     </div>
                                 </div>
 
@@ -76,27 +77,36 @@
                                         </h6>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-3">
 
+                                        <asp:DropDownList ID="ddlChannel" runat="server" AutoPostBack="True" CssClass="select2_category form-control" OnSelectedIndexChanged="ddlChannel_SelectedIndexChanged">
+                                            <asp:ListItem Value="0.300">No. of Particles ≥ 0.3 μm (Counts/mL)</asp:ListItem>
+                                            <asp:ListItem Value="0.500">No. of Particles ≥ 0.5 μm (Counts/mL)</asp:ListItem>
+                                            <asp:ListItem Value="0.600">No. of Particles ≥ 0.6 μm (Counts/mL)</asp:ListItem>
+                                        </asp:DropDownList>
 
-                                <asp:GridView ID="gvCoverPage" runat="server"></asp:GridView>
-
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-9">
+<asp:GridView ID="gvCoverPage" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
+                                    <Columns>
+                                        <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
+                                        <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits" />
+                                        <asp:BoundField DataField="Results" HeaderText="Results" />
+                                    </Columns>
+                                </asp:GridView>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </asp:Panel>
                     <asp:Panel ID="pDSH" runat="server">
 
                         <asp:Panel ID="pLoadFile" runat="server">
-                            <div class="form-group">
-                                <label class="control-label col-md-3"></label>
-                                <div class="col-md-9">
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <asp:DropDownList ID="ddlChannel" runat="server" AutoPostBack="True" CssClass="select2_category form-control" OnSelectedIndexChanged="ddlChannel_SelectedIndexChanged">
-                                            <asp:ListItem Value="0.300">No. of Particles ≥ 0.3 μm (Counts/mL)</asp:ListItem>
-                                            <asp:ListItem Value="0.500">No. of Particles ≥ 0.5 μm (Counts/mL)</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="form-group">
                                 <label class="control-label col-md-3">ทศนิยม</label>
                                 <div class="col-md-9">
@@ -148,7 +158,7 @@
                                 <asp:Label ID="lbParticle" runat="server" Text="No. of Particles ≥ 0.3 μm (Counts/mL) "></asp:Label>
 
 
-                                <asp:GridView ID="gvWorkSheet" CssClass="table table-striped table-hover table-bordered" runat="server"></asp:GridView>
+                                        <asp:GridView ID="gvWorkSheet" runat="server" CssClass="table table-striped table-hover table-bordered"></asp:GridView>
                                 <table class="table table-striped table-hover table-bordered">
                                     <tr>
                                         <td>Extraction Vol. (mL)</td>
@@ -216,6 +226,15 @@
                                     <asp:Panel ID="pSpecification" runat="server">
                                         <%--      <div class="row">
                                             <div class="col-md-6">--%>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Template Type:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlTemplateType" runat="server" CssClass="select2_category form-control">
+                                                    <asp:ListItem Value="1">Component</asp:ListItem>
+                                                    <asp:ListItem Value="2">IDM</asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Detail Spec:<span class="required">*</span></label>
                                             <div class="col-md-6">
