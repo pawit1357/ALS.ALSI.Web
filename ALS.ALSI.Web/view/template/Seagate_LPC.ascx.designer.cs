@@ -175,22 +175,40 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbCommodity;
         
         /// <summary>
-        /// ddlChannel control.
+        /// CheckBoxList1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlChannel;
+        protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxList1;
         
         /// <summary>
-        /// gvCoverPage control.
+        /// gvCoverPage03 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCoverPage;
+        protected global::System.Web.UI.WebControls.GridView gvCoverPage03;
+        
+        /// <summary>
+        /// gvCoverPage05 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvCoverPage05;
+        
+        /// <summary>
+        /// gvCoverPage06 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvCoverPage06;
         
         /// <summary>
         /// pDSH control.
@@ -256,13 +274,31 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbParticle;
         
         /// <summary>
-        /// gvWorkSheet control.
+        /// gvWorkSheet_03 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvWorkSheet;
+        protected global::System.Web.UI.WebControls.GridView gvWorkSheet_03;
+        
+        /// <summary>
+        /// gvWorkSheet_05 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvWorkSheet_05;
+        
+        /// <summary>
+        /// gvWorkSheet_06 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvWorkSheet_06;
         
         /// <summary>
         /// lbExtractionVol control.

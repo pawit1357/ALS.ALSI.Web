@@ -38,7 +38,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <asp:DropDownList ID="ddlA19" runat="server" CssClass="select2_category form-control">
+                                                        <asp:DropDownList ID="ddlA19" runat="server" CssClass="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlA19_SelectedIndexChanged">
                                                             <asp:ListItem Value="3">LPC</asp:ListItem>
                                                             <asp:ListItem Value="1">LPC (68 KHz)</asp:ListItem>
                                                             <asp:ListItem Value="2">LPC (132 KHz)</asp:ListItem>
@@ -80,24 +80,44 @@
                                 <div class="row">
                                     <div class="col-md-3">
 
-                                        <asp:DropDownList ID="ddlChannel" runat="server" AutoPostBack="True" CssClass="select2_category form-control" OnSelectedIndexChanged="ddlChannel_SelectedIndexChanged">
+                                        <%--<asp:DropDownList ID="ddlChannel" runat="server" AutoPostBack="True" CssClass="select2_category form-control" OnSelectedIndexChanged="ddlChannel_SelectedIndexChanged">
                                             <asp:ListItem Value="0.300">No. of Particles ≥ 0.3 μm (Counts/mL)</asp:ListItem>
                                             <asp:ListItem Value="0.500">No. of Particles ≥ 0.5 μm (Counts/mL)</asp:ListItem>
                                             <asp:ListItem Value="0.600">No. of Particles ≥ 0.6 μm (Counts/mL)</asp:ListItem>
-                                        </asp:DropDownList>
+                                        </asp:DropDownList>--%>
+
+                                        <asp:CheckBoxList ID="CheckBoxList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="CheckBoxList1_SelectedIndexChanged">
+                                            <asp:ListItem Value="0.300" Selected="True">No. of Particles ≥ 0.3 μm (Counts/mL)</asp:ListItem>
+                                            <asp:ListItem Value="0.500">No. of Particles ≥ 0.5 μm (Counts/mL)</asp:ListItem>
+                                            <asp:ListItem Value="0.600" Selected="True">No. of Particles ≥ 0.6 μm (Counts/mL)</asp:ListItem>
+                                        </asp:CheckBoxList>
 
                                     </div>
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-9">
-<asp:GridView ID="gvCoverPage" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
-                                    <Columns>
-                                        <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
-                                        <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits" />
-                                        <asp:BoundField DataField="Results" HeaderText="Results" />
-                                    </Columns>
-                                </asp:GridView>
+                                        <asp:GridView ID="gvCoverPage03" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
+                                            <Columns>
+                                                <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
+                                                <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits" />
+                                                <asp:BoundField DataField="Results" HeaderText="Results" />
+                                            </Columns>
+                                        </asp:GridView>
+                                                   <asp:GridView ID="gvCoverPage05" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
+                                            <Columns>
+                                                <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
+                                                <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits" />
+                                                <asp:BoundField DataField="Results" HeaderText="Results" />
+                                            </Columns>
+                                        </asp:GridView>
+                                                   <asp:GridView ID="gvCoverPage06" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
+                                            <Columns>
+                                                <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
+                                                <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits" />
+                                                <asp:BoundField DataField="Results" HeaderText="Results" />
+                                            </Columns>
+                                        </asp:GridView>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +178,12 @@
                                 <asp:Label ID="lbParticle" runat="server" Text="No. of Particles ≥ 0.3 μm (Counts/mL) "></asp:Label>
 
 
-                                        <asp:GridView ID="gvWorkSheet" runat="server" CssClass="table table-striped table-hover table-bordered"></asp:GridView>
+                                <asp:GridView ID="gvWorkSheet_03" runat="server" CssClass="table table-striped table-hover table-bordered"></asp:GridView>
+                                <asp:GridView ID="gvWorkSheet_05" runat="server" CssClass="table table-striped table-hover table-bordered"></asp:GridView>
+                                <asp:GridView ID="gvWorkSheet_06" runat="server" CssClass="table table-striped table-hover table-bordered"></asp:GridView>
+
+
+
                                 <table class="table table-striped table-hover table-bordered">
                                     <tr>
                                         <td>Extraction Vol. (mL)</td>

@@ -198,8 +198,10 @@ namespace ALS.ALSI.Web.view.template
                 }
                 #region "METHOD/PROCEDURE:"
 
-                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-                    && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                if (status == StatusEnum.CHEMIST_TESTING || 
+                    status == StatusEnum.SR_CHEMIST_CHECKING
+                    && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || 
+                    userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
                 {
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -224,7 +226,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 else
                 {
-                    ddlA19.Enabled = false;
+                    ddlA19.Enabled = true;
                     txtB19.Enabled = false;
                     txtCVP_C19.Enabled = false;
                     txtD19.Enabled = false;
@@ -249,7 +251,7 @@ namespace ALS.ALSI.Web.view.template
             #endregion
 
             #region "WorkingSheet"
- 
+
             this.Lpcs = template_seagate_lpc_coverpage.FindAllBySampleID(this.SampleID);
             if (this.Lpcs != null && this.Lpcs.Count > 0)
             {
@@ -265,7 +267,7 @@ namespace ALS.ALSI.Web.view.template
                 lbNoOfPartsUsed.Text = txtCVP_C19.Text;
 
                 ddlA19.SelectedValue = this.Lpcs[0].lpc_type;
-                ddlChannel.SelectedValue = this.Lpcs[0].channel_size;
+                //ddlChannel.SelectedValue = this.Lpcs[0].channel_size;
                 ddlTemplateType.SelectedValue = this.Lpcs[0].template_type.ToString();
 
                 tb_m_specification tem = new tb_m_specification().SelectByID(this.Lpcs[0].specification_id.Value);
@@ -276,10 +278,20 @@ namespace ALS.ALSI.Web.view.template
                     lbCommodity.Text = tem.B;
                 }
 
-                ddlChannel.SelectedValue = this.Lpcs[0].channel_size;
 
-                gvCoverPage.DataSource = this.Lpcs.Where(x => x.row_state == 1).ToList();
-                gvCoverPage.DataBind();
+                IEnumerable<IGrouping<string, template_seagate_lpc_coverpage>> groups = this.Lpcs.GroupBy(x => x.channel_size);
+                foreach (IEnumerable<template_seagate_lpc_coverpage> element in groups)
+                {
+                    //do something
+                    Console.WriteLine();
+                }
+
+
+
+                //ddlChannel.SelectedValue = this.Lpcs[0].channel_size;
+
+                gvCoverPage03.DataSource = this.Lpcs.Where(x => x.row_state == 1).ToList();
+                gvCoverPage03.DataBind();
 
 
                 CalculateCas();
@@ -308,6 +320,17 @@ namespace ALS.ALSI.Web.view.template
             }
 
 
+
+            gvWorkSheet_03.Visible = true;
+            gvWorkSheet_05.Visible = false;
+            gvWorkSheet_06.Visible = true;
+
+            gvCoverPage03.Visible = true;
+            gvCoverPage05.Visible = false;
+            gvCoverPage06.Visible = true;
+            gvCoverPage03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlA19.SelectedItem.Text);
+            gvCoverPage05.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlA19.SelectedItem.Text);
+            gvCoverPage06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlA19.SelectedItem.Text);
 
 
         }
@@ -350,7 +373,7 @@ namespace ALS.ALSI.Web.view.template
                         _tmp.NumberOfPieces = txtCVP_C19.Text;
                         _tmp.ExtractionMedium = txtD19.Text;
                         _tmp.ExtractionVolume = txtCVP_E19.Text;
-                        _tmp.channel_size = ddlChannel.SelectedValue;
+                        //_tmp.channel_size = ddlChannel.SelectedValue;
                         _tmp.template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
                         _tmp.row_state = 1;//Cover Page
                     }
@@ -380,7 +403,7 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.ExtractionMedium = txtD19.Text;
                             _tmp.ExtractionVolume = txtCVP_E19.Text;
                             _tmp.channel_size = ch_size;
-                            _tmp.SurfaceArea =Convert.ToDouble( txtSurfaceArea.Text);
+                            _tmp.SurfaceArea = Convert.ToDouble(txtSurfaceArea.Text);
                             _tmp.template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
                         }
 
@@ -590,7 +613,7 @@ namespace ALS.ALSI.Web.view.template
                                         }
                                         if (String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C))))
                                         {
-                                            if (ddlChannel.SelectedValue.Equals(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J))))
+                                            if ("0.300".Equals(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J))))
                                             {
                                                 template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
                                                 lpc.RunNumber = run;
@@ -689,97 +712,95 @@ namespace ALS.ALSI.Web.view.template
         private void CalculateCas()
         {
 
-            if (this.Lpcs.Count > 0)
-            {
+            //if (this.Lpcs.Count > 0)
+            //{
 
-                string lastSampleCount = this.Lpcs.Where(x => x.row_state.Value == 2 && !String.IsNullOrEmpty(x.type)).Max(x => x.type);
-                if (lastSampleCount != null)
-                {
-                    #region "RUN RESULT"
-                    List<template_seagate_lpc_coverpage> runResults = new List<template_seagate_lpc_coverpage>();
-                    lastSampleCount = lastSampleCount.Replace("Sample ", "").Trim().Replace("S", "").Trim();
-                    for (int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
-                    {
-                        runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("B" + i)).ToList());
-                        runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("S" + i)).ToList());
+            //    string lastSampleCount = this.Lpcs.Where(x => x.row_state.Value == 2 && !String.IsNullOrEmpty(x.type)).Max(x => x.type);
+            //    if (lastSampleCount != null)
+            //    {
+            //        #region "RUN RESULT"
+            //        List<template_seagate_lpc_coverpage> runResults = new List<template_seagate_lpc_coverpage>();
+            //        lastSampleCount = lastSampleCount.Replace("Sample ", "").Trim().Replace("S", "").Trim();
+            //        for (int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
+            //        {
+            //            runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("B" + i)).ToList());
+            //            runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("S" + i)).ToList());
 
-                    }
-                    var AverageOfLast3 = from lpc in runResults group lpc by lpc.type into newGroup orderby newGroup.Key select newGroup;
-                    List<template_seagate_lpc_coverpage> last3Results = new List<template_seagate_lpc_coverpage>();
-                    foreach (var item in AverageOfLast3)
-                    {
-                        template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
-                        //Average of last 3
-                        lpc.RunNumber = 5;
-                        lpc.Run = "Average of last 3";
-                        lpc.type = item.Key;
-                        lpc.channel_size = ddlChannel.SelectedValue;
-                        double _value = runResults.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.channel_size.Equals(ddlChannel.SelectedValue)).Average(x => Convert.ToDouble(x.Results));
-                        lpc.Results = String.Format("{0:0.000}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
-                        last3Results.Add(lpc);
-                    }
-                    runResults.AddRange(last3Results);
-                    DataTable dt = PivotTable.GetInversedDataTable(runResults.Where(x => x.channel_size.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Run", "Results", "-", false);
-                    gvWorkSheet.DataSource = dt;
-                    gvWorkSheet.DataBind();
-                    #endregion
-                    #region "AVERAGE"
-                    var listAverage = from lpc in last3Results where !String.IsNullOrEmpty(lpc.type) && lpc.type.StartsWith("B") group lpc by lpc.type into newGroup orderby newGroup.Key select newGroup;
-                    List<LPC> listAverages = new List<LPC>();
+            //        }
+            //        var AverageOfLast3 = from lpc in runResults group lpc by lpc.type into newGroup orderby newGroup.Key select newGroup;
+            //        List<template_seagate_lpc_coverpage> last3Results = new List<template_seagate_lpc_coverpage>();
+            //        foreach (var item in AverageOfLast3)
+            //        {
+            //            template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
+            //            //Average of last 3
+            //            lpc.RunNumber = 5;
+            //            lpc.Run = "Average of last 3";
+            //            lpc.type = item.Key;
+            //            lpc.channel_size = ddlChannel.SelectedValue;
+            //            double _value = runResults.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.channel_size.Equals(ddlChannel.SelectedValue)).Average(x => Convert.ToDouble(x.Results));
+            //            lpc.Results = String.Format("{0:0.000}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+            //            last3Results.Add(lpc);
+            //        }
+            //        runResults.AddRange(last3Results);
+            //        DataTable dt = PivotTable.GetInversedDataTable(runResults.Where(x => x.channel_size.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Run", "Results", "-", false);
+            //        gvWorkSheet_03.DataSource = dt;
+            //        gvWorkSheet_03.DataBind();
+            //        #endregion
+            //        #region "AVERAGE"
+            //        var listAverage = from lpc in last3Results where !String.IsNullOrEmpty(lpc.type) && lpc.type.StartsWith("B") group lpc by lpc.type into newGroup orderby newGroup.Key select newGroup;
+            //        List<LPC> listAverages = new List<LPC>();
 
-                    int index = 1;
-                    foreach (var item in listAverage)
-                    {
-                        LPC lpc = new LPC();
-                        //Average of last 3
-                        lpc.RunNumber = 6;
-                        lpc.Run = "";
-                        lpc.Sample = "";
-                        lpc.type = item.Key.Replace("Blank", "");
-                        lpc.ChannelSize = ddlChannel.SelectedValue;
-                        template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
-                        template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
+            //        int index = 1;
+            //        foreach (var item in listAverage)
+            //        {
+            //            LPC lpc = new LPC();
+            //            //Average of last 3
+            //            lpc.RunNumber = 6;
+            //            lpc.Run = "";
+            //            lpc.Sample = "";
+            //            lpc.type = item.Key.Replace("Blank", "");
+            //            lpc.ChannelSize = ddlChannel.SelectedValue;
+            //            template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
+            //            template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
 
 
-                        double _value = (Convert.ToDouble(lpcSaple.Results) - Convert.ToDouble(lpcBlank.Results)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor.Text);
+            //            double _value = (Convert.ToDouble(lpcSaple.Results) - Convert.ToDouble(lpcBlank.Results)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor.Text);
 
-                        lpc.Value = String.Format("{0:0}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
-                        listAverages.Add(lpc);
-                        index++;
-                    }
-                    DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Sample", "Value", ddlChannel.SelectedItem.Text, false);
-                    gvWorkSheetAverage.DataSource = dtAverages;
-                    gvWorkSheetAverage.DataBind();
-                    #endregion
-                    #region "AVG"
-                    double average = listAverages.Average(x => Convert.ToDouble(x.Value));
-                    lbAverage.Text = average.ToString().Split('.')[0];
+            //            lpc.Value = String.Format("{0:0}", Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+            //            listAverages.Add(lpc);
+            //            index++;
+            //        }
+            //        DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(ddlChannel.SelectedValue)).ToDataTable(), "Type", "Sample", "Value", ddlChannel.SelectedItem.Text, false);
+            //        gvWorkSheetAverage.DataSource = dtAverages;
+            //        gvWorkSheetAverage.DataBind();
+            //        #endregion
+            //        #region "AVG"
+            //        double average = listAverages.Average(x => Convert.ToDouble(x.Value));
+            //        lbAverage.Text = average.ToString().Split('.')[0];
 
-                    List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_state == 1).ToList();
-                    if (listCoverPage.Count > 0)
-                    {
-                        listCoverPage[0].Results = listAverages[0].Value;
-                        listCoverPage[1].Results = listAverages[1].Value;
-                        listCoverPage[2].Results = listAverages[2].Value;
-                        listCoverPage[3].Results = lbAverage.Text;
+            //        List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_state == 1).ToList();
+            //        if (listCoverPage.Count > 0)
+            //        {
+            //            listCoverPage[0].Results = listAverages[0].Value;
+            //            listCoverPage[1].Results = listAverages[1].Value;
+            //            listCoverPage[2].Results = listAverages[2].Value;
+            //            listCoverPage[3].Results = lbAverage.Text;
 
-                        gvCoverPage.DataSource = listCoverPage;
-                        gvCoverPage.DataBind();
-                    }
-                
-                #endregion
+            //            gvCoverPage03.DataSource = listCoverPage;
+            //            gvCoverPage03.DataBind();
+            //        }
 
-                Console.WriteLine();
-                    
+            //        #endregion
 
-                }
-                else
-                {
+            //        Console.WriteLine();
+            //    }
+            //    else
+            //    {
 
-                    gvCoverPage.DataSource = this.Lpcs;
-                    gvCoverPage.DataBind();
-                }
-            }
+            //        gvCoverPage03.DataSource = this.Lpcs;
+            //        gvCoverPage03.DataBind();
+            //    }
+            //}
         }
         #endregion
 
@@ -906,109 +927,170 @@ namespace ALS.ALSI.Web.view.template
             if (tem != null)
             {
                 int template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
-                string channel_size = ddlChannel.SelectedValue;
                 string lpc_type = ddlA19.SelectedValue;
 
-                ddlChannel.SelectedValue = channel_size;
 
-                List<template_seagate_lpc_coverpage> results = new List<template_seagate_lpc_coverpage>();
-                results.Add(new template_seagate_lpc_coverpage
+                #region "0.300"
+                List<template_seagate_lpc_coverpage> results03 = new List<template_seagate_lpc_coverpage>();
+                results03.Add(new template_seagate_lpc_coverpage
                 {
+                    channel_size = "0.300",
+                    LiquidParticleCount = "Total number of particles ≥ 0.3μm ",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+                results03.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.300",
                     LiquidParticleCount = "1st Run",
                     SpecificationLimits = "",
                     Results = ""
                 });
-                results.Add(new template_seagate_lpc_coverpage
+
+                results03.Add(new template_seagate_lpc_coverpage
                 {
+                    channel_size = "0.300",
                     LiquidParticleCount = "2nd Run",
                     SpecificationLimits = "",
                     Results = ""
                 });
-                results.Add(new template_seagate_lpc_coverpage
+
+                results03.Add(new template_seagate_lpc_coverpage
                 {
+                    channel_size = "0.300",
                     LiquidParticleCount = "3rd Run",
                     SpecificationLimits = "",
                     Results = ""
                 });
-
-                string spec = string.Empty;
-                switch (template_type)
+                #endregion
+                #region "0.500"
+                List<template_seagate_lpc_coverpage> results05 = new List<template_seagate_lpc_coverpage>();
+                results05.Add(new template_seagate_lpc_coverpage
                 {
-                    case 1://Component
-                        switch (lpc_type)
-                        {
-                            case "1"://LPC (68 KHz)
-                                switch (channel_size)
-                                {
-                                    case "0.200": break;
-                                    case "0.300":
-                                        spec = tem.F;
-                                        break;
-                                    case "0.400": break;
-                                    case "0.500": break;
-                                    case "0.600":
-                                        spec = tem.G;
-                                        break;
-                                    case "0.700": break;
-                                    case "0.800": break;
-                                    case "0.900": break;
-                                    case "1.000": break;
-                                }
-                                break;
-                            case "2"://LPC (132 KHz)
-                                switch (channel_size)
-                                {
-                                    case "0.200": break;
-                                    case "0.300":
-                                        spec = tem.H;
-                                        break;
-                                    case "0.400": break;
-                                    case "0.500": break;
-                                    case "0.600":
-                                        spec = tem.I;
-                                        break;
-                                    case "0.700": break;
-                                    case "0.800": break;
-                                    case "0.900": break;
-                                    case "1.000": break;
-                                }
-                                break;
-                        }
-                        lbDocNo.Text = tem.C;
-                        lbCommodity.Text = tem.B;
-                        break;
-                    case 2://IDM
-                        switch (channel_size)
-                        {
-                            case "0.200": break;
-                            case "0.300":
-                                spec = tem.F;
-                                break;
-                            case "0.400": break;
-                            case "0.500":
-                                spec = tem.G;
-                                break;
-                            case "0.600":
-                                spec = tem.H;
-                                break;
-                            case "0.700": break;
-                            case "0.800": break;
-                            case "0.900": break;
-                            case "1.000": break;
-                        }
-                        lbDocNo.Text = tem.B;
-                        lbCommodity.Text = tem.A;
-                        break;
-                }
-                results.Add(new template_seagate_lpc_coverpage
-                {
-                    LiquidParticleCount = "Average",
-                    SpecificationLimits = spec,
+                    channel_size = "0.500",
+                    LiquidParticleCount = "Total number of particles ≥ 0.5μm ",
+                    SpecificationLimits = "",
                     Results = ""
                 });
-                this.Lpcs = results;
-                gvCoverPage.DataSource = results;
-                gvCoverPage.DataBind();
+                results05.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.500",
+                    LiquidParticleCount = "1st Run",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+
+                results05.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.500",
+                    LiquidParticleCount = "2nd Run",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+
+                results05.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.500",
+                    LiquidParticleCount = "3rd Run",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+                #endregion
+                #region "0.600"
+                List<template_seagate_lpc_coverpage> results06 = new List<template_seagate_lpc_coverpage>();
+                results06.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.600",
+                    LiquidParticleCount = "Total number of particles ≥ 0.6μm ",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+                results06.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.600",
+                    LiquidParticleCount = "1st Run",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+
+                results06.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.600",
+                    LiquidParticleCount = "2nd Run",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+
+                results06.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.600",
+                    LiquidParticleCount = "3rd Run",
+                    SpecificationLimits = "",
+                    Results = ""
+                });
+                #endregion
+
+                /*
+                "3" > LPC
+                "1" > LPC(68 KHz)      
+                "2" > LPC(132 KHz)            
+                "4" > LPC(Tray)
+                */
+                results03.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.300",
+                    LiquidParticleCount = "Average",
+                    SpecificationLimits = lpc_type.Equals("1") ? tem.F : lpc_type.Equals("2") ? tem.H : lpc_type.Equals("3") ? tem.D : tem.D,
+                    Results = ""
+                });
+                results05.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.500",
+                    LiquidParticleCount = "Average",
+                    SpecificationLimits = lpc_type.Equals("1") ? "-" : lpc_type.Equals("2") ? "-" : lpc_type.Equals("3") ? tem.E : tem.E,
+                    Results = ""
+                });
+                results06.Add(new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.600",
+                    LiquidParticleCount = "Average",
+                    SpecificationLimits = lpc_type.Equals("1") ? tem.G : lpc_type.Equals("2") ? tem.I : lpc_type.Equals("3") ? tem.F : tem.F,
+                    Results = ""
+                });
+
+                if (lpc_type.Equals("1") || lpc_type.Equals("2"))
+                {
+                    lbDocNo.Text = tem.C;
+                    lbCommodity.Text = tem.B;
+                }
+                else
+                {
+                    lbDocNo.Text = tem.A;
+                    lbCommodity.Text = tem.B;
+                }
+
+                List<template_seagate_lpc_coverpage> tmp = new List<template_seagate_lpc_coverpage>();
+
+                if (CheckBoxList1.Items[0].Selected)
+                {
+                    tmp.AddRange(results03);
+                    gvCoverPage03.DataSource = results03;
+                    gvCoverPage03.DataBind();
+                }
+                if (CheckBoxList1.Items[1].Selected)
+                {
+                    tmp.AddRange(results05);
+                    gvCoverPage05.DataSource = results05;
+                    gvCoverPage05.DataBind();
+                }
+                if (CheckBoxList1.Items[2].Selected)
+                {
+                    tmp.AddRange(results06);
+                    gvCoverPage06.DataSource = results06;
+                    gvCoverPage06.DataBind();
+                }
+                this.Lpcs = tmp;
+
             }
         }
 
@@ -1038,13 +1120,34 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
         }
 
-        protected void ddlChannel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lbParticle.Text = ddlChannel.SelectedItem.Text;
-        }
+        //protected void ddlChannel_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    lbParticle.Text = ddlChannel.SelectedItem.Text;
+        //}
 
         protected void txtSurfaceArea_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        protected void CheckBoxList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCoverPage03.DataBind();
+            gvCoverPage05.DataBind();
+            gvCoverPage06.DataBind();
+        }
+
+        protected void ddlA19_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCoverPage03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})",ddlA19.SelectedItem.Text);
+            gvCoverPage05.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlA19.SelectedItem.Text);
+            gvCoverPage06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlA19.SelectedItem.Text);
+
+            gvCoverPage03.DataBind();
+            gvCoverPage05.DataBind();
+            gvCoverPage06.DataBind();
+
+
 
         }
     }
