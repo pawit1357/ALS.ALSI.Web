@@ -233,37 +233,51 @@
                                                 <td>
                                                     <asp:TextBox ID="txtB51" runat="server" Text=""></asp:TextBox></td>
                                             </tr>
+                                            <tr>
+                                                <td>Wash Method</td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlWashMethod" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlWashMethod_SelectedIndexChanged">
+                                                        <asp:ListItem Value="Rinse">Rinse</asp:ListItem>
+                                                        <asp:ListItem Value="Ultrasonic">Ultrasonic</asp:ListItem>
+                                                        <asp:ListItem Value="Flip">Flip</asp:ListItem>
+                                                        <asp:ListItem Value="Shake">Shake</asp:ListItem>
+                                                    </asp:DropDownList>
+
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <br />
                             <%--Tank Conditions--%>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <table class="table table-striped table-hover" id="Table1" runat="server">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Total Tank  Volume</th>
-                                                <th>Sonication Freq.</th>
-                                                <th>Ultrasonic Power</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tank Conditions</td>
-                                                <td>
-                                                    <asp:TextBox ID="txtB54" runat="server" Text="20.2 L"></asp:TextBox></td>
-                                                <td>
-                                                    <asp:TextBox ID="txtC54" runat="server" Text="68 kHz"></asp:TextBox></td>
-                                                <td>
-                                                    <asp:TextBox ID="txtD54" runat="server" Text="4.8 W/L"></asp:TextBox></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            <asp:Panel ID="pTankConditions" runat="server">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <table class="table table-striped table-hover" id="Table1" runat="server">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Total Tank  Volume</th>
+                                                    <th>Sonication Freq.</th>
+                                                    <th>Ultrasonic Power</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Tank Conditions</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtB54" runat="server" Text="20.2 L"></asp:TextBox></td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtC54" runat="server" Text="68 kHz"></asp:TextBox></td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtD54" runat="server" Text="4.8 W/L"></asp:TextBox></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
+                            </asp:Panel>
                             <br />
                             <%--Run--%>
                             <div class="row">

@@ -262,6 +262,15 @@ namespace ALS.ALSI.Web.view.template
                 txtD54.Text = _lpc.ws_d21;
                 #endregion
 
+                ddlWashMethod.SelectedValue = _lpc.WashMethod;
+                if(!String.IsNullOrEmpty(_lpc.WashMethod) && _lpc.WashMethod.Equals("Flip"))
+                {
+                    pTankConditions.Visible = false;
+                }
+                else
+                {
+                    pTankConditions.Visible = true;
+                }
 
 
                 ddlSpecification.SelectedValue = _lpc.detail_spec_id.ToString();
@@ -364,6 +373,7 @@ namespace ALS.ALSI.Web.view.template
                             cov.ws_c21 = txtC54.Text;
                             cov.ws_d21 = txtD54.Text;
                             #endregion
+                            cov.WashMethod = ddlWashMethod.SelectedValue;
                         }
                         objWork.DeleteBySampleID(this.SampleID);
                         objWork.InsertList(this.Lpc.ToList());
@@ -415,6 +425,8 @@ namespace ALS.ALSI.Web.view.template
                                 cov.ws_c21 = txtC54.Text;
                                 cov.ws_d21 = txtD54.Text;
                                 #endregion
+                                cov.WashMethod = ddlWashMethod.SelectedValue;
+
                             }
                             objWork.DeleteBySampleID(this.SampleID);
                             objWork.InsertList(this.Lpc.ToList());
@@ -1109,13 +1121,20 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
 
-            gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));
+            List<string> accumlativeSize = new List<string>();
+            accumlativeSize.Add("0.5");
+            accumlativeSize.Add("0.7");
+            accumlativeSize.Add("1");
+            accumlativeSize.Add("2");
+
+
+            gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && accumlativeSize.Contains(x.B));
             gvResult.DataBind();
 
-            gvStatic.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY));
+            gvStatic.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && accumlativeSize.Contains(x.B));
             gvStatic.DataBind();
 
-            gvSpec.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC));
+            gvSpec.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && accumlativeSize.Contains(x.B));
             gvSpec.DataBind();
             btnSubmit.Enabled = true;
 
@@ -1220,19 +1239,35 @@ namespace ALS.ALSI.Web.view.template
                 Literal _litBlankCorredtedCM2 = (Literal)e.Row.FindControl("litBlankCorredtedCM2");
                 if (_lbStatistics != null && _litBlankCorredted != null && _litBlankCorredtedCM2 != null)
                 {
-
-                    if (_lbStatistics.Text.Equals("%RSD Deviation"))
+                    try
                     {
-                        _litBlankCorredted.Text = String.Format("{0}%", Math.Round(Convert.ToDouble(_litBlankCorredted.Text) ));
-                        _litBlankCorredtedCM2.Text = String.Format("{0}%", Math.Round(Convert.ToDouble(_litBlankCorredtedCM2.Text)));
+
+
+                        if (_lbStatistics.Text.Equals("%RSD Deviation"))
+                        {
+                            if (!String.IsNullOrEmpty(_litBlankCorredted.Text) && !String.IsNullOrEmpty(_litBlankCorredtedCM2.Text))
+                            {
+                                _litBlankCorredted.Text = String.Format("{0}%", Math.Round(Convert.ToDouble(_litBlankCorredted.Text)));
+                                _litBlankCorredtedCM2.Text = String.Format("{0}%", Math.Round(Convert.ToDouble(_litBlankCorredtedCM2.Text)));
+                            }
+                        }
+                        else
+                        {
+                            if (!String.IsNullOrEmpty(_litBlankCorredted.Text) && !String.IsNullOrEmpty(_litBlankCorredtedCM2.Text))
+                            {
+
+                                _litBlankCorredtedCM2.Text = Math.Round(Convert.ToDouble(_litBlankCorredtedCM2.Text)) + "";
+                                _litBlankCorredted.Text = Math.Round(Convert.ToDouble(_litBlankCorredted.Text)) + "";
+                            }
+                        }
+                        
+
+                    
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        _litBlankCorredtedCM2.Text = Math.Round(Convert.ToDouble(_litBlankCorredtedCM2.Text)) + "";
-                        _litBlankCorredted.Text = Math.Round(Convert.ToDouble(_litBlankCorredted.Text)) + "";
-
+                        Console.WriteLine();
                     }
-
                 }
             }
         }
@@ -1242,5 +1277,19 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
         }
 
+        protected void ddlWashMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (ddlWashMethod.SelectedValue)
+            {
+                case "Rinse":
+                case "Ultrasonic":
+                case "Shake":
+                    break;
+                    pTankConditions.Visible = true;
+                case "Flip":
+                    pTankConditions.Visible = false;
+                    break;
+            }
+        }
     }
 }

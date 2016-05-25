@@ -107,51 +107,63 @@ namespace ALS.ALSI.Utils
 
             String returnValue = String.Empty;
 
-         
+            //if(_cell.CachedFormulaResultType == CellType.Unknown)
+            //{
+            //    Console.WriteLine();
+            //}
+
+
+            //if (_cell.CachedFormulaResultType != CellType.Error)
+            //{
             if (_cell != null)
             {
-
-                switch (_cell.CellType)
-                {
-                    case CellType.Blank:
-                        break;
-                    case CellType.Boolean:
-                        break;
-                    case CellType.Error:
-                        break;
-                    case CellType.Formula:
-                                    //DataFormatter df = new DataFormatter();
-            //String asItLooksInExcel = df.FormatCellValue(_cell);
-                        if (_cell.CachedFormulaResultType == CellType.Numeric)
-                        {
-                            returnValue = _cell.NumericCellValue.ToString();//.CellFormula.ToString();
-                        }
-                        else
-                        {
-                            returnValue = _cell.StringCellValue;//.CellFormula.ToString();
-                        }
-                        
-                        break;
-                    case CellType.Numeric:
-                        if (DateUtil.IsCellDateFormatted(_cell))
-                        {
-                            returnValue = _cell.DateCellValue.ToString();
-                        }
-                        else
-                        {
-                            returnValue = _cell.NumericCellValue.ToString();
-                        }
-                        break;
-                    case CellType.String:
-                        returnValue = _cell.StringCellValue.ToString();
-                        break;
-                    case CellType.Unknown:
-                        break;
-                }
                 ErrorIndex = String.Format("Row({0}),Column({1})  Error Value = {2}", _cell.RowIndex + 1, _cell.ColumnIndex + 1, returnValue);
 
+            switch (_cell.CellType)
+            {
+                case CellType.Blank:
+                    break;
+                case CellType.Boolean:
+                    break;
+                case CellType.Error:
+                    break;
+                case CellType.Formula:
+                    //DataFormatter df = new DataFormatter();
+                    //String asItLooksInExcel = df.FormatCellValue(_cell);
+                    if(_cell.CachedFormulaResultType == CellType.Error)
+                    {
+                        returnValue = "";
+                    }
+                    else if (_cell.CachedFormulaResultType == CellType.Numeric)
+                    {
+                        returnValue = _cell.NumericCellValue.ToString();//.CellFormula.ToString();
+                    }
+                    else
+                    {
+                        returnValue = _cell.StringCellValue;//.CellFormula.ToString();
+                    }
+
+                    break;
+                case CellType.Numeric:
+                    if (DateUtil.IsCellDateFormatted(_cell))
+                    {
+                        returnValue = _cell.DateCellValue.ToString();
+                    }
+                    else
+                    {
+                        returnValue = _cell.NumericCellValue.ToString();
+                    }
+                    break;
+                case CellType.String:
+                    returnValue = _cell.StringCellValue.ToString();
+                    break;
+                case CellType.Unknown:
+                    break;
             }
-            return returnValue.Length>255 ? returnValue.Substring(0,255):returnValue;
+
+            }
+            //}
+            return returnValue;//_cell.ToString();// returnValue.Length>255 ? returnValue.Substring(0,255):returnValue;
         }
 
 

@@ -238,6 +238,24 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtB51;
         
         /// <summary>
+        /// ddlWashMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlWashMethod;
+        
+        /// <summary>
+        /// pTankConditions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pTankConditions;
+        
+        /// <summary>
         /// Table1 control.
         /// </summary>
         /// <remarks>

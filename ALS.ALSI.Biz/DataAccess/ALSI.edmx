@@ -972,20 +972,21 @@
           <Property Name="f18" Type="varchar" MaxLength="45" />
           <Property Name="g18" Type="varchar" MaxLength="45" />
           <Property Name="b26" Type="varchar" MaxLength="45" />
+          <Property Name="item_visible" Type="varchar" MaxLength="45" />
           <Property Name="ProcedureNo" Type="varchar" MaxLength="45" />
           <Property Name="NumberOfPieces" Type="varchar" MaxLength="45" />
           <Property Name="ExtractionMedium" Type="varchar" MaxLength="45" />
           <Property Name="ExtractionVolume" Type="varchar" MaxLength="45" />
-          <Property Name="template_type" Type="int" />
-          <Property Name="channel_size" Type="varchar" MaxLength="5" />
-          <Property Name="row_state" Type="int" />
           <Property Name="LiquidParticleCount" Type="varchar" MaxLength="45" />
           <Property Name="SpecificationLimits" Type="varchar" MaxLength="45" />
           <Property Name="Results" Type="varchar" MaxLength="45" />
           <Property Name="RunNumber" Type="int" />
-          <Property Name="Run" Type="varchar" MaxLength="100" />
+          <Property Name="Run" Type="varchar" MaxLength="45" />
           <Property Name="type" Type="varchar" MaxLength="45" />
           <Property Name="SurfaceArea" Type="double" />
+          <Property Name="template_type" Type="int" />
+          <Property Name="channel_size" Type="varchar" MaxLength="5" />
+          <Property Name="row_state" Type="int" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
@@ -1232,6 +1233,7 @@
           <Property Name="E" Type="varchar" MaxLength="45" />
           <Property Name="F" Type="varchar" MaxLength="45" />
           <Property Name="data_type" Type="int" />
+          <Property Name="WashMethod" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_wd_mesa_coverpage">
           <Key>
@@ -2655,20 +2657,21 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="f18" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="g18" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="b26" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="item_visible" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ProcedureNo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="NumberOfPieces" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ExtractionMedium" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ExtractionVolume" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="template_type" Type="Int32" />
-          <Property Name="channel_size" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="row_state" Type="Int32" />
           <Property Name="LiquidParticleCount" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="SpecificationLimits" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Results" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="RunNumber" Type="Int32" />
-          <Property Name="Run" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Run" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="SurfaceArea" Type="Double" />
+          <Property Name="template_type" Type="Int32" />
+          <Property Name="channel_size" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="row_state" Type="Int32" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
@@ -2916,6 +2919,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="E" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="F" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="data_type" Type="Int32" />
+          <Property Name="WashMethod" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_mesa_coverpage">
           <Key>
@@ -4107,6 +4111,9 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_lpc_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_lpc_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_lpc_coverpage">
+                <ScalarProperty Name="row_state" ColumnName="row_state" />
+                <ScalarProperty Name="channel_size" ColumnName="channel_size" />
+                <ScalarProperty Name="template_type" ColumnName="template_type" />
                 <ScalarProperty Name="SurfaceArea" ColumnName="SurfaceArea" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="Run" ColumnName="Run" />
@@ -4114,13 +4121,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="Results" ColumnName="Results" />
                 <ScalarProperty Name="SpecificationLimits" ColumnName="SpecificationLimits" />
                 <ScalarProperty Name="LiquidParticleCount" ColumnName="LiquidParticleCount" />
-                <ScalarProperty Name="row_state" ColumnName="row_state" />
-                <ScalarProperty Name="channel_size" ColumnName="channel_size" />
-                <ScalarProperty Name="template_type" ColumnName="template_type" />
                 <ScalarProperty Name="ExtractionVolume" ColumnName="ExtractionVolume" />
                 <ScalarProperty Name="ExtractionMedium" ColumnName="ExtractionMedium" />
                 <ScalarProperty Name="NumberOfPieces" ColumnName="NumberOfPieces" />
                 <ScalarProperty Name="ProcedureNo" ColumnName="ProcedureNo" />
+                <ScalarProperty Name="item_visible" ColumnName="item_visible" />
                 <ScalarProperty Name="b26" ColumnName="b26" />
                 <ScalarProperty Name="g18" ColumnName="g18" />
                 <ScalarProperty Name="f18" ColumnName="f18" />
@@ -4396,6 +4401,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_lpc_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_lpc_coverpage">
               <MappingFragment StoreEntitySet="template_wd_lpc_coverpage">
+                <ScalarProperty Name="WashMethod" ColumnName="WashMethod" />
                 <ScalarProperty Name="data_type" ColumnName="data_type" />
                 <ScalarProperty Name="F" ColumnName="F" />
                 <ScalarProperty Name="E" ColumnName="E" />
