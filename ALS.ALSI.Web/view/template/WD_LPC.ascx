@@ -299,22 +299,22 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="Blank(Counts/ml)" ItemStyle-HorizontalAlign="Center">
+                                            <asp:TemplateField HeaderText="Blank(Counts/ml)" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
                                                     <asp:Literal ID="litBlank" runat="server" Text='<%# Eval("C")%>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Sample(Counts/ml)" ItemStyle-HorizontalAlign="Center">
+                                            <asp:TemplateField HeaderText="Sample(Counts/ml)" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
                                                     <asp:Literal ID="litSample" runat="server" Text='<%# Eval("D")%>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Blank-corrected(Counts/part)" ItemStyle-HorizontalAlign="Center">
+                                            <asp:TemplateField HeaderText="Blank-corrected(Counts/part)" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
                                                     <asp:Literal ID="litBlankCorredted" runat="server" Text='<%# Eval("E")%>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Blank-corrected(Counts/cm²)" ItemStyle-HorizontalAlign="Center">
+                                            <asp:TemplateField HeaderText="Blank-corrected(Counts/cm²)" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
                                                     <asp:Literal ID="litBlankCorredtedCM2" runat="server" Text='<%# Eval("F")%>' />
                                                 </ItemTemplate>
@@ -353,12 +353,12 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Blank-corrected(Counts/part)" ItemStyle-HorizontalAlign="Center">
+                                                <asp:TemplateField HeaderText="Blank-corrected(Counts/part)" ItemStyle-HorizontalAlign="Right">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litBlankCorredted" runat="server" Text='<%# Eval("E")%>' />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Blank-corrected(Counts/cm²)" ItemStyle-HorizontalAlign="Center">
+                                                <asp:TemplateField HeaderText="Blank-corrected(Counts/cm²)" ItemStyle-HorizontalAlign="Right">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litBlankCorredtedCM2" runat="server" Text='<%# Eval("F")%>' />
                                                     </ItemTemplate>

@@ -857,7 +857,7 @@ namespace ALS.ALSI.Web.view.template
                                     work.sample_id = this.SampleID;
                                     work.component_id = _cover.component_id;
                                     work.chemical_id = _cover.chemical_id;
-                                    work.name = "          " + child.library_id;
+                                    work.name = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + child.library_id;
                                     work.ng_part = _cover.ng_part;
                                     work.result = child.amount;
                                     work.row_type = Convert.ToInt32(RowTypeEnum.Normal);

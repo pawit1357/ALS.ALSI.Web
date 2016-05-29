@@ -12,6 +12,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         #region "Property"
         public CommandNameEnum RowState { get; set; }
+        public string type { get; set; }
         //public string runText { get { return this.run.ToString(); } }
         #endregion
 

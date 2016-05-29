@@ -18,6 +18,8 @@ using ALS.ALSI.Biz.ReportObjects;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
 using WordToPDF;
+using System.Text;
+using ALSALSI.Biz;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -263,7 +265,7 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
 
                 ddlWashMethod.SelectedValue = _lpc.WashMethod;
-                if(!String.IsNullOrEmpty(_lpc.WashMethod) && _lpc.WashMethod.Equals("Flip"))
+                if (!String.IsNullOrEmpty(_lpc.WashMethod) && _lpc.WashMethod.Equals("Flip"))
                 {
                     pTankConditions.Visible = false;
                 }
@@ -444,7 +446,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
- 
+
 
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
@@ -590,15 +592,23 @@ namespace ALS.ALSI.Web.view.template
             this.Lpc.RemoveAll(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));
             this.Lpc.RemoveAll(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY));
 
-            //
+            List<String> listOFParticle = new List<String>();
+            listOFParticle.Add("0.300");
+            listOFParticle.Add("0.500");
+            listOFParticle.Add("0.700");
+            listOFParticle.Add("1.000");
+            listOFParticle.Add("2.000");
+
+            List<template_wd_lpc_coverpage> lpcs = new List<template_wd_lpc_coverpage>();
+
             for (int i = 0; i < btnUpload.PostedFiles.Count; i++)
             {
                 HttpPostedFile _postedFile = btnUpload.PostedFiles[i];
                 try
                 {
-                    if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")))
+                    if (_postedFile.ContentLength > 0)
                     {
-                        if (_postedFile.ContentLength > 0)
+                        if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")))
                         {
                             string yyyy = DateTime.Now.ToString("yyyy");
                             string MM = DateTime.Now.ToString("MM");
@@ -615,82 +625,40 @@ namespace ALS.ALSI.Web.view.template
 
                             _postedFile.SaveAs(source_file);
 
-
                             using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
                             {
-                                String fnName = Path.GetFileNameWithoutExtension(source_file);
-
                                 HSSFWorkbook wd = new HSSFWorkbook(fs);
-                                ISheet _sheet = wd.GetSheet(ConfigurationManager.AppSettings["wd.lpc.excel.sheetname.working1"]);
-
-                                if (_sheet == null)
+                                ISheet isheet = wd.GetSheet("Sheet1");
+                                bool bStartAddData = false;
+                                for (int row = 17; row < 120; row++)
                                 {
-                                    errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", ConfigurationManager.AppSettings["wd.lpc.excel.sheetname.working1"]));
-                                }
-                                else
-                                {
-                                    sheetName = _sheet.SheetName;
-                                    txtB48.Text = CustomUtils.GetCellValue(_sheet.GetRow(15 - 1).GetCell(ExcelColumn.B));
-                                    txtB49.Text = CustomUtils.GetCellValue(_sheet.GetRow(16 - 1).GetCell(ExcelColumn.B));
-                                    txtB50.Text = CustomUtils.GetCellValue(_sheet.GetRow(17 - 1).GetCell(ExcelColumn.B));
-                                    txtB51.Text = CustomUtils.GetCellValue(_sheet.GetRow(18 - 1).GetCell(ExcelColumn.B));
-
-                                    String tmpA = String.Empty;
-                                    String tmpGroup = String.Empty;
-                                    String[] statisticsLabel = { "Average", "Standard Deviation", "%RSD Deviation" };
-                                    int rowIndex = 1;
-                                    int summaryIndex = 0;
-                                    for (int row = 22; row <= _sheet.LastRowNum; row++)
+                                    if (isheet.GetRow(row) != null) //null is when the row only contains empty cells 
                                     {
-                                        String A = CustomUtils.GetCellValue(_sheet.GetRow(row).GetCell(ExcelColumn.A));
-                                        String B = CustomUtils.GetCellValue(_sheet.GetRow(row).GetCell(ExcelColumn.B));
-                                        String C = CustomUtils.GetCellValue(_sheet.GetRow(row).GetCell(ExcelColumn.C));
-                                        String D = CustomUtils.GetCellValue(_sheet.GetRow(row).GetCell(ExcelColumn.D));
-                                        String E = CustomUtils.GetCellValue(_sheet.GetRow(row).GetCell(ExcelColumn.E));
-                                        String F = CustomUtils.GetCellValue(_sheet.GetRow(row).GetCell(ExcelColumn.F));
-
-                                        if (A.Equals("Run") && B.StartsWith("Accumlative Size"))
+                                        if (CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.D)).Equals("Series Averages"))
                                         {
-                                            tmpGroup = "Run";
-                                            continue;
+                                            bStartAddData = true;
                                         }
-                                        if (A.Equals("Statistics") && B.StartsWith("Accumlative Size"))
+                                        if (bStartAddData)
                                         {
-                                            tmpGroup = "Statistics";
-                                            continue;
-                                        }
-                                        if (String.IsNullOrEmpty(B))
-                                        {
-                                            continue;
-                                        }
-                                        if (!tmpA.Equals(A) && !String.IsNullOrEmpty(A))
-                                        {
-                                            tmpA = A;
-                                        }
-
-                                        template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
-                                        tmp.ID = 100 + rowIndex;
-                                        tmp.A = tmpA;
-                                        tmp.B = B;
-                                        tmp.C = String.IsNullOrEmpty(C) ? "" : Math.Round(Convert.ToDecimal(C), Convert.ToInt16(txtDecimal01.Text)).ToString();
-                                        tmp.D = String.IsNullOrEmpty(D) ? "" : Math.Round(Convert.ToDecimal(D), Convert.ToInt16(txtDecimal02.Text)).ToString();
-                                        tmp.E = String.IsNullOrEmpty(E) ? "" : Math.Round(Convert.ToDecimal(E), Convert.ToInt16(txtDecimal03.Text)).ToString();
-                                        tmp.F = String.IsNullOrEmpty(F) ? "" : Math.Round(Convert.ToDecimal(F), Convert.ToInt16(txtDecimal04.Text)).ToString();
-                                        tmp.data_type = (tmpGroup.Equals("Run")) ? Convert.ToInt32(WDLpcDataType.DATA_VALUE) : Convert.ToInt32(WDLpcDataType.SUMMARY);
-                                        if (tmp.data_type.Value == Convert.ToInt32(WDLpcDataType.SUMMARY))
-                                        {
-                                            int indexValue = summaryIndex / 5;
-                                            tmp.A = statisticsLabel[indexValue];
-                                            if (tmp.A.Equals("%RSD Deviation"))
+                                            if (listOFParticle.Contains(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.G))))
                                             {
-                                                tmp.E = String.IsNullOrEmpty(E) ? "" : Math.Round(Convert.ToDecimal(E) * 100, 0).ToString();
-                                                tmp.F = String.IsNullOrEmpty(F) ? "" : Math.Round(Convert.ToDecimal(F) * 100, 0).ToString();
+                                                template_wd_lpc_coverpage lpc = new template_wd_lpc_coverpage();
+                                                lpc.A = Path.GetFileNameWithoutExtension(_postedFile.FileName).Replace('B', ' ').Replace('S', ' ').Trim();
+                                                lpc.B = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.G));
+                                                lpc.C = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.Q));
+                                                lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("B") ? "Blank" : "Sample";
+                                                switch (lpc.type)
+                                                {
+                                                    case "Blank":
+                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt16(txtDecimal01.Text)));
+                                                        break;
+                                                    case "Sample":
+                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal02.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt16(txtDecimal02.Text)));
+                                                        break;
+                                                }
+                                                lpcs.Add(lpc);
                                             }
-                                            summaryIndex++;
                                         }
-                                        tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                        this.Lpc.Add(tmp);
-                                        rowIndex++;
                                     }
                                 }
                             }
@@ -699,15 +667,92 @@ namespace ALS.ALSI.Web.view.template
                     else
                     {
                         errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
-
                     }
+                    Console.WriteLine();
                 }
                 catch (Exception Ex)
                 {
-                    //logger.Error(Ex.Message);
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
+                    //logger.Error(Ex.Message);
+                    Console.WriteLine();
                 }
             }
+            List<template_wd_lpc_coverpage> tmps = new List<template_wd_lpc_coverpage>();
+
+            var grps = from lpc in lpcs group lpc by lpc.A into newGroup orderby newGroup.Key select newGroup;
+            foreach (var item in grps)
+            {
+                foreach(String par in listOFParticle)
+                {
+                    template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                    tmp.A = item.Key;
+                    tmp.B = par;
+                    string blankValue = lpcs.Where(x => x.type.Equals("Blank") && x.A.Equals(item.Key) && x.B.Equals(par)).FirstOrDefault().C;
+                    tmp.C = blankValue;
+                    string sampleValue = lpcs.Where(x => x.type.Equals("Sample") && x.A.Equals(item.Key) && x.B.Equals(par)).FirstOrDefault().C;
+                    tmp.D = sampleValue;
+
+
+
+                    double result = (Double.Parse(sampleValue) - Double.Parse(blankValue)) * Double.Parse(String.IsNullOrEmpty(txtB49.Text) ? "0" : txtB49.Text) / Double.Parse(String.IsNullOrEmpty(txtB51.Text) ? "0" : txtB51.Text);
+
+                    double result2 = result / Double.Parse(txtB48.Text);
+                    tmp.E = result.ToString("N" + txtDecimal03.Text);
+                    tmp.F = result2.ToString("N" + txtDecimal04.Text);
+
+
+                    tmp.data_type = Convert.ToInt32(WDLpcDataType.DATA_VALUE);
+                    tmps.Add(tmp);
+                }
+
+            }
+ 
+            foreach (String par in listOFParticle)
+            {
+                template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.A = "Average";
+                tmp.B = par;
+                tmp.C = string.Empty;
+                tmp.D = string.Empty;
+                tmp.E = CustomUtils.Average(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par)).Select(x => Convert.ToDouble(x.E)).ToList()).ToString();
+                tmp.F = CustomUtils.Average(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par)).Select(x => Convert.ToDouble(x.F)).ToList()).ToString();
+                tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmps.Add(tmp);
+            }
+            foreach (String par in listOFParticle)
+            {
+                template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.A = "Standard Deviation";
+                tmp.B = par;
+                tmp.C = string.Empty;
+                tmp.D = string.Empty;
+                tmp.E = CustomUtils.StandardDeviation(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par)).Select(x => Convert.ToDouble(x.E)).ToList()).ToString();
+                tmp.F = CustomUtils.StandardDeviation(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par)).Select(x => Convert.ToDouble(x.F)).ToList()).ToString();
+                tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmps.Add(tmp);
+            }
+            foreach (String par in listOFParticle)
+            {
+                template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.A = "%RSD Deviation";
+                tmp.B = par;
+                tmp.C = string.Empty;
+                tmp.D = string.Empty;
+
+                double _E = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Average")).FirstOrDefault().E);
+                double _E2 = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Standard Deviation")).FirstOrDefault().E);
+
+                double _F = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Average")).FirstOrDefault().F);
+                double _F2 = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Standard Deviation")).FirstOrDefault().F);
+
+                tmp.E = ((_E2/_E)*100).ToString() ;
+                tmp.F = ((_F2 / _F)*100).ToString();
+                tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmps.Add(tmp);
+            }
+
+            this.Lpc.AddRange(tmps);
+
             #endregion
 
             if (errors.Count > 0)
@@ -849,8 +894,8 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
             reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1 ));
-            reportParameters.Add(new ReportParameter("Company_addr",  reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
 
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
@@ -882,8 +927,8 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x=>(new String[]{ "1","2","3"}).Contains(x.A)).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] {  "4", "5" }).Contains(x.A)).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3" }).Contains(x.A)).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] { "4", "5" }).Contains(x.A)).ToDataTable())); // Add datasource here
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.ToDataTable())); // Add datasource here
 
@@ -1105,7 +1150,7 @@ namespace ALS.ALSI.Web.view.template
         {
             foreach (template_wd_lpc_coverpage val in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC)))
             {
-                template_wd_lpc_coverpage tmp = Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.A.Equals("Average") && x.B.Equals(val.B)).FirstOrDefault();
+                template_wd_lpc_coverpage tmp = Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.A.Equals("Average") && Convert.ToDouble(x.B) == Convert.ToDouble(val.B)).FirstOrDefault();
                 if (tmp != null)
                 {
                     val.D = tmp.F;
@@ -1121,23 +1166,37 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
 
-            List<string> accumlativeSize = new List<string>();
-            accumlativeSize.Add("0.5");
-            accumlativeSize.Add("0.7");
-            accumlativeSize.Add("1");
-            accumlativeSize.Add("2");
+            //List<string> accumlativeSize = new List<string>();
+            //accumlativeSize.Add("0.5");
+            //accumlativeSize.Add("0.7");
+            //accumlativeSize.Add("1");
+            //accumlativeSize.Add("2");
 
 
-            gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && accumlativeSize.Contains(x.B));
+            gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));
             gvResult.DataBind();
 
-            gvStatic.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && accumlativeSize.Contains(x.B));
+            gvStatic.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY));
             gvStatic.DataBind();
 
-            gvSpec.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && accumlativeSize.Contains(x.B));
+            gvSpec.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC));
             gvSpec.DataBind();
+
             btnSubmit.Enabled = true;
 
+        }
+
+        public String getDecimalFormat(int _digit)
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append("{0:0.");
+            for (int i = 1; i <= _digit; i++)
+            {
+                result.Append("0");
+            }
+            result.Append("}");
+            return result.ToString();
         }
 
 
@@ -1185,8 +1244,9 @@ namespace ALS.ALSI.Web.view.template
                     {
                         _litAverage.Text = Math.Round(Convert.ToDouble(_litAverage.Text)) + "";
                     }
-                    if (!_litSpecLimit.Text.Equals("NA")) { 
-                    _litSpecLimit.Text = String.Format("<{0}", _litSpecLimit.Text);
+                    if (!_litSpecLimit.Text.Equals("NA"))
+                    {
+                        _litSpecLimit.Text = String.Format("<{0}", _litSpecLimit.Text);
                     }
                 }
 
@@ -1214,7 +1274,6 @@ namespace ALS.ALSI.Web.view.template
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //Literal _litAccumulativeSize = (Literal)e.Row.FindControl("litAccumulativeSize");
                 Literal _litBlank = (Literal)e.Row.FindControl("litBlank");
                 Literal _litSample = (Literal)e.Row.FindControl("litSample");
                 Literal _litBlankCorredted = (Literal)e.Row.FindControl("litBlankCorredted");
@@ -1222,10 +1281,13 @@ namespace ALS.ALSI.Web.view.template
 
                 if (_litBlank != null && _litSample != null && _litBlankCorredted != null && _litBlankCorredtedCM2 != null)
                 {
-                    //_litBlank.Text = Convert.ToDouble(_litBlank.Text).ToString("N2");
-                    //_litSample.Text = Convert.ToDouble(_litSample.Text).ToString("N2");
-                    _litBlankCorredted.Text = Math.Round(Convert.ToDouble(_litBlankCorredted.Text)) + "";
-                    _litBlankCorredtedCM2.Text = Math.Round(Convert.ToDouble(_litBlankCorredtedCM2.Text)) + "";
+                    //if (!String.IsNullOrEmpty(txtB48.Text) && !String.IsNullOrEmpty(txtB49.Text) && !String.IsNullOrEmpty(txtB51.Text)) {
+                    //    double result = (Double.Parse(_litSample.Text) - Double.Parse(_litBlank.Text)) * Double.Parse(String.IsNullOrEmpty(txtB49.Text) ? "0" : txtB49.Text) / Double.Parse(String.IsNullOrEmpty(txtB51.Text) ? "0" : txtB51.Text);
+
+                    //    double result2 = result / Double.Parse(txtB48.Text);
+                    //    _litBlankCorredted.Text = result.ToString("N"+txtDecimal03.Text);
+                    //    _litBlankCorredtedCM2.Text = result2.ToString("N" + txtDecimal04.Text);
+                    //}
                 }
             }
         }
@@ -1260,9 +1322,9 @@ namespace ALS.ALSI.Web.view.template
                                 _litBlankCorredted.Text = Math.Round(Convert.ToDouble(_litBlankCorredted.Text)) + "";
                             }
                         }
-                        
 
-                    
+
+
                     }
                     catch (Exception ex)
                     {
@@ -1291,5 +1353,8 @@ namespace ALS.ALSI.Web.view.template
                     break;
             }
         }
+
+
+
     }
 }

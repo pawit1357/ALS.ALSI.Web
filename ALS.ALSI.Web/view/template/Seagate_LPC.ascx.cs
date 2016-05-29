@@ -670,8 +670,6 @@ namespace ALS.ALSI.Web.view.template
                                         }
                                         if (String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C))))
                                         {
-                                            //if ("0.300".Equals(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J))))
-                                            //{
                                             template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
 
                                             switch (CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J)))
@@ -706,8 +704,6 @@ namespace ALS.ALSI.Web.view.template
                                                     break;
                                             }
 
-
-                                            //}
                                         }
                                     }
                                 }
