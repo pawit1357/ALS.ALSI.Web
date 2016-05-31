@@ -249,7 +249,10 @@ namespace ALS.ALSI.Web.view.template
                     txtNumOfPiecesUsedForExtraction.Text = ic.NumOfPiecesUsedForExtraction;
                     txtExtractionMedium.Text = ic.ExtractionMedium;
                     txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDecimal(ic.ExtractionVolume))));
-
+                    if (ic.wunit != null)
+                    {
+                        ddlUnit.SelectedValue = ic.wunit.Value.ToString();
+                    }
                     if (ic.wunit != null)
                     {
                         ddlUnit.SelectedValue = ic.wunit.Value.ToString();
@@ -261,14 +264,19 @@ namespace ALS.ALSI.Web.view.template
                         gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
 
-                        Label1.Text = ddlUnit.SelectedItem.Text;
-                        Label2.Text = ddlUnit.SelectedItem.Text;
-                        Label3.Text = ddlUnit.SelectedItem.Text;
-                        Label4.Text = ddlUnit.SelectedItem.Text;
-                        Label5.Text = ddlUnit.SelectedItem.Text;
-                        Label6.Text = ddlUnit.SelectedItem.Text;
-                        Label7.Text = ddlUnit.SelectedItem.Text;
-                        Label8.Text = ddlUnit.SelectedItem.Text;
+                        gvResultAnions.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
+                        gvResultAnions.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
+                        gvResultAnions.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
+                        gvResultAnions.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+                        gvResultAnions.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+                        gvResultAnions.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
+
+                        gvResultCations.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
+                        gvResultCations.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
+                        gvResultCations.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
+                        gvResultCations.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+                        gvResultCations.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+                        gvResultCations.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
 
                     }
                     else
@@ -279,190 +287,7 @@ namespace ALS.ALSI.Web.view.template
                         gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-
-                        Label1.Text = ddlUnit.SelectedItem.Text;
-                        Label2.Text = ddlUnit.SelectedItem.Text;
-                        Label3.Text = ddlUnit.SelectedItem.Text;
-                        Label4.Text = ddlUnit.SelectedItem.Text;
-                        Label5.Text = ddlUnit.SelectedItem.Text;
-                        Label6.Text = ddlUnit.SelectedItem.Text;
-                        Label7.Text = ddlUnit.SelectedItem.Text;
-                        Label8.Text = ddlUnit.SelectedItem.Text;
                     }
-
-
-                    template_wd_ic_coverpage A17 = getCoverPageValue("Fluoride as F");
-                    template_wd_ic_coverpage A18 = getCoverPageValue("Chloride as Cl");
-                    template_wd_ic_coverpage A19 = getCoverPageValue("Bromide as Br");
-                    template_wd_ic_coverpage A19_1 = getCoverPageValue("Nitrite as NO2");
-
-                    template_wd_ic_coverpage A20 = getCoverPageValue("Nitrate as NO3");
-                    template_wd_ic_coverpage A21 = getCoverPageValue("Sulfate as SO4");
-                    template_wd_ic_coverpage A22 = getCoverPageValue("Phosphate as PO4");
-                    template_wd_ic_coverpage A23 = getCoverPageValue("Total Anions");
-
-                    template_wd_ic_coverpage C26 = getCoverPageValue("Lithium");
-                    template_wd_ic_coverpage C27 = getCoverPageValue("Sodium");
-                    template_wd_ic_coverpage C28 = getCoverPageValue("Ammonium");
-                    template_wd_ic_coverpage C29 = getCoverPageValue("Potassium");
-                    template_wd_ic_coverpage C30 = getCoverPageValue("Magnesium");
-                    template_wd_ic_coverpage C31 = getCoverPageValue("Calcium");
-                    template_wd_ic_coverpage C32 = getCoverPageValue("Total Cations");
-
-
-                    #region "Fluoride, F"
-                    txtB17.Text = A17.wb;
-                    txtC17.Text = A17.wc;
-                    txtD17.Text = A17.wd;
-                    lbAnE17.Text = A17.we;
-                    lbAnF17.Text = A17.wf;
-                    //lbAnG17.Text= A17.wg;
-                    lbAnH17.Text = A17.wh;
-                    lbAnI17.Text = A17.wi;
-                    lbAnJ17.Text = A17.wj;
-                    #endregion
-                    #region "Chloride, Cl"
-                    txtB18.Text = A18.wb;
-                    txtC18.Text = A18.wc;
-                    txtD18.Text = A18.wd;
-                    lbAnE18.Text = A18.we;
-                    lbAnF18.Text = A18.wf;
-                    //lbAnG18.TextA17.wg;
-                    lbAnH18.Text = A18.wh;
-                    lbAnI18.Text = A18.wi;
-                    lbAnJ18.Text = A18.wj;
-                    #endregion
-
-                    #region "Nitrite as NO2"
-                    if (A19_1 != null)
-                    {
-                        txtB19_1.Text = A19_1.wb;
-                        txtC19_1.Text = A19_1.wc;
-                        txtD19_1.Text = A19_1.wd;
-                        txtAnE19.Text = A19_1.we;
-                        txtAnF19.Text = A19_1.wf;
-                        //lbAnG18.TextA17.wg;
-                        txtAnH19.Text = A19_1.wh;
-                        txtAnI19.Text = A19_1.wi;
-                        txtAnJ19.Text = A19_1.wj;
-                    }
-                    #endregion
-
-
-                    #region "Bromide as Br"
-                    txtB19.Text = A19.wb;
-                    txtC19.Text = A19.wc;
-                    txtD19.Text = A19.wd;
-                    lbAnE19.Text = A19.we;
-                    lbAnF19.Text = A19.wf;
-                    //lbAnG19.TextA17.wg;
-                    lbAnH19.Text = A19.wh;
-                    lbAnI19.Text = A19.wi;
-                    lbAnJ19.Text = A19.wj;
-                    #endregion
-                    #region "Nitrate as NO3"
-                    txtB20.Text = A20.wb;
-                    txtC20.Text = A20.wc;
-                    txtD20.Text = A20.wd;
-                    lbAnE20.Text = A20.we;
-                    lbAnF20.Text = A20.wf;
-                    //lbAnG20.TextA17.wg;
-                    lbAnH20.Text = A20.wh;
-                    lbAnI20.Text = A20.wi;
-                    lbAnJ20.Text = A20.wj;
-                    #endregion
-                    #region "Sulfate as SO4"
-                    txtB21.Text = A21.wb;
-                    txtC21.Text = A21.wc;
-                    txtD21.Text = A21.wd;
-                    lbAnE21.Text = A21.we;
-                    lbAnF21.Text = A21.wf;
-                    //lbAnG21.TextA17.wg;
-                    lbAnH21.Text = A21.wh;
-                    lbAnI21.Text = A21.wi;
-                    lbAnJ21.Text = A21.wj;
-                    #endregion
-                    #region "Phosphate as PO4"
-                    txtB22.Text = A22.wb;
-                    txtC22.Text = A22.wc;
-                    txtD22.Text = A22.wd;
-                    lbAnE22.Text = A22.we;
-                    lbAnF22.Text = A22.wf;
-                    //lbAnG22.TextA17.wg;
-                    lbAnH22.Text = A22.wh;
-                    lbAnI22.Text = A22.wi;
-                    lbAnJ22.Text = A22.wj;
-                    #endregion
-                    #region "Total"
-                    lbAnI23.Text = A23.wi;
-                    lbAnJ23.Text = A23.wj;
-                    #endregion
-                    //-------------
-                    #region "FLithium as Li"
-                    txtB26.Text = C26.wb;
-                    txtC26.Text = C26.wc;
-                    txtD26.Text = C26.wd;
-                    lbAnE26.Text = C26.we;
-                    lbAnF26.Text = C26.wf;
-                    lbAnH26.Text = C26.wh;
-                    lbAnI26.Text = C26.wi;
-                    lbAnJ26.Text = C26.wj;
-                    #endregion
-                    #region "FSodium as Na"
-                    txtB27.Text = C27.wb;
-                    txtC27.Text = C27.wc;
-                    txtD27.Text = C27.wd;
-                    lbAnE27.Text = C27.we;
-                    lbAnF27.Text = C27.wf;
-                    lbAnH27.Text = C27.wh;
-                    lbAnI27.Text = C27.wi;
-                    lbAnJ27.Text = C27.wj;
-                    #endregion
-                    #region "FAmmonium as NH4"
-                    txtB28.Text = C28.wb;
-                    txtC28.Text = C28.wc;
-                    txtD28.Text = C28.wd;
-                    lbAnE28.Text = C28.we;
-                    lbAnF28.Text = C28.wf;
-                    lbAnH28.Text = C28.wh;
-                    lbAnI28.Text = C28.wi;
-                    lbAnJ28.Text = C28.wj;
-                    #endregion
-                    #region "FPotassium as K"
-                    txtB29.Text = C29.wb;
-                    txtC29.Text = C29.wc;
-                    txtD29.Text = C29.wd;
-                    lbAnE29.Text = C29.we;
-                    lbAnF29.Text = C29.wf;
-                    lbAnH29.Text = C29.wh;
-                    lbAnI29.Text = C29.wi;
-                    lbAnJ29.Text = C29.wj;
-                    #endregion
-                    #region "FMagnesium as Mg"
-                    txtB30.Text = C30.wb;
-                    txtC30.Text = C30.wc;
-                    txtD30.Text = C30.wd;
-                    lbAnE30.Text = C30.we;
-                    lbAnF30.Text = C30.wf;
-                    lbAnH30.Text = C30.wh;
-                    lbAnI30.Text = C30.wi;
-                    lbAnJ30.Text = C30.wj;
-                    #endregion
-                    #region "FCalcium as Ca"
-                    txtB31.Text = C31.wb;
-                    txtC31.Text = C31.wc;
-                    txtD31.Text = C31.wd;
-                    lbAnE31.Text = C31.we;
-                    lbAnF31.Text = C31.wf;
-                    lbAnH31.Text = C31.wh;
-                    lbAnI31.Text = C31.wi;
-                    lbAnJ31.Text = C31.wj;
-                    #endregion
-                    #region "FTotal"
-                    lbAnI32.Text = C32.wi;
-                    lbAnJ32.Text = C32.wj;
-                    #endregion
-
 
                     calculateByFormular();
                 }
@@ -470,6 +295,11 @@ namespace ALS.ALSI.Web.view.template
                 gvAnionic.DataBind();
                 gvCationic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.CATIONIC));
                 gvCationic.DataBind();
+
+                gvResultAnions.DataSource = this.coverpages.Where(x => x.ic_type.Value == 1).ToList();
+                gvResultAnions.DataBind();
+                gvResultCations.DataSource = this.coverpages.Where(x => x.ic_type.Value == 2).ToList();
+                gvResultCations.DataBind();
             }
             else
             {
@@ -539,15 +369,17 @@ namespace ALS.ALSI.Web.view.template
                         _cover.ExtractionMedium = txtExtractionMedium.Text;
                         _cover.ExtractionVolume = txtB11.Text;
                     }
-                    switch (this.CommandName)
-                    {
-                        case CommandNameEnum.Add:
+
+                    template_wd_ic_coverpage.DeleteBySampleID(this.SampleID);
+                    //switch (this.CommandName)
+                    //{
+                    //    case CommandNameEnum.Add:
                             template_wd_ic_coverpage.InsertList(this.coverpages);
-                            break;
-                        case CommandNameEnum.Edit:
-                            template_wd_ic_coverpage.UpdateList(this.coverpages);
-                            break;
-                    }
+                    //        break;
+                    //    case CommandNameEnum.Edit:
+                    //        template_wd_ic_coverpage.UpdateList(this.coverpages);
+                    //        break;
+                    //}
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
@@ -810,6 +642,18 @@ namespace ALS.ALSI.Web.view.template
                                                 ic.wh = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.H));
                                                 ic.wi = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.I));
                                                 ic.wj = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
+
+                                                ic.wb = (String.IsNullOrEmpty(ic.wb)) ? "" : Convert.ToDouble(ic.wb).ToString("N" + txtDecimal01.Text);
+                                                ic.wc = (String.IsNullOrEmpty(ic.wc)) ? "" : Convert.ToDouble(ic.wc).ToString("N" + txtDecimal02.Text);
+                                                ic.wd = (String.IsNullOrEmpty(ic.wd)) ? "" : Convert.ToDouble(ic.wd).ToString("N" + txtDecimal03.Text);
+                                                ic.we = (String.IsNullOrEmpty(ic.we)) ? "" : Convert.ToDouble(ic.we).ToString("N" + txtDecimal04.Text);
+                                                ic.wf = (String.IsNullOrEmpty(ic.wf)) ? "" : Convert.ToDouble(ic.wf).ToString("N" + txtDecimal05.Text);
+                                                ic.wg = (String.IsNullOrEmpty(ic.wg)) ? "" : Convert.ToDouble(ic.wg).ToString("N" + txtDecimal06.Text);
+                                                ic.wh = (String.IsNullOrEmpty(ic.wh)) ? "" : Convert.ToDouble(ic.wh).ToString("N" + txtDecimal07.Text);
+                                                ic.wi = (String.IsNullOrEmpty(ic.wi)) || ic.wi.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(ic.wi).ToString("N" + txtDecimal08.Text);
+                                                //ic.wj = (String.IsNullOrEmpty(ic.wj)) ? "" : Convert.ToDouble(ic.wj).ToString("N" + txtDecimal09.Text);
+
+
                                             }
                                         }
                                     }
@@ -818,607 +662,6 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-                                //#region "Fluoride, F"
-                                //txtB17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B));
-                                //txtC17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C));
-                                //txtD17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.J));
-
-
-                                ////Set Decimal
-                                //if ( !String.IsNullOrEmpty(txtB17.Text))
-                                //{
-                                //    txtB17.Text = Math.Round(Convert.ToDecimal(txtB17.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC17.Text))
-                                //{
-                                //    txtC17.Text = Math.Round(Convert.ToDecimal(txtC17.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD17.Text))
-                                //{
-                                //    txtD17.Text = Math.Round(Convert.ToDecimal(txtD17.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE17.Text))
-                                //{
-                                //    lbAnE17.Text = Math.Round(Convert.ToDecimal(lbAnE17.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF17.Text))
-                                //{
-                                //    lbAnF17.Text = Math.Round(Convert.ToDecimal(lbAnF17.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH17.Text))
-                                //{
-                                //    lbAnH17.Text = Math.Round(Convert.ToDecimal(lbAnH17.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI17.Text))
-                                //{
-                                //    lbAnI17.Text = lbAnI17.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI17.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ17.Text))
-                                //{
-                                //    lbAnJ17.Text = Math.Round(Convert.ToDecimal(lbAnJ17.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-
-
-
-                                //#endregion
-                                //#region "Chloride, Cl"
-                                //txtB18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B));
-                                //txtC18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C));
-                                //txtD18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.J));
-
-                                ////Set Decimal
-                                //if (!String.IsNullOrEmpty(txtB18.Text))
-                                //{
-                                //    txtB18.Text = Math.Round(Convert.ToDecimal(txtB18.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC18.Text))
-                                //{
-                                //    txtC18.Text = Math.Round(Convert.ToDecimal(txtC18.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD18.Text))
-                                //{
-                                //    txtD18.Text = Math.Round(Convert.ToDecimal(txtD18.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE18.Text))
-                                //{
-                                //    lbAnE18.Text = Math.Round(Convert.ToDecimal(lbAnE18.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF18.Text))
-                                //{
-                                //    lbAnF18.Text = Math.Round(Convert.ToDecimal(lbAnF18.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH18.Text))
-                                //{
-                                //    lbAnH18.Text = Math.Round(Convert.ToDecimal(lbAnH18.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI18.Text))
-                                //{
-                                //    lbAnI18.Text = lbAnI18.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI18.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ18.Text))
-                                //{
-                                //    lbAnJ18.Text = Math.Round(Convert.ToDecimal(lbAnJ18.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "Nitrite as NO2"
-                                //txtB19_1.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.B));
-                                //txtC19_1.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.C));
-                                //txtD19_1.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.D));
-                                //txtAnE19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.E));
-                                //txtAnF19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.F));
-                                //txtAnH19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.H));
-                                //txtAnI19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.I));
-                                //txtAnJ19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.J));
-
-                                ////Set Decimal
-                                //if (!String.IsNullOrEmpty(txtB19_1.Text))
-                                //{
-                                //    txtB19_1.Text = Math.Round(Convert.ToDecimal(txtB19_1.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC19_1.Text))
-                                //{
-                                //    txtC19_1.Text = Math.Round(Convert.ToDecimal(txtC19_1.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD19_1.Text))
-                                //{
-                                //    txtD19_1.Text = Math.Round(Convert.ToDecimal(txtD19_1.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtAnE19.Text))
-                                //{
-                                //    txtAnE19.Text = Math.Round(Convert.ToDecimal(txtAnE19.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtAnF19.Text))
-                                //{
-                                //    txtAnF19.Text = Math.Round(Convert.ToDecimal(txtAnF19.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtAnH19.Text))
-                                //{
-                                //    txtAnH19.Text = Math.Round(Convert.ToDecimal(txtAnH19.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtAnI19.Text))
-                                //{
-                                //    txtAnI19.Text = txtAnI19.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(txtAnI19.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtAnJ19.Text))
-                                //{
-                                //    txtAnJ19.Text = Math.Round(Convert.ToDecimal(txtAnJ19.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-
-                                //#region "Bromide as Br"
-                                //txtB19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.B));
-                                //txtC19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.C));
-                                //txtD19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ19.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.J));
-
-                                ////Set Decimal
-                                //if (!String.IsNullOrEmpty(txtB19.Text))
-                                //{
-                                //    txtB19.Text = Math.Round(Convert.ToDecimal(txtB19.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC19.Text))
-                                //{
-                                //    txtC19.Text = Math.Round(Convert.ToDecimal(txtC19.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD19.Text))
-                                //{
-                                //    txtD19.Text = Math.Round(Convert.ToDecimal(txtD19.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE19.Text))
-                                //{
-                                //    lbAnE19.Text = Math.Round(Convert.ToDecimal(lbAnE19.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF19.Text))
-                                //{
-                                //    lbAnF19.Text = Math.Round(Convert.ToDecimal(lbAnF19.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH19.Text))
-                                //{
-                                //    lbAnH19.Text = Math.Round(Convert.ToDecimal(lbAnH19.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI19.Text))
-                                //{
-                                //    lbAnI19.Text = lbAnI19.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI19.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ19.Text))
-                                //{
-                                //    lbAnJ19.Text = Math.Round(Convert.ToDecimal(lbAnJ19.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "Nitrate as NO3"
-                                //txtB20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.B));
-                                //txtC20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.C));
-                                //txtD20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ20.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.J));
-
-                                ////Set Decimal
-                                //if (!String.IsNullOrEmpty(txtB20.Text))
-                                //{
-                                //    txtB20.Text = Math.Round(Convert.ToDecimal(txtB20.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC20.Text))
-                                //{
-                                //    txtC20.Text = Math.Round(Convert.ToDecimal(txtC20.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD20.Text))
-                                //{
-                                //    txtD20.Text = Math.Round(Convert.ToDecimal(txtD20.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE20.Text))
-                                //{
-                                //    lbAnE20.Text = Math.Round(Convert.ToDecimal(lbAnE20.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF20.Text))
-                                //{
-                                //    lbAnF20.Text = Math.Round(Convert.ToDecimal(lbAnF20.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH20.Text))
-                                //{
-                                //    lbAnH20.Text = Math.Round(Convert.ToDecimal(lbAnH20.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI20.Text))
-                                //{
-                                //    lbAnI20.Text = lbAnI20.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI20.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ20.Text))
-                                //{
-                                //    lbAnJ20.Text = Math.Round(Convert.ToDecimal(lbAnJ20.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "Sulfate as SO4"
-                                //txtB21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.B));
-                                //txtC21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.C));
-                                //txtD21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ21.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.J));
-
-                                ////Set Decimal
-                                //if (!String.IsNullOrEmpty(txtB21.Text))
-                                //{
-                                //    txtB21.Text = Math.Round(Convert.ToDecimal(txtB21.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC21.Text))
-                                //{
-                                //    txtC21.Text = Math.Round(Convert.ToDecimal(txtC21.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD21.Text))
-                                //{
-                                //    txtD21.Text = Math.Round(Convert.ToDecimal(txtD21.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE21.Text))
-                                //{
-                                //    lbAnE21.Text = Math.Round(Convert.ToDecimal(lbAnE21.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF21.Text))
-                                //{
-                                //    lbAnF21.Text = Math.Round(Convert.ToDecimal(lbAnF21.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH21.Text))
-                                //{
-                                //    lbAnH21.Text = Math.Round(Convert.ToDecimal(lbAnH21.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI21.Text))
-                                //{
-                                //    lbAnI21.Text = lbAnI21.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI21.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ21.Text))
-                                //{
-                                //    lbAnJ21.Text = Math.Round(Convert.ToDecimal(lbAnJ21.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "Phosphate as PO4"
-                                //txtB22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.B));
-                                //txtC22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.C));
-                                //txtD22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ22.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.J));
-
-                                ////Set Decimal
-                                //if (!String.IsNullOrEmpty(txtB22.Text))
-                                //{
-                                //    txtB22.Text = Math.Round(Convert.ToDecimal(txtB22.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC22.Text))
-                                //{
-                                //    txtC22.Text = Math.Round(Convert.ToDecimal(txtC22.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD22.Text))
-                                //{
-                                //    txtD22.Text = Math.Round(Convert.ToDecimal(txtD22.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE22.Text))
-                                //{
-                                //    lbAnE22.Text = Math.Round(Convert.ToDecimal(lbAnE22.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF22.Text))
-                                //{
-                                //    lbAnF22.Text = Math.Round(Convert.ToDecimal(lbAnF22.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH22.Text))
-                                //{
-                                //    lbAnH22.Text = Math.Round(Convert.ToDecimal(lbAnH22.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI22.Text))
-                                //{
-                                //    lbAnI22.Text = lbAnI22.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI22.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ22.Text))
-                                //{
-                                //    lbAnJ22.Text = Math.Round(Convert.ToDecimal(lbAnJ22.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "Total"
-                                //lbAnI23.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ23.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.J));
-                                //if (!String.IsNullOrEmpty(lbAnI23.Text) && !String.IsNullOrEmpty(lbAnJ23.Text))
-                                //{
-                                //    lbAnI23.Text = lbAnI23.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI23.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //    lbAnJ23.Text = Math.Round(Convert.ToDecimal(lbAnJ23.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                ////-------------
-                                //#region "FLithium as Li"
-                                //txtB26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.B));
-                                //txtC26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.C));
-                                //txtD26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.F));
-
-                                //lbAnH26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.J));
-
-                                ////Set Decimal
-                                //if (!String.IsNullOrEmpty(txtB26.Text))
-                                //{
-                                //    txtB26.Text = Math.Round(Convert.ToDecimal(txtB26.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC26.Text))
-                                //{
-                                //    txtC26.Text = Math.Round(Convert.ToDecimal(txtC26.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD26.Text))
-                                //{
-                                //    txtD26.Text = Math.Round(Convert.ToDecimal(txtD26.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE26.Text))
-                                //{
-                                //    lbAnE26.Text = Math.Round(Convert.ToDecimal(lbAnE26.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF26.Text))
-                                //{
-                                //    lbAnF26.Text = Math.Round(Convert.ToDecimal(lbAnF26.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH26.Text))
-                                //{
-                                //    lbAnH26.Text = Math.Round(Convert.ToDecimal(lbAnH26.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI26.Text))
-                                //{
-                                //    lbAnI26.Text = lbAnI26.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI26.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //    lbAnJ26.Text = Math.Round(Convert.ToDecimal(lbAnJ26.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "FSodium as Na"
-                                //txtB27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.B));
-                                //txtC27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.C));
-                                //txtD27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ27.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.J));
-
-                                ////Set Decimal
-                                //if (!String.IsNullOrEmpty(txtB27.Text))
-                                //{
-                                //    txtB27.Text = Math.Round(Convert.ToDecimal(txtB27.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC27.Text))
-                                //{
-                                //    txtC27.Text = Math.Round(Convert.ToDecimal(txtC27.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD27.Text))
-                                //{
-                                //    txtD27.Text = Math.Round(Convert.ToDecimal(txtD27.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE27.Text))
-                                //{
-                                //    lbAnE27.Text = Math.Round(Convert.ToDecimal(lbAnE27.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF27.Text))
-                                //{
-                                //    lbAnF27.Text = Math.Round(Convert.ToDecimal(lbAnF27.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH27.Text)) { }
-                                //if (!String.IsNullOrEmpty(lbAnI27.Text))
-                                //{
-                                //    lbAnH27.Text = Math.Round(Convert.ToDecimal(lbAnH27.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ27.Text))
-                                //{
-                                //    lbAnI27.Text = lbAnI27.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI27.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //    lbAnJ27.Text = Math.Round(Convert.ToDecimal(lbAnJ27.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-
-
-
-                                //#endregion
-                                //#region "FAmmonium as NH4"
-                                //txtB28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.B));
-                                //txtC28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.C));
-                                //txtD28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ28.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.J));
-                                //if (!String.IsNullOrEmpty(txtB28.Text))
-                                //{
-                                //    txtB28.Text = Math.Round(Convert.ToDecimal(txtB28.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC28.Text))
-                                //{
-                                //    txtC28.Text = Math.Round(Convert.ToDecimal(txtC28.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD28.Text))
-                                //{
-                                //    txtD28.Text = Math.Round(Convert.ToDecimal(txtD28.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE28.Text))
-                                //{
-                                //    lbAnE28.Text = Math.Round(Convert.ToDecimal(lbAnE28.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF28.Text))
-                                //{
-                                //    lbAnF28.Text = Math.Round(Convert.ToDecimal(lbAnF28.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH28.Text))
-                                //{
-                                //    lbAnH28.Text = Math.Round(Convert.ToDecimal(lbAnH28.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI28.Text))
-                                //{
-                                //    lbAnI28.Text = lbAnI28.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI28.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ28.Text))
-                                //{
-
-
-                                //    //Set Decimal
-                                //    lbAnJ28.Text = Math.Round(Convert.ToDecimal(lbAnJ28.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "FPotassium as K"
-                                //txtB29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.B));
-                                //txtC29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.C));
-                                //txtD29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ29.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.J));
-
-                                //if (!String.IsNullOrEmpty(txtB29.Text))
-                                //{
-                                //    txtB29.Text = Math.Round(Convert.ToDecimal(txtB29.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC29.Text))
-                                //{
-                                //    txtC29.Text = Math.Round(Convert.ToDecimal(txtC29.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD29.Text))
-                                //{
-                                //    txtD29.Text = Math.Round(Convert.ToDecimal(txtD29.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE29.Text))
-                                //{
-                                //    lbAnE29.Text = Math.Round(Convert.ToDecimal(lbAnE29.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF29.Text))
-                                //{
-                                //    lbAnF29.Text = Math.Round(Convert.ToDecimal(lbAnF29.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH29.Text))
-                                //{
-                                //    lbAnH29.Text = Math.Round(Convert.ToDecimal(lbAnH29.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI29.Text))
-                                //{
-                                //    lbAnI29.Text = lbAnI29.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI29.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ29.Text))
-                                //{
-                                //    //Set Decimal
-                                //    lbAnJ29.Text = Math.Round(Convert.ToDecimal(lbAnJ29.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "FMagnesium as Mg"
-                                //txtB30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));
-                                //txtC30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.C));
-                                //txtD30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.J));
-                                //if (!String.IsNullOrEmpty(txtB30.Text))
-                                //{
-                                //    txtB30.Text = Math.Round(Convert.ToDecimal(txtB30.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC30.Text))
-                                //{
-                                //    txtC30.Text = Math.Round(Convert.ToDecimal(txtC30.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD30.Text))
-                                //{
-                                //    txtD30.Text = Math.Round(Convert.ToDecimal(txtD30.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE30.Text))
-                                //{
-                                //    lbAnE30.Text = Math.Round(Convert.ToDecimal(lbAnE30.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF30.Text))
-                                //{
-                                //    lbAnF30.Text = Math.Round(Convert.ToDecimal(lbAnF30.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH30.Text))
-                                //{
-                                //    lbAnH30.Text = Math.Round(Convert.ToDecimal(lbAnH30.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI30.Text))
-                                //{
-                                //    lbAnI30.Text = lbAnI30.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI30.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ30.Text))
-                                //{
-
-
-
-                                //    //Set Decimal
-                                //    lbAnJ30.Text = Math.Round(Convert.ToDecimal(lbAnJ30.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "FCalcium as Ca"
-                                //txtB31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));
-                                //txtC31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.C));
-                                //txtD31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.D));
-                                //lbAnE31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.E));
-                                //lbAnF31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.F));
-                                //lbAnH31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.H));
-                                //lbAnI31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.I));
-                                //lbAnJ31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.J));
-                                //if (!String.IsNullOrEmpty(txtB31.Text))
-                                //{
-                                //    txtB31.Text = Math.Round(Convert.ToDecimal(txtB31.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtC31.Text))
-                                //{
-                                //    txtC31.Text = Math.Round(Convert.ToDecimal(txtC31.Text), Convert.ToInt16(txtDecimal02.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(txtD31.Text))
-                                //{
-                                //    txtD31.Text = Math.Round(Convert.ToDecimal(txtD31.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnE31.Text))
-                                //{
-                                //    lbAnE31.Text = Math.Round(Convert.ToDecimal(lbAnE31.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnF31.Text))
-                                //{
-                                //    lbAnF31.Text = Math.Round(Convert.ToDecimal(lbAnF31.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnH31.Text))
-                                //{
-                                //    lbAnH31.Text = Math.Round(Convert.ToDecimal(lbAnH31.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnI31.Text))
-                                //{
-                                //    lbAnI31.Text = lbAnI31.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI31.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //}
-                                //if (!String.IsNullOrEmpty(lbAnJ31.Text))
-                                //{
-                                //    //Set Decimal
-                                //    lbAnJ31.Text = Math.Round(Convert.ToDecimal(lbAnJ31.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //}
-                                //#endregion
-                                //#region "FTotal"
-                                //if (isheet.GetRow(33 - 1) != null)
-                                //{
-                                //    lbAnI32.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.I));
-                                //    lbAnJ32.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.J));
-
-                                //    if (!String.IsNullOrEmpty(lbAnI32.Text) && !String.IsNullOrEmpty(lbAnJ32.Text))
-                                //    {
-                                //        lbAnI32.Text = lbAnI32.Text.Equals("Not Detected") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbAnI32.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-                                //        lbAnJ32.Text = Math.Round(Convert.ToDecimal(lbAnJ32.Text), Convert.ToInt16(txtDecimal09.Text)) + "";
-                                //    }
-                                //}
-                                //#endregion
 
                             }
 
@@ -1442,8 +685,10 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 litErrorMessage.Text = String.Empty;
-                gvResult.DataSource = this.coverpages;
-                gvResult.DataBind();
+                gvResultAnions.DataSource = this.coverpages.Where(x => x.ic_type.Value == 1).ToList();
+                gvResultAnions.DataBind();
+                gvResultCations.DataSource = this.coverpages.Where(x => x.ic_type.Value == 2).ToList();
+                gvResultCations.DataBind();
             }
         }
 
@@ -1866,74 +1111,6 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
-        ////
-        private String getValueByPeakName(ISheet _isIntegration, String _peakName)
-        {
-            Double result = 0;
-            for (int i = 0; i < _isIntegration.LastRowNum; i++)
-            {
-                if (_isIntegration.GetRow(i) != null)
-                {
-                    String pkName = CustomUtils.GetCellValue(_isIntegration.GetRow(i).GetCell(2));
-                    if (pkName.Equals(_peakName))
-                    {
-                        result = Convert.ToDouble(CustomUtils.GetCellValue(_isIntegration.GetRow(i).GetCell(6)));
-                        break;
-                    }
-                }
-            }
-
-            return String.Format("{0:n4}", Math.Round(result, 4));
-        }
-        ////
-        private void setCoverPageValue(String _peakname, String _wb, String _wc, String _wd, String _we, String _wf, String _wg, String _wh, String _wi, String _wj)
-        {
-            template_wd_ic_coverpage _val = this.coverpages.Where(x => x.A.StartsWith(_peakname)).FirstOrDefault();
-            if (_val != null)
-            {
-                _val.wb = _wb;
-                _val.wc = _wc;
-                _val.wd = _wd;
-                _val.we = _we;
-                _val.wf = String.IsNullOrEmpty(_wf) ? "0" : CustomUtils.isNumber(_wf) ? Math.Round(Convert.ToDouble(_wf), 2) + "" : String.Empty;
-                _val.wg = _wg;
-                _val.wg = _wh;
-                _val.wi = _wi;
-                _val.wj = String.IsNullOrEmpty(_wj) ? "0" : _wj;
-                //_val.wunit = _k;//unit
-                if (!String.IsNullOrEmpty(_val.B))
-                {
-                    _val.E = (_val.B.Equals("NA") || (_val.B.Equals("-")) ? "NA" : (CustomUtils.isNumber(_wf) ? Convert.ToDouble(_wj) : 0) < Convert.ToDouble(_val.B) ? "PASS" : "FAIL");
-                }
-            }
-        }
-
-        private template_wd_ic_coverpage getCoverPageValue(String _peakname)
-        {
-            return this.coverpages.Where(x => x.A.StartsWith(_peakname)).FirstOrDefault();
-        }
-
-        //private String getUnitText(String unit)
-        //{
-        //    String result = String.Empty;
-        //    if (!String.IsNullOrEmpty(unit))
-        //    {
-        //        if (unit.Equals("1"))
-        //        {
-        //            result = "ug";
-        //        }
-        //        else if (unit.Equals("1000"))
-        //        {
-        //            result = "ng";
-        //        }
-        //        else
-        //        {
-        //            result = "mg";
-        //        }
-        //    }
-        //    return result;
-        //}
-
         private void calculateByFormular()
         {
 
@@ -1944,22 +1121,6 @@ namespace ALS.ALSI.Web.view.template
             if (b11 != 0 && b12 != 0 && b13 != 0)
             {
 
-                setCoverPageValue("Fluoride as F", txtB17.Text, txtC17.Text, txtD17.Text, lbAnE17.Text, lbAnF17.Text, "", lbAnH17.Text, lbAnI17.Text, lbAnJ17.Text);
-                setCoverPageValue("Chloride as Cl", txtB18.Text, txtC18.Text, txtD18.Text, lbAnE18.Text, lbAnF18.Text, "", lbAnH18.Text, lbAnI18.Text, lbAnJ18.Text);
-                setCoverPageValue("Bromide as Br", txtB19.Text, txtC19.Text, txtD19.Text, lbAnE19.Text, lbAnF19.Text, "", lbAnH19.Text, lbAnI19.Text, lbAnJ19.Text);
-                setCoverPageValue("Nitrite as NO2", txtB19_1.Text, txtC19_1.Text, txtD19_1.Text, txtAnE19.Text, txtAnF19.Text, "", txtAnH19.Text, txtAnI19.Text, txtAnJ19.Text);
-                setCoverPageValue("Nitrate as NO3", txtB20.Text, txtC20.Text, txtD20.Text, lbAnE20.Text, lbAnF20.Text, "", lbAnH20.Text, lbAnI20.Text, lbAnJ20.Text);
-                setCoverPageValue("Sulfate as SO4", txtB21.Text, txtC21.Text, txtD21.Text, lbAnE21.Text, lbAnF21.Text, "", lbAnH21.Text, lbAnI21.Text, lbAnJ21.Text);
-                setCoverPageValue("Phosphate as PO4", txtB22.Text, txtC22.Text, txtD22.Text, lbAnE22.Text, lbAnF22.Text, "", lbAnH22.Text, lbAnI22.Text, lbAnJ22.Text);
-                setCoverPageValue("Total Anions", "", "", "", "", "", "", "", lbAnI23.Text, lbAnJ23.Text);
-                setCoverPageValue("Lithium", txtB26.Text, txtC26.Text, txtD26.Text, lbAnE26.Text, lbAnF26.Text, "", lbAnH26.Text, lbAnI26.Text, lbAnJ26.Text);
-                setCoverPageValue("Sodium", txtB27.Text, txtC27.Text, txtD27.Text, lbAnE27.Text, lbAnF27.Text, "", lbAnH27.Text, lbAnI27.Text, lbAnJ27.Text);
-                setCoverPageValue("Ammonium", txtB28.Text, txtC28.Text, txtD28.Text, lbAnE28.Text, lbAnF28.Text, "", lbAnH28.Text, lbAnI28.Text, lbAnJ28.Text);
-                setCoverPageValue("Potassium", txtB29.Text, txtC29.Text, txtD29.Text, lbAnE29.Text, lbAnF29.Text, "", lbAnH29.Text, lbAnI29.Text, lbAnJ29.Text);
-                setCoverPageValue("Magnesium", txtB30.Text, txtC30.Text, txtD30.Text, lbAnE30.Text, lbAnF30.Text, "", lbAnH30.Text, lbAnI30.Text, lbAnJ30.Text);
-                setCoverPageValue("Calcium", txtB31.Text, txtC31.Text, txtD31.Text, lbAnE31.Text, lbAnF31.Text, "", lbAnH31.Text, lbAnI31.Text, lbAnJ31.Text);
-                setCoverPageValue("Total Cations", "", "", "", "", "", "", "", lbAnI32.Text, lbAnJ32.Text);
-
                 gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                 gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                 gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
@@ -1968,6 +1129,14 @@ namespace ALS.ALSI.Web.view.template
                 gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
 
             }
+            foreach (template_wd_ic_coverpage _val in this.coverpages)
+            {
+                if (!String.IsNullOrEmpty(_val.B))
+                {
+                    _val.E = (_val.B.Equals("NA") || (_val.B.Equals("-")) ? "NA" : (CustomUtils.isNumber(_val.wf) ? Convert.ToDouble(_val.wj) : 0) < Convert.ToDouble(_val.B) ? "PASS" : "FAIL");
+                }
+            }
+
 
             gvAnionic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.ANIONIC));
             gvAnionic.DataBind();
@@ -1984,14 +1153,21 @@ namespace ALS.ALSI.Web.view.template
             gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
             gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
 
-            Label1.Text = ddlUnit.SelectedItem.Text;
-            Label2.Text = ddlUnit.SelectedItem.Text;
-            Label3.Text = ddlUnit.SelectedItem.Text;
-            Label4.Text = ddlUnit.SelectedItem.Text;
-            Label5.Text = ddlUnit.SelectedItem.Text;
-            Label6.Text = ddlUnit.SelectedItem.Text;
-            Label7.Text = ddlUnit.SelectedItem.Text;
-            Label8.Text = ddlUnit.SelectedItem.Text;
+
+            gvResultAnions.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
+            gvResultAnions.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
+            gvResultAnions.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
+            gvResultAnions.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+            gvResultAnions.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+            gvResultAnions.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
+
+            gvResultCations.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
+            gvResultCations.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
+            gvResultCations.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
+            gvResultCations.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+            gvResultCations.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+            gvResultCations.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
+
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)

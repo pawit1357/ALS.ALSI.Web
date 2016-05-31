@@ -98,7 +98,14 @@ namespace ALS.ALSI.Biz.DataAccess
                 tmp.Update();
             }
         }
-
+        public static void DeleteBySampleID(int _sampleID)
+        {
+            List<template_wd_ic_coverpage> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
+            foreach (template_wd_ic_coverpage tmp in lists)
+            {
+                _repository.Delete(tmp);
+            }
+        }
         //#region "IDisposable Support"
         //void IDisposable.Dispose()
         //{
@@ -223,6 +230,6 @@ namespace ALS.ALSI.Biz.DataAccess
 
 
 
-        
+
     }
 }

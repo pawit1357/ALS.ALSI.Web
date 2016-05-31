@@ -88,7 +88,7 @@
 
                                         <asp:CheckBoxList ID="CheckBoxList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="CheckBoxList1_SelectedIndexChanged">
                                             <asp:ListItem Value="0.300" Selected="True">No. of Particles ≥ 0.3 μm (Counts/mL)</asp:ListItem>
-                                            <asp:ListItem Value="0.500">No. of Particles ≥ 0.5 μm (Counts/mL)</asp:ListItem>
+                                            <asp:ListItem Value="0.500" Selected="True">No. of Particles ≥ 0.5 μm (Counts/mL)</asp:ListItem>
                                             <asp:ListItem Value="0.600" Selected="True">No. of Particles ≥ 0.6 μm (Counts/mL)</asp:ListItem>
                                         </asp:CheckBoxList>
 
@@ -100,21 +100,21 @@
                                         <asp:GridView ID="gvCoverPage03" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
                                             <Columns>
                                                 <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
-                                                <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits" />
+                                                <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits(Counts/cm2)" />
                                                 <asp:BoundField DataField="Results" HeaderText="Results" />
                                             </Columns>
                                         </asp:GridView>
                                         <asp:GridView ID="gvCoverPage05" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
                                             <Columns>
                                                 <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
-                                                <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits" />
+                                                <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits(Counts/cm2)" />
                                                 <asp:BoundField DataField="Results" HeaderText="Results" />
                                             </Columns>
                                         </asp:GridView>
                                         <asp:GridView ID="gvCoverPage06" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
                                             <Columns>
                                                 <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
-                                                <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits" />
+                                                <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits(Counts/cm2)" />
                                                 <asp:BoundField DataField="Results" HeaderText="Results" />
                                             </Columns>
                                         </asp:GridView>
@@ -524,14 +524,19 @@
                                         <tr>
                                             <td>Average of last 3</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
                                         </tr>
                                         <tr>
                                             <td>Average</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
                                         </tr>
-
+                                              <tr>
+                                            <td> No. of Particles</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
+                                        </tr>
+                                       
 
 
 
