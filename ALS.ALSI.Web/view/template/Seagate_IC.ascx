@@ -105,366 +105,138 @@
                         </div>
 
                         <h4 class="form-section">Results</h4>
-                        <%--1--%>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Anions</th>
-                                            <th>Conc of water blank,ug/L (B)</th>
-                                            <th>Conc of sample,ug/L (C)</th>
-                                            <th>Dilution Factor</th>
-                                            <th>Raw Result (<asp:Label ID="Label1" runat="server"></asp:Label>
-                                                )</th>
-                                            <th>Instrument Detection Limit (ug/L)</th>
-                                            <th>Method Detection Limit (<asp:Label ID="Label2" runat="server"></asp:Label>
-                                                )</th>
-                                            <th>Below Detection? (1=Yes, 0=No)</th>
-                                            <th>Conc of sample, (<asp:Label ID="Label3" runat="server"></asp:Label>
-                                                )</th>
-                                            <th>Result for use in Total </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
 
-                                        <tr>
-                                            <td>Fluoride, F</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB14_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC14_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD14_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE14" runat="server"></asp:Label></td>
-                                            <td>0.5</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG14" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH14" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI14" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ14" runat="server"></asp:Label></td>
+                        <asp:GridView ID="gvResultAnions" runat="server" AutoGenerateColumns="False"
+                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="" OnRowCommand="gvAnionic_RowCommand">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Anions" ItemStyle-HorizontalAlign="Left">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litType" runat="server" Text='<%# Eval("A")%>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Conc of water Blankµg/L (B)" ItemStyle-HorizontalAlign="Left">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litA" runat="server" Text='<%# Eval("wb")%>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Conc of Sample µg/L (C)" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litB" runat="server" Text='<%# Eval("wc")%>'></asp:Literal>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Dilution Factor" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litC" runat="server" Text='<%# Eval("wd")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Raw Results ng/cm2" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litD" runat="server" Text='<%# Eval("we")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Instrument Detection Limit ng/cm2" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litE" runat="server" Text='<%# Eval("wf")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Method Detection Limit ng/cm2" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litF" runat="server" Text='<%# Eval("wg")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Below MDL? (1=Yes, 0=No)" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litG" runat="server" Text='<%# Eval("wh")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Final Conc. of Sample ng/cm2" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litH" runat="server" Text='<%# Eval("wi")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                            </Columns>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Chloride, Cl</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB15_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC15_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD15_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE15" runat="server"></asp:Label></td>
-                                            <td>0.5</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG15" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH15" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI15" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ15" runat="server"></asp:Label></td>
+                            <EmptyDataTemplate>
+                                <div class="data-not-found">
+                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                </div>
+                            </EmptyDataTemplate>
+                        </asp:GridView>
+                        <br />
+                        <asp:GridView ID="gvResultCations" runat="server" AutoGenerateColumns="False"
+                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="" OnRowCommand="gvAnionic_RowCommand">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Anions" ItemStyle-HorizontalAlign="Left">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litType" runat="server" Text='<%# Eval("A")%>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Conc of water Blankµg/L (B)" ItemStyle-HorizontalAlign="Left">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litA" runat="server" Text='<%# Eval("wb")%>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Conc of Sample µg/L (C)" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litB" runat="server" Text='<%# Eval("wc")%>'></asp:Literal>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Dilution Factor" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litC" runat="server" Text='<%# Eval("wd")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Raw Results ng/cm2" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litD" runat="server" Text='<%# Eval("we")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Instrument Detection Limit ng/cm2" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litE" runat="server" Text='<%# Eval("wf")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Method Detection Limit ng/cm2" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litF" runat="server" Text='<%# Eval("wg")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Below MDL? (1=Yes, 0=No)" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litG" runat="server" Text='<%# Eval("wh")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Final Conc. of Sample ng/cm2" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="litH" runat="server" Text='<%# Eval("wi")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                            </Columns>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Nitrite as NO2</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB16_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC16_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD16_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE16" runat="server"></asp:Label></td>
-                                            <td>0.5</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG16" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH16" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI16" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ16" runat="server"></asp:Label></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Bromide, Br</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB17_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC17_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD17_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE17" runat="server"></asp:Label></td>
-                                            <td>0.5</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG17" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH17" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI17" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ17" runat="server"></asp:Label></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Nitrate, NO3</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB18_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC18_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD18_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE18" runat="server"></asp:Label></td>
-                                            <td>0.5</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG18" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH18" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI18" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ18" runat="server"></asp:Label></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Sulfate, SO4</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB19_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC19_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD19_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE19" runat="server"></asp:Label></td>
-                                            <td>0.5</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG19" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH19" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI19" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ19" runat="server"></asp:Label></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Phosphate, PO4</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB20_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC20_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD20_Chem" runat="server" Text="1"></asp:TextBox></td>
-
-                                            <td>
-                                                <asp:Label ID="lbAnE20" runat="server"></asp:Label></td>
-                                            <td>0.5</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG20" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH20" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI20" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ20" runat="server"></asp:Label></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH21" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI21" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ21" runat="server"></asp:Label></td>
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <%--2--%>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Cations</th>
-                                            <th>Conc of water blank,ug/L (B)</th>
-                                            <th>Conc of sample,ug/L (C)</th>
-                                            <th>Dilution Factor</th>
-                                            <th>Raw Result (<asp:Label ID="Label4" runat="server"></asp:Label>
-                                                )</th>
-                                            <th>Instrument Detection Limit (ug/L)</th>
-                                            <th>Method Detection Limit (<asp:Label ID="Label5" runat="server"></asp:Label>
-                                                )</th>
-                                            <th>Below Detection? (1=Yes, 0=No)</th>
-                                            <th>Conc of sample, (<asp:Label ID="Label6" runat="server"></asp:Label>
-                                                )</th>
-                                            <th>Result for use in Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <tr>
-                                            <td>Lithium, Li</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB23_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC23_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD23_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE23" runat="server"></asp:Label></td>
-                                            <td>0.6</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG23" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH23" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI23" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ23" runat="server"></asp:Label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sodium, Na</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB24_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC24_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD24_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE24" runat="server"></asp:Label></td>
-                                            <td>0.6</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG24" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH24" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI24" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ24" runat="server"></asp:Label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ammonium, NH4</td>
-
-
-                                            <td>
-                                                <asp:TextBox ID="txtB25_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC25_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD25_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE25" runat="server"></asp:Label></td>
-                                            <td>0.6</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG25" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH25" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI25" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ25" runat="server"></asp:Label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Potassium, K</td>
-
-
-                                            <td>
-                                                <asp:TextBox ID="txtB26_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC26_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD26_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE26" runat="server"></asp:Label></td>
-                                            <td>0.6</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG26" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH26" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI26" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ26" runat="server"></asp:Label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Magnesium, Mg
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="txtB27_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC27_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD27_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE27" runat="server"></asp:Label></td>
-                                            <td>0.6</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG27" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH27" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI27" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ27" runat="server"></asp:Label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Calcium, Ca
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="txtB28_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC28_Chem" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD28_Chem" runat="server" Text="1"></asp:TextBox></td>
-                                            <td>
-                                                <asp:Label ID="lbAnE28" runat="server"></asp:Label></td>
-                                            <td>0.6</td>
-                                            <td>
-                                                <asp:Label ID="lbAnG28" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH28" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI28" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ28" runat="server"></asp:Label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <asp:Label ID="lbAnH29" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnI29" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbAnJ29" runat="server"></asp:Label></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- END FORM-->
+                            <EmptyDataTemplate>
+                                <div class="data-not-found">
+                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                </div>
+                            </EmptyDataTemplate>
+                        </asp:GridView>
 
                     </asp:Panel>
                     <asp:Panel ID="pCoverpage" runat="server">
@@ -609,72 +381,72 @@
                                 <div class="portlet-body">
 
                                     <asp:Panel ID="pSpecification" runat="server">
-                                    <%--    <div class="row">
+                                        <%--    <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Detail Spec:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Detail Spec:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                            </div>
+                                        </div>
                                         <%--    </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pStatus" runat="server">
-                                <%--        <div class="row">
+                                        <%--        <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                            </div>
+                                        </div>
                                         <%--    </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pRemark" runat="server">
-                                  <%--      <div class="row">
+                                        <%--      <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                      <%--      </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <%--      </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDisapprove" runat="server">
-                                   <%--     <div class="row">
+                                        <%--     <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                      <%--      </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <%--      </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDownload" runat="server">
-                                      <%--  <div class="row">
+                                        <%--  <div class="row">
                                             <div class="col-md-6">--%>
 
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Download:</label>
-                                                    <div class="col-md-6">
-                                                        <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
-<%--                                                        <i class="fa fa-download"></i>--%>
-                                                        <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                            <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                                        </asp:LinkButton>
-                                                    </div>
-                                                </div>
-                                       <%--     </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Download:</label>
+                                            <div class="col-md-6">
+                                                <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
+                                                <%--                                                        <i class="fa fa-download"></i>--%>
+                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                                                    <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
+                                        <%--     </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
@@ -708,7 +480,7 @@
                                         <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-<%--                                    <asp:Panel ID="pUploadfile" runat="server">
+                                    <%--                                    <asp:Panel ID="pUploadfile" runat="server">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -728,8 +500,6 @@
                                         <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>--%>
-
-
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -762,7 +532,7 @@
                                         <tr>
                                             <td>Dilution Factor</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
 
                                         </tr>
                                         <tr>
@@ -786,7 +556,7 @@
                                         <tr>
                                             <td>Below Detection</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal07" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal07" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
 
                                         </tr>
                                         <tr>

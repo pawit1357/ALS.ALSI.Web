@@ -903,7 +903,7 @@ namespace ALS.ALSI.Web.view.template
                             lpc.RunNumber = 6;
                             lpc.Run = "";
                             lpc.Sample = "";
-                            lpc.type = item.Key.Replace("Blank", "");
+                            lpc.type = item.Key.Replace("Blank", "").Replace("B","").Trim();
                             lpc.ChannelSize = channel_size;
                             template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
                             template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
@@ -915,6 +915,7 @@ namespace ALS.ALSI.Web.view.template
                             listAverages.Add(lpc);
                             index++;
                         }
+
                         DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(channel_size)).ToDataTable(), "Type", "Sample", "Value", "No. of Particles ≥ " + channel_size.Substring(0, 3) + " μm (Counts/mL)", false);
                         gvWorkSheetAverage.DataSource = dtAverages;
                         gvWorkSheetAverage.DataBind();
@@ -997,7 +998,7 @@ namespace ALS.ALSI.Web.view.template
                             lpc.RunNumber = 6;
                             lpc.Run = "";
                             lpc.Sample = "";
-                            lpc.type = item.Key.Replace("Blank", "");
+                            lpc.type = item.Key.Replace("Blank", "").Replace("B", "").Trim();
                             lpc.ChannelSize = channel_size;
                             template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
                             template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
@@ -1005,7 +1006,7 @@ namespace ALS.ALSI.Web.view.template
 
                             double _value = (Convert.ToDouble(lpcSaple.Results) - Convert.ToDouble(lpcBlank.Results)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea05.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor05.Text);
 
-                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal05.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal05.Text)));
                             listAverages.Add(lpc);
                             index++;
                         }
@@ -1091,7 +1092,7 @@ namespace ALS.ALSI.Web.view.template
                             lpc.RunNumber = 6;
                             lpc.Run = "";
                             lpc.Sample = "";
-                            lpc.type = item.Key.Replace("Blank", "");
+                            lpc.type = item.Key.Replace("Blank", "").Replace("B", "").Trim();
                             lpc.ChannelSize = channel_size;
                             template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
                             template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
@@ -1099,7 +1100,7 @@ namespace ALS.ALSI.Web.view.template
 
                             double _value = (Convert.ToDouble(lpcSaple.Results) - Convert.ToDouble(lpcBlank.Results)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea06.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor06.Text);
 
-                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal05.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal05.Text)));
                             listAverages.Add(lpc);
                             index++;
                         }
