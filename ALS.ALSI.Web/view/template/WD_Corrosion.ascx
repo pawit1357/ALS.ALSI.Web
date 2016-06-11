@@ -81,7 +81,7 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <h5>METHOD/PROCEDURE</h5>
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped table-bordered mini">
                                     <thead>
                                         <tr>
                                             <th>Test</th>
@@ -114,10 +114,10 @@
                                             <ItemTemplate>
                                                 <asp:Literal ID="litTemperature_humidity_parameters" runat="server" Text='<%# Eval("temperature_humidity_parameters")%>' />
                                             </ItemTemplate>
-                                            <EditItemTemplate>
+                                            <%--         <EditItemTemplate>
                                                 <asp:DropDownList ID="ddlhTemperature_humidity_parameters" runat="server" class="select2_category form-control" AutoPostBack="True" DataTextField="C" DataValueField="ID"></asp:DropDownList>
-                                                <asp:HiddenField ID="hTemperature_humidity_parameters" Value='<%# Eval("temperature_humidity_parameters_id")%>' runat="server" />
-                                            </EditItemTemplate>
+                                                <asp:HiddenField ID="temperature_humidity_parameters_id" Value='<%# Eval("temperature_humidity_parameters_id")%>' runat="server" />
+                                            </EditItemTemplate>--%>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Specification" ItemStyle-HorizontalAlign="Center">
@@ -192,11 +192,44 @@
                         </div>
                         <br />
                     </asp:Panel>
+                                            <h4 class="form-section">อัพโหลดไฟล์:</h4>
 
                     <asp:Panel ID="pRefImage" runat="server">
-                        <h4 class="form-section">Photo Before:</h4>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">เลือกไฟล์: </label>
 
-                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="input-group input-large">
+                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                        </div>
+                                        <span class="input-group-addon btn default btn-file">
+                                            <span class="fileinput-new">Select file </span>
+                                            <span class="fileinput-exists">Change </span>
+                                            <asp:FileUpload ID="FileUpload1" runat="server" />
+
+                                        </span>
+                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                    </div>
+                                </div>
+                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-3">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <%--                        <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
@@ -212,13 +245,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </asp:Panel>
 
                     <div class="row">
                         <div class="col-md-3">
                             <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
-                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting" OnRowCancelingEdit="gvRefImages_RowCancelingEdit" OnRowDataBound="gvRefImages_RowDataBound" OnRowEditing="gvRefImages_RowEditing" OnRowUpdating="gvRefImages_RowUpdating">
+                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting" OnRowCancelingEdit="gvRefImages_RowCancelingEdit" OnRowDataBound="gvRefImages_RowDataBound" OnRowEditing="gvRefImages_RowEditing" OnRowUpdating="gvRefImages_RowUpdating" PageSize="2">
                                 <Columns>
 
                                     <asp:TemplateField HeaderText="Image Order" ItemStyle-HorizontalAlign="Center">
@@ -281,9 +314,9 @@
                                         <%--      <div class="row">
                                             <div class="col-md-6">--%>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3">Component:<span class="required">*</span></label>
+                                            <label class="control-label col-md-3">Procedure:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlComponent" runat="server" class="select2_category form-control" DataTextField="B" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged">
+                                                <asp:DropDownList ID="ddlComponent" runat="server" class="select2_category form-control" DataTextField="A" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
@@ -292,9 +325,9 @@
                                         <%--<div class="row">
                                             <div class="col-md-6">--%>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
+                                            <label class="control-label col-md-3">Temperature Humidity Parameters:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlSpecification" runat="server" class="select2_category form-control" DataTextField="B" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged">
+                                                <asp:DropDownList ID="ddlSpecification" runat="server" class="select2_category form-control" DataTextField="C" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>

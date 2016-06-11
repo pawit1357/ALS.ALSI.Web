@@ -214,8 +214,18 @@ namespace ALS.ALSI.Web.view.template
                 ddlComponent.SelectedValue = cover.procedureNo_id.ToString();
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
 
-                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
+                //lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
+                tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+                if (component != null)
+                {
+                    this.coverpages[0].temperature_humidity_parameters_id = component.ID;
+                    this.coverpages[0].temperature_humidity_parameters = component.C;
+                    //this.coverpages[0].specification = component.D;
 
+
+
+                    lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
+                }
 
                 gvResult.DataSource = this.coverpages;
                 gvResult.DataBind();
@@ -223,11 +233,26 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 this.CommandName = CommandNameEnum.Add;
-           
-                    lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", String.Empty);
-                
+
+                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", String.Empty);
+
 
                 this.coverpages = new List<template_seagate_corrosion_coverpage>();
+                //template_seagate_corrosion_coverpage cov = new template_seagate_corrosion_coverpage();
+
+                //cov.ID = 1;
+                //cov.sample_id = this.SampleID;
+                //cov.specification_id = Convert.ToInt32(ddlComponent.SelectedValue);
+
+                ////cov.procedureNo_id = txtProcedureNo.Text;
+                //cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
+
+                //cov.temperature_humidity_parameters = "85oC, 85%RH, 24hours";
+                //cov.specification = "No observable discoloration or spots at 10x";
+                //cov.result = "";
+                //this.coverpages.Add(cov);
+                //gvResult.DataSource = this.coverpages;
+                //gvResult.DataBind();
                 template_seagate_corrosion_coverpage cov = new template_seagate_corrosion_coverpage();
 
                 cov.ID = 1;
@@ -507,15 +532,39 @@ namespace ALS.ALSI.Web.view.template
                 //cov.procedureNo = txtProcedureNo.Text;
                 cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
 
-                //cov.temperature_humidity_parameters = String.Empty;
+                cov.temperature_humidity_parameters = component.C;
                 cov.specification = "No observable discoloration or spots at 10x";
                 cov.result = "";
                 covList.Add(cov);
                 this.coverpages = covList;
                 gvResult.DataSource = this.coverpages;
                 gvResult.DataBind();
+                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", component.B);
 
             }
+
+            //tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlComponent.SelectedValue));
+            //if (component != null)
+            //{
+            //    txtProcedureNo.Text = component.A;
+            //    List<template_seagate_corrosion_coverpage> covList = new List<template_seagate_corrosion_coverpage>();
+            //    template_seagate_corrosion_coverpage cov = new template_seagate_corrosion_coverpage();
+
+            //    cov.ID = 1;
+            //    cov.sample_id = this.SampleID;
+            //    cov.specification_id = Convert.ToInt32(ddlComponent.SelectedValue);
+            //    //cov.procedureNo = txtProcedureNo.Text;
+            //    cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
+
+            //    //cov.temperature_humidity_parameters = String.Empty;
+            //    cov.specification = "No observable discoloration or spots at 10x";
+            //    cov.result = "";
+            //    covList.Add(cov);
+            //    this.coverpages = covList;
+            //    gvResult.DataSource = this.coverpages;
+            //    gvResult.DataBind();
+
+            //}
         }
 
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
@@ -523,8 +572,21 @@ namespace ALS.ALSI.Web.view.template
             tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
             if (component != null)
             {
-                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", component.B);
+                if (this.coverpages.Count > 0)
+                {
+
+                    this.coverpages[0].temperature_humidity_parameters = component.C;
+                    this.coverpages[0].specification = "No observable discoloration or spots at 10x";
+                    this.coverpages[0].result = "";
+                    gvResult.DataSource = this.coverpages;
+                    gvResult.DataBind();
+                }
             }
+            //tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+            //if (component != null)
+            //{
+            //    lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", component.B);
+            //}
         }
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -581,18 +643,18 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            tb_m_specification comp = new tb_m_specification();
-            comp.specification_id = this.jobSample.specification_id;
-            comp.template_id = this.jobSample.template_id;
+            //tb_m_specification comp = new tb_m_specification();
+            //comp.specification_id = this.jobSample.specification_id;
+            //comp.template_id = this.jobSample.template_id;
 
-            HiddenField _hTemperature_humidity_parameters = (HiddenField)gvResult.Rows[e.NewEditIndex].FindControl("hTemperature_humidity_parameters");
-            DropDownList _ddlhTemperature_humidity_parameters = (DropDownList)gvResult.Rows[e.NewEditIndex].FindControl("ddlhTemperature_humidity_parameters");
-            if (_ddlhTemperature_humidity_parameters != null)
-            {
-                _ddlhTemperature_humidity_parameters.DataSource = comp.SelectAll();
-                _ddlhTemperature_humidity_parameters.DataBind();
-            }
-            _ddlhTemperature_humidity_parameters.SelectedValue = _hTemperature_humidity_parameters.Value;
+            //HiddenField _hTemperature_humidity_parameters = (HiddenField)gvResult.Rows[e.NewEditIndex].FindControl("hTemperature_humidity_parameters");
+            //DropDownList _ddlhTemperature_humidity_parameters = (DropDownList)gvResult.Rows[e.NewEditIndex].FindControl("ddlhTemperature_humidity_parameters");
+            //if (_ddlhTemperature_humidity_parameters != null)
+            //{
+            //    _ddlhTemperature_humidity_parameters.DataSource = comp.SelectAll();
+            //    _ddlhTemperature_humidity_parameters.DataBind();
+            //}
+            //_ddlhTemperature_humidity_parameters.SelectedValue = _hTemperature_humidity_parameters.Value;
         }
 
         protected void gvResult_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -607,9 +669,9 @@ namespace ALS.ALSI.Web.view.template
 
             int _id = Convert.ToInt32(gvResult.DataKeys[e.RowIndex].Values[0].ToString());
             DropDownList _ddlResult = (DropDownList)gvResult.Rows[e.RowIndex].FindControl("ddlResult");
-            DropDownList _ddlhTemperature_humidity_parameters = (DropDownList)gvResult.Rows[e.RowIndex].FindControl("ddlhTemperature_humidity_parameters");
+            //DropDownList _ddlhTemperature_humidity_parameters = (DropDownList)gvResult.Rows[e.RowIndex].FindControl("ddlhTemperature_humidity_parameters");
 
-            TextBox _txtSpecification = (TextBox)gvResult.Rows[e.RowIndex].FindControl("txtSpecification");
+            //TextBox _txtSpecification = (TextBox)gvResult.Rows[e.RowIndex].FindControl("txtSpecification");
 
 
             if (_ddlResult != null)
@@ -618,9 +680,9 @@ namespace ALS.ALSI.Web.view.template
                 if (_tmp != null)
                 {
                     _tmp.result = _ddlResult.SelectedValue;
-                    _tmp.temperature_humidity_parameters_id = Convert.ToInt16(_ddlhTemperature_humidity_parameters.SelectedValue);
-                    _tmp.specification = _txtSpecification.Text;
-                    _tmp.temperature_humidity_parameters = _ddlhTemperature_humidity_parameters.SelectedItem.Text;
+                    //_tmp.temperature_humidity_parameters_id = Convert.ToInt16(_ddlhTemperature_humidity_parameters.SelectedValue);
+                    //_tmp.specification = _txtSpecification.Text;
+                    //_tmp.temperature_humidity_parameters = _ddlhTemperature_humidity_parameters.SelectedItem.Text;
                     //
 
                 }
@@ -744,7 +806,7 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
         }
-      
+
         protected void gvRefImages_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             int _id = Convert.ToInt32(gvRefImages.DataKeys[e.RowIndex].Values[0].ToString());
@@ -762,7 +824,7 @@ namespace ALS.ALSI.Web.view.template
             gvRefImages.DataSource = this.refImg;
             gvRefImages.DataBind();
         }
-        
+
         #endregion
 
         protected void lbDownload_Click(object sender, EventArgs e)

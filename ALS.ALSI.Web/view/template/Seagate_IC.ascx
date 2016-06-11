@@ -90,15 +90,8 @@
                                             <td>
                                                 <asp:TextBox ID="txtB11" runat="server"></asp:TextBox></td>
                                         </tr>
-                                        <tr>
-                                            <td>Unit</td>
-                                            <td>
-                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="1000">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="0.001">mg</asp:ListItem>
-                                                </asp:DropDownList></td>
-                                        </tr>
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -518,6 +511,15 @@
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
                                     <table class="table table-striped">
+                                        <tr>
+                                            <td>Unit</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="1000">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="0.001">mg</asp:ListItem>
+                                                </asp:DropDownList></td>
+                                        </tr>
                                         <tr>
                                             <td>Conc of water blank,ug/L (B)</td>
                                             <td>

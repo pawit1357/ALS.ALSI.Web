@@ -85,6 +85,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl invDiv;
         
         /// <summary>
+        /// gvMethodProcedure control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMethodProcedure;
+        
+        /// <summary>
         /// tab1_tr1 control.
         /// </summary>
         /// <remarks>
@@ -922,15 +931,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pSpecification;
         
         /// <summary>
-        /// ddlDetailSpec control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDetailSpec;
-        
-        /// <summary>
         /// ddlComponent control.
         /// </summary>
         /// <remarks>
@@ -938,6 +938,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlComponent;
+        
+        /// <summary>
+        /// ddlDetailSpec control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDetailSpec;
         
         /// <summary>
         /// pStatus control.

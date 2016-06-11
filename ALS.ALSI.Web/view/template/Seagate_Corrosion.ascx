@@ -67,10 +67,10 @@
                                             <ItemTemplate>
                                                 <asp:Literal ID="litTemperature_humidity_parameters" runat="server" Text='<%# Eval("temperature_humidity_parameters")%>' />
                                             </ItemTemplate>
-                                            <EditItemTemplate>
+                                <%--            <EditItemTemplate>
                                                 <asp:DropDownList ID="ddlhTemperature_humidity_parameters" runat="server" class="select2_category form-control" AutoPostBack="True" DataTextField="C" DataValueField="ID"></asp:DropDownList>
                                                 <asp:HiddenField ID="hTemperature_humidity_parameters" Value='<%# Eval("temperature_humidity_parameters_id")%>' runat="server" />
-                                            </EditItemTemplate>
+                                            </EditItemTemplate>--%>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Specification" ItemStyle-HorizontalAlign="Center">
@@ -278,7 +278,7 @@
                                         <%--    <div class="row">
                                             <div class="col-md-6">--%>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3">Component:<span class="required">*</span></label>
+                                            <label class="control-label col-md-3">Procedure:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlComponent" runat="server" class="select2_category form-control" DataTextField="A" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged">
                                                 </asp:DropDownList>
@@ -289,9 +289,9 @@
                                         <%--   <div class="row">
                                             <div class="col-md-6">--%>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
+                                            <label class="control-label col-md-3">Temperature Humidity Parameters:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlSpecification" runat="server" class="select2_category form-control" DataTextField="B" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged">
+                                                <asp:DropDownList ID="ddlSpecification" runat="server" class="select2_category form-control" DataTextField="C" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>

@@ -3,6 +3,13 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 
+<style type="text/css">
+    .auto-style1 {
+        height: 26px;
+    }
+</style>
+
+
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
 
     <asp:ToolkitScriptManager ID="ToolkitScript1" runat="server" />
@@ -28,6 +35,63 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h5>METHOD/PROCEDURE:</h5>
+
+                                        <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="" OnRowCommand="gvAnionic_RowCommand">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="Analysis" ItemStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litAnalysis" runat="server" Text='<%# Eval("A")%>' />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Procedure No" ItemStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litProcedureNo" runat="server" Text='<%# Eval("wb")%>' />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Number of pieces used for extraction" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litNumberOfPiecesUsedForExtraction" runat="server" Text='<%# Eval("wc")%>'></asp:Literal>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Extraction Medium" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="litExtractionMedium" runat="server" Text='<%# Eval("wd")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Extraction Volume" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="litExtractionVolume" runat="server" Text='<%# Eval("we")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Hide">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("id")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("id")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+
+                                            <EmptyDataTemplate>
+                                                <div class="data-not-found">
+                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                </div>
+                                            </EmptyDataTemplate>
+                                        </asp:GridView>
+
+
+
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
                                                 <tr>
@@ -220,12 +284,12 @@ The instrument detection limit for silicone oil is
                                             <th colspan="4">Test Data</th>
                                         </tr>
                                         <tr>
-                                            <th>Volume of solvent used:</th>
-                                            <th>
+                                            <th class="auto-style1">Volume of solvent used:</th>
+                                            <th class="auto-style1">
                                                 <asp:TextBox ID="txtNVR_FTIR_B14" runat="server"></asp:TextBox>
                                             </th>
-                                            <th>mL</th>
-                                            <th></th>
+                                            <th class="auto-style1">mL</th>
+                                            <th class="auto-style1"></th>
                                         </tr>
                                         <tr>
                                             <th>Surface area (S):</th>
@@ -404,24 +468,21 @@ The instrument detection limit for silicone oil is
                                 <div class="portlet-body">
 
                                     <asp:Panel ID="pSpecification" runat="server">
-                                        <%--   <div class="row">
-                                            <div class="col-md-6">--%>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Component:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlComponent" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Detail Spec:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlDetailSpec" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlDetailSpec_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <%--                                            </div>--%>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Component:<span class="required">*</span></label>
-                                                <div class="col-md-6">
-                                                    <asp:DropDownList ID="ddlComponent" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%--                                        </div>--%>
+
 
                                         <br />
                                     </asp:Panel>
@@ -438,18 +499,18 @@ The instrument detection limit for silicone oil is
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
-                                   <asp:Panel ID="pRemark" runat="server">
+                                    <asp:Panel ID="pRemark" runat="server">
                                         <%-- <div class="row">
                                             <div class="col-md-6">--%>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
-                                        <div class="col-md-6">
-                                            <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <%--         </div>
+                                        <%--         </div>
                                         </div>--%>
-                                    <br />
+                                        <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDisapprove" runat="server">
                                         <%--     <div class="row">

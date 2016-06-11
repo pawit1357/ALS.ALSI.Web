@@ -215,8 +215,18 @@ namespace ALS.ALSI.Web.view.template
                 ddlComponent.SelectedValue = cover.procedureNo_id.ToString();
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
 
-                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
 
+                tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+                if (component != null)
+                {
+                    this.coverpages[0].temperature_humidity_parameters_id = component.ID;
+                    this.coverpages[0].temperature_humidity_parameters = component.C;
+                    this.coverpages[0].specification = component.D;
+
+
+
+                    lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
+                }
 
                 gvResult.DataSource = this.coverpages;
                 gvResult.DataBind();
@@ -262,7 +272,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 #endregion
 
-           
+
                 pRefImage.Visible = true;
                 gvResult.Columns[3].Visible = true;
                 gvResult.Columns[4].Visible = false;
@@ -349,8 +359,8 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                     template_wd_corrosion_coverpage.UpdateList(this.coverpages);
-                    template_wd_corrosion_img.DeleteBySampleID(this.SampleID);
-                    template_wd_corrosion_img.InsertList(this.refImg);
+                    //template_wd_corrosion_img.DeleteBySampleID(this.SampleID);
+                    //template_wd_corrosion_img.InsertList(this.refImg);
 
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
@@ -360,7 +370,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-            
+
 
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
@@ -389,7 +399,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-                      
+
                             this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
@@ -511,13 +521,14 @@ namespace ALS.ALSI.Web.view.template
                 //cov.procedureNo = txtProcedureNo.Text;
                 cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
 
-                //cov.temperature_humidity_parameters = String.Empty;
+                cov.temperature_humidity_parameters = component.C;
                 cov.specification = "No observable discoloration or spots at 10x";
                 cov.result = "";
                 covList.Add(cov);
                 this.coverpages = covList;
                 gvResult.DataSource = this.coverpages;
                 gvResult.DataBind();
+                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", component.B);
 
             }
         }
@@ -527,7 +538,15 @@ namespace ALS.ALSI.Web.view.template
             tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
             if (component != null)
             {
-                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", component.B);
+                if (this.coverpages.Count > 0)
+                {
+
+                    this.coverpages[0].temperature_humidity_parameters = component.C;
+                    this.coverpages[0].specification = "No observable discoloration or spots at 10x";
+                    this.coverpages[0].result = "";
+                    gvResult.DataSource = this.coverpages;
+                    gvResult.DataBind();
+                }
             }
         }
 
@@ -585,18 +604,18 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            tb_m_specification comp = new tb_m_specification();
-            comp.specification_id = this.jobSample.specification_id;
-            comp.template_id = this.jobSample.template_id;
+            //tb_m_specification comp = new tb_m_specification();
+            //comp.specification_id = this.jobSample.specification_id;
+            //comp.template_id = this.jobSample.template_id;
 
-            HiddenField _hTemperature_humidity_parameters = (HiddenField)gvResult.Rows[e.NewEditIndex].FindControl("hTemperature_humidity_parameters");
-            DropDownList _ddlhTemperature_humidity_parameters = (DropDownList)gvResult.Rows[e.NewEditIndex].FindControl("ddlhTemperature_humidity_parameters");
-            if (_ddlhTemperature_humidity_parameters != null)
-            {
-                _ddlhTemperature_humidity_parameters.DataSource = comp.SelectAll();
-                _ddlhTemperature_humidity_parameters.DataBind();
-            }
-            _ddlhTemperature_humidity_parameters.SelectedValue = _hTemperature_humidity_parameters.Value;
+            //HiddenField _temperature_humidity_parameters_id = (HiddenField)gvResult.Rows[e.NewEditIndex].FindControl("temperature_humidity_parameters_id");
+            //DropDownList _ddlhTemperature_humidity_parameters = (DropDownList)gvResult.Rows[e.NewEditIndex].FindControl("ddlhTemperature_humidity_parameters");
+            //if (_ddlhTemperature_humidity_parameters != null)
+            //{
+            //    _ddlhTemperature_humidity_parameters.DataSource = comp.SelectAll();
+            //    _ddlhTemperature_humidity_parameters.DataBind();
+            //}
+            //_ddlhTemperature_humidity_parameters.SelectedValue = _temperature_humidity_parameters_id.Value;
         }
 
         protected void gvResult_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -611,9 +630,9 @@ namespace ALS.ALSI.Web.view.template
 
             int _id = Convert.ToInt32(gvResult.DataKeys[e.RowIndex].Values[0].ToString());
             DropDownList _ddlResult = (DropDownList)gvResult.Rows[e.RowIndex].FindControl("ddlResult");
-            DropDownList _ddlhTemperature_humidity_parameters = (DropDownList)gvResult.Rows[e.RowIndex].FindControl("ddlhTemperature_humidity_parameters");
+            //DropDownList _ddlhTemperature_humidity_parameters = (DropDownList)gvResult.Rows[e.RowIndex].FindControl("ddlhTemperature_humidity_parameters");
 
-            TextBox _txtSpecification = (TextBox)gvResult.Rows[e.RowIndex].FindControl("txtSpecification");
+            //TextBox _txtSpecification = (TextBox)gvResult.Rows[e.RowIndex].FindControl("txtSpecification");
 
 
             if (_ddlResult != null)
@@ -622,9 +641,9 @@ namespace ALS.ALSI.Web.view.template
                 if (_tmp != null)
                 {
                     _tmp.result = _ddlResult.SelectedValue;
-                    _tmp.temperature_humidity_parameters_id = Convert.ToInt16(_ddlhTemperature_humidity_parameters.SelectedValue);
-                    _tmp.specification = _txtSpecification.Text;
-                    _tmp.temperature_humidity_parameters = _ddlhTemperature_humidity_parameters.SelectedItem.Text;
+                    //_tmp.temperature_humidity_parameters_id = Convert.ToInt16(_ddlhTemperature_humidity_parameters.SelectedValue);
+                    //_tmp.specification = _txtSpecification.Text;
+                    //_tmp.temperature_humidity_parameters = _ddlhTemperature_humidity_parameters.SelectedItem.Text;
                     //
 
                 }
@@ -877,7 +896,6 @@ namespace ALS.ALSI.Web.view.template
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
 
-
             for (int i = 0; i < FileUpload1.PostedFiles.Count; i++)
             {
                 HttpPostedFile _postedFile = FileUpload1.PostedFiles[i];
@@ -902,8 +920,6 @@ namespace ALS.ALSI.Web.view.template
                     _img.img_type = i + 1;
                     _img.path_img1 = source_file_url;
                     this.refImg.Add(_img);
-
-
                 }
             }
 
