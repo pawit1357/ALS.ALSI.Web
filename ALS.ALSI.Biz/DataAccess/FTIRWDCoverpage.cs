@@ -77,6 +77,39 @@ namespace ALS.ALSI.Biz.DataAccess
 
 
 
+        public static void InsertList(List<template_wd_ftir_coverpage> _lists)
+        {
+
+            foreach (template_wd_ftir_coverpage tmp in _lists)
+            {
+                try
+                {
+                    tmp.Insert();
+
+                }
+                catch (Exception ex) {
+
+                    Console.WriteLine();
+                }
+            }
+        }
+        public static void UpdateList(List<template_wd_ftir_coverpage> _lists)
+        {
+            foreach (template_wd_ftir_coverpage tmp in _lists)
+            {
+                tmp.Update();
+            }
+        }
+        public static void DeleteBySampleID(int _sampleID)
+        {
+            List<template_wd_ftir_coverpage> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
+            foreach (template_wd_ftir_coverpage tmp in lists)
+            {
+                _repository.Delete(tmp);
+            }
+        }
+
+
         //#region "IDisposable Support"
         //void IDisposable.Dispose()
         //{

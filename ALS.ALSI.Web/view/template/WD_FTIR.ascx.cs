@@ -17,7 +17,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WordToPDF;
-
+using System.Linq;
 namespace ALS.ALSI.Web.view.template
 {
     public partial class WD_FTIR : System.Web.UI.UserControl
@@ -47,9 +47,9 @@ namespace ALS.ALSI.Web.view.template
             set { ViewState[Constants.COMMAND_NAME] = value; }
         }
 
-        public template_wd_ftir_coverpage Ftir
+        public List<template_wd_ftir_coverpage> Ftir
         {
-            get { return (template_wd_ftir_coverpage)Session[GetType().Name + "Ftir"]; }
+            get { return (List<template_wd_ftir_coverpage>)Session[GetType().Name + "Ftir"]; }
             set { Session[GetType().Name + "Ftir"] = value; }
         }
 
@@ -200,90 +200,11 @@ namespace ALS.ALSI.Web.view.template
                     }
                     #endregion
 
-
-                    txtB21.Visible = true;
-                    txtB22.Visible = true;
-                    txtB23.Visible = true;
-
-                    txtC21.Visible = true;
-                    txtC22.Visible = true;
-                    txtC23.Visible = true;
-
-                    txtD21_1.Visible = true;
-                    txtD22.Visible = true;
-                    txtD23.Visible = true;
-
-                    txtE21.Visible = true;
-                    txtE22.Visible = true;
-                    txtE23.Visible = true;
-
-                    lbB21.Visible = false;
-                    lbB22.Visible = false;
-                    lbB23.Visible = false;
-
-                    lbC21.Visible = false;
-                    lbC22.Visible = false;
-                    lbC23.Visible = false;
-
-                    lbD21_1.Visible = false;
-                    lbD22.Visible = false;
-                    lbD23.Visible = false;
-
-                    lbE21.Visible = false;
-                    lbE22.Visible = false;
-                    lbE23.Visible = false;
-
-                    CheckBox1.Visible = true;
-                    CheckBox2.Visible = true;
-                    CheckBox3.Visible = true;
-                    CheckBox5.Visible = true;
-                    CheckBox6.Visible = true;
-
-
                     btnNVRFTIR.Visible = true;
 
                 }
                 else
                 {
-
-                    txtB21.Visible = false;
-                    txtB22.Visible = false;
-                    txtB23.Visible = false;
-
-                    txtC21.Visible = false;
-                    txtC22.Visible = false;
-                    txtC23.Visible = false;
-
-                    txtD21_1.Visible = false;
-                    txtD22.Visible = false;
-                    txtD23.Visible = false;
-
-                    txtE21.Visible = false;
-                    txtE22.Visible = false;
-                    txtE23.Visible = false;
-
-                    lbB21.Visible = true;
-                    lbB22.Visible = true;
-                    lbB23.Visible = true;
-
-                    lbC21.Visible = true;
-                    lbC22.Visible = true;
-                    lbC23.Visible = true;
-
-                    lbD21_1.Visible = true;
-                    lbD22.Visible = true;
-                    lbD23.Visible = true;
-
-
-                    lbE21.Visible = true;
-                    lbE22.Visible = true;
-                    lbE23.Visible = true;
-
-                    CheckBox1.Visible = false;
-                    CheckBox2.Visible = false;
-                    CheckBox3.Visible = false;
-                    CheckBox5.Visible = false;
-                    CheckBox6.Visible = false;
 
                     btnNVRFTIR.Visible = false;
 
@@ -293,132 +214,71 @@ namespace ALS.ALSI.Web.view.template
             #endregion
             #region "WorkSheet"
 
-            this.Ftir = new template_wd_ftir_coverpage().SelectBySampleID(this.SampleID);
-            if (this.Ftir != null)
+            this.Ftir = template_wd_ftir_coverpage.FindAllBySampleID(this.SampleID);
+            if (this.Ftir != null && this.Ftir.Count > 0)
             {
-                #region "NVR-FTIR(Hex)"
-                txtNVR_FTIR_B14.Text = this.Ftir.td_b14;//Volume of solvent used:
-                txtNVR_FTIR_B15.Text = this.Ftir.td_b15;//Surface area (S):
-                txtNVR_FTIR_B16.Text = this.Ftir.td_b16;//No. of parts extracted (N):
-                ////
-                txtB21.Text = this.Ftir.procedure_no;//Procedure No
-                txtB22.Text = this.Ftir.procedure_no;//Procedure No
-                txtB23.Text = this.Ftir.procedure_no;//Procedure No
+                ddlComponent.SelectedValue = this.Ftir[0].component_id.Value + "";
+                ddlDetailSpec.SelectedValue = this.Ftir[0].detail_spec_id.Value + "";
 
-                txtC21.Text = txtNVR_FTIR_B16.Text;//Number of piecesused for extraction
-                txtC22.Text = txtNVR_FTIR_B16.Text;//Number of piecesused for extraction
-                txtC23.Text = txtNVR_FTIR_B16.Text;//Number of piecesused for extraction
+                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                gvMethodProcedure.DataBind();
+                gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+                gvResult.DataBind();
 
-                txtD21_1.Text = this.Ftir.extraction_medium;//ExtractionMedium
-                txtD22.Text = this.Ftir.extraction_medium;//ExtractionMedium
-                txtD23.Text = this.Ftir.extraction_medium;//ExtractionMedium
+                CalculateCas();
 
-                txtE21.Text = txtNVR_FTIR_B14.Text;//Extraction Volume
-                txtE22.Text = txtNVR_FTIR_B14.Text;//Extraction Volume
-                txtE23.Text = txtNVR_FTIR_B14.Text;//Extraction Volume
+                tb_m_detail_spec tmp = new tb_m_detail_spec().SelectByID(this.Ftir[0].detail_spec_id.Value);
+                if (tmp != null)
+                {
+                    lbDocRev.Text = tmp.B;
+                    lbDesc.Text = tmp.A;
+                }
 
-                lbB21.Text = txtB21.Text;
-                lbB22.Text = txtB22.Text;
-                lbB23.Text = txtB23.Text;
-                lbC21.Text = txtC21.Text;
-                lbC22.Text = txtC22.Text;
-                lbC23.Text = txtC23.Text;
-                lbD21_1.Text = txtD21_1.Text;
-                lbD22.Text = txtD22.Text;
-                lbD23.Text = txtD23.Text;
-                lbE21.Text = txtE21.Text;
-                lbE22.Text = txtE22.Text;
-                lbE23.Text = txtE23.Text;
-                ////
+                txtNVR_FTIR_B14.Text = this.Ftir[0].td_b14;//Volume of solvent used:
+                txtNVR_FTIR_B15.Text = this.Ftir[0].td_b15;//Surface area (S):
+                txtNVR_FTIR_B16.Text = this.Ftir[0].td_b16;//No. of parts extracted (N):
 
-                txtNVR_B20.Text = this.Ftir.nvr_b20;
-                txtNVR_B21.Text = this.Ftir.nvr_b21;
-                txtNVR_C20.Text = this.Ftir.nvr_c20;
-                txtNVR_C21.Text = this.Ftir.nvr_c21;
-                lbC26.Text = this.Ftir.nvr_c26;
-
-                txtFTIR_B30.Text = this.Ftir.ftr_b30;
-                txtFTIR_B31.Text = this.Ftir.ftr_b31;
-                txtFTIR_B32.Text = this.Ftir.ftr_b32;
-                txtFTIR_B33.Text = this.Ftir.ftr_b33;
-                txtFTIR_B35.Text = this.Ftir.ftr_b35;
-
-                lbFTIR_C40.Text = this.Ftir.ftr_c40;
-
-                txtFTIR_B42.Text = this.Ftir.ftr_b42;
-                txtFTIR_B43.Text = this.Ftir.ftr_b43;
-                txtFTIR_B44.Text = this.Ftir.ftr_b44;
-                txtFTIR_B45.Text = this.Ftir.ftr_b45;
-
-                lbFTIR_C49.Text = this.Ftir.ftr_c49;
+                #region "NVR"
+                txtNVR_B20.Text = this.Ftir[0].nvr_b20;//Blank (B)-Wt.of Empty Pan (µg)
+                txtNVR_B21.Text = this.Ftir[0].nvr_b21;//Sample (A)-Wt.of Empty Pan (µg)
+                txtNVR_C20.Text = this.Ftir[0].nvr_c20;//Blank (B)-Wt.of Pan + Residue (µg)
+                txtNVR_C21.Text = this.Ftir[0].nvr_c21;//Sample (A)-Wt.of Pan + Residue (µg)
+                lbC26.Text = this.Ftir[0].nvr_c26;//Calculations:-Wt. of Residue (µg)
+                #endregion
+                #region "Silicone"
+                txtFTIR_B30.Text = this.Ftir[0].ftr_b30;//Peak Ht at 800cm-
+                txtFTIR_B31.Text = this.Ftir[0].ftr_b31;//Slope of Calibration Plot
+                txtFTIR_B32.Text = this.Ftir[0].ftr_b32;//y-intercept
+                txtFTIR_B33.Text = this.Ftir[0].ftr_b33;//Amount of Amide Detected (µg)
+                txtFTIR_B35.Text = this.Ftir[0].ftr_b36;//Method Detection Limit, MDL
+                lbFTIR_C40.Text = this.Ftir[0].ftr_c40;//Calculations
+                txtC41.Text = this.Ftir[0].ftr_c41;//Reported as 
+                #endregion
+                #region "Amide"
+                txtFTIR_B42.Text = this.Ftir[0].ftr_b43; //Peak Ht at cm-1
+                txtFTIR_B43.Text = this.Ftir[0].ftr_b44;//Slope of Calibration Plot
+                txtFTIR_B44.Text = this.Ftir[0].ftr_b45;//y-intercept
+                txtFTIR_B45.Text = this.Ftir[0].ftr_b46; //Amount of Amide Detected (µg)
+                txtFTIR_B45.Text = this.Ftir[0].ftr_b48; //Method Detection Limit, MDL
+                lbFTIR_C49.Text = this.Ftir[0].ftr_c52;//Calculations
+                txtC53.Text = this.Ftir[0].ftr_c53;//Reportas
+                #endregion
+                #region "Unit"
+                lbAmide.Text = this.Ftir[0].amide_unit;
+                lbSilicone.Text = this.Ftir[0].silicone_unit;
                 #endregion
 
-                ddlDetailSpec.SelectedValue = this.Ftir.detail_spec_id.ToString();
-                ddlComponent.SelectedValue = this.Ftir.component_id.ToString();
-                detailSpec = new tb_m_detail_spec().SelectByID(Convert.ToInt32(this.Ftir.detail_spec_id));
-                if (detailSpec != null)
-                {
-                    lbDocRev.Text = detailSpec.B;
-                    lbDesc.Text = detailSpec.A;
-                    lbC28.Text =detailSpec.E.Equals("-")? "NA": detailSpec.E.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.E);//NVR
-                    lbC30.Text = detailSpec.F.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.F); ;//FTIR
-
-                    lbE27.Text = detailSpec.D;
-                    lbD27.Text = detailSpec.D;
-
-                    lbD28.Text = this.Ftir.nvr_c26;
-                    lbD30.Text = this.Ftir.ftr_c40;
-
-                    //=IF(C28="NA","NA",IF(OR(D28="Not Detected",D28<INDEX('Detail Spec'!$A$3:$H$280,$F$1,5)),"PASS","FAIL"))
-                    //if (!String.IsNullOrEmpty(lbD28.Text) && !detailSpec.E.Equals("-"))
-                    //{
-                    //    lbE28.Text = lbC28.Text.Equals("NA") ? "NA" : (lbD28.Text.Equals("Not Detected") || Convert.ToDouble(lbD28.Text) < Convert.ToDouble(detailSpec.E)) ? "PASS" : "FAIL";
-                    //}
-                    ////=IF(C30="NA","NA",IF(OR(D30="< MDL",D30<INDEX('Detail Spec'!$A$3:$H$280,$F$1,6)),"PASS","FAIL"))
-                    //if (!String.IsNullOrEmpty(lbD30.Text))
-                    //{
-                    //    if (lbD30.Text.Equals("Not Detected"))
-                    //    {
-                    //        lbE30.Text = "PASS";
-                    //    }
-                    //    else
-                    //    {
-                    //        lbE30.Text = lbC30.Text.Equals("NA") ? "NA" : (lbD30.Text.Equals("MDL") || Convert.ToDouble(lbD30.Text) < Convert.ToDouble(detailSpec.F)) ? "PASS" : "FAIL";
-
-                    //    }
-                    //}
-
-                    CalculateCas();
-                }
-                tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(this.Ftir.component_id));
-                if (component != null)
-                {
-                    lbB21.Text = component.B;
-                    lbB22.Text = component.B;
-                    lbB23.Text = component.B;
-
-                    lbC21.Text = this.Ftir.td_b16;
-                    lbC22.Text = this.Ftir.td_b16;
-                    lbC23.Text = this.Ftir.td_b16;
-
-                    lbD21.Text = component.F;
-                    lbD22.Text = component.F;
-                    lbD23.Text = component.F;
-
-                    lbE21.Text = String.Format("{0} mL", component.G);
-                    lbE22.Text = String.Format("{0} mL", component.G);
-                    lbE23.Text = String.Format("{0} mL", component.G);
-                }
-
+                CalculateCas();
 
                 this.CommandName = CommandNameEnum.Edit;
-                ShowItem(this.Ftir.item_visible);
+                //ShowItem(this.Ftir.item_visible);
             }
             else
             {
-                this.Ftir = new template_wd_ftir_coverpage();
+                this.Ftir = new List<template_wd_ftir_coverpage>();
                 this.CommandName = CommandNameEnum.Add;
             }
+
             #endregion
 
             //initial component
@@ -464,21 +324,21 @@ namespace ALS.ALSI.Web.view.template
                     pCoverpage.Visible = true;
                     PWorking.Visible = false;
                     pLoadFile.Visible = false;
-                    txtC21.Text = txtNVR_FTIR_B16.Text;
-                    txtC22.Text = txtNVR_FTIR_B16.Text;
-                    txtC23.Text = txtNVR_FTIR_B16.Text;
+                    //txtC21.Text = txtNVR_FTIR_B16.Text;
+                    //txtC22.Text = txtNVR_FTIR_B16.Text;
+                    //txtC23.Text = txtNVR_FTIR_B16.Text;
 
-                    txtE21.Text = String.Format("{0} mL", txtNVR_FTIR_B14.Text);
-                    txtE22.Text = String.Format("{0} mL", txtNVR_FTIR_B14.Text);
-                    txtE23.Text = String.Format("{0} mL", txtNVR_FTIR_B14.Text);
+                    //txtE21.Text = String.Format("{0} mL", txtNVR_FTIR_B14.Text);
+                    //txtE22.Text = String.Format("{0} mL", txtNVR_FTIR_B14.Text);
+                    //txtE23.Text = String.Format("{0} mL", txtNVR_FTIR_B14.Text);
 
-                    lbC21.Text = txtC21.Text;
-                    lbC22.Text = txtC22.Text;
-                    lbC23.Text = txtC23.Text;
+                    //lbC21.Text = txtC21.Text;
+                    //lbC22.Text = txtC22.Text;
+                    //lbC23.Text = txtC23.Text;
 
-                    lbE21.Text = txtE21.Text;
-                    lbE22.Text = txtE22.Text;
-                    lbE23.Text = txtE23.Text;
+                    //lbE21.Text = txtE21.Text;
+                    //lbE22.Text = txtE22.Text;
+                    //lbE23.Text = txtE23.Text;
                     CalculateCas();
                     break;
                 case "NVR-FTIR(Hex)":
@@ -509,85 +369,60 @@ namespace ALS.ALSI.Web.view.template
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
-                    #region "NVR-FTIR(Hex)"
-                    this.Ftir.sample_id = this.SampleID;
-                    this.Ftir.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
-                    this.Ftir.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                    this.Ftir.item_visible = getItemStatus();
-                    this.Ftir.procedure_no = String.IsNullOrEmpty(txtB21.Text) ? (String.IsNullOrEmpty(txtB22.Text) ? (String.IsNullOrEmpty(txtB23.Text) ? String.Empty : txtB23.Text) : txtB22.Text) : txtB21.Text;
-                    this.Ftir.extraction_medium = String.IsNullOrEmpty(txtD21_1.Text) ? (String.IsNullOrEmpty(txtD22.Text) ? (String.IsNullOrEmpty(txtD23.Text) ? String.Empty : txtD23.Text) : txtD22.Text) : txtD21_1.Text;
-                    this.Ftir.td_b14 = txtNVR_FTIR_B14.Text;//Volume of solvent used:
-                    this.Ftir.td_b15 = txtNVR_FTIR_B15.Text;//Surface area (S):
-                    this.Ftir.td_b16 = txtNVR_FTIR_B16.Text;//No. of parts extracted (N):
 
-                    this.Ftir.nvr_b20 = txtNVR_B20.Text;//Blank (B)-Wt.of Empty Pan (µg)
-                    this.Ftir.nvr_b21 = txtNVR_B21.Text;//Sample (A)-Wt.of Empty Pan (µg)
-                    this.Ftir.nvr_c20 = txtNVR_C20.Text;//Blank (B)-Wt.of Pan + Residue (µg)
-                    this.Ftir.nvr_c21 = txtNVR_C21.Text;//Sample (A)-Wt.of Pan + Residue (µg)
-                    this.Ftir.nvr_c26 = lbC26.Text;//Calculations:-Wt. of Residue (µg)
-
-                    this.Ftir.ftr_b30 = txtFTIR_B30.Text;
-                    this.Ftir.ftr_b31 = txtFTIR_B31.Text;
-                    this.Ftir.ftr_b32 = txtFTIR_B32.Text;
-                    this.Ftir.ftr_b33 = txtFTIR_B33.Text;
-                    this.Ftir.ftr_b35 = txtFTIR_B35.Text;
-
-                    this.Ftir.ftr_c40 = lbFTIR_C40.Text;
-
-                    this.Ftir.ftr_b42 = txtFTIR_B42.Text;
-                    this.Ftir.ftr_b43 = txtFTIR_B43.Text;
-                    this.Ftir.ftr_b44 = txtFTIR_B44.Text;
-                    this.Ftir.ftr_b45 = txtFTIR_B45.Text;
-
-                    this.Ftir.ftr_c49 = lbFTIR_C49.Text;
-                    #endregion
-                    switch (CommandName)
+                    foreach (template_wd_ftir_coverpage item in this.Ftir)
                     {
-                        case CommandNameEnum.Add:
-                            this.Ftir.Insert();
-                            break;
-                        case CommandNameEnum.Edit:
-                            this.Ftir.Update();
-                            break;
+                        item.sample_id = this.SampleID;
+                        item.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
+                        item.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                     }
+                    template_wd_ftir_coverpage.DeleteBySampleID(this.SampleID);
+                    template_wd_ftir_coverpage.InsertList(this.Ftir);
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
 
-                    #region "NVR-FTIR(Hex)"
-                    this.Ftir.sample_id = this.SampleID;
-                    this.Ftir.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
-                    this.Ftir.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                    this.Ftir.item_visible = getItemStatus();
-                    this.Ftir.procedure_no = String.IsNullOrEmpty(txtB21.Text) ? (String.IsNullOrEmpty(txtB22.Text) ? (String.IsNullOrEmpty(txtB23.Text) ? String.Empty : txtB23.Text) : txtB22.Text) : txtB21.Text;
-                    this.Ftir.extraction_medium = String.IsNullOrEmpty(txtD21_1.Text) ? (String.IsNullOrEmpty(txtD22.Text) ? (String.IsNullOrEmpty(txtD23.Text) ? String.Empty : txtD23.Text) : txtD22.Text) : txtD21_1.Text;
-                    this.Ftir.td_b14 = txtNVR_FTIR_B14.Text;//Volume of solvent used:
-                    this.Ftir.td_b15 = txtNVR_FTIR_B15.Text;//Surface area (S):
-                    this.Ftir.td_b16 = txtNVR_FTIR_B16.Text;//No. of parts extracted (N):
+                    foreach (template_wd_ftir_coverpage item in this.Ftir)
+                    {
+                        item.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
+                        item.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                        item.td_b14 = txtNVR_FTIR_B14.Text;//Volume of solvent used:
+                        item.td_b15 = txtNVR_FTIR_B15.Text;//Surface area (S):
+                        item.td_b16 = txtNVR_FTIR_B16.Text;//No. of parts extracted (N):
 
-                    this.Ftir.nvr_b20 = txtNVR_B20.Text;//Blank (B)-Wt.of Empty Pan (µg)
-                    this.Ftir.nvr_b21 = txtNVR_B21.Text;//Sample (A)-Wt.of Empty Pan (µg)
-                    this.Ftir.nvr_c20 = txtNVR_C20.Text;//Blank (B)-Wt.of Pan + Residue (µg)
-                    this.Ftir.nvr_c21 = txtNVR_C21.Text;//Sample (A)-Wt.of Pan + Residue (µg)
-                    this.Ftir.nvr_c26 = lbC26.Text;//Calculations:-Wt. of Residue (µg)
+                        #region "NVR"
+                        item.nvr_b20 = txtNVR_B20.Text;//Blank (B)-Wt.of Empty Pan (µg)
+                        item.nvr_b21 = txtNVR_B21.Text;//Sample (A)-Wt.of Empty Pan (µg)
+                        item.nvr_c20 = txtNVR_C20.Text;//Blank (B)-Wt.of Pan + Residue (µg)
+                        item.nvr_c21 = txtNVR_C21.Text;//Sample (A)-Wt.of Pan + Residue (µg)
+                        item.nvr_c26 = lbC26.Text;//Calculations:-Wt. of Residue (µg)
+                        #endregion
+                        #region "Silicone"
+                        item.ftr_b30 = txtFTIR_B30.Text;//Peak Ht at 800cm-
+                        item.ftr_b31 = txtFTIR_B31.Text;//Slope of Calibration Plot
+                        item.ftr_b32 = txtFTIR_B32.Text;//y-intercept
+                        item.ftr_b33 = txtFTIR_B33.Text;//Amount of Amide Detected (µg)
+                        item.ftr_b36 = txtFTIR_B35.Text;//Method Detection Limit, MDL
+                        item.ftr_c40 = lbFTIR_C40.Text;//Calculations
+                        item.ftr_c41 = txtC41.Text;//Reported as 
+                        #endregion
+                        #region "Amide"
+                        item.ftr_b43 = txtFTIR_B42.Text; //Peak Ht at cm-1
+                        item.ftr_b44 = txtFTIR_B43.Text;//Slope of Calibration Plot
+                        item.ftr_b45 = txtFTIR_B44.Text;//y-intercept
+                        item.ftr_b46 = txtFTIR_B45.Text; //Amount of Amide Detected (µg)
+                        item.ftr_b48 = txtFTIR_B45.Text; //Method Detection Limit, MDL
+                        item.ftr_c52 = lbFTIR_C49.Text;//Calculations
+                        item.ftr_c53 = txtC53.Text;//Reportas
+                        #endregion
 
-                    this.Ftir.ftr_b30 = txtFTIR_B30.Text;
-                    this.Ftir.ftr_b31 = txtFTIR_B31.Text;
-                    this.Ftir.ftr_b32 = txtFTIR_B32.Text;
-                    this.Ftir.ftr_b33 = txtFTIR_B33.Text;
-                    this.Ftir.ftr_b35 = txtFTIR_B35.Text;
+                        item.amide_unit = lbAmide.Text;
+                        item.silicone_unit = lbSilicone.Text;
+                    }
 
-                    this.Ftir.ftr_c40 = lbFTIR_C40.Text;
+                    template_wd_ftir_coverpage.UpdateList(this.Ftir);
 
-                    this.Ftir.ftr_b42 = txtFTIR_B42.Text;
-                    this.Ftir.ftr_b43 = txtFTIR_B43.Text;
-                    this.Ftir.ftr_b44 = txtFTIR_B44.Text;
-                    this.Ftir.ftr_b45 = txtFTIR_B45.Text;
-
-                    this.Ftir.ftr_c49 = lbFTIR_C49.Text;
-                    #endregion
-                    this.Ftir.Update();
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -596,7 +431,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-            
+
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
                             break;
@@ -624,7 +459,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-                     
+
                             this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
@@ -763,14 +598,16 @@ namespace ALS.ALSI.Web.view.template
                         }
                         _postedFile.SaveAs(source_file);
                         #region "XLS"
-                        if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")))
+                        if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")) || (Path.GetExtension(_postedFile.FileName).Equals(".xlsx")))
                         {
                             using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
                             {
                                 HSSFWorkbook wb = new HSSFWorkbook(fs);
-                                ISheet isheet = wb.GetSheet(ConfigurationManager.AppSettings["wd.ftir.excel.sheetname.working1"]);// wb.GetSheet(ConfigurationManager.AppSettings["seagate.gcms.excel.sheetname.workingpg_motor_oil"]);
+
+                                ISheet isheet = wb.GetSheet("NVR_FTIR");
                                 if (isheet == null)
                                 {
+
                                     errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", ConfigurationManager.AppSettings["wd.ftir.excel.sheetname.working1"]));
                                 }
                                 else
@@ -790,7 +627,7 @@ namespace ALS.ALSI.Web.view.template
 
                                     lbD20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.D));
                                     lbD21.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.D));
-                                    lbC26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.C));
+                                    lbC26.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.C));
 
                                     //Decimal
                                     txtNVR_B20.Text = String.IsNullOrEmpty(txtNVR_B20.Text) ? "" : Math.Round(Convert.ToDecimal(txtNVR_B20.Text), Convert.ToInt16(txtDecimal01.Text)) + "";
@@ -805,42 +642,51 @@ namespace ALS.ALSI.Web.view.template
 
                                     #endregion
                                     #region "FTIR-Silicone"
-                                    txtFTIR_B30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.B));
-                                    txtFTIR_B31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));
-                                    txtFTIR_B32.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));
-                                    txtFTIR_B33.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));
-                                    txtFTIR_B35.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.B));
-                                    lbFTIR_C40.Text = CustomUtils.GetCellValue(isheet.GetRow(40 - 1).GetCell(ExcelColumn.C));
+                                    txtFTIR_B30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));//31-Peak Ht at 800cm-1
+                                    txtFTIR_B31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));//32-Slope of Calibration Plot
+                                    txtFTIR_B32.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));//33-y-intercept
+                                    txtFTIR_B33.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));//34-Amount of Silicone Detected (µg)
+                                    txtFTIR_B35.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.B));//35-Method Detection Limit, MDL
+                                    lbFTIR_C40.Text = CustomUtils.GetCellValue(isheet.GetRow(40 - 1).GetCell(ExcelColumn.C));//Calculations:
+                                    txtC41.Text = CustomUtils.GetCellValue(isheet.GetRow(41 - 1).GetCell(ExcelColumn.C));
 
 
 
-                                    txtFTIR_B30.Text = txtFTIR_B30.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(txtFTIR_B30.Text) ? "" : Math.Round(Convert.ToDecimal(txtFTIR_B30.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                    txtFTIR_B31.Text = txtFTIR_B31.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(txtFTIR_B31.Text) ? "" : Math.Round(Convert.ToDecimal(txtFTIR_B31.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                    txtFTIR_B32.Text = txtFTIR_B32.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(txtFTIR_B32.Text) ? "" : Math.Round(Convert.ToDecimal(txtFTIR_B32.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                    txtFTIR_B33.Text = txtFTIR_B33.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(txtFTIR_B33.Text) ? "" : Math.Round(Convert.ToDecimal(txtFTIR_B33.Text), Convert.ToInt16(txtDecimal06.Text)) + "";
-                                    txtFTIR_B35.Text = txtFTIR_B35.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(txtFTIR_B35.Text) ? "" : Math.Round(Convert.ToDecimal(txtFTIR_B35.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                    lbFTIR_C40.Text = lbFTIR_C40.Text.Equals("< MDL") ? "< MDL" : lbFTIR_C40.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(lbFTIR_C40.Text) ? "" : Math.Round(Convert.ToDecimal(lbFTIR_C40.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
+                                    txtFTIR_B30.Text = String.IsNullOrEmpty(txtFTIR_B30.Text) ? "" : Convert.ToDouble(txtFTIR_B30.Text).ToString("N" + Convert.ToInt16(txtDecimal03.Text));
+                                    txtFTIR_B31.Text = String.IsNullOrEmpty(txtFTIR_B31.Text) ? "" : Convert.ToDouble(txtFTIR_B31.Text).ToString("N" + Convert.ToInt16(txtDecimal04.Text));
+                                    txtFTIR_B32.Text = String.IsNullOrEmpty(txtFTIR_B32.Text) ? "" : Convert.ToDouble(txtFTIR_B32.Text).ToString("N" + Convert.ToInt16(txtDecimal05.Text));
+                                    txtFTIR_B33.Text = String.IsNullOrEmpty(txtFTIR_B33.Text) ? "" : Convert.ToDouble(txtFTIR_B33.Text).ToString("N" + Convert.ToInt16(txtDecimal06.Text));
+                                    txtFTIR_B35.Text = String.IsNullOrEmpty(txtFTIR_B35.Text) ? "" : Convert.ToDouble(txtFTIR_B35.Text).ToString("N" + Convert.ToInt16(txtDecimal07.Text));
+                                    lbFTIR_C40.Text = String.IsNullOrEmpty(lbFTIR_C40.Text) ? "" : Convert.ToDouble(lbFTIR_C40.Text).ToString("N" + Convert.ToInt16(txtDecimal08.Text));
 
 
                                     #endregion
                                     #region "FTIR-Amide"
-                                    txtFTIR_B42.Text = CustomUtils.GetCellValue(isheet.GetRow(42 - 1).GetCell(ExcelColumn.B));
-                                    txtFTIR_B43.Text = CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.B));
-                                    txtFTIR_B44.Text = CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.B));
+                                    txtFTIR_B42.Text = CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.B));//43-Peak Ht at 800cm-1
+                                    txtFTIR_B43.Text = CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.B));//44-Slope of Calibration Plot
+                                    txtFTIR_B44.Text = CustomUtils.GetCellValue(isheet.GetRow(45 - 1).GetCell(ExcelColumn.B));//45-y-intercept
+                                    txtFTIR_B45.Text = CustomUtils.GetCellValue(isheet.GetRow(46 - 1).GetCell(ExcelColumn.B));//46-Amount of Silicone Detected (µg)
+                                    txtFTIR_B48.Text = CustomUtils.GetCellValue(isheet.GetRow(48 - 1).GetCell(ExcelColumn.B)); //48-Method Detection Limit, MDL
+                                    lbFTIR_C49.Text = CustomUtils.GetCellValue(isheet.GetRow(52 - 1).GetCell(ExcelColumn.C)); //Calculations
+                                    txtC53.Text = CustomUtils.GetCellValue(isheet.GetRow(53 - 1).GetCell(ExcelColumn.C));
 
-                                    txtFTIR_B45.Text = CustomUtils.GetCellValue(isheet.GetRow(45 - 1).GetCell(ExcelColumn.B));
-                                    lbFTIR_C49.Text = CustomUtils.GetCellValue(isheet.GetRow(49 - 1).GetCell(ExcelColumn.C));
 
-                                    txtFTIR_B42.Text = txtFTIR_B42.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(txtFTIR_B42.Text) ? "" : Math.Round(Convert.ToDecimal(txtFTIR_B42.Text), Convert.ToInt16(txtDecimal03.Text)) + "";
-                                    txtFTIR_B43.Text = txtFTIR_B43.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(txtFTIR_B43.Text) ? "" : Math.Round(Convert.ToDecimal(txtFTIR_B43.Text), Convert.ToInt16(txtDecimal04.Text)) + "";
-                                    txtFTIR_B44.Text = txtFTIR_B44.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(txtFTIR_B44.Text) ? "" : Math.Round(Convert.ToDecimal(txtFTIR_B44.Text), Convert.ToInt16(txtDecimal05.Text)) + "";
-                                    txtFTIR_B45.Text = txtFTIR_B45.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(txtFTIR_B45.Text) ? "" : Math.Round(Convert.ToDecimal(txtFTIR_B45.Text), Convert.ToInt16(txtDecimal06.Text)) + "";
-                                    //txtFTIR_B35.Text = Math.Round(Convert.ToDecimal(txtFTIR_B35.Text), Convert.ToInt16(txtDecimal07.Text)) + "";
-                                    lbFTIR_C49.Text = lbFTIR_C49.Text.Equals("Not Detected") ? "Not Detected" : String.IsNullOrEmpty(lbFTIR_C49.Text) ? "" : Math.Round(Convert.ToDecimal(lbFTIR_C49.Text), Convert.ToInt16(txtDecimal08.Text)) + "";
-
+                                    txtFTIR_B42.Text = String.IsNullOrEmpty(txtFTIR_B42.Text) ? "" : Convert.ToDouble(txtFTIR_B42.Text).ToString("N" + Convert.ToInt16(txtDecimal03.Text));
+                                    txtFTIR_B43.Text = String.IsNullOrEmpty(txtFTIR_B43.Text) ? "" : Convert.ToDouble(txtFTIR_B43.Text).ToString("N" + Convert.ToInt16(txtDecimal04.Text));
+                                    txtFTIR_B44.Text = String.IsNullOrEmpty(txtFTIR_B44.Text) ? "" : Convert.ToDouble(txtFTIR_B44.Text).ToString("N" + Convert.ToInt16(txtDecimal05.Text));
+                                    txtFTIR_B45.Text = String.IsNullOrEmpty(txtFTIR_B45.Text) ? "" : Convert.ToDouble(txtFTIR_B45.Text).ToString("N" + Convert.ToInt16(txtDecimal06.Text));
+                                    txtFTIR_B48.Text = String.IsNullOrEmpty(txtFTIR_B48.Text) ? "" : Convert.ToDouble(txtFTIR_B48.Text).ToString("N" + Convert.ToInt16(txtDecimal07.Text));
+                                    lbFTIR_C49.Text = String.IsNullOrEmpty(lbFTIR_C49.Text) ? "" : Convert.ToDouble(lbFTIR_C49.Text).ToString("N" + Convert.ToInt16(txtDecimal08.Text));
 
 
                                     #endregion
+
+
+
+
+                                    lbAmide.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.C));
+                                    lbSilicone.Text = CustomUtils.GetCellValue(isheet.GetRow(48 - 1).GetCell(ExcelColumn.C));
+
                                 }
                                 Console.WriteLine();
                             }
@@ -871,149 +717,150 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 litErrorMessage.Text = String.Empty;
+                CalculateCas();
             }
         }
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
-            char[] item = this.Ftir.item_visible.ToCharArray();
+            //char[] item = this.Ftir.item_visible.ToCharArray();
 
-            DataTable dtHeader = new DataTable("MethodProcedure");
+            //DataTable dtHeader = new DataTable("MethodProcedure");
 
-            // Define all the columns once.
-            DataColumn[] cols ={ new DataColumn("ProcedureNo",typeof(String)),
-                                  new DataColumn("NumOfPiecesUsedForExtraction",typeof(String)),
-                                  new DataColumn("ExtractionMedium",typeof(String)),
-                                  new DataColumn("ExtractionVolume",typeof(String)),
-                              };
-            dtHeader.Columns.AddRange(cols);
-            DataRow row = dtHeader.NewRow();
-            row["ProcedureNo"] = item[0] == '1' ? txtB21.Text : item[1] == '1' ? txtB22.Text : txtB23.Text;
-            row["NumOfPiecesUsedForExtraction"] = item[0] == '1' ? txtC21.Text : item[1] == '1' ? txtC22.Text : txtC23.Text;
-            row["ExtractionMedium"] = item[0] == '1' ? txtD21_1.Text : item[1] == '1' ? txtD22.Text : txtD23.Text;
-            row["ExtractionVolume"] = item[0] == '1' ? txtE21.Text : item[1] == '1' ? txtE22.Text : txtE23.Text;
-            dtHeader.Rows.Add(row);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            //// Define all the columns once.
+            //DataColumn[] cols ={ new DataColumn("ProcedureNo",typeof(String)),
+            //                      new DataColumn("NumOfPiecesUsedForExtraction",typeof(String)),
+            //                      new DataColumn("ExtractionMedium",typeof(String)),
+            //                      new DataColumn("ExtractionVolume",typeof(String)),
+            //                  };
+            //dtHeader.Columns.AddRange(cols);
+            //DataRow row = dtHeader.NewRow();
+            //row["ProcedureNo"] = item[0] == '1' ? txtB21.Text : item[1] == '1' ? txtB22.Text : txtB23.Text;
+            //row["NumOfPiecesUsedForExtraction"] = item[0] == '1' ? txtC21.Text : item[1] == '1' ? txtC22.Text : txtC23.Text;
+            //row["ExtractionMedium"] = item[0] == '1' ? txtD21_1.Text : item[1] == '1' ? txtD22.Text : txtD23.Text;
+            //row["ExtractionVolume"] = item[0] == '1' ? txtE21.Text : item[1] == '1' ? txtE22.Text : txtE23.Text;
+            //dtHeader.Rows.Add(row);
+            //ReportHeader reportHeader = new ReportHeader();
+            //reportHeader = reportHeader.getReportHeder(this.jobSample);
 
-            List<ReportData> reportList = new List<ReportData>();
-            //Create ReportData NVR
-            ReportData tmp = new ReportData
-            {
+            //List<ReportData> reportList = new List<ReportData>();
+            ////Create ReportData NVR
+            //ReportData tmp = new ReportData
+            //{
 
-                A = "Non-Volatile Residue (NVR)",
-                B = lbC28.Text,
-                C = lbD28.Text,
-                D = lbE28.Text
-            };
-            if (item[3] == '1')
-            {
-                reportList.Add(tmp);
-            }
-            tmp = new ReportData
-            {
+            //    A = "Non-Volatile Residue (NVR)",
+            //    B = lbC28.Text,
+            //    C = lbD28.Text,
+            //    D = lbE28.Text
+            //};
+            //if (item[3] == '1')
+            //{
+            //    reportList.Add(tmp);
+            //}
+            //tmp = new ReportData
+            //{
 
-                A = "Silicone at Wave No:2962, 1261, 1092, 1022 & 800cm-1",
-                B = lbC30.Text,
-                C = lbD30.Text,
-                D = lbE30.Text
-            };
-            if (item[4] == '1')
-            {
-                reportList.Add(tmp);
-            }
-
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", item[0] == '1' ? "NVR/FTIR" : item[1] == '1' ? "NVR" : "FTIR"));
-            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
-            reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
+            //    A = "Silicone at Wave No:2962, 1261, 1092, 1022 & 800cm-1",
+            //    B = lbC30.Text,
+            //    C = lbD30.Text,
+            //    D = lbE30.Text
+            //};
+            //if (item[4] == '1')
+            //{
+            //    reportList.Add(tmp);
+            //}
 
 
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_wd.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", reportList.ToDataTable())); // Add datasource here
+            //ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            //reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            //reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            //reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            //reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            //reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
+            //reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
+            //reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+            //reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            //reportParameters.Add(new ReportParameter("Test", item[0] == '1' ? "NVR/FTIR" : item[1] == '1' ? "NVR" : "FTIR"));
+            //reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
+            //reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
+
+            //// Variables
+            //Warning[] warnings;
+            //string[] streamIds;
+            //string mimeType = string.Empty;
+            //string encoding = string.Empty;
+            //string extension = string.Empty;
+
+
+            //// Setup the report viewer object and get the array of bytes
+            //ReportViewer viewer = new ReportViewer();
+            //viewer.ProcessingMode = ProcessingMode.Local;
+            //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_wd.rdlc");
+            //viewer.LocalReport.SetParameters(reportParameters);
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", reportList.ToDataTable())); // Add datasource here
 
 
 
-            string download = String.Empty;
+            //string download = String.Empty;
 
-            StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            switch (status)
-            {
-                case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-                    }
-                    else
-                    {
-                        byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+            //StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+            //switch (status)
+            //{
+            //    case StatusEnum.ADMIN_CONVERT_WORD:
+            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+            //        {
+            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+            //        }
+            //        else
+            //        {
+            //            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 
-                        // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-                        Response.Buffer = true;
-                        Response.Clear();
-                        Response.ContentType = mimeType;
-                        Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-                        Response.BinaryWrite(bytes); // create the file
-                        Response.Flush(); // send it to the client to download
-                    }
-                    break;
-                case StatusEnum.LABMANAGER_CHECKING:
-                case StatusEnum.LABMANAGER_APPROVE:
-                case StatusEnum.LABMANAGER_DISAPPROVE:
-                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-                    }
-                    break;
-                case StatusEnum.ADMIN_CONVERT_PDF:
-                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-                    }
+            //            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            //            Response.Buffer = true;
+            //            Response.Clear();
+            //            Response.ContentType = mimeType;
+            //            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+            //            Response.BinaryWrite(bytes); // create the file
+            //            Response.Flush(); // send it to the client to download
+            //        }
+            //        break;
+            //    case StatusEnum.LABMANAGER_CHECKING:
+            //    case StatusEnum.LABMANAGER_APPROVE:
+            //    case StatusEnum.LABMANAGER_DISAPPROVE:
+            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+            //        {
+            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+            //        }
+            //        break;
+            //    case StatusEnum.ADMIN_CONVERT_PDF:
+            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+            //        {
+            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+            //        }
 
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
+            //        //if (!String.IsNullOrEmpty(this.jobSample.path_word))
+            //        //{
+            //        //    Word2Pdf objWorPdf = new Word2Pdf();
+            //        //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
+            //        //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
+            //        //    try
+            //        //    {
+            //        //        objWorPdf.Word2PdfCOnversion();
+            //        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
 
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+            //        //    }
+            //        //    catch (Exception ex)
+            //        //    {
+            //        //        Console.WriteLine();
+            //        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
 
-                    //    }
-                    //}
-                    break;
-            }
+            //        //    }
+            //        //}
+            //        break;
+            //}
 
 
 
@@ -1048,11 +895,79 @@ namespace ALS.ALSI.Web.view.template
             {
                 lbDocRev.Text = detailSpec.B;
                 lbDesc.Text = detailSpec.A;
-                lbC28.Text = detailSpec.E.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.E);//NVR
-                lbC30.Text = detailSpec.F.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.F); ;//FTIR
+                if (this.Ftir.Count > 0)
+                {
+                    foreach (template_wd_ftir_coverpage item in this.Ftir.Where(x => x.data_type == 2).ToList())
+                    {
+                        this.Ftir.Remove(item);
+                    }
+                }
+                #region "Result"
+                template_wd_ftir_coverpage tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 4;
+                tmp.A = "NVR";
+                tmp.B = "Non-Volatile Residue (NVR) in n-Hexane";
+                tmp.C = detailSpec.E;
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = 1;
+                tmp.data_type = 2;
+                this.Ftir.Add(tmp);
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 5;
+                tmp.A = "NVR";
+                tmp.B = "Non-Volatile Residue (NVR) in IPA";
+                tmp.C = detailSpec.F;
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = 1;
+                tmp.data_type = 2;
+                this.Ftir.Add(tmp);
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 6;
+                tmp.A = "FTIR";
+                tmp.B = "Silicone at Wave No:2962, 1261, 1092, 1022 & 800cm - 1";
+                tmp.C = detailSpec.G;
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = 1;
+                tmp.data_type = 2;
+                this.Ftir.Add(tmp);
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 7;
+                tmp.A = "FTIR";
+                tmp.B = "Amide";
+                tmp.C = detailSpec.I;
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = 1;
+                tmp.data_type = 2;
+                this.Ftir.Add(tmp);
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 8;
+                tmp.A = "FTIR";
+                tmp.B = "DOP";
+                tmp.C = detailSpec.H;
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = 1;
+                tmp.data_type = 2;
+                this.Ftir.Add(tmp);
 
-                lbE27.Text = detailSpec.D;
-                lbD27.Text = detailSpec.D;
+                #endregion
+
+                gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+                gvResult.DataBind();
+
+
+                //this.Result = listResult;
+                //gvResult.DataSource = this.Result;
+                //gvResult.DataBind();
+                //lbC28.Text = detailSpec.E.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.E);//NVR
+                //lbC30.Text = detailSpec.F.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.F); ;//FTIR
+
+                //lbE27.Text = detailSpec.D;
+                //lbD27.Text = detailSpec.D;
             }
         }
 
@@ -1061,33 +976,49 @@ namespace ALS.ALSI.Web.view.template
             tb_m_component component = new tb_m_component().SelectByID(int.Parse(ddlComponent.SelectedValue));
             if (component != null)
             {
+                if (this.Ftir.Count > 0)
+                {
+                    foreach (template_wd_ftir_coverpage item in this.Ftir.Where(x => x.data_type == 1).ToList())
+                    {
+                        this.Ftir.Remove(item);
+                    }
+                }
+                #region "Procedure"
+                template_wd_ftir_coverpage tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 1;
+                tmp.A = "NVR/FTIR";
+                tmp.B = String.Format("2092-772141 Rev.AD,{0}", component.B);
+                tmp.C = component.G;
+                tmp.D = component.J;
+                tmp.E = component.M;
+                tmp.row_type = 1;
+                tmp.data_type = 1;
+                this.Ftir.Add(tmp);
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 2;
+                tmp.A = "NVR";
+                tmp.B = String.Format("2092-772141 Rev.AD,{0}", component.B);
+                tmp.C = component.E;
+                tmp.D = component.H;
+                tmp.E = component.K;
+                tmp.row_type = 1;
+                tmp.data_type = 1;
+                this.Ftir.Add(tmp);
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 3;
+                tmp.A = "FTIR";
+                tmp.B = String.Format("2092-772141 Rev.AD,{0}", component.B);
+                tmp.C = component.F;
+                tmp.D = component.I;
+                tmp.E = component.L;
+                tmp.row_type = 1;
+                tmp.data_type = 1;
+                this.Ftir.Add(tmp);
+                #endregion
 
-                lbB21.Text = component.B;
-                lbB22.Text = component.B;
-                lbB23.Text = component.B;
 
-                lbD21.Text = component.F;
-                lbD22.Text = component.F;
-                lbD23.Text = component.F;
-
-                lbE21.Text = String.Format("{0} mL", component.G);
-                lbE22.Text = String.Format("{0} mL", component.G);
-                lbE23.Text = String.Format("{0} mL", component.G);
-
-                txtB21.Text = component.B;
-                txtB22.Text = component.B;
-                txtB23.Text = component.B;
-
-                txtD21_1.Text = component.F;
-                txtD22.Text = component.F;
-                txtD23.Text = component.F;
-
-                txtE21.Text = String.Format("{0} mL", component.G);
-                txtE22.Text = String.Format("{0} mL", component.G);
-                txtE23.Text = String.Format("{0} mL", component.G);
-
-                txtNVR_FTIR_B14.Text = component.G;//Volume of solvent used:
-
+                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                gvMethodProcedure.DataBind();
             }
         }
 
@@ -1113,105 +1044,36 @@ namespace ALS.ALSI.Web.view.template
             HttpContext.Current.Response.End();
             HttpContext.Current.Response.Flush();
         }
-        private String getItemStatus()
-        {
-            String result = String.Empty;
-            result = ((CheckBox1.Checked) ? "1" : "0") +
-                ((CheckBox2.Checked) ? "1" : "0") +
-                ((CheckBox3.Checked) ? "1" : "0") +
-                ((CheckBox5.Checked) ? "1" : "0") +
-                ((CheckBox6.Checked) ? "1" : "0");
-            return result;
-        }
 
-        private void ShowItem(String _itemVisible)
-        {
-            if (_itemVisible != null)
-            {
-                char[] item = _itemVisible.ToCharArray();
-                if (item.Length == 5)
-                {
-
-
-                    StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-                    switch (status)
-                    {
-                        case StatusEnum.LOGIN_CONVERT_TEMPLATE:
-                            break;
-                        case StatusEnum.CHEMIST_TESTING:
-                            CheckBox1.Checked = item[0] == '1' ? true : false;
-                            CheckBox2.Checked = item[1] == '1' ? true : false;
-                            CheckBox3.Checked = item[2] == '1' ? true : false;
-                            CheckBox5.Checked = item[3] == '1' ? true : false;
-                            CheckBox6.Checked = item[4] == '1' ? true : false;
-                            break;
-                        case StatusEnum.LOGIN_SELECT_SPEC:
-                        case StatusEnum.SR_CHEMIST_CHECKING:
-                        case StatusEnum.SR_CHEMIST_APPROVE:
-                        case StatusEnum.SR_CHEMIST_DISAPPROVE:
-                        case StatusEnum.ADMIN_CONVERT_WORD:
-                        case StatusEnum.LABMANAGER_CHECKING:
-                        case StatusEnum.LABMANAGER_APPROVE:
-                        case StatusEnum.LABMANAGER_DISAPPROVE:
-                        case StatusEnum.ADMIN_CONVERT_PDF:
-                            CheckBox1.Visible = false;
-                            CheckBox2.Visible = false;
-                            CheckBox3.Visible = false;
-                            CheckBox5.Visible = false;
-                            CheckBox6.Visible = false;
-
-                            tab1_tr1.Visible = item[0] == '1' ? true : false;
-                            tab1_tr2.Visible = item[1] == '1' ? true : false;
-                            tab1_tr3.Visible = item[2] == '1' ? true : false;
-
-                            tab2_tr1.Visible = item[3] == '1' ? true : false;
-                            tab3_tr1.Visible = item[4] == '1' ? true : false;
-                            break;
-                    }
-                }
-            }
-
-        }
 
         private void CalculateCas()
         {
-            if (!String.IsNullOrEmpty(lbC26.Text))
-            {
-                //NVR
-                lbD28.Text = lbC26.Text.Equals("< MDL") ? "Not Detected" : lbC26.Text;
-                if (lbD28.Text.Equals("Not Detected"))
-                {
-                    lbE28.Text = "PASS";
-                }
-                else
-                {
-                    decimal d28Spec = Convert.ToDecimal(CustomUtils.isNumber(lbC28.Text.Replace("<", "").Trim()) ? lbC28.Text.Replace("<", "").Trim() : "0");
-                    if (d28Spec == 0)
-                    {
-                        lbE28.Text = "NA";
-                    }
-                    else
-                    {
-                        decimal d28Value = Convert.ToDecimal(lbD28.Text);
-                        lbE28.Text = (d28Value == 0) ? "" : (d28Value < d28Spec) ? "PASS" : "FAIL";
-                    }
-                }
-            }
-            if (!String.IsNullOrEmpty(lbFTIR_C40.Text))
-            {
-                //FTIR
-                lbD30.Text = lbFTIR_C40.Text.Equals("< MDL") ? "Not Detected" : lbFTIR_C40.Text;
-                if (lbD30.Text.Equals("Not Detected"))
-                {
-                    lbE30.Text = "PASS";
-                }
-                else
-                {
-                    decimal d30Spec = Convert.ToDecimal(CustomUtils.isNumber(lbC30.Text.Replace("<", "").Trim()) ? lbC30.Text.Replace("<", "").Trim() : "0");
-                    decimal d30Value = Convert.ToDecimal(lbD30.Text);
-                    lbE30.Text = (d30Value == 0) ? "" : (d30Value < d30Spec) ? "PASS" : "FAIL";
-                }
-            }
+
+
+            this.Ftir[3].D = lbC26.Text;
+            this.Ftir[4].D = lbC26.Text;
+
+            this.Ftir[5].D = txtC41.Text;
+            this.Ftir[6].D = txtC53.Text;
+            this.Ftir[7].D = "Not Detected";
+            ////
+
+            this.Ftir[3].E = String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+            this.Ftir[4].E = String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+
+            this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") ? "NA" : (this.Ftir[7].D.Equals("Not Detected")) ? "PASS" : (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+
+
+            gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+            gvResult.DataBind();
+
+
+            lbA31.Text = !String.IsNullOrEmpty(txtFTIR_B35.Text) ? txtFTIR_B35.Text : txtFTIR_B48.Text;
+            lbB31.Text = !String.IsNullOrEmpty(lbAmide.Text) ? lbAmide.Text : lbSilicone.Text;
+
+
             btnSubmit.Enabled = true;
         }
 
@@ -1222,5 +1084,119 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
         }
 
+
+        protected void gvMethodProcedure_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int PKID = Convert.ToInt32(gvMethodProcedure.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMethodProcedure.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+
+        }
+
+        protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int PKID = Convert.ToInt32(gvResult.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResult.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+
+        }
+
+        protected void gvProcedure_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_wd_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 1);
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+
+                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+                    gvMethodProcedure.DataBind();
+                }
+            }
+        }
+
+        protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_wd_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 2);
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+
+                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2);
+                    gvResult.DataBind();
+                }
+            }
+        }
     }
 }

@@ -1038,6 +1038,11 @@
           <Property Name="sample_id" Type="int" />
           <Property Name="detail_spec_id" Type="int" />
           <Property Name="component_id" Type="int" />
+          <Property Name="A" Type="varchar" MaxLength="45" />
+          <Property Name="B" Type="varchar" MaxLength="100" />
+          <Property Name="C" Type="varchar" MaxLength="45" />
+          <Property Name="D" Type="varchar" MaxLength="45" />
+          <Property Name="E" Type="varchar" MaxLength="45" />
           <Property Name="td_b14" Type="varchar" MaxLength="45" />
           <Property Name="td_b15" Type="varchar" MaxLength="45" />
           <Property Name="td_b16" Type="varchar" MaxLength="45" />
@@ -1050,16 +1055,22 @@
           <Property Name="ftr_b31" Type="varchar" MaxLength="45" />
           <Property Name="ftr_b32" Type="varchar" MaxLength="45" />
           <Property Name="ftr_b33" Type="varchar" MaxLength="45" />
-          <Property Name="ftr_b35" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b36" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_c39" Type="varchar" MaxLength="45" />
           <Property Name="ftr_c40" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_c41" Type="varchar" MaxLength="45" />
           <Property Name="ftr_b42" Type="varchar" MaxLength="45" />
           <Property Name="ftr_b43" Type="varchar" MaxLength="45" />
           <Property Name="ftr_b44" Type="varchar" MaxLength="45" />
           <Property Name="ftr_b45" Type="varchar" MaxLength="45" />
-          <Property Name="ftr_c49" Type="varchar" MaxLength="45" />
-          <Property Name="item_visible" Type="varchar" MaxLength="45" />
-          <Property Name="procedure_no" Type="varchar" MaxLength="45" />
-          <Property Name="extraction_medium" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b46" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b48" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_c52" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_c53" Type="varchar" MaxLength="45" />
+          <Property Name="data_type" Type="int" />
+          <Property Name="row_type" Type="int" />
+          <Property Name="amide_unit" Type="varchar" MaxLength="45" />
+          <Property Name="silicone_unit" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_wd_gcms_coverpage">
           <Key>
@@ -2723,6 +2734,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="sample_id" Type="Int32" />
           <Property Name="detail_spec_id" Type="Int32" />
           <Property Name="component_id" Type="Int32" />
+          <Property Name="A" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="C" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="D" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="E" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="td_b14" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="td_b15" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="td_b16" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -2735,16 +2751,22 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="ftr_b31" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftr_b32" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftr_b33" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ftr_b35" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b36" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_c39" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftr_c40" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_c41" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftr_b42" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftr_b43" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftr_b44" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftr_b45" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ftr_c49" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="item_visible" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="procedure_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="extraction_medium" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b46" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b48" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_c52" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_c53" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="data_type" Type="Int32" />
+          <Property Name="row_type" Type="Int32" />
+          <Property Name="amide_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="silicone_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_gcms_coverpage">
           <Key>
@@ -4217,16 +4239,22 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_ftir_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_ftir_coverpage">
               <MappingFragment StoreEntitySet="template_wd_ftir_coverpage">
-                <ScalarProperty Name="extraction_medium" ColumnName="extraction_medium" />
-                <ScalarProperty Name="procedure_no" ColumnName="procedure_no" />
-                <ScalarProperty Name="item_visible" ColumnName="item_visible" />
-                <ScalarProperty Name="ftr_c49" ColumnName="ftr_c49" />
+                <ScalarProperty Name="silicone_unit" ColumnName="silicone_unit" />
+                <ScalarProperty Name="amide_unit" ColumnName="amide_unit" />
+                <ScalarProperty Name="row_type" ColumnName="row_type" />
+                <ScalarProperty Name="data_type" ColumnName="data_type" />
+                <ScalarProperty Name="ftr_c53" ColumnName="ftr_c53" />
+                <ScalarProperty Name="ftr_c52" ColumnName="ftr_c52" />
+                <ScalarProperty Name="ftr_b48" ColumnName="ftr_b48" />
+                <ScalarProperty Name="ftr_b46" ColumnName="ftr_b46" />
                 <ScalarProperty Name="ftr_b45" ColumnName="ftr_b45" />
                 <ScalarProperty Name="ftr_b44" ColumnName="ftr_b44" />
                 <ScalarProperty Name="ftr_b43" ColumnName="ftr_b43" />
                 <ScalarProperty Name="ftr_b42" ColumnName="ftr_b42" />
+                <ScalarProperty Name="ftr_c41" ColumnName="ftr_c41" />
                 <ScalarProperty Name="ftr_c40" ColumnName="ftr_c40" />
-                <ScalarProperty Name="ftr_b35" ColumnName="ftr_b35" />
+                <ScalarProperty Name="ftr_c39" ColumnName="ftr_c39" />
+                <ScalarProperty Name="ftr_b36" ColumnName="ftr_b36" />
                 <ScalarProperty Name="ftr_b33" ColumnName="ftr_b33" />
                 <ScalarProperty Name="ftr_b32" ColumnName="ftr_b32" />
                 <ScalarProperty Name="ftr_b31" ColumnName="ftr_b31" />
@@ -4239,6 +4267,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="td_b16" ColumnName="td_b16" />
                 <ScalarProperty Name="td_b15" ColumnName="td_b15" />
                 <ScalarProperty Name="td_b14" ColumnName="td_b14" />
+                <ScalarProperty Name="E" ColumnName="E" />
+                <ScalarProperty Name="D" ColumnName="D" />
+                <ScalarProperty Name="C" ColumnName="C" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="A" ColumnName="A" />
                 <ScalarProperty Name="component_id" ColumnName="component_id" />
                 <ScalarProperty Name="detail_spec_id" ColumnName="detail_spec_id" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />

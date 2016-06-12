@@ -18,6 +18,11 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> sample_id { get; set; }
         public Nullable<int> detail_spec_id { get; set; }
         public Nullable<int> component_id { get; set; }
+        public string A { get; set; }
+        public string B { get; set; }
+        public string C { get; set; }
+        public string D { get; set; }
+        public string E { get; set; }
         public string td_b14 { get; set; }
         public string td_b15 { get; set; }
         public string td_b16 { get; set; }
@@ -30,15 +35,21 @@ namespace ALS.ALSI.Biz.DataAccess
         public string ftr_b31 { get; set; }
         public string ftr_b32 { get; set; }
         public string ftr_b33 { get; set; }
-        public string ftr_b35 { get; set; }
+        public string ftr_b36 { get; set; }
+        public string ftr_c39 { get; set; }
         public string ftr_c40 { get; set; }
+        public string ftr_c41 { get; set; }
         public string ftr_b42 { get; set; }
         public string ftr_b43 { get; set; }
         public string ftr_b44 { get; set; }
         public string ftr_b45 { get; set; }
-        public string ftr_c49 { get; set; }
-        public string item_visible { get; set; }
-        public string procedure_no { get; set; }
-        public string extraction_medium { get; set; }
+        public string ftr_b46 { get; set; }
+        public string ftr_b48 { get; set; }
+        public string ftr_c52 { get; set; }
+        public string ftr_c53 { get; set; }
+        public Nullable<int> data_type { get; set; }
+        public Nullable<int> row_type { get; set; }
+        public string amide_unit { get; set; }
+        public string silicone_unit { get; set; }
     }
 }
