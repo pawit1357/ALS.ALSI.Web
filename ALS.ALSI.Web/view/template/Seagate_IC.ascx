@@ -100,7 +100,7 @@
                         <h4 class="form-section">Results</h4>
 
                         <asp:GridView ID="gvResultAnions" runat="server" AutoGenerateColumns="False"
-                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="" OnRowCommand="gvAnionic_RowCommand">
+                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" OnRowCommand="gvAnionic_RowCommand">
                             <Columns>
                                 <asp:TemplateField HeaderText="Anions" ItemStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
@@ -108,7 +108,7 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Conc of water Blankµg/L (B)" ItemStyle-HorizontalAlign="Left">
+                                <asp:TemplateField HeaderText="Conc of water Blank µg/L (B)" ItemStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <asp:Literal ID="litA" runat="server" Text='<%# Eval("wb")%>' />
                                     </ItemTemplate>
@@ -132,18 +132,20 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Instrument Detection Limit ng/cm2" ItemStyle-HorizontalAlign="Center">
+
+                                <asp:TemplateField HeaderText="Instrument Detection Limit (ug/L)" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:Label ID="litE" runat="server" Text='<%# Eval("wf")%>'></asp:Label>
+                                        <asp:Label ID="litF" runat="server" Text='<%# Eval("wf")%>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Method Detection Limit ng/cm2" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:Label ID="litF" runat="server" Text='<%# Eval("wg")%>'></asp:Label>
+                                        <asp:Label ID="litE" runat="server" Text='<%# Eval("wg")%>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
+
                                 <asp:TemplateField HeaderText="Below MDL? (1=Yes, 0=No)" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Label ID="litG" runat="server" Text='<%# Eval("wh")%>'></asp:Label>
@@ -168,13 +170,15 @@
                         <asp:GridView ID="gvResultCations" runat="server" AutoGenerateColumns="False"
                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="" OnRowCommand="gvAnionic_RowCommand">
                             <Columns>
-                                <asp:TemplateField HeaderText="Anions" ItemStyle-HorizontalAlign="Left">
+
+
+                                <asp:TemplateField HeaderText="Cations" ItemStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <asp:Literal ID="litType" runat="server" Text='<%# Eval("A")%>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Conc of water Blankµg/L (B)" ItemStyle-HorizontalAlign="Left">
+                                <asp:TemplateField HeaderText="Conc of water Blank µg/L (B)" ItemStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <asp:Literal ID="litA" runat="server" Text='<%# Eval("wb")%>' />
                                     </ItemTemplate>
@@ -198,18 +202,20 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Instrument Detection Limit ng/cm2" ItemStyle-HorizontalAlign="Center">
+
+                                <asp:TemplateField HeaderText="Instrument Detection Limit (ug/L)" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:Label ID="litE" runat="server" Text='<%# Eval("wf")%>'></asp:Label>
+                                        <asp:Label ID="litF" runat="server" Text='<%# Eval("wf")%>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Method Detection Limit ng/cm2" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:Label ID="litF" runat="server" Text='<%# Eval("wg")%>'></asp:Label>
+                                        <asp:Label ID="litE" runat="server" Text='<%# Eval("wg")%>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
+
                                 <asp:TemplateField HeaderText="Below MDL? (1=Yes, 0=No)" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Label ID="litG" runat="server" Text='<%# Eval("wh")%>'></asp:Label>
@@ -546,7 +552,7 @@
                                         <tr>
                                             <td>Instrument Detection Limit</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="1"></asp:TextBox></td>
 
                                         </tr>
                                         <tr>
