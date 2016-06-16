@@ -245,33 +245,64 @@ namespace ALS.ALSI.Web.view.template
             }
             else
             {
+
                 #region "Procedure"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 1;
-                tmp.A = "FTIR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev U";
-                tmp.C = "1.1277 gram Estimated surface use 124.264 cm²";
-                tmp.D = "n-hexane (HPLC Grade)";
-                tmp.E = "25mL";
+                tmp.ID = this.Ftir.Count+1;
+                tmp.A = "NVR/FTIR";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                tmp.C = "5.8109 g/ Estimated surface use 774.79 cm²";
+                tmp.D = "  IPA - 24 Hours (HPLC Grade)";
+                tmp.E = "40mL";
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 2;
+                tmp.ID = this.Ftir.Count + 1;
+                tmp.A = "NVR";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
+                tmp.C = "Estimated surface use  cm²";
+                tmp.D = "Ultrapure Water";
+                tmp.E = "100mL";
+                tmp.row_type = 1;
+                 tmp.data_type = 1;
+                this.Ftir.Add(tmp);
+                tmp = new template_seagate_ftir_coverpage();
+                tmp.ID = this.Ftir.Count + 1;
+                tmp.A = "NVR";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
+                tmp.C = "Estimated surface use  cm²";
+                tmp.D = "n-hexane (HPLC Grade)";
+                tmp.E = "100mL";
+                tmp.row_type = 1;
+                tmp.data_type = 1;
+                this.Ftir.Add(tmp);
+                tmp = new template_seagate_ftir_coverpage();
+                tmp.ID = this.Ftir.Count + 1;
+                tmp.A = "FTIR";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
+                tmp.C = "Estimated surface use  cm²";
+                tmp.D = "IPA/n-hexane (HPLC Grade)";
+                tmp.E = "100mL";
+                tmp.row_type = 1;
+                tmp.data_type = 1;
+                this.Ftir.Add(tmp);
+                tmp = new template_seagate_ftir_coverpage();
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = "FTIR";
                 tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G";
                 tmp.C = "";
-                tmp.D = "n - hexane (HPLC Grade)";
+                tmp.D = "n-hexane  (HPLC Grade)";
                 tmp.E = "10mL";
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 3;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = "FTIR";
                 tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G";
-                tmp.C = "";
-                tmp.D = "n-hexane  (HPLC Grade)";
+                tmp.C = "3 pieces.";
+                tmp.D = "n-hexane (HPLC Grade)";
                 tmp.E = "20mL";
                 tmp.row_type = 1;
                 tmp.data_type = 1;
@@ -623,7 +654,7 @@ namespace ALS.ALSI.Web.view.template
                 lbDesc.Text = item.B;
                 #region "FTIR"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 4;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = datas[4].E;
                 tmp.B = item.E;
                 tmp.C = "";
@@ -633,7 +664,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 5;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = datas[4].F;
                 tmp.B = item.F;
                 tmp.C = "";
@@ -643,7 +674,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 6;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = datas[4].G;
                 tmp.B = item.G;
                 tmp.C = "";
@@ -655,7 +686,7 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
                 #region "NVR"
                 tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 7;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = datas[4].I;
                 tmp.B = item.I;
                 tmp.C = "";
@@ -665,7 +696,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 8;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = datas[4].J;
                 tmp.B = item.J;
                 tmp.C = "";
@@ -675,7 +706,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 9;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = datas[4].L;
                 tmp.B = item.L;
                 tmp.C = "";
@@ -685,7 +716,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 10;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = datas[4].M;
                 tmp.B = item.M;
                 tmp.C = "";
@@ -695,7 +726,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = 11;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = datas[4].N;
                 tmp.B = item.N;
                 tmp.C = "";
@@ -718,28 +749,30 @@ namespace ALS.ALSI.Web.view.template
         {
 
             List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == 3).ToList();
+            if (ftirList.Count > 0)
+            {
+                int unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                //FTIR
+                this.Ftir[6].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone Oil
+                this.Ftir[7].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Hydrocarbon
+                this.Ftir[8].C = String.Empty;//(unit == 1) ? ftirList[7].B : ftirList[8].B;//Surfactant
+                                              //NVR
+                                              //this.Ftir[6].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//DI Water
+                                              //this.Ftir[7].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//IPA/Hexane
+                                              //this.Ftir[8].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Silicone Liner)"
+                                              //this.Ftir[9].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Non - Silicone Liner)"
+                                              //this.Ftir[10].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Adhesive)"
 
-            int unit = Convert.ToInt16(ddlUnit.SelectedValue);
-            //FTIR
-            this.Ftir[3].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone Oil
-            this.Ftir[4].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Hydrocarbon
-            this.Ftir[5].C = String.Empty;//(unit == 1) ? ftirList[7].B : ftirList[8].B;//Surfactant
-            //NVR
-            this.Ftir[6].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//DI Water
-            this.Ftir[7].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//IPA/Hexane
-            this.Ftir[8].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Silicone Liner)"
-            this.Ftir[9].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Non - Silicone Liner)"
-            this.Ftir[10].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Adhesive)"
 
 
+                gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
+                gvWftir.DataBind();
 
-            gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
-            gvWftir.DataBind();
-
-            gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
-            gvResult.DataBind();
-            //remark
-            lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
+                gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+                gvResult.DataBind();
+                //remark
+                lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
+            }
             btnSubmit.Enabled = true;
         }
 
@@ -1163,7 +1196,6 @@ namespace ALS.ALSI.Web.view.template
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             ModolPopupExtender.Show();
-
         }
 
 

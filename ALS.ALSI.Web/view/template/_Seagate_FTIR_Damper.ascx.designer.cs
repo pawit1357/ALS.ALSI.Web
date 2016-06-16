@@ -10,7 +10,7 @@
 namespace ALS.ALSI.Web.view.template {
     
     
-    public partial class Seagate_FTIR_Damper {
+    public partial class _Seagate_FTIR_Damper {
         
         /// <summary>
         /// Form1 control.

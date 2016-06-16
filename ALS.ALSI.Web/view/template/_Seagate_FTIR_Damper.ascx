@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_FTIR_Damper.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_FTIR_Damper" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="_Seagate_FTIR_Damper.ascx.cs" Inherits="ALS.ALSI.Web.view.template._Seagate_FTIR_Damper" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <style type="text/css">

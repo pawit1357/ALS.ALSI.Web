@@ -1057,7 +1057,8 @@
     <Content Include="view\template\Seagate_Copperwire.ascx" />
     <Content Include="view\template\Seagate_DHS_V2.ascx" />
     <Content Include="view\template\Seagate_FTIR_Packing.ascx" />
-    <Content Include="view\template\Seagate_FTIR_Damper.ascx" />
+    <Content Include="view\template\_Seagate_FTIR_Packing.ascx" />
+    <Content Include="view\template\_Seagate_FTIR_Damper.ascx" />
     <Content Include="view\template\Seagate_HPA.ascx" />
     <Content Include="view\template\Seagate_HPA_Siam_Backup.ascx" />
     <Content Include="view\template\Seagate_HPA_Siam.ascx" />
@@ -1265,12 +1266,17 @@
     <Compile Include="view\template\Seagate_FTIR_Packing.ascx.designer.cs">
       <DependentUpon>Seagate_FTIR_Packing.ascx</DependentUpon>
     </Compile>
-    <Compile Include="view\template\Seagate_FTIR_Damper.ascx.cs">
-      <DependentUpon>Seagate_FTIR_Damper.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="view\template\_Seagate_FTIR_Packing.ascx.cs">
+      <DependentUpon>_Seagate_FTIR_Packing.ascx</DependentUpon>
     </Compile>
-    <Compile Include="view\template\Seagate_FTIR_Damper.ascx.designer.cs">
-      <DependentUpon>Seagate_FTIR_Damper.ascx</DependentUpon>
+    <Compile Include="view\template\_Seagate_FTIR_Packing.ascx.designer.cs">
+      <DependentUpon>_Seagate_FTIR_Packing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\_Seagate_FTIR_Damper.ascx.cs">
+      <DependentUpon>_Seagate_FTIR_Damper.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\_Seagate_FTIR_Damper.ascx.designer.cs">
+      <DependentUpon>_Seagate_FTIR_Damper.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\Seagate_HPA.ascx.cs">
       <DependentUpon>Seagate_HPA.ascx</DependentUpon>
