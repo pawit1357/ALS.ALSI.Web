@@ -84,11 +84,18 @@ namespace ALS.ALSI.Biz.DataAccess
         public string nvrc36 { get; set; }
         public string nvrc37 { get; set; }
         public Nullable<int> selected_method { get; set; }
-        public Nullable<int> selected_unit { get; set; }
+        public Nullable<int> selected_unit_ftir { get; set; }
         public Nullable<int> selected_unit_nvr { get; set; }
         public string furmular_1 { get; set; }
         public string furmular_2 { get; set; }
         public string furmular_3 { get; set; }
         public string furmular_4 { get; set; }
+        public string A { get; set; }
+        public string B { get; set; }
+        public string C { get; set; }
+        public string D { get; set; }
+        public string E { get; set; }
+        public Nullable<int> data_type { get; set; }
+        public Nullable<int> row_type { get; set; }
     }
 }

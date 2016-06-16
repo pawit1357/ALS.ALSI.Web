@@ -690,12 +690,19 @@
           <Property Name="nvrc36" Type="varchar" MaxLength="45" />
           <Property Name="nvrc37" Type="varchar" MaxLength="45" />
           <Property Name="selected_method" Type="int" />
-          <Property Name="selected_unit" Type="int" />
+          <Property Name="selected_unit_ftir" Type="int" />
           <Property Name="selected_unit_nvr" Type="int" />
           <Property Name="furmular_1" Type="varchar" MaxLength="45" />
           <Property Name="furmular_2" Type="varchar" MaxLength="45" />
           <Property Name="furmular_3" Type="varchar" MaxLength="45" />
           <Property Name="furmular_4" Type="varchar" MaxLength="45" />
+          <Property Name="A" Type="varchar" MaxLength="45" />
+          <Property Name="B" Type="varchar" MaxLength="100" />
+          <Property Name="C" Type="varchar" MaxLength="45" />
+          <Property Name="D" Type="varchar" MaxLength="45" />
+          <Property Name="E" Type="varchar" MaxLength="45" />
+          <Property Name="data_type" Type="int" />
+          <Property Name="row_type" Type="int" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage">
           <Key>
@@ -2386,12 +2393,19 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="nvrc36" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="nvrc37" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="selected_method" Type="Int32" />
-          <Property Name="selected_unit" Type="Int32" />
+          <Property Name="selected_unit_ftir" Type="Int32" />
           <Property Name="selected_unit_nvr" Type="Int32" />
           <Property Name="furmular_1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="furmular_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="furmular_3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="furmular_4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="A" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="C" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="D" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="E" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="data_type" Type="Int32" />
+          <Property Name="row_type" Type="Int32" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage">
           <Key>
@@ -3816,12 +3830,19 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_ftir_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_ftir_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_ftir_coverpage">
+                <ScalarProperty Name="row_type" ColumnName="row_type" />
+                <ScalarProperty Name="data_type" ColumnName="data_type" />
+                <ScalarProperty Name="E" ColumnName="E" />
+                <ScalarProperty Name="D" ColumnName="D" />
+                <ScalarProperty Name="C" ColumnName="C" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="A" ColumnName="A" />
                 <ScalarProperty Name="furmular_4" ColumnName="furmular_4" />
                 <ScalarProperty Name="furmular_3" ColumnName="furmular_3" />
                 <ScalarProperty Name="furmular_2" ColumnName="furmular_2" />
                 <ScalarProperty Name="furmular_1" ColumnName="furmular_1" />
                 <ScalarProperty Name="selected_unit_nvr" ColumnName="selected_unit_nvr" />
-                <ScalarProperty Name="selected_unit" ColumnName="selected_unit" />
+                <ScalarProperty Name="selected_unit_ftir" ColumnName="selected_unit_ftir" />
                 <ScalarProperty Name="selected_method" ColumnName="selected_method" />
                 <ScalarProperty Name="nvrc37" ColumnName="nvrc37" />
                 <ScalarProperty Name="nvrc36" ColumnName="nvrc36" />

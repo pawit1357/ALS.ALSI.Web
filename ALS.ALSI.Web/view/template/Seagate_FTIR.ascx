@@ -28,146 +28,64 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h5>METHOD/PROCEDURE:</h5>
-                                        <table class="table table-striped table-hover table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Analysis</th>
-                                                    <th>Procedure No</th>
-                                                    <th>Number of pieces<br />
-                                                        used for extraction</th>
-                                                    <th>Extraction<br />
-                                                        Medium</th>
-                                                    <th>Extraction
-                                        <br />
-                                                        Volume</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr runat="server" id="tab1_tr1">
-                                                    <td class="auto-style1">NVR/FTIR</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtProcedureNo" runat="server" Text="20800032-001 Rev. B,20800014-001 Rev. G,20800033-001 Rev K" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtNomOfPiece" runat="server" Text="5.8109 g/Estimated surface use 774.79 cm²" TextMode="MultiLine" Rows="2" CssClass="form-control"></asp:TextBox>
+                                        <div class="col-md-9">
 
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionMedium" runat="server" Text="IPA - 24 Hrs(HPLC Grade)" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionVolumn" runat="server" Text="40ml" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked="true" /></td>
-                                                </tr>
+                                            <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
+                                                CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Analysis" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litAnalysis" runat="server" Text='<%# Eval("A")%>' />
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
 
-                                                <tr runat="server" id="tab1_tr2">
-                                                    <td class="auto-style1">NVR</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtProcedureNo0" runat="server" Text="20800032-001 Rev. B
-20800014-001 Rev. G
-35344-001 Rev T"
-                                                            TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtNomOfPiece0" runat="server" Rows="2" Text="Estimated surface use cm²" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionMedium0" runat="server" Text="Ultrapure Water" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionVolumn0" runat="server" Text="100ml" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox2" runat="server" Checked="true" /></td>
-                                                </tr>
+                                                    <asp:TemplateField HeaderText="Procedure No" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litProcedureNo" runat="server" Text='<%# Eval("B")%>' />
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
 
-                                                <tr runat="server" id="tab1_tr3">
-                                                    <td class="auto-style1">NVR</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtProcedureNo1" runat="server" Text="20800032-001 Rev. B
-20800014-001 Rev. G
-35344-001 Rev T"
-                                                            TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtNomOfPiece1" runat="server" Rows="2" Text="Estimated surface use cm²" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionMedium1" runat="server" Text="n-hexane (HPLC Grade)" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionVolumn1" runat="server" Text="100ml" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox3" runat="server" Checked="true" /></td>
-                                                </tr>
+                                                    <asp:TemplateField HeaderText="Number of pieces used for extraction" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litNumberOfPiecesUsedForExtraction" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
 
-                                                <tr runat="server" id="tab1_tr4">
-                                                    <td class="auto-style1">FTIR</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtProcedureNo2" runat="server" Text="20800032-001 Rev. B
-20800014-001 Rev. G
-35344-001 Rev T"
-                                                            TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtNomOfPiece2" runat="server" Rows="2" Text="Estimated surface use cm²" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionMedium2" runat="server" Text="IPA/n-hexane (HPLC Grade)" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionVolumn2" runat="server" Text="100ml" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox4" runat="server" Checked="true" /></td>
-                                                </tr>
+                                                    <asp:TemplateField HeaderText="Extraction Medium" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="litExtractionMedium" runat="server" Text='<%# Eval("D")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:TemplateField>
 
-                                                <tr runat="server" id="tab1_tr5">
-                                                    <td class="auto-style1">FTIR</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtProcedureNo3" runat="server" Text="20800032-001 Rev. B
-20800014-001 Rev. G"
-                                                            TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtNomOfPiece3" runat="server" Rows="2" Text="Estimated surface use cm²" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionMedium3" runat="server" Text="n-hexane (HPLC Grade)" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionVolumn3" runat="server" Text="10ml" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox5" runat="server" Checked="true" /></td>
-                                                </tr>
+                                                    <asp:TemplateField HeaderText="Extraction Volume" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="litExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Hide">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
 
-                                                <tr runat="server" id="tab1_tr6">
-                                                    <td class="auto-style1">FTIR</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtProcedureNo4" runat="server" Text="20800032-001 Rev. B
-20800014-001 Rev. G"
-                                                            TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtNomOfPiece4" runat="server" Rows="2" Text="1 pc." TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionMedium4" runat="server" Text="n-hexane (HPLC Grade)" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtExtractionVolumn4" runat="server" Text="20ml" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox6" runat="server" Checked="true" /></td>
-                                                </tr>
+                                                <EmptyDataTemplate>
+                                                    <div class="data-not-found">
+                                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                    </div>
+                                                </EmptyDataTemplate>
+                                            </asp:GridView>
+                                        </div>
 
-                                            </tbody>
-                                        </table>
+                                    
                                     </div>
                                 </div>
 
@@ -177,8 +95,48 @@
                                         <h6>The Specification is based on Seagate's Doc 
                                                     <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
                                             <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>
+                                        <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="Organic Contamination" ItemStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litOrganicContamination" runat="server" Text='<%# Eval("A")%>' />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
 
-                                        <table class="table table-striped table-hover">
+                                                <asp:TemplateField HeaderText="Specification Limits (ng/cm2)" ItemStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litSpecificationLimits" runat="server" Text='<%# Eval("B")%>' />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Results (ng/cm2)" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Hide">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+
+                                            <EmptyDataTemplate>
+                                                <div class="data-not-found">
+                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                </div>
+                                            </EmptyDataTemplate>
+                                        </asp:GridView>
+
+                                        <%--<table class="table table-striped table-hover">
                                             <thead>
                                                 <tr runat="server" id="Tr28">
                                                     <th>Non-Volatile Residue</th>
@@ -236,9 +194,9 @@
                                             </tbody>
 
 
-                                        </table>
+                                        </table>--%>
                                         <br />
-                                        <table class="table table-striped table-hover">
+                                        <%--<table class="table table-striped table-hover">
                                             <thead>
                                                 <tr runat="server" id="tab2_tr0">
                                                     <th>Organic Contamination</th>
@@ -300,7 +258,7 @@
                                                         <asp:CheckBox ID="CheckBox12" runat="server" Checked="true" /></td>
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table>--%>
                                     </div>
                                 </div>
                                 <br />
@@ -360,196 +318,86 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                     <%--working-FTIR--%>
                     <asp:Panel ID="PWorking" runat="server">
                         <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-striped table-hover table-bordered" id="tb1" runat="server">
+                            <div class="col-md-9">
+                                <table class="table table-striped table-hover table-bordered" id="Table2" runat="server">
                                     <thead>
+
                                         <tr>
                                             <th>Surface area per part (e) =</th>
                                             <th>
-                                                <asp:TextBox ID="txtWB13" runat="server" Text="20"></asp:TextBox></th>
+                                                <asp:TextBox ID="txtWB13" runat="server" Text="0"></asp:TextBox></th>
                                             <th>cm2</th>
-                                            <th></th>
-                                            <th></th>
                                         </tr>
                                         <tr>
                                             <th>No. of parts extracted (f) = </th>
                                             <th>
-                                                <asp:TextBox ID="txtWB14" runat="server" Text="1"></asp:TextBox></th>
-                                            <th></th>
-                                            <th></th>
+                                                <asp:TextBox ID="txtWB14" runat="server" Text="0"></asp:TextBox></th>
                                             <th></th>
                                         </tr>
                                         <tr>
                                             <th>Total Surface area (A) =</th>
                                             <th>
-                                                <asp:TextBox ID="txtWB15" runat="server" Text="20"></asp:TextBox></th>
+                                                <asp:TextBox ID="txtWB15" runat="server" Text="0"></asp:TextBox></th>
                                             <th>cm2</th>
-                                            <th></th>
-                                            <th></th>
                                         </tr>
-                                        <tr>
-                                            <th>Unit</th>
-                                            <th>
-                                                <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
-                                                    <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="2">ug/cm2</asp:ListItem>
-                                                </asp:DropDownList></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="5"></th>
-                                        </tr>
-                                        <tr>
-                                            <th></th>
-                                            <th>Silicone Oil</th>
-                                            <th>Amide Slip Agent</th>
-                                            <th>Phthalate</th>
-                                            <th>Hydrocarbon</th>
-                                            <th></th>
-                                        </tr>
+
                                     </thead>
-                                    <tbody>
-                                        <tr runat="server" id="tr25">
-                                            <td>Equation of calibration curve,y = mx + c</td>
-                                            <td>
-                                                <asp:Label ID="Label1" runat="server"></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="Label2" runat="server"></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="Label3" runat="server"></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="Label4" runat="server"></asp:Label>
-                                            </td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr runat="server" id="tr1">
-                                            <td>Peak height measured, y (mAbs)</td>
-                                            <td>
-                                                <asp:TextBox ID="txtWB20" runat="server" CssClass="m-wrap small" Text="0.00"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWC20" runat="server" CssClass="m-wrap small" Text="0.00"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWD20" runat="server" CssClass="m-wrap small" Text="0.00"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWE20" runat="server" CssClass="m-wrap small" Text="0.00"></asp:TextBox></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr runat="server" id="tr2">
-                                            <td>Slope of curve, m</td>
-                                            <td>
-                                                <asp:TextBox ID="txtWB21" runat="server" CssClass="m-wrap small" Text="33.9730"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWC21" runat="server" CssClass="m-wrap small" Text="57.1800"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWD21" runat="server" CssClass="m-wrap small" Text="20.3790"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWE21" runat="server" CssClass="m-wrap small" Text="19.1740"></asp:TextBox></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr runat="server" id="tr3">
-                                            <td>y -intercept, c</td>
-                                            <td>
-                                                <asp:TextBox ID="txtWB22" runat="server" CssClass="m-wrap small" Text="-0.0029"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWC22" runat="server" CssClass="m-wrap small" Text="-0.0490"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWD22" runat="server" CssClass="m-wrap small" Text="0.0533"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWE22" runat="server" CssClass="m-wrap small" Text="0.0969"></asp:TextBox></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr runat="server" id="tr4">
-                                            <td>Amount , x (ug) = (y - c) / m
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWB23" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWC23" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWD23" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWE23" runat="server" Text=""></asp:Label>
-
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr runat="server" id="tr5">
-                                            <td>Instrument Detection Limit (ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="txtWB24" runat="server" CssClass="m-wrap small" Text="0.02"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWC24" runat="server" CssClass="m-wrap small" Text="0.00"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWD24" runat="server" CssClass="m-wrap small" Text="0.00"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtWE24" runat="server" CssClass="m-wrap small" Text="0.02"></asp:TextBox></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr runat="server" id="tr6">
-                                            <td>Instrument Detection Limit (ug/sqcm)
-
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWB25" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWC25" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWD25" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWE25" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr runat="server" id="tr7">
-                                            <td>Amount (ng/cm2)
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWB26" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWC26" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWD26" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWE26" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr runat="server" id="tr8">
-                                            <td>Amount (ug/cm2)
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWB27" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWC27" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWD27" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lbWE27" runat="server" Text=""></asp:Label>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-
-                                    </tbody>
                                 </table>
+
+
+
+
+                                <asp:GridView ID="gvWftir" CssClass="table table-striped table-bordered mini" runat="server" AutoGenerateColumns="False">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Silicone Oil" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Amide Slip Agent" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litC" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Phthalate" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litD" runat="server" Text='<%# Eval("D")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Hydrocarbon" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litE" runat="server" Text='<%# Eval("E")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                        <%--                                        <asp:TemplateField HeaderText="Hide">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>--%>
+                                    </Columns>
+
+                                    <EmptyDataTemplate>
+                                        <div class="data-not-found">
+                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+
                             </div>
                         </div>
                     </asp:Panel>
@@ -787,69 +635,69 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
 
 
                                     <asp:Panel ID="pSpecification" runat="server">
-                                   <%--     <div class="row">
+                                        <%--     <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="B" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                         <%--   </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="B" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <%--   </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pStatus" runat="server">
-                                  <%--      <div class="row">
+                                        <%--      <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                       <%--     </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <%--     </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pRemark" runat="server">
-                                      <%--  <div class="row">
+                                        <%--  <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:TextBox ID="txtRemark"  runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                      <%--      </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:TextBox ID="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <%--      </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDisapprove" runat="server">
-                                    <%--    <div class="row">
+                                        <%--    <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
-                                                    <div class="col-md-6">
-                                                        <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                            </div>
+                                        </div>
                                         <%--    </div>
                                         </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDownload" runat="server">
-                                      <%--  <div class="row">
+                                        <%--  <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Download:</label>
-                                                    <div class="col-md-6">
-<asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
-                                                                                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                            <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                                        </asp:LinkButton>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Download:</label>
+                                            <div class="col-md-6">
+                                                <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
+                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                                                    <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
                                         <%--    </div>
                                         </div>--%>
                                         <br />
@@ -884,7 +732,7 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                         <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-<%--                                    <asp:Panel ID="pUploadfile" runat="server">
+                                    <%--                                    <asp:Panel ID="pUploadfile" runat="server">
 
                                         <div class="row">
                                             <div class="col-md-6">
@@ -904,8 +752,6 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                         </div>
                                         <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
                                     </asp:Panel>--%>
-
-
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -946,30 +792,48 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                         <tr>
                                             <td>Instrument Detection Limit (ug)</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="3"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Instrument Detection Limit (ug/sqcm)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal06" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
                                         </tr>
                                         <tr>
                                             <td>Amount (ng/cm2)</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal06" runat="server" TextMode="Number" CssClass="form-control" Text="3"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal07" runat="server" TextMode="Number" CssClass="form-control" Text="3"></asp:TextBox></td>
                                         </tr>
-
-
                                     </table>
                                     <h1>NVR</h1>
                                     <table class="table table-striped">
                                         <tr>
                                             <td>Control</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal07" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal08" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
                                         <tr>
                                             <td>Sample</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal08" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal09" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
                                         </tr>
 
 
+                                    </table>
+                                    <h1>Unit</h1>
+                                    <table class="table table-striped">
+
+                                        <tr>
+                                            <th>Unit</th>
+                                            <th>
+                                                <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
+                                                    <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="2">ug/cm2</asp:ListItem>
+                                                </asp:DropDownList></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
                                     </table>
                                 </div>
                                 <div class="modal-footer">
@@ -996,7 +860,7 @@ Remarks: The above analysis was carried out using FTIR spectrometer equipped wit
                                             รายการปัญหา</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                        <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+                                    <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
 
                                 </div>
                                 <div class="modal-footer">

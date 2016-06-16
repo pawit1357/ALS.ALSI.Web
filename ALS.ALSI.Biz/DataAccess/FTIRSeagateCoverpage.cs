@@ -42,8 +42,16 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public void Update()
         {
-            template_seagate_ftir_coverpage existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
-            _repository.Edit(existing, this);
+            try
+            {
+
+
+                template_seagate_ftir_coverpage existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
+                _repository.Edit(existing, this);
+            }
+            catch (Exception ex) {
+                Console.WriteLine();
+            }
         }
 
         public void Delete()
@@ -76,7 +84,38 @@ namespace ALS.ALSI.Biz.DataAccess
 
         #endregion
 
+        public static void InsertList(List<template_seagate_ftir_coverpage> _lists)
+        {
 
+            foreach (template_seagate_ftir_coverpage tmp in _lists)
+            {
+                try
+                {
+                    tmp.Insert();
+
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine();
+                }
+            }
+        }
+        public static void UpdateList(List<template_seagate_ftir_coverpage> _lists)
+        {
+            foreach (template_seagate_ftir_coverpage tmp in _lists)
+            {
+                tmp.Update();
+            }
+        }
+        public static void DeleteBySampleID(int _sampleID)
+        {
+            List<template_seagate_ftir_coverpage> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
+            foreach (template_seagate_ftir_coverpage tmp in lists)
+            {
+                _repository.Delete(tmp);
+            }
+        }
 
     }
 }
