@@ -17,13 +17,25 @@ namespace ALS.ALSI.Biz.DataAccess
         public int ID { get; set; }
         public Nullable<int> sample_id { get; set; }
         public Nullable<int> specification_id { get; set; }
-        public string ProcedureNo { get; set; }
-        public string NumOfPiece { get; set; }
-        public string ExtractionMedium { get; set; }
-        public string ExtractionVolumn { get; set; }
         public string w_b13 { get; set; }
         public string w_b14 { get; set; }
         public string w_b15 { get; set; }
+        public string w_d13 { get; set; }
+        public string w_d14 { get; set; }
+        public string w_d15 { get; set; }
+        public string A { get; set; }
+        public string B { get; set; }
+        public string C { get; set; }
+        public string D { get; set; }
+        public string E { get; set; }
+        public Nullable<int> selected_unit_ftir { get; set; }
+        public Nullable<int> selected_unit_nvr { get; set; }
+        public Nullable<int> data_type { get; set; }
+        public Nullable<int> row_type { get; set; }
+        public string ExtractionVolumn { get; set; }
+        public string ExtractionMedium { get; set; }
+        public string NumOfPiece { get; set; }
+        public string ProcedureNo { get; set; }
         public string w_b20 { get; set; }
         public string w_c20 { get; set; }
         public string w_d20 { get; set; }
@@ -84,18 +96,9 @@ namespace ALS.ALSI.Biz.DataAccess
         public string nvrc36 { get; set; }
         public string nvrc37 { get; set; }
         public Nullable<int> selected_method { get; set; }
-        public Nullable<int> selected_unit_ftir { get; set; }
-        public Nullable<int> selected_unit_nvr { get; set; }
         public string furmular_1 { get; set; }
         public string furmular_2 { get; set; }
         public string furmular_3 { get; set; }
         public string furmular_4 { get; set; }
-        public string A { get; set; }
-        public string B { get; set; }
-        public string C { get; set; }
-        public string D { get; set; }
-        public string E { get; set; }
-        public Nullable<int> data_type { get; set; }
-        public Nullable<int> row_type { get; set; }
     }
 }
