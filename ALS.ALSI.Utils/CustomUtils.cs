@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ALS.ALSI.Utils
 {
@@ -30,6 +31,11 @@ namespace ALS.ALSI.Utils
         {
             return GetRandomNumber(1, 1000); //Convert.ToInt32(DateTime.Now.Ticks);
 
+        }
+        public static int GenerateRandom(int min, int max)
+        {
+            var seed = Convert.ToInt32(Regex.Match(Guid.NewGuid().ToString(), @"\d+").Value);
+            return new Random(seed).Next(min, max);
         }
 
         public static Boolean isNumber(String _value)

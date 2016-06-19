@@ -211,7 +211,7 @@
                                     <table class="table table-striped table-hover" id="tab2" runat="server">
                                         <tbody>
                                             <tr runat="server" id="tr4">
-                                                <td colspan="2">Test Method: 92-004230 Rev. AK</td>
+                                                <td colspan="2">Test Method: <asp:Label ID="lbTestMethod" runat="server" Text="Label"></asp:Label></td>
                                             </tr>
                                             <tr>
                                                 <td>Surface Area, cm²</td>

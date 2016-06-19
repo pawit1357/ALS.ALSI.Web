@@ -249,6 +249,7 @@ namespace ALS.ALSI.Web.view.template
                 txtD21.Text = _lpc.ExtractionMedium;
                 txtE21.Text = _lpc.ExtractionVolume;
 
+                lbTestMethod.Text = txtB21.Text;
                 #region "Test Method: 92-004230 Rev. AK"
                 txtB48.Text = _lpc.ws_b15;//Surface Area, cm²
                 txtB49.Text = _lpc.ExtractionVolume;
@@ -852,6 +853,8 @@ namespace ALS.ALSI.Web.view.template
 
                 txtB49.Text = txtE21.Text;
                 txtB51.Text = txtC21.Text;
+
+                lbTestMethod.Text = txtB21.Text;
 
                 lbSpecRev.Text = tem.C;
                 lbComponent.Text = tem.B;

@@ -52,10 +52,10 @@ namespace ALS.ALSI.Web.view.template
             "E#Irgafos and Derivatives",
             "-#- Irgafos",
             "-#- Irgafos-oxidized",
-            "G#Total Organic Compound",
+            "G#Total Organic Compound"
             //"D#Phthalate",
-            "D#Diisononyl Phthalate & Isomer",
-            "D#Phthalate hump (m/z 149,293)"
+            //"D#Diisononyl Phthalate & Isomer",
+            //"D#Phthalate hump (m/z 149,293)"
         };
 
         public String Part
@@ -423,7 +423,9 @@ namespace ALS.ALSI.Web.view.template
                             _cov.pm_extraction_volumn = txtExtractionVolumn.Text;
                             _cov.pm_unit = hProcedureUnit.Value;
                         }
-                        template_wd_gcms_coverpage.UpdateList(this.coverpages);
+                        template_wd_gcms_coverpage.DeleteBySampleID(this.SampleID);
+                        template_wd_gcms_coverpage.InsertList(this.coverpages);
+                        //template_wd_gcms_coverpage.UpdateList(this.coverpages);
                         #endregion
                     }
                     else
@@ -956,7 +958,7 @@ namespace ALS.ALSI.Web.view.template
                 //String result = "Not Detected";
 
 
-                    tb_m_gcms_cas tmp = this.tbCas.Find(x => _cover.B.Equals(x.classification));
+                    tb_m_gcms_cas tmp = this.tbCas.Find(x => _cover.B.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
                     if (tmp != null)
                     {
 
@@ -969,30 +971,6 @@ namespace ALS.ALSI.Web.view.template
                         {
                             _cover.D = "Not Detected";
                         }
-
-                        //if (!_cover.D.Equals("Not Detected") && String.IsNullOrEmpty(_cover.D))
-                        //{
-                        //    decimal val = Convert.ToDecimal(result);
-
-
-                        //    if (_cover.B.Equals("Total Organic Compound"))
-                        //    {
-                        //        if (val > 100)
-                        //        {
-                        //            val = Math.Round(val);
-                        //            _cover.D = val.ToString();
-                        //        }
-                        //    }
-                        //    else
-                        //    {
-                        //        _cover.D = val.ToString("N3");
-                        //    }
-
-                        //}
-                        //else
-                        //{
-                        //    _cover.D = string.Empty;
-                        //}
                     }
                     else
                     {
@@ -1028,11 +1006,6 @@ namespace ALS.ALSI.Web.view.template
             gvCoverPages.DataBind();
 
             List<tb_m_gcms_cas> majorCompounds = this.tbCas.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.MajorCompounds));
-            //foreach (tb_m_gcms_cas _val in majorCompounds)
-            //{
-            //    _val.rt = Convert.ToDecimal(_val.rt).ToString("N2");
-            //    _val.amount = Convert.ToDecimal(_val.amount).ToString("N3");
-            //}
 
             gvMajorCompounds.DataSource = majorCompounds;
             gvMajorCompounds.DataBind();

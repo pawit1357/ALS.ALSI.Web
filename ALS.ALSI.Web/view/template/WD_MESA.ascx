@@ -234,6 +234,41 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Choose Source files: </label>
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="true"  />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"></label>
+                                    <div class="col-md-9">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%--                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
                                     <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
                                     <div class="col-md-6">
                                         <asp:HiddenField ID="hPathSourceFile" runat="server" />
@@ -247,45 +282,51 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </asp:Panel>
 
 
                     <div class="row">
                         <div class="col-md-9">
                             <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
-                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting">
+                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting">
                                 <Columns>
                                     <asp:TemplateField HeaderText="AREA" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
                                             <asp:Literal ID="litArea" runat="server" Text='<%# Eval("area")%>' />
                                         </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Right" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="DESCRIPTION" ItemStyle-HorizontalAlign="Right">
+                                    <asp:TemplateField HeaderText="LOCATION" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
                                             <asp:Literal ID="litDescription" runat="server" Text='<%# Eval("descripton")%>' />
                                         </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Right" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="SEM IMAGE AT 250X" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
                                             <asp:Image ID="litSemImageat250x" runat="server" ImageUrl='<%# Eval("path_sem_image_at_250x")%>' Width="120" Height="120" />
                                         </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Right" />
                                     </asp:TemplateField>
 
                                     <asp:TemplateField HeaderText="SEM IMAGE AT 500X" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
                                             <asp:Image ID="litSemImageAt500x" runat="server" ImageUrl='<%# Eval("path_sem_image_at_500x")%>' Width="120" Height="120" />
                                         </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Right" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="SEM IMAGE AT 2000X" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
                                             <asp:Image ID="litSemImageAt200x" runat="server" ImageUrl='<%# Eval("path_sem_image_at_2000x")%>' Width="120" Height="120" />
                                         </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Right" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="EDX SPECTRUM" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
                                             <asp:Image ID="litEdxSpectrum" runat="server" ImageUrl='<%# Eval("path_edx_spectrum")%>' Width="120" Height="120" />
                                         </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Right" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Delete">
                                         <ItemTemplate>

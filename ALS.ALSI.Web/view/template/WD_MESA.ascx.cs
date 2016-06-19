@@ -827,8 +827,10 @@ namespace ALS.ALSI.Web.view.template
                         string MM = DateTime.Now.ToString("MM");
                         string dd = DateTime.Now.ToString("dd");
 
-                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
-                        String source_file_url = String.Concat(Configurations.HOST,String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName)));
+                        String randNumber = String.Format("{0}_{1}{2}{3}",this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999),Path.GetExtension(_postedFile.FileName));
+
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                        String source_file_url = String.Concat(Configurations.HOST,String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
                         //source_file_url = string.Format("/alis/{0}", source_file_url);
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
