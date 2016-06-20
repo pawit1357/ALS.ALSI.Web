@@ -234,7 +234,7 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">Choose Source files: </label>
+                                    <label class="control-label col-md-3">SEM IMAGE AT 250X: </label>
                                     <div class="col-md-3">
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div class="input-group input-large">
@@ -246,7 +246,7 @@
                                                 <span class="input-group-addon btn default btn-file">
                                                     <span class="fileinput-new">Select file </span>
                                                     <span class="fileinput-exists">Change </span>
-                                                    <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="true"  />
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="false" />
 
                                                 </span>
                                                 <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
@@ -254,6 +254,70 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">SEM IMAGE AT 500X: </label>
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="FileUpload2" runat="server" AllowMultiple="false" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">SEM IMAGE AT 2000X: </label>
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="FileUpload3" runat="server" AllowMultiple="false" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">EDX SPECTRUM: </label>
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="FileUpload4" runat="server" AllowMultiple="false" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="form-group">
                                     <label class="control-label col-md-3"></label>
                                     <div class="col-md-9">
