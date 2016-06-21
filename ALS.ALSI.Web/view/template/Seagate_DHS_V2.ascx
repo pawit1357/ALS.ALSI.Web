@@ -17,7 +17,7 @@
                 </div>
                 <div class="portlet-body">
                     <asp:Panel ID="pDSH" runat="server">
-
+                        <asp:Panel ID="pLoadRawData" runat="server">
                         <div class="form-group">
                             <label class="control-label col-md-3">ทศนิยม</label>
                             <div class="col-md-9">
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                         </div>
-
+                            </asp:Panel>
                         <h4 class="form-section">Manage CAS# Data</h4>
                         <div class="row">
                             <div class="col-md-12">

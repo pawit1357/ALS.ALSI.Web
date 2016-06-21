@@ -91,7 +91,7 @@ namespace ALS.ALSI.Web.view.template
 
         private void initialPage()
         {
-            logger.Debug("TEST");
+            //logger.Debug("TEST");
             tb_m_detail_spec detailSpec = new tb_m_detail_spec();
             detailSpec.specification_id = this.jobSample.specification_id;
             detailSpec.template_id = this.jobSample.template_id;
@@ -238,9 +238,10 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
                 #region "METHOD/PROCEDURE:"
-                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-            && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+
+                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
+
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                     {
@@ -279,7 +280,13 @@ namespace ALS.ALSI.Web.view.template
                     gvCoverPages.Columns[5].Visible = false;
                     gvCoverPages.Columns[6].Visible = false;
 
-                }
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                    {
+                        btnCoverPage.Visible = true;
+                        btnDHS.Visible = true;
+                    }
+
+                    }
                 #endregion
                 #region "COVERPAGE"
                 if (this.coverpages != null && this.coverpages.Count > 0)

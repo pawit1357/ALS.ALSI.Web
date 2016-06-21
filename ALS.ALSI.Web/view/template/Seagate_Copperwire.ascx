@@ -248,24 +248,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <%--                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
-                                    <div class="col-md-6">
-                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                        <span class="btn green fileinput-button">
-                                            <i class="fa fa-plus"></i>
-                                            <span>Add files...</span>
-                                            <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="true" />
-                                        </span>
-                                        -<span><asp:Button ID="btnLoadFile" runat="server" CssClass="btn blue" OnClick="btnLoadFile_Click" Text="Upload" />
-                                            ***เลือกชนิดไฟล์ที่เป็น *.jpg</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>--%>
                     </asp:Panel>
 
                     <div class="row">

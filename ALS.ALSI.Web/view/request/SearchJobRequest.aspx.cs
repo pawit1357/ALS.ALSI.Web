@@ -166,10 +166,14 @@ namespace ALS.ALSI.Web.view.request
                     case RoleEnum.ADMIN:
                         gvJob.Columns[3].Visible = true;
                         gvJob.Columns[4].Visible = true;
+                        gvJob.Columns[11].Visible = true;
+                        gvJob.Columns[12].Visible = true;
                         break;
                     default:
                         gvJob.Columns[3].Visible = false;
                         gvJob.Columns[4].Visible = false;
+                        gvJob.Columns[11].Visible = false;
+                        gvJob.Columns[12].Visible = false;
                         break;
                 }
 

@@ -192,9 +192,11 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
                 #region "METHOD/PROCEDURE:"
-                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-                    && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+
+                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
+
+
 
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -225,7 +227,12 @@ namespace ALS.ALSI.Web.view.template
                     gvSpec.Columns[5].Visible = false;
                     btnCoverPage.Visible = false;
                     btnWorkSheet.Visible = false;
-                }
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                    {
+                        btnCoverPage.Visible = true;
+                        btnWorkSheet.Visible = true;
+                    }
+                    }
                 #endregion
             }
 

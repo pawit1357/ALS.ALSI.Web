@@ -27,6 +27,8 @@
                 </div>
                 <div class="portlet-body">
                     <asp:Panel ID="pDSH" runat="server">
+                                                <asp:Panel ID="pLoadRawData" runat="server">
+
                         <div class="panel panel-success">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Notes</h3>
@@ -48,6 +50,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -79,32 +82,7 @@
                                 </div>
                             </div>
                         </div>
-
-<%--                        <h4 class="form-section">Manage Source File</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
-                                    <div class="col-md-6">
-                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                        <span class="btn green fileinput-button">
-                                            <i class="fa fa-plus"></i>
-                                            <span>Add files...</span>
-                                            <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
-                                        </span>
-                                        <h6>***เลือกไฟล์ที่มี *.xls</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Generate Data</label>
-                                    <div class="col-md-6">
-                                        <asp:Button ID="btnLoadFile" runat="server" Text="Submit" CssClass="btn blue" OnClick="btnLoadFile_Click" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>--%>
+</asp:Panel>
 
                         <h4 class="form-section">Manage CAS# Data</h4>
                         <div class="row">

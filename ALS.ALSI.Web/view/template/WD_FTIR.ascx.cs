@@ -186,8 +186,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
                 #region "METHOD/PROCEDURE:"
-                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-            && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -201,13 +200,22 @@ namespace ALS.ALSI.Web.view.template
                     #endregion
 
                     btnNVRFTIR.Visible = true;
-
+                    btnCoverPage.Visible = true;
+                    gvMethodProcedure.Columns[5].Visible = true;
+                    gvResult.Columns[5].Visible = true;
+                    pLoadFile.Visible = true;
                 }
                 else
                 {
-
                     btnNVRFTIR.Visible = false;
-
+                    gvMethodProcedure.Columns[5].Visible = false;
+                    gvResult.Columns[5].Visible = false;
+                    pLoadFile.Visible = false;
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                    {
+                        btnCoverPage.Visible = true;
+                        btnNVRFTIR.Visible = true;
+                    }
                 }
                 #endregion
             }
@@ -346,8 +354,12 @@ namespace ALS.ALSI.Web.view.template
                     btnCoverPage.CssClass = "btn blue";
                     pCoverpage.Visible = false;
                     PWorking.Visible = true;
-                    pLoadFile.Visible = true;
+                    pLoadFile.Visible = false;
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                    {
+                        pLoadFile.Visible = true;
 
+                    }
                     break;
             }
         }

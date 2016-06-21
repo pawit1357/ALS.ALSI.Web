@@ -238,21 +238,7 @@ namespace ALS.ALSI.Web.view.template
 
 
                 this.coverpages = new List<template_seagate_corrosion_coverpage>();
-                //template_seagate_corrosion_coverpage cov = new template_seagate_corrosion_coverpage();
 
-                //cov.ID = 1;
-                //cov.sample_id = this.SampleID;
-                //cov.specification_id = Convert.ToInt32(ddlComponent.SelectedValue);
-
-                ////cov.procedureNo_id = txtProcedureNo.Text;
-                //cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
-
-                //cov.temperature_humidity_parameters = "85oC, 85%RH, 24hours";
-                //cov.specification = "No observable discoloration or spots at 10x";
-                //cov.result = "";
-                //this.coverpages.Add(cov);
-                //gvResult.DataSource = this.coverpages;
-                //gvResult.DataBind();
                 template_seagate_corrosion_coverpage cov = new template_seagate_corrosion_coverpage();
 
                 cov.ID = 1;
@@ -272,8 +258,7 @@ namespace ALS.ALSI.Web.view.template
             #endregion
 
 
-            if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-             && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+            if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
             {
                 #region ":: STAMP ANALYZED DATE ::"
                 if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))

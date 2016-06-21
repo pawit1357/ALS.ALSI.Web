@@ -639,7 +639,7 @@
                                 </div>
                             </div>
 
-
+                            <asp:Panel ID="pLoadRawData" runat="server">
                             <div class="form-group">
                                 <label class="control-label col-md-3">Select Source File: </label>
 
@@ -672,6 +672,7 @@
                                     </div>
                                 </div>
                             </div>
+                                </asp:Panel>
 
                         </asp:Panel>
                         <div class="row">

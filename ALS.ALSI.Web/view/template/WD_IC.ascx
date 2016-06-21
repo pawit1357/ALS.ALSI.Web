@@ -174,7 +174,7 @@
 
                     <asp:Panel ID="pWorkingIC" runat="server">
                         <asp:Panel ID="pLoadFile" runat="server">
-
+                             
                             <div class="form-group">
                                 <label class="control-label col-md-3">ทศนิยม</label>
                                 <div class="col-md-9">

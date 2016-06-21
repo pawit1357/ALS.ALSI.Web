@@ -126,7 +126,6 @@
 
 
                     <asp:Panel ID="pDSH" runat="server">
-
                         <asp:Panel ID="pLoadFile" runat="server">
 
                             <div class="form-group">
@@ -225,7 +224,7 @@
                                     <table class="table table-striped table-hover table-bordered">
                                         <tr>
                                             <td>Average</td>
-                                            <td colspan="3">
+                                            <td>
                                                 <asp:Label ID="lbAverage" runat="server" Text=""></asp:Label></td>
                                         </tr>
                                     </table>
@@ -275,7 +274,7 @@
                                     <table class="table table-striped table-hover table-bordered">
                                         <tr>
                                             <td>Average</td>
-                                            <td colspan="3">
+                                            <td>
                                                 <asp:Label ID="lbAverage05" runat="server" Text=""></asp:Label></td>
                                         </tr>
                                     </table>
@@ -325,7 +324,7 @@
                                     <table class="table table-striped table-hover table-bordered">
                                         <tr>
                                             <td>Average</td>
-                                            <td colspan="3">
+                                            <td>
                                                 <asp:Label ID="lbAverage06" runat="server" Text=""></asp:Label></td>
                                         </tr>
                                     </table>

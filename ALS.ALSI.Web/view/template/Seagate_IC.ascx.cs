@@ -232,22 +232,6 @@ namespace ALS.ALSI.Web.view.template
                         //gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                     }
 
-                    //if (ic.wunit != null)
-                    //{
-                    //    ddlUnit.SelectedValue = ic.wunit.Value.ToString();
-                    //    gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);
-                    //    gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
-                    //    gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);
-                    //    gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
-                    //}
-                    //else
-                    //{
-                    //    gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);
-                    //    gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
-                    //    gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);
-                    //    gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
-                    //}
-
                     //Working Sheet-IC
                     txtB9.Text = String.IsNullOrEmpty(ic.extraction_volume) ? String.Empty : ic.extraction_volume;
                     txtB10.Text = String.IsNullOrEmpty(ic.b10) ? String.Empty : ic.b10;
@@ -273,8 +257,7 @@ namespace ALS.ALSI.Web.view.template
 
 
             //Show Method/Procedure
-            if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-          && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+            if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
             {
                 #region ":: STAMP ANALYZED DATE ::"
                 if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -297,6 +280,7 @@ namespace ALS.ALSI.Web.view.template
                 gvCationic.Columns[3].Visible = true;
                 btnCoverPage.Visible = true;
                 btnWorking.Visible = true;
+                pLoadFile.Visible = true;
             }
             else
             {
@@ -310,6 +294,13 @@ namespace ALS.ALSI.Web.view.template
                 gvCationic.Columns[3].Visible = false;
                 btnCoverPage.Visible = false;
                 btnWorking.Visible = false;
+                pLoadFile.Visible = false;
+                if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                {
+                    btnCoverPage.Visible = true;
+                    btnWorking.Visible = true;
+                }
+
             }
 
             #endregion

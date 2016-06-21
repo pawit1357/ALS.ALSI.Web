@@ -81,6 +81,7 @@ namespace ALS.ALSI.Web.view.template
             Session.Remove(GetType().Name + Constants.PREVIOUS_PATH);
             Session.Remove(GetType().Name + "SampleID");
         }
+        #endregion
 
         private void initialPage()
         {
@@ -191,8 +192,7 @@ namespace ALS.ALSI.Web.view.template
                 #region "VISIBLE RESULT DATA"
 
 
-                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-               && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -204,138 +204,146 @@ namespace ALS.ALSI.Web.view.template
                         }
                     }
                     #endregion
-
+                    gvMethodProcedure.Columns[5].Visible = true;
+                    gvResult.Columns[3].Visible = true;
                     btnWorkingFTIR.Visible = true;
                     btnWorkingNVR.Visible = true;
-           
+
                 }
                 else
                 {
+                    gvMethodProcedure.Columns[5].Visible = false;
+                    gvResult.Columns[3].Visible = false;
                     btnWorkingFTIR.Visible = false;
                     btnWorkingNVR.Visible = false;
+
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                    {
+                        btnWorkingFTIR.Visible = true;
+                        btnWorkingNVR.Visible = true;
+                    }
+
                 }
                 #endregion
-            }
-            #endregion
 
-            #region "WorkSheet"
-            this.Ftir = template_seagate_ftir_coverpage.FindAllBySampleID(this.SampleID);
-            if (this.Ftir != null && this.Ftir.Count > 0)
-            {
-                ddlSpecification.SelectedValue = this.Ftir[0].specification_id.Value.ToString();
-                txtWB13.Text = this.Ftir[0].w_b13;
-                txtWB14.Text = this.Ftir[0].w_b14;
-                txtWB15.Text = this.Ftir[0].w_b15;
-
-                tb_m_specification mSpec = new tb_m_specification();
-                mSpec=  mSpec.SelectByID(this.Ftir[0].specification_id.Value);
-                if (mSpec != null)
+                #region "WorkSheet"
+                this.Ftir = template_seagate_ftir_coverpage.FindAllBySampleID(this.SampleID);
+                if (this.Ftir != null && this.Ftir.Count > 0)
                 {
-                    lbDocRev.Text = mSpec.C;
-                    lbDesc.Text = mSpec.B;
+                    ddlSpecification.SelectedValue = this.Ftir[0].specification_id.Value.ToString();
+                    txtWB13.Text = this.Ftir[0].w_b13;
+                    txtWB14.Text = this.Ftir[0].w_b14;
+                    txtWB15.Text = this.Ftir[0].w_b15;
+
+                    tb_m_specification mSpec = new tb_m_specification();
+                    mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
+                    if (mSpec != null)
+                    {
+                        lbDocRev.Text = mSpec.C;
+                        lbDesc.Text = mSpec.B;
+                    }
+
+                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                    gvMethodProcedure.DataBind();
+                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+                    gvResult.DataBind();
+                    gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
+                    gvWftir.DataBind();
+                    CalculateCas();
                 }
+                else
+                {
 
-                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
-                gvMethodProcedure.DataBind();
-                gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
-                gvResult.DataBind();
-                gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
-                gvWftir.DataBind();
-                CalculateCas();
-            }
-            else
-            {
-
-                #region "Procedure"
-                template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count+1;
-                tmp.A = "NVR/FTIR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
-                tmp.C = "5.8109 g/ Estimated surface use 774.79 cm²";
-                tmp.D = "  IPA - 24 Hours (HPLC Grade)";
-                tmp.E = "40mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
-                this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "NVR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
-                tmp.C = "Estimated surface use  cm²";
-                tmp.D = "Ultrapure Water";
-                tmp.E = "100mL";
-                tmp.row_type = 1;
-                 tmp.data_type = 1;
-                this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "NVR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
-                tmp.C = "Estimated surface use  cm²";
-                tmp.D = "n-hexane (HPLC Grade)";
-                tmp.E = "100mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
-                this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
-                tmp.C = "Estimated surface use  cm²";
-                tmp.D = "IPA/n-hexane (HPLC Grade)";
-                tmp.E = "100mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
-                this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G";
-                tmp.C = "";
-                tmp.D = "n-hexane  (HPLC Grade)";
-                tmp.E = "10mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
-                this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G";
-                tmp.C = "3 pieces.";
-                tmp.D = "n-hexane (HPLC Grade)";
-                tmp.E = "20mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
-                this.Ftir.Add(tmp);
+                    #region "Procedure"
+                    template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
+                    tmp.ID = this.Ftir.Count + 1;
+                    tmp.A = "NVR/FTIR";
+                    tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                    tmp.C = "5.8109 g/ Estimated surface use 774.79 cm²";
+                    tmp.D = "  IPA - 24 Hours (HPLC Grade)";
+                    tmp.E = "40mL";
+                    tmp.row_type = 1;
+                    tmp.data_type = 1;
+                    this.Ftir.Add(tmp);
+                    tmp = new template_seagate_ftir_coverpage();
+                    tmp.ID = this.Ftir.Count + 1;
+                    tmp.A = "NVR";
+                    tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
+                    tmp.C = "Estimated surface use  cm²";
+                    tmp.D = "Ultrapure Water";
+                    tmp.E = "100mL";
+                    tmp.row_type = 1;
+                    tmp.data_type = 1;
+                    this.Ftir.Add(tmp);
+                    tmp = new template_seagate_ftir_coverpage();
+                    tmp.ID = this.Ftir.Count + 1;
+                    tmp.A = "NVR";
+                    tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
+                    tmp.C = "Estimated surface use  cm²";
+                    tmp.D = "n-hexane (HPLC Grade)";
+                    tmp.E = "100mL";
+                    tmp.row_type = 1;
+                    tmp.data_type = 1;
+                    this.Ftir.Add(tmp);
+                    tmp = new template_seagate_ftir_coverpage();
+                    tmp.ID = this.Ftir.Count + 1;
+                    tmp.A = "FTIR";
+                    tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev.U";
+                    tmp.C = "Estimated surface use  cm²";
+                    tmp.D = "IPA/n-hexane (HPLC Grade)";
+                    tmp.E = "100mL";
+                    tmp.row_type = 1;
+                    tmp.data_type = 1;
+                    this.Ftir.Add(tmp);
+                    tmp = new template_seagate_ftir_coverpage();
+                    tmp.ID = this.Ftir.Count + 1;
+                    tmp.A = "FTIR";
+                    tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G";
+                    tmp.C = "";
+                    tmp.D = "n-hexane  (HPLC Grade)";
+                    tmp.E = "10mL";
+                    tmp.row_type = 1;
+                    tmp.data_type = 1;
+                    this.Ftir.Add(tmp);
+                    tmp = new template_seagate_ftir_coverpage();
+                    tmp.ID = this.Ftir.Count + 1;
+                    tmp.A = "FTIR";
+                    tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G";
+                    tmp.C = "3 pieces.";
+                    tmp.D = "n-hexane (HPLC Grade)";
+                    tmp.E = "20mL";
+                    tmp.row_type = 1;
+                    tmp.data_type = 1;
+                    this.Ftir.Add(tmp);
+                    #endregion
+                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                    gvMethodProcedure.DataBind();
+                }
                 #endregion
-                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
-                gvMethodProcedure.DataBind();
+
+                //initial component
+                btnCoverPage.CssClass = "btn green";
+                btnWorkingFTIR.CssClass = "btn blue";
+                btnWorkingNVR.CssClass = "btn blue";
+
+                pCoverPage.Visible = true;
+                PWorking.Visible = false;
+                PNvr.Visible = false;
+                pLoadFile.Visible = false;
+
+                switch (lbJobStatus.Text)
+                {
+                    case "CONVERT_PDF":
+                        litDownloadIcon.Text = "<i class=\"fa fa-file-pdf-o\"></i>";
+                        break;
+                    default:
+                        litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
+                        break;
+                }
             }
+
             #endregion
-
-            //initial component
-            btnCoverPage.CssClass = "btn green";
-            btnWorkingFTIR.CssClass = "btn blue";
-            btnWorkingNVR.CssClass = "btn blue";
-
-            pCoverPage.Visible = true;
-            PWorking.Visible = false;
-            PNvr.Visible = false;
-            pLoadFile.Visible = false;
-
-            switch (lbJobStatus.Text)
-            {
-                case "CONVERT_PDF":
-                    litDownloadIcon.Text = "<i class=\"fa fa-file-pdf-o\"></i>";
-                    break;
-                default:
-                    litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
-                    break;
-            }
         }
-
-        #endregion
-
         List<String> errors = new List<string>();
 
 
@@ -365,13 +373,6 @@ namespace ALS.ALSI.Web.view.template
                     PNvr.Visible = false;
                     pLoadFile.Visible = false;
 
-                    //lbC32.Text = Constants.GetEnumDescription(ResultEnum.NOT_DETECTED);
-                    //lbC33.Text = lbWE26.Text;// this.Ftir.w_e26;
-                    //lbC34.Text = Constants.GetEnumDescription(ResultEnum.NOT_DETECTED);
-                    //lbC35.Text = lbWD26.Text;// this.Ftir.w_d26;
-                    //lbC36.Text = lbWC26.Text;// this.Ftir.w_c26;
-
-
                     CalculateCas();
 
                     break;
@@ -382,8 +383,12 @@ namespace ALS.ALSI.Web.view.template
                     pCoverPage.Visible = false;
                     PWorking.Visible = true;
                     PNvr.Visible = false;
-                    pLoadFile.Visible = true;
+                    pLoadFile.Visible = false;
 
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                    {
+                        pLoadFile.Visible = true;
+                    }
                     break;
                 case "btnWorkingNVR":
                     btnCoverPage.CssClass = "btn blue";
@@ -392,8 +397,12 @@ namespace ALS.ALSI.Web.view.template
                     pCoverPage.Visible = false;
                     PWorking.Visible = false;
                     PNvr.Visible = true;
-                    pLoadFile.Visible = true;
+                    pLoadFile.Visible = false;
 
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                    {
+                        pLoadFile.Visible = true;
+                    }
                     break;
             }
         }

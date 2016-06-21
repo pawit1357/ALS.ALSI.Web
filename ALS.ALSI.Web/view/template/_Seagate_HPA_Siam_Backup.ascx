@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_HPA_Siam_Backup.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_HPA_Siam_Backup" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="_Seagate_HPA_Siam_Backup.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_HPA_Siam_Backup" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">

@@ -191,8 +191,7 @@ namespace ALS.ALSI.Web.view.template
                 #region "VISIBLE RESULT DATA"
 
 
-                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-               && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -204,15 +203,25 @@ namespace ALS.ALSI.Web.view.template
                         }
                     }
                     #endregion
-
+                    gvMethodProcedure.Columns[5].Visible = true;
+                    gvResult.Columns[3].Visible = true;
                     btnWorkingFTIR.Visible = true;
                     btnWorkingNVR.Visible = true;
-           
+
                 }
                 else
                 {
+                    gvMethodProcedure.Columns[5].Visible = false;
+                    gvResult.Columns[3].Visible = false;
                     btnWorkingFTIR.Visible = false;
                     btnWorkingNVR.Visible = false;
+
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                    {
+                        btnWorkingFTIR.Visible = true;
+                        btnWorkingNVR.Visible = true;
+                    }
+
                 }
                 #endregion
             }
@@ -368,12 +377,6 @@ namespace ALS.ALSI.Web.view.template
                     PNvr.Visible = false;
                     pLoadFile.Visible = false;
 
-                    //lbC32.Text = Constants.GetEnumDescription(ResultEnum.NOT_DETECTED);
-                    //lbC33.Text = lbWE26.Text;// this.Ftir.w_e26;
-                    //lbC34.Text = Constants.GetEnumDescription(ResultEnum.NOT_DETECTED);
-                    //lbC35.Text = lbWD26.Text;// this.Ftir.w_d26;
-                    //lbC36.Text = lbWC26.Text;// this.Ftir.w_c26;
-
 
                     CalculateCas();
 
@@ -385,8 +388,12 @@ namespace ALS.ALSI.Web.view.template
                     pCoverPage.Visible = false;
                     PWorking.Visible = true;
                     PNvr.Visible = false;
-                    pLoadFile.Visible = true;
+                    pLoadFile.Visible = false;
 
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                    {
+                        pLoadFile.Visible = true;
+                    }
                     break;
                 case "btnWorkingNVR":
                     btnCoverPage.CssClass = "btn blue";
@@ -395,8 +402,12 @@ namespace ALS.ALSI.Web.view.template
                     pCoverPage.Visible = false;
                     PWorking.Visible = false;
                     PNvr.Visible = true;
-                    pLoadFile.Visible = true;
+                    pLoadFile.Visible = false;
 
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                    {
+                        pLoadFile.Visible = true;
+                    }
                     break;
             }
         }

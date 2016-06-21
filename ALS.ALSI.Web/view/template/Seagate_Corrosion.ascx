@@ -67,7 +67,7 @@
                                             <ItemTemplate>
                                                 <asp:Literal ID="litTemperature_humidity_parameters" runat="server" Text='<%# Eval("temperature_humidity_parameters")%>' />
                                             </ItemTemplate>
-                                <%--            <EditItemTemplate>
+                                            <%--            <EditItemTemplate>
                                                 <asp:DropDownList ID="ddlhTemperature_humidity_parameters" runat="server" class="select2_category form-control" AutoPostBack="True" DataTextField="C" DataValueField="ID"></asp:DropDownList>
                                                 <asp:HiddenField ID="hTemperature_humidity_parameters" Value='<%# Eval("temperature_humidity_parameters_id")%>' runat="server" />
                                             </EditItemTemplate>--%>
@@ -147,69 +147,49 @@
                     </asp:Panel>
 
                     <asp:Panel ID="pRefImage" runat="server">
-                                            <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Help</h3>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Help</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul>
+                                    <li>##ขั้นตอนการอัพโหลด</li>
+                                    <li>เลือกไฟล์ที่มี </li>
+                                    <li>จะอัพโหลดได้แค่ 2 ไฟล์ คือ Before,After โดยอัพโหลดทีละรูป โดย</li>
+                                    <li>- รูปแรกที่อัพโหลดจะเป็น Before</li>
+                                    <li>- รูปที่สองที่อัพโหลดจะเป็น After</li>
+                                    <li>- การแก้คำอธิบายรูปว่าเป็น After หรือ Before สามารถทำได้โดยการกดปุ่ม Edit </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <ul>
-                                <li>##ขั้นตอนการอัพโหลด</li>
-                                <li>เลือกไฟล์ที่มี </li>
-                                <li>จะอัพโหลดได้แค่ 2 ไฟล์ คือ Before,After โดยอัพโหลดทีละรูป โดย</li>
-                                <li> - รูปแรกที่อัพโหลดจะเป็น Before</li>
-                                <li> - รูปที่สองที่อัพโหลดจะเป็น After</li>
-                                <li> - การแก้คำอธิบายรูปว่าเป็น After หรือ Before สามารถทำได้โดยการกดปุ่ม Edit </li>
-                            </ul>
-                        </div>
-                    </div>
-                         <div class="row">
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Uplod Photo: </label>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Uplod Photo: </label>
 
-                                            <div class="col-md-3">
-                                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                    <div class="input-group input-large">
-                                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
-                                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                <div class="col-md-3">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="input-group input-large">
+                                            <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
                                                                
                                             <span class="fileinput-filename"></span>
-                                                        </div>
-                                                        <span class="input-group-addon btn default btn-file">
-                                                            <span class="fileinput-new">Select file </span>
-                                                            <span class="fileinput-exists">Change </span>
-                                                            <asp:FileUpload ID="FileUpload1" runat="server" />
-
-                                                        </span>
-                                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
-
-                                                    </div>
-                                                </div>
-                                                <asp:Button ID="btnLoadFile" runat="server" CssClass="btn blue" OnClick="btnLoadFile_Click" Text="Upload" />
-                                            ***เลือกชนิดไฟล์ที่เป็น *.jpg</span>
-<%--                                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>--%>
-
                                             </div>
-                                        </div>
-                             </div>
-                        <%--<h4 class="form-section">Photo Before:</h4>--%>
+                                            <span class="input-group-addon btn default btn-file">
+                                                <span class="fileinput-new">Select file </span>
+                                                <span class="fileinput-exists">Change </span>
+                                                <asp:FileUpload ID="FileUpload1" runat="server" />
 
-<%--                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
-                                    <div class="col-md-6">
-                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                        <span class="btn green fileinput-button">
-                                            <i class="fa fa-plus"></i>
-                                            <span>Add files...</span>
-                                            <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="false" />
-                                        </span>
-                                        -<span><asp:Button ID="btnLoadFile" runat="server" CssClass="btn blue" OnClick="btnLoadFile_Click" Text="Upload" />
-                                            ***เลือกชนิดไฟล์ที่เป็น *.jpg</span>
+                                            </span>
+                                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                        </div>
                                     </div>
+                                    <asp:Button ID="btnLoadFile" runat="server" CssClass="btn blue" OnClick="btnLoadFile_Click" Text="Upload" />
+                                    ***เลือกชนิดไฟล์ที่เป็น *.jpg</span>
+                                    <%--                                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>--%>
                                 </div>
                             </div>
-                        </div>--%>
+                        </div>
                     </asp:Panel>
 
                     <div class="row">
@@ -338,20 +318,20 @@
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDownload" runat="server">
-                                 <%--       <div class="row">
+                                        <%--       <div class="row">
                                             <div class="col-md-6">--%>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Download:</label>
-                                                    <div class="col-md-6">
-<asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
-                                                                                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                            <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                                        </asp:LinkButton>
-                                                    </div>
-                                                </div>
-                                                <%--   </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Download:</label>
+                                            <div class="col-md-6">
+                                                <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
+                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                                                    <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
+                                        <%--   </div>
                                         </div>--%>
-                                                <br />
+                                        <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pUploadfile" runat="server">
                                         <div class="form-group">

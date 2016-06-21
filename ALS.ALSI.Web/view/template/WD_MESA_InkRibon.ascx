@@ -252,7 +252,151 @@
                         <br />
                     </asp:Panel>
 
+
                     <asp:Panel ID="pRefImage" runat="server">
+                        <h4 class="form-section">Reference Image:</h4>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">AREA:<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <asp:DropDownList ID="ddlArea" runat="server" CssClass="select2_category form-control">
+                                            <asp:ListItem Value="1">AREA 1</asp:ListItem>
+                                            <asp:ListItem Value="2">AREA 2</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">DESCRIPTION:<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtDesc" runat="server" class="form-control"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">SEM IMAGE AT 250X: </label>
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="false" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">SEM IMAGE AT 500X: </label>
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="FileUpload2" runat="server" AllowMultiple="false" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">SEM IMAGE AT 2000X: </label>
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="FileUpload3" runat="server" AllowMultiple="false" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">EDX SPECTRUM: </label>
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="FileUpload4" runat="server" AllowMultiple="false" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"></label>
+                                    <div class="col-md-9">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%--                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
+                                        <span class="btn green fileinput-button">
+                                            <i class="fa fa-plus"></i>
+                                            <span>Add files...</span>
+                                            <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="true" />
+                                        </span>
+                                        <asp:Button ID="btnLoadFile" runat="server" Text="Upload" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+                                        <span>***เลือกชนิดไฟล์ที่เป็น *.jpg</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>--%>
+                    </asp:Panel>
+
+<%--                    <asp:Panel ID="pRefImage" runat="server">
                         <h4 class="form-section">Reference Image:</h4>
                         <div class="row">
                             <div class="col-md-9">
@@ -294,7 +438,7 @@
                                 </div>
                             </div>
                         </div>
-                    </asp:Panel>
+                    </asp:Panel>--%>
 
 
                     <div class="row">

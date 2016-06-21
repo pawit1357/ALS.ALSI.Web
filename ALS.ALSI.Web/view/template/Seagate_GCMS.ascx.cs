@@ -216,8 +216,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
                 #region "VISIBLE RESULT DATA"
-                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-               && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -253,6 +252,14 @@ namespace ALS.ALSI.Web.view.template
                     btnMotorOil.Visible = false;
 
                     gvCoverPages.Columns[3].Visible = false;
+
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                    {
+                        btnCoverPage.Visible = true;
+                        btnRH.Visible = true;
+                        btnExtractable.Visible = true;
+                        btnMotorOil.Visible = true;
+                    }
                 }
                 #endregion
                 #region "COVERPAGE"

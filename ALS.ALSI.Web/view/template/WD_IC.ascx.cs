@@ -93,6 +93,12 @@ namespace ALS.ALSI.Web.view.template
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
 
+
+
+
+
+
+
             #region "SAMPLE"
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -179,9 +185,10 @@ namespace ALS.ALSI.Web.view.template
 
                 #region "VISIBLE RESULT DATA"
 
-                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-               && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+
+                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
+
 
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -202,6 +209,7 @@ namespace ALS.ALSI.Web.view.template
                     gvCationic.Columns[5].Visible = true;
                     btnCoverPage.Visible = true;
                     btnWorking.Visible = true;
+                    pLoadFile.Visible = true;
                 }
                 else
                 {
@@ -213,7 +221,14 @@ namespace ALS.ALSI.Web.view.template
                     gvCationic.Columns[5].Visible = false;
                     btnCoverPage.Visible = false;
                     btnWorking.Visible = false;
-                }
+                    pLoadFile.Visible = false;
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                    {
+                        btnCoverPage.Visible = true;
+                        btnWorking.Visible = true;
+                    }
+
+                    }
                 #endregion
 
 

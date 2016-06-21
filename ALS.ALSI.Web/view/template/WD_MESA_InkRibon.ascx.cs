@@ -247,8 +247,7 @@ namespace ALS.ALSI.Web.view.template
             #endregion
 
 
-            if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-           && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+            if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
             {
                 #region ":: STAMP ANALYZED DATE ::"
                 if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -865,6 +864,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
+
             template_wd_mesa_img _img = new template_wd_mesa_img();
             _img.id = CustomUtils.GetRandomNumberID();
             _img.sample_id = this.SampleID;
@@ -873,42 +873,87 @@ namespace ALS.ALSI.Web.view.template
             if (!String.IsNullOrEmpty(txtDesc.Text))
             {
 
-                for (int i = 0; i < FileUpload1.PostedFiles.Count; i++)
+                #region "SEM IMAGE AT 250X"
+                if ((Path.GetExtension(FileUpload1.FileName).Equals(".jpg")))
                 {
-                    HttpPostedFile _postedFile = FileUpload1.PostedFiles[i];
-                    if ((Path.GetExtension(_postedFile.FileName).Equals(".jpg")))
+                    string yyyy = DateTime.Now.ToString("yyyy");
+                    string MM = DateTime.Now.ToString("MM");
+                    string dd = DateTime.Now.ToString("dd");
+
+                    String randNumber = String.Format("{0}_250X{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(FileUpload1.FileName));
+
+                    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                    String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                     {
-                        string yyyy = DateTime.Now.ToString("yyyy");
-                        string MM = DateTime.Now.ToString("MM");
-                        string dd = DateTime.Now.ToString("dd");
-
-                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
-                        String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName)));
-
-
-                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                        {
-                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                        }
-                        _postedFile.SaveAs(source_file);
-
-                        switch (i + 1)
-                        {
-                            case 1:
-                                _img.path_sem_image_at_250x = source_file_url;
-                                break;
-                            case 2:
-                                _img.path_sem_image_at_500x = source_file_url;
-                                break;
-                            case 3:
-                                _img.path_sem_image_at_2000x = source_file_url;
-                                break;
-                            case 4:
-                                _img.path_edx_spectrum = source_file_url;
-                                break;
-                        }
+                        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                     }
+                    FileUpload1.SaveAs(source_file);
+                    _img.path_sem_image_at_250x = source_file_url;
                 }
+                #endregion
+                #region "SEM IMAGE AT 500X"
+                if ((Path.GetExtension(FileUpload2.FileName).Equals(".jpg")))
+                {
+                    string yyyy = DateTime.Now.ToString("yyyy");
+                    string MM = DateTime.Now.ToString("MM");
+                    string dd = DateTime.Now.ToString("dd");
+
+                    String randNumber = String.Format("{0}_500X{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(FileUpload2.FileName));
+
+                    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                    String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                    }
+                    FileUpload2.SaveAs(source_file);
+                    _img.path_sem_image_at_500x = source_file_url;
+                }
+                #endregion
+                #region "SEM IMAGE AT 2000X"
+                if ((Path.GetExtension(FileUpload3.FileName).Equals(".jpg")))
+                {
+                    string yyyy = DateTime.Now.ToString("yyyy");
+                    string MM = DateTime.Now.ToString("MM");
+                    string dd = DateTime.Now.ToString("dd");
+
+                    String randNumber = String.Format("{0}_2000X{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(FileUpload3.FileName));
+
+                    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                    String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                    }
+                    FileUpload3.SaveAs(source_file);
+                    _img.path_sem_image_at_2000x = source_file_url;
+                }
+                #endregion
+                #region "EDX SPECTRUM"
+                if ((Path.GetExtension(FileUpload4.FileName).Equals(".jpg")))
+                {
+                    string yyyy = DateTime.Now.ToString("yyyy");
+                    string MM = DateTime.Now.ToString("MM");
+                    string dd = DateTime.Now.ToString("dd");
+
+                    String randNumber = String.Format("{0}_SPECTRUM{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(FileUpload4.FileName));
+
+                    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                    String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                    }
+                    FileUpload4.SaveAs(source_file);
+                    _img.path_edx_spectrum = source_file_url;
+                }
+                #endregion
+
                 Boolean isExist = this.refImg.Where(x => x.area == _img.area && x.descripton.Equals(_img.descripton)).Any();
                 if (!isExist)
                 {
@@ -919,6 +964,60 @@ namespace ALS.ALSI.Web.view.template
                 gvRefImages.DataSource = this.refImg;
                 gvRefImages.DataBind();
             }
+            //template_wd_mesa_img _img = new template_wd_mesa_img();
+            //_img.id = CustomUtils.GetRandomNumberID();
+            //_img.sample_id = this.SampleID;
+            //_img.area = Convert.ToInt32(ddlArea.SelectedValue);
+            //_img.descripton = txtDesc.Text;
+            //if (!String.IsNullOrEmpty(txtDesc.Text))
+            //{
+
+            //    for (int i = 0; i < FileUpload1.PostedFiles.Count; i++)
+            //    {
+            //        HttpPostedFile _postedFile = FileUpload1.PostedFiles[i];
+            //        if ((Path.GetExtension(_postedFile.FileName).Equals(".jpg")))
+            //        {
+            //            string yyyy = DateTime.Now.ToString("yyyy");
+            //            string MM = DateTime.Now.ToString("MM");
+            //            string dd = DateTime.Now.ToString("dd");
+
+            //            String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
+            //            String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName)));
+
+
+            //            if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+            //            {
+            //                Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+            //            }
+            //            _postedFile.SaveAs(source_file);
+
+            //            switch (i + 1)
+            //            {
+            //                case 1:
+            //                    _img.path_sem_image_at_250x = source_file_url;
+            //                    break;
+            //                case 2:
+            //                    _img.path_sem_image_at_500x = source_file_url;
+            //                    break;
+            //                case 3:
+            //                    _img.path_sem_image_at_2000x = source_file_url;
+            //                    break;
+            //                case 4:
+            //                    _img.path_edx_spectrum = source_file_url;
+            //                    break;
+            //            }
+            //        }
+            //    }
+            //    Boolean isExist = this.refImg.Where(x => x.area == _img.area && x.descripton.Equals(_img.descripton)).Any();
+            //    if (!isExist)
+            //    {
+            //        this.refImg.Add(_img);
+            //        ddlArea.SelectedIndex = -1;
+            //        txtDesc.Text = string.Empty;
+            //    }
+            //    gvRefImages.DataSource = this.refImg;
+            //    gvRefImages.DataBind();
+            //}
         }
 
         protected void gvRefImages_RowCommand(object sender, GridViewCommandEventArgs e)
