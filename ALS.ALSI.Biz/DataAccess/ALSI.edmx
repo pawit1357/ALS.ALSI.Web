@@ -831,7 +831,7 @@
           <Property Name="specification_id" Type="int" />
           <Property Name="A" Type="varchar" MaxLength="150" />
           <Property Name="B" Type="varchar" MaxLength="150" />
-          <Property Name="C" Type="double" />
+          <Property Name="C" Type="varchar" MaxLength="100" />
           <Property Name="lpc_type" Type="int" />
           <Property Name="hpa_type" Type="int" />
           <Property Name="row_type" Type="int" />
@@ -2572,7 +2572,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="specification_id" Type="Int32" />
           <Property Name="A" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="B" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="C" Type="Double" />
+          <Property Name="C" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="lpc_type" Type="Int32" />
           <Property Name="hpa_type" Type="Int32" />
           <Property Name="row_type" Type="Int32" />

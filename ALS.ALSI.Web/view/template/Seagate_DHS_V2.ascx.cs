@@ -889,39 +889,6 @@ namespace ALS.ALSI.Web.view.template
 
                 }
 
-                //List<template_seagate_dhs_coverpage> c31List = new List<template_seagate_dhs_coverpage>();
-                //foreach (template_seagate_dhs_coverpage _cover in newCoverPage)
-                //{
-                //    switch (_cover.chemical_id)
-                //    {
-                //        case "C31.0":
-
-                //            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.c31_flag.ToUpper().Equals(_cover.chemical_id)).ToList();
-                //            if (childs.Count > 0)
-                //            {
-                //                foreach (tb_m_dhs_cas child in childs)
-                //                {
-                //                    template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
-                //                    work.sample_id = this.SampleID;
-                //                    work.component_id = _cover.component_id;
-                //                    work.chemical_id = _cover.chemical_id;
-                //                    work.name = "          " + child.library_id;
-                //                    work.ng_part = _cover.ng_part;
-                //                    work.result = child.amount;
-                //                    work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                //                    c31List.Add(work);
-                //                }
-                //                _cover.ng_part = "-";
-                //                _cover.result = "-";
-                //            }
-                //            else
-                //            {
-                //                _cover.result = "Not significant peak";
-                //            }
-                //            break;
-                //    }
-                //}
-                //newCoverPage.AddRange(c31List);
                 gvCoverPages.DataSource = newCoverPage;
                 gvCoverPages.DataBind();
             }

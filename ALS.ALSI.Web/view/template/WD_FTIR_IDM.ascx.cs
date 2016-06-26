@@ -20,7 +20,7 @@ using WordToPDF;
 using System.Linq;
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class WD_FTIR : System.Web.UI.UserControl
+    public partial class WD_FTIR_IDM : System.Web.UI.UserControl
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_FTIR));
@@ -904,30 +904,68 @@ namespace ALS.ALSI.Web.view.template
                 template_wd_ftir_coverpage tmp = new template_wd_ftir_coverpage();
                 tmp.ID = 4;
                 tmp.A = "NVR";
-                tmp.B = "Non-Volatile Residue (NVR)";
-                tmp.C = detailSpec.E;
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = 1;
-                tmp.data_type = 2;
-                this.Ftir.Add(tmp);
-
-                tmp = new template_wd_ftir_coverpage();
-                tmp.ID = 6;
-                tmp.A = "FTIR";
-                tmp.B = "Silicone at Wave No:2962, 1261, 1092, 1022 & 800cm - 1";
+                tmp.B = "Non-Volatile Residue (NVR) in n-Hexane";
                 tmp.C = detailSpec.F;
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = 1;
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
-                
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 5;
+                tmp.A = "NVR";
+                tmp.B = "Non-Volatile Residue (NVR) in IPA";
+                tmp.C = detailSpec.E;
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = 1;
+                tmp.data_type = 2;
+                this.Ftir.Add(tmp);
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 6;
+                tmp.A = "FTIR";
+                tmp.B = "Silicone at Wave No:2962, 1261, 1092, 1022 & 800cm - 1";
+                tmp.C = detailSpec.G;
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = 1;
+                tmp.data_type = 2;
+                this.Ftir.Add(tmp);
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 7;
+                tmp.A = "FTIR";
+                tmp.B = "Amide";
+                tmp.C = detailSpec.I;
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = 1;
+                tmp.data_type = 2;
+                this.Ftir.Add(tmp);
+                tmp = new template_wd_ftir_coverpage();
+                tmp.ID = 8;
+                tmp.A = "FTIR";
+                tmp.B = "DOP";
+                tmp.C = detailSpec.H;
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = 1;
+                tmp.data_type = 2;
+                this.Ftir.Add(tmp);
 
                 #endregion
 
                 gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
                 gvResult.DataBind();
+
+
+                //this.Result = listResult;
+                //gvResult.DataSource = this.Result;
+                //gvResult.DataBind();
+                //lbC28.Text = detailSpec.E.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.E);//NVR
+                //lbC30.Text = detailSpec.F.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.F); ;//FTIR
+
+                //lbE27.Text = detailSpec.D;
+                //lbD27.Text = detailSpec.D;
             }
         }
 
@@ -947,30 +985,30 @@ namespace ALS.ALSI.Web.view.template
                 template_wd_ftir_coverpage tmp = new template_wd_ftir_coverpage();
                 tmp.ID = 1;
                 tmp.A = "NVR/FTIR";
-                tmp.B = String.Format("{0}", component.B);//Procedure No
-                tmp.C = "0";// component.G;//Number of pieces used for extraction
-                tmp.D = component.F;//Extraction Medium
-                tmp.E = component.G;//Extraction Volume
+                tmp.B = String.Format("2092-772141 Rev.AD,{0}", component.B);//Procedure No
+                tmp.C = component.G;//"Number of pieces used for extraction"
+                tmp.D = component.J;//"Extraction Medium"
+                tmp.E = component.M;//"Extraction Volume"
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 tmp = new template_wd_ftir_coverpage();
                 tmp.ID = 2;
                 tmp.A = "NVR";
-                tmp.B = String.Format("{0}", component.B);
-                tmp.C = "0";//component.E;
-                tmp.D = component.F;
-                tmp.E = component.G;
+                tmp.B = String.Format("2092-772141 Rev.AD,{0}", component.B);
+                tmp.C = component.E;
+                tmp.D = component.H;
+                tmp.E = component.K;
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 tmp = new template_wd_ftir_coverpage();
                 tmp.ID = 3;
                 tmp.A = "FTIR";
-                tmp.B = String.Format("{0}", component.B);
-                tmp.C = "0";//component.F;
-                tmp.D = component.F;
-                tmp.E = component.G;
+                tmp.B = String.Format("2092-772141 Rev.AD,{0}", component.B);
+                tmp.C = component.F;
+                tmp.D = component.I;
+                tmp.E = component.L;
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
@@ -1010,25 +1048,29 @@ namespace ALS.ALSI.Web.view.template
         {
 
 
-            this.Ftir[3].D = lbC26.Text;//NVR
-            this.Ftir[4].D = txtC41.Text;//FTIR
+            this.Ftir[3].D = lbC26.Text;
+            this.Ftir[4].D = lbC26.Text;
 
-            //this.Ftir[5].D = txtC41.Text;
-            //this.Ftir[6].D = txtC53.Text;
-            //this.Ftir[7].D = "Not Detected";
+            this.Ftir[5].D = txtC41.Text;
+            this.Ftir[6].D = txtC53.Text;
+            this.Ftir[7].D = "Not Detected";
             ////
-            if (!this.Ftir[3].C.Equals("-"))
-            {
-                this.Ftir[3].E = String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-            }
-            if (!this.Ftir[4].C.Equals("-"))
-            {
-                this.Ftir[4].E = String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-            }
-            //this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") ? "NA" : (this.Ftir[7].D.Equals("Not Detected")) ? "PASS" : (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
 
+            this.Ftir[3].E = String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+            this.Ftir[4].E = String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+
+            if (!this.Ftir[5].C.Equals("Not Detected"))
+            {
+                this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            }
+            if (!this.Ftir[6].C.Equals("Not Detected"))
+            {
+                this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            }
+            if (!this.Ftir[7].C.Equals("Not Detected"))
+            {
+                this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") ? "NA" : (this.Ftir[7].D.Equals("Not Detected")) ? "PASS" : (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            }
 
             gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
             gvResult.DataBind();

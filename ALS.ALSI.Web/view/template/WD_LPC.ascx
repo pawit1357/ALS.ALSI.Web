@@ -284,7 +284,7 @@
                                 <div class="col-md-6">
 
                                     <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
-                                        CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound">
+                                        CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Run" ItemStyle-HorizontalAlign="Center">
                                                 <ItemTemplate>
@@ -319,6 +319,14 @@
                                                     <asp:Literal ID="litBlankCorredtedCM2" runat="server" Text='<%# Eval("F")%>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+                                                                                            <asp:TemplateField HeaderText="Hide">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                         </Columns>
 
                                         <EmptyDataTemplate>

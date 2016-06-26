@@ -1058,6 +1058,7 @@
     <Content Include="view\template\Seagate_DHS_V2.ascx" />
     <Content Include="view\template\Seagate_FTIR_Damper.ascx" />
     <Content Include="view\template\Seagate_FTIR_Packing.ascx" />
+    <Content Include="view\template\WD_FTIR_IDM.ascx" />
     <Content Include="view\template\_Seagate_FTIR_Packing.ascx" />
     <Content Include="view\template\_Seagate_FTIR_Damper.ascx" />
     <Content Include="view\template\Seagate_HPA.ascx" />
@@ -1273,6 +1274,13 @@
     </Compile>
     <Compile Include="view\template\Seagate_FTIR_Packing.ascx.designer.cs">
       <DependentUpon>Seagate_FTIR_Packing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\WD_FTIR_IDM.ascx.cs">
+      <DependentUpon>WD_FTIR_IDM.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\WD_FTIR_IDM.ascx.designer.cs">
+      <DependentUpon>WD_FTIR_IDM.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\_Seagate_FTIR_Packing.ascx.cs">
       <DependentUpon>_Seagate_FTIR_Packing.ascx</DependentUpon>

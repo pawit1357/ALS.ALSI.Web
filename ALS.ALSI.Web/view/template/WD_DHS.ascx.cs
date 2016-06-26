@@ -275,7 +275,14 @@ namespace ALS.ALSI.Web.view.template
                 #region "COVERPAGE"
                 if (this.coverpages != null && this.coverpages.Count > 0)
                 {
+                    
                     this.CommandName = CommandNameEnum.Edit;
+                    detailSpec = detailSpec.SelectByID(this.coverpages[0].detail_spec_id.Value);
+                    if (detailSpec != null)
+                    {
+                        gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", detailSpec.C);
+                        gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", detailSpec.C);
+                    }
                     ddlComponent.SelectedValue = this.coverpages[0].component_id.ToString();
                     ddlSpecification.SelectedValue = this.coverpages[0].detail_spec_id.ToString();
 
@@ -290,6 +297,7 @@ namespace ALS.ALSI.Web.view.template
                         lbDocRev.Text = _detailSpec.B;
                         lbDesc.Text = _detailSpec.A;
                     }
+
                     GenerrateCoverPage();
                 }
                 #endregion
@@ -1137,33 +1145,6 @@ namespace ALS.ALSI.Web.view.template
                             _cover.result_pass_or_false = _cover.specification_limits.Equals("NA")|| _cover.specification_limits.Equals("-") ? "" : _cover.result_pass_or_false;
                             break;
                     }
-
-
-
-                    Console.WriteLine();
-                    //if (_cover.specification_limits.StartsWith("<"))
-                    //{
-                    //    _cover.result = String.IsNullOrEmpty(_cover.result) ? "Not Detected" : _cover.result;
-                    //}
-                    //else
-                    //{
-
-                    //}
-
-
-                    //double _limit = CustomUtils.isNumber(_cover.specification_limits.Replace("<", "").Trim()) ? Convert.ToDouble(_cover.specification_limits.Replace("<", "").Trim()) : 0;
-                    //double _result = CustomUtils.isNumber(_cover.result) ? Convert.ToDouble(_cover.result) : 0;
-                    //_cover.result = String.IsNullOrEmpty( _cover.result)? "Not Detected" : CustomUtils.isNumber(_cover.result) ? Convert.ToDouble(_cover.result).ToString() : "Not Detected";
-
-
-
-                    //_cover.result_pass_or_false = (_cover.specification_limits.Equals("NA") || _cover.specification_limits.Equals("-")) ? "" :
-                    //    (_cover.result.Equals("Not Detected") || (_result < _limit) || _cover.specification_limits.Equals("ND")) ? "PASS" : "FAIL";
-
-                    //if (_cover.analytes.Equals("Total Acrylate and Methacrylate")||_cover.analytes.Equals("Total Siloxane"))
-                    //{
-                    //    _cover.result_pass_or_false = "NA";
-                    //}
 
                 }
 

@@ -1052,7 +1052,7 @@ namespace ALS.ALSI.Web.view.template
             #endregion
             channel_size = "0.600";
             #region "0.600"
-            if (CheckBoxList1.Items[0].Selected)
+            if (CheckBoxList1.Items[2].Selected)
             {
                 if (this.Lpcs.Where(x => x.row_state == 2 && x.channel_size.Equals(channel_size)).ToList().Count > 0)
                 {

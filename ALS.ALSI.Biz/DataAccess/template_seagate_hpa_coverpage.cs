@@ -19,7 +19,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> specification_id { get; set; }
         public string A { get; set; }
         public string B { get; set; }
-        public Nullable<double> C { get; set; }
+        public string C { get; set; }
         public Nullable<int> lpc_type { get; set; }
         public Nullable<int> hpa_type { get; set; }
         public Nullable<int> row_type { get; set; }

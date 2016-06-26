@@ -232,7 +232,7 @@ namespace ALS.ALSI.Web.view.template
                         btnCoverPage.Visible = true;
                         btnWorkSheet.Visible = true;
                     }
-                    }
+                }
                 #endregion
             }
 
@@ -638,6 +638,7 @@ namespace ALS.ALSI.Web.view.template
                                 HSSFWorkbook wd = new HSSFWorkbook(fs);
                                 ISheet isheet = wd.GetSheet("Sheet1");
                                 bool bStartAddData = false;
+
                                 for (int row = 17; row < 120; row++)
                                 {
                                     if (isheet.GetRow(row) != null) //null is when the row only contains empty cells 
@@ -669,6 +670,7 @@ namespace ALS.ALSI.Web.view.template
                                         }
                                     }
                                 }
+
                             }
                         }
                     }
@@ -690,7 +692,7 @@ namespace ALS.ALSI.Web.view.template
             var grps = from lpc in lpcs group lpc by lpc.A into newGroup orderby newGroup.Key select newGroup;
             foreach (var item in grps)
             {
-                foreach(String par in listOFParticle)
+                foreach (String par in listOFParticle)
                 {
                     template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
                     tmp.A = item.Key;
@@ -701,20 +703,23 @@ namespace ALS.ALSI.Web.view.template
                     tmp.D = sampleValue;
 
 
+                    if (!String.IsNullOrEmpty(txtB48.Text))
+                    {
+                        double result = (Double.Parse(sampleValue) - Double.Parse(blankValue)) * Double.Parse(String.IsNullOrEmpty(txtB49.Text) ? "0" : txtB49.Text) / Double.Parse(String.IsNullOrEmpty(txtB51.Text) ? "0" : txtB51.Text);
 
-                    double result = (Double.Parse(sampleValue) - Double.Parse(blankValue)) * Double.Parse(String.IsNullOrEmpty(txtB49.Text) ? "0" : txtB49.Text) / Double.Parse(String.IsNullOrEmpty(txtB51.Text) ? "0" : txtB51.Text);
+                        double result2 = result / Double.Parse(txtB48.Text);
+                        tmp.E = result.ToString("N" + txtDecimal03.Text);
+                        tmp.F = result2.ToString("N" + txtDecimal04.Text);
 
-                    double result2 = result / Double.Parse(txtB48.Text);
-                    tmp.E = result.ToString("N" + txtDecimal03.Text);
-                    tmp.F = result2.ToString("N" + txtDecimal04.Text);
-
-
-                    tmp.data_type = Convert.ToInt32(WDLpcDataType.DATA_VALUE);
-                    tmps.Add(tmp);
+                        tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
+                        tmp.data_type = Convert.ToInt32(WDLpcDataType.DATA_VALUE);
+                        tmps.Add(tmp);
+                    }
                 }
 
             }
- 
+
+
             foreach (String par in listOFParticle)
             {
                 template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
@@ -753,14 +758,19 @@ namespace ALS.ALSI.Web.view.template
                 double _F = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Average")).FirstOrDefault().F);
                 double _F2 = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Standard Deviation")).FirstOrDefault().F);
 
-                tmp.E = ((_E2/_E)*100).ToString() ;
-                tmp.F = ((_F2 / _F)*100).ToString();
+                tmp.E = ((_E2 / _E) * 100).ToString();
+                tmp.F = ((_F2 / _F) * 100).ToString();
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
                 tmps.Add(tmp);
             }
 
             this.Lpc.AddRange(tmps);
 
+            int order = 1;
+            foreach(template_wd_lpc_coverpage lpc in this.Lpc.Where(x=>x.data_type == Convert.ToInt16(WDLpcDataType.DATA_VALUE))){
+                lpc.ID = order;
+                order++;
+            }
             #endregion
 
             if (errors.Count > 0)
@@ -894,7 +904,7 @@ namespace ALS.ALSI.Web.view.template
 
             DataTable dt = Extenders.ObjectToDataTable(this.Lpc[0]);
             List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
-            List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE)).ToList();
+            List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList();
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
@@ -1284,23 +1294,68 @@ namespace ALS.ALSI.Web.view.template
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Literal _litBlank = (Literal)e.Row.FindControl("litBlank");
-                Literal _litSample = (Literal)e.Row.FindControl("litSample");
-                Literal _litBlankCorredted = (Literal)e.Row.FindControl("litBlankCorredted");
-                Literal _litBlankCorredtedCM2 = (Literal)e.Row.FindControl("litBlankCorredtedCM2");
-
-                if (_litBlank != null && _litSample != null && _litBlankCorredted != null && _litBlankCorredtedCM2 != null)
+                int PKID = Convert.ToInt32(gvResult.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                if (gvResult.DataKeys[e.Row.RowIndex].Values[1] != null)
                 {
-                    //if (!String.IsNullOrEmpty(txtB48.Text) && !String.IsNullOrEmpty(txtB49.Text) && !String.IsNullOrEmpty(txtB51.Text)) {
-                    //    double result = (Double.Parse(_litSample.Text) - Double.Parse(_litBlank.Text)) * Double.Parse(String.IsNullOrEmpty(txtB49.Text) ? "0" : txtB49.Text) / Double.Parse(String.IsNullOrEmpty(txtB51.Text) ? "0" : txtB51.Text);
+                    RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResult.DataKeys[e.Row.RowIndex].Values[1]);
+                    //Literal _litBlank = (Literal)e.Row.FindControl("litBlank");
+                    //Literal _litSample = (Literal)e.Row.FindControl("litSample");
+                    //Literal _litBlankCorredted = (Literal)e.Row.FindControl("litBlankCorredted");
+                    //Literal _litBlankCorredtedCM2 = (Literal)e.Row.FindControl("litBlankCorredtedCM2");
 
-                    //    double result2 = result / Double.Parse(txtB48.Text);
-                    //    _litBlankCorredted.Text = result.ToString("N"+txtDecimal03.Text);
-                    //    _litBlankCorredtedCM2.Text = result2.ToString("N" + txtDecimal04.Text);
-                    //}
+                    LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                    LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+                    //if (_litBlank != null && _litSample != null && _litBlankCorredted != null && _litBlankCorredtedCM2 != null)
+                    //{
+                    if (_btnHide != null && _btnUndo != null)
+                    {
+                        switch (cmd)
+                        {
+                            case RowTypeEnum.Hide:
+
+                                _btnHide.Visible = false;
+                                _btnUndo.Visible = true;
+                                e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                                break;
+                            default:
+                                _btnHide.Visible = true;
+                                _btnUndo.Visible = false;
+                                e.Row.ForeColor = System.Drawing.Color.Black;
+                                break;
+                        }
+                    }
                 }
             }
         }
+    
+
+        protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_wd_lpc_coverpage gcms = this.Lpc.Find(x => x.ID == PKID);
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+
+                    gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));
+                    gvResult.DataBind();
+                }
+            }
+        }
+
 
         protected void gvStatic_RowDataBound(object sender, GridViewRowEventArgs e)
         {

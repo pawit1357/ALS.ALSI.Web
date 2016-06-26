@@ -1481,42 +1481,42 @@ namespace ALS.ALSI.Web.view.template
             template_seagate_hpa_coverpage _tmp = this.Hpas.Where(x => x.A.Contains("1st Run") && x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).FirstOrDefault();
             if (_tmp != null)
             {
-                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC03_B25_1.Text) ? "0" : txt_UsLPC03_B25_1.Text);
+                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC03_B25_1.Text) ? "0" : txt_UsLPC03_B25_1.Text) + "";
             }
             _tmp = this.Hpas.Where(x => x.A.Contains("2nd Run") && x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).FirstOrDefault();
             if (_tmp != null)
             {
-                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC03_D25.Text) ? "0" : txt_UsLPC03_D25.Text);
+                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC03_D25.Text) ? "0" : txt_UsLPC03_D25.Text) + "";
             }
             _tmp = this.Hpas.Where(x => x.A.Contains("3rd Run") && x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).FirstOrDefault();
             if (_tmp != null)
             {
-                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC03_F25.Text) ? "0" : txt_UsLPC03_F25.Text);
+                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC03_F25.Text) ? "0" : txt_UsLPC03_F25.Text) + "";
             }
             _tmp = this.Hpas.Where(x => x.A.Contains("Average") && x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).FirstOrDefault();
             if (_tmp != null)
             {
-                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC03_B26.Text) ? "0" : txt_UsLPC03_B26.Text);
+                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC03_B26.Text) ? "0" : txt_UsLPC03_B26.Text) + "";
             }
             _tmp = this.Hpas.Where(x => x.A.Contains("1st Run") && x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).FirstOrDefault();
             if (_tmp != null)
             {
-                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC06_B25.Text) ? "0" : txt_UsLPC06_B25.Text);
+                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC06_B25.Text) ? "0" : txt_UsLPC06_B25.Text) + "";
             }
             _tmp = this.Hpas.Where(x => x.A.Contains("2nd Run") && x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).FirstOrDefault();
             if (_tmp != null)
             {
-                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC06_D25.Text) ? "0" : txt_UsLPC06_D25.Text);
+                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC06_D25.Text) ? "0" : txt_UsLPC06_D25.Text) + "";
             }
             _tmp = this.Hpas.Where(x => x.A.Contains("3rd Run") && x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).FirstOrDefault();
             if (_tmp != null)
             {
-                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC06_F25.Text) ? "0" : txt_UsLPC06_F25.Text);
+                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC06_F25.Text) ? "0" : txt_UsLPC06_F25.Text) + "";
             }
             _tmp = this.Hpas.Where(x => x.A.Contains("Average") && x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).FirstOrDefault();
             if (_tmp != null)
             {
-                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC06_B26.Text) ? "0" : txt_UsLPC06_B26.Text);
+                _tmp.C = Convert.ToDouble(String.IsNullOrEmpty(txt_UsLPC06_B26.Text) ? "0" : txt_UsLPC06_B26.Text) + "";
             }
 
             #region "Worksheet for HPA - Filtration"
@@ -1535,18 +1535,18 @@ namespace ALS.ALSI.Web.view.template
                 {
                     //=ROUND(MAX(0,(C13-B13))*($B$7/$B$9)*($B$3/$B$6)/($B$4*$B$5),1)
                     Double _div = (Convert.ToDouble(txtB7.Text) / Convert.ToDouble(txtB9.Text)) * (Convert.ToDouble(txtB3.Text) / Convert.ToDouble(txtB6.Text)) / (Convert.ToDouble(txtB4.Text) * Convert.ToDouble(txtB5.Text));
-                    _val.C = Math.Round((CustomUtils.GetMax((Convert.ToDouble(_val.RawCounts) - Convert.ToDouble(_val.BlankCouts))) * _div), 1);
+                    _val.C = Math.Round((CustomUtils.GetMax((Convert.ToDouble(_val.RawCounts) - Convert.ToDouble(_val.BlankCouts))) * _div), 1) + "";
                 }
             }
 
             for (int i = 0; i < ANameKey.Length; i++)
             {
-                Double _sum = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION) && x.data_group.Equals(ANameKey[i])).Sum(x => x.C);
+                Double _sum = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION) && x.data_group.Equals(ANameKey[i])).Sum(x => Convert.ToDouble(x.C));
 
                 template_seagate_hpa_coverpage _tmp1 = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA) && x.A.Contains(ANameKey[i])).FirstOrDefault();
                 if (_tmp1 != null)
                 {
-                    _tmp1.C = _sum;
+                    _tmp1.C = _sum + "";
                 }
             }
 
