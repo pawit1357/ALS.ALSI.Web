@@ -30,5 +30,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> direct_inject { get; set; }
         public Nullable<double> percent_recovery { get; set; }
         public Nullable<double> starndard_value { get; set; }
+        public string c31_flag { get; set; }
     }
 }

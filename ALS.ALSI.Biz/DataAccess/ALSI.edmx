@@ -429,6 +429,7 @@
           <Property Name="direct_inject" Type="int" />
           <Property Name="percent_recovery" Type="double" />
           <Property Name="starndard_value" Type="double" />
+          <Property Name="c31_flag" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="tb_m_dhs_library">
           <Key>
@@ -629,8 +630,8 @@
           <Property Name="w_d13" Type="varchar" MaxLength="45" />
           <Property Name="w_d14" Type="varchar" MaxLength="45" />
           <Property Name="w_d15" Type="varchar" MaxLength="45" />
-          <Property Name="A" Type="varchar" MaxLength="100" />
-          <Property Name="B" Type="varchar" MaxLength="100" />
+          <Property Name="A" Type="varchar" MaxLength="45" />
+          <Property Name="B" Type="varchar" MaxLength="45" />
           <Property Name="C" Type="varchar" MaxLength="45" />
           <Property Name="D" Type="varchar" MaxLength="45" />
           <Property Name="E" Type="varchar" MaxLength="45" />
@@ -638,10 +639,10 @@
           <Property Name="selected_unit_nvr" Type="int" />
           <Property Name="data_type" Type="int" />
           <Property Name="row_type" Type="int" />
-          <Property Name="ExtractionVolumn" Type="varchar" MaxLength="255" />
-          <Property Name="ExtractionMedium" Type="varchar" MaxLength="255" />
-          <Property Name="NumOfPiece" Type="varchar" MaxLength="255" />
           <Property Name="ProcedureNo" Type="varchar" MaxLength="255" />
+          <Property Name="NumOfPiece" Type="varchar" MaxLength="255" />
+          <Property Name="ExtractionMedium" Type="varchar" MaxLength="255" />
+          <Property Name="ExtractionVolumn" Type="varchar" MaxLength="255" />
           <Property Name="w_b20" Type="varchar" MaxLength="45" />
           <Property Name="w_c20" Type="varchar" MaxLength="45" />
           <Property Name="w_d20" Type="varchar" MaxLength="45" />
@@ -702,6 +703,7 @@
           <Property Name="nvrc36" Type="varchar" MaxLength="45" />
           <Property Name="nvrc37" Type="varchar" MaxLength="45" />
           <Property Name="selected_method" Type="int" />
+          <Property Name="selected_unit" Type="int" />
           <Property Name="furmular_1" Type="varchar" MaxLength="45" />
           <Property Name="furmular_2" Type="varchar" MaxLength="45" />
           <Property Name="furmular_3" Type="varchar" MaxLength="45" />
@@ -1081,6 +1083,37 @@
           <Property Name="row_type" Type="int" />
           <Property Name="amide_unit" Type="varchar" MaxLength="45" />
           <Property Name="silicone_unit" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="template_wd_ftir_coverpage_tmp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sample_id" Type="int" />
+          <Property Name="detail_spec_id" Type="int" />
+          <Property Name="component_id" Type="int" />
+          <Property Name="td_b14" Type="varchar" MaxLength="45" />
+          <Property Name="td_b15" Type="varchar" MaxLength="45" />
+          <Property Name="td_b16" Type="varchar" MaxLength="45" />
+          <Property Name="nvr_b20" Type="varchar" MaxLength="45" />
+          <Property Name="nvr_b21" Type="varchar" MaxLength="45" />
+          <Property Name="nvr_c20" Type="varchar" MaxLength="45" />
+          <Property Name="nvr_c21" Type="varchar" MaxLength="45" />
+          <Property Name="nvr_c26" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b30" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b31" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b32" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b33" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b35" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_c40" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b42" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b43" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b44" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b45" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_c49" Type="varchar" MaxLength="45" />
+          <Property Name="item_visible" Type="varchar" MaxLength="45" />
+          <Property Name="procedure_no" Type="varchar" MaxLength="45" />
+          <Property Name="extraction_medium" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_wd_gcms_coverpage">
           <Key>
@@ -1522,6 +1555,7 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="template_wd_corrosion_img" EntityType="Self.template_wd_corrosion_img" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_dhs_coverpage" EntityType="Self.template_wd_dhs_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_ftir_coverpage" EntityType="Self.template_wd_ftir_coverpage" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="template_wd_ftir_coverpage_tmp" EntityType="Self.template_wd_ftir_coverpage_tmp" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_gcms_coverpage" EntityType="Self.template_wd_gcms_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_hpa_for1_coverpage" EntityType="Self.template_wd_hpa_for1_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_hpa_for3_coverpage" EntityType="Self.template_wd_hpa_for3_coverpage" Schema="alsi" store:Type="Tables" />
@@ -1635,6 +1669,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="template_wd_corrosion_img" EntityType="alsiModel.template_wd_corrosion_img" />
           <EntitySet Name="template_wd_dhs_coverpage" EntityType="alsiModel.template_wd_dhs_coverpage" />
           <EntitySet Name="template_wd_ftir_coverpage" EntityType="alsiModel.template_wd_ftir_coverpage" />
+          <EntitySet Name="template_wd_ftir_coverpage_tmp" EntityType="alsiModel.template_wd_ftir_coverpage_tmp" />
           <EntitySet Name="template_wd_gcms_coverpage" EntityType="alsiModel.template_wd_gcms_coverpage" />
           <EntitySet Name="template_wd_hpa_for1_coverpage" EntityType="alsiModel.template_wd_hpa_for1_coverpage" />
           <EntitySet Name="template_wd_hpa_for3_coverpage" EntityType="alsiModel.template_wd_hpa_for3_coverpage" />
@@ -2135,6 +2170,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="direct_inject" Type="Int32" />
           <Property Name="percent_recovery" Type="Double" />
           <Property Name="starndard_value" Type="Double" />
+          <Property Name="c31_flag" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_m_dhs_library">
           <Key>
@@ -2335,8 +2371,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="w_d13" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="w_d14" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="w_d15" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="A" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="B" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="A" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="C" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="D" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="E" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -2344,10 +2380,10 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="selected_unit_nvr" Type="Int32" />
           <Property Name="data_type" Type="Int32" />
           <Property Name="row_type" Type="Int32" />
-          <Property Name="ExtractionVolumn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ExtractionMedium" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="NumOfPiece" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ProcedureNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NumOfPiece" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ExtractionMedium" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ExtractionVolumn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="w_b20" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="w_c20" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="w_d20" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -2408,6 +2444,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="nvrc36" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="nvrc37" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="selected_method" Type="Int32" />
+          <Property Name="selected_unit" Type="Int32" />
           <Property Name="furmular_1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="furmular_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="furmular_3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -2787,6 +2824,37 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_type" Type="Int32" />
           <Property Name="amide_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="silicone_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="template_wd_ftir_coverpage_tmp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sample_id" Type="Int32" />
+          <Property Name="detail_spec_id" Type="Int32" />
+          <Property Name="component_id" Type="Int32" />
+          <Property Name="td_b14" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="td_b15" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="td_b16" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nvr_b20" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nvr_b21" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nvr_c20" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nvr_c21" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nvr_c26" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b30" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b31" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b32" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b33" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b35" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_c40" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b42" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b43" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b44" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b45" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_c49" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="item_visible" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="procedure_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="extraction_medium" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_gcms_coverpage">
           <Key>
@@ -3621,6 +3689,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="tb_m_dhs_cas">
             <EntityTypeMapping TypeName="alsiModel.tb_m_dhs_cas">
               <MappingFragment StoreEntitySet="tb_m_dhs_cas">
+                <ScalarProperty Name="c31_flag" ColumnName="c31_flag" />
                 <ScalarProperty Name="starndard_value" ColumnName="starndard_value" />
                 <ScalarProperty Name="percent_recovery" ColumnName="percent_recovery" />
                 <ScalarProperty Name="direct_inject" ColumnName="direct_inject" />
@@ -3840,6 +3909,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="furmular_3" ColumnName="furmular_3" />
                 <ScalarProperty Name="furmular_2" ColumnName="furmular_2" />
                 <ScalarProperty Name="furmular_1" ColumnName="furmular_1" />
+                <ScalarProperty Name="selected_unit" ColumnName="selected_unit" />
                 <ScalarProperty Name="selected_method" ColumnName="selected_method" />
                 <ScalarProperty Name="nvrc37" ColumnName="nvrc37" />
                 <ScalarProperty Name="nvrc36" ColumnName="nvrc36" />
@@ -3900,10 +3970,10 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="w_d20" ColumnName="w_d20" />
                 <ScalarProperty Name="w_c20" ColumnName="w_c20" />
                 <ScalarProperty Name="w_b20" ColumnName="w_b20" />
-                <ScalarProperty Name="ProcedureNo" ColumnName="ProcedureNo" />
-                <ScalarProperty Name="NumOfPiece" ColumnName="NumOfPiece" />
-                <ScalarProperty Name="ExtractionMedium" ColumnName="ExtractionMedium" />
                 <ScalarProperty Name="ExtractionVolumn" ColumnName="ExtractionVolumn" />
+                <ScalarProperty Name="ExtractionMedium" ColumnName="ExtractionMedium" />
+                <ScalarProperty Name="NumOfPiece" ColumnName="NumOfPiece" />
+                <ScalarProperty Name="ProcedureNo" ColumnName="ProcedureNo" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
                 <ScalarProperty Name="data_type" ColumnName="data_type" />
                 <ScalarProperty Name="selected_unit_nvr" ColumnName="selected_unit_nvr" />
@@ -4302,6 +4372,38 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="C" ColumnName="C" />
                 <ScalarProperty Name="B" ColumnName="B" />
                 <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="component_id" ColumnName="component_id" />
+                <ScalarProperty Name="detail_spec_id" ColumnName="detail_spec_id" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="template_wd_ftir_coverpage_tmp">
+            <EntityTypeMapping TypeName="alsiModel.template_wd_ftir_coverpage_tmp">
+              <MappingFragment StoreEntitySet="template_wd_ftir_coverpage_tmp">
+                <ScalarProperty Name="extraction_medium" ColumnName="extraction_medium" />
+                <ScalarProperty Name="procedure_no" ColumnName="procedure_no" />
+                <ScalarProperty Name="item_visible" ColumnName="item_visible" />
+                <ScalarProperty Name="ftr_c49" ColumnName="ftr_c49" />
+                <ScalarProperty Name="ftr_b45" ColumnName="ftr_b45" />
+                <ScalarProperty Name="ftr_b44" ColumnName="ftr_b44" />
+                <ScalarProperty Name="ftr_b43" ColumnName="ftr_b43" />
+                <ScalarProperty Name="ftr_b42" ColumnName="ftr_b42" />
+                <ScalarProperty Name="ftr_c40" ColumnName="ftr_c40" />
+                <ScalarProperty Name="ftr_b35" ColumnName="ftr_b35" />
+                <ScalarProperty Name="ftr_b33" ColumnName="ftr_b33" />
+                <ScalarProperty Name="ftr_b32" ColumnName="ftr_b32" />
+                <ScalarProperty Name="ftr_b31" ColumnName="ftr_b31" />
+                <ScalarProperty Name="ftr_b30" ColumnName="ftr_b30" />
+                <ScalarProperty Name="nvr_c26" ColumnName="nvr_c26" />
+                <ScalarProperty Name="nvr_c21" ColumnName="nvr_c21" />
+                <ScalarProperty Name="nvr_c20" ColumnName="nvr_c20" />
+                <ScalarProperty Name="nvr_b21" ColumnName="nvr_b21" />
+                <ScalarProperty Name="nvr_b20" ColumnName="nvr_b20" />
+                <ScalarProperty Name="td_b16" ColumnName="td_b16" />
+                <ScalarProperty Name="td_b15" ColumnName="td_b15" />
+                <ScalarProperty Name="td_b14" ColumnName="td_b14" />
                 <ScalarProperty Name="component_id" ColumnName="component_id" />
                 <ScalarProperty Name="detail_spec_id" ColumnName="detail_spec_id" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />

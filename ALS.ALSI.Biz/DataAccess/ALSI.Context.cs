@@ -66,6 +66,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<template_wd_corrosion_img> template_wd_corrosion_img { get; set; }
         public DbSet<template_wd_dhs_coverpage> template_wd_dhs_coverpage { get; set; }
         public DbSet<template_wd_ftir_coverpage> template_wd_ftir_coverpage { get; set; }
+        public DbSet<template_wd_ftir_coverpage_tmp> template_wd_ftir_coverpage_tmp { get; set; }
         public DbSet<template_wd_gcms_coverpage> template_wd_gcms_coverpage { get; set; }
         public DbSet<template_wd_hpa_for1_coverpage> template_wd_hpa_for1_coverpage { get; set; }
         public DbSet<template_wd_hpa_for3_coverpage> template_wd_hpa_for3_coverpage { get; set; }

@@ -19,7 +19,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public int pkInt { get { return Convert.ToInt32( String.IsNullOrEmpty(this.pk)? "0" :this.pk); } }
         public int areaInt { get { return Convert.ToInt32(String.IsNullOrEmpty(this.area) ? "0" : this.area); } }
         public decimal amoutDecimal { get { return !isNumber(this.amount)? 0: Convert.ToDecimal(this.amount); } }
-        public string chemical_falg { get; set; }
+        //public string chemical_falg { get; set; }
         #endregion
 
         private static IRepository<tb_m_dhs_cas> _repository

@@ -252,6 +252,9 @@
     <Compile Include="DataAccess\template_wd_ftir_coverpage.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\template_wd_ftir_coverpage_tmp.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\template_wd_gcms_coverpage.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>

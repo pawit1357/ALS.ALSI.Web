@@ -269,8 +269,8 @@ namespace ALS.ALSI.Web.view.template
                     tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
                     ddlComponent.SelectedValue = component.ID.ToString();
 
-                    gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                    gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                    gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
                     lbDocRev.Text = component.B;
                     lbDesc.Text = component.A;
                     //lbResultDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
@@ -586,7 +586,7 @@ namespace ALS.ALSI.Web.view.template
                                             tmp.qual = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(5));
                                             tmp.area = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(6));
                                             tmp.amount = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7));
-                                            tmp.chemical_falg = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(8));
+                                            tmp.c31_flag = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(8));
                                             String compare_date = (string.IsNullOrEmpty(tmp.pk) ? "0" : "1") + "" +
                                                (string.IsNullOrEmpty(tmp.rt) ? "0" : "1") + "" +
                                                (string.IsNullOrEmpty(tmp.library_id) ? "0" : "1") + "" +
@@ -855,7 +855,7 @@ namespace ALS.ALSI.Web.view.template
                         case "C31.0":
                             List<template_seagate_dhs_coverpage> c31List = new List<template_seagate_dhs_coverpage>();
 
-                            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.chemical_falg.ToUpper().Equals(_cover.chemical_id)).ToList();
+                            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.c31_flag !=null && x.c31_flag.ToUpper().Equals(_cover.chemical_id)).ToList();
                             if (childs.Count > 0)
                             {
                                 foreach (tb_m_dhs_cas child in childs)
@@ -896,7 +896,7 @@ namespace ALS.ALSI.Web.view.template
                 //    {
                 //        case "C31.0":
 
-                //            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.chemical_falg.ToUpper().Equals(_cover.chemical_id)).ToList();
+                //            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.c31_flag.ToUpper().Equals(_cover.chemical_id)).ToList();
                 //            if (childs.Count > 0)
                 //            {
                 //                foreach (tb_m_dhs_cas child in childs)
@@ -1095,8 +1095,8 @@ namespace ALS.ALSI.Web.view.template
                     this.coverpages = newCoverPage;
                     //Result Description
 
-                    gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                    gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                    gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
                     lbDocRev.Text = component.B;
                     lbDesc.Text = component.A;
                     //lbResultDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
