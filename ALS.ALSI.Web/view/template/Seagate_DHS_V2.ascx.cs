@@ -142,7 +142,7 @@ namespace ALS.ALSI.Web.view.template
                 pUploadfile.Visible = false;
                 pDownload.Visible = false;
                 btnSubmit.Visible = false;
-                gvCoverPages.Columns[3].Visible = false;
+                gvCoverPages.Columns[4].Visible = false;
 
                 switch (userRole)
                 {
@@ -235,7 +235,7 @@ namespace ALS.ALSI.Web.view.template
                     txtProcedureNo.Enabled = true;
                     txtSampleSize.Enabled = true;
                     txtSamplingTime.Enabled = true;
-                    gvCoverPages.Columns[3].Visible = true;
+                    gvCoverPages.Columns[4].Visible = true;
 
                     btnCoverPage.Visible = true;
                     btnDHS.Visible = true;
@@ -245,7 +245,7 @@ namespace ALS.ALSI.Web.view.template
                     txtProcedureNo.Enabled = false;
                     txtSampleSize.Enabled = false;
                     txtSamplingTime.Enabled = false;
-                    gvCoverPages.Columns[3].Visible = false;
+                    gvCoverPages.Columns[4].Visible = false;
                     btnCoverPage.Visible = false;
                     btnDHS.Visible = false;
                     pLoadRawData.Visible = false;

@@ -69,5 +69,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> template_type { get; set; }
         public string channel_size { get; set; }
         public Nullable<int> row_state { get; set; }
+        public Nullable<int> row_type { get; set; }
     }
 }

@@ -630,11 +630,11 @@
           <Property Name="w_d13" Type="varchar" MaxLength="45" />
           <Property Name="w_d14" Type="varchar" MaxLength="45" />
           <Property Name="w_d15" Type="varchar" MaxLength="45" />
-          <Property Name="A" Type="varchar" MaxLength="45" />
-          <Property Name="B" Type="varchar" MaxLength="45" />
-          <Property Name="C" Type="varchar" MaxLength="45" />
-          <Property Name="D" Type="varchar" MaxLength="45" />
-          <Property Name="E" Type="varchar" MaxLength="45" />
+          <Property Name="A" Type="varchar" MaxLength="100" />
+          <Property Name="B" Type="varchar" MaxLength="100" />
+          <Property Name="C" Type="varchar" MaxLength="100" />
+          <Property Name="D" Type="varchar" MaxLength="100" />
+          <Property Name="E" Type="varchar" MaxLength="100" />
           <Property Name="selected_unit_ftir" Type="int" />
           <Property Name="selected_unit_nvr" Type="int" />
           <Property Name="data_type" Type="int" />
@@ -999,6 +999,7 @@
           <Property Name="template_type" Type="int" />
           <Property Name="channel_size" Type="varchar" MaxLength="5" />
           <Property Name="row_state" Type="int" />
+          <Property Name="row_type" Type="int" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
@@ -2371,11 +2372,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="w_d13" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="w_d14" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="w_d15" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="A" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="B" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="C" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="D" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="A" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="C" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="D" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="E" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="selected_unit_ftir" Type="Int32" />
           <Property Name="selected_unit_nvr" Type="Int32" />
           <Property Name="data_type" Type="Int32" />
@@ -2740,6 +2741,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="template_type" Type="Int32" />
           <Property Name="channel_size" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="row_state" Type="Int32" />
+          <Property Name="row_type" Type="Int32" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
@@ -4233,6 +4235,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_lpc_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_lpc_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_lpc_coverpage">
+                <ScalarProperty Name="row_type" ColumnName="row_type" />
                 <ScalarProperty Name="row_state" ColumnName="row_state" />
                 <ScalarProperty Name="channel_size" ColumnName="channel_size" />
                 <ScalarProperty Name="template_type" ColumnName="template_type" />

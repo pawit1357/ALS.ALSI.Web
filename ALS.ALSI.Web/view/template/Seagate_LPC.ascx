@@ -97,25 +97,49 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <asp:GridView ID="gvCoverPage03" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
+                                        <asp:GridView ID="gvCoverPage03" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_state" OnRowDataBound="gvCoverPage03_RowDataBound" OnRowCommand="gvCoverPage03_RowCommand">
                                             <Columns>
                                                 <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
                                                 <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits(Counts/cm2)" />
                                                 <asp:BoundField DataField="Results" HeaderText="Results" />
+                                                <asp:TemplateField HeaderText="Hide">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
-                                        <asp:GridView ID="gvCoverPage05" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
+                                        <asp:GridView ID="gvCoverPage05" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_state" OnRowDataBound="gvCoverPage05_RowDataBound" OnRowCommand="gvCoverPage05_RowCommand">
                                             <Columns>
                                                 <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
                                                 <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits(Counts/cm2)" />
                                                 <asp:BoundField DataField="Results" HeaderText="Results" />
+                                                <asp:TemplateField HeaderText="Hide">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
-                                        <asp:GridView ID="gvCoverPage06" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False">
+                                        <asp:GridView ID="gvCoverPage06" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_state" OnRowDataBound="gvCoverPage06_RowDataBound" OnRowCommand="gvCoverPage06_RowCommand">
                                             <Columns>
                                                 <asp:BoundField DataField="LiquidParticleCount" HeaderText="Liquid Particle Count" />
                                                 <asp:BoundField DataField="SpecificationLimits" HeaderText="Specification Limits(Counts/cm2)" />
                                                 <asp:BoundField DataField="Results" HeaderText="Results" />
+                                                <asp:TemplateField HeaderText="Hide">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
                                     </div>
@@ -530,12 +554,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
                                         </tr>
-                                              <tr>
-                                            <td> No. of Particles</td>
+                                        <tr>
+                                            <td>No. of Particles</td>
                                             <td>
                                                 <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
                                         </tr>
-                                       
+
 
 
 

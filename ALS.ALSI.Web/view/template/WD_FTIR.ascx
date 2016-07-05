@@ -158,7 +158,7 @@
 
                                 <h6>
                                     <%--=CONCATENATE("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is ", ROUND('working-FTIR'!$B$24,7),"--%> 
-Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.
+Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.
 The instrument detection limit for silicone oil is 
                     <asp:Label ID="lbA31" runat="server" Text=""></asp:Label>
                                     <asp:Label ID="lbB31" runat="server" Text=""></asp:Label>

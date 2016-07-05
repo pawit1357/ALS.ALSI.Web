@@ -603,16 +603,22 @@ namespace ALS.ALSI.Web.view.template
                                                 case "11111111"://NORMAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    Console.WriteLine();
                                                     break;
                                                 
                                                 case "00010011"://TOTAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
                                                     break;
-                                                case "00110011":
+                                                case "00110011"://Hydrocarbons, Unknowns, Others
+                                                    tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    Console.WriteLine();
+                                                    break;
                                                 case "00100011"://TOTAL OUT GAS
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalOutGas);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                                    Console.WriteLine();
                                                     break;
                                                 case "00100010"://SAMPLE SIZE
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.SampleSize);

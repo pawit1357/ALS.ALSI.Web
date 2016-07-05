@@ -229,6 +229,10 @@ namespace ALS.ALSI.Web.view.template
                     btnCoverPage.Visible = true;
                     btnWorkSheet.Visible = true;
                     CheckBoxList1.Enabled = true;
+                    gvCoverPage03.Columns[3].Visible = true;
+                    gvCoverPage05.Columns[3].Visible = true;
+                    gvCoverPage06.Columns[3].Visible = true;
+
                 }
                 else
                 {
@@ -246,6 +250,9 @@ namespace ALS.ALSI.Web.view.template
                         btnCoverPage.Visible = true;
                         btnWorkSheet.Visible = true;
                     }
+                    gvCoverPage03.Columns[3].Visible = false;
+                    gvCoverPage05.Columns[3].Visible = false;
+                    gvCoverPage06.Columns[3].Visible = false;
                 }
                 #endregion
 
@@ -716,7 +723,8 @@ namespace ALS.ALSI.Web.view.template
                                                     lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
                                                     lpc.channel_size = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
                                                     lpc.Results = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt16(txtDecimal01.Text) : Convert.ToInt16(txtDecimal02.Text)));
-                                                    lpc.row_state = 2;//WorkSheet
+                                                    lpc.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                                                    lpc.row_type = 2;
                                                     lpcs03.Add(lpc);
                                                     break;
                                                 case "0.500":
@@ -725,7 +733,8 @@ namespace ALS.ALSI.Web.view.template
                                                     lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
                                                     lpc.channel_size = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
                                                     lpc.Results = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt16(txtDecimal01.Text) : Convert.ToInt16(txtDecimal02.Text)));
-                                                    lpc.row_state = 2;//WorkSheet
+                                                    lpc.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                                                    lpc.row_type = 2;
                                                     lpcs05.Add(lpc);
                                                     break;
                                                 case "0.600":
@@ -734,7 +743,8 @@ namespace ALS.ALSI.Web.view.template
                                                     lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
                                                     lpc.channel_size = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
                                                     lpc.Results = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt16(txtDecimal01.Text) : Convert.ToInt16(txtDecimal02.Text)));
-                                                    lpc.row_state = 2;//WorkSheet
+                                                    lpc.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                                                    lpc.row_type = 2;
                                                     lpcs06.Add(lpc);
 
                                                     break;
@@ -776,7 +786,7 @@ namespace ALS.ALSI.Web.view.template
                     errors.Add("Dilution Factor (time) is empty.");
                 }
             }
-            if ( lpcs05.Count > 0 && CheckBoxList1.Items[1].Selected)
+            if (lpcs05.Count > 0 && CheckBoxList1.Items[1].Selected)
             {
                 this.Lpcs.AddRange(lpcs05);
 
@@ -789,7 +799,7 @@ namespace ALS.ALSI.Web.view.template
                     errors.Add("Dilution Factor (time) is empty.");
                 }
             }
-            if ( lpcs06.Count > 0 && CheckBoxList1.Items[2].Selected)
+            if (lpcs06.Count > 0 && CheckBoxList1.Items[2].Selected)
             {
                 this.Lpcs.AddRange(lpcs06);
 
@@ -910,7 +920,7 @@ namespace ALS.ALSI.Web.view.template
                             lpc.RunNumber = 6;
                             lpc.Run = "";
                             lpc.Sample = "";
-                            lpc.type = item.Key.Replace("Blank", "").Replace("B","").Trim();
+                            lpc.type = item.Key.Replace("Blank", "").Replace("B", "").Trim();
                             lpc.ChannelSize = channel_size;
                             template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
                             template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
@@ -934,10 +944,22 @@ namespace ALS.ALSI.Web.view.template
                         List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals(channel_size)).ToList();
                         if (listCoverPage.Count > 0)
                         {
-                            listCoverPage[1].Results = listAverages[0].Value;
-                            listCoverPage[2].Results = listAverages[1].Value;
-                            listCoverPage[3].Results = listAverages[2].Value;
-                            listCoverPage[4].Results = lbAverage.Text;
+                            if (listAverages.Count >= 1)
+                            {
+                                listCoverPage[1].Results = listAverages[0].Value;
+                            }
+                            if (listAverages.Count >= 2)
+                            {
+                                listCoverPage[2].Results = listAverages[1].Value;
+                            }
+                            if (listAverages.Count >= 3)
+                            {
+                                listCoverPage[3].Results = listAverages[2].Value;
+                            }
+                            if (listAverages.Count >= 4)
+                            {
+                                listCoverPage[4].Results = lbAverage.Text;
+                            }
 
                             gvCoverPage03.DataSource = listCoverPage;
                             gvCoverPage03.DataBind();
@@ -951,7 +973,7 @@ namespace ALS.ALSI.Web.view.template
                 else
                 {
 
-                    gvCoverPage03.DataSource = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals("0.300")).ToList();
+                    gvCoverPage03.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.300")).ToList();
                     gvCoverPage03.DataBind();
                 }
             }
@@ -1028,10 +1050,22 @@ namespace ALS.ALSI.Web.view.template
                         List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals(channel_size)).ToList();
                         if (listCoverPage.Count > 0)
                         {
-                            listCoverPage[1].Results = listAverages[0].Value;
-                            listCoverPage[2].Results = listAverages[1].Value;
-                            listCoverPage[3].Results = listAverages[2].Value;
-                            listCoverPage[4].Results = lbAverage05.Text;
+                            if (listAverages.Count >= 1)
+                            {
+                                listCoverPage[1].Results = listAverages[0].Value;
+                            }
+                            if (listAverages.Count >= 2)
+                            {
+                                listCoverPage[2].Results = listAverages[1].Value;
+                            }
+                            if (listAverages.Count >= 3)
+                            {
+                                listCoverPage[3].Results = listAverages[2].Value;
+                            }
+                            if (listAverages.Count >= 4)
+                            {
+                                listCoverPage[4].Results = lbAverage05.Text;
+                            }
 
                             gvCoverPage05.DataSource = listCoverPage;
                             gvCoverPage05.DataBind();
@@ -1045,7 +1079,7 @@ namespace ALS.ALSI.Web.view.template
                 else
                 {
 
-                    gvCoverPage05.DataSource = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals("0.500")).ToList();
+                    gvCoverPage05.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList();
                     gvCoverPage05.DataBind();
                 }
             }
@@ -1122,10 +1156,22 @@ namespace ALS.ALSI.Web.view.template
                         List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals(channel_size)).ToList();
                         if (listCoverPage.Count > 0)
                         {
-                            listCoverPage[1].Results = listAverages[0].Value;
-                            listCoverPage[2].Results = listAverages[1].Value;
-                            listCoverPage[3].Results = listAverages[2].Value;
-                            listCoverPage[4].Results = lbAverage06.Text;
+                            if (listAverages.Count >= 1)
+                            {
+                                listCoverPage[1].Results = listAverages[0].Value;
+                            }
+                            if (listAverages.Count >= 2)
+                            {
+                                listCoverPage[2].Results = listAverages[1].Value;
+                            }
+                            if (listAverages.Count >= 3)
+                            {
+                                listCoverPage[3].Results = listAverages[2].Value;
+                            }
+                            if (listAverages.Count >= 4)
+                            {
+                                listCoverPage[4].Results = lbAverage06.Text;
+                            }
 
                             gvCoverPage06.DataSource = listCoverPage;
                             gvCoverPage06.DataBind();
@@ -1139,7 +1185,7 @@ namespace ALS.ALSI.Web.view.template
                 else
                 {
 
-                    gvCoverPage06.DataSource = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals("0.600")).ToList();
+                    gvCoverPage06.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600")).ToList();
                     gvCoverPage06.DataBind();
                 }
             }
@@ -1405,7 +1451,7 @@ namespace ALS.ALSI.Web.view.template
                     Results = ""
                 });
 
-               switch(ddlTemplateType.SelectedValue)
+                switch (ddlTemplateType.SelectedValue)
                 {
                     case "1":
                         lbDocNo.Text = tem.C + "" + tem.D;
@@ -1533,6 +1579,171 @@ namespace ALS.ALSI.Web.view.template
             result.Append("}");
             return result.ToString();
         }
+
+
+
+        #region "Hide event"
+        protected void gvCoverPage03_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x =>  x.channel_size.Equals("0.300") && x.id == PKID).FirstOrDefault();
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_state = Convert.ToInt32(RowTypeEnum.Hide);
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+                    
+                    gvCoverPage03.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.300") ).ToList();
+                    gvCoverPage03.DataBind();
+                }
+            }
+        }
+        protected void gvCoverPage03_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                int PKID = Convert.ToInt32(gvCoverPage03.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvCoverPage03.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+        }
+        protected void gvCoverPage05_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x =>  x.channel_size.Equals("0.500") && x.id == PKID).FirstOrDefault();
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_state = Convert.ToInt32(RowTypeEnum.Hide);
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+                    
+                    gvCoverPage05.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500") ).ToList();
+                    gvCoverPage05.DataBind();
+                }
+            }
+        }
+        protected void gvCoverPage05_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                int PKID = Convert.ToInt32(gvCoverPage05.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvCoverPage05.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+        }
+        protected void gvCoverPage06_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x => x.channel_size.Equals("0.600") && x.id == PKID).FirstOrDefault();
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_state = Convert.ToInt32(RowTypeEnum.Hide);
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+                    
+                    gvCoverPage06.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600")).ToList();
+                    gvCoverPage06.DataBind();
+                }
+            }
+        }
+        protected void gvCoverPage06_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                int PKID = Convert.ToInt32(gvCoverPage06.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvCoverPage06.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+        }
+        #endregion
+
 
     }
 
