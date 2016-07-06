@@ -240,8 +240,8 @@ namespace ALS.ALSI.Web.view.template
                 mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
                 if (mSpec != null)
                 {
-                    lbDocRev.Text = mSpec.A;
-                    lbDesc.Text = mSpec.B;
+                    lbDocRev.Text = mSpec.B;
+                    lbDesc.Text = mSpec.A;
                 }
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
@@ -662,8 +662,8 @@ namespace ALS.ALSI.Web.view.template
             item = datas.Where(x => x.ID == Convert.ToInt16(ddlSpecification.SelectedValue)).FirstOrDefault();
             if (item != null)
             {
-                lbDocRev.Text = item.A;
-                lbDesc.Text = item.B;
+                lbDocRev.Text = item.B;
+                lbDesc.Text = item.A;
                 #region "FTIR"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;

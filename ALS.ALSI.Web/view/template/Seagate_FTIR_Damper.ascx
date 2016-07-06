@@ -93,7 +93,7 @@
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
                                         <h6>The Specification is based on Seagate's Doc 
-                                                    <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
+                                                    <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label> for 
                                             <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>
                                         <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
