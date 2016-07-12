@@ -672,7 +672,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
@@ -682,7 +682,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
@@ -692,7 +692,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
@@ -702,7 +702,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
@@ -745,7 +745,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
@@ -755,7 +755,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
@@ -765,7 +765,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
@@ -775,7 +775,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
 

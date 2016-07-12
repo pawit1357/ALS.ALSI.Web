@@ -333,7 +333,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case "0.300":
                             CheckBoxList1.Items[0].Selected = true;
-                            gvCoverPage03.DataSource = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals("0.300")).ToList();
+                            gvCoverPage03.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.300")).ToList();
                             gvCoverPage03.DataBind();
 
                             gvWorkSheet_03.Visible = true;
@@ -344,7 +344,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
                         case "0.500":
                             CheckBoxList1.Items[1].Selected = true;
-                            gvCoverPage05.DataSource = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals("0.500")).ToList();
+                            gvCoverPage05.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList();
                             gvCoverPage05.DataBind();
 
                             gvWorkSheet_05.Visible = true;
@@ -354,7 +354,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
                         case "0.600":
                             CheckBoxList1.Items[2].Selected = true;
-                            gvCoverPage06.DataSource = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals("0.600")).ToList();
+                            gvCoverPage06.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600")).ToList();
                             gvCoverPage06.DataBind();
                             gvWorkSheet_06.Visible = true;
                             gvCoverPage06.Visible = true;
@@ -456,7 +456,7 @@ namespace ALS.ALSI.Web.view.template
                         _tmp.ExtractionVolume = txtCVP_E19.Text;
                         //_tmp.channel_size = ddlChannel.SelectedValue;
                         _tmp.template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
-                        _tmp.row_state = 1;//Cover Page
+                        _tmp.row_type = 1;//Cover Page
                     }
 
                     objWork.DeleteBySampleID(this.SampleID);
@@ -875,9 +875,9 @@ namespace ALS.ALSI.Web.view.template
             #region "0.300"
             if (CheckBoxList1.Items[0].Selected)
             {
-                if (this.Lpcs.Where(x => x.row_state == 2 && x.channel_size.Equals(channel_size)).ToList().Count > 0)
+                if (this.Lpcs.Where(x => x.row_type == 2 && x.channel_size.Equals(channel_size)).ToList().Count > 0)
                 {
-                    string lastSampleCount = this.Lpcs.Where(x => x.row_state.Value == 2 && !String.IsNullOrEmpty(x.type) && x.channel_size.Equals(channel_size)).Max(x => x.type);
+                    string lastSampleCount = this.Lpcs.Where(x => x.row_type.Value == 2 && !String.IsNullOrEmpty(x.type) && x.channel_size.Equals(channel_size)).Max(x => x.type);
                     if (lastSampleCount != null)
                     {
                         #region "RUN RESULT"
@@ -941,7 +941,7 @@ namespace ALS.ALSI.Web.view.template
                         double average = listAverages.Average(x => Convert.ToDouble(x.Value));
                         lbAverage.Text = average.ToString().Split('.')[0];
 
-                        List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals(channel_size)).ToList();
+                        List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals(channel_size)).ToList();
                         if (listCoverPage.Count > 0)
                         {
                             if (listAverages.Count >= 1)
@@ -982,9 +982,9 @@ namespace ALS.ALSI.Web.view.template
             #region "0.500"
             if (CheckBoxList1.Items[1].Selected)
             {
-                if (this.Lpcs.Where(x => x.row_state == 2 && x.channel_size.Equals(channel_size)).ToList().Count > 0)
+                if (this.Lpcs.Where(x => x.row_type == 2 && x.channel_size.Equals(channel_size)).ToList().Count > 0)
                 {
-                    string lastSampleCount = this.Lpcs.Where(x => x.row_state.Value == 2 && !String.IsNullOrEmpty(x.type) && x.channel_size.Equals(channel_size)).Max(x => x.type);
+                    string lastSampleCount = this.Lpcs.Where(x => x.row_type.Value == 2 && !String.IsNullOrEmpty(x.type) && x.channel_size.Equals(channel_size)).Max(x => x.type);
                     if (lastSampleCount != null)
                     {
                         #region "RUN RESULT"
@@ -1047,7 +1047,7 @@ namespace ALS.ALSI.Web.view.template
                         double average = listAverages.Average(x => Convert.ToDouble(x.Value));
                         lbAverage05.Text = average.ToString().Split('.')[0];
 
-                        List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals(channel_size)).ToList();
+                        List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals(channel_size)).ToList();
                         if (listCoverPage.Count > 0)
                         {
                             if (listAverages.Count >= 1)
@@ -1088,9 +1088,9 @@ namespace ALS.ALSI.Web.view.template
             #region "0.600"
             if (CheckBoxList1.Items[2].Selected)
             {
-                if (this.Lpcs.Where(x => x.row_state == 2 && x.channel_size.Equals(channel_size)).ToList().Count > 0)
+                if (this.Lpcs.Where(x => x.row_type == 2 && x.channel_size.Equals(channel_size)).ToList().Count > 0)
                 {
-                    string lastSampleCount = this.Lpcs.Where(x => x.row_state.Value == 2 && !String.IsNullOrEmpty(x.type) && x.channel_size.Equals(channel_size)).Max(x => x.type);
+                    string lastSampleCount = this.Lpcs.Where(x => x.row_type.Value == 2 && !String.IsNullOrEmpty(x.type) && x.channel_size.Equals(channel_size)).Max(x => x.type);
                     if (lastSampleCount != null)
                     {
                         #region "RUN RESULT"
@@ -1153,7 +1153,7 @@ namespace ALS.ALSI.Web.view.template
                         double average = listAverages.Average(x => Convert.ToDouble(x.Value));
                         lbAverage06.Text = average.ToString().Split('.')[0];
 
-                        List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals(channel_size)).ToList();
+                        List<template_seagate_lpc_coverpage> listCoverPage = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals(channel_size)).ToList();
                         if (listCoverPage.Count > 0)
                         {
                             if (listAverages.Count >= 1)
@@ -1328,14 +1328,18 @@ namespace ALS.ALSI.Web.view.template
                     channel_size = "0.300",
                     LiquidParticleCount = "Total number of particles ≥ 0.3μm ",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 1
                 });
                 results03.Add(new template_seagate_lpc_coverpage
                 {
                     channel_size = "0.300",
                     LiquidParticleCount = "1st Run",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 2
                 });
 
                 results03.Add(new template_seagate_lpc_coverpage
@@ -1343,7 +1347,9 @@ namespace ALS.ALSI.Web.view.template
                     channel_size = "0.300",
                     LiquidParticleCount = "2nd Run",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 3
                 });
 
                 results03.Add(new template_seagate_lpc_coverpage
@@ -1351,7 +1357,9 @@ namespace ALS.ALSI.Web.view.template
                     channel_size = "0.300",
                     LiquidParticleCount = "3rd Run",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 4
                 });
                 #endregion
                 #region "0.500"
@@ -1361,14 +1369,19 @@ namespace ALS.ALSI.Web.view.template
                     channel_size = "0.500",
                     LiquidParticleCount = "Total number of particles ≥ 0.5μm ",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 5
+
                 });
                 results05.Add(new template_seagate_lpc_coverpage
                 {
                     channel_size = "0.500",
                     LiquidParticleCount = "1st Run",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 6
                 });
 
                 results05.Add(new template_seagate_lpc_coverpage
@@ -1376,7 +1389,9 @@ namespace ALS.ALSI.Web.view.template
                     channel_size = "0.500",
                     LiquidParticleCount = "2nd Run",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 7
                 });
 
                 results05.Add(new template_seagate_lpc_coverpage
@@ -1384,7 +1399,9 @@ namespace ALS.ALSI.Web.view.template
                     channel_size = "0.500",
                     LiquidParticleCount = "3rd Run",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 8
                 });
                 #endregion
                 #region "0.600"
@@ -1394,14 +1411,18 @@ namespace ALS.ALSI.Web.view.template
                     channel_size = "0.600",
                     LiquidParticleCount = "Total number of particles ≥ 0.6μm ",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 9
                 });
                 results06.Add(new template_seagate_lpc_coverpage
                 {
                     channel_size = "0.600",
                     LiquidParticleCount = "1st Run",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 10
                 });
 
                 results06.Add(new template_seagate_lpc_coverpage
@@ -1409,7 +1430,9 @@ namespace ALS.ALSI.Web.view.template
                     channel_size = "0.600",
                     LiquidParticleCount = "2nd Run",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 11
                 });
 
                 results06.Add(new template_seagate_lpc_coverpage
@@ -1417,7 +1440,9 @@ namespace ALS.ALSI.Web.view.template
                     channel_size = "0.600",
                     LiquidParticleCount = "3rd Run",
                     SpecificationLimits = "",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 12
                 });
                 #endregion
 
@@ -1434,21 +1459,27 @@ namespace ALS.ALSI.Web.view.template
                     //SpecificationLimits = lpc_type.Equals("1") ? tem.F : lpc_type.Equals("2") ? tem.H : lpc_type.Equals("3") ? tem.D : tem.D,//Original
                     SpecificationLimits = lpc_type.Equals("1") ? tem.F : lpc_type.Equals("2") ? tem.H : lpc_type.Equals("3") ? tem.F : "-",
 
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 13
                 });
                 results05.Add(new template_seagate_lpc_coverpage
                 {
                     channel_size = "0.500",
                     LiquidParticleCount = "Average",
                     SpecificationLimits = lpc_type.Equals("1") ? "-" : lpc_type.Equals("2") ? "-" : lpc_type.Equals("3") ? tem.G : "-",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 14
                 });
                 results06.Add(new template_seagate_lpc_coverpage
                 {
                     channel_size = "0.600",
                     LiquidParticleCount = "Average",
                     SpecificationLimits = lpc_type.Equals("1") ? tem.G : lpc_type.Equals("2") ? tem.I : lpc_type.Equals("3") ? tem.H : "-",
-                    Results = ""
+                    Results = "",
+                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
+                    id = 15
                 });
 
                 switch (ddlTemplateType.SelectedValue)
@@ -1589,7 +1620,7 @@ namespace ALS.ALSI.Web.view.template
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x =>  x.channel_size.Equals("0.300") && x.id == PKID).FirstOrDefault();
+                template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x => x.channel_size.Equals("0.300") && x.id == PKID).FirstOrDefault();
                 if (gcms != null)
                 {
                     switch (cmd)
@@ -1601,8 +1632,8 @@ namespace ALS.ALSI.Web.view.template
                             gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
-                    
-                    gvCoverPage03.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.300") ).ToList();
+
+                    gvCoverPage03.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.300")).ToList();
                     gvCoverPage03.DataBind();
                 }
             }
@@ -1612,7 +1643,7 @@ namespace ALS.ALSI.Web.view.template
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                int PKID = Convert.ToInt32(gvCoverPage03.DataKeys[e.Row.RowIndex].Values[0].ToString());
+
                 RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvCoverPage03.DataKeys[e.Row.RowIndex].Values[1]);
                 LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
                 LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
@@ -1633,8 +1664,9 @@ namespace ALS.ALSI.Web.view.template
                             break;
                     }
                 }
-
             }
+
+
         }
         protected void gvCoverPage05_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -1642,7 +1674,7 @@ namespace ALS.ALSI.Web.view.template
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x =>  x.channel_size.Equals("0.500") && x.id == PKID).FirstOrDefault();
+                template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x => x.channel_size.Equals("0.500") && x.id == PKID).FirstOrDefault();
                 if (gcms != null)
                 {
                     switch (cmd)
@@ -1654,8 +1686,8 @@ namespace ALS.ALSI.Web.view.template
                             gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
-                    
-                    gvCoverPage05.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500") ).ToList();
+
+                    gvCoverPage05.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList();
                     gvCoverPage05.DataBind();
                 }
             }
@@ -1665,7 +1697,7 @@ namespace ALS.ALSI.Web.view.template
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                int PKID = Convert.ToInt32(gvCoverPage05.DataKeys[e.Row.RowIndex].Values[0].ToString());
+
                 RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvCoverPage05.DataKeys[e.Row.RowIndex].Values[1]);
                 LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
                 LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
@@ -1707,7 +1739,7 @@ namespace ALS.ALSI.Web.view.template
                             gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
-                    
+
                     gvCoverPage06.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600")).ToList();
                     gvCoverPage06.DataBind();
                 }
@@ -1718,7 +1750,7 @@ namespace ALS.ALSI.Web.view.template
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                int PKID = Convert.ToInt32(gvCoverPage06.DataKeys[e.Row.RowIndex].Values[0].ToString());
+
                 RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvCoverPage06.DataKeys[e.Row.RowIndex].Values[1]);
                 LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
                 LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
