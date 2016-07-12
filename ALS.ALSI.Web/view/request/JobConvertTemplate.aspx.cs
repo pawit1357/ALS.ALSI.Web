@@ -6,6 +6,8 @@ using ALS.ALSI.Web.Properties;
 using System;
 using System.Collections;
 using System.Data;
+using System.IO;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -63,7 +65,7 @@ namespace ALS.ALSI.Web.view.request
 
         private void initialPage()
         {
-            DataTable dt = Extenders.ObtainDataTableFromIEnumerable( objInfo.SearchData());
+            DataTable dt = Extenders.ObtainDataTableFromIEnumerable(objInfo.SearchData());
             //searchResult = objInfo.SearchData();
             gvJob.DataSource = dt;
             gvJob.DataBind();
@@ -84,6 +86,7 @@ namespace ALS.ALSI.Web.view.request
                     ddlTemplate.Enabled = true;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
+                    pUploadfile.Visible = false;
                     break;
             }
 
@@ -136,11 +139,38 @@ namespace ALS.ALSI.Web.view.request
             switch (CommandName)
             {
                 case CommandNameEnum.ConvertTemplate:
+                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".xls") || Path.GetExtension(FileUpload1.FileName).Equals(".xlt")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
+
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+
+
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        FileUpload1.SaveAs(source_file);
+                        this.jobSample.ad_hoc_tempalte_path = source_file_url;
+                    }
+
+
                     this.jobSample.template_id = String.IsNullOrEmpty(ddlTemplate.SelectedValue) ? 0 : int.Parse(ddlTemplate.SelectedValue);
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC);
+                    if (pUploadfile.Visible)
+                    {
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                    }
+                    else {
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC);
+                    }
+
                     this.jobSample.Update();
                     break;
             }
+
             //Commit
             GeneralManager.Commit();
             removeSession();
@@ -149,9 +179,22 @@ namespace ALS.ALSI.Web.view.request
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            ddlTemplate.SelectedIndex = 0;
+            //ddlTemplate.SelectedIndex = 0;
             removeSession();
             Response.Redirect(PreviousPath);
+        }
+
+        protected void ddlTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //FixCode 407,408 Blank template
+            if (ddlTemplate.SelectedValue.Equals("407") || ddlTemplate.SelectedValue.Equals("408"))
+            {
+                pUploadfile.Visible = true;
+            }
+            else
+            {
+                pUploadfile.Visible = false;
+            }
         }
     }
 

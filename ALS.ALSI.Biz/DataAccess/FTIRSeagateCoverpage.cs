@@ -50,7 +50,7 @@ namespace ALS.ALSI.Biz.DataAccess
                 _repository.Edit(existing, this);
             }
             catch (Exception ex) {
-                Console.WriteLine();
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -97,7 +97,7 @@ namespace ALS.ALSI.Biz.DataAccess
                 catch (Exception ex)
                 {
 
-                    Console.WriteLine();
+                    Console.WriteLine(ex.Message);
                 }
             }
         }

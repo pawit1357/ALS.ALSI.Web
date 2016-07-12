@@ -95,6 +95,7 @@
           <Property Name="date_admin_sent_to_cus" Type="date" />
           <Property Name="sr_approve_date" Type="date" />
           <Property Name="date_labman_complete" Type="date" />
+          <Property Name="ad_hoc_tempalte_path" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -1824,6 +1825,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="date_admin_sent_to_cus" Type="DateTime" />
           <Property Name="sr_approve_date" Type="DateTime" />
           <Property Name="date_labman_complete" Type="DateTime" />
+          <Property Name="ad_hoc_tempalte_path" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="alsiModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
         </EntityType>
         <EntityType Name="job_sample_logs">
@@ -3320,6 +3322,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample">
             <EntityTypeMapping TypeName="alsiModel.job_sample">
               <MappingFragment StoreEntitySet="job_sample">
+                <ScalarProperty Name="ad_hoc_tempalte_path" ColumnName="ad_hoc_tempalte_path" />
                 <ScalarProperty Name="date_labman_complete" ColumnName="date_labman_complete" />
                 <ScalarProperty Name="sr_approve_date" ColumnName="sr_approve_date" />
                 <ScalarProperty Name="date_admin_sent_to_cus" ColumnName="date_admin_sent_to_cus" />

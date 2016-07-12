@@ -54,6 +54,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<System.DateTime> date_admin_sent_to_cus { get; set; }
         public Nullable<System.DateTime> sr_approve_date { get; set; }
         public Nullable<System.DateTime> date_labman_complete { get; set; }
+        public string ad_hoc_tempalte_path { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }
