@@ -56,7 +56,7 @@ namespace ALS.ALSI.Web.view.request
                 tmp.jobRefNo = txtREfNo.Text;
                 tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
                 tmp.spec_id = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : int.Parse(ddlSpecification.SelectedValue);
-                tmp.type_of_test_name = String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue) ? "" : ddlTypeOfTest.SelectedItem.Text;
+                tmp.dataGroup = String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue) ? "" : ddlTypeOfTest.SelectedItem.Text;
 
                 tmp.job_prefix = String.IsNullOrEmpty(hPrefix.Value) ? 1 : Convert.ToInt16(hPrefix.Value);
                 RoleEnum role = (RoleEnum)Enum.ToObject(typeof(RoleEnum), userLogin.role_id);

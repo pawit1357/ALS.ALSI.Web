@@ -27,7 +27,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public int status { get; set; }
         public String jobRefNo { get; set; }
         public int spec_id { get; set; }
-        public String type_of_test_name { get; set; }
+        public String dataGroup { get; set; }
 
         public String sample_po { get; set; }
         public String sample_invoice { get; set; }
@@ -216,9 +216,9 @@ namespace ALS.ALSI.Biz.DataAccess
                 {
                     result = result.Where(x => x.spec_id == this.spec_id);
                 }
-                if (!String.IsNullOrEmpty(this.type_of_test_name))
+                if (!String.IsNullOrEmpty(this.dataGroup))
                 {
-                    result = result.Where(x => x.type_of_test_name.Contains(this.type_of_test_name));
+                    result = result.Where(x => x.data_group.Contains(this.dataGroup));
                 }
                 if (!String.IsNullOrEmpty(this.sample_po))
                 {

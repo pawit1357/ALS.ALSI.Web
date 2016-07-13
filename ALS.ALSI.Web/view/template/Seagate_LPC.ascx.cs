@@ -956,10 +956,9 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[3].Results = listAverages[2].Value;
                             }
-                            if (listAverages.Count >= 4)
-                            {
+                   
                                 listCoverPage[4].Results = lbAverage.Text;
-                            }
+                  
 
                             gvCoverPage03.DataSource = listCoverPage;
                             gvCoverPage03.DataBind();
@@ -1062,10 +1061,9 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[3].Results = listAverages[2].Value;
                             }
-                            if (listAverages.Count >= 4)
-                            {
+                         
                                 listCoverPage[4].Results = lbAverage05.Text;
-                            }
+                            
 
                             gvCoverPage05.DataSource = listCoverPage;
                             gvCoverPage05.DataBind();
@@ -1168,10 +1166,9 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[3].Results = listAverages[2].Value;
                             }
-                            if (listAverages.Count >= 4)
-                            {
+                        
                                 listCoverPage[4].Results = lbAverage06.Text;
-                            }
+                            
 
                             gvCoverPage06.DataSource = listCoverPage;
                             gvCoverPage06.DataBind();

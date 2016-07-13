@@ -25,231 +25,7 @@
         <Top>0cm</Top>
         <Left>0cm</Left>
         <Height>1.05861cm</Height>
-        <Width>8.55896cm</Width>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox2">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Job No:</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.235cm</Top>
-        <Left>0.3175cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.5475cm</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox3">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Client:</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.87028cm</Top>
-        <Left>0.3175cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.5475cm</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox4">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Contract:</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>2.54083cm</Top>
-        <Left>0cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.865cm</Width>
-        <ZIndex>3</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox5">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Sample:</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>3.24667cm</Top>
-        <Left>0.3175cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.5475cm</Width>
-        <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox6">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Spec:</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>3.88194cm</Top>
-        <Left>0.3175cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.5475cm</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox7">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Test:</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.48194cm</Top>
-        <Left>0.3175cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.5475cm</Width>
-        <ZIndex>6</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox8">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Sample</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.11722cm</Top>
-        <Left>0.3175cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.5475cm</Width>
-        <ZIndex>7</ZIndex>
+        <Width>7.79167cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -267,6 +43,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
+                <Value>Job No: </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
                 <Value>=Parameters!pJobNo.Value</Value>
                 <Style />
               </TextRun>
@@ -276,10 +56,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>1.30556cm</Top>
-        <Left>2.16313cm</Left>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>6.39583cm</Width>
-        <ZIndex>8</ZIndex>
+        <Width>7.79167cm</Width>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -297,6 +77,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
+                <Value>Client: </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
                 <Value>=Parameters!pClient.Value</Value>
                 <Style />
               </TextRun>
@@ -306,10 +90,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>1.94084cm</Top>
-        <Left>2.16313cm</Left>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>6.39583cm</Width>
-        <ZIndex>9</ZIndex>
+        <Width>7.79167cm</Width>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -327,6 +111,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
+                <Value>Contract: </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
                 <Value>=Parameters!pContract.Value</Value>
                 <Style />
               </TextRun>
@@ -336,10 +124,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>2.61139cm</Top>
-        <Left>2.16313cm</Left>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>6.39583cm</Width>
-        <ZIndex>10</ZIndex>
+        <Width>7.79167cm</Width>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -357,6 +145,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
+                <Value>Sample: </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
                 <Value>=Parameters!pSample.Value</Value>
                 <Style />
               </TextRun>
@@ -366,10 +158,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>3.31723cm</Top>
-        <Left>2.16313cm</Left>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>6.39583cm</Width>
-        <ZIndex>11</ZIndex>
+        <Width>7.79167cm</Width>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -387,6 +179,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
+                <Value>Spec: </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
                 <Value>=Parameters!pSpec.Value</Value>
                 <Style />
               </TextRun>
@@ -396,10 +192,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>3.9525cm</Top>
-        <Left>2.16313cm</Left>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>6.39583cm</Width>
-        <ZIndex>12</ZIndex>
+        <Width>7.79167cm</Width>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -417,6 +213,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
+                <Value>Test: </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
                 <Value>=Parameters!pTest.Value</Value>
                 <Style />
               </TextRun>
@@ -426,10 +226,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>4.5525cm</Top>
-        <Left>2.16313cm</Left>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>6.39583cm</Width>
-        <ZIndex>13</ZIndex>
+        <Width>7.79167cm</Width>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -447,6 +247,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
+                <Value>Sample: </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
                 <Value>=Parameters!pSampleD.Value</Value>
                 <Style />
               </TextRun>
@@ -456,10 +260,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>5.18778cm</Top>
-        <Left>2.16313cm</Left>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>6.39583cm</Width>
-        <ZIndex>14</ZIndex>
+        <Width>7.79167cm</Width>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -474,7 +278,7 @@
     <Height>5.78778cm</Height>
     <Style />
   </Body>
-  <Width>8.91646cm</Width>
+  <Width>7.79167cm</Width>
   <Page>
     <PageHeight>8cm</PageHeight>
     <PageWidth>12cm</PageWidth>
