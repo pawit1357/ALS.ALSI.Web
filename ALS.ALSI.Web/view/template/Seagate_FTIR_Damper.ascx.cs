@@ -241,7 +241,7 @@ namespace ALS.ALSI.Web.view.template
 
 
                 tb_m_specification mSpec = new tb_m_specification();
-                mSpec=  mSpec.SelectByID(this.Ftir[0].specification_id.Value);
+                mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
                 if (mSpec != null)
                 {
                     lbDocRev.Text = mSpec.C;
@@ -260,7 +260,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 #region "Procedure"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count+1;
+                tmp.ID = this.Ftir.Count + 1;
                 tmp.A = "FTIR (Adhesive side)";
                 tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
                 tmp.C = "16 pieces";
@@ -446,7 +446,7 @@ namespace ALS.ALSI.Web.view.template
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
-                    
+
                     foreach (template_seagate_ftir_coverpage item in this.Ftir)
                     {
                         item.sample_id = this.SampleID;
@@ -690,7 +690,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = 2;
                 this.Ftir.Add(tmp);
-                
+
                 #endregion
 
                 gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
@@ -716,12 +716,22 @@ namespace ALS.ALSI.Web.view.template
                 this.Ftir[10].C = (unit == 1) ? ftirList[7].D : ftirList[8].D;
                 this.Ftir[11].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;
 
+                //part value to cover page method/procedure
+                var items = this.Ftir.Where(x => x.data_type == 1).ToList();
+                if (items.Count > 0)
+                {
+                    items[0].C = String.Format("{0} pieces", txtWB14.Text);
+                    items[1].C = String.Format("{0} pieces", txtWB14.Text);
+                }
 
                 gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
                 gvWftir.DataBind();
 
                 gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
                 gvResult.DataBind();
+
+                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                gvMethodProcedure.DataBind();
                 //remark
                 lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
             }
@@ -1043,6 +1053,8 @@ namespace ALS.ALSI.Web.view.template
                                     txtWD14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.D));//No. of parts extracted (f) = 
                                     txtWD15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.D));//Total Surface area (A) =
 
+
+
                                     for (int row = 18; row < 29; row++)
                                     {
                                         template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
@@ -1098,10 +1110,10 @@ namespace ALS.ALSI.Web.view.template
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Not Detected") || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
                                                 break;
                                             case 9:
-                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Not Detected") || tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal08.Text);
-                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Not Detected") || tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal08.Text);
-                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Not Detected") || tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal08.Text);
-                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Not Detected") || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal08.Text);
+                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Not Detected") || tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
+                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Not Detected") || tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
+                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Not Detected") || tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
+                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Not Detected") || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
                                                 break;
                                                 //Amount(ng / cm2)
                                                 //Amount(ug / cm2)

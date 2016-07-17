@@ -1057,6 +1057,7 @@
     <Content Include="view\template\Seagate_Copperwire.ascx" />
     <Content Include="view\template\Seagate_DHS_V2.ascx" />
     <Content Include="view\template\Seagate_FTIR_Damper.ascx" />
+    <Content Include="view\template\Seagate_FTIR_Adhesive.ascx" />
     <Content Include="view\template\Seagate_FTIR_Packing.ascx" />
     <Content Include="view\template\TemplateBlank.ascx" />
     <Content Include="view\template\WD_FTIR_IDM.ascx" />
@@ -1268,6 +1269,13 @@
     </Compile>
     <Compile Include="view\template\Seagate_FTIR_Damper.ascx.designer.cs">
       <DependentUpon>Seagate_FTIR_Damper.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\Seagate_FTIR_Adhesive.ascx.cs">
+      <DependentUpon>Seagate_FTIR_Adhesive.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\Seagate_FTIR_Adhesive.ascx.designer.cs">
+      <DependentUpon>Seagate_FTIR_Adhesive.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\Seagate_FTIR_Packing.ascx.cs">
       <DependentUpon>Seagate_FTIR_Packing.ascx</DependentUpon>

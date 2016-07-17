@@ -72,6 +72,8 @@ namespace ALS.ALSI.Web.view.template
         private void initialPage()
         {
             this.CommandName = CommandNameEnum.Add;
+
+
             ddlSpecification.Items.Clear();
             ddlSpecification.DataSource = new tb_m_specification().SelectBySpecificationID(this.jobSample.specification_id, this.jobSample.template_id);
             ddlSpecification.DataBind();
@@ -537,12 +539,12 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        protected void btnCalulate_Click(object sender, EventArgs e)
-        {
-            btnSubmit.Enabled = true;
-            calculateByFormular();
+        //protected void btnCalulate_Click(object sender, EventArgs e)
+        //{
+        //    btnSubmit.Enabled = true;
+        //    calculateByFormular();
 
-        }
+        //}
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
@@ -791,7 +793,7 @@ namespace ALS.ALSI.Web.view.template
 
                 _tmp = new template_seagate_ic_coverpage();
                 _tmp.id = 8;
-                _tmp.A = "Total";
+                _tmp.A = "Total of 7Anions";
                 _tmp.B = tem.K;
                 _tmp.wunitText = tem.C;
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
@@ -850,7 +852,7 @@ namespace ALS.ALSI.Web.view.template
                 listCover.Add(_tmp);
                 _tmp = new template_seagate_ic_coverpage();
                 _tmp.id = 14;
-                _tmp.A = "Total";
+                _tmp.A = "Total Cations";
                 _tmp.B = tem.R;
                 _tmp.wunitText = tem.C;
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
@@ -1085,13 +1087,7 @@ namespace ALS.ALSI.Web.view.template
                                         }
                                     }
                                 }
-
-
-
-
-
                             }
-
                         }
                     }
                     else
@@ -1156,60 +1152,60 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-        public static void TransferXLToTable()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("City", typeof(string));
-            dt.Columns.Add("State", typeof(string));
-            dt.Columns.Add("Zip", typeof(string));
+        //public static void TransferXLToTable()
+        //{
+        //    DataTable dt = new DataTable();
+        //    dt.Columns.Add("City", typeof(string));
+        //    dt.Columns.Add("State", typeof(string));
+        //    dt.Columns.Add("Zip", typeof(string));
 
-            using (FileStream stream = new FileStream(@"E:\test2.xlsx", FileMode.Open, FileAccess.Read))
-            {
-                IWorkbook wb = new XSSFWorkbook(stream);
-                ISheet sheet = wb.GetSheet("Sheet1");
-                string holder;
-                int i = 0;
-                do
-                {
-                    DataRow dr = dt.NewRow();
-                    IRow row = sheet.GetRow(i);
-                    try
-                    {
-                        holder = row.GetCell(0, MissingCellPolicy.CREATE_NULL_AS_BLANK).ToString();
-                    }
-                    catch (Exception)
-                    {
-                        break;
-                    }
+        //    using (FileStream stream = new FileStream(@"E:\test2.xlsx", FileMode.Open, FileAccess.Read))
+        //    {
+        //        IWorkbook wb = new XSSFWorkbook(stream);
+        //        ISheet sheet = wb.GetSheet("Sheet1");
+        //        string holder;
+        //        int i = 0;
+        //        do
+        //        {
+        //            DataRow dr = dt.NewRow();
+        //            IRow row = sheet.GetRow(i);
+        //            try
+        //            {
+        //                holder = row.GetCell(0, MissingCellPolicy.CREATE_NULL_AS_BLANK).ToString();
+        //            }
+        //            catch (Exception)
+        //            {
+        //                break;
+        //            }
 
-                    //string city = holder.Substring(0, holder.IndexOf(','));
-                    //string state = holder.Substring(holder.IndexOf(',') + 2, 2);
-                    //string zip = holder.Substring(holder.IndexOf(',') + 5, 5);
-                    dr[0] = "1";
-                    dr[1] = "2";
-                    dr[2] = "3";
-                    dt.Rows.Add(dr);
-                    i++;
-                } while (!String.IsNullOrEmpty(holder));
-            }
+        //            //string city = holder.Substring(0, holder.IndexOf(','));
+        //            //string state = holder.Substring(holder.IndexOf(',') + 2, 2);
+        //            //string zip = holder.Substring(holder.IndexOf(',') + 5, 5);
+        //            dr[0] = "1";
+        //            dr[1] = "2";
+        //            dr[2] = "3";
+        //            dt.Rows.Add(dr);
+        //            i++;
+        //        } while (!String.IsNullOrEmpty(holder));
+        //    }
 
-            using (FileStream stream = new FileStream(@"E:\FieldedAddresses.xlsx", FileMode.Create, FileAccess.Write))
-            {
-                IWorkbook wb = new XSSFWorkbook();
-                ISheet sheet = wb.CreateSheet("Sheet1");
-                ICreationHelper cH = wb.GetCreationHelper();
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    IRow row = sheet.CreateRow(i);
-                    for (int j = 0; j < 3; j++)
-                    {
-                        ICell cell = row.CreateCell(j);
-                        cell.SetCellValue(cH.CreateRichTextString(dt.Rows[i].ItemArray[j].ToString()));
-                    }
-                }
-                wb.Write(stream);
-            }
-        }
+        //    using (FileStream stream = new FileStream(@"E:\FieldedAddresses.xlsx", FileMode.Create, FileAccess.Write))
+        //    {
+        //        IWorkbook wb = new XSSFWorkbook();
+        //        ISheet sheet = wb.CreateSheet("Sheet1");
+        //        ICreationHelper cH = wb.GetCreationHelper();
+        //        for (int i = 0; i < dt.Rows.Count; i++)
+        //        {
+        //            IRow row = sheet.CreateRow(i);
+        //            for (int j = 0; j < 3; j++)
+        //            {
+        //                ICell cell = row.CreateCell(j);
+        //                cell.SetCellValue(cH.CreateRichTextString(dt.Rows[i].ItemArray[j].ToString()));
+        //            }
+        //        }
+        //        wb.Write(stream);
+        //    }
+        //}
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {

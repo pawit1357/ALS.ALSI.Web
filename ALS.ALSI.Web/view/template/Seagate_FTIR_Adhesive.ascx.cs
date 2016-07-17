@@ -21,7 +21,7 @@ using System.Linq;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class Seagate_FTIR_Packing : System.Web.UI.UserControl
+    public partial class Seagate_FTIR_Adhesive : System.Web.UI.UserControl
     {
 
 
@@ -205,6 +205,8 @@ namespace ALS.ALSI.Web.view.template
                     #endregion
                     gvMethodProcedure.Columns[5].Visible = true;
                     gvResult.Columns[3].Visible = true;
+                    gvResult1.Columns[3].Visible = true;
+
                     btnWorkingFTIR.Visible = true;
                     btnWorkingNVR.Visible = true;
 
@@ -213,6 +215,8 @@ namespace ALS.ALSI.Web.view.template
                 {
                     gvMethodProcedure.Columns[5].Visible = false;
                     gvResult.Columns[3].Visible = false;
+                    gvResult1.Columns[3].Visible = false;
+
                     btnWorkingFTIR.Visible = false;
                     btnWorkingNVR.Visible = false;
 
@@ -240,8 +244,8 @@ namespace ALS.ALSI.Web.view.template
                 mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
                 if (mSpec != null)
                 {
-                    lbDocRev.Text = mSpec.B;
-                    lbDesc.Text = mSpec.A;
+                    lbDocRev.Text = mSpec.C;
+                    lbDesc.Text = mSpec.B;
                 }
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
@@ -250,6 +254,9 @@ namespace ALS.ALSI.Web.view.template
                 gvResult.DataBind();
                 gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
                 gvWftir.DataBind();
+                gvResult1.DataSource = this.Ftir.Where(x => x.data_type == 4).ToList();
+                gvResult1.DataBind();
+
                 CalculateCas();
             }
             else
@@ -259,61 +266,61 @@ namespace ALS.ALSI.Web.view.template
                 #region "Procedure"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "NVR/FTIR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev M";
-                tmp.C = "5.8109 g/ Estimated surface use 774.79 cm²";
+                tmp.A = "FTIR (Seal & Label for HDA internal, Facestock)";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                tmp.C = "20 cm²";
                 tmp.D = "  IPA - 24 Hours (HPLC Grade)";
-                tmp.E = "40mL";
+                tmp.E = "10 mL";
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "NVR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev U";
-                tmp.C = "Estimated surface use  cm²";
+                tmp.A = "FTIR (Seal & Label for HDA internal, Adhesive side)";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                tmp.C = "20 cm²";
                 tmp.D = "Ultrapure Water";
-                tmp.E = "100mL";
+                tmp.E = "10 mL";
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "NVR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev U";
-                tmp.C = "Estimated surface use  cm²";
+                tmp.A = "FTIR (Release Liner, ultra - low Silicone, facing adhesive side)";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                tmp.C = "20 cm²";
                 tmp.D = "n-hexane (HPLC Grade)";
-                tmp.E = "100mL";
+                tmp.E = "10 mL";
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,35344 - 001 Rev U";
-                tmp.C = "1.1277 gram Estimated surface use 124.264 cm²";
+                tmp.A = "FTIR (Release Liner, Silicone(HDA Product Label), facing adhesive side)";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                tmp.C = "20 cm²";
                 tmp.D = "n - hexane(HPLC Grade)";
-                tmp.E = "25mL";
+                tmp.E = "10 mL";
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G";
-                tmp.C = "";
+                tmp.A = "FTIR (Release Liner, ultra - low Silicone (facing adhesive side))";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                tmp.C = "20 cm²";
                 tmp.D = "n-hexane  (HPLC Grade)";
-                tmp.E = "10mL";
+                tmp.E = "10 mL";
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G";
-                tmp.C = "";
+                tmp.A = "FTIR (Release Liner, ultra - low Silicone (facing adhesive side))";
+                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                tmp.C = "20 cm²";
                 tmp.D = "n-hexane (HPLC Grade)";
-                tmp.E = "20mL";
+                tmp.E = "10 mL";
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
@@ -375,6 +382,7 @@ namespace ALS.ALSI.Web.view.template
                     PNvr.Visible = false;
 
                     btnLoadFile.Visible = false;
+                    pLoadFile.Visible = false;
 
                     CalculateCas();
 
@@ -662,22 +670,22 @@ namespace ALS.ALSI.Web.view.template
             item = datas.Where(x => x.ID == Convert.ToInt16(ddlSpecification.SelectedValue)).FirstOrDefault();
             if (item != null)
             {
-                lbDocRev.Text = item.B;
-                lbDesc.Text = item.A;
-                #region "FTIR"
+                lbDocRev.Text = item.C;
+                lbDesc.Text = item.B;
+                #region "NVR"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].D;
-                tmp.B = item.D;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
-                this.Ftir.Add(tmp);
+                //tmp.ID = this.Ftir.Count + 1;
+                //tmp.A = datas[4].D;
+                //tmp.B = item.D;
+                //tmp.C = "";
+                //tmp.D = "";
+                //tmp.E = "";
+                //tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                //tmp.data_type = 2;
+                //this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].E;
+                tmp.A = datas[4].E;
                 tmp.B = item.E;
                 tmp.C = "";
                 tmp.D = "";
@@ -687,7 +695,7 @@ namespace ALS.ALSI.Web.view.template
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].F;
+                tmp.A = datas[4].F;
                 tmp.B = item.F;
                 tmp.C = "";
                 tmp.D = "";
@@ -697,7 +705,7 @@ namespace ALS.ALSI.Web.view.template
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].G;
+                tmp.A = datas[4].G;
                 tmp.B = item.G;
                 tmp.C = "";
                 tmp.D = "";
@@ -707,7 +715,7 @@ namespace ALS.ALSI.Web.view.template
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].H;
+                tmp.A = datas[4].H;
                 tmp.B = item.H;
                 tmp.C = "";
                 tmp.D = "";
@@ -717,7 +725,7 @@ namespace ALS.ALSI.Web.view.template
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].I;
+                tmp.A = datas[4].I;
                 tmp.B = item.I;
                 tmp.C = "";
                 tmp.D = "";
@@ -727,7 +735,7 @@ namespace ALS.ALSI.Web.view.template
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].J;
+                tmp.A = datas[4].J;
                 tmp.B = item.J;
                 tmp.C = "";
                 tmp.D = "";
@@ -737,52 +745,73 @@ namespace ALS.ALSI.Web.view.template
                 this.Ftir.Add(tmp);
 
                 #endregion
-                #region "NVR"
+                #region "FTIR"
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].M;
+                tmp.A = datas[4].L;
+                tmp.B = item.L;
+                tmp.C = "";
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                tmp.data_type = 4;
+                this.Ftir.Add(tmp);
+                tmp = new template_seagate_ftir_coverpage();
+                tmp.ID = this.Ftir.Count + 1;
+                tmp.A = datas[4].M;
                 tmp.B = item.M;
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = 4;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].N;
+                tmp.A = datas[4].N;
                 tmp.B = item.N;
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = 4;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].O;
+                tmp.A = datas[4].O;
                 tmp.B = item.O;
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = 4;
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
-                tmp.A = datas[3].P;
+                tmp.A = datas[4].P;
                 tmp.B = item.P;
                 tmp.C = "";
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = 4;
                 this.Ftir.Add(tmp);
-
+                tmp = new template_seagate_ftir_coverpage();
+                tmp.ID = this.Ftir.Count + 1;
+                tmp.A = datas[4].Q;
+                tmp.B = item.Q;
+                tmp.C = "";
+                tmp.D = "";
+                tmp.E = "";
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                tmp.data_type = 4;
+                this.Ftir.Add(tmp);
                 #endregion
 
                 gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
                 gvResult.DataBind();
+                gvResult1.DataSource = this.Ftir.Where(x => x.data_type == 4).ToList();
+                gvResult1.DataBind();
 
             }
         }
@@ -795,7 +824,7 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == 3).ToList();
             if (ftirList.Count > 0)
             {
-
+                int unit = Convert.ToInt16(ddlUnit.SelectedValue);
                 //part value to cover page method/procedure
                 var items = this.Ftir.Where(x => x.data_type == 1).ToList();
                 if (items.Count > 0)
@@ -809,22 +838,27 @@ namespace ALS.ALSI.Web.view.template
                 }
 
 
-                int unit = Convert.ToInt16(ddlUnit.SelectedValue);
                 //FTIR
-                this.Ftir[6].C = "Not Detected";// (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone
-                this.Ftir[7].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Silicone (Release side)
-                this.Ftir[8].C = "";// (unit == 1) ? ftirList[7].D : ftirList[8].D;//Silicone (Non-release side)
-                this.Ftir[9].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Hydrocarbon
-                this.Ftir[10].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone Oil
-                this.Ftir[11].C = (unit == 1) ? ftirList[7].D : ftirList[8].D;//Phthalate
-                this.Ftir[12].C = (unit == 1) ? ftirList[7].C : ftirList[8].C;//Amides
-                //NVR
-                //this.Ftir[6].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//DI Water
-                //this.Ftir[7].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//IPA/Hexane
-                //this.Ftir[8].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Silicone Liner)"
-                //this.Ftir[9].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Non - Silicone Liner)"
-                //this.Ftir[10].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Adhesive)"
-
+                var nvrs = this.Ftir.Where(x => x.data_type == 2).ToList();
+                if (nvrs.Count > 0)
+                {
+                    nvrs[0].C =  (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone
+                    nvrs[1].C = (unit == 1) ? ftirList[7].C : ftirList[8].C;//Silicone (Release side)
+                    nvrs[2].C = (unit ==1)? ftirList[7].D : ftirList[8].D;//Silicone (Non-release side)
+                    nvrs[3].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Hydrocarbon
+                    nvrs[4].C = (unit == 1) ? ftirList[7].F : ftirList[8].F;//Silicone Oil
+                    nvrs[5].C = (unit == 1) ? ftirList[7].G : ftirList[8].G;//Phthalate
+                }
+                var ftir = this.Ftir.Where(x => x.data_type == 4).ToList();
+                if (ftir.Count > 0)
+                {
+                    ftir[0].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone
+                    ftir[1].C = (unit == 1) ? ftirList[7].C : ftirList[8].C;//Silicone (Release side)
+                    ftir[2].C =  (unit == 1) ? ftirList[7].D : ftirList[8].D;//Silicone (Non-release side)
+                    ftir[3].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Hydrocarbon
+                    ftir[4].C = (unit == 1) ? ftirList[7].F : ftirList[8].F;//Silicone Oil
+                    ftir[5].C = (unit == 1) ? ftirList[7].G : ftirList[8].G;//Phthalate
+                }
 
 
                 gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
@@ -832,6 +866,9 @@ namespace ALS.ALSI.Web.view.template
 
                 gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
                 gvResult.DataBind();
+
+                gvResult1.DataSource = this.Ftir.Where(x => x.data_type == 4).ToList();
+                gvResult1.DataBind();
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
                 gvMethodProcedure.DataBind();
@@ -1295,6 +1332,32 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        protected void gvProcedure_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 1);
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+
+                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+                    gvMethodProcedure.DataBind();
+                }
+            }
+        }
+
         protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -1326,32 +1389,6 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        protected void gvProcedure_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
-            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
-            {
-                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 1);
-                if (gcms != null)
-                {
-                    switch (cmd)
-                    {
-                        case RowTypeEnum.Hide:
-                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
-
-                            break;
-                        case RowTypeEnum.Normal:
-                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                            break;
-                    }
-
-                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
-                    gvMethodProcedure.DataBind();
-                }
-            }
-        }
-
         protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
@@ -1378,7 +1415,62 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
+        protected void gvResult1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int PKID = Convert.ToInt32(gvResult.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResult.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
 
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+
+        }
+
+        protected void gvResult1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 4);
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+
+                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == 4);
+                    gvResult.DataBind();
+                }
+            }
+        }
     }
 }
 

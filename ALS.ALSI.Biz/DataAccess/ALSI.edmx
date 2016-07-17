@@ -709,6 +709,8 @@
           <Property Name="furmular_2" Type="varchar" MaxLength="45" />
           <Property Name="furmular_3" Type="varchar" MaxLength="45" />
           <Property Name="furmular_4" Type="varchar" MaxLength="45" />
+          <Property Name="F" Type="varchar" MaxLength="45" />
+          <Property Name="G" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage">
           <Key>
@@ -2452,6 +2454,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="furmular_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="furmular_3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="furmular_4" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="F" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="G" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage">
           <Key>
@@ -3910,6 +3914,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_ftir_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_ftir_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_ftir_coverpage">
+                <ScalarProperty Name="G" ColumnName="G" />
+                <ScalarProperty Name="F" ColumnName="F" />
                 <ScalarProperty Name="furmular_4" ColumnName="furmular_4" />
                 <ScalarProperty Name="furmular_3" ColumnName="furmular_3" />
                 <ScalarProperty Name="furmular_2" ColumnName="furmular_2" />

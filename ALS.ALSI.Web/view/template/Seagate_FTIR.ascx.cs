@@ -774,11 +774,26 @@ namespace ALS.ALSI.Web.view.template
 
 
 
+                //part value to cover page method/procedure
+                var items = this.Ftir.Where(x => x.data_type == 1).ToList();
+                if (items.Count > 0)
+                {
+                    items[0].C = String.Format("{0} cm2", txtWB14.Text);
+                    items[1].C = String.Format("{0} cm2", txtWB14.Text);
+                    items[2].C = String.Format("{0} cm2", txtWB14.Text);
+                    items[3].C = String.Format("{0} cm2", txtWB14.Text);
+                    items[4].C = String.Format("{0} cm2", txtWB14.Text);
+                    items[5].C = String.Format("{0} cm2", txtWB14.Text);
+                }
+
+
                 gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
                 gvWftir.DataBind();
 
                 gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
                 gvResult.DataBind();
+                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                gvMethodProcedure.DataBind();
                 //remark
                 lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
             }
@@ -1152,10 +1167,10 @@ namespace ALS.ALSI.Web.view.template
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Not Detected") || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
                                                 break;
                                             case 9:
-                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Not Detected") || tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal08.Text);
-                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Not Detected") || tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal08.Text);
-                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Not Detected") || tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal08.Text);
-                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Not Detected") || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal08.Text);
+                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Not Detected") || tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
+                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Not Detected") || tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
+                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Not Detected") || tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
+                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Not Detected") || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
                                                 break;
                                                 //Amount(ng / cm2)
                                                 //Amount(ug / cm2)

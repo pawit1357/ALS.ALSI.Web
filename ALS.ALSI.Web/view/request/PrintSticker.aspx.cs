@@ -101,11 +101,17 @@ namespace ALS.ALSI.Web.view.request
                 {
                     lbSample.Text = samples[0].description + "";
                     int spec_id = 0;
+                    int index = 0;
                     foreach (job_sample s in samples)
                     {
-
-                        lbJobNo.Text += jobSample.job_number+",";// String.Format("{0}{1}", jobSample.job_running.prefix, Convert.ToInt32(jobInfo.job_number).ToString("00000"));
-
+                        if (index == 0)
+                        {
+                            lbJobNo.Text = s.job_number.Split('-')[0] +"-"+s.job_number.Split('-')[1] + "-"+s.job_number.Split('-')[2]+ ",";// String.Format("{0}{1}", jobSample.job_running.prefix, Convert.ToInt32(jobInfo.job_number).ToString("00000"));
+                        }
+                        else
+                        {
+                            lbJobNo.Text += s.job_number.Split('-')[2] + ",";
+                        }
                         m_specification spec = new m_specification().SelectByID(s.specification_id);
 
                         lbSpec.Text = spec.name;
@@ -114,8 +120,10 @@ namespace ALS.ALSI.Web.view.request
                             spec_id = s.specification_id;
                         }
                         m_type_of_test tot = new m_type_of_test().SelectByID(s.type_of_test_id);
-                        type_of_test = tot.name + ","; //String.Format("<i class=\"icon-check\"></i> {0} ", tot.name);
+                        type_of_test += tot.name + ","; //String.Format("<i class=\"icon-check\"></i> {0} ", tot.name);
+                        index++;
                     }
+
                     lbTot.Text = type_of_test.Substring(0,type_of_test.Length-1);
                     if (jobInfo.sample_diposition != null)
                     {

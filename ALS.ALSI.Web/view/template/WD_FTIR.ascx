@@ -393,14 +393,14 @@ The instrument detection limit for silicone oil is
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                        <tr runat="server" id="tr16">
+       <%--                                 <tr runat="server" id="tr16">
                                             <td>Method Detection Limit, MDL</td>
                                             <td>
                                                 <asp:TextBox ID="txtFTIR_B48" runat="server" Text="" placeholder="ดึงข้อมูลจาก B48"></asp:TextBox>
                                             </td>
                                             <td><asp:Label ID="lbAmide" runat="server" Text="ng/cm2"></asp:Label></td>
                                             <td></td>
-                                        </tr>
+                                        </tr>--%>
                                         <tr runat="server" id="tr17">
                                             <td>Calculations:</td>
                                             <td>Amide (ng/cm<sup>2</sup>) =</td>

@@ -101,5 +101,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string furmular_2 { get; set; }
         public string furmular_3 { get; set; }
         public string furmular_4 { get; set; }
+        public string F { get; set; }
+        public string G { get; set; }
     }
 }

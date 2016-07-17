@@ -272,7 +272,7 @@ namespace ALS.ALSI.Web.view.template
                 txtC53.Text = this.Ftir[0].ftr_c53;//Reportas
                 #endregion
                 #region "Unit"
-                lbAmide.Text = this.Ftir[0].amide_unit;
+                //lbAmide.Text = this.Ftir[0].amide_unit;
                 lbSilicone.Text = this.Ftir[0].silicone_unit;
                 #endregion
 
@@ -415,7 +415,7 @@ namespace ALS.ALSI.Web.view.template
                         item.ftr_c53 = txtC53.Text;//Reportas
                         #endregion
 
-                        item.amide_unit = lbAmide.Text;
+                        //item.amide_unit = lbAmide.Text;
                         item.silicone_unit = lbSilicone.Text;
                     }
 
@@ -640,50 +640,61 @@ namespace ALS.ALSI.Web.view.template
 
                                     #endregion
                                     #region "FTIR-Silicone"
-                                    txtFTIR_B30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));//31-Peak Ht at 800cm-1
-                                    txtFTIR_B31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));//32-Slope of Calibration Plot
-                                    txtFTIR_B32.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));//33-y-intercept
-                                    txtFTIR_B33.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));//34-Amount of Silicone Detected (µg)
-                                    txtFTIR_B35.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.B));//35-Method Detection Limit, MDL
-                                    lbFTIR_C40.Text = CustomUtils.GetCellValue(isheet.GetRow(40 - 1).GetCell(ExcelColumn.C));//Calculations:
-                                    txtC41.Text = CustomUtils.GetCellValue(isheet.GetRow(41 - 1).GetCell(ExcelColumn.C));
+                                    if (CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.A)).Equals("Silicone"))
+                                    {
+                                        txtFTIR_B30.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));//31-Peak Ht at 800cm-1
+                                        txtFTIR_B31.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));//32-Slope of Calibration Plot
+                                        txtFTIR_B32.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));//33-y-intercept
+                                        txtFTIR_B33.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));//34-Amount of Silicone Detected (µg)
+                                        txtFTIR_B35.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.B));//35-Method Detection Limit, MDL
+                                        lbFTIR_C40.Text = CustomUtils.GetCellValue(isheet.GetRow(40 - 1).GetCell(ExcelColumn.C));//Calculations:
+                                        txtC41.Text = CustomUtils.GetCellValue(isheet.GetRow(41 - 1).GetCell(ExcelColumn.C));
 
 
 
-                                    txtFTIR_B30.Text = String.IsNullOrEmpty(txtFTIR_B30.Text) ? "" : Convert.ToDouble(txtFTIR_B30.Text).ToString("N" + Convert.ToInt16(txtDecimal03.Text));
-                                    txtFTIR_B31.Text = String.IsNullOrEmpty(txtFTIR_B31.Text) ? "" : Convert.ToDouble(txtFTIR_B31.Text).ToString("N" + Convert.ToInt16(txtDecimal04.Text));
-                                    txtFTIR_B32.Text = String.IsNullOrEmpty(txtFTIR_B32.Text) ? "" : Convert.ToDouble(txtFTIR_B32.Text).ToString("N" + Convert.ToInt16(txtDecimal05.Text));
-                                    txtFTIR_B33.Text = String.IsNullOrEmpty(txtFTIR_B33.Text) ? "" : Convert.ToDouble(txtFTIR_B33.Text).ToString("N" + Convert.ToInt16(txtDecimal06.Text));
-                                    txtFTIR_B35.Text = String.IsNullOrEmpty(txtFTIR_B35.Text) ? "" : Convert.ToDouble(txtFTIR_B35.Text).ToString("N" + Convert.ToInt16(txtDecimal07.Text));
-                                    lbFTIR_C40.Text = String.IsNullOrEmpty(lbFTIR_C40.Text) ? "" : Convert.ToDouble(lbFTIR_C40.Text).ToString("N" + Convert.ToInt16(txtDecimal08.Text));
+                                        txtFTIR_B30.Text = String.IsNullOrEmpty(txtFTIR_B30.Text) ? "" : Convert.ToDouble(txtFTIR_B30.Text).ToString("N" + Convert.ToInt16(txtDecimal03.Text));
+                                        txtFTIR_B31.Text = String.IsNullOrEmpty(txtFTIR_B31.Text) ? "" : Convert.ToDouble(txtFTIR_B31.Text).ToString("N" + Convert.ToInt16(txtDecimal04.Text));
+                                        txtFTIR_B32.Text = String.IsNullOrEmpty(txtFTIR_B32.Text) ? "" : Convert.ToDouble(txtFTIR_B32.Text).ToString("N" + Convert.ToInt16(txtDecimal05.Text));
+                                        txtFTIR_B33.Text = String.IsNullOrEmpty(txtFTIR_B33.Text) ? "" : Convert.ToDouble(txtFTIR_B33.Text).ToString("N" + Convert.ToInt16(txtDecimal06.Text));
+                                        txtFTIR_B35.Text = String.IsNullOrEmpty(txtFTIR_B35.Text) ? "" : Convert.ToDouble(txtFTIR_B35.Text).ToString("N" + Convert.ToInt16(txtDecimal07.Text));
+                                        lbFTIR_C40.Text = String.IsNullOrEmpty(lbFTIR_C40.Text) ? "" : (lbFTIR_C40.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(lbFTIR_C40.Text).ToString("N" + Convert.ToInt16(txtDecimal08.Text)));
 
-
+                                    }
+                                    else {
+                                        //errors.Add(String.Format("ตำแหน่งเริ่มต้นของ Silicone ต้องเป็น B30"));
+                                    }
                                     #endregion
                                     #region "FTIR-Amide"
-                                    txtFTIR_B42.Text = CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.B));//43-Peak Ht at 800cm-1
-                                    txtFTIR_B43.Text = CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.B));//44-Slope of Calibration Plot
-                                    txtFTIR_B44.Text = CustomUtils.GetCellValue(isheet.GetRow(45 - 1).GetCell(ExcelColumn.B));//45-y-intercept
-                                    txtFTIR_B45.Text = CustomUtils.GetCellValue(isheet.GetRow(46 - 1).GetCell(ExcelColumn.B));//46-Amount of Silicone Detected (µg)
-                                    txtFTIR_B48.Text = CustomUtils.GetCellValue(isheet.GetRow(48 - 1).GetCell(ExcelColumn.B)); //48-Method Detection Limit, MDL
-                                    lbFTIR_C49.Text = CustomUtils.GetCellValue(isheet.GetRow(52 - 1).GetCell(ExcelColumn.C)); //Calculations
-                                    txtC53.Text = CustomUtils.GetCellValue(isheet.GetRow(53 - 1).GetCell(ExcelColumn.C));
+                                    if (CustomUtils.GetCellValue(isheet.GetRow(42 - 1).GetCell(ExcelColumn.A)).Equals("Amide"))
+                                    {
+                                        txtFTIR_B42.Text = CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.B));//43-Peak at 800cm-1
+                                        txtFTIR_B43.Text = CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.B));//44-Slope of Calibration Plot
+                                        txtFTIR_B44.Text = CustomUtils.GetCellValue(isheet.GetRow(45 - 1).GetCell(ExcelColumn.B));//45-y-intercept
+                                        txtFTIR_B45.Text = CustomUtils.GetCellValue(isheet.GetRow(45 - 1).GetCell(ExcelColumn.B));//46-Amount of Silicone Detected (µg)
+                                        //txtFTIR_B48.Text = CustomUtils.GetCellValue(isheet.GetRow(48 - 1).GetCell(ExcelColumn.B)); //Calculations
+                                        //lbFTIR_C49.Text = CustomUtils.GetCellValue(isheet.GetRow(52 - 1).GetCell(ExcelColumn.C)); 
+                                        txtC53.Text = CustomUtils.GetCellValue(isheet.GetRow(50 - 1).GetCell(ExcelColumn.C));
 
 
-                                    txtFTIR_B42.Text = String.IsNullOrEmpty(txtFTIR_B42.Text) ? "" : Convert.ToDouble(txtFTIR_B42.Text).ToString("N" + Convert.ToInt16(txtDecimal03.Text));
-                                    txtFTIR_B43.Text = String.IsNullOrEmpty(txtFTIR_B43.Text) ? "" : Convert.ToDouble(txtFTIR_B43.Text).ToString("N" + Convert.ToInt16(txtDecimal04.Text));
-                                    txtFTIR_B44.Text = String.IsNullOrEmpty(txtFTIR_B44.Text) ? "" : Convert.ToDouble(txtFTIR_B44.Text).ToString("N" + Convert.ToInt16(txtDecimal05.Text));
-                                    txtFTIR_B45.Text = String.IsNullOrEmpty(txtFTIR_B45.Text) ? "" : Convert.ToDouble(txtFTIR_B45.Text).ToString("N" + Convert.ToInt16(txtDecimal06.Text));
-                                    txtFTIR_B48.Text = String.IsNullOrEmpty(txtFTIR_B48.Text) ? "" : Convert.ToDouble(txtFTIR_B48.Text).ToString("N" + Convert.ToInt16(txtDecimal07.Text));
-                                    lbFTIR_C49.Text = String.IsNullOrEmpty(lbFTIR_C49.Text) ? "" : Convert.ToDouble(lbFTIR_C49.Text).ToString("N" + Convert.ToInt16(txtDecimal08.Text));
-
+                                        txtFTIR_B42.Text = String.IsNullOrEmpty(txtFTIR_B42.Text) ? "" : Convert.ToDouble(txtFTIR_B42.Text).ToString("N" + Convert.ToInt16(txtDecimal03.Text));
+                                        txtFTIR_B43.Text = String.IsNullOrEmpty(txtFTIR_B43.Text) ? "" : Convert.ToDouble(txtFTIR_B43.Text).ToString("N" + Convert.ToInt16(txtDecimal04.Text));
+                                        txtFTIR_B44.Text = String.IsNullOrEmpty(txtFTIR_B44.Text) ? "" : Convert.ToDouble(txtFTIR_B44.Text).ToString("N" + Convert.ToInt16(txtDecimal05.Text));
+                                        txtFTIR_B45.Text = String.IsNullOrEmpty(txtFTIR_B45.Text) ? "" : Convert.ToDouble(txtFTIR_B45.Text).ToString("N" + Convert.ToInt16(txtDecimal06.Text));
+                                        //txtFTIR_B48.Text = String.IsNullOrEmpty(txtFTIR_B48.Text) ? "" : Convert.ToDouble(txtFTIR_B48.Text).ToString("N" + Convert.ToInt16(txtDecimal07.Text));
+                                        txtC53.Text = String.IsNullOrEmpty(txtC53.Text) ? "" :(txtC53.Text.Equals("Not Detected")? "Not Detected": Convert.ToDouble(txtC53.Text).ToString("N" + Convert.ToInt16(txtDecimal08.Text)));
+                                    }
+                                    else
+                                    {
+                                        //errors.Add(String.Format("ตำแหน่งเริ่มต้นของ Amide ต้องเป็น B42"));
+                                    }
 
                                     #endregion
 
 
 
 
-                                    lbAmide.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.C));
-                                    lbSilicone.Text = CustomUtils.GetCellValue(isheet.GetRow(48 - 1).GetCell(ExcelColumn.C));
+                                    //lbAmide.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.C));
+                                    lbSilicone.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.C));
 
                                 }
                                 Console.WriteLine();
@@ -700,7 +711,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 catch (Exception ex)
                 {
-                    errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
+                    //errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
 
                     Console.WriteLine();
                 }
@@ -1009,7 +1020,6 @@ namespace ALS.ALSI.Web.view.template
         private void CalculateCas()
         {
 
-
             this.Ftir[3].D = lbC26.Text;//NVR
             this.Ftir[4].D = txtC41.Text;//FTIR
 
@@ -1023,19 +1033,37 @@ namespace ALS.ALSI.Web.view.template
             }
             if (!this.Ftir[4].C.Equals("-"))
             {
-                this.Ftir[4].E = String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+                this.Ftir[4].E = this.Ftir[4].D.Equals("Not Detected")? "PASS": String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
             }
             //this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
             //this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
             //this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") ? "NA" : (this.Ftir[7].D.Equals("Not Detected")) ? "PASS" : (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
 
 
+            //part value to cover page method/procedure
+            var items = this.Ftir.Where(x => x.data_type == 1).ToList();
+            if (items.Count > 0)
+            {
+                items[0].C = String.Format("{0}", txtNVR_FTIR_B16.Text);
+                items[1].C = String.Format("{0}", txtNVR_FTIR_B16.Text);
+                items[2].C = String.Format("{0}", txtNVR_FTIR_B16.Text);
+
+                items[0].E = String.Format("{0} mL", txtNVR_FTIR_B14.Text);
+                items[1].E = String.Format("{0} mL", txtNVR_FTIR_B14.Text);
+                items[2].E = String.Format("{0} mL", txtNVR_FTIR_B14.Text);
+
+            }
+
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+            gvMethodProcedure.DataBind();
+
+
             gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
             gvResult.DataBind();
 
 
-            lbA31.Text = !String.IsNullOrEmpty(txtFTIR_B35.Text) ? txtFTIR_B35.Text : txtFTIR_B48.Text;
-            lbB31.Text = !String.IsNullOrEmpty(lbAmide.Text) ? lbAmide.Text : lbSilicone.Text;
+            lbA31.Text = txtFTIR_B35.Text;
+            //lbB31.Text = !String.IsNullOrEmpty(lbAmide.Text) ? lbAmide.Text : lbSilicone.Text;
 
 
             btnSubmit.Enabled = true;

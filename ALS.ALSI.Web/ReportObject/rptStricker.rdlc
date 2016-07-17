@@ -24,7 +24,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0cm</Top>
         <Left>0cm</Left>
-        <Height>1.05861cm</Height>
+        <Height>0.79403cm</Height>
         <Width>7.79167cm</Width>
         <Style>
           <Border>
@@ -43,19 +43,23 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Job No: </Value>
-                <Style />
+                <Value>   Job No:  </Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!pJobNo.Value</Value>
-                <Style />
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.30556cm</Top>
+        <Top>0.98806cm</Top>
         <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
@@ -77,19 +81,23 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Client: </Value>
-                <Style />
+                <Value>     Client:  </Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!pClient.Value</Value>
-                <Style />
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.94084cm</Top>
+        <Top>1.62334cm</Top>
         <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
@@ -111,19 +119,23 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Contract: </Value>
-                <Style />
+                <Value>Contract:  </Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!pContract.Value</Value>
-                <Style />
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>2.61139cm</Top>
+        <Top>2.29389cm</Top>
         <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
@@ -145,19 +157,23 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Sample: </Value>
-                <Style />
+                <Value> Sample:  </Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!pSample.Value</Value>
-                <Style />
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>3.31723cm</Top>
+        <Top>2.99973cm</Top>
         <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
@@ -179,19 +195,23 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Spec: </Value>
-                <Style />
+                <Value>      Spec:  </Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!pSpec.Value</Value>
-                <Style />
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>3.9525cm</Top>
+        <Top>3.635cm</Top>
         <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
@@ -213,19 +233,23 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Test: </Value>
-                <Style />
+                <Value>       Test:  </Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!pTest.Value</Value>
-                <Style />
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.5525cm</Top>
+        <Top>4.235cm</Top>
         <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
@@ -247,19 +271,23 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Sample: </Value>
-                <Style />
+                <Value> Sample:  </Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!pSampleD.Value</Value>
-                <Style />
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.18778cm</Top>
+        <Top>4.87028cm</Top>
         <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
@@ -275,7 +303,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>5.78778cm</Height>
+    <Height>5.62903cm</Height>
     <Style />
   </Body>
   <Width>7.79167cm</Width>
