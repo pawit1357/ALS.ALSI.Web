@@ -105,7 +105,21 @@
                         <%--3--%>
                         <div class="row">
                             <div class="col-md-9">
-                                <asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label>
+
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label></td>
+                                        <td>
+                                            <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                    </tr>
+                                </table>
+
+                                <%--                                <asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label>--%>
+
                                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand" OnRowEditing="gvResult_RowEditing" OnRowUpdating="gvResult_RowUpdating" OnRowCancelingEdit="gvResult_RowCancelingEdit">
                                     <Columns>
@@ -380,7 +394,7 @@
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pUploadfile" runat="server">
-                                        <div class="form-group" >
+                                        <div class="form-group">
                                             <label class="control-label col-md-3">Uplod file: </label>
 
                                             <div class="col-md-3">

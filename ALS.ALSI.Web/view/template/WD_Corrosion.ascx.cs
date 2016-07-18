@@ -224,8 +224,16 @@ namespace ALS.ALSI.Web.view.template
                     this.coverpages[0].specification = component.D;
 
 
+                    cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                    if (cbCheckBox.Checked)
+                    {
+                        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+                    }
+                    else
+                    {
+                        lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0}", ddlComponent.SelectedItem.Text);
 
-                    lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
+                    }
                 }
 
                 gvResult.DataSource = this.coverpages;
@@ -235,7 +243,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 this.CommandName = CommandNameEnum.Add;
 
-                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", String.Empty);
+                //lbResultDesc.Text = String.Format("The specification is based on Western Digital's document no. {0}", String.Empty);
 
 
                 this.coverpages = new List<template_wd_corrosion_coverpage>();
@@ -332,7 +340,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     template_wd_corrosion_coverpage.DeleteBySampleID(this.SampleID);
                     foreach (template_wd_corrosion_coverpage _cover in this.coverpages)
                     {
@@ -346,7 +354,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
@@ -528,7 +536,8 @@ namespace ALS.ALSI.Web.view.template
                 this.coverpages = covList;
                 gvResult.DataSource = this.coverpages;
                 gvResult.DataBind();
-                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", component.B);
+                lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0}", component.B);
+
 
             }
         }
@@ -929,7 +938,22 @@ namespace ALS.ALSI.Web.view.template
         }
 
 
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+            }
+            else
+            {
+                tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlComponent.SelectedValue));
+                if (component != null)
+                {
+                    lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0}", component.B);
+                }
+            }
 
+        }
 
 
 

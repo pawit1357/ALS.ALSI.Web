@@ -95,10 +95,21 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                                        <h6>The specification is based on Western Digital's document no.
+                                        <%--        <h6>The specification is based on Western Digital's document no.
                                                     <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
-                                            <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>
+                                            <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>--%>
 
+                                        <table>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                                <td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            </tr>
+                                        </table>
                                         <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
                                             <Columns>
@@ -166,7 +177,7 @@ The instrument detection limit for silicone oil is
                             </div>
                         </div>
                     </asp:Panel>
-                     
+
                     <asp:Panel ID="pLoadFile" runat="server">
 
                         <div class="form-group">
@@ -398,7 +409,8 @@ The instrument detection limit for silicone oil is
                                             <td>
                                                 <asp:TextBox ID="txtFTIR_B48" runat="server" Text="" placeholder="ดึงข้อมูลจาก B48"></asp:TextBox>
                                             </td>
-                                            <td><asp:Label ID="lbAmide" runat="server" Text="ng/cm2"></asp:Label></td>
+                                            <td>
+                                                <asp:Label ID="lbAmide" runat="server" Text="ng/cm2"></asp:Label></td>
                                             <td></td>
                                         </tr>
                                         <tr runat="server" id="tr17">

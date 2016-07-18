@@ -80,8 +80,48 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             #region "SAMPLE"
+
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+
+
+            //pStatus.Visible = false;
+
+
+            //pRemark.Visible = false;
+            //pDisapprove.Visible = false;
+
+            //pSpecification.Visible = false;
+            //pUploadfile.Visible = false;
+            //pDownload.Visible = false;
+            //btnSubmit.Visible = false;
+
+
+
+            //switch (status)
+            //{
+            //    case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+            //        break;
+            //    case StatusEnum.LOGIN_SELECT_SPEC:
+            //        break;
+            //    case StatusEnum.CHEMIST_TESTING:
+            //        break;
+            //    case StatusEnum.SR_CHEMIST_CHECKING:
+            //        break;
+            //    case StatusEnum.ADMIN_CONVERT_WORD:
+            //        break;
+            //    case StatusEnum.LABMANAGER_CHECKING:
+            //        break;
+            //    case StatusEnum.ADMIN_CONVERT_PDF:
+            //        break;
+            //}
+
+
+
+
+
+
+
             if (this.jobSample != null)
             {
                 lbJobStatus.Text = Constants.GetEnumDescription(status);
@@ -191,8 +231,18 @@ namespace ALS.ALSI.Web.view.template
                     txtE18.Text = (String.IsNullOrEmpty(ic.extraction_volume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDecimal(ic.extraction_volume))));//"Number of pieces used for extraction"
 
                     ///*RESULT*/
-                    lbDocRev.Text = spec.B;
-                    lbDesc.Text = spec.A;
+                    ///
+                    cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                    if (cbCheckBox.Checked)
+                    {
+                        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                    }
+                    else
+                    {
+                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", spec.B, spec.A);
+
+                    }
+      
 
                     if (ic.wunit != null)
                     {
@@ -204,10 +254,8 @@ namespace ALS.ALSI.Web.view.template
 
                         gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                        //gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                        //gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
 
                         gvResultAnions.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
                         gvResultAnions.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
@@ -228,10 +276,8 @@ namespace ALS.ALSI.Web.view.template
                     {
                         gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                        //gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                        //gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                     }
 
                     //Working Sheet-IC
@@ -251,6 +297,7 @@ namespace ALS.ALSI.Web.view.template
                 gvResultAnions.DataBind();
                 gvResultCations.DataSource = this.coverpages.Where(x => x.ic_type.Value == 2).ToList();
                 gvResultCations.DataBind();
+
             }
             else
             {
@@ -345,7 +392,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            calculateByFormular();
+            //calculateByFormular();
             template_seagate_ic_coverpage objWork = new template_seagate_ic_coverpage();
 
             Boolean isValid = true;
@@ -360,7 +407,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     foreach (template_seagate_ic_coverpage _cover in this.coverpages)
                     {
                         _cover.procedure_no = txtB18.Text;
@@ -384,7 +431,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
@@ -539,13 +586,6 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        //protected void btnCalulate_Click(object sender, EventArgs e)
-        //{
-        //    btnSubmit.Enabled = true;
-        //    calculateByFormular();
-
-        //}
-
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect(this.PreviousPath);
@@ -555,10 +595,8 @@ namespace ALS.ALSI.Web.view.template
         {
             gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
             gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
             gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
             gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
 
             gvAnionic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.ANIONIC));
             gvAnionic.DataBind();
@@ -710,8 +748,9 @@ namespace ALS.ALSI.Web.view.template
                 List<tb_m_specification> specs = mSpec.SelectBySpecificationID(tem.specification_id.Value, tem.template_id.Value);
 
                 /*RESULT*/
-                lbDocRev.Text = tem.B;
-                lbDesc.Text = tem.A;
+                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B, tem.A);
+                //lbDocRev.Text = tem.B;
+                //lbDesc.Text = tem.A;
                 if (specs.Count > 0)
                 {
                     txtB18.Text = specs[1].B;
@@ -892,7 +931,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "IC"));
-            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
             // Variables
             Warning[] warnings;
@@ -1079,10 +1118,6 @@ namespace ALS.ALSI.Web.view.template
 
                                                 ic.wi = (String.IsNullOrEmpty(ic.wi)) ? "" :(!ic.wi.StartsWith("<")? "":"<")+ Convert.ToDouble(ic.wi.Replace("<","").Trim()).ToString("N" + txtDecimal08.Text);
 
-                                                //ic.wi = ic.wi;// (String.IsNullOrEmpty(ic.wi)) || ic.wi.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(ic.wi).ToString("N" + txtDecimal08.Text);
-                                                //ic.wj = (String.IsNullOrEmpty(ic.wj)) ? "" : Convert.ToDouble(ic.wj).ToString("N" + txtDecimal09.Text);
-
-
                                             }
                                         }
                                     }
@@ -1117,11 +1152,6 @@ namespace ALS.ALSI.Web.view.template
           
         }
 
-        private template_seagate_ic_coverpage getCoverPageValue(String _peakname)
-        {
-            return this.coverpages.Where(x => x.A.Equals(_peakname)).FirstOrDefault();
-        }
-
 
         protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1134,85 +1164,20 @@ namespace ALS.ALSI.Web.view.template
             gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
 
 
-            //gvResultAnions.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
-            //gvResultAnions.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
             gvResultAnions.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
             gvResultAnions.Columns[6].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-            //gvResultAnions.Columns[5].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
             gvResultAnions.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
 
-            //gvResultCations.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
-            //gvResultCations.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
             gvResultCations.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
             gvResultCations.Columns[6].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-            //gvResultCations.Columns[5].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
             gvResultCations.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
 
         }
-
-
-
-        //public static void TransferXLToTable()
-        //{
-        //    DataTable dt = new DataTable();
-        //    dt.Columns.Add("City", typeof(string));
-        //    dt.Columns.Add("State", typeof(string));
-        //    dt.Columns.Add("Zip", typeof(string));
-
-        //    using (FileStream stream = new FileStream(@"E:\test2.xlsx", FileMode.Open, FileAccess.Read))
-        //    {
-        //        IWorkbook wb = new XSSFWorkbook(stream);
-        //        ISheet sheet = wb.GetSheet("Sheet1");
-        //        string holder;
-        //        int i = 0;
-        //        do
-        //        {
-        //            DataRow dr = dt.NewRow();
-        //            IRow row = sheet.GetRow(i);
-        //            try
-        //            {
-        //                holder = row.GetCell(0, MissingCellPolicy.CREATE_NULL_AS_BLANK).ToString();
-        //            }
-        //            catch (Exception)
-        //            {
-        //                break;
-        //            }
-
-        //            //string city = holder.Substring(0, holder.IndexOf(','));
-        //            //string state = holder.Substring(holder.IndexOf(',') + 2, 2);
-        //            //string zip = holder.Substring(holder.IndexOf(',') + 5, 5);
-        //            dr[0] = "1";
-        //            dr[1] = "2";
-        //            dr[2] = "3";
-        //            dt.Rows.Add(dr);
-        //            i++;
-        //        } while (!String.IsNullOrEmpty(holder));
-        //    }
-
-        //    using (FileStream stream = new FileStream(@"E:\FieldedAddresses.xlsx", FileMode.Create, FileAccess.Write))
-        //    {
-        //        IWorkbook wb = new XSSFWorkbook();
-        //        ISheet sheet = wb.CreateSheet("Sheet1");
-        //        ICreationHelper cH = wb.GetCreationHelper();
-        //        for (int i = 0; i < dt.Rows.Count; i++)
-        //        {
-        //            IRow row = sheet.CreateRow(i);
-        //            for (int j = 0; j < 3; j++)
-        //            {
-        //                ICell cell = row.CreateCell(j);
-        //                cell.SetCellValue(cH.CreateRichTextString(dt.Rows[i].ItemArray[j].ToString()));
-        //            }
-        //        }
-        //        wb.Write(stream);
-        //    }
-        //}
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             ModolPopupExtender.Show();
         }
-
-
 
         private String mappingRawData(String _val)
         {
@@ -1249,5 +1214,20 @@ namespace ALS.ALSI.Web.view.template
             return result;
         }
 
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+            }
+            else
+            {
+                tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+                if (tem != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B, tem.A);
+                }
+            }
+        }
     }
 }

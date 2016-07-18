@@ -291,12 +291,27 @@ namespace ALS.ALSI.Web.view.template
                     txtExtractionMedium.Text = this.coverpages[0].pm_extraction_medium;
                     txtExtractionVolume.Text = this.coverpages[0].pm_extraction_volume;
 
-                    tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
-                    if (_detailSpec != null)
+                    cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                    if (cbCheckBox.Checked)
                     {
-                        lbDocRev.Text = _detailSpec.B;
-                        lbDesc.Text = _detailSpec.A;
+                        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
                     }
+                    else
+                    {
+                        tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
+                        if (_detailSpec != null)
+                        {
+                            lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", _detailSpec.B, _detailSpec.A);
+                        }
+
+                    }
+
+                    //tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
+                    //if (_detailSpec != null)
+                    //{
+                    //    lbDocRev.Text = _detailSpec.B;
+                    //    lbDesc.Text = _detailSpec.A;
+                    //}
 
                     GenerrateCoverPage();
                 }
@@ -355,7 +370,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     #region "Cover Page#"
                     foreach (template_wd_dhs_coverpage _val in this.coverpages)
                     {
@@ -376,7 +391,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
-
+                        this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         //#endregion
@@ -826,8 +841,11 @@ namespace ALS.ALSI.Web.view.template
                 //Result Description
                 gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", detailSpec.C);
                 gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", detailSpec.C);
-                lbDocRev.Text = detailSpec.B;
-                lbDesc.Text = detailSpec.A;
+
+                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", detailSpec.B, detailSpec.A);
+
+                //lbDocRev.Text = detailSpec.B;
+                //lbDesc.Text = detailSpec.A;
                 //lbResultDesc.Text = String.Format("The specification is based on Western Digital's document no {0} for {1}", detailSpec.B, detailSpec.A);
                 //this.Unit = CustomUtils.getUnitByName(detailSpec.C);
 
@@ -890,7 +908,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "DHS"));
-            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The specification is based on Western Digital's document no. {0} for {1}", lbDocRev.Text, lbDesc.Text)));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
             // Variables
             Warning[] warnings;
@@ -1215,7 +1233,22 @@ namespace ALS.ALSI.Web.view.template
         }
 
 
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+            }
+            else
+            {
+                tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
+                if (_detailSpec != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", _detailSpec.B, _detailSpec.A);
+                }
+            }
 
+        }
 
     }
 }

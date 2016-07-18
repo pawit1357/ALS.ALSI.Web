@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">Select Worksheet: </label>
-                                 
+
                                 <div class="col-md-3">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="input-group input-large">
@@ -205,10 +205,20 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h6>
+                                        <%--    <h6>
                                             <asp:Label ID="lbDescription" runat="server" Text=""></asp:Label>
-                                        </h6>
-
+                                        </h6>--%>
+                                        <table>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                                <td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            </tr>
+                                        </table>
                                         <asp:GridView ID="gvCoverPages" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvCoverPage_RowDataBound" OnRowCommand="gvCoverPage_RowCommand" OnRowCancelingEdit="gvCoverPages_RowCancelingEdit" OnRowEditing="gvCoverPages_RowEditing" OnRowUpdating="gvCoverPages_RowUpdating">
                                             <Columns>

@@ -240,12 +240,19 @@ namespace ALS.ALSI.Web.view.template
                 txtWB14.Text = this.Ftir[0].w_b14;
                 txtWB15.Text = this.Ftir[0].w_b15;
 
-                tb_m_specification mSpec = new tb_m_specification();
-                mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
-                if (mSpec != null)
+                cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                if (cbCheckBox.Checked)
                 {
-                    lbDocRev.Text = mSpec.C;
-                    lbDesc.Text = mSpec.B;
+                    lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                }
+                else
+                {
+                    tb_m_specification mSpec = new tb_m_specification();
+                    mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
+                    if (mSpec != null)
+                    {
+                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.B, mSpec.A);
+                    }
                 }
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
@@ -434,7 +441,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     foreach (template_seagate_ftir_coverpage item in this.Ftir)
                     {
                         item.sample_id = this.SampleID;
@@ -448,6 +455,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
 
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
@@ -670,8 +678,8 @@ namespace ALS.ALSI.Web.view.template
             item = datas.Where(x => x.ID == Convert.ToInt16(ddlSpecification.SelectedValue)).FirstOrDefault();
             if (item != null)
             {
-                lbDocRev.Text = item.C;
-                lbDesc.Text = item.B;
+                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", item.B, item.A);
+
                 #region "NVR"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
                 //tmp.ID = this.Ftir.Count + 1;
@@ -1470,6 +1478,24 @@ namespace ALS.ALSI.Web.view.template
                     gvResult.DataBind();
                 }
             }
+        }
+
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+            }
+            else
+            {
+                tb_m_specification mSpec = new tb_m_specification();
+                mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
+                if (mSpec != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.B, mSpec.A);
+                }
+            }
+
         }
     }
 }

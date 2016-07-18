@@ -112,22 +112,22 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtE21;
         
         /// <summary>
-        /// lbSpecRev control.
+        /// lbSpecDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbSpecRev;
+        protected global::System.Web.UI.WebControls.Label lbSpecDesc;
         
         /// <summary>
-        /// lbComponent control.
+        /// cbCheckBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbComponent;
+        protected global::System.Web.UI.WebControls.CheckBox cbCheckBox;
         
         /// <summary>
         /// gvSpec control.

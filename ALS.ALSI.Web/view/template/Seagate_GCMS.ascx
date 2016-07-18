@@ -59,9 +59,15 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <h6>Results:</h6>
-                                <h6>
+                          <%--      <h6>
                                     <asp:Label ID="lbDescription" runat="server" Text=""></asp:Label>
-                                </h6>
+                                </h6>--%>
+                                                                           <table>
+                                               <tr><td></td></tr>
+                                               <tr>
+                                                   <td><asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td><td><asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                               </tr>
+                                           </table>
                                 <asp:GridView ID="gvCoverPages" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvCoverPages_RowDataBound" OnRowCommand="gvCoverPages_RowCommand">
                                     <Columns>

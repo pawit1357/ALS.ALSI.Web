@@ -214,17 +214,26 @@ namespace ALS.ALSI.Web.view.template
                 ddlComponent.SelectedValue = cover.procedureNo_id.ToString();
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
 
-                //lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
+                cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+
                 tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
                 if (component != null)
                 {
                     this.coverpages[0].temperature_humidity_parameters_id = component.ID;
                     this.coverpages[0].temperature_humidity_parameters = component.C;
-                    //this.coverpages[0].specification = component.D;
 
 
+                    if (cbCheckBox.Checked)
+                    {
+                        lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                    }
+                    else
+                    {
+                        lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
 
-                    lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
+                    }
+
+
                 }
 
                 gvResult.DataSource = this.coverpages;
@@ -331,7 +340,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     template_seagate_corrosion_coverpage.DeleteBySampleID(this.SampleID);
                     foreach (template_seagate_corrosion_coverpage _cover in this.coverpages)
                     {
@@ -345,7 +354,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
@@ -987,7 +996,20 @@ namespace ALS.ALSI.Web.view.template
 
 
 
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+            }
+            else
+            {
 
+                lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlComponent.SelectedItem.Text);
+
+            }
+
+        }
 
 
 

@@ -148,31 +148,22 @@ namespace ALS.ALSI.Web.view.template {
         protected global::AjaxControlToolkit.FilteredTextBoxExtender ftbe;
         
         /// <summary>
-        /// lbDocNo control.
+        /// lbSpecDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDocNo;
+        protected global::System.Web.UI.WebControls.Label lbSpecDesc;
         
         /// <summary>
-        /// lbDocRev control.
+        /// cbCheckBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDocRev;
-        
-        /// <summary>
-        /// lbCommodity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCommodity;
+        protected global::System.Web.UI.WebControls.CheckBox cbCheckBox;
         
         /// <summary>
         /// CheckBoxList1 control.

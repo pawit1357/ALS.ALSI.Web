@@ -91,11 +91,22 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h6>Results:</h6>
-                                        <h6>The Specification is based on Seagate's Doc
+                                        <table>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                                <td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            </tr>
+                                        </table>
+                                        <%--                         <h6>The Specification is based on Seagate's Doc
                             <asp:Label ID="lbDocNo" runat="server" Text=""></asp:Label>
                                             for
                             <asp:Label ID="lbCommodity" runat="server" Text=""></asp:Label>
-                                        </h6>
+                                        </h6>--%>
                                     </div>
                                 </div>
                                 <asp:GridView ID="gvLpc03" runat="server" AutoGenerateColumns="False"
@@ -640,39 +651,39 @@
                             </div>
 
                             <asp:Panel ID="pLoadRawData" runat="server">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Select Source File: </label>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Select Source File: </label>
 
-                                <div class="col-md-3">
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <div class="input-group input-large">
-                                            <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
-                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
                                                                
                                             <span class="fileinput-filename"></span>
-                                            </div>
-                                            <span class="input-group-addon btn default btn-file">
-                                                <span class="fileinput-new">Select file </span>
-                                                <span class="fileinput-exists">Change </span>
-                                                <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
 
-                                            </span>
-                                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
-                                            <asp:Label ID="lbMessage" runat="server"></asp:Label>
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                                <asp:Label ID="lbMessage" runat="server"></asp:Label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3"></label>
-                                <div class="col-md-9">
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"></label>
+                                    <div class="col-md-9">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                                </asp:Panel>
+                            </asp:Panel>
 
                         </asp:Panel>
                         <div class="row">

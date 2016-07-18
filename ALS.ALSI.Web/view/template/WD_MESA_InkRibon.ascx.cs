@@ -230,10 +230,19 @@ namespace ALS.ALSI.Web.view.template
 
                 }
 
-                tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);// this.coverpages[0].tb_m_component;
-                if (component != null)
+                cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                if (cbCheckBox.Checked)
                 {
-                    lbResultDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} for {1}", component.B, component.A);
+                    lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+                }
+                else
+                {
+
+                    tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);// this.coverpages[0].tb_m_component;
+                    if (component != null)
+                    {
+                        lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
+                    }
                 }
 
                 gvResult.DataSource = this.coverpages;
@@ -351,7 +360,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
@@ -381,7 +390,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     foreach (template_wd_mesa_coverpage _cover in this.coverpages)
                     {
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
@@ -544,7 +553,7 @@ namespace ALS.ALSI.Web.view.template
             tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(ddlComponent.SelectedValue));
             if (component != null)
             {
-                lbResultDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} for {1}", component.B, component.A);
+                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
 
                 //txtProcedureNo_Extraction.Text = String.Empty;
                 //txtExtractionMedium_Extraction.Text = String.Empty;
@@ -659,53 +668,6 @@ namespace ALS.ALSI.Web.view.template
             gvResult.DataBind();
         }
 
-        //protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.DataRow)
-        //    {
-        //        int _id = Convert.ToInt32(gvResult.DataKeys[e.Row.RowIndex].Values[0].ToString());
-        //        LinkButton _btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
-
-        //    }
-        //    else if (e.Row.RowType == DataControlRowType.Footer)
-        //    {
-        //    }
-        //}
-
-        //protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
-        //    //if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
-        //    //{
-        //    //    int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-        //    //    tb_m_dhs_cas _cas = this.tbCas.Find(x => x.ID == PKID);
-        //    //    if (_cas != null)
-        //    //    {
-        //    //        switch (cmd)
-        //    //        {
-        //    //            case CommandNameEnum.Hum:
-        //    //                _cas.RowState = CommandNameEnum.Hum;
-        //    //                break;
-        //    //            case CommandNameEnum.ReUse:
-        //    //                switch (_cas.RowState)
-        //    //                {
-        //    //                    case CommandNameEnum.Hum:
-        //    //                        _cas.RowState = CommandNameEnum.TotalRow;
-        //    //                        break;
-        //    //                    default:
-        //    //                        _cas.RowState = CommandNameEnum.Add;
-        //    //                        break;
-        //    //                }
-
-        //    //                break;
-        //    //            case CommandNameEnum.D34:
-        //    //                _cas.RowState = CommandNameEnum.D34;
-        //    //                break;
-        //    //        }
-        //    //        CalculateCas();
-        //    //    }
-        //    //}
-        //}
 
         #endregion
 
@@ -799,42 +761,6 @@ namespace ALS.ALSI.Web.view.template
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
 
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
                     break;
             }
 
@@ -964,60 +890,6 @@ namespace ALS.ALSI.Web.view.template
                 gvRefImages.DataSource = this.refImg;
                 gvRefImages.DataBind();
             }
-            //template_wd_mesa_img _img = new template_wd_mesa_img();
-            //_img.id = CustomUtils.GetRandomNumberID();
-            //_img.sample_id = this.SampleID;
-            //_img.area = Convert.ToInt32(ddlArea.SelectedValue);
-            //_img.descripton = txtDesc.Text;
-            //if (!String.IsNullOrEmpty(txtDesc.Text))
-            //{
-
-            //    for (int i = 0; i < FileUpload1.PostedFiles.Count; i++)
-            //    {
-            //        HttpPostedFile _postedFile = FileUpload1.PostedFiles[i];
-            //        if ((Path.GetExtension(_postedFile.FileName).Equals(".jpg")))
-            //        {
-            //            string yyyy = DateTime.Now.ToString("yyyy");
-            //            string MM = DateTime.Now.ToString("MM");
-            //            string dd = DateTime.Now.ToString("dd");
-
-            //            String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
-            //            String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName)));
-
-
-            //            if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-            //            {
-            //                Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-            //            }
-            //            _postedFile.SaveAs(source_file);
-
-            //            switch (i + 1)
-            //            {
-            //                case 1:
-            //                    _img.path_sem_image_at_250x = source_file_url;
-            //                    break;
-            //                case 2:
-            //                    _img.path_sem_image_at_500x = source_file_url;
-            //                    break;
-            //                case 3:
-            //                    _img.path_sem_image_at_2000x = source_file_url;
-            //                    break;
-            //                case 4:
-            //                    _img.path_edx_spectrum = source_file_url;
-            //                    break;
-            //            }
-            //        }
-            //    }
-            //    Boolean isExist = this.refImg.Where(x => x.area == _img.area && x.descripton.Equals(_img.descripton)).Any();
-            //    if (!isExist)
-            //    {
-            //        this.refImg.Add(_img);
-            //        ddlArea.SelectedIndex = -1;
-            //        txtDesc.Text = string.Empty;
-            //    }
-            //    gvRefImages.DataSource = this.refImg;
-            //    gvRefImages.DataBind();
-            //}
         }
 
         protected void gvRefImages_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -1102,5 +974,22 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
         }
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+            }
+            else
+            {
+                tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(ddlComponent.SelectedValue));
+                if (component != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
+                }
+            }
+
+        }
+
     }
 }

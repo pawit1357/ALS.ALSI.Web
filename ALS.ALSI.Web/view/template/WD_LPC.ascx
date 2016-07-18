@@ -62,10 +62,16 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                                        <h6>The specification is based on Western Digital's document no.
+                                  <%--      <h6>The specification is based on Western Digital's document no.
                                             <asp:Label ID="lbSpecRev" runat="server" Text=""></asp:Label>for
                                             <asp:Label ID="lbComponent" runat="server" Text=""></asp:Label>
-                                        </h6>
+                                        </h6>--%>
+                                                                                   <table>
+                                               <tr><td></td></tr>
+                                               <tr>
+                                                   <td><asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td><td><asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                               </tr>
+                                           </table>
                                     </div>
                                 </div>
                                 <br />

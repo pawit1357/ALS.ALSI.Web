@@ -168,10 +168,15 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <h6>Results:</h6>
-
-                                        The Specification is based on Seagate's Doc<asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
+                                                                                   <table>
+                                               <tr><td></td></tr>
+                                               <tr>
+                                                   <td><asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td><td><asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                               </tr>
+                                           </table>
+<%--                                        The Specification is based on Seagate's Doc<asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
                                         for
-                                        <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label>
+                                        <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label>--%>
 
 
                                         <asp:GridView ID="gvCoverPages" runat="server" AutoGenerateColumns="False"

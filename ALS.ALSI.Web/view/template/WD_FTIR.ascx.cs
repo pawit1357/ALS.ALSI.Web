@@ -235,12 +235,27 @@ namespace ALS.ALSI.Web.view.template
 
                 CalculateCas();
 
-                tb_m_detail_spec tmp = new tb_m_detail_spec().SelectByID(this.Ftir[0].detail_spec_id.Value);
-                if (tmp != null)
+                cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                if (cbCheckBox.Checked)
                 {
-                    lbDocRev.Text = tmp.B;
-                    lbDesc.Text = tmp.A;
+                    lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
                 }
+                else
+                {
+                    tb_m_detail_spec tmp = new tb_m_detail_spec().SelectByID(this.Ftir[0].detail_spec_id.Value);
+                    if (tmp != null)
+                    {
+                        lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", tmp.B, tmp.A);
+                    }
+                }
+
+
+                //tb_m_detail_spec tmp = new tb_m_detail_spec().SelectByID(this.Ftir[0].detail_spec_id.Value);
+                //if (tmp != null)
+                //{
+                    //lbDocRev.Text = tmp.B;
+                    //lbDesc.Text = tmp.A;
+                //}
 
                 txtNVR_FTIR_B14.Text = this.Ftir[0].td_b14;//Volume of solvent used:
                 txtNVR_FTIR_B15.Text = this.Ftir[0].td_b15;//Surface area (S):
@@ -363,7 +378,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
@@ -380,7 +395,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     foreach (template_wd_ftir_coverpage item in this.Ftir)
                     {
                         item.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
@@ -792,7 +807,7 @@ namespace ALS.ALSI.Web.view.template
             //reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             //reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             //reportParameters.Add(new ReportParameter("Test", item[0] == '1' ? "NVR/FTIR" : item[1] == '1' ? "NVR" : "FTIR"));
-            //reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
+            //reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Western Digital's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
             //reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
 
             //// Variables
@@ -902,8 +917,8 @@ namespace ALS.ALSI.Web.view.template
             tb_m_detail_spec detailSpec = new tb_m_detail_spec().SelectByID(int.Parse(ddlDetailSpec.SelectedValue));
             if (detailSpec != null)
             {
-                lbDocRev.Text = detailSpec.B;
-                lbDesc.Text = detailSpec.A;
+                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", detailSpec.B, detailSpec.A);
+
                 if (this.Ftir.Count > 0)
                 {
                     foreach (template_wd_ftir_coverpage item in this.Ftir.Where(x => x.data_type == 2).ToList())
@@ -1189,6 +1204,23 @@ namespace ALS.ALSI.Web.view.template
                     gvResult.DataBind();
                 }
             }
+        }
+
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+            }
+            else
+            {
+                tb_m_detail_spec detailSpec = new tb_m_detail_spec().SelectByID(int.Parse(ddlDetailSpec.SelectedValue));
+                if (detailSpec != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", detailSpec.B, detailSpec.A);
+                }
+            }
+
         }
 
 

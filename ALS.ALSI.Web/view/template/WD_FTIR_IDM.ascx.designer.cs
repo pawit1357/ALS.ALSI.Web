@@ -10,8 +10,7 @@
 namespace ALS.ALSI.Web.view.template {
     
     
-    public partial class WD_FTIR_IDM
-    {
+    public partial class WD_FTIR_IDM {
         
         /// <summary>
         /// Form1 control.
@@ -95,22 +94,22 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.GridView gvMethodProcedure;
         
         /// <summary>
-        /// lbDocRev control.
+        /// lbSpecDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDocRev;
+        protected global::System.Web.UI.WebControls.Label lbSpecDesc;
         
         /// <summary>
-        /// lbDesc control.
+        /// cbCheckBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDesc;
+        protected global::System.Web.UI.WebControls.CheckBox cbCheckBox;
         
         /// <summary>
         /// gvResult control.

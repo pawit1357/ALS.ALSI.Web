@@ -254,8 +254,21 @@ namespace ALS.ALSI.Web.view.template
                 if (detailSpec != null)
                 {
                     /*RESULT*/
-                    lbDocRev.Text = detailSpec.B;
-                    lbDesc.Text = detailSpec.A;
+                    //lbDocRev.Text = detailSpec.B;
+                    //lbDesc.Text = detailSpec.A;
+                    cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                    if (cbCheckBox.Checked)
+                    {
+                        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+                    }
+                    else
+                    {
+   
+                            lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", detailSpec.B, detailSpec.A);
+                        
+                    }
+
+
                     txtB11.Text = ic.ExtractionVolume;
                     txtB12.Text = ic.b12;
                     txtB13.Text = ic.NumOfPiecesUsedForExtraction;
@@ -372,7 +385,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     foreach (template_wd_ic_coverpage _cover in this.coverpages)
                     {
                         _cover.sample_id = this.SampleID;
@@ -399,7 +412,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
@@ -731,7 +744,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "IC"));
-            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The specification is based on Western Digital's document no. {0} for {1}", lbDocRev.Text, lbDesc.Text)));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
             // Variables
             Warning[] warnings;
@@ -830,8 +843,8 @@ namespace ALS.ALSI.Web.view.template
             if (tem != null)
             {
                 /*RESULT*/
-                lbDocRev.Text = tem.B;
-                lbDesc.Text = tem.A;
+                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
+            
                 gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", tem.C);
                 gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", tem.C);
                 gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", tem.C);
@@ -1195,5 +1208,22 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+            }
+            else
+            {
+                tb_m_detail_spec tem = new tb_m_detail_spec().SelectByID(int.Parse(ddlDetailSpec.SelectedValue));
+                if (tem != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
+                }
+            }
+
+        }
     }
 }

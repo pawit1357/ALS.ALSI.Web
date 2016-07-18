@@ -1061,12 +1061,8 @@
     <Content Include="view\template\Seagate_FTIR_Packing.ascx" />
     <Content Include="view\template\TemplateBlank.ascx" />
     <Content Include="view\template\WD_FTIR_IDM.ascx" />
-    <Content Include="view\template\_Seagate_FTIR_Packing.ascx" />
-    <Content Include="view\template\_Seagate_FTIR_Damper.ascx" />
     <Content Include="view\template\Seagate_HPA.ascx" />
-    <Content Include="view\template\_Seagate_HPA_Siam_Backup.ascx" />
     <Content Include="view\template\Seagate_HPA_Siam.ascx" />
-    <Content Include="view\template\_Seagate_LPC_Backup.ascx" />
     <Content Include="view\template\WD_Corrosion.ascx" />
     <Content Include="view\template\WD_GCMS_CVR.ascx" />
     <Content Include="view\template\WD_HPA_FOR_3.ascx" />
@@ -1298,18 +1294,6 @@
     <Compile Include="view\template\WD_FTIR_IDM.ascx.designer.cs">
       <DependentUpon>WD_FTIR_IDM.ascx</DependentUpon>
     </Compile>
-    <Compile Include="view\template\_Seagate_FTIR_Packing.ascx.cs">
-      <DependentUpon>_Seagate_FTIR_Packing.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="view\template\_Seagate_FTIR_Packing.ascx.designer.cs">
-      <DependentUpon>_Seagate_FTIR_Packing.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="view\template\_Seagate_FTIR_Damper.ascx.cs">
-      <DependentUpon>_Seagate_FTIR_Damper.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="view\template\_Seagate_FTIR_Damper.ascx.designer.cs">
-      <DependentUpon>_Seagate_FTIR_Damper.ascx</DependentUpon>
-    </Compile>
     <Compile Include="view\template\Seagate_HPA.ascx.cs">
       <DependentUpon>Seagate_HPA.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1317,26 +1301,12 @@
     <Compile Include="view\template\Seagate_HPA.ascx.designer.cs">
       <DependentUpon>Seagate_HPA.ascx</DependentUpon>
     </Compile>
-    <Compile Include="view\template\_Seagate_HPA_Siam_Backup.ascx.cs">
-      <DependentUpon>_Seagate_HPA_Siam_Backup.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="view\template\_Seagate_HPA_Siam_Backup.ascx.designer.cs">
-      <DependentUpon>_Seagate_HPA_Siam_Backup.ascx</DependentUpon>
-    </Compile>
     <Compile Include="view\template\Seagate_HPA_Siam.ascx.cs">
       <DependentUpon>Seagate_HPA_Siam.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="view\template\Seagate_HPA_Siam.ascx.designer.cs">
       <DependentUpon>Seagate_HPA_Siam.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="view\template\_Seagate_LPC_Backup.ascx.cs">
-      <DependentUpon>_Seagate_LPC_Backup.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="view\template\_Seagate_LPC_Backup.ascx.designer.cs">
-      <DependentUpon>_Seagate_LPC_Backup.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\WD_Corrosion.ascx.cs">
       <DependentUpon>WD_Corrosion.ascx</DependentUpon>

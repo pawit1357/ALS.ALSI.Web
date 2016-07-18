@@ -336,8 +336,19 @@ namespace ALS.ALSI.Web.view.template
                     txtExtractionMedium_hpa.Text = _cover.ExtractionMedium_hpa;
                     txtExtractionVolume_hpa.Text = _cover.ExtractionVolume_hpa;
 
-                    lbDocNo.Text = tem.B;
-                    lbCommodity.Text = tem.A;
+                    //lbDocNo.Text = tem.B;
+                    //lbCommodity.Text = tem.A;
+
+                    cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                    if (cbCheckBox.Checked)
+                    {
+                        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                    }
+                    else
+                    {
+                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " " + tem.C, tem.A);
+
+                    }
                     #endregion
 
                     #region "region "US-LPC(0.3)"
@@ -503,7 +514,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     foreach (template_seagate_hpa_coverpage ws in this.Hpas)
                     {
                         ws.sample_id = this.SampleID;
@@ -538,7 +549,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
-
+                        this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         //#endregion
@@ -657,7 +668,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                    
+
 
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
@@ -687,7 +698,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-                        
+
                             this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
@@ -1511,18 +1522,18 @@ namespace ALS.ALSI.Web.view.template
                 string MgSiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgSiO")).FirstOrDefault().C;
                 string PZT = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("PZT")).FirstOrDefault().C;
                 string Tin = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Sn based")).FirstOrDefault().C;
-                
+
                 string Ni = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Ni based")).FirstOrDefault().C;
                 string GrandTotal = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).FirstOrDefault().C;
 
                 hpas[0].C = Convert.ToDouble(sumOfHpas[0].C).ToString("N1");//[0]
                 hpas[1].C = Convert.ToDouble(sumOfHpas[1].C).ToString("N1");//[1]
                 hpas[2].C = Convert.ToDouble(sumOfHpas[2].C).ToString("N1");//[2]
-                        
+
                 hpas[3].C = Convert.ToDouble(MgSiO).ToString("N1");//[3]
                 hpas[4].C = Convert.ToDouble(PZT).ToString("N1");//[4]
                 hpas[5].C = Convert.ToDouble(Tin).ToString("N1");//[5]
-                        
+
                 hpas[6].C = Convert.ToDouble(sumOfHpas[3].C).ToString("N1");//[6]
                 hpas[7].C = Convert.ToDouble("0.0").ToString("N1");//[7]
                 hpas[8].C = Convert.ToDouble(Ni).ToString("N1");//[8]
@@ -1542,7 +1553,7 @@ namespace ALS.ALSI.Web.view.template
             gvLpc03.DataBind();
             gvLpc06.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).OrderBy(x => x.seq);
             gvLpc06.DataBind();
-            gvWsClassification.DataSource = this.Hpas.Where(x => 
+            gvWsClassification.DataSource = this.Hpas.Where(x =>
             //x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD) ||
             x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
             x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
@@ -1632,7 +1643,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocNo.Text, lbCommodity.Text)));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
             DataTable dtSummary = new DataTable("Summary");
             DataColumn[] cols1 ={ new DataColumn("A",typeof(String)),
@@ -1790,7 +1801,7 @@ namespace ALS.ALSI.Web.view.template
             if (tem != null)
             {
                 #region "Method"
-                txtProcedureNo.Text = tem.E +" "+tem.F;
+                txtProcedureNo.Text = tem.E + " " + tem.F;
                 txtNumberOfPieces.Text = tem.G;
                 txtExtractionMedium.Text = string.Empty;
                 txtExtractionVolume.Text = tem.H;
@@ -1800,8 +1811,11 @@ namespace ALS.ALSI.Web.view.template
                 txtExtractionMedium_hpa.Text = string.Empty;
                 txtExtractionVolume_hpa.Text = tem.H;
 
-                lbDocNo.Text = tem.B + " " + tem.C;
-                lbCommodity.Text = tem.A;
+                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " " + tem.C, tem.A);
+
+
+                //lbDocNo.Text = tem.B + " " + tem.C;
+                //lbCommodity.Text = tem.A;
                 #endregion
                 #region "LPC"
                 LPCTypeEnum lpcType = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(ddlLpcType.SelectedValue));
@@ -2373,7 +2387,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-         
+
             String LastGroup = String.Empty;
             foreach (String item in items)
             {
@@ -2415,7 +2429,7 @@ namespace ALS.ALSI.Web.view.template
 
             return _Hpas;
         }
-        
+
         private String mappingRawData(String _val)
         {
             String result = _val;
@@ -2437,6 +2451,23 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
             return result;
+        }
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+            }
+            else
+            {
+
+                tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(ddlSpecification.SelectedValue));
+                if (tem != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " " + tem.C, tem.A);
+                }
+            }
+
         }
 
     }

@@ -247,8 +247,10 @@ namespace ALS.ALSI.Web.view.template
                 tb_m_detail_spec tem = new tb_m_detail_spec().SelectByID(Convert.ToInt32(_lpc.detail_spec_id));
                 if (tem != null)
                 {
-                    lbSpecRev.Text = tem.B;
-                    lbComponent.Text = tem.A;
+                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", detailSpec.B, detailSpec.A);
+
+                    //lbSpecRev.Text = tem.B;
+                    //lbComponent.Text = tem.A;
                 }
                 //Method
                 txtB21.Text = _lpc.ProcedureNo;
@@ -367,7 +369,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                         this.jobSample.step2owner = userLogin.id;
-
+                        this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         //Add new
                         foreach (template_wd_lpc_coverpage cov in this.Lpc)
                         {
@@ -411,6 +413,7 @@ namespace ALS.ALSI.Web.view.template
                         {
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                             this.jobSample.step3owner = userLogin.id;
+                            this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                             //#region ":: STAMP COMPLETE DATE"
                             this.jobSample.date_chemist_complete = DateTime.Now;
                             //#endregion
@@ -818,8 +821,8 @@ namespace ALS.ALSI.Web.view.template
             tb_m_detail_spec tem = new tb_m_detail_spec().SelectByID(int.Parse(ddlSpecification.SelectedValue));
             if (tem != null)
             {
-                lbSpecRev.Text = tem.C;
-                lbComponent.Text = tem.B;
+                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
+
 
                 List<template_wd_lpc_coverpage> _Lpc = new List<template_wd_lpc_coverpage>();
                 template_wd_lpc_coverpage spec = new template_wd_lpc_coverpage();
@@ -873,8 +876,7 @@ namespace ALS.ALSI.Web.view.template
 
                 lbTestMethod.Text = txtB21.Text;
 
-                lbSpecRev.Text = tem.C;
-                lbComponent.Text = tem.B;
+                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
             }
         }
 
@@ -922,7 +924,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", dt.Rows[0]["ws_c21"].ToString()));
-            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The specification is based on Western Digital's document no. {0} for {1}", lbSpecRev.Text, lbComponent.Text)));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("txtB48", txtB48.Text));
             reportParameters.Add(new ReportParameter("txtB49", txtB49.Text));
             reportParameters.Add(new ReportParameter("txtB50", txtB50.Text));
@@ -1418,6 +1420,24 @@ namespace ALS.ALSI.Web.view.template
                     break;
             }
         }
+
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+            }
+            else
+            {
+                tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+                if (tem != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
+                }
+            }
+
+        }
+
 
 
 

@@ -215,11 +215,26 @@ namespace ALS.ALSI.Web.view.template
                 template_seagate_copperwire_coverpage cover = this.coverpages[0];
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
 
-                tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
-                if (component != null)
+                cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                if (cbCheckBox.Checked)
                 {
-                    lbResultDesc.Text = String.Format("The Specification is based on Seagate's Doc  {0} for {1}", component.A + "" + component.B, component.C);
+                    lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
                 }
+                else
+                {
+                    tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+                    if (component != null)
+                    {
+                        lbResultDesc.Text = String.Format("The Specification is based on Seagate's Doc  {0} for {1}", component.A + "" + component.B, component.C);
+                    }
+
+                }
+
+
+
+
+
+
 
 
                 txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].number_of_pieces_used_for_extraction;
@@ -232,7 +247,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 this.CommandName = CommandNameEnum.Add;
 
-                lbResultDesc.Text = String.Format("The Specification is based on Seagate's Doc  {0} for {1}", String.Empty,String.Empty);
+                lbResultDesc.Text = String.Format("The Specification is based on Seagate's Doc  {0} for {1}", String.Empty, String.Empty);
 
                 this.coverpages = new List<template_seagate_copperwire_coverpage>();
                 template_seagate_copperwire_coverpage cov = new template_seagate_copperwire_coverpage();
@@ -253,7 +268,8 @@ namespace ALS.ALSI.Web.view.template
             #endregion
 
 
-            if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST)) { 
+            if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+            {
                 #region ":: STAMP ANALYZED DATE ::"
                 if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
@@ -324,7 +340,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     template_seagate_copperwire_coverpage.DeleteBySampleID(this.SampleID);
                     foreach (template_seagate_copperwire_coverpage _cover in this.coverpages)
                     {
@@ -338,7 +354,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     #region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     #endregion
@@ -611,8 +627,8 @@ namespace ALS.ALSI.Web.view.template
 
             TextBox _txtSpecification = (TextBox)gvResult.Rows[e.RowIndex].FindControl("txtSpecification");
 
-            
-            if (_ddlResult1 != null && _ddlResult2!=null && _ddlResult3 !=null && _txtCopperWireCorrosionTest.Text !=null && _txtSpecification.Text !=null)
+
+            if (_ddlResult1 != null && _ddlResult2 != null && _ddlResult3 != null && _txtCopperWireCorrosionTest.Text != null && _txtSpecification.Text != null)
             {
                 template_seagate_copperwire_coverpage _tmp = this.coverpages.Find(x => x.ID == _id);
                 if (_tmp != null)
@@ -921,7 +937,22 @@ namespace ALS.ALSI.Web.view.template
 
 
 
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+            }
+            else
+            {
+                tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+                if (component != null)
+                {
+                    lbResultDesc.Text = String.Format("The Specification is based on Seagate's Doc  {0} for {1}", component.A + "" + component.B, component.C);
+                }
+            }
 
+        }
 
 
 

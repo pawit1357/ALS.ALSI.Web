@@ -303,12 +303,17 @@ namespace ALS.ALSI.Web.view.template
                     switch (ddlTemplateType.SelectedValue)
                     {
                         case "1":
-                            lbDocNo.Text = tem.C + "" + tem.D;
-                            lbCommodity.Text = tem.B;
+                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C + "" + tem.D, tem.B);
+
+                            //lbDocNo.Text = tem.C + "" + tem.D;
+                            //lbCommodity.Text = tem.B;
                             break;
                         case "2":
-                            lbDocNo.Text = tem.C;
-                            lbCommodity.Text = tem.B;
+                            //lbDocNo.Text = tem.C;
+                            //lbCommodity.Text = tem.B;
+
+                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C , tem.B);
+
                             break;
                     }
                 }
@@ -444,6 +449,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
 
                     foreach (template_seagate_lpc_coverpage _tmp in this.Lpcs)
                     {
@@ -468,6 +474,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
+                        this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         //#endregion
@@ -1224,7 +1231,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", ddlA19.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocNo.Text, lbCommodity.Text)));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
 
             // Variables
@@ -1482,24 +1489,13 @@ namespace ALS.ALSI.Web.view.template
                 switch (ddlTemplateType.SelectedValue)
                 {
                     case "1":
-                        lbDocNo.Text = tem.C + "" + tem.D;
-                        lbCommodity.Text = tem.B;
+                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C + "" + tem.D, tem.B);
                         break;
                     case "2":
-                        lbDocNo.Text = tem.C;
-                        lbCommodity.Text = tem.B;
+                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C, tem.B);
                         break;
                 }
-                //if (lpc_type.Equals("1") || lpc_type.Equals("2"))
-                //{
-                //    lbDocNo.Text = tem.C +""+tem.D;
-                //    lbCommodity.Text = tem.B;
-                //}
-                //else
-                //{
-                //    lbDocNo.Text = tem.C;
-                //    lbCommodity.Text = tem.B;
-                //}
+
 
                 List<template_seagate_lpc_coverpage> tmp = new List<template_seagate_lpc_coverpage>();
 
@@ -1774,6 +1770,31 @@ namespace ALS.ALSI.Web.view.template
         #endregion
 
 
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+            }
+            else
+            {
+                tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+
+                if (tem != null)
+                {
+                    switch (ddlTemplateType.SelectedValue)
+                    {
+                        case "1":
+                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C + "" + tem.D, tem.B);
+                            break;
+                        case "2":
+                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C, tem.B);
+                            break;
+                    }
+                }
+            }
+
+        }
     }
 
     public class LPC

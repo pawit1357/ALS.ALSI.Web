@@ -91,11 +91,22 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h6>Results:</h6>
-                                        <h6>The Specification is based on Seagate's Doc
+                                        <table>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                                <td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            </tr>
+                                        </table>
+                                        <%--                  <h6>The Specification is based on Seagate's Doc
                             <asp:Label ID="lbDocNo" runat="server" Text=""></asp:Label>
                                             for
                             <asp:Label ID="lbCommodity" runat="server" Text=""></asp:Label>
-                                        </h6>
+                                        </h6>--%>
                                     </div>
                                 </div>
                                 <asp:GridView ID="gvLpc03" runat="server" AutoGenerateColumns="False"

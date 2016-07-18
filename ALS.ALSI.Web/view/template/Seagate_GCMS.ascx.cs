@@ -276,7 +276,17 @@ namespace ALS.ALSI.Web.view.template
 
                         gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
                         gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                        lbDescription.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
+
+                        cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                        if (cbCheckBox.Checked)
+                        {
+                            lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                        }
+                        else
+                        {
+                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
+
+                        }
                     }
                     txtProcedure.Text = cov.procedure_no;
                     txtSampleSize.Text = cov.sample_size;
@@ -448,7 +458,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     #region "Cover Page#"
                     foreach (template_seagate_gcms_coverpage cov in this.coverpages)
                     {
@@ -469,6 +479,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
+                        this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         #region ":: STAMP COMPLETE DATE"
 
                         this.jobSample.date_chemist_complete = DateTime.Now;
@@ -1294,7 +1305,8 @@ namespace ALS.ALSI.Web.view.template
                     //Result Description
                     gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
                     gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                    lbDescription.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
+
+                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
                     txtProcedure.Text = component.F;
                     txtSampleSize.Text = component.G;
                     //lbExtractionMedium.Text;
@@ -1330,7 +1342,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "GCMS Extractable"));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbDescription.Text));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("Remark1", lbRemark1.Text));
             reportParameters.Add(new ReportParameter("Remark2", lbRemark2.Text));
             reportParameters.Add(new ReportParameter("Remark3", lbRemark3.Text));
@@ -1451,7 +1463,22 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
         }
 
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+            }
+            else
+            {
+                tb_m_component component = new tb_m_component().SelectByID(int.Parse(ddlComponent.SelectedValue));
+                if (component != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
+                }
+            }
 
+        }
 
     }
 }
