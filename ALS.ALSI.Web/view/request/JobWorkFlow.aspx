@@ -73,6 +73,8 @@
                             </div>
 
                             <div class="tab-content">
+                                <h6>
+                                    <asp:Label ID="lbDebugInfo" runat="server" Text=""></asp:Label></h6>
                                 <asp:PlaceHolder runat="server" ID="plhSampleInfo" />
                                 <asp:PlaceHolder runat="server" ID="plhCoverPage" />
                             </div>

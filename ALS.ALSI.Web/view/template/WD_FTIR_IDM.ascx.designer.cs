@@ -202,6 +202,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtNVR_FTIR_B14;
         
         /// <summary>
+        /// lbNVR_FTIR_B14 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNVR_FTIR_B14;
+        
+        /// <summary>
         /// txtNVR_FTIR_B15 control.
         /// </summary>
         /// <remarks>
@@ -209,6 +218,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNVR_FTIR_B15;
+        
+        /// <summary>
+        /// lbNVR_FTIR_B15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNVR_FTIR_B15;
         
         /// <summary>
         /// txtNVR_FTIR_B16 control.

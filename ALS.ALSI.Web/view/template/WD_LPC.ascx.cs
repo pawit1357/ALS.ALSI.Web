@@ -1411,11 +1411,11 @@ namespace ALS.ALSI.Web.view.template
             switch (ddlWashMethod.SelectedValue)
             {
                 case "Rinse":
-                case "Ultrasonic":
                 case "Shake":
-                    break;
                     pTankConditions.Visible = true;
+                    break;
                 case "Flip":
+                case "Ultrasonic":
                     pTankConditions.Visible = false;
                     break;
             }
@@ -1429,7 +1429,7 @@ namespace ALS.ALSI.Web.view.template
             }
             else
             {
-                tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+                tb_m_detail_spec tem = new tb_m_detail_spec().SelectByID(int.Parse(ddlSpecification.SelectedValue));
                 if (tem != null)
                 {
                     lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);

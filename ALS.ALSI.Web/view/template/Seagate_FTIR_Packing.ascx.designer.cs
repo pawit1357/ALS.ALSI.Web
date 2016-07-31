@@ -202,6 +202,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtWB13;
         
         /// <summary>
+        /// lbW13Unit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbW13Unit;
+        
+        /// <summary>
         /// txtWB14 control.
         /// </summary>
         /// <remarks>
@@ -218,6 +227,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtWB15;
+        
+        /// <summary>
+        /// lbW15Unit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbW15Unit;
         
         /// <summary>
         /// gvWftir control.

@@ -346,7 +346,23 @@ namespace ALS.ALSI.Web.view.template
                     pCoverpage.Visible = true;
                     PWorking.Visible = false;
                     pLoadFile.Visible = false;
+                    var items = this.Ftir.Where(x => x.data_type == 1).ToList();
+                    if (items.Count > 0)
+                    {
+                        items[0].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                        items[1].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                        items[2].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                        //items[3].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                        //items[4].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                        //items[5].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
 
+                        items[0].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                        items[1].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                        items[2].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                        //items[3].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                        //items[4].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                        //items[5].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                    }
                     CalculateCas();
                     break;
                 case "NVR-FTIR(Hex)":
@@ -630,6 +646,10 @@ namespace ALS.ALSI.Web.view.template
                                     txtNVR_FTIR_B14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.B));
                                     txtNVR_FTIR_B15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.B));
                                     txtNVR_FTIR_B16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.B));
+
+                                    lbNVR_FTIR_B14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.C));
+                                    lbNVR_FTIR_B15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.C));
+
                                     #endregion
                                     #region "NVR"
                                     txtNVR_B20.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.B));
@@ -1070,21 +1090,25 @@ namespace ALS.ALSI.Web.view.template
             this.Ftir[7].D = "Not Detected";
             ////
 
-            this.Ftir[3].E = String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-            this.Ftir[4].E = String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+            this.Ftir[3].E = String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("NA") || this.Ftir[3].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+            this.Ftir[4].E = String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") || this.Ftir[4].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
 
-            if (!this.Ftir[5].C.Equals("Not Detected"))
-            {
-                this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            }
-            if (!this.Ftir[6].C.Equals("Not Detected"))
-            {
-                this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            }
-            if (!this.Ftir[7].C.Equals("Not Detected"))
-            {
-                this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") ? "NA" : (this.Ftir[7].D.Equals("Not Detected")) ? "PASS" : (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            }
+            //if (!this.Ftir[5].C.Equals("Not Detected"))
+            //{
+                this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") || this.Ftir[5].C.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : this.Ftir[5].D.Equals("Not Detected") || this.Ftir[5].C.Equals("Not Detected")||(Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            //}
+            //if (!this.Ftir[6].C.Equals("Not Detected"))
+            //{
+                this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("NA") || this.Ftir[6].C.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : this.Ftir[6].D.Equals("Not Detected") || this.Ftir[6].C.Equals("Not Detected")||(Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            //}
+            //if (!this.Ftir[7].C.Equals("Not Detected"))
+            //{
+                this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") || this.Ftir[7].C.Equals("NA") ? "NA" : (this.Ftir[7].D.Equals("Not Detected")) ? "PASS" : this.Ftir[7].D.Equals("Not Detected") || this.Ftir[7].C.Equals("Not Detected")||(Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            //}
+
+
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+            gvMethodProcedure.DataBind();
 
             gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
             gvResult.DataBind();
@@ -1169,26 +1193,29 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvProcedure_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
-            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            if (!e.CommandName.Equals("Edit") && !e.CommandName.Equals("Cancel") && !e.CommandName.Equals("Update"))
             {
-                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_wd_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 1);
-                if (gcms != null)
+                RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
                 {
-                    switch (cmd)
+                    int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    template_wd_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 1);
+                    if (gcms != null)
                     {
-                        case RowTypeEnum.Hide:
-                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                        switch (cmd)
+                        {
+                            case RowTypeEnum.Hide:
+                                gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
 
-                            break;
-                        case RowTypeEnum.Normal:
-                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                            break;
+                                break;
+                            case RowTypeEnum.Normal:
+                                gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                                break;
+                        }
+
+                        gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+                        gvMethodProcedure.DataBind();
                     }
-
-                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
-                    gvMethodProcedure.DataBind();
                 }
             }
         }
@@ -1235,6 +1262,48 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+
+
+
+        #region "method/procedure"
+        protected void gvMethodProcedure_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvMethodProcedure.EditIndex = e.NewEditIndex;
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+            gvMethodProcedure.DataBind();
+        }
+
+        protected void gvMethodProcedure_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvMethodProcedure.EditIndex = -1;
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+            gvMethodProcedure.DataBind();
+        }
+
+        protected void gvMethodProcedure_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+
+            int _id = Convert.ToInt32(gvMethodProcedure.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox _txtExtractionVolume = (TextBox)gvMethodProcedure.Rows[e.RowIndex].FindControl("txtExtractionVolume");
+            TextBox _txtNumberOfPiecesUsedForExtraction = (TextBox)gvMethodProcedure.Rows[e.RowIndex].FindControl("txtNumberOfPiecesUsedForExtraction");
+
+            
+            if (_txtExtractionVolume != null)
+            {
+
+                template_wd_ftir_coverpage _tmp = this.Ftir.Find(x => x.ID == _id);
+                if (_tmp != null)
+                {
+                    _tmp.C = _txtNumberOfPiecesUsedForExtraction.Text;
+                    _tmp.E = _txtExtractionVolume.Text;
+                }
+            }
+
+            gvMethodProcedure.EditIndex = -1;
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+            gvMethodProcedure.DataBind();
+        }
+        #endregion
 
     }
 }

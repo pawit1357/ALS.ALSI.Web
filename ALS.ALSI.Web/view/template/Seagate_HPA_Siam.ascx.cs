@@ -435,16 +435,16 @@ namespace ALS.ALSI.Web.view.template
 
                     #region "Header Text"
                     gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                    gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                    gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                    gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.D);
+                    gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", tem.D);
 
                     gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                    gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                    gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                    gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.D);
+                    gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", tem.D);
 
                     gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
-                    gvHpa.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                    gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                    gvHpa.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.D);
+                    gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", tem.D);
                     #endregion
 
                     lbImgPath1.Text = _cover.img_path;
@@ -1957,16 +1957,16 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
                 #region "Header Text"
                 gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.D);
+                gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", tem.D);
 
                 gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.D);
+                gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", tem.D);
 
                 gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
-                gvHpa.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                gvHpa.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.D);
+                gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", tem.D);
                 #endregion
                 #region "Datasource"
                 this.Hpas = _Hpas;

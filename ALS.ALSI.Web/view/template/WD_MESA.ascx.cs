@@ -223,20 +223,20 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-                cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
-                if (cbCheckBox.Checked)
-                {
-                    lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
-                }
-                else
-                {
+                //cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                //if (cbCheckBox.Checked)
+                //{
+                //    lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+                //}
+                //else
+                //{
 
-                    tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);// this.coverpages[0].tb_m_component;
-                    if (component != null)
-                    {
-                        lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
-                    }
-                }
+                //    tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);// this.coverpages[0].tb_m_component;
+                //    if (component != null)
+                //    {
+                //        lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
+                //    }
+                //}
 
 
                 foreach (template_wd_mesa_coverpage _val in this.coverpages)
@@ -346,7 +346,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
-                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
+                    //this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     foreach (template_wd_mesa_coverpage _cover in this.coverpages)
                     {
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
@@ -369,7 +369,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
-                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
+                    //this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
@@ -531,7 +531,7 @@ namespace ALS.ALSI.Web.view.template
             tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(ddlComponent.SelectedValue));
             if (component != null)
             {
-                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
+                //lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
 
                 txtSampleSize_Extraction.Text = component.D;
 
@@ -1010,21 +1010,21 @@ namespace ALS.ALSI.Web.view.template
             //    }
             //}
         }
-        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbCheckBox.Checked)
-            {
-                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
-            }
-            else
-            {
-                tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(ddlComponent.SelectedValue));
-                if (component != null)
-                {
-                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
-                }
-            }
+        //protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (cbCheckBox.Checked)
+        //    {
+        //        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+        //    }
+        //    else
+        //    {
+        //        tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(ddlComponent.SelectedValue));
+        //        if (component != null)
+        //        {
+        //            lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
+        //        }
+        //    }
 
-        }
+        //}
     }
 }

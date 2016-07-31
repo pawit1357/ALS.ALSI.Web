@@ -7,7 +7,7 @@
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-             
+
             <div class="portlet box blue-dark">
 
                 <div class="portlet-title">
@@ -31,12 +31,15 @@
                                         <div class="col-md-9">
 
                                             <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
-                                                CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand">
+                                                CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Analysis" ItemStyle-HorizontalAlign="Left">
                                                         <ItemTemplate>
                                                             <asp:Literal ID="litAnalysis" runat="server" Text='<%# Eval("A")%>' />
                                                         </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtAnalysis" runat="server" Text='<%# Eval("A")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
                                                         <ItemStyle HorizontalAlign="Left" />
                                                     </asp:TemplateField>
 
@@ -44,6 +47,9 @@
                                                         <ItemTemplate>
                                                             <asp:Literal ID="litProcedureNo" runat="server" Text='<%# Eval("B")%>' />
                                                         </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtProcedureNo" runat="server" Text='<%# Eval("B")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
                                                         <ItemStyle HorizontalAlign="Left" />
                                                     </asp:TemplateField>
 
@@ -51,6 +57,9 @@
                                                         <ItemTemplate>
                                                             <asp:Literal ID="litNumberOfPiecesUsedForExtraction" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
                                                         </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtNumberOfPiecesUsedForExtraction" runat="server" Text='<%# Eval("C")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
                                                         <ItemStyle HorizontalAlign="Left" />
                                                     </asp:TemplateField>
 
@@ -58,6 +67,9 @@
                                                         <ItemTemplate>
                                                             <asp:Label ID="litExtractionMedium" runat="server" Text='<%# Eval("D")%>'></asp:Label>
                                                         </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtExtractionMedium" runat="server" Text='<%# Eval("D")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:TemplateField>
 
@@ -65,6 +77,9 @@
                                                         <ItemTemplate>
                                                             <asp:Label ID="litExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:Label>
                                                         </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Hide">
@@ -75,6 +90,17 @@
                                                                 CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Edit">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                                CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                        </EditItemTemplate>
+                                                    </asp:TemplateField>
                                                 </Columns>
 
                                                 <EmptyDataTemplate>
@@ -83,16 +109,17 @@
                                                     </div>
                                                 </EmptyDataTemplate>
                                             </asp:GridView>
+
                                         </div>
 
-                                    
+
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                                                         <table>
+                                        <table>
                                             <tr>
                                                 <td></td>
                                             </tr>
@@ -117,6 +144,8 @@
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litSpecificationLimits" runat="server" Text='<%# Eval("B")%>' />
                                                     </ItemTemplate>
+
+
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
 
@@ -135,6 +164,8 @@
                                                             CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
+
+
                                             </Columns>
 
                                             <EmptyDataTemplate>
@@ -144,129 +175,9 @@
                                             </EmptyDataTemplate>
                                         </asp:GridView>
 
-                                        <%--<table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr runat="server" id="Tr28">
-                                                    <th>Non-Volatile Residue</th>
-                                                    <th>Specification Limits (<asp:Label ID="lbUnitNvr" runat="server" />)</th>
-                                                    <th>Results(<asp:Label ID="lbUnitNvr_1" runat="server" />)</th>
-                                                    <th runat="server" id="th2">
-                                                        <asp:CheckBox ID="CheckBox14" runat="server" Checked="true" />
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr runat="server" id="Tr29">
-                                                    <td>NVR (DI Water)</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB29Spec" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbB29Result" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox7" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="Tr30">
-                                                    <td>NVR (IPA/Hexane)</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB30Spec" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbB30Result" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox13" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="Tr31">
-                                                    <td>NVR (IPA)</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB31Spec" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbB31Result" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox16" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="Tr32">
-                                                    <td>NVR (Acetone)</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB32Spec" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbB32Result" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox17" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
 
-
-
-                                            </tbody>
-
-
-                                        </table>--%>
                                         <br />
-                                        <%--<table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr runat="server" id="tab2_tr0">
-                                                    <th>Organic Contamination</th>
-                                                    <th>Specification Limits (<asp:Label ID="lbUnitFtir" runat="server" />)</th>
-                                                    <th>Results(<asp:Label ID="lbUnitFtir_1" runat="server" />)</th>
-                                                    <th runat="server" id="th1">
-                                                        <asp:CheckBox ID="CheckBox15" runat="server" Checked="true" />
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr runat="server" id="tab2_tr1">
-                                                    <td>Silicone</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB32" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC32" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb1">
-                                                        <asp:CheckBox ID="CheckBox8" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
 
-                                                <tr runat="server" id="tab2_tr2">
-                                                    <td>Silicone Oil </td>
-                                                    <td>
-                                                        <asp:Label ID="lbB33" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC33" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb2">
-                                                        <asp:CheckBox ID="CheckBox9" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="tab2_tr3">
-                                                    <td>Hydrocarbon</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB34" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC34" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb3">
-                                                        <asp:CheckBox ID="CheckBox10" runat="server" Checked="true" /></td>
-                                                </tr>
-                                                <tr runat="server" id="tab2_tr4">
-                                                    <td>Phthalate</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB35" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC35" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb4">
-                                                        <asp:CheckBox ID="CheckBox11" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="tab2_tr5">
-                                                    <td>Amide</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB36" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC36" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb5">
-                                                        <asp:CheckBox ID="CheckBox12" runat="server" Checked="true" /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>--%>
                                     </div>
                                 </div>
                                 <br />
@@ -334,7 +245,8 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             <th>Surface area per part (e) =</th>
                                             <th>
                                                 <asp:TextBox ID="txtWB13" runat="server" Text="0"></asp:TextBox></th>
-                                            <th>cm2</th>
+                                            <th>
+                                                <asp:Label ID="lbW13Unit" runat="server" Text=""></asp:Label></th>
                                         </tr>
                                         <tr>
                                             <th>No. of parts extracted (f) = </th>
@@ -346,7 +258,8 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             <th>Total Surface area (A) =</th>
                                             <th>
                                                 <asp:TextBox ID="txtWB15" runat="server" Text="0"></asp:TextBox></th>
-                                            <th>cm2</th>
+                                            <th>
+                                                <asp:Label ID="lbW15Unit" runat="server" Text=""></asp:Label></th>
                                         </tr>
 
                                     </thead>
@@ -389,14 +302,6 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
-                                        <%--                                        <asp:TemplateField HeaderText="Hide">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
                                     </Columns>
 
                                     <EmptyDataTemplate>
@@ -837,6 +742,9 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                                 <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
                                                     <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="2">ug/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">ug</asp:ListItem>
+                                                    <asp:ListItem Value="4">ug/g</asp:ListItem>
+
                                                 </asp:DropDownList></th>
                                             <th></th>
                                             <th></th>

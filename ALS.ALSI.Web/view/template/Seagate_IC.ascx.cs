@@ -1117,7 +1117,7 @@ namespace ALS.ALSI.Web.view.template
                                                 ic.wh = (String.IsNullOrEmpty(ic.wh)) ? "" : Convert.ToDouble(ic.wh).ToString("N" + txtDecimal07.Text);
 
                                                 ic.wi = (String.IsNullOrEmpty(ic.wi)) ? "" :(!ic.wi.StartsWith("<")? "":"<")+ Convert.ToDouble(ic.wi.Replace("<","").Trim()).ToString("N" + txtDecimal08.Text);
-
+                                                Console.WriteLine();
                                             }
                                         }
                                     }

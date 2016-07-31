@@ -202,6 +202,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtWB13;
         
         /// <summary>
+        /// lbWC13Unit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbWC13Unit;
+        
+        /// <summary>
         /// txtWD13 control.
         /// </summary>
         /// <remarks>
@@ -209,6 +218,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtWD13;
+        
+        /// <summary>
+        /// lbWE13Unit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbWE13Unit;
         
         /// <summary>
         /// txtWB14 control.
@@ -238,6 +256,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtWB15;
         
         /// <summary>
+        /// lbWC15Unit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbWC15Unit;
+        
+        /// <summary>
         /// txtWD15 control.
         /// </summary>
         /// <remarks>
@@ -245,6 +272,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtWD15;
+        
+        /// <summary>
+        /// lbWE15Unit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbWE15Unit;
         
         /// <summary>
         /// gvWftir control.

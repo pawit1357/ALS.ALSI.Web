@@ -119,7 +119,7 @@
                             <div class="col-md-9">
 
                                 <%--                                <asp:Label ID="lbResultDesc" runat="server" Text="" Visible="false"></asp:Label>--%>
-                                <table>
+                             <%--   <table>
                                     <tr>
                                         <td></td>
                                     </tr>
@@ -129,7 +129,7 @@
                                         <td>
                                             <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                     </tr>
-                                </table>
+                                </table>--%>
                                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand" OnRowEditing="gvResult_RowEditing" OnRowUpdating="gvResult_RowUpdating">
                                     <Columns>

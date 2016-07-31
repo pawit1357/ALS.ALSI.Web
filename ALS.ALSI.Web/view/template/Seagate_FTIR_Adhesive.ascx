@@ -29,9 +29,89 @@
                                     <div class="col-md-12">
                                         <h5>METHOD/PROCEDURE:</h5>
                                         <div class="col-md-9">
-
+                                            
                                             <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
-                                                CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand">
+                                                CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Analysis" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litAnalysis" runat="server" Text='<%# Eval("A")%>' />
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtAnalysis" runat="server" Text='<%# Eval("A")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+
+                                                    <asp:TemplateField HeaderText="Procedure No" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litProcedureNo" runat="server" Text='<%# Eval("B")%>' />
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtProcedureNo" runat="server" Text='<%# Eval("B")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+
+                                                    <asp:TemplateField HeaderText="Number of pieces used for extraction" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litNumberOfPiecesUsedForExtraction" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtNumberOfPiecesUsedForExtraction" runat="server" Text='<%# Eval("C")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+
+                                                    <asp:TemplateField HeaderText="Extraction Medium" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="litExtractionMedium" runat="server" Text='<%# Eval("D")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtExtractionMedium" runat="server" Text='<%# Eval("D")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:TemplateField>
+
+                                                    <asp:TemplateField HeaderText="Extraction Volume" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="litExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Hide">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Edit">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                                CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                        </EditItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+
+                                                <EmptyDataTemplate>
+                                                    <div class="data-not-found">
+                                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                    </div>
+                                                </EmptyDataTemplate>
+                                            </asp:GridView>
+
+<%--                                            <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
+                                                CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Analysis" ItemStyle-HorizontalAlign="Left">
                                                         <ItemTemplate>
@@ -65,6 +145,9 @@
                                                         <ItemTemplate>
                                                             <asp:Label ID="litExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:Label>
                                                         </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:TextBox>
+                                                        </EditItemTemplate>
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Hide">
@@ -75,6 +158,17 @@
                                                                 CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Edit">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                                CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                        </EditItemTemplate>
+                                                    </asp:TemplateField>
                                                 </Columns>
 
                                                 <EmptyDataTemplate>
@@ -83,6 +177,8 @@
                                                     </div>
                                                 </EmptyDataTemplate>
                                             </asp:GridView>
+--%>
+
                                         </div>
 
 
@@ -92,11 +188,11 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                            <%--            <h6>The Specification is based on Seagate's Doc 
+                                        <%--            <h6>The Specification is based on Seagate's Doc 
                                                     <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
                                             for 
                                             <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>--%>
-                                                                  <table>
+                                        <table>
                                             <tr>
                                                 <td></td>
                                             </tr>
@@ -257,7 +353,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             <th>Surface area per part (e) =</th>
                                             <th>
                                                 <asp:TextBox ID="txtWB13" runat="server" Text="0"></asp:TextBox></th>
-                                            <th>cm2</th>
+                                            <th><asp:Label ID="lbW13Unit" runat="server" Text=""></asp:Label></th>
                                         </tr>
                                         <tr>
                                             <th>No. of parts extracted (f) = </th>
@@ -269,7 +365,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             <th>Total Surface area (A) =</th>
                                             <th>
                                                 <asp:TextBox ID="txtWB15" runat="server" Text="0"></asp:TextBox></th>
-                                            <th>cm2</th>
+                                            <th><asp:Label ID="lbW15Unit" runat="server" Text=""></asp:Label></th>
                                         </tr>
 
                                     </thead>

@@ -37,7 +37,7 @@
                                         <h5>METHOD/PROCEDURE:</h5>
 
                                         <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand">
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Analysis" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
@@ -57,6 +57,9 @@
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litNumberOfPiecesUsedForExtraction" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
                                                     </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtNumberOfPiecesUsedForExtraction" runat="server" Text='<%# Eval("C")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
 
@@ -71,6 +74,9 @@
                                                     <ItemTemplate>
                                                         <asp:Label ID="litExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:Label>
                                                     </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Hide">
@@ -80,6 +86,17 @@
                                                         <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
                                                             CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
                                                     </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Edit">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                            CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                            CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                    </EditItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
 
@@ -236,7 +253,8 @@ The instrument detection limit for silicone oil is
                                             <th class="auto-style1">
                                                 <asp:TextBox ID="txtNVR_FTIR_B14" runat="server" placeholder="ดึงข้อมูลจาก B14"></asp:TextBox>
                                             </th>
-                                            <th class="auto-style1">mL</th>
+                                            <th class="auto-style1">
+                                                <asp:Label ID="lbNVR_FTIR_B14" runat="server" Text=""></asp:Label></th>
                                             <th class="auto-style1"></th>
                                         </tr>
                                         <tr>
@@ -244,7 +262,8 @@ The instrument detection limit for silicone oil is
                                             <th>
                                                 <asp:TextBox ID="txtNVR_FTIR_B15" runat="server" placeholder="ดึงข้อมูลจาก B15"></asp:TextBox>
                                             </th>
-                                            <th>cm<sup>2</sup></th>
+                                            <th>
+                                                <asp:Label ID="lbNVR_FTIR_B15" runat="server" Text=""></asp:Label></th>
                                             <th></th>
                                         </tr>
                                         <tr>

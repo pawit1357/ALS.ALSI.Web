@@ -531,8 +531,10 @@
                                             <td>
                                                 <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="1000">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="0.001">mg</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+
                                                 </asp:DropDownList></td>
                                         </tr>
                                         <tr>

@@ -1778,7 +1778,8 @@ namespace ALS.ALSI.Web.view.template
             }
             else
             {
-                tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
+                tb_m_specification tem = new tb_m_specification().SelectByID(this.Lpcs[0].specification_id.Value);
+
 
                 if (tem != null)
                 {
