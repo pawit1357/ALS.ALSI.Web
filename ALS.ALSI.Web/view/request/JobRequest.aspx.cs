@@ -575,33 +575,36 @@ namespace ALS.ALSI.Web.view.request
 
                         #region "Special Flow"
                         /*
-                         * ELS->Login->Chemist -(แนบไฟล์)->Sr Chemist-Approve->Finish
-                         * FA,FLWA->Login->Chemist -(แนบไฟล์) ->Sr Chemist-Approve->Admin->LabManager->Admin->Finish
-                         * GRP,TRB->Login->Admin->Finish
+                        *ELP:       Login(convert template , select spec) > Chemist testing > Sr. chemist checking > Admin(Word) > Lab Manager > Admin (Upload file PDF)
+                        ELS:       	Login(convert template(Ad hoc template)) >Chemist testing(Upload file) > Sr. chemist checking
+                        ELN:       	Login(convert template(Ad hoc template)) > Chemist testing(Upload file) > Sr. chemist checking > Admin(Word) > Lab Manager  Admin (Upload file PDF)
+                        FA:         Login > Chemist testing(Upload file) > Admin(Word) > Lab Manager > Admin (Upload file PDF)
+                        GRP:       	Login > Admin(Upload file PDF)
+                        ELWA :    	Login > Chemist testing(Upload file) > Sr. chemist checking > Admin(Word) > Lab Manager > Admin (Upload file PDF)
                          * */
                         if (!String.IsNullOrEmpty(ddlJobNumber.SelectedValue))
                         {
-                            switch (Convert.ToInt32(ddlJobNumber.SelectedValue))
+                            switch (ddlJobNumber.SelectedItem.Text.ToUpper())
                             {
-                                case 2://ELS
-                                    jobSample.template_id = 160;
+                                case "ELS":
+                                    jobSample.template_id =1;
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     break;
-                                case 3://FA
-                                    jobSample.template_id = 161;
+                                case "ELN":
+                                    jobSample.template_id = 2;
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     break;
-                                case 4://ELWA
-                                    jobSample.template_id = 162;
+                                case "FA":
+                                    jobSample.template_id = 3;
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     break;
-                                case 5://GRP
-                                    jobSample.template_id = 163;
+                                case "GRP":
+                                    jobSample.template_id = 4;
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
                                     break;
-                                case 6://TRB
-                                    jobSample.template_id = 164;
-                                    jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
+                                case "ELWA":
+                                    jobSample.template_id = 5;
+                                    jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     break;
                                 default://ELP 
                                     break;

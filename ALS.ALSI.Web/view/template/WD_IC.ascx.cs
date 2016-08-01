@@ -671,14 +671,14 @@ namespace ALS.ALSI.Web.view.template
                                                 ic.wi = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.I));
                                                 ic.wj = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
 
-                                                ic.wb = (String.IsNullOrEmpty(ic.wb)) ? "" : Convert.ToDouble(ic.wb).ToString("N" + txtDecimal01.Text);
-                                                ic.wc = (String.IsNullOrEmpty(ic.wc)) ? "" : Convert.ToDouble(ic.wc).ToString("N" + txtDecimal02.Text);
-                                                ic.wd = (String.IsNullOrEmpty(ic.wd)) ? "" : Convert.ToDouble(ic.wd).ToString("N" + txtDecimal03.Text);
-                                                ic.we = (String.IsNullOrEmpty(ic.we)) ? "" : Convert.ToDouble(ic.we).ToString("N" + txtDecimal04.Text);
-                                                ic.wf = (String.IsNullOrEmpty(ic.wf)) ? "" : Convert.ToDouble(ic.wf).ToString("N" + txtDecimal05.Text);
-                                                ic.wg = (String.IsNullOrEmpty(ic.wg)) ? "" : Convert.ToDouble(ic.wg).ToString("N" + txtDecimal06.Text);
-                                                ic.wh = (String.IsNullOrEmpty(ic.wh)) ? "" : Convert.ToDouble(ic.wh).ToString("N" + txtDecimal07.Text);
-                                                ic.wi = (String.IsNullOrEmpty(ic.wi)) || ic.wi.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(ic.wi).ToString("N" + txtDecimal08.Text);
+                                                ic.wb = (String.IsNullOrEmpty(ic.wb.Trim())) ? "" : Convert.ToDouble(ic.wb).ToString("N" + txtDecimal01.Text);
+                                                ic.wc = (String.IsNullOrEmpty(ic.wc.Trim())) ? "" : Convert.ToDouble(ic.wc).ToString("N" + txtDecimal02.Text);
+                                                ic.wd = (String.IsNullOrEmpty(ic.wd.Trim())) ? "" : Convert.ToDouble(ic.wd).ToString("N" + txtDecimal03.Text);
+                                                ic.we = (String.IsNullOrEmpty(ic.we.Trim())) ? "" : Convert.ToDouble(ic.we).ToString("N" + txtDecimal04.Text);
+                                                ic.wf = (String.IsNullOrEmpty(ic.wf.Trim())) ? "" : Convert.ToDouble(ic.wf).ToString("N" + txtDecimal05.Text);
+                                                ic.wg = (String.IsNullOrEmpty(ic.wg.Trim())) ? "" : Convert.ToDouble(ic.wg).ToString("N" + txtDecimal06.Text);
+                                                ic.wh = (String.IsNullOrEmpty(ic.wh.Trim())) ? "" : Convert.ToDouble(ic.wh).ToString("N" + txtDecimal07.Text);
+                                                ic.wi = (String.IsNullOrEmpty(ic.wi.Trim())) || ic.wi.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(ic.wi).ToString("N" + txtDecimal08.Text);
                                                 //ic.wj = (String.IsNullOrEmpty(ic.wj)) ? "" : Convert.ToDouble(ic.wj).ToString("N" + txtDecimal09.Text);
 
 

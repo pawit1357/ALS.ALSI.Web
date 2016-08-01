@@ -1410,13 +1410,13 @@ namespace ALS.ALSI.Web.view.template
         {
             switch (ddlWashMethod.SelectedValue)
             {
+                case "Flip":
                 case "Rinse":
                 case "Shake":
-                    pTankConditions.Visible = true;
-                    break;
-                case "Flip":
-                case "Ultrasonic":
                     pTankConditions.Visible = false;
+                    break;
+                case "Ultrasonic":
+                    pTankConditions.Visible = true;
                     break;
             }
         }

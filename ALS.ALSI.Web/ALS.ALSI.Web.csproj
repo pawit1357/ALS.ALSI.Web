@@ -1059,6 +1059,11 @@
     <Content Include="view\template\Seagate_FTIR_Damper.ascx" />
     <Content Include="view\template\Seagate_FTIR_Adhesive.ascx" />
     <Content Include="view\template\Seagate_FTIR_Packing.ascx" />
+    <Content Include="view\template\TemplateElwa.ascx" />
+    <Content Include="view\template\TemplateGrp.ascx" />
+    <Content Include="view\template\TemplateFa.ascx" />
+    <Content Include="view\template\TemplateEln.ascx" />
+    <Content Include="view\template\TemplateEls.ascx" />
     <Content Include="view\template\TemplateBlank.ascx" />
     <Content Include="view\template\WD_FTIR_IDM.ascx" />
     <Content Include="view\template\Seagate_HPA.ascx" />
@@ -1279,6 +1284,41 @@
     </Compile>
     <Compile Include="view\template\Seagate_FTIR_Packing.ascx.designer.cs">
       <DependentUpon>Seagate_FTIR_Packing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\TemplateElwa.ascx.cs">
+      <DependentUpon>TemplateElwa.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\TemplateElwa.ascx.designer.cs">
+      <DependentUpon>TemplateElwa.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\TemplateGrp.ascx.cs">
+      <DependentUpon>TemplateGrp.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\TemplateGrp.ascx.designer.cs">
+      <DependentUpon>TemplateGrp.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\TemplateFa.ascx.cs">
+      <DependentUpon>TemplateFa.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\TemplateFa.ascx.designer.cs">
+      <DependentUpon>TemplateFa.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\TemplateEln.ascx.cs">
+      <DependentUpon>TemplateEln.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\TemplateEln.ascx.designer.cs">
+      <DependentUpon>TemplateEln.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\TemplateEls.ascx.cs">
+      <DependentUpon>TemplateEls.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\TemplateEls.ascx.designer.cs">
+      <DependentUpon>TemplateEls.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\TemplateBlank.ascx.cs">
       <DependentUpon>TemplateBlank.ascx</DependentUpon>
