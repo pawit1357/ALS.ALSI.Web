@@ -18,6 +18,7 @@ using System.Data;
 using ALS.ALSI.Biz.ReportObjects;
 using Microsoft.Reporting.WebForms;
 using WordToPDF;
+using System.Text.RegularExpressions;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -32,12 +33,12 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-        private String[] ANameKey = {
-            "Total Hard Particles",
-            "Total MgSiO Particles",
-            "Total Steel Particles",
-            "Total Magnetic Particles"
-        };
+        //private String[] ANameKey = {
+        //    "Total Hard Particles",
+        //    "Total MgSiO Particles",
+        //    "Total Steel Particles",
+        //    "Total Magnetic Particles"
+        //};
 
         //private Hashtable GetHPAData()
         //{
@@ -261,7 +262,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     #endregion
 
-       
+
 
                     gvResult.Columns[5].Visible = true;
                     //gvResult_1.Columns[4].Visible = true;
@@ -298,16 +299,23 @@ namespace ALS.ALSI.Web.view.template
                 ddlComponent.SelectedValue = _cover.component_id.ToString();
                 ddlSpecification.SelectedValue = _cover.detail_spec_id.ToString();
 
-                //img1.ImageUrl = Configurations.HOST + "" + _cover.img_path;
 
-                gvResult.DataSource = this.HpaFor1.Where(x => x.parent == -1).OrderBy(x => x.seq);
-                gvResult.DataBind();
+                 detailSpec = new tb_m_detail_spec().SelectByID(_cover.detail_spec_id.Value);
+                if (detailSpec != null)
+                {
+                    lbDocNo.Text = detailSpec.B;
+                    lbComponent.Text = detailSpec.A;
+                }
+                    //img1.ImageUrl = Configurations.HOST + "" + _cover.img_path;
 
-                //gvResult_1.DataSource = this.HpaFor1.OrderBy(x => x.seq);
-                //gvResult_1.DataBind();
+                    //gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq);
+                    //gvResult.DataBind();
+
+                    //gvResult_1.DataSource = this.HpaFor1.OrderBy(x => x.seq);
+                    //gvResult_1.DataBind();
 
 
-                CalculateCas();
+                    CalculateCas();
             }
             else
             {
@@ -380,7 +388,7 @@ namespace ALS.ALSI.Web.view.template
                     //switch (this.CommandName)
                     //{
                     //    case CommandNameEnum.Add:
-                            objWork.InsertList(this.HpaFor1);
+                    objWork.InsertList(this.HpaFor1);
                     //        break;
                     //    case CommandNameEnum.Edit:
                     //        objWork.UpdateList(this.HpaFor1);
@@ -417,7 +425,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                   
+
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
                             break;
@@ -433,7 +441,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-             
+
                             this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
@@ -518,7 +526,8 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
-            List<template_wd_hpa_for1_coverpage> lists = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
+            //List<template_wd_hpa_for1_coverpage> lists = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> itemLines = this.HpaFor1.Where(x => x.hpa_type == 7).OrderBy(x => x.seq).ToList();
 
             #region "LOAD"
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -574,46 +583,53 @@ namespace ALS.ALSI.Web.view.template
 
                                         String[] data = line.Split(',');
 
-                                        string subfix = Path.GetFileNameWithoutExtension(source_file);
+                                        //string subfix = Path.GetFileNameWithoutExtension(source_file);
 
-                                        switch (subfix.Substring(subfix.Length - 1))
+                                        //switch (subfix.Substring(subfix.Length - 1))
+                                        //{
+                                        //    case "B":
+                                        #region "HPA(B)"
+                                        //foreach (template_wd_hpa_for1_coverpage _cov in this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList())
+                                        //{
+
+                                        int subIndex = data[0].IndexOf('(') == -1 ? data[0].ToUpper().Replace(" ", String.Empty).Length : data[0].ToUpper().Replace(" ", String.Empty).IndexOf('(');
+
+                                        foreach (template_wd_hpa_for1_coverpage _cov in itemLines)
                                         {
-                                            case "B":
-                                                #region "HPA(B)"
-                                                foreach (template_wd_hpa_for1_coverpage _cov in lists)
+
+                                            if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty).Substring(0, subIndex)))
+                                            {
+                                                template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
+                                                if (_hpa != null)
                                                 {
-                                                    int subIndex = data[0].IndexOf('(') == -1 ? data[0].ToUpper().Replace(" ", String.Empty).Length : data[0].ToUpper().Replace(" ", String.Empty).IndexOf('(');
+                                                    _hpa.C = (_hpa.C == null) ? 0 : _hpa.C + Convert.ToInt32(data[2]);
 
-                                                    if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty).Substring(0, subIndex)))
-                                                    {
-                                                        template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
-                                                        if (_hpa != null)
-                                                        {
-                                                            _hpa.C = (_hpa.C == null) ? 0 : _hpa.C + Convert.ToInt32(data[2]);
-                                                        }
-                                                    }
+
                                                 }
-                                                Console.WriteLine("");
-                                                #endregion
-                                                break;
-                                            //case "S":
-                                            //    #region "HPA(S)"
-                                            //    foreach (template_wd_hpa_for1_coverpage _cov in lists)
-                                            //    {
-                                            //        if (_cov.B.Equals(data[0]))
-                                            //        {
-                                            //            template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
-                                            //            if (_hpa != null)
-                                            //            {
-                                            //                _hpa.RawCounts = Convert.ToInt32(data[2]);
-                                            //            }
-                                            //        }
-                                            //    }
 
-                                            //    Console.WriteLine("");
-                                            //    #endregion
-                                            //    break;
+                                            }
                                         }
+                                        Console.WriteLine("");
+                                        #endregion
+                                        //break;
+                                        //case "S":
+                                        //    #region "HPA(S)"
+                                        //    foreach (template_wd_hpa_for1_coverpage _cov in lists)
+                                        //    {
+                                        //        if (_cov.B.Equals(data[0]))
+                                        //        {
+                                        //            template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
+                                        //            if (_hpa != null)
+                                        //            {
+                                        //                _hpa.RawCounts = Convert.ToInt32(data[2]);
+                                        //            }
+                                        //        }
+                                        //    }
+
+                                        //    Console.WriteLine("");
+                                        //    #endregion
+                                        //    break;
+                                        //}
                                         index++;
                                     }
                                 }
@@ -679,7 +695,7 @@ namespace ALS.ALSI.Web.view.template
             #region "SET DATA TO FORM"
 
             #endregion
-            CalculateCas();
+            //CalculateCas();
             btnSubmit.Enabled = true;
         }
 
@@ -708,6 +724,7 @@ namespace ALS.ALSI.Web.view.template
                     pCoverPage.Visible = true;
                     pDSH.Visible = false;
                     //img1.ImageUrl = Configurations.HOST + "" + this.HpaFor1[0].img_path;
+                    CalculateCas();
                     break;
                 case "Work Sheet":
                     btnCoverPage.CssClass = "btn blue";
@@ -723,8 +740,9 @@ namespace ALS.ALSI.Web.view.template
 
         private void CalculateCas()
         {
-            List<template_wd_hpa_for1_coverpage> lists = this.HpaFor1.Where(x => x.parent == 0).OrderBy(x => x.seq).ToList();
-            foreach (template_wd_hpa_for1_coverpage _val in lists)
+            //Item-Line
+            List<template_wd_hpa_for1_coverpage> itemLines = this.HpaFor1.Where(x => x.hpa_type == 7).OrderBy(x => x.seq).ToList();
+            foreach (template_wd_hpa_for1_coverpage _val in itemLines)
             {
                 if (!String.IsNullOrEmpty(txtB23.Text) && !String.IsNullOrEmpty(txtC23.Text) && !String.IsNullOrEmpty(txtD23.Text))
                 {
@@ -736,37 +754,35 @@ namespace ALS.ALSI.Web.view.template
                     _val.D = result.ToString();
                 }
             }
-
-            lists = this.HpaFor1.Where(x => x.parent == -1).OrderBy(x => x.seq).ToList();
-            foreach (template_wd_hpa_for1_coverpage _val in lists)
+            //Total-Line
+            List<template_wd_hpa_for1_coverpage> totalLines = this.HpaFor1.Where(x => x.hpa_type == 8).OrderBy(x => x.seq).ToList();
+            foreach (template_wd_hpa_for1_coverpage _val in totalLines)
             {
-                //=IF(D28="NA","NA",IF(C28>=INDEX('Detail Spec'!$A$3:$G$238,$F$1,4),"FAIL","PASS"))
-                template_wd_hpa_for1_coverpage tmp = this.HpaFor1.Where(x => x.ID == _val.ID).FirstOrDefault();
-                if (tmp != null)
+                _val.C = itemLines.Where(x => x.data_group.Equals(_val.data_group)).Sum(x => Convert.ToInt32(x.C));
+                _val.D = itemLines.Where(x => x.data_group.Equals(_val.data_group)).Sum(x => Convert.ToInt32(x.D)).ToString();
+            }
+            //Result-Line
+            List<template_wd_hpa_for1_coverpage> resultLine = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
+            foreach (template_wd_hpa_for1_coverpage _val in resultLine)
+            {
+                template_wd_hpa_for1_coverpage mappedValue = totalLines.Where(x => x.B.Equals(mappingRawData((_val.A)))).FirstOrDefault();
+                if (mappedValue != null)
                 {
-                    tmp.C = Convert.ToInt32(this.HpaFor1.Where(x => x.A.StartsWith(_val.A) && !String.IsNullOrEmpty(x.D) && x.parent == 0).Sum(x => Convert.ToInt32(x.D)));
-                    if (tmp.D != null)
+                    _val.C = mappedValue.C;
+                    if (_val.D != null)
                     {
-                        tmp.E = tmp.D.Equals("NA") ? "NA" : (tmp.C >= Convert.ToInt32(tmp.D)) ? "FAIL" : "PASS";
+                        _val.E = _val.D.Equals("NA") ? "NA" : (_val.C >= Convert.ToInt32(_val.D)) ? "FAIL" : "PASS";
                     }
                 }
+
+
+
             }
 
-            lists = this.HpaFor1.Where(x => x.parent == -2).OrderBy(x => x.seq).ToList();
-            foreach (template_wd_hpa_for1_coverpage _val in lists)
-            {
-                template_wd_hpa_for1_coverpage tmp = this.HpaFor1.Where(x => x.ID == _val.ID).FirstOrDefault();
-                if (tmp != null)
-                {
-                    tmp.C = Convert.ToInt32(this.HpaFor1.Where(x => x.A.StartsWith(_val.A) && x.parent == 0).Sum(x => Convert.ToInt32(x.C)));
-                    tmp.D = Convert.ToInt32(this.HpaFor1.Where(x => x.A.StartsWith(_val.A) && !String.IsNullOrEmpty(x.D) && x.parent == 0).Sum(x => Convert.ToInt32(x.D))).ToString();
-                }
-            }
-
-            gvResult.DataSource = this.HpaFor1.Where(x => x.parent == -1).OrderBy(x => x.seq).ToList();
+            gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
             gvResult.DataBind();
 
-            gvResult_1.DataSource = this.HpaFor1.OrderBy(x => x.seq).ToList();
+            gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != 3).OrderBy(x => x.seq).ToList();
             gvResult_1.DataBind();
 
             btnSubmit.Enabled = true;
@@ -790,6 +806,8 @@ namespace ALS.ALSI.Web.view.template
 
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
+            List<tb_m_detail_spec> detailSpecs = new tb_m_detail_spec().SelectByTemplateID(this.jobSample.template_id);
+
             tb_m_detail_spec detailSpec = new tb_m_detail_spec().SelectByID(int.Parse(ddlSpecification.SelectedValue));
             if (detailSpec != null)
             {
@@ -797,9 +815,108 @@ namespace ALS.ALSI.Web.view.template
                 lbComponent.Text = detailSpec.A;
                 List<template_wd_hpa_for1_coverpage> _list = new List<template_wd_hpa_for1_coverpage>();
 
+                List<String> ANameKey = new List<string>();
+
+
+                if (!String.IsNullOrEmpty(detailSpecs[1].D))
+                {
+                    ANameKey.Add(detailSpecs[1].D);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].E))
+                {
+                    ANameKey.Add(detailSpecs[1].E);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].F))
+                {
+                    ANameKey.Add(detailSpecs[1].F);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].G))
+                {
+                    ANameKey.Add(detailSpecs[1].G);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].H))
+                {
+                    ANameKey.Add(detailSpecs[1].H);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].I))
+                {
+                    ANameKey.Add(detailSpecs[1].I);
+                }
+
+                if (!String.IsNullOrEmpty(detailSpecs[1].J))
+                {
+                    ANameKey.Add(detailSpecs[1].J);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].K))
+                {
+                    ANameKey.Add(detailSpecs[1].K);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].L))
+                {
+                    ANameKey.Add(detailSpecs[1].L);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].M))
+                {
+                    ANameKey.Add(detailSpecs[1].M);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].N))
+                {
+                    ANameKey.Add(detailSpecs[1].N);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].O))
+                {
+                    ANameKey.Add(detailSpecs[1].O);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].P))
+                {
+                    ANameKey.Add(detailSpecs[1].P);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].Q))
+                {
+                    ANameKey.Add(detailSpecs[1].Q);
+                }
+
+                if (!String.IsNullOrEmpty(detailSpecs[1].R))
+                {
+                    ANameKey.Add(detailSpecs[1].R);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].S))
+                {
+                    ANameKey.Add(detailSpecs[1].S);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].T))
+                {
+                    ANameKey.Add(detailSpecs[1].T);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].U))
+                {
+                    ANameKey.Add(detailSpecs[1].U);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].V))
+                {
+                    ANameKey.Add(detailSpecs[1].V);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].W))
+                {
+                    ANameKey.Add(detailSpecs[1].W);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].X))
+                {
+                    ANameKey.Add(detailSpecs[1].X);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].Y))
+                {
+                    ANameKey.Add(detailSpecs[1].Y);
+                }
+                if (!String.IsNullOrEmpty(detailSpecs[1].Z))
+                {
+                    ANameKey.Add(detailSpecs[1].Z);
+                }
+
+
                 int seq = 1;
                 #region "Hard Particle Analysis"
-                for (int i = 0; i < ANameKey.Length; i++)
+                for (int i = 0; i < ANameKey.Count; i++)
                 {
                     String _val = ANameKey[i];
                     template_wd_hpa_for1_coverpage _tmp = new template_wd_hpa_for1_coverpage();
@@ -808,18 +925,29 @@ namespace ALS.ALSI.Web.view.template
                     _tmp.A = _val;
                     switch (i)
                     {
-                        case 0:
-                            _tmp.D = detailSpec.D;
-                            break;  //"Hard Particles",
-                        case 1:
-                            _tmp.D = detailSpec.E;
-                            break;  //"Magnetic Particles",
-                        case 2:
-                            _tmp.D = detailSpec.F;
-                            break;  //"SST Particles",
-                        case 3:
-                            _tmp.D = detailSpec.G;
-                            break;  //"MgSiO Particles",
+                        case 0: _tmp.D = detailSpec.D; break;
+                        case 1: _tmp.D = detailSpec.E; break;
+                        case 2: _tmp.D = detailSpec.F; break;
+                        case 3: _tmp.D = detailSpec.G; break;
+                        case 4: _tmp.D = detailSpec.H; break;
+                        case 5: _tmp.D = detailSpec.I; break;
+                        case 6: _tmp.D = detailSpec.J; break;
+                        case 7: _tmp.D = detailSpec.K; break;
+                        case 8: _tmp.D = detailSpec.L; break;
+                        case 9: _tmp.D = detailSpec.M; break;
+                        case 10: _tmp.D = detailSpec.N; break;
+                        case 11: _tmp.D = detailSpec.O; break;
+                        case 12: _tmp.D = detailSpec.P; break;
+                        case 13: _tmp.D = detailSpec.Q; break;
+                        case 14: _tmp.D = detailSpec.R; break;
+                        case 15: _tmp.D = detailSpec.S; break;
+                        case 16: _tmp.D = detailSpec.T; break;
+                        case 17: _tmp.D = detailSpec.U; break;
+                        case 18: _tmp.D = detailSpec.V; break;
+                        case 19: _tmp.D = detailSpec.W; break;
+                        case 20: _tmp.D = detailSpec.X; break;
+                        case 21: _tmp.D = detailSpec.Y; break;
+                        case 22: _tmp.D = detailSpec.Z; break;
                     }
                     _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                     _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.HPA);
@@ -835,8 +963,8 @@ namespace ALS.ALSI.Web.view.template
                 gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA));
                 gvResult.DataBind();
 
-                gvResult_1.DataSource = this.HpaFor1.Where(x => 
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)||
+                gvResult_1.DataSource = this.HpaFor1.Where(x =>
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL));
@@ -973,6 +1101,7 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        #region "DHS GRID."
         protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
@@ -992,7 +1121,7 @@ namespace ALS.ALSI.Web.view.template
                             gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
-                    gvResult.DataSource = this.HpaFor1.Where(x => x.parent == -1).OrderBy(x => x.seq).ToList();
+                    gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
                     gvResult.DataBind();
                 }
             }
@@ -1002,44 +1131,28 @@ namespace ALS.ALSI.Web.view.template
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //int PKID = Convert.ToInt32(gvResult.DataKeys[e.Row.RowIndex].Values[0].ToString());
-                //RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResult.DataKeys[e.Row.RowIndex].Values[1]);
-                //LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                //LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-                //HiddenField _hParent = (HiddenField)e.Row.FindControl("hParent");
-                //Literal _litB = (Literal)e.Row.FindControl("litB");
-                //Literal _litTest = (Literal)e.Row.FindControl("litTest");
+                int PKID = Convert.ToInt32(gvResult.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResult.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
 
-                //if (e.Row.RowIndex == 0)
-                //{
-                //    _litTest.Text = "Particle Analysis by SEM EDX";
-                //}
-                //if (_btnHide != null && _btnUndo != null)
-                //{
-                //    switch (cmd)
-                //    {
-                //        case RowTypeEnum.Hide:
-                //            _btnHide.Visible = false;
-                //            _btnUndo.Visible = true;
-                //            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-                //            break;
-                //        default:
-                //            _btnHide.Visible = true;
-                //            _btnUndo.Visible = false;
-                //            e.Row.ForeColor = System.Drawing.Color.Black;
-                //            break;
-                //    }
-                //    if (_litB != null)
-                //    {
-                //        int parent = Convert.ToInt32(_hParent.Value);
-                //        switch (parent)
-                //        {
-                //            case -1://Total
-                //                _litB.Text = String.Format("Total {0}", _litB.Text);
-                //                break;
-                //        }
-                //    }
-                //}
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
             }
         }
 
@@ -1052,10 +1165,13 @@ namespace ALS.ALSI.Web.view.template
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                LinkButton _btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
+
                 Literal _litB = (Literal)e.Row.FindControl("litB");
                 if (gvResult_1.DataKeys[e.Row.RowIndex].Values[2] != null)
                 {
-
+                    if (_btnEdit != null) { _btnEdit.Visible = false; }
+                   
                     GVTypeEnum cmd = (GVTypeEnum)Enum.ToObject(typeof(GVTypeEnum), (int)gvResult_1.DataKeys[e.Row.RowIndex].Values[2]);
                     switch (cmd)
                     {
@@ -1065,50 +1181,20 @@ namespace ALS.ALSI.Web.view.template
                             break;
                         case GVTypeEnum.CLASSIFICATION_SUB_TOTAL:
                             e.Row.BackColor = System.Drawing.Color.Yellow;
+                            if (_btnEdit != null) { _btnEdit.Visible = true; }
                             break;
                         case GVTypeEnum.CLASSIFICATION_ITEM:
                             _litB.Text = String.Format("{0}".PadRight(20, ' '), _litB.Text);
+                            if (_btnEdit != null) { _btnEdit.Visible = true; }
                             break;
                     }
                 }
-            }
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                //int PKID = Convert.ToInt32(gvResult_1.DataKeys[e.Row.RowIndex].Values[0].ToString());
-                //RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResult_1.DataKeys[e.Row.RowIndex].Values[1]);
-                ////LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                ////LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-                //HiddenField _hParent = (HiddenField)e.Row.FindControl("hParent");
-                //Literal _litB = (Literal)e.Row.FindControl("litB");
-                //Literal _litC = (Literal)e.Row.FindControl("litC");
-                //Literal _litD = (Literal)e.Row.FindControl("litD");
-                //Literal _litE = (Literal)e.Row.FindControl("litE");
-
-                //if (_litB != null)
-                //{
-                //    int parent = Convert.ToInt32(_hParent.Value);
-                //    switch (parent)
-                //    {
-                //        case -1://Total
-                //            _litB.Text = String.Format("{0}", _litB.Text);
-                //            _litC.Text = String.Empty;
-                //            _litD.Text = String.Empty;
-                //            _litE.Text = String.Empty;
-                //            e.Row.ForeColor = System.Drawing.Color.Blue;
-                //            break;
-                //        case -2://Sub Total
-                //            _litB.Text = String.Format("Subtotal - {0}", _litB.Text);
-                //            e.Row.ForeColor = System.Drawing.Color.Blue;
-                //            break;
-                //    }
-                //}
-                
             }
         }
 
 
 
-        #region "DHS GRID."
+
         protected void gvResult_1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
@@ -1117,14 +1203,14 @@ namespace ALS.ALSI.Web.view.template
         protected void gvResult_1_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvResult_1.EditIndex = e.NewEditIndex;
-            gvResult_1.DataSource = this.HpaFor1.OrderBy(x => x.seq).ToList();
+            gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != 3).OrderBy(x => x.seq).ToList();
             gvResult_1.DataBind();
         }
 
         protected void gvResult_1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvResult_1.EditIndex = -1;
-            gvResult_1.DataSource = this.HpaFor1.OrderBy(x => x.seq).ToList();
+            gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != 3).OrderBy(x => x.seq).ToList();
             gvResult_1.DataBind();
         }
 
@@ -1182,13 +1268,13 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Pb-Zr-Ti-O (PZT)");
             items.Add("-Total - Hard Particles");
             items.Add("#Magnetic Particles");
-            items.Add("Ce-Co");
+            //items.Add("Ce-Co");
             items.Add("Fe-Nd");
-            items.Add("Fe-Sr");
-            items.Add("Fe-Sm");
-            items.Add("Nd-Pr");
-            items.Add("Ni-Co");
             items.Add("Sm-Co");
+            items.Add("Fe-Sr");
+            //items.Add("Fe-Sm");
+            //items.Add("Nd-Pr");
+            //items.Add("Ni-Co");
             items.Add("-Total - Magnetic Particles");
             items.Add("#Steel Particle");
             items.Add("SS 300- Fe-Cr-Ni");
@@ -1253,6 +1339,7 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Na-Cl");
             items.Add("F-O");
             items.Add("Other");
+            items.Add("Disk Material");
             items.Add("$Grand Total of All Particles");
 
 
@@ -1305,10 +1392,10 @@ namespace ALS.ALSI.Web.view.template
         {
             String result = _val;
             Hashtable mappingValues = new Hashtable();
-            //mappingValues["SST300s with possible Si"] = "SST300s (Fe/Cr/Ni)";
-            //mappingValues["SST300s with possible Si and Mn"] = "SST400s (Fe/Cr)";
-            //mappingValues["SST400s with possible Si"] = "SST400s (Fe/Cr)";
-
+            mappingValues["Total hard Particle (Including Magnetic Particles)"] = "Total - Hard Particles";
+            mappingValues["Total MgSiO Particles"] = "Total - Magnetic Particles";
+            mappingValues["Total Steel Particles"] = "Total - Steel Particle";
+            mappingValues["Total Magnetic Particles"] = "Total - Magnetic Particles";
 
             //SST400s(Fe / Cr)
 
@@ -1316,7 +1403,7 @@ namespace ALS.ALSI.Web.view.template
 
             foreach (DictionaryEntry entry in mappingValues)
             {
-                if (entry.Key.Equals(_val))
+                if (entry.Key.Equals(Regex.Replace(_val, @"\r\n?|\n", "")))
                 {
                     result = entry.Value.ToString();
                     break;

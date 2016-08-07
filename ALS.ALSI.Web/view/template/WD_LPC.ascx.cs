@@ -323,6 +323,7 @@ namespace ALS.ALSI.Web.view.template
                     litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
                     break;
             }
+            pTankConditions.Visible = false;
         }
 
         #endregion
@@ -604,6 +605,8 @@ namespace ALS.ALSI.Web.view.template
             this.Lpc.RemoveAll(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY));
 
             List<String> listOFParticle = new List<String>();
+            listOFParticle.Add("0.200");
+
             listOFParticle.Add("0.300");
             listOFParticle.Add("0.500");
             listOFParticle.Add("0.700");

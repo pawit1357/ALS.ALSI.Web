@@ -199,7 +199,7 @@ namespace ALS.ALSI.Web.view.request
             if (template != null)
             {
                 LastLoadedTemplate = String.Format("{0}{1}.ascx", Constants.BASE_TEMPLATE_PATH, Path.GetFileNameWithoutExtension(template.path_url));
-                lbDebugInfo.Text = String.Format("debug:{0}", LastLoadedTemplate);
+                lbDebugInfo.Text = String.Format("debug:{0},TemplateID:{1},SampleID:{2})", LastLoadedTemplate,template.ID,this.jobSample.ID);
             }
 
             LoadTemplate();

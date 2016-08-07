@@ -23,7 +23,7 @@
                         <div class="row" id="invDiv" runat="server">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-12">
                                         <h5>METHOD:</h5>
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
@@ -70,7 +70,7 @@
                                 </div>
                                 <%-- RESULT--%>
                                 <div class="row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-12">
 
                                         <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
@@ -154,6 +154,7 @@
                                                     </ItemTemplate>
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtC" runat="server" Text='<%# Eval("C")%>'></asp:TextBox>
+
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Particle/cm2" ItemStyle-HorizontalAlign="Center">
@@ -168,7 +169,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Edit">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>' CausesValidation="false"><i class="fa fa-edit"></i></asp:LinkButton>
 
                                                     </ItemTemplate>
                                                     <EditItemTemplate>

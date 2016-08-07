@@ -61,14 +61,13 @@
                             <div class="col-md-9">
                                 <table>
                                     <tr>
-                                        <td></td>
+                                        <td><asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label></td>
+                                      
                                         <td>
                                             <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
-                                    </tr>
+                                         </tr>
                                 </table>
                                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand" OnRowEditing="gvResult_RowEditing" OnRowUpdating="gvResult_RowUpdating" OnRowCancelingEdit="gvResult_RowCancelingEdit">

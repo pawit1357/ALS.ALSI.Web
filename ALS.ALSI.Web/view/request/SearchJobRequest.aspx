@@ -211,15 +211,17 @@
         <div class="row">
             <div class="col-sm-12">
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                <div class="portlet light portlet-fit portlet-datatable bordered" id="form_wizard_1">
+<%--                <div class="portlet light portlet-fit portlet-datatable bordered" id="form_wizard_1">--%>
+                            <div class="portlet box blue-dark">
+
                     <div class="portlet-title">
                         <div class="caption">
                             <i class=" icon-layers font-green"></i>
-                            <span class="caption-subject font-green sbold uppercase">Search Result</span>
+                            <span class="captione">Search Result</span>
 
                         </div>
                         <div class="actions">
-                            - 
+                           
                       
 
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>

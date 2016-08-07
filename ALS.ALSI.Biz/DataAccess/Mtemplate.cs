@@ -53,7 +53,9 @@ namespace ALS.ALSI.Biz.DataAccess
         public IEnumerable<m_template> SelectAllByActive()
         {
 
-            return _repository.Find(x => x.status == "A").OrderBy(x => x.name).DistinctBy(x => x.path_url).ToList();
+            //return _repository.Find(x => x.status == "A").OrderBy(x => x.name).DistinctBy(x => x.path_url).ToList();
+            return _repository.Find(x => x.status == "A").OrderBy(x => x.name).ToList();
+
         }
         public IEnumerable<m_template> SelectAllByActiveForConvertPage(int _spec)
         {

@@ -282,17 +282,22 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                                           <table>
-                                               <tr><td></td></tr>
-                                               <tr>
-                                                   <td><asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td><td><asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
-                                               </tr>
-                                           </table>
-                                            
-                                            
+                                        <table>
+                                            <tr>
+                                              <td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                            </tr>
+                                            <tr>
+                                               
+                                                <td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            </tr>
+                                        </table>
 
 
-                                        
+
+
+
                                         <%--<h6>This sample is no Seagate specification reference.</h6>--%>
                                         <asp:GridView ID="gvAnionic" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type" OnRowDataBound="gvAnionic_RowDataBound" OnRowCommand="gvAnionic_RowCommand">

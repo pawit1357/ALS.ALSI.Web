@@ -343,7 +343,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " " + tem.C, tem.A);
+                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " " , tem.A);
 
                     }
                     #endregion
@@ -1806,7 +1806,7 @@ namespace ALS.ALSI.Web.view.template
                 txtExtractionMedium_hpa.Text = string.Empty;
                 txtExtractionVolume_hpa.Text = tem.F;
 
-                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " " + tem.C, tem.A);
+                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " " +  tem.A);
 
                 #endregion
                 #region "LPC"

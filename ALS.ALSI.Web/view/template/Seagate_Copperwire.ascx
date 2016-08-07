@@ -108,13 +108,13 @@
 
                                 <table>
                                     <tr>
-                                        <td></td>
+                                        <td><asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label></td>
+                                      
                                         <td>
                                             <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                             
                                     </tr>
                                 </table>
 

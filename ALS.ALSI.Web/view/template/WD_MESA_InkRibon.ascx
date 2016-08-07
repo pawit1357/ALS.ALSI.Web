@@ -165,16 +165,16 @@
                             <div class="col-md-9">
                                 <table>
                                     <tr>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
                                         <td>
                                             <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                    </tr>
+                                    <tr>
+
                                         <td>
                                             <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                     </tr>
                                 </table>
-<%--                                <asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label>--%>
+                                <%--                                <asp:Label ID="lbResultDesc" runat="server" Text=""></asp:Label>--%>
                                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand" OnRowEditing="gvResult_RowEditing" OnRowUpdating="gvResult_RowUpdating">
                                     <Columns>
@@ -287,7 +287,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -374,7 +374,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="control-label col-md-3"></label>
                                     <div class="col-md-9">
@@ -406,7 +406,7 @@
                         </div>--%>
                     </asp:Panel>
 
-<%--                    <asp:Panel ID="pRefImage" runat="server">
+                    <%--                    <asp:Panel ID="pRefImage" runat="server">
                         <h4 class="form-section">Reference Image:</h4>
                         <div class="row">
                             <div class="col-md-9">

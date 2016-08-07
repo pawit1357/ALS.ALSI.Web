@@ -556,6 +556,14 @@
           <Property Name="BY" Type="varchar" MaxLength="255" />
           <Property Name="BZ" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="tb_unit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="value" Type="double" />
+        </EntityType>
         <EntityType Name="template_seagate_copperwire_coverpage">
           <Key>
             <PropertyRef Name="ID" />
@@ -1150,11 +1158,11 @@
           <Property Name="detail_spec_id" Type="int" />
           <Property Name="component_id" Type="int" />
           <Property Name="seq" Type="int" />
-          <Property Name="A" Type="varchar" MaxLength="45" />
-          <Property Name="B" Type="varchar" MaxLength="45" />
+          <Property Name="A" Type="varchar" MaxLength="150" />
+          <Property Name="B" Type="varchar" MaxLength="150" />
           <Property Name="C" Type="int" />
-          <Property Name="D" Type="varchar" MaxLength="45" />
-          <Property Name="E" Type="varchar" MaxLength="45" />
+          <Property Name="D" Type="varchar" MaxLength="150" />
+          <Property Name="E" Type="varchar" MaxLength="150" />
           <Property Name="row_type" Type="int" />
           <Property Name="parent" Type="int" />
           <Property Name="img_path" Type="varchar" MaxLength="150" />
@@ -1545,6 +1553,7 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="tb_m_dhs_library" EntityType="Self.tb_m_dhs_library" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_gcms_cas" EntityType="Self.tb_m_gcms_cas" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_specification" EntityType="Self.tb_m_specification" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="tb_unit" EntityType="Self.tb_unit" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_copperwire_coverpage" EntityType="Self.template_seagate_copperwire_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_copperwire_img" EntityType="Self.template_seagate_copperwire_img" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_corrosion_coverpage" EntityType="Self.template_seagate_corrosion_coverpage" Schema="alsi" store:Type="Tables" />
@@ -1659,6 +1668,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="tb_m_dhs_library" EntityType="alsiModel.tb_m_dhs_library" />
           <EntitySet Name="tb_m_gcms_cas" EntityType="alsiModel.tb_m_gcms_cas" />
           <EntitySet Name="tb_m_specification" EntityType="alsiModel.tb_m_specification" />
+          <EntitySet Name="tb_unit" EntityType="alsiModel.tb_unit" />
           <EntitySet Name="template_seagate_copperwire_coverpage" EntityType="alsiModel.template_seagate_copperwire_coverpage" />
           <EntitySet Name="template_seagate_copperwire_img" EntityType="alsiModel.template_seagate_copperwire_img" />
           <EntitySet Name="template_seagate_corrosion_coverpage" EntityType="alsiModel.template_seagate_corrosion_coverpage" />
@@ -2302,6 +2312,14 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="BY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="BZ" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="tb_unit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="value" Type="Double" />
+        </EntityType>
         <EntityType Name="template_seagate_copperwire_coverpage">
           <Key>
             <PropertyRef Name="ID" />
@@ -2896,11 +2914,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="detail_spec_id" Type="Int32" />
           <Property Name="component_id" Type="Int32" />
           <Property Name="seq" Type="Int32" />
-          <Property Name="A" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="B" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="A" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="C" Type="Int32" />
-          <Property Name="D" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="D" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="E" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="row_type" Type="Int32" />
           <Property Name="parent" Type="Int32" />
           <Property Name="img_path" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -3843,6 +3861,15 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="template_id" ColumnName="template_id" />
                 <ScalarProperty Name="specification_id" ColumnName="specification_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_unit">
+            <EntityTypeMapping TypeName="alsiModel.tb_unit">
+              <MappingFragment StoreEntitySet="tb_unit">
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

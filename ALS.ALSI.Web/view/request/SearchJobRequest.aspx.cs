@@ -143,6 +143,8 @@ namespace ALS.ALSI.Web.view.request
 
                     break;
             }
+            btnElp.CssClass =  "btn blue";
+
 
         }
 
@@ -608,6 +610,8 @@ namespace ALS.ALSI.Web.view.request
             LinkButton btn = (LinkButton)sender;
 
             btnElp.CssClass = (btnElp.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
+            btnEln.CssClass = (btnEln.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
+
             btnEls.CssClass = (btnEls.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
             btnFa.CssClass = (btnFa.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
             btnElwa.CssClass = (btnElwa.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";

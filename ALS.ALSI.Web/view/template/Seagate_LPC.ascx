@@ -71,16 +71,21 @@
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
 
-                <%--                        <h6>The Specification is based on Seagate's Doc .
+                                        <%--                        <h6>The Specification is based on Seagate's Doc .
                             <asp:Label ID="lbDocNo" runat="server" Text=""></asp:Label>
                                             <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>for
                             <asp:Label ID="lbCommodity" runat="server" Text=""></asp:Label>--%>
-                                                                                   <table>
-                                               <tr><td></td></tr>
-                                               <tr>
-                                                   <td><asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td><td><asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
-                                               </tr>
-                                           </table>
+                                        <table>
+                                            <tr>
+                                               <td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                            </tr>
+                                            <tr>
+                                              
+                                                <td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            </tr>
+                                        </table>
                                         </h6>
                                     </div>
                                 </div>

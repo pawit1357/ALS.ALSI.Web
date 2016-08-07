@@ -121,11 +121,11 @@
                                         <h6>Results:</h6>
                                         <table>
                                             <tr>
-                                                <td></td>
+                                       <td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                            
                                                 <td>
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
@@ -744,6 +744,8 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                                     <asp:ListItem Value="2">ug/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">ug</asp:ListItem>
                                                     <asp:ListItem Value="4">ug/g</asp:ListItem>
+                                                    <asp:ListItem Value="5">ng/g</asp:ListItem>
+                                                    <asp:ListItem Value="6">g</asp:ListItem>
 
                                                 </asp:DropDownList></th>
                                             <th></th>

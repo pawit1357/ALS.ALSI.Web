@@ -73,7 +73,7 @@ namespace ALS.ALSI.Web.view.request
             m_template template = new m_template();
 
 
-            var data = template.SelectAllByActiveForConvertPage(Convert.ToInt16(dt.Rows[0]["spec_id"].ToString()));
+            var data = template.SelectAllByActive();//.SelectAllByActiveForConvertPage(Convert.ToInt16(dt.Rows[0]["spec_id"].ToString()));
             ddlTemplate.Items.Clear();
             ddlTemplate.DataSource = data;
             ddlTemplate.DataBind();

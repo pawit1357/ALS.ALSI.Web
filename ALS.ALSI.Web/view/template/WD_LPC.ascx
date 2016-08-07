@@ -62,16 +62,21 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                                  <%--      <h6>The specification is based on Western Digital's document no.
+                                        <%--      <h6>The specification is based on Western Digital's document no.
                                             <asp:Label ID="lbSpecRev" runat="server" Text=""></asp:Label>for
                                             <asp:Label ID="lbComponent" runat="server" Text=""></asp:Label>
                                         </h6>--%>
-                                                                                   <table>
-                                               <tr><td></td></tr>
-                                               <tr>
-                                                   <td><asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td><td><asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
-                                               </tr>
-                                           </table>
+                                        <table>
+                                            <tr>
+                                           <td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                            </tr>
+                                            <tr>
+                                           
+                                                <td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                                 <br />
@@ -147,7 +152,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Select Worksheet: </label>
-                                         
+
                                         <div class="col-md-3">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="input-group input-large">
@@ -217,7 +222,8 @@
                                     <table class="table table-striped table-hover" id="tab2" runat="server">
                                         <tbody>
                                             <tr runat="server" id="tr4">
-                                                <td colspan="2">Test Method: <asp:Label ID="lbTestMethod" runat="server" Text="Label"></asp:Label></td>
+                                                <td colspan="2">Test Method:
+                                                    <asp:Label ID="lbTestMethod" runat="server" Text="Label"></asp:Label></td>
                                             </tr>
                                             <tr>
                                                 <td>Surface Area, cm²</td>
@@ -325,14 +331,14 @@
                                                     <asp:Literal ID="litBlankCorredtedCM2" runat="server" Text='<%# Eval("F")%>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                                                                            <asp:TemplateField HeaderText="Hide">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Hide">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                        CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                        CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                         </Columns>
 
                                         <EmptyDataTemplate>
