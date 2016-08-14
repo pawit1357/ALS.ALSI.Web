@@ -371,27 +371,7 @@
                                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-                                    <%--                        <asp:Panel ID="pUploadfile" runat="server">
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Uplod file:</label>
-                                        <div class="col-md-6">
-                                            <asp:HiddenField ID="HiddenField1" runat="server" />
-                                            <span class="btn green fileinput-button">
-                                                <i class="fa fa-plus"></i>
-                                                <span>Add files...</span>
-                                                <asp:FileUpload ID="FileUpload1" runat="server" />
-                                            </span>
-                                            <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                            <br />
-                        </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -431,7 +411,6 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <asp:Button ID="btnCalculate" runat="server" CssClass="btn green" OnClick="btnCalculate_Click" Text="Calculate" />
                                         <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn green" />
                                         <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="disable btn" OnClick="btnCancel_Click" />
                                     </div>

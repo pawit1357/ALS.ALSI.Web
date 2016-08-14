@@ -110,73 +110,6 @@
                                                 </EmptyDataTemplate>
                                             </asp:GridView>
 
-<%--                                            <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
-                                                CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
-                                                <Columns>
-                                                    <asp:TemplateField HeaderText="Analysis" ItemStyle-HorizontalAlign="Left">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litAnalysis" runat="server" Text='<%# Eval("A")%>' />
-                                                        </ItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Left" />
-                                                    </asp:TemplateField>
-
-                                                    <asp:TemplateField HeaderText="Procedure No" ItemStyle-HorizontalAlign="Left">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litProcedureNo" runat="server" Text='<%# Eval("B")%>' />
-                                                        </ItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Left" />
-                                                    </asp:TemplateField>
-
-                                                    <asp:TemplateField HeaderText="Number of pieces used for extraction" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litNumberOfPiecesUsedForExtraction" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Left" />
-                                                    </asp:TemplateField>
-
-                                                    <asp:TemplateField HeaderText="Extraction Medium" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="litExtractionMedium" runat="server" Text='<%# Eval("D")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-
-                                                    <asp:TemplateField HeaderText="Extraction Volume" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="litExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtExtractionVolume" runat="server" Text='<%# Eval("E")%>'></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Hide">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                            <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Edit">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
-                                                                CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
-                                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
-                                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
-                                                        </EditItemTemplate>
-                                                    </asp:TemplateField>
-                                                </Columns>
-
-                                                <EmptyDataTemplate>
-                                                    <div class="data-not-found">
-                                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                                    </div>
-                                                </EmptyDataTemplate>
-                                            </asp:GridView>--%>
 
                                         </div>
 
@@ -403,218 +336,40 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                     <asp:Panel ID="PNvr" runat="server">
                         <div class="row">
                             <div class="col-md-9">
-                                <table class="table table-striped table-hover small" id="Table1" runat="server">
-                                    <thead>
-                                        <tr>
-                                            <th>Unit</th>
-                                            <th>
-                                                <asp:DropDownList ID="ddlNvrUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
-                                                    <asp:ListItem Value="1" Selected="True">ug</asp:ListItem>
-                                                    <asp:ListItem Value="2">ug/cm2</asp:ListItem>
-                                                </asp:DropDownList>
+                               
+                                
+                                <asp:GridView ID="gvNVr" CssClass="table table-striped table-bordered mini" runat="server" AutoGenerateColumns="False">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
 
-                                            </th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <th></th>
-                                            <th>Control</th>
-                                            <th>Sample</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr runat="server" id="tr26">
-                                            <td>Pan No.</td>
-                                            <td>
-                                                <asp:Label ID="Label5" runat="server">1</asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="Label6" runat="server">2</asp:Label>
-                                            </td>
+                                        <asp:TemplateField HeaderText="Control" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
 
-                                        </tr>
-                                        <tr runat="server" id="tr9">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB16" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC16" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
+                                        <asp:TemplateField HeaderText="Sample" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litC" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
 
-                                        </tr>
-                                        <tr runat="server" id="tr10">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB17" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC17" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
+                                    </Columns>
 
-                                        </tr>
-                                        <tr runat="server" id="tr11">
-                                            <td>Pan Tare weight (ug)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB18" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC18" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
+                                    <EmptyDataTemplate>
+                                        <div class="data-not-found">
+                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
 
-                                        </tr>
-
-                                        <tr runat="server" id="tr12">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB20" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC20" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr13">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB21" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC21" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr14">
-                                            <td>1st weighing (ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB22" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC22" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-
-
-
-                                        <tr runat="server" id="tr15">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB24" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC24" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr16">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB25" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC25" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr17">
-                                            <td>2nd weighing (ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB26" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC26" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-
-
-
-
-                                        <tr runat="server" id="tr18">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB28" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC28" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr19">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB29" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC29" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr20">
-                                            <td>3rd weighing (ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB30" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC30" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-
-                                        <tr runat="server" id="tr23">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB32" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC32" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr24">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB33" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC33" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr27">
-                                            <td>Final weighing (ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB34" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC34" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-
-
-
-                                        <tr runat="server" id="tr21">
-                                            <td>NVR(ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="nvrB36" runat="server" Text="0"></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="nvrC36" runat="server" Text="0"></asp:Label>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr22">
-                                            <td>NVR (ug/g) = ppm
-
-                                            </td>
-                                            <td>&nbsp;</td>
-                                            <td>
-                                                <asp:Label ID="nvrC37" runat="server" Text="0"></asp:Label>
-                                            </td>
-
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </asp:Panel>

@@ -1012,6 +1012,9 @@
           <Property Name="channel_size" Type="varchar" MaxLength="5" />
           <Property Name="row_state" Type="int" />
           <Property Name="row_type" Type="int" />
+          <Property Name="df03" Type="double" />
+          <Property Name="df05" Type="double" />
+          <Property Name="df06" Type="double" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
@@ -2768,6 +2771,9 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="channel_size" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="row_state" Type="Int32" />
           <Property Name="row_type" Type="Int32" />
+          <Property Name="df03" Type="Double" />
+          <Property Name="df05" Type="Double" />
+          <Property Name="df06" Type="Double" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
@@ -4274,6 +4280,9 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_lpc_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_lpc_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_lpc_coverpage">
+                <ScalarProperty Name="df06" ColumnName="df06" />
+                <ScalarProperty Name="df05" ColumnName="df05" />
+                <ScalarProperty Name="df03" ColumnName="df03" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
                 <ScalarProperty Name="row_state" ColumnName="row_state" />
                 <ScalarProperty Name="channel_size" ColumnName="channel_size" />

@@ -70,5 +70,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public string channel_size { get; set; }
         public Nullable<int> row_state { get; set; }
         public Nullable<int> row_type { get; set; }
+        public Nullable<double> df03 { get; set; }
+        public Nullable<double> df05 { get; set; }
+        public Nullable<double> df06 { get; set; }
     }
 }

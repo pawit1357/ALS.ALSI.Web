@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="WD_HPA_FOR_3.ascx.cs" Inherits="ALS.ALSI.Web.view.template.WD_HPA_FOR_3" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
-<form runat="server" id="Form1" method="POST" enctype="multipart/form-data">
+<form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
@@ -31,7 +31,7 @@
                         <div class="row" id="invDiv" runat="server">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-12">
                                         <h5>METHOD:</h5>
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
@@ -179,7 +179,7 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <asp:GridView ID="gvARM" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type,row_group" OnRowDataBound="gvARM_RowDataBound" OnRowCommand="gvARM_RowCommand" OnRowCancelingEdit="gvARM_RowCancelingEdit" OnRowDeleting="gvARM_RowDeleting" OnRowEditing="gvARM_RowEditing" OnRowUpdating="gvARM_RowUpdating">
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type,hpa_type" OnRowDataBound="gvARM_RowDataBound" OnRowCommand="gvARM_RowCommand" OnRowCancelingEdit="gvARM_RowCancelingEdit" OnRowDeleting="gvARM_RowDeleting" OnRowEditing="gvARM_RowEditing" OnRowUpdating="gvARM_RowUpdating">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Elemental Composition" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
@@ -232,7 +232,7 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <asp:GridView ID="gvPivot" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type,row_group" OnRowDataBound="gvPivot_RowDataBound" OnRowCommand="gvPivot_RowCommand" OnRowCancelingEdit="gvPivot_RowCancelingEdit" OnRowDeleting="gvPivot_RowDeleting" OnRowEditing="gvPivot_RowEditing" OnRowUpdating="gvPivot_RowUpdating">
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type,hpa_type" OnRowDataBound="gvPivot_RowDataBound" OnRowCommand="gvPivot_RowCommand" OnRowCancelingEdit="gvPivot_RowCancelingEdit" OnRowDeleting="gvPivot_RowDeleting" OnRowEditing="gvPivot_RowEditing" OnRowUpdating="gvPivot_RowUpdating">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Elemental Composition" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
@@ -285,7 +285,7 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <asp:GridView ID="gvSwage" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type,row_group" OnRowDataBound="gvSwage_RowDataBound" OnRowCommand="gvSwage_RowCommand" OnRowCancelingEdit="gvSwage_RowCancelingEdit" OnRowDeleting="gvSwage_RowDeleting" OnRowEditing="gvSwage_RowEditing" OnRowUpdating="gvSwage_RowUpdating">
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type,hpa_type" OnRowDataBound="gvSwage_RowDataBound" OnRowCommand="gvSwage_RowCommand" OnRowCancelingEdit="gvSwage_RowCancelingEdit" OnRowDeleting="gvSwage_RowDeleting" OnRowEditing="gvSwage_RowEditing" OnRowUpdating="gvSwage_RowUpdating">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Elemental Composition" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
@@ -377,68 +377,50 @@
                                 <div class="portlet-body">
 
                                     <asp:Panel ID="pSpecification" runat="server">
-                                        <%--                                        <div class="row">--%>
-                                        <%--                                            <div class="col-md-6">--%>
+
                                         <div class="form-group">
-                                            <label class="control-label col-md-3">Component:<span class="required">*</span></label>
+                                            <label class="control-label col-md-3">Compoddnent:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlComponent" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <%--                                            </div>--%>
-                                        <%--                                            <div class="col-md-6">--%>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <%--                                            </div>--%>
-                                        <%--                                        </div>--%>
-                                        <br />
+
                                     </asp:Panel>
                                     <asp:Panel ID="pStatus" runat="server">
-                                        <%--          <div class="row">
-                                            <div class="col-md-6">--%>
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <%--        </div>
-                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pRemark" runat="server">
-                                        <%--      <div class="row">
-                                            <div class="col-md-6">--%>
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
                                             </div>
                                         </div>
-                                        <%--     </div>
-                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDisapprove" runat="server">
-                                        <%--      <div class="row">
-                                            <div class="col-md-6">--%>
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <%--      </div>
-                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDownload" runat="server">
-                                        <%--     <div class="row">
-                                            <div class="col-md-6">--%>
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Download:</label>
                                             <div class="col-md-6">
@@ -448,8 +430,6 @@
                                                 </asp:LinkButton>
                                             </div>
                                         </div>
-                                        <%--     </div>
-                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pUploadfile" runat="server">
@@ -482,27 +462,7 @@
                                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-                                    <%--                        <asp:Panel ID="pUploadfile" runat="server">
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Uplod file:</label>
-                                        <div class="col-md-6">
-                                            <asp:HiddenField ID="HiddenField1" runat="server" />
-                                            <span class="btn green fileinput-button">
-                                                <i class="fa fa-plus"></i>
-                                                <span>Add files...</span>
-                                                <asp:FileUpload ID="FileUpload1" runat="server" />
-                                            </span>
-                                            <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                            <br />
-                        </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->

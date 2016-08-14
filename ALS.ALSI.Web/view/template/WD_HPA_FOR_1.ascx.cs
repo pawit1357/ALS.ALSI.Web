@@ -168,7 +168,7 @@ namespace ALS.ALSI.Web.view.template
                 pUploadfile.Visible = false;
                 pDownload.Visible = false;
                 btnSubmit.Visible = false;
-                btnCalculate.Visible = false;
+                //btnCalculate.Visible = false;
 
                 switch (userRole)
                 {
@@ -182,7 +182,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = false;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = false;
+                            //btnCalculate.Visible = false;
                         }
                         break;
                     case RoleEnum.CHEMIST:
@@ -195,7 +195,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = false;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = true;
+                            //btnCalculate.Visible = true;
 
                         }
                         break;
@@ -211,7 +211,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = false;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = true;
+                            //btnCalculate.Visible = true;
 
                         }
                         break;
@@ -225,7 +225,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = true;
                             pDownload.Visible = true;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = false;
+                            //btnCalculate.Visible = false;
 
                         }
                         break;
@@ -241,7 +241,7 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = true;
                             btnSubmit.Visible = true;
-                            btnCalculate.Visible = false;
+                            //btnCalculate.Visible = false;
 
                         }
                         break;
@@ -300,22 +300,22 @@ namespace ALS.ALSI.Web.view.template
                 ddlSpecification.SelectedValue = _cover.detail_spec_id.ToString();
 
 
-                 detailSpec = new tb_m_detail_spec().SelectByID(_cover.detail_spec_id.Value);
+                detailSpec = new tb_m_detail_spec().SelectByID(_cover.detail_spec_id.Value);
                 if (detailSpec != null)
                 {
                     lbDocNo.Text = detailSpec.B;
                     lbComponent.Text = detailSpec.A;
                 }
-                    //img1.ImageUrl = Configurations.HOST + "" + _cover.img_path;
+                //img1.ImageUrl = Configurations.HOST + "" + _cover.img_path;
 
-                    //gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq);
-                    //gvResult.DataBind();
+                //gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq);
+                //gvResult.DataBind();
 
-                    //gvResult_1.DataSource = this.HpaFor1.OrderBy(x => x.seq);
-                    //gvResult_1.DataBind();
+                //gvResult_1.DataSource = this.HpaFor1.OrderBy(x => x.seq);
+                //gvResult_1.DataBind();
 
 
-                    CalculateCas();
+                CalculateCas();
             }
             else
             {
@@ -529,6 +529,12 @@ namespace ALS.ALSI.Web.view.template
             //List<template_wd_hpa_for1_coverpage> lists = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
             List<template_wd_hpa_for1_coverpage> itemLines = this.HpaFor1.Where(x => x.hpa_type == 7).OrderBy(x => x.seq).ToList();
 
+            //Clear old value
+            foreach (template_wd_hpa_for1_coverpage _cov in itemLines)
+            {
+                _cov.C = 0;
+            }
+
             #region "LOAD"
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
 
@@ -567,7 +573,6 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                             default:
                                 #region "Raw Data-Arm"
-
                                 using (StreamReader reader = new StreamReader(source_file))
                                 {
                                     int index = 0;
@@ -583,100 +588,38 @@ namespace ALS.ALSI.Web.view.template
 
                                         String[] data = line.Split(',');
 
-                                        //string subfix = Path.GetFileNameWithoutExtension(source_file);
-
-                                        //switch (subfix.Substring(subfix.Length - 1))
-                                        //{
-                                        //    case "B":
-                                        #region "HPA(B)"
-                                        //foreach (template_wd_hpa_for1_coverpage _cov in this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList())
-                                        //{
-
-                                        int subIndex = data[0].IndexOf('(') == -1 ? data[0].ToUpper().Replace(" ", String.Empty).Length : data[0].ToUpper().Replace(" ", String.Empty).IndexOf('(');
+                                        //int subIndex = data[0].IndexOf('(') == -1 ? data[0].ToUpper().Replace(" ", String.Empty).Length : data[0].ToUpper().Replace(" ", String.Empty).IndexOf('(');
+                                        String compareValue = data[0].Split(' ')[0].ToUpper().Trim();
 
                                         foreach (template_wd_hpa_for1_coverpage _cov in itemLines)
                                         {
-
-                                            if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty).Substring(0, subIndex)))
+                                            if (_cov.B.ToUpper().Trim().Equals(compareValue))
                                             {
-                                                template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
-                                                if (_hpa != null)
-                                                {
-                                                    _hpa.C = (_hpa.C == null) ? 0 : _hpa.C + Convert.ToInt32(data[2]);
-
-
-                                                }
-
+                                                _cov.C +=  Convert.ToInt32(data[2]);
                                             }
-                                        }
-                                        Console.WriteLine("");
-                                        #endregion
-                                        //break;
-                                        //case "S":
-                                        //    #region "HPA(S)"
-                                        //    foreach (template_wd_hpa_for1_coverpage _cov in lists)
-                                        //    {
-                                        //        if (_cov.B.Equals(data[0]))
-                                        //        {
-                                        //            template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
-                                        //            if (_hpa != null)
-                                        //            {
-                                        //                _hpa.RawCounts = Convert.ToInt32(data[2]);
-                                        //            }
-                                        //        }
-                                        //    }
 
-                                        //    Console.WriteLine("");
-                                        //    #endregion
-                                        //    break;
+                                        }
+
+
+                                        //foreach (template_wd_hpa_for1_coverpage _cov in itemLines)
+                                        //{
+
+                                        //    if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty).Substring(0, subIndex)))
+                                        //    {
+                                        //        template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
+                                        //        if (_hpa != null)
+                                        //        {
+                                        //            _hpa.C = (_hpa.C == null) ? 0 : _hpa.C + Convert.ToInt32(data[2]);
+
+
+                                        //        }
+
+                                        //    }
                                         //}
+                                        Console.WriteLine("");
                                         index++;
                                     }
                                 }
-                                //using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
-                                //{
-                                //    HSSFWorkbook wd = new HSSFWorkbook(fs);
-                                //    ISheet sheet = wd.GetSheet("Raw Data-Arm");
-                                //    if (sheet == null)
-                                //    {
-                                //        MessageBox.Show(this.Page, String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", sheet.SheetName));
-                                //    }
-                                //    else
-                                //    {
-                                //        if (sheet != null)
-                                //        {
-
-                                //            foreach (template_wd_hpa_for1_coverpage _cov in lists)
-                                //            {
-                                //                int rc = 0;
-                                //                for (int c = 0; c < 100; c++)
-                                //                {
-                                //                    String typesOfParticles = CustomUtils.GetCellValue(sheet.GetRow(0).GetCell(c));
-                                //                    if (_cov.B.Equals(typesOfParticles))
-                                //                    {
-                                //                        for (int row = 1; row <= sheet.LastRowNum; row++)
-                                //                        {
-                                //                            String rank = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(3));
-                                //                            String value = CustomUtils.GetCellValue(sheet.GetRow(row).GetCell(c));
-                                //                            if (!rank.Equals("Rejected (ED)") && value.Equals("1"))
-                                //                            {
-                                //                                rc++;
-                                //                            }
-                                //                        }
-                                //                        break;
-                                //                    }
-                                //                }
-                                //                template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
-                                //                if (_hpa != null)
-                                //                {
-                                //                    _hpa.C = rc;
-                                //                }
-                                //            }
-                                //            Console.WriteLine("");
-
-                                //        }
-                                //    }
-                                //}
                                 #endregion
                                 break;
                         }
@@ -696,6 +639,15 @@ namespace ALS.ALSI.Web.view.template
 
             #endregion
             //CalculateCas();
+            //foreach (template_wd_hpa_for1_coverpage _cov in itemLines)
+            //{
+            //    if (_cov.B.Trim().Equals("Ti-C"))
+            //    {
+            //        _cov.C = 1357;
+            //    }
+
+            //}
+
             btnSubmit.Enabled = true;
         }
 
@@ -1171,7 +1123,7 @@ namespace ALS.ALSI.Web.view.template
                 if (gvResult_1.DataKeys[e.Row.RowIndex].Values[2] != null)
                 {
                     if (_btnEdit != null) { _btnEdit.Visible = false; }
-                   
+
                     GVTypeEnum cmd = (GVTypeEnum)Enum.ToObject(typeof(GVTypeEnum), (int)gvResult_1.DataKeys[e.Row.RowIndex].Values[2]);
                     switch (cmd)
                     {

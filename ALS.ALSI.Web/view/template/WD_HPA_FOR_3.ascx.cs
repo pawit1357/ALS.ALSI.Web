@@ -29,107 +29,107 @@ namespace ALS.ALSI.Web.view.template
 
         //private String[] GetHPAHeader = { "Total Hard Particles", "Total MgSiO Particles", "Total Steel Particles", "Total Magnetic Particles", "Other Particle" };
 
-        private Hashtable GetHPAData()
-        {
-            Hashtable hashtable = new Hashtable();
-            hashtable.Add("Hard Particles",
-                new String[]{
-                          "Al-O",
-                          "Al-Si-O",
-                          "Si-O",
-                          "Si-C",
-                          "Al-Cu-O",
-                          "Al-Mg-O",
-                          "Al-Si-Cu-O",
-                          "Al-Si-Fe-O",
-                          "Al-Si-Mg-O",
-                          "Al-Ti-O",
-                          "Ti-O",
-                          "Ti-C",
-                          "Ti-B",
-                          "Ti-N",
-                          "W-O",
-                          "W-C",
-                          "Zr-O",
-                          "Zr-C",
-                          "Pb-Zr-Ti-O"
-                           });
-            hashtable.Add("MgSiO Particles",
-                new String[]{
-                          "Mg-Si-O",
-                           });
-            hashtable.Add("Steel Particles",
-                new String[]{
-                          "SS 300- Fe-Cr-Ni",
-                          "SS 300- Fe-Cr-Ni-Mn",
-                          "SS 300- Fe-Cr-Ni-Si",
-                          "SS 400- Fe-Cr",
-                          "SS 400- Fe-Cr-Mn",
-                          "Other Steel - Fe",
-                          "Other Steel - Fe-Mn",
-                          "Other Steel - Fe-Ni",
-                          "Other Steel - Fe-O"
-                           });
-            hashtable.Add("Magnetic Particles",
-                new String[]{
-                          "Ce-Co",
-                          "Fe-Nd",
-                          "Fe-Sm",
-                          "Fe-Sr",
-                          "Nd-Pr",
-                          "Ni-Co",
-                          "Sm-Co"
-                           });
-            hashtable.Add("Other Particle",
-                new String[]{
-                          "No Element",
-                          "Ni",
-                          "Ni-P",
-                          "Sn base",
-                          "Other",
-                          "Al",
-                          "Al-Mg",
-                          "Al-Ti",
-                          "Al-Si (1)",
-                          "Al-Si (2)",
-                          "Si",
-                          "Al-Cu",
-                          "Al-Si-Cu",
-                          "Al-Si-Fe",
-                          "Al-Si-Mg",
-                          "Mg-Si-O-Al",
-                          "Ti",
-                          "Nd",
-                          "S-Cr-Mn",
-                          "Zn base",
-                          "Ca base",
-                          "Ni base",
-                          "Cr base",
-                          "Zr base",
-                          "Cl base",
-                          "Na-Cl",
-                          "Cu",
-                          "Cu-Au",
-                          "Ag-S",
-                          "Au-Ni",
-                          "Ag",
-                          "Au",
-                          "Cu-Au-Ni",
-                          "Cu-Zn",
-                          "Cu-Zn-Ni",
-                          "Cu-Zn-Au-Ni",
-                          "Zn-O",
-                          "Pb",
-                          "Fe-Cu",
-                          "Cr-Mn",
-                          "Al-Si Base",
-                          "F-O",
-                          "Cu-S-Al-O Base",
-                          "Ti-O/Al-Si-Fe",
-                          "Cr-Rich (Cr Base + Cr-Mn)"
-                           });
-            return hashtable;
-        }
+        //private Hashtable GetHPAData()
+        //{
+        //    Hashtable hashtable = new Hashtable();
+        //    hashtable.Add("Hard Particles",
+        //        new String[]{
+        //                  "Al-O",
+        //                  "Al-Si-O",
+        //                  "Si-O",
+        //                  "Si-C",
+        //                  "Al-Cu-O",
+        //                  "Al-Mg-O",
+        //                  "Al-Si-Cu-O",
+        //                  "Al-Si-Fe-O",
+        //                  "Al-Si-Mg-O",
+        //                  "Al-Ti-O",
+        //                  "Ti-O",
+        //                  "Ti-C",
+        //                  "Ti-B",
+        //                  "Ti-N",
+        //                  "W-O",
+        //                  "W-C",
+        //                  "Zr-O",
+        //                  "Zr-C",
+        //                  "Pb-Zr-Ti-O"
+        //                   });
+        //    hashtable.Add("MgSiO Particles",
+        //        new String[]{
+        //                  "Mg-Si-O",
+        //                   });
+        //    hashtable.Add("Steel Particles",
+        //        new String[]{
+        //                  "SS 300- Fe-Cr-Ni",
+        //                  "SS 300- Fe-Cr-Ni-Mn",
+        //                  "SS 300- Fe-Cr-Ni-Si",
+        //                  "SS 400- Fe-Cr",
+        //                  "SS 400- Fe-Cr-Mn",
+        //                  "Other Steel - Fe",
+        //                  "Other Steel - Fe-Mn",
+        //                  "Other Steel - Fe-Ni",
+        //                  "Other Steel - Fe-O"
+        //                   });
+        //    hashtable.Add("Magnetic Particles",
+        //        new String[]{
+        //                  "Ce-Co",
+        //                  "Fe-Nd",
+        //                  "Fe-Sm",
+        //                  "Fe-Sr",
+        //                  "Nd-Pr",
+        //                  "Ni-Co",
+        //                  "Sm-Co"
+        //                   });
+        //    hashtable.Add("Other Particle",
+        //        new String[]{
+        //                  "No Element",
+        //                  "Ni",
+        //                  "Ni-P",
+        //                  "Sn base",
+        //                  "Other",
+        //                  "Al",
+        //                  "Al-Mg",
+        //                  "Al-Ti",
+        //                  "Al-Si (1)",
+        //                  "Al-Si (2)",
+        //                  "Si",
+        //                  "Al-Cu",
+        //                  "Al-Si-Cu",
+        //                  "Al-Si-Fe",
+        //                  "Al-Si-Mg",
+        //                  "Mg-Si-O-Al",
+        //                  "Ti",
+        //                  "Nd",
+        //                  "S-Cr-Mn",
+        //                  "Zn base",
+        //                  "Ca base",
+        //                  "Ni base",
+        //                  "Cr base",
+        //                  "Zr base",
+        //                  "Cl base",
+        //                  "Na-Cl",
+        //                  "Cu",
+        //                  "Cu-Au",
+        //                  "Ag-S",
+        //                  "Au-Ni",
+        //                  "Ag",
+        //                  "Au",
+        //                  "Cu-Au-Ni",
+        //                  "Cu-Zn",
+        //                  "Cu-Zn-Ni",
+        //                  "Cu-Zn-Au-Ni",
+        //                  "Zn-O",
+        //                  "Pb",
+        //                  "Fe-Cu",
+        //                  "Cr-Mn",
+        //                  "Al-Si Base",
+        //                  "F-O",
+        //                  "Cu-S-Al-O Base",
+        //                  "Ti-O/Al-Si-Fe",
+        //                  "Cr-Rich (Cr Base + Cr-Mn)"
+        //                   });
+        //    return hashtable;
+        //}
         public users_login userLogin
         {
             get { return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null); }
@@ -445,6 +445,7 @@ namespace ALS.ALSI.Web.view.template
         }
 
         #endregion
+
         List<String> errors = new List<string>();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -500,15 +501,9 @@ namespace ALS.ALSI.Web.view.template
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                     }
-                    switch (this.CommandName)
-                    {
-                        case CommandNameEnum.Add:
-                            objWork.InsertList(this.HpaFor3);
-                            break;
-                        case CommandNameEnum.Edit:
-                            objWork.UpdateList(this.HpaFor3);
-                            break;
-                    }
+
+                    objWork.DeleteBySampleID(this.SampleID);
+                    objWork.InsertList(this.HpaFor3);
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
@@ -541,8 +536,10 @@ namespace ALS.ALSI.Web.view.template
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                     }
+                    objWork.DeleteBySampleID(this.SampleID);
+                    objWork.InsertList(this.HpaFor3);
 
-                    objWork.UpdateList(this.HpaFor3);
+                    //objWork.UpdateList(this.HpaFor3);
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -901,88 +898,6 @@ namespace ALS.ALSI.Web.view.template
         }
 
         #region "Custom method"
-
-        //private String validateDSHFile(IList<HttpPostedFile> _files)
-        //{
-        //    Boolean isFound_b1 = false;
-        //    Boolean isFound_s1 = false;
-        //    Boolean isFound_hb1 = false;
-        //    Boolean isFound_hs1 = false;
-        //    Boolean isFoundWrongExtension = false;
-
-        //    String result = String.Empty;
-
-        //    String[] files = new String[_files.Count];
-        //    if (files.Length == 4)
-        //    {
-        //        for (int i = 0; i < _files.Count; i++)
-        //        {
-        //            files[i] = _files[i].FileName;
-        //            if (!Path.GetExtension(_files[i].FileName).Trim().ToLower().Equals(".xls"))
-        //            {
-        //                isFoundWrongExtension = true;
-        //                break;
-        //            }
-        //        }
-        //        if (!isFoundWrongExtension)
-        //        {
-
-        //            //Find B1
-        //            foreach (String file in files)
-        //            {
-        //                if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B"))
-        //                {
-        //                    isFound_b1 = true;
-        //                    break;
-        //                }
-        //            }
-
-        //            //Find S1
-        //            foreach (String file in files)
-        //            {
-        //                if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S"))
-        //                {
-        //                    isFound_s1 = true;
-        //                    break;
-        //                }
-        //            }
-
-        //            //Find S1
-        //            foreach (String file in files)
-        //            {
-        //                if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("HPA(B)"))
-        //                {
-        //                    isFound_hb1 = true;
-        //                    break;
-        //                }
-        //            }
-
-        //            //Find S1
-        //            foreach (String file in files)
-        //            {
-        //                if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("HPA(S)"))
-        //                {
-        //                    isFound_hs1 = true;
-        //                    break;
-        //                }
-        //            }
-        //            result = (!isFound_b1) ? result += "File not found B.xls" :
-        //                        (!isFound_s1) ? result += "File not found S.xls" :
-        //                        (!isFound_hb1) ? result += "File not found HPA(B).xls" :
-        //                        (!isFound_hs1) ? result += "File not found HPA(S)xls" : String.Empty;
-        //        }
-        //        else
-        //        {
-        //            result = "File extension must be *.xls";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        result = "You must to select 4 files for upload.";
-        //    }
-        //    return result;
-        //}
-
         private void CalculateCas()
         {
 
@@ -1363,159 +1278,16 @@ namespace ALS.ALSI.Web.view.template
                 list.Add(_tmp);
 
                 int seq = 7;
-                #region "ARM"
-                foreach (DictionaryEntry entry in GetHPAData())
-                {
-                    seq++;
-                    String[] values = (String[])entry.Value;
-                    if (values != null && values.Length > 0)
-                    {
-                        for (int i = 0; i < values.Length; i++)
-                        {
-                            _tmp = new template_wd_hpa_for3_coverpage();
-                            _tmp.ID = CustomUtils.GetRandomNumberID();
-                            _tmp.seq = seq;
-                            _tmp.A = entry.Key.ToString();
-                            _tmp.B = values[i];
-                            _tmp.C = String.Empty;
-                            _tmp.D = String.Empty;
-                            _tmp.E = String.Empty;
-                            _tmp.row_group = Convert.ToInt32(HPAFor3Group.RAWDATA_ARM);
-                            _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                            list.Add(_tmp);
-                            seq++;
-                        }
-                    }
-                    seq++;
-                    _tmp = new template_wd_hpa_for3_coverpage();
-                    _tmp.ID = CustomUtils.GetRandomNumberID();
-                    _tmp.seq = seq;
-                    _tmp.A = entry.Key.ToString();
-                    _tmp.B = entry.Key.ToString();
-                    _tmp.C = String.Empty;
-                    _tmp.D = String.Empty;
-                    _tmp.E = String.Empty;
-                    _tmp.row_group = Convert.ToInt32(HPAFor3Group.ARM_SUB_TOTAL);
-                    _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                    list.Add(_tmp);
-                    seq++;
-                }
-                _tmp = new template_wd_hpa_for3_coverpage();
-                _tmp.ID = CustomUtils.GetRandomNumberID();
-                _tmp.seq = seq;
-                _tmp.A = String.Empty;
-                _tmp.B = String.Empty;
-                _tmp.C = String.Empty;
-                _tmp.D = String.Empty;
-                _tmp.E = String.Empty;
-                _tmp.row_group = Convert.ToInt32(HPAFor3Group.ARM_GRAND_TOTAL);
-                _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                list.Add(_tmp);
-                seq++;
-                #endregion
-                #region "PIVOT"
-                foreach (DictionaryEntry entry in GetHPAData())
-                {
-                    seq++;
-                    String[] values = (String[])entry.Value;
-                    if (values != null && values.Length > 0)
-                    {
-                        for (int i = 0; i < values.Length; i++)
-                        {
-                            _tmp = new template_wd_hpa_for3_coverpage();
-                            _tmp.ID = CustomUtils.GetRandomNumberID();
-                            _tmp.seq = seq;
-                            _tmp.A = entry.Key.ToString();
-                            _tmp.B = values[i];
-                            _tmp.C = String.Empty;
-                            _tmp.D = String.Empty;
-                            _tmp.E = String.Empty;
-                            _tmp.row_group = Convert.ToInt32(HPAFor3Group.RAWDATA_PIVOT);
-                            _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                            list.Add(_tmp);
-                            seq++;
-                        }
-                    }
-                    seq++;
-                    _tmp = new template_wd_hpa_for3_coverpage();
-                    _tmp.ID = CustomUtils.GetRandomNumberID();
-                    _tmp.seq = seq;
-                    _tmp.A = entry.Key.ToString();
-                    _tmp.B = entry.Key.ToString();
-                    _tmp.C = String.Empty;
-                    _tmp.D = String.Empty;
-                    _tmp.E = String.Empty;
-                    _tmp.row_group = Convert.ToInt32(HPAFor3Group.PIVOT_SUB_TOTAL);
-                    _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                    list.Add(_tmp);
-                    seq++;
-                }
-                _tmp = new template_wd_hpa_for3_coverpage();
-                _tmp.ID = CustomUtils.GetRandomNumberID();
-                _tmp.seq = seq;
-                _tmp.A = String.Empty;
-                _tmp.B = String.Empty;
-                _tmp.C = String.Empty;
-                _tmp.D = String.Empty;
-                _tmp.E = String.Empty;
-                _tmp.row_group = Convert.ToInt32(HPAFor3Group.PIVOT_GRAND_TOTAL);
-                _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                list.Add(_tmp);
-                seq++;
-                #endregion
-                #region "SWAGE"
-                foreach (DictionaryEntry entry in GetHPAData())
-                {
-                    seq++;
-                    String[] values = (String[])entry.Value;
-                    if (values != null && values.Length > 0)
-                    {
-                        for (int i = 0; i < values.Length; i++)
-                        {
-                            _tmp = new template_wd_hpa_for3_coverpage();
-                            _tmp.ID = CustomUtils.GetRandomNumberID();
-                            _tmp.seq = seq;
-                            _tmp.A = entry.Key.ToString();
-                            _tmp.B = values[i];
-                            _tmp.C = String.Empty;
-                            _tmp.D = String.Empty;
-                            _tmp.E = String.Empty;
-                            _tmp.row_group = Convert.ToInt32(HPAFor3Group.RAWDATA_SWAGE);
-                            _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                            list.Add(_tmp);
-                            seq++;
-                        }
-                    }
-                    seq++;
-                    _tmp = new template_wd_hpa_for3_coverpage();
-                    _tmp.ID = CustomUtils.GetRandomNumberID();
-                    _tmp.seq = seq;
-                    _tmp.A = entry.Key.ToString();
-                    _tmp.B = entry.Key.ToString();
-                    _tmp.C = String.Empty;
-                    _tmp.D = String.Empty;
-                    _tmp.E = String.Empty;
-                    _tmp.row_group = Convert.ToInt32(HPAFor3Group.SWAGE_SUB_TOTAL);
-                    _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                    list.Add(_tmp);
-                    seq++;
-                }
-                _tmp = new template_wd_hpa_for3_coverpage();
-                _tmp.ID = CustomUtils.GetRandomNumberID();
-                _tmp.seq = seq;
-                _tmp.A = String.Empty;
-                _tmp.B = String.Empty;
-                _tmp.C = String.Empty;
-                _tmp.D = String.Empty;
-                _tmp.E = String.Empty;
-                _tmp.row_group = Convert.ToInt32(HPAFor3Group.SWAGE_GRAND_TOTAL);
-                _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                list.Add(_tmp);
-                seq++;
-                #endregion
+
+
+                list.AddRange(getArmElementalComposition(list.Count));
+                list.AddRange(getPivotElementalComposition(list.Count));
+                list.AddRange(getSwagelementalComposition(list.Count));
+
 
 
                 this.HpaFor3 = list;
+
 
                 gvResult.DataSource = list.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RESULT_ON_ARM) ||
                                                     x.row_group == Convert.ToInt32(HPAFor3Group.RESULT_ON_PIVOT) ||
@@ -1527,19 +1299,29 @@ namespace ALS.ALSI.Web.view.template
                 gvResult.DataBind();
 
 
-                gvARM.DataSource = list.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_ARM) ||
-                                                    x.row_group == Convert.ToInt32(HPAFor3Group.ARM_SUB_TOTAL) ||
-                                                    x.row_group == Convert.ToInt32(HPAFor3Group.ARM_GRAND_TOTAL));
+
+
+
+                gvARM.DataSource = list.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_ARM)
+                && (x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)));
                 gvARM.DataBind();
-
-                gvPivot.DataSource = list.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_PIVOT) ||
-                                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_SUB_TOTAL) ||
-                                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_GRAND_TOTAL));
+                gvPivot.DataSource = list.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_PIVOT)
+                && (x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)));
                 gvPivot.DataBind();
-
-                gvSwage.DataSource = list.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_SWAGE) ||
-                        x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_SUB_TOTAL) ||
-                        x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_GRAND_TOTAL));
+                gvSwage.DataSource = list.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_SWAGE)
+                && (x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)
+                || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)));
                 gvSwage.DataBind();
 
                 btnSubmit.Enabled = true;
@@ -1785,59 +1567,39 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
+
+
+        #region "ARM-GRIDVIEW"
         protected void gvARM_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                int PKID = Convert.ToInt32(gvARM.DataKeys[e.Row.RowIndex].Values[0].ToString());
-                int _row_group = Convert.ToInt32(gvARM.DataKeys[e.Row.RowIndex].Values[2].ToString());
+                LinkButton _btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
 
-                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvARM.DataKeys[e.Row.RowIndex].Values[1]);
-                //LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                //LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
                 Literal _litB = (Literal)e.Row.FindControl("litB");
-                Literal _litC = (Literal)e.Row.FindControl("litC");
-                Literal _litD = (Literal)e.Row.FindControl("litD");
-                Literal _litE = (Literal)e.Row.FindControl("litE");
-
-                //if (_btnHide != null && _btnUndo != null)
-                //{
-                //    switch (cmd)
-                //    {
-                //        case RowTypeEnum.Hide:
-                //            _btnHide.Visible = false;
-                //            _btnUndo.Visible = true;
-                //            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-                //            break;
-                //        default:
-                //            _btnHide.Visible = true;
-                //            _btnUndo.Visible = false;
-                //            e.Row.ForeColor = System.Drawing.Color.Black;
-                //            break;
-                //    }
-                if (_litB != null)
+                if (gvARM.DataKeys[e.Row.RowIndex].Values[2] != null)
                 {
-                    HPAFor3Group group = (HPAFor3Group)Enum.ToObject(typeof(HPAFor3Group), _row_group);
-                    switch (group)
+                    if (_btnEdit != null) { _btnEdit.Visible = false; }
+
+                    GVTypeEnum cmd = (GVTypeEnum)Enum.ToObject(typeof(GVTypeEnum), (int)gvARM.DataKeys[e.Row.RowIndex].Values[2]);
+                    switch (cmd)
                     {
-                        case HPAFor3Group.ARM_SUB_TOTAL:
-                        case HPAFor3Group.PIVOT_SUB_TOTAL:
-                        case HPAFor3Group.SWAGE_SUB_TOTAL:
-                            _litB.Text = String.Format("Subtotal - {0}", _litB.Text);
-                            e.Row.ForeColor = System.Drawing.Color.Blue;
+                        case GVTypeEnum.CLASSIFICATION_GRAND_TOTAL:
+                        case GVTypeEnum.CLASSIFICATION_TOTAL:
+                            e.Row.BackColor = System.Drawing.Color.Orange;
                             break;
-                        case HPAFor3Group.ARM_GRAND_TOTAL:
-                        case HPAFor3Group.PIVOT_GRAND_TOTAL:
-                        case HPAFor3Group.SWAGE_GRAND_TOTAL:
-                            _litB.Text = String.Format("Grand Total of Particles");
-                            e.Row.ForeColor = System.Drawing.Color.Blue;
+                        case GVTypeEnum.CLASSIFICATION_SUB_TOTAL:
+                            e.Row.BackColor = System.Drawing.Color.Yellow;
+                            if (_btnEdit != null) { _btnEdit.Visible = true; }
+                            break;
+                        case GVTypeEnum.CLASSIFICATION_ITEM:
+                            _litB.Text = String.Format("{0}".PadRight(20, ' '), _litB.Text);
+                            if (_btnEdit != null) { _btnEdit.Visible = true; }
                             break;
                     }
                 }
-                //}
             }
         }
-
         protected void gvARM_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             //RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
@@ -1863,7 +1625,72 @@ namespace ALS.ALSI.Web.view.template
             //    }
             //}
         }
+        protected void gvARM_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
 
+        }
+        protected void gvARM_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvARM.EditIndex = e.NewEditIndex;
+            gvARM.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_ARM) ||
+                                                x.row_group == Convert.ToInt32(HPAFor3Group.ARM_SUB_TOTAL) ||
+                                                x.row_group == Convert.ToInt32(HPAFor3Group.ARM_GRAND_TOTAL)).OrderBy(x => x.seq);
+            gvARM.DataBind();
+        }
+        protected void gvARM_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int _id = Convert.ToInt32(gvARM.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txtC = (TextBox)gvARM.Rows[e.RowIndex].FindControl("txtC");
+
+
+            template_wd_hpa_for3_coverpage _cov = this.HpaFor3.Find(x => x.ID == _id);
+            if (_cov != null)
+            {
+                _cov.C = txtC.Text;
+            }
+            gvARM.EditIndex = -1;
+            CalculateCas();
+        }
+        protected void gvARM_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvARM.EditIndex = -1;
+            gvARM.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_ARM) ||
+                                                x.row_group == Convert.ToInt32(HPAFor3Group.ARM_SUB_TOTAL) ||
+                                                x.row_group == Convert.ToInt32(HPAFor3Group.ARM_GRAND_TOTAL)).OrderBy(x => x.seq);
+            gvARM.DataBind();
+        }
+        #endregion
+        #region "PIVOT-GRIDVIEW"
+        protected void gvPivot_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton _btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
+
+                Literal _litB = (Literal)e.Row.FindControl("litB");
+                if (gvARM.DataKeys[e.Row.RowIndex].Values[2] != null)
+                {
+                    if (_btnEdit != null) { _btnEdit.Visible = false; }
+
+                    GVTypeEnum cmd = (GVTypeEnum)Enum.ToObject(typeof(GVTypeEnum), (int)gvARM.DataKeys[e.Row.RowIndex].Values[2]);
+                    switch (cmd)
+                    {
+                        case GVTypeEnum.CLASSIFICATION_GRAND_TOTAL:
+                        case GVTypeEnum.CLASSIFICATION_TOTAL:
+                            e.Row.BackColor = System.Drawing.Color.Orange;
+                            break;
+                        case GVTypeEnum.CLASSIFICATION_SUB_TOTAL:
+                            e.Row.BackColor = System.Drawing.Color.Yellow;
+                            if (_btnEdit != null) { _btnEdit.Visible = true; }
+                            break;
+                        case GVTypeEnum.CLASSIFICATION_ITEM:
+                            _litB.Text = String.Format("{0}".PadRight(20, ' '), _litB.Text);
+                            if (_btnEdit != null) { _btnEdit.Visible = true; }
+                            break;
+                    }
+                }
+            }
+        }
         protected void gvPivot_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             //RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
@@ -1889,168 +1716,6 @@ namespace ALS.ALSI.Web.view.template
             //    }
             //}
         }
-
-        protected void gvPivot_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                int PKID = Convert.ToInt32(gvPivot.DataKeys[e.Row.RowIndex].Values[0].ToString());
-                int _row_group = Convert.ToInt32(gvPivot.DataKeys[e.Row.RowIndex].Values[2].ToString());
-
-                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvPivot.DataKeys[e.Row.RowIndex].Values[1]);
-                //LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                //LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-                Literal _litB = (Literal)e.Row.FindControl("litB");
-                Literal _litC = (Literal)e.Row.FindControl("litC");
-                Literal _litD = (Literal)e.Row.FindControl("litD");
-                Literal _litE = (Literal)e.Row.FindControl("litE");
-
-                //if (_btnHide != null && _btnUndo != null)
-                //{
-                //    switch (cmd)
-                //    {
-                //        case RowTypeEnum.Hide:
-                //            _btnHide.Visible = false;
-                //            _btnUndo.Visible = true;
-                //            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-                //            break;
-                //        default:
-                //            _btnHide.Visible = true;
-                //            _btnUndo.Visible = false;
-                //            e.Row.ForeColor = System.Drawing.Color.Black;
-                //            break;
-                //    }
-                if (_litB != null)
-                {
-                    HPAFor3Group group = (HPAFor3Group)Enum.ToObject(typeof(HPAFor3Group), _row_group);
-                    switch (group)
-                    {
-                        case HPAFor3Group.ARM_SUB_TOTAL:
-                        case HPAFor3Group.PIVOT_SUB_TOTAL:
-                        case HPAFor3Group.SWAGE_SUB_TOTAL:
-                            _litB.Text = String.Format("Subtotal - {0}", _litB.Text);
-                            e.Row.ForeColor = System.Drawing.Color.Blue;
-                            break;
-                        case HPAFor3Group.ARM_GRAND_TOTAL:
-                        case HPAFor3Group.PIVOT_GRAND_TOTAL:
-                        case HPAFor3Group.SWAGE_GRAND_TOTAL:
-                            _litB.Text = String.Format("Grand Total of {0}", _litB.Text);
-                            e.Row.ForeColor = System.Drawing.Color.Blue;
-                            break;
-                    }
-                }
-                //}
-            }
-        }
-
-        protected void gvSwage_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            //RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
-            //if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
-            //{
-            //    int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-            //    template_wd_hpa_for3_coverpage gcms = this.HpaFor3.Find(x => x.ID == PKID);
-            //    if (gcms != null)
-            //    {
-            //        switch (cmd)
-            //        {
-            //            case RowTypeEnum.Hide:
-            //                gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
-
-            //                break;
-            //            case RowTypeEnum.Normal:
-            //                gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-            //                break;
-            //        }
-
-            //        gvARM.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_SWAGE)).OrderBy(x => x.seq).ToList();
-            //        gvARM.DataBind();
-            //    }
-            //}
-        }
-
-        protected void gvSwage_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                int PKID = Convert.ToInt32(gvSwage.DataKeys[e.Row.RowIndex].Values[0].ToString());
-                int _row_group = Convert.ToInt32(gvSwage.DataKeys[e.Row.RowIndex].Values[2].ToString());
-
-                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvSwage.DataKeys[e.Row.RowIndex].Values[1]);
-                //LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                //LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-                Literal _litB = (Literal)e.Row.FindControl("litB");
-                Literal _litC = (Literal)e.Row.FindControl("litC");
-                Literal _litD = (Literal)e.Row.FindControl("litD");
-                Literal _litE = (Literal)e.Row.FindControl("litE");
-
-                //if (_btnHide != null && _btnUndo != null)
-                //{
-                //    switch (cmd)
-                //    {
-                //        case RowTypeEnum.Hide:
-                //            _btnHide.Visible = false;
-                //            _btnUndo.Visible = true;
-                //            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-                //            break;
-                //        default:
-                //            _btnHide.Visible = true;
-                //            _btnUndo.Visible = false;
-                //            e.Row.ForeColor = System.Drawing.Color.Black;
-                //            break;
-                //    }
-                if (_litB != null)
-                {
-                    HPAFor3Group group = (HPAFor3Group)Enum.ToObject(typeof(HPAFor3Group), _row_group);
-                    switch (group)
-                    {
-                        case HPAFor3Group.ARM_SUB_TOTAL:
-                        case HPAFor3Group.PIVOT_SUB_TOTAL:
-                        case HPAFor3Group.SWAGE_SUB_TOTAL:
-                            _litB.Text = String.Format("Subtotal - {0}", _litB.Text);
-                            e.Row.ForeColor = System.Drawing.Color.Blue;
-                            break;
-                        case HPAFor3Group.ARM_GRAND_TOTAL:
-                        case HPAFor3Group.PIVOT_GRAND_TOTAL:
-                        case HPAFor3Group.SWAGE_GRAND_TOTAL:
-                            _litB.Text = String.Format("Grand Total of {0}", _litB.Text);
-                            e.Row.ForeColor = System.Drawing.Color.Blue;
-                            break;
-                    }
-                }
-                //}
-            }
-        }
-
-        protected void gvARM_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-
-        }
-
-        protected void gvARM_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            gvARM.EditIndex = e.NewEditIndex;
-            gvARM.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_ARM) ||
-                                                x.row_group == Convert.ToInt32(HPAFor3Group.ARM_SUB_TOTAL) ||
-                                                x.row_group == Convert.ToInt32(HPAFor3Group.ARM_GRAND_TOTAL)).OrderBy(x => x.seq);
-            gvARM.DataBind();
-        }
-
-        protected void gvARM_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            int _id = Convert.ToInt32(gvARM.DataKeys[e.RowIndex].Values[0].ToString());
-            TextBox txtC = (TextBox)gvARM.Rows[e.RowIndex].FindControl("txtC");
-
-
-            template_wd_hpa_for3_coverpage _cov = this.HpaFor3.Find(x => x.ID == _id);
-            if (_cov != null)
-            {
-                _cov.C = txtC.Text;
-            }
-            gvARM.EditIndex = -1;
-            CalculateCas();
-        }
-
         protected void gvPivot_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
@@ -2077,19 +1742,135 @@ namespace ALS.ALSI.Web.view.template
             gvPivot.EditIndex = -1;
             CalculateCas();
         }
+        protected void gvPivot_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvPivot.EditIndex = -1;
+            gvPivot.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_PIVOT) ||
+                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_SUB_TOTAL) ||
+                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_GRAND_TOTAL)).OrderBy(x => x.seq);
+            gvPivot.DataBind();
+        }
+        #endregion
+        #region "SWAGE-GRIDVIEW"
+        protected void gvSwage_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton _btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
 
+                Literal _litB = (Literal)e.Row.FindControl("litB");
+                if (gvARM.DataKeys[e.Row.RowIndex].Values[2] != null)
+                {
+                    if (_btnEdit != null) { _btnEdit.Visible = false; }
+
+                    GVTypeEnum cmd = (GVTypeEnum)Enum.ToObject(typeof(GVTypeEnum), (int)gvARM.DataKeys[e.Row.RowIndex].Values[2]);
+                    switch (cmd)
+                    {
+                        case GVTypeEnum.CLASSIFICATION_GRAND_TOTAL:
+                        case GVTypeEnum.CLASSIFICATION_TOTAL:
+                            e.Row.BackColor = System.Drawing.Color.Orange;
+                            break;
+                        case GVTypeEnum.CLASSIFICATION_SUB_TOTAL:
+                            e.Row.BackColor = System.Drawing.Color.Yellow;
+                            if (_btnEdit != null) { _btnEdit.Visible = true; }
+                            break;
+                        case GVTypeEnum.CLASSIFICATION_ITEM:
+                            _litB.Text = String.Format("{0}".PadRight(20, ' '), _litB.Text);
+                            if (_btnEdit != null) { _btnEdit.Visible = true; }
+                            break;
+                    }
+                }
+            }
+            //if (e.Row.RowType == DataControlRowType.DataRow)
+            //{
+            //    int PKID = Convert.ToInt32(gvSwage.DataKeys[e.Row.RowIndex].Values[0].ToString());
+            //    int _row_group = Convert.ToInt32(gvSwage.DataKeys[e.Row.RowIndex].Values[2].ToString());
+
+            //    RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvSwage.DataKeys[e.Row.RowIndex].Values[1]);
+            //    //LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+            //    //LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+            //    Literal _litB = (Literal)e.Row.FindControl("litB");
+            //    Literal _litC = (Literal)e.Row.FindControl("litC");
+            //    Literal _litD = (Literal)e.Row.FindControl("litD");
+            //    Literal _litE = (Literal)e.Row.FindControl("litE");
+
+            //    //if (_btnHide != null && _btnUndo != null)
+            //    //{
+            //    //    switch (cmd)
+            //    //    {
+            //    //        case RowTypeEnum.Hide:
+            //    //            _btnHide.Visible = false;
+            //    //            _btnUndo.Visible = true;
+            //    //            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+            //    //            break;
+            //    //        default:
+            //    //            _btnHide.Visible = true;
+            //    //            _btnUndo.Visible = false;
+            //    //            e.Row.ForeColor = System.Drawing.Color.Black;
+            //    //            break;
+            //    //    }
+            //    if (_litB != null)
+            //    {
+            //        HPAFor3Group group = (HPAFor3Group)Enum.ToObject(typeof(HPAFor3Group), _row_group);
+            //        switch (group)
+            //        {
+            //            case HPAFor3Group.ARM_SUB_TOTAL:
+            //            case HPAFor3Group.PIVOT_SUB_TOTAL:
+            //            case HPAFor3Group.SWAGE_SUB_TOTAL:
+            //                _litB.Text = String.Format("Subtotal - {0}", _litB.Text);
+            //                e.Row.ForeColor = System.Drawing.Color.Blue;
+            //                break;
+            //            case HPAFor3Group.ARM_GRAND_TOTAL:
+            //            case HPAFor3Group.PIVOT_GRAND_TOTAL:
+            //            case HPAFor3Group.SWAGE_GRAND_TOTAL:
+            //                _litB.Text = String.Format("Grand Total of {0}", _litB.Text);
+            //                e.Row.ForeColor = System.Drawing.Color.Blue;
+            //                break;
+            //        }
+            //    }
+            //    //}
+            //}
+        }
+        protected void gvSwage_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            //RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            //if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            //{
+            //    int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+            //    template_wd_hpa_for3_coverpage gcms = this.HpaFor3.Find(x => x.ID == PKID);
+            //    if (gcms != null)
+            //    {
+            //        switch (cmd)
+            //        {
+            //            case RowTypeEnum.Hide:
+            //                gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+
+            //                break;
+            //            case RowTypeEnum.Normal:
+            //                gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+            //                break;
+            //        }
+
+            //        gvARM.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_SWAGE)).OrderBy(x => x.seq).ToList();
+            //        gvARM.DataBind();
+            //    }
+            //}
+        }
         protected void gvSwage_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
         }
-
         protected void gvSwage_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvSwage.EditIndex = e.NewEditIndex;
-            gvSwage.DataSource = this.HpaFor3.OrderBy(x => x.seq).ToList();
+            gvSwage.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_SWAGE) ||
+                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_SUB_TOTAL) ||
+                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_GRAND_TOTAL)).OrderBy(x => x.seq);
             gvSwage.DataBind();
-        }
 
+            //gvSwage.DataSource = this.HpaFor3.OrderBy(x => x.seq).ToList();
+            //gvSwage.DataBind();
+        }
         protected void gvSwage_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             int _id = Convert.ToInt32(gvSwage.DataKeys[e.RowIndex].Values[0].ToString());
@@ -2104,25 +1885,6 @@ namespace ALS.ALSI.Web.view.template
             gvSwage.EditIndex = -1;
             CalculateCas();
         }
-
-        protected void gvARM_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gvARM.EditIndex = -1;
-            gvARM.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_ARM) ||
-                                                x.row_group == Convert.ToInt32(HPAFor3Group.ARM_SUB_TOTAL) ||
-                                                x.row_group == Convert.ToInt32(HPAFor3Group.ARM_GRAND_TOTAL)).OrderBy(x => x.seq);
-            gvARM.DataBind();
-        }
-
-        protected void gvPivot_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gvPivot.EditIndex = -1;
-            gvPivot.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_PIVOT) ||
-                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_SUB_TOTAL) ||
-                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_GRAND_TOTAL)).OrderBy(x => x.seq);
-            gvPivot.DataBind();
-        }
-
         protected void gvSwage_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvSwage.EditIndex = -1;
@@ -2131,8 +1893,462 @@ namespace ALS.ALSI.Web.view.template
         x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_GRAND_TOTAL)).OrderBy(x => x.seq);
             gvSwage.DataBind();
         }
+        #endregion
 
 
+        private List<template_wd_hpa_for3_coverpage> getArmElementalComposition(int order)
+        {
+            List<template_wd_hpa_for3_coverpage> _Hpas = new List<template_wd_hpa_for3_coverpage>();
+
+            List<String> items = new List<string>();
+
+
+            /*
+            # = Group
+            - = Total
+            $ = Grand Total
+            -------------------------
+            */
+            #region "ARM"
+            items.Add("#Magnetic Particles");
+            items.Add("Al-O");
+            items.Add("Al-Si-O");
+            items.Add("Si-O");
+            items.Add("Si-C");
+            items.Add("Al-Cu-O");
+            items.Add("Al-Mg-O");
+            items.Add("Al-Si-Cu-O");
+            items.Add("Al-Si-Fe-O");
+            items.Add("Al-Si-Mg-O");
+            items.Add("Al-Ti-O");
+            items.Add("Ti-O");
+            items.Add("Ti-C");
+            items.Add("Ti-B");
+            items.Add("Ti-N");
+            items.Add("W-O");
+            items.Add("W-C");
+            items.Add("Zr-O");
+            items.Add("Zr-C");
+            items.Add("Pb-Zr-Ti-O (PZT)");
+            items.Add("-Total - Hard Particles ");
+            items.Add("#Magnetic Particles");
+            items.Add("Fe-Nd");
+            items.Add("Sm-Co");
+            items.Add("Fe-Sr");
+            items.Add("-Total - Magnetic Particles");
+            items.Add("#Steel Particle");
+            items.Add("SS 300- Fe-Cr-Ni");
+            items.Add("SS 300- Fe-Cr-Ni-Mn");
+            items.Add("SS 300- Fe-Cr-Ni-Si");
+            items.Add("SS 400- Fe-Cr ");
+            items.Add("SS 400- Fe-Cr-Mn");
+            items.Add("Other Steel - Fe");
+            items.Add("Other Steel - Fe-Mn");
+            items.Add("Other Steel - Fe-Ni");
+            items.Add("Other Steel - Fe-O");
+            items.Add("-Total - Steel Particle");
+            items.Add("#Fe Base particle");
+            items.Add("Mg-Si-O");
+            items.Add("Cr-O");
+            items.Add("Cr-Mn");
+            items.Add("Total -Cr-Rich");
+            items.Add("Fe-Cu");
+            items.Add("Fe-Cr/S");
+            items.Add("SCrMn/Fe");
+            items.Add("Pb");
+            items.Add("-Total - Fe Base particle");
+            items.Add("#Ni-Base particle");
+            items.Add("Ni");
+            items.Add("Ni-P");
+            items.Add("NiP/Al");
+            items.Add("NiP/Fe");
+            items.Add("NiP Base");
+            items.Add("-Total - Ni-Base particle");
+            items.Add("#Al Based particle");
+            items.Add("Al");
+            items.Add("Al-Mg");
+            items.Add("Al-Ti-Si");
+            items.Add("Al-Cu");
+            items.Add("Al-Si-Cu");
+            items.Add("Al-Si/Fe");
+            items.Add("Al-Si-Mg");
+            items.Add("Mg-Si-O-Al");
+            items.Add("Al-S/Si");
+            items.Add("Al-Si Base");
+            items.Add("AlSi/Fe-Cr-Ni-Mn-Cu");
+            items.Add("-Total - Al Based particle");
+            items.Add("#Cu-Zn base particle");
+            items.Add("Zn");
+            items.Add("Cu");
+            items.Add("Cu-Zn");
+            items.Add("Cu-S");
+            items.Add("Cu-Zn base");
+            items.Add("Cu-S-Al-O Base");
+            items.Add("Cu-Au");
+            items.Add("-Total - Cu-Zn base particle");
+            //items.Add("#Other");
+            items.Add("Sn base");
+            items.Add("Sb Base");
+            items.Add("Ba-S Base");
+            items.Add("Ag-S");
+            items.Add("Ti-O/Al-Si-Fe");
+            items.Add("Ti Base");
+            items.Add("AlSi/K");
+            items.Add("Ca");
+            items.Add("Na-Cl");
+            items.Add("F-O");
+            items.Add("Other");
+            items.Add("Disk Material");
+            items.Add("$Grand Total of All Particles");
+            #endregion
+            
+
+            String LastGroup = String.Empty;
+            foreach (String item in items)
+            {
+                if (item.StartsWith("#"))
+                {
+                    LastGroup = item;
+                }
+
+
+                template_wd_hpa_for3_coverpage _tmp = new template_wd_hpa_for3_coverpage();
+                _tmp.ID = CustomUtils.GetRandomNumberID();
+                _tmp.seq = order;
+                _tmp.A = LastGroup.Substring(1);
+                //_tmp.data_group = LastGroup.Substring(1);
+                _tmp.B = item;
+                _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                _tmp.row_group = Convert.ToInt32(HPAFor3Group.RAWDATA_ARM);
+                _tmp.hpa_type = (item.StartsWith("#")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD) :
+                (item.StartsWith("-")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) :
+                (item.StartsWith("$")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL) :
+                (item.StartsWith("*")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) : Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM);
+                if (_tmp.hpa_type != Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM))
+                {
+                    _tmp.B = item.Substring(1);
+                }
+                _Hpas.Add(_tmp);
+                order++;
+            }
+            String dub = String.Empty;
+            foreach (template_wd_hpa_for3_coverpage _cov in _Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)))
+            {
+                if (!_cov.A.Equals(dub))
+                {
+                    dub = _cov.A;
+                }
+                else
+                {
+                    _cov.A = string.Empty;
+                }
+            }
+
+            return _Hpas;
+        }
+
+        private List<template_wd_hpa_for3_coverpage> getPivotElementalComposition(int order)
+        {
+            List<template_wd_hpa_for3_coverpage> _Hpas = new List<template_wd_hpa_for3_coverpage>();
+
+            List<String> items = new List<string>();
+
+
+            /*
+            # = Group
+            - = Total
+            $ = Grand Total
+            -------------------------
+            */
+            
+            #region "Pivot"
+            items.Add("#Hard Particles ");
+            items.Add("Al-O");
+            items.Add("Al-Si-O");
+            items.Add("Si-O");
+            items.Add("Si-C");
+            items.Add("Al-Cu-O");
+            items.Add("Al-Mg-O");
+            items.Add("Al-Si-Cu-O");
+            items.Add("Al-Si-Fe-O");
+            items.Add("Al-Si-Mg-O");
+            items.Add("Al-Ti-O");
+            items.Add("Ti-O");
+            items.Add("Ti-C");
+            items.Add("Ti-B");
+            items.Add("Ti-N");
+            items.Add("W-O");
+            items.Add("W-C");
+            items.Add("Zr-O");
+            items.Add("Zr-C");
+            items.Add("Pb-Zr-Ti-O (PZT)");
+            items.Add("-Total - Hard Particles ");
+            items.Add("Fe-Nd");
+            items.Add("Sm-Co");
+            items.Add("Fe-Sr");
+            items.Add("Total - Magnetic Particles");
+            items.Add("#Steel Particle");
+            items.Add("SS 300- Fe-Cr-Ni");
+            items.Add("SS 300- Fe-Cr-Ni-Mn");
+            items.Add("SS 300- Fe-Cr-Ni-Si");
+            items.Add("SS 400- Fe-Cr ");
+            items.Add("SS 400- Fe-Cr-Mn");
+            items.Add("Other Steel - Fe");
+            items.Add("Other Steel - Fe-Mn");
+            items.Add("Other Steel - Fe-Ni");
+            items.Add("Other Steel - Fe-O");
+            items.Add("-Total - Steel Particle");
+            items.Add("#Fe Base particle");
+            items.Add("Mg-Si-O");
+            items.Add("Cr-O");
+            items.Add("Cr-Mn");
+            items.Add("Total -Cr-Rich");
+            items.Add("Fe-Cu");
+            items.Add("Fe-Cr/S");
+            items.Add("SCrMn/Fe");
+            items.Add("Pb");
+            items.Add("-Total - Fe Base particle");
+            items.Add("#Ni-Base particle");
+            items.Add("Ni");
+            items.Add("Ni-P");
+            items.Add("NiP/Al");
+            items.Add("NiP/Fe");
+            items.Add("NiP Base");
+            items.Add("-Total - Ni-Base particle");
+            items.Add("#Al Based particle");
+            items.Add("Al");
+            items.Add("Al-Mg");
+            items.Add("Al-Ti-Si");
+            items.Add("Al-Cu");
+            items.Add("Al-Si-Cu");
+            items.Add("Al-Si/Fe");
+            items.Add("Al-Si-Mg");
+            items.Add("Mg-Si-O-Al");
+            items.Add("Al-S/Si");
+            items.Add("Al-Si Base");
+            items.Add("AlSi/Fe-Cr-Ni-Mn-Cu");
+            items.Add("-Total - Al Based particle");
+            items.Add("#Cu-Zn base particle");
+            items.Add("Zn");
+            items.Add("Cu");
+            items.Add("Cu-Zn");
+            items.Add("Cu-S");
+            items.Add("Cu-Zn base");
+            items.Add("Cu-S-Al-O Base");
+            items.Add("Cu-Au");
+            items.Add("-Total - Cu-Zn base particle");
+            //items.Add("#Other");
+            items.Add("Sn base");
+            items.Add("Sb Base");
+            items.Add("Ba-S Base");
+            items.Add("Ag-S");
+            items.Add("Ti-O/Al-Si-Fe");
+            items.Add("Ti Base");
+            items.Add("AlSi/K");
+            items.Add("Ca");
+            items.Add("Na-Cl");
+            items.Add("F-O");
+            items.Add("Other");
+            items.Add("Disk Material");
+            items.Add("$Grand Total of All Particles");
+            #endregion
+            
+            String LastGroup = String.Empty;
+            foreach (String item in items)
+            {
+                if (item.StartsWith("#"))
+                {
+                    LastGroup = item;
+                }
+
+
+                template_wd_hpa_for3_coverpage _tmp = new template_wd_hpa_for3_coverpage();
+                _tmp.ID = CustomUtils.GetRandomNumberID();
+                _tmp.seq = order;
+                _tmp.A = LastGroup.Substring(1);
+                //_tmp.data_group = LastGroup.Substring(1);
+                _tmp.B = item;
+                _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                _tmp.row_group = Convert.ToInt32(HPAFor3Group.RAWDATA_PIVOT);
+                _tmp.hpa_type = (item.StartsWith("#")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD) :
+                (item.StartsWith("-")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) :
+                (item.StartsWith("$")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL) :
+                (item.StartsWith("*")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) : Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM);
+                if (_tmp.hpa_type != Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM))
+                {
+                    _tmp.B = item.Substring(1);
+                }
+                _Hpas.Add(_tmp);
+                order++;
+            }
+            String dub = String.Empty;
+            foreach (template_wd_hpa_for3_coverpage _cov in _Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)))
+            {
+                if (!_cov.A.Equals(dub))
+                {
+                    dub = _cov.A;
+                }
+                else
+                {
+                    _cov.A = string.Empty;
+                }
+            }
+
+            return _Hpas;
+        }
+
+        private List<template_wd_hpa_for3_coverpage> getSwagelementalComposition(int order)
+        {
+            List<template_wd_hpa_for3_coverpage> _Hpas = new List<template_wd_hpa_for3_coverpage>();
+
+            List<String> items = new List<string>();
+
+
+            /*
+            # = Group
+            - = Total
+            $ = Grand Total
+            -------------------------
+            */
+           
+            #region "Swage"
+            items.Add("#Hard Particles ");
+            items.Add("Al-O");
+            items.Add("Al-Si-O");
+            items.Add("Si-O");
+            items.Add("Si-C");
+            items.Add("Al-Cu-O");
+            items.Add("Al-Mg-O");
+            items.Add("Al-Si-Cu-O");
+            items.Add("Al-Si-Fe-O");
+            items.Add("Al-Si-Mg-O");
+            items.Add("Al-Ti-O");
+            items.Add("Ti-O");
+            items.Add("Ti-C");
+            items.Add("Ti-B");
+            items.Add("Ti-N");
+            items.Add("W-O");
+            items.Add("W-C");
+            items.Add("Zr-O");
+            items.Add("Zr-C");
+            items.Add("Pb-Zr-Ti-O (PZT)");
+            items.Add("-Total - Hard Particles ");
+            items.Add("#Magnetic Particles");
+            items.Add("Fe-Nd");
+            items.Add("Sm-Co");
+            items.Add("Fe-Sr");
+            items.Add("-Total - Magnetic Particles");
+            items.Add("#Steel Particle");
+            items.Add("SS 300- Fe-Cr-Ni");
+            items.Add("SS 300- Fe-Cr-Ni-Mn");
+            items.Add("SS 300- Fe-Cr-Ni-Si");
+            items.Add("SS 400- Fe-Cr ");
+            items.Add("SS 400- Fe-Cr-Mn");
+            items.Add("Other Steel - Fe");
+            items.Add("Other Steel - Fe-Mn");
+            items.Add("Other Steel - Fe-Ni");
+            items.Add("Other Steel - Fe-O");
+            items.Add("-Total - Steel Particle");
+            items.Add("#Fe Base particle");
+            items.Add("Mg-Si-O");
+            items.Add("   Cr-O");
+            items.Add("Cr-Mn");
+            items.Add("Total -Cr-Rich");
+            items.Add("Fe-Cu");
+            items.Add("Fe-Cr/S");
+            items.Add("SCrMn/Fe");
+            items.Add("Pb");
+            items.Add("-Total - Fe Base particle");
+            items.Add("#Ni-Base particle");
+            items.Add("Ni");
+            items.Add("Ni-P");
+            items.Add("NiP/Al");
+            items.Add("NiP/Fe");
+            items.Add("NiP Base");
+            items.Add("-Total - Ni-Base particle");
+            items.Add("#Al Based particle");
+            items.Add("Al");
+            items.Add("Al-Mg");
+            items.Add("Al-Ti-Si");
+            items.Add("Al-Cu");
+            items.Add("Al-Si-Cu");
+            items.Add("Al-Si/Fe");
+            items.Add("Al-Si-Mg");
+            items.Add("Mg-Si-O-Al");
+            items.Add("Al-S/Si");
+            items.Add("Al-Si Base");
+            items.Add("AlSi/Fe-Cr-Ni-Mn-Cu");
+            items.Add("-Total - Al Based particle");
+            items.Add("#Cu-Zn base particle");
+            items.Add("Zn");
+            items.Add("Cu");
+            items.Add("Cu-Zn");
+            items.Add("Cu-S");
+            items.Add("Cu-Zn Base");
+            items.Add("Cu-S-Al-O Base");
+            items.Add("Cu-Au");
+            items.Add("-Total - Cu-Zn base particle");
+            //items.Add("#Other");
+            items.Add("Sn Base");
+            items.Add("Sb Base");
+            items.Add("Ba-S Base");
+            items.Add("Ag-S");
+            items.Add("Ti-O/Al-Si-Fe");
+            items.Add("Ti Base");
+            items.Add("AlSi/K");
+            items.Add("Ca");
+            items.Add("Na-Cl");
+            items.Add("F-O");
+            items.Add("Other");
+            items.Add("Disk Material");
+            items.Add("$Grand Total of All Particles");
+            #endregion
+
+
+
+            String LastGroup = String.Empty;
+            foreach (String item in items)
+            {
+                if (item.StartsWith("#"))
+                {
+                    LastGroup = item;
+                }
+
+
+                template_wd_hpa_for3_coverpage _tmp = new template_wd_hpa_for3_coverpage();
+                _tmp.ID = CustomUtils.GetRandomNumberID();
+                _tmp.seq = order;
+                _tmp.A = LastGroup.Substring(1);
+                //_tmp.data_group = LastGroup.Substring(1);
+                _tmp.B = item;
+                _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                _tmp.row_group = Convert.ToInt32(HPAFor3Group.RAWDATA_SWAGE);
+                _tmp.hpa_type = (item.StartsWith("#")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD) :
+                (item.StartsWith("-")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) :
+                (item.StartsWith("$")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL) :
+                (item.StartsWith("*")) ? Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) : Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM);
+                if (_tmp.hpa_type != Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM))
+                {
+                    _tmp.B = item.Substring(1);
+                }
+                _Hpas.Add(_tmp);
+                order++;
+            }
+            String dub = String.Empty;
+            foreach (template_wd_hpa_for3_coverpage _cov in _Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)))
+            {
+                if (!_cov.A.Equals(dub))
+                {
+                    dub = _cov.A;
+                }
+                else
+                {
+                    _cov.A = string.Empty;
+                }
+            }
+
+            return _Hpas;
+        }
 
     }
 }

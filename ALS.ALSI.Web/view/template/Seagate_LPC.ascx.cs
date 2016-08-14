@@ -293,6 +293,14 @@ namespace ALS.ALSI.Web.view.template
                 lbNoOfPartsUsed06.Text = lbNoOfPartsUsed.Text;
 
                 ddlA19.SelectedValue = this.Lpcs[0].lpc_type;
+
+                txtDilutionFactor.Text = (this.Lpcs[0].df03 == null)? "1": this.Lpcs[0].df03.ToString();
+                txtDilutionFactor05.Text = (this.Lpcs[0].df05 == null) ? "1" : this.Lpcs[0].df05.ToString();
+                txtDilutionFactor06.Text = (this.Lpcs[0].df06 == null) ? "1" : this.Lpcs[0].df06.ToString();
+
+
+
+
                 //ddlChannel.SelectedValue = this.Lpcs[0].channel_size;
                 ddlTemplateType.SelectedValue = this.Lpcs[0].template_type.ToString();
 
@@ -464,7 +472,6 @@ namespace ALS.ALSI.Web.view.template
                         _tmp.template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
                         _tmp.row_type = 1;//Cover Page
                     }
-
                     objWork.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.Lpcs);
 
@@ -472,15 +479,19 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     if (this.Lpcs.Count > 0)
                     {
+                        //CalculateCas();
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
+
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         //#endregion
+
                         int spec_id = this.Lpcs[0].specification_id.Value;
                         string lpc_type = this.Lpcs[0].lpc_type;
                         //string ch_size = this.Lpcs[0].channel_size;
+
                         foreach (template_seagate_lpc_coverpage _tmp in this.Lpcs)
                         {
                             _tmp.sample_id = this.jobSample.ID;
@@ -490,22 +501,23 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.NumberOfPieces = txtCVP_C19.Text;
                             _tmp.ExtractionMedium = txtD19.Text;
                             _tmp.ExtractionVolume = txtCVP_E19.Text;
+                            _tmp.df03 = Convert.ToDouble(txtDilutionFactor.Text);
+                            _tmp.df05 = Convert.ToDouble(txtDilutionFactor05.Text);
+                            _tmp.df06 = Convert.ToDouble(txtDilutionFactor06.Text);
+
                             //_tmp.channel_size = ch_size;
                             String surfaceArea = "0";
                             if (CheckBoxList1.Items[0].Selected)
                             {
                                 surfaceArea = txtSurfaceArea.Text;
-
                             }
                             if (CheckBoxList1.Items[1].Selected)
                             {
                                 surfaceArea = txtSurfaceArea05.Text;
-
                             }
                             if (CheckBoxList1.Items[2].Selected)
                             {
                                 surfaceArea = txtSurfaceArea06.Text;
-
                             }
 
                             _tmp.SurfaceArea = Convert.ToDouble(surfaceArea);
@@ -513,7 +525,8 @@ namespace ALS.ALSI.Web.view.template
                         }
 
                         objWork.DeleteBySampleID(this.SampleID);
-                        objWork.InsertList(this.Lpcs);
+                        objWork.InsertList(this.Lpcs.Where(x => x.channel_size.Equals(CheckBoxList1.SelectedValue)).ToList());
+
                     }
                     else
                     {
@@ -607,6 +620,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
+
                     //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
                     //{
                     //    string yyyy = DateTime.Now.ToString("yyyy");
@@ -632,6 +646,7 @@ namespace ALS.ALSI.Web.view.template
                     //    //lbMessage.Attributes["class"] = "alert alert-error";
                     //    //isValid = false;
                     //}
+
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;

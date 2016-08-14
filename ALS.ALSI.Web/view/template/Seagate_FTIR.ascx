@@ -148,130 +148,8 @@
                                                 </div>
                                             </EmptyDataTemplate>
                                         </asp:GridView>
-
-                                        <%--<table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr runat="server" id="Tr28">
-                                                    <th>Non-Volatile Residue</th>
-                                                    <th>Specification Limits (<asp:Label ID="lbUnitNvr" runat="server" />)</th>
-                                                    <th>Results(<asp:Label ID="lbUnitNvr_1" runat="server" />)</th>
-                                                    <th runat="server" id="th2">
-                                                        <asp:CheckBox ID="CheckBox14" runat="server" Checked="true" />
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr runat="server" id="Tr29">
-                                                    <td>NVR (DI Water)</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB29Spec" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbB29Result" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox7" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="Tr30">
-                                                    <td>NVR (IPA/Hexane)</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB30Spec" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbB30Result" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox13" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="Tr31">
-                                                    <td>NVR (IPA)</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB31Spec" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbB31Result" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox16" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="Tr32">
-                                                    <td>NVR (Acetone)</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB32Spec" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbB32Result" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:CheckBox ID="CheckBox17" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-
-
-
-                                            </tbody>
-
-
-                                        </table>--%>
                                         <br />
-                                        <%--<table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr runat="server" id="tab2_tr0">
-                                                    <th>Organic Contamination</th>
-                                                    <th>Specification Limits (<asp:Label ID="lbUnitFtir" runat="server" />)</th>
-                                                    <th>Results(<asp:Label ID="lbUnitFtir_1" runat="server" />)</th>
-                                                    <th runat="server" id="th1">
-                                                        <asp:CheckBox ID="CheckBox15" runat="server" Checked="true" />
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr runat="server" id="tab2_tr1">
-                                                    <td>Silicone</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB32" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC32" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb1">
-                                                        <asp:CheckBox ID="CheckBox8" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
 
-                                                <tr runat="server" id="tab2_tr2">
-                                                    <td>Silicone Oil </td>
-                                                    <td>
-                                                        <asp:Label ID="lbB33" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC33" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb2">
-                                                        <asp:CheckBox ID="CheckBox9" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="tab2_tr3">
-                                                    <td>Hydrocarbon</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB34" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC34" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb3">
-                                                        <asp:CheckBox ID="CheckBox10" runat="server" Checked="true" /></td>
-                                                </tr>
-                                                <tr runat="server" id="tab2_tr4">
-                                                    <td>Phthalate</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB35" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC35" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb4">
-                                                        <asp:CheckBox ID="CheckBox11" runat="server" Checked="true" />
-                                                    </td>
-                                                </tr>
-                                                <tr runat="server" id="tab2_tr5">
-                                                    <td>Amide</td>
-                                                    <td>
-                                                        <asp:Label ID="lbB36" runat="server" Text=""></asp:Label></td>
-                                                    <td>
-                                                        <asp:Label ID="lbC36" runat="server" Text=""></asp:Label></td>
-                                                    <td id="th1_cb5">
-                                                        <asp:CheckBox ID="CheckBox12" runat="server" Checked="true" /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>--%>
                                     </div>
                                 </div>
                                 <br />
@@ -418,218 +296,39 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                     <asp:Panel ID="PNvr" runat="server">
                         <div class="row">
                             <div class="col-md-9">
-                                <table class="table table-striped table-hover small" id="Table1" runat="server">
-                                    <thead>
-                                        <tr>
-                                            <th>Unit</th>
-                                            <th>
-                                                <asp:DropDownList ID="ddlNvrUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
-                                                    <asp:ListItem Value="1" Selected="True">ug</asp:ListItem>
-                                                    <asp:ListItem Value="2">ug/cm2</asp:ListItem>
-                                                </asp:DropDownList>
+                                
+                                <asp:GridView ID="gvNVr" CssClass="table table-striped table-bordered mini" runat="server" AutoGenerateColumns="False">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
 
-                                            </th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <th></th>
-                                            <th>Control</th>
-                                            <th>Sample</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr runat="server" id="tr26">
-                                            <td>Pan No.</td>
-                                            <td>
-                                                <asp:Label ID="Label5" runat="server">1</asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="Label6" runat="server">2</asp:Label>
-                                            </td>
+                                        <asp:TemplateField HeaderText="Control" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
 
-                                        </tr>
-                                        <tr runat="server" id="tr9">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB16" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC16" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
+                                        <asp:TemplateField HeaderText="Sample" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litC" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
 
-                                        </tr>
-                                        <tr runat="server" id="tr10">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB17" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC17" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
+                                    </Columns>
 
-                                        </tr>
-                                        <tr runat="server" id="tr11">
-                                            <td>Pan Tare weight (ug)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB18" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC18" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
+                                    <EmptyDataTemplate>
+                                        <div class="data-not-found">
+                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
 
-                                        </tr>
-
-                                        <tr runat="server" id="tr12">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB20" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC20" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr13">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB21" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC21" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr14">
-                                            <td>1st weighing (ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB22" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC22" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-
-
-
-                                        <tr runat="server" id="tr15">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB24" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC24" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr16">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB25" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC25" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr17">
-                                            <td>2nd weighing (ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB26" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC26" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-
-
-
-
-                                        <tr runat="server" id="tr18">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB28" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC28" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr19">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB29" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC29" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr20">
-                                            <td>3rd weighing (ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB30" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC30" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-
-                                        <tr runat="server" id="tr23">
-                                            <td>Room temp.( oC)</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB32" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC32" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr24">
-                                            <td>Desiccator humidity</td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB33" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC33" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox></td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr27">
-                                            <td>Final weighing (ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrB34" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="nvrC34" runat="server" CssClass="m-wrap small" Text="0"></asp:TextBox>
-                                            </td>
-
-                                        </tr>
-
-
-
-                                        <tr runat="server" id="tr21">
-                                            <td>NVR(ug)
-
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="nvrB36" runat="server" Text="0"></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="nvrC36" runat="server" Text="0"></asp:Label>
-                                            </td>
-
-                                        </tr>
-                                        <tr runat="server" id="tr22">
-                                            <td>NVR (ug/g) = ppm
-
-                                            </td>
-                                            <td>&nbsp;</td>
-                                            <td>
-                                                <asp:Label ID="nvrC37" runat="server" Text="0"></asp:Label>
-                                            </td>
-
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </asp:Panel>
