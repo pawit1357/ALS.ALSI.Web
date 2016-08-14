@@ -115,6 +115,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="alsi-20160814-1.sql" />
     <Content Include="assets\global\css\components-md.css" />
     <Content Include="assets\global\css\components-md.min.css" />
     <Content Include="assets\global\css\components-rounded.css" />
@@ -1033,7 +1034,7 @@
     <Content Include="assets\pages\scripts\widgets.min.js" />
     <Content Include="css\paging.css" />
     <Content Include="Default.aspx" />
-    <Content Include="Dump20160814.sql" />
+    <Content Include="faadb-20160814-1.sql" />
     <Content Include="favicon.ico" />
     <Content Include="ForceChangePassword.aspx" />
     <Content Include="ForgotPassword.aspx" />
@@ -1043,6 +1044,7 @@
     <Content Include="images\logo.png" />
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
+    <Content Include="radbase-20160814-1.sql" />
     <Content Include="UserControls\CustomerPopup.ascx" />
     <Content Include="UserControls\SampleInfo.ascx" />
     <Content Include="view\customer\Customer.aspx" />
