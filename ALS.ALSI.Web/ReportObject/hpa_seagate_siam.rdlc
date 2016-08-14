@@ -25,10 +25,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>8.2684cm</Top>
-        <Left>0.72281cm</Left>
+        <Top>7.9509cm</Top>
+        <Left>0.71619cm</Left>
         <Height>0.52881cm</Height>
-        <Width>16.54993cm</Width>
+        <Width>18.17271cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -43,19 +43,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.19476in</Width>
+              <Width>1.32254in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.34059in</Width>
+              <Width>1.46837in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.76291in</Width>
+              <Width>1.89069in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.14268in</Width>
+              <Width>1.27046in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.07475in</Width>
+              <Width>1.20253in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -112,6 +112,7 @@
                           <Width>1pt</Width>
                         </RightBorder>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -166,6 +167,7 @@
                           <Width>1pt</Width>
                         </RightBorder>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -406,14 +408,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Analysis">
+                    <Textbox Name="SamplingTime">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Analysis.Value</Value>
+                              <Value>=Fields!SamplingTime.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -424,7 +426,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Analysis</rd:DefaultName>
+                      <rd:DefaultName>SamplingTime</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -693,10 +695,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>3.53292in</Top>
-        <Left>0.28458in</Left>
+        <Top>3.41834in</Top>
+        <Left>0.28283in</Left>
         <Height>0.71875in</Height>
-        <Width>6.51569in</Width>
+        <Width>7.1546in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -747,10 +749,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>10.97562cm</Top>
-        <Left>0.72281cm</Left>
+        <Top>10.68458cm</Top>
+        <Left>0.71838cm</Left>
         <Height>0.52881cm</Height>
-        <Width>16.54993cm</Width>
+        <Width>18.17271cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -781,10 +783,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>11.57498cm</Top>
-        <Left>0.72281cm</Left>
+        <Top>11.28394cm</Top>
+        <Left>0.71838cm</Left>
         <Height>0.52881cm</Height>
-        <Width>16.54993cm</Width>
+        <Width>18.17271cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -800,13 +802,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.47269in</Width>
+              <Width>3.08149in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.16889in</Width>
+              <Width>2.18394in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.87327in</Width>
+              <Width>1.88832in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -883,6 +885,7 @@
                           <Width>1pt</Width>
                         </RightBorder>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1065,7 +1068,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -1230,10 +1235,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet2</DataSetName>
-        <Top>4.83472in</Top>
-        <Left>0.28544in</Left>
+        <Top>4.72014in</Top>
+        <Left>0.28369in</Left>
         <Height>0.73958in</Height>
-        <Width>6.51485in</Width>
+        <Width>7.15374in</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -1265,13 +1270,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.47327in</Width>
+              <Width>3.08438in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.16947in</Width>
+              <Width>2.1851in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.87385in</Width>
+              <Width>1.88599in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1348,6 +1353,7 @@
                           <Width>1pt</Width>
                         </RightBorder>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1530,7 +1536,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -1695,10 +1703,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet3</DataSetName>
-        <Top>6.52236in</Top>
-        <Left>0.28371in</Left>
+        <Top>5.52916in</Top>
+        <Left>0.28196in</Left>
         <Height>0.73958in</Height>
-        <Width>6.51659in</Width>
+        <Width>7.15547in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -2012,7 +2020,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -2177,7 +2187,7 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet4</DataSetName>
-        <Top>7.33139in</Top>
+        <Top>7.45639in</Top>
         <Left>0.28371in</Left>
         <Height>0.73958in</Height>
         <Width>6.51659in</Width>
@@ -2591,7 +2601,7 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet5</DataSetName>
-        <Top>9.37839in</Top>
+        <Top>9.50339in</Top>
         <Left>0.28458in</Left>
         <Height>0.51041in</Height>
         <Width>6.51572in</Width>
@@ -2645,7 +2655,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>20.76172cm</Top>
+        <Top>21.07922cm</Top>
         <Left>0.71619cm</Left>
         <Height>0.52881cm</Height>
         <Width>15.39019cm</Width>
@@ -2858,8 +2868,8 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet8</DataSetName>
-        <Top>13.67697in</Top>
-        <Left>0.28458in</Left>
+        <Top>14.05891in</Top>
+        <Left>0.23303in</Left>
         <Height>0.25in</Height>
         <Width>6.62948in</Width>
         <ZIndex>9</ZIndex>
@@ -2929,8 +2939,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>38.58511cm</Top>
-        <Left>10.26552cm</Left>
+        <Top>43.83748cm</Top>
+        <Left>10.35227cm</Left>
         <Height>1.05798cm</Height>
         <Width>7.29827cm</Width>
         <ZIndex>10</ZIndex>
@@ -2967,8 +2977,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>40.56949cm</Top>
-        <Left>10.26553cm</Left>
+        <Top>45.82186cm</Top>
+        <Left>10.35228cm</Left>
         <Height>0.60819cm</Height>
         <Width>7.29826cm</Width>
         <ZIndex>11</ZIndex>
@@ -3005,8 +3015,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>41.35407cm</Top>
-        <Left>10.26553cm</Left>
+        <Top>46.60644cm</Top>
+        <Left>10.35228cm</Left>
         <Height>0.60819cm</Height>
         <Width>7.29827cm</Width>
         <ZIndex>12</ZIndex>
@@ -3043,8 +3053,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>39.9613cm</Top>
-        <Left>10.26553cm</Left>
+        <Top>45.21367cm</Top>
+        <Left>10.35228cm</Left>
         <Height>0.60819cm</Height>
         <Width>7.29826cm</Width>
         <ZIndex>13</ZIndex>
@@ -3084,8 +3094,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>35.56429cm</Top>
-        <Left>0.71619cm</Left>
+        <Top>40.81666cm</Top>
+        <Left>0.80294cm</Left>
         <Height>1.90465cm</Height>
         <Width>16.84554cm</Width>
         <ZIndex>14</ZIndex>
@@ -3141,10 +3151,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.52392cm</Width>
+              <Width>7.29634cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>10.02382cm</Width>
+              <Width>10.79624cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -3389,10 +3399,10 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>14.56976cm</Top>
-        <Left>0.725cm</Left>
+        <Top>16.39003cm</Top>
+        <Left>0.80294cm</Left>
         <Height>1.75464cm</Height>
-        <Width>16.54774cm</Width>
+        <Width>18.09258cm</Width>
         <ZIndex>16</ZIndex>
         <Style>
           <Border>
@@ -3425,8 +3435,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>37.64533cm</Top>
-        <Left>0.71619cm</Left>
+        <Top>42.8977cm</Top>
+        <Left>0.80294cm</Left>
         <Height>0.70556cm</Height>
         <Width>16.84554cm</Width>
         <ZIndex>17</ZIndex>
@@ -3692,7 +3702,7 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>21.89008cm</Top>
+        <Top>22.20758cm</Top>
         <Left>0.725cm</Left>
         <Height>1.75464cm</Height>
         <Width>16.54774cm</Width>
@@ -4088,7 +4098,7 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet6</DataSetName>
-        <Top>10.73618in</Top>
+        <Top>10.86118in</Top>
         <Left>0.28197in</Left>
         <Height>0.51041in</Height>
         <Width>6.51833in</Width>
@@ -4502,7 +4512,7 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet7</DataSetName>
-        <Top>12.07628in</Top>
+        <Top>12.20128in</Top>
         <Left>0.28197in</Left>
         <Height>0.51041in</Height>
         <Width>6.51833in</Width>
@@ -4785,7 +4795,7 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>25.33888cm</Top>
+        <Top>25.65638cm</Top>
         <Left>0.71619cm</Left>
         <Height>1.75464cm</Height>
         <Width>16.55656cm</Width>
@@ -5050,7 +5060,7 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>28.74274cm</Top>
+        <Top>29.06024cm</Top>
         <Left>0.59189cm</Left>
         <Height>1.75464cm</Height>
         <Width>16.68086cm</Width>
@@ -5315,7 +5325,7 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>32.1466cm</Top>
+        <Top>32.72868cm</Top>
         <Left>0.59189cm</Left>
         <Height>1.75464cm</Height>
         <Width>16.96984cm</Width>
@@ -5529,10 +5539,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -5762,10 +5771,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateSampleReceived.Value)</Value>
+                              <Value>=Parameters!DateSampleReceived.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -5838,10 +5846,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateAnalyzed.Value)</Value>
+                              <Value>=Parameters!DateAnalyzed.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -5914,10 +5921,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateTestCompleted.Value)</Value>
+                              <Value>=Parameters!DateTestCompleted.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -6146,14 +6152,109 @@
           <FontSize>11pt</FontSize>
         </Style>
       </Tablix>
+      <Tablix Name="Tablix17">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>4.95391cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.63969cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox103">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Stage Mimic</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox103</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>3.17969cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Image Name="Image2">
+                      <Source>Database</Source>
+                      <Value>=First(Fields!img1.Value)</Value>
+                      <MIMEType>image/jpeg</MIMEType>
+                      <Sizing>Fit</Sizing>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Image>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details2" />
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSet9</DataSetName>
+        <Top>36.82089cm</Top>
+        <Left>0.80294cm</Left>
+        <Height>3.81938cm</Height>
+        <Width>4.95391cm</Width>
+        <ZIndex>25</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
     </ReportItems>
-    <Height>16.73278in</Height>
+    <Height>48.48463cm</Height>
     <Style />
   </Body>
-  <Width>7.13629in</Width>
+  <Width>19.1601cm</Width>
   <Page>
     <PageHeader>
-      <Height>0.8611in</Height>
+      <Height>2.18719cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -6213,7 +6314,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.30902in</Height>
+      <Height>3.32491cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -6315,12 +6416,13 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>11.69in</PageHeight>
-    <PageWidth>8.27in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>1cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
+    <TopMargin>1cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
@@ -6396,8 +6498,8 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>pm_extraction_medium</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="pm_extraction_volumn">
-          <DataField>pm_extraction_volumn</DataField>
+        <Field Name="pm_extraction_volume">
+          <DataField>pm_extraction_volume</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="sample_size">
@@ -6416,10 +6518,70 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>Analysis</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="ParticleAnalysisBySEMEDX">
+          <DataField>ParticleAnalysisBySEMEDX</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TapedAreaForDriveParts">
+          <DataField>TapedAreaForDriveParts</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NoofTimesTaped">
+          <DataField>NoofTimesTaped</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SurfaceAreaAnalysed">
+          <DataField>SurfaceAreaAnalysed</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ParticleRanges">
+          <DataField>ParticleRanges</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NumberOfPieces">
+          <DataField>NumberOfPieces</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specification">
+          <DataField>specification</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="pass_fail">
+          <DataField>pass_fail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SampleSize_Extraction">
+          <DataField>SampleSize_Extraction</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProcedureNo_Extraction">
+          <DataField>ProcedureNo_Extraction</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExtractionMedium_Extraction">
+          <DataField>ExtractionMedium_Extraction</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OvenCondition_Extraction">
+          <DataField>OvenCondition_Extraction</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TemperatureHumidityParameters">
+          <DataField>TemperatureHumidityParameters</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="extraction_volumn">
+          <DataField>extraction_volumn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>method_procedure</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6464,10 +6626,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6512,10 +6726,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6560,10 +6826,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6608,10 +6926,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6656,10 +7026,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6739,6 +7161,22 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
         <Field Name="wunitTextReport">
           <DataField>wunitTextReport</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
@@ -6824,11 +7262,47 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>wunitTextReport</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
         <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet9">
+      <Query>
+        <DataSourceName>DS</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DS</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:TableName>hpa_img</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -7348,6 +7822,6 @@ MGcAgAlCbAOACfHci0e/8+wLfV96/YR11gbdizrRitrle3FMdbak4RWdZac7cRz1VEXB7KlDR7zY9Hs/
 596qQ/Vf9tZF+vGp35pG/vTqbT/sq7uxnTkDAEwHYhsATAht9/1zg7ahj/iOXFrFo4hv9xcMJxYAvHMdRVTxzvVMhLfKUppHfKI1poeNRWKe5m+d42xrdd2t+w/jve1rY0bq7JTwpXnrUvP3yiKxTSPPTW71OJGH4ddAL7KP90ShJqucv3IrfoZwTEtN9elOzCrWOeGtspQWwB+gNceMeE8lNN2WUg14crPJq8+rb39slT2MbeK1d8o0OtoPuS37dgMATBNiGwBMjqvDb3CO36xoqOiW0pD0dKhTyvFA7NlUZ1lPO90PHaub9UyEt8pSWoA4bG1/ycnSY4bOTR3MNKbd276layAOXt8ro3knO5crPQa8mN5HMXZpL9bWgzS5dXdLm/g6q1jdLKVh66/D9GWD3m1M/5Gw5ulCHerOEW+VpbQYNnJzzIiNXN+EiE0+TmCpW+fExdbn9lvH3pRzl7+8dPW2N0XTIKvNGQBgOhDbAAAAAAAAJg2xDQAAAAAAYNIQ2wAAAAAAACYNsQ0AAAAAAGDSENsAAAAAAAAmDbENAAAAAABg0hDbAAAAAAAAJg2xDQAAAAAAYNIQ2wAAAAAAACYNsQ0AAAAAAGDSENsAAAAAAAAmDbENAAAAAABg0hDbAAAAAAAAJg2xDQAAAAAAYNIQ2wAAAAAAACYNsQ0AAAAAAGDCPH78P8FInY4OciN3AAAAAElFTkSuQmCC</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0ade57e8-9f4c-4396-9bea-773dda1f0f61</rd:ReportID>
 </Report>

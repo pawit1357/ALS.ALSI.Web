@@ -12,6 +12,8 @@ namespace ALS.ALSI.Biz.DataAccess
 
         #region "Property"
         public CommandNameEnum RowState { get; set; }
+        public byte[] img1 { get; set; }
+
         #endregion
 
         private static IRepository<template_seagate_hpa_coverpage> _repository

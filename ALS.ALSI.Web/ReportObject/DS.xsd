@@ -35,6 +35,7 @@
               <xs:element name="LiquidParticleCount" msprop:Generator_ColumnVarNameInTable="columnLiquidParticleCount" msprop:Generator_ColumnPropNameInRow="LiquidParticleCount" msprop:Generator_ColumnPropNameInTable="LiquidParticleCountColumn" msprop:Generator_UserColumnName="LiquidParticleCount" type="xs:string" minOccurs="0" />
               <xs:element name="SpecificationLimits" msprop:Generator_ColumnVarNameInTable="columnSpecificationLimits" msprop:Generator_ColumnPropNameInRow="SpecificationLimits" msprop:Generator_ColumnPropNameInTable="SpecificationLimitsColumn" msprop:Generator_UserColumnName="SpecificationLimits" type="xs:string" minOccurs="0" />
               <xs:element name="Results" msprop:Generator_ColumnVarNameInTable="columnResults" msprop:Generator_ColumnPropNameInRow="Results" msprop:Generator_ColumnPropNameInTable="ResultsColumn" msprop:Generator_UserColumnName="Results" type="xs:string" minOccurs="0" />
+              <xs:element name="img1" msprop:Generator_ColumnVarNameInTable="columnimg1" msprop:Generator_ColumnPropNameInRow="img1" msprop:Generator_ColumnPropNameInTable="img1Column" msprop:Generator_UserColumnName="img1" type="xs:base64Binary" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -132,6 +133,13 @@
               <xs:element name="specification" msdata:Caption="copper_wire_corrosion_test" msprop:Generator_ColumnVarNameInTable="columnspecification" msprop:Generator_ColumnPropNameInRow="specification" msprop:Generator_ColumnPropNameInTable="specificationColumn" msprop:Generator_UserColumnName="specification" type="xs:string" minOccurs="0" />
               <xs:element name="result" msprop:Generator_ColumnVarNameInTable="columnresult" msprop:Generator_ColumnPropNameInRow="result" msprop:Generator_ColumnPropNameInTable="resultColumn" msprop:Generator_UserColumnName="result" type="xs:string" minOccurs="0" />
               <xs:element name="temperature_humidity_parameters" msprop:Generator_ColumnVarNameInTable="columntemperature_humidity_parameters" msprop:Generator_ColumnPropNameInRow="temperature_humidity_parameters" msprop:Generator_ColumnPropNameInTable="temperature_humidity_parametersColumn" msprop:Generator_UserColumnName="temperature_humidity_parameters" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="hpa_img" msprop:Generator_TableClassName="hpa_imgDataTable" msprop:Generator_TableVarName="tablehpa_img" msprop:Generator_TablePropName="hpa_img" msprop:Generator_RowDeletingName="hpa_imgRowDeleting" msprop:Generator_RowChangingName="hpa_imgRowChanging" msprop:Generator_RowEvHandlerName="hpa_imgRowChangeEventHandler" msprop:Generator_RowDeletedName="hpa_imgRowDeleted" msprop:Generator_UserTableName="hpa_img" msprop:Generator_RowChangedName="hpa_imgRowChanged" msprop:Generator_RowEvArgName="hpa_imgRowChangeEvent" msprop:Generator_RowClassName="hpa_imgRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="img1" msprop:Generator_ColumnVarNameInTable="columnimg1" msprop:Generator_ColumnPropNameInRow="img1" msprop:Generator_ColumnPropNameInTable="img1Column" msprop:Generator_UserColumnName="img1" type="xs:base64Binary" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

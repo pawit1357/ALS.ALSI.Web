@@ -55,7 +55,17 @@ namespace ALS.ALSI.Utils
         }
         public static byte[] GetBytesFromImage(String imageFile)
         {
+           
             string path = HttpContext.Current.Server.MapPath(imageFile);
+            byte[] photo = File.ReadAllBytes(path);
+
+            return photo;
+        }
+
+        public static byte[] GetBytesFromPhisicalPath(String imageFile)
+        {
+
+            string path = String.Format("{0}/{1}",Configurations.PATH_DRIVE, imageFile);
             byte[] photo = File.ReadAllBytes(path);
 
             return photo;

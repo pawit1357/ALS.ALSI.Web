@@ -74,7 +74,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                     rpt.addr1 = _cus.company_name;
                     rpt.addr2 = addr.address;
                 }
-                rpt.cusRefNo = (_sample.sample_po== null) ? String.Empty : _sample.sample_po.ToString();
+                rpt.cusRefNo = _job.customer_ref_no;// (_sample.sample_po== null) ? String.Empty : _sample.sample_po.ToString();
                 rpt.cur_date = DateTime.Now;
 
                 rpt.dateOfDampleRecieve = Convert.ToDateTime(_sample.date_login_received_sample);
