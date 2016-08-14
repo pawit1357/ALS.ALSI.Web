@@ -1033,6 +1033,7 @@
     <Content Include="assets\pages\scripts\widgets.min.js" />
     <Content Include="css\paging.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Dump20160814.sql" />
     <Content Include="favicon.ico" />
     <Content Include="ForceChangePassword.aspx" />
     <Content Include="ForgotPassword.aspx" />
