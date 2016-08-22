@@ -64,9 +64,11 @@ namespace ALS.ALSI.Utils
 
         public static byte[] GetBytesFromPhisicalPath(String imageFile)
         {
+            byte[] photo = null;
+            string path = String.Format("{0}/{1}", Configurations.PATH_DRIVE, imageFile);
 
-            string path = String.Format("{0}/{1}",Configurations.PATH_DRIVE, imageFile);
-            byte[] photo = File.ReadAllBytes(path);
+            photo = File.ReadAllBytes(path);
+
 
             return photo;
         }

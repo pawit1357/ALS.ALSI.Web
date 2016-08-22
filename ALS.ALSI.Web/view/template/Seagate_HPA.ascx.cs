@@ -337,6 +337,7 @@ namespace ALS.ALSI.Web.view.template
                     txtExtractionVolume_hpa.Text = _cover.ExtractionVolume_hpa;
 
                     cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+
                     if (cbCheckBox.Checked)
                     {
                         lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
@@ -1607,7 +1608,16 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
-
+            DataTable dtImgs = new DataTable("hpa_imgs");
+            if (this.Hpas[0].img_path != null)
+            {
+                // Define all the columns once.
+                DataColumn[] imgCol ={ new DataColumn("img1",typeof(Byte[]))};
+                dtImgs.Columns.AddRange(imgCol);
+                DataRow imgRow = dtImgs.NewRow();
+                imgRow["img1"] = CustomUtils.GetBytesFromPhisicalPath(this.Hpas[0].img_path);
+                dtImgs.Rows.Add(imgRow);
+            }
             DataTable dtHeader = new DataTable("MethodProcedure");
 
             // Define all the columns once.
@@ -1639,15 +1649,20 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-
+            tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(this.Hpas[0].specification_id));
+            if (tem != null)
+            {
+                reportParameters.Add(new ReportParameter("rpt_unit", tem.D));
+            }
             DataTable dtSummary = new DataTable("Summary");
             DataColumn[] cols1 ={ new DataColumn("A",typeof(String)),
                                   new DataColumn("B",typeof(String)),
@@ -1704,22 +1719,24 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_seagate.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.Hpas.OrderBy(x => x.hpa_type).Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03) && x.row_type.Value == Convert.ToInt16(RowTypeEnum.Normal)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06) && x.row_type.Value == Convert.ToInt16(RowTypeEnum.Normal)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
 
             List<template_seagate_hpa_coverpage> ds5 = this.Hpas.Where(x =>
                  x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
                  x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
-                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
-                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.seq).ToList();
+                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
 
 
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 17).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(17, 27).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(44, ds5.Count - 44).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 16).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(16, 23).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(39, ds5.Count - 39).ToDataTable())); // Add datasource here
+
+
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet8", dtSummary)); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet9", dtImgs)); // Add datasource here
 
 
 
@@ -2359,12 +2376,14 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Sn based");
             items.Add("Ti based");
             items.Add("PbZrTi");
+            items.Add("MgTiO");
             items.Add("SnPb");
             items.Add("AlSi (FeCrCuZnMn)");
             items.Add("CuZn");
             items.Add("FeMgSiO");
             items.Add("Pt based");
             items.Add("CrCoNiP (disc material)");
+            items.Add("NiP with AlMgSi");
             items.Add("-Total Semi-Hard Metal Particles");
             items.Add("#Class 4 Particles,i.e.soft - metal particles");
             items.Add("Ag based");

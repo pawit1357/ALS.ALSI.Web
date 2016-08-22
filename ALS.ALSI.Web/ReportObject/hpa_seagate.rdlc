@@ -9,7 +9,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Method/Procedure:</Value>
+                <Value>METHOD/PROCEDURE:</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontSize>11pt</FontSize>
@@ -25,10 +25,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>7.86336cm</Top>
-        <Left>0.64162cm</Left>
+        <Top>7.9509cm</Top>
+        <Left>0.71619cm</Left>
         <Height>0.52881cm</Height>
-        <Width>16.52349cm</Width>
+        <Width>18.17271cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -43,24 +43,24 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.19268in</Width>
+              <Width>1.32254in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.33851in</Width>
+              <Width>1.46837in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.76083in</Width>
+              <Width>1.89069in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.1406in</Width>
+              <Width>1.27046in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.07267in</Width>
+              <Width>1.20253in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.61458in</Height>
+              <Height>0.46875in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -112,6 +112,7 @@
                           <Width>1pt</Width>
                         </RightBorder>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -166,6 +167,7 @@
                           <Width>1pt</Width>
                         </RightBorder>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -200,24 +202,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>used for </Value>
-                              <Style>
-                                <FontStyle>Normal</FontStyle>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
-                                <TextDecoration>None</TextDecoration>
-                                <Color>#000000</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>extraction</Value>
+                              <Value>used for extraction</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -710,10 +695,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>3.44637in</Top>
-        <Left>0.24704in</Left>
-        <Height>0.86458in</Height>
-        <Width>6.50529in</Width>
+        <Top>3.41834in</Top>
+        <Left>0.28283in</Left>
+        <Height>0.71875in</Height>
+        <Width>7.15459in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -764,10 +749,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>11.12621cm</Top>
-        <Left>0.64162cm</Left>
+        <Top>10.68458cm</Top>
+        <Left>0.71838cm</Left>
         <Height>0.52881cm</Height>
-        <Width>16.52349cm</Width>
+        <Width>18.17271cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -798,10 +783,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>11.72557cm</Top>
-        <Left>0.64162cm</Left>
+        <Top>11.28394cm</Top>
+        <Left>0.71838cm</Left>
         <Height>0.52881cm</Height>
-        <Width>16.52349cm</Width>
+        <Width>18.17271cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -817,13 +802,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.25876in</Width>
+              <Width>3.08149in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.71663in</Width>
+              <Width>2.18394in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.52907in</Width>
+              <Width>1.88832in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -900,6 +885,7 @@
                           <Width>1pt</Width>
                         </RightBorder>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -934,7 +920,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(Counts/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1009,7 +1015,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(Counts/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1082,7 +1108,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -1247,10 +1275,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet2</DataSetName>
-        <Top>4.894in</Top>
-        <Left>0.25347in</Left>
+        <Top>4.72014in</Top>
+        <Left>0.28369in</Left>
         <Height>0.73958in</Height>
-        <Width>6.50445in</Width>
+        <Width>7.15375in</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -1282,13 +1310,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.26607in</Width>
+              <Width>3.08438in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.71663in</Width>
+              <Width>2.1851in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.52907in</Width>
+              <Width>1.88599in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1365,6 +1393,7 @@
                           <Width>1pt</Width>
                         </RightBorder>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1399,7 +1428,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(Counts/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1474,7 +1523,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(Counts/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1547,7 +1616,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -1712,10 +1783,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet3</DataSetName>
-        <Top>5.70303in</Top>
-        <Left>0.24615in</Left>
+        <Top>5.52916in</Top>
+        <Left>0.28196in</Left>
         <Height>0.73958in</Height>
-        <Width>6.51177in</Width>
+        <Width>7.15547in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -1747,13 +1818,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.52105in</Width>
+              <Width>2.68536in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.46166in</Width>
+              <Width>2.38156in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.52348in</Width>
+              <Width>2.08594in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1786,7 +1857,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(</Value>
+                              <Value>( </Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1881,7 +1952,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(particles/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1956,7 +2047,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(particles/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -2029,7 +2140,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -2194,10 +2307,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet4</DataSetName>
-        <Top>7.24704in</Top>
-        <Left>0.24615in</Left>
+        <Top>7.45639in</Top>
+        <Left>0.28371in</Left>
         <Height>0.73958in</Height>
-        <Width>6.50618in</Width>
+        <Width>7.15286in</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -2229,13 +2342,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.4698in</Width>
+              <Width>2.68421in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.88277in</Width>
+              <Width>2.09718in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.15274in</Width>
+              <Width>2.36715in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2608,10 +2721,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet5</DataSetName>
-        <Top>8.3337in</Top>
-        <Left>0.25347in</Left>
+        <Top>8.57654in</Top>
+        <Left>0.28804in</Left>
         <Height>0.51041in</Height>
-        <Width>6.50531in</Width>
+        <Width>7.14854in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -2662,8 +2775,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>20.4624cm</Top>
-        <Left>0.635cm</Left>
+        <Top>21.07922cm</Top>
+        <Left>0.71619cm</Left>
         <Height>0.52881cm</Height>
         <Width>15.39019cm</Width>
         <ZIndex>8</ZIndex>
@@ -2681,13 +2794,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.4698in</Width>
+              <Width>2.70254in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.88277in</Width>
+              <Width>2.11551in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.15274in</Width>
+              <Width>2.38548in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2713,9 +2826,7 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Left</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -2767,7 +2878,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -2820,7 +2931,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -2877,10 +2988,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet8</DataSetName>
-        <Top>13.04875in</Top>
-        <Left>0.30155in</Left>
+        <Top>12.82625in</Top>
+        <Left>0.16692in</Left>
         <Height>0.25in</Height>
-        <Width>6.50531in</Width>
+        <Width>7.20353in</Width>
         <ZIndex>9</ZIndex>
         <Style>
           <Border>
@@ -2948,8 +3059,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>36.98944cm</Top>
-        <Left>9.99113cm</Left>
+        <Top>40.73776cm</Top>
+        <Left>9.97331cm</Left>
         <Height>1.05798cm</Height>
         <Width>7.29827cm</Width>
         <ZIndex>10</ZIndex>
@@ -2986,8 +3097,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>38.97382cm</Top>
-        <Left>9.99114cm</Left>
+        <Top>42.72214cm</Top>
+        <Left>9.97332cm</Left>
         <Height>0.60819cm</Height>
         <Width>7.29826cm</Width>
         <ZIndex>11</ZIndex>
@@ -3024,8 +3135,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>39.7584cm</Top>
-        <Left>9.99114cm</Left>
+        <Top>43.50672cm</Top>
+        <Left>9.97332cm</Left>
         <Height>0.60819cm</Height>
         <Width>7.29827cm</Width>
         <ZIndex>12</ZIndex>
@@ -3062,8 +3173,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>38.36563cm</Top>
-        <Left>9.99114cm</Left>
+        <Top>42.11395cm</Top>
+        <Left>9.97332cm</Left>
         <Height>0.60819cm</Height>
         <Width>7.29826cm</Width>
         <ZIndex>13</ZIndex>
@@ -3103,10 +3214,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>33.96862cm</Top>
-        <Left>0.7593cm</Left>
+        <Top>37.71694cm</Top>
+        <Left>0.42398cm</Left>
         <Height>1.90465cm</Height>
-        <Width>16.5301cm</Width>
+        <Width>16.84554cm</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -3141,10 +3252,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.17639cm</Top>
-        <Left>0.62749cm</Left>
+        <Top>0.08872cm</Top>
+        <Left>0.73163cm</Left>
         <Height>0.74048cm</Height>
-        <Width>16.52349cm</Width>
+        <Width>16.54993cm</Width>
         <ZIndex>15</ZIndex>
         <Style>
           <Border>
@@ -3160,10 +3271,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.5107cm</Width>
+              <Width>7.29634cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>10.0106cm</Width>
+              <Width>10.79624cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -3288,10 +3399,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -3408,10 +3518,10 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>16.47645cm</Top>
-        <Left>0.64382cm</Left>
+        <Top>16.39003cm</Top>
+        <Left>0.80294cm</Left>
         <Height>1.75464cm</Height>
-        <Width>16.5213cm</Width>
+        <Width>18.09258cm</Width>
         <ZIndex>16</ZIndex>
         <Style>
           <Border>
@@ -3444,10 +3554,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>36.04966cm</Top>
-        <Left>0.7593cm</Left>
+        <Top>39.79798cm</Top>
+        <Left>0.42398cm</Left>
         <Height>0.70556cm</Height>
-        <Width>16.5301cm</Width>
+        <Width>16.84554cm</Width>
         <ZIndex>17</ZIndex>
         <Style>
           <Border>
@@ -3463,13 +3573,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.47067in</Width>
+              <Width>2.68623in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.88364in</Width>
+              <Width>2.0992in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.15361in</Width>
+              <Width>2.36917in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -3842,10 +3952,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet6</DataSetName>
-        <Top>10.10796in</Top>
-        <Left>0.29894in</Left>
+        <Top>10.04187in</Top>
+        <Left>0.24393in</Left>
         <Height>0.51041in</Height>
-        <Width>6.50792in</Width>
+        <Width>7.1546in</Width>
         <ZIndex>18</ZIndex>
         <Style>
           <Border>
@@ -3877,13 +3987,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.47067in</Width>
+              <Width>2.68623in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.88364in</Width>
+              <Width>2.0992in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.15361in</Width>
+              <Width>2.36917in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -4256,10 +4366,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet7</DataSetName>
-        <Top>11.44806in</Top>
-        <Left>0.29894in</Left>
+        <Top>11.38197in</Top>
+        <Left>0.24393in</Left>
         <Height>0.51041in</Height>
-        <Width>6.50792in</Width>
+        <Width>7.1546in</Width>
         <ZIndex>19</ZIndex>
         <Style>
           <Border>
@@ -4291,10 +4401,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.5151cm</Width>
+              <Width>6.52833cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>10.015cm</Width>
+              <Width>10.02823cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -4419,10 +4529,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -4539,10 +4648,10 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>23.74321cm</Top>
-        <Left>0.7593cm</Left>
+        <Top>23.57534cm</Top>
+        <Left>0.61956cm</Left>
         <Height>1.75464cm</Height>
-        <Width>16.5301cm</Width>
+        <Width>16.55656cm</Width>
         <ZIndex>20</ZIndex>
         <Style>
           <Border>
@@ -4556,10 +4665,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.57725cm</Width>
+              <Width>6.59048cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>10.07715cm</Width>
+              <Width>10.09038cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -4684,7 +4793,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -4804,10 +4913,10 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>27.14707cm</Top>
-        <Left>0.635cm</Left>
+        <Top>26.9792cm</Top>
+        <Left>0.49526cm</Left>
         <Height>1.75464cm</Height>
-        <Width>16.6544cm</Width>
+        <Width>16.68086cm</Width>
         <ZIndex>21</ZIndex>
         <Style>
           <Border>
@@ -4821,10 +4930,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.57725cm</Width>
+              <Width>6.73497cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>10.07715cm</Width>
+              <Width>10.23487cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -4949,10 +5058,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -5069,10 +5177,10 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>30.55093cm</Top>
-        <Left>0.635cm</Left>
+        <Top>30.64764cm</Top>
+        <Left>0.49526cm</Left>
         <Height>1.75464cm</Height>
-        <Width>16.6544cm</Width>
+        <Width>16.96984cm</Width>
         <ZIndex>22</ZIndex>
         <Style>
           <Border>
@@ -5094,27 +5202,31 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.58488cm</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox5">
+                    <Textbox Name="Textbox3">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>CUSTOMER PO NO.: </Value>
+                              <Value>CUSTOMER'S REF NO.:</Value>
                               <Style>
+                                <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -5130,7 +5242,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox11">
+                    <Textbox Name="Textbox5">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -5146,7 +5258,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox11</rd:DefaultName>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -5283,10 +5395,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -5516,10 +5627,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateSampleReceived.Value)</Value>
+                              <Value>=Parameters!DateSampleReceived.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -5592,10 +5702,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateAnalyzed.Value)</Value>
+                              <Value>=Parameters!DateAnalyzed.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -5668,10 +5777,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateTestCompleted.Value)</Value>
+                              <Value>=Parameters!DateTestCompleted.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -5819,6 +5927,21 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
+                              <Value>One lot of sample was received with references:</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
                               <Value>=Parameters!SampleDescription.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
@@ -5854,42 +5977,22 @@
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
           <TablixMembers>
-            <TablixMember>
-              <Group Name="Details1" />
-            </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>1.18989cm</Top>
-        <Left>0.635cm</Left>
-        <Height>6.31749cm</Height>
+        <Top>1.19823cm</Top>
+        <Left>0.71619cm</Left>
+        <Height>6.33261cm</Height>
         <Width>15.52942cm</Width>
         <ZIndex>23</ZIndex>
         <Style>
@@ -5900,14 +6003,108 @@
           <FontSize>11pt</FontSize>
         </Style>
       </Tablix>
+      <Tablix Name="Tablix17">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>4.95391cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.63969cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox103">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Stage Mimic</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox103</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>3.17969cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Image Name="Image2">
+                      <Source>Database</Source>
+                      <Value>=First(Fields!img1.Value)</Value>
+                      <MIMEType>image/jpeg</MIMEType>
+                      <Sizing>Fit</Sizing>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Image>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details2" />
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSet9</DataSetName>
+        <Top>33.72117cm</Top>
+        <Left>0.42398cm</Left>
+        <Height>3.81938cm</Height>
+        <Width>4.95391cm</Width>
+        <ZIndex>24</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
     </ReportItems>
-    <Height>17.07639in</Height>
+    <Height>45.5213cm</Height>
     <Style />
   </Body>
-  <Width>7.13629in</Width>
+  <Width>19.28357cm</Width>
   <Page>
     <PageHeader>
-      <Height>0.8611in</Height>
+      <Height>2.18719cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -5915,6 +6112,7 @@
           <Source>Embedded</Source>
           <Value>logo</Value>
           <Sizing>FitProportional</Sizing>
+          <Left>0.041in</Left>
           <Height>0.8611in</Height>
           <Width>0.86459in</Width>
           <Style>
@@ -5943,7 +6141,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
           <Top>0cm</Top>
-          <Left>13.52411cm</Left>
+          <Left>13.62825cm</Left>
           <Height>2.01081cm</Height>
           <Width>3.54542cm</Width>
           <ZIndex>1</ZIndex>
@@ -5966,7 +6164,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.13555in</Height>
+      <Height>3.32491cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -5993,7 +6191,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>2.43486cm</Top>
+          <Top>2.55798cm</Top>
           <Left>0cm</Left>
           <Height>0.44944cm</Height>
           <Width>18.12617cm</Width>
@@ -6011,7 +6209,7 @@
           <Source>Embedded</Source>
           <Value>footer</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.98778cm</Top>
+          <Top>0.96097cm</Top>
           <Left>0.635cm</Left>
           <Height>1.44708cm</Height>
           <Width>16.93555cm</Width>
@@ -6068,12 +6266,13 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>11.69in</PageHeight>
-    <PageWidth>8.27in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>1cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
+    <TopMargin>1cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
@@ -6149,8 +6348,8 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>pm_extraction_medium</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="pm_extraction_volumn">
-          <DataField>pm_extraction_volumn</DataField>
+        <Field Name="pm_extraction_volume">
+          <DataField>pm_extraction_volume</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="sample_size">
@@ -6169,10 +6368,70 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>Analysis</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="ParticleAnalysisBySEMEDX">
+          <DataField>ParticleAnalysisBySEMEDX</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TapedAreaForDriveParts">
+          <DataField>TapedAreaForDriveParts</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NoofTimesTaped">
+          <DataField>NoofTimesTaped</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SurfaceAreaAnalysed">
+          <DataField>SurfaceAreaAnalysed</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ParticleRanges">
+          <DataField>ParticleRanges</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NumberOfPieces">
+          <DataField>NumberOfPieces</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specification">
+          <DataField>specification</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="pass_fail">
+          <DataField>pass_fail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SampleSize_Extraction">
+          <DataField>SampleSize_Extraction</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProcedureNo_Extraction">
+          <DataField>ProcedureNo_Extraction</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExtractionMedium_Extraction">
+          <DataField>ExtractionMedium_Extraction</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OvenCondition_Extraction">
+          <DataField>OvenCondition_Extraction</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TemperatureHumidityParameters">
+          <DataField>TemperatureHumidityParameters</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="extraction_volumn">
+          <DataField>extraction_volumn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>method_procedure</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6217,10 +6476,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6265,10 +6576,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6313,10 +6676,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6361,10 +6776,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6409,10 +6876,62 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>library_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -6492,6 +7011,22 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
         <Field Name="wunitTextReport">
           <DataField>wunitTextReport</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
@@ -6577,11 +7112,47 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
           <DataField>wunitTextReport</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
         <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet9">
+      <Query>
+        <DataSourceName>DS</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DS</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:TableName>hpa_img</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -6639,6 +7210,11 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="Company_addr">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="rpt_unit">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
@@ -7101,6 +7677,6 @@ MGcAgAlCbAOACfHci0e/8+wLfV96/YR11gbdizrRitrle3FMdbak4RWdZac7cRz1VEXB7KlDR7zY9Hs/
 596qQ/Vf9tZF+vGp35pG/vTqbT/sq7uxnTkDAEwHYhsATAht9/1zg7ahj/iOXFrFo4hv9xcMJxYAvHMdRVTxzvVMhLfKUppHfKI1poeNRWKe5m+d42xrdd2t+w/jve1rY0bq7JTwpXnrUvP3yiKxTSPPTW71OJGH4ddAL7KP90ShJqucv3IrfoZwTEtN9elOzCrWOeGtspQWwB+gNceMeE8lNN2WUg14crPJq8+rb39slT2MbeK1d8o0OtoPuS37dgMATBNiGwBMjqvDb3CO36xoqOiW0pD0dKhTyvFA7NlUZ1lPO90PHaub9UyEt8pSWoA4bG1/ycnSY4bOTR3MNKbd276layAOXt8ro3knO5crPQa8mN5HMXZpL9bWgzS5dXdLm/g6q1jdLKVh66/D9GWD3m1M/5Gw5ulCHerOEW+VpbQYNnJzzIiNXN+EiE0+TmCpW+fExdbn9lvH3pRzl7+8dPW2N0XTIKvNGQBgOhDbAAAAAAAAJg2xDQAAAAAAYNIQ2wAAAAAAACYNsQ0AAAAAAGDSENsAAAAAAAAmDbENAAAAAABg0hDbAAAAAAAAJg2xDQAAAAAAYNIQ2wAAAAAAACYNsQ0AAAAAAGDSENsAAAAAAAAmDbENAAAAAABg0hDbAAAAAAAAJg2xDQAAAAAAYNIQ2wAAAAAAACYNsQ0AAAAAAGDCPH78P8FInY4OciN3AAAAAElFTkSuQmCC</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0ade57e8-9f4c-4396-9bea-773dda1f0f61</rd:ReportID>
 </Report>

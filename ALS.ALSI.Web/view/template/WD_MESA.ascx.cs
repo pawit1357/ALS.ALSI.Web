@@ -198,7 +198,12 @@ namespace ALS.ALSI.Web.view.template
             this.refImg = template_wd_mesa_img.FindAllBySampleID(this.SampleID);
             if (this.refImg != null && this.refImg.Count > 0)
             {
-                gvRefImages.DataSource = this.refImg;
+                //foreach(template_wd_mesa_img img in this.refImg)
+                //{
+                //    img.p
+                //}
+                //String.Concat(Configurations.HOST,
+                gvRefImages.DataSource = this.refImg.OrderBy(x=>x.area).OrderBy(x=>x.descripton).ToList();
                 gvRefImages.DataBind();
             }
             if (this.coverpages != null && this.coverpages.Count > 0)
@@ -424,6 +429,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
                             this.jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
+                            this.jobSample.path_word = string.Empty;
                             #region "LOG"
                             job_sample_logs jobSampleLog = new job_sample_logs
                             {
@@ -700,14 +706,29 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             reportParameters.Add(new ReportParameter("ResultDesc", ""));
+            List<template_wd_mesa_img> imgList = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
+            List<template_wd_mesa_img> tmpImg1 = new List<template_wd_mesa_img>();
+            tmpImg1.Add(imgList[0]);
+            List<template_wd_mesa_img> tmpImg2 = new List<template_wd_mesa_img>();
+            tmpImg2.Add(imgList[1]);
+            List<template_wd_mesa_img> tmpImg3 = new List<template_wd_mesa_img>();
+            tmpImg3.Add(imgList[2]);
+            List<template_wd_mesa_img> tmpImg4 = new List<template_wd_mesa_img>();
+            tmpImg4.Add(imgList[3]);
+            reportParameters.Add(new ReportParameter("area1_desc", imgList[0].descripton));
+            reportParameters.Add(new ReportParameter("area2_desc", imgList[1].descripton));
+            reportParameters.Add(new ReportParameter("area3_desc", imgList[2].descripton));
+            reportParameters.Add(new ReportParameter("area4_desc", imgList[3].descripton));
+
 
             // Variables
             Warning[] warnings;
@@ -731,8 +752,14 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dat.Where(x => x.area == 1).ToList().ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dat.Where(x => x.area == 2).ToList().ToDataTable())); // Add datasource here
+
+
+
+
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", tmpImg1.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", tmpImg2.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", tmpImg3.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", tmpImg4.ToDataTable())); // Add datasource here
 
 
 
@@ -744,7 +771,8 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.ADMIN_CONVERT_WORD:
                     if (!String.IsNullOrEmpty(this.jobSample.path_word))
                     {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        //Response.Redirect(HttpContext.Current.Server.MapPath(this.jobSample.path_word));
+                        Response.Redirect(String.Concat( Configurations.HOST, this.jobSample.path_word));
                     }
                     else
                     {
@@ -923,7 +951,7 @@ namespace ALS.ALSI.Web.view.template
                     ddlArea.SelectedIndex = -1;
                     txtDesc.Text = string.Empty;
                 }
-                gvRefImages.DataSource = this.refImg;
+                gvRefImages.DataSource = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
                 gvRefImages.DataBind();
             }
         }

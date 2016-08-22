@@ -82,7 +82,10 @@ namespace ALS.ALSI.Biz.ReportObjects
                 rpt.dateOfTestComplete = Convert.ToDateTime(_sample.date_chemist_complete);
 
                 rpt.alsRefNo = _sample.job_number.ToString();
-                rpt.description = _sample.description;
+                rpt.description = "Description:" + _sample.description + "\n" +
+                                  "Model:" + _sample.model + "\n" +
+                                  "Surface Area:" + _sample.surface_area + "\n";
+
                 rpt.model = _sample.model;
                 rpt.surface_areas = _sample.surface_area;
                 rpt.remark = _sample.remarks;

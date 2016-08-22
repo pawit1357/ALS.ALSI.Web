@@ -1605,14 +1605,15 @@ namespace ALS.ALSI.Web.view.template
         {
 
             DataTable dtImgs = new DataTable("hpa_imgs");
-
-            // Define all the columns once.
-            DataColumn[] imgCol ={ new DataColumn("img1",typeof(Byte[]))
-            };
-            dtImgs.Columns.AddRange(imgCol);
-            DataRow imgRow = dtImgs.NewRow();
-            imgRow["img1"] = CustomUtils.GetBytesFromPhisicalPath(this.Hpas[0].img_path);
-            dtImgs.Rows.Add(imgRow);
+            if (this.Hpas[0].img_path != null)
+            {
+                // Define all the columns once.
+                DataColumn[] imgCol = { new DataColumn("img1", typeof(Byte[])) };
+                dtImgs.Columns.AddRange(imgCol);
+                DataRow imgRow = dtImgs.NewRow();
+                imgRow["img1"] = CustomUtils.GetBytesFromPhisicalPath(this.Hpas[0].img_path);
+                dtImgs.Rows.Add(imgRow);
+            }
 
 
             DataTable dtHeader = new DataTable("MethodProcedure");
@@ -1653,19 +1654,15 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text.Substring(ddlLpcType.SelectedItem.Text.IndexOf('(') + 1, (ddlLpcType.SelectedItem.Text.IndexOf(')') - 1) - ddlLpcType.SelectedItem.Text.IndexOf('('))));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            //reportParameters.Add(new ReportParameter("img1", CustomUtils.GetBytesFromPhisicalPath(this.Hpas[0].img_path)));
+            tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(this.Hpas[0].specification_id));
+            if (tem != null)
+            {
+                reportParameters.Add(new ReportParameter("rpt_unit", tem.D));
+            }
 
-            
-            //foreach (template_seagate_hpa_coverpage _i in this.Hpas)
-            //{
-            //    //String source_file_url = String.Concat(Configurations.HOST, _i.img_path);
-
-            //    //http://localhost/uploads/2016/07/21/ELP-1071-HB/1071.jpg
-            //    _i.img1 = CustomUtils.GetBytesFromPhisicalPath(_i.img_path);
-            //}
-                DataTable dtSummary = new DataTable("Summary");
+            DataTable dtSummary = new DataTable("Summary");
             DataColumn[] cols1 ={ new DataColumn("A",typeof(String)),
                                   new DataColumn("B",typeof(String)),
                                   new DataColumn("C",typeof(String)),
@@ -1701,12 +1698,6 @@ namespace ALS.ALSI.Web.view.template
             row["B"] = "Magnification";
             row["C"] = lbC149.Text;
             dtSummary.Rows.Add(row);
-            //reportParameters.Add(new ReportParameter("lbC144", lbC144.Text));
-            //reportParameters.Add(new ReportParameter("lbC145", lbC145.Text));
-            //reportParameters.Add(new ReportParameter("lbC146", lbC146.Text));
-            //reportParameters.Add(new ReportParameter("lbC147", lbC147.Text));
-            //reportParameters.Add(new ReportParameter("lbC148", lbC148.Text));
-            //reportParameters.Add(new ReportParameter("lbC149", lbC149.Text));
             // Variables
             Warning[] warnings;
             string[] streamIds;
@@ -1726,29 +1717,18 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
 
 
-
-
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", this.Hpas.Where(x =>
-            //    x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
-            //    x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
-            //    x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
-            //    x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)
-
-            //).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
-
-
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", dtSummary)); // Add datasource here
-
             List<template_seagate_hpa_coverpage> ds5 = this.Hpas.Where(x =>
                  x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
                  x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
-                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
-                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.seq).ToList();
+                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
 
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 16).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(16, 23).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(39, ds5.Count - 39).ToDataTable())); // Add datasource here
 
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 28).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(28, 28).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(56, ds5.Count - 56).ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 16).ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(16, 30).ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(30, ds5.Count - 30).ToDataTable())); // Add datasource here
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet8", dtSummary)); // Add datasource here
 
@@ -1791,25 +1771,6 @@ namespace ALS.ALSI.Web.view.template
                     {
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
-
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
                     break;
             }
 
