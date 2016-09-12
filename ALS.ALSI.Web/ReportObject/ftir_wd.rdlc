@@ -62,8 +62,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>7.85455cm</Top>
-        <Left>0.40015cm</Left>
+        <Top>7.39649cm</Top>
+        <Left>0.33311cm</Left>
         <Height>0.52881cm</Height>
         <Width>14.20595cm</Width>
         <ZIndex>1</ZIndex>
@@ -497,14 +497,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ProcedureNo">
+                    <Textbox Name="B2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ProcedureNo.Value</Value>
+                              <Value>=Fields!B.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -515,7 +515,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ProcedureNo</rd:DefaultName>
+                      <rd:DefaultName>B2</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -550,14 +550,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="NumOfPiecesUsedForExtraction1">
+                    <Textbox Name="C">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NumOfPiecesUsedForExtraction.Value</Value>
+                              <Value>=Fields!C.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -568,7 +568,61 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>NumOfPiecesUsedForExtraction1</rd:DefaultName>
+                      <rd:DefaultName>C</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <TopBorder>
+                          <Color>Black</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Color>Black</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Color>Black</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>Black</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </RightBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="D">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!D.Value</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>D</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -603,14 +657,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ExtractionMedium">
+                    <Textbox Name="E1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ExtractionMedium.Value</Value>
+                              <Value>=Fields!E.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -621,60 +675,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ExtractionMedium</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </BottomBorder>
-                        <LeftBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </RightBorder>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="ExtractionVolume">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!ExtractionVolume.Value</Value>
-                              <Style>
-                                <FontSize>11pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>ExtractionVolume</rd:DefaultName>
+                      <rd:DefaultName>E1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -730,8 +731,8 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
-        <Top>3.36999in</Top>
+        <DataSetName>DataSet3</DataSetName>
+        <Top>3.18964in</Top>
         <Left>0.15754in</Left>
         <Height>0.71875in</Height>
         <Width>6.6925in</Width>
@@ -785,8 +786,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>10.56177cm</Top>
-        <Left>0.39796cm</Left>
+        <Top>10.1037cm</Top>
+        <Left>0.33311cm</Left>
         <Height>0.52881cm</Height>
         <Width>14.20814cm</Width>
         <ZIndex>3</ZIndex>
@@ -819,8 +820,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>11.16113cm</Top>
-        <Left>0.40015cm</Left>
+        <Top>10.8089cm</Top>
+        <Left>0.33311cm</Left>
         <Height>0.52881cm</Height>
         <Width>17.72602cm</Width>
         <ZIndex>4</ZIndex>
@@ -999,7 +1000,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(ug/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1074,7 +1095,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(ug/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1246,14 +1287,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="A">
+                    <Textbox Name="B">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!A.Value</Value>
+                              <Value>=Fields!B.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1266,7 +1307,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>A</rd:DefaultName>
+                      <rd:DefaultName>B</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1308,7 +1349,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!B.Value</Value>
+                              <Value>=Fields!C.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -1361,7 +1402,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!C.Value</Value>
+                              <Value>=Fields!D.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -1407,14 +1448,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="D">
+                    <Textbox Name="E">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!D.Value</Value>
+                              <Value>=Fields!E.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -1425,7 +1466,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>D</rd:DefaultName>
+                      <rd:DefaultName>E</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1482,11 +1523,14 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet2</DataSetName>
-        <Top>4.70998in</Top>
+        <Top>4.53311in</Top>
         <Left>0.15667in</Left>
         <Height>0.71875in</Height>
         <Width>6.69336in</Width>
         <ZIndex>5</ZIndex>
+        <Visibility>
+          <Hidden>=CountRows() = 0</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1530,9 +1574,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Remarks</rd:DefaultName>
-        <Top>5.62318in</Top>
-        <Left>0.16012in</Left>
-        <Height>0.61458in</Height>
+        <Top>5.3213in</Top>
+        <Left>0.15667in</Left>
+        <Height>0.53125in</Height>
         <Width>6.97617in</Width>
         <ZIndex>6</ZIndex>
         <Style>
@@ -1585,8 +1629,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>17.55207cm</Top>
-        <Left>11.2829cm</Left>
+        <Top>15.92381cm</Top>
+        <Left>11.28286cm</Left>
         <Height>1.05798cm</Height>
         <Width>6.11622cm</Width>
         <ZIndex>7</ZIndex>
@@ -1623,8 +1667,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>19.53645cm</Top>
-        <Left>11.28291cm</Left>
+        <Top>17.62526cm</Top>
+        <Left>11.28287cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11621cm</Width>
         <ZIndex>8</ZIndex>
@@ -1661,8 +1705,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>20.32103cm</Top>
-        <Left>11.2829cm</Left>
+        <Top>18.40984cm</Top>
+        <Left>11.28286cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11622cm</Width>
         <ZIndex>9</ZIndex>
@@ -1699,8 +1743,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>18.92826cm</Top>
-        <Left>11.28291cm</Left>
+        <Top>17.01707cm</Top>
+        <Left>11.28287cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11621cm</Width>
         <ZIndex>10</ZIndex>
@@ -1737,7 +1781,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>16.29902cm</Top>
+        <Top>15.04187cm</Top>
         <Left>0.39794cm</Left>
         <Height>0.70556cm</Height>
         <Width>17.72823cm</Width>
@@ -1953,7 +1997,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2186,7 +2230,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateSampleReceived.Value)</Value>
+                              <Value>=Parameters!DateSampleReceived.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2262,7 +2306,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateAnalyzed.Value)</Value>
+                              <Value>=Parameters!DateAnalyzed.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2338,7 +2382,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateTestCompleted.Value)</Value>
+                              <Value>=Parameters!DateTestCompleted.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2489,6 +2533,17 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
+                              <Value>One lot of sample was received with references:</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
                               <Value>=Parameters!SampleDescription.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
@@ -2556,7 +2611,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>DataSet2</DataSetName>
         <Top>1.00844cm</Top>
         <Left>0.46357cm</Left>
         <Height>6.31749cm</Height>
@@ -2571,7 +2626,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>8.65625in</Height>
+    <Height>7.53125in</Height>
     <Style />
   </Body>
   <Width>7.13629in</Width>
@@ -2757,82 +2812,6 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DataSet1">
-      <Query>
-        <DataSourceName>DS</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="procedure_no">
-          <DataField>procedure_no</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="number_of_pieces__used_for_extraction">
-          <DataField>number_of_pieces__used_for_extraction</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="extraction_medium">
-          <DataField>extraction_medium</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="extraction_volume">
-          <DataField>extraction_volume</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ProcedureNo">
-          <DataField>ProcedureNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ExtractionMedium">
-          <DataField>ExtractionMedium</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NumOfPiecesUsedForExtraction">
-          <DataField>NumOfPiecesUsedForExtraction</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ExtractionVolume">
-          <DataField>ExtractionVolume</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="procedureNo">
-          <DataField>procedureNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SampleSize">
-          <DataField>SampleSize</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SamplingTime">
-          <DataField>SamplingTime</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="pm_procedure_no">
-          <DataField>pm_procedure_no</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="pm_number_of_pieces_used_for_extraction">
-          <DataField>pm_number_of_pieces_used_for_extraction</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="pm_extraction_medium">
-          <DataField>pm_extraction_medium</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="pm_extraction_volumn">
-          <DataField>pm_extraction_volumn</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
-        <rd:TableName>method_procedure</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
-      </rd:DataSetInfo>
-    </DataSet>
     <DataSet Name="DataSet2">
       <Query>
         <DataSourceName>DS</DataSourceName>
@@ -2863,6 +2842,106 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
         <rd:SchemaPath>C:\Users\pawit\Documents\Visual Studio 2013\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:TableName>data</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet3">
+      <Query>
+        <DataSourceName>DS</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="A">
+          <DataField>A</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="B">
+          <DataField>B</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="C">
+          <DataField>C</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="D">
+          <DataField>D</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="E">
+          <DataField>E</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="rt">
+          <DataField>rt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="amount">
+          <DataField>amount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="library_id">
+          <DataField>library_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DS</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
         <rd:TableName>data</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -2926,6 +3005,11 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="Company_addr">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="rpt_unit">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>

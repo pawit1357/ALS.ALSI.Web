@@ -243,6 +243,8 @@ namespace ALS.ALSI.Web.view.template
             this.Ftir = template_seagate_ftir_coverpage.FindAllBySampleID(this.SampleID);
             if (this.Ftir != null && this.Ftir.Count > 0)
             {
+                ddlUnit.SelectedValue = this.Ftir[0].selected_unit_ftir.ToString();
+                ddlUnitNvr.SelectedValue = this.Ftir[0].selected_unit_nvr.ToString();
                 ddlSpecification.SelectedValue = this.Ftir[0].specification_id.Value.ToString();
                 txtWB13.Text = this.Ftir[0].w_b13;
                 txtWB14.Text = this.Ftir[0].w_b14;
@@ -263,17 +265,19 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
 
-                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
-                gvMethodProcedure.DataBind();
-                gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
-                gvResult.DataBind();
-                gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
-                gvWftir.DataBind();
+                //gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                //gvMethodProcedure.DataBind();
+
+                //gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
+                //gvResult.DataBind();
+
+                //gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
+                //gvWftir.DataBind();
+
                 CalculateCas();
             }
             else
             {
-
                 #region "Procedure"
                 foreach (String s in MethodProcedure)
                 {
@@ -285,12 +289,12 @@ namespace ALS.ALSI.Web.view.template
                     tmp.C = mp[2];
                     tmp.D = mp[3];
                     tmp.E = mp[4];
-                    tmp.row_type = 1;
-                    tmp.data_type = 1;
+                    tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                    tmp.data_type = Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE);
                     this.Ftir.Add(tmp);
                 }
                 #endregion
-                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                 gvMethodProcedure.DataBind();
             }
             #endregion
@@ -433,57 +437,17 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     //#endregion
 
-                    #region "NVR"
 
-
-                    //this.Ftir.nvrb16 = nvrB16.Text;
-                    //this.Ftir.nvrb17 = nvrB17.Text;
-                    //this.Ftir.nvrb18 = nvrB18.Text;
-                    //this.Ftir.nvrb20 = nvrB20.Text;
-                    //this.Ftir.nvrb21 = nvrB21.Text;
-                    //this.Ftir.nvrb22 = nvrB22.Text;
-                    //this.Ftir.nvrb24 = nvrB24.Text;
-                    //this.Ftir.nvrb25 = nvrB25.Text;
-                    //this.Ftir.nvrb26 = nvrB26.Text;
-                    //this.Ftir.nvrb28 = nvrB28.Text;
-                    //this.Ftir.nvrb29 = nvrB29.Text;
-                    //this.Ftir.nvrb30 = nvrB30.Text;
-                    //this.Ftir.nvrb32 = nvrB32.Text;
-                    //this.Ftir.nvrb33 = nvrB33.Text;
-                    //this.Ftir.nvrb34 = nvrB34.Text;
-                    //this.Ftir.nvrb36 = nvrB36.Text;
-                    //this.Ftir.nvrb37 = nvrB37.Text;
-
-
-                    //this.Ftir.nvrc16 = nvrC16.Text;
-                    //this.Ftir.nvrc17 = nvrC17.Text;
-                    //this.Ftir.nvrc18 = nvrC18.Text;
-                    //this.Ftir.nvrc20 = nvrC20.Text;
-                    //this.Ftir.nvrc21 = nvrC21.Text;
-                    //this.Ftir.nvrc22 = nvrC22.Text;
-                    //this.Ftir.nvrc24 = nvrC24.Text;
-                    //this.Ftir.nvrc25 = nvrC25.Text;
-                    //this.Ftir.nvrc26 = nvrC26.Text;
-                    //this.Ftir.nvrc28 = nvrC28.Text;
-                    //this.Ftir.nvrc29 = nvrC29.Text;
-                    //this.Ftir.nvrc30 = nvrC30.Text;
-                    //this.Ftir.nvrc32 = nvrC32.Text;
-                    //this.Ftir.nvrc33 = nvrC33.Text;
-                    //this.Ftir.nvrc34 = nvrC34.Text;
-                    //this.Ftir.nvrc36 = nvrC36.Text;
-                    //this.Ftir.nvrc37 = nvrC37.Text;
-
-                    #endregion
                     foreach (template_seagate_ftir_coverpage item in this.Ftir)
                     {
                         item.sample_id = this.SampleID;
                         item.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         item.selected_unit_ftir = Convert.ToInt32(ddlUnit.SelectedValue);
+                        item.selected_unit_nvr = Convert.ToInt32(ddlUnitNvr.SelectedValue);
                         item.w_b13 = txtWB13.Text;
                         item.w_b14 = txtWB14.Text;
                         item.w_b15 = txtWB15.Text;
                     }
-                    //template_seagate_ftir_coverpage.UpdateList(this.Ftir);
                     template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_ftir_coverpage.InsertList(this.Ftir);
                     break;
@@ -661,7 +625,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -671,7 +635,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -681,7 +645,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -701,7 +665,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -711,7 +675,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -721,7 +685,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
 
                 #endregion
@@ -734,7 +698,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -744,7 +708,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -754,7 +718,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -764,7 +728,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = 2;
+                tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_SPEC);
                 this.Ftir.Add(tmp);
 
                 #endregion
@@ -779,19 +743,20 @@ namespace ALS.ALSI.Web.view.template
 
         private void CalculateCas()
         {
-
-
-
             gvResult.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
             gvResult.Columns[2].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
 
+            gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnitNvr.SelectedItem.Text);
+            gvResultNvr.Columns[2].HeaderText = String.Format("Results ({0})", ddlUnitNvr.SelectedItem.Text);
+
             int unit = Convert.ToInt16(ddlUnit.SelectedValue);
+
             //FTIR
-            List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == 2 && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             if (ftir2.Count > 0)
             {
 
-                List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == 3).ToList();
+                List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                 if (ftirList.Count > 0)
                 {
                     template_seagate_ftir_coverpage tmp = ftir2.Where(x => x.A.Equals("Silicone")).FirstOrDefault();
@@ -817,29 +782,33 @@ namespace ALS.ALSI.Web.view.template
                     //remark
                     lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
                 }
-                List<template_seagate_ftir_coverpage> nvrList = this.Ftir.Where(x => x.data_type == 4).ToList();
+                List<template_seagate_ftir_coverpage> nvrList = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA)).ToList();
                 if (ftirList.Count > 0)
                 {
                     template_seagate_ftir_coverpage tmp = ftir2.Where(x => x.A.Equals("NVR(IPA)") || x.A.Equals("IPA")).FirstOrDefault();
                     if (tmp != null)
                     {
-                        tmp.C =  nvrList[nvrList.Count-1].C;//Silicone
+                        tmp.C = nvrList[nvrList.Count - 1].C;//Silicone
+                        tmp.C = Convert.ToDouble(tmp.C).ToString("N" + txtDecimal08.Text);
                     }
                 }
             }
 
 
 
-            gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
+            gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
             gvWftir.DataBind();
 
-            gvNVr.DataSource = this.Ftir.Where(x => x.data_type == 4).ToList();
+            gvNVr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA)).ToList();
             gvNVr.DataBind();
 
-            gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+            gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
             gvResult.DataBind();
 
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+            gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC)).ToList();
+            gvResultNvr.DataBind();
+
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
             gvMethodProcedure.DataBind();
 
             btnSubmit.Enabled = true;
@@ -848,216 +817,104 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
-            //char[] item = this.Ftir.item_visible.ToCharArray();
 
-            //DataTable dtHeader = new DataTable("MethodProcedure");
+            try
+            {
 
-            //// Define all the columns once.
-            //DataColumn[] cols ={ new DataColumn("ProcedureNo",typeof(String)),
-            //                      new DataColumn("NumOfPiecesUsedForExtraction",typeof(String)),
-            //                      new DataColumn("ExtractionMedium",typeof(String)),
-            //                      new DataColumn("ExtractionVolume",typeof(String)),
-            //                  };
-            //dtHeader.Columns.AddRange(cols);
-            //DataRow row = dtHeader.NewRow();
-            //row["ProcedureNo"] = this.Ftir.ProcedureNo;
-            //row["NumOfPiecesUsedForExtraction"] = this.Ftir.NumOfPiece;
-            //row["ExtractionMedium"] = this.Ftir.ExtractionMedium;
-            //row["ExtractionVolume"] = this.Ftir.ExtractionVolumn;
-            //dtHeader.Rows.Add(row);
-            //ReportHeader reportHeader = new ReportHeader();
-            //reportHeader = reportHeader.getReportHeder(this.jobSample);
 
-            //List<ReportData> reportNVRList = new List<ReportData>();
-            //List<ReportData> reportFTIRList = new List<ReportData>();
-            ////Create ReportData NVR
-            //ReportData tmp = new ReportData
-            //{
-            //    A = "NVR (DI Water)",
-            //    B = lbB29Spec.Text,
-            //    C = lbB29Result.Text
-            //};
-            //if (item[1] == '1')
-            //{
-            //    reportNVRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "NVR (IPA/Hexane)",
-            //    B = lbB30Spec.Text,
-            //    C = lbB30Result.Text
-            //};
-            //if (item[2] == '1')
-            //{
-            //    reportNVRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "NVR (IPA)",
-            //    B = lbB31Spec.Text,
-            //    C = lbB31Result.Text
-            //};
-            //if (item[3] == '1')
-            //{
-            //    reportNVRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "NVR (Acetone)",
-            //    B = lbB31Spec.Text,
-            //    C = lbB31Result.Text
-            //};
-            //if (item[4] == '1')
-            //{
-            //    reportNVRList.Add(tmp);
-            //}
+                //DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
+                List<template_seagate_ftir_coverpage> methods = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                List<template_seagate_ftir_coverpage> ftirs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
+                List<template_seagate_ftir_coverpage> nvrs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
+                ReportHeader reportHeader = new ReportHeader();
+                reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+
+                ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+                reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+                reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+                reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+
+                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+                reportParameters.Add(new ReportParameter("Test", " "));
+                reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+                reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnitNvr.SelectedItem.Text));
+
+                reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+                reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
+
+                // Variables
+                Warning[] warnings;
+                string[] streamIds;
+                string mimeType = string.Empty;
+                string encoding = string.Empty;
+                string extension = string.Empty;
+
+
+                // Setup the report viewer object and get the array of bytes
+                ReportViewer viewer = new ReportViewer();
+                viewer.ProcessingMode = ProcessingMode.Local;
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_nvr_seagate.rdlc");
+                viewer.LocalReport.SetParameters(reportParameters);
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", methods.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ftirs.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", nvrs.ToDataTable())); // Add datasource here
 
 
 
 
-            ////Create ReportData FTIR
-            //tmp = new ReportData
-            //{
-            //    A = "Silicone",
-            //    B = lbB32.Text,
-            //    C = lbC32.Text
-            //};
-            //if (item[6] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "Silicone Oil",
-            //    B = lbB33.Text,
-            //    C = lbC33.Text
-            //};
-            //if (item[7] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "Hydrocarbon",
-            //    B = lbB34.Text,
-            //    C = lbC34.Text
-            //};
-            //if (item[8] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "Phthalate",
-            //    B = lbB35.Text,
-            //    C = lbC35.Text
-            //};
-            //if (item[9] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "Amides",
-            //    B = lbB36.Text,
-            //    C = lbC36.Text
-            //};
-            //if (item[10] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
 
 
-            //ReportParameterCollection reportParameters = new ReportParameterCollection();
+                string download = String.Empty;
 
-            //reportParameters.Add(new ReportParameter("CustomerPoNo", String.IsNullOrEmpty(reportHeader.cusRefNo) ? "-" : reportHeader.cusRefNo));
-            //reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            //reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-            //reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            //reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            //reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            //reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
-            //reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            //reportParameters.Add(new ReportParameter("Test", MethodType[this.Ftir.selected_method.Value - 1]));
-            //reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
-            //reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
+                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+                switch (status)
+                {
+                    case StatusEnum.ADMIN_CONVERT_WORD:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        else
+                        {
+                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 
-            //// Variables
-            //Warning[] warnings;
-            //string[] streamIds;
-            //string mimeType = string.Empty;
-            //string encoding = string.Empty;
-            //string extension = string.Empty;
+                            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+                            Response.Buffer = true;
+                            Response.Clear();
+                            Response.ContentType = mimeType;
+                            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                            Response.BinaryWrite(bytes); // create the file
+                            Response.Flush(); // send it to the client to download
+                        }
+                        break;
+                    case StatusEnum.LABMANAGER_CHECKING:
+                    case StatusEnum.LABMANAGER_APPROVE:
+                    case StatusEnum.LABMANAGER_DISAPPROVE:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        break;
+                    case StatusEnum.ADMIN_CONVERT_PDF:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
 
-
-            //// Setup the report viewer object and get the array of bytes
-            //ReportViewer viewer = new ReportViewer();
-            //viewer.ProcessingMode = ProcessingMode.Local;
-            //viewer.LocalReport.ReportPath = Server.MapPath(MethodType[this.Ftir.selected_method.Value - 1].EndsWith("NVR") ? "~/ReportObject/ftir_nvr_seagate.rdlc" : "~/ReportObject/ftir_seagate.rdlc");
-            //viewer.LocalReport.SetParameters(reportParameters);
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", reportNVRList.ToDataTable())); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportFTIRList.ToDataTable())); // Add datasource here
-
-
-
-            //string download = String.Empty;
-
-            //StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            //switch (status)
-            //{
-            //    case StatusEnum.ADMIN_CONVERT_WORD:
-            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        {
-            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-            //        }
-            //        else
-            //        {
-            //            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            //            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            //            Response.Buffer = true;
-            //            Response.Clear();
-            //            Response.ContentType = mimeType;
-            //            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            //            Response.BinaryWrite(bytes); // create the file
-            //            Response.Flush(); // send it to the client to download
-            //        }
-            //        break;
-            //    case StatusEnum.LABMANAGER_CHECKING:
-            //    case StatusEnum.LABMANAGER_APPROVE:
-            //    case StatusEnum.LABMANAGER_DISAPPROVE:
-            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        {
-            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-            //        }
-            //        break;
-            //    case StatusEnum.ADMIN_CONVERT_PDF:
-            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        {
-            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-            //        }
-
-            //        //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        //{
-            //        //    Word2Pdf objWorPdf = new Word2Pdf();
-            //        //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-            //        //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-            //        //    try
-            //        //    {
-            //        //        objWorPdf.Word2PdfCOnversion();
-            //        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-            //        //    }
-            //        //    catch (Exception ex)
-            //        //    {
-            //        //        Console.WriteLine();
-            //        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-            //        //    }
-            //        //}
-            //        break;
-            //}
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
 
 
 
@@ -1123,13 +980,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     if (_postedFile.ContentLength > 0)
                     {
-                        if (this.Ftir.Count > 0)
-                        {
-                            foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == 3).ToList())
-                            {
-                                this.Ftir.Remove(_item);
-                            }
-                        }
+
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
                         string dd = DateTime.Now.ToString("dd");
@@ -1152,7 +1003,13 @@ namespace ALS.ALSI.Web.view.template
                                 ISheet isheet = wb.GetSheet(ConfigurationManager.AppSettings["seagate.ftir.excel.sheetname.working1"]);
                                 if (isheet != null)
                                 {
-
+                                    if (this.Ftir.Count > 0)
+                                    {
+                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList())
+                                        {
+                                            this.Ftir.Remove(_item);
+                                        }
+                                    }
                                     txtWB13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B));//Surface area per part (e) =
                                     txtWB14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.B));//No. of parts extracted (f) = 
                                     txtWB15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.B));//Total Surface area (A) =
@@ -1223,13 +1080,12 @@ namespace ALS.ALSI.Web.view.template
                                                 //Amount(ug / cm2)
                                         }
                                         tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                        tmp.data_type = 3;
+                                        tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA);
                                         if (!String.IsNullOrEmpty(tmp.A))
                                         {
                                             this.Ftir.Add(tmp);
                                         }
 
-                                        //CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.G));
                                     }
                                 }
                                 #endregion
@@ -1238,6 +1094,14 @@ namespace ALS.ALSI.Web.view.template
                                 isheet = wb.GetSheet("NVR");
                                 if (isheet != null)
                                 {
+                                    if (this.Ftir.Count > 0)
+                                    {
+                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA)).ToList())
+                                        {
+                                            this.Ftir.Remove(_item);
+                                        }
+                                    }
+
                                     for (int row = 13; row < 37; row++)
                                     {
                                         template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
@@ -1246,23 +1110,25 @@ namespace ALS.ALSI.Web.view.template
                                         tmp.B = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.B));
                                         tmp.C = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C));
                                         tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                        tmp.data_type = 4;
+                                        tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA);
+
                                         //กำหนดจุดทศนิยม
-                                        switch (row)
-                                        {
-                                            case 35:
-                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N2");
-                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N2");
-                                                break;
-                                            case 36:
-                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N3");
-                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N3");
-                                                break;
-                                            default:
-                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N2");
-                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N2");
-                                                break;
-                                        }
+                                        //switch (row)
+                                        //{
+                                        //    case 35:
+                                        //        tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N2");
+                                        //        tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N2");
+                                        //        break;
+                                        //    case 36:
+                                        //        tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N3");
+                                        //        tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N3");
+                                        //        break;
+                                        //    default:
+                                        //        tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N2");
+                                        //        tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N2");
+                                        //        break;
+                                        //}
+
                                         if (!String.IsNullOrEmpty(tmp.A))
                                         {
                                             this.Ftir.Add(tmp);
@@ -1277,8 +1143,6 @@ namespace ALS.ALSI.Web.view.template
                             errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
                         }
                         #endregion
-
-
                     }
                 }
                 catch (Exception ex)
@@ -1301,10 +1165,7 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        protected void LinkButton1_Click(object sender, EventArgs e)
-        {
-            ModolPopupExtender.Show();
-        }
+
 
         protected void gvMethodProcedure_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -1312,37 +1173,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 int PKID = Convert.ToInt32(gvMethodProcedure.DataKeys[e.Row.RowIndex].Values[0].ToString());
                 RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMethodProcedure.DataKeys[e.Row.RowIndex].Values[1]);
-                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-
-
-                if (_btnHide != null && _btnUndo != null)
-                {
-                    switch (cmd)
-                    {
-                        case RowTypeEnum.Hide:
-                            _btnHide.Visible = false;
-                            _btnUndo.Visible = true;
-                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-                            break;
-                        default:
-                            _btnHide.Visible = true;
-                            _btnUndo.Visible = false;
-                            e.Row.ForeColor = System.Drawing.Color.Black;
-                            break;
-                    }
-                }
-
-            }
-
-        }
-
-        protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                int PKID = Convert.ToInt32(gvResult.DataKeys[e.Row.RowIndex].Values[0].ToString());
-                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResult.DataKeys[e.Row.RowIndex].Values[1]);
                 LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
                 LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
 
@@ -1376,7 +1206,7 @@ namespace ALS.ALSI.Web.view.template
                 if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
                 {
                     int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 1);
+                    template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
                     if (gcms != null)
                     {
                         switch (cmd)
@@ -1390,11 +1220,43 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                         }
 
-                        gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+                        gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
                         gvMethodProcedure.DataBind();
                     }
                 }
             }
+        }
+
+
+        protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int PKID = Convert.ToInt32(gvResult.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResult.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+
         }
 
         protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -1403,7 +1265,7 @@ namespace ALS.ALSI.Web.view.template
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 2);
+                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC));
                 if (gcms != null)
                 {
                     switch (cmd)
@@ -1417,43 +1279,87 @@ namespace ALS.ALSI.Web.view.template
                             break;
                     }
 
-                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2);
+                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC));
                     gvResult.DataBind();
                 }
             }
         }
 
-        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+
+        protected void gvResultNvr_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (cbCheckBox.Checked)
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
-            }
-            else
-            {
-                tb_m_specification mSpec = new tb_m_specification();
-                mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
-                if (mSpec != null)
+                int PKID = Convert.ToInt32(gvResultNvr.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResultNvr.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+
+                if (_btnHide != null && _btnUndo != null)
                 {
-                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.B, mSpec.A);
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
                 }
+
             }
 
         }
+
+        protected void gvResultNvr_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC));
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+
+                    gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC));
+                    gvResultNvr.DataBind();
+                }
+            }
+        }
+
+
+
+
 
 
         #region "method/procedure"
         protected void gvMethodProcedure_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvMethodProcedure.EditIndex = e.NewEditIndex;
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
             gvMethodProcedure.DataBind();
         }
 
         protected void gvMethodProcedure_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvMethodProcedure.EditIndex = -1;
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
             gvMethodProcedure.DataBind();
         }
 
@@ -1483,11 +1389,39 @@ namespace ALS.ALSI.Web.view.template
             }
 
             gvMethodProcedure.EditIndex = -1;
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
             gvMethodProcedure.DataBind();
 
         }
         #endregion
+
+
+
+
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+            }
+            else
+            {
+                tb_m_specification mSpec = new tb_m_specification();
+                mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
+                if (mSpec != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.B, mSpec.A);
+                }
+            }
+
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            ModolPopupExtender.Show();
+        }
+
+
 
     }
 }

@@ -69,7 +69,7 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_TYPE_OF_TEST = APPNAME + "/view/type_of_test/TypeOfTest.aspx";
 
 
-       
+
 
 
         public static string GetEnumDescription(Enum value)
@@ -165,7 +165,7 @@ namespace ALS.ALSI.Biz.Constant
         //AD10Directinject =11,
         MajorCompounds = 12,
         Standard = 13,
-        CoverPageValue=14
+        CoverPageValue = 14
     }
 
     public enum RoleEnum
@@ -314,7 +314,7 @@ namespace ALS.ALSI.Biz.Constant
         ARM_SUB_TOTAL = 10,
         ARM_GRAND_TOTAL = 11,
         PIVOT_SUB_TOTAL = 12,
-        PIVOT_GRAND_TOTAL =13,
+        PIVOT_GRAND_TOTAL = 13,
         SWAGE_SUB_TOTAL = 14,
         SWAGE_GRAND_TOTAL = 15
     }
@@ -325,7 +325,7 @@ namespace ALS.ALSI.Biz.Constant
         SUMMARY = 3
     }
 
-    public enum IMAGE_ORDER_TYPE:int
+    public enum IMAGE_ORDER_TYPE : int
     {
         PHOTO_BEFORE = 1,
         PHOTO_AFTER = 2
@@ -334,6 +334,25 @@ namespace ALS.ALSI.Biz.Constant
     {
         RHC_BASE = 1,
         RHC_HUB = 2
+    }
+
+    public enum FtirNvrEnum : int
+    {
+        METHOD_PROCEDURE = 1,
+        FTIR_SPEC = 2,
+        NVR_SPEC = 5,
+        FTIR_RAW_DATA = 3,
+        NVR_RAW_DATA = 4
+    }
+
+    public enum SeagateGcmsEnum : int
+    {
+        MOTOR_OIL = 1,
+        MOTOR_HUB = 2,
+        MOTOR_HUB_SUB = 3,
+        MOTOR_BASE = 4,
+        MOTOR_BASE_SUB = 5,
+        COMPOUND =6
     }
 }
 

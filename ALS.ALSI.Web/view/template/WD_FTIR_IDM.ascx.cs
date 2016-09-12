@@ -235,6 +235,7 @@ namespace ALS.ALSI.Web.view.template
 
                 CalculateCas();
 
+                
                 cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
                 if (cbCheckBox.Checked)
                 {

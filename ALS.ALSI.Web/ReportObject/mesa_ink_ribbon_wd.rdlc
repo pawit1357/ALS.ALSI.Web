@@ -1292,7 +1292,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.07798in</Height>
+              <Height>1.37768in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1303,11 +1303,12 @@
                       <Sizing>Fit</Sizing>
                       <Style>
                         <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <RightBorder>
                           <Style>Solid</Style>
-                        </RightBorder>
+                        </Border>
+                        <PaddingLeft>30pt</PaddingLeft>
+                        <PaddingRight>30pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Image>
                   </CellContents>
@@ -1321,11 +1322,12 @@
                       <Sizing>Fit</Sizing>
                       <Style>
                         <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <RightBorder>
                           <Style>Solid</Style>
-                        </RightBorder>
+                        </Border>
+                        <PaddingLeft>30pt</PaddingLeft>
+                        <PaddingRight>30pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Image>
                   </CellContents>
@@ -1423,11 +1425,15 @@
                       <Source>Database</Source>
                       <Value>=Fields!img3.Value</Value>
                       <MIMEType>image/jpeg</MIMEType>
-                      <Sizing>FitProportional</Sizing>
+                      <Sizing>Fit</Sizing>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Style>Solid</Style>
                         </Border>
+                        <PaddingLeft>30pt</PaddingLeft>
+                        <PaddingRight>30pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Image>
                   </CellContents>
@@ -1438,11 +1444,15 @@
                       <Source>Database</Source>
                       <Value>=Fields!img4.Value</Value>
                       <MIMEType>image/jpeg</MIMEType>
-                      <Sizing>FitProportional</Sizing>
+                      <Sizing>Fit</Sizing>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Style>Solid</Style>
                         </Border>
+                        <PaddingLeft>30pt</PaddingLeft>
+                        <PaddingRight>30pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Image>
                   </CellContents>
@@ -1477,7 +1487,7 @@
         </PageBreak>
         <Top>5.8002in</Top>
         <Left>0.3907in</Left>
-        <Height>3.15633in</Height>
+        <Height>3.45603in</Height>
         <Width>6.39756in</Width>
         <ZIndex>5</ZIndex>
         <Style>
@@ -1605,8 +1615,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>24.85698cm</Top>
-        <Left>0.99456cm</Left>
+        <Top>25.79657cm</Top>
+        <Left>1.04526cm</Left>
         <Height>0.52881cm</Height>
         <Width>16.30055cm</Width>
         <ZIndex>8</ZIndex>
@@ -1660,8 +1670,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>37.01415cm</Top>
-        <Left>11.12599cm</Left>
+        <Top>38.58874cm</Top>
+        <Left>11.17669cm</Left>
         <Height>1.05798cm</Height>
         <Width>6.11622cm</Width>
         <ZIndex>9</ZIndex>
@@ -1698,8 +1708,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>38.99853cm</Top>
-        <Left>11.12599cm</Left>
+        <Top>40.57312cm</Top>
+        <Left>11.17669cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11621cm</Width>
         <ZIndex>10</ZIndex>
@@ -1736,8 +1746,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>39.78311cm</Top>
-        <Left>11.12599cm</Left>
+        <Top>41.3577cm</Top>
+        <Left>11.17669cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11622cm</Width>
         <ZIndex>11</ZIndex>
@@ -1774,8 +1784,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>38.39034cm</Top>
-        <Left>11.12599cm</Left>
+        <Top>39.96493cm</Top>
+        <Left>11.17669cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11621cm</Width>
         <ZIndex>12</ZIndex>
@@ -1815,8 +1825,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>33.88714cm</Top>
-        <Left>0.99456cm</Left>
+        <Top>35.46173cm</Top>
+        <Left>1.04526cm</Left>
         <Height>1.90465cm</Height>
         <Width>16.30055cm</Width>
         <ZIndex>13</ZIndex>
@@ -1962,7 +1972,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2082,8 +2092,8 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>22.92595cm</Top>
-        <Left>0.99018cm</Left>
+        <Top>23.86554cm</Top>
+        <Left>1.04088cm</Left>
         <Height>1.75464cm</Height>
         <Width>16.30492cm</Width>
         <ZIndex>14</ZIndex>
@@ -2226,7 +2236,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.07798in</Height>
+              <Height>1.28631in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2237,11 +2247,12 @@
                       <Sizing>Fit</Sizing>
                       <Style>
                         <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <RightBorder>
                           <Style>Solid</Style>
-                        </RightBorder>
+                        </Border>
+                        <PaddingLeft>30pt</PaddingLeft>
+                        <PaddingRight>30pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Image>
                   </CellContents>
@@ -2255,11 +2266,12 @@
                       <Sizing>Fit</Sizing>
                       <Style>
                         <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <RightBorder>
                           <Style>Solid</Style>
-                        </RightBorder>
+                        </Border>
+                        <PaddingLeft>30pt</PaddingLeft>
+                        <PaddingRight>30pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Image>
                   </CellContents>
@@ -2357,11 +2369,15 @@
                       <Source>Database</Source>
                       <Value>=Fields!img3.Value</Value>
                       <MIMEType>image/jpeg</MIMEType>
-                      <Sizing>FitProportional</Sizing>
+                      <Sizing>Fit</Sizing>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Style>Solid</Style>
                         </Border>
+                        <PaddingLeft>30pt</PaddingLeft>
+                        <PaddingRight>30pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Image>
                   </CellContents>
@@ -2372,11 +2388,15 @@
                       <Source>Database</Source>
                       <Value>=Fields!img4.Value</Value>
                       <MIMEType>image/jpeg</MIMEType>
-                      <Sizing>FitProportional</Sizing>
+                      <Sizing>Fit</Sizing>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Style>Solid</Style>
                         </Border>
+                        <PaddingLeft>30pt</PaddingLeft>
+                        <PaddingRight>30pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Image>
                   </CellContents>
@@ -2409,9 +2429,9 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>10.06386in</Top>
-        <Left>0.41153in</Left>
-        <Height>3.15633in</Height>
+        <Top>10.43378in</Top>
+        <Left>0.43149in</Left>
+        <Height>3.36466in</Height>
         <Width>6.39756in</Width>
         <ZIndex>15</ZIndex>
         <Style>
@@ -2463,8 +2483,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>36.08775cm</Top>
-        <Left>0.93948cm</Left>
+        <Top>37.66234cm</Top>
+        <Left>0.99018cm</Left>
         <Height>0.70556cm</Height>
         <Width>16.35563cm</Width>
         <ZIndex>16</ZIndex>
@@ -2679,7 +2699,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2912,7 +2932,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateSampleReceived.Value)</Value>
+                              <Value>=Parameters!DateSampleReceived.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2988,7 +3008,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateAnalyzed.Value)</Value>
+                              <Value>=Parameters!DateAnalyzed.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -3064,7 +3084,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateTestCompleted.Value)</Value>
+                              <Value>=Parameters!DateTestCompleted.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -3215,6 +3235,21 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
+                              <Value>One lot of sample was received with references:</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
                               <Value>=Parameters!SampleDescription.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
@@ -3297,7 +3332,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>40.67353cm</Height>
+    <Height>42.9313cm</Height>
     <Style />
   </Body>
   <Width>18.12617cm</Width>

@@ -1049,11 +1049,14 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("rpt_unit", "ng/part"));
+
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "GCMS - Hydrocarbon Residue"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
@@ -1088,8 +1091,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds3.ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
-
-
             }
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.tbCas.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.MajorCompounds)).ToDataTable())); // Add datasource here
 

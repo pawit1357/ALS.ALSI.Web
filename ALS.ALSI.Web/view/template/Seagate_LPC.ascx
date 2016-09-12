@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_LPC.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_LPC" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-
+ 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <asp:ToolkitScriptManager ID="ToolkitScript1" runat="server" />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -572,7 +572,16 @@
                                                 <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
                                         </tr>
 
+                                        <td>Unit</td>
+                                        <td>
 
+                                            <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+                                                </asp:DropDownList>
+                                        </td>
 
 
 

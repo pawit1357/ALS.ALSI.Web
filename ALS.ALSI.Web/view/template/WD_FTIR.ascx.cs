@@ -230,8 +230,11 @@ namespace ALS.ALSI.Web.view.template
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
                 gvMethodProcedure.DataBind();
+
                 gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
                 gvResult.DataBind();
+
+                ddlFtirUnit.SelectedValue = this.Ftir[0].ftir_unit.ToString();
 
                 CalculateCas();
 
@@ -388,6 +391,7 @@ namespace ALS.ALSI.Web.view.template
                         item.sample_id = this.SampleID;
                         item.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
                         item.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                        item.ftir_unit = Convert.ToInt32(ddlFtirUnit.SelectedValue);
                     }
                     template_wd_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_wd_ftir_coverpage.InsertList(this.Ftir);
@@ -747,6 +751,96 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+                DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
+                ReportHeader reportHeader = new ReportHeader();
+                reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+              List<template_wd_ftir_coverpage> ds =   this.Ftir.Where(x => x.data_type == 2 && x.row_type == Convert.ToInt16(RowTypeEnum.Normal)).ToList();
+
+                ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+                reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo + " "));
+                reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+                reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+
+                reportParameters.Add(new ReportParameter("rpt_unit",ddlFtirUnit.SelectedItem.Text));
+               
+                reportParameters.Add(new ReportParameter("Test","FTIR"));
+                reportParameters.Add(new ReportParameter("ResultDesc",  lbSpecDesc.Text));
+                reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
+
+                // Variables
+                Warning[] warnings;
+                string[] streamIds;
+                string mimeType = string.Empty;
+                string encoding = string.Empty;
+                string extension = string.Empty;
+
+
+                // Setup the report viewer object and get the array of bytes
+                ReportViewer viewer = new ReportViewer();
+                viewer.ProcessingMode = ProcessingMode.Local;
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_wd.rdlc");
+                viewer.LocalReport.SetParameters(reportParameters);
+
+
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds.ToList().ToDataTable()));
+
+                string download = String.Empty;
+
+                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+                switch (status)
+                {
+                    case StatusEnum.ADMIN_CONVERT_WORD:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        else
+                        {
+                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+                            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+                            Response.Buffer = true;
+                            Response.Clear();
+                            Response.ContentType = mimeType;
+                            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                            Response.BinaryWrite(bytes); // create the file
+                            Response.Flush(); // send it to the client to download
+                        }
+                        break;
+                    case StatusEnum.LABMANAGER_CHECKING:
+                    case StatusEnum.LABMANAGER_APPROVE:
+                    case StatusEnum.LABMANAGER_DISAPPROVE:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        break;
+                    case StatusEnum.ADMIN_CONVERT_PDF:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
+
 
             //char[] item = this.Ftir.item_visible.ToCharArray();
 

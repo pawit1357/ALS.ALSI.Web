@@ -64,17 +64,313 @@
                                 </h6>--%>
                                 <table>
                                     <tr>
-                                      <td><asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                        <td>
+                                            <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                     </tr>
                                 </table>
-                                <asp:GridView ID="gvCoverPages" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvCoverPages_RowDataBound" OnRowCommand="gvCoverPages_RowCommand">
+                                <asp:GridView ID="gvMotorOil" runat="server" AutoGenerateColumns="False"
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvMotorOil_RowDataBound" OnRowCommand="gvMotorOil_RowCommand">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Motor Oil Contamination" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Hide">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+
+                                    <PagerTemplate>
+                                        <div class="pagination">
+                                            <ul>
+                                                <li>
+                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
+                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
+                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
+                                                </li>
+                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
+                                                <li>
+                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
+                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
+                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </PagerTemplate>
+                                    <EmptyDataTemplate>
+                                        <div class="data-not-found">
+                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+                                <asp:GridView ID="gvMotorHub" runat="server" AutoGenerateColumns="False"
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvMotorHub_RowDataBound" OnRowCommand="gvMotorHub_RowCommand">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Motor Hub" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Hide">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+
+                                    <PagerTemplate>
+                                        <div class="pagination">
+                                            <ul>
+                                                <li>
+                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
+                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
+                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
+                                                </li>
+                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
+                                                <li>
+                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
+                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
+                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </PagerTemplate>
+                                    <EmptyDataTemplate>
+                                        <div class="data-not-found">
+                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+                                <asp:GridView ID="gvMotorHubSub" runat="server" AutoGenerateColumns="False"
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvMotorHubSub_RowDataBound" OnRowCommand="gvMotorHubSub_RowCommand">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Hide">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+
+                                    <PagerTemplate>
+                                        <div class="pagination">
+                                            <ul>
+                                                <li>
+                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
+                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
+                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
+                                                </li>
+                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
+                                                <li>
+                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
+                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
+                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </PagerTemplate>
+                                    <EmptyDataTemplate>
+                                        <div class="data-not-found">
+                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+                                <asp:GridView ID="gvMotorBase" runat="server" AutoGenerateColumns="False"
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvMotorBase_RowDataBound" OnRowCommand="gvMotorBase_RowCommand">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Motor Base" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Hide">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+
+                                    <PagerTemplate>
+                                        <div class="pagination">
+                                            <ul>
+                                                <li>
+                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
+                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
+                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
+                                                </li>
+                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
+                                                <li>
+                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
+                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
+                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </PagerTemplate>
+                                    <EmptyDataTemplate>
+                                        <div class="data-not-found">
+                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+                                <asp:GridView ID="gvMotorBaseSub" runat="server" AutoGenerateColumns="False"
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvMotorBaseSub_RowDataBound" OnRowCommand="gvMotorBaseSub_RowCommand">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Hide">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+
+                                    <PagerTemplate>
+                                        <div class="pagination">
+                                            <ul>
+                                                <li>
+                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
+                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
+                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
+                                                </li>
+                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
+                                                <li>
+                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
+                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
+                                                </li>
+                                                <li>
+                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
+                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </PagerTemplate>
+                                    <EmptyDataTemplate>
+                                        <div class="data-not-found">
+                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+                                <asp:GridView ID="gvCompound" runat="server" AutoGenerateColumns="False"
+                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvCompound_RowDataBound" OnRowCommand="gvCompound_RowCommand">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Compound" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
                                             </ItemTemplate>
@@ -650,7 +946,7 @@
                                             <td>
                                                 <asp:DropDownList ID="ddlBaseType" runat="server" CssClass="select2_category form-control">
                                                     <asp:ListItem Value="0">-</asp:ListItem>
-                                                    <asp:ListItem Value="1">2.5</asp:ListItem>
+                                                    <asp:ListItem Value="1" Selected="True">2.5</asp:ListItem>
                                                     <asp:ListItem Value="2">3.5</asp:ListItem>
                                                 </asp:DropDownList>
 
@@ -1022,7 +1318,87 @@
                                                 <asp:TextBox ID="txtDecimal12" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
                                         </tr>
                                     </table>
+                                    <h3>Unit</h3>
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <td>Motor Oil Contamination</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
 
+                                                </asp:DropDownList>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Motor Hub</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+
+                                                </asp:DropDownList>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Motor Hub (Total)</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+
+                                                </asp:DropDownList>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Motor Base</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnitMotorBase" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+
+                                                </asp:DropDownList>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Motor Base (Total)</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnitMotorBaseSub" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+
+                                                </asp:DropDownList>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compound</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+
+                                                </asp:DropDownList>
+
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />

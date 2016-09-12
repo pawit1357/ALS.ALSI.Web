@@ -36,5 +36,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string F { get; set; }
         public Nullable<int> data_type { get; set; }
         public string WashMethod { get; set; }
+        public Nullable<int> unit { get; set; }
     }
 }

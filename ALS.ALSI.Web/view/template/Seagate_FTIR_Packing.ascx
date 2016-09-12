@@ -121,15 +121,62 @@
                                         <h6>Results:</h6>
                                         <table>
                                             <tr>
-                                       <td>
+                                                <td>
                                                     <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                             </tr>
                                             <tr>
-                                            
+
                                                 <td>
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
                                         </table>
+                                        
+                                        <asp:GridView ID="gvResultNvr" runat="server" AutoGenerateColumns="False"
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResultNvr_RowDataBound" OnRowCommand="gvResultNvr_RowCommand">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="Non-Volatile Residue" ItemStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litOrganicContamination" runat="server" Text='<%# Eval("A")%>' />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Specification Limits (ng/cm2)" ItemStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litSpecificationLimits" runat="server" Text='<%# Eval("B")%>' />
+                                                    </ItemTemplate>
+
+
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Results (ng/cm2)" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Hide">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+
+                                            </Columns>
+
+                                            <EmptyDataTemplate>
+                                                <div class="data-not-found">
+                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                </div>
+                                            </EmptyDataTemplate>
+                                        </asp:GridView>
+
+                                        <br />
                                         <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
                                             <Columns>
@@ -321,6 +368,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
 
                                 <asp:GridView ID="gvNVr" CssClass="table table-striped table-bordered mini" runat="server" AutoGenerateColumns="False">
                                     <Columns>
+
                                         <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
@@ -351,7 +399,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                     </EmptyDataTemplate>
                                 </asp:GridView>
 
-                                 </div>
+                            </div>
                         </div>
                     </asp:Panel>
                     <!-- END FORM-->
@@ -538,28 +586,9 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             <td>
                                                 <asp:TextBox ID="txtDecimal07" runat="server" TextMode="Number" CssClass="form-control" Text="3"></asp:TextBox></td>
                                         </tr>
-                                    </table>
-                                    <h1>NVR</h1>
-                                    <table class="table table-striped">
                                         <tr>
-                                            <td>Control</td>
+                                            <td>Unit</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal08" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sample</td>
-                                            <td>
-                                                <asp:TextBox ID="txtDecimal09" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
-                                        </tr>
-
-
-                                    </table>
-                                    <h1>Unit</h1>
-                                    <table class="table table-striped">
-
-                                        <tr>
-                                            <th>Unit</th>
-                                            <th>
                                                 <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
                                                     <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="2">ug/cm2</asp:ListItem>
@@ -568,12 +597,38 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                                     <asp:ListItem Value="5">ng/g</asp:ListItem>
                                                     <asp:ListItem Value="6">g</asp:ListItem>
 
-                                                </asp:DropDownList></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                                </asp:DropDownList></td>
+
                                         </tr>
                                     </table>
+                                    <h1>NVR</h1>
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <td>Result (Cover page)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal08" runat="server" TextMode="Number" CssClass="form-control" Text="3"></asp:TextBox></td>
+                                        </tr>
+                                        <%--                                        <tr>
+                                            <td>Sample</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal09" runat="server" TextMode="Number" CssClass="form-control" Text="4"></asp:TextBox></td>
+                                        </tr>--%>
+                                        <tr>
+                                            <td>Unit</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnitNvr" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
+                                                    <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="2">ug/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">ug</asp:ListItem>
+                                                    <asp:ListItem Value="4">ug/g</asp:ListItem>
+                                                    <asp:ListItem Value="5">ng/g</asp:ListItem>
+                                                    <asp:ListItem Value="6">g</asp:ListItem>
+
+                                                </asp:DropDownList></td>
+                                        </tr>
+
+                                    </table>
+
                                 </div>
                                 <div class="modal-footer">
                                     <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />

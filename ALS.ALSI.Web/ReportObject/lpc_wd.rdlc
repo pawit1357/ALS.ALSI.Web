@@ -967,7 +967,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(Particles/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1042,7 +1062,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(Particles/cm2)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1444,6 +1484,9 @@
         <Height>0.97916in</Height>
         <Width>6.70431in</Width>
         <ZIndex>4</ZIndex>
+        <Visibility>
+          <Hidden>=CountRows() = 0</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -2259,6 +2302,9 @@
         <Height>0.86458in</Height>
         <Width>6.64085in</Width>
         <ZIndex>5</ZIndex>
+        <Visibility>
+          <Hidden>=CountRows() = 0</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -2457,7 +2503,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox43</rd:DefaultName>
@@ -2530,7 +2578,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox6</rd:DefaultName>
@@ -2812,6 +2862,9 @@
         <Height>0.86458in</Height>
         <Width>6.69389in</Width>
         <ZIndex>6</ZIndex>
+        <Visibility>
+          <Hidden>=CountRows() = 0</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -4303,7 +4356,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -4568,7 +4621,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -5490,6 +5543,9 @@
         <Height>0.86458in</Height>
         <Width>6.70433in</Width>
         <ZIndex>16</ZIndex>
+        <Visibility>
+          <Hidden>=CountRows() = 0</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -5793,7 +5849,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -6026,7 +6082,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateSampleReceived.Value)</Value>
+                              <Value>=Parameters!DateSampleReceived.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -6102,7 +6158,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateAnalyzed.Value)</Value>
+                              <Value>=Parameters!DateAnalyzed.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -6178,7 +6234,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateTestCompleted.Value)</Value>
+                              <Value EvaluationMode="Constant">Parameters!DateTestCompleted.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -7139,6 +7195,11 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="Company_addr">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="rpt_unit">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>

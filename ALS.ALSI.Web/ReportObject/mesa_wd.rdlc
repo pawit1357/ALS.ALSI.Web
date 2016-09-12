@@ -2267,7 +2267,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -3148,6 +3147,21 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
+                              <Value>One lot of sample was received with references:</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
                               <Value>=Parameters!SampleDescription.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
@@ -3236,7 +3250,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>REPORT</Value>
+                <Value>REPORT </Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontSize>15pt</FontSize>

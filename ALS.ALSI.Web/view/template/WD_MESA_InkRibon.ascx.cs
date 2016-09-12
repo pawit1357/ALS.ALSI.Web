@@ -684,13 +684,13 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("Company", reportHeader.addr1 ));
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
 
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             reportParameters.Add(new ReportParameter("ResultDesc", "-"));
@@ -800,7 +800,7 @@ namespace ALS.ALSI.Web.view.template
             {
 
                 #region "SEM IMAGE AT 250X"
-                if ((Path.GetExtension(FileUpload1.FileName).Equals(".jpg")))
+                if ((Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".jpg")))
                 {
                     string yyyy = DateTime.Now.ToString("yyyy");
                     string MM = DateTime.Now.ToString("MM");
@@ -820,7 +820,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 #endregion
                 #region "SEM IMAGE AT 500X"
-                if ((Path.GetExtension(FileUpload2.FileName).Equals(".jpg")))
+                if ((Path.GetExtension(FileUpload2.FileName).ToLower().Equals(".jpg")))
                 {
                     string yyyy = DateTime.Now.ToString("yyyy");
                     string MM = DateTime.Now.ToString("MM");
@@ -840,7 +840,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 #endregion
                 #region "SEM IMAGE AT 2000X"
-                if ((Path.GetExtension(FileUpload3.FileName).Equals(".jpg")))
+                if ((Path.GetExtension(FileUpload3.FileName).ToLower().Equals(".jpg")))
                 {
                     string yyyy = DateTime.Now.ToString("yyyy");
                     string MM = DateTime.Now.ToString("MM");
@@ -860,7 +860,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 #endregion
                 #region "EDX SPECTRUM"
-                if ((Path.GetExtension(FileUpload4.FileName).Equals(".jpg")))
+                if ((Path.GetExtension(FileUpload4.FileName).ToLower().Equals(".jpg")))
                 {
                     string yyyy = DateTime.Now.ToString("yyyy");
                     string MM = DateTime.Now.ToString("MM");
@@ -952,7 +952,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
@@ -961,11 +961,11 @@ namespace ALS.ALSI.Web.view.template
                 {
                     switch (cmd)
                     {
-                        case RowTypeEnum.Hide:
+                        case CommandNameEnum.Hide:
                             gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
 
                             break;
-                        case RowTypeEnum.Normal:
+                        case CommandNameEnum.Normal:
                             gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }

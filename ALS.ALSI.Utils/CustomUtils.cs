@@ -10,6 +10,7 @@ using System.Text;
 using System.Web;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Net;
 
 namespace ALS.ALSI.Utils
 {
@@ -56,8 +57,13 @@ namespace ALS.ALSI.Utils
         public static byte[] GetBytesFromImage(String imageFile)
         {
            
-            string path = HttpContext.Current.Server.MapPath(imageFile);
-            byte[] photo = File.ReadAllBytes(path);
+            //string path = HttpContext.Current.Server.MapPath(imageFile);
+            //byte[] photo = File.ReadAllBytes(path);
+
+            var webClient = new WebClient();
+
+            byte[] photo = webClient.DownloadData(imageFile);
+
 
             return photo;
         }

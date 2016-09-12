@@ -51,5 +51,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> row_type { get; set; }
         public string amide_unit { get; set; }
         public string silicone_unit { get; set; }
+        public Nullable<int> ftir_unit { get; set; }
+        public Nullable<int> nvr_unit { get; set; }
     }
 }

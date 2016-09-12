@@ -303,7 +303,7 @@ namespace ALS.ALSI.Web.view.template
 
                 //ddlChannel.SelectedValue = this.Lpcs[0].channel_size;
                 ddlTemplateType.SelectedValue = this.Lpcs[0].template_type.ToString();
-
+                ddlUnit.SelectedValue = this.Lpcs[0].unit+"";
                 tb_m_specification tem = new tb_m_specification().SelectByID(this.Lpcs[0].specification_id.Value);
 
                 if (tem != null)
@@ -471,6 +471,7 @@ namespace ALS.ALSI.Web.view.template
                         //_tmp.channel_size = ddlChannel.SelectedValue;
                         _tmp.template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
                         _tmp.row_type = 1;//Cover Page
+                        _tmp.unit = Convert.ToInt16(ddlUnit.SelectedValue);
                     }
                     objWork.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.Lpcs);
@@ -1239,14 +1240,18 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy")  + ""));
             reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy")  + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy")  + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy")  + ""));
+
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", ddlA19.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+
 
 
             // Variables
@@ -1263,7 +1268,10 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/lpc_seagate.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.Lpcs.Where(x => x.row_state == 1 && x.channel_size.Equals("0.300")).ToList().ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.300")).ToList().ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList().ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600")).ToList().ToDataTable())); // Add datasource here
+
             //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportLpcs.Where(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06)).ToDataTable())); // Add datasource here
 
 

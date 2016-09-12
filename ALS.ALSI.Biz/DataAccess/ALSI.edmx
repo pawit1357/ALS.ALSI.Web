@@ -824,6 +824,16 @@
           <Property Name="extraction_medium" Type="varchar" MaxLength="45" />
           <Property Name="extraction_volumn" Type="varchar" MaxLength="45" />
           <Property Name="selected_base" Type="int" />
+          <Property Name="data_type" Type="int" />
+          <Property Name="B28_MO" Type="varchar" MaxLength="45" />
+          <Property Name="C28_MO" Type="varchar" MaxLength="45" />
+          <Property Name="D28_MO" Type="varchar" MaxLength="45" />
+          <Property Name="UnitMotorOilContamination" Type="int" />
+          <Property Name="UnitMotorHub" Type="int" />
+          <Property Name="UnitMotorHubSub" Type="int" />
+          <Property Name="UnitMotorBase" Type="int" />
+          <Property Name="UnitMotorBaseSub" Type="int" />
+          <Property Name="UnitCompound" Type="int" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -1015,6 +1025,7 @@
           <Property Name="df03" Type="double" />
           <Property Name="df05" Type="double" />
           <Property Name="df06" Type="double" />
+          <Property Name="unit" Type="int" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
@@ -1099,6 +1110,8 @@
           <Property Name="row_type" Type="int" />
           <Property Name="amide_unit" Type="varchar" MaxLength="45" />
           <Property Name="silicone_unit" Type="varchar" MaxLength="45" />
+          <Property Name="ftir_unit" Type="int" />
+          <Property Name="nvr_unit" Type="int" />
         </EntityType>
         <EntityType Name="template_wd_ftir_coverpage_tmp">
           <Key>
@@ -1304,6 +1317,7 @@
           <Property Name="F" Type="varchar" MaxLength="45" />
           <Property Name="data_type" Type="int" />
           <Property Name="WashMethod" Type="varchar" MaxLength="45" />
+          <Property Name="unit" Type="int" />
         </EntityType>
         <EntityType Name="template_wd_mesa_coverpage">
           <Key>
@@ -2583,6 +2597,16 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="extraction_medium" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="extraction_volumn" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="selected_base" Type="Int32" />
+          <Property Name="data_type" Type="Int32" />
+          <Property Name="B28_MO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="C28_MO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="D28_MO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="UnitMotorOilContamination" Type="Int32" />
+          <Property Name="UnitMotorHub" Type="Int32" />
+          <Property Name="UnitMotorHubSub" Type="Int32" />
+          <Property Name="UnitMotorBase" Type="Int32" />
+          <Property Name="UnitMotorBaseSub" Type="Int32" />
+          <Property Name="UnitCompound" Type="Int32" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -2774,6 +2798,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="df03" Type="Double" />
           <Property Name="df05" Type="Double" />
           <Property Name="df06" Type="Double" />
+          <Property Name="unit" Type="Int32" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
@@ -2858,6 +2883,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_type" Type="Int32" />
           <Property Name="amide_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="silicone_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftir_unit" Type="Int32" />
+          <Property Name="nvr_unit" Type="Int32" />
         </EntityType>
         <EntityType Name="template_wd_ftir_coverpage_tmp">
           <Key>
@@ -3064,6 +3091,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="F" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="data_type" Type="Int32" />
           <Property Name="WashMethod" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="unit" Type="Int32" />
         </EntityType>
         <EntityType Name="template_wd_mesa_coverpage">
           <Key>
@@ -4045,6 +4073,16 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_gcms_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_gcms_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_gcms_coverpage">
+                <ScalarProperty Name="UnitCompound" ColumnName="UnitCompound" />
+                <ScalarProperty Name="UnitMotorBaseSub" ColumnName="UnitMotorBaseSub" />
+                <ScalarProperty Name="UnitMotorBase" ColumnName="UnitMotorBase" />
+                <ScalarProperty Name="UnitMotorHubSub" ColumnName="UnitMotorHubSub" />
+                <ScalarProperty Name="UnitMotorHub" ColumnName="UnitMotorHub" />
+                <ScalarProperty Name="UnitMotorOilContamination" ColumnName="UnitMotorOilContamination" />
+                <ScalarProperty Name="D28_MO" ColumnName="D28_MO" />
+                <ScalarProperty Name="C28_MO" ColumnName="C28_MO" />
+                <ScalarProperty Name="B28_MO" ColumnName="B28_MO" />
+                <ScalarProperty Name="data_type" ColumnName="data_type" />
                 <ScalarProperty Name="selected_base" ColumnName="selected_base" />
                 <ScalarProperty Name="extraction_volumn" ColumnName="extraction_volumn" />
                 <ScalarProperty Name="extraction_medium" ColumnName="extraction_medium" />
@@ -4280,6 +4318,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_lpc_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_lpc_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_lpc_coverpage">
+                <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="df06" ColumnName="df06" />
                 <ScalarProperty Name="df05" ColumnName="df05" />
                 <ScalarProperty Name="df03" ColumnName="df03" />
@@ -4390,6 +4429,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_ftir_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_ftir_coverpage">
               <MappingFragment StoreEntitySet="template_wd_ftir_coverpage">
+                <ScalarProperty Name="nvr_unit" ColumnName="nvr_unit" />
+                <ScalarProperty Name="ftir_unit" ColumnName="ftir_unit" />
                 <ScalarProperty Name="silicone_unit" ColumnName="silicone_unit" />
                 <ScalarProperty Name="amide_unit" ColumnName="amide_unit" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
@@ -4617,6 +4658,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_lpc_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_lpc_coverpage">
               <MappingFragment StoreEntitySet="template_wd_lpc_coverpage">
+                <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="WashMethod" ColumnName="WashMethod" />
                 <ScalarProperty Name="data_type" ColumnName="data_type" />
                 <ScalarProperty Name="F" ColumnName="F" />

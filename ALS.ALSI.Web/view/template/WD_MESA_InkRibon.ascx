@@ -3,54 +3,54 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.date-picker').datepicker();
+    //$(document).ready(function () {
+    //    $('.date-picker').datepicker();
 
-        var form1 = $('#Form1');
-        var error1 = $('.alert-error', form1);
-        var success1 = $('.alert-success', form1);
+    //    var form1 = $('#Form1');
+    //    var error1 = $('.alert-error', form1);
+    //    var success1 = $('.alert-success', form1);
 
-        form1.validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-inline', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
-            ignore: "",
-            rules: {
-                ctl00$ContentPlaceHolder2$ctl00$txtDesc: {
-                    required: true,
-                }
-            },
+    //    form1.validate({
+    //        errorElement: 'span', //default input error message container
+    //        errorClass: 'help-inline', // default input error message class
+    //        focusInvalid: false, // do not focus the last invalid input
+    //        ignore: "",
+    //        rules: {
+    //            ctl00$ContentPlaceHolder2$ctl00$txtDesc: {
+    //                required: true,
+    //            }
+    //        },
 
-            invalidHandler: function (event, validator) { //display error alert on form submit              
-                success1.hide();
-                error1.show();
-                App.scrollTo(error1, -200);
-            },
+    //        invalidHandler: function (event, validator) { //display error alert on form submit              
+    //            success1.hide();
+    //            error1.show();
+    //            App.scrollTo(error1, -200);
+    //        },
 
-            highlight: function (element) { // hightlight error inputs
-                $(element)
-                    .closest('.help-inline').removeClass('ok'); // display OK icon
-                $(element)
-                    .closest('.control-group').removeClass('success').addClass('error'); // set error class to the control group
-            },
+    //        highlight: function (element) { // hightlight error inputs
+    //            $(element)
+    //                .closest('.help-inline').removeClass('ok'); // display OK icon
+    //            $(element)
+    //                .closest('.control-group').removeClass('success').addClass('error'); // set error class to the control group
+    //        },
 
-            unhighlight: function (element) { // revert the change dony by hightlight
-                $(element)
-                    .closest('.control-group').removeClass('error'); // set error class to the control group
-            },
+    //        unhighlight: function (element) { // revert the change dony by hightlight
+    //            $(element)
+    //                .closest('.control-group').removeClass('error'); // set error class to the control group
+    //        },
 
-            success: function (label) {
-                label
-                    .addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
-                .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
-            },
+    //        success: function (label) {
+    //            label
+    //                .addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
+    //            .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
+    //        },
 
 
-            submitHandler: function (form) {
-                form.submit();
-            }
-        });
-    });
+    //        submitHandler: function (form) {
+    //            form.submit();
+    //        }
+    //    });
+    //});
 </script>
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
@@ -209,11 +209,11 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Edit">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>' CausesValidation="false"><i class="fa fa-edit"></i></asp:LinkButton>
                                             </ItemTemplate>
                                             <EditItemTemplate>
                                                 <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
-                                                    CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                    CommandName="Update" CausesValidation="false"><i class="fa fa-save"></i></asp:LinkButton>
                                                 <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
                                                     CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
                                             </EditItemTemplate>

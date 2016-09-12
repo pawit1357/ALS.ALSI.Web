@@ -287,6 +287,7 @@ namespace ALS.ALSI.Web.view.template
 
                 ddlSpecification.SelectedValue = _lpc.detail_spec_id.ToString();
                 ddlComponent.SelectedValue = _lpc.component_id.ToString();
+                ddlUnit.SelectedValue = _lpc.unit.ToString();
 
                 this.CommandName = CommandNameEnum.Edit;
 
@@ -387,6 +388,7 @@ namespace ALS.ALSI.Web.view.template
                             cov.ws_d21 = txtD54.Text;
                             #endregion
                             cov.WashMethod = ddlWashMethod.SelectedValue;
+                            cov.unit = Convert.ToInt16(ddlUnit.SelectedValue);
                         }
                         objWork.DeleteBySampleID(this.SampleID);
                         objWork.InsertList(this.Lpc.ToList());
@@ -606,7 +608,6 @@ namespace ALS.ALSI.Web.view.template
 
             List<String> listOFParticle = new List<String>();
             listOFParticle.Add("0.200");
-
             listOFParticle.Add("0.300");
             listOFParticle.Add("0.500");
             listOFParticle.Add("0.700");
@@ -911,23 +912,52 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList();
+            foreach(template_wd_lpc_coverpage lpc in specs)
+            {
+                lpc.D = Math.Round(Convert.ToDouble(lpc.D))+"";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                Console.WriteLine();
+            }
+            foreach (template_wd_lpc_coverpage lpc in sumarys)
+            {
+                lpc.E = Convert.ToDouble(lpc.E).ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                Console.WriteLine();
+            }
+            //foreach (template_wd_lpc_coverpage lpc in sumarys)
+            //{
+            //    lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+            //    Console.WriteLine();
+            //}
+
+
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
+            //reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            //reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            //reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            //reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            //reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+
+            //reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
+            //reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
+            //reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
 
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", dt.Rows[0]["ws_c21"].ToString()));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+
             reportParameters.Add(new ReportParameter("txtB48", txtB48.Text));
             reportParameters.Add(new ReportParameter("txtB49", txtB49.Text));
             reportParameters.Add(new ReportParameter("txtB50", txtB50.Text));
@@ -935,6 +965,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("txtB54", txtB54.Text));
             reportParameters.Add(new ReportParameter("txtC54", txtC54.Text));
             reportParameters.Add(new ReportParameter("txtD54", txtD54.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
 
             // Variables
             Warning[] warnings;

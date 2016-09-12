@@ -73,5 +73,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<double> df03 { get; set; }
         public Nullable<double> df05 { get; set; }
         public Nullable<double> df06 { get; set; }
+        public Nullable<int> unit { get; set; }
     }
 }

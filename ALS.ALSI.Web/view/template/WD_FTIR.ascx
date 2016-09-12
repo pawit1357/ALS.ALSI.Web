@@ -101,11 +101,11 @@
 
                                         <table>
                                             <tr>
-                                              <td>
+                                                <td>
                                                     <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                             </tr>
                                             <tr>
-                                            
+
                                                 <td>
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
@@ -612,9 +612,31 @@ The instrument detection limit for silicone oil is
                                             <td>Calculations:</td>
                                             <td>
                                                 <asp:TextBox ID="txtDecimal08" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
-
                                         </tr>
+                                        <tr>
+                                            <td>Ftir</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlFtirUnit" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
 
+                                                </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nvr</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlNvrUnit" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+
+                                                </asp:DropDownList>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                                 <div class="modal-footer">

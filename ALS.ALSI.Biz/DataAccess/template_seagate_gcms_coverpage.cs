@@ -113,5 +113,15 @@ namespace ALS.ALSI.Biz.DataAccess
         public string extraction_medium { get; set; }
         public string extraction_volumn { get; set; }
         public Nullable<int> selected_base { get; set; }
+        public Nullable<int> data_type { get; set; }
+        public string B28_MO { get; set; }
+        public string C28_MO { get; set; }
+        public string D28_MO { get; set; }
+        public Nullable<int> UnitMotorOilContamination { get; set; }
+        public Nullable<int> UnitMotorHub { get; set; }
+        public Nullable<int> UnitMotorHubSub { get; set; }
+        public Nullable<int> UnitMotorBase { get; set; }
+        public Nullable<int> UnitMotorBaseSub { get; set; }
+        public Nullable<int> UnitCompound { get; set; }
     }
 }

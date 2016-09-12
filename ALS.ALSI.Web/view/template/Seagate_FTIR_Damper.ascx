@@ -135,7 +135,7 @@
                                         <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
                                             <Columns>
-                                                <asp:TemplateField HeaderText="Organic Contamination" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Silicone Contamination" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litOrganicContamination" runat="server" Text='<%# Eval("A")%>' />
                                                     </ItemTemplate>

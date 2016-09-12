@@ -148,13 +148,58 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.CheckBox cbCheckBox;
         
         /// <summary>
-        /// gvCoverPages control.
+        /// gvMotorOil control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCoverPages;
+        protected global::System.Web.UI.WebControls.GridView gvMotorOil;
+        
+        /// <summary>
+        /// gvMotorHub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMotorHub;
+        
+        /// <summary>
+        /// gvMotorHubSub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMotorHubSub;
+        
+        /// <summary>
+        /// gvMotorBase control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMotorBase;
+        
+        /// <summary>
+        /// gvMotorBaseSub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMotorBaseSub;
+        
+        /// <summary>
+        /// gvCompound control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvCompound;
         
         /// <summary>
         /// lbRemark1 control.
@@ -1289,6 +1334,60 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDecimal12;
+        
+        /// <summary>
+        /// ddlUnitMotorOilContamination control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlUnitMotorOilContamination;
+        
+        /// <summary>
+        /// ddlUnitMotorHub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlUnitMotorHub;
+        
+        /// <summary>
+        /// ddlUnitMotorHubSub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlUnitMotorHubSub;
+        
+        /// <summary>
+        /// ddlUnitMotorBase control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlUnitMotorBase;
+        
+        /// <summary>
+        /// ddlUnitMotorBaseSub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlUnitMotorBaseSub;
+        
+        /// <summary>
+        /// ddlUnitCompound control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlUnitCompound;
         
         /// <summary>
         /// btnClose control.

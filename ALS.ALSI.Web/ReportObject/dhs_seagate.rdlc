@@ -25,7 +25,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.17639cm</Top>
+        <Top>0cm</Top>
         <Left>0.32104cm</Left>
         <Height>0.74048cm</Height>
         <Width>17.70064cm</Width>
@@ -62,7 +62,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>7.88107cm</Top>
+        <Top>7.51943cm</Top>
         <Left>0.47566cm</Left>
         <Height>0.52881cm</Height>
         <Width>14.20595cm</Width>
@@ -81,21 +81,21 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.5758in</Width>
+              <Width>1.52106in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.5758in</Width>
+              <Width>2.31272in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.00288in</Width>
+              <Width>1.59488in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.5758in</Width>
+              <Width>1.52106in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.46875in</Height>
+              <Height>0.28125in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -565,10 +565,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>3.38043in</Top>
+        <Top>3.22415in</Top>
         <Left>0.18727in</Left>
-        <Height>0.71875in</Height>
-        <Width>6.73028in</Width>
+        <Height>0.53125in</Height>
+        <Width>6.94972in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -619,7 +619,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>10.58829cm</Top>
+        <Top>9.71511cm</Top>
         <Left>0.47566cm</Left>
         <Height>0.52881cm</Height>
         <Width>14.20814cm</Width>
@@ -653,10 +653,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>11.18765cm</Top>
-        <Left>0.47566cm</Left>
+        <Top>10.31448cm</Top>
+        <Left>0.47785cm</Left>
         <Height>0.63464cm</Height>
-        <Width>14.20814cm</Width>
+        <Width>18.06723cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -672,13 +672,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.87557in</Width>
+              <Width>1.94872in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.62583in</Width>
+              <Width>2.69898in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.22802in</Width>
+              <Width>2.30117in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -769,7 +769,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(ng/part)</Value>
+                              <Value>(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -827,7 +847,27 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Results,(ng/part)</Value>
+                              <Value>Results,(</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1065,10 +1105,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet2</DataSetName>
-        <Top>4.80723in</Top>
+        <Top>4.35234in</Top>
         <Left>0.18813in</Left>
         <Height>0.73958in</Height>
-        <Width>6.72942in</Width>
+        <Width>6.94886in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -1136,8 +1176,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>17.89429cm</Top>
-        <Left>11.45434cm</Left>
+        <Top>15.77265cm</Top>
+        <Left>11.99787cm</Left>
         <Height>1.05798cm</Height>
         <Width>6.11622cm</Width>
         <ZIndex>6</ZIndex>
@@ -1174,8 +1214,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>19.87867cm</Top>
-        <Left>11.45435cm</Left>
+        <Top>17.75703cm</Top>
+        <Left>11.99788cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11621cm</Width>
         <ZIndex>7</ZIndex>
@@ -1212,8 +1252,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>20.66325cm</Top>
-        <Left>11.45434cm</Left>
+        <Top>18.47105cm</Top>
+        <Left>11.99787cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11622cm</Width>
         <ZIndex>8</ZIndex>
@@ -1250,8 +1290,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>19.27048cm</Top>
-        <Left>11.45435cm</Left>
+        <Top>17.14884cm</Top>
+        <Left>11.99788cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.11621cm</Width>
         <ZIndex>9</ZIndex>
@@ -1291,10 +1331,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>14.26528cm</Top>
-        <Left>0.50491cm</Left>
-        <Height>1.90465cm</Height>
-        <Width>17.06564cm</Width>
+        <Top>13.10987cm</Top>
+        <Left>0.47785cm</Left>
+        <Height>1.98403cm</Height>
+        <Width>17.54383cm</Width>
         <ZIndex>10</ZIndex>
         <Style>
           <Border>
@@ -1329,10 +1369,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>16.34632cm</Top>
-        <Left>0.47566cm</Left>
-        <Height>0.70556cm</Height>
-        <Width>17.09489cm</Width>
+        <Top>15.19973cm</Top>
+        <Left>0.47785cm</Left>
+        <Height>0.53763cm</Height>
+        <Width>17.54383cm</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -1348,10 +1388,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.01476cm</Width>
+              <Width>7.02306cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>9.51466cm</Width>
+              <Width>10.52296cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1545,10 +1585,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1778,10 +1817,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateSampleReceived.Value)</Value>
+                              <Value>=Parameters!DateSampleReceived.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1854,10 +1892,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateAnalyzed.Value)</Value>
+                              <Value>=Parameters!DateAnalyzed.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1930,10 +1967,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateTestCompleted.Value)</Value>
+                              <Value>=Parameters!DateTestCompleted.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
-                                <Format>d MMM yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2081,6 +2117,21 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
+                              <Value>One lot of sample was received with references:</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
                               <Value>=Parameters!SampleDescription.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
@@ -2152,7 +2203,7 @@
         <Top>1.02555cm</Top>
         <Left>0.47566cm</Left>
         <Height>6.31749cm</Height>
-        <Width>15.52942cm</Width>
+        <Width>17.54602cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -2163,13 +2214,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>9.26347in</Height>
+    <Height>8.26347in</Height>
     <Style />
   </Body>
-  <Width>7.13769in</Width>
+  <Width>7.30121in</Width>
   <Page>
     <PageHeader>
-      <Height>0.8611in</Height>
+      <Height>0.6736in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2178,8 +2229,8 @@
           <Value>logo</Value>
           <Sizing>FitProportional</Sizing>
           <Left>0.0014in</Left>
-          <Height>0.8611in</Height>
-          <Width>0.86459in</Width>
+          <Height>0.65277in</Height>
+          <Width>0.73959in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -2207,7 +2258,7 @@
           <rd:DefaultName>Textbox14</rd:DefaultName>
           <Top>0cm</Top>
           <Left>14.47627cm</Left>
-          <Height>2.01081cm</Height>
+          <Height>1.65803cm</Height>
           <Width>3.54542cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
@@ -2490,6 +2541,11 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="Company_addr">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="rpt_unit">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>

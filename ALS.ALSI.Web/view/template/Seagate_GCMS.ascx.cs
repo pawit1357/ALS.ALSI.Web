@@ -146,7 +146,7 @@ namespace ALS.ALSI.Web.view.template
                 pUploadfile.Visible = false;
                 pDownload.Visible = false;
                 btnSubmit.Visible = false;
-                gvCoverPages.Columns[3].Visible = false;
+                gvMotorOil.Columns[3].Visible = false;
 
                 switch (userRole)
                 {
@@ -238,7 +238,7 @@ namespace ALS.ALSI.Web.view.template
                     btnRH.Visible = true;
                     btnExtractable.Visible = true;
                     btnMotorOil.Visible = true;
-                    gvCoverPages.Columns[3].Visible = true;
+                    gvMotorOil.Columns[3].Visible = true;
                 }
                 else
                 {
@@ -251,7 +251,7 @@ namespace ALS.ALSI.Web.view.template
                     btnExtractable.Visible = false;
                     btnMotorOil.Visible = false;
 
-                    gvCoverPages.Columns[3].Visible = false;
+                    gvMotorOil.Columns[3].Visible = false;
 
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
                     {
@@ -273,9 +273,88 @@ namespace ALS.ALSI.Web.view.template
                     if (component != null)
                     {
                         ddlComponent.SelectedValue = component.ID.ToString();
+                        ddlUnitMotorOilContamination.SelectedValue = this.coverpages[0].UnitMotorOilContamination == null ? "0" : this.coverpages[0].UnitMotorOilContamination.ToString();
+                        ddlUnitMotorHub.SelectedValue = this.coverpages[0].UnitMotorHub == null ? "0" : this.coverpages[0].UnitMotorHub.ToString();
+                        ddlUnitMotorHubSub.SelectedValue = this.coverpages[0].UnitMotorHubSub == null ? "0" : this.coverpages[0].UnitMotorHubSub.ToString();
+                        ddlUnitMotorBase.SelectedValue = this.coverpages[0].UnitMotorBase == null ? "0" : this.coverpages[0].UnitMotorBase.ToString();
+                        ddlUnitMotorBaseSub.SelectedValue = this.coverpages[0].UnitMotorBaseSub == null ? "0" : this.coverpages[0].UnitMotorBaseSub.ToString();
+                        ddlUnitCompound.SelectedValue = this.coverpages[0].UnitCompound == null ? "0" : this.coverpages[0].UnitCompound.ToString();
 
-                        gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                        gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        //#region "Binding"
+                        //gvMotorOil.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL));
+                        //gvMotorOil.DataBind();
+                        //if (gvMotorOil.Rows.Count > 0)
+                        //{
+                        //    gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                        //    gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        //    gvMotorOil.Visible = true;
+                        //}
+                        //else
+                        //{
+                        //    gvMotorOil.Visible = false;
+                        //}
+                        //gvMotorHub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB));
+                        //gvMotorHub.DataBind();
+                        //if (gvMotorHub.Rows.Count > 0)
+                        //{
+                        //    gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                        //    gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        //    gvMotorHub.Visible = true;
+                        //}
+                        //else
+                        //{
+                        //    gvMotorHub.Visible = false;
+                        //}
+                        //gvMotorHubSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB));
+                        //gvMotorHubSub.DataBind();
+                        //if (gvMotorHubSub.Rows.Count > 0)
+                        //{
+                        //    gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                        //    gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        //    gvMotorHubSub.Visible = true;
+                        //}
+                        //else
+                        //{
+                        //    gvMotorHubSub.Visible = false;
+                        //}
+                        //gvMotorBase.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE));
+                        //gvMotorBase.DataBind();
+                        //if (gvMotorBase.Rows.Count > 0)
+                        //{
+                        //    gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                        //    gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        //    gvMotorBase.Visible = true;
+                        //}
+                        //else
+                        //{
+                        //    gvMotorBase.Visible = false;
+                        //}
+                        //gvMotorBaseSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB));
+                        //gvMotorBaseSub.DataBind();
+                        //if (gvMotorBaseSub.Rows.Count > 0)
+                        //{
+                        //    gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                        //    gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        //    gvMotorBaseSub.Visible = true;
+                        //}
+                        //else
+                        //{
+                        //    gvMotorBaseSub.Visible = false;
+                        //}
+                        //gvCompound.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND));
+                        //gvCompound.DataBind();
+                        //if (gvCompound.Rows.Count > 0)
+                        //{
+                        //    gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                        //    gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        //    gvCompound.Visible = true;
+                        //}
+                        //else
+                        //{
+                        //    gvCompound.Visible = false;
+                        //}
+                        //#endregion
+
 
                         cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
                         if (cbCheckBox.Checked)
@@ -364,8 +443,12 @@ namespace ALS.ALSI.Web.view.template
                     txtB21_MO.Text = cov.B21_MO;
                     txtB22_MO.Text = cov.B22_MO;
                     txtB23_MO.Text = cov.B23_MO;
-                    txtB26_MO.Text = cov.B25_MO;
+
+                    //txtB25_MO.Text = cov.B25_MO;
                     txtB26_MO.Text = cov.B26_MO;
+
+
+
 
                     txtC20_MO.Text = cov.C20_MO;
                     txtC21_MO.Text = cov.C21_MO;
@@ -390,6 +473,11 @@ namespace ALS.ALSI.Web.view.template
                     lbC31_MO.Text = cov.C31_MO;
                     lbD31_MO.Text = cov.D31_MO;
                     //lbE31_MO.Text = cov.E31_MO;
+
+                    txtB28_MO.Text = cov.B28_MO;
+                    txtC28_MO.Text = cov.C28_MO;
+                    txtD28_MO.Text = cov.D28_MO;
+
 
                     GenerrateCoverPage();
                 }
@@ -522,16 +610,20 @@ namespace ALS.ALSI.Web.view.template
                             cov.C30 = txtC30.Text;
                             cov.C31 = txtC31.Text;
                             cov.C32 = lbC32.Text;
+
                             cov.B34 = txtB34.Text;
                             cov.B35 = txtB35.Text;
                             cov.B36 = lbB36.Text;
+
                             cov.C34 = txtC34.Text;
                             cov.C35 = txtC35.Text;
                             cov.C36 = lbC36.Text;
+
                             cov.B39 = txtB39.Text;
                             cov.B40 = txtB40.Text;
                             cov.B43 = lbB43.Text;
                             cov.B44 = lbB44.Text;
+
                             cov.C43 = lbC43.Text;
                             cov.C44 = lbC44.Text;
                             cov.D43 = lbD43.Text;
@@ -554,7 +646,7 @@ namespace ALS.ALSI.Web.view.template
                             cov.B62 = txtB62.Text;
 
                             cov.B13_MO = txtB13_MO.Text;
-                            cov.B13_MO = txtB13_MO.Text;
+                            //cov.B13_MO = txtB13_MO.Text;
                             cov.B14_MO = txtB14_MO.Text;
                             cov.B17_MO = txtB17_MO.Text;
                             cov.C17_MO = txtC17_MO.Text;
@@ -567,21 +659,21 @@ namespace ALS.ALSI.Web.view.template
                             cov.B21_MO = txtB21_MO.Text;
                             cov.B22_MO = txtB22_MO.Text;
                             cov.B23_MO = txtB23_MO.Text;
-                            cov.B25_MO = txtB26_MO.Text;
+                            //cov.B25_MO = txtB26_MO.Text;
                             cov.B26_MO = txtB26_MO.Text;
 
                             cov.C20_MO = txtC20_MO.Text;
                             cov.C21_MO = txtC21_MO.Text;
                             cov.C22_MO = txtC22_MO.Text;
                             cov.C23_MO = txtC23_MO.Text;
-                            cov.C25_MO = txtC26_MO.Text;
+                            //cov.C25_MO = txtC26_MO.Text;
                             cov.C26_MO = txtC26_MO.Text;
 
                             cov.D20_MO = txtD20_MO.Text;
                             cov.D21_MO = txtD21_MO.Text;
                             cov.D22_MO = txtD22_MO.Text;
                             cov.D23_MO = txtD23_MO.Text;
-                            cov.D25_MO = txtD26_MO.Text;
+                            //cov.D25_MO = txtD25_MO.Text;
                             cov.D26_MO = txtD26_MO.Text;
 
                             cov.B30_MO = lbB30_MO.Text;
@@ -593,6 +685,18 @@ namespace ALS.ALSI.Web.view.template
                             cov.C31_MO = lbC31_MO.Text;
                             cov.D31_MO = lbD31_MO.Text;
                             //cov.E31_MO = lbE31_MO.Text;
+
+                            cov.B28_MO = txtB28_MO.Text;
+                            cov.C28_MO = txtC28_MO.Text;
+                            cov.D28_MO = txtD28_MO.Text;
+
+
+                            cov.UnitMotorOilContamination = Convert.ToInt16(ddlUnitMotorOilContamination.SelectedValue);
+                            cov.UnitMotorHub = Convert.ToInt16(ddlUnitMotorHub.SelectedValue);
+                            cov.UnitMotorHubSub = Convert.ToInt16(ddlUnitMotorHubSub.SelectedValue);
+                            cov.UnitMotorBase = Convert.ToInt16(ddlUnitMotorBase.SelectedValue);
+                            cov.UnitMotorBaseSub = Convert.ToInt16(ddlUnitMotorBaseSub.SelectedValue);
+                            cov.UnitCompound = Convert.ToInt16(ddlUnitCompound.SelectedValue);
 
                             //cov.selected_base = Convert.ToInt32(ddlBase.SelectedValue);
 
@@ -641,7 +745,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-   
+
                             this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
@@ -915,20 +1019,20 @@ namespace ALS.ALSI.Web.view.template
                                     txtB39.Text = CustomUtils.GetCellValue(isheet.GetRow(39 - 1).GetCell(ExcelColumn.B));
                                     txtB40.Text = CustomUtils.GetCellValue(isheet.GetRow(40 - 1).GetCell(ExcelColumn.B));
 
-                                    lbB43.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal03.Text)).ToString(); //Compunds <= DOP			2
-                                    lbB44.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal03.Text)).ToString(); //Compunds >= DOP			2
+                                    lbB43.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.B)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal03.Text)).ToString(); //Compunds <= DOP			2
+                                    lbB44.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.B)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal03.Text)).ToString(); //Compunds >= DOP			2
 
-                                    lbC43.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal04.Text)).ToString();//Compunds <= DOP			2
-                                    lbC44.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal04.Text)).ToString();//Compunds >= DOP			2
+                                    lbC43.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.C)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal04.Text)).ToString();//Compunds <= DOP			2
+                                    lbC44.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.C)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal04.Text)).ToString();//Compunds >= DOP			2
 
-                                    lbD43.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal05.Text)).ToString();//Repeated Hydrocarcon		2
-                                    lbD44.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal05.Text)).ToString();//Repeated Hydrocarcon		2
+                                    lbD43.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.D)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal05.Text)).ToString();//Repeated Hydrocarcon		2
+                                    lbD44.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.D)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal05.Text)).ToString();//Repeated Hydrocarcon		2
 
-                                    txtB47.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(47 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal06.Text)).ToString();//Minimum RHC Detection Limit is	3
-                                    txtB48.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(48 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal06.Text)).ToString();//Minimum RHC Detection Limit is	3
-                                    txtB49.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(49 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal06.Text)).ToString();//Minimum RHC Detection Limit is	3
+                                    txtB47.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(47 - 1).GetCell(ExcelColumn.B)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal06.Text)).ToString();//Minimum RHC Detection Limit is	3
+                                    txtB48.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(48 - 1).GetCell(ExcelColumn.B)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal06.Text)).ToString();//Minimum RHC Detection Limit is	3
+                                    txtB49.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(49 - 1).GetCell(ExcelColumn.B)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal06.Text)).ToString();//Minimum RHC Detection Limit is	3
 
-                                    txtB51.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(51 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal07.Text)).ToString();//R-Hub				2
+                                    txtB51.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(51 - 1).GetCell(ExcelColumn.B)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal07.Text)).ToString();//R-Hub				2
                                     txtB52.Text = CustomUtils.GetCellValue(isheet.GetRow(52 - 1).GetCell(ExcelColumn.B));
 
                                     txtB53.Text = CustomUtils.GetCellValue(isheet.GetRow(53 - 1).GetCell(ExcelColumn.B));
@@ -961,13 +1065,13 @@ namespace ALS.ALSI.Web.view.template
 
                                     txtB14_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.B));
 
-                                    txtB17_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal11.Text)).ToString();
-                                    txtC17_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal11.Text)).ToString();
-                                    txtD17_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal11.Text)).ToString();
+                                    txtB17_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal11.Text)).ToString();
+                                    txtC17_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal11.Text)).ToString();
+                                    txtD17_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal11.Text)).ToString();
 
-                                    txtB18_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal12.Text)).ToString();
-                                    txtC18_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C))), Convert.ToInt16(txtDecimal12.Text)).ToString();
-                                    txtD18_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D))), Convert.ToInt16(txtDecimal12.Text)).ToString();
+                                    txtB18_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal12.Text)).ToString();
+                                    txtC18_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal12.Text)).ToString();
+                                    txtD18_MO.Text = String.IsNullOrEmpty(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D))) ? "" : Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D)).Replace(",", "").Replace(" ", "")), Convert.ToInt16(txtDecimal12.Text)).ToString();
 
                                     txtB20_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.B));
                                     txtB21_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.B));
@@ -976,32 +1080,40 @@ namespace ALS.ALSI.Web.view.template
 
                                     txtB23_MO.Text = ddlBaseType.SelectedValue.Equals("1") ? CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.B)) : CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.B));//
 
-                                    txtB26_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.B));
 
-                                    txtB28_MO.Text = ddlBaseType.SelectedValue.Equals("1") ? CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.B)) : CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.B));//
+
+
+                                    #region "Motor Hub"
+                                    txtB26_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.B));
+                                    txtC26_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.C));
+                                    txtD26_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.D));
+                                    #endregion
+                                    #region "Motor Base / Base 3.5"
+                                    txtB28_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.B));//
+                                    txtC28_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.C));
+                                    txtD28_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.D));
+                                    #endregion
+
+
 
                                     txtC20_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.C));
                                     txtC21_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.C));
                                     txtC22_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.C));
                                     txtC23_MO.Text = ddlBaseType.SelectedValue.Equals("1") ? CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.C)) : CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.C));
-                                    txtC26_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.C));
-                                    txtC26_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.C));
 
                                     txtD20_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(20 - 1).GetCell(ExcelColumn.D));
                                     txtD21_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(21 - 1).GetCell(ExcelColumn.D));
                                     txtD22_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(22 - 1).GetCell(ExcelColumn.D));
                                     txtD23_MO.Text = ddlBaseType.SelectedValue.Equals("1") ? CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.D)) : CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.D));
-                                    txtD26_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.D));
-                                    txtD26_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.D));
 
-                                    lbB30_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));
-                                    lbC30_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.C));
-                                    lbD30_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.D));
+                                    lbB30_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.B));
+                                    lbC30_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.C));
+                                    lbD30_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.D));
                                     //lbE30_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.E));
 
-                                    lbB31_MO.Text = ddlBaseType.SelectedValue.Equals("1") ? CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B)) : CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));
-                                    lbC31_MO.Text = ddlBaseType.SelectedValue.Equals("1") ? CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.C)) : CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.C));
-                                    lbD31_MO.Text = ddlBaseType.SelectedValue.Equals("1") ? CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.D)) : CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
+                                    lbB31_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));
+                                    lbC31_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.C));
+                                    lbD31_MO.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.D));
                                     //lbE31_MO.Text = ddlBaseType.SelectedValue.Equals("1") ? CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.E)) : CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.E));
                                 }
                                 #endregion
@@ -1104,13 +1216,14 @@ namespace ALS.ALSI.Web.view.template
         #endregion
 
         #region "COVERPAGES GRID."
-        protected void gvCoverPages_RowDataBound(object sender, GridViewRowEventArgs e)
+
+        protected void gvMotorOil_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                int PKID = Convert.ToInt32(gvCoverPages.DataKeys[e.Row.RowIndex].Values[0].ToString());
-                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvCoverPages.DataKeys[e.Row.RowIndex].Values[1]);
+                int PKID = Convert.ToInt32(gvMotorOil.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMotorOil.DataKeys[e.Row.RowIndex].Values[1]);
                 LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
                 LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
 
@@ -1133,13 +1246,13 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
-        protected void gvCoverPages_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gvMotorOil_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID);
+                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL));
                 if (gcms != null)
                 {
                     switch (cmd)
@@ -1151,11 +1264,279 @@ namespace ALS.ALSI.Web.view.template
                             gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
-                    gvCoverPages.DataSource = this.coverpages;
-                    gvCoverPages.DataBind();
+                    gvMotorOil.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL)).ToList();
+                    gvMotorOil.DataBind();
                 }
             }
         }
+
+        protected void gvMotorHub_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                int PKID = Convert.ToInt32(gvMotorHub.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMotorHub.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+            }
+        }
+
+        protected void gvMotorHub_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE));
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+                    gvMotorHub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList();
+                    gvMotorHub.DataBind();
+                }
+            }
+        }
+
+        protected void gvMotorHubSub_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                int PKID = Convert.ToInt32(gvMotorHubSub.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMotorHubSub.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+            }
+        }
+
+        protected void gvMotorHubSub_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB));
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+                    gvMotorHubSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB)).ToList();
+                    gvMotorHubSub.DataBind();
+                }
+            }
+        }
+
+        protected void gvMotorBase_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                int PKID = Convert.ToInt32(gvMotorBase.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMotorBase.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+            }
+        }
+
+        protected void gvMotorBase_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE));
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+                    gvMotorBase.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList();
+                    gvMotorBase.DataBind();
+                }
+            }
+        }
+
+        protected void gvMotorBaseSub_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                int PKID = Convert.ToInt32(gvMotorBaseSub.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMotorBaseSub.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+            }
+        }
+
+        protected void gvMotorBaseSub_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB));
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+                    gvMotorBaseSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB)).ToList();
+                    gvMotorBaseSub.DataBind();
+                }
+            }
+        }
+
+
+        protected void gvCompound_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                int PKID = Convert.ToInt32(gvCompound.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvCompound.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+            }
+        }
+
+        protected void gvCompound_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND));
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+                    gvCompound.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND)).ToList();
+                    gvCompound.DataBind();
+                }
+            }
+        }
+
+
         #endregion
 
         #region "DHS GRID."
@@ -1220,34 +1601,6 @@ namespace ALS.ALSI.Web.view.template
 
         private void GenerrateCoverPage()
         {
-            //Boolean isBase25 = ddlBase.SelectedValue.Equals("1") ? true : false;
-            ////Motor Oil Contamination
-            if (!String.IsNullOrEmpty(lbB31_MO.Text) &&
-                !String.IsNullOrEmpty(lbB30_MO.Text) &&
-                !String.IsNullOrEmpty(lbD43.Text) &&
-                !String.IsNullOrEmpty(lbB43.Text) &&
-                !String.IsNullOrEmpty(lbC43.Text) &&
-
-                !String.IsNullOrEmpty(lbB31_MO.Text) &&
-                !String.IsNullOrEmpty(lbB44.Text) &&
-                !String.IsNullOrEmpty(lbC44.Text)
-                )
-            {
-                this.coverpages[0].C = lbD31_MO.Text.Equals("0") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbD31_MO.Text), 2) + "";
-                this.coverpages[1].C = lbD30_MO.Text.Equals("0") ? "Not Detected" : Math.Round(Convert.ToDecimal(lbD30_MO.Text), 2) + "";
-                //Motor Hub
-                this.coverpages[2].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbB31_MO.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
-                this.coverpages[4].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB43.Text) ? "0" : lbB43.Text), 2) + "";//Compounds with RT ≤ DOP
-                this.coverpages[5].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbC43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
-                this.coverpages[3].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(this.coverpages[4].C) + Convert.ToDecimal(this.coverpages[5].C)) + ""), 2) + "";//Total Organic Compound (TOC)
-
-                //Motor Base
-                this.coverpages[6].C = (Convert.ToDecimal(lbD44.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbB31_MO.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
-                this.coverpages[8].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB44.Text) ? "0" : lbB44.Text), 2) + "";//Compounds with RT ≤ DOP
-                this.coverpages[9].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbC44.Text) ? "0" : lbC44.Text), 2) + "";//Compounds with RT > DOP
-                this.coverpages[7].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(this.coverpages[8].C) + Convert.ToDecimal(this.coverpages[9].C)) + ""), 2) + "";//Total Organic Compound (TOC)
-            }
-
 
 
             //Note: This report was performed test by ALS Singapore.
@@ -1264,8 +1617,132 @@ namespace ALS.ALSI.Web.view.template
                 lbRemark3.Text = String.Format("Minimum RHC Detection Limit of Hub is {0} g/cm2", Math.Round(Convert.ToDecimal(txtB49.Text), 3));
             }
 
-            gvCoverPages.DataSource = this.coverpages;
-            gvCoverPages.DataBind();
+            #region "Binding"
+
+            List<template_seagate_gcms_coverpage> motorOils = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL)).ToList();
+            if (motorOils.Count > 0)
+            {
+
+                double c0 = Convert.ToDouble(String.IsNullOrEmpty(lbB30_MO.Text) ? "0" : lbB30_MO.Text) + Convert.ToDouble(String.IsNullOrEmpty(lbC30_MO.Text) ? "0" : lbC30_MO.Text);
+                double c1 = Convert.ToDouble(String.IsNullOrEmpty(lbB31_MO.Text) ? "0" : lbB31_MO.Text) + Convert.ToDouble(String.IsNullOrEmpty(lbC31_MO.Text) ? "0" : lbC31_MO.Text);
+
+
+                motorOils[0].C = c0 == 0 ? "Not Detected" : Math.Round(c0, 2) + "";
+                motorOils[1].C = c1 == 0 ? "Not Detected" : Math.Round(c1, 2) + "";
+
+                gvMotorOil.DataSource = motorOils;
+                gvMotorOil.DataBind();
+                gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+                gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+                gvMotorOil.Visible = true;
+            }
+            else
+            {
+                gvMotorOil.Visible = false;
+            }
+
+            List<template_seagate_gcms_coverpage> motorHubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB)).ToList();
+            if (motorHubs.Count > 0)
+            {
+
+                motorHubs[0].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbB31_MO.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+
+                gvMotorHub.DataSource = motorHubs;
+                gvMotorHub.DataBind();
+
+
+                gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHub.SelectedItem.Text);
+                gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
+                gvMotorHub.Visible = true;
+            }
+            else
+            {
+                gvMotorHub.Visible = false;
+            }
+
+
+
+            List<template_seagate_gcms_coverpage> motorHubSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB)).ToList();
+            if (motorHubSubs.Count > 0)
+            {
+                motorHubSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB43.Text) ? "0" : lbB43.Text), 2) + "";//Compounds with RT ≤ DOP
+                motorHubSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbC43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
+                motorHubSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorHubSubs[1].C) + Convert.ToDecimal(motorHubSubs[2].C)) + ""), 2) + "";//Total Organic Compound (TOC)
+                gvMotorHubSub.DataSource = motorHubSubs;
+                gvMotorHubSub.DataBind();
+
+                gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                gvMotorHubSub.Visible = true;
+            }
+            else
+            {
+                gvMotorHubSub.Visible = false;
+            }
+
+
+
+            List<template_seagate_gcms_coverpage> motorBases = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList();
+            if (motorBases.Count > 0)
+            {
+                motorBases[0].C = (Convert.ToDecimal(lbD44.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbB31_MO.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                gvMotorBase.DataSource = motorBases;
+
+                gvMotorBase.DataBind();
+                gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBase.SelectedItem.Text);
+                gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBase.SelectedItem.Text);
+                gvMotorBase.Visible = true;
+            }
+            else
+            {
+                gvMotorBase.Visible = false;
+            }
+
+
+            List<template_seagate_gcms_coverpage> motorBaseSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB)).ToList();
+            if (motorBaseSubs.Count > 0)
+            {
+
+                motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB44.Text) ? "0" : lbB44.Text), 2) + "";//Compounds with RT ≤ DOP
+                motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbC44.Text) ? "0" : lbC44.Text), 2) + "";//Compounds with RT > DOP
+                motorBaseSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorBaseSubs[1].C) + Convert.ToDecimal(motorBaseSubs[2].C)) + ""), 2) + "";//Total Organic Compound (TOC)
+
+                gvMotorBaseSub.DataSource = motorBaseSubs;
+                gvMotorBaseSub.DataBind();
+
+                gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                gvMotorBaseSub.Visible = true;
+            }
+            else
+            {
+                gvMotorBaseSub.Visible = false;
+            }
+
+
+
+            List<template_seagate_gcms_coverpage> compounds = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND)).ToList();
+            if (compounds.Count > 0)
+            {
+
+                compounds[0].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbD43.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                compounds[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
+                compounds[3].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbC43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
+
+                compounds[1].C = (Convert.ToDecimal(compounds[2].C) + Convert.ToDecimal(compounds[3].C)) + "";
+
+                gvCompound.DataSource = compounds;
+                gvCompound.DataBind();
+
+                gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompound.SelectedItem.Text);
+                gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
+                gvCompound.Visible = true;
+            }
+            else
+            {
+                gvCompound.Visible = false;
+            }
+            #endregion
         }
 
         #endregion
@@ -1287,7 +1764,7 @@ namespace ALS.ALSI.Web.view.template
 
                     List<template_seagate_gcms_coverpage> newCoverPage = new List<template_seagate_gcms_coverpage>();
                     int index = 0;
-                    foreach (tb_m_detail_spec_ref spec in detailSpecRefs.Where(x=>!x.B.Equals("-")).ToList())
+                    foreach (tb_m_detail_spec_ref spec in detailSpecRefs.Where(x => !x.B.Equals("-")).ToList())
                     {
                         template_seagate_gcms_coverpage work = new template_seagate_gcms_coverpage();
                         work.ID = spec.ID;// (this.CommandName == CommandNameEnum.Add) ? index : this.coverpages[index].ID;
@@ -1301,18 +1778,120 @@ namespace ALS.ALSI.Web.view.template
                         newCoverPage.Add(work);
                         index++;
                     }
+                    if (newCoverPage.Count > 0)
+                    {
+                        if (newCoverPage.Count >= 10)
+                        {
+                            newCoverPage[0].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL);
+                            newCoverPage[1].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL);
+                            newCoverPage[2].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB);
+                            newCoverPage[3].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                            newCoverPage[4].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                            newCoverPage[5].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                            newCoverPage[6].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE);
+                            newCoverPage[7].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                            newCoverPage[8].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                            newCoverPage[9].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                        }
+                        else
+                        {
+                            foreach (template_seagate_gcms_coverpage item in newCoverPage)
+                            {
+                                item.data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND);
+                            }
+                        }
+                    }
+
                     this.coverpages = newCoverPage;
-                    //Result Description
-                    gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+
+                    #region "Binding"
+                    gvMotorOil.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL));
+                    gvMotorOil.DataBind();
+                    if (gvMotorOil.Rows.Count > 0)
+                    {
+
+                        gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+                        gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+                        gvMotorOil.Visible = true;
+                    }
+                    else
+                    {
+                        gvMotorOil.Visible = false;
+                    }
+                    gvMotorHub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB));
+                    gvMotorHub.DataBind();
+                    if (gvMotorHub.Rows.Count > 0)
+                    {
+                        gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHub.SelectedItem.Text);
+                        gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
+                        gvMotorHub.Visible = true;
+                    }
+                    else
+                    {
+                        gvMotorHub.Visible = false;
+                    }
+                    gvMotorHubSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB));
+                    gvMotorHubSub.DataBind();
+                    if (gvMotorHubSub.Rows.Count > 0)
+                    {
+                        gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                        gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                        gvMotorHubSub.Visible = true;
+                    }
+                    else
+                    {
+                        gvMotorHubSub.Visible = false;
+                    }
+                    gvMotorBase.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE));
+                    gvMotorBase.DataBind();
+                    if (gvMotorBase.Rows.Count > 0)
+                    {
+                        gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBase.SelectedItem.Text);
+                        gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBase.SelectedItem.Text);
+                        gvMotorBase.Visible = true;
+                    }
+                    else
+                    {
+                        gvMotorBase.Visible = false;
+                    }
+                    gvMotorBaseSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB));
+                    gvMotorBaseSub.DataBind();
+                    if (gvMotorBaseSub.Rows.Count > 0)
+                    {
+                        gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                        gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                        gvMotorBaseSub.Visible = true;
+                    }
+                    else
+                    {
+                        gvMotorBaseSub.Visible = false;
+                    }
+                    gvCompound.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND));
+                    gvCompound.DataBind();
+                    if (gvCompound.Rows.Count > 0)
+                    {
+                        gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompound.SelectedItem.Text);
+                        gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
+                        gvCompound.Visible = true;
+                    }
+                    else
+                    {
+                        gvCompound.Visible = false;
+                    }
+                    #endregion
+
+
+
 
                     lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
                     txtProcedure.Text = component.F;
                     txtSampleSize.Text = component.G;
                     //lbExtractionMedium.Text;
                     txtExtractionVolumn.Text = component.H;
-                    gvCoverPages.DataSource = this.coverpages;
-                    gvCoverPages.DataBind();
+
+
+                    //gvMotorOil.DataSource = this.coverpages;
+                    //gvMotorOil.DataBind();
                 }
             }
         }
@@ -1325,136 +1904,126 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
-
-            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "GCMS Extractable"));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("Remark1", lbRemark1.Text));
-            reportParameters.Add(new ReportParameter("Remark2", lbRemark2.Text));
-            reportParameters.Add(new ReportParameter("Remark3", lbRemark3.Text));
-
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/gcms_seagate.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            int order = 1;
-            foreach (template_seagate_gcms_coverpage _val in this.coverpages)
+            try
             {
-                _val.order = order;
-                order++;
+                DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+                ReportHeader reportHeader = new ReportHeader();
+                reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+
+                ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+                reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo + " "));
+                reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+                reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+
+                reportParameters.Add(new ReportParameter("rpt_unit1", ddlUnitMotorOilContamination.SelectedItem.Text));
+                reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnitMotorHub.SelectedItem.Text));
+                reportParameters.Add(new ReportParameter("rpt_unit3", ddlUnitMotorHubSub.SelectedItem.Text));
+                reportParameters.Add(new ReportParameter("rpt_unit4", ddlUnitMotorBase.SelectedItem.Text));
+                reportParameters.Add(new ReportParameter("rpt_unit5", ddlUnitMotorBaseSub.SelectedItem.Text));
+                reportParameters.Add(new ReportParameter("rpt_unit6", ddlUnitCompound.SelectedItem.Text));
+
+
+
+                reportParameters.Add(new ReportParameter("Test", "GCMS Extractable"));
+                reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+                reportParameters.Add(new ReportParameter("Remark1", lbRemark1.Text));
+                reportParameters.Add(new ReportParameter("Remark2", lbRemark2.Text));
+                reportParameters.Add(new ReportParameter("Remark3", lbRemark3.Text));
+
+
+                // Variables
+                Warning[] warnings;
+                string[] streamIds;
+                string mimeType = string.Empty;
+                string encoding = string.Empty;
+                string extension = string.Empty;
+
+
+                // Setup the report viewer object and get the array of bytes
+                ReportViewer viewer = new ReportViewer();
+                viewer.ProcessingMode = ProcessingMode.Local;
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/gcms_seagate.rdlc");
+                viewer.LocalReport.SetParameters(reportParameters);
+
+
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL)).ToList().ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB)).ToList().ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB)).ToList().ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList().ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB)).ToList().ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND)).ToList().ToDataTable()));
+
+
+                string download = String.Empty;
+
+                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+                switch (status)
+                {
+                    case StatusEnum.ADMIN_CONVERT_WORD:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        else
+                        {
+                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+                            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+                            Response.Buffer = true;
+                            Response.Clear();
+                            Response.ContentType = mimeType;
+                            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                            Response.BinaryWrite(bytes); // create the file
+                            Response.Flush(); // send it to the client to download
+                        }
+                        break;
+                    case StatusEnum.LABMANAGER_CHECKING:
+                    case StatusEnum.LABMANAGER_APPROVE:
+                    case StatusEnum.LABMANAGER_DISAPPROVE:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        break;
+                    case StatusEnum.ADMIN_CONVERT_PDF:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+
+                        //if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        //{
+                        //    Word2Pdf objWorPdf = new Word2Pdf();
+                        //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
+                        //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
+                        //    try
+                        //    {
+                        //        objWorPdf.Word2PdfCOnversion();
+                        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
+
+                        //    }
+                        //    catch (Exception ex)
+                        //    {
+                        //        Console.WriteLine();
+                        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+
+                        //    }
+                        //}
+                        break;
+                }
             }
-
-            int[] ds2 = { 1, 2 };
-            int[] ds3 = { 3 };
-            int[] ds4 = { 4, 5, 6 };
-            int[] ds5 = { 7 };
-            int[] ds6 = { 8, 9, 10 };
-
-            //String[] ds2 = { "Motor Oil - Base", "Motor Oil - Hub" };
-
-            //String[] ds3 = { "Repeated Hydrocarbon (C20-C40 Alkanes)" };
-
-            //String[] ds4 = { "Total Organic Compound (TOC)", "Compounds with RT ≤ DOP", "Compounds with RT > DOP" };
-
-            //String[] ds5 = { "Repeated Hydrocarbon (C20-C40 Alkanes)" };
-
-            //String[] ds6 = { "Total Organic Compound (TOC)", "Compounds with RT ≤ DOP", "Compounds with RT > DOP" };
-
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.Where(x => ds2.Contains(x.order)))); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.coverpages.Where(x => ds3.Contains(x.order)))); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.coverpages.Where(x => ds4.Contains(x.order)))); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", this.coverpages.Where(x => ds5.Contains(x.order)))); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", this.coverpages.Where(x => ds6.Contains(x.order)))); // Add datasource here
-
-
-
-
-
-
-
-            string download = String.Empty;
-
-            StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            switch (status)
-            {
-                case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-                    }
-                    else
-                    {
-                        byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-                        // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-                        Response.Buffer = true;
-                        Response.Clear();
-                        Response.ContentType = mimeType;
-                        Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-                        Response.BinaryWrite(bytes); // create the file
-                        Response.Flush(); // send it to the client to download
-                    }
-                    break;
-                case StatusEnum.LABMANAGER_CHECKING:
-                case StatusEnum.LABMANAGER_APPROVE:
-                case StatusEnum.LABMANAGER_DISAPPROVE:
-                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-                    }
-                    break;
-                case StatusEnum.ADMIN_CONVERT_PDF:
-                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-                    }
-
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
-                    break;
+            catch (Exception ex) {
+                Console.WriteLine();
             }
-
 
         }
 

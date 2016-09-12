@@ -504,6 +504,7 @@ namespace ALS.ALSI.Web.view.template
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
             {
+                case StatusEnum.SR_CHEMIST_CHECKING:
                 case StatusEnum.ADMIN_CONVERT_WORD:
                     if (!String.IsNullOrEmpty(this.jobSample.ad_hoc_tempalte_path))
                     {

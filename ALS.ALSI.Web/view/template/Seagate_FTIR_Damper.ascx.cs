@@ -232,6 +232,7 @@ namespace ALS.ALSI.Web.view.template
             if (this.Ftir != null && this.Ftir.Count > 0)
             {
                 ddlSpecification.SelectedValue = this.Ftir[0].specification_id.Value.ToString();
+                ddlUnit.SelectedValue = this.Ftir[0].selected_unit_ftir.ToString();
                 txtWB13.Text = this.Ftir[0].w_b13;
                 txtWB14.Text = this.Ftir[0].w_b14;
                 txtWB15.Text = this.Ftir[0].w_b15;
@@ -255,11 +256,11 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
 
-                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                 gvMethodProcedure.DataBind();
-                gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+                gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
                 gvResult.DataBind();
-                gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
+                gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                 gvWftir.DataBind();
                 CalculateCas();
             }
@@ -327,7 +328,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
                 #endregion
-                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                 gvMethodProcedure.DataBind();
             }
             #endregion
@@ -385,7 +386,7 @@ namespace ALS.ALSI.Web.view.template
                     pLoadFile.Visible = false;
 
                     //part value to cover page method/procedure
-                    var items = this.Ftir.Where(x => x.data_type == 1).ToList();
+                    var items = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                     if (items.Count > 0)
                     {
                         items[0].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
@@ -643,7 +644,7 @@ namespace ALS.ALSI.Web.view.template
 
             if (this.Ftir.Count > 0)
             {
-                foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == 2).ToList())
+                foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList())
                 {
                     this.Ftir.Remove(_item);
                 }
@@ -721,7 +722,7 @@ namespace ALS.ALSI.Web.view.template
 
                 #endregion
 
-                gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+                gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
                 gvResult.DataBind();
 
             }
@@ -732,12 +733,12 @@ namespace ALS.ALSI.Web.view.template
         private void CalculateCas()
         {
 
-            List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == 3).ToList();
+            List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
             if (ftirList.Count > 0)
             {
                 int unit = Convert.ToInt16(ddlUnit.SelectedValue);
 
-                List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == 2 && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+                List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
 
                 if (ftir2.Count > 0)
                 {
@@ -773,20 +774,21 @@ namespace ALS.ALSI.Web.view.template
                     //this.Ftir[11].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;
 
                     //part value to cover page method/procedure
-                    var items = this.Ftir.Where(x => x.data_type == 1).ToList();
+                    var items = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                     if (items.Count > 0)
                     {
                         items[0].C = String.Format("{0} pieces", txtWB14.Text);
                         items[1].C = String.Format("{0} pieces", txtWB14.Text);
                     }
 
-                    gvWftir.DataSource = this.Ftir.Where(x => x.data_type == 3).ToList();
+                    gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                     gvWftir.DataBind();
 
-                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+                
+                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
                     gvResult.DataBind();
 
-                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                     gvMethodProcedure.DataBind();
                     //remark
                     lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
@@ -796,6 +798,98 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
+                List<template_seagate_ftir_coverpage> methods = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                List<template_seagate_ftir_coverpage> ftirs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
+                List<template_seagate_ftir_coverpage> nvrs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
+                ReportHeader reportHeader = new ReportHeader();
+                reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+
+                ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+                reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+                reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+                reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+
+                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+                reportParameters.Add(new ReportParameter("Test", " "));
+                reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+                reportParameters.Add(new ReportParameter("rpt_unit2", ""));
+
+                reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+                reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
+
+                // Variables
+                Warning[] warnings;
+                string[] streamIds;
+                string mimeType = string.Empty;
+                string encoding = string.Empty;
+                string extension = string.Empty;
+
+
+                // Setup the report viewer object and get the array of bytes
+                ReportViewer viewer = new ReportViewer();
+                viewer.ProcessingMode = ProcessingMode.Local;
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_nvr_seagate_damper.rdlc");
+                viewer.LocalReport.SetParameters(reportParameters);
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", methods.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
+
+
+                string download = String.Empty;
+
+                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+                switch (status)
+                {
+                    case StatusEnum.ADMIN_CONVERT_WORD:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        else
+                        {
+                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+                            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+                            Response.Buffer = true;
+                            Response.Clear();
+                            Response.ContentType = mimeType;
+                            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                            Response.BinaryWrite(bytes); // create the file
+                            Response.Flush(); // send it to the client to download
+                        }
+                        break;
+                    case StatusEnum.LABMANAGER_CHECKING:
+                    case StatusEnum.LABMANAGER_APPROVE:
+                    case StatusEnum.LABMANAGER_DISAPPROVE:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        break;
+                    case StatusEnum.ADMIN_CONVERT_PDF:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
+
 
             //char[] item = this.Ftir.item_visible.ToCharArray();
 
@@ -1075,7 +1169,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         if (this.Ftir.Count > 0)
                         {
-                            foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == 3).ToList())
+                            foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList())
                             {
                                 this.Ftir.Remove(_item);
                             }
@@ -1297,7 +1391,7 @@ namespace ALS.ALSI.Web.view.template
                 if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
                 {
                     int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 1);
+                    template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
                     if (gcms != null)
                     {
                         switch (cmd)
@@ -1311,7 +1405,7 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                         }
 
-                        gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+                        gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
                         gvMethodProcedure.DataBind();
                     }
                 }
@@ -1324,7 +1418,7 @@ namespace ALS.ALSI.Web.view.template
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == 2);
+                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC));
                 if (gcms != null)
                 {
                     switch (cmd)
@@ -1338,7 +1432,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
                     }
 
-                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2);
+                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC));
                     gvResult.DataBind();
                 }
             }
@@ -1367,14 +1461,14 @@ namespace ALS.ALSI.Web.view.template
         protected void gvMethodProcedure_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvMethodProcedure.EditIndex = e.NewEditIndex;
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
             gvMethodProcedure.DataBind();
         }
 
         protected void gvMethodProcedure_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvMethodProcedure.EditIndex = -1;
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
             gvMethodProcedure.DataBind();
         }
 
@@ -1404,7 +1498,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
             gvMethodProcedure.EditIndex = -1;
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1);
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
             gvMethodProcedure.DataBind();
         }
         #endregion
