@@ -32,7 +32,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string NoofTimesTaped { get; set; }
         public string SurfaceAreaAnalysed { get; set; }
         public string ParticleRanges { get; set; }
-        public string unit { get; set; }
+        public Nullable<int> unit { get; set; }
         public Nullable<int> hpa_type { get; set; }
         public string data_group { get; set; }
     }

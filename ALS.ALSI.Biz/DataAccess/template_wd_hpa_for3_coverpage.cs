@@ -29,7 +29,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> seq { get; set; }
         public Nullable<int> row_type { get; set; }
         public Nullable<int> row_group { get; set; }
-        public string unit { get; set; }
+        public Nullable<int> unit { get; set; }
         public string ParticleAnalysisBySEMEDX { get; set; }
         public string TapedAreaForDriveParts { get; set; }
         public string NoofTimesTaped { get; set; }

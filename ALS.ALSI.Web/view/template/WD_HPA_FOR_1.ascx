@@ -14,6 +14,8 @@
                     <div class="actions">
                         <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn green" OnClick="btnCoverPage_Click" />
                         <asp:Button ID="btnWorkSheet" runat="server" Text="Work Sheet" CssClass="btn blue" OnClick="btnCoverPage_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -225,24 +227,6 @@
                                 </div>
                             </div>
                         </div>
-                        <%--                        <h4 class="form-section">Manage Source File</h4>
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Choose Source files.:<span class="required">*</span></label>
-                                    <div class="col-md-6">
-                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                        <span class="btn green fileinput-button">
-                                            <i class="fa fa-plus"></i>
-                                            <span>Add files...</span>
-                                            <asp:FileUpload ID="btnUpload" runat="server" AllowMultiple="true" />
-                                        </span>
-                                        <asp:Button ID="btnLoadFile" runat="server" Text="Upload" CssClass="btn blue" OnClick="btnLoadFile_Click" />
-                                        <span>***เลือกชนิดไฟล์ที่เป็น *.jpg</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>--%>
                         <h4 class="form-section">Manage CAS# Data</h4>
                         <div class="row">
                             <div class="col-md-12">
@@ -420,6 +404,40 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="modal-wide" id="pnlModalDemo" style="display: none;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h class="modal-title">
+                                            กำหนดทศนิยมให้คอลัมภ์</h>
+                            </div>
+                            <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>Unit</td>
+                                        <td>
+                                            <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                            </asp:DropDownList>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+
+                    <asp:LinkButton ID="lnkFake" runat="server">
+                    </asp:LinkButton>
+                    <asp:ModalPopupExtender ID="ModolPopupExtender" runat="server" PopupControlID="pnlModalDemo"
+                        TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
+                        CancelControlID="btnClose">
+                    </asp:ModalPopupExtender>
+
                 </div>
             </div>
 

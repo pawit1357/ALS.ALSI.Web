@@ -1505,7 +1505,7 @@
         <Top>4.69061in</Top>
         <Left>0.00086in</Left>
         <Height>0.71875in</Height>
-        <Width>7.13543in</Width>
+        <Width>7.13542in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -3044,7 +3044,7 @@
         <Top>6.46672in</Top>
         <Left>0.00086in</Left>
         <Height>0.71875in</Height>
-        <Width>7.13284in</Width>
+        <Width>7.13285in</Width>
         <ZIndex>13</ZIndex>
         <Visibility>
           <Hidden>=CountRows() = 0</Hidden>

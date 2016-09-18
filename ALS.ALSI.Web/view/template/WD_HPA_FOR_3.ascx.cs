@@ -23,113 +23,9 @@ namespace ALS.ALSI.Web.view.template
 {
     public partial class WD_HPA_FOR_3 : System.Web.UI.UserControl
     {
-        //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_HPA_FOR_3));
 
         #region "Property"
-
-        //private String[] GetHPAHeader = { "Total Hard Particles", "Total MgSiO Particles", "Total Steel Particles", "Total Magnetic Particles", "Other Particle" };
-
-        //private Hashtable GetHPAData()
-        //{
-        //    Hashtable hashtable = new Hashtable();
-        //    hashtable.Add("Hard Particles",
-        //        new String[]{
-        //                  "Al-O",
-        //                  "Al-Si-O",
-        //                  "Si-O",
-        //                  "Si-C",
-        //                  "Al-Cu-O",
-        //                  "Al-Mg-O",
-        //                  "Al-Si-Cu-O",
-        //                  "Al-Si-Fe-O",
-        //                  "Al-Si-Mg-O",
-        //                  "Al-Ti-O",
-        //                  "Ti-O",
-        //                  "Ti-C",
-        //                  "Ti-B",
-        //                  "Ti-N",
-        //                  "W-O",
-        //                  "W-C",
-        //                  "Zr-O",
-        //                  "Zr-C",
-        //                  "Pb-Zr-Ti-O"
-        //                   });
-        //    hashtable.Add("MgSiO Particles",
-        //        new String[]{
-        //                  "Mg-Si-O",
-        //                   });
-        //    hashtable.Add("Steel Particles",
-        //        new String[]{
-        //                  "SS 300- Fe-Cr-Ni",
-        //                  "SS 300- Fe-Cr-Ni-Mn",
-        //                  "SS 300- Fe-Cr-Ni-Si",
-        //                  "SS 400- Fe-Cr",
-        //                  "SS 400- Fe-Cr-Mn",
-        //                  "Other Steel - Fe",
-        //                  "Other Steel - Fe-Mn",
-        //                  "Other Steel - Fe-Ni",
-        //                  "Other Steel - Fe-O"
-        //                   });
-        //    hashtable.Add("Magnetic Particles",
-        //        new String[]{
-        //                  "Ce-Co",
-        //                  "Fe-Nd",
-        //                  "Fe-Sm",
-        //                  "Fe-Sr",
-        //                  "Nd-Pr",
-        //                  "Ni-Co",
-        //                  "Sm-Co"
-        //                   });
-        //    hashtable.Add("Other Particle",
-        //        new String[]{
-        //                  "No Element",
-        //                  "Ni",
-        //                  "Ni-P",
-        //                  "Sn base",
-        //                  "Other",
-        //                  "Al",
-        //                  "Al-Mg",
-        //                  "Al-Ti",
-        //                  "Al-Si (1)",
-        //                  "Al-Si (2)",
-        //                  "Si",
-        //                  "Al-Cu",
-        //                  "Al-Si-Cu",
-        //                  "Al-Si-Fe",
-        //                  "Al-Si-Mg",
-        //                  "Mg-Si-O-Al",
-        //                  "Ti",
-        //                  "Nd",
-        //                  "S-Cr-Mn",
-        //                  "Zn base",
-        //                  "Ca base",
-        //                  "Ni base",
-        //                  "Cr base",
-        //                  "Zr base",
-        //                  "Cl base",
-        //                  "Na-Cl",
-        //                  "Cu",
-        //                  "Cu-Au",
-        //                  "Ag-S",
-        //                  "Au-Ni",
-        //                  "Ag",
-        //                  "Au",
-        //                  "Cu-Au-Ni",
-        //                  "Cu-Zn",
-        //                  "Cu-Zn-Ni",
-        //                  "Cu-Zn-Au-Ni",
-        //                  "Zn-O",
-        //                  "Pb",
-        //                  "Fe-Cu",
-        //                  "Cr-Mn",
-        //                  "Al-Si Base",
-        //                  "F-O",
-        //                  "Cu-S-Al-O Base",
-        //                  "Ti-O/Al-Si-Fe",
-        //                  "Cr-Rich (Cr Base + Cr-Mn)"
-        //                   });
-        //    return hashtable;
-        //}
+        
         public users_login userLogin
         {
             get { return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null); }
@@ -201,6 +97,13 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.DataSource = detailSpec.SelectAll();
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("HPA")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
 
             #endregion
             #region "SAMPLE"
@@ -390,34 +293,18 @@ namespace ALS.ALSI.Web.view.template
                 ddlComponent.SelectedValue = _cover.component_id.ToString();
                 ddlSpecification.SelectedValue = _cover.detail_spec_id.ToString();
 
-                //img1.ImageUrl = Configurations.HOST + "" + this.HpaFor3[0].img_path;
-                //img2.ImageUrl = Configurations.HOST + "" + this.HpaFor3[0].img_path1;
-                //img3.ImageUrl = Configurations.HOST + "" + this.HpaFor3[0].img_path2;
-
-                //gvResult.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RESULT_ON_ARM) ||
-                //                    x.row_group == Convert.ToInt32(HPAFor3Group.RESULT_ON_PIVOT) ||
-                //                    x.row_group == Convert.ToInt32(HPAFor3Group.RESULT_ON_SWAGE) ||
-                //                    x.row_group == Convert.ToInt32(HPAFor3Group.AVERAGE_RESULT) ||
-                //                    x.row_group == Convert.ToInt32(HPAFor3Group.SPECIFICATION) ||
-                //                    x.row_group == Convert.ToInt32(HPAFor3Group.PASS_SLASH_FAIL)).OrderBy(x => x.seq);
-                //gvResult.DataBind();
-
-                //gvARM.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_ARM) ||
-                //                                    x.row_group == Convert.ToInt32(HPAFor3Group.ARM_SUB_TOTAL) ||
-                //                                    x.row_group == Convert.ToInt32(HPAFor3Group.ARM_GRAND_TOTAL)).OrderBy(x => x.seq);
-                //gvARM.DataBind();
-
-                //gvPivot.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_PIVOT) ||
-                //                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_SUB_TOTAL) ||
-                //                    x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_GRAND_TOTAL)).OrderBy(x => x.seq);
-                //gvPivot.DataBind();
-
-                //gvSwage.DataSource = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_SWAGE) ||
-                //        x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_SUB_TOTAL) ||
-                //        x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_GRAND_TOTAL)).OrderBy(x => x.seq);
-                //gvSwage.DataBind();
-
                 CalculateCas();
+
+                #region "Unit"
+                gvResult.Columns[1].HeaderText = String.Format("Total Hard {0}", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+                gvResult.Columns[2].HeaderText = String.Format("Total MgSiO {0}", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+                gvResult.Columns[3].HeaderText = String.Format("Total Steel {0}", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+                gvResult.Columns[4].HeaderText = String.Format("Total Magnetic {0}", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+
+                gvARM.Columns[2].HeaderText = String.Format("{0}", ddlUnit.SelectedItem.Text);
+                gvPivot.Columns[2].HeaderText = String.Format("{0}", ddlUnit.SelectedItem.Text);
+                gvSwage.Columns[2].HeaderText = String.Format("{0}", ddlUnit.SelectedItem.Text);
+                #endregion
             }
             else
             {
@@ -500,6 +387,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.sample_id = this.SampleID;
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                        _cover.unit = Convert.ToInt16(ddlUnit.SelectedValue);
                     }
 
                     objWork.DeleteBySampleID(this.SampleID);
@@ -535,6 +423,8 @@ namespace ALS.ALSI.Web.view.template
                         _cover.sample_id = this.SampleID;
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                        _cover.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+
                     }
                     objWork.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.HpaFor3);
@@ -2348,6 +2238,29 @@ namespace ALS.ALSI.Web.view.template
             }
 
             return _Hpas;
+        }
+
+
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            gvResult.Columns[1].HeaderText = String.Format("Total Hard {0}", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            gvResult.Columns[2].HeaderText = String.Format("Total MgSiO {0}", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            gvResult.Columns[3].HeaderText = String.Format("Total Steel {0}", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            gvResult.Columns[4].HeaderText = String.Format("Total Magnetic {0}", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+
+            gvARM.Columns[2].HeaderText = String.Format("{0}", ddlUnit.SelectedItem.Text);
+            gvPivot.Columns[2].HeaderText = String.Format("{0}", ddlUnit.SelectedItem.Text);
+            gvSwage.Columns[2].HeaderText = String.Format("{0}", ddlUnit.SelectedItem.Text);
+
+
+            ModolPopupExtender.Show();
+            CalculateCas();
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            ModolPopupExtender.Show();
         }
 
     }

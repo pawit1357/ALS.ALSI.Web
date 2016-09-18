@@ -262,7 +262,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=CDate(Parameters!Date.Value).ToString("dd MMMM yyyy")</Value>
+                <Value>=Parameters!Date.Value</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                 </Style>
@@ -297,6 +297,19 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!Company.Value</Value>
+                <Style>
+                  <FontSize>11pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!Company_addr.Value</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                 </Style>
@@ -368,7 +381,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=CDate(Parameters!DateSampleReceived.Value).ToString("dd-MMMM-yyyy")</Value>
+                <Value>=Parameters!DateSampleReceived.Value</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                 </Style>
@@ -478,7 +491,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=CDate(Parameters!DateAnalyzed.Value).ToString("dd-MMMM-yyyy")</Value>
+                <Value>=Parameters!DateAnalyzed.Value</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                 </Style>
@@ -512,7 +525,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=CDate(Parameters!DateTestCompleted.Value).ToString("dd-MMMM-yyyy")</Value>
+                <Value>=Parameters!DateTestCompleted.Value</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                 </Style>
@@ -543,6 +556,23 @@
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>One lot of sample was received with references:</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
           <Paragraph>
             <TextRuns>
               <TextRun>
@@ -1436,7 +1466,17 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total Hard Particles/cm2</Value>
+                              <Value>Total Hard </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1494,7 +1534,17 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total MgSiO Particles/cm2</Value>
+                              <Value>Total MgSiO </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1552,7 +1602,24 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total Steel Particles/cm2</Value>
+                              <Value>Total Steel </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1610,7 +1677,24 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total Magnetic Particles/cm2</Value>
+                              <Value>Total Magnetic </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -2132,7 +2216,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Particle/cm2</Value>
+                              <Value>=Parameters!rpt_unit.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -2852,7 +2936,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Particle/cm2</Value>
+                              <Value>=Parameters!rpt_unit.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -3413,7 +3497,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Particle/cm2</Value>
+                              <Value>=Parameters!rpt_unit.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -4555,6 +4639,16 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="img03Url">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Company_addr">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="rpt_unit">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>

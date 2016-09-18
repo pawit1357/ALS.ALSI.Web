@@ -28,57 +28,9 @@ namespace ALS.ALSI.Web.view.template
 
         #region "Property"
 
-        //private String[] GetHPAHeader = { "Total Hard Particles", "Total MgSiO Particles", "Total Steel Particles", "Total Magnetic Particles", "Other Particle" };
         List<String> errors = new List<string>();
 
 
-
-        //private String[] ANameKey = {
-        //    "Total Hard Particles",
-        //    "Total MgSiO Particles",
-        //    "Total Steel Particles",
-        //    "Total Magnetic Particles"
-        //};
-
-        //private Hashtable GetHPAData()
-        //{
-        //    Hashtable hashtable = new Hashtable();
-        //    hashtable.Add("Hard Particles",
-        //        new String[]{
-        //        "Al-O",
-        //        "Al-Si-O",
-        //        "Si-O",
-        //        "Si-C",
-        //        "Al-Cu-O",
-        //        "Al-Mg-O",
-        //        "Al-Si-Cu-O",
-        //        "Al-Si-Fe-O",
-        //        "Al-Si-Mg-O",
-        //        "Al-Ti-O",
-        //        "Ti-O",
-        //        "Ti-C",
-        //        "Ti-B",
-        //        "Ti-N",
-        //        "W-O",
-        //        "W-C",
-        //        "Zr-O",
-        //        "Zr-C",
-        //        "Pb-Zr-Ti-O (PZT)",
-        //        });
-        //    hashtable.Add("MgSiO Particles",new String[]{});
-        //    hashtable.Add("Steel Particles",new String[]{});
-        //    hashtable.Add("Magnetic Particles",
-        //        new String[]{
-        //        "Ce-Co",
-        //        "Fe-Nd",
-        //        "Fe-Sr",
-        //        "Fe-Sm",
-        //        "Nd-Pr",
-        //        "Ni-Co",
-        //        "Sm-Co",
-        //        });
-        //    return hashtable;
-        //}
 
         public users_login userLogin
         {
@@ -151,6 +103,13 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.DataSource = detailSpec.SelectAll();
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("HPA")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
 
             #endregion
             #region "SAMPLE"
@@ -298,7 +257,7 @@ namespace ALS.ALSI.Web.view.template
 
                 ddlComponent.SelectedValue = _cover.component_id.ToString();
                 ddlSpecification.SelectedValue = _cover.detail_spec_id.ToString();
-
+                ddlUnit.SelectedValue = _cover.unit.ToString();
 
                 detailSpec = new tb_m_detail_spec().SelectByID(_cover.detail_spec_id.Value);
                 if (detailSpec != null)
@@ -306,23 +265,19 @@ namespace ALS.ALSI.Web.view.template
                     lbDocNo.Text = detailSpec.B;
                     lbComponent.Text = detailSpec.A;
                 }
-                //img1.ImageUrl = Configurations.HOST + "" + _cover.img_path;
-
-                //gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq);
-                //gvResult.DataBind();
-
-                //gvResult_1.DataSource = this.HpaFor1.OrderBy(x => x.seq);
-                //gvResult_1.DataBind();
-
-
                 CalculateCas();
+                #region "Unit"
+                gvResult.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[3].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);
+                gvResult_1.Columns[2].HeaderText = String.Format("{0}", ddlUnit.SelectedItem.Text);
+                #endregion
             }
             else
             {
                 this.CommandName = CommandNameEnum.Add;
             }
             //initial component
-            btnSubmit.Enabled = false;
+            //btnSubmit.Enabled = false;
             pCoverPage.Visible = true;
             pDSH.Visible = false;
 
@@ -382,18 +337,11 @@ namespace ALS.ALSI.Web.view.template
                         _cover.sample_id = this.SampleID;
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                        _cover.unit = Convert.ToInt16(ddlUnit.SelectedValue);
                     }
                     objWork.DeleteBySampleID(this.SampleID);
-
-                    //switch (this.CommandName)
-                    //{
-                    //    case CommandNameEnum.Add:
                     objWork.InsertList(this.HpaFor1);
-                    //        break;
-                    //    case CommandNameEnum.Edit:
-                    //        objWork.UpdateList(this.HpaFor1);
-                    //        break;
-                    //}
+
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
@@ -413,6 +361,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.sample_id = this.SampleID;
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                        _cover.unit = Convert.ToInt16(ddlUnit.SelectedValue);
                     }
 
                     objWork.UpdateList(this.HpaFor1);
@@ -595,27 +544,11 @@ namespace ALS.ALSI.Web.view.template
                                         {
                                             if (_cov.B.ToUpper().Trim().Equals(compareValue))
                                             {
-                                                _cov.C +=  Convert.ToInt32(data[2]);
+                                                _cov.C += Convert.ToInt32(data[2]);
                                             }
 
                                         }
 
-
-                                        //foreach (template_wd_hpa_for1_coverpage _cov in itemLines)
-                                        //{
-
-                                        //    if (mappingRawData(_cov.B).ToUpper().Replace(" ", String.Empty).Equals(data[0].ToUpper().Replace(" ", String.Empty).Substring(0, subIndex)))
-                                        //    {
-                                        //        template_wd_hpa_for1_coverpage _hpa = this.HpaFor1.Where(x => x.ID == _cov.ID).FirstOrDefault();
-                                        //        if (_hpa != null)
-                                        //        {
-                                        //            _hpa.C = (_hpa.C == null) ? 0 : _hpa.C + Convert.ToInt32(data[2]);
-
-
-                                        //        }
-
-                                        //    }
-                                        //}
                                         Console.WriteLine("");
                                         index++;
                                     }
@@ -638,17 +571,8 @@ namespace ALS.ALSI.Web.view.template
             #region "SET DATA TO FORM"
 
             #endregion
-            //CalculateCas();
-            //foreach (template_wd_hpa_for1_coverpage _cov in itemLines)
-            //{
-            //    if (_cov.B.Trim().Equals("Ti-C"))
-            //    {
-            //        _cov.C = 1357;
-            //    }
 
-            //}
-
-            btnSubmit.Enabled = true;
+            //btnSubmit.Enabled = true;
         }
 
         protected void btnCalculate_Click(object sender, EventArgs e)
@@ -737,7 +661,7 @@ namespace ALS.ALSI.Web.view.template
             gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != 3).OrderBy(x => x.seq).ToList();
             gvResult_1.DataBind();
 
-            btnSubmit.Enabled = true;
+            //btnSubmit.Enabled = true;
         }
 
         #endregion
@@ -922,7 +846,7 @@ namespace ALS.ALSI.Web.view.template
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL));
                 gvResult_1.DataBind();
 
-                btnSubmit.Enabled = true;
+                //btnSubmit.Enabled = true;
 
             }
         }
@@ -955,20 +879,31 @@ namespace ALS.ALSI.Web.view.template
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
 
+            List<template_wd_hpa_for1_coverpage> listHpa = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> listElementalComposition = this.HpaFor1.Where(x =>
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).ToList();
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", lbDocNo.Text, lbComponent.Text)));
             reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor1[0].img_path));
+            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+
             // Variables
             Warning[] warnings;
             string[] streamIds;
@@ -983,8 +918,8 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.HpaFor1.Where(x => x.parent == -1).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.HpaFor1.Where(x => x.parent != -1).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", listHpa.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.ToDataTable())); // Add datasource here
 
 
 
@@ -1362,6 +1297,23 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
             return result;
+        }
+
+
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            gvResult.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            gvResult.Columns[3].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            gvResult_1.Columns[2].HeaderText = String.Format("{0}", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+
+            ModolPopupExtender.Show();
+            CalculateCas();
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            ModolPopupExtender.Show();
         }
 
 
