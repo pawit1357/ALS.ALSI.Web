@@ -96,6 +96,12 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("FTIR")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
             #region "SAMPLE"
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -227,6 +233,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 ddlComponent.SelectedValue = this.Ftir[0].component_id.Value + "";
                 ddlDetailSpec.SelectedValue = this.Ftir[0].detail_spec_id.Value + "";
+                ddlUnit.SelectedValue = (this.Ftir[0].ftir_unit == null)? "0": this.Ftir[0].ftir_unit.Value + "";
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
                 gvMethodProcedure.DataBind();
@@ -235,7 +242,11 @@ namespace ALS.ALSI.Web.view.template
 
                 CalculateCas();
 
-                
+                #region "Unit"
+                gvResult.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
+                #endregion
+
                 cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
                 if (cbCheckBox.Checked)
                 {
@@ -249,13 +260,6 @@ namespace ALS.ALSI.Web.view.template
                         lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", tmp.B, tmp.A);
                     }
                 }
-
-                //tb_m_detail_spec tmp = new tb_m_detail_spec().SelectByID(this.Ftir[0].detail_spec_id.Value);
-                //if (tmp != null)
-                //{
-                //    lbDocRev.Text = tmp.B;
-                //    lbDesc.Text = tmp.A;
-                //}
 
                 txtNVR_FTIR_B14.Text = this.Ftir[0].td_b14;//Volume of solvent used:
                 txtNVR_FTIR_B15.Text = this.Ftir[0].td_b15;//Surface area (S):
@@ -404,6 +408,8 @@ namespace ALS.ALSI.Web.view.template
                         item.sample_id = this.SampleID;
                         item.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
                         item.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                        item.ftir_unit = Convert.ToInt32(ddlUnit.SelectedValue);
+
                     }
                     template_wd_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_wd_ftir_coverpage.InsertList(this.Ftir);
@@ -416,6 +422,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         item.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
                         item.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                        item.ftir_unit = Convert.ToInt32(ddlUnit.SelectedValue);
                         item.td_b14 = txtNVR_FTIR_B14.Text;//Volume of solvent used:
                         item.td_b15 = txtNVR_FTIR_B15.Text;//Surface area (S):
                         item.td_b16 = txtNVR_FTIR_B16.Text;//No. of parts extracted (N):
@@ -538,31 +545,6 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
-
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -756,6 +738,96 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
+
+
+            try
+            {
+                DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
+                ReportHeader reportHeader = new ReportHeader();
+                reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+                List<template_wd_ftir_coverpage> ds = this.Ftir.Where(x => x.data_type == 2 && x.row_type == Convert.ToInt16(RowTypeEnum.Normal)).ToList();
+
+                ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+                reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo + " "));
+                reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+                reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+
+                reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+
+                reportParameters.Add(new ReportParameter("Test", "FTIR"));
+                reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+                reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
+
+                // Variables
+                Warning[] warnings;
+                string[] streamIds;
+                string mimeType = string.Empty;
+                string encoding = string.Empty;
+                string extension = string.Empty;
+
+
+                // Setup the report viewer object and get the array of bytes
+                ReportViewer viewer = new ReportViewer();
+                viewer.ProcessingMode = ProcessingMode.Local;
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_wd.rdlc");
+                viewer.LocalReport.SetParameters(reportParameters);
+
+
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds.ToList().ToDataTable()));
+
+                string download = String.Empty;
+
+                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+                switch (status)
+                {
+                    case StatusEnum.ADMIN_CONVERT_WORD:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        else
+                        {
+                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+                            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+                            Response.Buffer = true;
+                            Response.Clear();
+                            Response.ContentType = mimeType;
+                            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                            Response.BinaryWrite(bytes); // create the file
+                            Response.Flush(); // send it to the client to download
+                        }
+                        break;
+                    case StatusEnum.LABMANAGER_CHECKING:
+                    case StatusEnum.LABMANAGER_APPROVE:
+                    case StatusEnum.LABMANAGER_DISAPPROVE:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+                        break;
+                    case StatusEnum.ADMIN_CONVERT_PDF:
+                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                        {
+                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        }
+
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
 
             //char[] item = this.Ftir.item_visible.ToCharArray();
 
@@ -1305,6 +1377,14 @@ namespace ALS.ALSI.Web.view.template
             gvMethodProcedure.DataBind();
         }
         #endregion
+
+
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvResult.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
+        }
 
     }
 }

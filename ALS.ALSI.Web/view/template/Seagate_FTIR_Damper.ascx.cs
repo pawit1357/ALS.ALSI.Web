@@ -98,6 +98,12 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("FTIR")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
             #region "SAMPLE"
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -263,6 +269,12 @@ namespace ALS.ALSI.Web.view.template
                 gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                 gvWftir.DataBind();
                 CalculateCas();
+                #region "Unit"
+                gvResult.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+                //gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnitNvr.SelectedItem.Text);
+                //gvResultNvr.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitNvr.SelectedItem.Text);
+                #endregion
             }
             else
             {
@@ -825,7 +837,7 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("rpt_unit2", ""));
 
                 reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-                reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
+                reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
 
                 // Variables
                 Warning[] warnings;
@@ -889,219 +901,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 Console.WriteLine();
             }
-
-
-            //char[] item = this.Ftir.item_visible.ToCharArray();
-
-            //DataTable dtHeader = new DataTable("MethodProcedure");
-
-            //// Define all the columns once.
-            //DataColumn[] cols ={ new DataColumn("ProcedureNo",typeof(String)),
-            //                      new DataColumn("NumOfPiecesUsedForExtraction",typeof(String)),
-            //                      new DataColumn("ExtractionMedium",typeof(String)),
-            //                      new DataColumn("ExtractionVolume",typeof(String)),
-            //                  };
-            //dtHeader.Columns.AddRange(cols);
-            //DataRow row = dtHeader.NewRow();
-            //row["ProcedureNo"] = this.Ftir.ProcedureNo;
-            //row["NumOfPiecesUsedForExtraction"] = this.Ftir.NumOfPiece;
-            //row["ExtractionMedium"] = this.Ftir.ExtractionMedium;
-            //row["ExtractionVolume"] = this.Ftir.ExtractionVolumn;
-            //dtHeader.Rows.Add(row);
-            //ReportHeader reportHeader = new ReportHeader();
-            //reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-            //List<ReportData> reportNVRList = new List<ReportData>();
-            //List<ReportData> reportFTIRList = new List<ReportData>();
-            ////Create ReportData NVR
-            //ReportData tmp = new ReportData
-            //{
-            //    A = "NVR (DI Water)",
-            //    B = lbB29Spec.Text,
-            //    C = lbB29Result.Text
-            //};
-            //if (item[1] == '1')
-            //{
-            //    reportNVRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "NVR (IPA/Hexane)",
-            //    B = lbB30Spec.Text,
-            //    C = lbB30Result.Text
-            //};
-            //if (item[2] == '1')
-            //{
-            //    reportNVRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "NVR (IPA)",
-            //    B = lbB31Spec.Text,
-            //    C = lbB31Result.Text
-            //};
-            //if (item[3] == '1')
-            //{
-            //    reportNVRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "NVR (Acetone)",
-            //    B = lbB31Spec.Text,
-            //    C = lbB31Result.Text
-            //};
-            //if (item[4] == '1')
-            //{
-            //    reportNVRList.Add(tmp);
-            //}
-
-
-
-
-            ////Create ReportData FTIR
-            //tmp = new ReportData
-            //{
-            //    A = "Silicone",
-            //    B = lbB32.Text,
-            //    C = lbC32.Text
-            //};
-            //if (item[6] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "Silicone Oil",
-            //    B = lbB33.Text,
-            //    C = lbC33.Text
-            //};
-            //if (item[7] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "Hydrocarbon",
-            //    B = lbB34.Text,
-            //    C = lbC34.Text
-            //};
-            //if (item[8] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "Phthalate",
-            //    B = lbB35.Text,
-            //    C = lbC35.Text
-            //};
-            //if (item[9] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-            //    A = "Amides",
-            //    B = lbB36.Text,
-            //    C = lbC36.Text
-            //};
-            //if (item[10] == '1')
-            //{
-            //    reportFTIRList.Add(tmp);
-            //}
-
-
-            //ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            //reportParameters.Add(new ReportParameter("CustomerPoNo", String.IsNullOrEmpty(reportHeader.cusRefNo) ? "-" : reportHeader.cusRefNo));
-            //reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            //reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-            //reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            //reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            //reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            //reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
-            //reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            //reportParameters.Add(new ReportParameter("Test", MethodType[this.Ftir.selected_method.Value - 1]));
-            //reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Seagate's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
-            //reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
-
-            //// Variables
-            //Warning[] warnings;
-            //string[] streamIds;
-            //string mimeType = string.Empty;
-            //string encoding = string.Empty;
-            //string extension = string.Empty;
-
-
-            //// Setup the report viewer object and get the array of bytes
-            //ReportViewer viewer = new ReportViewer();
-            //viewer.ProcessingMode = ProcessingMode.Local;
-            //viewer.LocalReport.ReportPath = Server.MapPath(MethodType[this.Ftir.selected_method.Value - 1].EndsWith("NVR") ? "~/ReportObject/ftir_nvr_seagate.rdlc" : "~/ReportObject/ftir_seagate.rdlc");
-            //viewer.LocalReport.SetParameters(reportParameters);
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", reportNVRList.ToDataTable())); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportFTIRList.ToDataTable())); // Add datasource here
-
-
-
-            //string download = String.Empty;
-
-            //StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            //switch (status)
-            //{
-            //    case StatusEnum.ADMIN_CONVERT_WORD:
-            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        {
-            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-            //        }
-            //        else
-            //        {
-            //            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            //            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            //            Response.Buffer = true;
-            //            Response.Clear();
-            //            Response.ContentType = mimeType;
-            //            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            //            Response.BinaryWrite(bytes); // create the file
-            //            Response.Flush(); // send it to the client to download
-            //        }
-            //        break;
-            //    case StatusEnum.LABMANAGER_CHECKING:
-            //    case StatusEnum.LABMANAGER_APPROVE:
-            //    case StatusEnum.LABMANAGER_DISAPPROVE:
-            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        {
-            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-            //        }
-            //        break;
-            //    case StatusEnum.ADMIN_CONVERT_PDF:
-            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        {
-            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-            //        }
-
-            //        //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        //{
-            //        //    Word2Pdf objWorPdf = new Word2Pdf();
-            //        //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-            //        //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-            //        //    try
-            //        //    {
-            //        //        objWorPdf.Word2PdfCOnversion();
-            //        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-            //        //    }
-            //        //    catch (Exception ex)
-            //        //    {
-            //        //        Console.WriteLine();
-            //        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-            //        //    }
-            //        //}
-            //        break;
-            //}
-
+            
 
 
         }
@@ -1503,7 +1303,13 @@ namespace ALS.ALSI.Web.view.template
         }
         #endregion
 
-
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvResult.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            CalculateCas();
+        }
 
     }
 }

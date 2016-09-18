@@ -120,6 +120,25 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tb_unit unit = new tb_unit();
+            ddlLiquidParticleUnit.Items.Clear();
+            ddlLiquidParticleUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("HPA")).ToList();
+            ddlLiquidParticleUnit.DataBind();
+            ddlLiquidParticleUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlHardParticleAlalysisUnit.Items.Clear();
+            ddlHardParticleAlalysisUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("HPA")).ToList();
+            ddlHardParticleAlalysisUnit.DataBind();
+            ddlHardParticleAlalysisUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlClassificationUnit.Items.Clear();
+            ddlClassificationUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("HPA")).ToList();
+            ddlClassificationUnit.DataBind();
+            ddlClassificationUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+
+
+
             #region "SAMPLE"
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -319,11 +338,17 @@ namespace ALS.ALSI.Web.view.template
             {
                 this.CommandName = CommandNameEnum.Edit;
                 template_seagate_hpa_coverpage _cover = this.Hpas[0];
+                ddlLiquidParticleUnit.SelectedValue = this.Hpas[0].unit == null ? "0" : this.Hpas[0].unit.Value.ToString();
+                ddlHardParticleAlalysisUnit.SelectedValue = this.Hpas[0].unit2 == null ? "0" : this.Hpas[0].unit2.Value.ToString();
+                ddlClassificationUnit.SelectedValue = this.Hpas[0].unit3 == null ? "0" : this.Hpas[0].unit3.Value.ToString();
+
+
                 tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(_cover.specification_id));
                 if (tem != null)
                 {
                     ddlSpecification.SelectedValue = tem.ID.ToString();
                     ddlLpcType.SelectedValue = _cover.lpc_type.ToString();
+
 
                     #region "Method"
                     txtProcedureNo.Text = _cover.ProcedureNo;
@@ -344,7 +369,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " " , tem.A);
+                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " ", tem.A);
 
                     }
                     #endregion
@@ -431,23 +456,35 @@ namespace ALS.ALSI.Web.view.template
                     txtB9.Text = _cover.ws_b9;
                     #endregion
 
-                    #region "Header Text"
-                    gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                    gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                    gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                    //#region "Header Text"
+                    //gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+                    //gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
+                    //gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
 
-                    gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                    gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                    gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                    //gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+                    //gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
+                    //gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
 
-                    gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
-                    gvHpa.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                    gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
-                    #endregion
+                    //gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
+                    //gvHpa.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
+                    //gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                    //#endregion
 
 
 
                     CalculateCas();
+                    #region "Unit"
+                    gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+                    gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+
+                    gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+                    gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+
+                    gvHpa.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
+                    gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
+
+                    gvClassification.Columns[2].HeaderText = String.Format("Results, {0}", ddlClassificationUnit.SelectedItem.Text);
+                    #endregion
                 }
             }
             else
@@ -529,6 +566,9 @@ namespace ALS.ALSI.Web.view.template
                         ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
                         #endregion
 
+                        ws.unit = Convert.ToInt16(ddlLiquidParticleUnit.SelectedValue);
+                        ws.unit2 = Convert.ToInt16(ddlHardParticleAlalysisUnit.SelectedValue);
+                        ws.unit3 = Convert.ToInt16(ddlClassificationUnit.SelectedValue);
                     }
                     objWork.DeleteBySampleID(this.SampleID);
                     //switch (this.CommandName)
@@ -547,6 +587,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
+
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         //#endregion
@@ -555,7 +596,9 @@ namespace ALS.ALSI.Web.view.template
                             ws.sample_id = this.SampleID;
                             ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                             ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
-
+                            ws.unit = Convert.ToInt16(ddlLiquidParticleUnit.SelectedValue);
+                            ws.unit2 = Convert.ToInt16(ddlHardParticleAlalysisUnit.SelectedValue);
+                            ws.unit3 = Convert.ToInt16(ddlClassificationUnit.SelectedValue);
                             #region "Method/Procedure"
                             ws.ProcedureNo = txtProcedureNo.Text;
                             ws.NumberOfPieces = txtNumberOfPieces.Text;
@@ -745,31 +788,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -1612,7 +1631,7 @@ namespace ALS.ALSI.Web.view.template
             if (this.Hpas[0].img_path != null)
             {
                 // Define all the columns once.
-                DataColumn[] imgCol ={ new DataColumn("img1",typeof(Byte[]))};
+                DataColumn[] imgCol = { new DataColumn("img1", typeof(Byte[])) };
                 dtImgs.Columns.AddRange(imgCol);
                 DataRow imgRow = dtImgs.NewRow();
                 imgRow["img1"] = CustomUtils.GetBytesFromPhisicalPath(this.Hpas[0].img_path);
@@ -1658,11 +1677,13 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(this.Hpas[0].specification_id));
-            if (tem != null)
-            {
-                reportParameters.Add(new ReportParameter("rpt_unit", tem.D));
-            }
+            //tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(this.Hpas[0].specification_id));
+            //if (tem != null)
+            //{
+            reportParameters.Add(new ReportParameter("rpt_unit", ddlLiquidParticleUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit2", ddlHardParticleAlalysisUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit3", ddlClassificationUnit.SelectedItem.Text));
+            //}
             DataTable dtSummary = new DataTable("Summary");
             DataColumn[] cols1 ={ new DataColumn("A",typeof(String)),
                                   new DataColumn("B",typeof(String)),
@@ -1699,12 +1720,6 @@ namespace ALS.ALSI.Web.view.template
             row["B"] = "Magnification";
             row["C"] = lbC149.Text;
             dtSummary.Rows.Add(row);
-            //reportParameters.Add(new ReportParameter("lbC144", lbC144.Text));
-            //reportParameters.Add(new ReportParameter("lbC145", lbC145.Text));
-            //reportParameters.Add(new ReportParameter("lbC146", lbC146.Text));
-            //reportParameters.Add(new ReportParameter("lbC147", lbC147.Text));
-            //reportParameters.Add(new ReportParameter("lbC148", lbC148.Text));
-            //reportParameters.Add(new ReportParameter("lbC149", lbC149.Text));
             // Variables
             Warning[] warnings;
             string[] streamIds;
@@ -1823,7 +1838,7 @@ namespace ALS.ALSI.Web.view.template
                 txtExtractionMedium_hpa.Text = string.Empty;
                 txtExtractionVolume_hpa.Text = tem.F;
 
-                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " " +  tem.A);
+                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B, tem.A);
 
                 #endregion
                 #region "LPC"
@@ -2504,6 +2519,40 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
+
+        protected void ddlLiquidParticleUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+            gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+
+            gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+            gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+            CalculateCas();
+            ModolPopupExtender.Show();
+        }
+
+        protected void ddlHardParticleAlalysisUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            gvHpa.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
+            gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
+            CalculateCas();
+            ModolPopupExtender.Show();
+        }
+        protected void ddlClassificationUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvClassification.Columns[2].HeaderText = String.Format("Results, {0}", ddlClassificationUnit.SelectedItem.Text);
+            CalculateCas();
+            ModolPopupExtender.Show();
+
+        }
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            ModolPopupExtender.Show();
+        }
+
+
 
     }
 }

@@ -3,12 +3,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 
-<style type="text/css">
-    .auto-style1 {
-        height: 26px;
-    }
-</style>
-
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
 
@@ -25,6 +19,8 @@
                     <div class="actions">
                         <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn btn-default btn-sm" OnClick="btnNVRFTIR_Click" />
                         <asp:Button ID="btnNVRFTIR" runat="server" Text="NVR-FTIR(Hex)" CssClass="btn blue" OnClick="btnNVRFTIR_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -35,7 +31,6 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h5>METHOD/PROCEDURE:</h5>
-
                                         <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand">
                                             <Columns>
@@ -95,9 +90,6 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                                        <%--<h6>The specification is based on Western Digital's document no.
-                                                    <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
-                                            <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>--%>
 
                                         <table>
                                             <tr>
@@ -181,14 +173,14 @@ The instrument detection limit for silicone oil is
 
                     <asp:Panel ID="pLoadFile" runat="server">
 
-                        <div class="form-group">
+                        <%--             <div class="form-group">
                             <label class="control-label col-md-3">ทศนิยม</label>
                             <div class="col-md-9">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="form-group">
                             <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -233,12 +225,12 @@ The instrument detection limit for silicone oil is
                                             <th colspan="4">Test Data</th>
                                         </tr>
                                         <tr>
-                                            <th class="auto-style1">Volume of solvent used:</th>
-                                            <th class="auto-style1">
+                                            <th>Volume of solvent used:</th>
+                                            <th>
                                                 <asp:TextBox ID="txtNVR_FTIR_B14" runat="server" placeholder="ดึงข้อมูลจาก B14"></asp:TextBox>
                                             </th>
-                                            <th class="auto-style1">mL</th>
-                                            <th class="auto-style1"></th>
+                                            <th>mL</th>
+                                            <th></th>
                                         </tr>
                                         <tr>
                                             <th>Surface area (S):</th>
@@ -405,14 +397,6 @@ The instrument detection limit for silicone oil is
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                        <%--                                 <tr runat="server" id="tr16">
-                                            <td>Method Detection Limit, MDL</td>
-                                            <td>
-                                                <asp:TextBox ID="txtFTIR_B48" runat="server" Text="" placeholder="ดึงข้อมูลจาก B48"></asp:TextBox>
-                                            </td>
-                                            <td><asp:Label ID="lbAmide" runat="server" Text="ng/cm2"></asp:Label></td>
-                                            <td></td>
-                                        </tr>--%>
                                         <tr runat="server" id="tr17">
                                             <td>Calculations:</td>
                                             <td>Amide (ng/cm<sup>2</sup>) =</td>
@@ -616,25 +600,30 @@ The instrument detection limit for silicone oil is
                                         <tr>
                                             <td>Ftir</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlFtirUnit" runat="server" class="select2_category form-control">
+                                                <asp:DropDownList ID="ddlFtirUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlFtirUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--                                                <asp:DropDownList ID="ddlFtirUnit" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
 
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Nvr</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlNvrUnit" runat="server" class="select2_category form-control">
+                                                <asp:DropDownList ID="ddlNvrUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlNvrUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+                                                <%--                             <asp:DropDownList ID="ddlNvrUnit" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
 
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
                                             </td>
                                         </tr>
                                     </table>

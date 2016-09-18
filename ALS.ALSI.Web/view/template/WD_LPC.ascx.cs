@@ -294,6 +294,20 @@ namespace ALS.ALSI.Web.view.template
                 gvSpec.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC));
                 gvSpec.DataBind();
                 CalculateCas();
+
+                #region "Unit"
+                gvSpec.Columns[2].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
+                gvSpec.Columns[3].HeaderText = String.Format("Average of 5 data points({0})", ddlUnit.SelectedItem.Text);
+
+                gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit.SelectedItem.Text);
+
+                gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+
+                gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+                gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+                #endregion
             }
             else
             {
@@ -442,6 +456,7 @@ namespace ALS.ALSI.Web.view.template
                                 cov.ws_d21 = txtD54.Text;
                                 #endregion
                                 cov.WashMethod = ddlWashMethod.SelectedValue;
+                                cov.unit = Convert.ToInt16(ddlUnit.SelectedValue);
 
                             }
                             objWork.DeleteBySampleID(this.SampleID);
@@ -537,31 +552,6 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
-
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -587,8 +577,6 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
-
-
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             removeSession();
@@ -774,7 +762,8 @@ namespace ALS.ALSI.Web.view.template
             this.Lpc.AddRange(tmps);
 
             int order = 1;
-            foreach(template_wd_lpc_coverpage lpc in this.Lpc.Where(x=>x.data_type == Convert.ToInt16(WDLpcDataType.DATA_VALUE))){
+            foreach (template_wd_lpc_coverpage lpc in this.Lpc.Where(x => x.data_type == Convert.ToInt16(WDLpcDataType.DATA_VALUE)))
+            {
                 lpc.ID = order;
                 order++;
             }
@@ -912,38 +901,22 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList();
-            foreach(template_wd_lpc_coverpage lpc in specs)
+            foreach (template_wd_lpc_coverpage lpc in specs)
             {
-                lpc.D = Math.Round(Convert.ToDouble(lpc.D))+"";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
                 Console.WriteLine();
             }
             foreach (template_wd_lpc_coverpage lpc in sumarys)
             {
-                lpc.E = Convert.ToDouble(lpc.E).ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
                 lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
                 Console.WriteLine();
             }
-            //foreach (template_wd_lpc_coverpage lpc in sumarys)
-            //{
-            //    lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
-            //    Console.WriteLine();
-            //}
-
 
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            //reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            //reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            //reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-            //reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            //reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-
-            //reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            //reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            //reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
@@ -1027,26 +1000,6 @@ namespace ALS.ALSI.Web.view.template
                     {
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
-
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
-
                     break;
             }
 
@@ -1222,12 +1175,6 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
 
-            //List<string> accumlativeSize = new List<string>();
-            //accumlativeSize.Add("0.5");
-            //accumlativeSize.Add("0.7");
-            //accumlativeSize.Add("1");
-            //accumlativeSize.Add("2");
-
 
             gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));
             gvResult.DataBind();
@@ -1363,7 +1310,7 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
         }
-    
+
 
         protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -1473,7 +1420,20 @@ namespace ALS.ALSI.Web.view.template
         }
 
 
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvSpec.Columns[2].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
+            gvSpec.Columns[3].HeaderText = String.Format("Average of 5 data points({0})", ddlUnit.SelectedItem.Text);
 
+            gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit.SelectedItem.Text);
 
+            gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+
+            gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+            gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+
+        }
     }
 }

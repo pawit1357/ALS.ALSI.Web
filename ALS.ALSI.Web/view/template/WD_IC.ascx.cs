@@ -93,7 +93,11 @@ namespace ALS.ALSI.Web.view.template
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
 
-
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("IC")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
 
 
@@ -228,7 +232,7 @@ namespace ALS.ALSI.Web.view.template
                         btnWorking.Visible = true;
                     }
 
-                    }
+                }
                 #endregion
 
 
@@ -254,8 +258,6 @@ namespace ALS.ALSI.Web.view.template
                 if (detailSpec != null)
                 {
                     /*RESULT*/
-                    //lbDocRev.Text = detailSpec.B;
-                    //lbDesc.Text = detailSpec.A;
                     cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
                     if (cbCheckBox.Checked)
                     {
@@ -263,9 +265,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-   
-                            lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", detailSpec.B, detailSpec.A);
-                        
+
+                        lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", detailSpec.B, detailSpec.A);
+
                     }
 
 
@@ -277,6 +279,7 @@ namespace ALS.ALSI.Web.view.template
                     txtNumOfPiecesUsedForExtraction.Text = ic.NumOfPiecesUsedForExtraction;
                     txtExtractionMedium.Text = ic.ExtractionMedium;
                     txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDecimal(ic.ExtractionVolume))));
+                    #region "Unit"
                     if (ic.wunit != null)
                     {
                         ddlUnit.SelectedValue = ic.wunit.Value.ToString();
@@ -316,7 +319,7 @@ namespace ALS.ALSI.Web.view.template
                         gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                     }
-
+                    #endregion  
                     calculateByFormular();
                 }
                 gvAnionic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.ANIONIC));
@@ -399,15 +402,8 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                     template_wd_ic_coverpage.DeleteBySampleID(this.SampleID);
-                    //switch (this.CommandName)
-                    //{
-                    //    case CommandNameEnum.Add:
-                            template_wd_ic_coverpage.InsertList(this.coverpages);
-                    //        break;
-                    //    case CommandNameEnum.Edit:
-                    //        template_wd_ic_coverpage.UpdateList(this.coverpages);
-                    //        break;
-                    //}
+                    template_wd_ic_coverpage.InsertList(this.coverpages);
+
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
@@ -516,31 +512,6 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
-
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -811,25 +782,6 @@ namespace ALS.ALSI.Web.view.template
                     {
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
-
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
                     break;
             }
 
@@ -846,7 +798,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 /*RESULT*/
                 lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
-            
+
                 gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", tem.C);
                 gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", tem.C);
                 gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", tem.C);
@@ -1197,7 +1149,8 @@ namespace ALS.ALSI.Web.view.template
             gvResultCations.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
             gvResultCations.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
             gvResultCations.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
-
+            ModolPopupExtender.Show();
+            calculateByFormular();
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
@@ -1227,5 +1180,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
+
+
     }
 }

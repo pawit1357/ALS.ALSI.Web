@@ -561,6 +561,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="unit_group" Type="varchar" MaxLength="20" />
           <Property Name="name" Type="varchar" MaxLength="45" />
           <Property Name="value" Type="double" />
         </EntityType>
@@ -928,11 +929,13 @@
           <Property Name="NumberOfPieces_hpa" Type="varchar" MaxLength="255" />
           <Property Name="ExtractionMedium_hpa" Type="varchar" MaxLength="255" />
           <Property Name="ExtractionVolume_hpa" Type="varchar" MaxLength="255" />
-          <Property Name="unit" Type="varchar" MaxLength="45" />
+          <Property Name="unit" Type="int" />
           <Property Name="BlankCouts" Type="int" />
           <Property Name="RawCounts" Type="int" />
           <Property Name="data_group" Type="varchar" MaxLength="150" />
           <Property Name="img_path" Type="varchar" MaxLength="150" />
+          <Property Name="unit2" Type="int" />
+          <Property Name="unit3" Type="int" />
         </EntityType>
         <EntityType Name="template_seagate_ic_coverpage">
           <Key>
@@ -1111,7 +1114,6 @@
           <Property Name="amide_unit" Type="varchar" MaxLength="45" />
           <Property Name="silicone_unit" Type="varchar" MaxLength="45" />
           <Property Name="ftir_unit" Type="int" />
-          <Property Name="nvr_unit" Type="int" />
         </EntityType>
         <EntityType Name="template_wd_ftir_coverpage_tmp">
           <Key>
@@ -2334,6 +2336,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="unit_group" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="value" Type="Double" />
         </EntityType>
@@ -2701,11 +2704,13 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="NumberOfPieces_hpa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ExtractionMedium_hpa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ExtractionVolume_hpa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="unit" Type="Int32" />
           <Property Name="BlankCouts" Type="Int32" />
           <Property Name="RawCounts" Type="Int32" />
           <Property Name="data_group" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="img_path" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="unit2" Type="Int32" />
+          <Property Name="unit3" Type="Int32" />
         </EntityType>
         <EntityType Name="template_seagate_ic_coverpage">
           <Key>
@@ -2884,7 +2889,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="amide_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="silicone_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftir_unit" Type="Int32" />
-          <Property Name="nvr_unit" Type="Int32" />
         </EntityType>
         <EntityType Name="template_wd_ftir_coverpage_tmp">
           <Key>
@@ -3903,6 +3907,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
               <MappingFragment StoreEntitySet="tb_unit">
                 <ScalarProperty Name="value" ColumnName="value" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="unit_group" ColumnName="unit_group" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -4198,6 +4203,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_hpa_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_hpa_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_hpa_coverpage">
+                <ScalarProperty Name="unit3" ColumnName="unit3" />
+                <ScalarProperty Name="unit2" ColumnName="unit2" />
                 <ScalarProperty Name="img_path" ColumnName="img_path" />
                 <ScalarProperty Name="data_group" ColumnName="data_group" />
                 <ScalarProperty Name="RawCounts" ColumnName="RawCounts" />
@@ -4429,7 +4436,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_ftir_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_ftir_coverpage">
               <MappingFragment StoreEntitySet="template_wd_ftir_coverpage">
-                <ScalarProperty Name="nvr_unit" ColumnName="nvr_unit" />
                 <ScalarProperty Name="ftir_unit" ColumnName="ftir_unit" />
                 <ScalarProperty Name="silicone_unit" ColumnName="silicone_unit" />
                 <ScalarProperty Name="amide_unit" ColumnName="amide_unit" />

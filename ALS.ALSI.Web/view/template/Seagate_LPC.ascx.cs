@@ -53,11 +53,6 @@ namespace ALS.ALSI.Web.view.template
             get { return (List<template_seagate_lpc_coverpage>)Session[GetType().Name + "Lpcs"]; }
             set { Session[GetType().Name + "Lpcs"] = value; }
         }
-        //public List<template_seagate_lpc_coverpage> ListResult
-        //{
-        //    get { return (List<template_seagate_lpc_coverpage>)Session[GetType().Name + "ListResult"]; }
-        //    set { Session[GetType().Name + "ListResult"] = value; }
-        //}
         public string PreviousPath
         {
             get { return (string)ViewState[GetType().Name + Constants.PREVIOUS_PATH]; }
@@ -73,8 +68,6 @@ namespace ALS.ALSI.Web.view.template
         private void removeSession()
         {
             Session.Remove(GetType().Name);
-            //Session.Remove(GetType().Name + "tbCas");
-            //Session.Remove(GetType().Name + "coverpages");
             Session.Remove(GetType().Name + "Lpcs");
             Session.Remove(GetType().Name + Constants.PREVIOUS_PATH);
             Session.Remove(GetType().Name + "SampleID");
@@ -98,7 +91,11 @@ namespace ALS.ALSI.Web.view.template
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
-
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("LPC")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
 
             #region "SAMPLE"
@@ -294,16 +291,15 @@ namespace ALS.ALSI.Web.view.template
 
                 ddlA19.SelectedValue = this.Lpcs[0].lpc_type;
 
-                txtDilutionFactor.Text = (this.Lpcs[0].df03 == null)? "1": this.Lpcs[0].df03.ToString();
+                txtDilutionFactor.Text = (this.Lpcs[0].df03 == null) ? "1" : this.Lpcs[0].df03.ToString();
                 txtDilutionFactor05.Text = (this.Lpcs[0].df05 == null) ? "1" : this.Lpcs[0].df05.ToString();
                 txtDilutionFactor06.Text = (this.Lpcs[0].df06 == null) ? "1" : this.Lpcs[0].df06.ToString();
 
 
 
 
-                //ddlChannel.SelectedValue = this.Lpcs[0].channel_size;
                 ddlTemplateType.SelectedValue = this.Lpcs[0].template_type.ToString();
-                ddlUnit.SelectedValue = this.Lpcs[0].unit+"";
+                ddlUnit.SelectedValue = this.Lpcs[0].unit + "";
                 tb_m_specification tem = new tb_m_specification().SelectByID(this.Lpcs[0].specification_id.Value);
 
                 if (tem != null)
@@ -320,7 +316,7 @@ namespace ALS.ALSI.Web.view.template
                             //lbDocNo.Text = tem.C;
                             //lbCommodity.Text = tem.B;
 
-                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C , tem.B);
+                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C, tem.B);
 
                             break;
                     }
@@ -383,6 +379,18 @@ namespace ALS.ALSI.Web.view.template
 
 
                 CalculateCas();
+                #region "Unit"
+                gvCoverPage03.Columns[1].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
+                gvCoverPage03.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
+
+                gvCoverPage05.Columns[1].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
+                gvCoverPage05.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
+
+                gvCoverPage06.Columns[1].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
+                gvCoverPage06.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
+                #endregion
+
+
             }
             else
             {
@@ -979,9 +987,9 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[3].Results = listAverages[2].Value;
                             }
-                   
-                                listCoverPage[4].Results = lbAverage.Text;
-                  
+
+                            listCoverPage[4].Results = lbAverage.Text;
+
 
                             gvCoverPage03.DataSource = listCoverPage;
                             gvCoverPage03.DataBind();
@@ -1084,9 +1092,9 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[3].Results = listAverages[2].Value;
                             }
-                         
-                                listCoverPage[4].Results = lbAverage05.Text;
-                            
+
+                            listCoverPage[4].Results = lbAverage05.Text;
+
 
                             gvCoverPage05.DataSource = listCoverPage;
                             gvCoverPage05.DataBind();
@@ -1189,9 +1197,9 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[3].Results = listAverages[2].Value;
                             }
-                        
-                                listCoverPage[4].Results = lbAverage06.Text;
-                            
+
+                            listCoverPage[4].Results = lbAverage06.Text;
+
 
                             gvCoverPage06.DataSource = listCoverPage;
                             gvCoverPage06.DataBind();
@@ -1240,12 +1248,12 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy")  + ""));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy")  + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy")  + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy")  + ""));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", ddlA19.SelectedItem.Text));
@@ -1314,24 +1322,6 @@ namespace ALS.ALSI.Web.view.template
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
 
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
                     break;
             }
 
@@ -1578,11 +1568,6 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
         }
 
-        //protected void ddlChannel_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    lbParticle.Text = ddlChannel.SelectedItem.Text;
-        //}
-
         protected void txtSurfaceArea_TextChanged(object sender, EventArgs e)
         {
 
@@ -1819,7 +1804,24 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
+
+
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCoverPage03.Columns[1].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPage03.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
+
+            gvCoverPage05.Columns[1].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPage05.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
+
+            gvCoverPage06.Columns[1].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPage06.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            CalculateCas();
+        }
     }
+
+
 
     public class LPC
     {

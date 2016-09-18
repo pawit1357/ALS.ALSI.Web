@@ -1962,7 +1962,7 @@
                               </Style>
                             </TextRun>
                             <TextRun>
-                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Value>=Parameters!rpt_unit2.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -2057,7 +2057,7 @@
                               </Style>
                             </TextRun>
                             <TextRun>
-                              <Value>=Parameters!rpt_unit.Value</Value>
+                              <Value>=Parameters!rpt_unit2.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -2480,7 +2480,17 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Results, Particle/sqcm</Value>
+                              <Value>Results, </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit3.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -3711,7 +3721,17 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Results, Particle/sqcm</Value>
+                              <Value>Results, </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit3.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -4125,7 +4145,17 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Results, Particle/sqcm</Value>
+                              <Value>Results, </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!rpt_unit3.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -7215,6 +7245,16 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="rpt_unit">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="rpt_unit2">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="rpt_unit3">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>

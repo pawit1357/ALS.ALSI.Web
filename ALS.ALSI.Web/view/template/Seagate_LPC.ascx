@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_LPC.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_LPC" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
- 
+
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <asp:ToolkitScriptManager ID="ToolkitScript1" runat="server" />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -13,6 +13,7 @@
                     <div class="actions">
                         <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn btn-default btn-sm" OnClick="btnUsLPC_Click" />
                         <asp:Button ID="btnWorkSheet" runat="server" Text="WorkSheet" CssClass="btn blue" OnClick="btnUsLPC_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -70,18 +71,13 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-
-                                        <%--                        <h6>The Specification is based on Seagate's Doc .
-                            <asp:Label ID="lbDocNo" runat="server" Text=""></asp:Label>
-                                            <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>for
-                            <asp:Label ID="lbCommodity" runat="server" Text=""></asp:Label>--%>
                                         <table>
                                             <tr>
-                                               <td>
+                                                <td>
                                                     <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                             </tr>
                                             <tr>
-                                              
+
                                                 <td>
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
@@ -91,13 +87,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-
-                                        <%--<asp:DropDownList ID="ddlChannel" runat="server" AutoPostBack="True" CssClass="select2_category form-control" OnSelectedIndexChanged="ddlChannel_SelectedIndexChanged">
-                                            <asp:ListItem Value="0.300">No. of Particles ≥ 0.3 μm (Counts/mL)</asp:ListItem>
-                                            <asp:ListItem Value="0.500">No. of Particles ≥ 0.5 μm (Counts/mL)</asp:ListItem>
-                                            <asp:ListItem Value="0.600">No. of Particles ≥ 0.6 μm (Counts/mL)</asp:ListItem>
-                                        </asp:DropDownList>--%>
-
                                         <asp:CheckBoxList ID="CheckBoxList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="CheckBoxList1_SelectedIndexChanged">
                                             <asp:ListItem Value="0.300" Selected="True">No. of Particles ≥ 0.3 μm (Counts/mL)</asp:ListItem>
                                             <asp:ListItem Value="0.500" Selected="True">No. of Particles ≥ 0.5 μm (Counts/mL)</asp:ListItem>
@@ -164,14 +153,14 @@
                     <asp:Panel ID="pDSH" runat="server">
                         <asp:Panel ID="pLoadFile" runat="server">
 
-                            <div class="form-group">
+                            <%--                 <div class="form-group">
                                 <label class="control-label col-md-3">ทศนิยม</label>
                                 <div class="col-md-9">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -527,10 +516,6 @@
 
                     <div class="form-actions">
 
-
-
-
-
                         <div class="modal-wide" id="pnlModalDemo" style="display: none;">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -539,13 +524,6 @@
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
                                     <table class="table table-striped">
-
-
-
-
-
-
-
                                         <tr>
                                             <td>Blank</td>
                                             <td>
@@ -572,16 +550,18 @@
                                                 <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
                                         </tr>
 
-                                        <td>Unit</td>
-                                        <td>
-
-                                            <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control">
+                                        <tr>
+                                            <td>Unit</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit" runat="server" AutoPostBack="True" class="select2_category form-control" DataTextField="Name" DataValueField="ID" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged">
+                                                </asp:DropDownList>
+                                                <%--      <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
-                                                </asp:DropDownList>
-                                        </td>
+                                                </asp:DropDownList>--%></td>
+                                        </tr>
 
 
 
@@ -591,8 +571,6 @@
                                     </table>
                                 </div>
                                 <div class="modal-footer">
-                                    <%--                                <asp:Button ID="OK" runat="server" CssClass="btn purple" Style="margin-top: 10px; margin-left: 20px;" Text="บันทึก" OnClick="OK_Click" />--%>
-
                                     <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
                                 </div>
                             </div>

@@ -361,27 +361,7 @@
                                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-                                    <%--                        <asp:Panel ID="pUploadfile" runat="server">
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Uplod file:</label>
-                                        <div class="col-md-6">
-                                            <asp:HiddenField ID="HiddenField1" runat="server" />
-                                            <span class="btn green fileinput-button">
-                                                <i class="fa fa-plus"></i>
-                                                <span>Add files...</span>
-                                                <asp:FileUpload ID="FileUpload1" runat="server" />
-                                            </span>
-                                            <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                            <br />
-                        </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -408,6 +388,11 @@
                                             <td>Total Outgassing</td>
                                             <td>
                                                 <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                                                                <tr>
+                                            <td>Unit</td>
+                                            <td> <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList></td>
                                         </tr>
                                     </table>
                                 </div>

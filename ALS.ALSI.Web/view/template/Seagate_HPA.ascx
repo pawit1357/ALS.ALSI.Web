@@ -16,6 +16,7 @@
                         <asp:Button ID="btnWorksheetForHPAFiltration" runat="server" Text="Worksheet for HPA - Filtration" CssClass="btn blue" OnClick="btnUsLPC_Click" />
                         <asp:Button ID="btnUsLPC03" runat="server" Text="US-LPC(0.3)" CssClass="btn blue" OnClick="btnUsLPC_Click" />
                         <asp:Button ID="btnUsLPC06" runat="server" Text="US-LPC(0.6)" CssClass="btn blue" OnClick="btnUsLPC_Click" />
+                        <asp:LinkButton ID="btnShowUnit" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
 
                     </div>
                 </div>
@@ -93,22 +94,18 @@
                                         <h6>Results:</h6>
                                         <table>
                                             <tr>
-                                          <td>
+                                                <td>
                                                     <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                             </tr>
                                             <tr>
-                                               
+
                                                 <td>
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
                                         </table>
-                                        <%--                         <h6>The Specification is based on Seagate's Doc
-                            <asp:Label ID="lbDocNo" runat="server" Text=""></asp:Label>
-                                            for
-                            <asp:Label ID="lbCommodity" runat="server" Text=""></asp:Label>
-                                        </h6>--%>
                                     </div>
                                 </div>
+
                                 <asp:GridView ID="gvLpc03" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type" OnRowDataBound="gvLpc03_RowDataBound" OnRowCommand="gvLpc03_RowCommand">
                                     <Columns>
@@ -854,6 +851,9 @@
                     <div class="form-actions">
                         <!-- POPUP -->
 
+
+
+                        <!-- X -->
                         <div class="modal-wide" id="popupErrorList" style="display: none;">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -892,6 +892,53 @@
                         </div>
                     </div>
 
+                    <div class="modal-wide" id="pnlModalDemo" style="display: none;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h class="modal-title">
+                                            กำหนดทศนิยม</h>
+                            </div>
+                            <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                                <h1>Unit</h1>
+                                <table class="table table-striped">
+
+                                    <tr>
+                                        <th>Liquid Particle Unit</th>
+                                        <th>
+                                            <asp:DropDownList ID="ddlLiquidParticleUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlLiquidParticleUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                            </asp:DropDownList>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Hard Particle Alalysis Unit</th>
+                                        <th>
+                                            <asp:DropDownList ID="ddlHardParticleAlalysisUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlHardParticleAlalysisUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                            </asp:DropDownList>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Classification Unit</th>
+                                        <th>
+                                            <asp:DropDownList ID="ddlClassificationUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlClassificationUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                            </asp:DropDownList>
+                                        </
+
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+
+                    <asp:LinkButton ID="lnkFake" runat="server">
+                    </asp:LinkButton>
+                    <asp:ModalPopupExtender ID="ModolPopupExtender" runat="server" PopupControlID="pnlModalDemo"
+                        TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
+                        CancelControlID="btnClose">
+                    </asp:ModalPopupExtender>
                 </div>
             </div>
         </ContentTemplate>

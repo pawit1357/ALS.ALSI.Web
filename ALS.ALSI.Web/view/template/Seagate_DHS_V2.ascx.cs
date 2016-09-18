@@ -114,6 +114,12 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("DHS")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
             #region "CAS"
             this.tbCas = tb_m_dhs_cas.FindAllBySampleID(this.SampleID);
             if (this.tbCas != null && this.tbCas.Count > 0 && this.coverpages != null && this.coverpages.Count > 0)
@@ -289,9 +295,6 @@ namespace ALS.ALSI.Web.view.template
                     txtProcedureNo.Text = this.coverpages[0].procedureNo;
                     txtSamplingTime.Text = this.coverpages[0].SamplingTime;
                     txtSampleSize.Text = this.coverpages[0].sampleSize;
-                    //this.SampleSize = String.IsNullOrEmpty(this.coverpages[0].sampleSize) ? 100 : Convert.ToInt32(this.coverpages[0].sampleSize);
-                    //this.Unit = Convert.ToInt32(this.coverpages[0].unit);
-                    //CalculateCas(true);
                     GenerrateCoverPage();
                 }
                 #endregion
@@ -370,7 +373,6 @@ namespace ALS.ALSI.Web.view.template
                     #endregion
                     break;
                 case StatusEnum.CHEMIST_TESTING:
-                    //CalculateCas(false);
                     if (this.tbCas.Count > 0)
                     {
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
@@ -473,42 +475,15 @@ namespace ALS.ALSI.Web.view.template
                         FileUpload1.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
-                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
-                        //lbMessage.Attributes["class"] = "alert alert-error";
-                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -912,6 +887,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
+            tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
 
 
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
@@ -928,7 +904,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", "ng/part"));
+            reportParameters.Add(new ReportParameter("rpt_unit", component.C));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "DHS"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
@@ -989,24 +965,6 @@ namespace ALS.ALSI.Web.view.template
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
 
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
                     break;
             }
 
@@ -1196,5 +1154,13 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
+        }
+
+
     }
 }

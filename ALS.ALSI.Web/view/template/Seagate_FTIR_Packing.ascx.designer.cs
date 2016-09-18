@@ -76,6 +76,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Button btnWorkingNVR;
         
         /// <summary>
+        /// lbDecimal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbDecimal;
+        
+        /// <summary>
         /// pCoverPage control.
         /// </summary>
         /// <remarks>
@@ -155,15 +164,6 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pLoadFile;
-        
-        /// <summary>
-        /// lbDecimal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbDecimal;
         
         /// <summary>
         /// FileUpload1 control.

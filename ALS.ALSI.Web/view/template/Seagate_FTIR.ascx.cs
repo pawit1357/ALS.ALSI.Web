@@ -99,6 +99,13 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("FTIR")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+
             #region "SAMPLE"
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -261,6 +268,12 @@ namespace ALS.ALSI.Web.view.template
                     gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                     gvWftir.DataBind();
                     CalculateCas();
+                    #region "Unit"
+                    gvResult.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+                    gvResult.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+                    //gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnitNvr.SelectedItem.Text);
+                    //gvResultNvr.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitNvr.SelectedItem.Text);
+                    #endregion
                 }
                 else
                 {
@@ -587,37 +600,12 @@ namespace ALS.ALSI.Web.view.template
                     else
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
-                        //lbMessage.Attributes["class"] = "alert alert-error";
-                        //isValid = false;
+
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -778,14 +766,7 @@ namespace ALS.ALSI.Web.view.template
                 //FTIR
                 this.Ftir[6].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone Oil
                 this.Ftir[7].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Hydrocarbon
-                this.Ftir[8].C = String.Empty;//(unit == 1) ? ftirList[7].B : ftirList[8].B;//Surfactant
-                                              //NVR
-                                              //this.Ftir[6].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//DI Water
-                                              //this.Ftir[7].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//IPA/Hexane
-                                              //this.Ftir[8].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Silicone Liner)"
-                                              //this.Ftir[9].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Non - Silicone Liner)"
-                                              //this.Ftir[10].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//"Silicone Oil(on Adhesive)"
-
+                this.Ftir[8].C = String.Empty;
 
 
                 //part value to cover page method/procedure
@@ -848,7 +829,7 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnit.SelectedItem.Text));
 
                 reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-                reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
+                reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
 
                 // Variables
                 Warning[] warnings;
@@ -1262,6 +1243,13 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvResult.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            CalculateCas();
+        }
 
     }
 }

@@ -112,6 +112,47 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tb_unit unit = new tb_unit();
+
+            ddlUnitCompound.Items.Clear();
+            ddlUnitCompound.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
+            ddlUnitCompound.DataBind();
+            ddlUnitCompound.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnitMotorBaseSub.Items.Clear();
+            ddlUnitMotorBaseSub.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
+            ddlUnitMotorBaseSub.DataBind();
+            ddlUnitMotorBaseSub.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnitMotorBase.Items.Clear();
+            ddlUnitMotorBase.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
+            ddlUnitMotorBase.DataBind();
+            ddlUnitMotorBase.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnitMotorHubSub.Items.Clear();
+            ddlUnitMotorHubSub.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
+            ddlUnitMotorHubSub.DataBind();
+            ddlUnitMotorHubSub.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnitMotorHub.Items.Clear();
+            ddlUnitMotorHub.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
+            ddlUnitMotorHub.DataBind();
+            ddlUnitMotorHub.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnitMotorOilContamination.Items.Clear();
+            ddlUnitMotorOilContamination.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
+            ddlUnitMotorOilContamination.DataBind();
+            ddlUnitMotorOilContamination.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+
+
+
+
+
+
+
+
+
             /*INFO*/
 
             this.jobSample = new job_sample().SelectByID(this.SampleID);
@@ -280,80 +321,7 @@ namespace ALS.ALSI.Web.view.template
                         ddlUnitMotorBaseSub.SelectedValue = this.coverpages[0].UnitMotorBaseSub == null ? "0" : this.coverpages[0].UnitMotorBaseSub.ToString();
                         ddlUnitCompound.SelectedValue = this.coverpages[0].UnitCompound == null ? "0" : this.coverpages[0].UnitCompound.ToString();
 
-                        //#region "Binding"
-                        //gvMotorOil.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL));
-                        //gvMotorOil.DataBind();
-                        //if (gvMotorOil.Rows.Count > 0)
-                        //{
-                        //    gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                        //    gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                        //    gvMotorOil.Visible = true;
-                        //}
-                        //else
-                        //{
-                        //    gvMotorOil.Visible = false;
-                        //}
-                        //gvMotorHub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB));
-                        //gvMotorHub.DataBind();
-                        //if (gvMotorHub.Rows.Count > 0)
-                        //{
-                        //    gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                        //    gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                        //    gvMotorHub.Visible = true;
-                        //}
-                        //else
-                        //{
-                        //    gvMotorHub.Visible = false;
-                        //}
-                        //gvMotorHubSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB));
-                        //gvMotorHubSub.DataBind();
-                        //if (gvMotorHubSub.Rows.Count > 0)
-                        //{
-                        //    gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                        //    gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                        //    gvMotorHubSub.Visible = true;
-                        //}
-                        //else
-                        //{
-                        //    gvMotorHubSub.Visible = false;
-                        //}
-                        //gvMotorBase.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE));
-                        //gvMotorBase.DataBind();
-                        //if (gvMotorBase.Rows.Count > 0)
-                        //{
-                        //    gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                        //    gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                        //    gvMotorBase.Visible = true;
-                        //}
-                        //else
-                        //{
-                        //    gvMotorBase.Visible = false;
-                        //}
-                        //gvMotorBaseSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB));
-                        //gvMotorBaseSub.DataBind();
-                        //if (gvMotorBaseSub.Rows.Count > 0)
-                        //{
-                        //    gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                        //    gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                        //    gvMotorBaseSub.Visible = true;
-                        //}
-                        //else
-                        //{
-                        //    gvMotorBaseSub.Visible = false;
-                        //}
-                        //gvCompound.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND));
-                        //gvCompound.DataBind();
-                        //if (gvCompound.Rows.Count > 0)
-                        //{
-                        //    gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                        //    gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
-                        //    gvCompound.Visible = true;
-                        //}
-                        //else
-                        //{
-                        //    gvCompound.Visible = false;
-                        //}
-                        //#endregion
+
 
 
                         cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
@@ -480,6 +448,20 @@ namespace ALS.ALSI.Web.view.template
 
 
                     GenerrateCoverPage();
+                    #region "Unit"
+                    gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+                    gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+                    gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                    gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                    gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorBase.SelectedItem.Text);
+                    gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBase.SelectedItem.Text);
+                    gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                    gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                    gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorHub.SelectedItem.Text);
+                    gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
+                    gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitCompound.SelectedItem.Text);
+                    gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
+                    #endregion
                 }
                 #endregion
             }
@@ -555,6 +537,15 @@ namespace ALS.ALSI.Web.view.template
                         cov.sample_size = txtSampleSize.Text;
                         cov.extraction_medium = txtExtractionMedium.Text;
                         cov.extraction_volumn = txtExtractionVolumn.Text;
+
+                        cov.UnitMotorOilContamination = Convert.ToInt16(ddlUnitMotorOilContamination.SelectedValue);
+                        cov.UnitMotorHub = Convert.ToInt16(ddlUnitMotorHub.SelectedValue);
+                        cov.UnitMotorHubSub = Convert.ToInt16(ddlUnitMotorHubSub.SelectedValue);
+                        cov.UnitMotorBase = Convert.ToInt16(ddlUnitMotorBase.SelectedValue);
+                        cov.UnitMotorBaseSub = Convert.ToInt16(ddlUnitMotorBaseSub.SelectedValue);
+                        cov.UnitCompound = Convert.ToInt16(ddlUnitCompound.SelectedValue);
+
+
                     }
                     template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_gcms_coverpage.InsertList(this.coverpages);
@@ -795,31 +786,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -1645,7 +1612,10 @@ namespace ALS.ALSI.Web.view.template
             if (motorHubs.Count > 0)
             {
 
-                motorHubs[0].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbB31_MO.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                if (!String.IsNullOrEmpty(lbD43.Text) && !String.IsNullOrEmpty(lbB31_MO.Text))
+                {
+                    motorHubs[0].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbB31_MO.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                }
 
                 gvMotorHub.DataSource = motorHubs;
                 gvMotorHub.DataBind();
@@ -1685,7 +1655,10 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorBases = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList();
             if (motorBases.Count > 0)
             {
-                motorBases[0].C = (Convert.ToDecimal(lbD44.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbB31_MO.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                if (!String.IsNullOrEmpty(lbD44.Text) && !String.IsNullOrEmpty(lbB31_MO.Text))
+                {
+                    motorBases[0].C = (Convert.ToDecimal(lbD44.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbB31_MO.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                }
                 gvMotorBase.DataSource = motorBases;
 
                 gvMotorBase.DataBind();
@@ -1725,7 +1698,10 @@ namespace ALS.ALSI.Web.view.template
             if (compounds.Count > 0)
             {
 
-                compounds[0].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbD43.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                if (!String.IsNullOrEmpty(lbD43.Text))
+                {
+                    compounds[0].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbD43.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                }
                 compounds[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
                 compounds[3].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbC43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
 
@@ -2021,7 +1997,8 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Console.WriteLine();
             }
 
@@ -2047,6 +2024,51 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
 
+        }
+
+
+
+        protected void ddlUnitMotorOilContamination_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+            gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            GenerrateCoverPage();
+        }
+        protected void ddlUnitMotorBaseSub_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+            gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            GenerrateCoverPage();
+        }
+        protected void ddlUnitMotorBase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorBase.SelectedItem.Text);
+            gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBase.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            GenerrateCoverPage();
+        }
+        protected void ddlUnitMotorHubSub_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+            gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            GenerrateCoverPage();
+        }
+        protected void ddlUnitMotorHub_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorHub.SelectedItem.Text);
+            gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            GenerrateCoverPage();
+        }
+        protected void ddlUnitCompound_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitCompound.SelectedItem.Text);
+            gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            GenerrateCoverPage();
         }
 
     }

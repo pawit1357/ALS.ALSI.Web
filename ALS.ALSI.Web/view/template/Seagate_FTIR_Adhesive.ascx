@@ -18,6 +18,8 @@
                         <asp:Button ID="btnCoverPage" runat="server" Text="CoverPage" CssClass="btn green" OnClick="btnWorkingFTIR_Click" />
                         <asp:Button ID="btnWorkingFTIR" runat="server" Text="FTIR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
                         <asp:Button ID="btnWorkingNVR" runat="server" Text="NVR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -29,7 +31,7 @@
                                     <div class="col-md-12">
                                         <h5>METHOD/PROCEDURE:</h5>
                                         <div class="col-md-9">
-                                            
+
                                             <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
                                                 CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
                                                 <Columns>
@@ -119,14 +121,14 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                      
+
                                         <table>
                                             <tr>
                                                 <td>
                                                     <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                             </tr>
                                             <tr>
-                                           
+
                                                 <td>
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
@@ -229,14 +231,14 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                     </asp:Panel>
                     <asp:Panel ID="pLoadFile" runat="server">
 
-                        <div class="form-group">
+                        <%--                     <div class="form-group">
                             <label class="control-label col-md-3">ทศนิยม</label>
                             <div class="col-md-9">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="form-group">
                             <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -281,7 +283,8 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             <th>Surface area per part (e) =</th>
                                             <th>
                                                 <asp:TextBox ID="txtWB13" runat="server" Text="0"></asp:TextBox></th>
-                                            <th><asp:Label ID="lbW13Unit" runat="server" Text=""></asp:Label></th>
+                                            <th>
+                                                <asp:Label ID="lbW13Unit" runat="server" Text=""></asp:Label></th>
                                         </tr>
                                         <tr>
                                             <th>No. of parts extracted (f) = </th>
@@ -293,7 +296,8 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             <th>Total Surface area (A) =</th>
                                             <th>
                                                 <asp:TextBox ID="txtWB15" runat="server" Text="0"></asp:TextBox></th>
-                                            <th><asp:Label ID="lbW15Unit" runat="server" Text=""></asp:Label></th>
+                                            <th>
+                                                <asp:Label ID="lbW15Unit" runat="server" Text=""></asp:Label></th>
                                         </tr>
 
                                     </thead>
@@ -336,14 +340,6 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
-                                        <%--                                        <asp:TemplateField HeaderText="Hide">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
                                     </Columns>
 
                                     <EmptyDataTemplate>
@@ -360,7 +356,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                     <asp:Panel ID="PNvr" runat="server">
                         <div class="row">
                             <div class="col-md-9">
-                                
+
                                 <asp:GridView ID="gvNVr" CssClass="table table-striped table-bordered mini" runat="server" AutoGenerateColumns="False">
                                     <Columns>
                                         <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
@@ -508,26 +504,6 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-                                    <%--                                    <asp:Panel ID="pUploadfile" runat="server">
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Uplod file:</label>
-                                                    <div class="col-md-6">
-                                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                                        <span class="btn green fileinput-button">
-                                                            <i class="fa fa-plus"></i>
-                                                            <span>Add files...</span>
-                                                            <asp:FileUpload ID="btnUpload" runat="server" />
-                                                        </span>
-                                                        <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                                    </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -602,10 +578,16 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <tr>
                                             <th>Unit</th>
                                             <th>
-                                                <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
+                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--           <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
                                                     <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="2">ug/cm2</asp:ListItem>
-                                                </asp:DropDownList></th>
+                                                </asp:DropDownList>--%>
+
+
+                                            </th>
                                             <th></th>
                                             <th></th>
                                             <th></th>

@@ -20,6 +20,8 @@
                     <div class="actions">
                         <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
                         <asp:Button ID="btnWorking" runat="server" Text="Workingpg-IC" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -66,11 +68,11 @@
                                     <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>--%>
                                 <table>
                                     <tr>
-                                     <td>
+                                        <td>
                                             <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                     </tr>
                                     <tr>
-                                      
+
                                         <td>
                                             <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                     </tr>
@@ -186,14 +188,14 @@
                     <asp:Panel ID="pWorkingIC" runat="server">
                         <asp:Panel ID="pLoadFile" runat="server">
 
-                            <div class="form-group">
+                            <%--            <div class="form-group">
                                 <label class="control-label col-md-3">ทศนิยม</label>
                                 <div class="col-md-9">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -520,26 +522,6 @@
                                         <br />
                                     </asp:Panel>
 
-                                    <%--                             <asp:Panel ID="pUploadfile" runat="server">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Uplod file:</label>
-                                                    <div class="col-md-6">
-                                                        <asp:HiddenField ID="HiddenField1" runat="server" />
-                                                        <span class="btn green fileinput-button">
-                                                            <i class="fa fa-plus"></i>
-                                                            <span>Add files...</span>
-                                                            <asp:FileUpload ID="btnUpload" runat="server" />
-                                                        </span>
-                                                        <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                                        <br />
-                                    </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -619,11 +601,14 @@
                                     <tr>
                                         <td>Unit</td>
                                         <td>
-                                            <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged">
+                                            <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                            </asp:DropDownList>
+
+                                            <%--         <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged">
                                                 <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                 <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                 <asp:ListItem Value="3">mg</asp:ListItem>
-                                            </asp:DropDownList>
+                                            </asp:DropDownList>--%>
                                         </td>
                                     </tr>
                                     <%--                      <tr>

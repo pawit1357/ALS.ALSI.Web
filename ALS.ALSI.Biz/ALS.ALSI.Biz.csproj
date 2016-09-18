@@ -147,6 +147,7 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\MGcmsCas.cs" />
+    <Compile Include="DataAccess\MUnit.cs" />
     <Compile Include="DataAccess\m_completion_scheduled.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>

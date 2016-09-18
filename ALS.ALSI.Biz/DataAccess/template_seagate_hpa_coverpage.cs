@@ -94,10 +94,12 @@ namespace ALS.ALSI.Biz.DataAccess
         public string NumberOfPieces_hpa { get; set; }
         public string ExtractionMedium_hpa { get; set; }
         public string ExtractionVolume_hpa { get; set; }
-        public string unit { get; set; }
+        public Nullable<int> unit { get; set; }
         public Nullable<int> BlankCouts { get; set; }
         public Nullable<int> RawCounts { get; set; }
         public string data_group { get; set; }
         public string img_path { get; set; }
+        public Nullable<int> unit2 { get; set; }
+        public Nullable<int> unit3 { get; set; }
     }
 }

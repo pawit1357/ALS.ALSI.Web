@@ -18,6 +18,8 @@
                         <asp:Button ID="btnCoverPage" runat="server" Text="CoverPage" CssClass="btn green" OnClick="btnWorkingFTIR_Click" />
                         <asp:Button ID="btnWorkingFTIR" runat="server" Text="FTIR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
                         <asp:Button ID="btnWorkingNVR" runat="server" Text="NVR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -29,7 +31,7 @@
                                     <div class="col-md-12">
                                         <h5>METHOD/PROCEDURE:</h5>
                                         <div class="col-md-9">
-                                            
+
                                             <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
                                                 CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
                                                 <Columns>
@@ -122,11 +124,11 @@
                                         <h6>Results:</h6>
                                         <table>
                                             <tr>
-                                             <td>
+                                                <td>
                                                     <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                             </tr>
                                             <tr>
-                                             
+
                                                 <td>
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
@@ -174,7 +176,7 @@
                                         </asp:GridView>
 
                                         <br />
-                                        
+
                                     </div>
                                 </div>
                                 <br />
@@ -190,14 +192,14 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                     </asp:Panel>
                     <asp:Panel ID="pLoadFile" runat="server">
 
-                        <div class="form-group">
+                        <%--            <div class="form-group">
                             <label class="control-label col-md-3">ทศนิยม</label>
                             <div class="col-md-9">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="form-group">
                             <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -244,11 +246,13 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <td>Surface area per part (e) =</td>
                                         <td>
                                             <asp:TextBox ID="txtWB13" runat="server" Text="0"></asp:TextBox></td>
-                                        <td><asp:Label ID="lbWC13Unit" runat="server" Text=""></asp:Label></td>
+                                        <td>
+                                            <asp:Label ID="lbWC13Unit" runat="server" Text=""></asp:Label></td>
                                         <td></td>
                                         <td>
                                             <asp:TextBox ID="txtWD13" runat="server" Text="0"></asp:TextBox></td>
-                                        <td><asp:Label ID="lbWE13Unit" runat="server" Text=""></asp:Label></td>
+                                        <td>
+                                            <asp:Label ID="lbWE13Unit" runat="server" Text=""></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td>No. of parts extracted (f) = </td>
@@ -265,11 +269,13 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <th>Total Surface area (A) =</th>
                                         <th>
                                             <asp:TextBox ID="txtWB15" runat="server" Text="0"></asp:TextBox></th>
-                                        <th><asp:Label ID="lbWC15Unit" runat="server" Text=""></asp:Label></th>
+                                        <th>
+                                            <asp:Label ID="lbWC15Unit" runat="server" Text=""></asp:Label></th>
                                         <td></td>
                                         <td>
                                             <asp:TextBox ID="txtWD15" runat="server" Text="0"></asp:TextBox></td>
-                                        <td><asp:Label ID="lbWE15Unit" runat="server" Text=""></asp:Label></td>
+                                        <td>
+                                            <asp:Label ID="lbWE15Unit" runat="server" Text=""></asp:Label></td>
                                     </tr>
 
                                 </table>
@@ -336,8 +342,8 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                     <asp:Panel ID="PNvr" runat="server">
                         <div class="row">
                             <div class="col-md-9">
-                               
-                                
+
+
                                 <asp:GridView ID="gvNVr" CssClass="table table-striped table-bordered mini" runat="server" AutoGenerateColumns="False">
                                     <Columns>
                                         <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
@@ -579,10 +585,17 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <tr>
                                             <th>Unit</th>
                                             <th>
-                                                <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
+                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--                <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
                                                     <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="2">ug/cm2</asp:ListItem>
-                                                </asp:DropDownList></th>
+                                                </asp:DropDownList>--%>
+
+
+
+                                            </th>
                                             <th></th>
                                             <th></th>
                                             <th></th>

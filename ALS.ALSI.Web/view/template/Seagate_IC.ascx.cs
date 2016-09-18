@@ -79,47 +79,17 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("IC")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+
             #region "SAMPLE"
 
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-
-
-            //pStatus.Visible = false;
-
-
-            //pRemark.Visible = false;
-            //pDisapprove.Visible = false;
-
-            //pSpecification.Visible = false;
-            //pUploadfile.Visible = false;
-            //pDownload.Visible = false;
-            //btnSubmit.Visible = false;
-
-
-
-            //switch (status)
-            //{
-            //    case StatusEnum.LOGIN_CONVERT_TEMPLATE:
-            //        break;
-            //    case StatusEnum.LOGIN_SELECT_SPEC:
-            //        break;
-            //    case StatusEnum.CHEMIST_TESTING:
-            //        break;
-            //    case StatusEnum.SR_CHEMIST_CHECKING:
-            //        break;
-            //    case StatusEnum.ADMIN_CONVERT_WORD:
-            //        break;
-            //    case StatusEnum.LABMANAGER_CHECKING:
-            //        break;
-            //    case StatusEnum.ADMIN_CONVERT_PDF:
-            //        break;
-            //}
-
-
-
-
-
 
 
             if (this.jobSample != null)
@@ -242,8 +212,8 @@ namespace ALS.ALSI.Web.view.template
                         lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", spec.B, spec.A);
 
                     }
-      
 
+                    #region "Unit"
                     if (ic.wunit != null)
                     {
                         ddlUnit.SelectedValue = ic.wunit.Value.ToString();
@@ -279,6 +249,7 @@ namespace ALS.ALSI.Web.view.template
                         gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                         gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
                     }
+                    #endregion
 
                     //Working Sheet-IC
                     txtB9.Text = String.IsNullOrEmpty(ic.extraction_volume) ? String.Empty : ic.extraction_volume;
@@ -1173,6 +1144,7 @@ namespace ALS.ALSI.Web.view.template
             gvResultCations.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
             gvResultCations.Columns[6].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
             gvResultCations.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
 
         }
 

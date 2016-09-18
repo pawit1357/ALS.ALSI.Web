@@ -111,6 +111,20 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("FTIR")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnitNvr.Items.Clear();
+            ddlUnitNvr.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("FTIR")).ToList();
+            ddlUnitNvr.DataBind();
+            ddlUnitNvr.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+
+
+
             #region "SAMPLE"
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -275,6 +289,12 @@ namespace ALS.ALSI.Web.view.template
                 //gvWftir.DataBind();
 
                 CalculateCas();
+                #region "Unit"
+                gvResult.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+                gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnitNvr.SelectedItem.Text);
+                gvResultNvr.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitNvr.SelectedItem.Text);
+                #endregion
             }
             else
             {
@@ -733,9 +753,10 @@ namespace ALS.ALSI.Web.view.template
 
                 #endregion
 
-                gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+                gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
                 gvResult.DataBind();
-
+                gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC)).ToList();
+                gvResultNvr.DataBind();
             }
         }
 
@@ -847,7 +868,7 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnitNvr.SelectedItem.Text));
 
                 reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-                reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
+                reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
 
                 // Variables
                 Warning[] warnings;
@@ -1421,10 +1442,24 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
         }
 
+        
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+            gvResult.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            CalculateCas();
+        }
+        protected void ddlUnitNvr_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+            gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnitNvr.SelectedItem.Text);
+            gvResultNvr.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitNvr.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            CalculateCas();
+        }
     }
 }
-
 
 

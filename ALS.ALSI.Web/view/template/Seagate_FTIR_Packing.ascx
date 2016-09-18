@@ -18,6 +18,8 @@
                         <asp:Button ID="btnCoverPage" runat="server" Text="CoverPage" CssClass="btn green" OnClick="btnWorkingFTIR_Click" />
                         <asp:Button ID="btnWorkingFTIR" runat="server" Text="FTIR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
                         <asp:Button ID="btnWorkingNVR" runat="server" Text="NVR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -130,7 +132,7 @@
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
                                         </table>
-                                        
+
                                         <asp:GridView ID="gvResultNvr" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResultNvr_RowDataBound" OnRowCommand="gvResultNvr_RowCommand">
                                             <Columns>
@@ -240,14 +242,14 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                     </asp:Panel>
                     <asp:Panel ID="pLoadFile" runat="server">
 
-                        <div class="form-group">
+                        <%--              <div class="form-group">
                             <label class="control-label col-md-3">ทศนิยม</label>
                             <div class="col-md-9">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="form-group">
                             <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -514,26 +516,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-                                    <%--                                    <asp:Panel ID="pUploadfile" runat="server">
 
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Uplod file:</label>
-                                                    <div class="col-md-6">
-                                                        <asp:HiddenField ID="hPathSourceFile" runat="server" />
-                                                        <span class="btn green fileinput-button">
-                                                            <i class="fa fa-plus"></i>
-                                                            <span>Add files...</span>
-                                                            <asp:FileUpload ID="btnUpload" runat="server" />
-                                                        </span>
-                                                        <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
-                                    </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -589,7 +572,9 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <tr>
                                             <td>Unit</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
+                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+                                                <%--                    <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
                                                     <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="2">ug/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">ug</asp:ListItem>
@@ -597,7 +582,9 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                                     <asp:ListItem Value="5">ng/g</asp:ListItem>
                                                     <asp:ListItem Value="6">g</asp:ListItem>
 
-                                                </asp:DropDownList></td>
+                                                </asp:DropDownList>--%>
+
+                                            </td>
 
                                         </tr>
                                     </table>
@@ -616,7 +603,10 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <tr>
                                             <td>Unit</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitNvr" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
+                                                <asp:DropDownList ID="ddlUnitNvr" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitNvr_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--                  <asp:DropDownList ID="ddlUnitNvr" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
                                                     <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="2">ug/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">ug</asp:ListItem>
@@ -624,7 +614,9 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                                     <asp:ListItem Value="5">ng/g</asp:ListItem>
                                                     <asp:ListItem Value="6">g</asp:ListItem>
 
-                                                </asp:DropDownList></td>
+                                                </asp:DropDownList>--%>
+
+                                            </td>
                                         </tr>
 
                                     </table>

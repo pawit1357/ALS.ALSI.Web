@@ -15,6 +15,7 @@ namespace ALS.ALSI.Biz.DataAccess
     public partial class tb_unit
     {
         public int id { get; set; }
+        public string unit_group { get; set; }
         public string name { get; set; }
         public Nullable<double> value { get; set; }
     }

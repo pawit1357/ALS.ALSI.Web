@@ -14,6 +14,8 @@
                     <div class="actions">
                         <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn btn-default btn-sm" OnClick="btnUsLPC_Click" />
                         <asp:Button ID="btnWorkSheet" runat="server" Text="WorkSheet" CssClass="btn blue" OnClick="btnUsLPC_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -142,14 +144,15 @@
                             <asp:Panel ID="pDSH" runat="server">
                                 <asp:Panel ID="pLoadFile" runat="server">
 
-                                    <div class="form-group">
+                                    <%--                   <div class="form-group">
                                         <label class="control-label col-md-3">ทศนิยม</label>
                                         <div class="col-md-9">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>--%>
+
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -575,13 +578,18 @@
                                         <tr>
                                             <td>Unit</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control">
+                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
 
-                                                </asp:DropDownList></td>
+                                                </asp:DropDownList>--%>
+
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>

@@ -112,6 +112,17 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x=>x.unit_group.Equals("DHS")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+            //ddlComponent.Items.Clear();
+
+
+
+
             #region "CAS"
             this.tbCas = tb_m_dhs_cas.FindAllBySampleID(this.SampleID);
             if (this.tbCas != null && this.tbCas.Count > 0 && this.coverpages != null && this.coverpages.Count > 0)
@@ -249,7 +260,7 @@ namespace ALS.ALSI.Web.view.template
                     btnCoverPage.Visible = false;
                     btnDHS.Visible = false;
                     pLoadRawData.Visible = false;
-
+                    
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
                     {
                         btnDHS.Visible = true;
@@ -263,7 +274,7 @@ namespace ALS.ALSI.Web.view.template
 
                     this.CommandName = CommandNameEnum.Edit;
                     //Result Description
-
+                    ddlUnit.SelectedValue = this.coverpages[0].unit.Value.ToString();
 
 
                     tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
@@ -287,17 +298,13 @@ namespace ALS.ALSI.Web.view.template
                         }
 
                     }
-                    //lbResultDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", component.B, component.A);
-
 
                     ddlComponent.SelectedValue = coverpages[0].component_id.ToString();
 
                     txtProcedureNo.Text = this.coverpages[0].procedureNo;
                     txtSamplingTime.Text = this.coverpages[0].SamplingTime;
                     txtSampleSize.Text = this.coverpages[0].sampleSize;
-                    //this.SampleSize = String.IsNullOrEmpty(this.coverpages[0].sampleSize) ? 100 : Convert.ToInt32(this.coverpages[0].sampleSize);
-                    //this.Unit = Convert.ToInt32(this.coverpages[0].unit);
-                    //CalculateCas(true);
+
                     GenerrateCoverPage();
                 }
                 #endregion
@@ -874,8 +881,7 @@ namespace ALS.ALSI.Web.view.template
                                 _cover.result = "Not Detected";
                                 break;
                             default:
-                                //Double amt = Convert.ToDouble(tmp.amount);
-                                _cover.result = tmp.amount;// amt.ToString();
+                                _cover.result = tmp.amount;
                                 break;
                         }
                     }
@@ -893,8 +899,7 @@ namespace ALS.ALSI.Web.view.template
                                 _cover.result = "Not Detected";
                                 break;
                             default:
-                                //Double amt = Convert.ToDouble(tmp.amount);
-                                _cover.result = tmp.amount;// amt.ToString();
+                                _cover.result = tmp.amount;
                                 break;
                         }
                     }
@@ -904,58 +909,7 @@ namespace ALS.ALSI.Web.view.template
 
                 gvCoverPages.DataSource = newCoverPage;
                 gvCoverPages.DataBind();
-                //List<template_seagate_dhs_coverpage> newCoverPage = new List<template_seagate_dhs_coverpage>();
-                //foreach (template_seagate_dhs_coverpage _cover in this.coverpages)
-                //{
-                //    tb_m_dhs_cas tmp = this.tbCas.Find(x => _cover.name.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
-                //    if (tmp != null)
-                //    {
-                //        switch (tmp.amount)
-                //        {
-                //            case "Not Detected":
-                //                _cover.result = "Not Detected";
-                //                break;
-                //            default:
-                //                //Double amt = Convert.ToDouble(tmp.amount);
-                //                //switch (_cover.name)
-                //                //{
-                //                //    case "Total of All Compounds":
-                //                //        _cover.result = Math.Round(amt).ToString();
-                //                //        break;
-                //                //    default:
-                //                _cover.result = tmp.amount;
-                //                //        break;
-                //                //}
-                //                break;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        _cover.result = "Not Detected";
-                //    }
-                //    tmp = this.tbCas.Find(x => _cover.name.Equals(x.library_id) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
-                //    if (tmp != null)
-                //    {
-                //        switch (tmp.amount)
-                //        {
-                //            case "Not Detected":
-                //                _cover.result = "Not Detected";
-                //                break;
-                //            default:
-                //                //Double amt = Convert.ToDouble(tmp.amount);
-                //                _cover.result = tmp.amount;
-                //                break;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        _cover.result = "Not Detected";
-                //    }
-                //    newCoverPage.Add(_cover);
-                //}
 
-                //gvCoverPages.DataSource = newCoverPage;
-                //gvCoverPages.DataBind();
             }
             else
             {
@@ -969,6 +923,7 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
+            tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
 
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
             ReportHeader reportHeader = new ReportHeader();
@@ -984,7 +939,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", "ng/part"));
+            reportParameters.Add(new ReportParameter("rpt_unit", component.C));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "DHS"));
@@ -1250,6 +1205,15 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
+
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
+        }
+
+
 
 
     }

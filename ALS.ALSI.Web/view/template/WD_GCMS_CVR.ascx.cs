@@ -306,12 +306,6 @@ namespace ALS.ALSI.Web.view.template
                         }
                     }
 
-                    //tb_m_detail_spec detailSpec1 = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);
-                    //if (detailSpec1 != null)
-                    //{
-                    //    lbDescription.Text = String.Format("The Specification is based on Western Digital's Doc {0} for {1}", detailSpec1.B, detailSpec1.A);
-
-                    //}
                     this.CommandName = CommandNameEnum.Edit;
                     txtProcedure.Text = this.coverpages[0].pm_procedure;
                     txtNumberOfPieces.Text = this.coverpages[0].pm_number_of_pieces;
@@ -319,13 +313,19 @@ namespace ALS.ALSI.Web.view.template
                     txtExtractionVolumn.Text = this.coverpages[0].pm_extraction_volumn;
                     
                     hProcedureUnit.Value = this.coverpages[0].pm_unit;
-                    //ddlTest.SelectedValue = this.coverpages[0].test.ToString();
 
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", hProcedureUnit.Value);
-                    gvCoverPages.Columns[3].HeaderText = String.Format("Results({0})", hProcedureUnit.Value);
-                    //gvMajorCompounds.Columns[2].HeaderText = String.Format("Result({0})", hProcedureUnit.Value);
+                    //gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", hProcedureUnit.Value);
+                    //gvCoverPages.Columns[3].HeaderText = String.Format("Results({0})", hProcedureUnit.Value);
                     //
                     //GenerrateCoverPage();
+
+                    #region "Unit"
+                    gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
+                    gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+                    gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
+                    gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", ddlUnit.SelectedItem.Text);
+                    #endregion
+
                     gvCoverPages.DataSource = this.coverpages;
                     gvCoverPages.DataBind();
                 }
@@ -524,31 +524,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -1009,76 +985,7 @@ namespace ALS.ALSI.Web.view.template
 
         #region "Custom method"
 
-
-        //private void GenerrateCoverPage()
-        //{
-        //    //ReFresh Clas# value
-
-        //    List<template_wd_gcms_coverpage> newCoverPage = new List<template_wd_gcms_coverpage>();
-        //    foreach (template_wd_gcms_coverpage _cover in this.coverpages)
-        //    {
-        //        //String result = "Not Detected";
-
-
-        //            tb_m_gcms_cas tmp = this.tbCas.Find(x => _cover.B.Equals(x.classification));
-        //            if (tmp != null)
-        //            {
-
-        //                decimal val = Convert.ToDecimal(String.IsNullOrEmpty(tmp.amount) ? "0" : tmp.amount);
-        //                if (val > 0)
-        //                {
-        //                    _cover.D = val.ToString();
-        //                }
-        //                else
-        //                {
-        //                    _cover.D = "Not Detected";
-        //                }
-        //            }
-        //            else
-        //            {
-        //                _cover.D = "Not Detected";
-        //            }
-
-
-
-  
-
-        //        newCoverPage.Add(_cover);
-        //    }
-
-        //    //Calculate Pass/Fail Result
-        //    foreach (template_wd_gcms_coverpage _cover in newCoverPage)
-        //    {
-        //        string specificationLimits = _cover.C.Replace("<", "").Trim();
-
-        //        if (!specificationLimits.StartsWith("-") &&!specificationLimits.Equals("NA") && !specificationLimits.Equals(""))
-        //        {
-        //            if (!String.IsNullOrEmpty(_cover.D))
-        //            {
-        //                _cover.E = _cover.D.Equals("Not Detected") ? "PASS" : (Convert.ToDecimal(_cover.D) < Convert.ToDecimal(specificationLimits) ? "PASS" : "FAIL");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            _cover.E = String.Empty;
-        //        }
-
-        //    }
-        //    gvCoverPages.DataSource = newCoverPage;
-        //    gvCoverPages.DataBind();
-
-            //List<tb_m_gcms_cas> majorCompounds = this.tbCas.FindAll(x => x.row_type == Convert.ToInt32(CommandNameEnum.MajorCompounds));
-            //foreach (tb_m_gcms_cas _val in majorCompounds)
-            //{
-            //    _val.rt = Convert.ToDecimal(_val.rt).ToString("N2");
-            //    _val.amount = Convert.ToDecimal(_val.amount).ToString("N3");
-            //}
-
-            //gvMajorCompounds.DataSource = majorCompounds;
-            //gvMajorCompounds.DataBind();
-
-        //}
-
+        
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
@@ -1098,7 +1005,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", "ng/part"));
+            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "GCMS - Hydrocarbon Residue"));
@@ -1167,24 +1074,6 @@ namespace ALS.ALSI.Web.view.template
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
 
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
                     break;
             }
 
@@ -1247,6 +1136,18 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
 
+        }
+
+
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
+            gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", ddlUnit.SelectedItem.Text);
+
+
+            ModolPopupExtender.Show();
         }
     }
 }

@@ -25,6 +25,8 @@
                     <div class="actions">
                         <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn btn-default btn-sm" OnClick="btnNVRFTIR_Click" />
                         <asp:Button ID="btnNVRFTIR" runat="server" Text="NVR-FTIR(Hex)" CssClass="btn blue" OnClick="btnNVRFTIR_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -112,17 +114,14 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                                        <%--        <h6>The specification is based on Western Digital's document no.
-                                                    <asp:Label ID="lbDocRev" runat="server" Text=""></asp:Label>
-                                            <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label></h6>--%>
 
                                         <table>
                                             <tr>
-                                           <td>
+                                                <td>
                                                     <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                             </tr>
                                             <tr>
-                                              
+
                                                 <td>
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
@@ -194,17 +193,16 @@ The instrument detection limit for silicone oil is
                             </div>
                         </div>
                     </asp:Panel>
-
                     <asp:Panel ID="pLoadFile" runat="server">
 
-                        <div class="form-group">
+                        <%--                  <div class="form-group">
                             <label class="control-label col-md-3">ทศนิยม</label>
                             <div class="col-md-9">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="form-group">
                             <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -633,7 +631,16 @@ The instrument detection limit for silicone oil is
                                                 <asp:TextBox ID="txtDecimal08" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
 
                                         </tr>
+                                        <tr>
+                                            <td>Unit:</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
 
+
+                                            </td>
+
+                                        </tr>
                                     </table>
                                 </div>
                                 <div class="modal-footer">

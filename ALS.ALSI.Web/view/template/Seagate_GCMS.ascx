@@ -17,6 +17,8 @@
                         <asp:Button ID="btnRH" runat="server" Text="RHC Base Hub" CssClass="btn blue" OnClick="btnCoverPage_Click" />
                         <asp:Button ID="btnExtractable" runat="server" Text="Workingpg - Extractable" CssClass="btn blue" OnClick="btnCoverPage_Click" />
                         <asp:Button ID="btnMotorOil" runat="server" Text="Workingpg - Motor Oil" CssClass="btn blue" OnClick="btnCoverPage_Click" />
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -437,14 +439,14 @@
 
                     <asp:Panel ID="pLoadFile" runat="server">
 
-                        <div class="form-group">
+                        <%--                  <div class="form-group">
                             <label class="control-label col-md-3">ทศนิยม</label>
                             <div class="col-md-9">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="form-group">
                             <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -1214,28 +1216,7 @@
                                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-                                    <%--                                    <asp:Panel ID="pUploadfile" runat="server">
 
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Uplod file:</label>
-                                                    <div class="col-md-6">
-                                                        <asp:HiddenField ID="HiddenField1" runat="server" />
-                                                        <span class="btn green fileinput-button">
-                                                            <i class="fa fa-plus"></i>
-                                                            <span>Add files...</span>
-                                                            <asp:FileUpload ID="FileUpload1" runat="server" />
-                                                        </span>
-                                                        <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-                                        <br />
-                                    </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -1323,78 +1304,97 @@
                                         <tr>
                                             <td>Motor Oil Contamination</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control">
+                                                <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorOilContamination_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--                <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
 
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Motor Hub</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control">
+                                                <asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--<asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
 
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Motor Hub (Total)</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control">
+                                                <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHubSub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--                                                <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
 
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Motor Base</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitMotorBase" runat="server" class="select2_category form-control">
+                                                <asp:DropDownList ID="ddlUnitMotorBase" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorBase_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+
+                                                <%--                                                <asp:DropDownList ID="ddlUnitMotorBase" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
 
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Motor Base (Total)</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitMotorBaseSub" runat="server" class="select2_category form-control">
+                                                <asp:DropDownList ID="ddlUnitMotorBaseSub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorBaseSub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--           <asp:DropDownList ID="ddlUnitMotorBaseSub" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
 
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Compound</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control">
+                                                <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitCompound_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                                <%--                                         <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
                                                     <asp:ListItem Value="2">ng/cm2</asp:ListItem>
                                                     <asp:ListItem Value="3">mg/g</asp:ListItem>
                                                     <asp:ListItem Value="4">mg</asp:ListItem>
 
-                                                </asp:DropDownList>
+                                                </asp:DropDownList>--%>
 
                                             </td>
                                         </tr>

@@ -149,6 +149,13 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+
             #region "CAS"
             this.tbCas = tb_m_gcms_cas.FindAllBySampleID(this.SampleID);
             if (this.tbCas != null && this.tbCas.Count > 0 && this.coverpages != null && this.coverpages.Count > 0)
@@ -341,11 +348,18 @@ namespace ALS.ALSI.Web.view.template
                     hProcedureUnit.Value = this.coverpages[0].pm_unit;
                     //ddlTest.SelectedValue = this.coverpages[0].test.ToString();
 
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", hProcedureUnit.Value);
-                    gvCoverPages.Columns[3].HeaderText = String.Format("Results({0})", hProcedureUnit.Value);
-                    gvMajorCompounds.Columns[2].HeaderText = String.Format("Result({0})", hProcedureUnit.Value);
+                    //gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", hProcedureUnit.Value);
+                    //gvCoverPages.Columns[3].HeaderText = String.Format("Results({0})", hProcedureUnit.Value);
+                    //gvMajorCompounds.Columns[2].HeaderText = String.Format("Result({0})", hProcedureUnit.Value);
                     //
                     GenerrateCoverPage();
+
+                    #region "Unit"
+                    gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
+                    gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+                    gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
+                    gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", ddlUnit.SelectedItem.Text);
+                    #endregion
                 }
                 #endregion
             }
@@ -1055,7 +1069,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", "ng/part"));
+            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "GCMS - Hydrocarbon Residue"));
@@ -1217,5 +1231,17 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
+
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
+            gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", ddlUnit.SelectedItem.Text);
+
+
+            ModolPopupExtender.Show();
+        }
+        
     }
 }
