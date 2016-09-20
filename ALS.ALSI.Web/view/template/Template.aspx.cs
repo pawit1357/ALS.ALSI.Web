@@ -277,13 +277,7 @@ namespace ALS.ALSI.Web.view.template
 
                                                 detailSpecRef.RowState = CommandNameEnum.Add;
 
-                                                //bool isExist = false;
-                                                //if (!listOfSpec.Contains(spectRefId))
-                                                //{
-                                                //    isExist = true;
-                                                //    listOfSpec.Add(spectRefId);
-                                                //}
-                                                if (!detailSpecRef.B.Equals("") && !detailSpecRef.B.Equals("-"))
+                                                if (!detailSpecRef.B.Equals(""))// && !detailSpecRef.B.Equals("-"))
                                                 {
                                                     detailSpecRefs.Add(detailSpecRef);
                                                 }

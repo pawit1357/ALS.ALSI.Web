@@ -273,29 +273,32 @@ namespace ALS.ALSI.Web.view.template
 
 
                     tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
-                    ddlComponent.SelectedValue = component.ID.ToString();
-
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                    gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
-
-                    cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
-                    if (cbCheckBox.Checked)
+                    if (component != null)
                     {
-                        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                        ddlComponent.SelectedValue = component.ID.ToString();
+
+                        gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                        gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
+
+                        cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                        if (cbCheckBox.Checked)
+                        {
+                            lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                        }
+                        else
+                        {
+                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
+
+                        }
+
+
+                        ddlComponent.SelectedValue = coverpages[0].component_id.ToString();
+
+                        txtProcedureNo.Text = this.coverpages[0].procedureNo;
+                        txtSamplingTime.Text = this.coverpages[0].SamplingTime;
+                        txtSampleSize.Text = this.coverpages[0].sampleSize;
+                        GenerrateCoverPage();
                     }
-                    else
-                    {
-                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
-
-                    }
-
-
-                    ddlComponent.SelectedValue = coverpages[0].component_id.ToString();
-
-                    txtProcedureNo.Text = this.coverpages[0].procedureNo;
-                    txtSamplingTime.Text = this.coverpages[0].SamplingTime;
-                    txtSampleSize.Text = this.coverpages[0].sampleSize;
-                    GenerrateCoverPage();
                 }
                 #endregion
             }

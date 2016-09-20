@@ -481,7 +481,7 @@
           <Property Name="B" Type="varchar" MaxLength="1024" />
           <Property Name="C" Type="varchar" MaxLength="255" />
           <Property Name="D" Type="varchar" MaxLength="255" />
-          <Property Name="E" Type="varchar" MaxLength="255" />
+          <Property Name="E" Type="varchar" MaxLength="500" />
           <Property Name="F" Type="varchar" MaxLength="255" />
           <Property Name="G" Type="varchar" MaxLength="255" />
           <Property Name="H" Type="varchar" MaxLength="255" />
@@ -2256,7 +2256,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="B" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
           <Property Name="C" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="D" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="E" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="E" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="F" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="G" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="H" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
