@@ -106,7 +106,11 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
-
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("LPC")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             #region "SAMPLE"
             if (this.jobSample != null)

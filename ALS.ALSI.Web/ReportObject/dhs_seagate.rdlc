@@ -1108,7 +1108,7 @@
         <Top>4.35234in</Top>
         <Left>0.18813in</Left>
         <Height>0.73958in</Height>
-        <Width>6.94886in</Width>
+        <Width>6.94887in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -2220,7 +2220,7 @@
   <Width>7.30121in</Width>
   <Page>
     <PageHeader>
-      <Height>0.6736in</Height>
+      <Height>0.65277in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2326,7 +2326,7 @@
           <Value>footer</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.93451cm</Top>
-          <Left>0.635cm</Left>
+          <Left>0cm</Left>
           <Height>1.44708cm</Height>
           <Width>16.93555cm</Width>
           <ZIndex>1</ZIndex>
