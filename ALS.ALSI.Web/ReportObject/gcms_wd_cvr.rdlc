@@ -25,7 +25,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.14111cm</Top>
+        <Top>0.1411cm</Top>
         <Left>0.41121cm</Left>
         <Height>0.74048cm</Height>
         <Width>17.15934cm</Width>
@@ -62,7 +62,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>7.62332cm</Top>
+        <Top>7.62331cm</Top>
         <Left>0.4112cm</Left>
         <Height>0.52881cm</Height>
         <Width>17.14505cm</Width>
@@ -731,7 +731,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>3.27894in</Top>
+        <Top>3.27893in</Top>
         <Left>0.16275in</Left>
         <Height>0.71875in</Height>
         <Width>6.75565in</Width>
@@ -785,7 +785,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>10.33053cm</Top>
+        <Top>10.33052cm</Top>
         <Left>0.4112cm</Left>
         <Height>0.52881cm</Height>
         <Width>17.14505cm</Width>
@@ -819,7 +819,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>10.92989cm</Top>
+        <Top>10.92988cm</Top>
         <Left>0.4112cm</Left>
         <Height>0.52881cm</Height>
         <Width>17.14505cm</Width>
@@ -1503,7 +1503,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet2</DataSetName>
-        <Top>4.58074in</Top>
+        <Top>4.58073in</Top>
         <Left>0.16275in</Left>
         <Height>0.71875in</Height>
         <Width>6.75479in</Width>
@@ -1574,7 +1574,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>15.63066cm</Top>
+        <Top>15.63065cm</Top>
         <Left>10.7884cm</Left>
         <Height>1.05798cm</Height>
         <Width>6.75122cm</Width>
@@ -1612,7 +1612,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>17.50849cm</Top>
+        <Top>17.50848cm</Top>
         <Left>10.7884cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.75121cm</Width>
@@ -1650,7 +1650,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>18.29307cm</Top>
+        <Top>18.29306cm</Top>
         <Left>10.78839cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.75122cm</Width>
@@ -1688,7 +1688,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>16.79447cm</Top>
+        <Top>16.79446cm</Top>
         <Left>10.7884cm</Left>
         <Height>0.60819cm</Height>
         <Width>6.75121cm</Width>
@@ -1729,7 +1729,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>13.6371cm</Top>
+        <Top>13.63709cm</Top>
         <Left>0.41339cm</Left>
         <Height>1.90465cm</Height>
         <Width>17.15935cm</Width>
@@ -1767,7 +1767,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>15.61231cm</Top>
+        <Top>15.6123cm</Top>
         <Left>6.09974cm</Left>
         <Height>0.70556cm</Height>
         <Width>4.51227cm</Width>
@@ -2594,7 +2594,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>1.12944cm</Top>
+        <Top>1.12943cm</Top>
         <Left>0.41339cm</Left>
         <Height>6.31749cm</Height>
         <Width>17.14286cm</Width>
@@ -2614,7 +2614,7 @@
   <Width>7.29904in</Width>
   <Page>
     <PageHeader>
-      <Height>0.66318in</Height>
+      <Height>0.66319in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2778,10 +2778,10 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
     </PageFooter>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <LeftMargin>0.79in</LeftMargin>
+    <RightMargin>0.28in</RightMargin>
+    <TopMargin>1.65in</TopMargin>
+    <BottomMargin>0.16in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>

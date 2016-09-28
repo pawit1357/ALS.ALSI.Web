@@ -77,11 +77,13 @@ namespace ALS.ALSI.Biz.ReportObjects
                 rpt.cusRefNo = _job.customer_ref_no;// (_sample.sample_po== null) ? String.Empty : _sample.sample_po.ToString();
                 rpt.cur_date = DateTime.Now;
 
-                rpt.dateOfDampleRecieve = Convert.ToDateTime(_sample.date_login_received_sample);
+                rpt.dateOfDampleRecieve = Convert.ToDateTime(_job.date_of_receive);
                 rpt.dateOfAnalyze = Convert.ToDateTime(_sample.date_chemist_alalyze);
                 rpt.dateOfTestComplete = Convert.ToDateTime(_sample.date_chemist_complete);
 
-                rpt.alsRefNo = _sample.job_number.ToString();
+                //ATT / ELP / 16 / XXXX(เลขจ็อบ) - XX(Test)
+                String[] tmp = _sample.job_number.Split('-');
+                rpt.alsRefNo = String.Format("ATT/{0}/{1}/{2}-{3}", tmp[0], DateTime.Now.ToString("yy"), tmp[1], tmp[2]);// _sample.job_number.ToString();
                 rpt.description = "Description:" + _sample.description + "\n" +
                                   "Model:" + _sample.model + "\n" +
                                   "Surface Area:" + _sample.surface_area + "\n";

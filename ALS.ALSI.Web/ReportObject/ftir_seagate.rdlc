@@ -1716,7 +1716,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!Date.Value)</Value>
+                              <Value>=Parameters!Date.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -1949,7 +1949,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateSampleReceived.Value)</Value>
+                              <Value>=Parameters!DateSampleReceived.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2025,7 +2025,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateAnalyzed.Value)</Value>
+                              <Value>=Parameters!DateAnalyzed.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2101,7 +2101,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CDATE(Parameters!DateTestCompleted.Value)</Value>
+                              <Value>=Parameters!DateTestCompleted.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -2249,6 +2249,17 @@
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>One lot of sample was received with references:</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
@@ -2505,10 +2516,10 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
     </PageFooter>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <LeftMargin>0.79in</LeftMargin>
+    <RightMargin>0.28in</RightMargin>
+    <TopMargin>1.65in</TopMargin>
+    <BottomMargin>0.16in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>

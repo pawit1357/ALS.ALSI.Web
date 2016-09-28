@@ -737,7 +737,7 @@
         <Top>3.25167in</Top>
         <Left>0.11458in</Left>
         <Height>0.71875in</Height>
-        <Width>6.88106in</Width>
+        <Width>6.88105in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -2341,7 +2341,7 @@
         <Top>6.12986in</Top>
         <Left>0.11714in</Left>
         <Height>0.71875in</Height>
-        <Width>6.8785in</Width>
+        <Width>6.87849in</Width>
         <ZIndex>9</ZIndex>
         <Visibility>
           <Hidden>=CountRows() = 0</Hidden>
@@ -3843,7 +3843,7 @@
         <Top>17.57185cm</Top>
         <Left>0.29754cm</Left>
         <Height>1.75464cm</Height>
-        <Width>17.12173cm</Width>
+        <Width>17.12172cm</Width>
         <ZIndex>18</ZIndex>
         <Style>
           <Border>
@@ -4671,7 +4671,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>1.09326cm</Top>
         <Left>0.29104cm</Left>
-        <Height>6.2316cm</Height>
+        <Height>6.23159cm</Height>
         <Width>17.27954cm</Width>
         <ZIndex>19</ZIndex>
         <Style>
@@ -5341,10 +5341,10 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
     </PageFooter>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <LeftMargin>0.79in</LeftMargin>
+    <RightMargin>0.28in</RightMargin>
+    <TopMargin>1.65in</TopMargin>
+    <BottomMargin>0.16in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>

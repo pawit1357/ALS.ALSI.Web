@@ -6467,7 +6467,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>41.34921cm</Height>
+    <Height>16.27922in</Height>
     <Style>
       <Border>
         <Color>White</Color>
@@ -6475,10 +6475,10 @@
       </Border>
     </Style>
   </Body>
-  <Width>18.175cm</Width>
+  <Width>7.15551in</Width>
   <Page>
     <PageHeader>
-      <Height>2.18719cm</Height>
+      <Height>0.8611in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -6538,7 +6538,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.84902cm</Height>
+      <Height>1.12166in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -6640,13 +6640,12 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
-    <LeftMargin>1cm</LeftMargin>
-    <RightMargin>1cm</RightMargin>
-    <TopMargin>1cm</TopMargin>
-    <BottomMargin>1cm</BottomMargin>
-    <ColumnSpacing>1.27cm</ColumnSpacing>
+    <PageHeight>11.69in</PageHeight>
+    <PageWidth>8.27in</PageWidth>
+    <LeftMargin>0.79in</LeftMargin>
+    <RightMargin>0.28in</RightMargin>
+    <TopMargin>1.65in</TopMargin>
+    <BottomMargin>0.16in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
@@ -7677,6 +7676,6 @@ MGcAgAlCbAOACfHci0e/8+wLfV96/YR11gbdizrRitrle3FMdbak4RWdZac7cRz1VEXB7KlDR7zY9Hs/
     </Variable>
   </Variables>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0ade57e8-9f4c-4396-9bea-773dda1f0f61</rd:ReportID>
 </Report>

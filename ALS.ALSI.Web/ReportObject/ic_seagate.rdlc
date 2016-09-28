@@ -2178,7 +2178,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -3341,10 +3340,10 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
     </PageFooter>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <LeftMargin>0.79in</LeftMargin>
+    <RightMargin>0.28in</RightMargin>
+    <TopMargin>1.65in</TopMargin>
+    <BottomMargin>0.16in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
