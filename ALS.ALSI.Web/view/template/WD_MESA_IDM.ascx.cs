@@ -18,7 +18,7 @@ using WordToPDF;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class WD_MESA_InkRibon : System.Web.UI.UserControl
+    public partial class WD_MESA_IDM : System.Web.UI.UserControl
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_MESA_InkRibon));
@@ -211,22 +211,22 @@ namespace ALS.ALSI.Web.view.template
                     ddlComponent.SelectedValue = coverpage.component_id.ToString();
 
                     txtProcedureNo_Extraction.Text = coverpage.ProcedureNo_Extraction;
-                    txtExtractionMedium_Extraction.Text = coverpage.ExtractionMedium_Extraction;
+                    //txtExtractionMedium_Extraction.Text = coverpage.ExtractionMedium_Extraction;
                     txtSampleSize_Extraction.Text = coverpage.SampleSize_Extraction;
                     txtOvenCondition_Extraction.Text = coverpage.OvenCondition_Extraction;
 
-                    txtProcedureNo_IndirectMaterials.Text = coverpage.ProcedureNo_IndirectMaterials;
-                    txtSampleSize_IndirectMaterials.Text = coverpage.SampleSize_IndirectMaterials;
-                    txtOvenCondition_IndirectMaterials.Text = coverpage.OvenCondition_IndirectMaterials;
+                    //txtProcedureNo_IndirectMaterials.Text = coverpage.ProcedureNo_IndirectMaterials;
+                    //txtSampleSize_IndirectMaterials.Text = coverpage.SampleSize_IndirectMaterials;
+                    //txtOvenCondition_IndirectMaterials.Text = coverpage.OvenCondition_IndirectMaterials;
 
                     lbProcedureNo_Extraction.Text = txtProcedureNo_Extraction.Text;
-                    lbExtractionMedium_Extraction.Text = txtExtractionMedium_Extraction.Text;
+                    //lbExtractionMedium_Extraction.Text = txtExtractionMedium_Extraction.Text;
                     lbSampleSize_Extraction.Text = txtSampleSize_Extraction.Text;
                     lbOvenCondition_Extraction.Text = txtOvenCondition_Extraction.Text;
 
-                    lbProcedureNo_IndirectMaterials.Text = txtProcedureNo_IndirectMaterials.Text;
-                    lbSampleSize_IndirectMaterials.Text = txtSampleSize_IndirectMaterials.Text;
-                    lbOvenCondition_IndirectMaterials.Text = txtOvenCondition_IndirectMaterials.Text;
+                    //lbProcedureNo_IndirectMaterials.Text = txtProcedureNo_IndirectMaterials.Text;
+                    //lbSampleSize_IndirectMaterials.Text = txtSampleSize_IndirectMaterials.Text;
+                    //lbOvenCondition_IndirectMaterials.Text = txtOvenCondition_IndirectMaterials.Text;
 
                 }
 
@@ -271,22 +271,22 @@ namespace ALS.ALSI.Web.view.template
 
 
                 txtProcedureNo_Extraction.Visible = true;
-                txtExtractionMedium_Extraction.Visible = true;
+                //txtExtractionMedium_Extraction.Visible = true;
                 txtSampleSize_Extraction.Visible = true;
                 txtOvenCondition_Extraction.Visible = true;
 
-                txtProcedureNo_IndirectMaterials.Visible = true;
-                txtSampleSize_IndirectMaterials.Visible = true;
-                txtOvenCondition_IndirectMaterials.Visible = true;
+                //txtProcedureNo_IndirectMaterials.Visible = true;
+                //txtSampleSize_IndirectMaterials.Visible = true;
+                //txtOvenCondition_IndirectMaterials.Visible = true;
 
                 lbProcedureNo_Extraction.Visible = false;
-                lbExtractionMedium_Extraction.Visible = false;
+                //lbExtractionMedium_Extraction.Visible = false;
                 lbSampleSize_Extraction.Visible = false;
                 lbOvenCondition_Extraction.Visible = false;
 
-                lbProcedureNo_IndirectMaterials.Visible = false;
-                lbSampleSize_IndirectMaterials.Visible = false;
-                lbOvenCondition_IndirectMaterials.Visible = false;
+                //lbProcedureNo_IndirectMaterials.Visible = false;
+                //lbSampleSize_IndirectMaterials.Visible = false;
+                //lbOvenCondition_IndirectMaterials.Visible = false;
                 pRefImage.Visible = true;
                 gvResult.Columns[4].Visible = true;
                 gvResult.Columns[5].Visible = true;
@@ -295,22 +295,22 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 txtProcedureNo_Extraction.Visible = false;
-                txtExtractionMedium_Extraction.Visible = false;
+                //txtExtractionMedium_Extraction.Visible = false;
                 txtSampleSize_Extraction.Visible = false;
                 txtOvenCondition_Extraction.Visible = false;
 
-                txtProcedureNo_IndirectMaterials.Visible = false;
-                txtSampleSize_IndirectMaterials.Visible = false;
-                txtOvenCondition_IndirectMaterials.Visible = false;
+                //txtProcedureNo_IndirectMaterials.Visible = false;
+                //txtSampleSize_IndirectMaterials.Visible = false;
+                //txtOvenCondition_IndirectMaterials.Visible = false;
 
                 lbProcedureNo_Extraction.Visible = true;
-                lbExtractionMedium_Extraction.Visible = true;
+                //lbExtractionMedium_Extraction.Visible = true;
                 lbSampleSize_Extraction.Visible = true;
                 lbOvenCondition_Extraction.Visible = true;
 
-                lbProcedureNo_IndirectMaterials.Visible = true;
-                lbSampleSize_IndirectMaterials.Visible = true;
-                lbOvenCondition_IndirectMaterials.Visible = true;
+                //lbProcedureNo_IndirectMaterials.Visible = true;
+                //lbSampleSize_IndirectMaterials.Visible = true;
+                //lbOvenCondition_IndirectMaterials.Visible = true;
                 pRefImage.Visible = false;
                 gvResult.Columns[4].Visible = false;
                 gvResult.Columns[5].Visible = false;
@@ -367,24 +367,27 @@ namespace ALS.ALSI.Web.view.template
                     foreach (template_wd_mesa_coverpage _cover in this.coverpages)
                     {
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
-                        _cover.ExtractionMedium_Extraction = txtExtractionMedium_Extraction.Text;
+                        //_cover.ExtractionMedium_Extraction = txtExtractionMedium_Extraction.Text;
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
-                        _cover.ProcedureNo_IndirectMaterials = txtProcedureNo_IndirectMaterials.Text;
-                        _cover.SampleSize_IndirectMaterials = txtSampleSize_IndirectMaterials.Text;
-                        _cover.OvenCondition_IndirectMaterials = txtOvenCondition_IndirectMaterials.Text;
+                        //_cover.ProcedureNo_IndirectMaterials = txtProcedureNo_IndirectMaterials.Text;
+                        //_cover.SampleSize_IndirectMaterials = txtSampleSize_IndirectMaterials.Text;
+                        //_cover.OvenCondition_IndirectMaterials = txtOvenCondition_IndirectMaterials.Text;
                     }
-                    switch (this.CommandName)
-                    {
-                        case CommandNameEnum.Add:
+
+                    template_wd_mesa_coverpage.DeleteBySampleID(this.SampleID);
+
+                    //switch (this.CommandName)
+                    //{
+                    //    case CommandNameEnum.Add:
                             template_wd_mesa_coverpage.InsertList(this.coverpages);
 
-                            break;
-                        case CommandNameEnum.Edit:
-                            template_wd_mesa_coverpage.UpdateList(this.coverpages);
+                    //        break;
+                    //    case CommandNameEnum.Edit:
+                    //        template_wd_mesa_coverpage.UpdateList(this.coverpages);
 
-                            break;
-                    }
+                    //        break;
+                    //}
 
                     break;
                 case StatusEnum.CHEMIST_TESTING:
@@ -394,12 +397,12 @@ namespace ALS.ALSI.Web.view.template
                     foreach (template_wd_mesa_coverpage _cover in this.coverpages)
                     {
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
-                        _cover.ExtractionMedium_Extraction = txtExtractionMedium_Extraction.Text;
+                        //_cover.ExtractionMedium_Extraction = txtExtractionMedium_Extraction.Text;
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
-                        _cover.ProcedureNo_IndirectMaterials = txtProcedureNo_IndirectMaterials.Text;
-                        _cover.SampleSize_IndirectMaterials = txtSampleSize_IndirectMaterials.Text;
-                        _cover.OvenCondition_IndirectMaterials = txtOvenCondition_IndirectMaterials.Text;
+                        //_cover.ProcedureNo_IndirectMaterials = txtProcedureNo_IndirectMaterials.Text;
+                        //_cover.SampleSize_IndirectMaterials = txtSampleSize_IndirectMaterials.Text;
+                        //_cover.OvenCondition_IndirectMaterials = txtOvenCondition_IndirectMaterials.Text;
                     }
                     template_wd_mesa_coverpage.UpdateList(this.coverpages);
                     template_wd_mesa_img.InsertList(this.refImg);
@@ -561,7 +564,7 @@ namespace ALS.ALSI.Web.view.template
                 //txtOvenCondition_Extraction.Text = String.Empty;
 
                 //txtProcedureNo_IndirectMaterials.Text = String.Empty;
-                txtSampleSize_IndirectMaterials.Text = component.D;
+                //txtSampleSize_IndirectMaterials.Text = component.D;
                 //txtOvenCondition_IndirectMaterials.Text = String.Empty;
 
 
@@ -714,7 +717,7 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_ink_ribbon_wd.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_idm_wd.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dat.Where(x => x.area == 1).ToList().ToDataTable())); // Add datasource here

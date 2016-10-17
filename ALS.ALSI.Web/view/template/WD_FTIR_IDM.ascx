@@ -45,6 +45,9 @@
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litAnalysis" runat="server" Text='<%# Eval("A")%>' />
                                                     </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtAnalysis" runat="server" Text='<%# Eval("A")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
 
@@ -52,6 +55,9 @@
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litProcedureNo" runat="server" Text='<%# Eval("B")%>' />
                                                     </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtProcedureNo" runat="server" Text='<%# Eval("B")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
 
@@ -69,6 +75,9 @@
                                                     <ItemTemplate>
                                                         <asp:Label ID="litExtractionMedium" runat="server" Text='<%# Eval("D")%>'></asp:Label>
                                                     </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtExtractionMedium" runat="server" Text='<%# Eval("D")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:TemplateField>
 

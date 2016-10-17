@@ -340,9 +340,11 @@ namespace ALS.ALSI.Biz.Constant
     {
         METHOD_PROCEDURE = 1,
         FTIR_SPEC = 2,
-        NVR_SPEC = 5,
         FTIR_RAW_DATA = 3,
-        NVR_RAW_DATA = 4
+        NVR_RAW_DATA = 4,
+        NVR_RAW_DATA_DI = 7,
+        NVR_SPEC = 5,
+        NVR_RAW_DATA_IPA = 6
     }
 
     public enum SeagateGcmsEnum : int
@@ -352,7 +354,7 @@ namespace ALS.ALSI.Biz.Constant
         MOTOR_HUB_SUB = 3,
         MOTOR_BASE = 4,
         MOTOR_BASE_SUB = 5,
-        COMPOUND =6
+        COMPOUND = 6
     }
 }
 

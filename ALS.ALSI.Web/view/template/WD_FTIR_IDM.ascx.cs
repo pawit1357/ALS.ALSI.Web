@@ -752,12 +752,12 @@ namespace ALS.ALSI.Web.view.template
 
                 reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo + " "));
                 reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
                 reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
                 reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
                 reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
 
                 reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
@@ -1357,17 +1357,22 @@ namespace ALS.ALSI.Web.view.template
         {
 
             int _id = Convert.ToInt32(gvMethodProcedure.DataKeys[e.RowIndex].Values[0].ToString());
-            TextBox _txtExtractionVolume = (TextBox)gvMethodProcedure.Rows[e.RowIndex].FindControl("txtExtractionVolume");
+            TextBox _txtAnalysis = (TextBox)gvMethodProcedure.Rows[e.RowIndex].FindControl("txtAnalysis");
+            TextBox _txtProcedureNo = (TextBox)gvMethodProcedure.Rows[e.RowIndex].FindControl("txtProcedureNo");
             TextBox _txtNumberOfPiecesUsedForExtraction = (TextBox)gvMethodProcedure.Rows[e.RowIndex].FindControl("txtNumberOfPiecesUsedForExtraction");
+            TextBox _txtExtractionMedium = (TextBox)gvMethodProcedure.Rows[e.RowIndex].FindControl("txtExtractionMedium");
+            TextBox _txtExtractionVolume = (TextBox)gvMethodProcedure.Rows[e.RowIndex].FindControl("txtExtractionVolume");
 
-            
             if (_txtExtractionVolume != null)
             {
 
                 template_wd_ftir_coverpage _tmp = this.Ftir.Find(x => x.ID == _id);
                 if (_tmp != null)
                 {
+                    _tmp.A = _txtAnalysis.Text;
+                    _tmp.B = _txtProcedureNo.Text;
                     _tmp.C = _txtNumberOfPiecesUsedForExtraction.Text;
+                    _tmp.D = _txtExtractionMedium.Text;
                     _tmp.E = _txtExtractionVolume.Text;
                 }
             }

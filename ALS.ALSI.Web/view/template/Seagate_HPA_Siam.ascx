@@ -46,6 +46,7 @@
                                                 <asp:DropDownList ID="ddlLpcType" runat="server" AutoPostBack="True" CssClass="select2_category form-control" OnSelectedIndexChanged="ddlLpcType_SelectedIndexChanged">
                                                     <asp:ListItem Value="1">LPC (68 KHz)</asp:ListItem>
                                                     <asp:ListItem Value="2">LPC (132 KHz)</asp:ListItem>
+                                                    <asp:ListItem Value="3">LPC (ALPC 132 KHz)</asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
                                             <td>

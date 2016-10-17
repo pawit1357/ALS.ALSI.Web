@@ -60,16 +60,16 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             foreach (template_wd_mesa_coverpage tmp in _lists)
             {
-                switch (tmp.RowState)
-                {
-                    case CommandNameEnum.Add:
+                //switch (tmp.RowState)
+                //{
+                //    case CommandNameEnum.Add:
                         _repository.Add(tmp);
-                        break;
-                    case CommandNameEnum.Edit:
-                        template_wd_mesa_coverpage existing = _repository.Find(x => x.ID == tmp.ID).FirstOrDefault();
-                        _repository.Edit(existing, tmp);
-                        break;
-                }
+                //        break;
+                //    case CommandNameEnum.Edit:
+                //        template_wd_mesa_coverpage existing = _repository.Find(x => x.ID == tmp.ID).FirstOrDefault();
+                //        _repository.Edit(existing, tmp);
+                //        break;
+                //}
 
             }
         }

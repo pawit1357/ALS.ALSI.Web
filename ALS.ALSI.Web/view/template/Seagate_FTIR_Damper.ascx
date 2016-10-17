@@ -134,10 +134,10 @@
                                             </tr>
                                         </table>
 
-                                        <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
+                                        <asp:GridView ID="gvResultNvr" runat="server" AutoGenerateColumns="False"
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResultNvr_RowDataBound" OnRowCommand="gvResultNvr_RowCommand">
                                             <Columns>
-                                                <asp:TemplateField HeaderText="Silicone Contamination" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Non-Volatile Residue" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litOrganicContamination" runat="server" Text='<%# Eval("A")%>' />
                                                     </ItemTemplate>
@@ -176,7 +176,46 @@
                                         </asp:GridView>
 
                                         <br />
+                                        <asp:GridView ID="gvResultFtir" runat="server" AutoGenerateColumns="False"
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResultFtir_RowDataBound" OnRowCommand="gvResultFtir_RowCommand">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="Silicone Contamination" ItemStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litOrganicContamination" runat="server" Text='<%# Eval("A")%>' />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
 
+                                                <asp:TemplateField HeaderText="Specification Limits (ng/cm2)" ItemStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litSpecificationLimits" runat="server" Text='<%# Eval("B")%>' />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Results (ng/cm2)" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Hide">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+
+                                            <EmptyDataTemplate>
+                                                <div class="data-not-found">
+                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                </div>
+                                            </EmptyDataTemplate>
+                                        </asp:GridView>
                                     </div>
                                 </div>
                                 <br />
@@ -375,7 +414,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         </div>
                                     </EmptyDataTemplate>
                                 </asp:GridView>
-
+                              
                             </div>
                         </div>
                     </asp:Panel>

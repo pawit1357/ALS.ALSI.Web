@@ -687,6 +687,8 @@ namespace ALS.ALSI.Web.view.template
             tb_m_detail_spec detailSpec = new tb_m_detail_spec().SelectByID(int.Parse(ddlSpecification.SelectedValue));
             if (detailSpec != null)
             {
+                tb_m_detail_spec dp = detailSpecs.Where(x => x.A.Equals("Indirect Material")).FirstOrDefault();
+                
                 lbDocNo.Text = detailSpec.B;
                 lbComponent.Text = detailSpec.A;
                 List<template_wd_hpa_for1_coverpage> _list = new List<template_wd_hpa_for1_coverpage>();
@@ -694,99 +696,99 @@ namespace ALS.ALSI.Web.view.template
                 List<String> ANameKey = new List<string>();
 
 
-                if (!String.IsNullOrEmpty(detailSpecs[1].D))
+                if (!String.IsNullOrEmpty(dp.D))
                 {
-                    ANameKey.Add(detailSpecs[1].D);
+                    ANameKey.Add(dp.D);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].E))
+                if (!String.IsNullOrEmpty(dp.E))
                 {
-                    ANameKey.Add(detailSpecs[1].E);
+                    ANameKey.Add(dp.E);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].F))
+                if (!String.IsNullOrEmpty(dp.F))
                 {
-                    ANameKey.Add(detailSpecs[1].F);
+                    ANameKey.Add(dp.F);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].G))
+                if (!String.IsNullOrEmpty(dp.G))
                 {
-                    ANameKey.Add(detailSpecs[1].G);
+                    ANameKey.Add(dp.G);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].H))
+                if (!String.IsNullOrEmpty(dp.H))
                 {
-                    ANameKey.Add(detailSpecs[1].H);
+                    ANameKey.Add(dp.H);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].I))
+                if (!String.IsNullOrEmpty(dp.I))
                 {
-                    ANameKey.Add(detailSpecs[1].I);
-                }
-
-                if (!String.IsNullOrEmpty(detailSpecs[1].J))
-                {
-                    ANameKey.Add(detailSpecs[1].J);
-                }
-                if (!String.IsNullOrEmpty(detailSpecs[1].K))
-                {
-                    ANameKey.Add(detailSpecs[1].K);
-                }
-                if (!String.IsNullOrEmpty(detailSpecs[1].L))
-                {
-                    ANameKey.Add(detailSpecs[1].L);
-                }
-                if (!String.IsNullOrEmpty(detailSpecs[1].M))
-                {
-                    ANameKey.Add(detailSpecs[1].M);
-                }
-                if (!String.IsNullOrEmpty(detailSpecs[1].N))
-                {
-                    ANameKey.Add(detailSpecs[1].N);
-                }
-                if (!String.IsNullOrEmpty(detailSpecs[1].O))
-                {
-                    ANameKey.Add(detailSpecs[1].O);
-                }
-                if (!String.IsNullOrEmpty(detailSpecs[1].P))
-                {
-                    ANameKey.Add(detailSpecs[1].P);
-                }
-                if (!String.IsNullOrEmpty(detailSpecs[1].Q))
-                {
-                    ANameKey.Add(detailSpecs[1].Q);
+                    ANameKey.Add(dp.I);
                 }
 
-                if (!String.IsNullOrEmpty(detailSpecs[1].R))
+                if (!String.IsNullOrEmpty(dp.J))
                 {
-                    ANameKey.Add(detailSpecs[1].R);
+                    ANameKey.Add(dp.J);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].S))
+                if (!String.IsNullOrEmpty(dp.K))
                 {
-                    ANameKey.Add(detailSpecs[1].S);
+                    ANameKey.Add(dp.K);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].T))
+                if (!String.IsNullOrEmpty(dp.L))
                 {
-                    ANameKey.Add(detailSpecs[1].T);
+                    ANameKey.Add(dp.L);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].U))
+                if (!String.IsNullOrEmpty(dp.M))
                 {
-                    ANameKey.Add(detailSpecs[1].U);
+                    ANameKey.Add(dp.M);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].V))
+                if (!String.IsNullOrEmpty(dp.N))
                 {
-                    ANameKey.Add(detailSpecs[1].V);
+                    ANameKey.Add(dp.N);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].W))
+                if (!String.IsNullOrEmpty(dp.O))
                 {
-                    ANameKey.Add(detailSpecs[1].W);
+                    ANameKey.Add(dp.O);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].X))
+                if (!String.IsNullOrEmpty(dp.P))
                 {
-                    ANameKey.Add(detailSpecs[1].X);
+                    ANameKey.Add(dp.P);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].Y))
+                if (!String.IsNullOrEmpty(dp.Q))
                 {
-                    ANameKey.Add(detailSpecs[1].Y);
+                    ANameKey.Add(dp.Q);
                 }
-                if (!String.IsNullOrEmpty(detailSpecs[1].Z))
+
+                if (!String.IsNullOrEmpty(dp.R))
                 {
-                    ANameKey.Add(detailSpecs[1].Z);
+                    ANameKey.Add(dp.R);
+                }
+                if (!String.IsNullOrEmpty(dp.S))
+                {
+                    ANameKey.Add(dp.S);
+                }
+                if (!String.IsNullOrEmpty(dp.T))
+                {
+                    ANameKey.Add(dp.T);
+                }
+                if (!String.IsNullOrEmpty(dp.U))
+                {
+                    ANameKey.Add(dp.U);
+                }
+                if (!String.IsNullOrEmpty(dp.V))
+                {
+                    ANameKey.Add(dp.V);
+                }
+                if (!String.IsNullOrEmpty(dp.W))
+                {
+                    ANameKey.Add(dp.W);
+                }
+                if (!String.IsNullOrEmpty(dp.X))
+                {
+                    ANameKey.Add(dp.X);
+                }
+                if (!String.IsNullOrEmpty(dp.Y))
+                {
+                    ANameKey.Add(dp.Y);
+                }
+                if (!String.IsNullOrEmpty(dp.Z))
+                {
+                    ANameKey.Add(dp.Z);
                 }
 
 
@@ -890,13 +892,13 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
 
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
