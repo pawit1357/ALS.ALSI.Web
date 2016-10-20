@@ -3951,17 +3951,20 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox49">
+      <Textbox Name="Textbox53">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>ALS Testing Services</Value>
+                <Value>Remark:
+1.) The result related only to the test items.
+2.) The test report shall not be reproduced except in full, without written approval of ALS Testing Services (Thailand) Co., Ltd.
+</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>11pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -3969,13 +3972,34 @@
               </TextRun>
             </TextRuns>
             <Style>
-              <TextAlign>Center</TextAlign>
+              <TextAlign>Left</TextAlign>
             </Style>
           </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Top>28.04617cm</Top>
+        <Left>0.54129cm</Left>
+        <Height>1.90465cm</Height>
+        <Width>16.30055cm</Width>
+        <ZIndex>35</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox49">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>(Thailand) Co.,Ltd</Value>
+                <Value>ALS Testing Services (Thailand) Co.,Ltd</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontSize>11pt</FontSize>
@@ -3991,11 +4015,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>31.14637cm</Top>
-        <Left>9.54351cm</Left>
+        <Top>30.12721cm</Top>
+        <Left>9.69374cm</Left>
         <Height>1.05798cm</Height>
-        <Width>6.11622cm</Width>
-        <ZIndex>35</ZIndex>
+        <Width>7.1481cm</Width>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4029,11 +4053,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>33.13075cm</Top>
-        <Left>9.54352cm</Left>
+        <Top>31.9352cm</Top>
+        <Left>9.69374cm</Left>
         <Height>0.60819cm</Height>
-        <Width>6.11621cm</Width>
-        <ZIndex>36</ZIndex>
+        <Width>7.1481cm</Width>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4067,11 +4091,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>33.91533cm</Top>
-        <Left>9.54351cm</Left>
+        <Top>32.57867cm</Top>
+        <Left>9.69374cm</Left>
         <Height>0.60819cm</Height>
-        <Width>6.11622cm</Width>
-        <ZIndex>37</ZIndex>
+        <Width>7.14805cm</Width>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4105,51 +4129,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>32.52256cm</Top>
-        <Left>9.54352cm</Left>
+        <Top>31.1859cm</Top>
+        <Left>9.69374cm</Left>
         <Height>0.60819cm</Height>
-        <Width>6.11621cm</Width>
-        <ZIndex>38</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox53">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Remark:
-1.) The result related only to the test items.
-2.) The test report shall not be reproduced except in full, without written approval of ALS Testing Services (Thailand) Co., Ltd.
-</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Left</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>28.04617cm</Top>
-        <Left>0.54129cm</Left>
-        <Height>1.90465cm</Height>
-        <Width>16.30055cm</Width>
+        <Width>7.1481cm</Width>
         <ZIndex>39</ZIndex>
         <Style>
           <Border>
@@ -4180,6 +4163,9 @@
           <Left>0.25in</Left>
           <Height>0.8611in</Height>
           <Width>0.86459in</Width>
+          <Visibility>
+            <Hidden>true</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -4229,7 +4215,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>3.28125in</Height>
+      <Height>0.82292in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -4241,6 +4227,9 @@
           <Left>0.24913in</Left>
           <Height>0.5in</Height>
           <Width>6.49046in</Width>
+          <Visibility>
+            <Hidden>true</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>

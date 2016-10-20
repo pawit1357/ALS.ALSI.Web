@@ -354,7 +354,8 @@ namespace ALS.ALSI.Biz.Constant
         MOTOR_HUB_SUB = 3,
         MOTOR_BASE = 4,
         MOTOR_BASE_SUB = 5,
-        COMPOUND = 6
+        COMPOUND = 6,
+        COMPOUND_SUB = 7
     }
 }
 

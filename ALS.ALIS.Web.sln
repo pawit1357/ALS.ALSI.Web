@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALS.ALSI.Web", "ALS.ALSI.Web\ALS.ALSI.Web.csproj", "{8AC9AB32-CDAA-4E44-BA44-8DBF3E71AD57}"
 EndProject
@@ -25,11 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{581952
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALS.TestCase", "ALS.TestCase\ALS.TestCase.csproj", "{77575ADD-3F65-4C36-B5CF-C832E4EA4687}"
+EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -72,11 +70,23 @@ Global
 		{759A88B6-BD40-4781-904B-B07BDFEB88C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{759A88B6-BD40-4781-904B-B07BDFEB88C3}.Release|x64.ActiveCfg = Release|x64
 		{759A88B6-BD40-4781-904B-B07BDFEB88C3}.Release|x64.Build.0 = Release|x64
+		{77575ADD-3F65-4C36-B5CF-C832E4EA4687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77575ADD-3F65-4C36-B5CF-C832E4EA4687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77575ADD-3F65-4C36-B5CF-C832E4EA4687}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{77575ADD-3F65-4C36-B5CF-C832E4EA4687}.Debug|x64.Build.0 = Debug|Any CPU
+		{77575ADD-3F65-4C36-B5CF-C832E4EA4687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77575ADD-3F65-4C36-B5CF-C832E4EA4687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77575ADD-3F65-4C36-B5CF-C832E4EA4687}.Release|x64.ActiveCfg = Release|Any CPU
+		{77575ADD-3F65-4C36-B5CF-C832E4EA4687}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E4EC3FD2-51FC-4342-9FC6-01210B38A661} = {5C9B0442-14BD-403D-9915-34E8053CD1D1}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

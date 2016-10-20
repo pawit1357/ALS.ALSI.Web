@@ -3405,7 +3405,7 @@
   <Width>7.18185in</Width>
   <Page>
     <PageHeader>
-      <Height>2.78125in</Height>
+      <Height>0.96514in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -3446,63 +3446,14 @@
         <Image Name="Image2">
           <Source>Embedded</Source>
           <Value>alslogo2</Value>
-          <Left>0.13544in</Left>
-          <Height>2.78125in</Height>
-          <Width>2.40625in</Width>
-          <ZIndex>1</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
-        <Textbox Name="Textbox64">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>ATT-FM-510-01-01 | Rev.02 | 01JUL 2015</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>2.00202cm</Top>
-          <Left>13.34973cm</Left>
-          <Height>0.44944cm</Height>
-          <Width>4.83431cm</Width>
-          <ZIndex>2</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Image Name="Image3">
-          <Source>Embedded</Source>
-          <Value>logo_main</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.78in</Top>
-          <Left>3.73833in</Left>
-          <Height>0.5in</Height>
-          <Width>0.5in</Width>
-          <ZIndex>3</ZIndex>
+          <Left>0.13544in</Left>
+          <Height>0.61458in</Height>
+          <Width>1.85417in</Width>
+          <ZIndex>1</ZIndex>
+          <Visibility>
+            <Hidden>true</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -3529,6 +3480,9 @@
           <Left>0.67441cm</Left>
           <Height>1.44708cm</Height>
           <Width>16.93555cm</Width>
+          <Visibility>
+            <Hidden>true</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -3754,6 +3708,47 @@
           <Height>0.81986cm</Height>
           <Width>18.12617cm</Width>
           <ZIndex>1</ZIndex>
+          <Visibility>
+            <Hidden>true</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox64">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>ATT-FM-510-01-01 | Rev.02 | 01JUL 2015</Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontSize>7pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox13</rd:DefaultName>
+          <Top>2.61159cm</Top>
+          <Left>0cm</Left>
+          <Height>0.44944cm</Height>
+          <Width>4.83431cm</Width>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
