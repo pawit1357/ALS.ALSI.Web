@@ -24,6 +24,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> hpa_type { get; set; }
         public Nullable<int> row_type { get; set; }
         public Nullable<int> seq { get; set; }
+        public Nullable<int> seq_group { get; set; }
         public string us03_b14 { get; set; }
         public string us03_b15 { get; set; }
         public string us03_b16 { get; set; }

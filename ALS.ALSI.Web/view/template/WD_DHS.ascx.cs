@@ -929,8 +929,15 @@ namespace ALS.ALSI.Web.view.template
 
             List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 10).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, ds2.Count - 10).ToDataTable())); // Add datasource here
-
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, (ds2.Count>25)? 25: ds2.Count - 10).ToDataTable())); // Add datasource here
+            if (ds2.Count > 35)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(35, ds2.Count - 35).ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+            }
             // Variables
             //Warning[] warnings;
             //string[] streamIds;

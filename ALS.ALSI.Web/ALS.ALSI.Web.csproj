@@ -1059,6 +1059,7 @@
     <Content Include="view\template\Seagate_FTIR_Damper.ascx" />
     <Content Include="view\template\Seagate_FTIR_Adhesive.ascx" />
     <Content Include="view\template\Seagate_FTIR_Packing.ascx" />
+    <Content Include="view\template\Seagate_HPA_1.ascx" />
     <Content Include="view\template\TemplateElwa.ascx" />
     <Content Include="view\template\TemplateGrp.ascx" />
     <Content Include="view\template\TemplateFa.ascx" />
@@ -1285,6 +1286,13 @@
     </Compile>
     <Compile Include="view\template\Seagate_FTIR_Packing.ascx.designer.cs">
       <DependentUpon>Seagate_FTIR_Packing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\Seagate_HPA_1.ascx.cs">
+      <DependentUpon>Seagate_HPA_1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\Seagate_HPA_1.ascx.designer.cs">
+      <DependentUpon>Seagate_HPA_1.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\TemplateElwa.ascx.cs">
       <DependentUpon>TemplateElwa.ascx</DependentUpon>

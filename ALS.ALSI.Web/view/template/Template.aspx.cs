@@ -216,7 +216,7 @@ namespace ALS.ALSI.Web.view.template
                         List<tb_m_component> components = new List<tb_m_component>();
                         List<tb_m_detail_spec_ref> detailSpecRefs = new List<tb_m_detail_spec_ref>();
 
-                        for (int row = 4; row <= isComponent.LastRowNum; row++)
+                        for (int row = 2; row <= isComponent.LastRowNum; row++)
                         {
                             if (isComponent.GetRow(row) != null) //null is when the row only contains empty cells 
                             {

@@ -13,6 +13,8 @@ namespace ALS.ALSI.Biz.DataAccess
         #region "Property"
         public CommandNameEnum RowState { get; set; }
         public byte[] img1 { get; set; }
+        //public int Run { get { return (int)this.seq; }  }
+        public string Run { get; set; }
 
         #endregion
 

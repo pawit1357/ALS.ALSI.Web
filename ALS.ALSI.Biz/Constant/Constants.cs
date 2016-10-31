@@ -165,7 +165,8 @@ namespace ALS.ALSI.Biz.Constant
         //AD10Directinject =11,
         MajorCompounds = 12,
         Standard = 13,
-        CoverPageValue = 14
+        CoverPageValue = 14,
+        c31 = 15
     }
 
     public enum RoleEnum
@@ -293,6 +294,21 @@ namespace ALS.ALSI.Biz.Constant
         Add = 1,
         Edit = 2,
         Delete = 3,
+    }
+    public enum HPAType : int
+    {
+        LPC03 = 1,
+        LPC06 = 2,
+        HPA = 3,
+        CLASSIFICATION = 4,
+        ANALYSIS_DETAILS = 5,
+        CLASSIFICATION_HEAD = 6,
+        CLASSIFICATION_ITEM = 7,
+        CLASSIFICATION_TOTAL = 8,
+        CLASSIFICATION_GRAND_TOTAL = 9,
+        CLASSIFICATION_SUB_TOTAL = 10,
+        LPC =11,
+        LPC05 = 12,
     }
     public enum HPAFor3Group : int
     {

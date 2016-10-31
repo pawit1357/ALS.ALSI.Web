@@ -859,6 +859,7 @@
           <Property Name="hpa_type" Type="int" />
           <Property Name="row_type" Type="int" />
           <Property Name="seq" Type="int" />
+          <Property Name="seq_group" Type="int" />
           <Property Name="us03_b14" Type="varchar" MaxLength="45" />
           <Property Name="us03_b15" Type="varchar" MaxLength="45" />
           <Property Name="us03_b16" Type="varchar" MaxLength="45" />
@@ -2634,6 +2635,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="hpa_type" Type="Int32" />
           <Property Name="row_type" Type="Int32" />
           <Property Name="seq" Type="Int32" />
+          <Property Name="seq_group" Type="Int32" />
           <Property Name="us03_b14" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="us03_b15" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="us03_b16" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -4280,6 +4282,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="us03_b16" ColumnName="us03_b16" />
                 <ScalarProperty Name="us03_b15" ColumnName="us03_b15" />
                 <ScalarProperty Name="us03_b14" ColumnName="us03_b14" />
+                <ScalarProperty Name="seq_group" ColumnName="seq_group" />
                 <ScalarProperty Name="seq" ColumnName="seq" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
                 <ScalarProperty Name="hpa_type" ColumnName="hpa_type" />

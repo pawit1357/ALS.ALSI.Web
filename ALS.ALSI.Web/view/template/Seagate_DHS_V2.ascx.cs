@@ -594,6 +594,10 @@ namespace ALS.ALSI.Web.view.template
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
                                                     break;
                                                 //case "00110011":
+                                                case "00110111"://C31
+                                                    tmp.row_type = Convert.ToInt32(RowTypeEnum.c31);
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    break;
                                                 case "00010011"://TOTAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
@@ -842,7 +846,7 @@ namespace ALS.ALSI.Web.view.template
                         case "C31.0":
                             List<template_seagate_dhs_coverpage> c31List = new List<template_seagate_dhs_coverpage>();
 
-                            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.c31_flag !=null && x.c31_flag.ToUpper().Equals(_cover.chemical_id)).ToList();
+                            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.c31_flag != null && x.c31_flag.ToUpper().Equals(_cover.chemical_id)).ToList();
                             if (childs.Count > 0)
                             {
                                 foreach (tb_m_dhs_cas child in childs)
@@ -851,7 +855,8 @@ namespace ALS.ALSI.Web.view.template
                                     work.sample_id = this.SampleID;
                                     work.component_id = _cover.component_id;
                                     work.chemical_id = _cover.chemical_id;
-                                    work.name = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + child.library_id;
+                                    //work.name = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + child.library_id;
+                                    work.name =  child.library_id;
                                     work.ng_part = _cover.ng_part;
                                     work.result = child.amount;
                                     work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
@@ -864,15 +869,13 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 _cover.result = "Not significant peak";
                             }
-                            newCoverPage.Add(_cover);
+                            //newCoverPage.Add(_cover);
                             newCoverPage.AddRange(c31List);
                             break;
                         default:
                             newCoverPage.Add(_cover);
                             break;
                     }
-
-
 
                 }
 

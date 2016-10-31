@@ -647,7 +647,7 @@ namespace ALS.ALSI.Web.view.template
                     _val.C = mappedValue.C;
                     if (_val.D != null)
                     {
-                        _val.E = _val.D.Equals("NA") ? "NA" : (_val.C >= Convert.ToInt32(_val.D)) ? "FAIL" : "PASS";
+                        _val.E = _val.D.Equals("NA") ? "NA":_val.D.Equals("TBD")? "" : (_val.C >= Convert.ToInt32(_val.D)) ? "FAIL" : "PASS";
                     }
                 }
 
