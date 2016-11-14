@@ -1728,21 +1728,74 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportObject - Pdf\copperwire_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\corrosion_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\corrosion_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\dhs_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\dhs_seagate_v2_pdf.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportObject - Pdf\dhs_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\ftir_nvr_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\ftir_nvr_seagate_damper_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\ftir_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\ftir_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\gcms_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\gcms_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\gcms_wd_cvr_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\hpa_for_1_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\hpa_for_3_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\hpa_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\hpa_seagate_boyd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\hpa_seagate_siam_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\ic_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\ic_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\lpc_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\lpc_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\mesa_idm_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\mesa_ink_ribbon_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject - Pdf\mesa_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\copperwire_seagate_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\corrosion_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\copperwire_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\corrosion_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\corrosion_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\dhs_seagate_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\dhs_seagate_v2.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportObject\dhs_seagate_v2_pdf.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportObject\dhs_wd_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate_damper.rdlc" />
+    <EmbeddedResource Include="ReportObject\ftir_nvr_seagate_damper_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\ftir_nvr_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\ftir_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\ftir_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\gcms_seagate_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
+    <EmbeddedResource Include="ReportObject\gcms_wd_cvr_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\gcms_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_for_1_wd_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_for_3_wd_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate_boyd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_seagate_boyd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_seagate_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate_siam.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_seagate_siam_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\ic_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\ic_wd_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\lpc_seagate_pdf.rdlc" />
+    <EmbeddedResource Include="ReportObject\lpc_wd_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_idm_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\mesa_idm_wd_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_ink_ribbon_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\corrosion_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\mesa_ink_ribbon_wd_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\lpc_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\lpc_seagate.rdlc" />
@@ -1755,6 +1808,7 @@
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\mesa_wd_pdf.rdlc" />
     <EmbeddedResource Include="ReportObject\Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
