@@ -107,7 +107,7 @@
                                                 </asp:Label>
                                                 <asp:TextBox ID="txtProcedureNo_Extraction" runat="server" Text="2092-772116 Rev. AB" CssClass="form-control"></asp:TextBox>
                                             </td>
-                              <%--              <td>
+                                            <%--              <td>
                                                 <asp:Label ID="lbExtractionMedium_Extraction" runat="server" Text="Dichloromethane">
                                                 </asp:Label>
                                                 <asp:TextBox ID="txtExtractionMedium_Extraction" runat="server" Text="Dichloromethane" CssClass="form-control"></asp:TextBox>
@@ -127,7 +127,7 @@
                                 </table>
 
                                 <br />
-               <%--                 <h5>METHOD/PROCEDURE: Indirect Materials</h5>
+                                <%--                 <h5>METHOD/PROCEDURE: Indirect Materials</h5>
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
@@ -577,6 +577,8 @@
                                                 <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
                                                     <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
                                                 </asp:LinkButton>
+                                                <asp:LinkButton ID="lbDownloadPdf" runat="server" OnClick="lbDownloadPdf_Click" Text="ดาวโหลด pdf สำหรับส่งอีเมล์ลูกค้า">
+                                                </asp:LinkButton>
                                             </div>
                                         </div>
                                         <%--     </div>
@@ -692,7 +694,7 @@
             <asp:PostBackTrigger ControlID="btnLoadFile" />
             <asp:PostBackTrigger ControlID="btnSubmit" />
             <asp:PostBackTrigger ControlID="lbDownload" />
-
+            <asp:PostBackTrigger ControlID="lbDownloadPdf" />
         </Triggers>
     </asp:UpdatePanel>
 </form>

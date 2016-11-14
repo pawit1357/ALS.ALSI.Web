@@ -224,7 +224,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 #region "VISIBLE RESULT DATA"
 
-                if (status == StatusEnum.CHEMIST_TESTING ||userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
                     #region ":: STAMP ANALYZED DATE ::"
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -520,7 +520,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
-            string sheetName =string.Empty;
+            string sheetName = string.Empty;
 
             List<tb_m_dhs_cas> _cas = new List<tb_m_dhs_cas>();
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -844,38 +844,58 @@ namespace ALS.ALSI.Web.view.template
                     switch (_cover.chemical_id)
                     {
                         case "C31.0":
-                            List<template_seagate_dhs_coverpage> c31List = new List<template_seagate_dhs_coverpage>();
-
-                            List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.c31_flag != null && x.c31_flag.ToUpper().Equals(_cover.chemical_id)).ToList();
-                            if (childs.Count > 0)
+                            tmp = this.tbCas.Find(x => _cover.name.Equals(x.library_id) && x.row_type == Convert.ToInt32(RowTypeEnum.c31));
+                            if (tmp != null)
                             {
-                                foreach (tb_m_dhs_cas child in childs)
+                                switch (tmp.amount)
                                 {
-                                    template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
-                                    work.sample_id = this.SampleID;
-                                    work.component_id = _cover.component_id;
-                                    work.chemical_id = _cover.chemical_id;
-                                    //work.name = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + child.library_id;
-                                    work.name =  child.library_id;
-                                    work.ng_part = _cover.ng_part;
-                                    work.result = child.amount;
-                                    work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                    c31List.Add(work);
+                                    case "Not Detected":
+                                        _cover.result = "Not Detected";
+                                        break;
+                                    default:
+                                        //Double amt = Convert.ToDouble(tmp.amount);
+                                        _cover.result = tmp.amount;// amt.ToString();
+                                        break;
                                 }
-                                _cover.ng_part = "-";
-                                _cover.result = "-";
                             }
-                            else
-                            {
-                                _cover.result = "Not significant peak";
-                            }
-                            //newCoverPage.Add(_cover);
-                            newCoverPage.AddRange(c31List);
-                            break;
-                        default:
-                            newCoverPage.Add(_cover);
                             break;
                     }
+                    newCoverPage.Add(_cover);
+                    //switch (_cover.chemical_id)
+                    //{
+                    //    case "C31.0":
+                    //        List<template_seagate_dhs_coverpage> c31List = new List<template_seagate_dhs_coverpage>();
+
+                    //        List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.c31_flag != null && x.c31_flag.ToUpper().Equals(_cover.chemical_id)).ToList();
+                    //        if (childs.Count > 0)
+                    //        {
+                    //            foreach (tb_m_dhs_cas child in childs)
+                    //            {
+                    //                template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
+                    //                work.sample_id = this.SampleID;
+                    //                work.component_id = _cover.component_id;
+                    //                work.chemical_id = _cover.chemical_id;
+                    //                //work.name = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + child.library_id;
+                    //                work.name =  child.library_id;
+                    //                work.ng_part = _cover.ng_part;
+                    //                work.result = child.amount;
+                    //                work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                    //                c31List.Add(work);
+                    //            }
+                    //            _cover.ng_part = "-";
+                    //            _cover.result = "-";
+                    //        }
+                    //        else
+                    //        {
+                    //            _cover.result = "Not significant peak";
+                    //        }
+                    //        //newCoverPage.Add(_cover);
+                    //        newCoverPage.AddRange(c31List);
+                    //        break;
+                    //    default:
+                    //        newCoverPage.Add(_cover);
+                    //        break;
+                    //}
 
                 }
 
@@ -982,7 +1002,62 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
+        protected void lbDownloadPdf_Click(object sender, EventArgs e)
+        {
+            tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
 
+
+            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("rpt_unit", component.C));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", "DHS"));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_seagate_v2_pdf.rdlc");
+            //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/Report1.rdlc");
+
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
+
+
+
+            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush(); // send it to the client to download
+
+
+        }
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue.ToString(), true);

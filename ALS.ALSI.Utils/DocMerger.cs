@@ -9,7 +9,9 @@ namespace ALS.ALSI.Utils
         /// <summary>
         /// This is the default Word Document Template file
         /// </summary>
-        private const string defaultWordDocumentTemplate = @"C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Utils\BlankLetterHeadEL.doc";
+        private const string defaultWordDocumentTemplate = @"C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Utils\BlankLetterHeadEL.dotx";
+        //private const string defaultWordDocumentTemplate = @"C:\Users\icnsk\Downloads\ELP-1362A-DB.doc";
+
 
         /// <summary>
         /// A function that merges Microsoft Word Documents that uses the default template
@@ -102,5 +104,55 @@ namespace ALS.ALSI.Utils
                 wordApplication.Quit(ref missing, ref missing, ref missing);
             }
         }
+
+        public static void AddPageHeaderFooter(object fileName)
+        {
+            object missing = System.Reflection.Missing.Value;
+            // Create an object for filename, which is the file to be opened
+            //object fileName =@”C:\MySecond.doc”;
+            // Create an object of application class
+            Microsoft.Office.Interop.Word._Application WordApp = new Word.Application();
+            // open the document specified in the fileName variable
+            Word.Document adoc = WordApp.Documents.Open(ref fileName, ref missing, ref missing, ref missing, ref missing,
+            ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing,
+            ref missing, ref missing, ref missing);
+            // We can insert the picture using Range objects AddPicture method
+            // To insert a picture at a particular location in the word document
+            // insert a table over there and then refer that location through range object
+            Word.Range rngPic = adoc.Tables[1].Range;
+            // we can even select a particular cell in the table
+            //Range rngPic = rng.Tables[1].Cell(2, 3).Range;
+            rngPic.InlineShapes.AddPicture(@"C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\images\images.png", ref missing, ref missing, ref missing);
+            WordApp.Visible = false;
+
+  
+        }
+
+        //public static void InsertPageHeader()
+        //{
+        //    string strDocName = @"C:\Users\icnsk\Downloads\ELP-1362A-DB.doc";
+        //    object missing = System.Type.Missing;
+        //    //object pageBreak = Word.WdBreakType.wdPageBreak;
+        //    string outputFile = "C:\\Users\\icnsk\\Downloads\\mygod" + DateTime.Now.ToString("yyyyMMddHHmm") + ".doc";
+
+
+        //    // first we are creating application of word.
+        //    Microsoft.Office.Interop.Word.Application WordApp = new Microsoft.Office.Interop.Word.Application();
+        //    // now creating new document.
+        //    WordApp.Documents.Add();
+        //    // see word file behind your program
+        //    WordApp.Visible = true;
+        //    // get the reference of active document
+        //    Microsoft.Office.Interop.Word.Document doc = WordApp.ActiveDocument;
+
+        //            // now add the picture in active document reference
+        //            doc.InlineShapes.AddPicture(strDocName, Type.Missing, Type.Missing, Type.Missing);
+
+        //    // file is saved.
+        //    doc.SaveAs(outputFile, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+        //    // application is now quit.
+        //    WordApp.Quit(Type.Missing, Type.Missing, Type.Missing);
+
+        //}
     }
 }

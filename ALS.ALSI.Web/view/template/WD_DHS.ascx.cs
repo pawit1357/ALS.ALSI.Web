@@ -275,7 +275,7 @@ namespace ALS.ALSI.Web.view.template
                 #region "COVERPAGE"
                 if (this.coverpages != null && this.coverpages.Count > 0)
                 {
-                    
+
                     this.CommandName = CommandNameEnum.Edit;
                     detailSpec = detailSpec.SelectByID(this.coverpages[0].detail_spec_id.Value);
                     if (detailSpec != null)
@@ -929,7 +929,7 @@ namespace ALS.ALSI.Web.view.template
 
             List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 10).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, (ds2.Count>25)? 25: ds2.Count - 10).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, (ds2.Count > 25) ? 25 : ds2.Count - 10).ToDataTable())); // Add datasource here
             if (ds2.Count > 35)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(35, ds2.Count - 35).ToDataTable())); // Add datasource here
@@ -1007,9 +1007,74 @@ namespace ALS.ALSI.Web.view.template
                     //}
                     break;
             }
+        }
 
 
+        protected void lbDownloadPdf_Click(object sender, EventArgs e)
+        {
 
+            //DataTable dt = Extenders.ObjectToDataTable(this.reportCovers[0]);
+            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("rpt_unit", "ng/part"));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", "DHS"));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_wd_pdf.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+
+            List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 10).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, (ds2.Count > 25) ? 25 : ds2.Count - 10).ToDataTable())); // Add datasource here
+            if (ds2.Count > 35)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(35, ds2.Count - 35).ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+            }
+
+            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+            try
+            {
+
+
+                // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+                Response.Buffer = true;
+                Response.Clear();
+                Response.ContentType = mimeType;
+                Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                Response.BinaryWrite(bytes); // create the file
+                Response.Flush(); // send it to the client to download
+            }
+            catch (Exception ex) {
+                Console.WriteLine();
+            }
 
 
         }
@@ -1170,7 +1235,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     _cover.result = String.IsNullOrEmpty(_cover.result) ? "Not Detected" : _cover.result;
 
-                    double spec = (_cover.specification_limits.Equals("NA") || _cover.specification_limits.Equals("ND") ||_cover.specification_limits.Equals("-")) ? 0 : Convert.ToDouble(_cover.specification_limits.Replace("<", "").Trim());
+                    double spec = (_cover.specification_limits.Equals("NA") || _cover.specification_limits.Equals("ND") || _cover.specification_limits.Equals("-")) ? 0 : Convert.ToDouble(_cover.specification_limits.Replace("<", "").Trim());
                     double result = _cover.result.Equals("Not Detected") ? 0 : Convert.ToDouble(_cover.result);
                     _cover.result_pass_or_false = _cover.specification_limits.Equals("NA") ? "NA" : (_cover.result.Equals("Not Detected") || result < spec) ? "PASS" : "FAIL";
 
@@ -1181,7 +1246,7 @@ namespace ALS.ALSI.Web.view.template
                         case "Total Siloxane":
                             break;
                         default:
-                            _cover.result_pass_or_false = _cover.specification_limits.Equals("NA")|| _cover.specification_limits.Equals("-") ? "" : _cover.result_pass_or_false;
+                            _cover.result_pass_or_false = _cover.specification_limits.Equals("NA") || _cover.specification_limits.Equals("-") ? "" : _cover.result_pass_or_false;
                             break;
                     }
 

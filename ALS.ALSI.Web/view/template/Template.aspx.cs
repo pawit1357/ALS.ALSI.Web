@@ -253,12 +253,12 @@ namespace ALS.ALSI.Web.view.template
                                 component.RowState = CommandNameEnum.Add;
 
                                 #region "Add Detail"
-                                if (isDetailSpecRef != null && !String.IsNullOrEmpty(txtSpecRef.Text))
+                                if (isDetailSpecRef != null && !String.IsNullOrEmpty(txtSpecRef.Text) && !String.IsNullOrEmpty(component.B) && !component.B.Equals("Spec / Rev"))
                                 {
                                     String _spectRefId = CustomUtils.GetCellValue(isComponent.GetRow(row).GetCell(Convert.ToInt32(txtSpecRef.Text)-1));
                                     if (!String.IsNullOrEmpty(_spectRefId))
                                     {
-
+                                        
                                         int spectRefId = Convert.ToInt32(_spectRefId);
                                         int index = 1;
 

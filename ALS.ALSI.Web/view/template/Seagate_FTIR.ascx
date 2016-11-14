@@ -410,6 +410,8 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                                 <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
                                                     <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
                                                 </asp:LinkButton>
+                                                <asp:LinkButton ID="lbDownloadPdf" runat="server" OnClick="lbDownloadPdf_Click" Text="ดาวโหลด pdf สำหรับส่งอีเมล์ลูกค้า">
+                                                </asp:LinkButton>
                                             </div>
                                         </div>
                                         <%--    </div>
@@ -602,6 +604,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
             <asp:PostBackTrigger ControlID="btnLoadFile" />
             <asp:PostBackTrigger ControlID="lbDownload" />
             <asp:PostBackTrigger ControlID="lbDecimal" />
+            <asp:PostBackTrigger ControlID="lbDownloadPdf" />
         </Triggers>
     </asp:UpdatePanel>
 </form>

@@ -380,7 +380,7 @@ namespace ALS.ALSI.Web.view.template
                     //switch (this.CommandName)
                     //{
                     //    case CommandNameEnum.Add:
-                            template_wd_mesa_coverpage.InsertList(this.coverpages);
+                    template_wd_mesa_coverpage.InsertList(this.coverpages);
 
                     //        break;
                     //    case CommandNameEnum.Edit:
@@ -415,7 +415,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                 
+
 
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
@@ -688,7 +688,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
             reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1 ));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
 
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
@@ -769,6 +769,69 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        protected void lbDownloadPdf_Click(object sender, EventArgs e)
+        {
+
+            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+
+
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", "-"));
+            reportParameters.Add(new ReportParameter("ResultDesc", "-"));
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+            List<template_wd_mesa_img> dat = this.refImg;
+            foreach (template_wd_mesa_img _i in dat)
+            {
+                _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
+                _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
+                _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
+                _i.img4 = CustomUtils.GetBytesFromImage(_i.path_edx_spectrum);
+            }
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_idm_wd_pdf.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dat.Where(x => x.area == 1).ToList().ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dat.Where(x => x.area == 2).ToList().ToDataTable())); // Add datasource here
+
+
+            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush(); // send it to the client to download
+
+
+
+        }
         private void downloadWord()
         {
             HttpContext.Current.Response.Clear();

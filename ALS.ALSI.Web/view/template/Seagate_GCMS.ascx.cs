@@ -1761,7 +1761,7 @@ namespace ALS.ALSI.Web.view.template
 
                 //compounds[1].C = (Convert.ToDecimal(compounds[2].C) + Convert.ToDecimal(compounds[3].C)) + "";
 
-        
+
 
                 gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompound.SelectedItem.Text);
                 gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
@@ -1788,7 +1788,7 @@ namespace ALS.ALSI.Web.view.template
 
                 compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
 
-            
+
                 gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompound.SelectedItem.Text);
                 gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
 
@@ -1983,7 +1983,7 @@ namespace ALS.ALSI.Web.view.template
                         gvCompoundSub.Visible = false;
                     }
 
-                    
+
                     #endregion
 
 
@@ -2132,6 +2132,79 @@ namespace ALS.ALSI.Web.view.template
             {
                 Console.WriteLine();
             }
+
+        }
+
+        protected void lbDownloadPdf_Click(object sender, EventArgs e)
+        {
+
+
+            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo + " "));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+
+            reportParameters.Add(new ReportParameter("rpt_unit1", ddlUnitMotorOilContamination.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnitMotorHub.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit3", ddlUnitMotorHubSub.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit4", ddlUnitMotorBase.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit5", ddlUnitMotorBaseSub.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit6", ddlUnitCompound.SelectedItem.Text));
+
+
+
+            reportParameters.Add(new ReportParameter("Test", "GCMS Extractable"));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+            reportParameters.Add(new ReportParameter("Remark1", lbRemark1.Text));
+            reportParameters.Add(new ReportParameter("Remark2", lbRemark2.Text));
+            reportParameters.Add(new ReportParameter("Remark3", lbRemark3.Text));
+
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/gcms_seagate_pdf.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+
+
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL)).ToList().ToDataTable()));
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB)).ToList().ToDataTable()));
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB)).ToList().ToDataTable()));
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList().ToDataTable()));
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB)).ToList().ToDataTable()));
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND)).ToList().ToDataTable()));
+
+
+            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush(); // send it to the client to download
 
         }
 

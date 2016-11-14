@@ -25,7 +25,7 @@ namespace ALS.ALSI.Web.view.template
     {
 
         #region "Property"
-        
+
         public users_login userLogin
         {
             get { return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null); }
@@ -438,7 +438,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                
+
 
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
@@ -455,7 +455,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-                  
+
                             this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
@@ -1399,6 +1399,115 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        protected void lbDownloadPdf_Click(object sender, EventArgs e)
+        {
+
+            //DataTable dt = Extenders.ObjectToDataTable(this.HpaFor3[0]);
+            DataTable dtHeader = new DataTable("MethodProcedure");
+
+            // Define all the columns once.
+            DataColumn[] cols ={ new DataColumn("ParticleAnalysisBySEMEDX",typeof(String)),
+                                  new DataColumn("TapedAreaForDriveParts",typeof(String)),
+                                  new DataColumn("NoofTimesTaped",typeof(String)),
+                                  new DataColumn("SurfaceAreaAnalysed",typeof(String)),
+                                  new DataColumn("ParticleRanges",typeof(String)),
+                              };
+            dtHeader.Columns.AddRange(cols);
+            DataRow row = dtHeader.NewRow();
+            row["ParticleAnalysisBySEMEDX"] = txtA23.Text;
+            row["TapedAreaForDriveParts"] = txtB23.Text;
+            row["NoofTimesTaped"] = txtC23.Text;
+            row["SurfaceAreaAnalysed"] = txtD23.Text;
+            row["ParticleRanges"] = txtE23.Text;
+            dtHeader.Rows.Add(row);
+            row = dtHeader.NewRow();
+            row["ParticleAnalysisBySEMEDX"] = txtA24.Text;
+            row["TapedAreaForDriveParts"] = txtB24.Text;
+            row["NoofTimesTaped"] = txtC24.Text;
+            row["SurfaceAreaAnalysed"] = txtD24.Text;
+            row["ParticleRanges"] = txtE24.Text;
+            dtHeader.Rows.Add(row);
+            row = dtHeader.NewRow();
+            row["ParticleAnalysisBySEMEDX"] = txtA25.Text;
+            row["TapedAreaForDriveParts"] = txtB25.Text;
+            row["NoofTimesTaped"] = txtC25.Text;
+            row["SurfaceAreaAnalysed"] = txtD25.Text;
+            row["ParticleRanges"] = txtE25.Text;
+            dtHeader.Rows.Add(row);
+
+            List<template_wd_hpa_for3_coverpage> specs = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RESULT_ON_ARM) ||
+                                x.row_group == Convert.ToInt32(HPAFor3Group.RESULT_ON_PIVOT) ||
+                                x.row_group == Convert.ToInt32(HPAFor3Group.RESULT_ON_SWAGE) ||
+                                x.row_group == Convert.ToInt32(HPAFor3Group.AVERAGE_RESULT) ||
+                                x.row_group == Convert.ToInt32(HPAFor3Group.SPECIFICATION) ||
+                                x.row_group == Convert.ToInt32(HPAFor3Group.PASS_SLASH_FAIL)).OrderBy(x => x.seq).ToList();
+
+            List<template_wd_hpa_for3_coverpage> arms = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_ARM) ||
+                                            x.row_group == Convert.ToInt32(HPAFor3Group.ARM_SUB_TOTAL) ||
+                                            x.row_group == Convert.ToInt32(HPAFor3Group.ARM_GRAND_TOTAL)).OrderBy(x => x.seq).ToList();
+
+            List<template_wd_hpa_for3_coverpage> pivots = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_PIVOT) ||
+                            x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_SUB_TOTAL) ||
+                            x.row_group == Convert.ToInt32(HPAFor3Group.PIVOT_GRAND_TOTAL)).OrderBy(x => x.seq).ToList();
+
+            List<template_wd_hpa_for3_coverpage> swage = this.HpaFor3.Where(x => x.row_group == Convert.ToInt32(HPAFor3Group.RAWDATA_SWAGE) ||
+                x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_SUB_TOTAL) ||
+                x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_GRAND_TOTAL)).OrderBy(x => x.seq).ToList();
+
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", "-"));
+            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", lbDocNo.Text, lbComponent.Text)));
+            reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor3[0].img_path));
+            reportParameters.Add(new ReportParameter("img02Url", Configurations.HOST + "" + this.HpaFor3[0].img_path1));
+            reportParameters.Add(new ReportParameter("img03Url", Configurations.HOST + "" + this.HpaFor3[0].img_path2));
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_3_wd_pdf.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", arms.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", pivots.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", swage.ToDataTable())); // Add datasource here
+
+
+
+
+            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush(); // send it to the client to download
+
+
+        }
         protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
@@ -1891,7 +2000,7 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Disk Material");
             items.Add("$Grand Total of All Particles");
             #endregion
-            
+
 
             String LastGroup = String.Empty;
             foreach (String item in items)
@@ -1950,7 +2059,7 @@ namespace ALS.ALSI.Web.view.template
             $ = Grand Total
             -------------------------
             */
-            
+
             #region "Pivot"
             items.Add("#Hard Particles ");
             items.Add("Al-O");
@@ -2042,7 +2151,7 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Disk Material");
             items.Add("$Grand Total of All Particles");
             #endregion
-            
+
             String LastGroup = String.Empty;
             foreach (String item in items)
             {
@@ -2100,7 +2209,7 @@ namespace ALS.ALSI.Web.view.template
             $ = Grand Total
             -------------------------
             */
-           
+
             #region "Swage"
             items.Add("#Hard Particles ");
             items.Add("Al-O");

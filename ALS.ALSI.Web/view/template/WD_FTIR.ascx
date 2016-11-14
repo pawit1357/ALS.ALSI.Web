@@ -497,6 +497,8 @@ The instrument detection limit for silicone oil is
                                                 <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
                                                     <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
                                                 </asp:LinkButton>
+                                                <asp:LinkButton ID="lbDownloadPdf" runat="server" OnClick="lbDownloadPdf_Click" Text="ดาวโหลด pdf สำหรับส่งอีเมล์ลูกค้า">
+                                                </asp:LinkButton>
                                             </div>
                                         </div>
                                         <%--      </div>
@@ -694,6 +696,7 @@ The instrument detection limit for silicone oil is
             <asp:PostBackTrigger ControlID="btnLoadFile" />
             <asp:PostBackTrigger ControlID="lbDownload" />
             <asp:PostBackTrigger ControlID="lbDecimal" />
+            <asp:PostBackTrigger ControlID="lbDownloadPdf" />
         </Triggers>
     </asp:UpdatePanel>
 </form>

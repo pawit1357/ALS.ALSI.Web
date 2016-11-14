@@ -131,8 +131,8 @@ namespace ALS.ALSI.Web.view.template
                     _cas.RowState = CommandNameEnum.Edit;
                 }
 
-  
-                gvResult.DataSource = this.tbCas.Where(x=>x.row_type.Value != Convert.ToInt32(CommandNameEnum.MajorCompounds));
+
+                gvResult.DataSource = this.tbCas.Where(x => x.row_type.Value != Convert.ToInt32(CommandNameEnum.MajorCompounds));
                 gvResult.DataBind();
             }
 
@@ -253,7 +253,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     #endregion
 
-          
+
 
                     txtProcedure.Enabled = true;
                     txtNumberOfPieces.Enabled = true;
@@ -286,7 +286,7 @@ namespace ALS.ALSI.Web.view.template
                         btnDHS.Visible = true;
                     }
 
-                    }
+                }
                 #endregion
                 #region "COVERPAGE"
                 if (this.coverpages != null && this.coverpages.Count > 0)
@@ -311,7 +311,7 @@ namespace ALS.ALSI.Web.view.template
                     txtNumberOfPieces.Text = this.coverpages[0].pm_number_of_pieces;
                     txtExtractionMedium.Text = this.coverpages[0].pm_extraction_medium;
                     txtExtractionVolumn.Text = this.coverpages[0].pm_extraction_volumn;
-                    
+
                     hProcedureUnit.Value = this.coverpages[0].pm_unit;
 
                     //gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", hProcedureUnit.Value);
@@ -364,12 +364,12 @@ namespace ALS.ALSI.Web.view.template
 
             if (!Page.IsPostBack)
             {
-               
+
                 initialPage();
             }
 
 
-            
+
         }
 
         #region "Button"
@@ -426,7 +426,7 @@ namespace ALS.ALSI.Web.view.template
                     #region "Cover Page#"
                     foreach (template_wd_gcms_coverpage _cov in this.coverpages)
                     {
-    
+
 
                         _cov.pm_procedure = txtProcedure.Text;
                         _cov.pm_number_of_pieces = txtNumberOfPieces.Text;
@@ -447,7 +447,7 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                       
+
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
                             break;
@@ -475,7 +475,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-                       
+
                             this.jobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
@@ -771,7 +771,7 @@ namespace ALS.ALSI.Web.view.template
                 _ddlPassFail.Items.Add(new ListItem("FAIL", "FAIL"));
             }
 
-            
+
         }
         protected void gvCoverPages_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
@@ -787,7 +787,7 @@ namespace ALS.ALSI.Web.view.template
             DropDownList _ddlResult = (DropDownList)gvCoverPages.Rows[e.RowIndex].FindControl("ddlResult");
             DropDownList _ddlPassFail = (DropDownList)gvCoverPages.Rows[e.RowIndex].FindControl("ddlPassFail");
 
-            if (_ddlResult != null && _ddlPassFail!=null)
+            if (_ddlResult != null && _ddlPassFail != null)
             {
                 template_wd_gcms_coverpage _tmp = this.coverpages.Find(x => x.ID == _id);
                 if (_tmp != null)
@@ -915,7 +915,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", detailSpec.B, detailSpec.A);
 
-                List<int> ignoreIndex = new List<int>(){0,4};
+                List<int> ignoreIndex = new List<int>() { 0, 4 };
 
                 List<tb_m_detail_spec> headerDs = detailSpec.SelectAll().Take(2).ToList();
                 int index = 1;
@@ -985,11 +985,11 @@ namespace ALS.ALSI.Web.view.template
 
         #region "Custom method"
 
-        
+
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
-           
+
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
@@ -1026,13 +1026,13 @@ namespace ALS.ALSI.Web.view.template
             viewer.ProcessingMode = ProcessingMode.Local;
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/gcms_wd_cvr.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
-            
+
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.Where(x=>x.row_type.Value == Convert.ToInt16(CommandNameEnum.Normal)).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.Where(x => x.row_type.Value == Convert.ToInt16(CommandNameEnum.Normal)).ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.tbCas.FindAll(x => x.row_type == Convert.ToInt32(CommandNameEnum.MajorCompounds)).ToDataTable())); // Add datasource here
 
 
-            
+
 
 
 
@@ -1076,6 +1076,65 @@ namespace ALS.ALSI.Web.view.template
 
                     break;
             }
+
+        }
+
+        protected void lbDownloadPdf_Click(object sender, EventArgs e)
+        {
+
+            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", "GCMS - Hydrocarbon Residue"));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+
+
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/gcms_wd_cvr_pdf.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.Where(x => x.row_type.Value == Convert.ToInt16(CommandNameEnum.Normal)).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.tbCas.FindAll(x => x.row_type == Convert.ToInt32(CommandNameEnum.MajorCompounds)).ToDataTable())); // Add datasource here
+
+
+
+
+            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush(); // send it to the client to download
 
         }
 

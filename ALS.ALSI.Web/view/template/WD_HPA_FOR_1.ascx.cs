@@ -647,7 +647,7 @@ namespace ALS.ALSI.Web.view.template
                     _val.C = mappedValue.C;
                     if (_val.D != null)
                     {
-                        _val.E = _val.D.Equals("NA") ? "NA":_val.D.Equals("TBD")? "" : (_val.C >= Convert.ToInt32(_val.D)) ? "FAIL" : "PASS";
+                        _val.E = _val.D.Equals("NA") ? "NA" : _val.D.Equals("TBD") ? "" : (_val.C >= Convert.ToInt32(_val.D)) ? "FAIL" : "PASS";
                     }
                 }
 
@@ -688,7 +688,7 @@ namespace ALS.ALSI.Web.view.template
             if (detailSpec != null)
             {
                 tb_m_detail_spec dp = detailSpecs.Where(x => x.A.Equals("Indirect Material")).FirstOrDefault();
-                
+
                 lbDocNo.Text = detailSpec.B;
                 lbComponent.Text = detailSpec.A;
                 List<template_wd_hpa_for1_coverpage> _list = new List<template_wd_hpa_for1_coverpage>();
@@ -986,6 +986,68 @@ namespace ALS.ALSI.Web.view.template
                     break;
             }
 
+
+
+        }
+        protected void lbDownloadPdf_Click(object sender, EventArgs e)
+        {
+
+
+            DataTable dt = Extenders.ObjectToDataTable(this.HpaFor1[0]);
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+            List<template_wd_hpa_for1_coverpage> listHpa = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> listElementalComposition = this.HpaFor1.Where(x =>
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).ToList();
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", "-"));
+            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", lbDocNo.Text, lbComponent.Text)));
+            reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor1[0].img_path));
+            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd_pdf.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", listHpa.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.ToDataTable())); // Add datasource here
+
+            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush(); // send it to the client to download
 
 
         }

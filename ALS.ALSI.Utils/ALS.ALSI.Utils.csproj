@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="BlankLetterHeadEL.doc" />
+    <None Include="BlankLetterHeadEL.dotx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

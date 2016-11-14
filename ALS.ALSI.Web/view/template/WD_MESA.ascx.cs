@@ -203,7 +203,7 @@ namespace ALS.ALSI.Web.view.template
                 //    img.p
                 //}
                 //String.Concat(Configurations.HOST,
-                gvRefImages.DataSource = this.refImg.OrderBy(x=>x.area).OrderBy(x=>x.descripton).ToList();
+                gvRefImages.DataSource = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
                 gvRefImages.DataBind();
             }
             if (this.coverpages != null && this.coverpages.Count > 0)
@@ -772,7 +772,7 @@ namespace ALS.ALSI.Web.view.template
                     if (!String.IsNullOrEmpty(this.jobSample.path_word))
                     {
                         //Response.Redirect(HttpContext.Current.Server.MapPath(this.jobSample.path_word));
-                        Response.Redirect(String.Concat( Configurations.HOST, this.jobSample.path_word));
+                        Response.Redirect(String.Concat(Configurations.HOST, this.jobSample.path_word));
                     }
                     else
                     {
@@ -828,6 +828,89 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        protected void lbDownloadPdf_Click(object sender, EventArgs e)
+        {
+
+
+            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+
+
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", "-"));
+            reportParameters.Add(new ReportParameter("ResultDesc", ""));
+            List<template_wd_mesa_img> imgList = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
+            List<template_wd_mesa_img> tmpImg1 = new List<template_wd_mesa_img>();
+            tmpImg1.Add(imgList[0]);
+            List<template_wd_mesa_img> tmpImg2 = new List<template_wd_mesa_img>();
+            tmpImg2.Add(imgList[1]);
+            List<template_wd_mesa_img> tmpImg3 = new List<template_wd_mesa_img>();
+            tmpImg3.Add(imgList[2]);
+            List<template_wd_mesa_img> tmpImg4 = new List<template_wd_mesa_img>();
+            tmpImg4.Add(imgList[3]);
+            reportParameters.Add(new ReportParameter("area1_desc", imgList[0].descripton));
+            reportParameters.Add(new ReportParameter("area2_desc", imgList[1].descripton));
+            reportParameters.Add(new ReportParameter("area3_desc", imgList[2].descripton));
+            reportParameters.Add(new ReportParameter("area4_desc", imgList[3].descripton));
+
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+            List<template_wd_mesa_img> dat = this.refImg;
+            foreach (template_wd_mesa_img _i in dat)
+            {
+                _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
+                _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
+                _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
+                _i.img4 = CustomUtils.GetBytesFromImage(_i.path_edx_spectrum);
+            }
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd_pdf.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+
+
+
+
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", tmpImg1.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", tmpImg2.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", tmpImg3.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", tmpImg4.ToDataTable())); // Add datasource here
+
+
+            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush(); // send it to the client to download
+
+
+
+        }
 
 
         private void downloadWord()

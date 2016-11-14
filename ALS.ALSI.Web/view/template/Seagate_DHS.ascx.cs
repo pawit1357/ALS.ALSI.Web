@@ -115,7 +115,7 @@ namespace ALS.ALSI.Web.view.template
 
             tb_unit unit = new tb_unit();
             ddlUnit.Items.Clear();
-            ddlUnit.DataSource = unit.SelectAll().Where(x=>x.unit_group.Equals("DHS")).ToList();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("DHS")).ToList();
             ddlUnit.DataBind();
             ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
             //ddlComponent.Items.Clear();
@@ -226,10 +226,10 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
                 #region "VISIBLE RESULT DATA"
-                if (status == StatusEnum.CHEMIST_TESTING || 
+                if (status == StatusEnum.CHEMIST_TESTING ||
                     //status == StatusEnum.SR_CHEMIST_CHECKING && 
                     userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) //||
-                    //userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST)
+                                                                           //userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST)
                     )
                 {
                     #region ":: STAMP ANALYZED DATE ::"
@@ -260,7 +260,7 @@ namespace ALS.ALSI.Web.view.template
                     btnCoverPage.Visible = false;
                     btnDHS.Visible = false;
                     pLoadRawData.Visible = false;
-                    
+
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
                     {
                         btnDHS.Visible = true;
@@ -629,7 +629,7 @@ namespace ALS.ALSI.Web.view.template
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
                                                     Console.WriteLine();
                                                     break;
-                                                
+
                                                 case "00010011"://TOTAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
@@ -1029,6 +1029,59 @@ namespace ALS.ALSI.Web.view.template
 
 
 
+
+        }
+        protected void lbDownloadPdf_Click(object sender, EventArgs e)
+        {
+
+            tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
+
+            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("rpt_unit", component.C));
+
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", "DHS"));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_seagate_pdf.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
+
+
+
+            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush(); // send it to the client to download
 
         }
 

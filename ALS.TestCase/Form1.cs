@@ -20,9 +20,12 @@ namespace ALS.TestCase
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            String[] fileToMerge = new string[1];
-            fileToMerge[0] = "C:\\Users\\icnsk\\Downloads\\ELP-1249-DB (1).doc";
-            MsWord.Merge(fileToMerge, "C:\\Users\\icnsk\\Downloads\\testhui.doc", false);
+            //String[] fileToMerge = new string[1];
+            ////fileToMerge[0] = @"C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Utils\BlankLetterHeadEL.dotx";
+            //fileToMerge[0] = @"C:\Users\icnsk\Downloads\ELP-1362A-DB.doc";
+            //MsWord.Merge(fileToMerge, "C:\\Users\\icnsk\\Downloads\\testhui"+DateTime.Now.ToString("yyyyMMddHHmm")+".doc", false);
+            MsWord.AddPageHeaderFooter(@"C:\Users\icnsk\Downloads\Doc1.docx");
+            System.Windows.Forms.MessageBox.Show("Finish");
 
         }
     }

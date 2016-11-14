@@ -25,7 +25,7 @@
 
                         <asp:Panel ID="pLoadFile" runat="server">
 
-<%--                            <div class="form-group">
+                            <%--                            <div class="form-group">
                                 <label class="control-label col-md-3">ทศนิยม</label>
                                 <div class="col-md-9">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -199,7 +199,7 @@
                                                     <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
                                             </tr>
                                             <tr>
-                                                
+
                                                 <td>
                                                     <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
@@ -363,6 +363,8 @@
                                                 <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
                                                     <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
                                                 </asp:LinkButton>
+                                                <asp:LinkButton ID="lbDownloadPdf" runat="server" OnClick="lbDownloadPdf_Click" Text="ดาวโหลด pdf สำหรับส่งอีเมล์ลูกค้า">
+                                                </asp:LinkButton>
                                             </div>
                                         </div>
                                         <%--       </div>
@@ -516,6 +518,7 @@
             <asp:PostBackTrigger ControlID="btnSubmit" />
             <asp:PostBackTrigger ControlID="btnLoadFile" />
             <asp:PostBackTrigger ControlID="lbDownload" />
+            <asp:PostBackTrigger ControlID="lbDownloadPdf" />
             <asp:PostBackTrigger ControlID="lbDecimal" />
         </Triggers>
     </asp:UpdatePanel>
