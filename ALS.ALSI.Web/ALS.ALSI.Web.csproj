@@ -92,6 +92,15 @@
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.Doc">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\e-iceblue\Spire.Doc-Fe\Bin\NET2.0\Spire.Doc.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\e-iceblue\Spire.Doc-Fe\Bin\NET2.0\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\e-iceblue\Spire.Doc-Fe\Bin\NET2.0\Spire.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
@@ -1660,7 +1669,6 @@
     <Folder Include="assets\layouts\" />
     <Folder Include="assets\pages\img\" />
     <Folder Include="assets\pages\media\" />
-    <Folder Include="template\" />
     <Folder Include="uploads\" />
     <Folder Include="view\dashboard\" />
     <Folder Include="view\permission\" />
@@ -1716,6 +1724,9 @@
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Report\ELP-1249-DB.doc" />
+    <Content Include="Report\ELP-1249-DB_orginal.doc" />
+    <Content Include="template\Blank Letter Head - EL.doc" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

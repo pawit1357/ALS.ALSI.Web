@@ -18,6 +18,7 @@ using System.Data;
 using ALS.ALSI.Biz.ReportObjects;
 using Microsoft.Reporting.WebForms;
 using WordToPDF;
+using Spire.Doc;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -1771,13 +1772,30 @@ namespace ALS.ALSI.Web.view.template
                     {
                         byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 
-                        // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-                        Response.Buffer = true;
-                        Response.Clear();
+                        if (!Directory.Exists(Server.MapPath("~/Report/")))
+                        {
+                            Directory.CreateDirectory(Server.MapPath("~/Report/"));
+                        }
+                        using (FileStream fs = File.Create(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension))
+                        {
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+
+                        Document sourceDoc = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
+                        Document destinationDoc = new Document(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
+                        foreach (Section sec in sourceDoc.Sections)
+                        {
+                            foreach (DocumentObject obj in sec.Body.ChildObjects)
+                            {
+                                destinationDoc.Sections[0].Body.ChildObjects.Add(obj.Clone());
+                            }
+                        }
+                        destinationDoc.SaveToFile(Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension);
+
                         Response.ContentType = mimeType;
-                        Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-                        Response.BinaryWrite(bytes); // create the file
-                        Response.Flush(); // send it to the client to download
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                        Response.WriteFile(Server.MapPath("~/Report/" + this.jobSample.job_number + "." + extension));
+                        Response.Flush();
                     }
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:

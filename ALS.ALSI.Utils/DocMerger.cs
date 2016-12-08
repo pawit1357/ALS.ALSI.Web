@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using Word = Microsoft.Office.Interop.Word;
 
@@ -107,25 +107,29 @@ namespace ALS.ALSI.Utils
 
         public static void AddPageHeaderFooter(object fileName)
         {
-            object missing = System.Reflection.Missing.Value;
-            // Create an object for filename, which is the file to be opened
-            //object fileName =@�C:\MySecond.doc�;
-            // Create an object of application class
-            Microsoft.Office.Interop.Word._Application WordApp = new Word.Application();
-            // open the document specified in the fileName variable
-            Word.Document adoc = WordApp.Documents.Open(ref fileName, ref missing, ref missing, ref missing, ref missing,
-            ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing,
-            ref missing, ref missing, ref missing);
-            // We can insert the picture using Range objects AddPicture method
-            // To insert a picture at a particular location in the word document
-            // insert a table over there and then refer that location through range object
-            Word.Range rngPic = adoc.Tables[1].Range;
-            // we can even select a particular cell in the table
-            //Range rngPic = rng.Tables[1].Cell(2, 3).Range;
-            rngPic.InlineShapes.AddPicture(@"C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\images\images.png", ref missing, ref missing, ref missing);
-            WordApp.Visible = false;
 
-  
+            //System.Diagnostics.Process.Start("Sample.docx"); footer.Paragraphs[0].Text = "Author: Charlotte Brontë";
+
+
+            //object missing = System.Reflection.Missing.Value;
+            //// Create an object for filename, which is the file to be opened
+            ////object fileName =@”C:\MySecond.doc”;
+            //// Create an object of application class
+            //Microsoft.Office.Interop.Word._Application WordApp = new Word.Application();
+            //// open the document specified in the fileName variable
+            //Word.Document adoc = WordApp.Documents.Open(ref fileName, ref missing, ref missing, ref missing, ref missing,
+            //ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing,
+            //ref missing, ref missing, ref missing);
+            //// We can insert the picture using Range objects AddPicture method
+            //// To insert a picture at a particular location in the word document
+            //// insert a table over there and then refer that location through range object
+            //Word.Range rngPic = adoc.Tables[1].Range;
+            //// we can even select a particular cell in the table
+            ////Range rngPic = rng.Tables[1].Cell(2, 3).Range;
+            //rngPic.InlineShapes.AddPicture(@"C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\images\images.png", ref missing, ref missing, ref missing);
+            //WordApp.Visible = false;
+
+
         }
 
         //public static void InsertPageHeader()

@@ -247,15 +247,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbDownloadName;
         
         /// <summary>
-        /// lbDownloadPdf control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbDownloadPdf;
-        
-        /// <summary>
         /// pUploadfile control.
         /// </summary>
         /// <remarks>
