@@ -45,6 +45,12 @@ namespace ALS.ALSI.Biz.DataAccess
             return _repository.Find(x => x.ID == _id).FirstOrDefault();
         }
 
+        public string getProcedureByTemplateId(int _templateId)
+        {
+            List<tb_m_specification> listOfSpec = _repository.Find(x => x.template_id == _templateId).ToList();
+            return (listOfSpec.Count > 0) ? listOfSpec[1].C : string.Empty;
+        }
+
         public void Insert()
         {
             _repository.Add(this);

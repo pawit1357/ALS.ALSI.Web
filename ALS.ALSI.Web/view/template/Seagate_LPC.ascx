@@ -21,7 +21,7 @@
                         <div class="row" id="invDiv" runat="server">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-10">
                                         <h5>METHOD/PROCEDURE:</h5>
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>

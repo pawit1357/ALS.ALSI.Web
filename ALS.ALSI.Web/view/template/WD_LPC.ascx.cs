@@ -1277,6 +1277,72 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
 
+            //Cal Average
+
+            foreach(template_wd_lpc_coverpage item in this.Lpc.Where(x=>x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList())
+            {
+                this.Lpc.Remove(item);
+            }
+
+            List<String> listOFParticle = new List<String>();
+
+            listOFParticle.Add("0.200");
+            listOFParticle.Add("0.300");
+            listOFParticle.Add("0.500");
+            listOFParticle.Add("0.700");
+            listOFParticle.Add("1.000");
+            listOFParticle.Add("2.000");
+
+            List<template_wd_lpc_coverpage> tmps = new List<template_wd_lpc_coverpage>();
+
+            foreach (String par in listOFParticle)
+            {
+                template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.A = "Average";
+                tmp.B = par;
+                tmp.C = string.Empty;
+                tmp.D = string.Empty;
+                tmp.E = CustomUtils.Average(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.E)).ToList()).ToString();
+                tmp.F = CustomUtils.Average(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.F)).ToList()).ToString();
+                tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmps.Add(tmp);
+            }
+            foreach (String par in listOFParticle)
+            {
+                template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.A = "Standard Deviation";
+                tmp.B = par;
+                tmp.C = string.Empty;
+                tmp.D = string.Empty;
+                tmp.E = CustomUtils.StandardDeviation(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.E)).ToList()).ToString();
+                tmp.F = CustomUtils.StandardDeviation(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.F)).ToList()).ToString();
+                tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmps.Add(tmp);
+            }
+            foreach (String par in listOFParticle)
+            {
+                template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.A = "%RSD Deviation";
+                tmp.B = par;
+                tmp.C = string.Empty;
+                tmp.D = string.Empty;
+
+                double _E = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Average")).FirstOrDefault().E);
+                double _E2 = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Standard Deviation")).FirstOrDefault().E);
+
+                double _F = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Average")).FirstOrDefault().F);
+                double _F2 = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Standard Deviation")).FirstOrDefault().F);
+
+                tmp.E = ((_E2 / _E) * 100).ToString();
+                tmp.F = ((_F2 / _F) * 100).ToString();
+                tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmps.Add(tmp);
+            }
+
+            this.Lpc.AddRange(tmps);
+
+
+
 
             gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));
             gvResult.DataBind();
@@ -1437,6 +1503,7 @@ namespace ALS.ALSI.Web.view.template
 
                     gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));
                     gvResult.DataBind();
+                    CalculateCas();
                 }
             }
         }

@@ -248,6 +248,11 @@ namespace ALS.ALSI.Web.view.template
                         btnCoverPage.Visible = true;
                         btnWorkSheet.Visible = true;
                     }
+                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.LOGIN))
+                    {
+                        txtB19.Enabled = true;
+                    }
+
                     gvCoverPage03.Columns[3].Visible = false;
                     gvCoverPage05.Columns[3].Visible = false;
                     gvCoverPage06.Columns[3].Visible = false;
@@ -1420,6 +1425,8 @@ namespace ALS.ALSI.Web.view.template
                 int template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
                 string lpc_type = ddlA19.SelectedValue;
 
+                //Procedure
+                txtB19.Text = new tb_m_specification().getProcedureByTemplateId(jobSample.template_id);
 
                 #region "0.300"
                 List<template_seagate_lpc_coverpage> results03 = new List<template_seagate_lpc_coverpage>();
@@ -1552,35 +1559,149 @@ namespace ALS.ALSI.Web.view.template
                 "2" > LPC(132 KHz)            
                 "4" > LPC(Tray)
                 */
-                results03.Add(new template_seagate_lpc_coverpage
-                {
-                    channel_size = "0.300",
-                    LiquidParticleCount = "Average",
-                    //SpecificationLimits = lpc_type.Equals("1") ? tem.F : lpc_type.Equals("2") ? tem.H : lpc_type.Equals("3") ? tem.D : tem.D,//Original
-                    SpecificationLimits = lpc_type.Equals("1") ? tem.F : lpc_type.Equals("2") ? tem.H : lpc_type.Equals("3") ? tem.F : "-",
+                template_seagate_lpc_coverpage tmp03 = new template_seagate_lpc_coverpage();
 
-                    Results = "",
-                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
-                    id = 13
-                });
-                results05.Add(new template_seagate_lpc_coverpage
+                tmp03.channel_size = "0.300";
+                tmp03.LiquidParticleCount = "Average";
+                //IDM
+                string spec03 = string.Empty;
+                switch (template_type)
                 {
-                    channel_size = "0.500",
-                    LiquidParticleCount = "Average",
-                    SpecificationLimits = lpc_type.Equals("1") ? "-" : lpc_type.Equals("2") ? "-" : lpc_type.Equals("3") ? tem.G : "-",
-                    Results = "",
-                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
-                    id = 14
-                });
-                results06.Add(new template_seagate_lpc_coverpage
+                    case 1://Component
+                        switch (lpc_type)
+                        {
+                            case "1"://> LPC(68 KHz)   
+                                spec03 = tem.F;
+                                break;
+                            case "2"://> LPC(132 KHz)   
+                                spec03 = tem.H;
+                                break;
+                            case "3"://> LPC
+                                spec03 = string.Empty;
+                                break;
+                            case "4"://> LPC(Tray)
+                                spec03 = string.Empty;
+                                break;
+                        }
+                        break;
+                    case 2://IDM
+                        switch (lpc_type)
+                        {
+                            case "1"://> LPC(68 KHz)   
+                                spec03 = string.Empty;
+                                break;
+                            case "2"://> LPC(132 KHz)   
+                                spec03 = string.Empty;
+                                break;
+                            case "3"://> LPC
+                                spec03 = tem.F;
+                                break;
+                            case "4"://> LPC(Tray)
+                                spec03 = tem.I;
+                                break;
+                        }
+                        break;
+                }
+                tmp03.SpecificationLimits = spec03;
+                tmp03.Results = "";
+                tmp03.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                tmp03.id = 13;
+                results03.Add(tmp03);
+
+                template_seagate_lpc_coverpage tmp05 = new template_seagate_lpc_coverpage();
+
+                tmp05.channel_size = "0.500";
+                tmp05.LiquidParticleCount = "Average";
+                string spec05 = string.Empty;
+                switch (template_type)
                 {
-                    channel_size = "0.600",
-                    LiquidParticleCount = "Average",
-                    SpecificationLimits = lpc_type.Equals("1") ? tem.G : lpc_type.Equals("2") ? tem.I : lpc_type.Equals("3") ? tem.H : "-",
-                    Results = "",
-                    row_state = Convert.ToInt32(RowTypeEnum.Normal),
-                    id = 15
-                });
+                    case 1://Component
+                        switch (lpc_type)
+                        {
+                            case "1"://> LPC(68 KHz)   
+                                spec05 = string.Empty;
+                                break;
+                            case "2"://> LPC(132 KHz)   
+                                spec05 = string.Empty;
+                                break;
+                            case "3"://> LPC
+                                spec05 = string.Empty;
+                                break;
+                            case "4"://> LPC(Tray)
+                                spec05 = string.Empty;
+                                break;
+                        }
+                        break;
+                    case 2://IDM
+                        switch (lpc_type)
+                        {
+                            case "1"://> LPC(68 KHz)   
+                                spec05 = String.Empty;
+                                break;
+                            case "2"://> LPC(132 KHz)   
+                                spec05 = String.Empty;
+                                break;
+                            case "3"://> LPC
+                                spec05 = tem.G;
+                                break;
+                            case "4"://> LPC(Tray)
+                                spec05 = String.Empty;
+                                break;
+                        }
+                        break;
+                }
+                tmp05.SpecificationLimits = spec05;
+                tmp05.Results = "";
+                tmp05.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                tmp05.id = 14;
+
+                results05.Add(tmp05);
+                template_seagate_lpc_coverpage tmp06 = new template_seagate_lpc_coverpage();
+                tmp06.channel_size = "0.600";
+                tmp06.LiquidParticleCount = "Average";
+                string spec06 = string.Empty;
+                switch (template_type)
+                {
+                    case 1://Component
+                        switch (lpc_type)
+                        {
+                            case "1"://> LPC(68 KHz)   
+                                spec06 = tem.G;
+                                break;
+                            case "2"://> LPC(132 KHz)   
+                                spec06 = tem.I;
+                                break;
+                            case "3"://> LPC
+                                spec06 = String.Empty;
+                                break;
+                            case "4"://> LPC(Tray)
+                                spec06 = String.Empty;
+                                break;
+                        }
+                        break;
+                    case 2://IDM
+                        switch (lpc_type)
+                        {
+                            case "1"://> LPC(68 KHz)   
+                                spec06 = String.Empty;
+                                break;
+                            case "2"://> LPC(132 KHz)   
+                                spec06 = String.Empty;
+                                break;
+                            case "3"://> LPC
+                                spec06 = tem.H;
+                                break;
+                            case "4"://> LPC(Tray)
+                                spec06 = tem.J;
+                                break;
+                        }
+                        break;
+                }
+                tmp06.SpecificationLimits = spec06;
+                tmp06.Results = "";
+                tmp06.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                tmp06.id = 15;
+                results06.Add(tmp06);
 
                 switch (ddlTemplateType.SelectedValue)
                 {
