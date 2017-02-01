@@ -1255,7 +1255,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     _cover.result = String.IsNullOrEmpty(_cover.result) ? "Not Detected" : _cover.result;
 
-                    double spec = (_cover.specification_limits.Equals("NA") || _cover.specification_limits.Equals("ND") || _cover.specification_limits.Equals("-")) ? 0 : Convert.ToDouble(_cover.specification_limits.Replace("<", "").Trim());
+                    double spec = (_cover.specification_limits.Equals("NA") || _cover.specification_limits.Equals("ND") || _cover.specification_limits.Equals("-")) ? 0 : Convert.ToDouble(_cover.specification_limits.Split('(')[0].Replace("<", "").Trim());
                     double result = _cover.result.Equals("Not Detected") ? 0 : Convert.ToDouble(_cover.result);
                     _cover.result_pass_or_false = _cover.specification_limits.Equals("NA") ? "NA" : (_cover.result.Equals("Not Detected") || result < spec) ? "PASS" : "FAIL";
 

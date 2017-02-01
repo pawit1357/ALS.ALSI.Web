@@ -252,7 +252,7 @@ namespace ALS.ALSI.Web.view.template
                 tb_m_detail_spec tem = new tb_m_detail_spec().SelectByID(Convert.ToInt32(_lpc.detail_spec_id));
                 if (tem != null)
                 {
-                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", detailSpec.B, detailSpec.A);
+                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
 
                     //lbSpecRev.Text = tem.B;
                     //lbComponent.Text = tem.A;

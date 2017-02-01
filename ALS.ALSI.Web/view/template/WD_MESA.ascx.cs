@@ -718,17 +718,33 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("ResultDesc", ""));
             List<template_wd_mesa_img> imgList = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
             List<template_wd_mesa_img> tmpImg1 = new List<template_wd_mesa_img>();
-            tmpImg1.Add(imgList[0]);
+            if (imgList.Count >= 1)
+            {
+                tmpImg1.Add(imgList[0]);
+            }
+
             List<template_wd_mesa_img> tmpImg2 = new List<template_wd_mesa_img>();
-            tmpImg2.Add(imgList[1]);
+            if (imgList.Count >= 2)
+            {
+                tmpImg2.Add(imgList[1]);
+            }
+
             List<template_wd_mesa_img> tmpImg3 = new List<template_wd_mesa_img>();
-            tmpImg3.Add(imgList[2]);
+            if (imgList.Count >= 3)
+            {
+                tmpImg3.Add(imgList[2]);
+            }
+
             List<template_wd_mesa_img> tmpImg4 = new List<template_wd_mesa_img>();
-            tmpImg4.Add(imgList[3]);
-            reportParameters.Add(new ReportParameter("area1_desc", imgList[0].descripton));
-            reportParameters.Add(new ReportParameter("area2_desc", imgList[1].descripton));
-            reportParameters.Add(new ReportParameter("area3_desc", imgList[2].descripton));
-            reportParameters.Add(new ReportParameter("area4_desc", imgList[3].descripton));
+            if (imgList.Count >= 4)
+            {
+                tmpImg4.Add(imgList[3]);
+            }
+
+            reportParameters.Add(new ReportParameter("area1_desc", (imgList.Count>=1) ? imgList[0].descripton : string.Empty));
+            reportParameters.Add(new ReportParameter("area2_desc", (imgList.Count>=2) ? imgList[1].descripton : string.Empty));
+            reportParameters.Add(new ReportParameter("area3_desc", (imgList.Count>=3)? imgList[2].descripton:string.Empty));
+            reportParameters.Add(new ReportParameter("area4_desc", (imgList.Count>=4) ? imgList[3].descripton : string.Empty));
 
 
             // Variables

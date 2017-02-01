@@ -112,6 +112,12 @@ namespace ALS.ALSI.Web.view.template
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            tb_unit unit = new tb_unit();
+
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlSpecification.Items.Clear();
             ddlSpecification.DataSource = detailSpec.SelectAll();
@@ -321,10 +327,12 @@ namespace ALS.ALSI.Web.view.template
                     //GenerrateCoverPage();
 
                     #region "Unit"
+                    if (!String.IsNullOrEmpty(ddlUnit.SelectedValue)) { 
                     gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
                     gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
                     gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
                     gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", ddlUnit.SelectedItem.Text);
+                }
                     #endregion
 
                     gvCoverPages.DataSource = this.coverpages;
@@ -1218,6 +1226,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
             gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
             gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
@@ -1225,6 +1234,10 @@ namespace ALS.ALSI.Web.view.template
 
 
             ModolPopupExtender.Show();
+            gvCoverPages.DataSource = this.coverpages;
+            gvCoverPages.DataBind();
+
+
         }
     }
 }
