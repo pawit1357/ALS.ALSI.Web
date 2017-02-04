@@ -373,6 +373,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
+        /// txtDecimal03 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDecimal03;
+        
+        /// <summary>
         /// txtDecimal01 control.
         /// </summary>
         /// <remarks>

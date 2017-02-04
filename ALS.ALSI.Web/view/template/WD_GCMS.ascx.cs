@@ -659,7 +659,13 @@ namespace ALS.ALSI.Web.view.template
                                             tmp.ID = j;
                                             tmp.sample_id = this.SampleID;
                                             tmp.pk = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(0));
-                                            tmp.rt = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1));
+                                            if (isheet.GetRow(j).GetCell(1) != null && !String.IsNullOrEmpty(tmp.pk))
+                                            {
+                                                if (isheet.GetRow(j).GetCell(1).CellType != CellType.Blank)
+                                                {
+                                                    tmp.rt = Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1))).ToString("N"+txtDecimal03.Text);
+                                                }
+                                            }
                                             tmp.library_id = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(2));
                                             tmp.classification = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(3));
                                             tmp.cas = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(4));
@@ -715,7 +721,14 @@ namespace ALS.ALSI.Web.view.template
                                             tmp.ID = j;
                                             tmp.sample_id = this.SampleID;
                                             tmp.pk = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(0));
-                                            tmp.rt = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1));
+                                            //tmp.rt = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1));
+                                            if (isheet.GetRow(j).GetCell(1) != null && !String.IsNullOrEmpty(tmp.pk))
+                                            {
+                                                if (isheet.GetRow(j).GetCell(1).CellType != CellType.Blank)
+                                                {
+                                                    tmp.rt = Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1))).ToString("N" + txtDecimal03.Text);
+                                                }
+                                            }
                                             tmp.library_id = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(2));
                                             tmp.classification = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(3));
                                             tmp.cas = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(4));

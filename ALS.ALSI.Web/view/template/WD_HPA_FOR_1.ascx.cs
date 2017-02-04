@@ -263,8 +263,7 @@ namespace ALS.ALSI.Web.view.template
                 detailSpec = new tb_m_detail_spec().SelectByID(_cover.detail_spec_id.Value);
                 if (detailSpec != null)
                 {
-                    lbDocNo.Text = detailSpec.B;
-                    lbComponent.Text = detailSpec.A;
+                    lbSpecDesc.Text = String.Format("The Specification is based on WD's specification Doc No {0} for {1}", detailSpec.B, detailSpec.A);
                 }
                 CalculateCas();
                 #region "Unit"
@@ -272,6 +271,23 @@ namespace ALS.ALSI.Web.view.template
                 gvResult.Columns[3].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);
                 gvResult_1.Columns[2].HeaderText = String.Format("{0}", ddlUnit.SelectedItem.Text);
                 #endregion
+
+                cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                if (cbCheckBox.Checked)
+                {
+                    lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+                }
+                else
+                {
+                    tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
+                    if (_detailSpec != null)
+                    {
+                        lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", _detailSpec.B, _detailSpec.A);
+                    }
+
+                }
+
+
             }
             else
             {
@@ -690,8 +706,10 @@ namespace ALS.ALSI.Web.view.template
             {
                 tb_m_detail_spec dp = detailSpecs.Where(x => x.A.Equals("Indirect Material")).FirstOrDefault();
 
-                lbDocNo.Text = detailSpec.B;
-                lbComponent.Text = detailSpec.A;
+                //lbDocNo.Text = detailSpec.B;
+                //lbComponent.Text = detailSpec.A;
+                lbSpecDesc.Text = String.Format("The Specification is based on WD's specification Doc No {0} for {1}", detailSpec.B, detailSpec.A);
+
                 List<template_wd_hpa_for1_coverpage> _list = new List<template_wd_hpa_for1_coverpage>();
 
                 List<String> ANameKey = new List<string>();
@@ -903,7 +921,15 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
-            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", lbDocNo.Text, lbComponent.Text)));
+            tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
+            if (_detailSpec != null)
+            {
+                reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", _detailSpec.B, _detailSpec.A)));
+            }
+            else
+            {
+                reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", "", "")));
+            }
             reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor1[0].img_path));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
 
@@ -1034,9 +1060,20 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
 
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+
+
+                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
-            reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", lbDocNo.Text, lbComponent.Text)));
+            tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
+            if (_detailSpec != null)
+            {
+                reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", _detailSpec.B, _detailSpec.A)));
+            }
+            else
+            {
+                reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", "", "")));
+            }
+
             reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor1[0].img_path));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
 
@@ -1398,6 +1435,24 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
         }
 
+        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCheckBox.Checked)
+            {
+                
+                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+            }
+            else
+            {
+                
+                tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
+                if (_detailSpec != null)
+                {
+                    lbSpecDesc.Text = String.Format("The Specification is based on WD's specification Doc No {0} for {1}", _detailSpec.B, _detailSpec.A);
+                }
+            }
+
+        }
 
     }
 }

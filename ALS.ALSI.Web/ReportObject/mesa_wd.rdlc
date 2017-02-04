@@ -2249,10 +2249,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.01476cm</Width>
+              <Width>8.52942cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>9.51466cm</Width>
+              <Width>8.52942cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2283,10 +2283,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2315,10 +2311,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2356,10 +2348,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2388,10 +2376,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2429,10 +2413,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2463,10 +2443,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2504,10 +2480,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2547,10 +2519,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2588,10 +2556,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2620,10 +2584,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2631,12 +2591,13 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.58488cm</Height>
+              <Height>0.37083cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox81">
                       <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -2646,7 +2607,7 @@
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
+                                <FontWeight>Thin</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                                 <Color>#000000</Color>
                               </Style>
@@ -2661,10 +2622,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2673,6 +2630,7 @@
                   <CellContents>
                     <Textbox Name="Textbox83">
                       <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -2681,6 +2639,8 @@
                               <Value>=Parameters!DateSampleReceived.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
+                                <FontWeight>Thin</FontWeight>
+                                <TextDecoration>None</TextDecoration>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2695,10 +2655,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2706,12 +2662,13 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.58488cm</Height>
+              <Height>0.38488cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox84">
                       <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -2721,7 +2678,7 @@
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
+                                <FontWeight>Thin</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                                 <Color>#000000</Color>
                               </Style>
@@ -2736,10 +2693,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2748,6 +2701,7 @@
                   <CellContents>
                     <Textbox Name="Textbox85">
                       <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -2756,6 +2710,8 @@
                               <Value>=Parameters!DateAnalyzed.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
+                                <FontWeight>Thin</FontWeight>
+                                <TextDecoration>None</TextDecoration>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2770,10 +2726,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2781,12 +2733,13 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.58488cm</Height>
+              <Height>0.38488cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox86">
                       <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -2796,7 +2749,7 @@
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
+                                <FontWeight>Thin</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                                 <Color>#000000</Color>
                               </Style>
@@ -2811,10 +2764,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2823,6 +2772,7 @@
                   <CellContents>
                     <Textbox Name="Textbox87">
                       <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -2845,10 +2795,6 @@
                           <Color>White</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2862,6 +2808,7 @@
                   <CellContents>
                     <Textbox Name="Textbox6">
                       <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -2898,6 +2845,7 @@
                   <CellContents>
                     <Textbox Name="Textbox7">
                       <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -3061,15 +3009,16 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>1.73146cm</Top>
-        <Left>0.98651cm</Left>
-        <Height>6.31749cm</Height>
-        <Width>15.52942cm</Width>
+        <Top>1.22555cm</Top>
+        <Left>0.98646cm</Left>
+        <Height>5.70344cm</Height>
+        <Width>17.05884cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Color>White</Color>
             <Style>None</Style>
+            <Width>0.25pt</Width>
           </Border>
           <FontSize>11pt</FontSize>
         </Style>
@@ -3081,7 +3030,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>REPORT </Value>
+                <Value>REPORT 4</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontSize>15pt</FontSize>
@@ -4312,7 +4261,7 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
     <Height>25.43647in</Height>
     <Style />
   </Body>
-  <Width>7.39943in</Width>
+  <Width>7.31066in</Width>
   <Page>
     <PageHeader>
       <Height>0.65625in</Height>

@@ -433,6 +433,11 @@
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
                                     <table class="table table-striped">
+                                                                                <tr>
+                                            <td>Rt</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
                                         <tr>
                                             <td>Amout</td>
                                             <td>

@@ -929,27 +929,48 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
 
             List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 10).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, (ds2.Count > 25) ? 25 : ds2.Count - 10).ToDataTable())); // Add datasource here
-            if (ds2.Count > 35)
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+
+            if (ds2.Count > 0 && ds2.Count < 20)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(35, ds2.Count - 35).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
+            }
+            if (ds2.Count >= 20)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 20).ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+            }
+
+            if (ds2.Count > 20 && ds2.Count < 40)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(20, ds2.Count - 20).ToDataTable())); // Add datasource here
+            }
+            if (ds2.Count >=40)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(20, 40).ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+
+            }
+            if (ds2.Count > 40 && ds2.Count < 60)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(40, ds2.Count - 40).ToDataTable())); // Add datasource here
+            }
+            if (ds2.Count >= 60)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(40, 60).ToDataTable())); // Add datasource here
             }
             else
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
             }
-            // Variables
-            //Warning[] warnings;
-            //string[] streamIds;
-            //string mimeType = string.Empty;
-            //string encoding = string.Empty;
-            //string extension = string.Empty;
-
-            //ReportViewer viewer = new ReportViewer();
-            //viewer.ProcessingMode = ProcessingMode.Local;
-            //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/Report1.rdlc");
-
 
             string download = String.Empty;
 
@@ -975,7 +996,7 @@ namespace ALS.ALSI.Web.view.template
                         }
 
                         Document sourceDoc = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
-                        Document destinationDoc = new Document(Server.MapPath("~/template/") +"Blank Letter Head - EL.doc");
+                        Document destinationDoc = new Document(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
                         foreach (Section sec in sourceDoc.Sections)
                         {
                             foreach (DocumentObject obj in sec.Body.ChildObjects)
@@ -1092,7 +1113,8 @@ namespace ALS.ALSI.Web.view.template
                 Response.BinaryWrite(bytes); // create the file
                 Response.Flush(); // send it to the client to download
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Console.WriteLine();
             }
 
@@ -1271,13 +1293,21 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                 }
-
+                foreach (template_wd_dhs_coverpage _cover in newCoverPage)
+                {
+                    _cover.specification_limits = _cover.specification_limits.Replace("<-", "-");
+                }
                 this.reportCovers = newCoverPage;
                 gvCoverPages.DataSource = newCoverPage;
                 gvCoverPages.DataBind();
             }
             else
             {
+
+                foreach (template_wd_dhs_coverpage _cover in this.coverpages)
+                {
+                    _cover.specification_limits = _cover.specification_limits.Replace("<-", "-");
+                }
                 gvCoverPages.DataSource = this.coverpages;
                 gvCoverPages.DataBind();
             }

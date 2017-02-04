@@ -63,11 +63,23 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                                        <h6>The Specification is based on WD's specification Doc No 
+
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            </tr>
+                                        </table>
+
+                     <%--                   <h6>The Specification is based on WD's specification Doc No 
                             <asp:Label ID="lbDocNo" runat="server" Text=""></asp:Label>
                                             for
                             <asp:Label ID="lbComponent" runat="server" Text=""></asp:Label>
-                                        </h6>
+                                        </h6>--%>
                                     </div>
                                 </div>
                                 <%-- RESULT--%>
