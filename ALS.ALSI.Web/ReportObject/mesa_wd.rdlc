@@ -25,8 +25,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>8.22534cm</Top>
-        <Left>0.85712cm</Left>
+        <Top>5.65899cm</Top>
+        <Left>0.92481cm</Left>
         <Height>0.52881cm</Height>
         <Width>14.7307cm</Width>
         <Style>
@@ -57,7 +57,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.46875in</Height>
+              <Height>0.22917in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -313,7 +313,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -531,9 +533,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>3.51599in</Top>
-        <Left>0.33745in</Left>
-        <Height>0.71875in</Height>
+        <Top>2.47781in</Top>
+        <Left>0.3641in</Left>
+        <Height>0.47917in</Height>
         <Width>6.68314in</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -569,7 +571,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Results</Value>
+                <Value>RESULTS:</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontSize>11pt</FontSize>
@@ -585,9 +587,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>10.82677cm</Top>
-        <Left>0.85493cm</Left>
-        <Height>0.52881cm</Height>
+        <Top>7.61655cm</Top>
+        <Left>0.92262cm</Left>
+        <Height>0.45825cm</Height>
         <Width>14.73289cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
@@ -618,7 +620,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.32292in</Height>
+              <Height>0.19792in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -876,7 +878,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -1092,9 +1096,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>4.55402in</Top>
-        <Left>0.33916in</Left>
-        <Height>0.57292in</Height>
+        <Top>3.20683in</Top>
+        <Left>0.36324in</Left>
+        <Height>0.44792in</Height>
         <Width>6.68229in</Width>
         <ZIndex>3</ZIndex>
         <Style>
@@ -1146,9 +1150,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>13.16353cm</Top>
-        <Left>0.86148cm</Left>
-        <Height>0.52881cm</Height>
+        <Top>9.35363cm</Top>
+        <Left>0.92262cm</Left>
+        <Height>0.59937cm</Height>
         <Width>14.72634cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
@@ -1194,9 +1198,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>13.7629cm</Top>
-        <Left>0.86148cm</Left>
-        <Height>0.52881cm</Height>
+        <Top>10.02356cm</Top>
+        <Left>0.92262cm</Left>
+        <Height>0.50235cm</Height>
         <Width>14.72634cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
@@ -1242,8 +1246,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>25.39998cm</Top>
-        <Left>0.98649cm</Left>
+        <Top>19.72948cm</Top>
+        <Left>0.94616cm</Left>
         <Height>0.52881cm</Height>
         <Width>14.20814cm</Width>
         <ZIndex>6</ZIndex>
@@ -1283,8 +1287,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>56.21463cm</Top>
-        <Left>0.86148cm</Left>
+        <Top>50.36542cm</Top>
+        <Left>0.77044cm</Left>
         <Height>1.90465cm</Height>
         <Width>16.97082cm</Width>
         <ZIndex>7</ZIndex>
@@ -1302,15 +1306,15 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.28009in</Width>
+              <Width>2.95717in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.35213in</Width>
+              <Width>3.02921in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.26302in</Height>
+              <Height>0.18229in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1409,7 +1413,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.35963in</Height>
+              <Height>1.12265in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1450,7 +1454,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.2526in</Height>
+              <Height>0.21354in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1529,7 +1533,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.48101in</Height>
+              <Height>1.30653in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1590,10 +1594,10 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet2</DataSetName>
-        <Top>5.69611in</Top>
-        <Left>0.38838in</Left>
-        <Height>3.35626in</Height>
-        <Width>6.63222in</Width>
+        <Top>4.19961in</Top>
+        <Left>0.36324in</Left>
+        <Height>2.82501in</Height>
+        <Width>5.98639in</Width>
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
@@ -1911,8 +1915,8 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet3</DataSetName>
-        <Top>10.27764in</Top>
-        <Left>0.38837in</Left>
+        <Top>8.04516in</Top>
+        <Left>0.37249in</Left>
         <Height>3.42716in</Height>
         <Width>6.63222in</Width>
         <ZIndex>9</ZIndex>
@@ -1954,7 +1958,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.58488cm</Height>
+              <Height>0.5055cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2027,7 +2031,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.58488cm</Height>
+              <Height>0.53196cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2103,7 +2107,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.58488cm</Height>
+              <Height>0.53196cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2194,9 +2198,9 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>23.53916cm</Top>
-        <Left>0.98651cm</Left>
-        <Height>1.75464cm</Height>
+        <Top>18.01893cm</Top>
+        <Left>0.82115cm</Left>
+        <Height>1.56943cm</Height>
         <Width>16.30492cm</Width>
         <ZIndex>10</ZIndex>
         <Style>
@@ -2230,8 +2234,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>58.29567cm</Top>
-        <Left>0.86148cm</Left>
+        <Top>52.44646cm</Top>
+        <Left>0.77044cm</Left>
         <Height>0.70556cm</Height>
         <Width>16.35563cm</Width>
         <ZIndex>11</ZIndex>
@@ -2249,10 +2253,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>8.52942cm</Width>
+              <Width>8.42404cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>8.52942cm</Width>
+              <Width>8.42404cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2318,7 +2322,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.58488cm</Height>
+              <Height>0.53196cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2450,7 +2454,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.00821cm</Height>
+              <Height>0.92884cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2526,7 +2530,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.6cm</Height>
+              <Height>0.17667cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2733,7 +2737,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.38488cm</Height>
+              <Height>0.37634cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2802,7 +2806,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.6cm</Height>
+              <Height>0.15875cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2879,7 +2883,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.6cm</Height>
+              <Height>0.54708cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3009,10 +3013,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>1.22555cm</Top>
+        <Top>0.90805cm</Top>
         <Left>0.98646cm</Left>
-        <Height>5.70344cm</Height>
-        <Width>17.05884cm</Width>
+        <Height>4.64511cm</Height>
+        <Width>16.84807cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -3030,7 +3034,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>REPORT 4</Value>
+                <Value>REPORT</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontSize>15pt</FontSize>
@@ -3047,9 +3051,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
         <Top>0.17639cm</Top>
-        <Left>1.10117cm</Left>
-        <Height>0.87277cm</Height>
-        <Width>16.11822cm</Width>
+        <Left>1.04384cm</Left>
+        <Height>0.68756cm</Height>
+        <Width>16.17555cm</Width>
         <ZIndex>13</ZIndex>
         <Style>
           <Border>
@@ -3351,8 +3355,8 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet4</DataSetName>
-        <Top>14.05188in</Top>
-        <Left>0.38837in</Left>
+        <Top>11.80552in</Top>
+        <Left>0.33894in</Left>
         <Height>3.42716in</Height>
         <Width>6.63222in</Width>
         <ZIndex>14</ZIndex>
@@ -3415,8 +3419,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>34.98656cm</Top>
-        <Left>1.04381cm</Left>
+        <Top>29.2808cm</Top>
+        <Left>0.91826cm</Left>
         <Height>0.52881cm</Height>
         <Width>14.20814cm</Width>
         <ZIndex>15</ZIndex>
@@ -3681,8 +3685,8 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>44.57313cm</Top>
-        <Left>0.98651cm</Left>
+        <Top>38.8478cm</Top>
+        <Left>0.76385cm</Left>
         <Height>1.75464cm</Height>
         <Width>16.30492cm</Width>
         <ZIndex>16</ZIndex>
@@ -3984,8 +3988,8 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet5</DataSetName>
-        <Top>18.58637in</Top>
-        <Left>0.41095in</Left>
+        <Top>16.3323in</Top>
+        <Left>0.32329in</Left>
         <Height>3.42716in</Height>
         <Width>6.63222in</Width>
         <ZIndex>17</ZIndex>
@@ -4048,8 +4052,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>46.50416cm</Top>
-        <Left>1.04381cm</Left>
+        <Top>40.77883cm</Top>
+        <Left>0.82115cm</Left>
         <Height>0.52881cm</Height>
         <Width>14.20814cm</Width>
         <ZIndex>18</ZIndex>
@@ -4086,8 +4090,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>59.17761cm</Top>
-        <Left>10.6842cm</Left>
+        <Top>53.3284cm</Top>
+        <Left>10.59316cm</Left>
         <Height>1.05798cm</Height>
         <Width>7.1481cm</Width>
         <ZIndex>19</ZIndex>
@@ -4124,8 +4128,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>60.9856cm</Top>
-        <Left>10.6842cm</Left>
+        <Top>55.17167cm</Top>
+        <Left>10.63572cm</Left>
         <Height>0.60819cm</Height>
         <Width>7.1481cm</Width>
         <ZIndex>20</ZIndex>
@@ -4162,8 +4166,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>61.62907cm</Top>
-        <Left>10.6842cm</Left>
+        <Top>55.81514cm</Top>
+        <Left>10.63572cm</Left>
         <Height>0.60819cm</Height>
         <Width>7.14805cm</Width>
         <ZIndex>21</ZIndex>
@@ -4200,8 +4204,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>60.2363cm</Top>
-        <Left>10.6842cm</Left>
+        <Top>54.38709cm</Top>
+        <Left>10.59316cm</Left>
         <Height>0.60819cm</Height>
         <Width>7.1481cm</Width>
         <ZIndex>22</ZIndex>
@@ -4215,111 +4219,16 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox75">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>ADDRESS 75/37 Moo 11, Klong Nueng Subdistric, Klong Luang District, Pathumthani, Thailand 12120  ç PHONE +66 2908 1681-5  ç FAX +66 2908 1680
-ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>7pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>62.83626cm</Top>
-        <Left>0.01958cm</Left>
-        <Height>0.81986cm</Height>
-        <Width>18.12617cm</Width>
-        <ZIndex>23</ZIndex>
-        <Visibility>
-          <Hidden>true</Hidden>
-        </Visibility>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
     </ReportItems>
-    <Height>25.43647in</Height>
+    <Height>24.88439in</Height>
     <Style />
   </Body>
   <Width>7.31066in</Width>
   <Page>
     <PageHeader>
-      <Height>0.65625in</Height>
+      <Height>0.22917in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Image Name="imgLogoHeader">
-          <Source>Embedded</Source>
-          <Value>logo</Value>
-          <Sizing>FitProportional</Sizing>
-          <Left>0.41096in</Left>
-          <Height>0.65625in</Height>
-          <Width>0.7005in</Width>
-          <Visibility>
-            <Hidden>true</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
-        <Textbox Name="Textbox15">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>="Page" &amp; Globals.PageNumber &amp; " of " &amp; Globals.TotalPages</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Right</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox14</rd:DefaultName>
-          <Top>0cm</Top>
-          <Left>13.68668cm</Left>
-          <Height>1.66686cm</Height>
-          <Width>3.46604cm</Width>
-          <ZIndex>1</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <VerticalAlign>Bottom</VerticalAlign>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>
@@ -4327,66 +4236,9 @@ ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.12166in</Height>
+      <Height>0.56958in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Textbox Name="Textbox74">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>ATT-FM-510-01-01 | Rev.02 | 01JUL 2015</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>2.39956cm</Top>
-          <Left>0cm</Left>
-          <Height>0.44944cm</Height>
-          <Width>18.12617cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Image Name="Image7">
-          <Source>Embedded</Source>
-          <Value>footer</Value>
-          <Sizing>FitProportional</Sizing>
-          <Top>0.95248cm</Top>
-          <Left>0.41323cm</Left>
-          <Height>1.44708cm</Height>
-          <Width>16.93555cm</Width>
-          <ZIndex>1</ZIndex>
-          <Visibility>
-            <Hidden>true</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
-      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>

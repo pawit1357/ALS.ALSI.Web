@@ -42,6 +42,10 @@
     <Reference Include="Spire.Pdf">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\e-iceblue\Spire.Doc-Fe\Bin\NET2.0\Spire.Pdf.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap, Version=4.4.2.472, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StructureMap.4.4.2\lib\net45\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -75,6 +79,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,6 +94,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ALS.ALSI.Biz\ALS.ALSI.Biz.csproj">
+      <Project>{759a88b6-bd40-4781-904b-b07bdfeb88c3}</Project>
+      <Name>ALS.ALSI.Biz</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ALS.ALSI.Utils\ALS.ALSI.Utils.csproj">
       <Project>{018b48e9-ebc2-45c0-a2ae-52d76cb1e771}</Project>
       <Name>ALS.ALSI.Utils</Name>

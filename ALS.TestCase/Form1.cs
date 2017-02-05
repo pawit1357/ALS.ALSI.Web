@@ -5,6 +5,8 @@ using Spire.Doc.Fields;
 using System;
 using System.Windows.Forms;
 using Spire.Doc.Formatting;
+using System.Collections.Generic;
+using ALS.ALSI.Biz.DataAccess;
 
 namespace ALS.TestCase
 {
@@ -18,6 +20,9 @@ namespace ALS.TestCase
         private void Form1_Load(object sender, EventArgs e)
         {
 
+
+            ////List<template_wd_mesa_coverpage> coverpages = template_wd_mesa_coverpage.FindAllBySampleID(2726);
+            ////List<template_wd_mesa_img> refImg = template_wd_mesa_img.FindAllBySampleID(2726);
             //Create Table
             Document doc = new Document();
             Section s = doc.AddSection();
@@ -43,6 +48,17 @@ namespace ALS.TestCase
             format2.Bold = false;
             format2.UnderlineStyle = UnderlineStyle.Single;
             #endregion
+
+            //Initialize a Header Instance
+            HeaderFooter header = doc.Sections[0].HeadersFooters.Header;
+            //Add Header Paragraph and Format
+            Paragraph paragraph1 = header.AddParagraph();
+            paragraph1.Format.HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment.Right;
+            //Append Picture for Header Paragraph and Format
+            DocPicture headerimage = paragraph1.AppendPicture(Image.FromFile(@"C:\Users\icnsk\Documents\Visual Studio 2015\Projects\ALS.ALSI.Web\ALS.ALSI.Web\images\images.png"));
+            headerimage.VerticalAlignment = ShapeVerticalAlignment.Bottom;
+
+
 
             #region "PAGE TITLE"
             Paragraph paragraph = s.AddParagraph();

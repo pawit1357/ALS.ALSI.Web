@@ -16,6 +16,7 @@ using ALS.ALSI.Biz.ReportObjects;
 using Microsoft.Reporting.WebForms;
 using WordToPDF;
 using Spire.Doc;
+using Spire.Doc.Documents;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -696,6 +697,7 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
+            //ReportBiz reportBiz = new ReportBiz();
 
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
 
@@ -741,10 +743,10 @@ namespace ALS.ALSI.Web.view.template
                 tmpImg4.Add(imgList[3]);
             }
 
-            reportParameters.Add(new ReportParameter("area1_desc", (imgList.Count>=1) ? imgList[0].descripton : string.Empty));
-            reportParameters.Add(new ReportParameter("area2_desc", (imgList.Count>=2) ? imgList[1].descripton : string.Empty));
-            reportParameters.Add(new ReportParameter("area3_desc", (imgList.Count>=3)? imgList[2].descripton:string.Empty));
-            reportParameters.Add(new ReportParameter("area4_desc", (imgList.Count>=4) ? imgList[3].descripton : string.Empty));
+            reportParameters.Add(new ReportParameter("area1_desc", (imgList.Count >= 1) ? imgList[0].descripton : string.Empty));
+            reportParameters.Add(new ReportParameter("area2_desc", (imgList.Count >= 2) ? imgList[1].descripton : string.Empty));
+            reportParameters.Add(new ReportParameter("area3_desc", (imgList.Count >= 3) ? imgList[2].descripton : string.Empty));
+            reportParameters.Add(new ReportParameter("area4_desc", (imgList.Count >= 4) ? imgList[3].descripton : string.Empty));
 
 
             // Variables
@@ -804,17 +806,28 @@ namespace ALS.ALSI.Web.view.template
                             fs.Write(bytes, 0, bytes.Length);
                         }
 
-                        Document sourceDoc = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
-                        Document destinationDoc = new Document(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
-                        foreach (Section sec in sourceDoc.Sections)
+                        #region "Insert Footer & Header from template"
+                        Document doc1 = new Document();
+                        doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
+                        HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
+                        HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
+                        Document doc2 = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
+                        foreach (Section section in doc2.Sections)
                         {
-                            foreach (DocumentObject obj in sec.Body.ChildObjects)
+                            foreach (DocumentObject obj in header.ChildObjects)
                             {
-                                destinationDoc.Sections[0].Body.ChildObjects.Add(obj.Clone());
+                                section.HeadersFooters.Header.ChildObjects.Add(obj.Clone());
+                            }
+                            foreach (DocumentObject obj in footer.ChildObjects)
+                            {
+                                section.HeadersFooters.Footer.ChildObjects.Add(obj.Clone());
                             }
                         }
-                        destinationDoc.SaveToFile(Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension);
 
+
+                      
+                        doc2.SaveToFile(Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension);
+                        #endregion
                         Response.ContentType = mimeType;
                         Response.AddHeader("Content-Disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
                         Response.WriteFile(Server.MapPath("~/Report/" + this.jobSample.job_number + "." + extension));
