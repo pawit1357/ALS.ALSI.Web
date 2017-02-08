@@ -963,8 +963,7 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3" }).Contains(x.A)).ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] { "4", "5" }).Contains(x.A)).ToDataTable())); // Add datasource here
-
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.Where(x=>x.B != "0.200").ToList().ToDataTable())); // Add datasource here
 
 
 

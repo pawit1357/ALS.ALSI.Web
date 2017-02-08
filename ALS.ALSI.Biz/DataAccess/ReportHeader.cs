@@ -86,7 +86,8 @@ namespace ALS.ALSI.Biz.ReportObjects
                 rpt.alsRefNo = String.Format("ATT/{0}/{1}/{2}-{3}", tmp[0], DateTime.Now.ToString("yy"), tmp[1], tmp[2]);// _sample.job_number.ToString();
                 rpt.description = "Description:" + _sample.description + "\n" +
                                   "Model:" + _sample.model + "\n" +
-                                  "Surface Area:" + _sample.surface_area + "\n";
+                                  "Surface Area:" + _sample.surface_area + "\n"+
+                                  (!String.IsNullOrEmpty(_sample.remarks)? "Remark: "+_sample.remarks+"\n":"");
 
                 rpt.model = _sample.model;
                 rpt.surface_areas = _sample.surface_area;

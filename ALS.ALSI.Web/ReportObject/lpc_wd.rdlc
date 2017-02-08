@@ -71,7 +71,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Analysis</Value>
+                              <Value>Test</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -790,7 +790,7 @@
         <Top>12.49444cm</Top>
         <Left>0.49052cm</Left>
         <Height>0.52881cm</Height>
-        <Width>14.20814cm</Width>
+        <Width>16.96559cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -823,7 +823,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.72916in</Height>
+              <Height>0.61458in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1260,6 +1260,17 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
+                              <Value>≥ </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontFamily>Times New Roman</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
                               <Value>=Fields!B.Value</Value>
                               <Style />
                             </TextRun>
@@ -1311,7 +1322,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!C.Value</Value>
+                              <Value>= IIF (Fields!C.Value = "NA", "NA","&lt; "+Fields!C.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1362,7 +1373,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!D.Value</Value>
+                              <Value>=Format(CDec(Fields!D.Value),"N0")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1481,7 +1492,7 @@
         <DataSetName>DataSet2</DataSetName>
         <Top>5.1967in</Top>
         <Left>0.19399in</Left>
-        <Height>0.97916in</Height>
+        <Height>0.86458in</Height>
         <Width>6.70431in</Width>
         <ZIndex>4</ZIndex>
         <Visibility>
@@ -2025,7 +2036,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!B.Value</Value>
+                              <Value>=Format(CDec(Fields!B.Value),"N1")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2178,7 +2189,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!E.Value</Value>
+                              <Value>=Format(CDec(Fields!E.Value),"N0")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2222,14 +2233,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="E">
+                    <Textbox Name="F">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!E.Value</Value>
+                              <Value>=Format(CDec(Fields!F.Value),"N0")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2238,7 +2249,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>E</rd:DefaultName>
+                      <rd:DefaultName>F</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -2689,7 +2700,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!B.Value</Value>
+                              <Value>=Format(CDec(Fields!B.Value),"N1")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2740,7 +2751,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!E.Value</Value>
+                              <Value>=iif(Fields!A.Value = "%RSD Deviation","%"&amp;Format(CDec(Fields!E.Value),"N0"),Format(CDec(Fields!E.Value),"N0"))</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2791,7 +2802,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!F.Value</Value>
+                              <Value>=iif(Fields!A.Value = "%RSD Deviation","%"&amp;Format(CDec(Fields!F.Value),"N0"),Format(CDec(Fields!F.Value),"N0"))</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2895,10 +2906,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.28049in</Width>
+              <Width>3.40558in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.13599in</Width>
+              <Width>3.26108in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2914,7 +2925,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Test Method: 92-004230 Rev. AK</Value>
+                              <Value>Test Method: 92-004230 Rev. AM</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -2990,7 +3001,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -3043,7 +3054,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -3094,7 +3105,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Extraction Vol, ml</Value>
+                              <Value>Extraction Vol, mL</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -3105,7 +3116,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -3158,7 +3169,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -3209,7 +3220,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Sample Vol, ml</Value>
+                              <Value>Sample Vol, mL</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -3220,7 +3231,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -3273,7 +3284,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -3335,7 +3346,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -3388,7 +3399,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -3456,7 +3467,7 @@
         <Top>7.18934in</Top>
         <Left>0.23164in</Left>
         <Height>1.28125in</Height>
-        <Width>4.41648in</Width>
+        <Width>6.66666in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -3488,16 +3499,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.51486in</Width>
+              <Width>1.81396in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.62145in</Width>
+              <Width>1.92055in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.35932in</Width>
+              <Width>1.65842in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.9488in</Width>
+              <Width>1.2479in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -3986,7 +3997,7 @@
         <Top>8.63851in</Top>
         <Left>0.23164in</Left>
         <Height>0.53125in</Height>
-        <Width>5.44443in</Width>
+        <Width>6.64084in</Width>
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
@@ -4753,7 +4764,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(Counts/ml)</Value>
+                              <Value>(Counts/mL)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -4828,7 +4839,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>(Counts/ml)</Value>
+                              <Value>(Counts/mL)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -5097,7 +5108,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!B.Value</Value>
+                              <Value>=Format(CDec(Fields!B.Value),"N1")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -5250,7 +5261,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!E.Value</Value>
+                              <Value>=Format(CDec(Fields!E.Value),"N0")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -5301,7 +5312,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!E.Value</Value>
+                              <Value>=Format(CDec(Fields!F.Value),"N0")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -6065,7 +6076,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value EvaluationMode="Constant">Parameters!DateTestCompleted.Value</Value>
+                              <Value>=Parameters!DateTestCompleted.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>d MMM yyyy</Format>
@@ -6213,6 +6224,21 @@
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>One lot of sample was received with references:</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
@@ -6460,178 +6486,6 @@
   </Body>
   <Width>7.15551in</Width>
   <Page>
-    <PageHeader>
-      <Height>0.8611in</Height>
-      <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Image Name="imgLogoHeader">
-          <Source>Embedded</Source>
-          <Value>logo</Value>
-          <Sizing>FitProportional</Sizing>
-          <Left>0.25in</Left>
-          <Height>0.8611in</Height>
-          <Width>0.86459in</Width>
-          <Visibility>
-            <Hidden>true</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
-        <Textbox Name="Textbox15">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>="Page" &amp; Globals.PageNumber &amp; " of " &amp; Globals.TotalPages</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Right</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox14</rd:DefaultName>
-          <Top>0cm</Top>
-          <Left>13.83771cm</Left>
-          <Height>2.01081cm</Height>
-          <Width>3.54542cm</Width>
-          <ZIndex>1</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <VerticalAlign>Bottom</VerticalAlign>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-      </ReportItems>
-      <Style>
-        <Border>
-          <Style>None</Style>
-        </Border>
-      </Style>
-    </PageHeader>
-    <PageFooter>
-      <Height>1.12166in</Height>
-      <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Textbox Name="Textbox103">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>ATT-FM-510-01-01 | Rev.02 | 01JUL 2015</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>2.39958cm</Top>
-          <Left>0cm</Left>
-          <Height>0.44944cm</Height>
-          <Width>18.12617cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Image Name="Image1">
-          <Source>Embedded</Source>
-          <Value>footer</Value>
-          <Sizing>FitProportional</Sizing>
-          <Top>0.9525cm</Top>
-          <Left>0.635cm</Left>
-          <Height>1.44708cm</Height>
-          <Width>16.93555cm</Width>
-          <ZIndex>1</ZIndex>
-          <Visibility>
-            <Hidden>true</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
-        <Textbox Name="Textbox105">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>ADDRESS 75/37 Moo 11, Klong Nueng Subdistric, Klong Luang District, Pathumthani, Thailand 12120  ç PHONE +66 2908 1681-5  ç FAX +66 2908 1680
-ALS Testing Services (Thailand) Co., Ltd. An ALS Limited Company</Value>
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontSize>7pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>0cm</Top>
-          <Left>0.02441cm</Left>
-          <Height>0.81986cm</Height>
-          <Width>18.12617cm</Width>
-          <ZIndex>2</ZIndex>
-          <Visibility>
-            <Hidden>true</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-      </ReportItems>
-      <Style>
-        <Border>
-          <Style>None</Style>
-        </Border>
-      </Style>
-    </PageFooter>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
     <LeftMargin>0.79in</LeftMargin>

@@ -106,7 +106,8 @@
                                             </td>
                                             <td>
                                                 <asp:Label ID="lbOvenCondition_Extraction" runat="server"> </asp:Label>
-                                                <asp:TextBox ID="txtOvenCondition_Extraction" runat="server" Text="70degC, 24hrs Room temperature. at 24 hrs." CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox ID="txtOvenCondition_Extraction" runat="server" Text="Temperature 70oC for 24 hours
+Room Temperature for 24 hours" CssClass="form-control"></asp:TextBox>
 
                                             </td>
                                         </tr>

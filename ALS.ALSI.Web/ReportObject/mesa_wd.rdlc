@@ -303,7 +303,24 @@
                               </Style>
                             </TextRun>
                             <TextRun>
-                              <Value>MESA Defect by &amp; SEM</Value>
+                              <Value>MESA Defect </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>by SEM</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1597,7 +1614,7 @@
         <Top>4.19961in</Top>
         <Left>0.36324in</Left>
         <Height>2.82501in</Height>
-        <Width>5.98639in</Width>
+        <Width>5.98638in</Width>
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
@@ -2200,7 +2217,7 @@
         </PageBreak>
         <Top>18.01893cm</Top>
         <Left>0.82115cm</Left>
-        <Height>1.56943cm</Height>
+        <Height>1.56942cm</Height>
         <Width>16.30492cm</Width>
         <ZIndex>10</ZIndex>
         <Style>
@@ -3016,7 +3033,7 @@
         <Top>0.90805cm</Top>
         <Left>0.98646cm</Left>
         <Height>4.64511cm</Height>
-        <Width>16.84807cm</Width>
+        <Width>16.84808cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>

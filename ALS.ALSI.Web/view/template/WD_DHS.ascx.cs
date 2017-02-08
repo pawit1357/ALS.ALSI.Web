@@ -302,7 +302,7 @@ namespace ALS.ALSI.Web.view.template
                         tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
                         if (_detailSpec != null)
                         {
-                            lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", _detailSpec.B, _detailSpec.A);
+                            lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", _detailSpec.B, _detailSpec.A);
                         }
 
                     }
@@ -842,8 +842,8 @@ namespace ALS.ALSI.Web.view.template
                 //Result Description
                 gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", detailSpec.C);
                 gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", detailSpec.C);
+                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", detailSpec.B, detailSpec.A);
 
-                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", detailSpec.B, detailSpec.A);
 
                 //lbDocRev.Text = detailSpec.B;
                 //lbDesc.Text = detailSpec.A;
@@ -933,45 +933,30 @@ namespace ALS.ALSI.Web.view.template
             //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
             //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
 
-            if (ds2.Count > 0 && ds2.Count < 20)
+            if (ds2.Count > 0 && ds2.Count < 12)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
             }
-            if (ds2.Count >= 20)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 20).ToDataTable())); // Add datasource here
-            }
             else
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 12).ToDataTable())); // Add datasource here
             }
 
-            if (ds2.Count > 20 && ds2.Count < 40)
+            if (ds2.Count > 12 && ds2.Count < 32)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(20, ds2.Count - 20).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(12, (ds2.Count-12)).ToDataTable())); // Add datasource here
+            }else if (ds2.Count >= 32 && ds2.Count < 52)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(32, (ds2.Count - 32) - 1).ToDataTable())); // Add datasource here
             }
-            if (ds2.Count >=40)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(20, 40).ToDataTable())); // Add datasource here
-            }
-            else
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
-
-            }
-            if (ds2.Count > 40 && ds2.Count < 60)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(40, ds2.Count - 40).ToDataTable())); // Add datasource here
-            }
-            if (ds2.Count >= 60)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(40, 60).ToDataTable())); // Add datasource here
-            }
-            else
-            {
+            else { 
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
             }
+            if (ds2.Count < 32)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
 
+            }
             string download = String.Empty;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -1391,7 +1376,7 @@ namespace ALS.ALSI.Web.view.template
                 tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
                 if (_detailSpec != null)
                 {
-                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", _detailSpec.B, _detailSpec.A);
+                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", _detailSpec.B, _detailSpec.A);
                 }
             }
 
