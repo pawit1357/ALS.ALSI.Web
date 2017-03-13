@@ -90,6 +90,18 @@ namespace ALS.ALSI.Web.view.template
                     this.PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
                     Server.Transfer(Constants.LINK_TEMPLATE);
                     break;
+                case CommandNameEnum.Inactive:
+                    this.PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    m_template template = new m_template().SelectByID(this.PKID);
+                    if (template != null)
+                    {
+                        template.status = "I";
+                        template.Update();
+                        GeneralManager.Commit();
+
+                        bindingData();
+                    }
+                        break;
             }
 
         }
@@ -138,5 +150,29 @@ namespace ALS.ALSI.Web.view.template
             bindingData();
         }
 
+        protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowIndex != -1)
+            {
+                //int PKID = Convert.ToInt32(gvResult.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                //string status = gvResult.DataKeys[e.Row.RowIndex].Values[1].ToString();
+                //LinkButton _btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
+                //LinkButton _btnInActive = (LinkButton)e.Row.FindControl("btnInActive");
+
+                //if (_btnEdit != null && _btnInActive != null)
+                //{
+                //    if (status.Equals("A"))
+                //    {
+                //        _btnInActive.Visible = true;
+                //        _btnEdit.Visible = true;
+                //    }
+                //    else
+                //    {
+                //        _btnInActive.Visible = false;
+                //        _btnEdit.Visible = true;
+                //    }
+                //}
+            }
+        }
     }
 }

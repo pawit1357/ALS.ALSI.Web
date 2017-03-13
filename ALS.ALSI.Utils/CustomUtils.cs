@@ -139,6 +139,7 @@ namespace ALS.ALSI.Utils
 
             //if (_cell.CachedFormulaResultType != CellType.Error)
             //{
+            if (_cell == null) return "0";
             if (_cell != null)
             {
                 ErrorIndex = String.Format("Row({0}),Column({1})  Error Value = {2}", _cell.RowIndex + 1, _cell.ColumnIndex + 1, returnValue);
@@ -146,6 +147,7 @@ namespace ALS.ALSI.Utils
             switch (_cell.CellType)
             {
                 case CellType.Blank:
+                        returnValue = "0";
                     break;
                 case CellType.Boolean:
                     break;

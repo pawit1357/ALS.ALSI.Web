@@ -42,6 +42,7 @@ namespace ALS.ALSI.Web.view.template
             "-#- Surfactant contained in Hydrocarbon Hump (e.g. Triton X-100)",
             "-#Surfactant as DP154/155",
             "-#Surfactant as Triton X-100",
+            "I#Total Silanes",
             "H#Total Siloxane",
             "F#Total Hexadecyl Esters of Fatty Acids",
             "-#- Tetradecanoic acid, hexadecyl ester (C14)",

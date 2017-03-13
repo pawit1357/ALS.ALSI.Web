@@ -23,7 +23,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0cm</Top>
-        <Left>0cm</Left>
+        <Left>1.5875cm</Left>
         <Height>0.79403cm</Height>
         <Width>7.79167cm</Width>
         <Style>
@@ -60,7 +60,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.98806cm</Top>
-        <Left>0cm</Left>
+        <Left>1.5875cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
         <ZIndex>1</ZIndex>
@@ -98,7 +98,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>1.62334cm</Top>
-        <Left>0cm</Left>
+        <Left>1.5875cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
         <ZIndex>2</ZIndex>
@@ -136,7 +136,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>2.29389cm</Top>
-        <Left>0cm</Left>
+        <Left>1.5875cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
         <ZIndex>3</ZIndex>
@@ -162,21 +162,15 @@
                   <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
-              <TextRun>
-                <Value>=Parameters!pSample.Value</Value>
-                <Style>
-                  <FontSize>9pt</FontSize>
-                </Style>
-              </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>2.99973cm</Top>
-        <Left>0cm</Left>
+        <Left>1.5875cm</Left>
         <Height>0.6cm</Height>
-        <Width>7.79167cm</Width>
+        <Width>1.44167cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -211,8 +205,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>3.635cm</Top>
-        <Left>0cm</Left>
+        <Top>4.5875cm</Top>
+        <Left>1.5875cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
         <ZIndex>5</ZIndex>
@@ -238,21 +232,15 @@
                   <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
-              <TextRun>
-                <Value>=Parameters!pTest.Value</Value>
-                <Style>
-                  <FontSize>9pt</FontSize>
-                </Style>
-              </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.235cm</Top>
-        <Left>0cm</Left>
+        <Top>5.36389cm</Top>
+        <Left>1.62278cm</Left>
         <Height>0.6cm</Height>
-        <Width>7.79167cm</Width>
+        <Width>1.44167cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -287,8 +275,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.87028cm</Top>
-        <Left>0cm</Left>
+        <Top>6.14028cm</Top>
+        <Left>1.5875cm</Left>
         <Height>0.6cm</Height>
         <Width>7.79167cm</Width>
         <ZIndex>7</ZIndex>
@@ -302,11 +290,75 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!pSample.Value</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>2.99973cm</Top>
+        <Left>3.20556cm</Left>
+        <Height>1.44666cm</Height>
+        <Width>6.17361cm</Width>
+        <ZIndex>8</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox3">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!pTest.Value</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>5.32889cm</Top>
+        <Left>3.20556cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>9</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>5.62903cm</Height>
+    <Height>7.37528cm</Height>
     <Style />
   </Body>
-  <Width>7.79167cm</Width>
+  <Width>9.37917cm</Width>
   <Page>
     <PageHeight>8cm</PageHeight>
     <PageWidth>12cm</PageWidth>

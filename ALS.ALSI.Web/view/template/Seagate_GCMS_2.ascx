@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_GCMS.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_GCMS" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_GCMS_2.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_GCMS_2" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
@@ -74,185 +74,6 @@
                                             <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                     </tr>
                                 </table>
-
-                                <asp:GridView ID="gvMotorOil" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvMotorOil_RowDataBound" OnRowCommand="gvMotorOil_RowCommand">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Motor Oil Contamination" ItemStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Hide">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-
-                                    <PagerTemplate>
-                                        <div class="pagination">
-                                            <ul>
-                                                <li>
-                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
-                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
-                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
-                                                </li>
-                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
-                                                <li>
-                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
-                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
-                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </PagerTemplate>
-                                    <EmptyDataTemplate>
-                                        <div class="data-not-found">
-                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                        </div>
-                                    </EmptyDataTemplate>
-                                </asp:GridView>
-
-                                <asp:GridView ID="gvMotorHub" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvMotorHub_RowDataBound" OnRowCommand="gvMotorHub_RowCommand">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Motor Hub" ItemStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Hide">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-
-                                    <PagerTemplate>
-                                        <div class="pagination">
-                                            <ul>
-                                                <li>
-                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
-                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
-                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
-                                                </li>
-                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
-                                                <li>
-                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
-                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
-                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </PagerTemplate>
-                                    <EmptyDataTemplate>
-                                        <div class="data-not-found">
-                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                        </div>
-                                    </EmptyDataTemplate>
-                                </asp:GridView>
-                                <asp:GridView ID="gvMotorHubSub" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvMotorHubSub_RowDataBound" OnRowCommand="gvMotorHubSub_RowCommand">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Hide">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-
-                                    <PagerTemplate>
-                                        <div class="pagination">
-                                            <ul>
-                                                <li>
-                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
-                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
-                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
-                                                </li>
-                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
-                                                <li>
-                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
-                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
-                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </PagerTemplate>
-                                    <EmptyDataTemplate>
-                                        <div class="data-not-found">
-                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                        </div>
-                                    </EmptyDataTemplate>
-                                </asp:GridView>
                                 <asp:GridView ID="gvMotorBase" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvMotorBase_RowDataBound" OnRowCommand="gvMotorBase_RowCommand">
                                     <Columns>
@@ -371,125 +192,7 @@
                                         </div>
                                     </EmptyDataTemplate>
                                 </asp:GridView>
-                                <asp:GridView ID="gvCompound" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvCompound_RowDataBound" OnRowCommand="gvCompound_RowCommand">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Compound" ItemStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Hide">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-
-                                    <PagerTemplate>
-                                        <div class="pagination">
-                                            <ul>
-                                                <li>
-                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
-                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
-                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
-                                                </li>
-                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
-                                                <li>
-                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
-                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
-                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </PagerTemplate>
-                                    <EmptyDataTemplate>
-                                        <div class="data-not-found">
-                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                        </div>
-                                    </EmptyDataTemplate>
-                                </asp:GridView>
                                 <br />
-                                <asp:GridView ID="gvCompoundSub" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvCompoundSub_RowDataBound" OnRowCommand="gvCompoundSub_RowCommand">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Compound" ItemStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMotorOilContamination" runat="server" Text='<%# Eval("A")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Maximum Allowable Amount" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litMaximumAllowableAmout" runat="server" Text='<%# Eval("B")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Hide">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Show" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-
-                                    <PagerTemplate>
-                                        <div class="pagination">
-                                            <ul>
-                                                <li>
-                                                    <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
-                                                        CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
-                                                        CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
-                                                </li>
-                                                <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
-                                                <li>
-                                                    <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
-                                                        CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
-                                                </li>
-                                                <li>
-                                                    <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
-                                                        CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </PagerTemplate>
-                                    <EmptyDataTemplate>
-                                        <div class="data-not-found">
-                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                        </div>
-                                    </EmptyDataTemplate>
-                                </asp:GridView>
                             </div>
                         </div>
                         <br />
@@ -692,478 +395,244 @@
                                 <table class="table table-striped table-hover table-bordered">
                                     <tbody>
                                         <tr>
-                                            <td>Motor Base / Base</td>
-                                            <td></td>
+                                            <td>&nbsp;</td>
+                                            <td>Motor Base / Baseplate</td>
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td>Surface area per part  =</td>
+                                            <td style="text-align:right">Internal Standard Recovery (R) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB13" runat="server"></asp:TextBox></td>
-                                            <td>cm<sup>2</sup></td>
+                                            <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td>No. of parts extracted = </td>
+                                            <td style="text-align:right">pA of C14D10 in sample (X) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB14" runat="server"></asp:TextBox></td>
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td>Total Surface area   =</td>
+                                            <td style="text-align:right">pA of C14D10 in working standard (Y) :</td>
                                             <td>
-                                                <asp:Label ID="lbB15" runat="server"></asp:Label></td>
-                                            <td>cm<sup>2</sup></td>
+                                                <asp:TextBox ID="txtB15" runat="server"></asp:TextBox></td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Concentration of C14D10 (C) :</td>
+                                            <td>
+                                                <asp:TextBox ID="txtB16" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Total Concentration of C14D10 (A) :</td>
+                                            <td>
+                                                <asp:TextBox ID="txtB17" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right"Dilution factor (D) :</td>
+                                                Dilution factor (D) :<td>
+                                                    <asp:TextBox ID="txtB18" runat="server"></asp:TextBox>
+                                                </td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">IDL of RHC :</td>
+                                            <td>
+                                                <asp:TextBox ID="txtB19" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>&nbsp;</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <br />
-                                <table class="table table-striped table-hover table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <td>Motor Hub</td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Surface area per part  =</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB18" runat="server"></asp:TextBox></td>
-                                            <td>cm<sup>2</sup></td>
-                                        </tr>
-                                        <tr>
-                                            <td>No. of parts extracted = </td>
-                                            <td>
-                                                <asp:TextBox ID="txtB19" runat="server"></asp:TextBox></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Surface area   =</td>
-                                            <td>
-                                                <asp:Label ID="lbB20" runat="server"></asp:Label></td>
-                                            <td>cm<sup>2</sup></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
                                 <br />
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Total Organic Compound (TOC)</th>
-                                            <th>Area ≤ DOP</th>
-                                            <th>Area &gt; DOP</th>
-                                            </t>
+                                            <th>&nbsp;</th>
+                                            <th colspan="2">Motor Base / Baseplate</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th>TOC ≤ DOP</th>
+                                            <th>TOC > DOP</th>
+                                          
+                                            <th>Repeated Hydrocarbon</th>
+                                          
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- PART 1 -->
                                         <tr>
-                                            <td>Peak Area of Standard (C16H34)</td>
+                                            <td style="text-align:right">Surface area of sample (cm2) :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB23" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB20" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtC23" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC20" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD20" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Concentration of Standard (ng)</td>
+                                            <td style="text-align:right">No. of extracted sample (N) :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB24" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB21" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtC24" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC21" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD21" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Dilution Factor for Hub</td>
+                                            <td style="text-align:right">Total surface area of sample :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB25" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB22" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtC25" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC22" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD22" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Dilution Factor for Base 2.5"/3.5"</td>
+                                            <td style="text-align:right">Concentration of C16H34 (C) :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB26" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB23" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtC26" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC23" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD23" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Recovery of internal standard (Hub)</td>
+                                            <td style="text-align:right">Dilution factor (D) :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB27" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB24" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtC27" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC24" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD24" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Recovery of internal standard (Base)</td>
+                                            <td style="text-align:right">Internal Standard Recovery (R) :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB28" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB25" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtC28" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC25" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD25" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <!-- PART 2 -->
                                         <tr>
-                                            <td>Motor Hub</td>
+                                            <td style="text-align:right">pA of C16H34 (Z) :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB30" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB26" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtC30" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC26" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD26" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Hub - Blank Area</td>
+                                            <td style="text-align:right">pA of Motor Base :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB31" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB27" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtC31" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC27" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD27" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Hub (blank substracted))</td>
+                                            <td style="text-align:right">pA of Blank :</td>
                                             <td>
-                                                <asp:Label ID="lbB32" runat="server"></asp:Label></td>
+                                                <asp:TextBox ID="txtB28" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:Label ID="lbC32" runat="server"></asp:Label></td>
+                                                <asp:TextBox ID="txtC28" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD28" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <!-- PART 3 -->
                                         <tr>
-                                            <td>Motor Base / Base</td>
+                                            <td style="text-align:right">pA of sample (Y) :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB34" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC34" runat="server"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Base - Blank Area</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB35" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC35" runat="server"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Base (blank substracted)</td>
-                                            <td>
-                                                <asp:Label ID="lbB36" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbC36" runat="server"></asp:Label></td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                                <br />
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Repeated Hydrocarbon (C20 - C40)</th>
-                                            <th>Area of RHC</th>
-                                        </tr>
-                                    </thead>
-                                    <tr>
-                                        <td>Hub - Repeated Hydrocarbon</td>
-                                        <td>
-                                            <asp:TextBox ID="txtB39" runat="server"></asp:TextBox></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Base - Repeated Hydrocarbon</td>
-                                        <td>
-                                            <asp:TextBox ID="txtB40" runat="server"></asp:TextBox></td>
-                                    </tr>
-                                </table>
-                                <br />
-                                <table class="table table-striped table-hover table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td>Compounds ≤ DOP (ng/cm<sup>2</sup>)</td>
-                                            <td>Compounds > DOP (ng/cm<sup>2</sup>)</td>
-                                            <td>Repeated Hydrocarbon(ng/part)</td>
-                                        </tr>
-                                        <!-- PART 1 -->
-                                        <tr>
-                                            <td>Motor Hub</td>
-                                            <td>
-                                                <asp:Label ID="lbB43" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbC43" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbD43" runat="server"></asp:Label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Motor Base / Base 2.5"/3.5"</td>
-                                            <td>
-                                                <asp:Label ID="lbB44" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbC44" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbD44" runat="server"></asp:Label></td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                                <br />
-                                <table class="table table-striped table-hover table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <td>Minimum RHC Detection Limit is</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB47" runat="server"></asp:TextBox></td>
-                                            <td>ng/part.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Minimum RHC Detection Limit of base is</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB48" runat="server"></asp:TextBox></td>
-                                            <td>ng/sqcm</td>
-                                        </tr>
-                                        <tr>
-                                            <td>MMinimum RHC Detection Limit of hub is </td>
-                                            <td>
-                                                <asp:TextBox ID="txtB49" runat="server"></asp:TextBox></td>
-                                            <td>ng/sqcm</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <br />
-                                <table class="table table-striped table-hover table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <td>R-Hub</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB51" runat="server"></asp:TextBox></td>
-                                            <td>R = (X/Y)*(C/A)*D</td>
-                                        </tr>
-                                        <tr>
-                                            <td>X</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB52" runat="server"></asp:TextBox></td>
-                                            <td>Peak area of D10 in sample</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Y</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB53" runat="server"></asp:TextBox></td>
-                                            <td>Peak area of D10 in working standard</td>
-                                        </tr>
-                                        <tr>
-                                            <td>C</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB54" runat="server"></asp:TextBox></td>
-                                            <td>Concentration of D10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>A</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB55" runat="server"></asp:TextBox></td>
-                                            <td>Total concentration spike to sample</td>
-                                        </tr>
-                                        <tr>
-                                            <td>D</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB56" runat="server"></asp:TextBox></td>
-                                            <td>Dilution factor</td>
-                                        </tr>
-                                        <!-- R-Base --->
-                                        <tr>
-                                            <td>R-Base</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB57" runat="server"></asp:TextBox></td>
-                                            <td>R = (X/Y)*(C/A)*D</td>
-                                        </tr>
-                                        <tr>
-                                            <td>X</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB58" runat="server"></asp:TextBox></td>
-                                            <td>Peak area of D10 in sample</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Y</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB59" runat="server"></asp:TextBox></td>
-                                            <td>Peak area of D10 in working standard</td>
-                                        </tr>
-                                        <tr>
-                                            <td>C</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB60" runat="server"></asp:TextBox></td>
-                                            <td>Concentration of D10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>A</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB61" runat="server"></asp:TextBox></td>
-                                            <td>Total concentration spike to sample</td>
-                                        </tr>
-                                        <tr>
-                                            <td>D</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB62" runat="server"></asp:TextBox></td>
-                                            <td>Dilution factor</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </asp:Panel>
-                    <asp:Panel ID="pMotorOil" runat="server">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <br />
-                                <table class="table table-striped table-hover table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <asp:DropDownList ID="ddlBaseType" runat="server" CssClass="select2_category form-control">
-                                                    <asp:ListItem Value="0">-</asp:ListItem>
-                                                    <asp:ListItem Value="1" Selected="True">2.5</asp:ListItem>
-                                                    <asp:ListItem Value="2">3.5</asp:ListItem>
-                                                </asp:DropDownList>
-
+                                                <asp:TextBox ID="txtB29" runat="server"></asp:TextBox>
                                             </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Surface area of Base  =</td>
                                             <td>
-                                                <asp:TextBox ID="txtB13_MO" runat="server"></asp:TextBox></td>
-                                            <td>cm<sup>2</sup></td>
+                                                <asp:TextBox ID="txtC29" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD29" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtB30" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtC30" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD30" runat="server"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Method Detection Limit (MDL) :</td>
+                                            <td>
+                                                <asp:TextBox ID="txtB31" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtC31" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD31" runat="server"></asp:TextBox>
+                                            </td>
+                                        </tr>
 
-                                            <td>Surface area of Hub  =</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB14_MO" runat="server"></asp:TextBox></td>
-                                            <td>cm<sup>2</sup></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <br />
-                                <table class="table table-striped table-hover table-bordered">
-                                    <tbody>
                                         <tr>
-                                            <td>M/Z</td>
+                                            <td style="text-align:right">&nbsp;</td>
                                             <td>
-                                                <asp:TextBox ID="txtB17_MO" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtB32" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtC17_MO" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtC32" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>
-                                                <asp:TextBox ID="txtD17_MO" runat="server"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Retention Time</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB18_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC18_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD18_MO" runat="server"></asp:TextBox></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table class="table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <td>Motor Oil Compound</td>
-                                            <td>Area</td>
-                                            <td>Area</td>
-                                            <td>Area</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Peak Area of Motor Oil</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB20_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC20_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD20_MO" runat="server"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Concentration of Standard (ng)</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB21_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC21_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD21_MO" runat="server"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dilution Factor for Hub</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB22_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC22_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD22_MO" runat="server"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dilution Factor for Base 2.5" / 3.5</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB23_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC23_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD23_MO" runat="server"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Motor Hub</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB26_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC26_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD26_MO" runat="server"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Motor Base / Base 2.5&quot; / 3.5&quot;&quot;</td>
-                                            <td>
-                                                <asp:TextBox ID="txtB28_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtC28_MO" runat="server"></asp:TextBox></td>
-                                            <td>
-                                                <asp:TextBox ID="txtD28_MO" runat="server"></asp:TextBox></td>
-
+                                                <asp:TextBox ID="txtD32" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
 
                                     </tbody>
                                 </table>
                                 <br />
-                                <table class="table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <td>Motor Oil Comtamination</td>
-                                            <td>Result (ng/cm2)</td>
-                                            <td>Result (ng/cm2)</td>
-                                            <%--                                            <td>Result (ng/cm2)</td>--%>
-                                            <td>Total (ng/cm2)</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Hub</td>
-                                            <td>
-                                                <asp:Label ID="lbB30_MO" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbC30_MO" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbD30_MO" runat="server"></asp:Label></td>
-                                            <%--  <td>
-                                                <asp:Label ID="lbE30_MO" runat="server"></asp:Label></td>--%>
-                                        </tr>
-                                        <tr>
-                                            <td>Motor Base / Base 2.5"/ 3.5"</td>
-                                            <td>
-                                                <asp:Label ID="lbB31_MO" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbC31_MO" runat="server"></asp:Label></td>
-                                            <td>
-                                                <asp:Label ID="lbD31_MO" runat="server"></asp:Label></td>
-                                            <%--               <td>
-                                                <asp:Label ID="lbE31_MO" runat="server"></asp:Label></td>--%>
-                                        </tr>
-
-
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
-
                     </asp:Panel>
 
                     <!-- END FORM-->
@@ -1366,8 +835,8 @@
                                         <tr>
                                             <td>Motor Oil Contamination</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorOilContamination_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
-                                                </asp:DropDownList>
+                                           <%--     <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorOilContamination_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>--%>
 
                                                 <%--                <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
@@ -1382,8 +851,8 @@
                                         <tr>
                                             <td>Motor Hub</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
-                                                </asp:DropDownList>
+                                         <%--       <asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>--%>
 
                                                 <%--<asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
@@ -1398,8 +867,8 @@
                                         <tr>
                                             <td>Motor Hub (Total)</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHubSub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
-                                                </asp:DropDownList>
+                                     <%--           <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHubSub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>--%>
 
                                                 <%--                                                <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
@@ -1447,8 +916,8 @@
                                         <tr>
                                             <td>Compound</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitCompound_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
-                                                </asp:DropDownList>
+                                        <%--        <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitCompound_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>--%>
 
                                                 <%--                                         <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control">
                                                     <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
@@ -1533,7 +1002,13 @@
 
         </Triggers>
     </asp:UpdatePanel>
-    <%--EDIT--%>
+    <%--           <asp:DropDownList ID="ddlUnitMotorBaseSub" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+
+                                                </asp:DropDownList>--%>
 </form>
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->

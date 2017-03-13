@@ -50,7 +50,7 @@ namespace ALS.ALSI.Biz.DataAccess
         }
 
         #region "Custom"
-        public IEnumerable<m_template> SelectAllByActive()
+        public IEnumerable<m_template> SelectAllByActive ()
         {
 
             //return _repository.Find(x => x.status == "A").OrderBy(x => x.name).DistinctBy(x => x.path_url).ToList();
@@ -68,7 +68,7 @@ namespace ALS.ALSI.Biz.DataAccess
            //return _repository.GetAll().ToList();
             using (ALSIEntities ctx = new ALSIEntities())
             {
-                var result = from j in ctx.m_template where j.status == "A" select j;
+                var result = from j in ctx.m_template select j;// j.status == "A" select j;
 
                 //if (this.ID > 0)
                 //{

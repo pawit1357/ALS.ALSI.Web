@@ -147,7 +147,8 @@ namespace ALS.ALSI.Biz.Constant
         ChangeReportDate = 28,
         Amend = 29,
         Retest = 30,
-        Normal = 31
+        Normal = 31,
+        Inactive = 32
     }
 
     public enum RowTypeEnum : int

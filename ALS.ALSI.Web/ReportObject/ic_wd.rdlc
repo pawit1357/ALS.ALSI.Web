@@ -661,7 +661,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ExtractionVolume.Value</Value>
+                              <Value>= Cstr((CDbl(Fields!ExtractionVolume.Value)*1000)) + " mL"</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -1544,7 +1544,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!wf.Value</Value>
+                              <Value>=IIf(Fields!wf.Value = "", "-", Fields!wf.Value)</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -2412,7 +2412,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!wf.Value</Value>
+                              <Value>=IIf(Fields!wf.Value = "", "-", Fields!wf.Value)</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>

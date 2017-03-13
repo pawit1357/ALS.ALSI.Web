@@ -71,15 +71,19 @@
                                 <asp:Label ID="lbTotalRecords" runat="server" Text="" Visible="false"></asp:Label>
 
                                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="id" OnRowCommand="gvResult_RowCommand" OnRowDeleting="gvResult_RowDeleting" OnPageIndexChanging="gvResult_PageIndexChanging" AllowPaging="True" PageSize="50">
+                                    CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,status" OnRowCommand="gvResult_RowCommand" OnRowDeleting="gvResult_RowDeleting" OnPageIndexChanging="gvResult_PageIndexChanging" AllowPaging="True" PageSize="50" OnRowDataBound="gvResult_RowDataBound"  >
                                     <Columns>
                                         <asp:BoundField HeaderText="ID" DataField="ID" ItemStyle-HorizontalAlign="Left" SortExpression="ID" />
                                         <asp:BoundField HeaderText="Name" DataField="name" ItemStyle-HorizontalAlign="Left" SortExpression="name" />
                                         <asp:BoundField HeaderText="Source file" DataField="path_source_file" ItemStyle-HorizontalAlign="Left" SortExpression="path_source_file" />
                                         <asp:BoundField HeaderText="Url" DataField="path_url" ItemStyle-HorizontalAlign="Left" SortExpression="path_url" />
-                                        <asp:TemplateField HeaderText="">
+                                        <asp:BoundField HeaderText="Status" DataField="status" ItemStyle-HorizontalAlign="Left" SortExpression="status" />
+
+                                         <asp:TemplateField HeaderText="">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Upload" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnInActive" runat="server" ToolTip="InActive" CommandName="Inactive" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-ban"></i></asp:LinkButton>
+
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

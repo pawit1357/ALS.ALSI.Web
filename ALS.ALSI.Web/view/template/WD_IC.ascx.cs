@@ -250,7 +250,7 @@ namespace ALS.ALSI.Web.view.template
                 txtProcedureNo.Text = ic.ProcedureNo;
                 txtNumOfPiecesUsedForExtraction.Text = ic.NumOfPiecesUsedForExtraction;
                 txtExtractionMedium.Text = ic.ExtractionMedium;
-                txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDecimal(ic.ExtractionVolume))));
+                txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDouble(ic.ExtractionVolume))));
 
                 ddlComponent.SelectedValue = ic.component_id.ToString();
                 ddlDetailSpec.SelectedValue = ic.detail_spec_id.ToString();
@@ -267,7 +267,7 @@ namespace ALS.ALSI.Web.view.template
                     else
                     {
 
-                        lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", detailSpec.B, detailSpec.A);
+                        lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0} {1}", detailSpec.B, detailSpec.A);
 
                     }
 
@@ -279,7 +279,7 @@ namespace ALS.ALSI.Web.view.template
                     txtProcedureNo.Text = ic.ProcedureNo;
                     txtNumOfPiecesUsedForExtraction.Text = ic.NumOfPiecesUsedForExtraction;
                     txtExtractionMedium.Text = ic.ExtractionMedium;
-                    txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDecimal(ic.ExtractionVolume))));
+                    txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDouble(ic.ExtractionVolume))));
                     #region "Unit"
                     if (ic.wunit != null)
                     {
@@ -561,7 +561,7 @@ namespace ALS.ALSI.Web.view.template
                     pWorkingIC.Visible = false;
 
                     txtNumOfPiecesUsedForExtraction.Text = txtB13.Text;
-                    txtExtractionVolume.Text = (String.IsNullOrEmpty(txtB11.Text) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDecimal(txtB11.Text))));
+                    txtExtractionVolume.Text = (String.IsNullOrEmpty(txtB11.Text) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDouble(txtB11.Text))));
                     calculateByFormular();
                     break;
                 case "Workingpg-IC":
@@ -894,7 +894,7 @@ namespace ALS.ALSI.Web.view.template
             if (tem != null)
             {
                 /*RESULT*/
-                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
+                lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0} {1}", tem.B, tem.A);
 
                 gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", tem.C);
                 gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", tem.C);
@@ -1272,7 +1272,7 @@ namespace ALS.ALSI.Web.view.template
                 tb_m_detail_spec tem = new tb_m_detail_spec().SelectByID(int.Parse(ddlDetailSpec.SelectedValue));
                 if (tem != null)
                 {
-                    lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
+                    lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0} {1}", tem.B, tem.A);
                 }
             }
 
