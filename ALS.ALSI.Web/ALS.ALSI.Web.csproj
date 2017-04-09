@@ -1055,6 +1055,7 @@
     <Content Include="UserControls\SampleInfo.ascx" />
     <Content Include="view\customer\Customer.aspx" />
     <Content Include="view\customer\SearchCustomer.aspx" />
+    <Content Include="view\maintenance\Maintenance.aspx" />
     <Content Include="view\jobRunning\JobRunning.aspx" />
     <Content Include="view\jobRunning\SearchJobRunning.aspx" />
     <Content Include="view\library\Library.aspx" />
@@ -1206,6 +1207,13 @@
     </Compile>
     <Compile Include="view\customer\SearchCustomer.aspx.designer.cs">
       <DependentUpon>SearchCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\maintenance\Maintenance.aspx.cs">
+      <DependentUpon>Maintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\maintenance\Maintenance.aspx.designer.cs">
+      <DependentUpon>Maintenance.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\jobRunning\JobRunning.aspx.cs">
       <DependentUpon>JobRunning.aspx</DependentUpon>
