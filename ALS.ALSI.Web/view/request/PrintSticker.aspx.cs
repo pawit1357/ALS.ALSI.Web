@@ -238,7 +238,7 @@ namespace ALS.ALSI.Web.view.request
                 lbContract.Text = cus_con_per.name;// jobInfo.m_customer_contract_person.name;
 
 
-                List<job_sample> samples = job_sample.FindAllByJobID(jobInfo.ID);
+                List<job_sample> samples = job_sample.FindAllBySampleID(key);//.FindAllByJobID(jobInfo.ID);
                 if (samples != null && samples.Count > 0)
                 {
                     lbSample.Text = samples[0].description + "";
@@ -307,7 +307,7 @@ namespace ALS.ALSI.Web.view.request
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/rptStricker.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/Report2.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
 
 

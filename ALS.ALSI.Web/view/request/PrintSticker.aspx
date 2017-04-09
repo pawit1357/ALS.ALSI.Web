@@ -16,7 +16,28 @@
 
             //Reset the page's HTML with div's HTML only
             document.body.innerHTML =
-              "<html><head><title></title><style type=\"text/css\" media=\"print\">@page { size: 3.5in 3.5in; }.printbreak {page-break-before: always;}</style></head><body>" +
+              "<html><head><title></title><style>"+
+         "body {" +
+            "    width: 4in;" +
+            "}" +
+            ".label{" +
+            "    /* Avery 5160 labels -- CSS and HTML by MM at Boulder Information Services */" +
+            "    width: 3in; /* plus .6 inches from padding */" +
+            "    height: 3in; /* plus .125 inches from padding */" +
+            "    margin-right: .125in; /* the gutter */" +
+            "" +
+            "    float: left;" +
+            "" +
+            "    text-align: center;" +
+            "    overflow: hidden;" +
+            "" +
+            "}" +
+            ".page-break  {" +
+            "clear: left;" +
+            "display:block;" +
+            "   page-break-after:always;" +
+            "}" +
+        "</style></head><body>" +
               divElements + "</body>";
 
             //Print Page
@@ -130,10 +151,11 @@
                         <div class="col-md-6">
                             <div id="divStrickerPreview">
 
-                                <div class="modal-body" id="divStricker">
+                                <div class="label" id="divStricker" >
                                     <h4>
+                                        <span >
                                         <%--<img src="~/img/print_logo.png" width="150" height="50" runat="server" />--%><br />
-                                        Testing Services (Thailand)</h4>
+                                        Testing Services (Thailand)</span></h4>
                                     <table>
                                         <tr>
                                             <td>Job No:</td>
@@ -191,8 +213,8 @@
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
                                         <asp:LinkButton ID="lbPrint" runat="server" CssClass="cancel btn blue" OnClick="lbPrint_Click"><i class="icon-print"></i>Print</asp:LinkButton>
-                                       <%-- <button onclick="javascript:printDiv('divStricker');" class="cancel btn blue">--%>
-                                        <%--    <i class="icon-print"></i>Print</button>--%>
+                                      <button onclick="javascript:printDiv('divStricker');" class="cancel btn blue">
+                                            <i class="icon-print"></i>Print</button>
                                         <asp:Button ID="btnCancel" runat="server" class="cancel btn" Text="Cancel" OnClick="btnCancel_Click" />
                                     </div>
                                 </div>

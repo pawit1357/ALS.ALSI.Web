@@ -68,16 +68,16 @@ namespace ALS.ALSI.Utils
             return photo;
         }
 
-        public static byte[] GetBytesFromPhisicalPath(String imageFile)
-        {
-            byte[] photo = null;
-            string path = String.Format("{0}/{1}", Configurations.PATH_DRIVE, imageFile);
+        //public static byte[] GetBytesFromPhisicalPath(String imageFile)
+        //{
+        //    byte[] photo = null;
+        //    string path = String.Format("{0}/{1}", Configurations.PATH_DRIVE, imageFile);
 
-            photo = File.ReadAllBytes(path);
+        //    photo = File.ReadAllBytes(path);
 
 
-            return photo;
-        }
+        //    return photo;
+        //}
         //private static Image resizeImage(Image imgToResize, Size size)
         //{
         //    int sourceWidth = imgToResize.Width;

@@ -164,8 +164,8 @@ namespace ALS.ALSI.Web.view.template
             if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".xls")  || Path.GetExtension(FileUpload1.FileName).Equals(".xlt")))
             {
                 String _pathSourceFile = String.Format(Configurations.PATH_TEMPLATE, FileUpload1.FileName);
-                String _phisicalPath = String.Format(System.AppDomain.CurrentDomain.BaseDirectory + Configurations.PATH_TEMPLATE, String.Empty);
-                String _savefilePath = String.Format(System.AppDomain.CurrentDomain.BaseDirectory + Configurations.PATH_TEMPLATE, FileUpload1.FileName);
+                String _phisicalPath = String.Format(Configurations.PATH_TEMPLATE, String.Empty);
+                String _savefilePath = String.Format( Configurations.PATH_TEMPLATE, FileUpload1.FileName);
                 if (!Directory.Exists(_phisicalPath))
                 {
                     Directory.CreateDirectory(_phisicalPath);

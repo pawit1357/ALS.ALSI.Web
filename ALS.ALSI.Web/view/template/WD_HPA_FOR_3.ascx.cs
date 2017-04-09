@@ -1387,6 +1387,20 @@ namespace ALS.ALSI.Web.view.template
                         Response.AddHeader("Content-Disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
                         Response.WriteFile(Server.MapPath("~/Report/" + this.jobSample.job_number + "." + extension));
                         Response.Flush();
+
+                        #region "Delete After Download"
+                        String deleteFile1 = Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension;
+                        String deleteFile2 = Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension;
+
+                        if (File.Exists(deleteFile1))
+                        {
+                            File.Delete(deleteFile1);
+                        }
+                        if (File.Exists(deleteFile2))
+                        {
+                            File.Delete(deleteFile2);
+                        }
+                        #endregion
                     }
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:

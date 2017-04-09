@@ -716,8 +716,8 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", ""));
-            reportParameters.Add(new ReportParameter("ResultDesc", ""));
+            reportParameters.Add(new ReportParameter("Test", " "));
+            reportParameters.Add(new ReportParameter("ResultDesc", " "));
             List<template_wd_mesa_img> imgList = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
             List<template_wd_mesa_img> tmpImg1 = new List<template_wd_mesa_img>();
             if (imgList.Count >= 1)
@@ -743,10 +743,10 @@ namespace ALS.ALSI.Web.view.template
                 tmpImg4.Add(imgList[3]);
             }
 
-            reportParameters.Add(new ReportParameter("area1_desc", (imgList.Count >= 1) ? imgList[0].descripton : string.Empty));
-            reportParameters.Add(new ReportParameter("area2_desc", (imgList.Count >= 2) ? imgList[1].descripton : string.Empty));
-            reportParameters.Add(new ReportParameter("area3_desc", (imgList.Count >= 3) ? imgList[2].descripton : string.Empty));
-            reportParameters.Add(new ReportParameter("area4_desc", (imgList.Count >= 4) ? imgList[3].descripton : string.Empty));
+            reportParameters.Add(new ReportParameter("area1_desc", (imgList.Count >= 1) ? imgList[0].descripton : " "));
+            reportParameters.Add(new ReportParameter("area2_desc", (imgList.Count >= 2) ? imgList[1].descripton : " "));
+            reportParameters.Add(new ReportParameter("area3_desc", (imgList.Count >= 3) ? imgList[2].descripton : " "));
+            reportParameters.Add(new ReportParameter("area4_desc", (imgList.Count >= 4) ? imgList[3].descripton : " "));
 
 
             // Variables
@@ -759,10 +759,22 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_mesa_img> dat = this.refImg;
             foreach (template_wd_mesa_img _i in dat)
             {
-                _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
-                _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
-                _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
-                _i.img4 = CustomUtils.GetBytesFromImage(_i.path_edx_spectrum);
+                if (_i.path_sem_image_at_2000x != null)
+                {
+                    _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
+                }
+                if (_i.path_sem_image_at_250x != null)
+                {
+                    _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
+                }
+                if (_i.path_sem_image_at_500x != null)
+                {
+                    _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
+                }
+                if (_i.path_edx_spectrum != null)
+                {
+                    _i.img4 = CustomUtils.GetBytesFromImage(_i.path_edx_spectrum);
+                }
             }
 
             // Setup the report viewer object and get the array of bytes
@@ -775,17 +787,48 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", tmpImg1.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", tmpImg2.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", tmpImg3.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", tmpImg4.ToDataTable())); // Add datasource here
+            if (tmpImg1.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", tmpImg1.ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+            }
+
+            if (tmpImg2.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", tmpImg2.ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+            }
+
+            if (tmpImg3.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", tmpImg3.ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+            }
+
+            if (tmpImg4.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", tmpImg4.ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+            }
 
 
 
             string download = String.Empty;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            switch (status)
+            switch (status) 
             {
                 case StatusEnum.ADMIN_CONVERT_WORD:
                     if (!String.IsNullOrEmpty(this.jobSample.path_word))
@@ -832,6 +875,20 @@ namespace ALS.ALSI.Web.view.template
                         Response.AddHeader("Content-Disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
                         Response.WriteFile(Server.MapPath("~/Report/" + this.jobSample.job_number + "." + extension));
                         Response.Flush();
+
+                        #region "Delete After Download"
+                        String deleteFile1 = Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension;
+                        String deleteFile2 = Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension;
+
+                        if (File.Exists(deleteFile1))
+                        {
+                            File.Delete(deleteFile1);
+                        }
+                        if (File.Exists(deleteFile2))
+                        {
+                            File.Delete(deleteFile2);
+                        }
+                        #endregion
 
                     }
                     break;
@@ -1003,7 +1060,7 @@ namespace ALS.ALSI.Web.view.template
                     String randNumber = String.Format("{0}_250X{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(FileUpload1.FileName));
 
                     String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
-                    String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+                    String source_file_url =  String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
 
                     if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                     {

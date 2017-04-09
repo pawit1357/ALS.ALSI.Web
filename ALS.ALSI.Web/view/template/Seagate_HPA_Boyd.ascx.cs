@@ -869,7 +869,7 @@ namespace ALS.ALSI.Web.view.template
                             string dd = DateTime.Now.ToString("dd");
 
                             String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
-                            String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
+                            //String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
 
 
                             if (!Directory.Exists(Path.GetDirectoryName(source_file)))
@@ -1622,7 +1622,7 @@ namespace ALS.ALSI.Web.view.template
                 DataColumn[] imgCol = { new DataColumn("img1", typeof(Byte[])) };
                 dtImgs.Columns.AddRange(imgCol);
                 DataRow imgRow = dtImgs.NewRow();
-                imgRow["img1"] = CustomUtils.GetBytesFromPhisicalPath(this.Hpas[0].img_path);
+                imgRow["img1"] = CustomUtils.GetBytesFromImage(this.Hpas[0].img_path);
                 dtImgs.Rows.Add(imgRow);
             }
 
@@ -1811,6 +1811,20 @@ namespace ALS.ALSI.Web.view.template
                         Response.AddHeader("Content-Disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
                         Response.WriteFile(Server.MapPath("~/Report/" + this.jobSample.job_number + "." + extension));
                         Response.Flush();
+
+                        #region "Delete After Download"
+                        String deleteFile1 = Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension;
+                        String deleteFile2 = Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension;
+
+                        if (File.Exists(deleteFile1))
+                        {
+                            File.Delete(deleteFile1);
+                        }
+                        if (File.Exists(deleteFile2))
+                        {
+                            File.Delete(deleteFile2);
+                        }
+                        #endregion
                     }
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:
@@ -1860,7 +1874,7 @@ namespace ALS.ALSI.Web.view.template
                 DataColumn[] imgCol = { new DataColumn("img1", typeof(Byte[])) };
                 dtImgs.Columns.AddRange(imgCol);
                 DataRow imgRow = dtImgs.NewRow();
-                imgRow["img1"] = CustomUtils.GetBytesFromPhisicalPath(this.Hpas[0].img_path);
+                imgRow["img1"] = CustomUtils.GetBytesFromImage(this.Hpas[0].img_path);
                 dtImgs.Rows.Add(imgRow);
             }
 
