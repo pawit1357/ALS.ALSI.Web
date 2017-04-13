@@ -85,6 +85,7 @@ namespace ALS.ALSI.Web.view.request
 
         private void fillinScreen()
         {
+            type_of_test = "";
             job_sample jobSample = new job_sample().SelectByID(this.SampleID);
             job_info jobInfo = new job_info().SelectByID(this.JobID);
             if (jobInfo != null)
@@ -307,7 +308,7 @@ namespace ALS.ALSI.Web.view.request
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/Report2.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/Report1.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
 
 

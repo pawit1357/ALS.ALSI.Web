@@ -48,7 +48,7 @@
                             </div>
                         </div>
 
-<%--                        <div class="form-group">
+                        <%--                        <div class="form-group">
                             <label class="control-label col-md-3">Disable Past Dates</label>
                             <div class="col-md-3">
                                 <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
@@ -63,8 +63,7 @@
                                 <span class="help-block">Select date </span>
                             </div>
                         </div>
-    --%>
-
+                        --%>
                     </div>
                     <h4 class="form-section">Customer Information</h4>
                     <div class="row">
@@ -357,117 +356,120 @@
                                 </div>
                                 <div class="portlet-body">
                                     <!-- BEGIN FORM-->
-                                    <asp:GridView ID="gvSample" runat="server" AutoGenerateColumns="False" AllowPaging="True"
-                                        CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_id,job_number,no_of_report,uncertainty,status_completion_scheduled" OnRowCancelingEdit="gvSample_RowCancelingEdit" OnRowDataBound="gvSample_RowDataBound" OnRowDeleting="gvSample_RowDeleting" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" OnSelectedIndexChanging="gvSample_SelectedIndexChanging" OnPageIndexChanging="gvSample_PageIndexChanging">
-                                        <Columns>
-                                            <asp:TemplateField HeaderText="Ref No." ItemStyle-HorizontalAlign="Center">
-                                                <ItemTemplate>
-                                                    <asp:Literal ID="litRefNo" runat="server" Text='<%# Eval("job_number")%>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:TextBox ID="txtRefNo" CssClass="form-control" runat="server" Text='<%# Eval("job_number")%>'></asp:TextBox>
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
+                                    <div style="width: 100%; overflow-x: scroll; overflow-y: hidden; padding-bottom: 10px;" runat="server">
 
-                                            <asp:TemplateField HeaderText="Sample Description (Part description, Part no. etc.)" ItemStyle-HorizontalAlign="Center">
-                                                <ItemTemplate>
-                                                    <asp:Literal ID="litDescriptoin" runat="server" Text='<%# Eval("description")%>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:TextBox ID="txtDescriptoin" CssClass="form-control" runat="server" Text='<%# Eval("description")%>'></asp:TextBox>
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="model" ItemStyle-HorizontalAlign="Center">
-                                                <ItemTemplate>
-                                                    <asp:Literal ID="litModel" runat="server" Text='<%# Eval("model")%>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:TextBox ID="txtModel" CssClass="form-control" runat="server" Text='<%# Eval("model")%>'></asp:TextBox>
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Surface Area" ItemStyle-HorizontalAlign="Center">
-                                                <ItemTemplate>
-                                                    <asp:Literal ID="litSurfaceArea" runat="server" Text='<%# Eval("surface_area")%>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:TextBox ID="txtSurfaceArea" CssClass="form-control" runat="server" Text='<%# Eval("surface_area")%>'></asp:TextBox>
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Remark" ItemStyle-HorizontalAlign="Center">
-                                                <ItemTemplate>
-                                                    <asp:Literal ID="litRemark" runat="server" Text='<%# Eval("remarks")%>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:TextBox ID="txtRemark" CssClass="form-control" runat="server" Text='<%# Eval("remarks")%>'></asp:TextBox>
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="No.of Report:" ItemStyle-HorizontalAlign="Center">
-                                                <ItemTemplate>
-                                                    <asp:Literal ID="litNoOfReport" runat="server" Text='<%# Eval("no_of_report")%>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:DropDownList ID="ddlNoOfReport" runat="server" CssClass="select2_category form-control"></asp:DropDownList>
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="UNCERTAINTY" ItemStyle-HorizontalAlign="Center">
-                                                <ItemTemplate>
-                                                    <asp:Literal ID="litUncertainty" runat="server" Text='<%# Eval("uncertainty")%>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:DropDownList ID="ddlUncertaint" runat="server" CssClass="select2_category form-control"></asp:DropDownList>
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="STATUS" ItemStyle-HorizontalAlign="Center">
-                                                <ItemTemplate>
-                                                    <asp:Literal ID="litStatus_completion_scheduled" runat="server" Text='<%# Eval("status_completion_scheduled")%>' />
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:DropDownList ID="ddlCompletionScheduled" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID"></asp:DropDownList>
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" OnClientClick="return confirm('Are you sure you want to delete this record?');"
-                                                        CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
-                                                </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
-                                                        CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
-                                                    <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
-                                                        CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
-                                                </EditItemTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
-                                        <PagerTemplate>
-                                            <div class="pagination">
-                                                <ul>
-                                                    <li>
-                                                        <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
-                                                            CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
-                                                    </li>
-                                                    <li>
-                                                        <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
-                                                            CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
-                                                    </li>
-                                                    <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
-                                                    <li>
-                                                        <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
-                                                            CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
-                                                    </li>
-                                                    <li>
-                                                        <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
-                                                            CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </PagerTemplate>
-                                        <EmptyDataTemplate>
-                                            <div class="data-not-found">
-                                                <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                            </div>
-                                        </EmptyDataTemplate>
-                                    </asp:GridView>
+                                        <asp:GridView ID="gvSample" runat="server" AutoGenerateColumns="False" AllowPaging="True"
+                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_id,job_number,no_of_report,uncertainty,status_completion_scheduled" OnRowCancelingEdit="gvSample_RowCancelingEdit" OnRowDataBound="gvSample_RowDataBound" OnRowDeleting="gvSample_RowDeleting" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" OnSelectedIndexChanging="gvSample_SelectedIndexChanging" OnPageIndexChanging="gvSample_PageIndexChanging">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="Ref No." ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litRefNo" runat="server" Text='<%# Eval("job_number")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtRefNo" CssClass="form-control" runat="server" Text='<%# Eval("job_number")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Sample Description (Part description, Part no. etc.)" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litDescriptoin" runat="server" Text='<%# Eval("description")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtDescriptoin" CssClass="form-control" runat="server" Text='<%# Eval("description")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="model" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litModel" runat="server" Text='<%# Eval("model")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtModel" CssClass="form-control" runat="server" Text='<%# Eval("model")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Surface Area" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litSurfaceArea" runat="server" Text='<%# Eval("surface_area")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtSurfaceArea" CssClass="form-control" runat="server" Text='<%# Eval("surface_area")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Remark" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litRemark" runat="server" Text='<%# Eval("remarks")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtRemark" CssClass="form-control" runat="server" Text='<%# Eval("remarks")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="No.of Report:" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litNoOfReport" runat="server" Text='<%# Eval("no_of_report")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:DropDownList ID="ddlNoOfReport" runat="server" CssClass="select2_category form-control"></asp:DropDownList>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="UNCERTAINTY" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litUncertainty" runat="server" Text='<%# Eval("uncertainty")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:DropDownList ID="ddlUncertaint" runat="server" CssClass="select2_category form-control"></asp:DropDownList>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="STATUS" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litStatus_completion_scheduled" runat="server" Text='<%# Eval("status_completion_scheduled")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:DropDownList ID="ddlCompletionScheduled" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID"></asp:DropDownList>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" OnClientClick="return confirm('Are you sure you want to delete this record?');"
+                                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                            CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                            CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                            <PagerTemplate>
+                                                <div class="pagination">
+                                                    <ul>
+                                                        <li>
+                                                            <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
+                                                                CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
+                                                        </li>
+                                                        <li>
+                                                            <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
+                                                                CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
+                                                        </li>
+                                                        <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
+                                                        <li>
+                                                            <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
+                                                                CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
+                                                        </li>
+                                                        <li>
+                                                            <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
+                                                                CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </PagerTemplate>
+                                            <EmptyDataTemplate>
+                                                <div class="data-not-found">
+                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                </div>
+                                            </EmptyDataTemplate>
+                                        </asp:GridView>
+                                    </div>
                                     <!-- END FORM-->
                                 </div>
                             </div>

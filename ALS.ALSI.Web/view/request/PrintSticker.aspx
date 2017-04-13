@@ -12,7 +12,7 @@
             //Get the HTML of div
             var divElements = document.getElementById(divID).innerHTML;
             //Get the HTML of whole page
-            var oldPage = document.body.innerHTML;
+            //var oldPage = document.body.innerHTML;
 
             //Reset the page's HTML with div's HTML only
             document.body.innerHTML =
@@ -20,29 +20,13 @@
          "body {" +
             "    width: 4in;" +
             "}" +
-            ".label{" +
-            "    /* Avery 5160 labels -- CSS and HTML by MM at Boulder Information Services */" +
-            "    width: 3in; /* plus .6 inches from padding */" +
-            "    height: 3in; /* plus .125 inches from padding */" +
-            "    margin-right: .125in; /* the gutter */" +
-            "" +
-            "    float: left;" +
-            "" +
-            "    text-align: center;" +
-            "    overflow: hidden;" +
-            "" +
-            "}" +
-            ".page-break  {" +
-            "clear: left;" +
-            "display:block;" +
-            "   page-break-after:always;" +
-            "}" +
         "</style></head><body>" +
-              divElements + "</body>";
+              divElements + "</body></html>";
 
             //Print Page
             window.print();
-
+            location.reload();
+            //document.location.href = "PrintSticker.aspx";
             //Restore orignal HTML
             //document.body.innerHTML = oldPage;
             //window.location.assign("CashFlowCalendar.aspx")
@@ -151,51 +135,50 @@
                         <div class="col-md-6">
                             <div id="divStrickerPreview">
 
-                                <div class="label" id="divStricker" >
-                                    <h4>
-                                        <span >
-                                        <%--<img src="~/img/print_logo.png" width="150" height="50" runat="server" />--%><br />
-                                        Testing Services (Thailand)</span></h4>
+                                <div id="divStricker" >
                                     <table>
+                                         <tr>
+                                             <td colspan="2" class="text-center">Testing Services (Thailand)</td>
+                                             </tr>
                                         <tr>
-                                            <td>Job No:</td>
-                                            <td>
+                                            <td class="text-right"> Job No:&nbsp;&nbsp;&nbsp; </td>
+                                            <td class="text-left">
                                                 <asp:Label ID="lbJobNo" runat="server" Text=""></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Client:</td>
-                                            <td>
+                                            <td class="text-right">Client:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-left">
                                                 <asp:Label ID="lbClient" runat="server" Text=""></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Contract:</td>
-                                            <td>
+                                            <td class="text-right">Contract:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-left">
                                                 <asp:Label ID="lbContract" runat="server" Text=""></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Sample:</td>
-                                            <td>
+                                            <td class="text-right">Sample:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-left">
                                                 <asp:Label ID="lbSample" runat="server" Text=""></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Spec:</td>
-                                            <td>
+                                            <td class="text-right">Spec:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-left">
                                                 <asp:Label ID="lbSpec" runat="server" Text=""></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Test:</td>
-                                            <td>
+                                            <td class="text-right">Test:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-left">
                                               <asp:Label ID="lbTot" runat="server" Text=""></asp:Label>  
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Sample </td>
-                                            <td>
+                                            <td class="text-right">Sample:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-left">
                                                 <asp:Label ID="lbSd" runat="server" Text=""></asp:Label>
                                             
                                             </td>
@@ -207,13 +190,19 @@
                         </div>
                     </div>
 
+
+                    <page size="A4">
+
+
+                    </page>
+
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <asp:LinkButton ID="lbPrint" runat="server" CssClass="cancel btn blue" OnClick="lbPrint_Click"><i class="icon-print"></i>Print</asp:LinkButton>
-                                      <button onclick="javascript:printDiv('divStricker');" class="cancel btn blue">
+                                        <asp:LinkButton ID="lbPrint" runat="server" CssClass="cancel btn blue" OnClick="lbPrint_Click" Visible="False"><i class="icon-print"></i>Print</asp:LinkButton>
+                             <button onclick="javascript:printDiv('divStricker'); return false;" class="cancel btn blue">
                                             <i class="icon-print"></i>Print</button>
                                         <asp:Button ID="btnCancel" runat="server" class="cancel btn" Text="Cancel" OnClick="btnCancel_Click" />
                                     </div>
