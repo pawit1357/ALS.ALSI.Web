@@ -176,7 +176,15 @@ namespace ALS.ALSI.Web.view.template
                 switch (CommandName)
                 {
                     case CommandNameEnum.Add:
-                        this.PKID = obj.InsertGetLastID();
+                        try
+                        {
+                            this.PKID = obj.InsertGetLastID();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine();
+                        }
                         break;
                     case CommandNameEnum.Edit:
                         break;

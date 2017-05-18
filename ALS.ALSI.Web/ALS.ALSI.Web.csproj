@@ -58,10 +58,6 @@
     <Reference Include="AjaxMin">
       <HintPath>..\ALS.ALSI.Biz\Binaries\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
@@ -94,13 +90,13 @@
       <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="Spire.Doc">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\e-iceblue\Spire.Doc-Fe\Bin\NET2.0\Spire.Doc.dll</HintPath>
+      <HintPath>E:\lib\Spire.Doc.dll</HintPath>
     </Reference>
     <Reference Include="Spire.License">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\e-iceblue\Spire.Doc-Fe\Bin\NET2.0\Spire.License.dll</HintPath>
+      <HintPath>E:\lib\Spire.License.dll</HintPath>
     </Reference>
     <Reference Include="Spire.Pdf">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\e-iceblue\Spire.Doc-Fe\Bin\NET2.0\Spire.Pdf.dll</HintPath>
+      <HintPath>E:\lib\Spire.Pdf.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -128,6 +124,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\apps\css\inbox.css" />
+    <Content Include="assets\apps\css\inbox.min.css" />
+    <Content Include="assets\apps\css\ticket.css" />
+    <Content Include="assets\apps\css\ticket.min.css" />
+    <Content Include="assets\apps\css\todo-2.css" />
+    <Content Include="assets\apps\css\todo-2.min.css" />
+    <Content Include="assets\apps\css\todo.css" />
+    <Content Include="assets\apps\css\todo.min.css" />
+    <Content Include="assets\apps\scripts\calendar.js" />
+    <Content Include="assets\apps\scripts\calendar.min.js" />
+    <Content Include="assets\apps\scripts\inbox.js" />
+    <Content Include="assets\apps\scripts\inbox.min.js" />
+    <Content Include="assets\apps\scripts\todo-2.js" />
+    <Content Include="assets\apps\scripts\todo-2.min.js" />
+    <Content Include="assets\apps\scripts\todo.js" />
+    <Content Include="assets\apps\scripts\todo.min.js" />
     <Content Include="assets\global\css\components-md.css" />
     <Content Include="assets\global\css\components-md.min.css" />
     <Content Include="assets\global\css\components-rounded.css" />
@@ -805,6 +817,82 @@
     <Content Include="assets\global\scripts\app.min.js" />
     <Content Include="assets\global\scripts\datatable.js" />
     <Content Include="assets\global\scripts\datatable.min.js" />
+    <Content Include="assets\layouts\global\scripts\quick-sidebar.js" />
+    <Content Include="assets\layouts\global\scripts\quick-sidebar.min.js" />
+    <Content Include="assets\layouts\layout\css\custom.css" />
+    <Content Include="assets\layouts\layout\css\custom.min.css" />
+    <Content Include="assets\layouts\layout\css\layout.css" />
+    <Content Include="assets\layouts\layout\css\layout.min.css" />
+    <Content Include="assets\layouts\layout\css\themes\blue.css" />
+    <Content Include="assets\layouts\layout\css\themes\blue.min.css" />
+    <Content Include="assets\layouts\layout\css\themes\darkblue.css" />
+    <Content Include="assets\layouts\layout\css\themes\darkblue.min.css" />
+    <Content Include="assets\layouts\layout\css\themes\default.css" />
+    <Content Include="assets\layouts\layout\css\themes\default.min.css" />
+    <Content Include="assets\layouts\layout\css\themes\grey.css" />
+    <Content Include="assets\layouts\layout\css\themes\grey.min.css" />
+    <Content Include="assets\layouts\layout\css\themes\light.css" />
+    <Content Include="assets\layouts\layout\css\themes\light.min.css" />
+    <Content Include="assets\layouts\layout\css\themes\light2.css" />
+    <Content Include="assets\layouts\layout\css\themes\light2.min.css" />
+    <Content Include="assets\layouts\layout\img\ajax-loading.gif" />
+    <Content Include="assets\layouts\layout\img\ajax-modal-loading.gif" />
+    <Content Include="assets\layouts\layout\img\arrow-down.png" />
+    <Content Include="assets\layouts\layout\img\avatar.png" />
+    <Content Include="assets\layouts\layout\img\avatar1.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar10.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar11.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar1_small.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar2.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar3.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar3_small.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar4.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar5.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar6.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar7.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar8.jpg" />
+    <Content Include="assets\layouts\layout\img\avatar9.jpg" />
+    <Content Include="assets\layouts\layout\img\hor-menu-red-arrow.png" />
+    <Content Include="assets\layouts\layout\img\icon-color-close.png" />
+    <Content Include="assets\layouts\layout\img\icon-color.png" />
+    <Content Include="assets\layouts\layout\img\icon-img-down.png" />
+    <Content Include="assets\layouts\layout\img\icon-img-up.png" />
+    <Content Include="assets\layouts\layout\img\inbox-nav-arrow-blue.png" />
+    <Content Include="assets\layouts\layout\img\loading-spinner-blue.gif" />
+    <Content Include="assets\layouts\layout\img\loading-spinner-default.gif" />
+    <Content Include="assets\layouts\layout\img\loading-spinner-grey.gif" />
+    <Content Include="assets\layouts\layout\img\loading.gif" />
+    <Content Include="assets\layouts\layout\img\logo-big-white.png" />
+    <Content Include="assets\layouts\layout\img\logo-big.png" />
+    <Content Include="assets\layouts\layout\img\logo-invert.png" />
+    <Content Include="assets\layouts\layout\img\logo.png" />
+    <Content Include="assets\layouts\layout\img\menu-toggler.png" />
+    <Content Include="assets\layouts\layout\img\photo1.jpg" />
+    <Content Include="assets\layouts\layout\img\photo2.jpg" />
+    <Content Include="assets\layouts\layout\img\photo3.jpg" />
+    <Content Include="assets\layouts\layout\img\remove-icon-small.png" />
+    <Content Include="assets\layouts\layout\img\search_icon_light.png" />
+    <Content Include="assets\layouts\layout\img\sidebar-menu-arrow-reverse.png" />
+    <Content Include="assets\layouts\layout\img\sidebar-menu-arrow-right.png" />
+    <Content Include="assets\layouts\layout\img\sidebar-menu-arrow.png" />
+    <Content Include="assets\layouts\layout\img\sidebar_arrow_icon_light.png" />
+    <Content Include="assets\layouts\layout\img\sidebar_arrow_icon_light_rtl.png" />
+    <Content Include="assets\layouts\layout\img\sidebar_inline_toggler_icon_blue.jpg" />
+    <Content Include="assets\layouts\layout\img\sidebar_inline_toggler_icon_darkblue.jpg" />
+    <Content Include="assets\layouts\layout\img\sidebar_inline_toggler_icon_default.jpg" />
+    <Content Include="assets\layouts\layout\img\sidebar_inline_toggler_icon_grey.jpg" />
+    <Content Include="assets\layouts\layout\img\sidebar_inline_toggler_icon_light.jpg" />
+    <Content Include="assets\layouts\layout\img\sidebar_inline_toggler_icon_light2.jpg" />
+    <Content Include="assets\layouts\layout\img\sidebar_toggler_icon_blue.png" />
+    <Content Include="assets\layouts\layout\img\sidebar_toggler_icon_darkblue.png" />
+    <Content Include="assets\layouts\layout\img\sidebar_toggler_icon_default.png" />
+    <Content Include="assets\layouts\layout\img\sidebar_toggler_icon_grey.png" />
+    <Content Include="assets\layouts\layout\img\sidebar_toggler_icon_light.png" />
+    <Content Include="assets\layouts\layout\img\sidebar_toggler_icon_light2.png" />
+    <Content Include="assets\layouts\layout\scripts\demo.js" />
+    <Content Include="assets\layouts\layout\scripts\demo.min.js" />
+    <Content Include="assets\layouts\layout\scripts\layout.js" />
+    <Content Include="assets\layouts\layout\scripts\layout.min.js" />
     <Content Include="assets\pages\css\about.css" />
     <Content Include="assets\pages\css\about.min.css" />
     <Content Include="assets\pages\css\blog.css" />
@@ -1087,6 +1175,7 @@
     <Content Include="view\template\Seagate_HPA_Siam.ascx" />
     <Content Include="view\template\WD_Corrosion.ascx" />
     <Content Include="view\template\WD_GCMS_CVR.ascx" />
+    <Content Include="view\template\WD_HPA_FOR_1_V2.ascx" />
     <Content Include="view\template\WD_HPA_FOR_3.ascx" />
     <Content Include="view\template\WD_HPA_FOR_1.ascx" />
     <Content Include="view\template\Seagate_DHS.ascx" />
@@ -1183,12 +1272,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ReportObject\CrystalReport1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportObject\DS.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1418,6 +1501,13 @@
     </Compile>
     <Compile Include="view\template\WD_GCMS_CVR.ascx.designer.cs">
       <DependentUpon>WD_GCMS_CVR.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\WD_HPA_FOR_1_V2.ascx.cs">
+      <DependentUpon>WD_HPA_FOR_1_V2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\WD_HPA_FOR_1_V2.ascx.designer.cs">
+      <DependentUpon>WD_HPA_FOR_1_V2.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\WD_HPA_FOR_3.ascx.cs">
       <DependentUpon>WD_HPA_FOR_3.ascx</DependentUpon>
@@ -1704,8 +1794,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\apps\" />
-    <Folder Include="assets\layouts\" />
+    <Folder Include="assets\apps\img\" />
     <Folder Include="assets\pages\img\" />
     <Folder Include="assets\pages\media\" />
     <Folder Include="Report\" />
@@ -1790,10 +1879,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\corrosion_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\copperwire_seagate.rdlc" />
-    <EmbeddedResource Include="ReportObject\CrystalReport1.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\dhs_seagate_v2.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>

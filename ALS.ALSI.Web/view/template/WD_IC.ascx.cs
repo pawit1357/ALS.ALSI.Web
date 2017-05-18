@@ -17,7 +17,6 @@ using ALS.ALSI.Biz.ReportObjects;
 using System.Data;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
-using WordToPDF;
 using Spire.Doc;
 
 namespace ALS.ALSI.Web.view.template
@@ -1225,7 +1224,10 @@ namespace ALS.ALSI.Web.view.template
             {
                 if (!String.IsNullOrEmpty(_val.B))
                 {
-                    _val.E = (_val.B.Equals("NA") || (_val.B.Equals("-")) ? "NA" : (CustomUtils.isNumber(_val.wf) ? Convert.ToDouble(_val.wj) : 0) < Convert.ToDouble(_val.B) ? "PASS" : "FAIL");
+                    if (_val.wf != null)
+                    {
+                        _val.E = (_val.B.Equals("NA") || (_val.B.Equals("-")) ? "NA" : (CustomUtils.isNumber(_val.wf) ? Convert.ToDouble(_val.wj) : 0) < Convert.ToDouble(_val.B) ? "PASS" : "FAIL");
+                    }
                 }
             }
 

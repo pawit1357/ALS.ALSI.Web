@@ -9,6 +9,11 @@
         <br />
         <asp:Button ID="btnExecute" runat="server" Text="Execute" OnClick="btnExecute_Click" />
         <asp:Button ID="btnGetDs" runat="server" Text="Execute(DS)" OnClick="btnGetDs_Click" />
+        <asp:Button ID="btnBackup" runat="server" Text="Backup(DB)" OnClick="btnBackup_Click" />
+
+        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">DownloadBackup</asp:LinkButton>
+        <asp:HiddenField ID="HiddenField1" runat="server" />
+
         <br />
         <asp:Label ID="lbResult" runat="server" Text=""></asp:Label>
         <br />

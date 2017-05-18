@@ -14,7 +14,6 @@ using System.Linq;
 using System.Data;
 using ALS.ALSI.Biz.ReportObjects;
 using Microsoft.Reporting.WebForms;
-using WordToPDF;
 using Spire.Doc;
 
 namespace ALS.ALSI.Web.view.template
@@ -985,7 +984,8 @@ namespace ALS.ALSI.Web.view.template
         {
             if (cbCheckBox.Checked)
             {
-                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+                //lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+                lbSpecDesc.Text = String.Empty;
             }
             else
             {

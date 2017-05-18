@@ -15,10 +15,10 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using WordToPDF;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -664,7 +664,14 @@ namespace ALS.ALSI.Web.view.template
                                             {
                                                 if (isheet.GetRow(j).GetCell(1).CellType != CellType.Blank)
                                                 {
-                                                    tmp.rt = Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1))).ToString("N"+txtDecimal03.Text);
+                                                    if (CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1)).IndexOf("-")>0)
+                                                    {
+                                                        tmp.rt = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1));
+                                                    }
+                                                    else {
+
+                                                        tmp.rt = Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1))).ToString("N" + txtDecimal03.Text);
+                                                    }
                                                 }
                                             }
                                             tmp.library_id = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(2));

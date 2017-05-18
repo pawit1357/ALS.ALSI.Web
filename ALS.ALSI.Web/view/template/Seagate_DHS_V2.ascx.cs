@@ -16,10 +16,10 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using WordToPDF;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -592,8 +592,11 @@ namespace ALS.ALSI.Web.view.template
                                                     break;
                                                 case "11111111"://NORMAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
-                                                    break;
+                                                    if (Regex.IsMatch(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7)), @"^\d+$"))
+                                                    {
+                                                        tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    }       
+                                                break;
                                                 //case "00110011":
                                                 case "00110111"://C31
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.c31);
@@ -611,6 +614,9 @@ namespace ALS.ALSI.Web.view.template
                                                 case "00100010"://SAMPLE SIZE
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.SampleSize);
                                                     break;
+                                                //case "00000000":
+                                                //    bAdd = false;
+                                                //    break;
                                                 default:
                                                     bAdd = false;
                                                     break;
@@ -805,7 +811,7 @@ namespace ALS.ALSI.Web.view.template
             {
 
                 List<template_seagate_dhs_coverpage> newCoverPage = new List<template_seagate_dhs_coverpage>();
-                foreach (template_seagate_dhs_coverpage _cover in this.coverpages)
+                foreach (template_seagate_dhs_coverpage _cover in this.coverpages.Where(x=>!x.chemical_id.Equals("0")))
                 {
                     String groupName = mappingRawData(_cover.name.Trim());
                     tb_m_dhs_cas tmp = this.tbCas.Find(x => groupName.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
@@ -1143,16 +1149,24 @@ namespace ALS.ALSI.Web.view.template
                     {
                         template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
                         //work.ID = (this.CommandName == CommandNameEnum.Add) ? index : this.coverpages[index].ID;
-                        work.sample_id = this.SampleID;
-                        work.component_id = component.ID;
-                        work.chemical_id = spec.B;
-                        work.name = spec.C;
-                        work.ng_part = spec.D;
-                        work.result = String.Empty;
-                        //work.RowState = this.CommandName;
-                        work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                        newCoverPage.Add(work);
-                        index++;
+                        if (!spec.B.Equals("0")){
+                            if (spec.B.Equals("-") && spec.C.Equals("-"))
+                            {
+                                Console.WriteLine();
+                            }
+                            else {
+                                work.sample_id = this.SampleID;
+                                work.component_id = component.ID;
+                                work.chemical_id = spec.B;
+                                work.name = spec.C;
+                                work.ng_part = spec.D;
+                                work.result = String.Empty;
+                                //work.RowState = this.CommandName;
+                                work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                                newCoverPage.Add(work);
+                                index++;
+                            }
+                        }
                     }
                     this.coverpages = newCoverPage;
                     //Result Description

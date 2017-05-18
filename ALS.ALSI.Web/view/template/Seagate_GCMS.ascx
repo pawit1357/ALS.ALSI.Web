@@ -371,6 +371,7 @@
                                         </div>
                                     </EmptyDataTemplate>
                                 </asp:GridView>
+
                                 <asp:GridView ID="gvCompound" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="ID,row_type" OnRowDataBound="gvCompound_RowDataBound" OnRowCommand="gvCompound_RowCommand">
                                     <Columns>
@@ -490,7 +491,8 @@
                                         </div>
                                     </EmptyDataTemplate>
                                 </asp:GridView>
-                            </div>
+                           
+                                 </div>
                         </div>
                         <br />
                         <asp:Label ID="lbRemark1" runat="server" Text=""></asp:Label><br />

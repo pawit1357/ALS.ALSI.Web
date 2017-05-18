@@ -17,7 +17,6 @@ using NPOI.SS.UserModel;
 using System.Data;
 using ALS.ALSI.Biz.ReportObjects;
 using Microsoft.Reporting.WebForms;
-using WordToPDF;
 using System.Text.RegularExpressions;
 using Spire.Doc;
 
@@ -417,21 +416,21 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".doc") || Path.GetExtension(btnUpload.FileName).Equals(".docx")))
+                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
                         string dd = DateTime.Now.ToString("dd");
 
-                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
 
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
                             Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                         }
-                        btnUpload.SaveAs(source_file);
+                        FileUpload1.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
                         //lbMessage.Text = string.Empty;
@@ -445,21 +444,21 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
+                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
                         string dd = DateTime.Now.ToString("dd");
 
-                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
 
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
                             Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                         }
-                        btnUpload.SaveAs(source_file);
+                        FileUpload1.SaveAs(source_file);
                         this.jobSample.path_pdf = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                         //lbMessage.Text = string.Empty;
@@ -667,9 +666,6 @@ namespace ALS.ALSI.Web.view.template
                         _val.E = _val.D.Equals("NA") ? "NA" : _val.D.Equals("TBD") ? "" : (_val.C >= Convert.ToInt32(_val.D)) ? "FAIL" : "PASS";
                     }
                 }
-
-
-
             }
 
             gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
@@ -705,7 +701,10 @@ namespace ALS.ALSI.Web.view.template
             if (detailSpec != null)
             {
                 tb_m_detail_spec dp = detailSpecs.Where(x => x.A.Equals("Indirect Material")).FirstOrDefault();
-
+                //if (dp == null)
+                //{
+                //    dp = detailSpec;
+                //}
                 //lbDocNo.Text = detailSpec.B;
                 //lbComponent.Text = detailSpec.A;
                 lbSpecDesc.Text = String.Format("The Specification is based on WD's specification Doc No {0} for {1}", detailSpec.B, detailSpec.A);

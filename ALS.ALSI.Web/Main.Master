@@ -187,7 +187,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <asp:Literal ID="litNavigator" runat="server" />
                     </ul>
                     <div class="page-toolbar">
-                        ALIS V1.0 Lasted Update 2015-10-30
+                        ALIS V1.2 Lasted Update 2017-05-15
                     </div>
                 </div>
                 <!-- END PAGE BAR -->

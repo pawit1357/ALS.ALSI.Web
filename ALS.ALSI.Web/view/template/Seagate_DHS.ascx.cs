@@ -1168,17 +1168,26 @@ namespace ALS.ALSI.Web.view.template
                     int index = 0;
                     foreach (tb_m_detail_spec_ref spec in detailSpecRefs)
                     {
-                        template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
-                        //work.ID = (this.CommandName == CommandNameEnum.Add) ? index : this.coverpages[index].ID;
-                        work.sample_id = this.SampleID;
-                        work.component_id = component.ID;
-                        work.name = spec.B;
-                        work.ng_part = spec.C;
-                        work.result = String.Empty;
-                        //work.RowState = this.CommandName;
-                        work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                        newCoverPage.Add(work);
-                        index++;
+                        if (!spec.B.Equals("0"))
+                        {
+                            if (spec.B.Equals("-") && spec.C.Equals("-"))
+                            {
+                                Console.WriteLine();
+                            }
+                            else {
+                                template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
+                                //work.ID = (this.CommandName == CommandNameEnum.Add) ? index : this.coverpages[index].ID;
+                                work.sample_id = this.SampleID;
+                                work.component_id = component.ID;
+                                work.name = spec.B;
+                                work.ng_part = spec.C;
+                                work.result = String.Empty;
+                                //work.RowState = this.CommandName;
+                                work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                                newCoverPage.Add(work);
+                                index++;
+                            }
+                        }
                     }
                     this.coverpages = newCoverPage;
                     //Result Description
