@@ -270,7 +270,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Procedure:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlComponent" runat="server" class="select2_category form-control" DataTextField="C" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged">
+                                                <asp:DropDownList ID="ddlComponent" runat="server" class="select2_category form-control" DataTextField="A" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>

@@ -40,8 +40,10 @@ namespace ALS.ALSI.Web.view.template
             "-#- C18-C40 Hydrocarbon Hump only",
             "-#- Surfactant contained in Hydrocarbon Hump (e.g. DP154/ DP155)",
             "-#- Surfactant contained in Hydrocarbon Hump (e.g. Triton X-100)",
+            "-#- Surfactant contained in Hydrocarbon Hump (e.g. PCM AL)",
             "-#Surfactant as DP154/155",
             "-#Surfactant as Triton X-100",
+            "-#Surfactant as PCM AL",
             "I#Total Silanes",
             "H#Total Siloxane",
             "F#Total Hexadecyl Esters of Fatty Acids",
@@ -955,6 +957,10 @@ namespace ALS.ALSI.Web.view.template
                     work.A = (index == 1 || index == 2) ? "GCMS" : String.Empty;//Required Test
                     work.B = _name.Substring(2, _name.Length - 2);//Analytes
                     work.C = detailSpec.getValueByPrefix(_name[0].ToString());//Specification Limits 
+                    if (work.C.Trim().Equals("0"))
+                    {
+                        work.C = "NA";
+                    }
                     work.D = String.Empty;
                     work.E = String.Empty;//PASS / FAIL
                     //work.RowState = this.CommandName;
@@ -1031,12 +1037,17 @@ namespace ALS.ALSI.Web.view.template
                     {
                         _cover.D = "Not Detected";
                     }
+
                 }
                 else
                 {
                     _cover.D = "Not Detected";
                 }
 
+                if (_cover.B.Equals("Phthalate"))
+                {
+                    _cover.C = _cover.C.Equals("0") ? "NA" : _cover.C;
+                }
 
 
 
@@ -1059,6 +1070,11 @@ namespace ALS.ALSI.Web.view.template
                 else
                 {
                     _cover.E = String.Empty;
+                }
+
+                if (_cover.B.Equals("Phthalate"))
+                {
+                    _cover.E = _cover.C.Equals("0") ? "" : "";
                 }
 
             }

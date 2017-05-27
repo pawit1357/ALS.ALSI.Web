@@ -96,13 +96,14 @@ namespace ALS.ALSI.Web.view.template
             comp.specification_id = this.jobSample.specification_id;
             comp.template_id = this.jobSample.template_id;
 
+            List<tb_m_specification> listSpec = comp.SelectAll().ToList().GetRange(1, comp.SelectAll().ToList().Count-1);
             ddlComponent.Items.Clear();
-            ddlComponent.DataSource = comp.SelectAll().Where(x => x.B.Equals("Method")).ToList();
+            ddlComponent.DataSource = listSpec.Where(x => !x.A.Equals(""));
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlSpecification.Items.Clear();
-            ddlSpecification.DataSource = comp.SelectAll().Where(x => x.B.Equals("Specification")).ToList();
+            ddlSpecification.DataSource = listSpec.Where(x => !x.C.Equals(""));
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
@@ -516,23 +517,24 @@ namespace ALS.ALSI.Web.view.template
             tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlComponent.SelectedValue));
             if (component != null)
             {
-                txtProcedureNo.Text = component.C;
-                List<template_seagate_corrosion_coverpage> covList = new List<template_seagate_corrosion_coverpage>();
-                template_seagate_corrosion_coverpage cov = new template_seagate_corrosion_coverpage();
+                txtProcedureNo.Text = component.A;
 
-                cov.ID = 1;
-                cov.sample_id = this.SampleID;
-                cov.specification_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                //cov.procedureNo = txtProcedureNo.Text;
-                cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
+                //List<template_seagate_corrosion_coverpage> covList = new List<template_seagate_corrosion_coverpage>();
+                //template_seagate_corrosion_coverpage cov = new template_seagate_corrosion_coverpage();
 
-                cov.temperature_humidity_parameters = component.C;
-                cov.specification = "No observable discoloration or spots at 10x";
-                cov.result = "";
-                covList.Add(cov);
-                this.coverpages = covList;
-                gvResult.DataSource = this.coverpages;
-                gvResult.DataBind();
+                //cov.ID = 1;
+                //cov.sample_id = this.SampleID;
+                //cov.specification_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                ////cov.procedureNo = txtProcedureNo.Text;
+                //cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
+
+                //cov.temperature_humidity_parameters = component.A;
+                //cov.specification = "No observable discoloration or spots at 10x";
+                //cov.result = "";
+                //covList.Add(cov);
+                //this.coverpages = covList;
+                //gvResult.DataSource = this.coverpages;
+                //gvResult.DataBind();
                 lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", component.B);
 
             }
