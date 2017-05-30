@@ -932,7 +932,7 @@ namespace ALS.ALSI.Web.view.template
             //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
             //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
 
-            if (ds2.Count > 0 && ds2.Count < 12)
+            if (ds2.Count > 0 && ds2.Count <= 12)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
             }
@@ -941,17 +941,18 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 12).ToDataTable())); // Add datasource here
             }
 
-            if (ds2.Count > 12 && ds2.Count < 32)
+            if (ds2.Count > 12 && ds2.Count <= 32)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(12, (ds2.Count-12)).ToDataTable())); // Add datasource here
-            }else if (ds2.Count >= 32 && ds2.Count < 52)
+            }else if (ds2.Count > 32 && ds2.Count < 52)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(32, (ds2.Count - 32) - 1).ToDataTable())); // Add datasource here
             }
             else { 
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
             }
-            if (ds2.Count < 32)
+
+            if (ds2.Count <= 32)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
 
