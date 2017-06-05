@@ -51,49 +51,75 @@ namespace ALS.ALSI.Web.view.initial
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
-            Response.Clear();
-            Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.xls");
-            Response.Charset = "";
-            Response.ContentType = "application/vnd.ms-excel";
-            using (StringWriter sw = new StringWriter())
-            {
-                HtmlTextWriter hw = new HtmlTextWriter(sw);
 
-                //To Export all pages
-                gvResult.AllowPaging = false;
 
-                gvResult.HeaderRow.BackColor = Color.White;
-                foreach (TableCell cell in gvResult.HeaderRow.Cells)
-                {
-                    cell.BackColor = gvResult.HeaderStyle.BackColor;
-                }
-                foreach (GridViewRow row in gvResult.Rows)
-                {
-                    row.BackColor = Color.White;
-                    foreach (TableCell cell in row.Cells)
-                    {
-                        if (row.RowIndex % 2 == 0)
-                        {
-                            cell.BackColor = gvResult.AlternatingRowStyle.BackColor;
-                        }
-                        else
-                        {
-                            cell.BackColor = gvResult.RowStyle.BackColor;
-                        }
-                        cell.CssClass = "textmode";
-                    }
-                }
+            String filePath = MaintenanceBiz.GenScript();
 
-                gvResult.RenderControl(hw);
+            string yyyy = DateTime.Now.ToString("yyyy");
+            string MM = DateTime.Now.ToString("MM");
+            string dd = DateTime.Now.ToString("dd");
 
-                //style to format numbers to string
-                string style = @"<style> .textmode { } </style>";
-                Response.Write(style);
-                Response.Output.Write(sw.ToString());
-                Response.Flush();
-                Response.End();
-            }
+
+
+            String downloadUrl = Configurations.HOST + "" + String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_URL, yyyy, MM, dd, "Script", Path.GetFileName(filePath));
+
+
+
+            LinkButton1.PostBackUrl = downloadUrl;
+            Console.WriteLine();
+
+            //Response.Clear();
+            //Response.Buffer = true;
+            //Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.xls");
+            //Response.Charset = "";
+            //Response.ContentType = "application/vnd.ms-excel";
+
+
+            //using (StringWriter sw = new StringWriter())
+            //{
+            //    HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            //    //To Export all pages
+            //    gvResult.AllowPaging = false;
+
+            //    gvResult.HeaderRow.BackColor = Color.White;
+            //    foreach (TableCell cell in gvResult.HeaderRow.Cells)
+            //    {
+            //        cell.BackColor = gvResult.HeaderStyle.BackColor;
+
+            //    }
+
+            //    foreach (GridViewRow row in gvResult.Rows)
+            //    {
+            //        row.BackColor = Color.White;
+            //        foreach (TableCell cell in row.Cells)
+            //        {
+
+            //            if (row.RowIndex % 2 == 0)
+            //            {
+            //                cell.BackColor = gvResult.AlternatingRowStyle.BackColor;
+            //            }
+            //            else
+            //            {
+            //                cell.BackColor = gvResult.RowStyle.BackColor;
+            //            }
+            //            cell.CssClass = "textmode";
+
+
+            //        }
+
+            //    }
+
+
+            //    gvResult.RenderControl(hw);
+
+            //    //style to format numbers to string
+            //    string style = @"<style> .textmode { } </style>";
+            //    Response.Write(style);
+            //    Response.Output.Write(sw.ToString());
+            //    Response.Flush();
+            //    Response.End();
+            //}
         }
 
         public override void VerifyRenderingInServerForm(Control control)

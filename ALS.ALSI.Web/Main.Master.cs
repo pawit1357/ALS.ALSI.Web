@@ -110,5 +110,12 @@ namespace ALS.ALSI.Web
             
 
         }
+
+
+
+        protected void lbtnMaintainance_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("");
+        }
     }
 }

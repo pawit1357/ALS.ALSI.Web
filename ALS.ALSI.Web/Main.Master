@@ -188,12 +188,16 @@ License: You must have a valid license purchased only from themeforest(the above
                     </ul>
                     <div class="page-toolbar">
                         ALIS V1.2 Lasted Update 2017-05-15
+                                  <a href="/alis/view/maintenance/Maintenance.aspx">
+                                    <i class="fa fa-ticket"></i></a>
                     </div>
+                    
                 </div>
                 <!-- END PAGE BAR -->
                 <!-- BEGIN PAGE TITLE-->
                 <h3 class="page-title">
                     <asp:Literal ID="litPageTitle" runat="server" />
+
                     <%--       Blank Page Layout
                         <small>blank page layout</small>--%>
                     </h3>

@@ -249,7 +249,7 @@ namespace ALS.ALSI.Web.view.template
                 txtProcedureNo.Text = ic.ProcedureNo;
                 txtNumOfPiecesUsedForExtraction.Text = ic.NumOfPiecesUsedForExtraction;
                 txtExtractionMedium.Text = ic.ExtractionMedium;
-                txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDouble(ic.ExtractionVolume))));
+                txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}mL", Convert.ToInt16((1000 * Convert.ToDouble(ic.ExtractionVolume)))));
 
                 ddlComponent.SelectedValue = ic.component_id.ToString();
                 ddlDetailSpec.SelectedValue = ic.detail_spec_id.ToString();
@@ -278,7 +278,7 @@ namespace ALS.ALSI.Web.view.template
                     txtProcedureNo.Text = ic.ProcedureNo;
                     txtNumOfPiecesUsedForExtraction.Text = ic.NumOfPiecesUsedForExtraction;
                     txtExtractionMedium.Text = ic.ExtractionMedium;
-                    txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDouble(ic.ExtractionVolume))));
+                    txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}mL", (1000 * Convert.ToDouble(ic.ExtractionVolume))));
                     #region "Unit"
                     if (ic.wunit != null)
                     {
@@ -560,7 +560,7 @@ namespace ALS.ALSI.Web.view.template
                     pWorkingIC.Visible = false;
 
                     txtNumOfPiecesUsedForExtraction.Text = txtB13.Text;
-                    txtExtractionVolume.Text = (String.IsNullOrEmpty(txtB11.Text) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDouble(txtB11.Text))));
+                    txtExtractionVolume.Text = (String.IsNullOrEmpty(txtB11.Text) ? String.Empty : String.Format("{0}mL", Convert.ToInt16((1000 * Convert.ToDouble(txtB11.Text)))));
                     calculateByFormular();
                     break;
                 case "Workingpg-IC":
@@ -1115,7 +1115,7 @@ namespace ALS.ALSI.Web.view.template
                             e.Row.ForeColor = System.Drawing.Color.Black;
                             break;
                     }
-                    litSpecificationLimits.Text = litSpecificationLimits.Text.Equals("NA") ? litSpecificationLimits.Text : String.Format("<{0}", litSpecificationLimits.Text);
+                    litSpecificationLimits.Text = litSpecificationLimits.Text.Equals("NA") ? litSpecificationLimits.Text : String.Format("{0}{1}",(litSpecificationLimits.Text.IndexOf("-") != -1 ? "":"<") ,litSpecificationLimits.Text);
                 }
             }
         }
@@ -1146,7 +1146,7 @@ namespace ALS.ALSI.Web.view.template
                             e.Row.ForeColor = System.Drawing.Color.Black;
                             break;
                     }
-                    litSpecificationLimits.Text = litSpecificationLimits.Text.Equals("NA") ? litSpecificationLimits.Text : String.Format("<{0}", litSpecificationLimits.Text);
+                    litSpecificationLimits.Text = litSpecificationLimits.Text.Equals("NA") ? litSpecificationLimits.Text : String.Format("{0}{1}", (litSpecificationLimits.Text.IndexOf("-") != -1 ? "" : "<"), litSpecificationLimits.Text);
 
                 }
             }
@@ -1220,15 +1220,22 @@ namespace ALS.ALSI.Web.view.template
                 gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
 
             }
-            foreach (template_wd_ic_coverpage _val in this.coverpages)
-            {
-                if (!String.IsNullOrEmpty(_val.B))
+            try {
+                foreach (template_wd_ic_coverpage _val in this.coverpages)
                 {
-                    if (_val.wf != null)
+
+                    if (!String.IsNullOrEmpty(_val.B))
                     {
-                        _val.E = (_val.B.Equals("NA") || (_val.B.Equals("-")) ? "NA" : (CustomUtils.isNumber(_val.wf) ? Convert.ToDouble(_val.wj) : 0) < Convert.ToDouble(_val.B) ? "PASS" : "FAIL");
+                        if (_val.wf != null)
+                        {
+                            String secValue = _val.B.Split(' ')[0];
+                            _val.E = (secValue.Equals("NA") || (secValue.Equals("-")) ? "NA" : (CustomUtils.isNumber(_val.wf) ? Convert.ToDouble(_val.wj) : 0) < Convert.ToDouble(secValue) ? "PASS" : "FAIL");
+                        }
                     }
                 }
+            }catch(Exception ex)
+            {
+                Console.WriteLine("");
             }
 
 

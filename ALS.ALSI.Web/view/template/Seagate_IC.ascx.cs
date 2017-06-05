@@ -198,7 +198,8 @@ namespace ALS.ALSI.Web.view.template
                     txtB18.Text = ic.procedure_no;
                     txtC18.Text = (String.IsNullOrEmpty(ic.number_of_pieces__used_for_extraction) ? String.Empty : ic.number_of_pieces__used_for_extraction);//"Number of pieces used for extraction"
                     txtD18.Text = ic.extraction_medium;
-                    txtE18.Text = (String.IsNullOrEmpty(ic.extraction_volume) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDecimal(ic.extraction_volume))));//"Number of pieces used for extraction"
+                    txtE18.Text = (String.IsNullOrEmpty(ic.extraction_volume) ? String.Empty : String.Format("{0}mL", Convert.ToInt16((1000 * Convert.ToDouble(ic.extraction_volume)))));//"Number of pieces used for extraction"
+
 
                     ///*RESULT*/
                     ///
@@ -588,7 +589,7 @@ namespace ALS.ALSI.Web.view.template
                     pWorkingIC.Visible = false;
 
                     txtC18.Text = txtB11.Text;
-                    txtE18.Text = (String.IsNullOrEmpty(txtB9.Text) ? String.Empty : String.Format("{0}ml", (1000 * Convert.ToDecimal(txtB9.Text))));//"Number of pieces used for extraction"
+                    txtE18.Text = (String.IsNullOrEmpty(txtB9.Text) ? String.Empty : String.Format("{0}mL", Convert.ToInt16((1000 * Convert.ToDouble(txtB9.Text)))));//"Number of pieces used for extraction"
 
                     calculateByFormular();
                     break;
@@ -1126,7 +1127,7 @@ namespace ALS.ALSI.Web.view.template
                 HttpPostedFile _postedFile = FileUpload1.PostedFiles[i];
                 try
                 {
-                    if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")))
+                    if ((Path.GetExtension(_postedFile.FileName).Equals(".xls") || Path.GetExtension(_postedFile.FileName).Equals(".xlsx")|| Path.GetExtension(_postedFile.FileName).Equals(".xlt")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -1190,7 +1191,7 @@ namespace ALS.ALSI.Web.view.template
                                                 ic.wg = (String.IsNullOrEmpty(ic.wg)) ? "" : Convert.ToDouble(ic.wg).ToString("N" + txtDecimal06.Text);
                                                 ic.wh = (String.IsNullOrEmpty(ic.wh)) ? "" : Convert.ToDouble(ic.wh).ToString("N" + txtDecimal07.Text);
 
-                                                ic.wi = (String.IsNullOrEmpty(ic.wi)) ? "" : (!ic.wi.StartsWith("<") ? "" : "<") + Convert.ToDouble(ic.wi.Replace("<", "").Trim()).ToString("N" + txtDecimal08.Text);
+                                                ic.wi = ic.wi.Equals("Not Detected")? ic.wi : (String.IsNullOrEmpty(ic.wi)) ? "" : (!ic.wi.StartsWith(" <") ? "" : "<") + Convert.ToDouble(ic.wi.Replace("<", "").Trim()).ToString("N" + txtDecimal08.Text);
                                                 Console.WriteLine();
                                             }
                                         }

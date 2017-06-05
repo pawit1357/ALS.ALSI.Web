@@ -270,7 +270,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Procedure:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlComponent" runat="server" class="select2_category form-control" DataTextField="A" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged">
+                                                <asp:DropDownList ID="ddlMethod" runat="server" class="select2_category form-control" DataTextField="C" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlMethod_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
@@ -279,9 +279,16 @@
                                         <%--   <div class="row">
                                             <div class="col-md-6">--%>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3">Temperature Humidity Parameters:<span class="required">*</span></label>
+                                            <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlSpecification" runat="server" class="select2_category form-control" DataTextField="C" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged">
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                                                                <div class="form-group">
+                                            <label class="control-label col-md-3">Temperature Humidity Parameters:<span class="required">*</span></label>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList ID="ddlTemp" runat="server" class="select2_category form-control" DataTextField="B" DataValueField="ID" AutoPostBack="True" OnSelectedIndexChanged="ddlTemp_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
