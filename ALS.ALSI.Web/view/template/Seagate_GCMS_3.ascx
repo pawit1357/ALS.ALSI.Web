@@ -493,7 +493,7 @@
                                         </div>
                                     </EmptyDataTemplate>
                                 </asp:GridView>
-                           
+
                                 <br />
                             </div>
                         </div>
@@ -704,46 +704,46 @@
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Internal Standard Recovery (R) :</td>
+                                            <td style="text-align: right">Internal Standard Recovery (R) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB13" runat="server"></asp:TextBox></td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of C14D10 in sample (X) :</td>
+                                            <td style="text-align: right">pA of C14D10 in sample (X) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB14" runat="server"></asp:TextBox></td>
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of C14D10 in working standard (Y) :</td>
+                                            <td style="text-align: right">pA of C14D10 in working standard (Y) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB15" runat="server"></asp:TextBox></td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Concentration of C14D10 (C) :</td>
+                                            <td style="text-align: right">Concentration of C14D10 (C) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB16" runat="server"></asp:TextBox>
                                             </td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Total Concentration of C14D10 (A) :</td>
+                                            <td style="text-align: right">Total Concentration of C14D10 (A) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB17" runat="server"></asp:TextBox>
                                             </td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right"Dilution factor (D) :</td>
-                                                Dilution factor (D) :<td>
-                                                    <asp:TextBox ID="txtB18" runat="server"></asp:TextBox>
-                                                </td>
+                                            <td style="text-align: right">Dilution factor (D) :</td>
+                                            Dilution factor (D) :<td>
+                                                <asp:TextBox ID="txtB18" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">IDL of RHC :</td>
+                                            <td style="text-align: right">IDL of RHC :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB19" runat="server"></asp:TextBox>
                                             </td>
@@ -766,15 +766,15 @@
                                             <th></th>
                                             <th>TOC ≤ DOP</th>
                                             <th>TOC > DOP</th>
-                                          
+
                                             <th>Repeated Hydrocarbon</th>
-                                          
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- PART 1 -->
                                         <tr>
-                                            <td style="text-align:right">Surface area of sample (cm2) :</td>
+                                            <td style="text-align: right">Surface area of sample (cm2) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB20" runat="server"></asp:TextBox>
                                             </td>
@@ -786,7 +786,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">No. of extracted sample (N) :</td>
+                                            <td style="text-align: right">No. of extracted sample (N) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB21" runat="server"></asp:TextBox>
                                             </td>
@@ -798,7 +798,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Total surface area of sample :</td>
+                                            <td style="text-align: right">Total surface area of sample :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB22" runat="server"></asp:TextBox>
                                             </td>
@@ -810,7 +810,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Concentration of C16H34 (C) :</td>
+                                            <td style="text-align: right">Concentration of C16H34 (C) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB23" runat="server"></asp:TextBox>
                                             </td>
@@ -822,7 +822,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Dilution factor (D) :</td>
+                                            <td style="text-align: right">Dilution factor (D) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB24" runat="server"></asp:TextBox>
                                             </td>
@@ -834,7 +834,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Internal Standard Recovery (R) :</td>
+                                            <td style="text-align: right">Internal Standard Recovery (R) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB25" runat="server"></asp:TextBox>
                                             </td>
@@ -847,7 +847,7 @@
                                         </tr>
                                         <!-- PART 2 -->
                                         <tr>
-                                            <td style="text-align:right">pA of C16H34 (Z) :</td>
+                                            <td style="text-align: right">pA of C16H34 (Z) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB26" runat="server"></asp:TextBox>
                                             </td>
@@ -859,7 +859,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of Motor Base :</td>
+                                            <td style="text-align: right">pA of Motor Base :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB27" runat="server"></asp:TextBox>
                                             </td>
@@ -871,7 +871,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of Blank :</td>
+                                            <td style="text-align: right">pA of Blank :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB28" runat="server"></asp:TextBox>
                                             </td>
@@ -884,7 +884,7 @@
                                         </tr>
                                         <!-- PART 3 -->
                                         <tr>
-                                            <td style="text-align:right">pA of sample (Y) :</td>
+                                            <td style="text-align: right">pA of sample (Y) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB29" runat="server"></asp:TextBox>
                                             </td>
@@ -908,7 +908,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Method Detection Limit (MDL) :</td>
+                                            <td style="text-align: right">Method Detection Limit (MDL) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB31" runat="server"></asp:TextBox>
                                             </td>
@@ -921,7 +921,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td style="text-align:right">&nbsp;</td>
+                                            <td style="text-align: right">&nbsp;</td>
                                             <td>
                                                 <asp:TextBox ID="txtB32" runat="server"></asp:TextBox>
                                             </td>
@@ -947,15 +947,15 @@
                                             <th></th>
                                             <th>TOC ≤ DOP</th>
                                             <th>TOC > DOP</th>
-                                          
+
                                             <th>Repeated Hydrocarbon</th>
-                                          
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- PART 1 -->
                                         <tr>
-                                            <td style="text-align:right">Surface area of sample (cm2) :</td>
+                                            <td style="text-align: right">Surface area of sample (cm2) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB40" runat="server"></asp:TextBox>
                                             </td>
@@ -967,7 +967,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">No. of extracted sample (N) :</td>
+                                            <td style="text-align: right">No. of extracted sample (N) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB41" runat="server"></asp:TextBox>
                                             </td>
@@ -979,7 +979,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Total surface area of sample :</td>
+                                            <td style="text-align: right">Total surface area of sample :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB42" runat="server"></asp:TextBox>
                                             </td>
@@ -991,7 +991,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Concentration of C16H34 (C) :</td>
+                                            <td style="text-align: right">Concentration of C16H34 (C) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB43" runat="server"></asp:TextBox>
                                             </td>
@@ -1003,7 +1003,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Dilution factor (D) :</td>
+                                            <td style="text-align: right">Dilution factor (D) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB44" runat="server"></asp:TextBox>
                                             </td>
@@ -1015,7 +1015,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Internal Standard Recovery (R) :</td>
+                                            <td style="text-align: right">Internal Standard Recovery (R) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB45" runat="server"></asp:TextBox>
                                             </td>
@@ -1028,7 +1028,7 @@
                                         </tr>
                                         <!-- PART 2 -->
                                         <tr>
-                                            <td style="text-align:right">pA of C16H34 (Z) :</td>
+                                            <td style="text-align: right">pA of C16H34 (Z) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB46" runat="server"></asp:TextBox>
                                             </td>
@@ -1040,7 +1040,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of Motor Base :</td>
+                                            <td style="text-align: right">pA of Motor Base :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB47" runat="server"></asp:TextBox>
                                             </td>
@@ -1052,7 +1052,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of Blank :</td>
+                                            <td style="text-align: right">pA of Blank :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB48" runat="server"></asp:TextBox>
                                             </td>
@@ -1065,7 +1065,7 @@
                                         </tr>
                                         <!-- PART 3 -->
                                         <tr>
-                                            <td style="text-align:right">pA of sample (Y) :</td>
+                                            <td style="text-align: right">pA of sample (Y) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB49" runat="server"></asp:TextBox>
                                             </td>
@@ -1089,7 +1089,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Method Detection Limit (MDL) :</td>
+                                            <td style="text-align: right">Method Detection Limit (MDL) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB51" runat="server"></asp:TextBox>
                                             </td>
@@ -1102,7 +1102,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td style="text-align:right">&nbsp;</td>
+                                            <td style="text-align: right">&nbsp;</td>
                                             <td>
                                                 <asp:TextBox ID="txtB52" runat="server"></asp:TextBox>
                                             </td>
@@ -1119,6 +1119,43 @@
                             </div>
                         </div>
                     </asp:Panel>
+
+
+                    <asp:Panel ID="pMotorOil" runat="server">
+                        <h4 class="form-section">Motor Oil Comtamination</h4>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <label class="control-label col-md-6"><span class="required">**** ข้อมูลจะแสดงที่หน้า Cover Page ****</span></label>
+                                <!-- 
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Hub:<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtMotorOilHub" runat="server" Text="" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Motor Base / Base 2.5"<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtMotorOilBase25" runat="server" Text="" CssClass="form-control"></asp:TextBox>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Motor Base / Base 3.5"<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtMotorOilBase35" runat="server" Text="" CssClass="form-control"></asp:TextBox>
+                                    </div>
+
+                                </div>
+                                <br />
+                                -->
+
+
+                            </div>
+                        </div>
+                    </asp:Panel>
+
 
                     <!-- END FORM-->
                     <div class="row">

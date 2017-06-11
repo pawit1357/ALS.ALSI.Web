@@ -1191,7 +1191,7 @@ namespace ALS.ALSI.Web.view.template
                                                 ic.wg = (String.IsNullOrEmpty(ic.wg)) ? "" : Convert.ToDouble(ic.wg).ToString("N" + txtDecimal06.Text);
                                                 ic.wh = (String.IsNullOrEmpty(ic.wh)) ? "" : Convert.ToDouble(ic.wh).ToString("N" + txtDecimal07.Text);
 
-                                                ic.wi = ic.wi.Equals("Not Detected")? ic.wi : (String.IsNullOrEmpty(ic.wi)) ? "" : (!ic.wi.StartsWith(" <") ? "" : "<") + Convert.ToDouble(ic.wi.Replace("<", "").Trim()).ToString("N" + txtDecimal08.Text);
+                                                ic.wi = ic.wi.Equals("Not Detected")? ic.wi : (String.IsNullOrEmpty(ic.wi)) ? "" : (!ic.wi.StartsWith("<") ? "" : "<") + Convert.ToDouble(ic.wi.Replace("<", "").Trim()).ToString("N" + txtDecimal08.Text);
                                                 Console.WriteLine();
                                             }
                                         }

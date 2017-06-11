@@ -9,23 +9,27 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Testing Services (Thailand)</Value>
+                <Value>ALS Testing Services (Thailand)</Value>
                 <Style>
-                  <FontSize>8pt</FontSize>
+                  <FontStyle>Italic</FontStyle>
+                  <FontFamily>Cambria</FontFamily>
+                  <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
                 </Style>
               </TextRun>
             </TextRuns>
             <Style>
-              <TextAlign>Center</TextAlign>
+              <TextAlign>Left</TextAlign>
             </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.12695cm</Top>
-        <Left>0.35278cm</Left>
-        <Height>0.50299cm</Height>
-        <Width>8.5325cm</Width>
+        <Top>0.43049cm</Top>
+        <Left>1.79917cm</Left>
+        <Height>0.88195cm</Height>
+        <Width>7.08611cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -354,6 +358,21 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Image Name="Image1">
+        <Source>Embedded</Source>
+        <Value>images</Value>
+        <Sizing>FitProportional</Sizing>
+        <Top>0.12782in</Top>
+        <Left>0.13889in</Left>
+        <Height>0.5in</Height>
+        <Width>0.5in</Width>
+        <ZIndex>10</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
     </ReportItems>
     <Height>2.36817in</Height>
     <Style />
@@ -402,6 +421,14 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
+  <EmbeddedImages>
+    <EmbeddedImage Name="images">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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
+m64AAAAASUVORK5CYII=</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>616b1962-535d-4c00-a303-f6b6ecc41f07</rd:ReportID>
 </Report>

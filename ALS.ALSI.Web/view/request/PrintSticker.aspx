@@ -138,7 +138,10 @@
                                 <div id="divStricker" >
                                     <table>
                                          <tr>
-                                             <td colspan="2" class="text-center">Testing Services (Thailand)</td>
+                                             <td>
+                                                 <img src="/alis/images/als_logo.jpg" alt="" style="width:30px;height:30px;"></image>
+                                                 </td>
+                                             <td class="text-left">ALS Testing Services (Thailand)</td>
                                              </tr>
                                         <tr>
                                             <td class="text-right"> Job No:&nbsp;&nbsp;&nbsp; </td>

@@ -26,7 +26,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public IEnumerable<m_customer> SelectAll()
         {
-            return _repository.GetAll().ToList();
+            return _repository.GetAll().OrderBy(x=>x.company_name).ToList();
         }
 
         public m_customer SelectByID(int _id)
@@ -136,7 +136,7 @@ namespace ALS.ALSI.Biz.DataAccess
             using (ALSIEntities ctx = new ALSIEntities())
             {
                 var result = from j in ctx.m_customer
-                             join a in ctx.m_customer_address on j.ID equals a.company_id
+                             join a in ctx.m_customer_address on j.ID equals a.company_id orderby j.company_name
                              select new { 
                              j.ID,
                              j.customer_code,

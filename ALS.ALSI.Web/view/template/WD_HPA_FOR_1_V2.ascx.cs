@@ -554,7 +554,7 @@ namespace ALS.ALSI.Web.view.template
                                         String[] data = line.Split(',');
 
                                         //int subIndex = data[0].IndexOf('(') == -1 ? data[0].ToUpper().Replace(" ", String.Empty).Length : data[0].ToUpper().Replace(" ", String.Empty).IndexOf('(');
-                                        String compareValue = data[0].Split(' ')[0].ToUpper().Trim();
+                                        String compareValue = data[0].Split('(')[0].ToUpper().Trim();
 
                                         foreach (template_wd_hpa_for1_coverpage _cov in itemLines)
                                         {

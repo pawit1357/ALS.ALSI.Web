@@ -1170,6 +1170,7 @@
     <Content Include="ForceChangePassword.aspx" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="images\als_logo.jpg" />
     <Content Include="images\footer.png" />
     <Content Include="images\images.png" />
     <Content Include="images\logo.png" />
@@ -1922,6 +1923,7 @@
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate_damper.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_seagate_2.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate_boyd.rdlc" />

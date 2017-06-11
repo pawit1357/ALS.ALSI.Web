@@ -464,6 +464,7 @@ namespace ALS.ALSI.Web.view.template
             pRH.Visible = false;
             pExtractable.Visible = false;
             pLoadFile.Visible = false;
+            pMotorOil.Visible = false;
 
             switch (lbJobStatus.Text)
             {
@@ -640,19 +641,19 @@ namespace ALS.ALSI.Web.view.template
                             cov.C51 = txtC51.Text;
                             cov.C52 = txtC52.Text;
 
-                            cov.D40 = txtD40.Text;
-                            cov.D41 = txtD41.Text;
-                            cov.D42 = txtD42.Text;
-                            cov.D43 = txtD43.Text;
-                            cov.D44 = txtD44.Text;
-                            cov.D45 = txtD45.Text;
-                            cov.D46 = txtD46.Text;
-                            cov.D47 = txtD47.Text;
-                            cov.D48 = txtD48.Text;
-                            cov.D49 = txtD49.Text;
-                            cov.D50 = txtD50.Text;
-                            cov.D51 = txtD51.Text;
-                            cov.D52 = txtD52.Text;
+                            cov.D40 = (txtD40.Text.Length > 20) ? "" : txtD40.Text;
+                            cov.D41 = (txtD41.Text.Length > 20) ? "" : txtD41.Text;
+                            cov.D42 = (txtD42.Text.Length > 20) ? "" : txtD42.Text;
+                            cov.D43 = (txtD43.Text.Length > 20) ? "" : txtD43.Text;
+                            cov.D44 = (txtD44.Text.Length > 20) ? "" : txtD44.Text;
+                            cov.D45 = (txtD45.Text.Length > 20) ? "" : txtD45.Text;
+                            cov.D46 = (txtD46.Text.Length > 20) ? "" : txtD46.Text;
+                            cov.D47 = (txtD47.Text.Length > 20) ? "" : txtD47.Text;
+                            cov.D48 = (txtD48.Text.Length > 20) ? "" : txtD48.Text;
+                            cov.D49 = (txtD49.Text.Length > 20) ? "" : txtD49.Text;
+                            cov.D50 = (txtD50.Text.Length > 20) ? "" : txtD50.Text;
+                            cov.D51 = (txtD51.Text.Length > 20) ? "" : txtD51.Text;
+                            cov.D52 = (txtD52.Text.Length > 20) ? "" : txtD52.Text;
 
 
                             cov.UnitMotorOilContamination = Convert.ToInt16(ddlUnitMotorOilContamination.SelectedValue);
@@ -1015,6 +1016,9 @@ namespace ALS.ALSI.Web.view.template
                                     txtD30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.D));
                                     txtD31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
                                     txtD32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
+
+
+
                                     #endregion
                                     #region "Motor Hub"
                                     txtB40.Text = isheet.GetRow(40 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(40 - 1).GetCell(ExcelColumn.B));
@@ -1073,8 +1077,37 @@ namespace ALS.ALSI.Web.view.template
                                 {
                                     sheetName = isheet.SheetName;
 
-                                    //txtB13_MO.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal09.Text)).ToString();//Surface area of Base			2
-                                    //txtB13_MO.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal10.Text)).ToString();//Surface area of Hub			2
+
+                                    String txtMotorOilHub = isheet.GetRow(33 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.D));
+                                    String txtMotorOilBase25 = isheet.GetRow(34 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
+                                    String txtMotorOilBase35 = isheet.GetRow(35 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
+
+                                    txtMotorOilHub = String.IsNullOrEmpty(txtMotorOilHub) ? "" : Convert.ToDouble(txtMotorOilHub).ToString("N2");
+                                    txtMotorOilBase25 = String.IsNullOrEmpty(txtMotorOilBase25) ? "" : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
+                                    txtMotorOilBase35 = String.IsNullOrEmpty(txtMotorOilBase35) ? "" : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
+
+                                    
+                                    List<template_seagate_gcms_coverpage> motorOilsUpdate = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
+                                    if (motorOilsUpdate.Count > 0)
+                                    {
+                                        Double c0 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilHub) ? "0" : txtMotorOilHub);
+                                        motorOilsUpdate[0].C = c0 == 0 ? "Not Detected" : Math.Round(c0, 2) + "";
+
+                                        if (!String.IsNullOrEmpty(txtMotorOilBase35) && !txtMotorOilBase35.Equals("0.00"))
+                                        {
+                                            Double c1 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilBase35) ? "0" : txtMotorOilBase35);
+
+                                            motorOilsUpdate[1].C = c1 == 0 ? "Not Detected" : Math.Round(c1, 2) + "";
+                                        }
+                                        else
+                                        {
+                                            Double c2 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilBase25) ? "0" : txtMotorOilBase25);
+
+                                            motorOilsUpdate[1].C = c2 == 0 ? "Not Detected" : Math.Round(c2, 2) + "";
+
+                                        }
+                                    }
+
 
                                 }
                                 #endregion
@@ -1107,6 +1140,8 @@ namespace ALS.ALSI.Web.view.template
                 gvRHCBase.DataBind();
                 gvRHCHub.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt16(GcmsSeagateEnum.RHC_HUB) && !x.library_id.Equals("0")).ToList();
                 gvRHCHub.DataBind();
+
+                GenerrateCoverPage();
             }
         }
 
@@ -1125,6 +1160,7 @@ namespace ALS.ALSI.Web.view.template
                     pCoverpage.Visible = true;
                     pRH.Visible = false;
                     pExtractable.Visible = false;
+                    pMotorOil.Visible = false;
                     pLoadFile.Visible = false;
 
                     GenerrateCoverPage();
@@ -1138,6 +1174,7 @@ namespace ALS.ALSI.Web.view.template
                     pCoverpage.Visible = false;
                     pRH.Visible = true;
                     pExtractable.Visible = false;
+                    pMotorOil.Visible = false;
                     pLoadFile.Visible = false;
                     pLoadFile.Visible = true;
 
@@ -1151,6 +1188,7 @@ namespace ALS.ALSI.Web.view.template
                     pCoverpage.Visible = false;
                     pRH.Visible = false;
                     pExtractable.Visible = true;
+                    pMotorOil.Visible = false;
                     pLoadFile.Visible = true;
 
                     break;
@@ -1163,6 +1201,7 @@ namespace ALS.ALSI.Web.view.template
                     pCoverpage.Visible = false;
                     pRH.Visible = false;
                     pExtractable.Visible = false;
+                    pMotorOil.Visible = true;
                     pLoadFile.Visible = true;
 
                     break;
@@ -1541,7 +1580,8 @@ namespace ALS.ALSI.Web.view.template
                             gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
-                    gvCompoundSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB)).ToList();
+
+                    gvCompoundSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
                     gvCompoundSub.DataBind();
                 }
             }
@@ -1608,6 +1648,18 @@ namespace ALS.ALSI.Web.view.template
 
         private void GenerrateCoverPage()
         {
+            //set float
+
+
+            txtB25.Text = String.IsNullOrEmpty(txtB25.Text) ? "" : Convert.ToDouble(txtB25.Text).ToString("N3");
+            txtC25.Text = String.IsNullOrEmpty(txtC25.Text) ? "" : Convert.ToDouble(txtC25.Text).ToString("N3");
+            txtD25.Text = String.IsNullOrEmpty(txtD25.Text) ? "" : Convert.ToDouble(txtD25.Text).ToString("N3");
+            txtB30.Text = String.IsNullOrEmpty(txtB30.Text) ? "" : Convert.ToDouble(txtB30.Text).ToString("N3");
+            txtC30.Text = String.IsNullOrEmpty(txtC30.Text) ? "" : Convert.ToDouble(txtC30.Text).ToString("N3");
+            txtD30.Text = String.IsNullOrEmpty(txtD30.Text) ? "" : Convert.ToDouble(txtD30.Text).ToString("N3");
+            txtB31.Text = String.IsNullOrEmpty(txtB31.Text) ? "" : Convert.ToDouble(txtB31.Text).ToString("N3");
+            txtC31.Text = String.IsNullOrEmpty(txtC31.Text) ? "" : Convert.ToDouble(txtC31.Text).ToString("N3");
+            txtD31.Text = String.IsNullOrEmpty(txtD31.Text) ? "" : Convert.ToDouble(txtD31.Text).ToString("N3");
 
 
             //Note: This report was performed test by ALS Singapore.
@@ -1633,12 +1685,7 @@ namespace ALS.ALSI.Web.view.template
             if (motorOils.Count > 0)
             {
 
-                //double c0 = Convert.ToDouble(String.IsNullOrEmpty(lbB30_MO.Text) ? "0" : lbB30_MO.Text) + Convert.ToDouble(String.IsNullOrEmpty(lbC30_MO.Text) ? "0" : lbC30_MO.Text);
-                //double c1 = Convert.ToDouble(String.IsNullOrEmpty(lbB31_MO.Text) ? "0" : lbB31_MO.Text) + Convert.ToDouble(String.IsNullOrEmpty(lbC31_MO.Text) ? "0" : lbC31_MO.Text);
 
-
-                //motorOils[0].C = c0 == 0 ? "Not Detected" : Math.Round(c0, 2) + "";
-                //motorOils[1].C = c1 == 0 ? "Not Detected" : Math.Round(c1, 2) + "";
 
                 gvMotorOil.DataSource = motorOils;
                 gvMotorOil.DataBind();
@@ -1751,16 +1798,13 @@ namespace ALS.ALSI.Web.view.template
             if (compounds.Count > 0)
             {
 
-                //if (!String.IsNullOrEmpty(lbD43.Text))
-                //{
-                //    compounds[0].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbD43.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
-                //}
+                if (!String.IsNullOrEmpty(txtD30.Text))
+                {
+                    compounds[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                }
 
-
-
-
-                gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompound.SelectedItem.Text);
-                gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
+                gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
+                gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
 
                 gvCompound.DataSource = compounds;
                 gvCompound.DataBind();
@@ -1775,14 +1819,14 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
             if (compoundSubs.Count > 0)
             {
-                //compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
-                //compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbC43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), 2) + "";//Compounds with RT > DOP
 
-                //compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
+                compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
 
 
-                gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompound.SelectedItem.Text);
-                gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
+                gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
+                gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
 
                 gvCompoundSub.DataSource = compoundSubs;
                 gvCompoundSub.DataBind();
@@ -2033,8 +2077,8 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
                 reportParameters.Add(new ReportParameter("Remark1", lbRemark1.Text));
                 reportParameters.Add(new ReportParameter("Remark2", lbRemark2.Text));
-                reportParameters.Add(new ReportParameter("Remark3", String.IsNullOrEmpty(lbRemark3.Text)? " ":lbRemark3.Text));
-                reportParameters.Add(new ReportParameter("Remark4", String.IsNullOrEmpty(lbRemark4.Text)? "":lbRemark4.Text));
+                reportParameters.Add(new ReportParameter("Remark3", String.IsNullOrEmpty(lbRemark3.Text) ? " " : lbRemark3.Text));
+                reportParameters.Add(new ReportParameter("Remark4", String.IsNullOrEmpty(lbRemark4.Text) ? "" : lbRemark4.Text));
 
                 // Variables
                 Warning[] warnings;
