@@ -81,19 +81,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.48785in</Width>
+              <Width>0.75868in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.18241in</Width>
+              <Width>1.07824in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.61295in</Width>
+              <Width>1.3942in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.26574in</Width>
+              <Width>2.41708in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.2067in</Width>
+              <Width>1.10095in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -734,7 +734,7 @@
         <Top>3.27893in</Top>
         <Left>0.16275in</Left>
         <Height>0.71875in</Height>
-        <Width>6.75565in</Width>
+        <Width>6.74916in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -924,7 +924,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Analytes</Value>
+                              <Value>Analyte</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -2455,7 +2455,7 @@
     <Height>7.60811in</Height>
     <Style />
   </Body>
-  <Width>7.09071in</Width>
+  <Width>7.04891in</Width>
   <Page>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>

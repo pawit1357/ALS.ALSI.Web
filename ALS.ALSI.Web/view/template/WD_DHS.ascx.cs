@@ -475,7 +475,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
+                    if (FileUpload1.HasFile)// && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -831,7 +831,7 @@ namespace ALS.ALSI.Web.view.template
                     work.detail_spec_id = detailSpec.ID;
                     work.analytes = item.name;
                     work.specification_limits = item.value;
-                    work.specification_limits = ((work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.NA)) || work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.ND))) ? work.specification_limits : String.Format("<{0}", work.specification_limits));
+                    work.specification_limits = ((work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.NA)) || work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.ND))) ? work.specification_limits : work.specification_limits.Equals("0")? work.specification_limits:String.Format("<{0}", work.specification_limits));
                     work.result = string.Empty;
                     work.result_pass_or_false = String.Empty;
                     work.row_type = Convert.ToInt32(RowTypeEnum.Normal);

@@ -112,7 +112,7 @@ namespace ALS.ALSI.Web.view.template
             ddlTemp.DataSource = listSpec.Where(x => !x.A.Equals("") && !x.B.Equals(""));
             ddlTemp.DataBind();
             ddlTemp.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-            
+
 
 
 
@@ -223,25 +223,37 @@ namespace ALS.ALSI.Web.view.template
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
 
                 cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+                txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].number_of_pieces_used_for_extraction;
+                
+
+                tb_m_specification procedure = new tb_m_specification().SelectByID(this.coverpages[0].procedureNo_id.Value);
+                if (procedure != null)
+                {
+                    txtProcedureNo.Text = procedure.C;
+
+
+                }
+
+                tb_m_specification temp = new tb_m_specification().SelectByID(this.coverpages[0].temperature_humidity_parameters_id.Value);
+                if (temp != null)
+                {
+                    this.coverpages[0].temperature_humidity_parameters = temp.B;
+                }
 
                 tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
                 if (component != null)
                 {
-                    this.coverpages[0].temperature_humidity_parameters_id = component.ID;
-                    this.coverpages[0].temperature_humidity_parameters = component.C;
 
-
+                    //lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", component.C);
                     if (cbCheckBox.Checked)
                     {
                         lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
                     }
                     else
                     {
-                        lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlMethod.SelectedItem.Text);
+                        lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", component.C);
 
                     }
-
-
                 }
 
                 gvResult.DataSource = this.coverpages;
@@ -354,6 +366,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         _cover.procedureNo_id = Convert.ToInt16(ddlMethod.SelectedValue);
                         _cover.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
+                        _cover.temperature_humidity_parameters_id = Convert.ToInt16(ddlTemp.SelectedValue);
                         _cover.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                     }
                     template_seagate_corrosion_coverpage.InsertList(this.coverpages);

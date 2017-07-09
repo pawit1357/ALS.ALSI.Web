@@ -462,7 +462,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
+                    if (FileUpload1.HasFile)// && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");

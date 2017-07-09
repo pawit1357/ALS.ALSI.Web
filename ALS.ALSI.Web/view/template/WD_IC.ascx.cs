@@ -484,7 +484,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".doc") || Path.GetExtension(btnUpload.FileName).Equals(".docx")))
+                    if (btnUpload.HasFile)// && (Path.GetExtension(btnUpload.FileName).Equals(".doc") || Path.GetExtension(btnUpload.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -1229,7 +1229,7 @@ namespace ALS.ALSI.Web.view.template
                         if (_val.wf != null)
                         {
                             String secValue = _val.B.Split(' ')[0];
-                            _val.E = (secValue.Equals("NA") || (secValue.Equals("-")) ? "NA" : (CustomUtils.isNumber(_val.wf) ? Convert.ToDouble(_val.wj) : 0) < Convert.ToDouble(secValue) ? "PASS" : "FAIL");
+                            _val.E = (secValue.Equals("NA") || (secValue.Equals("-")) ? "NA" : (CustomUtils.isNumber(_val.wj) ? Convert.ToDouble(_val.wj) : 0) < Convert.ToDouble(secValue) ? "PASS" : "FAIL");
                         }
                     }
                 }

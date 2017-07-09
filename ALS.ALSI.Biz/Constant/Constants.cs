@@ -280,7 +280,9 @@ namespace ALS.ALSI.Biz.Constant
         [Description("68 KHz")]
         KHz_68 = 1,
         [Description("132 KHz")]
-        KHz_132 = 2
+        KHz_132 = 2,
+        [Description("ALPC (132 KHz)")]
+        ALPC_132= 3
     }
     public enum ParticleTypeEnum
     {

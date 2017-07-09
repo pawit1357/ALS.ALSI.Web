@@ -77,7 +77,9 @@ namespace ALS.ALSI.Web.view.request
             ddlTemplate.Items.Clear();
             ddlTemplate.DataSource = data;
             ddlTemplate.DataBind();
-            //ddlTemplate.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
+            ddlTemplate.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
+            ddlTemplate.SelectedValue = "";
+
 
             switch (CommandName)
             {

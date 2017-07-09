@@ -280,6 +280,8 @@ namespace ALS.ALSI.Web.view.template
             }
             else
             {
+
+
                 #region "Procedure"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -344,6 +346,12 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                 gvMethodProcedure.DataBind();
+
+                //fix unit unit.Equals("ng/cm2")
+                ddlUnit.SelectedValue = "25";
+                gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", "ng/cm2");
+                gvResultNvr.Columns[2].HeaderText = String.Format("Results,({0})", "ng/cm2");
+
             }
             #endregion
 
@@ -563,7 +571,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".doc") || Path.GetExtension(btnUpload.FileName).Equals(".docx")))
+                    if (btnUpload.HasFile)// && (Path.GetExtension(btnUpload.FileName).Equals(".doc") || Path.GetExtension(btnUpload.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -833,7 +841,7 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
             if (ftirList.Count > 0)
             {
-                int unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                String unit = ddlUnit.SelectedItem.Text;// Convert.ToInt16(ddlUnit.SelectedValue);
 
                 List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
 
@@ -842,22 +850,22 @@ namespace ALS.ALSI.Web.view.template
                     template_seagate_ftir_coverpage tmp = ftir2.Where(x => x.A.Equals("Damper, Adhesive side")).FirstOrDefault();
                     if (tmp != null)
                     {
-                        tmp.C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone
+                        tmp.C = (unit.Equals("ng/cm2")) ? ftirList[7].B : ftirList[8].B;//Silicone
                     }
                     tmp = ftir2.Where(x => x.A.Equals("Damper, non-Adhesive side")).FirstOrDefault();
                     if (tmp != null)
                     {
-                        tmp.C = (unit == 1) ? ftirList[7].C : ftirList[8].B;//Silicone
+                        tmp.C = (unit.Equals("ng/cm2")) ? ftirList[7].C : ftirList[8].B;//Silicone
                     }
                     tmp = ftir2.Where(x => x.A.Equals("Release Liner, ultra-low Silicone (facing adhesive side)")).FirstOrDefault();
                     if (tmp != null)
                     {
-                        tmp.C = (unit == 1) ? ftirList[7].D : ftirList[8].B;//Silicone
+                        tmp.C = (unit.Equals("ng/cm2")) ? ftirList[7].D : ftirList[8].B;//Silicone
                     }
                     tmp = ftir2.Where(x => x.A.Equals("Release Liner, ultra-low Silicone (back, not facing adhesive side)")).FirstOrDefault();
                     if (tmp != null)
                     {
-                        tmp.C = (unit == 1) ? ftirList[7].E : ftirList[8].B;//Silicone
+                        tmp.C = (unit.Equals("ng/cm2")) ? ftirList[7].E : ftirList[8].B;//Silicone
                     }
 
                 }
@@ -1252,16 +1260,16 @@ namespace ALS.ALSI.Web.view.template
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal06.Text);
                                                 break;
                                             case 8:
-                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Detected") ? tmp.B : tmp.B.Equals("Not Detected") ? tmp.B : tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
-                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Detected") ? tmp.C : tmp.C.Equals("Not Detected") ? tmp.C : tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
-                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Detected") ? tmp.D : tmp.D.Equals("Not Detected") ? tmp.D : tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
-                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Detected") ? tmp.E : tmp.E.Equals("Not Detected") ? tmp.E : tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
+                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Detected") ? tmp.B : tmp.B.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.B : tmp.B.Equals("<IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
+                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Detected") ? tmp.C : tmp.C.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.C : tmp.C.Equals("<IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
+                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Detected") ? tmp.D : tmp.D.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.D : tmp.D.Equals("<IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
+                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Detected") ? tmp.E : tmp.E.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.E : tmp.E.Equals("<IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
                                                 break;
                                             case 9:
-                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Detected") ? tmp.B : tmp.B.Equals("Not Detected") ? tmp.B : tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
-                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Detected") ? tmp.C : tmp.C.Equals("Not Detected") ? tmp.C : tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
-                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Detected") ? tmp.D : tmp.D.Equals("Not Detected") ? tmp.D : tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
-                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Detected") ? tmp.E : tmp.E.Equals("Not Detected") ? tmp.E : tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
+                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Detected") ? tmp.B : tmp.B.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.B : tmp.B.Equals("<IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
+                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Detected") ? tmp.C : tmp.C.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.C : tmp.C.Equals("<IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
+                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Detected") ? tmp.D : tmp.D.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.D : tmp.D.Equals("<IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
+                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Detected") ? tmp.E : tmp.E.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.E : tmp.E.Equals("<IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
                                                 break;
                                                 //Amount(ng / cm2)
                                                 //Amount(ug / cm2)
@@ -1501,7 +1509,9 @@ namespace ALS.ALSI.Web.view.template
                 mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
                 if (mSpec != null)
                 {
-                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.B, mSpec.A);
+                    //lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.B, mSpec.A);
+                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} for {1}", mSpec.C, mSpec.B);
+
                 }
             }
 
@@ -1557,6 +1567,8 @@ namespace ALS.ALSI.Web.view.template
         {
             gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
             gvResultNvr.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+            gvResultFtir.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
+            gvResultFtir.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
             ModolPopupExtender.Show();
             CalculateCas();
         }

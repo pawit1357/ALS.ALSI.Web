@@ -60,17 +60,19 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public static void InsertList(List<template_seagate_corrosion_coverpage> _lists)
         {
+
+
             foreach (template_seagate_corrosion_coverpage tmp in _lists)
             {
-                template_seagate_corrosion_coverpage existing = _repository.Find(x => x.ID == tmp.ID).FirstOrDefault();
-                if (existing == null)
-                {
+                //template_seagate_corrosion_coverpage existing = _repository.Find(x => x.ID == tmp.ID).FirstOrDefault();
+                //if (existing == null)
+                //{
                     _repository.Add(tmp);
-                }
-                else
-                {
-                    _repository.Edit(existing, tmp);
-                }
+                //}
+                //else
+                //{
+                //    _repository.Edit(existing, tmp);
+                //}
                 //switch (tmp.RowState)
                 //{
                 //    case CommandNameEnum.Add:

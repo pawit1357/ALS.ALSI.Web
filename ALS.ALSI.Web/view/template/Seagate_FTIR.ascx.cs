@@ -211,7 +211,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                     }
                     #endregion
-                    gvMethodProcedure.Columns[5].Visible = true;
+                    gvMp.Columns[5].Visible = true;
                     gvResult.Columns[3].Visible = true;
                     btnWorkingFTIR.Visible = true;
                     btnWorkingNVR.Visible = true;
@@ -219,7 +219,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 else
                 {
-                    gvMethodProcedure.Columns[5].Visible = false;
+                    gvMp.Columns[5].Visible = false;
                     gvResult.Columns[3].Visible = false;
                     btnWorkingFTIR.Visible = false;
                     btnWorkingNVR.Visible = false;
@@ -256,24 +256,26 @@ namespace ALS.ALSI.Web.view.template
                         mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
                         if (mSpec != null)
                         {
-                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.B, mSpec.A);
+                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.C, mSpec.B);
                         }
                     }
 
-
-                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-                    gvMethodProcedure.DataBind();
-                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
-                    gvResult.DataBind();
-                    gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
-                    gvWftir.DataBind();
-                    CalculateCas();
                     #region "Unit"
                     gvResult.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
                     gvResult.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
                     //gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnitNvr.SelectedItem.Text);
                     //gvResultNvr.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitNvr.SelectedItem.Text);
                     #endregion
+
+                    //gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                    //gvMp.DataBind();
+                    //gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
+                    //gvResult.DataBind();
+                    //gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
+                    //gvWftir.DataBind();
+                    CalculateCas();
+                   
+
                 }
                 else
                 {
@@ -340,8 +342,8 @@ namespace ALS.ALSI.Web.view.template
                     tmp.data_type = Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE);
                     this.Ftir.Add(tmp);
                     #endregion
-                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-                    gvMethodProcedure.DataBind();
+                    gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                    gvMp.DataBind();
                 }
                 #endregion
 
@@ -578,7 +580,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".doc") || Path.GetExtension(btnUpload.FileName).Equals(".docx")))
+                    if (btnUpload.HasFile)// && (Path.GetExtension(btnUpload.FileName).Equals(".doc") || Path.GetExtension(btnUpload.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -662,7 +664,7 @@ namespace ALS.ALSI.Web.view.template
             item = datas.Where(x => x.ID == Convert.ToInt16(ddlSpecification.SelectedValue)).FirstOrDefault();
             if (item != null)
             {
-                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", item.B, item.A);
+                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", item.C, item.B);
 
                 #region "FTIR"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
@@ -762,24 +764,48 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
             if (ftirList.Count > 0)
             {
-                int unit = Convert.ToInt16(ddlUnit.SelectedValue);
-                //FTIR
-                this.Ftir[6].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone Oil
-                this.Ftir[7].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Hydrocarbon
-                this.Ftir[8].C = String.Empty;
 
+                String unit = ddlUnit.SelectedItem.Text;// Convert.ToInt16(ddlUnit.SelectedValue);
 
-                //part value to cover page method/procedure
-                var items = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-                if (items.Count > 0)
+                List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
+
+                if (ftir2.Count > 0)
                 {
-                    items[0].C = String.Format("{0} cm2", txtWB14.Text);
-                    items[1].C = String.Format("{0} cm2", txtWB14.Text);
-                    items[2].C = String.Format("{0} cm2", txtWB14.Text);
-                    items[3].C = String.Format("{0} cm2", txtWB14.Text);
-                    items[4].C = String.Format("{0} cm2", txtWB14.Text);
-                    items[5].C = String.Format("{0} cm2", txtWB14.Text);
+//Silicone Oil
+//Hydrocarbon
+//Surfactant
+//Phthalate
+//Amides
+
+
+                    ftir2[0].C = (unit.Equals("ng/cm2")) ? ftirList[8].B : ftirList[7].B;
+                    ftir2[1].C = (unit.Equals("ng/cm2")) ? ftirList[8].E : ftirList[7].E;
+                    //ftir2[2].C = (unit.Equals("ng/cm2")) ? ftirList[7].D : ftirList[8].D;
+                    //ftir2[3].C = (unit.Equals("ng/cm2")) ? ftirList[7].E : ftirList[8].E;
+                    //ftir2[4].C = (unit.Equals("ng/cm2")) ? ftirList[7].F : ftirList[8].F;
+                    //ftir2[5].C = (unit.Equals("ng/cm2")) ? ftirList[7].G : ftirList[8].G;
+
                 }
+
+
+                //int unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                ////FTIR
+                //this.Ftir[6].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone Oil
+                //this.Ftir[7].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Hydrocarbon
+                //this.Ftir[8].C = String.Empty;
+
+
+                ////part value to cover page method/procedure
+                //var items = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                //if (items.Count > 0)
+                //{
+                //    items[0].C = String.Format("{0} cm2", txtWB14.Text);
+                //    items[1].C = String.Format("{0} cm2", txtWB14.Text);
+                //    items[2].C = String.Format("{0} cm2", txtWB14.Text);
+                //    items[3].C = String.Format("{0} cm2", txtWB14.Text);
+                //    items[4].C = String.Format("{0} cm2", txtWB14.Text);
+                //    items[5].C = String.Format("{0} cm2", txtWB14.Text);
+                //}
 
 
                 gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
@@ -788,8 +814,11 @@ namespace ALS.ALSI.Web.view.template
                 gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
                 gvResult.DataBind();
 
-                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-                gvMethodProcedure.DataBind();
+                gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                gvMp.DataBind();
+
+                gvResult.DataSource = ftir2;
+                gvResult.DataBind();
                 //remark
                 lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
             }
@@ -1100,6 +1129,10 @@ namespace ALS.ALSI.Web.view.template
                                 HSSFWorkbook wb = new HSSFWorkbook(fs);
                                 #region "FTIR"
                                 ISheet isheet = wb.GetSheet(ConfigurationManager.AppSettings["seagate.ftir.excel.sheetname.working1"]);
+                                if (isheet == null)
+                                {
+                                    isheet = wb.GetSheet("FTIR");
+                                }
                                 if (isheet != null)
                                 {
                                     txtWB13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B));//Surface area per part (e) =
@@ -1155,16 +1188,16 @@ namespace ALS.ALSI.Web.view.template
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal06.Text);
                                                 break;
                                             case 8:
-                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Not Detected") || tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
-                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Not Detected") || tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
-                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Not Detected") || tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
-                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Not Detected") || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
+                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.ToUpper().Equals("Not Detected".ToUpper()) || tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
+                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.ToUpper().Equals("Not Detected".ToUpper()) || tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
+                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.ToUpper().Equals("Not Detected".ToUpper()) || tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
+                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.ToUpper().Equals("Not Detected".ToUpper()) || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
                                                 break;
                                             case 9:
-                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Not Detected") || tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
-                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Not Detected") || tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
-                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Not Detected") || tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
-                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Not Detected") || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
+                                                tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.ToUpper().Equals("Not Detected".ToUpper()) || tmp.B.Equals("< IDL") ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
+                                                tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.ToUpper().Equals("Not Detected".ToUpper()) || tmp.C.Equals("< IDL") ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
+                                                tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.ToUpper().Equals("Not Detected".ToUpper()) || tmp.D.Equals("< IDL") ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
+                                                tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.ToUpper().Equals("Not Detected".ToUpper()) || tmp.E.Equals("< IDL") ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
                                                 break;
                                                 //Amount(ng / cm2)
                                                 //Amount(ug / cm2)
@@ -1217,36 +1250,7 @@ namespace ALS.ALSI.Web.view.template
         }
 
 
-        protected void gvMethodProcedure_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                int PKID = Convert.ToInt32(gvMethodProcedure.DataKeys[e.Row.RowIndex].Values[0].ToString());
-                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMethodProcedure.DataKeys[e.Row.RowIndex].Values[1]);
-                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-
-
-                if (_btnHide != null && _btnUndo != null)
-                {
-                    switch (cmd)
-                    {
-                        case RowTypeEnum.Hide:
-                            _btnHide.Visible = false;
-                            _btnUndo.Visible = true;
-                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-                            break;
-                        default:
-                            _btnHide.Visible = true;
-                            _btnUndo.Visible = false;
-                            e.Row.ForeColor = System.Drawing.Color.Black;
-                            break;
-                    }
-                }
-
-            }
-
-        }
+       
 
         protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -1281,7 +1285,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvProcedure_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
@@ -1290,17 +1294,17 @@ namespace ALS.ALSI.Web.view.template
                 {
                     switch (cmd)
                     {
-                        case RowTypeEnum.Hide:
+                        case CommandNameEnum.Hide:
                             gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
 
                             break;
-                        case RowTypeEnum.Normal:
+                        case CommandNameEnum.Normal:
                             gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
 
-                    gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
-                    gvMethodProcedure.DataBind();
+                    gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+                    gvMp.DataBind();
                 }
             }
         }
@@ -1344,11 +1348,117 @@ namespace ALS.ALSI.Web.view.template
                 mSpec = mSpec.SelectByID(this.Ftir[0].specification_id.Value);
                 if (mSpec != null)
                 {
-                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.B, mSpec.A);
+                    lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", mSpec.C, mSpec.B);
                 }
             }
 
         }
+
+
+
+        #region "method/procedure"
+        protected void gvMp_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case CommandNameEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+
+                            break;
+                        case CommandNameEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+
+                    gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+                    gvMp.DataBind();
+                }
+            }
+        }
+
+        protected void gvMp_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int PKID = Convert.ToInt32(gvMp.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMp.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+
+        }
+        protected void gvMp_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvMp.EditIndex = e.NewEditIndex;
+            gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+            gvMp.DataBind();
+        }
+
+        protected void gvMp_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvMp.EditIndex = -1;
+            gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+            gvMp.DataBind();
+        }
+
+        protected void gvMp_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+
+            int _id = Convert.ToInt32(gvMp.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox _txtExtractionVolume = (TextBox)gvMp.Rows[e.RowIndex].FindControl("txtExtractionVolume");
+
+            TextBox _txtAnalysis = (TextBox)gvMp.Rows[e.RowIndex].FindControl("txtAnalysis");
+            TextBox _txtProcedureNo = (TextBox)gvMp.Rows[e.RowIndex].FindControl("txtProcedureNo");
+            TextBox _txtNumberOfPiecesUsedForExtraction = (TextBox)gvMp.Rows[e.RowIndex].FindControl("txtNumberOfPiecesUsedForExtraction");
+            TextBox _txtExtractionMedium = (TextBox)gvMp.Rows[e.RowIndex].FindControl("txtExtractionMedium");
+            if (_txtExtractionVolume != null)
+            {
+
+                template_seagate_ftir_coverpage _tmp = this.Ftir.Find(x => x.ID == _id);
+                if (_tmp != null)
+                {
+                    _tmp.A = _txtAnalysis.Text;
+                    _tmp.B = _txtProcedureNo.Text;
+                    _tmp.C = _txtNumberOfPiecesUsedForExtraction.Text;
+                    _tmp.D = _txtExtractionMedium.Text;
+                    _tmp.E = _txtExtractionVolume.Text;
+
+                }
+            }
+
+            gvMp.EditIndex = -1;
+            gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+            gvMp.DataBind();
+        }
+        #endregion
+
+
 
         protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
         {

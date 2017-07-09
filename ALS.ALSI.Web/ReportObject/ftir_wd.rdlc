@@ -109,7 +109,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Analysis</Value>
+                              <Value>Test</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontSize>11pt</FontSize>
@@ -1575,7 +1575,7 @@
         <rd:DefaultName>Remarks</rd:DefaultName>
         <Top>5.3213in</Top>
         <Left>0.15667in</Left>
-        <Height>0.53125in</Height>
+        <Height>0.39583in</Height>
         <Width>6.97617in</Width>
         <ZIndex>6</ZIndex>
         <Style>
@@ -1611,7 +1611,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>15.04187cm</Top>
+        <Top>16.94687cm</Top>
         <Left>0.39794cm</Left>
         <Height>0.70556cm</Height>
         <Width>17.72823cm</Width>
@@ -2277,6 +2277,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2457,7 +2458,7 @@
       </Tablix>
       <Subreport Name="Subreport1">
         <ReportName>Signature</ReportName>
-        <Top>6.26922in</Top>
+        <Top>7.01922in</Top>
         <Left>0.13115in</Left>
         <Height>1.04167in</Height>
         <Width>6.88629in</Width>
@@ -2468,8 +2469,42 @@
           </Border>
         </Style>
       </Subreport>
+      <Textbox Name="Remarks2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Remark:
+1.) The result related only to the test items.
+2.) The test report shall not be reproduced except in full, without written approval of ALS Testing Services (Thailand) Co., Ltd.</Value>
+                <Style>
+                  <FontSize>11pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Remarks</rd:DefaultName>
+        <Top>5.77269in</Top>
+        <Left>0.13372in</Left>
+        <Height>0.82986in</Height>
+        <Width>6.97617in</Width>
+        <ZIndex>10</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>7.38542in</Height>
+    <Height>8.06089in</Height>
     <Style />
   </Body>
   <Width>7.13629in</Width>

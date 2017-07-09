@@ -137,7 +137,19 @@ namespace ALS.ALSI.Web.view.request
             switch (CommandName)
             {
                 case CommandNameEnum.ChangeStatus:
+
                     this.jobSample.job_status = String.IsNullOrEmpty(ddlStatus.SelectedValue) ? 0 : int.Parse(ddlStatus.SelectedValue);
+                    if (this.jobSample.job_status == 10)
+                    {//if change status to convert template
+                        this.jobSample.template_id = -1;
+                        this.jobSample.path_word = String.Empty;
+                        this.jobSample.path_pdf = String.Empty;
+                    }
+                    if (this.jobSample.job_status == 13)
+                    {//if change status to convert word
+                        this.jobSample.path_word = String.Empty;
+                        this.jobSample.path_pdf = String.Empty;
+                    }
                     this.jobSample.Update();
                     break;
             }

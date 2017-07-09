@@ -519,7 +519,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".doc") || Path.GetExtension(btnUpload.FileName).Equals(".docx")))
+                    if (btnUpload.HasFile)// && (Path.GetExtension(btnUpload.FileName).Equals(".doc") || Path.GetExtension(btnUpload.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -1097,7 +1097,7 @@ namespace ALS.ALSI.Web.view.template
             }
             if (!this.Ftir[4].C.Equals("-"))
             {
-                this.Ftir[4].E = this.Ftir[4].D.Equals("Not Detected") ? "PASS" : String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+                this.Ftir[4].E = this.Ftir[4].D.ToUpper().Equals("Not Detected".ToUpper()) ? "PASS" : String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
             }
             //this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
             //this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
@@ -1127,7 +1127,7 @@ namespace ALS.ALSI.Web.view.template
 
 
             lbA31.Text = txtFTIR_B35.Text;
-            //lbB31.Text = !String.IsNullOrEmpty(lbAmide.Text) ? lbAmide.Text : lbSilicone.Text;
+            lbB31.Text = lbSilicone.Text;
 
 
             btnSubmit.Enabled = true;
@@ -1277,6 +1277,9 @@ namespace ALS.ALSI.Web.view.template
             gvResult.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlFtirUnit.SelectedItem.Text);
             gvResult.Columns[3].HeaderText = String.Format("Results ({0})", ddlFtirUnit.SelectedItem.Text);
             ModolPopupExtender.Show();
+
+            gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
+            gvResult.DataBind();
         }
         protected void ddlNvrUnit_SelectedIndexChanged(object sender, EventArgs e)
         {

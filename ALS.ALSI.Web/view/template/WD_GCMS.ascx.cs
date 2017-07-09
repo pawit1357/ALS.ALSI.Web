@@ -337,6 +337,7 @@ namespace ALS.ALSI.Web.view.template
                             lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", detailSpec1.B, detailSpec1.A);
                         }
                     }
+
                     //tb_m_detail_spec detailSpec1 = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);
                     //if (detailSpec1 != null)
                     //{
@@ -350,20 +351,32 @@ namespace ALS.ALSI.Web.view.template
                     txtExtractionVolumn.Text = this.coverpages[0].pm_extraction_volumn;
 
                     hProcedureUnit.Value = this.coverpages[0].pm_unit;
-                    //ddlTest.SelectedValue = this.coverpages[0].test.ToString();
 
-                    //gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", hProcedureUnit.Value);
-                    //gvCoverPages.Columns[3].HeaderText = String.Format("Results({0})", hProcedureUnit.Value);
-                    //gvMajorCompounds.Columns[2].HeaderText = String.Format("Result({0})", hProcedureUnit.Value);
+
                     //
-                    GenerrateCoverPage();
 
                     #region "Unit"
-                    gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
-                    gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
-                    gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", ddlUnit.SelectedItem.Text);
+                    if (CustomUtils.isNumber(hProcedureUnit.Value))
+                    {
+                        ddlUnit.SelectedValue = hProcedureUnit.Value;
+                        tb_unit _unit = new tb_unit().SelectByID(int.Parse(hProcedureUnit.Value));
+                        gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", _unit.name);
+                        gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", _unit.name);
+                        gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", _unit.name);
+                        gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", _unit.name);
+                    }
+                    else
+                    {
+                        gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", hProcedureUnit.Value);
+                        gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", hProcedureUnit.Value);
+                        gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", hProcedureUnit.Value);
+                        gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", hProcedureUnit.Value);
+                    }
+
                     #endregion
+
+                    GenerrateCoverPage();
+
                 }
                 #endregion
             }
@@ -528,7 +541,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
+                    if (FileUpload1.HasFile)// && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -545,42 +558,15 @@ namespace ALS.ALSI.Web.view.template
                         btnUpload.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
-                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
-                        //lbMessage.Attributes["class"] = "alert alert-error";
-                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -666,7 +652,7 @@ namespace ALS.ALSI.Web.view.template
                                             {
                                                 if (isheet.GetRow(j).GetCell(1).CellType != CellType.Blank)
                                                 {
-                                                    if (CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1)).IndexOf("-")>0)
+                                                    if (CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1)).IndexOf("-") > 0)
                                                     {
                                                         tmp.rt = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1));
                                                     }
@@ -984,7 +970,7 @@ namespace ALS.ALSI.Web.view.template
                 txtExtractionMedium.Text = component.E;
                 txtExtractionVolumn.Text = component.F;
 
-                hProcedureUnit.Value = component.C;
+                //hProcedureUnit.Value = component.C;
                 gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", component.C);
                 gvCoverPages.Columns[3].HeaderText = String.Format("Results({0})", component.C);
                 gvMajorCompounds.Columns[2].HeaderText = String.Format("Result({0})", component.C);
@@ -1076,6 +1062,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     _cover.E = _cover.C.Equals("0") ? "" : "";
                 }
+                _cover.C = CustomUtils.isNumber(_cover.C) ? "<" + _cover.C : _cover.C;
 
             }
             gvCoverPages.DataSource = newCoverPage;
@@ -1099,6 +1086,15 @@ namespace ALS.ALSI.Web.view.template
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
+            String _unit = String.Empty;
+            if (CustomUtils.isNumber(hProcedureUnit.Value))
+            {
+                _unit = ddlUnit.SelectedItem.Text;
+            }
+            else
+            {
+                _unit = hProcedureUnit.Value;
+            }
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
             reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
@@ -1107,7 +1103,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit", _unit));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "GCMS - Hydrocarbon Residue"));
@@ -1385,11 +1381,17 @@ namespace ALS.ALSI.Web.view.template
 
         protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            hProcedureUnit.Value = ddlUnit.SelectedValue;
             gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
             gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
             gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
             gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", ddlUnit.SelectedItem.Text);
 
+            gvCoverPages.DataSource = this.coverpages;
+            gvCoverPages.DataBind();
+
+            gvResult.DataSource = this.tbCas.Where(x => x.row_type.Value != Convert.ToInt32(RowTypeEnum.MajorCompounds));
+            gvResult.DataBind();
 
             ModolPopupExtender.Show();
         }

@@ -286,7 +286,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 case StatusEnum.CHEMIST_TESTING:
 
-                    if (FileUpload2.HasFile && (Path.GetExtension(FileUpload2.FileName).Equals(".doc") || Path.GetExtension(FileUpload2.FileName).Equals(".docx")))
+                    if (FileUpload2.HasFile)// && (Path.GetExtension(FileUpload2.FileName).Equals(".doc") || Path.GetExtension(FileUpload2.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -367,7 +367,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
+                    if (FileUpload1.HasFile)// && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -392,7 +392,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
+                    if (FileUpload1.HasFile)// && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");

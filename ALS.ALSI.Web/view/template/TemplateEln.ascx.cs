@@ -402,7 +402,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
+                    if (FileUpload1.HasFile) // && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -537,14 +537,6 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
-
-        //protected void lbDowloadWorkSheet_Click(object sender, EventArgs e)
-        //{
-        //    if (!String.IsNullOrEmpty(this.jobSample.ad_hoc_tempalte_path))
-        //    {
-        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.ad_hoc_tempalte_path));
-        //    }
-        //}
     }
 }
 

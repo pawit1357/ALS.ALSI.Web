@@ -346,7 +346,13 @@ namespace ALS.ALSI.Utils
                                 if (dcOrder.ToString().Equals(dcHeader.ToString()))
                                 {
                                     String specName = dtRowHeader[dcHeader].ToString();
-                                    spec.name = specName.Substring(0, specName.IndexOf('(') == -1 ? specName.Length : specName.IndexOf('(')).Trim();
+                                    if (specName.Equals("Total Silanes (ng/cm2)"))
+                                    {
+                                        spec.name = specName;
+                                    }
+                                    else {
+                                        spec.name = specName.Substring(0, specName.IndexOf('(') == -1 ? specName.Length : specName.IndexOf('(')).Trim();
+                                    }
                                     break;
                                 }
                             }

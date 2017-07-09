@@ -19,7 +19,6 @@
                         <asp:Button ID="btnWorkingFTIR" runat="server" Text="FTIR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
                         <asp:Button ID="btnWorkingNVR" runat="server" Text="NVR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
                         <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
-
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -304,8 +303,6 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                 </table>
 
 
-
-
                                 <asp:GridView ID="gvWftir" CssClass="table table-striped table-bordered mini" runat="server" AutoGenerateColumns="False">
                                     <Columns>
                                         <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Left">
@@ -315,28 +312,43 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             <ItemStyle HorizontalAlign="Left" />
                                         </asp:TemplateField>
 
-                                        <asp:TemplateField HeaderText="Silicone Oil" ItemStyle-HorizontalAlign="Left">
+                                        <asp:TemplateField HeaderText="Seal & Label for HDA internal, Facestock" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>' />
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Left" />
                                         </asp:TemplateField>
 
-                                        <asp:TemplateField HeaderText="Amide Slip Agent" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="Seal & Label for HDA internal, Adhesive side" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litC" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Phthalate" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="Release Liner, ultra-low Silicone, facing adhesive side" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litD" runat="server" Text='<%# Eval("D")%>'></asp:Literal>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Hydrocarbon" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="Release Liner, non-Silicone, facing adhesive side" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litE" runat="server" Text='<%# Eval("E")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+
+
+                                       <asp:TemplateField HeaderText="Release Liner, ultra-low Silicone facing adhesive (inside)" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litF" runat="server" Text='<%# Eval("F")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+
+                                       <asp:TemplateField HeaderText="Release Liner, ultra-low Silicone facing adhesive (outside)" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litG" runat="server" Text='<%# Eval("G")%>'></asp:Literal>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>

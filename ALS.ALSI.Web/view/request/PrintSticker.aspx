@@ -186,6 +186,13 @@
                                             
                                             </td>
                                         </tr>
+                                                                                <tr>
+                                            <td class="text-right">Surface Area:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-left">
+                                                <asp:Label ID="lbSa" runat="server" Text=""></asp:Label>
+                                            
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>

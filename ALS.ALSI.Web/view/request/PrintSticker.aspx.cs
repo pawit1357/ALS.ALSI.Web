@@ -138,6 +138,8 @@ namespace ALS.ALSI.Web.view.request
                         }
                         lbSd.Text = sample_diposition;
                     }
+                    lbSa.Text = samples[0].surface_area;
+
                 }
 
                 lbJobNo.Text = lbJobNo.Text.Substring(0, lbJobNo.Text.Length - 1);
@@ -271,6 +273,7 @@ namespace ALS.ALSI.Web.view.request
                         }
                         lbSd.Text = sample_diposition;
                     }
+                    lbSa.Text = samples[0].surface_area;
                 }
 
             }

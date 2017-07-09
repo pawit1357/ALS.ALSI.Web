@@ -293,7 +293,7 @@ namespace ALS.ALSI.Web.view.template
 
 
                 txtB18.Enabled = true;
-                txtC18.Enabled = false;
+                txtC18.Enabled = true;
                 txtD18.Enabled = true;
                 txtD18.Enabled = true;
                 txtE18.Enabled = false;
@@ -380,25 +380,26 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
+                    template_seagate_ic_coverpage.DeleteBySampleID(this.SampleID);
                     foreach (template_seagate_ic_coverpage _cover in this.coverpages)
                     {
                         _cover.procedure_no = txtB18.Text;
-                        _cover.number_of_pieces__used_for_extraction = txtB11.Text;
+                        _cover.number_of_pieces__used_for_extraction = txtC18.Text;
                         _cover.extraction_medium = txtD18.Text;
                         _cover.extraction_volume = txtB9.Text;
                         _cover.sample_id = this.SampleID;
                         _cover.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         _cover.b10 = txtB10.Text;
                     }
-                    switch (this.CommandName)
-                    {
-                        case CommandNameEnum.Add:
+                    //switch (this.CommandName)
+                    //{
+                    //    case CommandNameEnum.Add:
                             template_seagate_ic_coverpage.InsertList(this.coverpages);
-                            break;
-                        case CommandNameEnum.Edit:
-                            template_seagate_ic_coverpage.UpdateList(this.coverpages);
-                            break;
-                    }
+                            //break;
+                    //    case CommandNameEnum.Edit:
+                    //        template_seagate_ic_coverpage.UpdateList(this.coverpages);
+                    //        break;
+                    //}
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
@@ -410,7 +411,7 @@ namespace ALS.ALSI.Web.view.template
                     foreach (template_seagate_ic_coverpage _cover in this.coverpages)
                     {
                         _cover.procedure_no = txtB18.Text;
-                        _cover.number_of_pieces__used_for_extraction = txtB11.Text;
+                        _cover.number_of_pieces__used_for_extraction = txtC18.Text;
                         _cover.extraction_medium = txtD18.Text;
                         _cover.extraction_volume = txtB9.Text;
                         _cover.sample_id = this.SampleID;
@@ -1191,7 +1192,7 @@ namespace ALS.ALSI.Web.view.template
                                                 ic.wg = (String.IsNullOrEmpty(ic.wg)) ? "" : Convert.ToDouble(ic.wg).ToString("N" + txtDecimal06.Text);
                                                 ic.wh = (String.IsNullOrEmpty(ic.wh)) ? "" : Convert.ToDouble(ic.wh).ToString("N" + txtDecimal07.Text);
 
-                                                ic.wi = ic.wi.Equals("Not Detected")? ic.wi : (String.IsNullOrEmpty(ic.wi)) ? "" : (!ic.wi.StartsWith("<") ? "" : "<") + Convert.ToDouble(ic.wi.Replace("<", "").Trim()).ToString("N" + txtDecimal08.Text);
+                                                ic.wi = ic.wi.ToUpper().Equals("Not Detected".ToUpper())? ic.wi : (String.IsNullOrEmpty(ic.wi)) ? "" : (!ic.wi.StartsWith("<") ? "" : "<") + Convert.ToDouble(ic.wi.Replace("<", "").Trim()).ToString("N" + txtDecimal08.Text);
                                                 Console.WriteLine();
                                             }
                                         }

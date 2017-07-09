@@ -326,12 +326,28 @@ namespace ALS.ALSI.Web.view.template
                     //GenerrateCoverPage();
 
                     #region "Unit"
-                    if (!String.IsNullOrEmpty(ddlUnit.SelectedValue)) { 
-                    gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
-                    gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
-                    gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
-                    gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", ddlUnit.SelectedItem.Text);
-                }
+                    String _unit = String.Empty;
+                    if (CustomUtils.isNumber(hProcedureUnit.Value))
+                    {
+                        tb_unit unit2 = new tb_unit().SelectByID(Convert.ToInt16(hProcedureUnit.Value));
+                        if (unit2 != null)
+                        {
+                            _unit = unit2.name;
+                            ddlUnit.SelectedValue = hProcedureUnit.Value;
+                        }
+                    }
+                    else
+                    {
+                        _unit = hProcedureUnit.Value;
+                    }
+
+
+                    gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", _unit);
+                    gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", _unit);
+                    gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", _unit);
+                    gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", _unit);
+
+
                     #endregion
 
                     gvCoverPages.DataSource = this.coverpages;
@@ -505,7 +521,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
+                    if (FileUpload1.HasFile)// && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -964,7 +980,7 @@ namespace ALS.ALSI.Web.view.template
                 txtExtractionMedium.Text = component.E;
                 txtExtractionVolumn.Text = component.F;
 
-                hProcedureUnit.Value = component.C;
+                //hProcedureUnit.Value = component.C;
                 gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", component.C);
                 gvCoverPages.Columns[3].HeaderText = String.Format("Results({0})", component.C);
                 //gvMajorCompounds.Columns[2].HeaderText = String.Format("Result({0})", component.C);
@@ -1003,6 +1019,20 @@ namespace ALS.ALSI.Web.view.template
             reportHeader = reportHeader.getReportHeder(this.jobSample);
 
 
+            String _unit = String.Empty;
+            if (CustomUtils.isNumber(hProcedureUnit.Value))
+            {
+                tb_unit unit2 = new tb_unit().SelectByID(Convert.ToInt16(hProcedureUnit.Value));
+                if (unit2 != null)
+                {
+                    _unit = unit2.name;
+                }
+            }
+            else
+            {
+                _unit = hProcedureUnit.Value;
+            }
+
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
@@ -1013,10 +1043,10 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit", _unit));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "GCMS - Hydrocarbon Residue"));
+            reportParameters.Add(new ReportParameter("Test", "CVR"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
 
@@ -1251,10 +1281,13 @@ namespace ALS.ALSI.Web.view.template
         protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            hProcedureUnit.Value = ddlUnit.SelectedValue;
+
             gvResult.Columns[7].HeaderText = String.Format("Amount ({0})", ddlUnit.SelectedItem.Text);
             gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
             gvCoverPages.Columns[3].HeaderText = String.Format("Results ({0})", ddlUnit.SelectedItem.Text);
             gvMajorCompounds.Columns[2].HeaderText = String.Format("Result ({0})", ddlUnit.SelectedItem.Text);
+
 
 
             ModolPopupExtender.Show();

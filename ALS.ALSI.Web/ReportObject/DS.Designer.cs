@@ -566,6 +566,12 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columnimg1;
             
+            private global::System.Data.DataColumn columnlocation_of_parts;
+            
+            private global::System.Data.DataColumn columnspecification;
+            
+            private global::System.Data.DataColumn columnpass_fail;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dataDataTable() {
@@ -769,6 +775,30 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn location_of_partsColumn {
+                get {
+                    return this.columnlocation_of_parts;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn specificationColumn {
+                get {
+                    return this.columnspecification;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn pass_failColumn {
+                get {
+                    return this.columnpass_fail;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -825,7 +855,10 @@ namespace ALS.ALSI.Web.ReportObject {
                         string LiquidParticleCount1, 
                         string SpecificationLimits, 
                         string Results, 
-                        byte[] img1) {
+                        byte[] img1, 
+                        string location_of_parts, 
+                        string specification, 
+                        string pass_fail) {
                 dataRow rowdataRow = ((dataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         A,
@@ -848,7 +881,10 @@ namespace ALS.ALSI.Web.ReportObject {
                         LiquidParticleCount1,
                         SpecificationLimits,
                         Results,
-                        img1};
+                        img1,
+                        location_of_parts,
+                        specification,
+                        pass_fail};
                 rowdataRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdataRow);
                 return rowdataRow;
@@ -892,6 +928,9 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columnSpecificationLimits = base.Columns["SpecificationLimits"];
                 this.columnResults = base.Columns["Results"];
                 this.columnimg1 = base.Columns["img1"];
+                this.columnlocation_of_parts = base.Columns["location_of_parts"];
+                this.columnspecification = base.Columns["specification"];
+                this.columnpass_fail = base.Columns["pass_fail"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -939,6 +978,12 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columnResults);
                 this.columnimg1 = new global::System.Data.DataColumn("img1", typeof(byte[]), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnimg1);
+                this.columnlocation_of_parts = new global::System.Data.DataColumn("location_of_parts", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlocation_of_parts);
+                this.columnspecification = new global::System.Data.DataColumn("specification", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnspecification);
+                this.columnpass_fail = new global::System.Data.DataColumn("pass_fail", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpass_fail);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3951,6 +3996,54 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string location_of_parts {
+                get {
+                    try {
+                        return ((string)(this[this.tabledata.location_of_partsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'location_of_parts\' in table \'data\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledata.location_of_partsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string specification {
+                get {
+                    try {
+                        return ((string)(this[this.tabledata.specificationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'specification\' in table \'data\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledata.specificationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string pass_fail {
+                get {
+                    try {
+                        return ((string)(this[this.tabledata.pass_failColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'pass_fail\' in table \'data\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledata.pass_failColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsANull() {
                 return this.IsNull(this.tabledata.AColumn);
             }
@@ -4199,6 +4292,42 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setimg1Null() {
                 this[this.tabledata.img1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Islocation_of_partsNull() {
+                return this.IsNull(this.tabledata.location_of_partsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setlocation_of_partsNull() {
+                this[this.tabledata.location_of_partsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsspecificationNull() {
+                return this.IsNull(this.tabledata.specificationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetspecificationNull() {
+                this[this.tabledata.specificationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Ispass_failNull() {
+                return this.IsNull(this.tabledata.pass_failColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setpass_failNull() {
+                this[this.tabledata.pass_failColumn] = global::System.Convert.DBNull;
             }
         }
         
