@@ -2201,7 +2201,10 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.ID = CustomUtils.GetRandomNumberID();
                             _tmp.seq = (i + 1);
                             _tmp.A = _val;
-                            _tmp.B = tem.AI;
+                            if ("Average".ToLower().Equals(_val.ToLower()))
+                            {
+                                _tmp.B = tem.AI;
+                            }
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC03);
                             _Hpas.Add(_tmp);
@@ -2215,7 +2218,10 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.ID = CustomUtils.GetRandomNumberID();
                             _tmp.seq = (i + 1);
                             _tmp.A = _val;
-                            _tmp.B = tem.AJ;
+                            if ("Average".ToLower().Equals(_val.ToLower()))
+                            {
+                                _tmp.B = tem.AJ;
+                            }
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC06);
                             _Hpas.Add(_tmp);
