@@ -1226,7 +1226,7 @@
           <Property Name="row_type" Type="int" />
           <Property Name="row_group" Type="int" />
           <Property Name="unit" Type="int" />
-          <Property Name="ParticleAnalysisBySEMEDX" Type="varchar" MaxLength="45" />
+          <Property Name="ParticleAnalysisBySEMEDX" Type="varchar" MaxLength="255" />
           <Property Name="TapedAreaForDriveParts" Type="varchar" MaxLength="45" />
           <Property Name="NoofTimesTaped" Type="varchar" MaxLength="45" />
           <Property Name="SurfaceAreaAnalysed" Type="varchar" MaxLength="45" />
@@ -3014,7 +3014,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_type" Type="Int32" />
           <Property Name="row_group" Type="Int32" />
           <Property Name="unit" Type="Int32" />
-          <Property Name="ParticleAnalysisBySEMEDX" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ParticleAnalysisBySEMEDX" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TapedAreaForDriveParts" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="NoofTimesTaped" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="SurfaceAreaAnalysed" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
