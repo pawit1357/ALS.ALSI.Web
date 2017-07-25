@@ -75,7 +75,7 @@
                                             </tr>
                                         </table>
 
-                     <%--                   <h6>The Specification is based on WD's specification Doc No 
+                                        <%--                   <h6>The Specification is based on WD's specification Doc No 
                             <asp:Label ID="lbDocNo" runat="server" Text=""></asp:Label>
                                             for
                             <asp:Label ID="lbComponent" runat="server" Text=""></asp:Label>
@@ -194,6 +194,17 @@
                                                     </EditItemTemplate>
 
                                                 </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Hide">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("id")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                            CommandArgument='<%# Eval("id")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+
                                             </Columns>
                                             <EmptyDataTemplate>
                                                 <div class="data-not-found">

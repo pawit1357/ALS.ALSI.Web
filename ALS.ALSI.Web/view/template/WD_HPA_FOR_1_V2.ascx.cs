@@ -653,6 +653,12 @@ namespace ALS.ALSI.Web.view.template
                 _val.C = itemLines.Where(x => x.data_group.Equals(_val.data_group)).Sum(x => Convert.ToInt32(x.C));
                 _val.D = itemLines.Where(x => x.data_group.Equals(_val.data_group)).Sum(x => Convert.ToInt32(x.D)).ToString();
             }
+            List<template_wd_hpa_for1_coverpage> grandTotal = this.HpaFor1.Where(x => x.hpa_type ==9).OrderBy(x => x.seq).ToList();
+            foreach (template_wd_hpa_for1_coverpage _val in grandTotal)
+            {
+                _val.C = totalLines.Where(x => x.hpa_type == 8).Sum(x => Convert.ToInt32(x.C));
+                _val.D = totalLines.Where(x => x.hpa_type == 8).Sum(x => Convert.ToInt32(x.D)).ToString();
+            }
             //Result-Line
             List<template_wd_hpa_for1_coverpage> resultLine = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in resultLine)
@@ -664,7 +670,7 @@ namespace ALS.ALSI.Web.view.template
                     if (_val.D != null)
                     {
                         String dValue = _val.D.Replace("<", "").Trim();
-                        _val.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "" : (_val.C >= Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
+                        _val.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "" : (_val.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
                     }
                 }
             }
@@ -793,12 +799,12 @@ namespace ALS.ALSI.Web.view.template
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
 
-            List<template_wd_hpa_for1_coverpage> listHpa = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> listHpa = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).OrderBy(x => x.seq).ToList();
             List<template_wd_hpa_for1_coverpage> listElementalComposition = this.HpaFor1.Where(x =>
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
+                (x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).ToList();
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -1082,7 +1088,29 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvResult_1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+            //CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_wd_hpa_for1_coverpage gcms = this.HpaFor1.Find(x => x.ID == PKID);
+                if (gcms != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+
+                            break;
+                        case RowTypeEnum.Normal:
+                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+                    gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != 3).OrderBy(x => x.seq).ToList();
+                    gvResult_1.DataBind();
+                }
+            }
         }
 
         protected void gvResult_1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -1113,6 +1141,32 @@ namespace ALS.ALSI.Web.view.template
                             break;
                     }
                 }
+
+                //-----------------------------------------------------------------------
+                int PKID = Convert.ToInt32(gvResult_1.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd1 = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvResult_1.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd1)
+                    {
+                        case RowTypeEnum.Hide:
+
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+
             }
         }
 

@@ -214,7 +214,7 @@ namespace ALS.ALSI.Web.view.template
                 template_wd_corrosion_coverpage cover = this.coverpages[0];
                 ddlComponent.SelectedValue = cover.procedureNo_id.ToString();
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
-
+                txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].number_of_pieces_used_for_extraction;
 
                 tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
                 if (component != null)
