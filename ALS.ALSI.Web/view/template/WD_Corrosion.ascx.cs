@@ -367,8 +367,8 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                     template_wd_corrosion_coverpage.UpdateList(this.coverpages);
-                    //template_wd_corrosion_img.DeleteBySampleID(this.SampleID);
-                    //template_wd_corrosion_img.InsertList(this.refImg);
+                    template_wd_corrosion_img.DeleteBySampleID(this.SampleID);
+                    template_wd_corrosion_img.InsertList(this.refImg);
 
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
