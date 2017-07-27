@@ -491,8 +491,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
-            //List<template_wd_hpa_for1_coverpage> lists = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
-            List<template_wd_hpa_for1_coverpage> itemLines = this.HpaFor1.Where(x => x.hpa_type == 7).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> itemLines = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).OrderBy(x => x.seq).ToList();
 
             //Clear old value
             foreach (template_wd_hpa_for1_coverpage _cov in itemLines)
@@ -663,7 +662,7 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_hpa_for1_coverpage> resultLine = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in resultLine)
             {
-                template_wd_hpa_for1_coverpage mappedValue = totalLines.Where(x => x.B.Equals(mappingRawData((_val.A)))).FirstOrDefault();
+                template_wd_hpa_for1_coverpage mappedValue = totalLines.Where(x => x.A.Equals(mappingRawData((_val.A)))).FirstOrDefault();
                 if (mappedValue != null)
                 {
                     _val.C = mappedValue.C;
@@ -1088,29 +1087,38 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvResult_1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            //CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
 
-            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
-            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+
+            try
             {
-                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_wd_hpa_for1_coverpage gcms = this.HpaFor1.Find(x => x.ID == PKID);
-                if (gcms != null)
+                RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
                 {
-                    switch (cmd)
+                    int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    template_wd_hpa_for1_coverpage gcms = this.HpaFor1.Find(x => x.ID == PKID);
+                    if (gcms != null)
                     {
-                        case RowTypeEnum.Hide:
-                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
+                        switch (cmd)
+                        {
+                            case RowTypeEnum.Hide:
+                                gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
 
-                            break;
-                        case RowTypeEnum.Normal:
-                            gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                            break;
+                                break;
+                            case RowTypeEnum.Normal:
+                                gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                                break;
+                        }
+                        gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != 3).OrderBy(x => x.seq).ToList();
+                        gvResult_1.DataBind();
                     }
-                    gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != 3).OrderBy(x => x.seq).ToList();
-                    gvResult_1.DataBind();
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
         }
 
         protected void gvResult_1_RowDataBound(object sender, GridViewRowEventArgs e)
