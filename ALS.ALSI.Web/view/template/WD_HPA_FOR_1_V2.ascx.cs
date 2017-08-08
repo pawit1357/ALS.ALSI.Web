@@ -655,17 +655,17 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_hpa_for1_coverpage> grandTotal = this.HpaFor1.Where(x => x.hpa_type ==9).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in grandTotal)
             {
-                _val.C = totalLines.Where(x => x.hpa_type == 8).Sum(x => Convert.ToInt32(x.C));
-                _val.D = totalLines.Where(x => x.hpa_type == 8).Sum(x => Convert.ToInt32(x.D)).ToString();
+                _val.C = itemLines.Where(x => x.hpa_type == 7).Sum(x => Convert.ToInt32(x.C));
+                _val.D = itemLines.Where(x => x.hpa_type == 7).Sum(x => Convert.ToInt32(x.D)).ToString();
             }
             //Result-Line
             List<template_wd_hpa_for1_coverpage> resultLine = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in resultLine)
             {
-                template_wd_hpa_for1_coverpage mappedValue = totalLines.Where(x => x.A.Equals(mappingRawData((_val.A)))).FirstOrDefault();
+                template_wd_hpa_for1_coverpage mappedValue = totalLines.Where(x => x.B.Equals(mappingRawData((_val.A)))).FirstOrDefault();
                 if (mappedValue != null)
                 {
-                    _val.C = mappedValue.C;
+                    _val.C = Convert.ToInt16(mappedValue.D);
                     if (_val.D != null)
                     {
                         String dValue = _val.D.Replace("<", "").Trim();
@@ -1313,7 +1313,7 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Cu-S-Al-O Base");
             items.Add("Cu-Au");
             items.Add("-Total - Cu-Zn Base Particle");
-            //items.Add("#Other");
+            items.Add("#Other");
             items.Add("Sn Base");
             items.Add("Sb Base");
             items.Add("Ba-S Base");
@@ -1328,6 +1328,113 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Disk Material");
             items.Add("$Grand Total of All Particles");
 
+            //Hashtable items = new Hashtable();
+
+            /*
+            # = Group
+            - = Total
+            $ = Grand Total
+            -------------------------
+            */
+            //items.Add("Hard Particles", "#Hard Particles");
+            //items.Add("Hard Particles", "Al-O");
+            //items.Add("Hard Particles", "Al-Si-O");
+            //items.Add("Hard Particles", "Si-O");
+            //items.Add("Hard Particles", "Si-C");
+            //items.Add("Hard Particles", "Al-Cu-O");
+            //items.Add("Hard Particles", "Al-Mg-O");
+            //items.Add("Hard Particles", "Al-Si-Cu-O");
+            //items.Add("Hard Particles", "Al-Si-Fe-O");
+            //items.Add("Hard Particles", "Al-Si-Mg-O");
+            //items.Add("Hard Particles", "Al-Ti-O");
+            //items.Add("Hard Particles", "Ti-O");
+            //items.Add("Hard Particles", "Ti-C");
+            //items.Add("Hard Particles", "Ti-B");
+            //items.Add("Hard Particles", "Ti-N");
+            //items.Add("Hard Particles", "W-O");
+            //items.Add("Hard Particles", "W-C");
+            //items.Add("Hard Particles", "Zr-O");
+            //items.Add("Hard Particles", "Zr-C");
+            //items.Add("Hard Particles", "Pb-Zr-Ti-O (PZT)");
+            //items.Add("Hard Particles", "-Total - Hard Particles");
+
+            //items.Add("Magnetic Particles", "#Magnetic Particles");
+            //items.Add("Magnetic Particles", "Fe-Nd");
+            //items.Add("Magnetic Particles", "Sm-Co");
+            //items.Add("Magnetic Particles", "Fe-Sr");
+            //items.Add("Magnetic Particles", "-Total - Magnetic Particles");
+
+            //items.Add("Steel Particle", "#Steel Particle");
+            //items.Add("Steel Particle", "SS 300- Fe-Cr-Ni");
+            //items.Add("Steel Particle", "SS 300- Fe-Cr-Ni-Mn");
+            //items.Add("Steel Particle", "SS 300- Fe-Cr-Ni-Si");
+            //items.Add("Steel Particle", "SS 400- Fe-Cr ");
+            //items.Add("Steel Particle", "SS 400- Fe-Cr-Mn");
+            //items.Add("Steel Particle", "Other Steel - Fe");
+            //items.Add("Steel Particle", "Other Steel - Fe-Mn");
+            //items.Add("Steel Particle", "Other Steel - Fe-Ni");
+            //items.Add("Steel Particle", "Other Steel - Fe-O");
+            //items.Add("Steel Particle", "-Total - Steel Particle");
+
+            //items.Add("Cr-Rich", "#Cr-Rich");
+            //items.Add("Cr-Rich", "*Mg-Si-O");
+            //items.Add("Cr-Rich", "Cr-O");
+            //items.Add("Cr-Rich", "Cr-Mn");
+            //items.Add("Cr-Rich", "-Total -Cr-Rich");
+
+            //items.Add("Fe Base", "#Fe Base");
+            //items.Add("Fe Base", "Fe-Cu");
+            //items.Add("Fe Base", "Fe-Cr/S");
+            //items.Add("Fe Base", "SCrMn/Fe");
+            //items.Add("Fe Base", "Pb");
+            //items.Add("Fe Base", "-Total - Fe Base Particle");
+
+            //items.Add("Ni-Base", "#Ni-Base");
+            //items.Add("Ni-Base", "Ni");
+            //items.Add("Ni-Base", "Ni-P");
+            //items.Add("Ni-Base", "NiP/Al");
+            //items.Add("Ni-Base", "NiP/Fe");
+            //items.Add("Ni-Base", "NiP Base");
+            //items.Add("Ni-Base", "-Total - Ni-Base Particle");
+
+            //items.Add("Al Based", "#Al Based");
+            //items.Add("Al Based", "Al");
+            //items.Add("Al Based", "Al-Mg");
+            //items.Add("Al Based", "Al-Ti-Si");
+            //items.Add("Al Based", "Al-Cu");
+            //items.Add("Al Based", "Al-Si-Cu");
+            //items.Add("Al Based", "Al-Si/Fe");
+            //items.Add("Al Based", "Al-Si-Mg");
+            //items.Add("Al Based", "Mg-Si-O-Al");
+            //items.Add("Al Based", "Al-S/Si");
+            //items.Add("Al Based", "Al-Si Base");
+            //items.Add("Al Based", "AlSi/Fe-Cr-Ni-Mn-Cu");
+            //items.Add("Al Based", "-Total - Al Based Particle");
+
+            //items.Add("Cu-Zn base", "#Cu-Zn base");
+            //items.Add("Cu-Zn base", "Zn");
+            //items.Add("Cu-Zn base", "Cu");
+            //items.Add("Cu-Zn base", "Cu-Zn");
+            //items.Add("Cu-Zn base", "Cu-S");
+            //items.Add("Cu-Zn base", "Cu-Zn Base");
+            //items.Add("Cu-Zn base", "Cu-S-Al-O Base");
+            //items.Add("Cu-Zn base", "Cu-Au");
+            //items.Add("Cu-Zn base", "-Total - Cu-Zn Base Particle");
+
+            ////items.Add("Other","#Other";
+            //items.Add("Other", "Sn Base");
+            //items.Add("Other", "Sb Base");
+            //items.Add("Other", "Ba-S Base");
+            //items.Add("Other", "Ag-S");
+            //items.Add("Other", "Ti-O/Al-Si-Fe");
+            //items.Add("Other", "Ti Base");
+            //items.Add("Other", "AlSi/K");
+            //items.Add("Other", "Ca");
+            //items.Add("Other", "Na-Cl");
+            //items.Add("Other", "F-O");
+            //items.Add("Other", "Other");
+            //items.Add("Other", "Disk Material");
+            //items.Add("Grand Total of All Particles", "$Grand Total of All Particles");
 
 
 
@@ -1382,7 +1489,10 @@ namespace ALS.ALSI.Web.view.template
             mappingValues["Total MgSiO Particles"] = "Total - Magnetic Particles";
             mappingValues["Total Steel Particles"] = "Total - Steel Particle";
             mappingValues["Total Magnetic Particles"] = "Total - Magnetic Particles";
-
+            mappingValues["Total Cr / O, Cr / Mn / O"] = "Total -Cr-Rich";
+            mappingValues["Hard Particles"] = "Total - Hard Particles";
+            
+            //Total Cr / O, Cr / Mn / O
             //SST400s(Fe / Cr)
 
 

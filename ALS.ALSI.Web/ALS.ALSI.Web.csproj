@@ -1984,6 +1984,7 @@
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\ReportHeader.rdlc" />
     <EmbeddedResource Include="ReportObject\rptStricker.rdlc" />
     <EmbeddedResource Include="ReportObject\Signature.rdlc" />
   </ItemGroup>
