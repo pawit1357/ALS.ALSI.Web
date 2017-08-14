@@ -975,6 +975,15 @@ namespace ALS.ALSI.Web.view.template
                                     txtB17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B));
                                     txtB18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B));
                                     txtB19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.B));
+
+                                    txtC13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.C));
+                                    txtC14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.C));
+                                    txtC15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.C));
+                                    txtC16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.C));
+                                    txtC17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C));
+                                    txtC18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C));
+                                    txtC19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.C));
+
                                     #endregion
                                     #region "Motor Base / Baseplate"
                                     txtB20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.B));
@@ -990,6 +999,7 @@ namespace ALS.ALSI.Web.view.template
                                     txtB30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));
                                     txtB31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));
                                     txtB32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.B));
+
                                     txtC20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.C));
                                     txtC21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.C));
                                     txtC22.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.C));
@@ -1003,6 +1013,7 @@ namespace ALS.ALSI.Web.view.template
                                     txtC30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.C));
                                     txtC31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.C));
                                     txtC32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.C));
+
                                     txtD20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.D));
                                     txtD21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.D));
                                     txtD22.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.D));
@@ -1016,6 +1027,36 @@ namespace ALS.ALSI.Web.view.template
                                     txtD30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.D));
                                     txtD31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
                                     txtD32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
+
+                                    txtE20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.E));
+                                    txtE21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.E));
+                                    txtE22.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.E));
+                                    txtE23.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.E));
+                                    txtE24.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.E));
+                                    txtE25.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.E));
+                                    txtE26.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.E));
+                                    txtE27.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.E));
+                                    txtE28.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.E));
+                                    txtE29.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.E));
+                                    txtE30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.E));
+                                    txtE31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.E));
+                                    txtE32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.E));
+
+                                    txtF20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.F));
+                                    txtF21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.F));
+                                    txtF22.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.F));
+                                    txtF23.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.F));
+                                    txtF24.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.F));
+                                    txtF25.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.F));
+                                    txtF26.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.F));
+                                    txtF27.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.F));
+                                    txtF28.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.F));
+                                    txtF29.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.F));
+                                    txtF30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.F));
+                                    txtF31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.F));
+                                    txtF32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.F));
+
+
 
 
 
@@ -1657,6 +1698,10 @@ namespace ALS.ALSI.Web.view.template
             txtB30.Text = String.IsNullOrEmpty(txtB30.Text) ? "" : Convert.ToDouble(txtB30.Text).ToString("N3");
             txtC30.Text = String.IsNullOrEmpty(txtC30.Text) ? "" : Convert.ToDouble(txtC30.Text).ToString("N3");
             txtD30.Text = String.IsNullOrEmpty(txtD30.Text) ? "" : Convert.ToDouble(txtD30.Text).ToString("N3");
+
+            txtE30.Text = String.IsNullOrEmpty(txtE30.Text) ? "" : Convert.ToDouble(txtE30.Text).ToString("N3");
+            txtF30.Text = String.IsNullOrEmpty(txtF30.Text) ? "" : Convert.ToDouble(txtF30.Text).ToString("N3");
+
             txtB31.Text = String.IsNullOrEmpty(txtB31.Text) ? "" : Convert.ToDouble(txtB31.Text).ToString("N3");
             txtC31.Text = String.IsNullOrEmpty(txtC31.Text) ? "" : Convert.ToDouble(txtC31.Text).ToString("N3");
             txtD31.Text = String.IsNullOrEmpty(txtD31.Text) ? "" : Convert.ToDouble(txtD31.Text).ToString("N3");
@@ -1665,7 +1710,7 @@ namespace ALS.ALSI.Web.view.template
             //Note: This report was performed test by ALS Singapore.
             if (!string.IsNullOrEmpty(txtD31.Text))
             {
-                lbRemark1.Text = String.Format("1.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD31.Text), 3), txtD32.Text);
+                lbRemark1.Text = String.Format("1.) Minimun RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD31.Text), 3), txtD32.Text);
             }
             if (!string.IsNullOrEmpty(txtC31.Text))
             {
@@ -1673,11 +1718,15 @@ namespace ALS.ALSI.Web.view.template
             }
             if (!string.IsNullOrEmpty(txtD51.Text))
             {
-                lbRemark3.Text = String.Format("3.) Minimun RHC Detection Limit is Hub {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
+                lbRemark3.Text = String.Format("3.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
             }
             if (!string.IsNullOrEmpty(txtC51.Text))
             {
-                lbRemark4.Text = String.Format("4.) Minimun RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
+                lbRemark4.Text = String.Format("4.) Minimun RHC Detection Limit is Hub {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
+            }
+            if (!string.IsNullOrEmpty(txtC51.Text))
+            {
+                lbRemark4.Text = String.Format("5.) Minimun RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
             }
             #region "Binding"
 
@@ -1819,13 +1868,24 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
             if (compoundSubs.Count > 0)
             {
-                compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), 2) + "";//Compounds with RT > DOP
-                compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[1].C =Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[2].C =Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[0].C =(Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
 
-                compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
+                compoundSubs[4].C =Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE30.Text) ? "0" : txtE30.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[5].C =Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtF30.Text) ? "0" : txtF30.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[3].C =(Convert.ToDecimal(compoundSubs[4].C) + Convert.ToDecimal(compoundSubs[5].C)) + "";
 
 
-                gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
+
+                compoundSubs[1].C = (Convert.ToDouble(compoundSubs[1].C) == 0) ? "Not Detecte" : compoundSubs[1].C;
+                compoundSubs[2].C = (Convert.ToDouble(compoundSubs[2].C) == 0) ? "Not Detecte" : compoundSubs[2].C;
+
+                compoundSubs[4].C = (Convert.ToDouble(compoundSubs[4].C) == 0) ? "Not Detecte" : compoundSubs[4].C;
+                compoundSubs[4].C = (Convert.ToDouble(compoundSubs[5].C) == 0) ? "Not Detecte" : compoundSubs[4].C;
+
+
+               gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
                 gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
 
                 gvCompoundSub.DataSource = compoundSubs;

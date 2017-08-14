@@ -135,5 +135,37 @@ namespace ALS.ALSI.Biz.DataAccess
         public string D30 { get; set; }
         public string D31 { get; set; }
         public string D32 { get; set; }
+        public string C14 { get; set; }
+        public string C15 { get; set; }
+        public string C16 { get; set; }
+        public string C17 { get; set; }
+        public string C18 { get; set; }
+        public string C19 { get; set; }
+        public string E20 { get; set; }
+        public string E21 { get; set; }
+        public string E22 { get; set; }
+        public string E23 { get; set; }
+        public string E24 { get; set; }
+        public string E25 { get; set; }
+        public string E26 { get; set; }
+        public string E27 { get; set; }
+        public string E28 { get; set; }
+        public string E29 { get; set; }
+        public string E30 { get; set; }
+        public string E31 { get; set; }
+        public string E32 { get; set; }
+        public string F20 { get; set; }
+        public string F21 { get; set; }
+        public string F22 { get; set; }
+        public string F23 { get; set; }
+        public string F24 { get; set; }
+        public string F25 { get; set; }
+        public string F26 { get; set; }
+        public string F27 { get; set; }
+        public string F28 { get; set; }
+        public string F29 { get; set; }
+        public string F30 { get; set; }
+        public string F31 { get; set; }
+        public string F32 { get; set; }
     }
 }

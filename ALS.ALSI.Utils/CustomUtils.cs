@@ -268,6 +268,16 @@ namespace ALS.ALSI.Utils
 
 
         }
+        public static String removeSpacialCharacter(String originalStr)
+        {
+            String returnStr = originalStr;
+            String[] spcialChar = { "!","@","#","$","%","^","&","*","(",")","-","+" };
+            foreach(String s in spcialChar)
+            {
+                returnStr = returnStr.Replace(s, "_");
+            }
+            return returnStr.Trim();
+        }
 
 
 

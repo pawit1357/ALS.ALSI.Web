@@ -501,7 +501,8 @@
                         <asp:Label ID="lbRemark1" runat="server" Text=""></asp:Label><br />
                         <asp:Label ID="lbRemark2" runat="server" Text=""></asp:Label><br />
                         <asp:Label ID="lbRemark3" runat="server" Text=""></asp:Label><br />
-                        <asp:Label ID="lbRemark4" runat="server" Text=""></asp:Label>
+                        <asp:Label ID="lbRemark4" runat="server" Text=""></asp:Label><br />
+                        <asp:Label ID="lbRemark5" runat="server" Text=""></asp:Label>
 
                     </asp:Panel>
 
@@ -701,55 +702,72 @@
                                         <tr>
                                             <td>&nbsp;</td>
                                             <td>Motor Base / Baseplate</td>
-                                            <td></td>
+                                            <td>Irgafos &amp; Irgafos oxidize</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Internal Standard Recovery (R) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB13" runat="server"></asp:TextBox></td>
-                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtC13" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">pA of C14D10 in sample (X) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB14" runat="server"></asp:TextBox></td>
-                                            <td></td>
+                                            <td>
+                                                <asp:TextBox ID="txtC14" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">pA of C14D10 in working standard (Y) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB15" runat="server"></asp:TextBox></td>
-                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtC15" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Concentration of C14D10 (C) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB16" runat="server"></asp:TextBox>
                                             </td>
-                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtC16" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Total Concentration of C14D10 (A) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB17" runat="server"></asp:TextBox>
                                             </td>
-                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtC17" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Dilution factor (D) :</td>
-                                            Dilution factor (D) :<td>
+                                            <td>
                                                 <asp:TextBox ID="txtB18" runat="server"></asp:TextBox>
                                             </td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: right">IDL of RHC :</td>
                                             <td>
-                                                <asp:TextBox ID="txtB19" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtC18" runat="server"></asp:TextBox>
                                             </td>
-                                            <td>&nbsp;</td>
                                         </tr>
                                     </tbody>
+                                    <tr>
+                                        <td style="text-align: right">IDL of RHC :</td>
+                                        <td>
+                                            <asp:TextBox ID="txtB19" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtC19" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <caption>
+                                    </caption>
                                 </table>
                                 <br />
 
@@ -761,6 +779,7 @@
                                             <th>&nbsp;</th>
                                             <th colspan="2">Motor Base / Baseplate</th>
                                             <th>&nbsp;</th>
+                                            <th colspan="2">Other Components / no spec.</th>
                                         </tr>
                                         <tr>
                                             <th></th>
@@ -768,6 +787,9 @@
                                             <th>TOC > DOP</th>
 
                                             <th>Repeated Hydrocarbon</th>
+
+                                            <th>Irgafos</th>
+                                            <th>Irgafos - oxidize</th>
 
                                         </tr>
                                     </thead>
@@ -784,6 +806,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtD20" runat="server"></asp:TextBox>
                                             </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE20" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF20" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">No. of extracted sample (N) :</td>
@@ -795,6 +823,12 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtD21" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE21" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF21" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -808,6 +842,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtD22" runat="server"></asp:TextBox>
                                             </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE22" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF22" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Concentration of C16H34 (C) :</td>
@@ -819,6 +859,12 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtD23" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE23" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF23" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -832,6 +878,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtD24" runat="server"></asp:TextBox>
                                             </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE24" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF24" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Internal Standard Recovery (R) :</td>
@@ -843,6 +895,12 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtD25" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE25" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF25" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <!-- PART 2 -->
@@ -857,6 +915,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtD26" runat="server"></asp:TextBox>
                                             </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE26" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF26" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">pA of Motor Base :</td>
@@ -869,6 +933,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtD27" runat="server"></asp:TextBox>
                                             </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE27" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF27" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">pA of Blank :</td>
@@ -880,6 +950,12 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtD28" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE28" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF28" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <!-- PART 3 -->
@@ -894,6 +970,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtD29" runat="server"></asp:TextBox>
                                             </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE29" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF29" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>&nbsp;</td>
@@ -905,6 +987,12 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtD30" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE30" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF30" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -918,6 +1006,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtD31" runat="server"></asp:TextBox>
                                             </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE31" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF31" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
 
                                         <tr>
@@ -930,6 +1024,12 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtD32" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE32" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF32" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
 
@@ -1523,7 +1623,12 @@
 
         </Triggers>
     </asp:UpdatePanel>
-    <%--        <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitCompound_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+    <%--           <asp:DropDownList ID="ddlUnitMotorBaseSub" runat="server" class="select2_category form-control">
+                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
+                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
+                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
+                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+
                                                 </asp:DropDownList>--%>
 </form>
 
