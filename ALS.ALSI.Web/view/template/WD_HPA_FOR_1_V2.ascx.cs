@@ -598,7 +598,8 @@ namespace ALS.ALSI.Web.view.template
                 txtD23.Focus();
 
             }
-            else {
+            else
+            {
                 CalculateCas();
             }
 
@@ -631,8 +632,14 @@ namespace ALS.ALSI.Web.view.template
 
         private void CalculateCas()
         {
+
             //Item-Line
-            List<template_wd_hpa_for1_coverpage> itemLines = this.HpaFor1.Where(x => x.hpa_type == 7).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> itemLines = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).OrderBy(x => x.seq).ToList();
+
+            foreach (template_wd_hpa_for1_coverpage _val in itemLines)
+            {
+                _val.D = "0";
+            }
             foreach (template_wd_hpa_for1_coverpage _val in itemLines)
             {
                 if (!String.IsNullOrEmpty(txtB23.Text) && !String.IsNullOrEmpty(txtC23.Text) && !String.IsNullOrEmpty(txtD23.Text))
@@ -646,20 +653,30 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
             //Total-Line
-            List<template_wd_hpa_for1_coverpage> totalLines = this.HpaFor1.Where(x => x.hpa_type == 8).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> totalLines = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in totalLines)
             {
-                _val.C = itemLines.Where(x => x.data_group.Equals(_val.data_group)).Sum(x => Convert.ToInt32(x.C));
-                _val.D = itemLines.Where(x => x.data_group.Equals(_val.data_group)).Sum(x => Convert.ToInt32(x.D)).ToString();
+                _val.C =0;
+                _val.D = "0";
             }
-            List<template_wd_hpa_for1_coverpage> grandTotal = this.HpaFor1.Where(x => x.hpa_type ==9).OrderBy(x => x.seq).ToList();
+            foreach (template_wd_hpa_for1_coverpage _val in totalLines)
+            {
+                _val.C = itemLines.Where(x => x.data_group.Equals(_val.data_group) && x.hpa_type != Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).Sum(x => Convert.ToInt32(x.C));
+                _val.D = itemLines.Where(x => x.data_group.Equals(_val.data_group) && x.hpa_type != Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).Sum(x => Convert.ToInt32(x.D)).ToString();
+            }
+            List<template_wd_hpa_for1_coverpage> grandTotal = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in grandTotal)
+            {
+                _val.C = 0;
+                _val.D = "0";
+            }
+                foreach (template_wd_hpa_for1_coverpage _val in grandTotal)
             {
                 _val.C = itemLines.Where(x => x.hpa_type == 7).Sum(x => Convert.ToInt32(x.C));
                 _val.D = itemLines.Where(x => x.hpa_type == 7).Sum(x => Convert.ToInt32(x.D)).ToString();
             }
             //Result-Line
-            List<template_wd_hpa_for1_coverpage> resultLine = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> resultLine = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in resultLine)
             {
                 template_wd_hpa_for1_coverpage mappedValue = totalLines.Where(x => x.B.Equals(mappingRawData((_val.A)))).FirstOrDefault();
@@ -673,11 +690,44 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
+            template_wd_hpa_for1_coverpage mgsioResult = resultLine.Where(x => x.A.Equals("Total MgSiO Particles")).FirstOrDefault();
+            if (mgsioResult != null)
+            {
+                template_wd_hpa_for1_coverpage mappedValue = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).FirstOrDefault();
+                mgsioResult.C = Convert.ToInt16(mappedValue.D);
+                if (mgsioResult.D != null)
+                {
+                    String dValue = mgsioResult.D.Replace("<", "").Trim();
+                    mgsioResult.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "" : (mgsioResult.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
+                }
+            }
 
-            gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
+
+
+
+            //MgSiO
+
+            //List<template_wd_hpa_for1_coverpage> mgSiOLineResult = this.HpaFor1.Where(x =>  x.B.Equals(mappingRawData(("Total MgSiO Particles")))).ToList();
+            //foreach (template_wd_hpa_for1_coverpage _val in mgSiOLineResult)
+            //{
+            //    template_wd_hpa_for1_coverpage mappedValue = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).FirstOrDefault();
+            //    if (mappedValue != null)
+            //    {
+            //        _val.C = Convert.ToInt16(mappedValue.D);
+            //        if (_val.D != null)
+            //        {
+            //            String dValue = _val.D.Replace("<", "").Trim();
+            //            _val.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "" : (_val.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
+            //        }
+            //    }
+            //}
+
+
+
+            gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
             gvResult.DataBind();
 
-            gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != 3).OrderBy(x => x.seq).ToList();
+            gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
             gvResult_1.DataBind();
 
             //btnSubmit.Enabled = true;
@@ -728,7 +778,7 @@ namespace ALS.ALSI.Web.view.template
                     switch (seq)
                     {
                         case 1:
-                            _tmp.D = (CustomUtils.isNumber( detailSpec.D) && !detailSpec.D.Equals("0") ? String.Format("<{0}",detailSpec.D): detailSpec.D);
+                            _tmp.D = (CustomUtils.isNumber(detailSpec.D) && !detailSpec.D.Equals("0") ? String.Format("<{0}", detailSpec.D) : detailSpec.D);
                             break;
                         case 2:
                             _tmp.D = (CustomUtils.isNumber(detailSpec.E) && !detailSpec.E.Equals("0") ? String.Format("<{0}", detailSpec.E) : detailSpec.E);
@@ -985,7 +1035,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
             if (_detailSpec != null)
@@ -1486,12 +1536,13 @@ namespace ALS.ALSI.Web.view.template
             String result = _val;
             Hashtable mappingValues = new Hashtable();
             mappingValues["Total hard Particle (Including Magnetic Particles)"] = "Total - Hard Particles";
-            mappingValues["Total MgSiO Particles"] = "Total - Magnetic Particles";
+            mappingValues["Total MgSiO Particles"] = "Mg-Si-O";
             mappingValues["Total Steel Particles"] = "Total - Steel Particle";
             mappingValues["Total Magnetic Particles"] = "Total - Magnetic Particles";
             mappingValues["Total Cr / O, Cr / Mn / O"] = "Total -Cr-Rich";
             mappingValues["Hard Particles"] = "Total - Hard Particles";
-            
+
+
             //Total Cr / O, Cr / Mn / O
             //SST400s(Fe / Cr)
 
@@ -1529,12 +1580,12 @@ namespace ALS.ALSI.Web.view.template
         {
             if (cbCheckBox.Checked)
             {
-                
+
                 lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
             }
             else
             {
-                
+
                 tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
                 if (_detailSpec != null)
                 {

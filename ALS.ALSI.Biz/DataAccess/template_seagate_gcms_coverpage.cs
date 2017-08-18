@@ -167,5 +167,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string F30 { get; set; }
         public string F31 { get; set; }
         public string F32 { get; set; }
+        public string C13 { get; set; }
     }
 }

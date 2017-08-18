@@ -226,7 +226,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbRemark1;
+        protected global::System.Web.UI.WebControls.TextBox lbRemark1;
         
         /// <summary>
         /// lbRemark2 control.
@@ -235,7 +235,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbRemark2;
+        protected global::System.Web.UI.WebControls.TextBox lbRemark2;
         
         /// <summary>
         /// lbRemark3 control.
@@ -244,7 +244,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbRemark3;
+        protected global::System.Web.UI.WebControls.TextBox lbRemark3;
         
         /// <summary>
         /// lbRemark4 control.
@@ -253,7 +253,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbRemark4;
+        protected global::System.Web.UI.WebControls.TextBox lbRemark4;
         
         /// <summary>
         /// lbRemark5 control.
@@ -262,7 +262,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbRemark5;
+        protected global::System.Web.UI.WebControls.TextBox lbRemark5;
         
         /// <summary>
         /// pLoadFile control.

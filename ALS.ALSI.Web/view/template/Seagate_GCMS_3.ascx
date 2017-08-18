@@ -498,11 +498,17 @@
                             </div>
                         </div>
                         <br />
-                        <asp:Label ID="lbRemark1" runat="server" Text=""></asp:Label><br />
-                        <asp:Label ID="lbRemark2" runat="server" Text=""></asp:Label><br />
+                        
+                        <asp:TextBox ID="lbRemark1" runat="server" Width="400px"></asp:TextBox><br />
+                        <asp:TextBox ID="lbRemark2" runat="server" Width="400px">></asp:TextBox><br />
+                        <asp:TextBox ID="lbRemark3" runat="server" Width="400px">></asp:TextBox><br />
+                        <asp:TextBox ID="lbRemark4" runat="server" Width="400px">></asp:TextBox><br />
+                        <asp:TextBox ID="lbRemark5" runat="server" Width="400px">></asp:TextBox><br />
+                        <%--<asp:Label ID="lbRemark1" runat="server" Text=""></asp:Label><br />--%>
+             <%--           <asp:Label ID="lbRemark2" runat="server" Text=""></asp:Label><br />
                         <asp:Label ID="lbRemark3" runat="server" Text=""></asp:Label><br />
                         <asp:Label ID="lbRemark4" runat="server" Text=""></asp:Label><br />
-                        <asp:Label ID="lbRemark5" runat="server" Text=""></asp:Label>
+                        <asp:Label ID="lbRemark5" runat="server" Text=""></asp:Label>--%>
 
                     </asp:Panel>
 

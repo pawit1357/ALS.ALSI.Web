@@ -345,6 +345,14 @@ namespace ALS.ALSI.Web.view.template
                     txtB18.Text = cov.B18;
                     txtB19.Text = cov.B19;
 
+                    txtC13.Text = cov.C13;
+                    txtC14.Text = cov.C14;
+                    txtC15.Text = cov.C15;
+                    txtC16.Text = cov.C16;
+                    txtC17.Text = cov.C17;
+                    txtC18.Text = cov.C18;
+                    txtC19.Text = cov.C19;
+
                     txtB20.Text = cov.B20;
                     txtB21.Text = cov.B21;
                     txtB22.Text = cov.B22;
@@ -387,6 +395,33 @@ namespace ALS.ALSI.Web.view.template
                     txtD31.Text = cov.D31;
                     txtD32.Text = cov.D32;
 
+                    txtE20.Text = cov.E20;
+                    txtE21.Text = cov.E21;
+                    txtE22.Text = cov.E22;
+                    txtE23.Text = cov.E23;
+                    txtE24.Text = cov.E24;
+                    txtE25.Text = cov.E25;
+                    txtE26.Text = cov.E26;
+                    txtE27.Text = cov.E27;
+                    txtE28.Text = cov.E28;
+                    txtE29.Text = cov.E29;
+                    txtE30.Text = cov.E30;
+                    txtE31.Text = cov.E31;
+                    txtE32.Text = cov.E32;
+
+                    txtF20.Text = cov.F20;
+                    txtF21.Text = cov.F21;
+                    txtF22.Text = cov.F22;
+                    txtF23.Text = cov.F23;
+                    txtF24.Text = cov.F24;
+                    txtF25.Text = cov.F25;
+                    txtF26.Text = cov.F26;
+                    txtF27.Text = cov.F27;
+                    txtF28.Text = cov.F28;
+                    txtF29.Text = cov.F29;
+                    txtF30.Text = cov.F30;
+                    txtF31.Text = cov.F31;
+                    txtF32.Text = cov.F32;
 
                     txtB40.Text = cov.B40;
                     txtB41.Text = cov.B41;
@@ -569,6 +604,14 @@ namespace ALS.ALSI.Web.view.template
                             cov.B18 = txtB18.Text;
                             cov.B19 = txtB19.Text;
 
+                            cov.C13 = txtC13.Text;
+                            cov.C14 = txtC14.Text;
+                            cov.C15 = txtC15.Text;
+                            cov.C16 = txtC16.Text;
+                            cov.C17 = txtC17.Text;
+                            cov.C18 = txtC18.Text;
+                            cov.C19 = txtC19.Text;
+
                             cov.B20 = txtB20.Text;
                             cov.B21 = txtB21.Text;
                             cov.B22 = txtB22.Text;
@@ -611,6 +654,36 @@ namespace ALS.ALSI.Web.view.template
                             cov.D31 = txtD31.Text;
                             cov.D32 = txtD32.Text;
 
+                            cov.E20 = txtE20.Text;
+                            cov.E21 = txtE21.Text;
+                            cov.E22 = txtE22.Text;
+                            cov.E23 = txtE23.Text;
+                            cov.E24 = txtE24.Text;
+                            cov.E25 = txtE25.Text;
+                            cov.E26 = txtE26.Text;
+                            cov.E27 = txtE27.Text;
+                            cov.E28 = txtE28.Text;
+                            cov.E29 = txtE29.Text;
+                            cov.E30 = txtE30.Text;
+                            cov.E31 = txtE31.Text;
+                            cov.E32 = txtE32.Text;
+
+                            cov.F20 = txtF20.Text;
+                            cov.F21 = txtF21.Text;
+                            cov.F22 = txtF22.Text;
+                            cov.F23 = txtF23.Text;
+                            cov.F24 = txtF24.Text;
+                            cov.F25 = txtF25.Text;
+                            cov.F26 = txtF26.Text;
+                            cov.F27 = txtF27.Text;
+                            cov.F28 = txtF28.Text;
+                            cov.F29 = txtF29.Text;
+                            cov.F30 = txtF30.Text;
+                            cov.F31 = txtF31.Text;
+                            cov.F32 = txtF32.Text;
+
+
+
                             cov.B40 = txtB40.Text;
                             cov.B41 = txtB41.Text;
                             cov.B42 = txtB42.Text;
@@ -640,6 +713,9 @@ namespace ALS.ALSI.Web.view.template
                             cov.C50 = txtC50.Text;
                             cov.C51 = txtC51.Text;
                             cov.C52 = txtC52.Text;
+
+
+
 
                             cov.D40 = (txtD40.Text.Length > 20) ? "" : txtD40.Text;
                             cov.D41 = (txtD41.Text.Length > 20) ? "" : txtD41.Text;

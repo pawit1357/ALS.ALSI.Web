@@ -146,50 +146,50 @@
                                         <tr>
                                             <td class="text-right"> Job No:&nbsp;&nbsp;&nbsp; </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lbJobNo" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="lbJobNo" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-right">Client:&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
-                                                <asp:Label ID="lbClient" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="lbClient" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-right">Contract:&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
-                                                <asp:Label ID="lbContract" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="lbContract" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-right">Sample:&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
-                                                <asp:Label ID="lbSample" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="lbSample" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-right">Spec:&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
-                                                <asp:Label ID="lbSpec" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="lbSpec" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-right">Test:&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
-                                              <asp:Label ID="lbTot" runat="server" Text=""></asp:Label>  
+                                              <asp:Label ID="lbTot" runat="server" Font-Bold="True"></asp:Label>  
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-right">Sample:&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
-                                                <asp:Label ID="lbSd" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="lbSd" runat="server" Font-Bold="True"></asp:Label>
                                             
                                             </td>
                                         </tr>
                                                                                 <tr>
                                             <td class="text-right">Surface Area:&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
-                                                <asp:Label ID="lbSa" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="lbSa" runat="server" Font-Bold="True"></asp:Label>
                                             
                                             </td>
                                         </tr>
@@ -214,7 +214,7 @@
                                         <asp:LinkButton ID="lbPrint" runat="server" CssClass="cancel btn blue" OnClick="lbPrint_Click" Visible="False"><i class="icon-print"></i>Print</asp:LinkButton>
                              <button onclick="javascript:printDiv('divStricker'); return false;" class="cancel btn blue">
                                             <i class="icon-print"></i>Print</button>
-                                        <asp:Button ID="btnCancel" runat="server" class="cancel btn" Text="Cancel" OnClick="btnCancel_Click" />
+<%--                                        <asp:Button ID="btnCancel" runat="server" class="cancel btn" Text="Cancel" OnClick="btnCancel_Click" />--%>
                                     </div>
                                 </div>
                             </div>

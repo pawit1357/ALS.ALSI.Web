@@ -79,7 +79,7 @@ namespace ALS.ALSI.Web.view.request
         private void initialPage()
         {
             fillinScreen();
-            btnCancel.Enabled = true;
+            //btnCancel.Enabled = true;
             bindingData();
         }
 
@@ -100,7 +100,7 @@ namespace ALS.ALSI.Web.view.request
                 List<job_sample> samples = job_sample.FindAllByJobID(jobInfo.ID);
                 if (samples != null && samples.Count > 0)
                 {
-                    lbSample.Text = samples[0].description + "";
+                    lbSample.Text = samples[0].description.Length > 30 ? samples[0].description.Substring(0, 30) + "  ..." : samples[0].description;
                     int spec_id = 0;
                     int index = 0;
                     foreach (job_sample s in samples)
@@ -115,7 +115,7 @@ namespace ALS.ALSI.Web.view.request
                         }
                         m_specification spec = new m_specification().SelectByID(s.specification_id);
 
-                        lbSpec.Text = spec.name;
+                        lbSpec.Text = spec.name.Length > 15 ? spec.name.Substring(0, 15) + "..." : spec.name;
                         if (spec_id != s.specification_id)
                         {
                             spec_id = s.specification_id;
@@ -174,7 +174,7 @@ namespace ALS.ALSI.Web.view.request
             }
             else
             {
-                btnCancel_Click(null, null);
+                //btnCancel_Click(null, null);
             }
         }
 
@@ -211,11 +211,12 @@ namespace ALS.ALSI.Web.view.request
                 initialPage();
             }
         }
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            removeSession();
-            Response.Redirect(PreviousPath);
-        }
+
+        //void btnCancel_Click(object sender, EventArgs e)
+        //{
+        //    removeSession();
+        //    Response.Redirect(PreviousPath);
+        //}
 
         protected void btnPrint_Click(object sender, EventArgs e)
         {
@@ -244,7 +245,7 @@ namespace ALS.ALSI.Web.view.request
                 List<job_sample> samples = job_sample.FindAllBySampleID(key);//.FindAllByJobID(jobInfo.ID);
                 if (samples != null && samples.Count > 0)
                 {
-                    lbSample.Text = samples[0].description + "";
+                    lbSample.Text = samples[0].description.Length > 30 ? samples[0].description.Substring(0, 30) + "  ..." : samples[0].description;
                     int spec_id = 0;
                     foreach (job_sample s in samples)
                     {
@@ -252,7 +253,8 @@ namespace ALS.ALSI.Web.view.request
 
                         m_specification spec = new m_specification().SelectByID(s.specification_id);
 
-                        lbSpec.Text = spec.name;
+                        lbSpec.Text = spec.name.Length >15 ? spec.name.Substring(0,15)+"...":spec.name;
+
                         if (spec_id != s.specification_id)
                         {
                             spec_id = s.specification_id;
@@ -279,7 +281,7 @@ namespace ALS.ALSI.Web.view.request
             }
             else
             {
-                btnCancel_Click(null, null);
+                //btnCancel_Click(null, null);
             }
 
             Console.WriteLine();
