@@ -31,6 +31,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1960,9 +1961,11 @@
     <EmbeddedResource Include="ReportObject\dhs_seagate_v2.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportObject\dhs_wd_2.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate_damper.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_seagate_2.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v3.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd.rdlc" />
@@ -1984,6 +1987,7 @@
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\test_sub.rdlc" />
     <EmbeddedResource Include="ReportObject\ReportHeader.rdlc" />
     <EmbeddedResource Include="ReportObject\rptStricker.rdlc" />
     <EmbeddedResource Include="ReportObject\Signature.rdlc" />

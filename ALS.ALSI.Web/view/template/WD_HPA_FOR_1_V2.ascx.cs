@@ -843,7 +843,6 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
-
             DataTable dt = Extenders.ObjectToDataTable(this.HpaFor1[0]);
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);

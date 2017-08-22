@@ -9,7 +9,13 @@ namespace ALS.ALSI.Web.view.request
     public partial class JobWorkFlow : System.Web.UI.Page
     {
         #region "Property"
-
+        public users_login userLogin
+        {
+            get
+            {
+                return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null);
+            }
+        }
         protected String Step1Status
         {
             get { return (String)Session[GetType().Name + "Step1Status"]; }
@@ -199,7 +205,7 @@ namespace ALS.ALSI.Web.view.request
             if (template != null)
             {
                 LastLoadedTemplate = String.Format("{0}{1}.ascx", Constants.BASE_TEMPLATE_PATH, Path.GetFileNameWithoutExtension(template.path_url));
-                lbDebugInfo.Text = String.Format("debug:{0},TemplateID:{1},SampleID:{2})", LastLoadedTemplate,template.ID,this.jobSample.ID);
+                lbDebugInfo.Text = String.Format("debug:{0},TemplateID:{1},SampleID:{2},User:{3})", LastLoadedTemplate,template.ID,this.jobSample.ID, userLogin.username);
             }
 
             LoadTemplate();

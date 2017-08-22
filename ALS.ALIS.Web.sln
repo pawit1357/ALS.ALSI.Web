@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALS.ALSI.Web", "ALS.ALSI.Web\ALS.ALSI.Web.csproj", "{8AC9AB32-CDAA-4E44-BA44-8DBF3E71AD57}"
 EndProject
@@ -75,6 +75,9 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E4EC3FD2-51FC-4342-9FC6-01210B38A661} = {5C9B0442-14BD-403D-9915-34E8053CD1D1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D47B11D-B72D-4B8C-80F9-64DB9C27685B}
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True

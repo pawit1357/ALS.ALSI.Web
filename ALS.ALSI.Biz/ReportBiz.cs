@@ -18,8 +18,6 @@ namespace ALS.ALSI.Biz
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(jobSample);
 
-            //List<template_wd_mesa_img> imgList = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
-            //List<template_wd_mesa_img> tmpImg1 = new List<template_wd_mesa_img>();
 
             Document doc = new Document();
             Section s = doc.AddSection();
@@ -61,7 +59,6 @@ namespace ALS.ALSI.Biz
             #region "Information"
             Table table = s.AddTable(true);
             //Create Header and Data
-            String[] Header = { "", "", };
             String[][] data = {
                                   new String[]{ "CUSTOMER PO NO.:", reportHeader.cusRefNo},
                                   new String[]{ "ALS THAILAND REF NO.:", reportHeader.alsRefNo},
@@ -77,8 +74,9 @@ namespace ALS.ALSI.Biz
                                   new String[]{ "", reportHeader.description },
                               };
 
+
             //Add Cells
-            table.ResetCells(data.Length, Header.Length);
+            table.ResetCells(data.Length, 2);
 
             //Data Row
             for (int r = 0; r < data.Length; r++)
@@ -116,14 +114,81 @@ namespace ALS.ALSI.Biz
             #endregion
 
             #region "Method/Procedure"
+            table = s.AddTable(true);
             Paragraph pBlank = s.AddParagraph();
             pBlank.AppendText("");
             Paragraph pMethodProcedure = s.AddParagraph();
             pMethodProcedure.AppendText("METHOD/PROCEDURE:").ApplyCharacterFormat(format2);
-            Table tableMethodProcedure = s.AddTable(true);
-            //Create Header and Data
 
-            //String[] HeaderMethodProcedure = { "Test", "Procedure No", "Sample Size", "Oven Condition" };
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+            //Create Header and Data
+            //String[] Header1 = { "Item", "Description", "Qty", "Unit Price", "Price" };
+            //String[][] data1 = {
+            //                      new String[]{ "Spire.Doc for .NET",".NET Word Component","1","$799.00","$799.00"},
+            //                      new String[]{"Spire.XLS for .NET",".NET Excel Component","2","$799.00","$1,598.00"},
+            //                      new String[]{"Spire.Office for .NET",".NET Office Component","1","$1,899.00","$1,899.00"},
+            //                      new String[]{"Spire.PDF for .NET",".NET PDFComponent","2","$599.00","$1,198.00"},
+            //                  };
+            ////Add Cells
+            //tableMethodProcedure.ResetCells(data1.Length + 1, Header1.Length);
+
+            ////Header Row
+            //TableRow FRow = table.Rows[0];
+            //FRow.IsHeader = true;
+            ////Row Height
+            //FRow.Height = 23;
+            ////Header Format
+            //FRow.RowFormat.BackColor = Color.AliceBlue;
+            //for (int i = 0; i < Header1.Length; i++)
+            //{
+            //    //Cell Alignment
+            //    Paragraph p = FRow.Cells[i].AddParagraph();
+            //    FRow.Cells[i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+            //    p.Format.HorizontalAlignment = HorizontalAlignment.Center;
+            //    //Data Format
+            //    TextRange TR = p.AppendText(Header1[i]);
+            //    TR.CharacterFormat.FontName = "Calibri";
+            //    TR.CharacterFormat.FontSize = 14;
+            //    TR.CharacterFormat.TextColor = Color.Teal;
+            //    TR.CharacterFormat.Bold = true;
+            //}
+
+            ////Data Row
+            //for (int r = 0; r < data1.Length; r++)
+            //{
+            //    TableRow DataRow = table.Rows[r + 1];
+
+            //    //Row Height
+            //    DataRow.Height = 20;
+
+            //    //C Represents Column.
+            //    for (int c = 0; c < data1[r].Length; c++)
+            //    {
+            //        //Cell Alignment
+            //        DataRow.Cells[c].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+            //        //Fill Data in Rows
+            //        Paragraph p2 = DataRow.Cells[c].AddParagraph();
+            //        TextRange TR2 = p2.AppendText(data1[r][c]);
+            //        //Format Cells
+            //        p2.Format.HorizontalAlignment = HorizontalAlignment.Center;
+            //        TR2.CharacterFormat.FontName = "Calibri";
+            //        TR2.CharacterFormat.FontSize = 12;
+            //        TR2.CharacterFormat.TextColor = Color.Brown;
+            //    }
+            //}
+
+
+
+            //Create Header and Data
+            //wd_dhs
+            //String[] HeaderMethodProcedure = { "Test", "Procedure No", "Number of piecesused for extraction", "ExtractionMedium", "Extraction Volume" };
             //String[][] dataMethodProcedure = {
             //                      new String[]{ "","","",""},
             //                  };
@@ -186,19 +251,24 @@ namespace ALS.ALSI.Biz
             #endregion
 
 
-            //Save and Launch
-            doc.SaveToFile(@"E:\ALIS\Template\" + jobSample.job_number + "_test.doc");
-
-            Document destinationDoc = new Document(@"E:\ALIS\Template\Blank Letter Head - EL.doc");
-            foreach (Section sec in doc.Sections)
+            Document doc1 = new Document();
+            doc1.LoadFromFile(@"D:\Work\Outsource\ALS.ALSI.Web\ALS.ALSI.Web\template\Blank Letter Head - EL.doc");
+            Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
+            Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
+            foreach (Section section in doc.Sections)
             {
-                foreach (DocumentObject obj in sec.Body.ChildObjects)
+                foreach (DocumentObject obj in header.ChildObjects)
                 {
-                    destinationDoc.Sections[0].Body.ChildObjects.Add(obj.Clone());
+                    section.HeadersFooters.Header.ChildObjects.Add(obj.Clone());
+                }
+                foreach (DocumentObject obj in footer.ChildObjects)
+                {
+                    section.HeadersFooters.Footer.ChildObjects.Add(obj.Clone());
                 }
             }
-            destinationDoc.SaveToFile(@"E:\ALIS\Template\"+jobSample.job_number+".doc");
-            //destinationDoc.SaveToFile(Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension);
+            doc.SaveToFile(@"D:\" + jobSample.job_number + ".doc");
+
+
         }
     }
 }
