@@ -1,9 +1,7 @@
 ﻿using ALS.ALIS.Repository.Interface;
 using ALS.ALSI.Biz.Constant;
-using ALS.ALSI.Biz.DataAccess;
 using StructureMap;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

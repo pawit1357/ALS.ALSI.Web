@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_DHS.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_DHS" %>
+﻿lo8k<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_DHS.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_DHS" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">

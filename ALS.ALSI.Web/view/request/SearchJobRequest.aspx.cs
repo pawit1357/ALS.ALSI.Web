@@ -1,6 +1,7 @@
 ﻿using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
+using ClosedXML.Excel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -143,7 +144,7 @@ namespace ALS.ALSI.Web.view.request
 
                     break;
             }
-            btnElp.CssClass =  "btn blue";
+            btnElp.CssClass = "btn blue";
 
 
         }
@@ -447,7 +448,7 @@ namespace ALS.ALSI.Web.view.request
                             btnChangeStatus.Visible = false;
                             btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE || job_status == StatusEnum.LOGIN_SELECT_SPEC || job_status == StatusEnum.CHEMIST_TESTING) ? false : true;
                             btnChangeDueDate.Visible = true;
-                            btnChangePo.Visible = false;
+                            btnChangePo.Visible = true;
                             btnChangeInvoice.Visible = false;
                             btnPrintLabel.Visible = false;
                             btnChangeReportDate.Visible = false;
@@ -461,7 +462,7 @@ namespace ALS.ALSI.Web.view.request
                             btnChangeStatus.Visible = false;
                             btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE || job_status == StatusEnum.LOGIN_SELECT_SPEC || job_status == StatusEnum.CHEMIST_TESTING) ? false : true;
                             btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = false;
+                            btnChangePo.Visible = true;
                             btnChangeInvoice.Visible = false;
                             btnPrintLabel.Visible = false;
                             btnChangeReportDate.Visible = false;
@@ -489,7 +490,7 @@ namespace ALS.ALSI.Web.view.request
                             btnChangeStatus.Visible = false;
                             btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE || job_status == StatusEnum.LOGIN_SELECT_SPEC || job_status == StatusEnum.CHEMIST_TESTING) ? false : true;
                             btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = false;
+                            btnChangePo.Visible = true;
                             btnChangeInvoice.Visible = true;
                             btnPrintLabel.Visible = false;
                             btnChangeReportDate.Visible = false;
@@ -639,7 +640,7 @@ namespace ALS.ALSI.Web.view.request
                     hPrefix.Value = "6";
                     break;
                 case "btnEln":
-                                        hPrefix.Value = "7";
+                    hPrefix.Value = "7";
 
                     break;
             }
@@ -679,50 +680,92 @@ namespace ALS.ALSI.Web.view.request
 
         protected void ExportToExcel()
         {
-            Response.Clear();
-            Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.xls");
-            Response.Charset = "";
-            Response.ContentType = "application/vnd.ms-excel";
-            using (StringWriter sw = new StringWriter())
+
+            //GridView gvTemp = new GridView();
+            //gvTemp.AllowPaging = false;
+            //gvTemp.DataSource = this.searchResult;
+            //gvTemp.DataBind();
+
+            //Response.ClearContent();
+            //Response.AddHeader("content-disposition", "attachment;filename=DataForInterfaceBackToSap_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx");
+            //Response.ContentType = "application/excel";
+            //System.IO.StringWriter sw = new System.IO.StringWriter();
+            //HtmlTextWriter htw = new HtmlTextWriter(sw);
+            //gvTemp.RenderControl(htw);
+            //Response.Write(sw.ToString());
+            //Response.End();
+
+            using (XLWorkbook wb = new XLWorkbook())
             {
-                HtmlTextWriter hw = new HtmlTextWriter(sw);
+                DataTable dt = new DataTable("DT");
 
-                //To Export all pages
-                gvJob.AllowPaging = false;
-                //this.BindGrid();
+                dt.Columns.Add("ID", typeof(int));
+                dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
+                dt.Columns.Add("date_admin_sent_to_cus", typeof(DateTime));
+                dt.Columns.Add("receive_date", typeof(string));
+                dt.Columns.Add("due_date", typeof(string));
+                dt.Columns.Add("job_number", typeof(string));
+                dt.Columns.Add("customer_ref_no", typeof(string));
+                dt.Columns.Add("s_pore_ref_no", typeof(string));
+                dt.Columns.Add("customer", typeof(string));
+                dt.Columns.Add("sample_invoice", typeof(string));
+                dt.Columns.Add("sample_po", typeof(string));
+                dt.Columns.Add("contract_person", typeof(string));
+                dt.Columns.Add("description", typeof(string));
+                dt.Columns.Add("model", typeof(string));
+                dt.Columns.Add("surface_area", typeof(string));
+                dt.Columns.Add("specification", typeof(string));
+                dt.Columns.Add("type_of_test", typeof(string));
+                dt.Columns.Add("customer_id", typeof(int));
+                dt.Columns.Add("job_status", typeof(string));
+                dt.Columns.Add("create_date", typeof(string));
+                dt.Columns.Add("sn", typeof(int));
+                dt.Columns.Add("remarks", typeof(string));
+                dt.Columns.Add("contract_person_id", typeof(int));
+                dt.Columns.Add("job_role", typeof(string));
+                dt.Columns.Add("status_completion_scheduled", typeof(string));
+                dt.Columns.Add("step1owner", typeof(string));
+                dt.Columns.Add("step2owner", typeof(string));
+                dt.Columns.Add("step3owner", typeof(string));
+                dt.Columns.Add("step4owner", typeof(string));
+                dt.Columns.Add("step5owner", typeof(string));
+                dt.Columns.Add("step6owner", typeof(string));
+                dt.Columns.Add("job_prefix", typeof(int));
+                dt.Columns.Add("data_group", typeof(string));
+                dt.Columns.Add("type_of_test_id", typeof(int));
+                dt.Columns.Add("type_of_test_name", typeof(string));
+                dt.Columns.Add("spec_id", typeof(int));
+                dt.Columns.Add("date_login_received_sample", typeof(string));
+                dt.Columns.Add("date_chemist_alalyze", typeof(string));
+                dt.Columns.Add("date_labman_complete", typeof(string));
 
-                gvJob.HeaderRow.BackColor = Color.White;
-                foreach (TableCell cell in gvJob.HeaderRow.Cells)
+
+
+                job_info _jobInfo = new job_info();
+
+
+                //_jobInfo.duedate_from = DateTime.Now.AddMonths(-1);
+                //_jobInfo.duedate_to = DateTime.Now.AddMonths(1);
+                //IEnumerable xx = _jobInfo.SearchData();
+                DataTable dt2 = Extenders.ObtainDataTableFromIEnumerable(this.searchResult);
+                dt.Merge(dt2);
+
+                wb.Worksheets.Add(dt);
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=jobList_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx");
+                using (MemoryStream MyMemoryStream = new MemoryStream())
                 {
-                    cell.BackColor = gvJob.HeaderStyle.BackColor;
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
                 }
-                foreach (GridViewRow row in gvJob.Rows)
-                {
-                    row.BackColor = Color.White;
-                    foreach (TableCell cell in row.Cells)
-                    {
-                        if (row.RowIndex % 2 == 0)
-                        {
-                            cell.BackColor = gvJob.AlternatingRowStyle.BackColor;
-                        }
-                        else
-                        {
-                            cell.BackColor = gvJob.RowStyle.BackColor;
-                        }
-                        cell.CssClass = "textmode";
-                    }
-                }
-
-                gvJob.RenderControl(hw);
-
-                //style to format numbers to string
-                string style = @"<style> .textmode { } </style>";
-                Response.Write(style);
-                Response.Output.Write(sw.ToString());
-                Response.Flush();
-                Response.End();
             }
+
         }
 
         public override void VerifyRenderingInServerForm(Control control)

@@ -37,6 +37,8 @@ namespace ALS.ALSI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
             if (!UserUtils.isLogin())
             {
                 Response.Redirect(Constants.LINK_LOGIN);
@@ -115,6 +117,7 @@ namespace ALS.ALSI.Web
 
         protected void lbtnMaintainance_Click(object sender, EventArgs e)
         {
+
             Response.Redirect("");
         }
     }

@@ -278,18 +278,18 @@
                                         <asp:Literal ID="ltJobStatus" runat="server" Text="-"></asp:Literal>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField HeaderText="Received." DataField="date_srchemist_complate" ItemStyle-HorizontalAlign="Center" SortExpression="date_srchemist_complate" DataFormatString="{0:dd-MM-yyyy}">
+                                <asp:BoundField HeaderText="Received." DataField="date_srchemist_complate" ItemStyle-HorizontalAlign="Center" SortExpression="date_srchemist_complate" DataFormatString="{0:d MMM yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
 
-                                <asp:BoundField HeaderText="Report Sent to Customer" DataField="date_admin_sent_to_cus" ItemStyle-HorizontalAlign="Center" SortExpression="date_admin_sent_to_cus" DataFormatString="{0:dd-MM-yyyy}">
+                                <asp:BoundField HeaderText="Report Sent to Customer" DataField="date_admin_sent_to_cus" ItemStyle-HorizontalAlign="Center" SortExpression="date_admin_sent_to_cus" DataFormatString="{0:d MMM yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
 
-                                <asp:BoundField HeaderText="Receive Date." DataField="receive_date" ItemStyle-HorizontalAlign="Center" SortExpression="receive_date" DataFormatString="{0:dd-MM-yyyy}">
+                                <asp:BoundField HeaderText="Receive Date." DataField="receive_date" ItemStyle-HorizontalAlign="Center" SortExpression="receive_date" DataFormatString="{0:d MMM yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
-                                <asp:BoundField HeaderText="Due Date." DataField="due_date" ItemStyle-HorizontalAlign="Center" SortExpression="due_date" DataFormatString="{0:dd-MM-yyyy}">
+                                <asp:BoundField HeaderText="Due Date." DataField="due_date" ItemStyle-HorizontalAlign="Center" SortExpression="due_date" DataFormatString="{0:d MMM yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <%--<asp:BoundField HeaderText="Ref No." DataField="job_number" ItemStyle-HorizontalAlign="Left" SortExpression="job_number" />--%>

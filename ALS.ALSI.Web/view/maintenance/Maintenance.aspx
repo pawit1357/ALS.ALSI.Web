@@ -10,7 +10,7 @@
         <asp:Button ID="btnExecute" runat="server" Text="Execute" OnClick="btnExecute_Click" />
         <asp:Button ID="btnGetDs" runat="server" Text="Execute(DS)" OnClick="btnGetDs_Click" />
         <asp:Button ID="btnBackup" runat="server" Text="Backup(DB)" OnClick="btnBackup_Click" />
-
+        <asp:Button ID="btnListDir" runat="server" Text="ListDir" OnClick="btnListDir_Click" />
         <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">DownloadBackup</asp:LinkButton>
         <asp:HiddenField ID="HiddenField1" runat="server" />
 
@@ -21,5 +21,31 @@
 
             <asp:GridView ID="gvResult" runat="server" CssClass="table table-striped table-hover table-bordered" AllowPaging="True" PageSize="100"></asp:GridView>
         </div>
+
+        <br />
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="Label1" runat="server" Text="Original Name:"></asp:Label></td>
+                <td>
+                    <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" Width="500"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="Label2" runat="server" Text="Destination Name:"></asp:Label></td>
+                <td>
+                    <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" Width="500"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <br />
+                    <asp:Button ID="btnRename" runat="server" Text="Re Name" OnClick="btnRename_Click" />
+
+                </td>
+            </tr>
+        </table>
+
+
     </form>
 </asp:Content>

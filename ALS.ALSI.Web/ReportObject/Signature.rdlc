@@ -12,7 +12,7 @@
                 <Value>ALS Testing Services (Thailand) Co.,Ltd</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Lucida Sans</FontFamily>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -25,9 +25,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0cm</Top>
-        <Left>9.3619cm</Left>
-        <Height>0.58173cm</Height>
+        <Top>2.17257cm</Top>
+        <Left>10.35925cm</Left>
+        <Height>0.49308cm</Height>
         <Width>7.1481cm</Width>
         <Style>
           <Border>
@@ -46,10 +46,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Warunee Maneesuwan</Value>
+                <Value />
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Lucida Sans</FontFamily>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -60,72 +60,64 @@
               <TextAlign>Center</TextAlign>
             </Style>
           </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>1.40159cm</Top>
-        <Left>9.3619cm</Left>
-        <Height>0.60819cm</Height>
-        <Width>7.1481cm</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox46">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>M.Sc, B.Sc, Laboratory Manager</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>11pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>2.04505cm</Top>
-        <Left>9.3619cm</Left>
-        <Height>0.60819cm</Height>
-        <Width>7.14805cm</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox47">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
                 <Value>............................................</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Lucida Sans</FontFamily>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>(Warunee Maneesuwa)</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Lucida Sans</FontFamily>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>M.Sc, B.Sc, Laboratory Manager</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Lucida Sans</FontFamily>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Approval Signature</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Lucida Sans</FontFamily>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -138,11 +130,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.75812cm</Top>
-        <Left>9.3619cm</Left>
-        <Height>0.57291cm</Height>
-        <Width>7.1481cm</Width>
-        <ZIndex>3</ZIndex>
+        <Top>2.66564cm</Top>
+        <Left>10.35925cm</Left>
+        <Height>2.21195cm</Height>
+        <Width>7.24052cm</Width>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -160,10 +152,51 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Approval Signature</Value>
+                <Value>Remark:
+1.) The result related only to the test items.
+2.) The test report shall not be reproduced except in full, without written approval of ALS Testing Services (Thailand) Co., Ltd.
+</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Lucida Sans</FontFamily>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Top>0cm</Top>
+        <Left>0.00001cm</Left>
+        <Height>1.6969cm</Height>
+        <Width>17.59976cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox108">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>- END OF REPORT -</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Lucida Sans</FontFamily>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -176,11 +209,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>2.75908cm</Top>
-        <Left>9.3619cm</Left>
-        <Height>0.60819cm</Height>
-        <Width>7.14805cm</Width>
-        <ZIndex>4</ZIndex>
+        <Top>1.6969cm</Top>
+        <Left>0cm</Left>
+        <Height>0.47567cm</Height>
+        <Width>17.50735cm</Width>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -192,11 +225,13 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.3257in</Height>
+    <Height>1.92031in</Height>
     <Style />
   </Body>
-  <Width>6.5in</Width>
+  <Width>6.92904in</Width>
   <Page>
+    <PageHeight>11.69in</PageHeight>
+    <PageWidth>8.27in</PageWidth>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
     <TopMargin>1in</TopMargin>

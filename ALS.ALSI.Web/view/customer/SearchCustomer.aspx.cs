@@ -3,6 +3,8 @@ using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using System;
 using System.Collections;
+using System.Data;
+using System.Runtime.InteropServices;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -23,6 +25,18 @@ namespace ALS.ALSI.Web.view.customer
         {
             get { return (CommandNameEnum)ViewState[Constants.COMMAND_NAME]; }
             set { ViewState[Constants.COMMAND_NAME] = value; }
+        }
+
+        public SortDirection GridViewSortDirection
+        {
+            get
+            {
+                if (ViewState["sortDirection"] == null)
+                    ViewState["sortDirection"] = SortDirection.Ascending;
+
+                return (SortDirection)ViewState["sortDirection"];
+            }
+            set { ViewState["sortDirection"] = value; }
         }
 
         public m_customer obj
@@ -57,9 +71,9 @@ namespace ALS.ALSI.Web.view.customer
             bindingData();
         }
 
-        private void bindingData()
+        private void bindingData([Optional] string sortDirection, [Optional] string sortExpression)
         {
-            searchResult = obj.SearchData();
+            searchResult = obj.SearchData(sortDirection, sortExpression);
             gvResult.DataSource = searchResult;
             gvResult.DataBind();
             gvResult.UseAccessibleHeader = true;
@@ -116,6 +130,9 @@ namespace ALS.ALSI.Web.view.customer
                     this.PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
                     Server.Transfer(Constants.LINK_CUSTOMER);
                     break;
+                case CommandNameEnum.Sort:
+                   
+                    break;
             }
         }
 
@@ -140,6 +157,59 @@ namespace ALS.ALSI.Web.view.customer
             gv.PageIndex = e.NewPageIndex;
             gv.DataBind();
         }
+
+        protected void gvResult_Sorting(object sender, GridViewSortEventArgs e)
+        {
+
+            if (GridViewSortDirection == SortDirection.Ascending)
+            {
+                GridViewSortDirection = SortDirection.Descending;
+            }
+            else
+            {
+                GridViewSortDirection = SortDirection.Ascending;
+            };
+
+            String sortExpression = e.SortExpression;
+            String sortDirection = ConvertSortDirectionToSql(GridViewSortDirection);
+            bindingData(sortDirection,sortExpression);
+            Console.WriteLine();
+        }
+
+
+        private string ConvertSortDirectionToSql(SortDirection sortDirection)
+        {
+            string newSortDirection = String.Empty;
+
+            switch (sortDirection)
+            {
+                case SortDirection.Ascending:
+                    newSortDirection = "ASC";
+                    break;
+
+                case SortDirection.Descending:
+                    newSortDirection = "DESC";
+                    break;
+            }
+
+            return newSortDirection;
+        }
+
+        //protected void gvResult_Sorting(object sender, GridViewSortEventArgs e)
+        //{
+        //    //DataTable dataTable = gridView.DataSource as DataTable;
+
+        //    if (searchResult != null)
+        //    {
+
+        //        //DataView dataView = new DataView(
+        //        gvResult.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+        //        gvResult.DataSource = dataView;
+        //        gvResult.DataBind();
+        //    }
+        //}
+
 
     }
 }

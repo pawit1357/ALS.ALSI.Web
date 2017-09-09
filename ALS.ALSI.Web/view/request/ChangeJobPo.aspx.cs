@@ -123,7 +123,8 @@ namespace ALS.ALSI.Web.view.request
             //Commit
             GeneralManager.Commit();
             removeSession();
-            MessageBox.Show(this, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+            MessageBox.Show(this, Resources.MSG_SAVE_SUCCESS);
+            //MessageBox.Show(this, Resources.MSG_SAVE_SUCCESS, PreviousPath);
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)

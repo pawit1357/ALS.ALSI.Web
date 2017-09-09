@@ -958,9 +958,20 @@ namespace ALS.ALSI.Web.view.template
 
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
 
+            List<template_seagate_dhs_coverpage> ds2 = this.coverpages.ToList();
 
+            if (ds2.Count > 0 && ds2.Count <= 8)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+            }
+            if (ds2.Count >8)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0,8).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(8, ds2.Count-8).ToDataTable())); // Add datasource here
+            }
 
 
             string download = String.Empty;

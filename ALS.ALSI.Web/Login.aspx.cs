@@ -1,4 +1,5 @@
-﻿using ALS.ALSI.Biz.Constant;
+﻿using ALS.ALSI.Biz;
+using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
 using System;
@@ -36,6 +37,7 @@ namespace ALS.ALSI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
 
         }
 

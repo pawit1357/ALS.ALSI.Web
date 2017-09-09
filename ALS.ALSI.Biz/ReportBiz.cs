@@ -5,22 +5,31 @@ using Spire.Doc.Documents;
 using Spire.Doc.Fields;
 using Spire.Doc.Formatting;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
-using System.IO;
+using System.Text;
 using System.Web;
 
 namespace ALS.ALSI.Biz
 {
     public class ReportBiz
     {
-        public static void ReportMesa(job_sample jobSample)
+        private String fontName = "Arial";
+        private int fontSize = 11;
+        private Document doc;
+        private Section s;
+        private CharacterFormat format;
+        private CharacterFormat bodyFormat;
+        private job_sample jobSample;
+        private HttpServerUtility server;
+
+        public ReportBiz(HttpServerUtility _server,job_sample _jobSample)
         {
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(jobSample);
-
-
-            Document doc = new Document();
-            Section s = doc.AddSection();
+            this.doc = new Document();
+            this.s = this.doc.AddSection();
+            this.server = _server;
+            this.jobSample = _jobSample;
 
             #region "PAGE SETUP"
             s.PageSetup.PageSize = PageSize.A4;
@@ -32,17 +41,95 @@ namespace ALS.ALSI.Biz
             #endregion
 
             #region "FONT FORMAT"
-            CharacterFormat format = new CharacterFormat(doc);
-            format.FontName = "Arial";
+            format = new CharacterFormat(doc);
+            format.FontName = fontName;
             format.FontSize = 15;
             format.Bold = false;
             format.UnderlineStyle = UnderlineStyle.Single;
-            CharacterFormat format2 = new CharacterFormat(doc);
-            format2.FontName = "Arial";
-            format2.FontSize = 11;
-            format2.Bold = false;
-            format2.UnderlineStyle = UnderlineStyle.Single;
+            bodyFormat = new CharacterFormat(doc);
+            bodyFormat.FontName = fontName;
+            bodyFormat.FontSize = fontSize;
+            bodyFormat.Bold = false;
+            //format2.UnderlineStyle = UnderlineStyle.Single;
             #endregion
+
+        }
+
+        public void ReportWdDhs1(List<template_wd_dhs_coverpage> listResult)
+        {
+            ReportHeader();
+            #region "Body"
+            s.AddParagraph().AppendText("Results").ApplyCharacterFormat(bodyFormat);
+            tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(listResult[0].detail_spec_id.Value);
+            if (_detailSpec != null)
+            {
+                s.AddParagraph().AppendText(String.Format("The Specification is based on Western Digital's document no. {0} {1}", _detailSpec.B, _detailSpec.A)).ApplyCharacterFormat(bodyFormat);
+            }
+
+            Table tableResult = s.AddTable(true);
+            String[] HeaderResult = { "Required Test", "Analytes", "Specification Limits(ng / part)", "Results(ng / part)", "PASS / FAIL" };
+            //Add Cells
+            tableResult.ResetCells(listResult.Count, HeaderResult.Length);
+            //Header Row
+            TableRow FRowResult = tableResult.Rows[0];
+            FRowResult.IsHeader = true;
+            
+            //Row Height
+            FRowResult.Height = fontSize;
+            //Header Format
+            FRowResult.RowFormat.BackColor = Color.LightGray;
+            for (int i = 0; i < HeaderResult.Length; i++)
+            {
+                //Cell Alignment
+                Paragraph p = FRowResult.Cells[i].AddParagraph();
+                FRowResult.Cells[i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                p.Format.HorizontalAlignment = HorizontalAlignment.Center;
+                //Data Format
+                p.AppendText(HeaderResult[i]).ApplyCharacterFormat(bodyFormat);
+
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < listResult.Count; i++)
+            {
+                TableRow DataRow = tableResult.Rows[i];
+
+                Paragraph pRow = DataRow.Cells[0].AddParagraph();
+                pRow.AppendText("DHS").ApplyCharacterFormat(bodyFormat);
+                pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
+
+           
+                    sb.Append(String.Format("{0},{1},{2},{3},{4},{5},{6}\n",i,pRow.IsComposite,pRow.IsDeleteRevision,pRow.IsEndOfDocument,pRow.IsEndOfSection,pRow.IsInCell,pRow.IsInsertRevision));
+                
+                pRow = DataRow.Cells[1].AddParagraph();
+                pRow.AppendText(listResult[i].analytes).ApplyCharacterFormat(bodyFormat);
+                pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
+
+                pRow = DataRow.Cells[2].AddParagraph();
+                pRow.AppendText(listResult[i].specification_limits).ApplyCharacterFormat(bodyFormat);
+                pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
+
+                pRow = DataRow.Cells[3].AddParagraph();
+                pRow.AppendText(listResult[i].result).ApplyCharacterFormat(bodyFormat);
+                pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
+
+                pRow = DataRow.Cells[4].AddParagraph();
+                pRow.AppendText(listResult[i].result_pass_or_false).ApplyCharacterFormat(bodyFormat);
+                pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
+            }
+            #endregion
+
+            MergeHeaderFooter();
+
+        }
+
+
+
+        private void ReportHeader()
+        {
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(jobSample);
+
 
             #region "PAGE TITLE"
             Paragraph paragraph = s.AddParagraph();
@@ -57,7 +144,7 @@ namespace ALS.ALSI.Biz
             #endregion
 
             #region "Information"
-            Table table = s.AddTable(true);
+            Table tableInfo = s.AddTable(true);
             //Create Header and Data
             String[][] data = {
                                   new String[]{ "CUSTOMER PO NO.:", reportHeader.cusRefNo},
@@ -76,199 +163,140 @@ namespace ALS.ALSI.Biz
 
 
             //Add Cells
-            table.ResetCells(data.Length, 2);
+            tableInfo.ResetCells(data.Length, 2);
 
             //Data Row
             for (int r = 0; r < data.Length; r++)
             {
-                TableRow DataRow = table.Rows[r];
+                TableRow tr = tableInfo.Rows[r];
 
                 //Row Height
-                DataRow.Height = 11;
-                DataRow.Cells[0].SetCellWidth(30, CellWidthType.Percentage);
-                DataRow.Cells[1].SetCellWidth(70, CellWidthType.Percentage);
+                tr.Height = fontSize;
+                tr.Cells[0].SetCellWidth(30, CellWidthType.Percentage);
+                tr.Cells[1].SetCellWidth(70, CellWidthType.Percentage);
                 //C Represents Column.
                 for (int c = 0; c < data[r].Length; c++)
                 {
                     //Cell Alignment
-                    DataRow.Cells[c].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                    tr.Cells[c].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                     //Fill Data in Rows
-                    Paragraph p2 = DataRow.Cells[c].AddParagraph();
-                    TextRange TR2 = p2.AppendText(data[r][c]);
-                    //Format Cells
-                    p2.Format.HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment.Left;
-                    TR2.CharacterFormat.FontName = "Arial";
-                    TR2.CharacterFormat.FontSize = 11;
-                    TR2.CharacterFormat.TextColor = Color.Black;
-                    DataRow.Cells[c].CellFormat.Borders.Bottom.BorderType = Spire.Doc.Documents.BorderStyle.None;
-                    DataRow.Cells[c].CellFormat.Borders.Top.BorderType = Spire.Doc.Documents.BorderStyle.None;
-                    DataRow.Cells[c].CellFormat.Borders.Left.BorderType = Spire.Doc.Documents.BorderStyle.None;
-                    DataRow.Cells[c].CellFormat.Borders.Right.BorderType = Spire.Doc.Documents.BorderStyle.None;
+                    Paragraph p2 = tr.Cells[c].AddParagraph();
+                    p2.AppendText(data[r][c]).ApplyCharacterFormat(bodyFormat); ;
+                    tr.Cells[c].CellFormat.Borders.Bottom.BorderType = Spire.Doc.Documents.BorderStyle.None;
+                    tr.Cells[c].CellFormat.Borders.Top.BorderType = Spire.Doc.Documents.BorderStyle.None;
+                    tr.Cells[c].CellFormat.Borders.Left.BorderType = Spire.Doc.Documents.BorderStyle.None;
+                    tr.Cells[c].CellFormat.Borders.Right.BorderType = Spire.Doc.Documents.BorderStyle.None;
                 }
             }
-
-            table.TableFormat.Borders.Bottom.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            table.TableFormat.Borders.Top.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            table.TableFormat.Borders.Left.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            table.TableFormat.Borders.Right.BorderType = Spire.Doc.Documents.BorderStyle.None;
+            tableInfo.TableFormat.Borders.Bottom.BorderType = Spire.Doc.Documents.BorderStyle.None;
+            tableInfo.TableFormat.Borders.Top.BorderType = Spire.Doc.Documents.BorderStyle.None;
+            tableInfo.TableFormat.Borders.Left.BorderType = Spire.Doc.Documents.BorderStyle.None;
+            tableInfo.TableFormat.Borders.Right.BorderType = Spire.Doc.Documents.BorderStyle.None;
             #endregion
 
             #region "Method/Procedure"
-            table = s.AddTable(true);
-            Paragraph pBlank = s.AddParagraph();
-            pBlank.AppendText("");
-            Paragraph pMethodProcedure = s.AddParagraph();
-            pMethodProcedure.AppendText("METHOD/PROCEDURE:").ApplyCharacterFormat(format2);
+            s.AddParagraph().AppendText("");
+            s.AddParagraph().AppendText("METHOD/PROCEDURE:").ApplyCharacterFormat(bodyFormat);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            Table table = s.AddTable(true);
+            String[] Header = { "Test", "Procedure No ", "Number of pieces used for extraction ", " Extraction Medium  ", "Extraction Volume" };
+            List<template_wd_dhs_coverpage> dataList = template_wd_dhs_coverpage.FindAllBySampleID(jobSample.ID);
+            //Add Cells
+            table.ResetCells(2, Header.Length);
+            //Header Row
+            TableRow FRow = table.Rows[0];
+            FRow.IsHeader = true;
+            //Row Height
+            FRow.Height = fontSize;
+            //Header Format
+            FRow.RowFormat.BackColor = Color.LightGray;
+            for (int i = 0; i < Header.Length; i++)
+            {
+                //Cell Alignment
+                Paragraph p = FRow.Cells[i].AddParagraph();
+                FRow.Cells[i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                p.Format.HorizontalAlignment = HorizontalAlignment.Center;
+                //Data Format
+                p.AppendText(Header[i]).ApplyCharacterFormat(bodyFormat); ;
+            }
 
+            TableRow DataRow = table.Rows[1];
+            Paragraph pRow = DataRow.Cells[0].AddParagraph();
 
+            pRow.AppendText("DHS").ApplyCharacterFormat(bodyFormat);
+            pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
+            pRow = DataRow.Cells[1].AddParagraph();
+            pRow.AppendText(dataList[0].pm_procedure_no).ApplyCharacterFormat(bodyFormat);
+            pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
+            pRow = DataRow.Cells[2].AddParagraph();
+            pRow.AppendText(dataList[0].pm_number_of_pieces_used_for_extraction).ApplyCharacterFormat(bodyFormat);
+            pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
+            pRow = DataRow.Cells[3].AddParagraph();
+            pRow.AppendText(dataList[0].pm_extraction_medium).ApplyCharacterFormat(bodyFormat);
+            pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
+            pRow = DataRow.Cells[4].AddParagraph();
+            pRow.AppendText(dataList[0].pm_extraction_volume).ApplyCharacterFormat(bodyFormat);
+            pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
 
-
-
-
-
-            //Create Header and Data
-            //String[] Header1 = { "Item", "Description", "Qty", "Unit Price", "Price" };
-            //String[][] data1 = {
-            //                      new String[]{ "Spire.Doc for .NET",".NET Word Component","1","$799.00","$799.00"},
-            //                      new String[]{"Spire.XLS for .NET",".NET Excel Component","2","$799.00","$1,598.00"},
-            //                      new String[]{"Spire.Office for .NET",".NET Office Component","1","$1,899.00","$1,899.00"},
-            //                      new String[]{"Spire.PDF for .NET",".NET PDFComponent","2","$599.00","$1,198.00"},
-            //                  };
-            ////Add Cells
-            //tableMethodProcedure.ResetCells(data1.Length + 1, Header1.Length);
-
-            ////Header Row
-            //TableRow FRow = table.Rows[0];
-            //FRow.IsHeader = true;
-            ////Row Height
-            //FRow.Height = 23;
-            ////Header Format
-            //FRow.RowFormat.BackColor = Color.AliceBlue;
-            //for (int i = 0; i < Header1.Length; i++)
-            //{
-            //    //Cell Alignment
-            //    Paragraph p = FRow.Cells[i].AddParagraph();
-            //    FRow.Cells[i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            //    p.Format.HorizontalAlignment = HorizontalAlignment.Center;
-            //    //Data Format
-            //    TextRange TR = p.AppendText(Header1[i]);
-            //    TR.CharacterFormat.FontName = "Calibri";
-            //    TR.CharacterFormat.FontSize = 14;
-            //    TR.CharacterFormat.TextColor = Color.Teal;
-            //    TR.CharacterFormat.Bold = true;
-            //}
-
-            ////Data Row
-            //for (int r = 0; r < data1.Length; r++)
-            //{
-            //    TableRow DataRow = table.Rows[r + 1];
-
-            //    //Row Height
-            //    DataRow.Height = 20;
-
-            //    //C Represents Column.
-            //    for (int c = 0; c < data1[r].Length; c++)
-            //    {
-            //        //Cell Alignment
-            //        DataRow.Cells[c].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            //        //Fill Data in Rows
-            //        Paragraph p2 = DataRow.Cells[c].AddParagraph();
-            //        TextRange TR2 = p2.AppendText(data1[r][c]);
-            //        //Format Cells
-            //        p2.Format.HorizontalAlignment = HorizontalAlignment.Center;
-            //        TR2.CharacterFormat.FontName = "Calibri";
-            //        TR2.CharacterFormat.FontSize = 12;
-            //        TR2.CharacterFormat.TextColor = Color.Brown;
-            //    }
-            //}
-
-
-
-            //Create Header and Data
-            //wd_dhs
-            //String[] HeaderMethodProcedure = { "Test", "Procedure No", "Number of piecesused for extraction", "ExtractionMedium", "Extraction Volume" };
-            //String[][] dataMethodProcedure = {
-            //                      new String[]{ "","","",""},
-            //                  };
-
-            ////Add Cells
-            //tableMethodProcedure.ResetCells(HeaderMethodProcedure.Length, dataMethodProcedure.Length);
-            ////Header Row
-            //TableRow FRow = tableMethodProcedure.Rows[0];
-            //FRow.IsHeader = false;
-            ////Row Height
-            //FRow.Height = 23;
-            ////Header Format
-            //FRow.RowFormat.BackColor = Color.AliceBlue;
-            //for (int i = 0; i < Header.Length; i++)
-            //{
-            //    //Cell Alignment
-            //    Paragraph p = FRow.Cells[i].AddParagraph();
-            //    FRow.Cells[i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            //    p.Format.HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment.Center;
-            //    //Data Format
-            //    TextRange TR = p.AppendText(Header[i]);
-            //    TR.CharacterFormat.FontName = "Arial";
-            //    TR.CharacterFormat.FontSize = 11;
-            //    TR.CharacterFormat.TextColor = Color.Gray;
-            //    TR.CharacterFormat.Bold = true;
-            //}
-            ////Data Row
-            //for (int r = 0; r < data.Length; r++)
-            //{
-            //    TableRow DataRow = table.Rows[r];
-
-            //    //Row Height
-            //    DataRow.Height = 11;
-            //    DataRow.Cells[0].SetCellWidth(30, CellWidthType.Percentage);
-            //    DataRow.Cells[1].SetCellWidth(70, CellWidthType.Percentage);
-            //    //C Represents Column.
-            //    for (int c = 0; c < data[r].Length; c++)
-            //    {
-            //        //Cell Alignment
-            //        DataRow.Cells[c].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            //        //Fill Data in Rows
-            //        Paragraph p2 = DataRow.Cells[c].AddParagraph();
-            //        TextRange TR2 = p2.AppendText(data[r][c]);
-            //        //Format Cells
-            //        p2.Format.HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment.Left;
-            //        TR2.CharacterFormat.FontName = "Arial";
-            //        TR2.CharacterFormat.FontSize = 11;
-            //        TR2.CharacterFormat.TextColor = Color.Black;
-            //        DataRow.Cells[c].CellFormat.Borders.Bottom.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            //        DataRow.Cells[c].CellFormat.Borders.Top.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            //        DataRow.Cells[c].CellFormat.Borders.Left.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            //        DataRow.Cells[c].CellFormat.Borders.Right.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            //    }
-            //}
-
-            //table.TableFormat.Borders.Bottom.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            //table.TableFormat.Borders.Top.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            //table.TableFormat.Borders.Left.BorderType = Spire.Doc.Documents.BorderStyle.None;
-            //table.TableFormat.Borders.Right.BorderType = Spire.Doc.Documents.BorderStyle.None;
             #endregion
 
 
+
+
+
+
+
+
+        }
+
+        private void MergeHeaderFooter()
+        {
             Document doc1 = new Document();
-            doc1.LoadFromFile(@"D:\Work\Outsource\ALS.ALSI.Web\ALS.ALSI.Web\template\Blank Letter Head - EL.doc");
+            doc1.LoadFromFile(this.server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
             Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
             Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
-            foreach (Section section in doc.Sections)
+
+
+            Paragraph paraInserted = new Paragraph(this.doc);
+            TextRange textRange1 = paraInserted.AppendText("======================= xxx ============================");
+            //textRange1.CharacterFormat.TextColor = Color.Blue;
+            //textRange1.CharacterFormat.FontSize = 15;
+            //textRange1.CharacterFormat.UnderlineStyle = UnderlineStyle.Dash;
+
+            //this.doc.Sections[0].Paragraphs.Insert(0, paraInserted);
+            //this.doc.Sections[0].Paragraphs.Insert(1, paraInserted);
+            //document.Sections[0].Paragraphs.Insert(0, paraInserted);
+
+//            int number_of_pages = this.doc.BuiltinDocumentProperties.PageCount;
+
+//]            Paragraph paragraph = range.OwnerParagraph;
+            //Body body = paragraph.OwnerTextBody;
+            //int index = body.ChildObjects.IndexOf(paragraph);
+
+
+            foreach (Section section in this.doc.Sections)
             {
+                
                 foreach (DocumentObject obj in header.ChildObjects)
                 {
                     section.HeadersFooters.Header.ChildObjects.Add(obj.Clone());
                 }
+
+                
+
+                //section.Body.AddParagraph().AppendText("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+                //foreach (DocumentObject obj in header.ChildObjects)
+                //{
+                //    section.HeadersFooters.Header.ChildObjects.Add(obj.Clone());
+                //}
+
                 foreach (DocumentObject obj in footer.ChildObjects)
                 {
                     section.HeadersFooters.Footer.ChildObjects.Add(obj.Clone());
                 }
             }
-            doc.SaveToFile(@"D:\" + jobSample.job_number + ".doc");
-
-
+            this.doc.SaveToFile(this.server.MapPath("~/Report/") + this.jobSample.job_number + ".doc");
         }
     }
 }

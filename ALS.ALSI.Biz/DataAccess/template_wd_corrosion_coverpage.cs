@@ -22,5 +22,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string number_of_pieces_used_for_extraction { get; set; }
         public string specification { get; set; }
         public string result { get; set; }
+        public string procedureNo { get; set; }
     }
 }

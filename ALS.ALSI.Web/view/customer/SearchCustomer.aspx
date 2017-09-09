@@ -84,11 +84,11 @@
 
                 <asp:Label ID="lbTotalRecords" runat="server" Text="" Visible="false"></asp:Label>
                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
-                    CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="id" OnRowCommand="gvResult_RowCommand" OnRowDeleting="gvResult_RowDeleting" OnPageIndexChanging="gvResult_PageIndexChanging" AllowPaging="True" PageSize="20">
+                    CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="id" OnRowCommand="gvResult_RowCommand" OnRowDeleting="gvResult_RowDeleting" OnPageIndexChanging="gvResult_PageIndexChanging" AllowPaging="True" PageSize="20" AllowSorting="True" OnSorting="gvResult_Sorting">
                     <Columns>
-                        <asp:BoundField HeaderText="Code" DataField="customer_code" ItemStyle-HorizontalAlign="Left" SortExpression="customer_code" />
+                        <asp:BoundField HeaderText="Code" DataField="customer_code" ItemStyle-HorizontalAlign="Left"/>
                         <asp:BoundField HeaderText="Name" DataField="company_name" ItemStyle-HorizontalAlign="Left" SortExpression="company_name" />
-                        <asp:BoundField HeaderText="Address" DataField="address" ItemStyle-HorizontalAlign="Left" SortExpression="address" />
+                        <asp:BoundField HeaderText="Address" DataField="address" ItemStyle-HorizontalAlign="Left"  />
 <%--                        <asp:BoundField HeaderText="Mobile" DataField="mobile_number" ItemStyle-HorizontalAlign="Left" SortExpression="mobile_number" />--%>
 <%--                        <asp:BoundField HeaderText="Email" DataField="email_address" ItemStyle-HorizontalAlign="Left" SortExpression="email_address" />--%>
                         <%--<asp:BoundField HeaderText="Branch" DataField="branch" ItemStyle-HorizontalAlign="Left" SortExpression="branch" />--%>
@@ -122,18 +122,21 @@
     </form>
 
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>    <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>    <!-- END PAGE LEVEL SCRIPTS -->
+    <script src="/alis/assets/global/plugins/jquery.min.js" type="text/javascript"></script>    <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>    <!-- END PAGE LEVEL SCRIPTS -->
     <script>
+        /*
         jQuery(document).ready(function () {
-            /*
+       
             var table = $('#ContentPlaceHolder2_gvResult');
             // begin: third table
             table.dataTable({
                 // set the initial value
-                "pageLength": 50,
+                "pageLength": 5,
+                "order": [[1, "desc"]]
             });
-            */
+       
         });
+        */
     </script>
     <!-- END JAVASCRIPTS -->
 </asp:Content>

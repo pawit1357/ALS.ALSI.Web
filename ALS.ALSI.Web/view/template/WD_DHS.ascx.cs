@@ -121,32 +121,12 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
-            #region "CAS"
-            this.tbCas = tb_m_dhs_cas.FindAllBySampleID(this.SampleID);
-            if (this.tbCas != null && this.tbCas.Count > 0 && this.coverpages != null && this.coverpages.Count > 0)
-            {
-                foreach (tb_m_dhs_cas _cas in this.tbCas)
-                {
-                    _cas.RowState = CommandNameEnum.Edit;
-                }
 
 
-                txtProcedureNo.Text = this.coverpages[0].pm_procedure_no;
-                txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].pm_number_of_pieces_used_for_extraction;
-                txtExtractionMedium.Text = this.coverpages[0].pm_extraction_medium;
-                txtExtractionVolume.Text = this.coverpages[0].pm_extraction_volume;
-
-
-
-                gvResult.DataSource = this.tbCas;
-                gvResult.DataBind();
-            }
-
-            #endregion
-            #region "SAMPLE"
             if (this.jobSample != null)
             {
 
+                #region "METHOD/PROCEDURE:"
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
                 lbJobStatus.Text = Constants.GetEnumDescription(status);
@@ -159,7 +139,17 @@ namespace ALS.ALSI.Web.view.template
                 pUploadfile.Visible = false;
                 pDownload.Visible = false;
                 btnSubmit.Visible = false;
+                pLoadFile.Visible = false;
 
+                txtProcedureNo.Enabled = false;
+                txtNumberOfPiecesUsedForExtraction.Enabled = false;
+                txtExtractionMedium.Enabled = false;
+                txtExtractionVolume.Enabled = false;
+                gvCoverPages.Columns[5].Visible = false;
+                btnCoverPage.Visible = false;
+                btnDHS.Visible = false;
+                pCoverpage.Visible = true;
+                pDSH.Visible = false;
                 switch (userRole)
                 {
                     case RoleEnum.LOGIN:
@@ -184,7 +174,26 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = false;
                             btnSubmit.Visible = true;
+
+                            txtProcedureNo.Enabled = true;
+                            txtNumberOfPiecesUsedForExtraction.Enabled = true;
+                            txtExtractionMedium.Enabled = true;
+                            txtExtractionVolume.Enabled = true;
+                            gvCoverPages.Columns[5].Visible = true;
+                            btnCoverPage.Visible = true;
+                            btnDHS.Visible = true;
+                            pLoadFile.Visible = true;
+
                         }
+                        #region ":: STAMP ANALYZED DATE ::"
+                   
+                            if (this.jobSample.date_chemist_alalyze == null)
+                            {
+                                this.jobSample.date_chemist_alalyze = DateTime.Now;
+                                this.jobSample.Update();
+                            }
+                        
+                        #endregion
                         break;
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
@@ -198,6 +207,9 @@ namespace ALS.ALSI.Web.view.template
                             pUploadfile.Visible = false;
                             pDownload.Visible = false;
                             btnSubmit.Visible = true;
+
+                            btnCoverPage.Visible = true;
+                            btnDHS.Visible = true;
                         }
                         break;
                     case RoleEnum.ADMIN:
@@ -228,50 +240,17 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
-                #region "METHOD/PROCEDURE:"
-                //   if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-                //&& userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
-                //   {
-                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                {
-                    #region ":: STAMP ANALYZED DATE ::"
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                    {
-                        if (this.jobSample.date_chemist_alalyze == null)
-                        {
-                            this.jobSample.date_chemist_alalyze = DateTime.Now;
-                            this.jobSample.Update();
-                        }
-                    }
-                    #endregion
+                #endregion
 
-                    txtProcedureNo.Enabled = true;
-                    txtNumberOfPiecesUsedForExtraction.Enabled = true;
-                    txtExtractionMedium.Enabled = true;
-                    txtExtractionVolume.Enabled = true;
-                    gvCoverPages.Columns[5].Visible = true;
-                    btnCoverPage.Visible = true;
-                    btnDHS.Visible = true;
-                    pLoadFile.Visible = true;
-                }
-                else
+                #region "CAS"
+                this.tbCas = tb_m_dhs_cas.FindAllBySampleID(this.SampleID);
+                if (this.tbCas != null && this.tbCas.Count > 0)
                 {
-                    pLoadFile.Visible = false;
-                    txtProcedureNo.Enabled = false;
-                    txtNumberOfPiecesUsedForExtraction.Enabled = false;
-                    txtExtractionMedium.Enabled = false;
-                    txtExtractionVolume.Enabled = false;
-                    gvCoverPages.Columns[5].Visible = false;
-                    btnCoverPage.Visible = false;
-                    btnDHS.Visible = false;
-
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
-                    {
-                        btnCoverPage.Visible = true;
-                        btnDHS.Visible = true;
-                    }
+                    gvResult.DataSource = this.tbCas;
+                    gvResult.DataBind();
                 }
                 #endregion
+                
                 #region "COVERPAGE"
                 if (this.coverpages != null && this.coverpages.Count > 0)
                 {
@@ -291,6 +270,7 @@ namespace ALS.ALSI.Web.view.template
                     txtExtractionMedium.Text = this.coverpages[0].pm_extraction_medium;
                     txtExtractionVolume.Text = this.coverpages[0].pm_extraction_volume;
 
+
                     cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
                     if (cbCheckBox.Checked)
                     {
@@ -298,35 +278,19 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
-                        if (_detailSpec != null)
+                        if (detailSpec != null)
                         {
-                            lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", _detailSpec.B, _detailSpec.A);
+                            lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", detailSpec.B, detailSpec.A);
                         }
-
                     }
-
-                    //tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
-                    //if (_detailSpec != null)
-                    //{
-                    //    lbDocRev.Text = _detailSpec.B;
-                    //    lbDesc.Text = _detailSpec.A;
-                    //}
-
-                    GenerrateCoverPage();
                 }
                 #endregion
+                GenerrateCoverPage();
             }
-
-            #endregion
-
 
             //initial button.
             btnCoverPage.CssClass = "btn blue";
             btnDHS.CssClass = "btn green";
-            pCoverpage.Visible = true;
-            pDSH.Visible = false;
-
             switch (lbJobStatus.Text)
             {
                 case "CONVERT_PDF":
@@ -337,7 +301,6 @@ namespace ALS.ALSI.Web.view.template
                     break;
             }
 
-            ReportBiz.ReportMesa(this.jobSample);
         }
 
         #endregion
@@ -494,42 +457,15 @@ namespace ALS.ALSI.Web.view.template
                         FileUpload1.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
-                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
-                        //lbMessage.Attributes["class"] = "alert alert-error";
-                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -581,7 +517,6 @@ namespace ALS.ALSI.Web.view.template
                         string dd = DateTime.Now.ToString("dd");
 
                         String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                        //String source_file_url = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
@@ -736,13 +671,7 @@ namespace ALS.ALSI.Web.view.template
                 LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
                 Literal _litRequiredTest = (Literal)e.Row.FindControl("litRequiredTest");
                 Label _lbAnalytes = (e.Row.FindControl("litAnalytes") as Label);
-                //Literal _litResult = (Literal)e.Row.FindControl("litResult");
 
-                //แก้เรื่องซ่อนในหน้า cover page
-                //if (_litResult != null)
-                //{
-                //    _litResult.Text = String.IsNullOrEmpty(_litResult.Text) || _litResult.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDecimal(_litResult.Text).ToString("N2");
-                //}
                 if (_btnHide != null && _btnUndo != null && _litRequiredTest != null)
                 {
                     switch (cmd)
@@ -833,7 +762,7 @@ namespace ALS.ALSI.Web.view.template
                     work.detail_spec_id = detailSpec.ID;
                     work.analytes = item.name;
                     work.specification_limits = item.value;
-                    work.specification_limits = ((work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.NA)) || work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.ND))) ? work.specification_limits : work.specification_limits.Equals("0")? work.specification_limits:String.Format("<{0}", work.specification_limits));
+                    work.specification_limits = ((work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.NA)) || work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.ND))) ? work.specification_limits : work.specification_limits.Equals("0") ? work.specification_limits : String.Format("<{0}", work.specification_limits));
                     work.result = string.Empty;
                     work.result_pass_or_false = String.Empty;
                     work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
@@ -846,12 +775,6 @@ namespace ALS.ALSI.Web.view.template
                 lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", detailSpec.B, detailSpec.A);
 
 
-                //lbDocRev.Text = detailSpec.B;
-                //lbDesc.Text = detailSpec.A;
-                //lbResultDesc.Text = String.Format("The specification is based on Western Digital's document no {0} for {1}", detailSpec.B, detailSpec.A);
-                //this.Unit = CustomUtils.getUnitByName(detailSpec.C);
-
-                //lbD18.Text = component.D;
                 this.coverpages = tmp;
                 gvCoverPages.DataSource = this.coverpages;
                 gvCoverPages.DataBind();
@@ -866,7 +789,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 txtProcedureNo.Text = component.B;
                 txtNumberOfPiecesUsedForExtraction.Text = component.D;
-                //txtExtractionMedium.Text = String.Empty;
                 txtExtractionVolume.Text = component.E;
             }
         }
@@ -895,7 +817,6 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
-            //DataTable dt = Extenders.ObjectToDataTable(this.reportCovers[0]);
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
@@ -914,6 +835,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Test", "DHS"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
+
             // Variables
             Warning[] warnings;
             string[] streamIds;
@@ -925,40 +847,51 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_wd_2.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_wd.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
 
             List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
 
-            if (ds2.Count > 0 && ds2.Count <= 12)
+            if (ds2.Count > 0 && ds2.Count <= 15)
             {
+
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
-            }
-            else
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 12).ToDataTable())); // Add datasource here
-            }
-
-            if (ds2.Count > 12 && ds2.Count <= 32)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(12, (ds2.Count-12)).ToDataTable())); // Add datasource here
-            }else if (ds2.Count > 32 && ds2.Count < 52)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(32, (ds2.Count - 32) - 1).ToDataTable())); // Add datasource here
-            }
-            else { 
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+
             }
 
-            //if (ds2.Count <= 32)
-            //{
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
 
-            //}
+            if (ds2.Count > 15 && ds2.Count <= 44)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, ds2.Count-15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+            }
+
+            if (ds2.Count > 44 && ds2.Count <= 73)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, 29).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(44, ds2.Count - 44).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+
+            }
+            if (ds2.Count > 73)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, 29).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(44, 29).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(73, ds2.Count - 73).ToDataTable())); // Add datasource here
+            }
+
+
+
+
+
             string download = String.Empty;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -1038,204 +971,11 @@ namespace ALS.ALSI.Web.view.template
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
 
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
                     break;
             }
         }
-        //Create document method
-        //private void CreateDocument()
-        //{
-        //    try
-        //    {
-        //        //Create an instance for word app
-        //        Microsoft.Office.Interop.Word.Application winword = new Microsoft.Office.Interop.Word.Application();
+        
 
-        //        //Set animation status for word application
-        //        winword.ShowAnimation = false;
-
-        //        //Set status for word application is to be visible or not.
-        //        winword.Visible = false;
-
-        //        //Create a missing variable for missing value
-        //        object missing = System.Reflection.Missing.Value;
-
-        //        //Create a new document
-        //        Microsoft.Office.Interop.Word.Document document = winword.Documents.Add(ref missing, ref missing, ref missing, ref missing);
-
-        //        //Add header into the document
-        //        foreach (Microsoft.Office.Interop.Word.Section section in document.Sections)
-        //        {
-        //            //Get the header range and add the header details.
-        //            Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
-        //            headerRange.Fields.Add(headerRange, Microsoft.Office.Interop.Word.WdFieldType.wdFieldPage);
-        //            headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
-        //            headerRange.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
-        //            headerRange.Font.Size = 10;
-        //            headerRange.Text = "Header text goes here";
-        //        }
-
-        //        //Add the footers into the document
-        //        foreach (Microsoft.Office.Interop.Word.Section wordSection in document.Sections)
-        //        {
-        //            //Get the footer range and add the footer details.
-        //            Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
-        //            footerRange.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdDarkRed;
-        //            footerRange.Font.Size = 10;
-        //            footerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
-        //            footerRange.Text = "Footer text goes here";
-        //        }
-
-        //        //adding text to document
-        //        document.Content.SetRange(0, 0);
-        //        document.Content.Text = "This is test document " + Environment.NewLine;
-
-        //        //Add paragraph with Heading 1 style
-        //        Microsoft.Office.Interop.Word.Paragraph para1 = document.Content.Paragraphs.Add(ref missing);
-        //        object styleHeading1 = "Heading 1";
-        //        para1.Range.set_Style(ref styleHeading1);
-        //        para1.Range.Text = "Para 1 text";
-        //        para1.Range.InsertParagraphAfter();
-
-        //        //Add paragraph with Heading 2 style
-        //        Microsoft.Office.Interop.Word.Paragraph para2 = document.Content.Paragraphs.Add(ref missing);
-        //        object styleHeading2 = "Heading 2";
-        //        para2.Range.set_Style(ref styleHeading2);
-        //        para2.Range.Text = "Para 2 text";
-        //        para2.Range.InsertParagraphAfter();
-
-        //        //Create a 5X5 table and insert some dummy record
-        //        Table firstTable = document.Tables.Add(para1.Range, 5, 5, ref missing, ref missing);
-
-        //        firstTable.Borders.Enable = 1;
-        //        foreach (Row row in firstTable.Rows)
-        //        {
-        //            foreach (Cell cell in row.Cells)
-        //            {
-        //                //Header row
-        //                if (cell.RowIndex == 1)
-        //                {
-        //                    cell.Range.Text = "Column " + cell.ColumnIndex.ToString();
-        //                    cell.Range.Font.Bold = 1;
-        //                    //other format properties goes here
-        //                    cell.Range.Font.Name = "verdana";
-        //                    cell.Range.Font.Size = 10;
-        //                    //cell.Range.Font.ColorIndex = WdColorIndex.wdGray25;                            
-        //                    cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
-        //                    //Center alignment for the Header cells
-        //                    cell.VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-        //                    cell.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
-
-        //                }
-        //                //Data row
-        //                else
-        //                {
-        //                    cell.Range.Text = (cell.RowIndex - 2 + cell.ColumnIndex).ToString();
-        //                }
-        //            }
-        //        }
-
-        //        //Save the document
-        //        object filename = @"c:\temp1.docx";
-        //        document.SaveAs2(ref filename);
-        //        document.Close(ref missing, ref missing, ref missing);
-        //        document = null;
-        //        winword.Quit(ref missing, ref missing, ref missing);
-        //        winword = null;
-        //        MessageBox.Show("Document created successfully !");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
-
-
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-            //DataTable dt = Extenders.ObjectToDataTable(this.reportCovers[0]);
-            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", "ng/part"));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "DHS"));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_wd_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-
-            List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 10).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, (ds2.Count > 25) ? 25 : ds2.Count - 10).ToDataTable())); // Add datasource here
-            if (ds2.Count > 35)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(35, ds2.Count - 35).ToDataTable())); // Add datasource here
-            }
-            else
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
-            }
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-            try
-            {
-
-
-                // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-                Response.Buffer = true;
-                Response.Clear();
-                Response.ContentType = mimeType;
-                Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-                Response.BinaryWrite(bytes); // create the file
-                Response.Flush(); // send it to the client to download
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-            }
-
-
-        }
 
         #endregion
 

@@ -1088,6 +1088,7 @@
           <Property Name="number_of_pieces_used_for_extraction" Type="varchar" MaxLength="45" />
           <Property Name="specification" Type="varchar" MaxLength="255" />
           <Property Name="result" Type="varchar" MaxLength="45" />
+          <Property Name="procedureNo" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_img">
           <Key>
@@ -1259,7 +1260,7 @@
           <Property Name="row_type" Type="int" />
           <Property Name="row_group" Type="int" />
           <Property Name="unit" Type="int" />
-          <Property Name="ParticleAnalysisBySEMEDX" Type="varchar" MaxLength="45" />
+          <Property Name="ParticleAnalysisBySEMEDX" Type="varchar" MaxLength="255" />
           <Property Name="TapedAreaForDriveParts" Type="varchar" MaxLength="45" />
           <Property Name="NoofTimesTaped" Type="varchar" MaxLength="45" />
           <Property Name="SurfaceAreaAnalysed" Type="varchar" MaxLength="45" />
@@ -2909,6 +2910,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="number_of_pieces_used_for_extraction" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="specification" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="result" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="procedureNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_img">
           <Key>
@@ -3080,7 +3082,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_type" Type="Int32" />
           <Property Name="row_group" Type="Int32" />
           <Property Name="unit" Type="Int32" />
-          <Property Name="ParticleAnalysisBySEMEDX" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ParticleAnalysisBySEMEDX" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TapedAreaForDriveParts" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="NoofTimesTaped" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="SurfaceAreaAnalysed" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -3413,7 +3415,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -4529,6 +4531,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_corrosion_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_wd_corrosion_coverpage">
               <MappingFragment StoreEntitySet="template_wd_corrosion_coverpage">
+                <ScalarProperty Name="procedureNo" ColumnName="procedureNo" />
                 <ScalarProperty Name="result" ColumnName="result" />
                 <ScalarProperty Name="specification" ColumnName="specification" />
                 <ScalarProperty Name="number_of_pieces_used_for_extraction" ColumnName="number_of_pieces_used_for_extraction" />

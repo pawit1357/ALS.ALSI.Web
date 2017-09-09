@@ -17,7 +17,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public String ref_ { get; set; }
         public CommandNameEnum RowState { get; set; }
         public int pkInt { get { return Convert.ToInt32(String.IsNullOrEmpty(this.pk) ? "0" : this.pk); } }
-        public int areaInt { get { return Convert.ToInt32(String.IsNullOrEmpty(this.area) ? "0" : this.area); } }
+        public Int64 areaInt { get { return Convert.ToInt64(String.IsNullOrEmpty(this.area) ? "0" : this.area); } }
         #endregion
 
         private static IRepository<tb_m_gcms_cas> _repository

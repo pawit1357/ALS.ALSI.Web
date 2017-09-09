@@ -1203,7 +1203,7 @@ namespace ALS.ALSI.Web.view.template
                                     txtMotorOilBase25 = String.IsNullOrEmpty(txtMotorOilBase25) ? "" : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
                                     txtMotorOilBase35 = String.IsNullOrEmpty(txtMotorOilBase35) ? "" : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
 
-                                    
+
                                     List<template_seagate_gcms_coverpage> motorOilsUpdate = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
                                     if (motorOilsUpdate.Count > 0)
                                     {
@@ -1944,13 +1944,13 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
             if (compoundSubs.Count > 0)
             {
-                compoundSubs[1].C =Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), 2) + "";//Compounds with RT > DOP
-                compoundSubs[2].C =Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), 2) + "";//Compounds with RT > DOP
-                compoundSubs[0].C =(Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
+                compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
 
-                compoundSubs[4].C =Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE30.Text) ? "0" : txtE30.Text), 2) + "";//Compounds with RT > DOP
-                compoundSubs[5].C =Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtF30.Text) ? "0" : txtF30.Text), 2) + "";//Compounds with RT > DOP
-                compoundSubs[3].C =(Convert.ToDecimal(compoundSubs[4].C) + Convert.ToDecimal(compoundSubs[5].C)) + "";
+                compoundSubs[4].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE30.Text) ? "0" : txtE30.Text), 2) + "";//Compounds with RT > DOP
+                //compoundSubs[5].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtF30.Text) ? "0" : txtF30.Text), 2) + "";//Compounds with RT > DOP
+                //compoundSubs[3].C = (Convert.ToDecimal(compoundSubs[4].C) + Convert.ToDecimal(compoundSubs[5].C)) + "";
 
 
 
@@ -1958,10 +1958,10 @@ namespace ALS.ALSI.Web.view.template
                 compoundSubs[2].C = (Convert.ToDouble(compoundSubs[2].C) == 0) ? "Not Detecte" : compoundSubs[2].C;
 
                 compoundSubs[4].C = (Convert.ToDouble(compoundSubs[4].C) == 0) ? "Not Detecte" : compoundSubs[4].C;
-                compoundSubs[4].C = (Convert.ToDouble(compoundSubs[5].C) == 0) ? "Not Detecte" : compoundSubs[4].C;
+                //compoundSubs[4].C = (Convert.ToDouble(compoundSubs[5].C) == 0) ? "Not Detecte" : compoundSubs[4].C;
 
 
-               gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
+                gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
                 gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
 
                 gvCompoundSub.DataSource = compoundSubs;

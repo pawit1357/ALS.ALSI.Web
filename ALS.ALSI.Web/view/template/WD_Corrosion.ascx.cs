@@ -215,7 +215,7 @@ namespace ALS.ALSI.Web.view.template
                 ddlComponent.SelectedValue = cover.procedureNo_id.ToString();
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
                 txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].number_of_pieces_used_for_extraction;
-
+                txtProcedureNo.Text = this.coverpages[0].procedureNo;
                 tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
                 if (component != null)
                 {
@@ -307,6 +307,7 @@ namespace ALS.ALSI.Web.view.template
                     litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
                     break;
             }
+          
         }
 
         #endregion
@@ -364,6 +365,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.procedureNo_id = Convert.ToInt16(ddlComponent.SelectedValue);
                         _cover.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
                         _cover.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
+                        _cover.procedureNo = txtProcedureNo.Text;
                     }
 
                     template_wd_corrosion_coverpage.UpdateList(this.coverpages);

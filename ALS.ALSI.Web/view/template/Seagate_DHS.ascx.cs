@@ -959,13 +959,24 @@ namespace ALS.ALSI.Web.view.template
 
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_seagate.rdlc");
+            viewer.ProcessingMode = ProcessingMode.Local;
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
 
+            List<template_seagate_dhs_coverpage> ds2 = this.coverpages.ToList();
 
+            if (ds2.Count > 0 && ds2.Count <= 10)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+            }
+            if (ds2.Count > 10)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 10).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, ds2.Count - 10).ToDataTable())); // Add datasource here
+            }
 
 
             string download = String.Empty;

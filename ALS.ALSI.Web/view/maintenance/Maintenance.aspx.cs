@@ -126,5 +126,35 @@ namespace ALS.ALSI.Web.view.initial
         {
             /* Verifies that the control is rendered */
         }
+
+        protected void btnListDir_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Order", typeof(string));
+            dt.Columns.Add("File Name", typeof(string));
+
+            DirectoryInfo d = new DirectoryInfo(txtSql.Text);//Assuming Test is your Folder
+            FileInfo[] Files = d.GetFiles("*.*"); //Getting Text files
+
+            int index = 1;
+            foreach (FileInfo file in Files)
+            {
+                DataRow dr = dt.NewRow();
+
+                dr[0] = index;
+                dr[1] = file.Name;
+                index++;
+
+                dt.Rows.Add(dr);//this will add the row at the end of the datatable
+            }
+            gvResult.DataSource = dt;
+            gvResult.DataBind();
+        }
+
+        protected void btnRename_Click(object sender, EventArgs e)
+        {
+            File.Move(txtSql.Text+"\\"+TextBox1.Text, txtSql.Text + "\\" + TextBox2.Text);
+
+        }
     }
 }

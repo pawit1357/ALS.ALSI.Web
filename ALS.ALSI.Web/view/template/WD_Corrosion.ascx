@@ -93,7 +93,7 @@
                                         <tr>
                                             <td>Corrosion test</td>
                                             <td>
-                                                <asp:TextBox ID="txtProcedureNo" runat="server" Text="20400058-001 Rev B" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox ID="txtProcedureNo" runat="server" Text="" CssClass="form-control"></asp:TextBox>
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtNumberOfPiecesUsedForExtraction" runat="server" Text="" CssClass="form-control"></asp:TextBox>

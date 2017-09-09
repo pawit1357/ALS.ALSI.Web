@@ -931,7 +931,7 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
                 reportParameters.Add(new ReportParameter("Test", " "));
                 reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-                reportParameters.Add(new ReportParameter("rpt_unit2", ""));
+                reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnit.SelectedItem.Text));
 
                 reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
                 reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
@@ -950,8 +950,47 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_nvr_seagate_damper.rdlc");
                 viewer.LocalReport.SetParameters(reportParameters);
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", methods.ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
+
+
+                if (nvrs.Count > 0 && nvrs.Count <= 4)
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.GetRange(0, nvrs.Count).ToDataTable())); // Add datasource here
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+                }
+                if (nvrs.Count > 4)
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.GetRange(0, 4).ToDataTable())); // Add datasource here
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", nvrs.GetRange(4, nvrs.Count - 4).ToDataTable())); // Add datasource here
+                }
+                if (nvrs.Count == 0)
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.ToDataTable())); // Add datasource here
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", nvrs.ToDataTable())); // Add datasource here
+
+                    if (ftirs.Count > 0 && ftirs.Count <= 3)
+                    {
+                        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.GetRange(0, ftirs.Count).ToDataTable())); // Add datasource here
+                        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+                    }
+                    if (ftirs.Count > 3)
+                    {
+                        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.GetRange(0, 3).ToDataTable())); // Add datasource here
+                        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ftirs.GetRange(3, ftirs.Count - 3).ToDataTable())); // Add datasource here
+                    }
+
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+                }
+
+                if (ftirs.Count == 0)
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ftirs.ToDataTable())); // Add datasource here
+                }
+
 
 
                 string download = String.Empty;

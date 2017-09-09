@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace ALS.ALSI.Biz.DataAccess
 {
@@ -131,10 +132,12 @@ namespace ALS.ALSI.Biz.DataAccess
         #region "Custom"
 
 
-        public IEnumerable SearchData()
+        public IEnumerable SearchData([Optional] string sortDirection, [Optional] string sortExpression)
         {
             using (ALSIEntities ctx = new ALSIEntities())
             {
+                IEnumerable dataList = null;
+
                 var result = from j in ctx.m_customer
                              join a in ctx.m_customer_address on j.ID equals a.company_id orderby j.company_name
                              select new { 
@@ -144,6 +147,9 @@ namespace ALS.ALSI.Biz.DataAccess
                              j.code,
                              a.address
                              };
+
+
+
                 if (!string.IsNullOrEmpty(this.customer_code))
                 {
                     result = result.Where(x => x.customer_code.Contains(this.customer_code));
@@ -152,7 +158,26 @@ namespace ALS.ALSI.Biz.DataAccess
                 {
                     result = result.Where(x => x.company_name.Contains(this.company_name));
                 }
-                return result.ToList();
+
+                if (sortDirection != null)
+                {
+                    switch (sortDirection)
+                    {
+                        case "ASC":
+                            dataList =  result.ToList().OrderBy(x => x.GetType().GetProperty(sortExpression).GetValue(x, null)).ToList();
+                            break;
+                        case "DESC":
+                            dataList =  result.ToList().OrderByDescending(x => x.GetType().GetProperty(sortExpression).GetValue(x, null)).ToList();
+                            break;
+
+                    }
+                }
+                else
+                {
+                    dataList = result.ToList();
+                }
+
+                return dataList;
             }
         }
 

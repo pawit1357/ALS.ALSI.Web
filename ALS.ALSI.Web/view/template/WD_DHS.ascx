@@ -399,6 +399,7 @@
                                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
+                                  
                                     <%--                                    <asp:Panel ID="pUploadfile" runat="server">
 
                                         <div class="row">
@@ -420,6 +421,7 @@
                                         <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>--%>
+
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->

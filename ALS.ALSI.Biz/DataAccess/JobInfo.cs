@@ -115,6 +115,25 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             using (ALSIEntities ctx = new ALSIEntities())
             {
+                //Status 
+                //    Received.	 Report x
+                //    Sent to Customer  x
+                //    Receive Date.	
+                //    Due Date.	
+                //    ALS Ref 
+                //    No.Cus 
+                //    Ref 
+                //    No.S'Ref No.	
+                //    Company	
+                //    Invoice	
+                //    Po	
+                //    Contact	
+                //    Description	
+                //    Model	
+                //    Surface Area	
+                //    Specification	
+                //    Type of test
+
                 var result = from j in ctx.job_info
                              join s in ctx.job_sample on j.ID equals s.job_id
                              join sp in ctx.m_specification on s.specification_id equals sp.ID
@@ -125,24 +144,28 @@ namespace ALS.ALSI.Biz.DataAccess
                              select new
                              {
                                  ID = j.ID,
+                                 s.date_srchemist_complate,
+                                 s.date_admin_sent_to_cus,
+                                 receive_date = j.date_of_receive,
+                                 due_date = s.due_date,
                                  job_number = s.job_number,
-                                 create_date = j.create_date,
                                  customer_ref_no = j.customer_ref_no,
                                  s_pore_ref_no = j.s_pore_ref_no,
-                                 sample_po = s.sample_po,
                                  customer = c.company_name,
+                                 s.sample_invoice,
+                                 sample_po = s.sample_po,
                                  contract_person = cp.name,
-                                 sn = s.ID,
                                  description = s.description,
                                  model = s.model,
                                  surface_area = s.surface_area,
-                                 remarks = s.remarks,
                                  specification = sp.name,
                                  type_of_test = tt.name,
-                                 receive_date = j.date_of_receive,
                                  customer_id = c.ID,
-                                 contract_person_id = cp.ID,
                                  job_status = s.job_status,
+                                 create_date = j.create_date,
+                                 sn = s.ID,
+                                 remarks = s.remarks,
+                                 contract_person_id = cp.ID,
                                  job_role = s.job_role,
                                  status_completion_scheduled = s.status_completion_scheduled,
                                  s.step1owner,
@@ -156,13 +179,9 @@ namespace ALS.ALSI.Biz.DataAccess
                                  type_of_test_id = tt.ID,
                                  type_of_test_name = tt.name,
                                  spec_id = sp.ID,
-                                 due_date = s.due_date,
                                 s.date_login_received_sample,
                                 s.date_chemist_alalyze,
-                                s.date_srchemist_complate,
-                                s.date_admin_sent_to_cus,
                                 s.date_labman_complete,
-                                s.sample_invoice
                              };
 
                 if (this.ID > 0)
@@ -231,7 +250,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
                 if (this.receive_report_from != DateTime.MinValue && this.receive_report_to != DateTime.MinValue)
                 {
-                    result = result.Where(x => x.date_srchemist_complate >= this.receive_report_from && x.date_srchemist_complate <= this.receive_report_to);
+                    result = result.Where(x => x.receive_date >= this.receive_report_from && x.receive_date <= this.receive_report_to);
                 }
                 if (this.duedate_from != DateTime.MinValue && this.duedate_to != DateTime.MinValue)
                 {

@@ -148,7 +148,8 @@ namespace ALS.ALSI.Biz.Constant
         Amend = 29,
         Retest = 30,
         Normal = 31,
-        Inactive = 32
+        Inactive = 32,
+        Sort = 33
     }
 
     public enum RowTypeEnum : int
