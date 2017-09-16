@@ -37,6 +37,11 @@ namespace ALS.ALSI.Biz.Constant
         {
             get { return ConfigurationManager.AppSettings["HOST"]; }
         }
+
+        public static String MySQLCon
+        {
+            get { return ConfigurationManager.ConnectionStrings["ALSIEntities"].ConnectionString; }
+        }
         //public static String PATH_DRIVE
         //{
         //    get { return ConfigurationManager.AppSettings["PATH_DRIVE"]; }

@@ -2,13 +2,17 @@
 using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
 using ClosedXML.Excel;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -321,41 +325,6 @@ namespace ALS.ALSI.Web.view.request
             gv.DataBind();
         }
 
-        //protected void ddlCompany_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    ddlContract_person.Items.Clear();
-        //    ddlContract_person.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-        //    ddlContract_person.DataBind();
-
-
-        //    m_customer cus = new m_customer().SelectByID(Convert.ToInt32(ddlCompany.SelectedValue));
-        //    if (cus != null)
-        //    {
-
-        //        List<m_customer_contract_person> contractPersonList = new m_customer_contract_person().FindAllByCompanyID(cus.ID);
-        //        if (contractPersonList != null)
-        //        {
-        //            ddlContract_person.Items.Clear();
-        //            ddlContract_person.Items.Add(new ListItem(Constants.PLEASE_SELECT, ""));
-        //            ddlContract_person.DataSource = contractPersonList;
-        //            ddlContract_person.DataBind();
-
-        //            //ddlContract_person.Enabled = true;
-        //        }
-        //        else
-        //        {
-        //            //TODO            
-
-        //        }
-        //    }
-        //    else
-        //    {
-        //        //TODO
-        //    }
-
-
-        //}
-
         protected void gvJob_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -650,29 +619,7 @@ namespace ALS.ALSI.Web.view.request
 
         protected void ddlCompany_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //DropDownList ddlCompany = (DropDownList)sender;
-            //job_info jobInfo = new job_info();
-            //jobInfo.customer_id = Convert.ToInt32(ddlCompany.SelectedValue);
-            //searchResult = jobInfo.SearchData();
 
-            //gvJob.DataSource = searchResult;
-            //gvJob.DataBind();
-            //gvJob.UseAccessibleHeader = true;
-            //gvJob.HeaderRow.TableSection = TableRowSection.TableHeader;
-            //if (gvJob.Rows.Count > 0)
-            //{
-            //    lbTotalRecords.Text = String.Format(Constants.TOTAL_RECORDS, gvJob.Rows.Count);
-
-            //}
-            //else
-            //{
-            //    lbTotalRecords.Text = string.Empty;
-            //}
-            //ddlCompany = (DropDownList)gvJob.HeaderRow.FindControl("ddlCompany");
-            //ddlCompany.DataSource = new m_customer().SelectAll();
-            //ddlCompany.DataBind();
-            //ddlCompany.Items.Insert(0, new ListItem("Company", "0"));
-            //Console.WriteLine();
         }
 
 
@@ -681,74 +628,139 @@ namespace ALS.ALSI.Web.view.request
         protected void ExportToExcel()
         {
 
-            //GridView gvTemp = new GridView();
-            //gvTemp.AllowPaging = false;
-            //gvTemp.DataSource = this.searchResult;
-            //gvTemp.DataBind();
-
-            //Response.ClearContent();
-            //Response.AddHeader("content-disposition", "attachment;filename=DataForInterfaceBackToSap_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx");
-            //Response.ContentType = "application/excel";
-            //System.IO.StringWriter sw = new System.IO.StringWriter();
-            //HtmlTextWriter htw = new HtmlTextWriter(sw);
-            //gvTemp.RenderControl(htw);
-            //Response.Write(sw.ToString());
-            //Response.End();
 
             using (XLWorkbook wb = new XLWorkbook())
             {
                 DataTable dt = new DataTable("DT");
 
-                dt.Columns.Add("ID", typeof(int));
-                dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
-                dt.Columns.Add("date_admin_sent_to_cus", typeof(DateTime));
-                dt.Columns.Add("receive_date", typeof(string));
-                dt.Columns.Add("due_date", typeof(string));
-                dt.Columns.Add("job_number", typeof(string));
-                dt.Columns.Add("customer_ref_no", typeof(string));
-                dt.Columns.Add("s_pore_ref_no", typeof(string));
-                dt.Columns.Add("customer", typeof(string));
-                dt.Columns.Add("sample_invoice", typeof(string));
-                dt.Columns.Add("sample_po", typeof(string));
-                dt.Columns.Add("contract_person", typeof(string));
-                dt.Columns.Add("description", typeof(string));
-                dt.Columns.Add("model", typeof(string));
-                dt.Columns.Add("surface_area", typeof(string));
-                dt.Columns.Add("specification", typeof(string));
-                dt.Columns.Add("type_of_test", typeof(string));
-                dt.Columns.Add("customer_id", typeof(int));
-                dt.Columns.Add("job_status", typeof(string));
-                dt.Columns.Add("create_date", typeof(string));
-                dt.Columns.Add("sn", typeof(int));
-                dt.Columns.Add("remarks", typeof(string));
-                dt.Columns.Add("contract_person_id", typeof(int));
-                dt.Columns.Add("job_role", typeof(string));
-                dt.Columns.Add("status_completion_scheduled", typeof(string));
-                dt.Columns.Add("step1owner", typeof(string));
-                dt.Columns.Add("step2owner", typeof(string));
-                dt.Columns.Add("step3owner", typeof(string));
-                dt.Columns.Add("step4owner", typeof(string));
-                dt.Columns.Add("step5owner", typeof(string));
-                dt.Columns.Add("step6owner", typeof(string));
-                dt.Columns.Add("job_prefix", typeof(int));
-                dt.Columns.Add("data_group", typeof(string));
-                dt.Columns.Add("type_of_test_id", typeof(int));
-                dt.Columns.Add("type_of_test_name", typeof(string));
-                dt.Columns.Add("spec_id", typeof(int));
-                dt.Columns.Add("date_login_received_sample", typeof(string));
-                dt.Columns.Add("date_chemist_alalyze", typeof(string));
-                dt.Columns.Add("date_labman_complete", typeof(string));
+                dt.Columns.Add("Status", typeof(string));
+                dt.Columns.Add("Received", typeof(DateTime));
+                dt.Columns.Add("Report Sent to Customer", typeof(DateTime));
+                dt.Columns.Add("Receive Date", typeof(string));
+                dt.Columns.Add("Due Date", typeof(DateTime));
+                dt.Columns.Add("ALS Ref", typeof(string));
+                dt.Columns.Add("No.Cus Ref No", typeof(string));
+                dt.Columns.Add("S Ref No", typeof(string));
+                dt.Columns.Add("Company", typeof(string));
+                dt.Columns.Add("Invoice", typeof(string));
+                dt.Columns.Add("Po", typeof(string));
+                dt.Columns.Add("Contact", typeof(string));
+                dt.Columns.Add("Description", typeof(string));
+                dt.Columns.Add("Model", typeof(string));
+                dt.Columns.Add("Surface Area", typeof(string));
+                dt.Columns.Add("Specification", typeof(string));
+                dt.Columns.Add("Type of test", typeof(string));
+
+                String conSQL = Configurations.MySQLCon;
+                using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
+                {
+                    conn.Open();
 
 
+                    String sql = "SELECT" +
+                                "`Extent7`.`name` AS `Status`," +
+                                "`Extent2`.`date_srchemist_complate` AS `Received`," +
+                                "`Extent2`.`date_admin_sent_to_cus` AS `Report Sent to Customer`," +
+                                "`Extent1`.`date_of_receive` AS `Receive Date`," +
+                                "`Extent2`.`due_date` AS `Due Date`," +
+                                "`Extent2`.`job_number` AS `ALS Ref`," +
+                                "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
+                                "`Extent1`.`s_pore_ref_no` AS `S Ref No`," +
+                                "`Extent5`.`company_name` AS `Company`," +
+                                "`Extent2`.`sample_invoice` AS `Invoice`," +
+                                "`Extent2`.`sample_po` AS `Po`," +
+                                "`Extent6`.`name` as `Contact`," +
+                                "`Extent2`.`description` AS `Description`," +
+                                "`Extent2`.`model` AS Model," +
+                                "`Extent2`.`surface_area` AS `Surface Area`," +
+                                "`Extent3`.`name` AS `Specification`," +
+                                "`Extent4`.`name` AS `Type of test`" +
+                                " FROM `job_info` AS `Extent1`" +
+                                " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
+                                " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
+                                " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
+                                " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
+                                " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
+                                " INNER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`";
+
+
+                    StringBuilder sqlCri = new StringBuilder();
+                    if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
+                    {
+                        sqlCri.Append(" `Extent1`.`job_prefix` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
+                    }
+                    if (!String.IsNullOrEmpty(ddlCompany.SelectedValue))
+                    {
+                        if (Convert.ToInt16(ddlCompany.SelectedValue) > 0)
+                        {
+                            sqlCri.Append(" `Extent1`.`customer_id` = " + Convert.ToInt16(ddlCompany.SelectedValue));
+                        }
+
+                    }
+
+                    if (!String.IsNullOrEmpty(ddlSpecification.SelectedValue))
+                    {
+                        sqlCri.Append(" `Extent3`.`id` = " + Convert.ToInt16(ddlSpecification.SelectedValue));
+                    }
+
+                    if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
+                    {
+                        sqlCri.Append(" `Extent4`.`id` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
+                    }
+                    if (!String.IsNullOrEmpty(ddlJobStatus.SelectedValue))
+                    {
+                        sqlCri.Append(" `Extent7`.`id` = " + Convert.ToInt16(ddlJobStatus.SelectedValue));
+                    }
+
+                    if (!String.IsNullOrEmpty(txtREfNo.Text))
+                    {
+                        sqlCri.Append(" `Extent2`.`job_number` = '" + txtREfNo.Text+"'");
+
+                    }
+                    if (!String.IsNullOrEmpty(txtPo.Text))
+                    {
+                        sqlCri.Append(" `Extent2`.`sample_po` = '" + txtPo.Text+"'");
+                    }
+                    if (!String.IsNullOrEmpty(txtInvoice.Text))
+                    {
+                        sqlCri.Append(" `Extent1`.`sample_invoice` = '" + txtInvoice.Text+"'");
+
+                    }
+
+                    DateTime receive_report_from = String.IsNullOrEmpty(txtReceivedReportFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportFrom.Text);
+                    DateTime receive_report_to = String.IsNullOrEmpty(txtReceivedReportTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportTo.Text);
+                    if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
+                    {
+                        sqlCri.Append(" `Extent1`.`date_of_receive` between'" + receive_report_from.ToString("yyyy-MM-dd") + "' AND '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
+                    }
+
+                    DateTime duedate_from = String.IsNullOrEmpty(txtDuedateFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateFrom.Text);
+                    DateTime duedate_to = String.IsNullOrEmpty(txtDuedateTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateTo.Text);
+                    if (duedate_from != DateTime.MinValue && duedate_to != DateTime.MinValue)
+                    {
+                        sqlCri.Append(" `Extent2`.`due_date` between '" + duedate_from.ToString("yyyy-MM-dd") + "' AND '" + duedate_to.ToString("yyyy-MM-dd") + "'");
+
+                    }
+
+                    DateTime report_to_customer_from = String.IsNullOrEmpty(txtReportToCustomerFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerFrom.Text);
+                    DateTime report_to_customer_to = String.IsNullOrEmpty(txtReportToCustomerTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerTo.Text);
+                    if (report_to_customer_from != DateTime.MinValue && report_to_customer_to != DateTime.MinValue)
+                    {
+                        sqlCri.Append(" `Extent2`.`date_admin_sent_to_cus` between '" + report_to_customer_from.ToString("yyyy-MM-dd") + "' AND '" + report_to_customer_to.ToString("yyyy-MM-dd") + "'");
+
+                    }
+
+                    sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString() : "";
+                    sql += " ORDER BY `Extent2`.`job_number` DESC";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    MySqlDataReader sdr = cmd.ExecuteReader();
+                    dt.Load(sdr);
+                    Console.WriteLine();
+                }
 
                 job_info _jobInfo = new job_info();
-
-
-                //_jobInfo.duedate_from = DateTime.Now.AddMonths(-1);
-                //_jobInfo.duedate_to = DateTime.Now.AddMonths(1);
-                //IEnumerable xx = _jobInfo.SearchData();
-                DataTable dt2 = Extenders.ObtainDataTableFromIEnumerable(this.searchResult);
-                dt.Merge(dt2);
 
                 wb.Worksheets.Add(dt);
 

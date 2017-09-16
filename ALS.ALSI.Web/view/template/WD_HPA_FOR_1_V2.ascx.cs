@@ -656,7 +656,7 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_hpa_for1_coverpage> totalLines = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in totalLines)
             {
-                _val.C =0;
+                _val.C = 0;
                 _val.D = "0";
             }
             foreach (template_wd_hpa_for1_coverpage _val in totalLines)
@@ -670,11 +670,14 @@ namespace ALS.ALSI.Web.view.template
                 _val.C = 0;
                 _val.D = "0";
             }
-                foreach (template_wd_hpa_for1_coverpage _val in grandTotal)
+            foreach (template_wd_hpa_for1_coverpage _val in grandTotal)
             {
-                _val.C = itemLines.Where(x => x.hpa_type == 7).Sum(x => Convert.ToInt32(x.C));
-                _val.D = itemLines.Where(x => x.hpa_type == 7).Sum(x => Convert.ToInt32(x.D)).ToString();
+                _val.C = itemLines.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).Sum(x => Convert.ToInt32(x.C));
+                _val.D = itemLines.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).Sum(x => Convert.ToInt32(x.D)).ToString();
             }
+            //Add MgSiO
+
+            
             //Result-Line
             List<template_wd_hpa_for1_coverpage> resultLine = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in resultLine)

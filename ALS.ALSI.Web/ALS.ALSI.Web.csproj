@@ -1291,11 +1291,6 @@
     <Content Include="view\user\User.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="alsiDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>alsiDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1916,17 +1911,6 @@
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.woff" />
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="assets\global\plugins\uniform\README.md" />
-    <Content Include="alsiDataSet.xsc">
-      <DependentUpon>alsiDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="alsiDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>alsiDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="alsiDataSet.xss">
-      <DependentUpon>alsiDataSet.xsd</DependentUpon>
-    </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

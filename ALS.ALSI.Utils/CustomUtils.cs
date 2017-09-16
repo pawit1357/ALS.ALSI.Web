@@ -268,6 +268,7 @@ namespace ALS.ALSI.Utils
 
 
         }
+
         public static String removeSpacialCharacter(String originalStr)
         {
             String returnStr = originalStr;
