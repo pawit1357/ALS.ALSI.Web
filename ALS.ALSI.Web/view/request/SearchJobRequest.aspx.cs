@@ -634,10 +634,10 @@ namespace ALS.ALSI.Web.view.request
                 DataTable dt = new DataTable("DT");
 
                 dt.Columns.Add("Status", typeof(string));
-                dt.Columns.Add("Received", typeof(DateTime));
-                dt.Columns.Add("Report Sent to Customer", typeof(DateTime));
+                dt.Columns.Add("Received", typeof(string));
+                dt.Columns.Add("Report Sent to Customer", typeof(string));
                 dt.Columns.Add("Receive Date", typeof(string));
-                dt.Columns.Add("Due Date", typeof(DateTime));
+                dt.Columns.Add("Due Date", typeof(string));
                 dt.Columns.Add("ALS Ref", typeof(string));
                 dt.Columns.Add("No.Cus Ref No", typeof(string));
                 dt.Columns.Add("S Ref No", typeof(string));
@@ -659,10 +659,10 @@ namespace ALS.ALSI.Web.view.request
 
                     String sql = "SELECT" +
                                 "`Extent7`.`name` AS `Status`," +
-                                "`Extent2`.`date_srchemist_complate` AS `Received`," +
+                                "DATE_FORMAT(`Extent2`.`date_srchemist_complate`,'%e %b %Y') AS `Received`," +
                                 "`Extent2`.`date_admin_sent_to_cus` AS `Report Sent to Customer`," +
-                                "`Extent1`.`date_of_receive` AS `Receive Date`," +
-                                "`Extent2`.`due_date` AS `Due Date`," +
+                                "DATE_FORMAT(`Extent1`.`date_of_receive`,'%e %b %Y') AS `Receive Date`," +
+                                "DATE_FORMAT(`Extent2`.`due_date`,'%e %b %Y') AS `Due Date`," +
                                 "`Extent2`.`job_number` AS `ALS Ref`," +
                                 "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
                                 "`Extent1`.`s_pore_ref_no` AS `S Ref No`," +

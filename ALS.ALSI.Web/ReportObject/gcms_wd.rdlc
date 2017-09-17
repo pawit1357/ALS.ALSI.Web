@@ -978,7 +978,7 @@
             <Top>1.65531in</Top>
             <Left>0.00086in</Left>
             <Height>0.60571in</Height>
-            <Width>7.23165in</Width>
+            <Width>7.23163in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1728,7 +1728,7 @@
             <DataSetName>DataSet2</DataSetName>
             <Top>2.46921in</Top>
             <Height>0.67527in</Height>
-            <Width>7.23251in</Width>
+            <Width>7.23252in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -2177,7 +2177,7 @@
             <DataSetName>DataSet4</DataSetName>
             <Top>4.62348in</Top>
             <Height>0.69792in</Height>
-            <Width>7.23251in</Width>
+            <Width>7.2325in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -2459,7 +2459,7 @@
             <Top>7.98697cm</Top>
             <Left>0cm</Left>
             <Height>1.75464cm</Height>
-            <Width>18.37058cm</Width>
+            <Width>18.37052cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -3130,9 +3130,8 @@
                 <Value>=Parameters!SampleDescription.Value</Value>
               </Parameter>
             </Parameters>
-            <Top>0.10642in</Top>
             <Left>0.00086in</Left>
-            <Height>1.34069in</Height>
+            <Height>1.44711in</Height>
             <Width>7.23165in</Width>
             <ZIndex>8</ZIndex>
             <Style>
@@ -3145,7 +3144,7 @@
         <Height>6.4231in</Height>
         <Style />
       </Body>
-      <Width>7.23251in</Width>
+      <Width>7.23252in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

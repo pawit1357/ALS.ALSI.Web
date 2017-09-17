@@ -224,43 +224,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="Textbox18">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>REPORT</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontSize>15pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>0.17639cm</Top>
-            <Left>0.635cm</Left>
-            <Height>0.74048cm</Height>
-            <Width>16.20684cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox29">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -271,7 +234,7 @@
                     <Value>METHOD/PROCEDURE:</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>11pt</FontSize>
+                      <FontFamily>Lucida Sans</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -284,11 +247,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>8.82403cm</Top>
-            <Left>0.63499cm</Left>
+            <Top>5.25639cm</Top>
+            <Left>0.0022cm</Left>
             <Height>0.52881cm</Height>
             <Width>16.48138cm</Width>
-            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -320,7 +282,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.61458in</Height>
+                  <Height>0.41458in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -334,7 +296,7 @@
                                   <Value>Particle Analysis by SEM EDX</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -392,7 +354,7 @@
                                   <Value>Taped Area For Drive Parts</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -450,7 +412,7 @@
                                   <Value>No. of Times Taped</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -508,7 +470,7 @@
                                   <Value>Surface Area Analysed (cm2)</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -566,7 +528,7 @@
                                   <Value>Particle Ranges</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -626,7 +588,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!ParticleAnalysisBySEMEDX.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -677,7 +641,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!TapedAreaForDriveParts.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -728,7 +694,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!NoofTimesTaped.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -779,7 +747,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!SurfaceAreaAnalysed.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -830,7 +800,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!ParticleRanges.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -895,11 +867,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>3.75167in</Top>
-            <Left>0.25in</Left>
-            <Height>0.86458in</Height>
+            <Top>2.34708in</Top>
+            <Height>0.66458in</Height>
             <Width>6.4896in</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -936,7 +907,7 @@
                     <Value>Results</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>11pt</FontSize>
+                      <FontFamily>Lucida Sans</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -947,32 +918,13 @@
                   <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>11.84875cm</Top>
-            <Left>0.63499cm</Left>
-            <Height>0.52881cm</Height>
-            <Width>14.20814cm</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox37">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!ResultDesc.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
@@ -981,11 +933,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>12.44811cm</Top>
-            <Left>0.63499cm</Left>
+            <Top>7.82601cm</Top>
+            <Left>0cm</Left>
             <Height>0.52881cm</Height>
-            <Width>14.20814cm</Width>
-            <ZIndex>4</ZIndex>
+            <Width>16.48137cm</Width>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1017,7 +969,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.58333in</Height>
+                  <Height>0.38333in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1031,7 +983,7 @@
                                   <Value>Test</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1089,7 +1041,7 @@
                                   <Value>Particle Classification</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1147,7 +1099,7 @@
                                   <Value>Result</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1164,7 +1116,7 @@
                                   <Value>(</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1174,7 +1126,7 @@
                                   <Value>=Parameters!rpt_unit.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1184,7 +1136,7 @@
                                   <Value>)</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1242,7 +1194,7 @@
                                   <Value>Specification Limit</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1259,7 +1211,7 @@
                                   <Value>(</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1269,7 +1221,7 @@
                                   <Value>=Parameters!rpt_unit.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1279,7 +1231,7 @@
                                   <Value>)</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1337,7 +1289,7 @@
                                   <Value>PASS / FAIL</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1456,7 +1408,7 @@
                                   <Value>=Fields!A.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1509,7 +1461,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!C.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1560,7 +1514,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!D.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1611,7 +1567,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!E.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1680,11 +1638,11 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>5.17847in</Top>
-            <Left>0.25086in</Left>
-            <Height>0.83333in</Height>
+            <Top>3.35874in</Top>
+            <Left>0.00087in</Left>
+            <Height>0.63333in</Height>
             <Width>6.48873in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1743,7 +1701,7 @@
                                   <Value>Elemental Composition</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1801,7 +1759,7 @@
                                   <Value>Count</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1859,7 +1817,7 @@
                                   <Value>=Parameters!rpt_unit.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1917,7 +1875,7 @@
                                   <Value>Remarks</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1980,7 +1938,7 @@
                                   <Value>=Fields!B.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -2033,7 +1991,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!C.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -2084,7 +2044,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!D.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -2135,7 +2097,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!E.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -2203,11 +2167,10 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>8.48749in</Top>
-            <Left>0.25087in</Left>
+            <Top>6.47804in</Top>
             <Height>0.58333in</Height>
             <Width>6.48873in</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2244,7 +2207,7 @@
                     <Value>Analysis Table on Base</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>11pt</FontSize>
+                      <FontFamily>Lucida Sans</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -2257,11 +2220,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>21.00261cm</Top>
-            <Left>0.63721cm</Left>
+            <Top>15.74903cm</Top>
+            <Left>0.00221cm</Left>
             <Height>0.52881cm</Height>
-            <Width>14.20814cm</Width>
-            <ZIndex>7</ZIndex>
+            <Width>16.48137cm</Width>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2282,7 +2245,7 @@
                     <Value>Total hard particles/cm2 = total no. of hard particles/(no. of times taped x surface area analysed)</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>11pt</FontSize>
+                      <FontFamily>Lucida Sans</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -2299,7 +2262,7 @@
                     <Value>Stage Mimic of  Base</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>11pt</FontSize>
+                      <FontFamily>Lucida Sans</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -2312,11 +2275,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>15.44636cm</Top>
-            <Left>0.6328cm</Left>
+            <Top>10.31626cm</Top>
+            <Left>0cm</Left>
             <Height>1.11089cm</Height>
-            <Width>16.75035cm</Width>
-            <ZIndex>8</ZIndex>
+            <Width>16.48137cm</Width>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2331,11 +2294,11 @@
             <Source>Embedded</Source>
             <Value>=Parameters!img01Url.Value</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>6.58805in</Top>
-            <Left>0.25087in</Left>
+            <Top>4.55443in</Top>
+            <Left>0.00087in</Left>
             <Height>1.07653in</Height>
             <Width>1.35417in</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2352,7 +2315,7 @@
                     <Value>Please refer to attachment for details of results</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>11pt</FontSize>
+                      <FontFamily>Lucida Sans</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -2369,7 +2332,7 @@
                     <Value>Note: This report was performed test by ALS Singapore</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>11pt</FontSize>
+                      <FontFamily>Lucida Sans</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -2380,52 +2343,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>19.78553cm</Top>
-            <Left>0.6328cm</Left>
+            <Top>14.47903cm</Top>
+            <Left>0.00221cm</Left>
             <Height>1.09361cm</Height>
-            <Width>14.20814cm</Width>
-            <ZIndex>10</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox49">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Remark:
-1.) The result related only to the test items.
-2.) The test report shall not be reproduced except in full, without written approval of ALS Testing Services (Thailand) Co., Ltd.
-</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>23.37187cm</Top>
-            <Left>0.54129cm</Left>
-            <Height>1.32257cm</Height>
-            <Width>16.30055cm</Width>
-            <ZIndex>11</ZIndex>
+            <Width>16.47916cm</Width>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2438,11 +2360,11 @@
           </Textbox>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>9.77777in</Top>
-            <Left>0.21485in</Left>
+            <Top>7.13082in</Top>
+            <Left>0.06988in</Left>
             <Height>1.04167in</Height>
-            <Width>6.52475in</Width>
-            <ZIndex>12</ZIndex>
+            <Width>6.41885in</Width>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2451,11 +2373,10 @@
           </Subreport>
           <Subreport Name="Subreport2">
             <ReportName>ReportHeader</ReportName>
-            <Top>0.51913in</Top>
-            <Left>0.25087in</Left>
+            <Left>0.00087in</Left>
             <Height>2in</Height>
-            <Width>6.37978in</Width>
-            <ZIndex>13</ZIndex>
+            <Width>6.48873in</Width>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2463,10 +2384,10 @@
             </Style>
           </Subreport>
         </ReportItems>
-        <Height>10.98083in</Height>
+        <Height>8.2417in</Height>
         <Style />
       </Body>
-      <Width>6.84376in</Width>
+      <Width>6.4896in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

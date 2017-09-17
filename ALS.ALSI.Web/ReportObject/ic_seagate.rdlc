@@ -1116,8 +1116,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.54888in</Top>
-            <Left>0in</Left>
-            <Height>0.57092in</Height>
+            <Height>0.57093in</Height>
             <Width>6.93185in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -1668,9 +1667,8 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet2</DataSetName>
             <Top>2.2844in</Top>
-            <Left>0in</Left>
-            <Height>0.56138in</Height>
-            <Width>6.93185in</Width>
+            <Height>0.56139in</Height>
+            <Width>6.93184in</Width>
             <ZIndex>3</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2153,9 +2151,8 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet3</DataSetName>
             <Top>2.87356in</Top>
-            <Left>0in</Left>
             <Height>0.58466in</Height>
-            <Width>6.93185in</Width>
+            <Width>6.93184in</Width>
             <ZIndex>4</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2438,7 +2435,7 @@
             <Top>8.78389cm</Top>
             <Left>0cm</Left>
             <Height>1.58639cm</Height>
-            <Width>17.6069cm</Width>
+            <Width>17.60687cm</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2454,7 +2451,6 @@
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
             <Top>4.66745in</Top>
-            <Left>0in</Left>
             <Height>1.04167in</Height>
             <Width>6.93185in</Width>
             <ZIndex>6</ZIndex>
@@ -2495,7 +2491,6 @@
                 <Value>=Parameters!SampleDescription.Value</Value>
               </Parameter>
             </Parameters>
-            <Left>0in</Left>
             <Height>1.34069in</Height>
             <Width>6.93185in</Width>
             <ZIndex>7</ZIndex>
@@ -2993,7 +2988,7 @@
         <Height>5.81842in</Height>
         <Style />
       </Body>
-      <Width>7.05359in</Width>
+      <Width>6.93185in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

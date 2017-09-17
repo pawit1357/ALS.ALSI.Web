@@ -855,7 +855,7 @@ namespace ALS.ALSI.Web.view.template
                 (x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).OrderBy(x=>x.seq).ToList();
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -898,7 +898,11 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", listHpa.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.ToDataTable())); // Add datasource here
+
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.GetRange(0,24).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", listElementalComposition.GetRange(24, 24).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", listElementalComposition.GetRange(48, 24).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", listElementalComposition.GetRange(72, listElementalComposition.Count-72).ToDataTable())); // Add datasource here
 
 
 
