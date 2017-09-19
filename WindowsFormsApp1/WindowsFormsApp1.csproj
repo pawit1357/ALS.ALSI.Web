@@ -32,10 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StructureMap, Version=2.5.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ALS.ALSI.Biz\Binaries\StructureMap.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -81,20 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ALS.ALIS.Repository\ALS.ALIS.Repository.csproj">
-      <Project>{3ae4eac4-3189-4168-9c8b-f608a1ad7ea2}</Project>
-      <Name>ALS.ALIS.Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ALS.ALSI.Biz\ALS.ALSI.Biz.csproj">
-      <Project>{759a88b6-bd40-4781-904b-b07bdfeb88c3}</Project>
-      <Name>ALS.ALSI.Biz</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ALS.ALSI.Utils\ALS.ALSI.Utils.csproj">
-      <Project>{018b48e9-ebc2-45c0-a2ae-52d76cb1e771}</Project>
-      <Name>ALS.ALSI.Utils</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
