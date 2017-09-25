@@ -215,15 +215,15 @@ namespace ALS.ALSI.Web.view.template
                 ddlComponent.SelectedValue = cover.procedureNo_id.ToString();
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
                 txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].number_of_pieces_used_for_extraction;
-                txtProcedureNo.Text = this.coverpages[0].procedureNo;
+                
                 tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
                 if (component != null)
                 {
                     this.coverpages[0].temperature_humidity_parameters_id = component.ID;
                     this.coverpages[0].temperature_humidity_parameters = component.C;
                     this.coverpages[0].specification = component.D;
-
-
+                    this.coverpages[0].procedureNo = component.A;
+                    txtProcedureNo.Text = this.coverpages[0].procedureNo;
                     cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
                     if (cbCheckBox.Checked)
                     {
@@ -775,7 +775,7 @@ namespace ALS.ALSI.Web.view.template
                               };
             dtHeader.Columns.AddRange(cols);
             DataRow row = dtHeader.NewRow();
-            row["ProcedureNo"] = "";
+            row["ProcedureNo"] = txtProcedureNo.Text;
             row["NumOfPiecesUsedForExtraction"] = this.coverpages[0].number_of_pieces_used_for_extraction;
             dtHeader.Rows.Add(row);
 

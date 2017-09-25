@@ -818,6 +818,7 @@ namespace ALS.ALSI.Web.view.template
 
             //tb_m_specification component = new tb_m_specification().SelectByID(this.coverpages[0].specification_id.Value);
 
+            this.coverpages[0].procedureNo = txtProcedureNo.Text;
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
 
             ReportHeader reportHeader = new ReportHeader();

@@ -558,7 +558,6 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.59055in</Top>
-            <Left>0in</Left>
             <Height>0.71875in</Height>
             <Width>7.23165in</Width>
             <ZIndex>1</ZIndex>
@@ -628,8 +627,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>7.80539cm</Top>
-            <Left>0.00001cm</Left>
+            <Top>6.04201cm</Top>
+            <Left>0.00004cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.36838cm</Width>
             <ZIndex>2</ZIndex>
@@ -870,7 +869,7 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet3</DataSetName>
             <Top>4.03311in</Top>
-            <Left>0.44146in</Left>
+            <Left>0.44442in</Left>
             <Height>1.91161in</Height>
             <Width>6.3583in</Width>
             <ZIndex>3</ZIndex>
@@ -883,7 +882,7 @@
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
             <Top>6.01417in</Top>
-            <Left>0in</Left>
+            <Left>0.00296in</Left>
             <Height>1.04167in</Height>
             <Width>7.23165in</Width>
             <ZIndex>4</ZIndex>
@@ -924,7 +923,6 @@
                 <Value>=Parameters!SampleDescription.Value</Value>
               </Parameter>
             </Parameters>
-            <Left>0in</Left>
             <Height>1.34069in</Height>
             <Width>7.23165in</Width>
             <ZIndex>5</ZIndex>
@@ -1525,9 +1523,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>3.35063in</Top>
+            <Top>2.65639in</Top>
+            <Left>0.00001in</Left>
             <Height>0.61304in</Height>
-            <Width>7.23165in</Width>
+            <Width>7.23166in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -1784,10 +1783,10 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>6.04201cm</Top>
-            <Left>0.00001cm</Left>
+            <Top>8.48073cm</Top>
+            <Left>0.00004cm</Left>
             <Height>1.58699cm</Height>
-            <Width>18.36839cm</Width>
+            <Width>18.3684cm</Width>
             <ZIndex>7</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -1804,7 +1803,7 @@
         <Height>7.05584in</Height>
         <Style />
       </Body>
-      <Width>7.23165in</Width>
+      <Width>7.23461in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

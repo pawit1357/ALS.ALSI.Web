@@ -14,6 +14,7 @@ namespace ALS.ALSI.Biz.DataAccess
         #region "Property"
         public CommandNameEnum RowState { get; set; }
         public string temperature_humidity_parameters { get; set; }
+        public string procedureNo { get; set; }
         #endregion
 
         private static IRepository<template_seagate_corrosion_coverpage> _repository
