@@ -539,7 +539,18 @@ namespace ALS.ALSI.Web.view.template
                         }
 
                         objWork.DeleteBySampleID(this.SampleID);
-                        objWork.InsertList(this.Lpcs.Where(x => x.channel_size.Equals(CheckBoxList1.SelectedValue)).ToList());
+                        List<String> listOfParitcleSelected = new List<String>();
+                        for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+
+                        {
+
+                            if (CheckBoxList1.Items[i].Selected)
+                            {
+                                listOfParitcleSelected.Add(CheckBoxList1.Items[i].Value);
+                            }
+
+                        }
+                        objWork.InsertList(this.Lpcs.Where(x => listOfParitcleSelected.Contains(x.channel_size)).ToList());
 
                     }
                     else

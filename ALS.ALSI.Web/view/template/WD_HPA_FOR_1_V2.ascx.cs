@@ -647,7 +647,7 @@ namespace ALS.ALSI.Web.view.template
                     double _rc = Convert.ToDouble(_val.C);
                     double c23 = Convert.ToDouble(txtC23.Text);
                     double d23 = Convert.ToDouble(txtD23.Text);
-                    double result = Math.Round(_rc / c23 / d23, 0);
+                    double result = Math.Round(_rc / c23 / d23 , MidpointRounding.AwayFromZero);
                     _val.D = result.ToString();
                 }
             }
