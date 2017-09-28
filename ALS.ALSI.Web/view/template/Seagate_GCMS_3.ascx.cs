@@ -464,6 +464,13 @@ namespace ALS.ALSI.Web.view.template
                     txtD50.Text = cov.D50;
                     txtD51.Text = cov.D51;
                     txtD52.Text = cov.D52;
+
+                    lbRemark1.Text = cov.remark1;
+                    lbRemark2.Text = cov.remark2;
+                    lbRemark3.Text = cov.remark3;
+                    lbRemark4.Text = cov.remark4;
+                    lbRemark5.Text = cov.remark5;
+
                     #region "Unit"
                     gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
                     gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
@@ -740,7 +747,11 @@ namespace ALS.ALSI.Web.view.template
                             //cov.UnitCompound = Convert.ToInt16(ddlUnitCompound.SelectedValue);
 
                             //cov.selected_base = Convert.ToInt32(ddlBase.SelectedValue);
-
+                            cov.remark1 = lbRemark1.Text;
+                            cov.remark2 = lbRemark2.Text;
+                            cov.remark3 = lbRemark3.Text;
+                            cov.remark4 = lbRemark4.Text;
+                            cov.remark5 = lbRemark5.Text;
                         }
                         template_seagate_gcms_coverpage.UpdateList(this.coverpages);
 
@@ -1784,26 +1795,30 @@ namespace ALS.ALSI.Web.view.template
 
 
             //Note: This report was performed test by ALS Singapore.
-            if (!string.IsNullOrEmpty(txtD31.Text))
+            if (!string.IsNullOrEmpty(txtD31.Text) && String.IsNullOrEmpty(lbRemark1.Text))
             {
                 lbRemark1.Text = String.Format("1.) Minimun RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD31.Text), 3), txtD32.Text);
             }
-            if (!string.IsNullOrEmpty(txtC31.Text))
+
+            if (!string.IsNullOrEmpty(txtC31.Text) && String.IsNullOrEmpty(lbRemark2.Text))
             {
                 lbRemark2.Text = String.Format("2.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC31.Text), 3), txtC32.Text);
             }
-            if (!string.IsNullOrEmpty(txtD51.Text))
+            if (!string.IsNullOrEmpty(txtD51.Text) && String.IsNullOrEmpty(lbRemark3.Text))
             {
                 lbRemark3.Text = String.Format("3.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
             }
-            if (!string.IsNullOrEmpty(txtC51.Text))
+            if (!string.IsNullOrEmpty(txtC51.Text) && String.IsNullOrEmpty(lbRemark4.Text))
             {
                 lbRemark4.Text = String.Format("4.) Minimun RHC Detection Limit is Hub {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
             }
-            if (!string.IsNullOrEmpty(txtC51.Text))
+            if (!string.IsNullOrEmpty(txtC51.Text) && String.IsNullOrEmpty(lbRemark5.Text))
             {
-                lbRemark4.Text = String.Format("5.) Minimun RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
+                lbRemark5.Text = String.Format("5.) Minimun RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
             }
+
+
+
             #region "Binding"
 
             List<template_seagate_gcms_coverpage> motorOils = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
@@ -2219,6 +2234,7 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("Remark2", lbRemark2.Text));
                 reportParameters.Add(new ReportParameter("Remark3", String.IsNullOrEmpty(lbRemark3.Text) ? " " : lbRemark3.Text));
                 reportParameters.Add(new ReportParameter("Remark4", String.IsNullOrEmpty(lbRemark4.Text) ? "" : lbRemark4.Text));
+                reportParameters.Add(new ReportParameter("Remark5", String.IsNullOrEmpty(lbRemark5.Text) ? "" : lbRemark5.Text));
 
                 // Variables
                 Warning[] warnings;

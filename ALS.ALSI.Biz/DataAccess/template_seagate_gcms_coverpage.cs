@@ -168,5 +168,10 @@ namespace ALS.ALSI.Biz.DataAccess
         public string F31 { get; set; }
         public string F32 { get; set; }
         public string C13 { get; set; }
+        public string remark1 { get; set; }
+        public string remark2 { get; set; }
+        public string remark3 { get; set; }
+        public string remark4 { get; set; }
+        public string remark5 { get; set; }
     }
 }

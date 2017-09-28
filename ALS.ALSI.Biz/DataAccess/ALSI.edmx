@@ -880,6 +880,11 @@
           <Property Name="F31" Type="varchar" MaxLength="20" />
           <Property Name="F32" Type="varchar" MaxLength="20" />
           <Property Name="C13" Type="varchar" MaxLength="20" />
+          <Property Name="remark1" Type="varchar" MaxLength="150" />
+          <Property Name="remark2" Type="varchar" MaxLength="150" />
+          <Property Name="remark3" Type="varchar" MaxLength="150" />
+          <Property Name="remark4" Type="varchar" MaxLength="150" />
+          <Property Name="remark5" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -2702,6 +2707,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="F31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="F32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="C13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="remark1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -4172,6 +4182,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_gcms_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_seagate_gcms_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_gcms_coverpage">
+                <ScalarProperty Name="remark5" ColumnName="remark5" />
+                <ScalarProperty Name="remark4" ColumnName="remark4" />
+                <ScalarProperty Name="remark3" ColumnName="remark3" />
+                <ScalarProperty Name="remark2" ColumnName="remark2" />
+                <ScalarProperty Name="remark1" ColumnName="remark1" />
                 <ScalarProperty Name="C13" ColumnName="C13" />
                 <ScalarProperty Name="F32" ColumnName="F32" />
                 <ScalarProperty Name="F31" ColumnName="F31" />
