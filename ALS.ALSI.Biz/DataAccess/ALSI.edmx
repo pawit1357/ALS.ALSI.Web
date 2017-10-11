@@ -623,10 +623,12 @@
           <Property Name="result" Type="varchar" MaxLength="200" />
           <Property Name="row_type" Type="int" />
           <Property Name="SamplingTime" Type="varchar" MaxLength="50" />
-          <Property Name="unit" Type="int" />
           <Property Name="procedureNo" Type="varchar" MaxLength="45" />
           <Property Name="sampleSize" Type="varchar" MaxLength="45" />
           <Property Name="chemical_id" Type="varchar" MaxLength="45" />
+          <Property Name="unit" Type="int" />
+          <Property Name="digit1" Type="int" />
+          <Property Name="digit2" Type="int" />
         </EntityType>
         <EntityType Name="template_seagate_ftir_coverpage">
           <Key>
@@ -885,6 +887,7 @@
           <Property Name="remark3" Type="varchar" MaxLength="150" />
           <Property Name="remark4" Type="varchar" MaxLength="150" />
           <Property Name="remark5" Type="varchar" MaxLength="150" />
+          <Property Name="UnitCompoundSub" Type="int" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -2450,10 +2453,12 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="result" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="row_type" Type="Int32" />
           <Property Name="SamplingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="unit" Type="Int32" />
           <Property Name="procedureNo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="sampleSize" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="chemical_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="unit" Type="Int32" />
+          <Property Name="digit1" Type="Int32" />
+          <Property Name="digit2" Type="Int32" />
         </EntityType>
         <EntityType Name="template_seagate_ftir_coverpage">
           <Key>
@@ -2712,6 +2717,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="remark3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="remark4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="remark5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="UnitCompoundSub" Type="Int32" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -4069,10 +4075,12 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_dhs_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_seagate_dhs_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_dhs_coverpage">
+                <ScalarProperty Name="digit2" ColumnName="digit2" />
+                <ScalarProperty Name="digit1" ColumnName="digit1" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="chemical_id" ColumnName="chemical_id" />
                 <ScalarProperty Name="sampleSize" ColumnName="sampleSize" />
                 <ScalarProperty Name="procedureNo" ColumnName="procedureNo" />
-                <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="SamplingTime" ColumnName="SamplingTime" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
                 <ScalarProperty Name="result" ColumnName="result" />
@@ -4182,6 +4190,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_gcms_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_seagate_gcms_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_gcms_coverpage">
+                <ScalarProperty Name="UnitCompoundSub" ColumnName="UnitCompoundSub" />
                 <ScalarProperty Name="remark5" ColumnName="remark5" />
                 <ScalarProperty Name="remark4" ColumnName="remark4" />
                 <ScalarProperty Name="remark3" ColumnName="remark3" />

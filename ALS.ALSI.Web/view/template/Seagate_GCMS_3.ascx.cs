@@ -119,6 +119,11 @@ namespace ALS.ALSI.Web.view.template
             ddlUnitCompound.DataBind();
             ddlUnitCompound.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            ddlUnitCompoundSub.Items.Clear();
+            ddlUnitCompoundSub.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
+            ddlUnitCompoundSub.DataBind();
+            ddlUnitCompoundSub.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
             ddlUnitMotorBaseSub.Items.Clear();
             ddlUnitMotorBaseSub.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
             ddlUnitMotorBaseSub.DataBind();
@@ -143,12 +148,6 @@ namespace ALS.ALSI.Web.view.template
             ddlUnitMotorOilContamination.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("GCMS")).ToList();
             ddlUnitMotorOilContamination.DataBind();
             ddlUnitMotorOilContamination.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-
-
-
-
-
-
 
 
 
@@ -317,7 +316,7 @@ namespace ALS.ALSI.Web.view.template
                         ddlUnitMotorBase.SelectedValue = this.coverpages[0].UnitMotorBase == null ? "0" : this.coverpages[0].UnitMotorBase.ToString();
                         ddlUnitMotorBaseSub.SelectedValue = this.coverpages[0].UnitMotorBaseSub == null ? "0" : this.coverpages[0].UnitMotorBaseSub.ToString();
                         ddlUnitCompound.SelectedValue = this.coverpages[0].UnitCompound == null ? "0" : this.coverpages[0].UnitCompound.ToString();
-
+                        ddlUnitCompoundSub.SelectedValue = this.coverpages[0].UnitCompoundSub == null ? "0" : this.coverpages[0].UnitCompoundSub.ToString();
 
 
 
@@ -484,8 +483,8 @@ namespace ALS.ALSI.Web.view.template
                     gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
                     gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitCompound.SelectedItem.Text);
                     gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
-                    gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitCompound.SelectedItem.Text);
-                    gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
+                    gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitCompoundSub.SelectedItem.Text);
+                    gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompoundSub.SelectedItem.Text);
                     #endregion
                     GenerrateCoverPage();
 
@@ -580,7 +579,6 @@ namespace ALS.ALSI.Web.view.template
                     #endregion
                     break;
                 case StatusEnum.CHEMIST_TESTING:
-                    //CalculateCas(false);
                     if (this.tbCas.Count > 0)
                     {
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
@@ -591,6 +589,8 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         #endregion
                         #region "CAS#"
+
+                        //DataTable t = this.tbCas.ToDataTable();
                         tb_m_gcms_cas.DeleteBySampleID(this.SampleID);
                         tb_m_gcms_cas.InsertList(this.tbCas);
                         #endregion
@@ -744,7 +744,8 @@ namespace ALS.ALSI.Web.view.template
                             cov.UnitMotorHubSub = Convert.ToInt16(ddlUnitMotorHubSub.SelectedValue);
                             cov.UnitMotorBase = Convert.ToInt16(ddlUnitMotorBase.SelectedValue);
                             cov.UnitMotorBaseSub = Convert.ToInt16(ddlUnitMotorBaseSub.SelectedValue);
-                            //cov.UnitCompound = Convert.ToInt16(ddlUnitCompound.SelectedValue);
+                            cov.UnitCompound = Convert.ToInt16(ddlUnitCompound.SelectedValue);
+                            cov.UnitCompoundSub = Convert.ToInt16(ddlUnitCompoundSub.SelectedValue);
 
                             //cov.selected_base = Convert.ToInt32(ddlBase.SelectedValue);
                             cov.remark1 = lbRemark1.Text;
@@ -768,9 +769,6 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
-                            //#region ":: STAMP COMPLETE DATE"
-                            //this.jobSample.sr_approve_date = DateTime.Now;
-                            //#endregion
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
@@ -819,7 +817,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step5owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (FileUpload1.HasFile)// && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
+                    if (FileUpload1.HasFile)
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -836,13 +834,10 @@ namespace ALS.ALSI.Web.view.template
                         FileUpload1.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
-                        //lbMessage.Text = string.Empty;
                     }
                     else
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
-                        //lbMessage.Attributes["class"] = "alert alert-error";
-                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
@@ -851,7 +846,6 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
-
             }
             if (errors.Count > 0)
             {
@@ -898,7 +892,6 @@ namespace ALS.ALSI.Web.view.template
                         string dd = DateTime.Now.ToString("dd");
 
                         String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                        //String source_file_url = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
@@ -1211,8 +1204,8 @@ namespace ALS.ALSI.Web.view.template
                                     String txtMotorOilBase35 = isheet.GetRow(35 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
 
                                     txtMotorOilHub = String.IsNullOrEmpty(txtMotorOilHub) ? "" : Convert.ToDouble(txtMotorOilHub).ToString("N2");
-                                    txtMotorOilBase25 = String.IsNullOrEmpty(txtMotorOilBase25) ? "" : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
-                                    txtMotorOilBase35 = String.IsNullOrEmpty(txtMotorOilBase35) ? "" : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
+                                    txtMotorOilBase25 = String.IsNullOrEmpty(txtMotorOilBase25) ? "" : "<MDL".Equals(txtMotorOilBase25) ? txtMotorOilBase25 : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
+                                    txtMotorOilBase35 = String.IsNullOrEmpty(txtMotorOilBase35) ? "" : "<MDL".Equals(txtMotorOilBase35) ? txtMotorOilBase25 : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
 
 
                                     List<template_seagate_gcms_coverpage> motorOilsUpdate = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
@@ -1221,18 +1214,32 @@ namespace ALS.ALSI.Web.view.template
                                         Double c0 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilHub) ? "0" : txtMotorOilHub);
                                         motorOilsUpdate[0].C = c0 == 0 ? "Not Detected" : Math.Round(c0, 2) + "";
 
+
                                         if (!String.IsNullOrEmpty(txtMotorOilBase35) && !txtMotorOilBase35.Equals("0.00"))
                                         {
-                                            Double c1 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilBase35) ? "0" : txtMotorOilBase35);
+                                            if ("<MDL".Equals(txtMotorOilBase35))
+                                            {
+                                                motorOilsUpdate[1].C = txtMotorOilBase35.Replace("<", "&lt;");
+                                            }
+                                            else
+                                            {
+                                                Double c1 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilBase35) ? "0" : txtMotorOilBase35);
 
-                                            motorOilsUpdate[1].C = c1 == 0 ? "Not Detected" : Math.Round(c1, 2) + "";
+                                                motorOilsUpdate[1].C = c1 == 0 ? "Not Detected" : Math.Round(c1, 2) + "";
+                                            }
                                         }
                                         else
                                         {
-                                            Double c2 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilBase25) ? "0" : txtMotorOilBase25);
+                                            if ("<MDL".Equals(txtMotorOilBase25))
+                                            {
+                                                motorOilsUpdate[1].C = " " + txtMotorOilBase25.Replace("<", "&lt;"); ;
+                                            }
+                                            else
+                                            {
+                                                Double c2 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilBase25) ? "0" : txtMotorOilBase25);
 
-                                            motorOilsUpdate[1].C = c2 == 0 ? "Not Detected" : Math.Round(c2, 2) + "";
-
+                                                motorOilsUpdate[1].C = c2 == 0 ? "Not Detected" : Math.Round(c2, 2) + "";
+                                            }
                                         }
                                     }
 
@@ -1268,6 +1275,45 @@ namespace ALS.ALSI.Web.view.template
                 gvRHCBase.DataBind();
                 gvRHCHub.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt16(GcmsSeagateEnum.RHC_HUB) && !x.library_id.Equals("0")).ToList();
                 gvRHCHub.DataBind();
+
+                //Note: This report was performed test by ALS Singapore.
+                if (!string.IsNullOrEmpty(txtD31.Text) && String.IsNullOrEmpty(lbRemark1.Text))
+                {
+                    lbRemark1.Text = String.Format("1.) Minimun RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD31.Text), 3), txtD32.Text);
+                }
+
+                if (!string.IsNullOrEmpty(txtC31.Text) && String.IsNullOrEmpty(lbRemark2.Text))
+                {
+                    lbRemark2.Text = String.Format("2.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC31.Text), 3), txtC32.Text);
+                }
+                if (!string.IsNullOrEmpty(txtD51.Text) && String.IsNullOrEmpty(lbRemark3.Text))
+                {
+                    lbRemark3.Text = String.Format("3.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
+                }
+                if (!string.IsNullOrEmpty(txtC51.Text) && String.IsNullOrEmpty(lbRemark4.Text))
+                {
+                    lbRemark4.Text = String.Format("4.) Minimun RHC Detection Limit is Hub {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
+                }
+                if (!string.IsNullOrEmpty(txtC51.Text) && String.IsNullOrEmpty(lbRemark5.Text))
+                {
+                    lbRemark5.Text = String.Format("5.) Minimun RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
+                }
+
+                gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
+                gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
+                gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
+                gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
+                gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBase.SelectedItem.Text);
+                gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBase.SelectedItem.Text);
+                gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHub.SelectedItem.Text);
+                gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
+                gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+                gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+
 
                 GenerrateCoverPage();
             }
@@ -1794,28 +1840,7 @@ namespace ALS.ALSI.Web.view.template
             txtD31.Text = String.IsNullOrEmpty(txtD31.Text) ? "" : Convert.ToDouble(txtD31.Text).ToString("N3");
 
 
-            //Note: This report was performed test by ALS Singapore.
-            if (!string.IsNullOrEmpty(txtD31.Text) && String.IsNullOrEmpty(lbRemark1.Text))
-            {
-                lbRemark1.Text = String.Format("1.) Minimun RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD31.Text), 3), txtD32.Text);
-            }
 
-            if (!string.IsNullOrEmpty(txtC31.Text) && String.IsNullOrEmpty(lbRemark2.Text))
-            {
-                lbRemark2.Text = String.Format("2.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC31.Text), 3), txtC32.Text);
-            }
-            if (!string.IsNullOrEmpty(txtD51.Text) && String.IsNullOrEmpty(lbRemark3.Text))
-            {
-                lbRemark3.Text = String.Format("3.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
-            }
-            if (!string.IsNullOrEmpty(txtC51.Text) && String.IsNullOrEmpty(lbRemark4.Text))
-            {
-                lbRemark4.Text = String.Format("4.) Minimun RHC Detection Limit is Hub {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
-            }
-            if (!string.IsNullOrEmpty(txtC51.Text) && String.IsNullOrEmpty(lbRemark5.Text))
-            {
-                lbRemark5.Text = String.Format("5.) Minimun RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
-            }
 
 
 
@@ -1829,8 +1854,7 @@ namespace ALS.ALSI.Web.view.template
 
                 gvMotorOil.DataSource = motorOils;
                 gvMotorOil.DataBind();
-                gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
-                gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+
                 gvMotorOil.Visible = true;
             }
             else
@@ -1851,8 +1875,7 @@ namespace ALS.ALSI.Web.view.template
                 gvMotorHub.DataBind();
 
 
-                gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHub.SelectedItem.Text);
-                gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
+
                 gvMotorHub.Visible = true;
             }
             else
@@ -1876,8 +1899,7 @@ namespace ALS.ALSI.Web.view.template
                 gvMotorHubSub.DataSource = motorHubSubs;
                 gvMotorHubSub.DataBind();
 
-                gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
-                gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+
                 gvMotorHubSub.Visible = true;
             }
             else
@@ -1897,8 +1919,7 @@ namespace ALS.ALSI.Web.view.template
                 gvMotorBase.DataSource = motorBases;
 
                 gvMotorBase.DataBind();
-                gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBase.SelectedItem.Text);
-                gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBase.SelectedItem.Text);
+
                 gvMotorBase.Visible = true;
             }
             else
@@ -1923,8 +1944,7 @@ namespace ALS.ALSI.Web.view.template
                 gvMotorBaseSub.DataSource = motorBaseSubs;
                 gvMotorBaseSub.DataBind();
 
-                gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
-                gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+
                 gvMotorBaseSub.Visible = true;
             }
             else
@@ -1943,8 +1963,7 @@ namespace ALS.ALSI.Web.view.template
                     compounds[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
                 }
 
-                gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
-                gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
+
 
                 gvCompound.DataSource = compounds;
                 gvCompound.DataBind();
@@ -1980,8 +1999,7 @@ namespace ALS.ALSI.Web.view.template
                 //compoundSubs[4].C = (Convert.ToDouble(compoundSubs[5].C) == 0) ? "Not Detecte" : compoundSubs[4].C;
 
 
-                gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
-                gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
+
 
                 gvCompoundSub.DataSource = compoundSubs;
                 gvCompoundSub.DataBind();
@@ -2165,8 +2183,8 @@ namespace ALS.ALSI.Web.view.template
                     gvCompoundSub.DataBind();
                     if (gvCompoundSub.Rows.Count > 0)
                     {
-                        gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompound.SelectedItem.Text);
-                        gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
+                        gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompoundSub.SelectedItem.Text);
+                        gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompoundSub.SelectedItem.Text);
                         gvCompoundSub.Visible = true;
                     }
                     else
@@ -2225,6 +2243,8 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("rpt_unit3", ddlUnitMotorHubSub.SelectedItem.Text));
                 reportParameters.Add(new ReportParameter("rpt_unit4", ddlUnitMotorBase.SelectedItem.Text));
                 reportParameters.Add(new ReportParameter("rpt_unit5", ddlUnitMotorBaseSub.SelectedItem.Text));
+                reportParameters.Add(new ReportParameter("rpt_unit6", ddlUnitCompound.SelectedItem.Text));
+                reportParameters.Add(new ReportParameter("rpt_unit7", ddlUnitCompoundSub.SelectedItem.Text));
 
 
 
@@ -2250,13 +2270,26 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/gcms_seagate.rdlc");
                 viewer.LocalReport.SetParameters(reportParameters);
 
+                foreach (var item in coverpages)
+                {
+                    item.C = item.C.Replace("&lt;", "<");
+                }
 
+                DataTable dt2 = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList().ToDataTable();
+                DataTable dt3 = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-")).ToList().ToDataTable();
+                DataTable dt4 = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB) && !x.A.Equals("-")).ToList().ToDataTable();
+                DataTable dt5 = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE) && !x.A.Equals("-")).ToList().ToDataTable();
+                DataTable dt6 = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-")).ToList().ToDataTable();
+                DataTable dt7 = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND) && !x.A.Equals("-")).ToList().ToDataTable();
+                DataTable dt8 = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList().ToDataTable();
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL)).ToList().ToDataTable()));
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB)).ToList().ToDataTable()));
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB)).ToList().ToDataTable()));
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList().ToDataTable()));
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB)).ToList().ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt2));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt3));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt4));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", dt5));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", dt6));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", dt7));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet8", dt8));
                 //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND)).ToList().ToDataTable()));
 
 
@@ -2434,6 +2467,15 @@ namespace ALS.ALSI.Web.view.template
         {
             gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitCompound.SelectedItem.Text);
             gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
+            ModolPopupExtender.Show();
+            GenerrateCoverPage();
+        }
+
+        protected void ddlUnitCompoundSub_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitCompoundSub.SelectedItem.Text);
+            gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompoundSub.SelectedItem.Text);
             ModolPopupExtender.Show();
             GenerrateCoverPage();
         }

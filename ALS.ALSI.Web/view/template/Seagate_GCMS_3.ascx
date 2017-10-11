@@ -91,7 +91,8 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
+                                                                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
+
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -1466,14 +1467,6 @@
                                                 <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorOilContamination_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
 
-                                                <%--                <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
-                                                    <asp:ListItem Value="4">mg</asp:ListItem>
-
-                                                </asp:DropDownList>--%>
-
                                             </td>
                                         </tr>
                                         <tr>
@@ -1481,14 +1474,6 @@
                                             <td>
                                                 <asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
-
-                                                <%--<asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
-                                                    <asp:ListItem Value="4">mg</asp:ListItem>
-
-                                                </asp:DropDownList>--%>
 
                                             </td>
                                         </tr>
@@ -1498,14 +1483,6 @@
                                                 <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHubSub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
 
-                                                <%--                                                <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
-                                                    <asp:ListItem Value="4">mg</asp:ListItem>
-
-                                                </asp:DropDownList>--%>
-
                                             </td>
                                         </tr>
                                         <tr>
@@ -1513,15 +1490,6 @@
                                             <td>
                                                 <asp:DropDownList ID="ddlUnitMotorBase" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorBase_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
-
-
-                                                <%--                                                <asp:DropDownList ID="ddlUnitMotorBase" runat="server" class="select2_category form-control">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
-                                                    <asp:ListItem Value="4">mg</asp:ListItem>
-
-                                                </asp:DropDownList>--%>
 
                                             </td>
                                         </tr>
@@ -1531,14 +1499,6 @@
                                                 <asp:DropDownList ID="ddlUnitMotorBaseSub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorBaseSub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
 
-                                                <%--           <asp:DropDownList ID="ddlUnitMotorBaseSub" runat="server" class="select2_category form-control">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
-                                                    <asp:ListItem Value="4">mg</asp:ListItem>
-
-                                                </asp:DropDownList>--%>
-
                                             </td>
                                         </tr>
                                         <tr>
@@ -1547,12 +1507,15 @@
                                                 <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitCompound_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
 
-                                                <%--<asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
-                                                    <asp:ListItem Value="4">mg</asp:ListItem>
-                                                </asp:DropDownList>--%>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compound</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnitCompoundSub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitCompoundSub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
 
                                             </td>
                                         </tr>

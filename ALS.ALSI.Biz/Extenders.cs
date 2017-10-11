@@ -4,25 +4,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 
 public static class Extenders
 {
-
-    //[Extension()]
-    //public static IEnumerable Sorting(IEnumerable Collection, string SortProperty, SortDirection SortDirection)
-    //{
-    //    BindingFlags BINDING_FLAGS = BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance;
-
-    //    Collection.OrderBy(x => x.GetType().GetProperty(GridViewSortExpression).GetValue(x, null));
-    //    //Selector = f => f.GetType.GetProperty(SortProperty, BINDING_FLAGS).GetValue(f, null);
-
-    //    IEnumerable<Object> ListData = Collection.Cast<object>();
-    //    return SortDirection == SortDirection.Ascending ? ListData.OrderBy(Selector).ToList : ListData.OrderByDescending(Selector).ToList;
-    //}
 
     public static DataTable ToDataTable<T>(this IEnumerable<T> collection, string tableName)
     {

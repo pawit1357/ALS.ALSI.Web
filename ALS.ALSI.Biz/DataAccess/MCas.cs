@@ -16,8 +16,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public String SelectedText { get { return classification + (String.IsNullOrEmpty(library_id) ? String.Empty : " ( " + library_id + " )"); } }
         public String ref_ { get; set; }
         public CommandNameEnum RowState { get; set; }
-        public int pkInt { get { return Convert.ToInt32( String.IsNullOrEmpty(this.pk)? "0" :this.pk); } }
-        public int areaInt { get { return Convert.ToInt32(String.IsNullOrEmpty(this.area) ? "0" : this.area); } }
+        public Int64 pkInt { get { return Convert.ToInt64( String.IsNullOrEmpty(this.pk)? "0" :this.pk); } }
+        public Int64 areaInt { get { return Convert.ToInt64(String.IsNullOrEmpty(this.area) ? "0" : this.area); } }
         public decimal amoutDecimal { get { return !isNumber(this.amount)? 0: Convert.ToDecimal(this.amount); } }
         //public string chemical_falg { get; set; }
         #endregion
