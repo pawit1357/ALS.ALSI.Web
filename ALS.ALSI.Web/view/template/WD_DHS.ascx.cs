@@ -121,7 +121,11 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
-
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("DHS")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             if (this.jobSample != null)
             {
@@ -256,12 +260,37 @@ namespace ALS.ALSI.Web.view.template
                 {
 
                     this.CommandName = CommandNameEnum.Edit;
-                    detailSpec = detailSpec.SelectByID(this.coverpages[0].detail_spec_id.Value);
-                    if (detailSpec != null)
+
+                    if (this.coverpages[0].unit != null)
                     {
-                        gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", detailSpec.C);
-                        gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", detailSpec.C);
+                        tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
+                        if (_unit != null)
+                        {
+                            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
+                            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
+                            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                        }
+                        else
+                        {
+                            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
+                            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
+                            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                        }
                     }
+                    else
+                    {
+                        detailSpec = detailSpec.SelectByID(this.coverpages[0].detail_spec_id.Value);
+                        if (detailSpec != null)
+                        {
+                            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", detailSpec.C);
+                            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", detailSpec.C);
+                            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", detailSpec.C);
+                        }
+                    }
+
+
+
+
                     ddlComponent.SelectedValue = this.coverpages[0].component_id.ToString();
                     ddlSpecification.SelectedValue = this.coverpages[0].detail_spec_id.ToString();
 
@@ -373,6 +402,7 @@ namespace ALS.ALSI.Web.view.template
                             _val.pm_number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                             _val.pm_extraction_medium = txtExtractionMedium.Text;
                             _val.pm_extraction_volume = txtExtractionVolume.Text;
+                            _val.unit = Convert.ToInt16(ddlUnit.SelectedValue);
                         }
                         template_wd_dhs_coverpage.UpdateList(this.coverpages);
                     }
@@ -770,8 +800,9 @@ namespace ALS.ALSI.Web.view.template
                 }
 
                 //Result Description
-                gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", detailSpec.C);
-                gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", detailSpec.C);
+                //gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", detailSpec.C);
+                //gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", detailSpec.C);
+                //gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", detailSpec.C);
                 lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", detailSpec.B, detailSpec.A);
 
 
@@ -816,8 +847,16 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
-
-            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+            String unitName = "ng/part";
+            if (this.coverpages[0].unit != null)
+            {
+                tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
+                if (_unit != null)
+                {
+                    unitName = _unit.name;
+                }
+            }
+                DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
             ReportParameterCollection reportParameters = new ReportParameterCollection();
@@ -830,7 +869,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", "ng/part"));
+            reportParameters.Add(new ReportParameter("rpt_unit", unitName));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "DHS"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
@@ -1242,6 +1281,13 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
+        }
     }
 }
 

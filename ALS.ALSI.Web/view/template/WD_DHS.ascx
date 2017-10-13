@@ -448,6 +448,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
+                                                                                <tr>
+                                            <td>Unit</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList></td>
+                                        </tr>
                                     </table>
                                 </div>
                                 <div class="modal-footer">

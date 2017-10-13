@@ -288,9 +288,28 @@ namespace ALS.ALSI.Web.view.template
                     if (component != null)
                     {
                         ddlComponent.SelectedValue = component.ID.ToString();
-
-                        gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                        gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", component.C);
+                        if (this.coverpages[0].unit != null)
+                        {
+                            tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
+                            if (_unit != null)
+                            {
+                                gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
+                                gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
+                                gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                            }
+                            else
+                            {
+                                gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                                gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
+                                gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", component.C);
+                            }
+                        }
+                        else
+                        {
+                            gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
+                            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", component.C);
+                        }
 
 
                         cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
@@ -305,6 +324,7 @@ namespace ALS.ALSI.Web.view.template
                         }
 
                     }
+
 
                     ddlComponent.SelectedValue = coverpages[0].component_id.ToString();
 
@@ -391,7 +411,7 @@ namespace ALS.ALSI.Web.view.template
                             _val.procedureNo = txtProcedureNo.Text;
                             _val.sampleSize = txtSampleSize.Text;
                             _val.SamplingTime = txtSamplingTime.Text;
-                            _val.unit = Convert.ToInt16(txtDecimal01.Text);
+                            _val.unit = Convert.ToInt16(ddlUnit.SelectedValue);
                             _val.digit1 = Convert.ToInt16(txtDecimal01.Text);
                             _val.digit2 = Convert.ToInt16(txtDecimal02.Text);
 
@@ -935,7 +955,15 @@ namespace ALS.ALSI.Web.view.template
         {
 
             tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
-
+            String unitName = "";
+            if (this.coverpages[0].unit != null)
+            {
+                tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
+                if (_unit != null)
+                {
+                    unitName = _unit.name;
+                }
+            }
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
@@ -950,7 +978,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", component.C));
+            reportParameters.Add(new ReportParameter("rpt_unit", this.coverpages[0].unit != null?unitName: component.C));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "DHS"));
@@ -1337,6 +1365,7 @@ namespace ALS.ALSI.Web.view.template
         {
             gvCoverPages.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnit.SelectedItem.Text);
             gvCoverPages.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", ddlUnit.SelectedItem.Text);
             ModolPopupExtender.Show();
         }
 

@@ -1232,7 +1232,7 @@ namespace ALS.ALSI.Web.view.template
                                         {
                                             if ("<MDL".Equals(txtMotorOilBase25))
                                             {
-                                                motorOilsUpdate[1].C = " " + txtMotorOilBase25.Replace("<", "&lt;"); ;
+                                                motorOilsUpdate[1].C = " " + txtMotorOilBase25.Replace("<", "&lt;"); 
                                             }
                                             else
                                             {
