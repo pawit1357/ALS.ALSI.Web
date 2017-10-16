@@ -263,18 +263,27 @@ namespace ALS.ALSI.Web.view.template
 
                     if (this.coverpages[0].unit != null)
                     {
-                        tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
-                        if (_unit != null)
+                        if (this.coverpages[0].unit.Value > 0)
                         {
-                            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
-                            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
-                            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                            tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
+                            if (_unit != null)
+                            {
+                                gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
+                                gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
+                                gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                            }
+                            else
+                            {
+                                gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", detailSpec.C);
+                                gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", detailSpec.C);
+                                gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", detailSpec.C);
+                            }
                         }
                         else
                         {
-                            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
-                            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
-                            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", detailSpec.C);
+                            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", detailSpec.C);
+                            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", detailSpec.C);
                         }
                     }
                     else
@@ -850,10 +859,13 @@ namespace ALS.ALSI.Web.view.template
             String unitName = "ng/part";
             if (this.coverpages[0].unit != null)
             {
-                tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
-                if (_unit != null)
+                if (this.coverpages[0].unit.Value > 0)
                 {
-                    unitName = _unit.name;
+                    tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
+                    if (_unit != null)
+                    {
+                        unitName = _unit.name;
+                    }
                 }
             }
                 DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);

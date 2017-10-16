@@ -290,18 +290,27 @@ namespace ALS.ALSI.Web.view.template
                         ddlComponent.SelectedValue = component.ID.ToString();
                         if (this.coverpages[0].unit != null)
                         {
-                            tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
-                            if (_unit != null)
+                            if (this.coverpages[0].unit.Value > 0)
                             {
-                                gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
-                                gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
-                                gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                                tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
+                                if (_unit != null)
+                                {
+                                    gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
+                                    gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
+                                    gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                                }
+                                else
+                                {
+                                    gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                                    gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
+                                    gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", component.C);
+                                }
                             }
                             else
                             {
-                                gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
-                                gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
-                                gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", component.C);
+                                    gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                                    gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
+                                    gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", component.C);
                             }
                         }
                         else
@@ -958,10 +967,13 @@ namespace ALS.ALSI.Web.view.template
             String unitName = "";
             if (this.coverpages[0].unit != null)
             {
-                tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
-                if (_unit != null)
+                if (this.coverpages[0].unit.Value > 0)
                 {
-                    unitName = _unit.name;
+                    tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
+                    if (_unit != null)
+                    {
+                        unitName = _unit.name;
+                    }
                 }
             }
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);

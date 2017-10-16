@@ -279,12 +279,21 @@ namespace ALS.ALSI.Web.view.template
                         ddlComponent.SelectedValue = component.ID.ToString();
                         if (this.coverpages[0].unit != null)
                         {
-                            tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
-                            if (_unit != null)
+                            if (this.coverpages[0].unit.Value > 0)
                             {
-                                gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
-                                gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
-                                gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                                tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
+                                if (_unit != null)
+                                {
+                                    gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", _unit.name);
+                                    gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", _unit.name);
+                                    gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", _unit.name);
+                                }
+                                else
+                                {
+                                    gvCoverPages.Columns[2].HeaderText = String.Format("Maximum Allowable Amount,({0})", component.C);
+                                    gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", component.C);
+                                    gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", component.C);
+                                }
                             }
                             else
                             {
@@ -947,10 +956,13 @@ namespace ALS.ALSI.Web.view.template
             String unitName = "";
             if (this.coverpages[0].unit != null)
             {
-                tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
-                if (_unit != null)
+                if (this.coverpages[0].unit.Value > 0)
                 {
-                    unitName = _unit.name;
+                    tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
+                    if (_unit != null)
+                    {
+                        unitName = _unit.name;
+                    }
                 }
             }
 
@@ -1003,6 +1015,15 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0,8).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(8, ds2.Count-8).ToDataTable())); // Add datasource here
             }
+            if (cbNoHeader.Checked)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+
+            }
 
 
             string download = String.Empty;
@@ -1031,9 +1052,14 @@ namespace ALS.ALSI.Web.view.template
                         #region "Insert Footer & Header from template"
                         Document doc1 = new Document();
                         doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
+                        //doc1.LoadFromFile(Server.MapPath("~/template/") + "BlankLetterHeadNoPicture.doc");
+
+                        
                         Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
                         Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
-                        
+
+
+
                         Document doc2 = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
                         foreach (Section section in doc2.Sections)
                         {
@@ -1043,9 +1069,6 @@ namespace ALS.ALSI.Web.view.template
                             }
                             foreach (DocumentObject obj in footer.ChildObjects)
                             {
-                                //section.HeadersFooters.Footer.AddParagraph().AppendText("");
-                                //section.HeadersFooters.Footer.AddParagraph().AppendText("");
-                                //section.HeadersFooters.Footer.AddParagraph().AppendText("");
                                 section.HeadersFooters.Footer.ChildObjects.Add(obj.Clone());
                             }
                         }

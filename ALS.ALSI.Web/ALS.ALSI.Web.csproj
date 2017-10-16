@@ -1930,6 +1930,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="template\Blank Letter Head - EL.doc" />
+    <Content Include="template\BlankLetterHeadNoPicture.doc" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

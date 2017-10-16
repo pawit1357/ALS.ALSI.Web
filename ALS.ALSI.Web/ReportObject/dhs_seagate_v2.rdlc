@@ -251,6 +251,118 @@
         <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="DataSet4">
+      <Query>
+        <DataSourceName>DS</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="A">
+          <DataField>A</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="B">
+          <DataField>B</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="C">
+          <DataField>C</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="D">
+          <DataField>D</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="E">
+          <DataField>E</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="rt">
+          <DataField>rt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="amount">
+          <DataField>amount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="library_id">
+          <DataField>library_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="liquidParticleCount">
+          <DataField>liquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specificationLimit">
+          <DataField>specificationLimit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="accumulative_size">
+          <DataField>accumulative_size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="run">
+          <DataField>run</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="F">
+          <DataField>F</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wi">
+          <DataField>wi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wf">
+          <DataField>wf</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="wunitTextReport">
+          <DataField>wunitTextReport</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LiquidParticleCount">
+          <DataField>LiquidParticleCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpecificationLimits">
+          <DataField>SpecificationLimits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Results">
+          <DataField>Results</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="location_of_parts">
+          <DataField>location_of_parts</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specification">
+          <DataField>specification</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="pass_fail">
+          <DataField>pass_fail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DS</rd:DataSetName>
+        <rd:SchemaPath>D:\Work\Outsource\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:TableName>data</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -1470,9 +1582,9 @@
           </Tablix>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>4.98293in</Top>
+            <Top>5.26987in</Top>
             <Left>0.01153in</Left>
-            <Height>1.04167in</Height>
+            <Height>0.81945in</Height>
             <Width>6.74143in</Width>
             <ZIndex>4</ZIndex>
             <Style>
@@ -2392,20 +2504,125 @@
               </RightBorder>
             </Style>
           </Tablix>
-          <Line Name="Line1">
-            <Top>6.70174in</Top>
-            <Left>0.63217in</Left>
-            <Height>0in</Height>
-            <Width>5.14783in</Width>
+          <Tablix Name="Tablix7">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>6.81167cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>10.31157cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.48186cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox24">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>White</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox25">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox16</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>White</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet4</DataSetName>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <Top>12.72722cm</Top>
+            <Left>0.02928cm</Left>
+            <Height>0.48186cm</Height>
+            <Width>17.12324cm</Width>
             <ZIndex>8</ZIndex>
+            <Visibility>
+              <Hidden>=CountRows() = 0</Hidden>
+            </Visibility>
             <Style>
               <Border>
-                <Style>Solid</Style>
+                <Color>White</Color>
+                <Style>None</Style>
               </Border>
+              <FontSize>11pt</FontSize>
             </Style>
-          </Line>
+          </Tablix>
         </ReportItems>
-        <Height>8.04199in</Height>
+        <Height>6.09405in</Height>
         <Style />
       </Body>
       <Width>6.75296in</Width>
