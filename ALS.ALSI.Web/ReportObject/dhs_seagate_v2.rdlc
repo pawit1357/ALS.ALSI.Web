@@ -782,7 +782,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>2.42014in</Top>
-            <Height>0.53603in</Height>
+            <Height>0.53602in</Height>
             <Width>6.75296in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -1772,8 +1772,8 @@
             </PageBreak>
             <Top>9.43868cm</Top>
             <Left>0cm</Left>
-            <Height>1.53392cm</Height>
-            <Width>17.12323cm</Width>
+            <Height>1.53393cm</Height>
+            <Width>17.12324cm</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2392,8 +2392,20 @@
               </RightBorder>
             </Style>
           </Tablix>
+          <Line Name="Line1">
+            <Top>6.70174in</Top>
+            <Left>0.63217in</Left>
+            <Height>0in</Height>
+            <Width>5.14783in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
         </ReportItems>
-        <Height>6.0246in</Height>
+        <Height>8.04199in</Height>
         <Style />
       </Body>
       <Width>6.75296in</Width>

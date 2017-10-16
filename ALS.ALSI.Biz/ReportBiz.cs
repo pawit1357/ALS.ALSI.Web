@@ -24,35 +24,21 @@ namespace ALS.ALSI.Biz
         private job_sample jobSample;
         private HttpServerUtility server;
 
-        public ReportBiz(HttpServerUtility _server,job_sample _jobSample)
+        public ReportBiz(job_sample _jobSample)
+        {
+            this.doc = new Document();
+            this.s = this.doc.AddSection();
+            this.jobSample = _jobSample;
+            Setup();
+        }
+
+        public ReportBiz(HttpServerUtility _server, job_sample _jobSample)
         {
             this.doc = new Document();
             this.s = this.doc.AddSection();
             this.server = _server;
             this.jobSample = _jobSample;
-
-            #region "PAGE SETUP"
-            s.PageSetup.PageSize = PageSize.A4;
-            s.PageSetup.Orientation = PageOrientation.Portrait;
-            s.PageSetup.Margins.Top = 100.0f;
-            s.PageSetup.Margins.Bottom = 72.0f;
-            //s.PageSetup.Margins.Left = 89.85f;
-            //s.PageSetup.Margins.Right = 89.85f;
-            #endregion
-
-            #region "FONT FORMAT"
-            format = new CharacterFormat(doc);
-            format.FontName = fontName;
-            format.FontSize = 15;
-            format.Bold = false;
-            format.UnderlineStyle = UnderlineStyle.Single;
-            bodyFormat = new CharacterFormat(doc);
-            bodyFormat.FontName = fontName;
-            bodyFormat.FontSize = fontSize;
-            bodyFormat.Bold = false;
-            //format2.UnderlineStyle = UnderlineStyle.Single;
-            #endregion
-
+            Setup();
         }
 
         public void ReportWdDhs1(List<template_wd_dhs_coverpage> listResult)
@@ -73,7 +59,7 @@ namespace ALS.ALSI.Biz
             //Header Row
             TableRow FRowResult = tableResult.Rows[0];
             FRowResult.IsHeader = true;
-            
+
             //Row Height
             FRowResult.Height = fontSize;
             //Header Format
@@ -98,9 +84,9 @@ namespace ALS.ALSI.Biz
                 pRow.AppendText("DHS").ApplyCharacterFormat(bodyFormat);
                 pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
 
-           
-                    sb.Append(String.Format("{0},{1},{2},{3},{4},{5},{6}\n",i,pRow.IsComposite,pRow.IsDeleteRevision,pRow.IsEndOfDocument,pRow.IsEndOfSection,pRow.IsInCell,pRow.IsInsertRevision));
-                
+
+                sb.Append(String.Format("{0},{1},{2},{3},{4},{5},{6}\n", i, pRow.IsComposite, pRow.IsDeleteRevision, pRow.IsEndOfDocument, pRow.IsEndOfSection, pRow.IsInCell, pRow.IsInsertRevision));
+
                 pRow = DataRow.Cells[1].AddParagraph();
                 pRow.AppendText(listResult[i].analytes).ApplyCharacterFormat(bodyFormat);
                 pRow.Format.HorizontalAlignment = HorizontalAlignment.Center;
@@ -258,8 +244,8 @@ namespace ALS.ALSI.Biz
             Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
 
 
-            Paragraph paraInserted = new Paragraph(this.doc);
-            TextRange textRange1 = paraInserted.AppendText("======================= xxx ============================");
+            //Paragraph paraInserted = new Paragraph(this.doc);
+            //TextRange textRange1 = paraInserted.AppendText("======================= xxx ============================");
             //textRange1.CharacterFormat.TextColor = Color.Blue;
             //textRange1.CharacterFormat.FontSize = 15;
             //textRange1.CharacterFormat.UnderlineStyle = UnderlineStyle.Dash;
@@ -268,22 +254,22 @@ namespace ALS.ALSI.Biz
             //this.doc.Sections[0].Paragraphs.Insert(1, paraInserted);
             //document.Sections[0].Paragraphs.Insert(0, paraInserted);
 
-//            int number_of_pages = this.doc.BuiltinDocumentProperties.PageCount;
+            //            int number_of_pages = this.doc.BuiltinDocumentProperties.PageCount;
 
-//]            Paragraph paragraph = range.OwnerParagraph;
+            //]            Paragraph paragraph = range.OwnerParagraph;
             //Body body = paragraph.OwnerTextBody;
             //int index = body.ChildObjects.IndexOf(paragraph);
 
 
             foreach (Section section in this.doc.Sections)
             {
-                
+
                 foreach (DocumentObject obj in header.ChildObjects)
                 {
                     section.HeadersFooters.Header.ChildObjects.Add(obj.Clone());
                 }
 
-                
+
 
                 //section.Body.AddParagraph().AppendText("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
                 //foreach (DocumentObject obj in header.ChildObjects)
@@ -297,6 +283,32 @@ namespace ALS.ALSI.Biz
                 }
             }
             this.doc.SaveToFile(this.server.MapPath("~/Report/") + this.jobSample.job_number + ".doc");
+        }
+
+
+        private void Setup()
+        {
+            #region "PAGE SETUP"
+            s.PageSetup.PageSize = PageSize.A4;
+            s.PageSetup.Orientation = PageOrientation.Portrait;
+            s.PageSetup.Margins.Top = 100.0f;
+            s.PageSetup.Margins.Bottom = 72.0f;
+            //s.PageSetup.Margins.Left = 89.85f;
+            //s.PageSetup.Margins.Right = 89.85f;
+            #endregion
+
+            #region "FONT FORMAT"
+            format = new CharacterFormat(doc);
+            format.FontName = fontName;
+            format.FontSize = 15;
+            format.Bold = false;
+            format.UnderlineStyle = UnderlineStyle.Single;
+            bodyFormat = new CharacterFormat(doc);
+            bodyFormat.FontName = fontName;
+            bodyFormat.FontSize = fontSize;
+            bodyFormat.Bold = false;
+            //format2.UnderlineStyle = UnderlineStyle.Single;
+            #endregion
         }
     }
 }

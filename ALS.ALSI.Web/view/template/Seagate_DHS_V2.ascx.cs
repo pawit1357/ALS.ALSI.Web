@@ -615,10 +615,10 @@ namespace ALS.ALSI.Web.view.template
                                                     break;
                                                 case "11111111"://NORMAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                                    if (Regex.IsMatch(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7)), @"^\d+$"))
-                                                    {
+                                                    //if (Regex.IsMatch(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7)), @"^[1-9]\d*(\.\d+)?$"))
+                                                    //{
                                                         tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
-                                                    }       
+                                                    //}       
                                                 break;
                                                 //case "00110011":
                                                 case "00110111"://C31
@@ -1033,6 +1033,7 @@ namespace ALS.ALSI.Web.view.template
                         doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
                         Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
                         Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
+                        
                         Document doc2 = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
                         foreach (Section section in doc2.Sections)
                         {
@@ -1042,6 +1043,9 @@ namespace ALS.ALSI.Web.view.template
                             }
                             foreach (DocumentObject obj in footer.ChildObjects)
                             {
+                                //section.HeadersFooters.Footer.AddParagraph().AppendText("");
+                                //section.HeadersFooters.Footer.AddParagraph().AppendText("");
+                                //section.HeadersFooters.Footer.AddParagraph().AppendText("");
                                 section.HeadersFooters.Footer.ChildObjects.Add(obj.Clone());
                             }
                         }
