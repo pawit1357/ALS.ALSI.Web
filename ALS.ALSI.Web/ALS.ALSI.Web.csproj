@@ -1343,6 +1343,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="ReportObject\DS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1911,13 +1916,14 @@
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.woff" />
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="assets\global\plugins\uniform\README.md" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\PublishProfiles\ALIS.pubxml" />
     <Content Include="ReportObject\DS.xsc">
       <DependentUpon>DS.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="ReportObject\DS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -1926,11 +1932,11 @@
     <Content Include="ReportObject\DS.xss">
       <DependentUpon>DS.xsd</DependentUpon>
     </Content>
+    <Content Include="template\Blank Letter Head - EL.doc" />
+    <Content Include="template\BlankLetterHeadNoPicture.doc" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="template\Blank Letter Head - EL.doc" />
-    <Content Include="template\BlankLetterHeadNoPicture.doc" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -2019,7 +2025,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50295</DevelopmentServerPort>
           <DevelopmentServerVPath>/alis</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8081/alis</IISUrl>
+          <IISUrl>http://localhost/alis</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost/alis</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
