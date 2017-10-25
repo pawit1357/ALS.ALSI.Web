@@ -320,7 +320,28 @@ namespace ALS.ALSI.Utils
             return result;
         }
 
+        public static String showOnCoverPageValue(String val,int digit)
+        {
+            String returnResult = String.Empty;
+            switch (val)
+            {
+                case "":
+                case "0":
+                case "0.00":
+                    returnResult = "";
+                    break;
+                case " <MDL":
+                case "<MDL":
+                case "Not Detected":
+                    returnResult = val;
+                    break;
+                default:
+                    returnResult = Convert.ToDouble(val).ToString("N"+digit);
+                    break;
+            }
+            return returnResult;
 
+        }
 
 
         public static List<DetailSpecComponent> GetComponent(List<tb_m_detail_spec> _data, tb_m_detail_spec _value,List<int> ignoreOrder)

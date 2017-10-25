@@ -1951,6 +1951,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\corrosion_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\copperwire_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\dhs_seagate_v2 - Copy.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\dhs_seagate_v2.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -2021,18 +2024,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50295</DevelopmentServerPort>
-          <DevelopmentServerVPath>/alis</DevelopmentServerVPath>
-          <IISUrl>http://localhost/alis</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost/alis</IISAppRootUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

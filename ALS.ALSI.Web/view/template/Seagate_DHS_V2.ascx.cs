@@ -997,11 +997,9 @@ namespace ALS.ALSI.Web.view.template
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_seagate_v2.rdlc");
-            //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/Report1.rdlc");
 
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
 
             List<template_seagate_dhs_coverpage> ds2 = this.coverpages.ToList();
 
