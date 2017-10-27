@@ -369,6 +369,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
             #endregion
+            CalculateCas();
         }
         List<String> errors = new List<string>();
 
@@ -788,40 +789,24 @@ namespace ALS.ALSI.Web.view.template
                 }
 
 
-                //int unit = Convert.ToInt16(ddlUnit.SelectedValue);
-                ////FTIR
-                //this.Ftir[6].C = (unit == 1) ? ftirList[7].B : ftirList[8].B;//Silicone Oil
-                //this.Ftir[7].C = (unit == 1) ? ftirList[7].E : ftirList[8].E;//Hydrocarbon
-                //this.Ftir[8].C = String.Empty;
-
-
-                ////part value to cover page method/procedure
-                //var items = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-                //if (items.Count > 0)
-                //{
-                //    items[0].C = String.Format("{0} cm2", txtWB14.Text);
-                //    items[1].C = String.Format("{0} cm2", txtWB14.Text);
-                //    items[2].C = String.Format("{0} cm2", txtWB14.Text);
-                //    items[3].C = String.Format("{0} cm2", txtWB14.Text);
-                //    items[4].C = String.Format("{0} cm2", txtWB14.Text);
-                //    items[5].C = String.Format("{0} cm2", txtWB14.Text);
-                //}
 
 
                 gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                 gvWftir.DataBind();
 
-                gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
-                gvResult.DataBind();
 
-                gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-                gvMp.DataBind();
+
+
 
                 gvResult.DataSource = ftir2;
                 gvResult.DataBind();
                 //remark
                 lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
             }
+            gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
+            gvResult.DataBind();
+            gvMp.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+            gvMp.DataBind();
             btnSubmit.Enabled = true;
         }
 
