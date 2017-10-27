@@ -1203,47 +1203,28 @@ namespace ALS.ALSI.Web.view.template
                                     String txtMotorOilBase25 = isheet.GetRow(34 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
                                     String txtMotorOilBase35 = isheet.GetRow(35 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
 
-                                    txtMotorOilHub = String.IsNullOrEmpty(txtMotorOilHub) ? "" : Convert.ToDouble(txtMotorOilHub).ToString("N2");
-                                    txtMotorOilBase25 = String.IsNullOrEmpty(txtMotorOilBase25) ? "" : "<MDL".Equals(txtMotorOilBase25) ? txtMotorOilBase25 : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
-                                    txtMotorOilBase35 = String.IsNullOrEmpty(txtMotorOilBase35) ? "" : "<MDL".Equals(txtMotorOilBase35) ? txtMotorOilBase25 : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
-
+                                    txtMotorOilHub = CustomUtils.showOnCoverPageValue(txtMotorOilHub,2);// String.IsNullOrEmpty(txtMotorOilHub)|| txtMotorOilHub.Equals("0.00") ? "" : txtMotorOilHub.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilHub) ? txtMotorOilHub : Convert.ToDouble(txtMotorOilHub).ToString("N2");
+                                    txtMotorOilBase25 = CustomUtils.showOnCoverPageValue(txtMotorOilBase25, 2);//String.IsNullOrEmpty(txtMotorOilBase25)|| txtMotorOilBase25.Equals("0.00") ? "" : txtMotorOilBase25.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase25) ? txtMotorOilBase25 : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
+                                    txtMotorOilBase35 = CustomUtils.showOnCoverPageValue(txtMotorOilBase35, 2);//String.IsNullOrEmpty(txtMotorOilBase35) || txtMotorOilBase35.Equals("0.00") ? "":"";// : txtMotorOilBase35.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase35) ? txtMotorOilBase35 : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
 
                                     List<template_seagate_gcms_coverpage> motorOilsUpdate = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
                                     if (motorOilsUpdate.Count > 0)
                                     {
-                                        Double c0 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilHub) ? "0" : txtMotorOilHub);
-                                        motorOilsUpdate[0].C = c0 == 0 ? "Not Detected" : Math.Round(c0, 2) + "";
-
-
-                                        if (!String.IsNullOrEmpty(txtMotorOilBase35) && !txtMotorOilBase35.Equals("0.00"))
+                                        if (!String.IsNullOrEmpty(txtMotorOilHub))
                                         {
-                                            if ("<MDL".Equals(txtMotorOilBase35))
-                                            {
-                                                motorOilsUpdate[1].C = txtMotorOilBase35.Replace("<", "&lt;");
-                                            }
-                                            else
-                                            {
-                                                Double c1 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilBase35) ? "0" : txtMotorOilBase35);
-
-                                                motorOilsUpdate[1].C = c1 == 0 ? "Not Detected" : Math.Round(c1, 2) + "";
-                                            }
+                                            motorOilsUpdate[0].C = txtMotorOilHub.Replace("<", "&lt;");
                                         }
-                                        else
+
+                                        if (!String.IsNullOrEmpty(txtMotorOilBase25))
                                         {
-                                            if ("<MDL".Equals(txtMotorOilBase25))
-                                            {
-                                                motorOilsUpdate[1].C = " " + txtMotorOilBase25.Replace("<", "&lt;"); 
-                                            }
-                                            else
-                                            {
-                                                Double c2 = Convert.ToDouble(String.IsNullOrEmpty(txtMotorOilBase25) ? "0" : txtMotorOilBase25);
-
-                                                motorOilsUpdate[1].C = c2 == 0 ? "Not Detected" : Math.Round(c2, 2) + "";
-                                            }
+                                            motorOilsUpdate[1].C = txtMotorOilBase25.Replace("<", "&lt;");
                                         }
+                                        if (!String.IsNullOrEmpty(txtMotorOilBase35))
+                                        {
+                                            motorOilsUpdate[1].C = txtMotorOilBase35.Replace("<", "&lt;");
+                                        }
+
                                     }
-
-
                                 }
                                 #endregion
                                 Console.WriteLine();
