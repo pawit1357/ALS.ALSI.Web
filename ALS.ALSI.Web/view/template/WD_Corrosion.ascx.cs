@@ -97,15 +97,32 @@ namespace ALS.ALSI.Web.view.template
             comp.specification_id = this.jobSample.specification_id;
             comp.template_id = this.jobSample.template_id;
 
-            ddlComponent.Items.Clear();
-            ddlComponent.DataSource = comp.SelectAll();
-            ddlComponent.DataBind();
-            ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+            List<tb_m_specification> listSpec = comp.SelectAll().ToList();
+            ddlMethod.Items.Clear();
+            ddlMethod.DataSource = listSpec.Where(x => !x.A.Equals("Procedure") && !x.A.Equals("0"));
+            ddlMethod.DataBind();
+            ddlMethod.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlSpecification.Items.Clear();
-            ddlSpecification.DataSource = comp.SelectAll();
+            ddlSpecification.DataSource = listSpec.Where(x => !x.B.Equals("Specification") && !x.B.Equals("0"));
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+
+            ddlTemp.Items.Clear();
+            ddlTemp.DataSource = listSpec.Where(x => !x.C.Equals("Temperature Humidity Parameters") && !x.C.Equals("0"));
+            ddlTemp.DataBind();
+            ddlTemp.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            //ddlComponent.Items.Clear();
+            //ddlComponent.DataSource = comp.SelectAll();
+            //ddlComponent.DataBind();
+            //ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            //ddlSpecification.Items.Clear();
+            //ddlSpecification.DataSource = comp.SelectAll();
+            //ddlSpecification.DataBind();
+            //ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
 
 
@@ -212,27 +229,34 @@ namespace ALS.ALSI.Web.view.template
             {
                 this.CommandName = CommandNameEnum.Edit;
                 template_wd_corrosion_coverpage cover = this.coverpages[0];
-                ddlComponent.SelectedValue = cover.procedureNo_id.ToString();
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
                 txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].number_of_pieces_used_for_extraction;
-                
-                tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
-                if (component != null)
-                {
-                    this.coverpages[0].temperature_humidity_parameters_id = component.ID;
-                    this.coverpages[0].temperature_humidity_parameters = component.C;
-                    this.coverpages[0].specification = component.D;
-                    this.coverpages[0].procedureNo = component.A;
-                    txtProcedureNo.Text = this.coverpages[0].procedureNo;
-                    cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
-                    if (cbCheckBox.Checked)
-                    {
-                        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
-                    }
-                    else
-                    {
-                        lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0}", ddlComponent.SelectedItem.Text);
 
+                tb_m_specification procedure = new tb_m_specification().SelectByID(this.coverpages[0].procedureNo_id.Value);
+                if (procedure != null)
+                {
+
+                    txtProcedureNo.Text = procedure.A;
+                    cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
+
+                    tb_m_specification specification = new tb_m_specification().SelectByID(this.coverpages[0].specification_id.Value);
+                    if (specification != null)
+                    {
+                        if (cbCheckBox.Checked)
+                        {
+                            lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                        }
+                        else
+                        {
+                            lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", specification.B);
+
+                        }
+                    }
+
+                    tb_m_specification temp = new tb_m_specification().SelectByID(this.coverpages[0].temperature_humidity_parameters_id.Value);
+                    if (temp != null)
+                    {
+                        this.coverpages[0].temperature_humidity_parameters = temp.C;
                     }
                 }
 
@@ -243,17 +267,12 @@ namespace ALS.ALSI.Web.view.template
             {
                 this.CommandName = CommandNameEnum.Add;
 
-                //lbResultDesc.Text = String.Format("The specification is based on Western Digital's document no. {0}", String.Empty);
-
 
                 this.coverpages = new List<template_wd_corrosion_coverpage>();
                 template_wd_corrosion_coverpage cov = new template_wd_corrosion_coverpage();
 
                 cov.ID = 1;
                 cov.sample_id = this.SampleID;
-                cov.specification_id = Convert.ToInt32(ddlComponent.SelectedValue);
-
-                //cov.procedureNo_id = txtProcedureNo.Text;
                 cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
 
                 cov.temperature_humidity_parameters = "85oC, 85%RH, 24hours";
@@ -285,7 +304,7 @@ namespace ALS.ALSI.Web.view.template
                 gvRefImages.Columns[2].Visible = true;
                 txtProcedureNo.ReadOnly = false;
                 txtNumberOfPiecesUsedForExtraction.ReadOnly = false;
-               
+
             }
             else
             {
@@ -307,7 +326,7 @@ namespace ALS.ALSI.Web.view.template
                     litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
                     break;
             }
-          
+
         }
 
         #endregion
@@ -345,8 +364,9 @@ namespace ALS.ALSI.Web.view.template
                     template_wd_corrosion_coverpage.DeleteBySampleID(this.SampleID);
                     foreach (template_wd_corrosion_coverpage _cover in this.coverpages)
                     {
-                        _cover.procedureNo_id = Convert.ToInt16(ddlComponent.SelectedValue);
+                        _cover.procedureNo_id = Convert.ToInt16(ddlMethod.SelectedValue);
                         _cover.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
+                        _cover.temperature_humidity_parameters_id = Convert.ToInt16(ddlTemp.SelectedValue);
                         _cover.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                     }
                     template_wd_corrosion_coverpage.InsertList(this.coverpages);
@@ -362,7 +382,7 @@ namespace ALS.ALSI.Web.view.template
 
                     foreach (template_wd_corrosion_coverpage _cover in this.coverpages)
                     {
-                        _cover.procedureNo_id = Convert.ToInt16(ddlComponent.SelectedValue);
+                        //_cover.procedureNo_id = Convert.ToInt16(ddlComponent.SelectedValue);
                         _cover.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
                         _cover.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                         _cover.procedureNo = txtProcedureNo.Text;
@@ -516,49 +536,26 @@ namespace ALS.ALSI.Web.view.template
             Response.Redirect(this.PreviousPath);
         }
 
-        protected void ddlComponent_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlComponent.SelectedValue));
-            if (component != null)
-            {
-                txtProcedureNo.Text = component.A;
-                List<template_wd_corrosion_coverpage> covList = new List<template_wd_corrosion_coverpage>();
-                template_wd_corrosion_coverpage cov = new template_wd_corrosion_coverpage();
-
-                cov.ID = 1;
-                cov.sample_id = this.SampleID;
-                cov.specification_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                //cov.procedureNo = txtProcedureNo.Text;
-                cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
-
-                cov.temperature_humidity_parameters = component.C;
-                cov.specification = "No observable discoloration or spots at 10x";
-                cov.result = "";
-                covList.Add(cov);
-                this.coverpages = covList;
-                gvResult.DataSource = this.coverpages;
-                gvResult.DataBind();
-                lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0}", component.B);
-
-
-            }
+            txtProcedureNo.Text = ddlMethod.SelectedItem.Text;
         }
 
+        protected void ddlTemp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.coverpages.Count > 0)
+            {
+
+                this.coverpages[0].temperature_humidity_parameters = ddlTemp.SelectedItem.Text;
+                this.coverpages[0].specification = "No observable discoloration or spots at 10x";
+                this.coverpages[0].result = "";
+                gvResult.DataSource = this.coverpages;
+                gvResult.DataBind();
+            }
+        }
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
-            if (component != null)
-            {
-                if (this.coverpages.Count > 0)
-                {
-
-                    this.coverpages[0].temperature_humidity_parameters = component.C;
-                    this.coverpages[0].specification = "No observable discoloration or spots at 10x";
-                    this.coverpages[0].result = "";
-                    gvResult.DataSource = this.coverpages;
-                    gvResult.DataBind();
-                }
-            }
+            lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlSpecification.SelectedItem.Text);
         }
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -986,17 +983,15 @@ namespace ALS.ALSI.Web.view.template
         {
             if (cbCheckBox.Checked)
             {
-                //lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
-                lbSpecDesc.Text = String.Empty;
+                lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
             }
             else
             {
-                tb_m_specification component = new tb_m_specification().SelectByID(int.Parse(ddlComponent.SelectedValue));
-                if (component != null)
-                {
-                    lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0}", component.B);
-                }
+
+                lbResultDesc.Text = String.Format("The specification is based on Western Digital's document no. {0}", ddlMethod.SelectedItem.Text);
+
             }
+
 
         }
 

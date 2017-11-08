@@ -135,6 +135,12 @@ namespace ALS.ALSI.Biz.DataAccess
         public string D30 { get; set; }
         public string D31 { get; set; }
         public string D32 { get; set; }
+        public Nullable<int> UnitCompoundSub { get; set; }
+        public string remark1 { get; set; }
+        public string remark2 { get; set; }
+        public string remark3 { get; set; }
+        public string remark4 { get; set; }
+        public string remark5 { get; set; }
         public string C14 { get; set; }
         public string C15 { get; set; }
         public string C16 { get; set; }
@@ -142,6 +148,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string C18 { get; set; }
         public string C19 { get; set; }
         public string E20 { get; set; }
+        public string C13 { get; set; }
         public string E21 { get; set; }
         public string E22 { get; set; }
         public string E23 { get; set; }
@@ -167,12 +174,5 @@ namespace ALS.ALSI.Biz.DataAccess
         public string F30 { get; set; }
         public string F31 { get; set; }
         public string F32 { get; set; }
-        public string C13 { get; set; }
-        public string remark1 { get; set; }
-        public string remark2 { get; set; }
-        public string remark3 { get; set; }
-        public string remark4 { get; set; }
-        public string remark5 { get; set; }
-        public Nullable<int> UnitCompoundSub { get; set; }
     }
 }
