@@ -316,7 +316,8 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        if (detailSpec != null)
+                        detailSpec = detailSpec.SelectByID(this.coverpages[0].detail_spec_id.Value);
+                            if (detailSpec != null)
                         {
                             lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", detailSpec.B, detailSpec.A);
                         }
