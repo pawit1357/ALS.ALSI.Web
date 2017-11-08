@@ -22,10 +22,10 @@ namespace ALS.ALSI.Biz.DataAccess
         public string result { get; set; }
         public Nullable<int> row_type { get; set; }
         public string SamplingTime { get; set; }
+        public Nullable<int> unit { get; set; }
         public string procedureNo { get; set; }
         public string sampleSize { get; set; }
         public string chemical_id { get; set; }
-        public Nullable<int> unit { get; set; }
         public Nullable<int> digit1 { get; set; }
         public Nullable<int> digit2 { get; set; }
     }

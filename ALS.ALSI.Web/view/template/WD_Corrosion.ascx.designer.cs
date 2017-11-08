@@ -76,13 +76,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtNumberOfPiecesUsedForExtraction;
         
         /// <summary>
-        /// lbSpecDesc control.
+        /// lbResultDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbSpecDesc;
+        protected global::System.Web.UI.WebControls.Label lbResultDesc;
         
         /// <summary>
         /// cbCheckBox control.
@@ -148,13 +148,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pSpecification;
         
         /// <summary>
-        /// ddlComponent control.
+        /// ddlMethod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlComponent;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMethod;
         
         /// <summary>
         /// ddlSpecification control.
@@ -164,6 +164,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSpecification;
+        
+        /// <summary>
+        /// ddlTemp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTemp;
         
         /// <summary>
         /// pStatus control.
