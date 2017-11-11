@@ -917,7 +917,7 @@ used for extraction</Value>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.68777in</Top>
             <Height>0.71875in</Height>
-            <Width>7.25442in</Width>
+            <Width>7.2544in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1487,7 +1487,7 @@ used for extraction</Value>
             <DataSetName>DataSet5</DataSetName>
             <Top>2.71194in</Top>
             <Height>0.71875in</Height>
-            <Width>7.25442in</Width>
+            <Width>7.25441in</Width>
             <ZIndex>4</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -1975,7 +1975,7 @@ used for extraction</Value>
             <DataSetName>DataSet6</DataSetName>
             <Top>3.50013in</Top>
             <Height>0.71875in</Height>
-            <Width>7.25442in</Width>
+            <Width>7.25441in</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>

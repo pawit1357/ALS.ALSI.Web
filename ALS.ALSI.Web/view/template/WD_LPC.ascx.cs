@@ -112,9 +112,15 @@ namespace ALS.ALSI.Web.view.template
             ddlUnit.DataBind();
             ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            m_type_of_test typeOfTest = new m_type_of_test();
+            typeOfTest = typeOfTest.SelectByID(jobSample.type_of_test_id);
+
             #region "SAMPLE"
             if (this.jobSample != null)
             {
+
+
+
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
                 lbJobStatus.Text = Constants.GetEnumDescription(status);
@@ -297,11 +303,11 @@ namespace ALS.ALSI.Web.view.template
 
                 gvSpec.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC));
                 gvSpec.DataBind();
-                CalculateCas();
+
 
                 #region "Unit"
                 gvSpec.Columns[2].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
-                gvSpec.Columns[3].HeaderText = String.Format("Average of 5 data points({0})", ddlUnit.SelectedItem.Text);
+                gvSpec.Columns[3].HeaderText = String.Format("Average of {0} {1} points({2})", typeOfTest.name.Split(' ')[1].ToLower(), typeOfTest.name.Split(' ')[2].ToLower(), ddlUnit.SelectedItem.Text);
 
                 gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit.SelectedItem.Text);
                 gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit.SelectedItem.Text);
@@ -312,6 +318,7 @@ namespace ALS.ALSI.Web.view.template
                 gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
                 gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
                 #endregion
+                CalculateCas();
             }
             else
             {
@@ -943,6 +950,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("txtC54", txtC54.Text));
             reportParameters.Add(new ReportParameter("txtD54", txtD54.Text));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("method", txtB21.Text));
 
             // Variables
             Warning[] warnings;
@@ -1626,8 +1634,12 @@ namespace ALS.ALSI.Web.view.template
 
         protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            m_type_of_test typeOfTest = new m_type_of_test();
+            typeOfTest = typeOfTest.SelectByID(jobSample.type_of_test_id);
+
             gvSpec.Columns[2].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
-            gvSpec.Columns[3].HeaderText = String.Format("Average of 5 data points({0})", ddlUnit.SelectedItem.Text);
+            gvSpec.Columns[3].HeaderText = String.Format("Average of {0} {1} points({2})", typeOfTest.name.Split(' ')[1].ToLower(), typeOfTest.name.Split(' ')[2].ToLower(), ddlUnit.SelectedItem.Text);
+
 
             gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit.SelectedItem.Text);
             gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit.SelectedItem.Text);
@@ -1638,6 +1650,7 @@ namespace ALS.ALSI.Web.view.template
             gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
             gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
 
+            CalculateCas();
         }
     }
 }
