@@ -21,8 +21,10 @@ namespace WindowsFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            job_sample job = new job_sample();
-            job.SelectByID(5939);
+            int test = Convert.ToInt32("34843");
+            Console.WriteLine();
+            //job_sample job = new job_sample();
+            //job.SelectByID(5939);
 
             //ReportBiz reportBiz = new ReportBiz(new System.Web.HttpServerUtility(),job);
                 

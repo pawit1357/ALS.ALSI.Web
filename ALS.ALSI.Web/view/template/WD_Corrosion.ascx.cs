@@ -232,31 +232,40 @@ namespace ALS.ALSI.Web.view.template
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
                 txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].number_of_pieces_used_for_extraction;
 
+               
+
+
                 tb_m_specification procedure = new tb_m_specification().SelectByID(this.coverpages[0].procedureNo_id.Value);
                 if (procedure != null)
                 {
-
+                    ddlMethod.SelectedValue = this.coverpages[0].procedureNo_id.Value.ToString();
                     txtProcedureNo.Text = procedure.A;
                     cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
 
                     tb_m_specification specification = new tb_m_specification().SelectByID(this.coverpages[0].specification_id.Value);
                     if (specification != null)
                     {
+                        ddlSpecification.SelectedValue = this.coverpages[0].specification_id.Value.ToString();
                         if (cbCheckBox.Checked)
                         {
-                            lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                            lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
                         }
                         else
                         {
-                            lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", specification.B);
+                            lbResultDesc.Text = String.Format("The specification is based on Western Digital 's document no. {0}", specification.B);
 
                         }
                     }
 
-                    tb_m_specification temp = new tb_m_specification().SelectByID(this.coverpages[0].temperature_humidity_parameters_id.Value);
-                    if (temp != null)
+                    if (this.coverpages[0].temperature_humidity_parameters_id != null)
                     {
-                        this.coverpages[0].temperature_humidity_parameters = temp.C;
+                        ddlTemp.SelectedValue = this.coverpages[0].temperature_humidity_parameters_id.Value.ToString();
+
+                        tb_m_specification temp = new tb_m_specification().SelectByID(this.coverpages[0].temperature_humidity_parameters_id.Value);
+                        if (temp != null)
+                        {
+                            this.coverpages[0].temperature_humidity_parameters = temp.C;
+                        }
                     }
                 }
 
@@ -276,7 +285,7 @@ namespace ALS.ALSI.Web.view.template
                 cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
 
                 cov.temperature_humidity_parameters = "85oC, 85%RH, 24hours";
-                cov.specification = "No observable discoloration or spots at 10x";
+                cov.specification = "No observable discoloration or spots at 40x";
                 cov.result = "";
                 this.coverpages.Add(cov);
                 gvResult.DataSource = this.coverpages;
@@ -547,7 +556,7 @@ namespace ALS.ALSI.Web.view.template
             {
 
                 this.coverpages[0].temperature_humidity_parameters = ddlTemp.SelectedItem.Text;
-                this.coverpages[0].specification = "No observable discoloration or spots at 10x";
+                this.coverpages[0].specification = "No observable discoloration or spots at 40x";
                 this.coverpages[0].result = "";
                 gvResult.DataSource = this.coverpages;
                 gvResult.DataBind();
@@ -555,7 +564,7 @@ namespace ALS.ALSI.Web.view.template
         }
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlSpecification.SelectedItem.Text);
+            lbResultDesc.Text = String.Format("The specification is based on Western Digital 's document no. {0}", ddlSpecification.SelectedItem.Text);
         }
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -783,8 +792,8 @@ namespace ALS.ALSI.Web.view.template
                               };
             dtResult.Columns.AddRange(cols1);
             DataRow row1 = dtResult.NewRow();
-            row1["B"] = component.B;
-            row1["C"] = component.C;
+            row1["B"] = ddlTemp.SelectedItem.Text;
+            row1["C"] = component.D;
             row1["result"] = this.coverpages[0].result;
             dtResult.Rows.Add(row1);
 
@@ -804,7 +813,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
-            reportParameters.Add(new ReportParameter("ResultDesc", ""));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbResultDesc.Text));
 
             // Variables
             Warning[] warnings;

@@ -437,8 +437,8 @@ namespace ALS.ALSI.Web.view.template
                     {
                         foreach (template_wd_gcms_coverpage _cov in this.coverpages)
                         {
-                            _cov.detail_spec_id = Convert.ToInt16(ddlSpecification.SelectedValue);
-                            _cov.component_id = Convert.ToInt16(ddlComponent.SelectedValue);
+                            _cov.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                            _cov.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
 
                             _cov.pm_procedure = txtProcedure.Text;
                             _cov.pm_number_of_pieces = txtNumberOfPieces.Text;
