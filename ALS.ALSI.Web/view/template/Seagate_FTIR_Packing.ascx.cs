@@ -94,12 +94,12 @@ namespace ALS.ALSI.Web.view.template
         {
 
             ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
             List<tb_m_specification> listSpec = new tb_m_specification().SelectBySpecificationID(this.jobSample.specification_id, this.jobSample.template_id);
             ddlSpecification.Items.Clear();
@@ -169,8 +169,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -197,8 +197,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -277,13 +277,13 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
 
-                //gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                //gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                 //gvMethodProcedure.DataBind();
 
-                //gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
+                //gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
                 //gvResult.DataBind();
 
-                //gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
+                //gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                 //gvWftir.DataBind();
 
                 CalculateCas();
@@ -308,11 +308,11 @@ namespace ALS.ALSI.Web.view.template
                     tmp.D = mp[3];
                     tmp.E = mp[4];
                     tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                    tmp.data_type = Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE);
+                    tmp.data_type = Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE);
                     this.Ftir.Add(tmp);
                 }
                 #endregion
-                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                 gvMethodProcedure.DataBind();
             }
             #endregion
@@ -621,11 +621,11 @@ namespace ALS.ALSI.Web.view.template
 
             if (this.Ftir.Count > 0)
             {
-                foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList())
+                foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList())
                 {
                     this.Ftir.Remove(_item);
                 }
-                foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC)).ToList())
+                foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList())
                 {
                     this.Ftir.Remove(_item);
                 }
@@ -633,7 +633,7 @@ namespace ALS.ALSI.Web.view.template
 
             tb_m_specification item = new tb_m_specification();
             List<tb_m_specification> datas = item.SelectBySpecificationID(this.jobSample.specification_id, this.jobSample.template_id);
-            item = datas.Where(x => x.ID == Convert.ToInt16(ddlSpecification.SelectedValue)).FirstOrDefault();
+            item = datas.Where(x => x.ID == Convert.ToInt32(ddlSpecification.SelectedValue)).FirstOrDefault();
             if (item != null)
             {
                 lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", item.B, item.A);
@@ -649,7 +649,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -659,7 +659,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -669,7 +669,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -689,7 +689,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -699,7 +699,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -709,7 +709,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
 
                 #endregion
@@ -722,7 +722,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -732,7 +732,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -742,7 +742,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
                 this.Ftir.Add(tmp);
                 tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
@@ -752,14 +752,14 @@ namespace ALS.ALSI.Web.view.template
                 tmp.D = "";
                 tmp.E = "";
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_SPEC);
+                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
                 this.Ftir.Add(tmp);
 
                 #endregion
 
-                gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
+                gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
                 gvResult.DataBind();
-                gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC)).ToList();
+                gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
                 gvResultNvr.DataBind();
             }
         }
@@ -774,15 +774,15 @@ namespace ALS.ALSI.Web.view.template
             gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnitNvr.SelectedItem.Text);
             gvResultNvr.Columns[2].HeaderText = String.Format("Results ({0})", ddlUnitNvr.SelectedItem.Text);
 
-            int unit = Convert.ToInt16(ddlUnit.SelectedValue);
+            int unit = Convert.ToInt32(ddlUnit.SelectedValue);
 
             #region "FTIR"
             //FTIR
-            List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             if (ftir2.Count > 0)
             {
 
-                List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
+                List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                 if (ftirList.Count > 0)
                 {
 
@@ -820,31 +820,15 @@ namespace ALS.ALSI.Web.view.template
             //IPA
             //Acetone
 
-            List<template_seagate_ftir_coverpage> nvrSpec = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            List<template_seagate_ftir_coverpage> nvrSpec = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             if (nvrSpec.Count > 0)
             {
-                List<template_seagate_ftir_coverpage> nvrListIPA = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA)).ToList();
-                if (nvrListIPA.Count > 0)
-                {
-
-                    template_seagate_ftir_coverpage tmp = nvrSpec.Where(x => x.A.Equals("IPA")).FirstOrDefault();
-                    if (tmp != null)
-                    {
-
-                        tmp.C = nvrListIPA[nvrListIPA.Count - 1].C;//Silicone
-                        if (!String.IsNullOrEmpty(tmp.C))
-                        {
-                            tmp.C = Convert.ToDouble(tmp.C).ToString("N" + txtDecimal08.Text);
-                        }
-                    }
-                }
-                List<template_seagate_ftir_coverpage> nvrListDI = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA_DI)).ToList();
+                List<template_seagate_ftir_coverpage> nvrListDI = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA_DI)).ToList();
                 if (nvrListDI.Count > 0)
                 {
                     template_seagate_ftir_coverpage tmp = nvrSpec.Where(x => x.A.Equals("DI Water")).FirstOrDefault();
                     if (tmp != null)
                     {
-
                         tmp.C = nvrListDI[nvrListDI.Count - 1].C;//Silicone
                         if (!String.IsNullOrEmpty(tmp.C))
                         {
@@ -852,43 +836,59 @@ namespace ALS.ALSI.Web.view.template
                         }
                     }
                 }
-                List<template_seagate_ftir_coverpage> nvrListIPAHexane = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA_IPA)).ToList();
+
+                List<template_seagate_ftir_coverpage> nvrListIPAHexane = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA_IPA)).ToList();
                 if (nvrListIPAHexane.Count > 0)
                 {
-                    template_seagate_ftir_coverpage tmp = nvrSpec.Where(x => x.A.Equals("IPA/Hexane")).FirstOrDefault();
+                    template_seagate_ftir_coverpage tmp = nvrSpec.Where(x => x.A.Equals("IPA")).FirstOrDefault();
                     if (tmp != null)
                     {
-
-                        tmp.C = nvrListIPAHexane[nvrListIPAHexane.Count - 1].C;//Silicone
-                        if (!String.IsNullOrEmpty(tmp.C))
+                        if (!String.IsNullOrEmpty(tmp.B))
                         {
-                            tmp.C = Convert.ToDouble(tmp.C).ToString("N" + txtDecimal08.Text);
+                            tmp.C = nvrListIPAHexane[nvrListIPAHexane.Count - 1].C;
+                            if (!String.IsNullOrEmpty(tmp.C))
+                            {
+                                tmp.C = Convert.ToDouble(tmp.C).ToString("N" + txtDecimal08.Text);
+                            }
                         }
                     }
+                    tmp = nvrSpec.Where(x => x.A.Equals("IPA/Hexane")).FirstOrDefault();
+                    if (tmp != null)
+                    {
+                        if (!String.IsNullOrEmpty(tmp.B))
+                        {
+                            tmp.C = nvrListIPAHexane[nvrListIPAHexane.Count - 1].C;
+                            if (!String.IsNullOrEmpty(tmp.C))
+                            {
+                                tmp.C = String.IsNullOrEmpty(tmp.B) ? String.Empty : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal08.Text);
+                            }
+                        }
+                    }
+
                 }
                 #endregion
 
             }
 
-            gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
+            gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
             gvWftir.DataBind();
 
-            gvNVr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA)).ToList();
+            gvNVr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA)).ToList();
             gvNVr.DataBind();
 
-            gvNVrDI.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA_DI)).ToList();
+            gvNVrDI.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA_DI)).ToList();
             gvNVrDI.DataBind();
 
-            gvNvrIPA.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA_IPA)).ToList();
+            gvNvrIPA.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA_IPA)).ToList();
             gvNvrIPA.DataBind();
 
-            gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC)).ToList();
+            gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
             gvResult.DataBind();
 
-            gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC)).ToList();
+            gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
             gvResultNvr.DataBind();
 
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
             gvMethodProcedure.DataBind();
 
             btnSubmit.Enabled = true;
@@ -1191,7 +1191,7 @@ namespace ALS.ALSI.Web.view.template
                                 {
                                     if (this.Ftir.Count > 0)
                                     {
-                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA)).ToList())
+                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA)).ToList())
                                         {
                                             this.Ftir.Remove(_item);
                                         }
@@ -1278,7 +1278,7 @@ namespace ALS.ALSI.Web.view.template
                                                 //Amount(ug / cm2)
                                         }
                                         tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                        tmp.data_type = Convert.ToInt16(FtirNvrEnum.FTIR_RAW_DATA);
+                                        tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA);
                                         if (!String.IsNullOrEmpty(tmp.A))
                                         {
                                             this.Ftir.Add(tmp);
@@ -1294,7 +1294,7 @@ namespace ALS.ALSI.Web.view.template
                                 {
                                     if (this.Ftir.Count > 0)
                                     {
-                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA)).ToList())
+                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA)).ToList())
                                         {
                                             this.Ftir.Remove(_item);
                                         }
@@ -1308,7 +1308,7 @@ namespace ALS.ALSI.Web.view.template
                                         tmp.B = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.B));
                                         tmp.C = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C));
                                         tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                        tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA);
+                                        tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA);
 
                                         if (!String.IsNullOrEmpty(tmp.A))
                                         {
@@ -1324,7 +1324,7 @@ namespace ALS.ALSI.Web.view.template
                                 {
                                     if (this.Ftir.Count > 0)
                                     {
-                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA_DI)).ToList())
+                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA_DI)).ToList())
                                         {
                                             this.Ftir.Remove(_item);
                                         }
@@ -1338,7 +1338,7 @@ namespace ALS.ALSI.Web.view.template
                                         tmp.B = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.B));
                                         tmp.C = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C));
                                         tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                        tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA_DI);
+                                        tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA_DI);
 
                                         if (!String.IsNullOrEmpty(tmp.A))
                                         {
@@ -1353,7 +1353,7 @@ namespace ALS.ALSI.Web.view.template
                                 {
                                     if (this.Ftir.Count > 0)
                                     {
-                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA_IPA)).ToList())
+                                        foreach (template_seagate_ftir_coverpage _item in this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA_IPA)).ToList())
                                         {
                                             this.Ftir.Remove(_item);
                                         }
@@ -1367,7 +1367,7 @@ namespace ALS.ALSI.Web.view.template
                                         tmp.B = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.B));
                                         tmp.C = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C));
                                         tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                        tmp.data_type = Convert.ToInt16(FtirNvrEnum.NVR_RAW_DATA_IPA);
+                                        tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_RAW_DATA_IPA);
 
                                         if (!String.IsNullOrEmpty(tmp.A))
                                         {
@@ -1446,7 +1446,7 @@ namespace ALS.ALSI.Web.view.template
                 if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
                 {
                     int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+                    template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE));
                     if (gcms != null)
                     {
                         switch (cmd)
@@ -1460,7 +1460,7 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                         }
 
-                        gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+                        gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE));
                         gvMethodProcedure.DataBind();
                     }
                 }
@@ -1504,7 +1504,7 @@ namespace ALS.ALSI.Web.view.template
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC));
+                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC));
                 if (gcms != null)
                 {
                     switch (cmd)
@@ -1518,7 +1518,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
                     }
 
-                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.FTIR_SPEC));
+                    gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC));
                     gvResult.DataBind();
                 }
             }
@@ -1561,7 +1561,7 @@ namespace ALS.ALSI.Web.view.template
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC));
+                template_seagate_ftir_coverpage gcms = this.Ftir.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC));
                 if (gcms != null)
                 {
                     switch (cmd)
@@ -1575,7 +1575,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
                     }
 
-                    gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.NVR_SPEC));
+                    gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC));
                     gvResultNvr.DataBind();
                 }
             }
@@ -1585,14 +1585,14 @@ namespace ALS.ALSI.Web.view.template
         protected void gvMethodProcedure_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvMethodProcedure.EditIndex = e.NewEditIndex;
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE));
             gvMethodProcedure.DataBind();
         }
 
         protected void gvMethodProcedure_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvMethodProcedure.EditIndex = -1;
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE));
             gvMethodProcedure.DataBind();
         }
 
@@ -1622,7 +1622,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
             gvMethodProcedure.EditIndex = -1;
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt16(FtirNvrEnum.METHOD_PROCEDURE));
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE));
             gvMethodProcedure.DataBind();
 
         }

@@ -99,12 +99,12 @@ namespace ALS.ALSI.Web.view.template
             comp.template_id = this.jobSample.template_id;
 
             ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
 
             ddlComponent.Items.Clear();
@@ -164,9 +164,9 @@ namespace ALS.ALSI.Web.view.template
             {
                 this.coverpages = this.coverpages.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal));
 
-                gvRHCBase.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt16(GcmsSeagateEnum.RHC_BASE) && !x.library_id.Equals("0")).ToList();
+                gvRHCBase.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt32(GcmsSeagateEnum.RHC_BASE) && !x.library_id.Equals("0")).ToList();
                 gvRHCBase.DataBind();
-                gvRHCHub.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt16(GcmsSeagateEnum.RHC_HUB) && !x.library_id.Equals("0")).ToList();
+                gvRHCHub.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt32(GcmsSeagateEnum.RHC_HUB) && !x.library_id.Equals("0")).ToList();
                 gvRHCHub.DataBind();
             }
 
@@ -217,8 +217,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -243,8 +243,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -481,12 +481,12 @@ namespace ALS.ALSI.Web.view.template
                         cov.extraction_medium = txtExtractionMedium.Text;
                         cov.extraction_volumn = txtExtractionVolumn.Text;
 
-                        //cov.UnitMotorOilContamination = Convert.ToInt16(ddlUnitMotorOilContamination.SelectedValue);
-                        //cov.UnitMotorHub = Convert.ToInt16(ddlUnitMotorHub.SelectedValue);
-                        //cov.UnitMotorHubSub = Convert.ToInt16(ddlUnitMotorHubSub.SelectedValue);
-                        cov.UnitMotorBase = Convert.ToInt16(ddlUnitMotorBase.SelectedValue);
-                        cov.UnitMotorBaseSub = Convert.ToInt16(ddlUnitMotorBaseSub.SelectedValue);
-                        //cov.UnitCompound = Convert.ToInt16(ddlUnitCompound.SelectedValue);
+                        //cov.UnitMotorOilContamination = Convert.ToInt32(ddlUnitMotorOilContamination.SelectedValue);
+                        //cov.UnitMotorHub = Convert.ToInt32(ddlUnitMotorHub.SelectedValue);
+                        //cov.UnitMotorHubSub = Convert.ToInt32(ddlUnitMotorHubSub.SelectedValue);
+                        cov.UnitMotorBase = Convert.ToInt32(ddlUnitMotorBase.SelectedValue);
+                        cov.UnitMotorBaseSub = Convert.ToInt32(ddlUnitMotorBaseSub.SelectedValue);
+                        //cov.UnitCompound = Convert.ToInt32(ddlUnitCompound.SelectedValue);
 
 
                     }
@@ -573,12 +573,12 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-                            //cov.UnitMotorOilContamination = Convert.ToInt16(ddlUnitMotorOilContamination.SelectedValue);
-                            //cov.UnitMotorHub = Convert.ToInt16(ddlUnitMotorHub.SelectedValue);
-                            //cov.UnitMotorHubSub = Convert.ToInt16(ddlUnitMotorHubSub.SelectedValue);
-                            cov.UnitMotorBase = Convert.ToInt16(ddlUnitMotorBase.SelectedValue);
-                            cov.UnitMotorBaseSub = Convert.ToInt16(ddlUnitMotorBaseSub.SelectedValue);
-                            //cov.UnitCompound = Convert.ToInt16(ddlUnitCompound.SelectedValue);
+                            //cov.UnitMotorOilContamination = Convert.ToInt32(ddlUnitMotorOilContamination.SelectedValue);
+                            //cov.UnitMotorHub = Convert.ToInt32(ddlUnitMotorHub.SelectedValue);
+                            //cov.UnitMotorHubSub = Convert.ToInt32(ddlUnitMotorHubSub.SelectedValue);
+                            cov.UnitMotorBase = Convert.ToInt32(ddlUnitMotorBase.SelectedValue);
+                            cov.UnitMotorBaseSub = Convert.ToInt32(ddlUnitMotorBaseSub.SelectedValue);
+                            //cov.UnitCompound = Convert.ToInt32(ddlUnitCompound.SelectedValue);
 
                             //cov.selected_base = Convert.ToInt32(ddlBase.SelectedValue);
 
@@ -776,7 +776,7 @@ namespace ALS.ALSI.Web.view.template
                                                 String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.classification) ||
 
                                                 String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.library_id) && !String.IsNullOrEmpty(tmp.area)) ? Convert.ToInt32(RowTypeEnum.TotalRow) : Convert.ToInt32(RowTypeEnum.Normal);
-                                            tmp.cas_group = Convert.ToInt16(GcmsSeagateEnum.RHC_BASE);
+                                            tmp.cas_group = Convert.ToInt32(GcmsSeagateEnum.RHC_BASE);
                                             if (!String.IsNullOrEmpty(tmp.area))
                                             {
                                                 _cas.Add(tmp);
@@ -820,7 +820,7 @@ namespace ALS.ALSI.Web.view.template
                                                 String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.classification) ||
 
                                                 String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.library_id) && !String.IsNullOrEmpty(tmp.area)) ? Convert.ToInt32(RowTypeEnum.TotalRow) : Convert.ToInt32(RowTypeEnum.Normal);
-                                            tmp.cas_group = Convert.ToInt16(GcmsSeagateEnum.RHC_BASE);
+                                            tmp.cas_group = Convert.ToInt32(GcmsSeagateEnum.RHC_BASE);
                                             if (!String.IsNullOrEmpty(tmp.area))
                                             {
                                                 _cas.Add(tmp);
@@ -865,7 +865,7 @@ namespace ALS.ALSI.Web.view.template
                                                 String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.classification) ||
 
                                                 String.IsNullOrEmpty(tmp.pk) && !String.IsNullOrEmpty(tmp.library_id) && !String.IsNullOrEmpty(tmp.area)) ? Convert.ToInt32(RowTypeEnum.TotalRow) : Convert.ToInt32(RowTypeEnum.Normal);
-                                            tmp.cas_group = Convert.ToInt16(GcmsSeagateEnum.RHC_HUB);
+                                            tmp.cas_group = Convert.ToInt32(GcmsSeagateEnum.RHC_HUB);
                                             if (!String.IsNullOrEmpty(tmp.area))
                                             {
                                                 _cas.Add(tmp);
@@ -948,8 +948,8 @@ namespace ALS.ALSI.Web.view.template
                                 {
                                     sheetName = isheet.SheetName;
 
-                                    //txtB13_MO.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal09.Text)).ToString();//Surface area of Base			2
-                                    //txtB13_MO.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B))), Convert.ToInt16(txtDecimal10.Text)).ToString();//Surface area of Hub			2
+                                    //txtB13_MO.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B))), Convert.ToInt32(txtDecimal09.Text)).ToString();//Surface area of Base			2
+                                    //txtB13_MO.Text = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B))), Convert.ToInt32(txtDecimal10.Text)).ToString();//Surface area of Hub			2
 
                                 }
                                 #endregion
@@ -978,9 +978,9 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
                 this.tbCas = _cas;
-                gvRHCBase.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt16(GcmsSeagateEnum.RHC_BASE) && !x.library_id.Equals("0")).ToList();
+                gvRHCBase.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt32(GcmsSeagateEnum.RHC_BASE) && !x.library_id.Equals("0")).ToList();
                 gvRHCBase.DataBind();
-                gvRHCHub.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt16(GcmsSeagateEnum.RHC_HUB) && !x.library_id.Equals("0")).ToList();
+                gvRHCHub.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt32(GcmsSeagateEnum.RHC_HUB) && !x.library_id.Equals("0")).ToList();
                 gvRHCHub.DataBind();
             }
         }
@@ -1084,7 +1084,7 @@ namespace ALS.ALSI.Web.view.template
         //    if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
         //    {
         //        int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL));
+        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL));
         //        if (gcms != null)
         //        {
         //            switch (cmd)
@@ -1096,7 +1096,7 @@ namespace ALS.ALSI.Web.view.template
         //                    gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
         //                    break;
         //            }
-        //            gvMotorOil.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL)).ToList();
+        //            gvMotorOil.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL)).ToList();
         //            gvMotorOil.DataBind();
         //        }
         //    }
@@ -1137,7 +1137,7 @@ namespace ALS.ALSI.Web.view.template
         //    if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
         //    {
         //        int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE));
+        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE));
         //        if (gcms != null)
         //        {
         //            switch (cmd)
@@ -1149,7 +1149,7 @@ namespace ALS.ALSI.Web.view.template
         //                    gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
         //                    break;
         //            }
-        //            gvMotorHub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList();
+        //            gvMotorHub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE)).ToList();
         //            gvMotorHub.DataBind();
         //        }
         //    }
@@ -1190,7 +1190,7 @@ namespace ALS.ALSI.Web.view.template
         //    if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
         //    {
         //        int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB));
+        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB));
         //        if (gcms != null)
         //        {
         //            switch (cmd)
@@ -1202,7 +1202,7 @@ namespace ALS.ALSI.Web.view.template
         //                    gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
         //                    break;
         //            }
-        //            gvMotorHubSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB)).ToList();
+        //            gvMotorHubSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB)).ToList();
         //            gvMotorHubSub.DataBind();
         //        }
         //    }
@@ -1243,7 +1243,7 @@ namespace ALS.ALSI.Web.view.template
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE));
+                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE));
                 if (gcms != null)
                 {
                     switch (cmd)
@@ -1255,7 +1255,7 @@ namespace ALS.ALSI.Web.view.template
                             gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
-                    gvMotorBase.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList();
+                    gvMotorBase.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE)).ToList();
                     gvMotorBase.DataBind();
                 }
             }
@@ -1296,7 +1296,7 @@ namespace ALS.ALSI.Web.view.template
             if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
             {
                 int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB));
+                template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB));
                 if (gcms != null)
                 {
                     switch (cmd)
@@ -1308,7 +1308,7 @@ namespace ALS.ALSI.Web.view.template
                             gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
-                    gvMotorBaseSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB)).ToList();
+                    gvMotorBaseSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB)).ToList();
                     gvMotorBaseSub.DataBind();
                 }
             }
@@ -1350,7 +1350,7 @@ namespace ALS.ALSI.Web.view.template
         //    if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
         //    {
         //        int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND));
+        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND));
         //        if (gcms != null)
         //        {
         //            switch (cmd)
@@ -1362,7 +1362,7 @@ namespace ALS.ALSI.Web.view.template
         //                    gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
         //                    break;
         //            }
-        //            gvCompound.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND)).ToList();
+        //            gvCompound.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND)).ToList();
         //            gvCompound.DataBind();
         //        }
         //    }
@@ -1404,7 +1404,7 @@ namespace ALS.ALSI.Web.view.template
         //    if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
         //    {
         //        int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB));
+        //        template_seagate_gcms_coverpage gcms = this.coverpages.Find(x => x.ID == PKID && x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB));
         //        if (gcms != null)
         //        {
         //            switch (cmd)
@@ -1416,7 +1416,7 @@ namespace ALS.ALSI.Web.view.template
         //                    gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
         //                    break;
         //            }
-        //            gvCompoundSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB)).ToList();
+        //            gvCompoundSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB)).ToList();
         //            gvCompoundSub.DataBind();
         //        }
         //    }
@@ -1503,7 +1503,7 @@ namespace ALS.ALSI.Web.view.template
 
             #region "Binding"
 
-            //List<template_seagate_gcms_coverpage> motorOils = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
+            //List<template_seagate_gcms_coverpage> motorOils = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
             //if (motorOils.Count > 0)
             //{
 
@@ -1525,7 +1525,7 @@ namespace ALS.ALSI.Web.view.template
             //    gvMotorOil.Visible = false;
             //}
 
-            //List<template_seagate_gcms_coverpage> motorHubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-")).ToList();
+            //List<template_seagate_gcms_coverpage> motorHubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-")).ToList();
             //if (motorHubs.Count > 0)
             //{
 
@@ -1549,7 +1549,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            //List<template_seagate_gcms_coverpage> motorHubSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB) && !x.A.Equals("-")).ToList();
+            //List<template_seagate_gcms_coverpage> motorHubSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB) && !x.A.Equals("-")).ToList();
             //if (motorHubSubs.Count > 0)
             //{
             //    motorHubSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB43.Text) ? "0" : lbB43.Text), 2) + "";//Compounds with RT ≤ DOP
@@ -1569,7 +1569,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            List<template_seagate_gcms_coverpage> motorBases = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE) && !x.A.Equals("-")).ToList();
+            List<template_seagate_gcms_coverpage> motorBases = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE) && !x.A.Equals("-")).ToList();
             if (motorBases.Count > 0)
             {
                 if (!String.IsNullOrEmpty(txtD30.Text))
@@ -1589,7 +1589,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
 
-            List<template_seagate_gcms_coverpage> motorBaseSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-")).ToList();
+            List<template_seagate_gcms_coverpage> motorBaseSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-")).ToList();
             if (motorBaseSubs.Count > 0)
             {
 
@@ -1611,7 +1611,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            //List<template_seagate_gcms_coverpage> compounds = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND) && !x.A.Equals("-")).ToList();
+            //List<template_seagate_gcms_coverpage> compounds = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND) && !x.A.Equals("-")).ToList();
             //if (compounds.Count > 0)
             //{
 
@@ -1636,7 +1636,7 @@ namespace ALS.ALSI.Web.view.template
             //    gvCompound.Visible = false;
             //}
 
-            //List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
+            //List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
             //if (compoundSubs.Count > 0)
             //{
             //    compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
@@ -1717,26 +1717,26 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-                    newCoverPage[0].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL);
-                    newCoverPage[1].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL);
-                    newCoverPage[2].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB);
-                    newCoverPage[3].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB);
-                    newCoverPage[4].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB);
-                    newCoverPage[5].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB);
-                    newCoverPage[6].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE);
-                    newCoverPage[7].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB);
-                    newCoverPage[8].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB);
-                    newCoverPage[9].data_type = Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB);
-                    newCoverPage[10].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND);
-                    newCoverPage[11].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[12].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[13].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[14].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[15].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[16].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[17].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[18].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[19].data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB);
+                    newCoverPage[0].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
+                    newCoverPage[1].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
+                    newCoverPage[2].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB);
+                    newCoverPage[3].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                    newCoverPage[4].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                    newCoverPage[5].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                    newCoverPage[6].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
+                    newCoverPage[7].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                    newCoverPage[8].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                    newCoverPage[9].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                    newCoverPage[10].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
+                    newCoverPage[11].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    newCoverPage[12].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    newCoverPage[13].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    newCoverPage[14].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    newCoverPage[15].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    newCoverPage[16].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    newCoverPage[17].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    newCoverPage[18].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    newCoverPage[19].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
 
                     Console.WriteLine();
 
@@ -1745,7 +1745,7 @@ namespace ALS.ALSI.Web.view.template
                     //{
                     //    foreach (template_seagate_gcms_coverpage item in newCoverPage)
                     //    {
-                    //        item.data_type = Convert.ToInt16(SeagateGcmsEnum.COMPOUND);
+                    //        item.data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
                     //    }
                     //}
                     //}
@@ -1753,7 +1753,7 @@ namespace ALS.ALSI.Web.view.template
                     this.coverpages = newCoverPage;
 
                     //#region "Binding"
-                    //gvMotorOil.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-"));
+                    //gvMotorOil.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-"));
                     //gvMotorOil.DataBind();
                     //if (gvMotorOil.Rows.Count > 0)
                     //{
@@ -1766,7 +1766,7 @@ namespace ALS.ALSI.Web.view.template
                     //{
                     //    gvMotorOil.Visible = false;
                     //}
-                    //gvMotorHub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-"));
+                    //gvMotorHub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-"));
                     //gvMotorHub.DataBind();
                     //if (gvMotorHub.Rows.Count > 0)
                     //{
@@ -1778,7 +1778,7 @@ namespace ALS.ALSI.Web.view.template
                     //{
                     //    gvMotorHub.Visible = false;
                     //}
-                    //gvMotorHubSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_HUB_SUB) && !x.A.Equals("-"));
+                    //gvMotorHubSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB) && !x.A.Equals("-"));
                     //gvMotorHubSub.DataBind();
                     //if (gvMotorHubSub.Rows.Count > 0)
                     //{
@@ -1790,7 +1790,7 @@ namespace ALS.ALSI.Web.view.template
                     //{
                     //    gvMotorHubSub.Visible = false;
                     //}
-                    //gvMotorBase.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE) && !x.A.Equals("-"));
+                    //gvMotorBase.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE) && !x.A.Equals("-"));
                     //gvMotorBase.DataBind();
                     //if (gvMotorBase.Rows.Count > 0)
                     //{
@@ -1802,7 +1802,7 @@ namespace ALS.ALSI.Web.view.template
                     //{
                     //    gvMotorBase.Visible = false;
                     //}
-                    //gvMotorBaseSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-"));
+                    //gvMotorBaseSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-"));
                     //gvMotorBaseSub.DataBind();
                     //if (gvMotorBaseSub.Rows.Count > 0)
                     //{
@@ -1814,7 +1814,7 @@ namespace ALS.ALSI.Web.view.template
                     //{
                     //    gvMotorBaseSub.Visible = false;
                     //}
-                    //gvCompound.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND) && !x.A.Equals("-"));
+                    //gvCompound.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND) && !x.A.Equals("-"));
                     //gvCompound.DataBind();
                     //if (gvCompound.Rows.Count > 0)
                     //{
@@ -1826,7 +1826,7 @@ namespace ALS.ALSI.Web.view.template
                     //{
                     //    gvCompound.Visible = false;
                     //}
-                    //gvCompoundSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-"));
+                    //gvCompoundSub.DataSource = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-"));
                     //gvCompoundSub.DataBind();
                     //if (gvCompoundSub.Rows.Count > 0)
                     //{
@@ -1913,8 +1913,8 @@ namespace ALS.ALSI.Web.view.template
 
 
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE)).ToList().ToDataTable()));
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", this.coverpages.Where(x => x.data_type == Convert.ToInt16(SeagateGcmsEnum.MOTOR_BASE_SUB)).ToList().ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE)).ToList().ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB)).ToList().ToDataTable()));
 
 
                 string download = String.Empty;

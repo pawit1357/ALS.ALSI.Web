@@ -163,8 +163,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -189,8 +189,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -413,7 +413,7 @@ namespace ALS.ALSI.Web.view.template
                             cov.ws_d21 = txtD54.Text;
                             #endregion
                             cov.WashMethod = ddlWashMethod.SelectedValue;
-                            cov.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                            cov.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                         }
                         objWork.DeleteBySampleID(this.SampleID);
                         objWork.InsertList(this.Lpc.ToList());
@@ -467,7 +467,7 @@ namespace ALS.ALSI.Web.view.template
                                 cov.ws_d21 = txtD54.Text;
                                 #endregion
                                 cov.WashMethod = ddlWashMethod.SelectedValue;
-                                cov.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                                cov.unit = Convert.ToInt32(ddlUnit.SelectedValue);
 
                             }
                             objWork.DeleteBySampleID(this.SampleID);
@@ -665,10 +665,10 @@ namespace ALS.ALSI.Web.view.template
                                                 switch (lpc.type)
                                                 {
                                                     case "Blank":
-                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt16(txtDecimal01.Text)));
+                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt32(txtDecimal01.Text)));
                                                         break;
                                                     case "Sample":
-                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal02.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt16(txtDecimal02.Text)));
+                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal02.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt32(txtDecimal02.Text)));
                                                         break;
                                                 }
                                                 lpcs.Add(lpc);
@@ -717,7 +717,7 @@ namespace ALS.ALSI.Web.view.template
                         tmp.E = result.ToString("N" + txtDecimal03.Text);
                         tmp.F = result2.ToString("N" + txtDecimal04.Text);
 
-                        tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
+                        tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                         tmp.data_type = Convert.ToInt32(WDLpcDataType.DATA_VALUE);
                         tmps.Add(tmp);
                     }
@@ -773,7 +773,7 @@ namespace ALS.ALSI.Web.view.template
             this.Lpc.AddRange(tmps);
 
             int order = 1;
-            foreach (template_wd_lpc_coverpage lpc in this.Lpc.Where(x => x.data_type == Convert.ToInt16(WDLpcDataType.DATA_VALUE)))
+            foreach (template_wd_lpc_coverpage lpc in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE)))
             {
                 lpc.ID = order;
                 order++;
@@ -914,13 +914,13 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B != "0.200").ToList();
             foreach (template_wd_lpc_coverpage lpc in specs)
             {
-                lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
                 Console.WriteLine();
             }
             foreach (template_wd_lpc_coverpage lpc in sumarys)
             {
-                lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
-                lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
+                lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
                 Console.WriteLine();
             }
 
@@ -1080,13 +1080,13 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList();
             foreach (template_wd_lpc_coverpage lpc in specs)
             {
-                lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
                 Console.WriteLine();
             }
             foreach (template_wd_lpc_coverpage lpc in sumarys)
             {
-                lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
-                lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
+                lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
                 Console.WriteLine();
             }
 

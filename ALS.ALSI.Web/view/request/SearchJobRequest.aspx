@@ -211,8 +211,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
-<%--                <div class="portlet light portlet-fit portlet-datatable bordered" id="form_wizard_1">--%>
-                            <div class="portlet box blue-dark">
+                <%--                <div class="portlet light portlet-fit portlet-datatable bordered" id="form_wizard_1">--%>
+                <div class="portlet box blue-dark">
 
                     <div class="portlet-title">
                         <div class="caption">
@@ -221,8 +221,8 @@
 
                         </div>
                         <div class="actions">
-                           
-                      
+
+
 
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>
                             <asp:LinkButton ID="btnEls" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELS</asp:LinkButton>
@@ -247,9 +247,9 @@
                         <asp:Label ID="lbTotalRecords" runat="server" Text="" Visible="false"></asp:Label>
 
                         <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False"
-                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
+                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,receive_date,is_hold" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
                             <Columns>
-                                <asp:TemplateField HeaderText="">
+                                <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
 
                                         <asp:LinkButton ID="btnInfo" runat="server" ToolTip="Info" CommandName="View" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-search"></i></asp:LinkButton>
@@ -265,15 +265,18 @@
                                         <asp:LinkButton ID="btnPrintLabel" runat="server" ToolTip="Print Label" CommandName="Print" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-print"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnAmend" runat="server" ToolTip="Change Amend" CommandName="Amend" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-pencil-square"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnReTest" runat="server" ToolTip="ReTest" CommandName="Retest" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-retweet"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnHold" runat="server" ToolTip="Hold" CommandName="Hold" CommandArgument='<%# String.Concat(Eval("ID"))%>'><i class="fa fa-toggle-off"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnUnHold" runat="server" ToolTip="UnHold" CommandName="UnHold" CommandArgument='<%# String.Concat(Eval("ID"))%>'><i class="fa fa-toggle-on"></i></asp:LinkButton>
 
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="#">
+                                <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="litStatus" runat="server">&nbsp;</asp:Literal>
+                                        <%--                                        <asp:HiddenField ID="csID" runat="server" Value="<%# Eval("status_completion_scheduled")%>" />--%>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Status">
+                                <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="ltJobStatus" runat="server" Text="-"></asp:Literal>
                                     </ItemTemplate>
@@ -289,9 +292,14 @@
                                 <asp:BoundField HeaderText="Receive Date." DataField="receive_date" ItemStyle-HorizontalAlign="Center" SortExpression="receive_date" DataFormatString="{0:d MMM yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
-                                <asp:BoundField HeaderText="Due Date." DataField="due_date" ItemStyle-HorizontalAlign="Center" SortExpression="due_date" DataFormatString="{0:d MMM yyyy}">
+                                <asp:TemplateField HeaderText="Due Date.">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litDueDate" runat="server" Text="-"></asp:Literal>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <%--                                <asp:BoundField HeaderText="Due Date." DataField="due_date" ItemStyle-HorizontalAlign="Center" SortExpression="due_date" DataFormatString="{0:d MMM yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>
+                                </asp:BoundField>--%>
                                 <%--<asp:BoundField HeaderText="Ref No." DataField="job_number" ItemStyle-HorizontalAlign="Left" SortExpression="job_number" />--%>
                                 <asp:TemplateField HeaderText="ALS Ref No.">
                                     <ItemTemplate>

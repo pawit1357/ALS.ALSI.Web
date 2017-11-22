@@ -1206,6 +1206,9 @@
     <Content Include="images\logo.png" />
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
+    <Content Include="PhaseII-Doc\PhaseII.sql" />
+    <Content Include="PhaseII-Doc\Solve.sql" />
+    <Content Include="ReadMe\script-solve.sql" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="SqlServerTypes\readme.htm" />

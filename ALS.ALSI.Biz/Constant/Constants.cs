@@ -149,7 +149,9 @@ namespace ALS.ALSI.Biz.Constant
         Retest = 30,
         Normal = 31,
         Inactive = 32,
-        Sort = 33
+        Sort = 33,
+        Hold = 34,
+        UnHold = 35
     }
 
     public enum RowTypeEnum : int
@@ -179,7 +181,9 @@ namespace ALS.ALSI.Biz.Constant
         SR_CHEMIST = 4,
         ADMIN = 5,
         LABMANAGER = 6,
-        ACCOUNT = 7
+        ACCOUNT = 7,
+        MARKETING =8,
+        BUSINESS_MANAGER =9
     }
 
     public enum ResultEnum
@@ -237,7 +241,8 @@ namespace ALS.ALSI.Biz.Constant
         ADMIN_CONVERT_WORD = 13,
         [Description("CONVERT_PDF")]
         ADMIN_CONVERT_PDF = 14,
-
+        [Description("UN_HOLD")]
+        JOB_UNHOLD = 15
 
     }
 

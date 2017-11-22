@@ -52,10 +52,12 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<System.DateTime> date_chemist_complete { get; set; }
         public Nullable<System.DateTime> date_srchemist_complate { get; set; }
         public Nullable<System.DateTime> date_admin_sent_to_cus { get; set; }
-        public Nullable<System.DateTime> sr_approve_date { get; set; }
         public Nullable<System.DateTime> date_labman_complete { get; set; }
+        public Nullable<System.DateTime> sr_approve_date { get; set; }
         public string ad_hoc_tempalte_path { get; set; }
         public string is_no_spec { get; set; }
+        public Nullable<System.DateTime> update_date { get; set; }
+        public string is_hold { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

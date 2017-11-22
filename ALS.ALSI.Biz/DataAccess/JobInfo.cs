@@ -182,6 +182,7 @@ namespace ALS.ALSI.Biz.DataAccess
                                 s.date_login_received_sample,
                                 s.date_chemist_alalyze,
                                 s.date_labman_complete,
+                                s.is_hold
                              };
 
                 if (this.ID > 0)

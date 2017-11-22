@@ -84,12 +84,12 @@ namespace ALS.ALSI.Web.view.template
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
             tb_unit unit = new tb_unit();
             ddlUnit.Items.Clear();
@@ -149,8 +149,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -179,8 +179,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -476,15 +476,15 @@ namespace ALS.ALSI.Web.view.template
                     {
                         _tmp.sample_id = this.jobSample.ID;
                         _tmp.lpc_type = ddlA19.SelectedValue;
-                        _tmp.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
+                        _tmp.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         _tmp.ProcedureNo = txtB19.Text;
                         _tmp.NumberOfPieces = txtCVP_C19.Text;
                         _tmp.ExtractionMedium = txtD19.Text;
                         _tmp.ExtractionVolume = txtCVP_E19.Text;
                         //_tmp.channel_size = ddlChannel.SelectedValue;
-                        _tmp.template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
+                        _tmp.template_type = Convert.ToInt32(ddlTemplateType.SelectedValue);
                         _tmp.row_type = 1;//Cover Page
-                        _tmp.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                        _tmp.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
                     objWork.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.Lpcs);
@@ -535,7 +535,7 @@ namespace ALS.ALSI.Web.view.template
                             }
 
                             _tmp.SurfaceArea = Convert.ToDouble(surfaceArea);
-                            _tmp.template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
+                            _tmp.template_type = Convert.ToInt32(ddlTemplateType.SelectedValue);
                         }
 
                         objWork.DeleteBySampleID(this.SampleID);
@@ -769,7 +769,7 @@ namespace ALS.ALSI.Web.view.template
                                                     lpc.Run = run + "";
                                                     lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
                                                     lpc.channel_size = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
-                                                    lpc.Results = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt16(txtDecimal01.Text) : Convert.ToInt16(txtDecimal02.Text)));
+                                                    lpc.Results = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt32(txtDecimal01.Text) : Convert.ToInt32(txtDecimal02.Text)));
                                                     lpc.row_state = Convert.ToInt32(RowTypeEnum.Normal);
                                                     lpc.row_type = 2;
                                                     lpcs03.Add(lpc);
@@ -779,7 +779,7 @@ namespace ALS.ALSI.Web.view.template
                                                     lpc.Run = run + "";
                                                     lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
                                                     lpc.channel_size = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
-                                                    lpc.Results = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt16(txtDecimal01.Text) : Convert.ToInt16(txtDecimal02.Text)));
+                                                    lpc.Results = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt32(txtDecimal01.Text) : Convert.ToInt32(txtDecimal02.Text)));
                                                     lpc.row_state = Convert.ToInt32(RowTypeEnum.Normal);
                                                     lpc.row_type = 2;
                                                     lpcs05.Add(lpc);
@@ -789,7 +789,7 @@ namespace ALS.ALSI.Web.view.template
                                                     lpc.Run = run + "";
                                                     lpc.type = Path.GetFileNameWithoutExtension(_postedFile.FileName);
                                                     lpc.channel_size = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.J));
-                                                    lpc.Results = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt16(txtDecimal01.Text) : Convert.ToInt16(txtDecimal02.Text)));
+                                                    lpc.Results = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Convert.ToDouble(CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.S))), _postedFile.FileName.StartsWith("B") ? Convert.ToInt32(txtDecimal01.Text) : Convert.ToInt32(txtDecimal02.Text)));
                                                     lpc.row_state = Convert.ToInt32(RowTypeEnum.Normal);
                                                     lpc.row_type = 2;
                                                     lpcs06.Add(lpc);
@@ -930,7 +930,7 @@ namespace ALS.ALSI.Web.view.template
                         #region "RUN RESULT"
                         List<template_seagate_lpc_coverpage> runResults = new List<template_seagate_lpc_coverpage>();
                         lastSampleCount = lastSampleCount.Replace("Sample ", "").Trim().Replace("S", "").Trim();
-                        for (int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
+                        for (int i = 1; i <= Convert.ToInt32(lastSampleCount); i++)
                         {
                             runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("B" + i) && x.channel_size.Equals(channel_size)).ToList());
                             runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("S" + i) && x.channel_size.Equals(channel_size)).ToList());
@@ -947,7 +947,7 @@ namespace ALS.ALSI.Web.view.template
                             lpc.type = item.Key;
                             lpc.channel_size = channel_size;
                             double _value = runResults.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.channel_size.Equals(channel_size)).Average(x => Convert.ToDouble(x.Results));
-                            lpc.Results = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+                            lpc.Results = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt32(txtDecimal03.Text)));
                             last3Results.Add(lpc);
                         }
                         runResults.AddRange(last3Results);
@@ -975,7 +975,7 @@ namespace ALS.ALSI.Web.view.template
 
                             double _value = (Convert.ToDouble(lpcSaple.Results) - Convert.ToDouble(lpcBlank.Results)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor.Text);
 
-                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal05.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal05.Text)));
+                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal05.Text)), Math.Round(_value, Convert.ToInt32(txtDecimal05.Text)));
                             listAverages.Add(lpc);
                             index++;
                         }
@@ -1036,7 +1036,7 @@ namespace ALS.ALSI.Web.view.template
                         #region "RUN RESULT"
                         List<template_seagate_lpc_coverpage> runResults = new List<template_seagate_lpc_coverpage>();
                         lastSampleCount = lastSampleCount.Replace("Sample ", "").Trim().Replace("S", "").Trim();
-                        for (int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
+                        for (int i = 1; i <= Convert.ToInt32(lastSampleCount); i++)
                         {
                             runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("B" + i) && x.channel_size.Equals(channel_size)).ToList());
                             runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("S" + i) && x.channel_size.Equals(channel_size)).ToList());
@@ -1053,7 +1053,7 @@ namespace ALS.ALSI.Web.view.template
                             lpc.type = item.Key;
                             lpc.channel_size = channel_size;
                             double _value = runResults.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.channel_size.Equals(channel_size)).Average(x => Convert.ToDouble(x.Results));
-                            lpc.Results = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+                            lpc.Results = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt32(txtDecimal03.Text)));
                             last3Results.Add(lpc);
                         }
                         runResults.AddRange(last3Results);
@@ -1081,7 +1081,7 @@ namespace ALS.ALSI.Web.view.template
 
                             double _value = (Convert.ToDouble(lpcSaple.Results) - Convert.ToDouble(lpcBlank.Results)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea05.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor05.Text);
 
-                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal05.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal05.Text)));
+                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal05.Text)), Math.Round(_value, Convert.ToInt32(txtDecimal05.Text)));
                             listAverages.Add(lpc);
                             index++;
                         }
@@ -1141,7 +1141,7 @@ namespace ALS.ALSI.Web.view.template
                         #region "RUN RESULT"
                         List<template_seagate_lpc_coverpage> runResults = new List<template_seagate_lpc_coverpage>();
                         lastSampleCount = lastSampleCount.Replace("Sample ", "").Trim().Replace("S", "").Trim();
-                        for (int i = 1; i <= Convert.ToInt16(lastSampleCount); i++)
+                        for (int i = 1; i <= Convert.ToInt32(lastSampleCount); i++)
                         {
                             runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("B" + i) && x.channel_size.Equals(channel_size)).ToList());
                             runResults.AddRange(this.Lpcs.Where(x => !String.IsNullOrEmpty(x.type) && x.type.Equals("S" + i) && x.channel_size.Equals(channel_size)).ToList());
@@ -1158,7 +1158,7 @@ namespace ALS.ALSI.Web.view.template
                             lpc.type = item.Key;
                             lpc.channel_size = channel_size;
                             double _value = runResults.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.channel_size.Equals(channel_size)).Average(x => Convert.ToDouble(x.Results));
-                            lpc.Results = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal03.Text)));
+                            lpc.Results = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt32(txtDecimal03.Text)));
                             last3Results.Add(lpc);
                         }
                         runResults.AddRange(last3Results);
@@ -1186,7 +1186,7 @@ namespace ALS.ALSI.Web.view.template
 
                             double _value = (Convert.ToDouble(lpcSaple.Results) - Convert.ToDouble(lpcBlank.Results)) * Convert.ToDouble(lbExtractionVol.Text) / (Convert.ToDouble(txtSurfaceArea06.Text) * Convert.ToDouble(lbNoOfPartsUsed.Text)) * Convert.ToDouble(txtDilutionFactor06.Text);
 
-                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal05.Text)), Math.Round(_value, Convert.ToInt16(txtDecimal05.Text)));
+                            lpc.Value = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal05.Text)), Math.Round(_value, Convert.ToInt32(txtDecimal05.Text)));
                             listAverages.Add(lpc);
                             index++;
                         }
@@ -1296,7 +1296,7 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList().ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600")).ToList().ToDataTable())); // Add datasource here
 
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportLpcs.Where(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06)).ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportLpcs.Where(x => x.particle_type == Convert.ToInt32(ParticleTypeEnum.PAR_06)).ToDataTable())); // Add datasource here
 
 
 
@@ -1437,7 +1437,7 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList().ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600")).ToList().ToDataTable())); // Add datasource here
 
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportLpcs.Where(x => x.particle_type == Convert.ToInt16(ParticleTypeEnum.PAR_06)).ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportLpcs.Where(x => x.particle_type == Convert.ToInt32(ParticleTypeEnum.PAR_06)).ToDataTable())); // Add datasource here
 
             byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 
@@ -1457,7 +1457,7 @@ namespace ALS.ALSI.Web.view.template
 
             if (tem != null)
             {
-                int template_type = Convert.ToInt16(ddlTemplateType.SelectedValue);
+                int template_type = Convert.ToInt32(ddlTemplateType.SelectedValue);
                 string lpc_type = ddlA19.SelectedValue;
 
                 //Procedure
