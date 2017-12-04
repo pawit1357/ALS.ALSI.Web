@@ -1301,7 +1301,7 @@
             <DataSetName>DataSet2</DataSetName>
             <Top>3.02551in</Top>
             <Height>0.58463in</Height>
-            <Width>7.15028in</Width>
+            <Width>7.15029in</Width>
             <ZIndex>3</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -1376,7 +1376,7 @@
               </Parameter>
             </Parameters>
             <Height>2.18417in</Height>
-            <Width>7.15028in</Width>
+            <Width>7.15029in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -1636,7 +1636,7 @@
             <Top>9.16977cm</Top>
             <Left>0cm</Left>
             <Height>1.65324cm</Height>
-            <Width>18.16172cm</Width>
+            <Width>18.16171cm</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2120,10 +2120,10 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>6.09425in</Height>
+        <Height>6.01257in</Height>
         <Style />
       </Body>
-      <Width>7.15028in</Width>
+      <Width>7.15029in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

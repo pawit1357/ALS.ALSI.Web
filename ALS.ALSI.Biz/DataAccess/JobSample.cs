@@ -33,6 +33,11 @@ namespace ALS.ALSI.Biz.DataAccess
             return _repository.Find(x => x.ID == _id).FirstOrDefault();
         }
 
+        public List<job_sample> findByIdAndStatus(String jobNumber, StatusEnum status )
+        {
+            return _repository.Find(x => x.job_number == jobNumber && x.job_status == Convert.ToInt16(status)).ToList();
+        }
+
         public void Insert()
         {
             _repository.Add(this);

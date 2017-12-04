@@ -148,6 +148,8 @@ namespace ALS.ALSI.Biz.DataAccess
                                  s.date_admin_sent_to_cus,
                                  receive_date = j.date_of_receive,
                                  due_date = s.due_date,
+                                 s.due_date_customer,
+                                 s.due_date_lab,
                                  job_number = s.job_number,
                                  customer_ref_no = j.customer_ref_no,
                                  s_pore_ref_no = j.s_pore_ref_no,
@@ -182,7 +184,9 @@ namespace ALS.ALSI.Biz.DataAccess
                                 s.date_login_received_sample,
                                 s.date_chemist_alalyze,
                                 s.date_labman_complete,
-                                s.is_hold
+                                s.is_hold,
+                                s.amend_count,
+                                s.retest_count
                              };
 
                 if (this.ID > 0)

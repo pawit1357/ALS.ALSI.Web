@@ -247,7 +247,7 @@
                         <asp:Label ID="lbTotalRecords" runat="server" Text="" Visible="false"></asp:Label>
 
                         <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False"
-                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,receive_date,is_hold" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
+                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,due_date,is_hold,due_date_customer,due_date_lab,amend_count,retest_count" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
                             <Columns>
                                 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
@@ -263,10 +263,10 @@
                                         <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Chnage Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnPrintLabel" runat="server" ToolTip="Print Label" CommandName="Print" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-print"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnAmend" runat="server" ToolTip="Change Amend" CommandName="Amend" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-pencil-square"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnAmend" runat="server" ToolTip="Amend" CommandName="Amend" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-wrench"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnReTest" runat="server" ToolTip="ReTest" CommandName="Retest" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-retweet"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnHold" runat="server" ToolTip="Hold" CommandName="Hold" CommandArgument='<%# String.Concat(Eval("ID"))%>'><i class="fa fa-toggle-off"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnUnHold" runat="server" ToolTip="UnHold" CommandName="UnHold" CommandArgument='<%# String.Concat(Eval("ID"))%>'><i class="fa fa-toggle-on"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnHold" runat="server" ToolTip="Hold" CommandName="Hold" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-toggle-off"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnUnHold" runat="server" ToolTip="UnHold" CommandName="UnHold" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-toggle-on"></i></asp:LinkButton>
 
                                     </ItemTemplate>
                                 </asp:TemplateField>
@@ -387,6 +387,8 @@
                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-truck">:Complete </i></div>
                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-lock">: Hold</i></div>
                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-trash-o">:Cancel </i></div>
+                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-retweet">:Retest(report) </i></div>
+                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-wrench">:Amend(report) </i></div>
                             <p>STATUS:</p>
                             <button type="button" class="btn red btn-sm">Cancel</button>
                             <button type="button" class="btn green btn-sm">Complete</button>

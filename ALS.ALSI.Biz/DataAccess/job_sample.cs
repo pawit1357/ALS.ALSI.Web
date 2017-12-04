@@ -47,6 +47,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> step7owner { get; set; }
         public string internal_reference_remark { get; set; }
         public Nullable<System.DateTime> due_date { get; set; }
+        public Nullable<System.DateTime> due_date_customer { get; set; }
+        public Nullable<System.DateTime> due_date_lab { get; set; }
         public Nullable<System.DateTime> date_login_received_sample { get; set; }
         public Nullable<System.DateTime> date_chemist_alalyze { get; set; }
         public Nullable<System.DateTime> date_chemist_complete { get; set; }
@@ -58,6 +60,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public string is_no_spec { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
         public string is_hold { get; set; }
+        public Nullable<int> amend_count { get; set; }
+        public Nullable<int> retest_count { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

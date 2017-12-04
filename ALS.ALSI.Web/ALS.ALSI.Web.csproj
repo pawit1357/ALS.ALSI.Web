@@ -1234,7 +1234,6 @@
     <Content Include="view\library\Library.aspx" />
     <Content Include="view\library\SearchLibrary.aspx" />
     <Content Include="view\request\JobReTest.aspx" />
-    <Content Include="view\request\JobAmend.aspx" />
     <Content Include="view\request\ChangeReportDate.aspx" />
     <Content Include="view\request\AdminPrint.aspx" />
     <Content Include="view\template\Seagate_Copperwire.ascx" />
@@ -1429,13 +1428,6 @@
     </Compile>
     <Compile Include="view\request\JobReTest.aspx.designer.cs">
       <DependentUpon>JobReTest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="view\request\JobAmend.aspx.cs">
-      <DependentUpon>JobAmend.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="view\request\JobAmend.aspx.designer.cs">
-      <DependentUpon>JobAmend.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\request\ChangeReportDate.aspx.cs">
       <DependentUpon>ChangeReportDate.aspx</DependentUpon>

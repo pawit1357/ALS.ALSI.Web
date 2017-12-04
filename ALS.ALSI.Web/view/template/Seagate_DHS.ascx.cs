@@ -1016,8 +1016,8 @@ namespace ALS.ALSI.Web.view.template
 
             if (ds2.Count > 0 && ds2.Count <= 10)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
             }
             if (ds2.Count > 10)
             {

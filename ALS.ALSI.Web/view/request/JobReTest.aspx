@@ -72,7 +72,9 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Change Due date</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">
+                        <asp:Label ID="lbTitleName" runat="server" Text=""></asp:Label>
+                    </span>
                     <span class="caption-helper"></span>
                 </div>
                 <div class="tools">
@@ -82,35 +84,38 @@
             <div class="portlet-body form">
                 <div class="form-body">
                     <!-- BEGIN FORM-->
-                    <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">แก้ไขผลการทดสอบ:<span class="required">*</span></label>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Invoice:</label>
-                                <div class="col-md-6">
-                                    <div class="input-group" style="text-align: left">
-                                        <asp:TextBox ID="txtInvoice" runat="server" CssClass="form-control"></asp:TextBox>
-                                        <span class="input-group-btn"></span>
-                                    </div>
-                                </div>
-                            </div>
+                            <asp:RadioButtonList ID="rdEditData" runat="server">
+                                <asp:ListItem Value="1" Selected="True">&nbsp;&nbsp;ใช่</asp:ListItem>
+                                <asp:ListItem Value="0">&nbsp;&nbsp;ไม่</asp:ListItem>
+                            </asp:RadioButtonList>
+
                         </div>
 
                     </div>
-                    <div class="form-actions">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <asp:Button ID="btnSave" runat="server" CssClass="btn green" Text="Save" OnClick="btnSave_Click" />
-                                        <asp:Button ID="btnCancel" runat="server" CssClass="cancel btn" Text="Cancel" OnClick="btnCancel_Click" />
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
+                        <div class="col-md-6">
+                            <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <asp:Button ID="btnSave" runat="server" CssClass="btn green" Text="Save" OnClick="btnSave_Click" />
+                                            <asp:Button ID="btnCancel" runat="server" CssClass="cancel btn" Text="Cancel" OnClick="btnCancel_Click" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                            </div>
                         </div>
+                        <!-- END FORM-->
                     </div>
-                    <!-- END FORM-->
                 </div>
             </div>
         </div>

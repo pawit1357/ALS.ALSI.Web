@@ -572,8 +572,10 @@ namespace ALS.ALSI.Web.view.request
 
                         jobSample.job_role = userLogin.role_id;
                         jobSample.status_completion_scheduled = Convert.ToInt32(ddlCompletionScheduled.SelectedValue);
+                        jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
 
                         #region "Special Flow"
+
                         /*
                         *ELP:       Login(convert template , select spec) > Chemist testing > Sr. chemist checking > Admin(Word) > Lab Manager > Admin (Upload file PDF)
                         ELS:       	Login(convert template(Ad hoc template)) >Chemist testing(Upload file) > Sr. chemist checking
@@ -582,6 +584,7 @@ namespace ALS.ALSI.Web.view.request
                         GRP:       	Login > Admin(Upload file PDF)
                         ELWA :    	Login > Chemist testing(Upload file) > Sr. chemist checking > Admin(Word) > Lab Manager > Admin (Upload file PDF)
                          * */
+
                         if (!String.IsNullOrEmpty(ddlJobNumber.SelectedValue))
                         {
                             switch (ddlJobNumber.SelectedItem.Text.ToUpper())
@@ -618,6 +621,8 @@ namespace ALS.ALSI.Web.view.request
                             if (objJobInfo != null)
                             {
                                 jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
+                                jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date));
+                                jobSample.due_date_lab = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date));
                             }
                         }
                         else

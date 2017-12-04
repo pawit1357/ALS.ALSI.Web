@@ -119,8 +119,6 @@ namespace ALS.ALSI.Web.view.template
             if (this.jobSample != null)
             {
 
-
-
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
                 lbJobStatus.Text = Constants.GetEnumDescription(status);
@@ -128,127 +126,48 @@ namespace ALS.ALSI.Web.view.template
 
                 pRemark.Visible = false;
                 pDisapprove.Visible = false;
-                pSpecification.Visible = false;
-                pStatus.Visible = false;
-                pUploadfile.Visible = false;
-                pDownload.Visible = false;
-                btnSubmit.Visible = false;
-
-                switch (userRole)
+                pCoverPage.Visible = true;
+                pDSH.Visible = false;
+                pTankConditions.Visible = false;
+                pSpecification.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC);
+                pStatus.Visible = (status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.LABMANAGER_CHECKING);
+                pUploadfile.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD);
+                pDownload.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+                btnSubmit.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+                btnCoverPage.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                btnWorkSheet.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                txtB21.Enabled = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                txtC21.Enabled = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                txtD21.Enabled = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                txtE21.Enabled = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                gvSpec.Columns[5].Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                if (status == StatusEnum.LABMANAGER_CHECKING)
                 {
-                    case RoleEnum.LOGIN:
-                        if (status == StatusEnum.LOGIN_SELECT_SPEC)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = true;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.CHEMIST:
-                        if (status == StatusEnum.CHEMIST_TESTING)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.SR_CHEMIST:
-                        if (status == StatusEnum.SR_CHEMIST_CHECKING)
-                        {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = true;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.ADMIN:
-                        if (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = true;
-                            pDownload.Visible = true;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.LABMANAGER:
-                        if (status == StatusEnum.LABMANAGER_CHECKING)
-                        {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = true;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = true;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+
                 }
-                #region "METHOD/PROCEDURE:"
-
-                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                else if (status == StatusEnum.SR_CHEMIST_CHECKING)
                 {
-
-
-
-                    #region ":: STAMP ANALYZED DATE ::"
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                    {
-                        if (this.jobSample.date_chemist_alalyze == null)
-                        {
-                            this.jobSample.date_chemist_alalyze = DateTime.Now;
-                            this.jobSample.Update();
-                        }
-                    }
-                    #endregion
-
-
-                    txtB21.Enabled = true;
-                    txtC21.Enabled = true;
-                    txtD21.Enabled = true;
-                    txtE21.Enabled = true;
-                    gvSpec.Columns[5].Visible = true;
-                    btnCoverPage.Visible = true;
-                    btnWorkSheet.Visible = true;
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                    pRemark.Visible = false;
                 }
-                else
+
+                #region ":: STAMP ANALYZED DATE ::"
+                if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
-                    txtB21.Enabled = false;
-                    txtC21.Enabled = false;
-                    txtD21.Enabled = false;
-                    txtE21.Enabled = false;
-                    gvSpec.Columns[5].Visible = false;
-                    btnCoverPage.Visible = false;
-                    btnWorkSheet.Visible = false;
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                    if (this.jobSample.date_chemist_alalyze == null)
                     {
-                        btnCoverPage.Visible = true;
-                        btnWorkSheet.Visible = true;
+                        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                        this.jobSample.Update();
                     }
                 }
                 #endregion
             }
-
             #endregion
 
-            #region "WorkSheet"
+            #region "WORKSHEET"
             this.Lpc = template_wd_lpc_coverpage.FindAllBySampleID(this.SampleID);
             if (this.Lpc != null && this.Lpc.Count > 0)
             {
@@ -258,10 +177,8 @@ namespace ALS.ALSI.Web.view.template
                 if (tem != null)
                 {
                     lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
-
-                    //lbSpecRev.Text = tem.B;
-                    //lbComponent.Text = tem.A;
                 }
+
                 //Method
                 txtB21.Text = _lpc.ProcedureNo;
                 txtC21.Text = _lpc.NumberOfPieces;
@@ -269,13 +186,12 @@ namespace ALS.ALSI.Web.view.template
                 txtE21.Text = _lpc.ExtractionVolume;
 
                 lbTestMethod.Text = txtB21.Text;
+
                 #region "Test Method: 92-004230 Rev. AK"
                 txtB48.Text = _lpc.ws_b15;//Surface Area, cm²
                 txtB49.Text = _lpc.ExtractionVolume;
                 txtB50.Text = _lpc.ws_b17;
                 txtB51.Text = _lpc.NumberOfPieces;
-
-
                 #endregion
 
                 #region "Tank Conditions"
@@ -324,8 +240,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 this.Lpc = new List<template_wd_lpc_coverpage>();
                 this.CommandName = CommandNameEnum.Add;
-
-
                 txtB54.Text = "20.2 L";
                 txtC54.Text = "68 kHz";
                 txtD54.Text = "4.8 W/L";
@@ -337,19 +251,11 @@ namespace ALS.ALSI.Web.view.template
             btnCoverPage.CssClass = "btn blue";
             btnWorkSheet.CssClass = "btn green";
 
-            pCoverPage.Visible = true;
-            pDSH.Visible = false;
 
-            switch (lbJobStatus.Text)
-            {
-                case "CONVERT_PDF":
-                    litDownloadIcon.Text = "<i class=\"fa fa-file-pdf-o\"></i>";
-                    break;
-                default:
-                    litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
-                    break;
-            }
-            pTankConditions.Visible = false;
+
+            litDownloadIcon.Text = "<i class=\"fa fa-"+(lbJobStatus.Text.Equals("CONVERT_PDF")? "file-pdf-o" : "file-word-o") +"\"></i>";
+
+
         }
 
         #endregion
@@ -970,16 +876,16 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3" }).Contains(x.A)).ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] { "4", "5" }).Contains(x.A)).ToDataTable())); // Add datasource here
-           
-            if(sumarys.Count>0 && sumarys.Count <= 10)
+
+            if (sumarys.Count > 0 && sumarys.Count <= 10)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0,sumarys.Count).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, sumarys.Count).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
             }
-            if (sumarys.Count >10)
+            if (sumarys.Count > 10)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, 10).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", sumarys.GetRange(10, sumarys.Count-10).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", sumarys.GetRange(10, sumarys.Count - 10).ToDataTable())); // Add datasource here
             }
 
 
@@ -1070,236 +976,9 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-            DataTable dt = Extenders.ObjectToDataTable(this.Lpc[0]);
-            List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
-            List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
-            List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList();
-            foreach (template_wd_lpc_coverpage lpc in specs)
-            {
-                lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
-                Console.WriteLine();
-            }
-            foreach (template_wd_lpc_coverpage lpc in sumarys)
-            {
-                lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
-                lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
-                Console.WriteLine();
-            }
-
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", dt.Rows[0]["ws_c21"].ToString()));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-
-            reportParameters.Add(new ReportParameter("txtB48", txtB48.Text));
-            reportParameters.Add(new ReportParameter("txtB49", txtB49.Text));
-            reportParameters.Add(new ReportParameter("txtB50", txtB50.Text));
-            reportParameters.Add(new ReportParameter("txtB51", txtB51.Text));
-            reportParameters.Add(new ReportParameter("txtB54", txtB54.Text));
-            reportParameters.Add(new ReportParameter("txtC54", txtC54.Text));
-            reportParameters.Add(new ReportParameter("txtD54", txtD54.Text));
-            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/lpc_wd_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3" }).Contains(x.A)).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] { "4", "5" }).Contains(x.A)).ToDataTable())); // Add datasource here
-
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.ToDataTable())); // Add datasource here
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-        }
+        
         #region "Custom method"
-
-        private String validateDSHFile(IList<HttpPostedFile> _files)
-        {
-            Boolean isFound_b1 = false;
-            Boolean isFound_b2 = false;
-            Boolean isFound_b3 = false;
-            Boolean isFound_b4 = false;
-            Boolean isFound_b5 = false;
-
-            Boolean isFound_s1 = false;
-            Boolean isFound_s2 = false;
-            Boolean isFound_s3 = false;
-            Boolean isFound_s4 = false;
-            Boolean isFound_s5 = false;
-            Boolean isFoundWrongExtension = false;
-
-            String result = String.Empty;
-
-            String[] files = new String[_files.Count];
-            if (files.Length == 10)
-            {
-                for (int i = 0; i < _files.Count; i++)
-                {
-                    files[i] = _files[i].FileName;
-                    if (!Path.GetExtension(_files[i].FileName).Trim().Equals(".xls"))
-                    {
-                        isFoundWrongExtension = true;
-                        break;
-                    }
-                }
-                if (!isFoundWrongExtension)
-                {
-
-                    //Find B1
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B1"))
-                        {
-                            isFound_b1 = true;
-                            break;
-                        }
-                    }
-
-                    //Find B2
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B2"))
-                        {
-                            isFound_b2 = true;
-                            break;
-                        }
-                    }
-                    //Find B3
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B3"))
-                        {
-                            isFound_b3 = true;
-                            break;
-                        }
-                    }
-                    //Find B4
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B4"))
-                        {
-                            isFound_b4 = true;
-                            break;
-                        }
-                    }
-                    //Find B5
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B5"))
-                        {
-                            isFound_b5 = true;
-                            break;
-                        }
-                    }
-                    //Find S1
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S1"))
-                        {
-                            isFound_s1 = true;
-                            break;
-                        }
-                    }
-
-                    //Find S2
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S2"))
-                        {
-                            isFound_s2 = true;
-                            break;
-                        }
-                    }
-                    //Find S3
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S3"))
-                        {
-                            isFound_s3 = true;
-                            break;
-                        }
-                    }
-                    //Find S4
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S4"))
-                        {
-                            isFound_s4 = true;
-                            break;
-                        }
-                    }
-                    //Find S5
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S5"))
-                        {
-                            isFound_s5 = true;
-                            break;
-                        }
-                    }
-                    result = (!isFound_b1) ? result += "File not found B1.xls" :
-                                (!isFound_b2) ? result += "File not found B2.xls" :
-                                (!isFound_b3) ? result += "File not found B3.xls" :
-                                 (!isFound_b4) ? result += "File not found B3.xls" :
-                                  (!isFound_b5) ? result += "File not found B3.xls" :
-                                (!isFound_s1) ? result += "File not found S1.xls" :
-                                (!isFound_s2) ? result += "File not found S2.xls" :
-                                (!isFound_s3) ? result += "File not found S3.xls" :
-                                 (!isFound_s4) ? result += "File not found S3.xls" :
-                                  (!isFound_s5) ? result += "File not found S3.xls" : String.Empty;
-                }
-                else
-                {
-                    result = "File extension must be *.txt";
-                }
-            }
-            else
-            {
-                result = "You must to select 6 files for upload.";
-            }
-            return result;
-        }
-
+        
         private void CalculateCas()
         {
             foreach (template_wd_lpc_coverpage val in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC)))
@@ -1322,7 +1001,7 @@ namespace ALS.ALSI.Web.view.template
 
             //Cal Average
 
-            foreach(template_wd_lpc_coverpage item in this.Lpc.Where(x=>x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList())
+            foreach (template_wd_lpc_coverpage item in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList())
             {
                 this.Lpc.Remove(item);
             }

@@ -1,6 +1,7 @@
 ﻿using ALS.ALIS.Repository.Interface;
 using ALS.ALSI.Biz.Constant;
 using StructureMap;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -95,6 +96,25 @@ namespace ALS.ALSI.Biz.DataAccess
             return _repository.GetAll().Where(x => x.sample_id == _sampleID).ToList();
         }
 
+
+        public static void CloneData(int oldSampleId,int newSampleId)
+        {
+            try
+            {
+                List<template_seagate_copperwire_coverpage> listOfData = FindAllBySampleID(oldSampleId);
+                if (null != listOfData && listOfData.Count > 0)
+                {
+                    foreach (template_seagate_copperwire_coverpage item in listOfData)
+                    {
+                        item.sample_id = newSampleId;
+                        item.Insert();
+                    }
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+        }
         #endregion
     }
 }

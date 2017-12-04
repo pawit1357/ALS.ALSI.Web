@@ -58,7 +58,25 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             _repository.Delete(this);
         }
-
+        public static void CloneData(int oldSampleId, int newSampleId)
+        {
+            try
+            {
+                List<template_wd_ic_coverpage> lists = _repository.Find(x => x.sample_id == oldSampleId).ToList();
+                if (null != lists && lists.Count > 0)
+                {
+                    foreach (template_wd_ic_coverpage item in lists)
+                    {
+                        item.sample_id = newSampleId;
+                        item.Insert();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
         #region "Custom"
         public void UpdateBySampleID()
         {

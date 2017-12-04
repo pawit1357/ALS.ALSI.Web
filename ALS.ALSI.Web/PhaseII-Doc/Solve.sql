@@ -23,3 +23,8 @@ select * from tb_m_component where template_id=480 order by id desc;
 
 
 select * from template_wd_corrosion_coverpage where sample_id=3726;
+
+
+select * from job_sample where job_number='ELP-0582-DB';
+
+

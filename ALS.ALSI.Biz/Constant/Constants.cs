@@ -242,7 +242,11 @@ namespace ALS.ALSI.Biz.Constant
         [Description("CONVERT_PDF")]
         ADMIN_CONVERT_PDF = 14,
         [Description("UN_HOLD")]
-        JOB_UNHOLD = 15
+        JOB_UNHOLD = 15,
+        [Description("RETEST REPORT")]
+        JOB_RETEST= 16,
+        [Description("APPROVE AMEND")]
+        JOB_AMEND = 17,
 
     }
 
