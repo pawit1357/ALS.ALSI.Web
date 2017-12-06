@@ -1206,6 +1206,8 @@
     <Content Include="images\logo.png" />
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
+    <Content Include="PhaseII-Doc\Dump20171206-after-update.sql" />
+    <Content Include="PhaseII-Doc\Dump20171206.sql" />
     <Content Include="PhaseII-Doc\PhaseII.sql" />
     <Content Include="PhaseII-Doc\Solve.sql" />
     <Content Include="ReadMe\script-solve.sql" />

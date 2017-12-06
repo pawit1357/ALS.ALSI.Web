@@ -856,6 +856,8 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
                 //########
+                this.jobSample.update_date = DateTime.Now;
+                this.jobSample.update_by = userLogin.id;
                 this.jobSample.Update();
 
                 //Commit
@@ -2231,11 +2233,11 @@ namespace ALS.ALSI.Web.view.template
 
                 reportParameters.Add(new ReportParameter("Test", "GCMS Extractable"));
                 reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-                reportParameters.Add(new ReportParameter("Remark1", lbRemark1.Text));
-                reportParameters.Add(new ReportParameter("Remark2", lbRemark2.Text));
+                reportParameters.Add(new ReportParameter("Remark1", String.IsNullOrEmpty(lbRemark1.Text) ? " " : lbRemark1.Text));
+                reportParameters.Add(new ReportParameter("Remark2", String.IsNullOrEmpty(lbRemark2.Text) ? " " : lbRemark2.Text));
                 reportParameters.Add(new ReportParameter("Remark3", String.IsNullOrEmpty(lbRemark3.Text) ? " " : lbRemark3.Text));
-                reportParameters.Add(new ReportParameter("Remark4", String.IsNullOrEmpty(lbRemark4.Text) ? "" : lbRemark4.Text));
-                reportParameters.Add(new ReportParameter("Remark5", String.IsNullOrEmpty(lbRemark5.Text) ? "" : lbRemark5.Text));
+                reportParameters.Add(new ReportParameter("Remark4", String.IsNullOrEmpty(lbRemark4.Text) ? " " : lbRemark4.Text));
+                reportParameters.Add(new ReportParameter("Remark5", String.IsNullOrEmpty(lbRemark5.Text) ? " " : lbRemark5.Text));
 
                 // Variables
                 Warning[] warnings;

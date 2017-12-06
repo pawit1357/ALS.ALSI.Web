@@ -46,7 +46,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public void Update()
         {
             job_sample existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
-            this.update_date = DateTime.Now;
             _repository.Edit(existing, this);
         }
 

@@ -288,6 +288,7 @@ namespace ALS.ALSI.Web.view.request
                     if (cs != null)
                     {
                         job_sample jobSample = new job_sample().SelectByID(this.SampleID);
+                        jobSample.update_date = DateTime.Now;
                         jobSample.is_hold = "1";
                         jobSample.Update();
                         //Commit
@@ -299,10 +300,12 @@ namespace ALS.ALSI.Web.view.request
                     if (cs != null)
                     {
                         job_sample jobSample = new job_sample().SelectByID(this.SampleID);
-                        jobSample.due_date = jobSample.update_date.Value.AddDays(cs.value.Value);
-                        jobSample.due_date_customer = jobSample.update_date.Value.AddDays(cs.lab_due_date.Value);
-                        jobSample.due_date_lab = jobSample.update_date.Value.AddDays(cs.customer_due_date.Value);
+                        jobSample.update_date = DateTime.Now;
+                        jobSample.due_date = (jobSample.update_date==null)? DateTime.Now.AddDays(cs.value.Value): jobSample.update_date.Value.AddDays(cs.value.Value);
+                        jobSample.due_date_customer = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.lab_due_date.Value) : jobSample.update_date.Value.AddDays(cs.lab_due_date.Value);
+                        jobSample.due_date_lab = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.customer_due_date.Value) : jobSample.update_date.Value.AddDays(cs.customer_due_date.Value);
                         jobSample.is_hold = "0";
+                        jobSample.job_status = Convert.ToInt16(StatusEnum.CHEMIST_TESTING);
                         jobSample.Update();
                         //Commit
                         GeneralManager.Commit();
@@ -586,6 +589,7 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Specification", typeof(string));
                 dt.Columns.Add("Type of test", typeof(string));
                 dt.Columns.Add("Modified Date", typeof(string));
+                dt.Columns.Add("Update By", typeof(string));
                 String conSQL = Configurations.MySQLCon;
                 using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
                 {
@@ -610,14 +614,16 @@ namespace ALS.ALSI.Web.view.request
                                 "`Extent2`.`surface_area` AS `Surface Area`," +
                                 "`Extent3`.`name` AS `Specification`," +
                                 "`Extent4`.`name` AS `Type of test`," +
-                                "DATE_FORMAT(`Extent2`.`update_date`,'%e %b %Y')  AS `Modified Date`" +
+                                "DATE_FORMAT(`Extent2`.`update_date`,'%e %b %Y %H:%i')  AS `Modified Date`," +
+                                "`Extent8`.`username` AS `Update By`" +
                                 " FROM `job_info` AS `Extent1`" +
                                 " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
                                 " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
                                 " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
                                 " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
                                 " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
-                                " INNER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`";
+                                " INNER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
+                                " INNER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`";
 
 
                     StringBuilder sqlCri = new StringBuilder();

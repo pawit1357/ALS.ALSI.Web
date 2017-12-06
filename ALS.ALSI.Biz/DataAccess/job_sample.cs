@@ -62,6 +62,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string is_hold { get; set; }
         public Nullable<int> amend_count { get; set; }
         public Nullable<int> retest_count { get; set; }
+        public Nullable<int> update_by { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

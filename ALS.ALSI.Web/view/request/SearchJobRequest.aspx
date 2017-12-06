@@ -252,8 +252,8 @@
                                 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
 
-                                        <asp:LinkButton ID="btnInfo" runat="server" ToolTip="Info" CommandName="View" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-search"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnInfo" runat="server" ToolTip="Info" CommandName="View" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-search"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-edit"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnConvertTemplete" runat="server" ToolTip="Convert Template" CommandName="ConvertTemplate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tasks"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnWorkFlow" runat="server" ToolTip="Work Flow" CommandName="Workflow" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-briefcase"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeStatus" runat="server" ToolTip="Change Status" CommandName="ChangeStatus" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-refresh"></i></asp:LinkButton>

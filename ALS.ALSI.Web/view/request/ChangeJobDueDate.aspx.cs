@@ -116,7 +116,9 @@ namespace ALS.ALSI.Web.view.request
         protected void btnSave_Click(object sender, EventArgs e)
         {
 
-            this.jobSample.due_date = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);// Convert.ToDateTime(txtDuedate.Text);
+            this.jobSample.due_date = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+            this.jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+            this.jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
             this.jobSample.Update();
             job_sample_logs tmp = new job_sample_logs
             {

@@ -520,6 +520,12 @@ namespace ALS.ALSI.Web.view.request
                     objJobInfo.Insert();
                     break;
                 case CommandNameEnum.Edit:
+                    foreach(job_sample s in this.listSampleShow)
+                    {
+                        s.update_by = userLogin.id;
+                        s.update_date = DateTime.Now;
+                    }
+
                     objJobInfo.Update();
                     break;
             }
@@ -572,8 +578,10 @@ namespace ALS.ALSI.Web.view.request
 
                         jobSample.job_role = userLogin.role_id;
                         jobSample.status_completion_scheduled = Convert.ToInt32(ddlCompletionScheduled.SelectedValue);
-                        jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
-
+                        //jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
+                        jobSample.update_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
+                        jobSample.update_by = userLogin.id;
+                        jobSample.is_hold = "0";//0=Unhold
                         #region "Special Flow"
 
                         /*

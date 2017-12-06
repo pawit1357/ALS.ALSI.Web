@@ -495,6 +495,9 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
                 //########
+
+                this.jobSample.update_date = DateTime.Now;
+                this.jobSample.update_by = userLogin.id;
                 this.jobSample.Update();
                 //Commit
                 GeneralManager.Commit();
