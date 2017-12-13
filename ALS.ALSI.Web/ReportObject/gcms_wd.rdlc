@@ -1771,7 +1771,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.44792in</Height>
+                  <Height>0.35625in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1785,7 +1785,7 @@
                                   <Value>Major Compounds (R.T)</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1843,7 +1843,7 @@
                                   <Value>Classification</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1901,7 +1901,7 @@
                                   <Value>Result</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1918,7 +1918,7 @@
                                   <Value>(</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1928,7 +1928,7 @@
                                   <Value>=Parameters!rpt_unit.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -1938,7 +1938,7 @@
                                   <Value>)</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -2002,7 +2002,7 @@
                                   <Value>=Fields!rt.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -2058,7 +2058,7 @@
                                 <TextRun>
                                   <Value>=Fields!library_id.Value</Value>
                                   <Style>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2111,7 +2111,7 @@
                                 <TextRun>
                                   <Value>=Fields!amount.Value</Value>
                                   <Style>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Lucida Sans</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2176,7 +2176,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet4</DataSetName>
             <Top>4.62348in</Top>
-            <Height>0.69792in</Height>
+            <Height>0.60625in</Height>
             <Width>7.2325in</Width>
             <ZIndex>4</ZIndex>
             <Style>
@@ -2459,7 +2459,7 @@
             <Top>7.98697cm</Top>
             <Left>0cm</Left>
             <Height>1.75464cm</Height>
-            <Width>18.37052cm</Width>
+            <Width>18.37058cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>

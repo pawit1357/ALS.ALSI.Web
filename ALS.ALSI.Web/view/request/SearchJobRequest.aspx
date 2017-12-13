@@ -104,7 +104,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Received Report From:</label>
+                                <label class="control-label col-md-3">Date Receive Sample (From):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtReceivedReportFrom" runat="server" class="form-control"></asp:TextBox>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Received Report To:</label>
+                                <label class="control-label col-md-3">Date Receive Sample (To):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtReceivedReportTo" runat="server" class="form-control"></asp:TextBox>
@@ -133,7 +133,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Report To Customer From:</label>
+                                <label class="control-label col-md-3">Report To Customer (From):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtReportToCustomerFrom" runat="server" class="form-control"></asp:TextBox>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Report To Customer To:</label>
+                                <label class="control-label col-md-3">Report To Customer (To):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtReportToCustomerTo" runat="server" class="form-control"></asp:TextBox>
@@ -162,7 +162,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Duedate From:</label>
+                                <label class="control-label col-md-3">Duedate (From):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtDuedateFrom" runat="server" class="form-control"></asp:TextBox>
@@ -175,7 +175,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Duedate Customer To:</label>
+                                <label class="control-label col-md-3">Duedate (To):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtDuedateTo" runat="server" class="form-control"></asp:TextBox>

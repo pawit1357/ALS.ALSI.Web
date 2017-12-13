@@ -628,9 +628,9 @@ namespace ALS.ALSI.Web.view.request
                         {
                             if (objJobInfo != null)
                             {
-                                jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
-                                jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date));
-                                jobSample.due_date_lab = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date));
+                                jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value)-1);
+                                jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date)-1);
+                                jobSample.due_date_lab = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date)-1);
                             }
                         }
                         else

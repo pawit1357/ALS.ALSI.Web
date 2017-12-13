@@ -48,11 +48,32 @@
 --select job_sample.job_number,job_info.date_of_receive,
 --job_sample.due_date,
 --job_sample.due_date_customer,
---job_sample.due_date_lab
----- DATE_ADD(job_info.date_of_receive, INTERVAL m_completion_scheduled.customer_due_date DAY) as due_date_customer,
----- DATE_ADD(job_info.date_of_receive, INTERVAL m_completion_scheduled.lab_due_date DAY) as due_date_lab
+--job_sample.due_date_lab,
+-- DATE_ADD(job_info.date_of_receive, INTERVAL m_completion_scheduled.customer_due_date DAY) as XXdue_date_customer,
+-- DATE_ADD(job_info.date_of_receive, INTERVAL m_completion_scheduled.lab_due_date DAY) as XXdue_date_lab,
+--m_completion_scheduled.value,
+--m_completion_scheduled.customer_due_date,
+--m_completion_scheduled.lab_due_date
 --from job_sample 
 --left join job_info on job_info.id = job_sample.job_id
 --left join m_completion_scheduled on m_completion_scheduled.id = job_sample.status_completion_scheduled
+--where job_sample.job_number='ELN-0655-PAB'
 
 
+-- # 2017-12-11 #
+/*
+CREATE TABLE `alsi`.`m_template_config` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `template_id` INT NULL,
+  `A` VARCHAR(45) NULL,
+  `B` VARCHAR(45) NULL,
+  `C` VARCHAR(45) NULL,
+  `D` VARCHAR(45) NULL,
+  `E` VARCHAR(45) NULL,
+  `F` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+
+
+  ELP-2469-DB
+*/

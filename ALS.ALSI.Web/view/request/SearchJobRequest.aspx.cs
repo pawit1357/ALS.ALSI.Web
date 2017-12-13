@@ -239,8 +239,8 @@ namespace ALS.ALSI.Web.view.request
             m_completion_scheduled cs = new m_completion_scheduled().SelectByID(Convert.ToInt32(CompletionScheduledEnum.NORMAL));
 
             this.CommandName = cmd;
-            this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-            this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
+            this.JobID = (cmd == CommandNameEnum.Page)? 0: int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+            this.SampleID = (cmd == CommandNameEnum.Page) ? 0 : int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
 
             switch (cmd)
             {
@@ -412,8 +412,8 @@ namespace ALS.ALSI.Web.view.request
                     btnChangeInvoice.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT));
                     btnPrintLabel.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT);
                     btnChangeReportDate.Visible = ((userRole == RoleEnum.ADMIN));
-                    btnAmend.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.LABMANAGER_CHECKING);
-                    btnReTest.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.LABMANAGER_CHECKING);
+                    btnAmend.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE);
+                    btnReTest.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE);
                     btnHold.Visible = ((userRole == RoleEnum.LOGIN) && !isHold);
                     btnUnHold.Visible = ((userRole == RoleEnum.LOGIN) && isHold);
 
@@ -423,6 +423,7 @@ namespace ALS.ALSI.Web.view.request
                     {
                         case RoleEnum.LOGIN:
                         case RoleEnum.CHEMIST:
+                        case RoleEnum.SR_CHEMIST:
                         case RoleEnum.LABMANAGER:
                             litDueDate.Text = due_date_lab.ToString("dd MMM yyyy");
                             break;
@@ -432,7 +433,7 @@ namespace ALS.ALSI.Web.view.request
                             litDueDate.Text = due_date_customer.ToString("dd MMM yyyy");
                             break;
                         default:
-                            litDueDate.Text = due_date.ToString("dd MMM yyyy");
+                            litDueDate.Text = due_date_lab.ToString("dd MMM yyyy");
                             break;
                     }
 
