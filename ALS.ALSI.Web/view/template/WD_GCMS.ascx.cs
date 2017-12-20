@@ -547,15 +547,15 @@ namespace ALS.ALSI.Web.view.template
                         string MM = DateTime.Now.ToString("MM");
                         string dd = DateTime.Now.ToString("dd");
 
-                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
 
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
                             Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                         }
-                        btnUpload.SaveAs(source_file);
+                        FileUpload1.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
                     }
