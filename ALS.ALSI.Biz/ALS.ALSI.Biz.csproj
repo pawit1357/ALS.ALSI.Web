@@ -64,8 +64,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Binaries\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -96,14 +96,17 @@
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
-    <Reference Include="Spire.Doc">
-      <HintPath>E:\lib\Spire.Doc.dll</HintPath>
+    <Reference Include="Spire.Doc, Version=5.7.0.54020, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Binaries\Spire.Doc.dll</HintPath>
     </Reference>
-    <Reference Include="Spire.License">
-      <HintPath>E:\lib\Spire.License.dll</HintPath>
+    <Reference Include="Spire.License, Version=1.3.5.20, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Binaries\Spire.License.dll</HintPath>
     </Reference>
-    <Reference Include="Spire.Pdf">
-      <HintPath>E:\lib\Spire.Pdf.dll</HintPath>
+    <Reference Include="Spire.Pdf, Version=3.7.291.54020, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Binaries\Spire.Pdf.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.5.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -141,6 +144,8 @@
       <DependentUpon>ALSI.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\Component.cs" />
+    <Compile Include="DataAccess\MMicroscopicAnalysis.cs" />
+    <Compile Include="DataAccess\MEvaluationOfParticles.cs" />
     <Compile Include="DataAccess\job_info.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -177,6 +182,12 @@
     <Compile Include="DataAccess\m_customer_contract_person.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\m_evaluation_of_particles.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\m_microscopic_analysis.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\m_role.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -192,6 +203,9 @@
     <Compile Include="DataAccess\m_template.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\m_template_config.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\m_title.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -204,6 +218,8 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\SeagateGcmsImg.cs" />
+    <Compile Include="DataAccess\Pa.cs" />
+    <Compile Include="DataAccess\PaDetail.cs" />
     <Compile Include="DataAccess\tb_m_component.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -226,6 +242,12 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\tb_unit.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\template_pa.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\template_pa_detail.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\template_seagate_copperwire_coverpage.cs">
@@ -369,11 +391,15 @@
   <ItemGroup>
     <Content Include="Binaries\AjaxControlToolkit.dll" />
     <Content Include="Binaries\AjaxMin.dll" />
+    <Content Include="Binaries\DocumentFormat.OpenXml.dll" />
     <Content Include="Binaries\EntityFramework.dll" />
     <Content Include="Binaries\HtmlToOpenXml.dll" />
     <Content Include="Binaries\MySql.Data.dll" />
     <Content Include="Binaries\MySql.Data.Entity.EF5.dll" />
     <Content Include="Binaries\MySql.Web.dll" />
+    <Content Include="Binaries\Spire.Doc.dll" />
+    <Content Include="Binaries\Spire.License.dll" />
+    <Content Include="Binaries\Spire.Pdf.dll" />
     <Content Include="Binaries\StructureMap.dll" />
     <Content Include="Binaries\WordToPDF.dll" />
     <Content Include="DataAccess\ALSI.Context.tt">

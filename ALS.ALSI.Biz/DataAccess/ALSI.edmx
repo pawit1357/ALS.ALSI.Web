@@ -95,8 +95,8 @@
           <Property Name="date_chemist_complete" Type="date" />
           <Property Name="date_srchemist_complate" Type="date" />
           <Property Name="date_admin_sent_to_cus" Type="date" />
-          <Property Name="date_labman_complete" Type="date" />
           <Property Name="sr_approve_date" Type="date" />
+          <Property Name="date_labman_complete" Type="date" />
           <Property Name="ad_hoc_tempalte_path" Type="varchar" MaxLength="200" />
           <Property Name="is_no_spec" Type="varchar" MaxLength="1" />
           <Property Name="update_date" Type="datetime" Precision="0" />
@@ -173,6 +173,29 @@
           <Property Name="email" Type="varchar" MaxLength="45" />
           <Property Name="department" Type="varchar" MaxLength="45" />
         </EntityType>
+        <EntityType Name="m_evaluation_of_particles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="template_id" Type="int" />
+          <Property Name="seq" Type="int" />
+          <Property Name="A" Type="varchar" MaxLength="255" />
+          <Property Name="B" Type="varchar" MaxLength="255" />
+          <Property Name="C" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="m_microscopic_analysis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="template_id" Type="int" />
+          <Property Name="seq" Type="int" />
+          <Property Name="A" Type="varchar" MaxLength="45" />
+          <Property Name="B" Type="varchar" MaxLength="45" />
+          <Property Name="status" Type="varchar" MaxLength="45" />
+        </EntityType>
         <EntityType Name="m_role">
           <Key>
             <PropertyRef Name="ID" />
@@ -226,6 +249,19 @@
           <Property Name="create_date" Type="date" />
           <Property Name="status" Type="varchar" MaxLength="1" />
           <Property Name="version" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="m_template_config">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="template_id" Type="int" />
+          <Property Name="A" Type="varchar" MaxLength="45" />
+          <Property Name="B" Type="varchar" MaxLength="45" />
+          <Property Name="C" Type="varchar" MaxLength="45" />
+          <Property Name="D" Type="varchar" MaxLength="45" />
+          <Property Name="E" Type="varchar" MaxLength="45" />
+          <Property Name="F" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="m_title">
           <Key>
@@ -575,6 +611,59 @@
           <Property Name="name" Type="varchar" MaxLength="45" />
           <Property Name="value" Type="double" />
         </EntityType>
+        <EntityType Name="template_pa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sample_id" Type="int" />
+          <Property Name="largest_metallic_particle" Type="varchar" MaxLength="45" />
+          <Property Name="largest_non-metallic_particle" Type="varchar" MaxLength="45" />
+          <Property Name="largest_fiber" Type="varchar" MaxLength="45" />
+          <Property Name="em_extraction_medium" Type="varchar" MaxLength="45" />
+          <Property Name="em_shaking" Type="varchar" MaxLength="45" />
+          <Property Name="em_wetted_surface_per_component" Type="varchar" MaxLength="45" />
+          <Property Name="em_total_tested_size" Type="varchar" MaxLength="45" />
+          <Property Name="type_of_method" Type="varchar" MaxLength="45" />
+          <Property Name="type_of_method_a" Type="varchar" MaxLength="45" />
+          <Property Name="type_of_method_b" Type="varchar" MaxLength="45" />
+          <Property Name="type_of_method_c" Type="varchar" MaxLength="45" />
+          <Property Name="type_of_method_d" Type="varchar" MaxLength="45" />
+          <Property Name="filtration_method" Type="varchar" MaxLength="45" />
+          <Property Name="analysis_membrane_used" Type="varchar" MaxLength="45" />
+          <Property Name="type_of_drying" Type="varchar" MaxLength="45" />
+          <Property Name="particle_sizing_counting_det" Type="varchar" MaxLength="45" />
+          <Property Name="particle_sizing_counting_det_a" Type="varchar" MaxLength="45" />
+          <Property Name="particle_sizing_counting_det_b" Type="varchar" MaxLength="45" />
+          <Property Name="ccc_total" Type="varchar" MaxLength="45" />
+          <Property Name="img01" Type="varchar" MaxLength="45" />
+          <Property Name="img02" Type="varchar" MaxLength="45" />
+          <Property Name="img03" Type="varchar" MaxLength="45" />
+          <Property Name="img04" Type="varchar" MaxLength="45" />
+          <Property Name="img05" Type="varchar" MaxLength="45" />
+          <Property Name="img07" Type="varchar" MaxLength="45" />
+          <Property Name="img08" Type="varchar" MaxLength="45" />
+          <Property Name="result" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="template_pa_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sample_id" Type="int" />
+          <Property Name="evaluation_of_particles_id" Type="int" />
+          <Property Name="microscopic_analysis_id" Type="int" />
+          <Property Name="col_a" Type="varchar" MaxLength="45" />
+          <Property Name="col_b" Type="varchar" MaxLength="45" />
+          <Property Name="col_c" Type="varchar" MaxLength="45" />
+          <Property Name="col_d" Type="varchar" MaxLength="45" />
+          <Property Name="col_e" Type="varchar" MaxLength="45" />
+          <Property Name="col_f" Type="varchar" MaxLength="45" />
+          <Property Name="col_g" Type="varchar" MaxLength="45" />
+          <Property Name="col_h" Type="varchar" MaxLength="45" />
+          <Property Name="row_type" Type="int" />
+          <Property Name="row_status" Type="int" />
+        </EntityType>
         <EntityType Name="template_seagate_copperwire_coverpage">
           <Key>
             <PropertyRef Name="ID" />
@@ -634,11 +723,11 @@
           <Property Name="row_type" Type="int" />
           <Property Name="SamplingTime" Type="varchar" MaxLength="50" />
           <Property Name="unit" Type="int" />
+          <Property Name="digit2" Type="int" />
+          <Property Name="digit1" Type="int" />
           <Property Name="procedureNo" Type="varchar" MaxLength="45" />
           <Property Name="sampleSize" Type="varchar" MaxLength="45" />
           <Property Name="chemical_id" Type="varchar" MaxLength="45" />
-          <Property Name="digit1" Type="int" />
-          <Property Name="digit2" Type="int" />
         </EntityType>
         <EntityType Name="template_seagate_ftir_coverpage">
           <Key>
@@ -859,45 +948,45 @@
           <Property Name="D30" Type="varchar" MaxLength="20" />
           <Property Name="D31" Type="varchar" MaxLength="20" />
           <Property Name="D32" Type="varchar" MaxLength="20" />
+          <Property Name="C14" Type="varchar" MaxLength="20" />
+          <Property Name="C15" Type="varchar" MaxLength="20" />
+          <Property Name="C16" Type="varchar" MaxLength="20" />
+          <Property Name="C17" Type="varchar" MaxLength="20" />
+          <Property Name="C18" Type="varchar" MaxLength="20" />
+          <Property Name="C19" Type="varchar" MaxLength="20" />
+          <Property Name="E20" Type="varchar" MaxLength="20" />
+          <Property Name="E21" Type="varchar" MaxLength="20" />
+          <Property Name="E22" Type="varchar" MaxLength="20" />
+          <Property Name="E23" Type="varchar" MaxLength="20" />
+          <Property Name="E24" Type="varchar" MaxLength="20" />
+          <Property Name="E25" Type="varchar" MaxLength="20" />
+          <Property Name="E26" Type="varchar" MaxLength="20" />
+          <Property Name="E27" Type="varchar" MaxLength="20" />
+          <Property Name="E28" Type="varchar" MaxLength="20" />
+          <Property Name="E29" Type="varchar" MaxLength="20" />
+          <Property Name="E30" Type="varchar" MaxLength="20" />
+          <Property Name="E31" Type="varchar" MaxLength="20" />
+          <Property Name="E32" Type="varchar" MaxLength="20" />
+          <Property Name="F20" Type="varchar" MaxLength="20" />
+          <Property Name="F21" Type="varchar" MaxLength="20" />
+          <Property Name="F22" Type="varchar" MaxLength="20" />
+          <Property Name="F23" Type="varchar" MaxLength="20" />
+          <Property Name="F24" Type="varchar" MaxLength="20" />
+          <Property Name="F25" Type="varchar" MaxLength="20" />
+          <Property Name="F26" Type="varchar" MaxLength="20" />
+          <Property Name="F27" Type="varchar" MaxLength="20" />
+          <Property Name="F28" Type="varchar" MaxLength="20" />
+          <Property Name="F29" Type="varchar" MaxLength="20" />
+          <Property Name="F30" Type="varchar" MaxLength="20" />
+          <Property Name="F31" Type="varchar" MaxLength="20" />
+          <Property Name="F32" Type="varchar" MaxLength="20" />
+          <Property Name="C13" Type="varchar" MaxLength="20" />
+          <Property Name="remark1" Type="varchar" MaxLength="150" />
+          <Property Name="remark2" Type="varchar" MaxLength="150" />
+          <Property Name="remark3" Type="varchar" MaxLength="150" />
+          <Property Name="remark4" Type="varchar" MaxLength="150" />
+          <Property Name="remark5" Type="varchar" MaxLength="150" />
           <Property Name="UnitCompoundSub" Type="int" />
-          <Property Name="remark1" Type="varchar" MaxLength="100" />
-          <Property Name="remark2" Type="varchar" MaxLength="100" />
-          <Property Name="remark3" Type="varchar" MaxLength="100" />
-          <Property Name="remark4" Type="varchar" MaxLength="100" />
-          <Property Name="remark5" Type="varchar" MaxLength="100" />
-          <Property Name="C14" Type="varchar" MaxLength="45" />
-          <Property Name="C15" Type="varchar" MaxLength="45" />
-          <Property Name="C16" Type="varchar" MaxLength="45" />
-          <Property Name="C17" Type="varchar" MaxLength="45" />
-          <Property Name="C18" Type="varchar" MaxLength="45" />
-          <Property Name="C19" Type="varchar" MaxLength="45" />
-          <Property Name="E20" Type="varchar" MaxLength="45" />
-          <Property Name="C13" Type="varchar" MaxLength="45" />
-          <Property Name="E21" Type="varchar" MaxLength="45" />
-          <Property Name="E22" Type="varchar" MaxLength="45" />
-          <Property Name="E23" Type="varchar" MaxLength="45" />
-          <Property Name="E24" Type="varchar" MaxLength="45" />
-          <Property Name="E25" Type="varchar" MaxLength="45" />
-          <Property Name="E26" Type="varchar" MaxLength="45" />
-          <Property Name="E27" Type="varchar" MaxLength="45" />
-          <Property Name="E28" Type="varchar" MaxLength="45" />
-          <Property Name="E29" Type="varchar" MaxLength="45" />
-          <Property Name="E30" Type="varchar" MaxLength="45" />
-          <Property Name="E31" Type="varchar" MaxLength="45" />
-          <Property Name="E32" Type="varchar" MaxLength="45" />
-          <Property Name="F20" Type="varchar" MaxLength="45" />
-          <Property Name="F21" Type="varchar" MaxLength="45" />
-          <Property Name="F22" Type="varchar" MaxLength="45" />
-          <Property Name="F23" Type="varchar" MaxLength="45" />
-          <Property Name="F24" Type="varchar" MaxLength="45" />
-          <Property Name="F25" Type="varchar" MaxLength="45" />
-          <Property Name="F26" Type="varchar" MaxLength="45" />
-          <Property Name="F27" Type="varchar" MaxLength="45" />
-          <Property Name="F28" Type="varchar" MaxLength="45" />
-          <Property Name="F29" Type="varchar" MaxLength="45" />
-          <Property Name="F30" Type="varchar" MaxLength="45" />
-          <Property Name="F31" Type="varchar" MaxLength="45" />
-          <Property Name="F32" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -1106,7 +1195,7 @@
           <Property Name="number_of_pieces_used_for_extraction" Type="varchar" MaxLength="45" />
           <Property Name="specification" Type="varchar" MaxLength="255" />
           <Property Name="result" Type="varchar" MaxLength="45" />
-          <Property Name="procedureNo" Type="varchar" MaxLength="45" />
+          <Property Name="procedureNo" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_img">
           <Key>
@@ -1621,11 +1710,14 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="m_customer" EntityType="Self.m_customer" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_customer_address" EntityType="Self.m_customer_address" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_customer_contract_person" EntityType="Self.m_customer_contract_person" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="m_evaluation_of_particles" EntityType="Self.m_evaluation_of_particles" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="m_microscopic_analysis" EntityType="Self.m_microscopic_analysis" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_role" EntityType="Self.m_role" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_specification" EntityType="Self.m_specification" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_status" EntityType="Self.m_status" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_status_group" EntityType="Self.m_status_group" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_template" EntityType="Self.m_template" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="m_template_config" EntityType="Self.m_template_config" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_title" EntityType="Self.m_title" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_type_of_test" EntityType="Self.m_type_of_test" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="menu" EntityType="Self.menu" Schema="alsi" store:Type="Tables" />
@@ -1639,6 +1731,8 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="tb_m_gcms_cas" EntityType="Self.tb_m_gcms_cas" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_specification" EntityType="Self.tb_m_specification" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_unit" EntityType="Self.tb_unit" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="template_pa" EntityType="Self.template_pa" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="template_pa_detail" EntityType="Self.template_pa_detail" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_copperwire_coverpage" EntityType="Self.template_seagate_copperwire_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_copperwire_img" EntityType="Self.template_seagate_copperwire_img" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_corrosion_coverpage" EntityType="Self.template_seagate_corrosion_coverpage" Schema="alsi" store:Type="Tables" />
@@ -1736,11 +1830,14 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="m_customer" EntityType="ALSIModel.m_customer" />
           <EntitySet Name="m_customer_address" EntityType="ALSIModel.m_customer_address" />
           <EntitySet Name="m_customer_contract_person" EntityType="ALSIModel.m_customer_contract_person" />
+          <EntitySet Name="m_evaluation_of_particles" EntityType="ALSIModel.m_evaluation_of_particles" />
+          <EntitySet Name="m_microscopic_analysis" EntityType="ALSIModel.m_microscopic_analysis" />
           <EntitySet Name="m_role" EntityType="ALSIModel.m_role" />
           <EntitySet Name="m_specification" EntityType="ALSIModel.m_specification" />
           <EntitySet Name="m_status" EntityType="ALSIModel.m_status" />
           <EntitySet Name="m_status_group" EntityType="ALSIModel.m_status_group" />
           <EntitySet Name="m_template" EntityType="ALSIModel.m_template" />
+          <EntitySet Name="m_template_config" EntityType="ALSIModel.m_template_config" />
           <EntitySet Name="m_title" EntityType="ALSIModel.m_title" />
           <EntitySet Name="m_type_of_test" EntityType="ALSIModel.m_type_of_test" />
           <EntitySet Name="menus" EntityType="ALSIModel.menu" />
@@ -1754,6 +1851,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="tb_m_gcms_cas" EntityType="ALSIModel.tb_m_gcms_cas" />
           <EntitySet Name="tb_m_specification" EntityType="ALSIModel.tb_m_specification" />
           <EntitySet Name="tb_unit" EntityType="ALSIModel.tb_unit" />
+          <EntitySet Name="template_pa" EntityType="ALSIModel.template_pa" />
+          <EntitySet Name="template_pa_detail" EntityType="ALSIModel.template_pa_detail" />
           <EntitySet Name="template_seagate_copperwire_coverpage" EntityType="ALSIModel.template_seagate_copperwire_coverpage" />
           <EntitySet Name="template_seagate_copperwire_img" EntityType="ALSIModel.template_seagate_copperwire_img" />
           <EntitySet Name="template_seagate_corrosion_coverpage" EntityType="ALSIModel.template_seagate_corrosion_coverpage" />
@@ -1923,8 +2022,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="date_chemist_complete" Type="DateTime" />
           <Property Name="date_srchemist_complate" Type="DateTime" />
           <Property Name="date_admin_sent_to_cus" Type="DateTime" />
-          <Property Name="date_labman_complete" Type="DateTime" />
           <Property Name="sr_approve_date" Type="DateTime" />
+          <Property Name="date_labman_complete" Type="DateTime" />
           <Property Name="ad_hoc_tempalte_path" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="is_no_spec" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="update_date" Type="DateTime" />
@@ -2008,6 +2107,29 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <NavigationProperty Name="job_info" Relationship="ALSIModel.fk_contract_person_id" FromRole="m_customer_contract_person" ToRole="job_info" />
           <NavigationProperty Name="m_customer" Relationship="ALSIModel.fk_company_id" FromRole="m_customer_contract_person" ToRole="m_customer" />
         </EntityType>
+        <EntityType Name="m_evaluation_of_particles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="template_id" Type="Int32" />
+          <Property Name="seq" Type="Int32" />
+          <Property Name="A" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="C" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="m_microscopic_analysis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="template_id" Type="Int32" />
+          <Property Name="seq" Type="Int32" />
+          <Property Name="A" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="m_role">
           <Key>
             <PropertyRef Name="ID" />
@@ -2065,6 +2187,19 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="create_date" Type="DateTime" />
           <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="version" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="m_template_config">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="template_id" Type="Int32" />
+          <Property Name="A" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="C" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="D" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="E" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="F" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="m_title">
           <Key>
@@ -2416,6 +2551,59 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="value" Type="Double" />
         </EntityType>
+        <EntityType Name="template_pa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sample_id" Type="Int32" />
+          <Property Name="largest_metallic_particle" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="largest_non_metallic_particle" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="largest_fiber" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="em_extraction_medium" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="em_shaking" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="em_wetted_surface_per_component" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="em_total_tested_size" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="type_of_method" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="type_of_method_a" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="type_of_method_b" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="type_of_method_c" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="type_of_method_d" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="filtration_method" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="analysis_membrane_used" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="type_of_drying" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="particle_sizing_counting_det" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="particle_sizing_counting_det_a" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="particle_sizing_counting_det_b" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ccc_total" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img01" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img02" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img03" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img04" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img05" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img07" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img08" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="result" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="template_pa_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sample_id" Type="Int32" />
+          <Property Name="evaluation_of_particles_id" Type="Int32" />
+          <Property Name="microscopic_analysis_id" Type="Int32" />
+          <Property Name="col_a" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="col_b" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="col_c" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="col_d" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="col_e" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="col_f" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="col_g" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="col_h" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="row_type" Type="Int32" />
+          <Property Name="row_status" Type="Int32" />
+        </EntityType>
         <EntityType Name="template_seagate_copperwire_coverpage">
           <Key>
             <PropertyRef Name="ID" />
@@ -2475,11 +2663,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_type" Type="Int32" />
           <Property Name="SamplingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="unit" Type="Int32" />
+          <Property Name="digit2" Type="Int32" />
+          <Property Name="digit1" Type="Int32" />
           <Property Name="procedureNo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="sampleSize" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="chemical_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="digit1" Type="Int32" />
-          <Property Name="digit2" Type="Int32" />
         </EntityType>
         <EntityType Name="template_seagate_ftir_coverpage">
           <Key>
@@ -2700,45 +2888,45 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="D30" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="D31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="D32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C14" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C15" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C16" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C17" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C18" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C19" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E20" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E21" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E22" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E23" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E24" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E25" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E26" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E27" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E28" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E29" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E30" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F20" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F21" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F22" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F23" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F24" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F25" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F26" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F27" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F28" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F29" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F30" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="remark1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="UnitCompoundSub" Type="Int32" />
-          <Property Name="remark1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="remark2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="remark3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="remark4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="remark5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="C14" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="C15" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="C16" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="C17" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="C18" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="C19" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E20" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="C13" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E21" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E22" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E23" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E24" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E25" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E26" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E27" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E28" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E29" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E30" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E31" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E32" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F20" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F21" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F22" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F23" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F24" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F25" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F26" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F27" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F28" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F29" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F30" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F31" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F32" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -2947,7 +3135,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="number_of_pieces_used_for_extraction" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="specification" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="result" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="procedureNo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="procedureNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_img">
           <Key>
@@ -3523,8 +3711,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="is_no_spec" ColumnName="is_no_spec" />
                 <ScalarProperty Name="ad_hoc_tempalte_path" ColumnName="ad_hoc_tempalte_path" />
-                <ScalarProperty Name="sr_approve_date" ColumnName="sr_approve_date" />
                 <ScalarProperty Name="date_labman_complete" ColumnName="date_labman_complete" />
+                <ScalarProperty Name="sr_approve_date" ColumnName="sr_approve_date" />
                 <ScalarProperty Name="date_admin_sent_to_cus" ColumnName="date_admin_sent_to_cus" />
                 <ScalarProperty Name="date_srchemist_complate" ColumnName="date_srchemist_complate" />
                 <ScalarProperty Name="date_chemist_complete" ColumnName="date_chemist_complete" />
@@ -3636,6 +3824,31 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="m_evaluation_of_particles">
+            <EntityTypeMapping TypeName="ALSIModel.m_evaluation_of_particles">
+              <MappingFragment StoreEntitySet="m_evaluation_of_particles">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="C" ColumnName="C" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="template_id" ColumnName="template_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="m_microscopic_analysis">
+            <EntityTypeMapping TypeName="ALSIModel.m_microscopic_analysis">
+              <MappingFragment StoreEntitySet="m_microscopic_analysis">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="template_id" ColumnName="template_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="m_role">
             <EntityTypeMapping TypeName="ALSIModel.m_role">
               <MappingFragment StoreEntitySet="m_role">
@@ -3692,6 +3905,20 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="specification_id" ColumnName="specification_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="m_template_config">
+            <EntityTypeMapping TypeName="ALSIModel.m_template_config">
+              <MappingFragment StoreEntitySet="m_template_config">
+                <ScalarProperty Name="F" ColumnName="F" />
+                <ScalarProperty Name="E" ColumnName="E" />
+                <ScalarProperty Name="D" ColumnName="D" />
+                <ScalarProperty Name="C" ColumnName="C" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="template_id" ColumnName="template_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4054,6 +4281,61 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="template_pa">
+            <EntityTypeMapping TypeName="ALSIModel.template_pa">
+              <MappingFragment StoreEntitySet="template_pa">
+                <ScalarProperty Name="result" ColumnName="result" />
+                <ScalarProperty Name="img08" ColumnName="img08" />
+                <ScalarProperty Name="img07" ColumnName="img07" />
+                <ScalarProperty Name="img05" ColumnName="img05" />
+                <ScalarProperty Name="img04" ColumnName="img04" />
+                <ScalarProperty Name="img03" ColumnName="img03" />
+                <ScalarProperty Name="img02" ColumnName="img02" />
+                <ScalarProperty Name="img01" ColumnName="img01" />
+                <ScalarProperty Name="ccc_total" ColumnName="ccc_total" />
+                <ScalarProperty Name="particle_sizing_counting_det_b" ColumnName="particle_sizing_counting_det_b" />
+                <ScalarProperty Name="particle_sizing_counting_det_a" ColumnName="particle_sizing_counting_det_a" />
+                <ScalarProperty Name="particle_sizing_counting_det" ColumnName="particle_sizing_counting_det" />
+                <ScalarProperty Name="type_of_drying" ColumnName="type_of_drying" />
+                <ScalarProperty Name="analysis_membrane_used" ColumnName="analysis_membrane_used" />
+                <ScalarProperty Name="filtration_method" ColumnName="filtration_method" />
+                <ScalarProperty Name="type_of_method_d" ColumnName="type_of_method_d" />
+                <ScalarProperty Name="type_of_method_c" ColumnName="type_of_method_c" />
+                <ScalarProperty Name="type_of_method_b" ColumnName="type_of_method_b" />
+                <ScalarProperty Name="type_of_method_a" ColumnName="type_of_method_a" />
+                <ScalarProperty Name="type_of_method" ColumnName="type_of_method" />
+                <ScalarProperty Name="em_total_tested_size" ColumnName="em_total_tested_size" />
+                <ScalarProperty Name="em_wetted_surface_per_component" ColumnName="em_wetted_surface_per_component" />
+                <ScalarProperty Name="em_shaking" ColumnName="em_shaking" />
+                <ScalarProperty Name="em_extraction_medium" ColumnName="em_extraction_medium" />
+                <ScalarProperty Name="largest_fiber" ColumnName="largest_fiber" />
+                <ScalarProperty Name="largest_non_metallic_particle" ColumnName="largest_non-metallic_particle" />
+                <ScalarProperty Name="largest_metallic_particle" ColumnName="largest_metallic_particle" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="template_pa_detail">
+            <EntityTypeMapping TypeName="ALSIModel.template_pa_detail">
+              <MappingFragment StoreEntitySet="template_pa_detail">
+                <ScalarProperty Name="row_status" ColumnName="row_status" />
+                <ScalarProperty Name="row_type" ColumnName="row_type" />
+                <ScalarProperty Name="col_h" ColumnName="col_h" />
+                <ScalarProperty Name="col_g" ColumnName="col_g" />
+                <ScalarProperty Name="col_f" ColumnName="col_f" />
+                <ScalarProperty Name="col_e" ColumnName="col_e" />
+                <ScalarProperty Name="col_d" ColumnName="col_d" />
+                <ScalarProperty Name="col_c" ColumnName="col_c" />
+                <ScalarProperty Name="col_b" ColumnName="col_b" />
+                <ScalarProperty Name="col_a" ColumnName="col_a" />
+                <ScalarProperty Name="microscopic_analysis_id" ColumnName="microscopic_analysis_id" />
+                <ScalarProperty Name="evaluation_of_particles_id" ColumnName="evaluation_of_particles_id" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="template_seagate_copperwire_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_seagate_copperwire_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_copperwire_coverpage">
@@ -4107,11 +4389,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_dhs_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_seagate_dhs_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_dhs_coverpage">
-                <ScalarProperty Name="digit2" ColumnName="digit2" />
-                <ScalarProperty Name="digit1" ColumnName="digit1" />
                 <ScalarProperty Name="chemical_id" ColumnName="chemical_id" />
                 <ScalarProperty Name="sampleSize" ColumnName="sampleSize" />
                 <ScalarProperty Name="procedureNo" ColumnName="procedureNo" />
+                <ScalarProperty Name="digit1" ColumnName="digit1" />
+                <ScalarProperty Name="digit2" ColumnName="digit2" />
                 <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="SamplingTime" ColumnName="SamplingTime" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
@@ -4222,6 +4504,13 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_gcms_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_seagate_gcms_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_gcms_coverpage">
+                <ScalarProperty Name="UnitCompoundSub" ColumnName="UnitCompoundSub" />
+                <ScalarProperty Name="remark5" ColumnName="remark5" />
+                <ScalarProperty Name="remark4" ColumnName="remark4" />
+                <ScalarProperty Name="remark3" ColumnName="remark3" />
+                <ScalarProperty Name="remark2" ColumnName="remark2" />
+                <ScalarProperty Name="remark1" ColumnName="remark1" />
+                <ScalarProperty Name="C13" ColumnName="C13" />
                 <ScalarProperty Name="F32" ColumnName="F32" />
                 <ScalarProperty Name="F31" ColumnName="F31" />
                 <ScalarProperty Name="F30" ColumnName="F30" />
@@ -4247,7 +4536,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="E23" ColumnName="E23" />
                 <ScalarProperty Name="E22" ColumnName="E22" />
                 <ScalarProperty Name="E21" ColumnName="E21" />
-                <ScalarProperty Name="C13" ColumnName="C13" />
                 <ScalarProperty Name="E20" ColumnName="E20" />
                 <ScalarProperty Name="C19" ColumnName="C19" />
                 <ScalarProperty Name="C18" ColumnName="C18" />
@@ -4255,12 +4543,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="C16" ColumnName="C16" />
                 <ScalarProperty Name="C15" ColumnName="C15" />
                 <ScalarProperty Name="C14" ColumnName="C14" />
-                <ScalarProperty Name="remark5" ColumnName="remark5" />
-                <ScalarProperty Name="remark4" ColumnName="remark4" />
-                <ScalarProperty Name="remark3" ColumnName="remark3" />
-                <ScalarProperty Name="remark2" ColumnName="remark2" />
-                <ScalarProperty Name="remark1" ColumnName="remark1" />
-                <ScalarProperty Name="UnitCompoundSub" ColumnName="UnitCompoundSub" />
                 <ScalarProperty Name="D32" ColumnName="D32" />
                 <ScalarProperty Name="D31" ColumnName="D31" />
                 <ScalarProperty Name="D30" ColumnName="D30" />

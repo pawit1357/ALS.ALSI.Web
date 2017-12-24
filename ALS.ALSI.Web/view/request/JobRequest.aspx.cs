@@ -602,8 +602,16 @@ namespace ALS.ALSI.Web.view.request
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     break;
                                 case "ELN":
-                                    jobSample.template_id = 2;
-                                    jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                                    if (item.Text.EndsWith("PA_REPORT1")|| item.Text.EndsWith("PA_REPORT2"))
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        jobSample.template_id = 2;
+                                        jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                                    }
+  
                                     break;
                                 case "FA":
                                     jobSample.template_id = 3;
