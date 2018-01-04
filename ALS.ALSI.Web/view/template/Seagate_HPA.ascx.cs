@@ -772,15 +772,15 @@ namespace ALS.ALSI.Web.view.template
                         string MM = DateTime.Now.ToString("MM");
                         string dd = DateTime.Now.ToString("dd");
 
-                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
 
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
                             Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                         }
-                        btnUpload.SaveAs(source_file);
+                        FileUpload1.SaveAs(source_file);
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
                         lbMessage.Text = string.Empty;
@@ -794,9 +794,33 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
+                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
 
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    this.jobSample.step7owner = userLogin.id;
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+
+
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        FileUpload1.SaveAs(source_file);
+                        this.jobSample.path_pdf = source_file_url;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        //lbMessage.Text = string.Empty;
+                    }
+                    else
+                    {
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        isValid = false;
+                    }
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                    //this.jobSample.step7owner = userLogin.id;
                     break;
 
             }
@@ -2046,6 +2070,9 @@ namespace ALS.ALSI.Web.view.template
 
                 lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B, tem.A);
 
+                //foreach(var item in _Hpas.Where(x=>x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03) || x.hpa_type== Convert.ToInt32(GVTypeEnum.LPC06)){
+                //    item.B = String.Empty;
+                //}
                 #endregion
                 #region "LPC"
                 LPCTypeEnum lpcType = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(ddlLpcType.SelectedValue));
@@ -2128,7 +2155,11 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.ID = CustomUtils.GetRandomNumberID();
                             _tmp.seq = (i + 1);
                             _tmp.A = _val;
-                            _tmp.B = tem.I;
+                            if (_val.Equals(lpc03A[lpc03A.Length - 1]))//Add value to Total Row
+                            {
+                                _tmp.B = tem.I;
+                            }
+                            //_tmp.B = tem.I;
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC03);
                             _Hpas.Add(_tmp);
@@ -2142,7 +2173,11 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.ID = CustomUtils.GetRandomNumberID();
                             _tmp.seq = (i + 1);
                             _tmp.A = _val;
-                            _tmp.B = tem.J;
+                            if (_val.Equals(lpc06A[lpc06A.Length - 1]))//Add value to Total Row
+                            {
+                                _tmp.B = tem.J;
+                            }
+                            //_tmp.B = tem.J;
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.LPC06);
                             _Hpas.Add(_tmp);

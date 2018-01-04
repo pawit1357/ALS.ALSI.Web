@@ -186,6 +186,13 @@ namespace ALS.ALSI.Biz.Constant
         BUSINESS_MANAGER =9
     }
 
+    public enum PAEnum
+    {
+        EVALUATION_OF_PARTICLES = 1,
+        GRAVIMETRY = 2,
+        MICROSCOPIC_ANALLYSIS = 3,
+        DOUBLE_ANALYSIS = 4
+    }
     public enum ResultEnum
     {
         [Description("-")]

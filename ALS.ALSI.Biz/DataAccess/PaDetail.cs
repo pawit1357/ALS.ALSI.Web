@@ -108,17 +108,4 @@ namespace ALS.ALSI.Biz.DataAccess
 
     }
 
-
-    public class ReportLPC
-    {
-
-        public string liquidParticleCount { get; set; }
-        public string specificationLimit { get; set; }
-        public string result { get; set; }
-        public int lpc_type { get; set; }
-        public int particle_type { get; set; }
-        public string unit { get; set; }
-
-
-    }
 }

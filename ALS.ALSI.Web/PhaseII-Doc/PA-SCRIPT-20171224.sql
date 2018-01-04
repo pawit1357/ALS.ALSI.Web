@@ -1,7 +1,8 @@
 -- *******************************************************************************************************************************
 -- 2017-12-24 (PA REPORT)
 -- *******************************************************************************************************************************
-
+-- INSERT INTO `alsi`.`m_template` (`ID`, `specification_id`, `name`, `path_url`, `requestor`, `modified_by`, `verified_by`, `validated_by`, `modified_date`, `create_date`, `status`) VALUES ('621', '27', 'PA-REPORT01', '~/view/template/PA01.ascx', '2', '2', '2', '2', '2017-12-24', '2017-12-24', 'A');
+-- INSERT INTO `alsi`.`m_template` (`ID`, `specification_id`, `name`, `path_url`, `requestor`, `modified_by`, `verified_by`, `validated_by`, `modified_date`, `create_date`, `status`) VALUES ('622', '28', 'PA-REPORT01', '~/view/template/PA02.ascx', '2', '2', '2', '2', '2017-12-24', '2017-12-24', 'A');
 
 -- INSERT INTO `alsi`.`m_specification` (`ID`, `name`, `status`) VALUES ('27', 'PA(REPORT)', 'A');
 -- INSERT INTO `alsi`.`m_type_of_test` (`ID`, `specification_id`, `prefix`, `name`, `parent`, `status`, `data_group`) VALUES ('219', '27', 'PAB', 'PA_REPORT1', '1', 'A', 'PA');
@@ -67,62 +68,5 @@
 
 
 
---CREATE TABLE `template_pa` (
---  `id` int(11) NOT NULL AUTO_INCREMENT,
---  `sample_id` int(11) DEFAULT NULL,
---  `largest_metallic_particle` varchar(45) DEFAULT NULL,
---  `largest_non-metallic_particle` varchar(45) DEFAULT NULL,
---  `largest_fiber` varchar(45) DEFAULT NULL,
---  `em_extraction_medium` varchar(45) DEFAULT NULL,
---  `em_shaking` varchar(45) DEFAULT NULL,
---  `em_wetted_surface_per_component` varchar(45) DEFAULT NULL,
---  `em_total_tested_size` varchar(45) DEFAULT NULL,
---  `type_of_method` varchar(45) DEFAULT NULL,
---  `type_of_method_a` varchar(45) DEFAULT NULL,
---  `type_of_method_b` varchar(45) DEFAULT NULL,
---  `type_of_method_c` varchar(45) DEFAULT NULL,
---  `type_of_method_d` varchar(45) DEFAULT NULL,
---  `filtration_method` varchar(45) DEFAULT NULL,
---  `analysis_membrane_used` varchar(45) DEFAULT NULL,
---  `type_of_drying` varchar(45) DEFAULT NULL,
---  `particle_sizing_counting_det` varchar(45) DEFAULT NULL,
---  `particle_sizing_counting_det_a` varchar(45) DEFAULT NULL,
---  `particle_sizing_counting_det_b` varchar(45) DEFAULT NULL,
---  `ccc_total` varchar(45) DEFAULT NULL,
---  `img01` varchar(45) DEFAULT NULL,
---  `img02` varchar(45) DEFAULT NULL,
---  `img03` varchar(45) DEFAULT NULL,
---  `img04` varchar(45) DEFAULT NULL,
---  `img05` varchar(45) DEFAULT NULL,
---  `img07` varchar(45) DEFAULT NULL,
---  `img08` varchar(45) DEFAULT NULL,
---  `result` varchar(45) DEFAULT NULL,
---  PRIMARY KEY (`id`)
---) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---CREATE TABLE `template_pa_detail` (
---  `id` int(11) NOT NULL AUTO_INCREMENT,
---  `sample_id` varchar(45) DEFAULT NULL,
---  `evaluation_of_particles_id` int(11) DEFAULT NULL,
---  `microscopic_analysis_id` int(11) DEFAULT NULL,
---  `eop_a` varchar(45) DEFAULT NULL,
---  `eop_b` varchar(45) DEFAULT NULL COMMENT 'Size rang, (µm)',
---  `eop_c` varchar(45) DEFAULT NULL COMMENT '''Specification''',
---  `eop_d` varchar(45) DEFAULT NULL COMMENT '''Result quantity per part''',
---  `g_a` varchar(45) DEFAULT NULL,
---  `g_b` varchar(45) DEFAULT NULL,
---  `g_c` varchar(45) DEFAULT NULL,
---  `ma_a` varchar(45) DEFAULT NULL,
---  `ma_b` varchar(45) DEFAULT NULL,
---  `ma_c` varchar(45) DEFAULT NULL,
---  `ma_d` varchar(45) DEFAULT NULL,
---  `ma_e` varchar(45) DEFAULT NULL,
---  `ma_f` varchar(45) DEFAULT NULL,
---  `ma_g` varchar(45) DEFAULT NULL,
---  `ma_h` varchar(45) DEFAULT NULL,
---  `da_a` varchar(45) DEFAULT NULL,
---  `da_b` varchar(45) DEFAULT NULL,
---  `da_d` varchar(45) DEFAULT NULL,
---  `row_type` int(11) DEFAULT NULL,
---  PRIMARY KEY (`id`)
---) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--ELN-0661-PAB
+--ELN-0662-PAB

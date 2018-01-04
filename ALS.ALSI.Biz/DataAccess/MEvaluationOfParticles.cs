@@ -1,7 +1,6 @@
 ﻿using ALS.ALIS.Repository.Interface;
 using ALS.ALSI.Biz.Constant;
 using StructureMap;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -54,7 +53,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public void Update()
         {
-            m_evaluation_of_particles existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
+            m_evaluation_of_particles existing = _repository.Find(x => x.id == this.id).FirstOrDefault();
             _repository.Edit(existing, this);
         }
 
@@ -74,7 +73,7 @@ namespace ALS.ALSI.Biz.DataAccess
                         _repository.Add(tmp);
                         break;
                     case CommandNameEnum.Edit:
-                        m_evaluation_of_particles existing = _repository.Find(x => x.ID == tmp.ID).FirstOrDefault();
+                        m_evaluation_of_particles existing = _repository.Find(x => x.id == tmp.id).FirstOrDefault();
                         _repository.Edit(existing, tmp);
                         break;
                 }

@@ -21,32 +21,459 @@
                 </div>
                 <div class="portlet-body">
                     <asp:Panel ID="pCoverpage" runat="server">
-                        <h5>Evaluation of Particles:</h5>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-puzzle font-grey-gallery"></i>
+                                            <span class="caption-subject bold font-grey-gallery uppercase">Evaluation of Particles:</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="form-group">
+                                            <asp:GridView ID="gvEop" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvEop_RowDataBound" OnRowCommand="gvEop_RowCommand">
+                                                <Columns>
+                                                    <asp:BoundField DataField="col_b" HeaderText="Cleanliness Class SKK: 3A_2 (Refer to S252001-1)" />
+                                                    <asp:BoundField DataField="col_c" HeaderText="Specification" />
+                                                    <asp:BoundField DataField="col_d" HeaderText="Result quantity per part" />
+                                                    <asp:TemplateField HeaderText="Hide">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table border="0">
+                            <tr>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td colspan="5">Remark: 1The specification provided by customer.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:Label ID="lbRow01" runat="server">Largest Metallic Particle:</asp:Label></td>
+                                <td>X</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:Label ID="lbLmp" runat="server"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:Label ID="lbRow02" runat="server">Largest Non-metallic Particle:</asp:Label></td>
+                                <td>X</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:Label ID="lbLnmp" runat="server"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:Label ID="lbRow03" runat="server">Largest Fiber:</asp:Label></td>
+                                <td>X</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:Label ID="lbLf" runat="server"></asp:Label></td>
+                            </tr>
 
-                        <asp:GridView ID="gvEop" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvEop_RowDataBound" OnRowCommand="gvEop_RowCommand">
-                            <Columns>
-                                <asp:BoundField DataField="col_a" HeaderText="" />
-                                <asp:BoundField DataField="col_b" HeaderText="Cleanliness Class SKK: 3A_2 (Refer to S252001-1)" />
-                                <asp:BoundField DataField="col_c" HeaderText="Specification" />
-                                <asp:BoundField DataField="col_d" HeaderText="Result quantity per part" />
-                                <asp:TemplateField HeaderText="Hide">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                            CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
+                        </table>
+                        <br />
+                        <table border="0">
+                            <tr>
+                                <td rowspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td rowspan="6">
+                                    <img src="img_avatar1.png" class="media-object" style="width: 60px"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>ALS Reference no.:</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:TextBox ID="txtAlsReferenceNo" runat="server"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td>Part description:</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:TextBox ID="txtPartDescription" runat="server"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td>Lot No.:</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:TextBox ID="txtLotNo" runat="server"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td>Date analysed:</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:TextBox ID="txtDateAnalyzed" runat="server"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td>Date test completed:</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <asp:TextBox ID="txtDateTestComplete" runat="server"></asp:TextBox></td>
+                            </tr>
+                        </table>
 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-puzzle font-grey-gallery"></i>
+                                            <span class="caption-subject bold font-grey-gallery uppercase">Description of process and extraction:</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="form-group">
+                                            <table border="0">
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Extraction Procedure:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>aIn-house method refers to ISO16232 and</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtExtractionProcedure" runat="server"></asp:TextBox></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Analysis Environment:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Controlled laboratory, (class ISO14644-1: class 5)</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Extraction method:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Extraction medium:</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtExtractionMedium" runat="server"></asp:TextBox></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Shaking / Rewash Q’ty:</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtShkingRewashQty" runat="server"></asp:TextBox></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Wetted surface per component:</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtWettedSurfacePerComponent" runat="server"></asp:TextBox></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Total tested size:</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtTotalTestedSize" runat="server"></asp:TextBox></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Type of method:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <asp:CheckBoxList ID="cbTypeOfMethod" runat="server">
+                                                            <asp:ListItem Value="1">Agitation acc.to ISO16232-2</asp:ListItem>
+                                                            <asp:ListItem Value="2">Pressure Rinse (medium pressure) acc.to ISO16232-3</asp:ListItem>
+                                                            <asp:ListItem Value="3">Ultrasonic acc.to ISO16232-4</asp:ListItem>
+                                                        </asp:CheckBoxList></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+
+
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Filtration method:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <asp:CheckBoxList ID="cbFiltrationMethod" runat="server">
+                                                            <asp:ListItem Value="1">Vacuum pressure</asp:ListItem>
+                                                            <asp:ListItem Value="2">Cascade filtration</asp:ListItem>
+                                                        </asp:CheckBoxList>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Analysis Membrane used:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <asp:TextBox ID="lbAnalysisMembraneUsed" runat="server" Text="47mm Dia., Nylon 5 µm MFPD"></asp:TextBox></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Type of drying:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <asp:CheckBoxList ID="cbTypeOfDrying" runat="server">
+                                                            <asp:ListItem Value="1">Oven Temperature 80C, 1 hour</asp:ListItem>
+                                                            <asp:ListItem Value="2">Desiccator 24C / 33%RH, 24 hours</asp:ListItem>
+                                                        </asp:CheckBoxList>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Mass of Contaminant:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Gravimetric analysis acc.to ISO16232-6</td>
+                                                    <td></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Particle sizing / counting / determination:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <asp:CheckBoxList ID="cbParticleSizingCoungtingDetermination" runat="server">
+                                                            <asp:ListItem Value="1">by Optical Microscope acc.to ISO16232-7</asp:ListItem>
+                                                        </asp:CheckBoxList>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Pixel scaling:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtPixelScaling" runat="server" Text=""></asp:TextBox></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Camera resolution:</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtCameraResolution" runat="server" Text=""></asp:TextBox></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td></td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <asp:CheckBoxList ID="cbParticleSizingCoungtingDetermination2" runat="server">
+                                                            <asp:ListItem Value="2">by SEM/EDX acc.to ISO16232-8</asp:ListItem>
+                                                        </asp:CheckBoxList>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <caption>
+                                                <i class="icon-puzzle font-grey-gallery"></i><span class="caption-subject bold font-grey-gallery uppercase">Gravimetry:</span>
+                                            </caption>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="form-group">
+                                            <asp:GridView ID="gvGravimetry" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvGravimetry_RowDataBound" OnRowCommand="gvGravimetry_RowCommand">
+                                                <Columns>
+                                                    <asp:BoundField DataField="col_a" HeaderText="Membrane filter weight" />
+                                                    <asp:BoundField DataField="col_b" HeaderText="Blank" />
+                                                    <asp:BoundField DataField="col_c" HeaderText="Component" />
+                                                    <asp:TemplateField HeaderText="Hide">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <caption>
+                                                <i class="icon-puzzle font-grey-gallery"></i><span class="caption-subject bold font-grey-gallery uppercase">Microscopic Analysis:</span>
+                                            </caption>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="form-group">
+
+                                            <asp:GridView ID="gvMicroscopicAnalysis" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvMicroscopicAnalysis_RowDataBound" OnRowCommand="gvMicroscopicAnalysis_RowCommand" OnDataBound="gvMicroscopicAnalysis_OnDataBound">
+                                                <Columns>
+                                                    <asp:BoundField DataField="col_a" HeaderText="Size class" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+                                                    <asp:BoundField DataField="col_b" HeaderText="Size range(um)" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+                                                    <asp:BoundField DataField="col_c" HeaderText="Total" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+                                                    <asp:BoundField DataField="col_d" HeaderText="Metal" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+                                                    <asp:BoundField DataField="col_e" HeaderText="Total" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+                                                    <asp:BoundField DataField="col_f" HeaderText="Metal" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+                                                    <asp:BoundField DataField="col_g" HeaderText="Total" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+                                                    <asp:BoundField DataField="col_h" HeaderText="Metal" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+                                                    <asp:TemplateField HeaderText="Hide">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                                CommandArgument='<%# Eval("ID")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+
+
+                                            <table border="0">
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td colspan="5">Remark:	1Metallic + Non-metallic particles without fibers.
+	2Fibers defined as Non-metallic, Length/Width > 10.
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <caption>
+                                                <i class="icon-puzzle font-grey-gallery"></i><span class="caption-subject bold font-grey-gallery uppercase">Component Cleanliness Code (CCC):</span>
+                                            </caption>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="form-group">
+                                            <table border="0">
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td colspan="2">Extended (B/C/E/D/E/F/G/H/I/J/K)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>per membrane:</td>
+                                                    <td>
+                                                        <asp:Label ID="lbPermembrane" runat="server" Text=""></asp:Label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td colspan="2">Remark:	1Metallic + Non-metallic particles without fibers.
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <caption>
+                                                <i class="icon-puzzle font-grey-gallery"></i><span class="caption-subject bold font-grey-gallery uppercase">Attachment I:</span>
+                                            </caption>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="form-group">
+                                            <table border="0">
+                                                <tr>
+                                                    <td>
+                                                        <img src="img_avatar1.png" class="media-object" style="width: 60px"></td>
+                                                    <td>
+                                                        <img src="img_avatar1.png" class="media-object" style="width: 60px"></td>
+                                                    <td>
+                                                        <img src="img_avatar1.png" class="media-object" style="width: 60px"></td>
+                                                    <td>
+                                                        <img src="img_avatar1.png" class="media-object" style="width: 60px"></td>
+                                                    <td>
+                                                        <img src="img_avatar1.png" class="media-object" style="width: 60px"></td>
+                                                    <td>
+                                                        <img src="img_avatar1.png" class="media-object" style="width: 60px"></td>
+                                                    <td>
+                                                        <img src="img_avatar1.png" class="media-object" style="width: 60px"></td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </asp:Panel>
                     <asp:Panel ID="pUploadWorkSheet" runat="server">
                         <div class="row" id="Div1" runat="server">
                             <div class="col-md-12">
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">Uplod file:</label>
+                                    <label class="control-label col-md-3">Uplod file(source file):</label>
 
                                     <div class="col-md-3">
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -64,9 +491,19 @@
                                                 </span>
                                                 <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
 
+
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-9">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+
                                 </div>
                             </div>
                         </div>
@@ -84,6 +521,7 @@
                                 </div>
                                 <div class="portlet-body">
 
+                                    <!-- 
                                     <asp:Panel ID="pEop" runat="server">
 
                                         <div class="form-group">
@@ -106,6 +544,7 @@
 
                                         <br />
                                     </asp:Panel>
+                                        -->
 
                                     <asp:Panel ID="pStatus" runat="server">
 
@@ -282,8 +721,10 @@
                 </div>
             </div>
 
+
         </ContentTemplate>
         <Triggers>
+            <asp:PostBackTrigger ControlID="btnLoadFile" />
             <asp:PostBackTrigger ControlID="btnSubmit" />
             <asp:PostBackTrigger ControlID="lbDownload" />
         </Triggers>

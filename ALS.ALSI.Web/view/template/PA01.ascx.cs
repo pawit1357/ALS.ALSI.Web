@@ -41,12 +41,12 @@ namespace ALS.ALSI.Web.view.template
             get { return (job_sample)Session["job_sample"]; }
             set { Session["job_sample"] = value; }
         }
-        
 
-        public List<template_wd_dhs_coverpage> reportCovers
+
+        public List<template_pa_detail> reportCovers
         {
-            get { return (List<template_wd_dhs_coverpage>)Session[GetType().Name + "reportCovers"]; }
-            set { Session[GetType().Name + "reportCovers"] = value; }
+            get { return (List<template_pa_detail>)Session[GetType().Name + "template_pa_detail_rpt"]; }
+            set { Session[GetType().Name + "template_pa_detail_rpt"] = value; }
         }
 
 
@@ -111,139 +111,34 @@ namespace ALS.ALSI.Web.view.template
 
                 pRemark.Visible = false;
                 pDisapprove.Visible = false;
-                pStatus.Visible = false;
-                pUploadfile.Visible = false;
-                pDownload.Visible = false;
-                btnSubmit.Visible = false;
+                //pCoverPage.Visible = true;
+                //pSpecification.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC);
+                pStatus.Visible = (status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.LABMANAGER_CHECKING);
+                pUploadfile.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD);
+                pDownload.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+                btnSubmit.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+                btnCoverPage.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
 
-                //lbDowloadWorkSheet.Text = this.jobSample.job_number;
-                lbDownload.Text = this.jobSample.job_number;
-                pUploadWorkSheet.Visible = false;
-                pCoverpage.Visible = true;
-
-               
-                switch (userRole)
+                if (status == StatusEnum.LABMANAGER_CHECKING)
                 {
-                    case RoleEnum.LOGIN:
-                        if (status == StatusEnum.LOGIN_SELECT_SPEC)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.CHEMIST:
-                        if (status == StatusEnum.CHEMIST_TESTING)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                            pUploadWorkSheet.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.SR_CHEMIST:
-                        if (status == StatusEnum.SR_CHEMIST_CHECKING)
-                        {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pStatus.Visible = true;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = true;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.ADMIN:
-                        lbDownload.Text = this.jobSample.job_number;
-                        switch (status)
-                        {
-                            case StatusEnum.ADMIN_CONVERT_WORD:
-                                pRemark.Visible = false;
-                                pDisapprove.Visible = false;
-                                pStatus.Visible = false;
-                                pUploadfile.Visible = true;
-                                pDownload.Visible = true;
-                                btnSubmit.Visible = true;
-                                pCoverpage.Visible = false;
-                                
-                                lbDesc.Text = "สำหรับดาวโหลดไฟล์ word ที่ผ่านการ Apporve จาก Sr.Chemist มาปรับแก้";
-                                break;
-                            case StatusEnum.ADMIN_CONVERT_PDF:
-                                pRemark.Visible = false;
-                                pDisapprove.Visible = false;
-                                pStatus.Visible = false;
-                                pUploadfile.Visible = true;
-                                pDownload.Visible = true;
-                                btnSubmit.Visible = true;
-                                pCoverpage.Visible = false;
-                                lbDesc.Text = "สำหรับดาวโหลดไฟล์ word ที่ผ่านการ Approve จาก Lab Manager มา Convert เป็น PDF";
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
 
-                                break;
-                        }
-                        //if (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD)
-                        //{
-                        //    pRemark.Visible = false;
-                        //    pDisapprove.Visible = false;
-                        //    pStatus.Visible = false;
-                        //    pUploadfile.Visible = true;
-                        //    pDownload.Visible = true;
-                        //    btnSubmit.Visible = true;
-                        //    pCoverpage.Visible = false;
-                        //}
-                        break;
-                        
-                    case RoleEnum.LABMANAGER:
-                        if (status == StatusEnum.LABMANAGER_CHECKING)
-                        {
-                            lbDownload.Text = this.jobSample.job_number;
-                            lbDesc.Text = "สำหรับดาวโหลดไฟล์ word ที่ผ่านการแก้ไขจาก Admin มาตรวจสอบ";
-
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pStatus.Visible = true;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = true;
-                            btnSubmit.Visible = true;
-                            pCoverpage.Visible = false;
-
-                        }
-                        break;
                 }
-                #region "METHOD/PROCEDURE:"
-
-                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                else if (status == StatusEnum.SR_CHEMIST_CHECKING)
                 {
-                    #region ":: STAMP ANALYZED DATE ::"
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                    {
-                        if (this.jobSample.date_chemist_alalyze == null)
-                        {
-                            this.jobSample.date_chemist_alalyze = DateTime.Now;
-                            this.jobSample.Update();
-                        }
-                    }
-                    #endregion
-                    btnCoverPage.Visible = true;
-                    btnDHS.Visible = true;
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                    pRemark.Visible = false;
                 }
-                else
-                {
-                    btnCoverPage.Visible = false;
-                    btnDHS.Visible = false;
 
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                #region ":: STAMP ANALYZED DATE ::"
+                if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                {
+                    if (this.jobSample.date_chemist_alalyze == null)
                     {
-                        btnCoverPage.Visible = true;
-                        btnDHS.Visible = true;
+                        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                        this.jobSample.Update();
                     }
                 }
                 #endregion
@@ -257,18 +152,63 @@ namespace ALS.ALSI.Web.view.template
             btnDHS.CssClass = "btn green";
 
             m_evaluation_of_particles eop = new m_evaluation_of_particles();
-
-            ddlEop.Items.Clear();
-            ddlEop.DataSource = eop.SelectAll().Where(x => x.template_id ==1).ToList();
-            ddlEop.DataBind();
-            ddlEop.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-
             m_microscopic_analysis ma = new m_microscopic_analysis();
 
-            ddlMa.Items.Clear();
-            ddlMa.DataSource = ma.SelectAll().Where(x => x.template_id == 1).ToList();
-            ddlMa.DataBind();
-            ddlMa.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            reportCovers = new List<template_pa_detail>();
+
+            #region "Evaluation of Particles"
+            List<m_evaluation_of_particles> eops = eop.SelectAll().Where(x => x.template_id == this.jobSample.template_id).ToList();
+            template_pa_detail tmp = new template_pa_detail();
+            foreach (var item in eops)
+            {
+                tmp = new template_pa_detail();
+                tmp.col_a = item.A;
+                tmp.col_b = item.B;
+                tmp.col_c = item.C;
+                tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
+                reportCovers.Add(tmp);
+            }
+            #endregion
+            #region "Gravimetry"
+
+            tmp = new template_pa_detail();
+            tmp.col_a = "Before filtration(mg):";
+            tmp.col_b = String.Empty;
+            tmp.col_c = String.Empty;
+            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+            tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
+            reportCovers.Add(tmp);
+            tmp = new template_pa_detail();
+            tmp.col_a = "After filtration (mg):";
+            tmp.col_b = String.Empty;
+            tmp.col_c = String.Empty;
+            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+            tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
+            reportCovers.Add(tmp);
+            tmp = new template_pa_detail();
+            tmp.col_a = "Residue weight(mg):";
+            tmp.col_b = String.Empty;
+            tmp.col_c = String.Empty;
+            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+            tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
+            reportCovers.Add(tmp);
+
+            #endregion
+            #region "Microscopic Analysis"
+            #endregion
+
+
+            gvEop.DataSource = reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            gvEop.DataBind();
+
+            gvGravimetry.DataSource = reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
+            gvGravimetry.DataBind();
+
+            //gvMicroscopicAnalysis.DataSource = reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            //gvMicroscopicAnalysis.DataBind();
+
 
 
             //pCoverpage.Visible = true;
@@ -285,6 +225,42 @@ namespace ALS.ALSI.Web.view.template
             //}
         }
 
+        private void calculate()
+        {
+            //            -----------------
+            //lbLmp
+            //lbLnmp
+            //lbLf
+            //-----------------
+            //txtAlsReferenceNo
+            //txtPartDescription
+            //txtLotNo
+            //txtDateAnalyzed
+            //txtDateTestComplete
+            //-----------------
+            //txtExtractionProcedure
+            //---------------- -
+            //txtExtractionMedium
+            //txtShkingRewashQty
+            //txtWettedSurfacePerComponent
+            //txtTotalTestedSize
+            //------
+            //cbTypeOfMethod
+            //cbFiltrationMethod
+            //lbAnalysisMembraneUsed
+            //cbTypeOfDrying
+            //cbParticleSizingCoungtingDetermination
+            //txtPixelScaling
+            //txtCameraResolution
+            //cbParticleSizingCoungtingDetermination2
+            //----------
+            //gvGravimetry
+            //lbPermembrane
+
+            gvMicroscopicAnalysis.DataSource = reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            gvMicroscopicAnalysis.DataBind();
+
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -475,8 +451,6 @@ namespace ALS.ALSI.Web.view.template
         {
             Response.Redirect(this.PreviousPath);
         }
-        
-
 
         protected void btnCoverPage_Click(object sender, EventArgs e)
         {
@@ -498,6 +472,130 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
+        protected void btnLoadFile_Click(object sender, EventArgs e)
+        {
+
+            string sheetName = string.Empty;
+
+            List<tb_m_dhs_cas> _cas = new List<tb_m_dhs_cas>();
+            String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
+            for (int i = 0; i < FileUpload2.PostedFiles.Count; i++)
+            {
+                HttpPostedFile _postedFile = FileUpload2.PostedFiles[i];
+                try
+                {
+                    if (_postedFile.ContentLength > 0)
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
+
+                        String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload2.FileName));
+
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        _postedFile.SaveAs(source_file);
+
+
+
+
+                        if ((Path.GetExtension(_postedFile.FileName).Equals(".csv")))
+                        {
+
+                            #region "Microscopic Analysis"
+                            foreach(template_pa_detail pd in reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList())
+                            {
+                                reportCovers.Remove(pd);
+                            }
+
+                            List<char> cols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
+                            DataTable table = new DataTable();
+                            foreach (char c in cols)
+                            {
+                                table.Columns.Add(c.ToString(), typeof(string));
+                            }
+
+                            using (var reader = new StreamReader(source_file))
+                            {
+                                int row = 0;
+                                while (!reader.EndOfStream)
+                                {
+                                    var line = reader.ReadLine();
+                                    var values = line.Split(',');
+                                    if (!String.IsNullOrEmpty(values[0]))
+                                    {
+                                        table.Rows.Add(
+                                         (row == 0) ? values[0].Split(':')[0] : values[0],
+                                         (row == 0) ? values[1].Split(':')[0] : values[1],
+                                         (row == 0) ? values[2].Split(':')[0] : values[2],
+                                         (row == 0) ? values[3].Split(':')[0] : values[3],
+                                         (row == 0) ? values[4].Split(':')[0] : values[4],
+                                         (row == 0) ? values[5].Split(':')[0] : values[5],
+                                         (row == 0) ? values[6].Split(':')[0] : values[6],
+                                         (row == 0) ? values[7].Split(':')[0] : values[7],
+                                         (row == 0) ? values[8].Split(':')[0] : values[8],
+                                         (row == 0) ? values[9].Split(':')[0] : values[9],
+                                         (row == 0) ? values[10].Split(':')[0] : values[10]
+                                         );
+                                    }
+                                    row++;
+                                }
+                            }
+                            for (int r = 1; r < table.Columns.Count; r++)
+                            {
+
+                                template_pa_detail tmp = new template_pa_detail();
+                                tmp.col_a = table.Rows[0][r].ToString().Replace("\"","");
+                                tmp.col_b = table.Rows[1][r].ToString().Replace("\"", "");
+                                tmp.col_c = table.Rows[2][r].ToString().Replace("\"", "");
+                                tmp.col_d = table.Rows[3][r].ToString().Replace("\"", "");
+                                tmp.col_e = String.Empty;
+                                tmp.col_f = String.Empty;
+                                tmp.col_g = String.Empty;
+                                tmp.col_h = String.Empty;
+                                tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                                tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
+                                if (!tmp.col_a.Equals(""))
+                                {
+                                    reportCovers.Add(tmp);
+                                }
+                            }
+                            #endregion
+
+                            Console.WriteLine();
+
+                        }
+                        else
+                        {
+                            errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.csv"));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
+
+                    Console.WriteLine();
+                }
+            }
+
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //this.tbCas = _cas;
+                //gvResult.DataSource = this.tbCas;
+                //gvResult.DataBind();
+                calculate();
+            }
+        }
         #endregion
 
         #region "Event"
@@ -557,6 +655,155 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
+        protected void gvGravimetry_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                //template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x => x.channel_size.Equals("0.500") && x.id == PKID).FirstOrDefault();
+                //if (gcms != null)
+                //{
+                //    switch (cmd)
+                //    {
+                //        case RowTypeEnum.Hide:
+                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Hide);
+                //            break;
+                //        case RowTypeEnum.Normal:
+                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                //            break;
+                //    }
+
+                //    gvEop.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList();
+                //    gvEop.DataBind();
+                //}
+            }
+        }
+
+        protected void gvGravimetry_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvGravimetry.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+        }
+
+        protected void gvMicroscopicAnalysis_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                //template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x => x.channel_size.Equals("0.500") && x.id == PKID).FirstOrDefault();
+                //if (gcms != null)
+                //{
+                //    switch (cmd)
+                //    {
+                //        case RowTypeEnum.Hide:
+                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Hide);
+                //            break;
+                //        case RowTypeEnum.Normal:
+                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
+                //            break;
+                //    }
+
+                //    gvEop.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList();
+                //    gvEop.DataBind();
+                //}
+            }
+        }
+
+        protected void gvMicroscopicAnalysis_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+
+                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMicroscopicAnalysis.DataKeys[e.Row.RowIndex].Values[1]);
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+            }
+        }
+
+        protected void gvMicroscopicAnalysis_OnDataBound(object sender, EventArgs e)
+        {
+            GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+            TableHeaderCell cell = new TableHeaderCell();
+            cell.Text = "";
+            cell.ColumnSpan = 1;
+            row.Controls.Add(cell);
+
+            cell = new TableHeaderCell();
+            cell.ColumnSpan = 1;
+            cell.Text = "";
+            row.Controls.Add(cell);
+
+            cell = new TableHeaderCell();
+            cell.ColumnSpan = 2;
+            cell.Text = "Particle counton membrane";
+            cell.HorizontalAlign = HorizontalAlign.Center;
+            row.Controls.Add(cell);
+
+            cell = new TableHeaderCell();
+            cell.ColumnSpan = 2;
+            cell.Text = "Particle count /component";
+            cell.HorizontalAlign = HorizontalAlign.Center;
+            row.Controls.Add(cell);
+
+            cell = new TableHeaderCell();
+            cell.ColumnSpan = 2;
+            cell.Text = "Particle count /1000cm2";
+            cell.HorizontalAlign = HorizontalAlign.Center;
+            row.Controls.Add(cell);
+            cell = new TableHeaderCell();
+            cell.ColumnSpan = 1;
+            cell.Text = "";
+            row.Controls.Add(cell);
+
+            //row.BackColor = ColorTranslator.FromHtml("#3AC0F2");
+            gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
+        }
+
         protected void ddlEop_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -564,9 +811,10 @@ namespace ALS.ALSI.Web.view.template
 
             if (tem != null)
             {
-               
+
             }
         }
+
         protected void ddlMa_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -634,6 +882,7 @@ namespace ALS.ALSI.Web.view.template
                     break;
             }
         }
+
 
     }
 }
