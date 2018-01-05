@@ -43,10 +43,16 @@ namespace ALS.ALSI.Web.view.template
         }
 
 
-        public List<template_pa_detail> reportCovers
+        public template_pa pa
         {
-            get { return (List<template_pa_detail>)Session[GetType().Name + "template_pa_detail_rpt"]; }
-            set { Session[GetType().Name + "template_pa_detail_rpt"] = value; }
+            get { return (template_pa)Session[GetType().Name + "pa"]; }
+            set { Session[GetType().Name + "pa"] = value; }
+        }
+
+        public List<template_pa_detail> paDetail
+        {
+            get { return (List<template_pa_detail>)Session[GetType().Name + "paDetail"]; }
+            set { Session[GetType().Name + "paDetail"] = value; }
         }
 
 
@@ -155,7 +161,8 @@ namespace ALS.ALSI.Web.view.template
             m_microscopic_analysis ma = new m_microscopic_analysis();
 
 
-            reportCovers = new List<template_pa_detail>();
+            paDetail = new List<template_pa_detail>();
+            pa = new template_pa();
 
             #region "Evaluation of Particles"
             List<m_evaluation_of_particles> eops = eop.SelectAll().Where(x => x.template_id == this.jobSample.template_id).ToList();
@@ -168,7 +175,7 @@ namespace ALS.ALSI.Web.view.template
                 tmp.col_c = item.C;
                 tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                 tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
-                reportCovers.Add(tmp);
+                paDetail.Add(tmp);
             }
             #endregion
             #region "Gravimetry"
@@ -179,34 +186,34 @@ namespace ALS.ALSI.Web.view.template
             tmp.col_c = String.Empty;
             tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
             tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
-            reportCovers.Add(tmp);
+            paDetail.Add(tmp);
             tmp = new template_pa_detail();
             tmp.col_a = "After filtration (mg):";
             tmp.col_b = String.Empty;
             tmp.col_c = String.Empty;
             tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
             tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
-            reportCovers.Add(tmp);
+            paDetail.Add(tmp);
             tmp = new template_pa_detail();
             tmp.col_a = "Residue weight(mg):";
             tmp.col_b = String.Empty;
             tmp.col_c = String.Empty;
             tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
             tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
-            reportCovers.Add(tmp);
+            paDetail.Add(tmp);
 
             #endregion
             #region "Microscopic Analysis"
             #endregion
 
 
-            gvEop.DataSource = reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
             gvEop.DataBind();
 
-            gvGravimetry.DataSource = reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
+            gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
             gvGravimetry.DataBind();
 
-            //gvMicroscopicAnalysis.DataSource = reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            //gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
             //gvMicroscopicAnalysis.DataBind();
 
 
@@ -257,7 +264,7 @@ namespace ALS.ALSI.Web.view.template
             //gvGravimetry
             //lbPermembrane
 
-            gvMicroscopicAnalysis.DataSource = reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
             gvMicroscopicAnalysis.DataBind();
 
         }
@@ -490,7 +497,7 @@ namespace ALS.ALSI.Web.view.template
                         string MM = DateTime.Now.ToString("MM");
                         string dd = DateTime.Now.ToString("dd");
 
-                        String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload2.FileName));
+                        String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
@@ -498,79 +505,78 @@ namespace ALS.ALSI.Web.view.template
                         }
                         _postedFile.SaveAs(source_file);
 
-
-
-
+                        #region "Microscopic Analysis"
                         if ((Path.GetExtension(_postedFile.FileName).Equals(".csv")))
                         {
-
-                            #region "Microscopic Analysis"
-                            foreach(template_pa_detail pd in reportCovers.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList())
+                            if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("ClassTable_FromNumber_FeretMaximum"))
                             {
-                                reportCovers.Remove(pd);
-                            }
-
-                            List<char> cols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
-                            DataTable table = new DataTable();
-                            foreach (char c in cols)
-                            {
-                                table.Columns.Add(c.ToString(), typeof(string));
-                            }
-
-                            using (var reader = new StreamReader(source_file))
-                            {
-                                int row = 0;
-                                while (!reader.EndOfStream)
+                                lbPermembrane.Text = String.Empty;
+                                foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList())
                                 {
-                                    var line = reader.ReadLine();
-                                    var values = line.Split(',');
-                                    if (!String.IsNullOrEmpty(values[0]))
+                                    paDetail.Remove(pd);
+                                }
+
+                                List<char> cols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
+                                DataTable table = new DataTable();
+                                foreach (char c in cols)
+                                {
+                                    table.Columns.Add(c.ToString(), typeof(string));
+                                }
+
+                                using (var reader = new StreamReader(source_file))
+                                {
+                                    int row = 0;
+                                    while (!reader.EndOfStream)
                                     {
-                                        table.Rows.Add(
-                                         (row == 0) ? values[0].Split(':')[0] : values[0],
-                                         (row == 0) ? values[1].Split(':')[0] : values[1],
-                                         (row == 0) ? values[2].Split(':')[0] : values[2],
-                                         (row == 0) ? values[3].Split(':')[0] : values[3],
-                                         (row == 0) ? values[4].Split(':')[0] : values[4],
-                                         (row == 0) ? values[5].Split(':')[0] : values[5],
-                                         (row == 0) ? values[6].Split(':')[0] : values[6],
-                                         (row == 0) ? values[7].Split(':')[0] : values[7],
-                                         (row == 0) ? values[8].Split(':')[0] : values[8],
-                                         (row == 0) ? values[9].Split(':')[0] : values[9],
-                                         (row == 0) ? values[10].Split(':')[0] : values[10]
-                                         );
+                                        var line = reader.ReadLine();
+                                        var values = line.Split(',');
+                                        if (!String.IsNullOrEmpty(values[0]))
+                                        {
+                                            table.Rows.Add(
+                                             (row == 0) ? values[0].Split(':')[0] : values[0],
+                                             (row == 0) ? values[1].Split(':')[0] : values[1],
+                                             (row == 0) ? values[2].Split(':')[0] : values[2],
+                                             (row == 0) ? values[3].Split(':')[0] : values[3],
+                                             (row == 0) ? values[4].Split(':')[0] : values[4],
+                                             (row == 0) ? values[5].Split(':')[0] : values[5],
+                                             (row == 0) ? values[6].Split(':')[0] : values[6],
+                                             (row == 0) ? values[7].Split(':')[0] : values[7],
+                                             (row == 0) ? values[8].Split(':')[0] : values[8],
+                                             (row == 0) ? values[9].Split(':')[0] : values[9],
+                                             (row == 0) ? values[10].Split(':')[0] : values[10]
+                                             );
+                                        }
+                                        row++;
                                     }
-                                    row++;
                                 }
-                            }
-                            for (int r = 1; r < table.Columns.Count; r++)
-                            {
-
-                                template_pa_detail tmp = new template_pa_detail();
-                                tmp.col_a = table.Rows[0][r].ToString().Replace("\"","");
-                                tmp.col_b = table.Rows[1][r].ToString().Replace("\"", "");
-                                tmp.col_c = table.Rows[2][r].ToString().Replace("\"", "");
-                                tmp.col_d = table.Rows[3][r].ToString().Replace("\"", "");
-                                tmp.col_e = String.Empty;
-                                tmp.col_f = String.Empty;
-                                tmp.col_g = String.Empty;
-                                tmp.col_h = String.Empty;
-                                tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-                                tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
-                                if (!tmp.col_a.Equals(""))
+                                for (int r = 1; r < table.Columns.Count; r++)
                                 {
-                                    reportCovers.Add(tmp);
+
+                                    template_pa_detail tmp = new template_pa_detail();
+                                    tmp.col_a = table.Rows[0][r].ToString().Replace("\"", "");
+                                    tmp.col_b = table.Rows[1][r].ToString().Replace("\"", "");
+                                    tmp.col_c = table.Rows[2][r].ToString().Replace("\"", "");
+                                    tmp.col_d = table.Rows[3][r].ToString().Replace("\"", "");
+                                    tmp.col_e = String.Empty;
+                                    tmp.col_f = String.Empty;
+                                    tmp.col_g = String.Empty;
+                                    tmp.col_h = String.Empty;
+                                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                                    tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
+                                    if (!tmp.col_a.Equals(""))
+                                    {
+                                        lbPermembrane.Text += string.Format("{0}{1}/", tmp.col_a, tmp.col_c);
+                                        paDetail.Add(tmp);
+                                    }
                                 }
+                                lbPermembrane.Text = lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1);
                             }
-                            #endregion
-
-                            Console.WriteLine();
-
                         }
                         else
                         {
-                            errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.csv"));
+                            //errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.csv"));
                         }
+                        #endregion
                     }
                 }
                 catch (Exception ex)
@@ -581,6 +587,187 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
 
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //this.tbCas = _cas;
+                //gvResult.DataSource = this.tbCas;
+                //gvResult.DataBind();
+                calculate();
+            }
+        }
+
+        protected void btnLoadImg1_Click(object sender, EventArgs e)
+        {
+            String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
+            string yyyy = DateTime.Now.ToString("yyyy");
+            string MM = DateTime.Now.ToString("MM");
+            string dd = DateTime.Now.ToString("dd");
+
+            String randNumber = String.Empty;
+            String source_file = String.Empty;
+            String source_file_url = String.Empty;
+
+            if ((Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".JPG")))
+            {
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg01.FileName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                fileUploadImg01.SaveAs(source_file);
+                this.pa.img01 = source_file_url;
+                img1.ImageUrl = source_file_url;
+            }
+            
+            if (errors.Count > 0)
+            {
+                litErrorMessage.Text = MessageBox.GenWarnning(errors);
+                modalErrorList.Show();
+
+            }
+            else
+            {
+                litErrorMessage.Text = String.Empty;
+                //this.tbCas = _cas;
+                //gvResult.DataSource = this.tbCas;
+                //gvResult.DataBind();
+                calculate();
+            }
+        }
+
+        protected void btnLoadImg_Click(object sender, EventArgs e)
+        {
+            String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
+            string yyyy = DateTime.Now.ToString("yyyy");
+            string MM = DateTime.Now.ToString("MM");
+            string dd = DateTime.Now.ToString("dd");
+
+            String randNumber = String.Empty;
+            String source_file = String.Empty;
+            String source_file_url = String.Empty;
+
+            //if ((Path.GetExtension(fileUploadImg01.FileName).Equals(".tif")))
+            //{
+            //    randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg01.FileName));
+            //    source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+            //    source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+            //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+            //    {
+            //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+            //    }
+            //    fileUploadImg01.SaveAs(source_file);
+            //    this.pa.img01 = source_file_url;
+            //    img1.ImageUrl = source_file_url;
+            //}
+            if ((Path.GetExtension(fileUploadImg02.FileName).Equals(".tif")))
+            {
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg02.FileName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                fileUploadImg02.SaveAs(source_file);
+                this.pa.img02 = source_file_url;
+                img2.ImageUrl = source_file_url;
+            }
+            if ((Path.GetExtension(fileUploadImg03.FileName).Equals(".tif")))
+            {
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg03.FileName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                fileUploadImg03.SaveAs(source_file);
+                this.pa.img03 = source_file_url;
+                img3.ImageUrl = source_file_url;
+            }
+            if ((Path.GetExtension(fileUploadImg04.FileName).Equals(".tif")))
+            {
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg04.FileName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                fileUploadImg04.SaveAs(source_file);
+                this.pa.img04 = source_file_url;
+                img4.ImageUrl = source_file_url;
+            }
+            if ((Path.GetExtension(fileUploadImg05.FileName).Equals(".tif")))
+            {
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg05.FileName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                fileUploadImg05.SaveAs(source_file);
+                this.pa.img05 = source_file_url;
+                img5.ImageUrl = source_file_url;
+            }
+            //if ((Path.GetExtension(fileUploadImg06.FileName).Equals(".tif")))
+            //{
+            //    randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg06.FileName));
+            //    source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+            //    source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+            //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+            //    {
+            //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+            //    }
+            //    fileUploadImg06.SaveAs(source_file);
+            //    this.pa.img06 = source_file_url;
+            //    img6.ImageUrl = source_file_url;
+            //}
+            if ((Path.GetExtension(fileUploadImg07.FileName).Equals(".tif")))
+            {
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg07.FileName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                fileUploadImg07.SaveAs(source_file);
+                this.pa.img07 = source_file_url;
+                img7.ImageUrl = source_file_url;
+            }
+            //if ((Path.GetExtension(fileUploadImg08.FileName).Equals(".tif")))
+            //{
+            //    randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg08.FileName));
+            //    source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+            //    source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+            //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+            //    {
+            //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+            //    }
+            //    fileUploadImg08.SaveAs(source_file);
+            //    this.pa.img08 = source_file_url;
+            //    img8.ImageUrl = source_file_url;
+            //}
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
