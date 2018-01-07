@@ -32,12 +32,70 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body">
+
+
+
                                         <div class="form-group">
-                                            <asp:GridView ID="gvEop" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvEop_RowDataBound" OnRowCommand="gvEop_RowCommand">
+                                            <label class="control-label col-md-3">Test result</label>
+                                            <div class="col-md-9">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    
+                                                    <asp:DropDownList ID="ddlResult" runat="server"  CssClass="form-control">
+                                                        <asp:ListItem Value="0">TEST FAILED</asp:ListItem>
+                                                        <asp:ListItem Value="1">TEST PASS</asp:ListItem>
+                                                    </asp:DropDownList>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <asp:GridView ID="gvEop" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvEop_RowDataBound" OnRowCommand="gvEop_RowCommand" OnRowCancelingEdit="gvEop_RowCancelingEdit" OnRowDeleting="gvEop_RowDeleting" OnRowEditing="gvEop_RowEditing" OnRowUpdating="gvEop_RowUpdating">
                                                 <Columns>
-                                                    <asp:BoundField DataField="col_b" HeaderText="Cleanliness Class SKK: 3A_2 (Refer to S252001-1)" />
-                                                    <asp:BoundField DataField="col_c" HeaderText="Specification" />
-                                                    <asp:BoundField DataField="col_d" HeaderText="Result quantity per part" />
+                                                    <%--<asp:BoundField DataField="col_b" HeaderText="Cleanliness Class SKK: 3A_2 (Refer to S252001-1)" />
+                                                    <asp:BoundField DataField="col_c" HeaderText="Specification" />--%>
+                                                    <asp:TemplateField HeaderText="Cleanliness Class SKK: 3A_2 (Refer to S252001-1)" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litB" runat="server" Text='<%# Eval("col_b")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtB" runat="server" Text='<%# Eval("col_b")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Specification" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litC" runat="server" Text='<%# Eval("col_c")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtC" runat="server" Text='<%# Eval("col_c")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Result quantity per part" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litD" runat="server" Text='<%# Eval("col_d")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtD" runat="server" Text='<%# Eval("col_d")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:TemplateField>
+
+
+                                                    <asp:TemplateField HeaderText="Edit">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                                CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                        </EditItemTemplate>
+
+                                                    </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Hide">
                                                         <ItemTemplate>
                                                             <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
@@ -67,7 +125,7 @@
                                 <td>X</td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
-                                    <asp:Label ID="lbLmp" runat="server"></asp:Label></td>
+                                    <asp:TextBox ID="txtLmp" runat="server"></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -77,7 +135,7 @@
                                 <td>X</td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
-                                    <asp:Label ID="lbLnmp" runat="server"></asp:Label></td>
+                                    <asp:TextBox ID="txtLnmp" runat="server"></asp:TextBox></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -87,7 +145,7 @@
                                 <td>X</td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                 <td>
-                                    <asp:Label ID="lbLf" runat="server"></asp:Label></td>
+                                    <asp:TextBox ID="txtLf" runat="server"></asp:TextBox></td>
                             </tr>
 
                         </table>
@@ -95,46 +153,43 @@
                         <table border="0">
                             <tr>
                                 <td rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <td rowspan="8">
-                                    <asp:Image ID="img1" runat="server" Style="width: 60px; height: 60px;" /></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td rowspan="8" style="vertical-align: top">
+                                    <asp:Image ID="img1" runat="server" Style="width: 120px; height: 120px;" />
+                                </td>
+
+                                <td rowspan="8" style="vertical-align: top">&nbsp;</td>
+
                             </tr>
                             <tr>
-                                <td>ALS Reference no.:</td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td style="text-align: right">ALS Reference no:</td>
                                 <td>
                                     <asp:TextBox ID="txtAlsReferenceNo" runat="server"></asp:TextBox></td>
                             </tr>
                             <tr>
-                                <td>Part description:</td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td style="text-align: right">Part description:</td>
                                 <td>
-                                    <asp:TextBox ID="txtPartDescription" runat="server"></asp:TextBox></td>
+                                    <asp:TextBox ID="txtPartDescription" runat="server"></asp:TextBox>
+                                </td>
                             </tr>
                             <tr>
-                                <td>Lot No.:</td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td style="text-align: right">Lot No.:</td>
                                 <td>
                                     <asp:TextBox ID="txtLotNo" runat="server"></asp:TextBox></td>
                             </tr>
                             <tr>
-                                <td>Date analysed:</td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td style="text-align: right">Date analysed:</td>
                                 <td>
                                     <asp:TextBox ID="txtDateAnalyzed" runat="server"></asp:TextBox></td>
                             </tr>
                             <tr>
-                                <td>Date test completed:</td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td style="text-align: right">Date test completed:</td>
                                 <td>
                                     <asp:TextBox ID="txtDateTestComplete" runat="server"></asp:TextBox></td>
                             </tr>
 
 
                             <tr>
-                                <td colspan="3">&nbsp;
+                                <td colspan="2">&nbsp;
                                                         <div class="row" id="Div3" runat="server">
                                                             <div class="col-md-12">
 
@@ -173,7 +228,7 @@
 
 
                             <tr>
-                                <td colspan="3">&nbsp;
+                                <td colspan="2">&nbsp;
 
                                                                             <div class="form-group">
                                                                                 <label class="control-label col-md-3"></label>
@@ -287,7 +342,7 @@
                                                     <td>Analysis Membrane used:</td>
                                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                     <td>
-                                                        <asp:TextBox ID="lbAnalysisMembraneUsed" runat="server" Text="47mm Dia., Nylon 5 µm MFPD"></asp:TextBox></td>
+                                                        <asp:TextBox ID="txtAnalysisMembraneUsed" runat="server" Text="47mm Dia., Nylon 5 µm MFPD"></asp:TextBox></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>

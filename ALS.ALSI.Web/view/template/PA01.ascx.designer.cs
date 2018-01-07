@@ -76,6 +76,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pCoverpage;
         
         /// <summary>
+        /// ddlResult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlResult;
+        
+        /// <summary>
         /// gvEop control.
         /// </summary>
         /// <remarks>
@@ -94,13 +103,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbRow01;
         
         /// <summary>
-        /// lbLmp control.
+        /// txtLmp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbLmp;
+        protected global::System.Web.UI.WebControls.TextBox txtLmp;
         
         /// <summary>
         /// lbRow02 control.
@@ -112,13 +121,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbRow02;
         
         /// <summary>
-        /// lbLnmp control.
+        /// txtLnmp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbLnmp;
+        protected global::System.Web.UI.WebControls.TextBox txtLnmp;
         
         /// <summary>
         /// lbRow03 control.
@@ -130,13 +139,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbRow03;
         
         /// <summary>
-        /// lbLf control.
+        /// txtLf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbLf;
+        protected global::System.Web.UI.WebControls.TextBox txtLf;
         
         /// <summary>
         /// img1 control.
@@ -283,13 +292,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.CheckBoxList cbFiltrationMethod;
         
         /// <summary>
-        /// lbAnalysisMembraneUsed control.
+        /// txtAnalysisMembraneUsed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox lbAnalysisMembraneUsed;
+        protected global::System.Web.UI.WebControls.TextBox txtAnalysisMembraneUsed;
         
         /// <summary>
         /// cbTypeOfDrying control.

@@ -618,31 +618,29 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sample_id" Type="int" />
           <Property Name="largest_metallic_particle" Type="varchar" MaxLength="45" />
-          <Property Name="largest_non-metallic_particle" Type="varchar" MaxLength="45" />
+          <Property Name="largest_non_metallic_particle" Type="varchar" MaxLength="45" />
           <Property Name="largest_fiber" Type="varchar" MaxLength="45" />
           <Property Name="em_extraction_medium" Type="varchar" MaxLength="45" />
           <Property Name="em_shaking" Type="varchar" MaxLength="45" />
           <Property Name="em_wetted_surface_per_component" Type="varchar" MaxLength="45" />
           <Property Name="em_total_tested_size" Type="varchar" MaxLength="45" />
           <Property Name="type_of_method" Type="varchar" MaxLength="45" />
-          <Property Name="type_of_method_a" Type="varchar" MaxLength="45" />
-          <Property Name="type_of_method_b" Type="varchar" MaxLength="45" />
-          <Property Name="type_of_method_c" Type="varchar" MaxLength="45" />
-          <Property Name="type_of_method_d" Type="varchar" MaxLength="45" />
           <Property Name="filtration_method" Type="varchar" MaxLength="45" />
           <Property Name="analysis_membrane_used" Type="varchar" MaxLength="45" />
           <Property Name="type_of_drying" Type="varchar" MaxLength="45" />
-          <Property Name="particle_sizing_counting_det" Type="varchar" MaxLength="45" />
+          <Property Name="particle_sizing_counting_det1" Type="varchar" MaxLength="45" />
+          <Property Name="particle_sizing_counting_det2" Type="varchar" MaxLength="45" />
           <Property Name="particle_sizing_counting_det_a" Type="varchar" MaxLength="45" />
           <Property Name="particle_sizing_counting_det_b" Type="varchar" MaxLength="45" />
           <Property Name="ccc_total" Type="varchar" MaxLength="45" />
-          <Property Name="img01" Type="varchar" MaxLength="45" />
-          <Property Name="img02" Type="varchar" MaxLength="45" />
-          <Property Name="img03" Type="varchar" MaxLength="45" />
-          <Property Name="img04" Type="varchar" MaxLength="45" />
-          <Property Name="img05" Type="varchar" MaxLength="45" />
-          <Property Name="img07" Type="varchar" MaxLength="45" />
-          <Property Name="img08" Type="varchar" MaxLength="45" />
+          <Property Name="img01" Type="varchar" MaxLength="255" />
+          <Property Name="img02" Type="varchar" MaxLength="255" />
+          <Property Name="img03" Type="varchar" MaxLength="255" />
+          <Property Name="img04" Type="varchar" MaxLength="255" />
+          <Property Name="img05" Type="varchar" MaxLength="255" />
+          <Property Name="img06" Type="varchar" MaxLength="255" />
+          <Property Name="img07" Type="varchar" MaxLength="255" />
+          <Property Name="img08" Type="varchar" MaxLength="255" />
           <Property Name="result" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_pa_detail">
@@ -653,14 +651,14 @@
           <Property Name="sample_id" Type="int" />
           <Property Name="evaluation_of_particles_id" Type="int" />
           <Property Name="microscopic_analysis_id" Type="int" />
-          <Property Name="col_a" Type="varchar" MaxLength="45" />
-          <Property Name="col_b" Type="varchar" MaxLength="45" />
-          <Property Name="col_c" Type="varchar" MaxLength="45" />
-          <Property Name="col_d" Type="varchar" MaxLength="45" />
-          <Property Name="col_e" Type="varchar" MaxLength="45" />
-          <Property Name="col_f" Type="varchar" MaxLength="45" />
-          <Property Name="col_g" Type="varchar" MaxLength="45" />
-          <Property Name="col_h" Type="varchar" MaxLength="45" />
+          <Property Name="col_a" Type="varchar" MaxLength="255" />
+          <Property Name="col_b" Type="varchar" MaxLength="255" />
+          <Property Name="col_c" Type="varchar" MaxLength="255" />
+          <Property Name="col_d" Type="varchar" MaxLength="255" />
+          <Property Name="col_e" Type="varchar" MaxLength="255" />
+          <Property Name="col_f" Type="varchar" MaxLength="255" />
+          <Property Name="col_g" Type="varchar" MaxLength="255" />
+          <Property Name="col_h" Type="varchar" MaxLength="255" />
           <Property Name="row_type" Type="int" />
           <Property Name="row_status" Type="int" />
         </EntityType>
@@ -2565,24 +2563,22 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="em_wetted_surface_per_component" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="em_total_tested_size" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="type_of_method" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="type_of_method_a" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="type_of_method_b" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="type_of_method_c" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="type_of_method_d" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="filtration_method" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="analysis_membrane_used" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="type_of_drying" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="particle_sizing_counting_det" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="particle_sizing_counting_det1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="particle_sizing_counting_det2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="particle_sizing_counting_det_a" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="particle_sizing_counting_det_b" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ccc_total" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="img01" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="img02" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="img03" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="img04" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="img05" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="img07" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="img08" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img03" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img04" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img05" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img06" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img07" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img08" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="result" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_pa_detail">
@@ -2593,14 +2589,14 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="sample_id" Type="Int32" />
           <Property Name="evaluation_of_particles_id" Type="Int32" />
           <Property Name="microscopic_analysis_id" Type="Int32" />
-          <Property Name="col_a" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="col_b" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="col_c" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="col_d" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="col_e" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="col_f" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="col_g" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="col_h" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="col_a" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="col_b" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="col_c" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="col_d" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="col_e" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="col_f" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="col_g" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="col_h" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="row_type" Type="Int32" />
           <Property Name="row_status" Type="Int32" />
         </EntityType>
@@ -4287,6 +4283,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="result" ColumnName="result" />
                 <ScalarProperty Name="img08" ColumnName="img08" />
                 <ScalarProperty Name="img07" ColumnName="img07" />
+                <ScalarProperty Name="img06" ColumnName="img06" />
                 <ScalarProperty Name="img05" ColumnName="img05" />
                 <ScalarProperty Name="img04" ColumnName="img04" />
                 <ScalarProperty Name="img03" ColumnName="img03" />
@@ -4295,21 +4292,18 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="ccc_total" ColumnName="ccc_total" />
                 <ScalarProperty Name="particle_sizing_counting_det_b" ColumnName="particle_sizing_counting_det_b" />
                 <ScalarProperty Name="particle_sizing_counting_det_a" ColumnName="particle_sizing_counting_det_a" />
-                <ScalarProperty Name="particle_sizing_counting_det" ColumnName="particle_sizing_counting_det" />
+                <ScalarProperty Name="particle_sizing_counting_det2" ColumnName="particle_sizing_counting_det2" />
+                <ScalarProperty Name="particle_sizing_counting_det1" ColumnName="particle_sizing_counting_det1" />
                 <ScalarProperty Name="type_of_drying" ColumnName="type_of_drying" />
                 <ScalarProperty Name="analysis_membrane_used" ColumnName="analysis_membrane_used" />
                 <ScalarProperty Name="filtration_method" ColumnName="filtration_method" />
-                <ScalarProperty Name="type_of_method_d" ColumnName="type_of_method_d" />
-                <ScalarProperty Name="type_of_method_c" ColumnName="type_of_method_c" />
-                <ScalarProperty Name="type_of_method_b" ColumnName="type_of_method_b" />
-                <ScalarProperty Name="type_of_method_a" ColumnName="type_of_method_a" />
                 <ScalarProperty Name="type_of_method" ColumnName="type_of_method" />
                 <ScalarProperty Name="em_total_tested_size" ColumnName="em_total_tested_size" />
                 <ScalarProperty Name="em_wetted_surface_per_component" ColumnName="em_wetted_surface_per_component" />
                 <ScalarProperty Name="em_shaking" ColumnName="em_shaking" />
                 <ScalarProperty Name="em_extraction_medium" ColumnName="em_extraction_medium" />
                 <ScalarProperty Name="largest_fiber" ColumnName="largest_fiber" />
-                <ScalarProperty Name="largest_non_metallic_particle" ColumnName="largest_non-metallic_particle" />
+                <ScalarProperty Name="largest_non_metallic_particle" ColumnName="largest_non_metallic_particle" />
                 <ScalarProperty Name="largest_metallic_particle" ColumnName="largest_metallic_particle" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
                 <ScalarProperty Name="id" ColumnName="id" />

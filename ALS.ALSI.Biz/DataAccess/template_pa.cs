@@ -24,14 +24,11 @@ namespace ALS.ALSI.Biz.DataAccess
         public string em_wetted_surface_per_component { get; set; }
         public string em_total_tested_size { get; set; }
         public string type_of_method { get; set; }
-        public string type_of_method_a { get; set; }
-        public string type_of_method_b { get; set; }
-        public string type_of_method_c { get; set; }
-        public string type_of_method_d { get; set; }
         public string filtration_method { get; set; }
         public string analysis_membrane_used { get; set; }
         public string type_of_drying { get; set; }
-        public string particle_sizing_counting_det { get; set; }
+        public string particle_sizing_counting_det1 { get; set; }
+        public string particle_sizing_counting_det2 { get; set; }
         public string particle_sizing_counting_det_a { get; set; }
         public string particle_sizing_counting_det_b { get; set; }
         public string ccc_total { get; set; }
@@ -40,6 +37,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string img03 { get; set; }
         public string img04 { get; set; }
         public string img05 { get; set; }
+        public string img06 { get; set; }
         public string img07 { get; set; }
         public string img08 { get; set; }
         public string result { get; set; }

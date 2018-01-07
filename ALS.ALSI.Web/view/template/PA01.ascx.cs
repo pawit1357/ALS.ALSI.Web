@@ -67,7 +67,11 @@ namespace ALS.ALSI.Web.view.template
             get { return (int)Session[GetType().Name + "SampleID"]; }
             set { Session[GetType().Name + "SampleID"] = value; }
         }
-
+        public int index
+        {
+            get { return (int)Session[GetType().Name + "index"]; }
+            set { Session[GetType().Name + "index"] = value; }
+        }
         List<String> errors = new List<string>();
 
         private void removeSession()
@@ -88,6 +92,7 @@ namespace ALS.ALSI.Web.view.template
 
         private void initialPage()
         {
+            index = 0;
             this.CommandName = CommandNameEnum.Add;
             tb_m_detail_spec detailSpec = new tb_m_detail_spec();
             detailSpec.specification_id = this.jobSample.specification_id;
@@ -170,38 +175,45 @@ namespace ALS.ALSI.Web.view.template
             foreach (var item in eops)
             {
                 tmp = new template_pa_detail();
+                tmp.id = index;
                 tmp.col_a = item.A;
                 tmp.col_b = item.B;
                 tmp.col_c = item.C;
                 tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                 tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
                 paDetail.Add(tmp);
+                index++;
             }
             #endregion
             #region "Gravimetry"
 
             tmp = new template_pa_detail();
+            tmp.id = index;
             tmp.col_a = "Before filtration(mg):";
             tmp.col_b = String.Empty;
             tmp.col_c = String.Empty;
             tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
             tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
             paDetail.Add(tmp);
+            index++;
             tmp = new template_pa_detail();
+            tmp.id = index;
             tmp.col_a = "After filtration (mg):";
             tmp.col_b = String.Empty;
             tmp.col_c = String.Empty;
             tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
             tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
             paDetail.Add(tmp);
+            index++;
             tmp = new template_pa_detail();
+            tmp.id = index;
             tmp.col_a = "Residue weight(mg):";
             tmp.col_b = String.Empty;
             tmp.col_c = String.Empty;
             tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
             tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
             paDetail.Add(tmp);
-
+            index++;
             #endregion
             #region "Microscopic Analysis"
             #endregion
@@ -263,9 +275,12 @@ namespace ALS.ALSI.Web.view.template
             //----------
             //gvGravimetry
             //lbPermembrane
-
-            gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
-            gvMicroscopicAnalysis.DataBind();
+            List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            if (null != listPaDetail && listPaDetail.Count > 0)
+            {
+                gvMicroscopicAnalysis.DataSource = listPaDetail;
+                gvMicroscopicAnalysis.DataBind();
+            }
 
         }
         #endregion
@@ -293,25 +308,61 @@ namespace ALS.ALSI.Web.view.template
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
             {
+                case StatusEnum.LOGIN_SELECT_SPEC:
+
+                    this.pa.id = 0;
+                    this.pa.sample_id = this.SampleID;
+                    this.pa.largest_metallic_particle = txtLmp.Text;
+                    this.pa.largest_non_metallic_particle = txtLnmp.Text;
+                    this.pa.largest_fiber = txtLf.Text;
+
+                    this.pa.em_extraction_medium = txtExtractionMedium.Text;
+                    this.pa.em_shaking = txtShkingRewashQty.Text;
+                    this.pa.em_wetted_surface_per_component = txtWettedSurfacePerComponent.Text;
+                    this.pa.em_total_tested_size = txtTotalTestedSize.Text;
+
+                    this.pa.type_of_method = cbTypeOfMethod.SelectedValue;
+
+
+                    this.pa.filtration_method = cbFiltrationMethod.SelectedValue;
+                    this.pa.analysis_membrane_used = txtAnalysisMembraneUsed.Text;
+                    this.pa.type_of_drying = cbTypeOfDrying.SelectedValue;
+                    this.pa.particle_sizing_counting_det1 = cbParticleSizingCoungtingDetermination.SelectedValue;
+                    this.pa.particle_sizing_counting_det2 = cbParticleSizingCoungtingDetermination2.SelectedValue;
+                    this.pa.particle_sizing_counting_det_a = txtPixelScaling.Text;
+                    this.pa.particle_sizing_counting_det_b = txtCameraResolution.Text;
+                    //
+                    this.pa.ccc_total = lbPermembrane.Text;
+                    //this.pa.img01  
+                    //this.pa.img02
+                    //this.pa.img03
+                    //this.pa.img04
+                    //this.pa.img05
+                    //this.pa.img06
+                    //this.pa.img07
+                    //this.pa.img08
+                    this.pa.result = ddlResult.SelectedValue;
+
+                    break;
                 case StatusEnum.CHEMIST_TESTING:
 
-                    if (FileUpload2.HasFile)// && (Path.GetExtension(FileUpload2.FileName).Equals(".doc") || Path.GetExtension(FileUpload2.FileName).Equals(".docx")))
-                    {
-                        string yyyy = DateTime.Now.ToString("yyyy");
-                        string MM = DateTime.Now.ToString("MM");
-                        string dd = DateTime.Now.ToString("dd");
+                    //if (FileUpload2.HasFile)// && (Path.GetExtension(FileUpload2.FileName).Equals(".doc") || Path.GetExtension(FileUpload2.FileName).Equals(".docx")))
+                    //{
+                    //    string yyyy = DateTime.Now.ToString("yyyy");
+                    //    string MM = DateTime.Now.ToString("MM");
+                    //    string dd = DateTime.Now.ToString("dd");
 
-                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload2.FileName));
-                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload2.FileName));
+                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload2.FileName));
+                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload2.FileName));
 
 
-                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                        {
-                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                        }
-                        FileUpload2.SaveAs(source_file);
-                        this.jobSample.ad_hoc_tempalte_path = source_file_url;
-                    }
+                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                    //    {
+                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                    //    }
+                    //    FileUpload2.SaveAs(source_file);
+                    //    this.jobSample.ad_hoc_tempalte_path = source_file_url;
+                    //}
 
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step2owner = userLogin.id;
@@ -442,6 +493,12 @@ namespace ALS.ALSI.Web.view.template
                 litErrorMessage.Text = String.Empty;
                 //########
                 this.jobSample.Update();
+                this.pa.Insert();
+                foreach(template_pa_detail item in this.paDetail)
+                {
+                    item.sample_id = this.SampleID;
+                }
+                new template_pa_detail().InsertList(this.paDetail);
                 //Commit
                 GeneralManager.Commit();
 
@@ -553,6 +610,7 @@ namespace ALS.ALSI.Web.view.template
                                 {
 
                                     template_pa_detail tmp = new template_pa_detail();
+                                    tmp.id = index;
                                     tmp.col_a = table.Rows[0][r].ToString().Replace("\"", "");
                                     tmp.col_b = table.Rows[1][r].ToString().Replace("\"", "");
                                     tmp.col_c = table.Rows[2][r].ToString().Replace("\"", "");
@@ -567,6 +625,7 @@ namespace ALS.ALSI.Web.view.template
                                     {
                                         lbPermembrane.Text += string.Format("{0}{1}/", tmp.col_a, tmp.col_c);
                                         paDetail.Add(tmp);
+                                        index++;
                                     }
                                 }
                                 lbPermembrane.Text = lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1);
@@ -628,7 +687,7 @@ namespace ALS.ALSI.Web.view.template
                 this.pa.img01 = source_file_url;
                 img1.ImageUrl = source_file_url;
             }
-            
+
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
@@ -789,26 +848,33 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvEop_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
-            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            try
             {
-                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                //template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x => x.channel_size.Equals("0.500") && x.id == PKID).FirstOrDefault();
-                //if (gcms != null)
-                //{
-                //    switch (cmd)
-                //    {
-                //        case RowTypeEnum.Hide:
-                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Hide);
-                //            break;
-                //        case RowTypeEnum.Normal:
-                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
-                //            break;
-                //    }
+                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+                {
+                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    if (_cov != null)
+                    {
+                        RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
+                        switch (cmd)
+                        {
+                            case RowTypeEnum.Hide:
+                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Hide);
+                                break;
+                            case RowTypeEnum.Normal:
+                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Normal);
+                                break;
+                        }
 
-                //    gvEop.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList();
-                //    gvEop.DataBind();
-                //}
+                        gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+                        gvEop.DataBind();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
             }
         }
 
@@ -818,12 +884,13 @@ namespace ALS.ALSI.Web.view.template
             {
 
 
-                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvEop.DataKeys[e.Row.RowIndex].Values[1]);
                 LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
                 LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
 
                 if (_btnHide != null && _btnUndo != null)
                 {
+                    RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvEop.DataKeys[e.Row.RowIndex].Values[1]);
+
                     switch (cmd)
                     {
                         case RowTypeEnum.Hide:
@@ -842,6 +909,41 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
+        protected void gvEop_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+        protected void gvEop_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvEop.EditIndex = e.NewEditIndex;
+            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            gvEop.DataBind();
+        }
+        protected void gvEop_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int _id = Convert.ToInt32(gvEop.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txtB = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtB");
+            TextBox txtC = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtD");
+            TextBox txtD = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtD");
+
+
+            template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            if (_cov != null)
+            {
+                _cov.col_b = txtB.Text;
+                _cov.col_c = txtC.Text;
+                _cov.col_d = txtD.Text;
+            }
+            gvEop.EditIndex = -1;
+            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            gvEop.DataBind();
+        }
+        protected void gvEop_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvEop.EditIndex = -1;
+            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            gvEop.DataBind();
+        }
         protected void gvGravimetry_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
