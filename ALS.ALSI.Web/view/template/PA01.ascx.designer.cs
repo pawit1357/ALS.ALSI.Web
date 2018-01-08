@@ -49,31 +49,40 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbJobStatus;
         
         /// <summary>
-        /// btnCoverPage control.
+        /// btnPage01 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCoverPage;
+        protected global::System.Web.UI.WebControls.Button btnPage01;
         
         /// <summary>
-        /// btnDHS control.
+        /// btnPage02 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDHS;
+        protected global::System.Web.UI.WebControls.Button btnPage02;
         
         /// <summary>
-        /// pCoverpage control.
+        /// btnPage03 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pCoverpage;
+        protected global::System.Web.UI.WebControls.Button btnPage03;
+        
+        /// <summary>
+        /// pPage01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pPage01;
         
         /// <summary>
         /// ddlResult control.
@@ -146,6 +155,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLf;
+        
+        /// <summary>
+        /// pPage02 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pPage02;
         
         /// <summary>
         /// img1 control.
@@ -355,13 +373,49 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.GridView gvGravimetry;
         
         /// <summary>
-        /// Div1 control.
+        /// txtParticleSize01 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        protected global::System.Web.UI.WebControls.TextBox txtParticleSize01;
+        
+        /// <summary>
+        /// FilteredTextBoxExtender1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender1;
+        
+        /// <summary>
+        /// txtParticleSize02 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtParticleSize02;
+        
+        /// <summary>
+        /// txtParticleSize03 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtParticleSize03;
+        
+        /// <summary>
+        /// FilteredTextBoxExtender2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender2;
         
         /// <summary>
         /// FileUpload2 control.
@@ -398,6 +452,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbPermembrane;
+        
+        /// <summary>
+        /// pPage03 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pPage03;
         
         /// <summary>
         /// img2 control.

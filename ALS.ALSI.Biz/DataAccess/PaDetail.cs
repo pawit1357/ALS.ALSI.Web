@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace ALS.ALSI.Biz.DataAccess
 {
+    [Serializable]
     public partial class template_pa_detail
     {
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(template_pa_detail));
@@ -48,7 +49,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         #region "Custom"
 
-        public void InsertList(List<template_pa_detail> _lists)
+        public static void InsertList(List<template_pa_detail> _lists)
         {
             foreach (template_pa_detail tmp in _lists)
             {
@@ -70,7 +71,7 @@ namespace ALS.ALSI.Biz.DataAccess
         }
 
 
-        public void DeleteBySampleID(int _sampleID)
+        public static void DeleteBySampleID(int _sampleID)
         {
             List<template_pa_detail> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
             foreach (template_pa_detail tmp in lists)

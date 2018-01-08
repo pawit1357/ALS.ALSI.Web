@@ -128,7 +128,8 @@ namespace ALS.ALSI.Web.view.template
                 pUploadfile.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD);
                 pDownload.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
                 btnSubmit.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
-                btnCoverPage.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                //btnPage01.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                //btnPage02.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
 
                 if (status == StatusEnum.LABMANAGER_CHECKING)
                 {
@@ -148,19 +149,24 @@ namespace ALS.ALSI.Web.view.template
                 {
                     if (this.jobSample.date_chemist_alalyze == null)
                     {
+                        txtDateAnalyzed.Text = DateTime.Now.ToString("dd MMMM yyy");
+
                         this.jobSample.date_chemist_alalyze = DateTime.Now;
                         this.jobSample.Update();
                     }
+                    txtDateTestComplete.Text = this.jobSample.due_date_lab.Value.ToString("dd MMMM yyy");
                 }
                 #endregion
+
+                txtAlsReferenceNo.Text = String.Format("ATT/ELN/{0}/{1}", DateTime.Now.Year.ToString().Substring(2, 2), this.jobSample.job_number);
+                txtPartDescription.Text = this.jobSample.description;
+                txtLotNo.Text = String.Empty;
             }
 
             #endregion
 
 
-            //initial button.
-            btnCoverPage.CssClass = "btn blue";
-            btnDHS.CssClass = "btn green";
+
 
             m_evaluation_of_particles eop = new m_evaluation_of_particles();
             m_microscopic_analysis ma = new m_microscopic_analysis();
@@ -219,19 +225,14 @@ namespace ALS.ALSI.Web.view.template
             #endregion
 
 
-            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
-            gvEop.DataBind();
-
-            gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
-            gvGravimetry.DataBind();
-
-            //gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
-            //gvMicroscopicAnalysis.DataBind();
 
 
 
-            //pCoverpage.Visible = true;
-            //pDSH.Visible = false;
+            pPage01.Visible = true;
+            pPage02.Visible = false;
+            pPage03.Visible = false;
+
+            calculate();
 
             //switch (lbJobStatus.Text)
             //{
@@ -275,12 +276,28 @@ namespace ALS.ALSI.Web.view.template
             //----------
             //gvGravimetry
             //lbPermembrane
+            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            gvEop.DataBind();
+
+            gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
+            gvGravimetry.DataBind();
+
             List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
                 gvMicroscopicAnalysis.DataSource = listPaDetail;
                 gvMicroscopicAnalysis.DataBind();
             }
+
+            try
+            {
+                txtParticleSize02.Text = (Convert.ToDouble(txtParticleSize03.Text) / Convert.ToDouble(txtParticleSize01.Text)).ToString("N2");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
 
         }
         #endregion
@@ -309,8 +326,8 @@ namespace ALS.ALSI.Web.view.template
             switch (status)
             {
                 case StatusEnum.LOGIN_SELECT_SPEC:
+                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
 
-                    this.pa.id = 0;
                     this.pa.sample_id = this.SampleID;
                     this.pa.largest_metallic_particle = txtLmp.Text;
                     this.pa.largest_non_metallic_particle = txtLnmp.Text;
@@ -331,42 +348,54 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.particle_sizing_counting_det2 = cbParticleSizingCoungtingDetermination2.SelectedValue;
                     this.pa.particle_sizing_counting_det_a = txtPixelScaling.Text;
                     this.pa.particle_sizing_counting_det_b = txtCameraResolution.Text;
-                    //
-                    this.pa.ccc_total = lbPermembrane.Text;
-                    //this.pa.img01  
-                    //this.pa.img02
-                    //this.pa.img03
-                    //this.pa.img04
-                    //this.pa.img05
-                    //this.pa.img06
-                    //this.pa.img07
-                    //this.pa.img08
-                    this.pa.result = ddlResult.SelectedValue;
 
+                    //Delete old
+                    this.pa.Delete();
+                    this.pa.Insert();
+                    template_pa_detail.DeleteBySampleID(this.SampleID);
+                    foreach (template_pa_detail item in this.paDetail)
+                    {
+                        item.sample_id = this.SampleID;
+                    }
+                    template_pa_detail.InsertList(this.paDetail);
                     break;
                 case StatusEnum.CHEMIST_TESTING:
 
-                    //if (FileUpload2.HasFile)// && (Path.GetExtension(FileUpload2.FileName).Equals(".doc") || Path.GetExtension(FileUpload2.FileName).Equals(".docx")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
-
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload2.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload2.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    FileUpload2.SaveAs(source_file);
-                    //    this.jobSample.ad_hoc_tempalte_path = source_file_url;
-                    //}
-
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step2owner = userLogin.id;
+
+                    //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
+                    //#endregion
+                    //this.pa.id = 0;
+                    //this.pa.sample_id = this.SampleID;
+                    //this.pa.largest_metallic_particle = txtLmp.Text;
+                    //this.pa.largest_non_metallic_particle = txtLnmp.Text;
+                    //this.pa.largest_fiber = txtLf.Text;
+
+                    //this.pa.em_extraction_medium = txtExtractionMedium.Text;
+                    //this.pa.em_shaking = txtShkingRewashQty.Text;
+                    //this.pa.em_wetted_surface_per_component = txtWettedSurfacePerComponent.Text;
+                    //this.pa.em_total_tested_size = txtTotalTestedSize.Text;
+
+                    //this.pa.type_of_method = cbTypeOfMethod.SelectedValue;
+
+
+                    //this.pa.filtration_method = cbFiltrationMethod.SelectedValue;
+                    //this.pa.analysis_membrane_used = txtAnalysisMembraneUsed.Text;
+                    //this.pa.type_of_drying = cbTypeOfDrying.SelectedValue;
+                    //this.pa.particle_sizing_counting_det1 = cbParticleSizingCoungtingDetermination.SelectedValue;
+                    //this.pa.particle_sizing_counting_det2 = cbParticleSizingCoungtingDetermination2.SelectedValue;
+                    //this.pa.particle_sizing_counting_det_a = txtPixelScaling.Text;
+                    //this.pa.particle_sizing_counting_det_b = txtCameraResolution.Text;
+                    ////
+                    //this.pa.ccc_total = lbPermembrane.Text;
+                    //this.pa.result = ddlResult.SelectedValue;
+
+
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                    //this.jobSample.step2owner = userLogin.id;
+                    //this.jobSample.date_chemist_complete = DateTime.Now;
 
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
@@ -493,12 +522,7 @@ namespace ALS.ALSI.Web.view.template
                 litErrorMessage.Text = String.Empty;
                 //########
                 this.jobSample.Update();
-                this.pa.Insert();
-                foreach(template_pa_detail item in this.paDetail)
-                {
-                    item.sample_id = this.SampleID;
-                }
-                new template_pa_detail().InsertList(this.paDetail);
+
                 //Commit
                 GeneralManager.Commit();
 
@@ -519,19 +543,31 @@ namespace ALS.ALSI.Web.view.template
         protected void btnCoverPage_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            switch (btn.Text)
+            switch (btn.ID)
             {
-                case "Cover Page":
-                    btnCoverPage.CssClass = "btn green";
-                    btnDHS.CssClass = "btn blue";
-                    pCoverpage.Visible = true;
-                    //pDSH.Visible = false;
+                case "btnPage01":
+                    btnPage01.CssClass = "btn red-sunglo btn-sm";
+                    btnPage02.CssClass = "btn btn-default btn-sm";
+                    btnPage03.CssClass = "btn btn-default btn-sm";
+                    pPage01.Visible = true;
+                    pPage02.Visible = false;
+                    pPage03.Visible = false;
                     break;
-                case "WorkSheet":
-                    btnCoverPage.CssClass = "btn blue";
-                    btnDHS.CssClass = "btn green";
-                    pCoverpage.Visible = false;
-                    //pDSH.Visible = true;
+                case "btnPage02":
+                    btnPage01.CssClass = "btn btn-default btn-sm";
+                    btnPage02.CssClass = "btn red-sunglo btn-sm";
+                    btnPage03.CssClass = "btn btn-default btn-sm";
+                    pPage01.Visible = false;
+                    pPage02.Visible = true;
+                    pPage03.Visible = false;
+                    break;
+                case "btnPage03":
+                    btnPage01.CssClass = "btn btn-default btn-sm";
+                    btnPage02.CssClass = "btn btn-default btn-sm";
+                    btnPage03.CssClass = "btn red-sunglo btn-sm";
+                    pPage01.Visible = false;
+                    pPage02.Visible = false;
+                    pPage03.Visible = true;
                     break;
             }
         }
@@ -615,14 +651,15 @@ namespace ALS.ALSI.Web.view.template
                                     tmp.col_b = table.Rows[1][r].ToString().Replace("\"", "");
                                     tmp.col_c = table.Rows[2][r].ToString().Replace("\"", "");
                                     tmp.col_d = table.Rows[3][r].ToString().Replace("\"", "");
-                                    tmp.col_e = String.Empty;
-                                    tmp.col_f = String.Empty;
-                                    tmp.col_g = String.Empty;
-                                    tmp.col_h = String.Empty;
+
                                     tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                                     tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
                                     if (!tmp.col_a.Equals(""))
                                     {
+                                        tmp.col_e = (Convert.ToDouble(tmp.col_c) / Convert.ToDouble(txtParticleSize01.Text)).ToString("N2");
+                                        tmp.col_f = (Convert.ToDouble(tmp.col_d) / Convert.ToDouble(txtParticleSize01.Text)).ToString("N2");
+                                        tmp.col_g = ((Convert.ToDouble(tmp.col_c) / Convert.ToDouble(txtParticleSize02.Text)) * Convert.ToDouble(txtParticleSize03.Text)).ToString("N0");
+                                        tmp.col_h = ((Convert.ToDouble(tmp.col_d) / Convert.ToDouble(txtParticleSize02.Text)) * Convert.ToDouble(txtParticleSize03.Text)).ToString("N0");
                                         lbPermembrane.Text += string.Format("{0}{1}/", tmp.col_a, tmp.col_c);
                                         paDetail.Add(tmp);
                                         index++;
@@ -644,6 +681,14 @@ namespace ALS.ALSI.Web.view.template
 
                     Console.WriteLine();
                 }
+            }
+            if (!FileUpload2.HasFile)
+            {
+                errors.Add(String.Format("ไม่พบไฟล์ *.csv ที่ใช้โหลดข้อมูล (Ex. ClassTable_FromNumber_FeretMaximum_A01316.csv)"));
+            }
+            if (txtParticleSize01.Text.Equals("") || txtParticleSize02.Text.Equals("") || txtParticleSize03.Text.Equals(""))
+            {
+                errors.Add(String.Format("โปรดระบุข้อมูล Particle Size ที่ใช้สำหรับคำนวณ)"));
             }
 
             if (errors.Count > 0)
@@ -697,9 +742,6 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 litErrorMessage.Text = String.Empty;
-                //this.tbCas = _cas;
-                //gvResult.DataSource = this.tbCas;
-                //gvResult.DataBind();
                 calculate();
             }
         }
@@ -715,20 +757,6 @@ namespace ALS.ALSI.Web.view.template
             String source_file = String.Empty;
             String source_file_url = String.Empty;
 
-            //if ((Path.GetExtension(fileUploadImg01.FileName).Equals(".tif")))
-            //{
-            //    randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg01.FileName));
-            //    source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
-            //    source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
-
-            //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-            //    {
-            //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-            //    }
-            //    fileUploadImg01.SaveAs(source_file);
-            //    this.pa.img01 = source_file_url;
-            //    img1.ImageUrl = source_file_url;
-            //}
             if ((Path.GetExtension(fileUploadImg02.FileName).Equals(".tif")))
             {
                 randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg02.FileName));
@@ -785,20 +813,20 @@ namespace ALS.ALSI.Web.view.template
                 this.pa.img05 = source_file_url;
                 img5.ImageUrl = source_file_url;
             }
-            //if ((Path.GetExtension(fileUploadImg06.FileName).Equals(".tif")))
-            //{
-            //    randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg06.FileName));
-            //    source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
-            //    source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+            if ((Path.GetExtension(fileUploadImg06.FileName).Equals(".tif")))
+            {
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg06.FileName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
 
-            //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-            //    {
-            //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-            //    }
-            //    fileUploadImg06.SaveAs(source_file);
-            //    this.pa.img06 = source_file_url;
-            //    img6.ImageUrl = source_file_url;
-            //}
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                fileUploadImg06.SaveAs(source_file);
+                this.pa.img06 = source_file_url;
+                img6.ImageUrl = source_file_url;
+            }
             if ((Path.GetExtension(fileUploadImg07.FileName).Equals(".tif")))
             {
                 randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg07.FileName));
@@ -813,20 +841,7 @@ namespace ALS.ALSI.Web.view.template
                 this.pa.img07 = source_file_url;
                 img7.ImageUrl = source_file_url;
             }
-            //if ((Path.GetExtension(fileUploadImg08.FileName).Equals(".tif")))
-            //{
-            //    randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg08.FileName));
-            //    source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
-            //    source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
 
-            //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-            //    {
-            //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-            //    }
-            //    fileUploadImg08.SaveAs(source_file);
-            //    this.pa.img08 = source_file_url;
-            //    img8.ImageUrl = source_file_url;
-            //}
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
@@ -836,9 +851,6 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 litErrorMessage.Text = String.Empty;
-                //this.tbCas = _cas;
-                //gvResult.DataSource = this.tbCas;
-                //gvResult.DataBind();
                 calculate();
             }
         }
@@ -846,6 +858,7 @@ namespace ALS.ALSI.Web.view.template
 
         #region "Event"
 
+        #region "EOP"
         protected void gvEop_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
@@ -913,12 +926,14 @@ namespace ALS.ALSI.Web.view.template
         {
 
         }
+
         protected void gvEop_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvEop.EditIndex = e.NewEditIndex;
             gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
             gvEop.DataBind();
         }
+
         protected void gvEop_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             int _id = Convert.ToInt32(gvEop.DataKeys[e.RowIndex].Values[0].ToString());
@@ -938,34 +953,44 @@ namespace ALS.ALSI.Web.view.template
             gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
             gvEop.DataBind();
         }
+
         protected void gvEop_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvEop.EditIndex = -1;
             gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
             gvEop.DataBind();
         }
+        #endregion
+        #region "Gravimetry"
         protected void gvGravimetry_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
-            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            try
             {
-                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                //template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x => x.channel_size.Equals("0.500") && x.id == PKID).FirstOrDefault();
-                //if (gcms != null)
-                //{
-                //    switch (cmd)
-                //    {
-                //        case RowTypeEnum.Hide:
-                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Hide);
-                //            break;
-                //        case RowTypeEnum.Normal:
-                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
-                //            break;
-                //    }
+                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+                {
+                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.GRAVIMETRY) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    if (_cov != null)
+                    {
+                        RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
+                        switch (cmd)
+                        {
+                            case RowTypeEnum.Hide:
+                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Hide);
+                                break;
+                            case RowTypeEnum.Normal:
+                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Normal);
+                                break;
+                        }
 
-                //    gvEop.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList();
-                //    gvEop.DataBind();
-                //}
+                        gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.GRAVIMETRY)).ToList();
+                        gvGravimetry.DataBind();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
             }
         }
 
@@ -999,99 +1024,219 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
+        protected void gvGravimetry_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void gvGravimetry_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvGravimetry.EditIndex = e.NewEditIndex;
+            gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
+            gvGravimetry.DataBind();
+        }
+
+        protected void gvGravimetry_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int _id = Convert.ToInt32(gvGravimetry.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txtA = (TextBox)gvGravimetry.Rows[e.RowIndex].FindControl("txtA");
+            TextBox txtB = (TextBox)gvGravimetry.Rows[e.RowIndex].FindControl("txtB");
+            TextBox txtC = (TextBox)gvGravimetry.Rows[e.RowIndex].FindControl("txtC");
+
+
+            template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.GRAVIMETRY) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            if (_cov != null)
+            {
+                _cov.col_a = txtA.Text;
+                _cov.col_b = txtB.Text;
+                _cov.col_c = txtC.Text;
+            }
+            gvGravimetry.EditIndex = -1;
+            gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
+            gvGravimetry.DataBind();
+        }
+
+        protected void gvGravimetry_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvGravimetry.EditIndex = -1;
+            gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
+            gvGravimetry.DataBind();
+        }
+        #endregion
+
+        #region "MicroscopicAnalysis"
         protected void gvMicroscopicAnalysis_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
-            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            try
             {
-                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                //template_seagate_lpc_coverpage gcms = this.Lpcs.Where(x => x.channel_size.Equals("0.500") && x.id == PKID).FirstOrDefault();
-                //if (gcms != null)
-                //{
-                //    switch (cmd)
-                //    {
-                //        case RowTypeEnum.Hide:
-                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Hide);
-                //            break;
-                //        case RowTypeEnum.Normal:
-                //            gcms.row_state = Convert.ToInt32(RowTypeEnum.Normal);
-                //            break;
-                //    }
+                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+                {
+                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    if (_cov != null)
+                    {
+                        RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
+                        switch (cmd)
+                        {
+                            case RowTypeEnum.Hide:
+                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Hide);
+                                break;
+                            case RowTypeEnum.Normal:
+                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Normal);
+                                break;
+                        }
 
-                //    gvEop.DataSource = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList();
-                //    gvEop.DataBind();
-                //}
+                        gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+                        gvMicroscopicAnalysis.DataBind();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
             }
         }
 
         protected void gvMicroscopicAnalysis_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            try
             {
-
-
-                RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMicroscopicAnalysis.DataKeys[e.Row.RowIndex].Values[1]);
-                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-
-                if (_btnHide != null && _btnUndo != null)
+                if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    switch (cmd)
-                    {
-                        case RowTypeEnum.Hide:
-                            _btnHide.Visible = false;
-                            _btnUndo.Visible = true;
-                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-                            break;
-                        default:
-                            _btnHide.Visible = true;
-                            _btnUndo.Visible = false;
-                            e.Row.ForeColor = System.Drawing.Color.Black;
-                            break;
-                    }
-                }
 
+
+                    RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMicroscopicAnalysis.DataKeys[e.Row.RowIndex].Values[1]);
+                    LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                    LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                    if (_btnHide != null && _btnUndo != null)
+                    {
+                        switch (cmd)
+                        {
+                            case RowTypeEnum.Hide:
+                                _btnHide.Visible = false;
+                                _btnUndo.Visible = true;
+                                e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                                break;
+                            default:
+                                _btnHide.Visible = true;
+                                _btnUndo.Visible = false;
+                                e.Row.ForeColor = System.Drawing.Color.Black;
+                                break;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
             }
         }
 
         protected void gvMicroscopicAnalysis_OnDataBound(object sender, EventArgs e)
         {
-            GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
-            TableHeaderCell cell = new TableHeaderCell();
-            cell.Text = "";
-            cell.ColumnSpan = 1;
-            row.Controls.Add(cell);
+            try
+            {
+                GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+                TableHeaderCell cell = new TableHeaderCell();
+                cell.Text = "";
+                cell.ColumnSpan = 1;
+                row.Controls.Add(cell);
 
-            cell = new TableHeaderCell();
-            cell.ColumnSpan = 1;
-            cell.Text = "";
-            row.Controls.Add(cell);
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 1;
+                cell.Text = "";
+                row.Controls.Add(cell);
 
-            cell = new TableHeaderCell();
-            cell.ColumnSpan = 2;
-            cell.Text = "Particle counton membrane";
-            cell.HorizontalAlign = HorizontalAlign.Center;
-            row.Controls.Add(cell);
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 2;
+                cell.Text = "Particle counton membrane";
+                cell.HorizontalAlign = HorizontalAlign.Center;
+                row.Controls.Add(cell);
 
-            cell = new TableHeaderCell();
-            cell.ColumnSpan = 2;
-            cell.Text = "Particle count /component";
-            cell.HorizontalAlign = HorizontalAlign.Center;
-            row.Controls.Add(cell);
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 2;
+                cell.Text = "Particle count /component";
+                cell.HorizontalAlign = HorizontalAlign.Center;
+                row.Controls.Add(cell);
 
-            cell = new TableHeaderCell();
-            cell.ColumnSpan = 2;
-            cell.Text = "Particle count /1000cm2";
-            cell.HorizontalAlign = HorizontalAlign.Center;
-            row.Controls.Add(cell);
-            cell = new TableHeaderCell();
-            cell.ColumnSpan = 1;
-            cell.Text = "";
-            row.Controls.Add(cell);
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 2;
+                cell.Text = "Particle count /1000cm2";
+                cell.HorizontalAlign = HorizontalAlign.Center;
+                row.Controls.Add(cell);
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 1;
+                cell.Text = "";
+                row.Controls.Add(cell);
 
-            //row.BackColor = ColorTranslator.FromHtml("#3AC0F2");
-            gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
+                //row.BackColor = ColorTranslator.FromHtml("#3AC0F2");
+                gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
         }
+
+
+        protected void gvMicroscopicAnalysis_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void gvMicroscopicAnalysis_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            try
+            {
+                gvMicroscopicAnalysis.EditIndex = e.NewEditIndex;
+                gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+                gvMicroscopicAnalysis.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
+        }
+
+        protected void gvMicroscopicAnalysis_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int _id = Convert.ToInt32(gvMicroscopicAnalysis.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txtA = (TextBox)gvMicroscopicAnalysis.Rows[e.RowIndex].FindControl("txtA");
+            TextBox txtB = (TextBox)gvMicroscopicAnalysis.Rows[e.RowIndex].FindControl("txtB");
+            TextBox txtC = (TextBox)gvMicroscopicAnalysis.Rows[e.RowIndex].FindControl("txtC");
+            TextBox txtD = (TextBox)gvMicroscopicAnalysis.Rows[e.RowIndex].FindControl("txtD");
+            TextBox txtE = (TextBox)gvMicroscopicAnalysis.Rows[e.RowIndex].FindControl("txtE");
+            TextBox txtF = (TextBox)gvMicroscopicAnalysis.Rows[e.RowIndex].FindControl("txtF");
+            TextBox txtG = (TextBox)gvMicroscopicAnalysis.Rows[e.RowIndex].FindControl("txtG");
+            TextBox txtH = (TextBox)gvMicroscopicAnalysis.Rows[e.RowIndex].FindControl("txtH");
+
+
+            //template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            //if (_cov != null)
+            //{
+            //    _cov.col_a = txtA.Text;
+            //    _cov.col_b = txtB.Text;
+            //    _cov.col_c = txtC.Text;
+            //    _cov.col_d = txtD.Text;
+            //    _cov.col_e = txtE.Text;
+            //    _cov.col_f = txtF.Text;
+            //    _cov.col_g = txtG.Text;
+            //    _cov.col_h = txtH.Text;
+            //}
+            gvMicroscopicAnalysis.EditIndex = -1;
+            gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            gvMicroscopicAnalysis.DataBind();
+        }
+
+        protected void gvMicroscopicAnalysis_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvMicroscopicAnalysis.EditIndex = -1;
+            gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            gvMicroscopicAnalysis.DataBind();
+        }
+        #endregion
 
         protected void ddlEop_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1115,7 +1260,29 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
+        protected void txtParticleSize01_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtParticleSize02.Text = (Convert.ToDouble(txtParticleSize03.Text) / Convert.ToDouble(txtParticleSize01.Text)).ToString("N2");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
+        protected void txtParticleSize03_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtParticleSize02.Text = (Convert.ToDouble(txtParticleSize03.Text) / Convert.ToDouble(txtParticleSize01.Text)).ToString("N2");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
         #endregion
 
 

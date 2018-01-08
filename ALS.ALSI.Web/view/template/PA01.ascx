@@ -14,13 +14,17 @@
                         <i class="fa fa-cogs"></i>WORKING SHEET &nbsp;<i class="icon-tasks"></i> (<asp:Label ID="lbJobStatus" runat="server" Text=""></asp:Label>)           
                     </div>
                     <div class="actions">
-                        <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
-                        <asp:Button ID="btnDHS" runat="server" Text="WorkSheet" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
+                        <asp:Button ID="btnPage01" runat="server" Text="Particle Analysis According" CssClass="btn red-sunglo btn-sm" OnClick="btnCoverPage_Click" />
+                        <asp:Button ID="btnPage02" runat="server" Text="Cleanliness Analysis Accordging" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
+                        <asp:Button ID="btnPage03" runat="server" Text="Attachment I" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
+
 
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <asp:Panel ID="pCoverpage" runat="server">
+
+                    <asp:Panel ID="pPage01" runat="server">
+
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- BEGIN Portlet PORTLET-->
@@ -39,8 +43,8 @@
                                             <label class="control-label col-md-3">Test result</label>
                                             <div class="col-md-9">
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                    
-                                                    <asp:DropDownList ID="ddlResult" runat="server"  CssClass="form-control">
+
+                                                    <asp:DropDownList ID="ddlResult" runat="server" CssClass="form-control">
                                                         <asp:ListItem Value="0">TEST FAILED</asp:ListItem>
                                                         <asp:ListItem Value="1">TEST PASS</asp:ListItem>
                                                     </asp:DropDownList>
@@ -149,6 +153,8 @@
                             </tr>
 
                         </table>
+                    </asp:Panel>
+                    <asp:Panel ID="pPage02" runat="server">
                         <br />
                         <table border="0">
                             <tr>
@@ -410,9 +416,6 @@
                             </div>
                         </div>
 
-
-
-
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- BEGIN Portlet PORTLET-->
@@ -426,11 +429,49 @@
                                     </div>
                                     <div class="portlet-body">
                                         <div class="form-group">
-                                            <asp:GridView ID="gvGravimetry" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvGravimetry_RowDataBound" OnRowCommand="gvGravimetry_RowCommand">
+                                            <asp:GridView ID="gvGravimetry" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvGravimetry_RowDataBound" OnRowCommand="gvGravimetry_RowCommand" OnRowCancelingEdit="gvGravimetry_RowCancelingEdit" OnRowDeleting="gvGravimetry_RowDeleting" OnRowEditing="gvGravimetry_RowEditing" OnRowUpdating="gvGravimetry_RowUpdating">
                                                 <Columns>
-                                                    <asp:BoundField DataField="col_a" HeaderText="Membrane filter weight" />
-                                                    <asp:BoundField DataField="col_b" HeaderText="Blank" />
-                                                    <asp:BoundField DataField="col_c" HeaderText="Component" />
+
+                                                    <asp:TemplateField HeaderText="Membrane filter weight" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litA" runat="server" Text='<%# Eval("col_a")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtA" runat="server" Text='<%# Eval("col_a")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Blank" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litB" runat="server" Text='<%# Eval("col_b")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtB" runat="server" Text='<%# Eval("col_b")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Component" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litC" runat="server" Text='<%# Eval("col_c")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtC" runat="server" Text='<%# Eval("col_c")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Edit">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                                CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                        </EditItemTemplate>
+
+                                                    </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Hide">
                                                         <ItemTemplate>
                                                             <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
@@ -460,47 +501,132 @@
                                     </div>
                                     <div class="portlet-body">
                                         <div class="form-group">
-                                            <div class="row" id="Div1" runat="server">
-                                                <div class="col-md-12">
 
-                                                    <div class="form-group">
-                                                        <caption>
-                                                            <label class="control-label col-md-3">
-                                                                Uplod file(source file):</label>
-                                                            <div class="col-md-3">
-                                                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                                    <div class="input-group input-large">
-                                                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
-                                                                            <i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename"></span>
-                                                                        </div>
-                                                                        <span class="input-group-addon btn default btn-file"><span class="fileinput-new">Select file </span><span class="fileinput-exists">Change </span>
-                                                                            <asp:FileUpload ID="FileUpload2" runat="server" />
-                                                                        </span><a class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput" href="javascript:;">Remove </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </caption>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3"></label>
-                                                        <div class="col-md-9">
-                                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                                <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <asp:GridView ID="gvMicroscopicAnalysis" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvMicroscopicAnalysis_RowDataBound" OnRowCommand="gvMicroscopicAnalysis_RowCommand" OnDataBound="gvMicroscopicAnalysis_OnDataBound">
+                                            <table border="0" style="width: 50%">
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Particle Size:</td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtParticleSize01" runat="server" Text="72" AutoPostBack="true" OnTextChanged="txtParticleSize01_TextChanged"></asp:TextBox>
+                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" TargetControlID="txtParticleSize01" FilterType="Numbers" runat="server" />
+
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtParticleSize02" runat="server" Text="0" ReadOnly="false"></asp:TextBox></td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtParticleSize03" runat="server" Text="1000" AutoPostBack="true" OnTextChanged="txtParticleSize03_TextChanged"></asp:TextBox>
+                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" TargetControlID="txtParticleSize03" FilterType="Numbers" runat="server" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>Choose File:</td>
+
+                                                    <td>
+                                                        <asp:FileUpload ID="FileUpload2" runat="server" /></td>
+                                                    <td>
+                                                        <asp:Button ID="btnLoadFile" runat="server" Text="Load Data" CssClass="btn blue-hoki" OnClick="btnLoadFile_Click" /></td>
+                                                    <td></td>
+                                                </tr>
+
+                                            </table>
+                                            <br />
+                                            <asp:GridView ID="gvMicroscopicAnalysis" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvMicroscopicAnalysis_RowDataBound" OnRowCommand="gvMicroscopicAnalysis_RowCommand" OnDataBound="gvMicroscopicAnalysis_OnDataBound" OnRowCancelingEdit="gvMicroscopicAnalysis_RowCancelingEdit" OnRowDeleting="gvMicroscopicAnalysis_RowDeleting" OnRowEditing="gvMicroscopicAnalysis_RowEditing" OnRowUpdating="gvMicroscopicAnalysis_RowUpdating">
                                                 <Columns>
-                                                    <asp:BoundField DataField="col_a" HeaderText="Size class" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
-                                                    <asp:BoundField DataField="col_b" HeaderText="Size range(um)" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
-                                                    <asp:BoundField DataField="col_c" HeaderText="Total" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
-                                                    <asp:BoundField DataField="col_d" HeaderText="Metal" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
-                                                    <asp:BoundField DataField="col_e" HeaderText="Total" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
-                                                    <asp:BoundField DataField="col_f" HeaderText="Metal" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
-                                                    <asp:BoundField DataField="col_g" HeaderText="Total" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
-                                                    <asp:BoundField DataField="col_h" HeaderText="Metal" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+
+
+
+                                                    <asp:TemplateField HeaderText="Size class" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litA" runat="server" Text='<%# Eval("col_a")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtA" runat="server" Text='<%# Eval("col_a")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Size range(um)" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litB" runat="server" Text='<%# Eval("col_b")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtB" runat="server" Text='<%# Eval("col_b")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Total" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litC" runat="server" Text='<%# Eval("col_c")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtC" runat="server" Text='<%# Eval("col_c")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Metal" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litD" runat="server" Text='<%# Eval("col_d")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtD" runat="server" Text='<%# Eval("col_d")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Total" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litE" runat="server" Text='<%# Eval("col_e")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtE" runat="server" Text='<%# Eval("col_e")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Metal" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litF" runat="server" Text='<%# Eval("col_f")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtF" runat="server" Text='<%# Eval("col_f")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Total" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litG" runat="server" Text='<%# Eval("col_g")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtG" runat="server" Text='<%# Eval("col_g")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Metal" ItemStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litH" runat="server" Text='<%# Eval("col_h")%>'></asp:Literal>
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtH" runat="server" Text='<%# Eval("col_h")%>' CssClass="form-control"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+
+
+
+                                                    <asp:TemplateField HeaderText="Edit">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                                CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                        </EditItemTemplate>
+
+                                                    </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Hide">
                                                         <ItemTemplate>
                                                             <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
@@ -573,8 +699,8 @@
                                 </div>
                             </div>
                         </div>
-
-
+                    </asp:Panel>
+                    <asp:Panel ID="pPage03" runat="server">
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- BEGIN Portlet PORTLET-->
@@ -815,23 +941,22 @@
                                 </div>
                             </div>
                         </div>
+
                     </asp:Panel>
                     <asp:Panel ID="pUploadWorkSheet" runat="server">
-                    </asp:Panel>
-                    <!-- END FORM-->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- BEGIN Portlet PORTLET-->
-                            <div class="portlet light">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-puzzle font-grey-gallery"></i>
-                                        <span class="caption-subject bold font-grey-gallery uppercase">Operation </span>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-puzzle font-grey-gallery"></i>
+                                            <span class="caption-subject bold font-grey-gallery uppercase">Operation </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="portlet-body">
+                                    <div class="portlet-body">
 
-                                    <!-- 
+                                        <!-- 
                                     <asp:Panel ID="pEop" runat="server">
 
                                         <div class="form-group">
@@ -856,52 +981,52 @@
                                     </asp:Panel>
                                         -->
 
-                                    <asp:Panel ID="pStatus" runat="server">
+                                        <asp:Panel ID="pStatus" runat="server">
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
-                                            <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
+                                                <div class="col-md-6">
+                                                    <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br />
-                                    </asp:Panel>
-                                    <asp:Panel ID="pRemark" runat="server">
+                                            <br />
+                                        </asp:Panel>
+                                        <asp:Panel ID="pRemark" runat="server">
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
-                                            <div class="col-md-6">
-                                                <asp:TextBox ID="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
+                                                <div class="col-md-6">
+                                                    <asp:TextBox ID="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br />
-                                    </asp:Panel>
-                                    <asp:Panel ID="pDisapprove" runat="server">
+                                            <br />
+                                        </asp:Panel>
+                                        <asp:Panel ID="pDisapprove" runat="server">
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
-                                            <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
+                                                <div class="col-md-6">
+                                                    <asp:DropDownList ID="ddlAssignTo" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br />
-                                    </asp:Panel>
-                                    <asp:Panel ID="pDownload" runat="server">
-                                        <div class="row" id="Div2" runat="server">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Download:</label>
-                                                    <div class="col-md-3">
+                                            <br />
+                                        </asp:Panel>
+                                        <asp:Panel ID="pDownload" runat="server">
+                                            <div class="row" id="Div2" runat="server">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Download:</label>
+                                                        <div class="col-md-3">
 
-                                                        <h5>
-                                                            <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click"></asp:LinkButton></h5>
-                                                        <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label>
+                                                            <h5>
+                                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click"></asp:LinkButton></h5>
+                                                            <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <%--                                        <div class="form-group">
+                                            <%--                                        <div class="form-group">
                                             <label class="control-label col-md-3">Download:</label>
                                             <div class="col-md-6">
                                                 <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
@@ -910,43 +1035,47 @@
                                                 </asp:LinkButton>
                                             </div>
                                         </div>--%>
-                                        <br />
-                                    </asp:Panel>
-                                    <asp:Panel ID="pUploadfile" runat="server">
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Uplod file: </label>
+                                            <br />
+                                        </asp:Panel>
+                                        <asp:Panel ID="pUploadfile" runat="server">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Uplod file: </label>
 
-                                            <div class="col-md-3">
-                                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                    <div class="input-group input-large">
-                                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
-                                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                <div class="col-md-3">
+                                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                        <div class="input-group input-large">
+                                                            <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
                                                                
                                             <span class="fileinput-filename"></span>
+                                                            </div>
+                                                            <span class="input-group-addon btn default btn-file">
+                                                                <span class="fileinput-new">Select file </span>
+                                                                <span class="fileinput-exists">Change </span>
+                                                                <asp:FileUpload ID="FileUpload1" runat="server" />
+
+                                                            </span>
+                                                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
                                                         </div>
-                                                        <span class="input-group-addon btn default btn-file">
-                                                            <span class="fileinput-new">Select file </span>
-                                                            <span class="fileinput-exists">Change </span>
-                                                            <asp:FileUpload ID="FileUpload1" runat="server" />
-
-                                                        </span>
-                                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
-
                                                     </div>
+                                                    <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>
+
                                                 </div>
-                                                <p class="text-success">อัพโหลดไฟล์ที่ได้ทำการแก้ไขเสร็จแล้ว</p>
-
                                             </div>
-                                        </div>
 
-                                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-                                        <br />
-                                    </asp:Panel>
+                                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                                            <br />
+                                        </asp:Panel>
+                                    </div>
                                 </div>
+                                <!-- END Portlet PORTLET-->
                             </div>
-                            <!-- END Portlet PORTLET-->
                         </div>
-                    </div>
+                    </asp:Panel>
+
+
+
 
                     <div class="form-actions">
 
@@ -1052,6 +1181,7 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     jQuery(document).ready(function () {
+
     });
 </script>
 <!-- END JAVASCRIPTS -->
