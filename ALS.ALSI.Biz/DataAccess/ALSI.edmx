@@ -628,6 +628,7 @@
           <Property Name="filtration_method" Type="varchar" MaxLength="45" />
           <Property Name="analysis_membrane_used" Type="varchar" MaxLength="45" />
           <Property Name="type_of_drying" Type="varchar" MaxLength="45" />
+          <Property Name="extraction_procedure" Type="varchar" MaxLength="45" />
           <Property Name="particle_sizing_counting_det1" Type="varchar" MaxLength="45" />
           <Property Name="particle_sizing_counting_det2" Type="varchar" MaxLength="45" />
           <Property Name="particle_sizing_counting_det_a" Type="varchar" MaxLength="45" />
@@ -2566,6 +2567,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="filtration_method" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="analysis_membrane_used" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="type_of_drying" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="extraction_procedure" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="particle_sizing_counting_det1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="particle_sizing_counting_det2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="particle_sizing_counting_det_a" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -4294,6 +4296,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="particle_sizing_counting_det_a" ColumnName="particle_sizing_counting_det_a" />
                 <ScalarProperty Name="particle_sizing_counting_det2" ColumnName="particle_sizing_counting_det2" />
                 <ScalarProperty Name="particle_sizing_counting_det1" ColumnName="particle_sizing_counting_det1" />
+                <ScalarProperty Name="extraction_procedure" ColumnName="extraction_procedure" />
                 <ScalarProperty Name="type_of_drying" ColumnName="type_of_drying" />
                 <ScalarProperty Name="analysis_membrane_used" ColumnName="analysis_membrane_used" />
                 <ScalarProperty Name="filtration_method" ColumnName="filtration_method" />

@@ -131,6 +131,11 @@ namespace ALS.ALSI.Web.view.template
                 //btnPage01.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
                 //btnPage02.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
 
+                pPage01.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+                pPage02.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+                pPage03.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+
+
                 if (status == StatusEnum.LABMANAGER_CHECKING)
                 {
                     ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
@@ -171,58 +176,106 @@ namespace ALS.ALSI.Web.view.template
             m_evaluation_of_particles eop = new m_evaluation_of_particles();
             m_microscopic_analysis ma = new m_microscopic_analysis();
 
+            template_pa_detail pad = new template_pa_detail();
 
-            paDetail = new List<template_pa_detail>();
-            pa = new template_pa();
-
-            #region "Evaluation of Particles"
-            List<m_evaluation_of_particles> eops = eop.SelectAll().Where(x => x.template_id == this.jobSample.template_id).ToList();
-            template_pa_detail tmp = new template_pa_detail();
-            foreach (var item in eops)
+            List<template_pa_detail> listPaDetail = pad.SelectBySampleID(this.SampleID);
+            if (listPaDetail.Count > 0)
             {
+                this.paDetail = listPaDetail;
+            }
+            else
+            {
+                paDetail = new List<template_pa_detail>();
+                #region "Evaluation of Particles"
+                List<m_evaluation_of_particles> eops = eop.SelectAll().Where(x => x.template_id == this.jobSample.template_id).ToList();
+                template_pa_detail tmp = new template_pa_detail();
+                foreach (var item in eops)
+                {
+                    tmp = new template_pa_detail();
+                    tmp.id = index;
+                    tmp.col_a = item.A;
+                    tmp.col_b = item.B;
+                    tmp.col_c = item.C;
+                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                    tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
+                    paDetail.Add(tmp);
+                    index++;
+                }
+                #endregion
+                #region "Gravimetry"
+
                 tmp = new template_pa_detail();
                 tmp.id = index;
-                tmp.col_a = item.A;
-                tmp.col_b = item.B;
-                tmp.col_c = item.C;
+                tmp.col_a = "Before filtration(mg):";
+                tmp.col_b = String.Empty;
+                tmp.col_c = String.Empty;
                 tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-                tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
+                tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
                 paDetail.Add(tmp);
                 index++;
+                tmp = new template_pa_detail();
+                tmp.id = index;
+                tmp.col_a = "After filtration (mg):";
+                tmp.col_b = String.Empty;
+                tmp.col_c = String.Empty;
+                tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
+                paDetail.Add(tmp);
+                index++;
+                tmp = new template_pa_detail();
+                tmp.id = index;
+                tmp.col_a = "Residue weight(mg):";
+                tmp.col_b = String.Empty;
+                tmp.col_c = String.Empty;
+                tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
+                paDetail.Add(tmp);
+                index++;
+                #endregion
+                #region "Microscopic Analysis"
+                #endregion
             }
-            #endregion
-            #region "Gravimetry"
 
-            tmp = new template_pa_detail();
-            tmp.id = index;
-            tmp.col_a = "Before filtration(mg):";
-            tmp.col_b = String.Empty;
-            tmp.col_c = String.Empty;
-            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-            tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
-            paDetail.Add(tmp);
-            index++;
-            tmp = new template_pa_detail();
-            tmp.id = index;
-            tmp.col_a = "After filtration (mg):";
-            tmp.col_b = String.Empty;
-            tmp.col_c = String.Empty;
-            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-            tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
-            paDetail.Add(tmp);
-            index++;
-            tmp = new template_pa_detail();
-            tmp.id = index;
-            tmp.col_a = "Residue weight(mg):";
-            tmp.col_b = String.Empty;
-            tmp.col_c = String.Empty;
-            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-            tmp.row_type = Convert.ToInt16(PAEnum.GRAVIMETRY);
-            paDetail.Add(tmp);
-            index++;
-            #endregion
-            #region "Microscopic Analysis"
-            #endregion
+            pa = new template_pa();
+            pa = pa.SelectByID(this.SampleID);
+            if (pa != null)
+            {
+                txtLmp.Text = this.pa.largest_metallic_particle;
+                txtLnmp.Text = this.pa.largest_non_metallic_particle;
+                txtLf.Text = this.pa.largest_fiber;
+
+                txtExtractionMedium.Text = this.pa.em_extraction_medium;
+                txtShkingRewashQty.Text = this.pa.em_shaking;
+                txtWettedSurfacePerComponent.Text = this.pa.em_wetted_surface_per_component;
+                txtTotalTestedSize.Text = this.pa.em_total_tested_size;
+
+                CustomUtils.setCheckBoxListValue(ref cbTypeOfMethod,this.pa.type_of_method);
+                CustomUtils.setCheckBoxListValue(ref cbFiltrationMethod, this.pa.filtration_method);
+                CustomUtils.setCheckBoxListValue(ref cbTypeOfDrying, this.pa.type_of_drying);
+                CustomUtils.setCheckBoxListValue(ref cbParticleSizingCoungtingDetermination, this.pa.particle_sizing_counting_det1);
+                CustomUtils.setCheckBoxListValue(ref cbParticleSizingCoungtingDetermination2, this.pa.particle_sizing_counting_det2);
+
+                txtExtractionProcedure.Text = this.pa.extraction_procedure;
+                txtAnalysisMembraneUsed.Text = this.pa.analysis_membrane_used;
+                txtPixelScaling.Text = this.pa.particle_sizing_counting_det_a;
+                txtCameraResolution.Text = this.pa.particle_sizing_counting_det_b;
+
+                img1.ImageUrl = this.pa.img01;
+                img2.ImageUrl = this.pa.img02;
+                img3.ImageUrl = this.pa.img03;
+                img4.ImageUrl = this.pa.img04;
+                img5.ImageUrl = this.pa.img05;
+                img6.ImageUrl = this.pa.img06;
+                img7.ImageUrl = this.pa.img07;
+
+                lbPermembrane.Text = this.pa.ccc_total;
+                txtLotNo.Text = String.Empty;
+
+            }
+
+
+
+
 
 
 
@@ -276,13 +329,20 @@ namespace ALS.ALSI.Web.view.template
             //----------
             //gvGravimetry
             //lbPermembrane
-            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
-            gvEop.DataBind();
 
-            gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
-            gvGravimetry.DataBind();
-
-            List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            if (null != listPaDetail && listPaDetail.Count > 0)
+            {
+                gvEop.DataSource = listPaDetail;
+                gvEop.DataBind();
+            }
+            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
+            if (null != listPaDetail && listPaDetail.Count > 0)
+            {
+                gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
+                gvGravimetry.DataBind();
+            }
+            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
                 gvMicroscopicAnalysis.DataSource = listPaDetail;
@@ -337,15 +397,15 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.em_shaking = txtShkingRewashQty.Text;
                     this.pa.em_wetted_surface_per_component = txtWettedSurfacePerComponent.Text;
                     this.pa.em_total_tested_size = txtTotalTestedSize.Text;
+                    this.pa.extraction_procedure = txtExtractionProcedure.Text;
 
-                    this.pa.type_of_method = cbTypeOfMethod.SelectedValue;
+                    this.pa.type_of_method = CustomUtils.getCheckBoxListValue(cbTypeOfMethod);
+                    this.pa.filtration_method = CustomUtils.getCheckBoxListValue(cbFiltrationMethod);
+                    this.pa.type_of_drying = CustomUtils.getCheckBoxListValue(cbTypeOfDrying);
+                    this.pa.particle_sizing_counting_det1 = CustomUtils.getCheckBoxListValue(cbParticleSizingCoungtingDetermination);
+                    this.pa.particle_sizing_counting_det2 = CustomUtils.getCheckBoxListValue(cbParticleSizingCoungtingDetermination2);
 
-
-                    this.pa.filtration_method = cbFiltrationMethod.SelectedValue;
                     this.pa.analysis_membrane_used = txtAnalysisMembraneUsed.Text;
-                    this.pa.type_of_drying = cbTypeOfDrying.SelectedValue;
-                    this.pa.particle_sizing_counting_det1 = cbParticleSizingCoungtingDetermination.SelectedValue;
-                    this.pa.particle_sizing_counting_det2 = cbParticleSizingCoungtingDetermination2.SelectedValue;
                     this.pa.particle_sizing_counting_det_a = txtPixelScaling.Text;
                     this.pa.particle_sizing_counting_det_b = txtCameraResolution.Text;
 
@@ -366,36 +426,35 @@ namespace ALS.ALSI.Web.view.template
 
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
-                    //#endregion
-                    //this.pa.id = 0;
-                    //this.pa.sample_id = this.SampleID;
-                    //this.pa.largest_metallic_particle = txtLmp.Text;
-                    //this.pa.largest_non_metallic_particle = txtLnmp.Text;
-                    //this.pa.largest_fiber = txtLf.Text;
+                    this.pa.sample_id = this.SampleID;
+                    this.pa.largest_metallic_particle = txtLmp.Text;
+                    this.pa.largest_non_metallic_particle = txtLnmp.Text;
+                    this.pa.largest_fiber = txtLf.Text;
 
-                    //this.pa.em_extraction_medium = txtExtractionMedium.Text;
-                    //this.pa.em_shaking = txtShkingRewashQty.Text;
-                    //this.pa.em_wetted_surface_per_component = txtWettedSurfacePerComponent.Text;
-                    //this.pa.em_total_tested_size = txtTotalTestedSize.Text;
+                    this.pa.em_extraction_medium = txtExtractionMedium.Text;
+                    this.pa.em_shaking = txtShkingRewashQty.Text;
+                    this.pa.em_wetted_surface_per_component = txtWettedSurfacePerComponent.Text;
+                    this.pa.em_total_tested_size = txtTotalTestedSize.Text;
+                    this.pa.extraction_procedure = txtExtractionProcedure.Text;
 
-                    //this.pa.type_of_method = cbTypeOfMethod.SelectedValue;
+                    this.pa.type_of_method = CustomUtils.getCheckBoxListValue(cbTypeOfMethod);
+                    this.pa.filtration_method = CustomUtils.getCheckBoxListValue(cbFiltrationMethod);
+                    this.pa.type_of_drying = CustomUtils.getCheckBoxListValue(cbTypeOfDrying);
+                    this.pa.particle_sizing_counting_det1 = CustomUtils.getCheckBoxListValue(cbParticleSizingCoungtingDetermination);
+                    this.pa.particle_sizing_counting_det2 = CustomUtils.getCheckBoxListValue(cbParticleSizingCoungtingDetermination2);
 
+                    this.pa.analysis_membrane_used = txtAnalysisMembraneUsed.Text;
+                    this.pa.particle_sizing_counting_det_a = txtPixelScaling.Text;
+                    this.pa.particle_sizing_counting_det_b = txtCameraResolution.Text;
 
-                    //this.pa.filtration_method = cbFiltrationMethod.SelectedValue;
-                    //this.pa.analysis_membrane_used = txtAnalysisMembraneUsed.Text;
-                    //this.pa.type_of_drying = cbTypeOfDrying.SelectedValue;
-                    //this.pa.particle_sizing_counting_det1 = cbParticleSizingCoungtingDetermination.SelectedValue;
-                    //this.pa.particle_sizing_counting_det2 = cbParticleSizingCoungtingDetermination2.SelectedValue;
-                    //this.pa.particle_sizing_counting_det_a = txtPixelScaling.Text;
-                    //this.pa.particle_sizing_counting_det_b = txtCameraResolution.Text;
-                    ////
-                    //this.pa.ccc_total = lbPermembrane.Text;
-                    //this.pa.result = ddlResult.SelectedValue;
-
-
-                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
-                    //this.jobSample.step2owner = userLogin.id;
-                    //this.jobSample.date_chemist_complete = DateTime.Now;
+                    //Delete old
+                    this.pa.Update();
+                    template_pa_detail.DeleteBySampleID(this.SampleID);
+                    foreach (template_pa_detail item in this.paDetail)
+                    {
+                        item.sample_id = this.SampleID;
+                    }
+                    template_pa_detail.InsertList(this.paDetail);
 
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
@@ -938,7 +997,7 @@ namespace ALS.ALSI.Web.view.template
         {
             int _id = Convert.ToInt32(gvEop.DataKeys[e.RowIndex].Values[0].ToString());
             TextBox txtB = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtB");
-            TextBox txtC = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtD");
+            TextBox txtC = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtC");
             TextBox txtD = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtD");
 
 

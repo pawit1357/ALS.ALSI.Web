@@ -24,7 +24,7 @@ namespace ALS.ALSI.Biz.DataAccess
             return _repository.GetAll().ToList();
         }
 
-        public template_pa SelectByID(int _id, string _type)
+        public template_pa SelectByID(int _id)
         {
             return _repository.First(x => x.sample_id == _id);
         }

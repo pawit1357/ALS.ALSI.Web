@@ -27,6 +27,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string filtration_method { get; set; }
         public string analysis_membrane_used { get; set; }
         public string type_of_drying { get; set; }
+        public string extraction_procedure { get; set; }
         public string particle_sizing_counting_det1 { get; set; }
         public string particle_sizing_counting_det2 { get; set; }
         public string particle_sizing_counting_det_a { get; set; }
