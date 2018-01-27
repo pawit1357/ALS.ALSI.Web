@@ -281,7 +281,11 @@ namespace ALS.ALSI.Utils
             return returnStr.Trim();
         }
 
-
+        private static long GenerateId()
+        {
+            byte[] buffer = Guid.NewGuid().ToByteArray();
+            return BitConverter.ToInt64(buffer, 0);
+        }
 
         public static int getUnitByName(String _name)
         {
@@ -425,23 +429,26 @@ namespace ALS.ALSI.Utils
             {
                 if (lst.Selected == true)
                 {
-                    returnMsg += String.Format("{0}," , lst.Value);
+                    returnMsg += String.Format("{0},", lst.Value);
                 }
             }
-            return returnMsg.Length>0? returnMsg.Substring(0, returnMsg.Length-1):String.Empty;
+            return returnMsg.Length > 0 ? returnMsg.Substring(0, returnMsg.Length - 1) : String.Empty;
         }
 
-        public static void setCheckBoxListValue(ref CheckBoxList cb,String _selectedValue)
+        public static void setCheckBoxListValue(ref CheckBoxList cb, String _selectedValue)
         {
-            String[] selectedValue = _selectedValue.Split(',');
-
-            foreach (ListItem lst in cb.Items)
+            if (_selectedValue != null)
             {
-                if (selectedValue.Contains(lst.Value))
-                {
-                    lst.Selected = true;
-                }
+                String[] selectedValue = _selectedValue.Split(',');
 
+                foreach (ListItem lst in cb.Items)
+                {
+                    if (selectedValue.Contains(lst.Value))
+                    {
+                        lst.Selected = true;
+                    }
+
+                }
             }
         }
 

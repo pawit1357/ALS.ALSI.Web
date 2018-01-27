@@ -85,15 +85,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pPage01;
         
         /// <summary>
-        /// ddlResult control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlResult;
-        
-        /// <summary>
         /// gvEop control.
         /// </summary>
         /// <remarks>
@@ -112,13 +103,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbRow01;
         
         /// <summary>
-        /// txtLmp control.
+        /// txtLms control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLmp;
+        protected global::System.Web.UI.WebControls.TextBox txtLms;
         
         /// <summary>
         /// lbRow02 control.
@@ -155,6 +146,141 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLf;
+        
+        /// <summary>
+        /// txtDoec control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDoec;
+        
+        /// <summary>
+        /// txtDos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDos;
+        
+        /// <summary>
+        /// txtCustomerLimit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerLimit;
+        
+        /// <summary>
+        /// txtGravimetry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGravimetry;
+        
+        /// <summary>
+        /// txtLmsp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLmsp;
+        
+        /// <summary>
+        /// txtExtractionValue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtExtractionValue;
+        
+        /// <summary>
+        /// txtLnmsp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLnmsp;
+        
+        /// <summary>
+        /// txtEop_G control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEop_G;
+        
+        /// <summary>
+        /// txtEop_Lmsp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEop_Lmsp;
+        
+        /// <summary>
+        /// txtEop_Lnmsp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEop_Lnmsp;
+        
+        /// <summary>
+        /// lbLf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbLf;
+        
+        /// <summary>
+        /// txtEop_pt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEop_pt;
+        
+        /// <summary>
+        /// txtEop_size control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEop_size;
+        
+        /// <summary>
+        /// txtEop_value control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEop_value;
+        
+        /// <summary>
+        /// txtEopRemark control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEopRemark;
         
         /// <summary>
         /// pPage02 control.
@@ -247,58 +373,355 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Button btnLoadImg1;
         
         /// <summary>
-        /// txtExtractionProcedure control.
+        /// cbCsa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExtractionProcedure;
+        protected global::System.Web.UI.WebControls.CheckBoxList cbCsa;
         
         /// <summary>
-        /// txtExtractionMedium control.
+        /// txtWspc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExtractionMedium;
+        protected global::System.Web.UI.WebControls.TextBox txtWspc;
         
         /// <summary>
-        /// txtShkingRewashQty control.
+        /// txtWvpc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtShkingRewashQty;
+        protected global::System.Web.UI.WebControls.TextBox txtWvpc;
         
         /// <summary>
-        /// txtWettedSurfacePerComponent control.
+        /// txtTls control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWettedSurfacePerComponent;
+        protected global::System.Web.UI.WebControls.TextBox txtTls;
         
         /// <summary>
-        /// txtTotalTestedSize control.
+        /// cbPreTreatmentConditioning control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTotalTestedSize;
+        protected global::System.Web.UI.WebControls.CheckBox cbPreTreatmentConditioning;
         
         /// <summary>
-        /// cbTypeOfMethod control.
+        /// txtPreTreatmentConditioning control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cbTypeOfMethod;
+        protected global::System.Web.UI.WebControls.TextBox txtPreTreatmentConditioning;
+        
+        /// <summary>
+        /// cbPackingToBeTested control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cbPackingToBeTested;
+        
+        /// <summary>
+        /// cbContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbContainer;
+        
+        /// <summary>
+        /// ddlContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlContainer;
+        
+        /// <summary>
+        /// cbFluid1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbFluid1;
+        
+        /// <summary>
+        /// ddlFluid1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFluid1;
+        
+        /// <summary>
+        /// cbFluid2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbFluid2;
+        
+        /// <summary>
+        /// ddlFluid2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFluid2;
+        
+        /// <summary>
+        /// cbFluid3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbFluid3;
+        
+        /// <summary>
+        /// ddlFluid3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFluid3;
+        
+        /// <summary>
+        /// txtTradeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTradeName;
+        
+        /// <summary>
+        /// txtManufacturer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtManufacturer;
+        
+        /// <summary>
+        /// txtTotalQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTotalQuantity;
+        
+        /// <summary>
+        /// cbTshb01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbTshb01;
+        
+        /// <summary>
+        /// cbTshb02 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbTshb02;
+        
+        /// <summary>
+        /// cbTshb03 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbTshb03;
+        
+        /// <summary>
+        /// txtTshb03 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTshb03;
+        
+        /// <summary>
+        /// cbPots01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbPots01;
+        
+        /// <summary>
+        /// txtPots01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPots01;
+        
+        /// <summary>
+        /// cbDissolving control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbDissolving;
+        
+        /// <summary>
+        /// txtDissolving control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDissolving;
+        
+        /// <summary>
+        /// txtDissolvingTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDissolvingTime;
+        
+        /// <summary>
+        /// cbPressureRinsing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbPressureRinsing;
+        
+        /// <summary>
+        /// cbInternalRinsing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbInternalRinsing;
+        
+        /// <summary>
+        /// cbAgitation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbAgitation;
+        
+        /// <summary>
+        /// gvDissolving control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvDissolving;
+        
+        /// <summary>
+        /// cbWashQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbWashQuantity;
+        
+        /// <summary>
+        /// txtWashQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWashQuantity;
+        
+        /// <summary>
+        /// cbRewashingQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbRewashingQuantity;
+        
+        /// <summary>
+        /// txtRewashingQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRewashingQuantity;
+        
+        /// <summary>
+        /// cbWashPressureRinsing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbWashPressureRinsing;
+        
+        /// <summary>
+        /// cbWashInternalRinsing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbWashInternalRinsing;
+        
+        /// <summary>
+        /// cbWashAgitation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbWashAgitation;
+        
+        /// <summary>
+        /// gvWashing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvWashing;
         
         /// <summary>
         /// cbFiltrationMethod control.
@@ -310,112 +733,265 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.CheckBoxList cbFiltrationMethod;
         
         /// <summary>
-        /// txtAnalysisMembraneUsed control.
+        /// ddlManufacturer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAnalysisMembraneUsed;
+        protected global::System.Web.UI.WebControls.DropDownList ddlManufacturer;
         
         /// <summary>
-        /// cbTypeOfDrying control.
+        /// ddlMaterial control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cbTypeOfDrying;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMaterial;
         
         /// <summary>
-        /// cbParticleSizingCoungtingDetermination control.
+        /// txtPoreSize control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cbParticleSizingCoungtingDetermination;
+        protected global::System.Web.UI.WebControls.TextBox txtPoreSize;
         
         /// <summary>
-        /// txtPixelScaling control.
+        /// txtDiameter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPixelScaling;
+        protected global::System.Web.UI.WebControls.TextBox txtDiameter;
         
         /// <summary>
-        /// txtCameraResolution control.
+        /// cbOven control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCameraResolution;
+        protected global::System.Web.UI.WebControls.CheckBox cbOven;
         
         /// <summary>
-        /// cbParticleSizingCoungtingDetermination2 control.
+        /// cbDesiccator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cbParticleSizingCoungtingDetermination2;
+        protected global::System.Web.UI.WebControls.CheckBox cbDesiccator;
         
         /// <summary>
-        /// gvGravimetry control.
+        /// cbAmbientAir control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvGravimetry;
+        protected global::System.Web.UI.WebControls.CheckBox cbAmbientAir;
         
         /// <summary>
-        /// txtParticleSize01 control.
+        /// cbEasyDry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtParticleSize01;
+        protected global::System.Web.UI.WebControls.CheckBox cbEasyDry;
         
         /// <summary>
-        /// FilteredTextBoxExtender1 control.
+        /// txtDryTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender1;
+        protected global::System.Web.UI.WebControls.TextBox txtDryTime;
         
         /// <summary>
-        /// txtParticleSize02 control.
+        /// txtTemperature control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtParticleSize02;
+        protected global::System.Web.UI.WebControls.TextBox txtTemperature;
         
         /// <summary>
-        /// txtParticleSize03 control.
+        /// ddlGravimetricAlalysis control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtParticleSize03;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGravimetricAlalysis;
         
         /// <summary>
-        /// FilteredTextBoxExtender2 control.
+        /// txtModel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender2;
+        protected global::System.Web.UI.WebControls.TextBox txtModel;
+        
+        /// <summary>
+        /// txtBalanceResolution control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBalanceResolution;
+        
+        /// <summary>
+        /// txtLastCalibration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLastCalibration;
+        
+        /// <summary>
+        /// cbZEISSAxioImager2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbZEISSAxioImager2;
+        
+        /// <summary>
+        /// cbMeasuringSoftware control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbMeasuringSoftware;
+        
+        /// <summary>
+        /// cbAutomated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbAutomated;
+        
+        /// <summary>
+        /// txtAutomated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAutomated;
+        
+        /// <summary>
+        /// txtTotalextractionVolume control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTotalextractionVolume;
+        
+        /// <summary>
+        /// lbExtractionMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbExtractionMethod;
+        
+        /// <summary>
+        /// txtNumberOfComponents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNumberOfComponents;
+        
+        /// <summary>
+        /// lbExtractionTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbExtractionTime;
+        
+        /// <summary>
+        /// lbMembraneType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbMembraneType;
+        
+        /// <summary>
+        /// lbX control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbX;
+        
+        /// <summary>
+        /// lbY control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbY;
+        
+        /// <summary>
+        /// txtMeasuredDiameter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMeasuredDiameter;
+        
+        /// <summary>
+        /// txtFeretLmsp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFeretLmsp;
+        
+        /// <summary>
+        /// txtFeretLnms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFeretLnms;
+        
+        /// <summary>
+        /// txtFeretFb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFeretFb;
         
         /// <summary>
         /// FileUpload2 control.
@@ -445,6 +1021,33 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.GridView gvMicroscopicAnalysis;
         
         /// <summary>
+        /// pCcc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pCcc;
+        
+        /// <summary>
+        /// TextBox41 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox41;
+        
+        /// <summary>
+        /// TextBox42 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox42;
+        
+        /// <summary>
         /// lbPermembrane control.
         /// </summary>
         /// <remarks>
@@ -452,6 +1055,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbPermembrane;
+        
+        /// <summary>
+        /// TextBox43 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox43;
         
         /// <summary>
         /// pPage03 control.
@@ -472,15 +1084,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Image img2;
         
         /// <summary>
-        /// Div4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div4;
-        
-        /// <summary>
         /// fileUploadImg02 control.
         /// </summary>
         /// <remarks>
@@ -499,15 +1102,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Image img3;
         
         /// <summary>
-        /// Div5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div5;
-        
-        /// <summary>
         /// fileUploadImg03 control.
         /// </summary>
         /// <remarks>
@@ -515,6 +1109,24 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileUploadImg03;
+        
+        /// <summary>
+        /// txtLms_X control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLms_X;
+        
+        /// <summary>
+        /// txtLms_Y control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLms_Y;
         
         /// <summary>
         /// img4 control.
@@ -526,15 +1138,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Image img4;
         
         /// <summary>
-        /// Div6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div6;
-        
-        /// <summary>
         /// fileUploadImg04 control.
         /// </summary>
         /// <remarks>
@@ -542,6 +1145,24 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileUploadImg04;
+        
+        /// <summary>
+        /// txtLnms_X control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLnms_X;
+        
+        /// <summary>
+        /// txtLnms_Y control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLnms_Y;
         
         /// <summary>
         /// img5 control.
@@ -553,15 +1174,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Image img5;
         
         /// <summary>
-        /// Div7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div7;
-        
-        /// <summary>
         /// fileUploadImg05 control.
         /// </summary>
         /// <remarks>
@@ -571,58 +1183,22 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.FileUpload fileUploadImg05;
         
         /// <summary>
-        /// img6 control.
+        /// txtLf_X control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image img6;
+        protected global::System.Web.UI.WebControls.TextBox txtLf_X;
         
         /// <summary>
-        /// Div8 control.
+        /// txtLf_Y control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div8;
-        
-        /// <summary>
-        /// fileUploadImg06 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileUploadImg06;
-        
-        /// <summary>
-        /// img7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image img7;
-        
-        /// <summary>
-        /// Div9 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div9;
-        
-        /// <summary>
-        /// fileUploadImg07 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileUploadImg07;
+        protected global::System.Web.UI.WebControls.TextBox txtLf_Y;
         
         /// <summary>
         /// btnLoadImg control.
@@ -652,13 +1228,31 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pEop;
         
         /// <summary>
-        /// ddlEop control.
+        /// ddlResult control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEop;
+        protected global::System.Web.UI.WebControls.DropDownList ddlResult;
+        
+        /// <summary>
+        /// ddlSpecification control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSpecification;
+        
+        /// <summary>
+        /// txtPIRTDC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPIRTDC;
         
         /// <summary>
         /// pMa control.
@@ -758,6 +1352,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbDownload;
+        
+        /// <summary>
+        /// litDownloadIcon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litDownloadIcon;
         
         /// <summary>
         /// lbDesc control.

@@ -26,6 +26,24 @@ namespace ALS.ALSI.Biz.DataAccess
         public string col_f { get; set; }
         public string col_g { get; set; }
         public string col_h { get; set; }
+        public string col_i { get; set; }
+        public string col_j { get; set; }
+        public string col_k { get; set; }
+        public string col_l { get; set; }
+        public string col_m { get; set; }
+        public string col_n { get; set; }
+        public string col_o { get; set; }
+        public string col_p { get; set; }
+        public string col_q { get; set; }
+        public string col_r { get; set; }
+        public string col_s { get; set; }
+        public string col_t { get; set; }
+        public string col_u { get; set; }
+        public string col_v { get; set; }
+        public string col_w { get; set; }
+        public string col_x { get; set; }
+        public string col_y { get; set; }
+        public string col_z { get; set; }
         public Nullable<int> row_type { get; set; }
         public Nullable<int> row_status { get; set; }
     }

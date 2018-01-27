@@ -144,8 +144,6 @@
       <DependentUpon>ALSI.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\Component.cs" />
-    <Compile Include="DataAccess\MMicroscopicAnalysis.cs" />
-    <Compile Include="DataAccess\MEvaluationOfParticles.cs" />
     <Compile Include="DataAccess\job_info.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -161,13 +159,15 @@
     <Compile Include="DataAccess\job_sample_logs.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\McustomerAddress.cs" />
     <Compile Include="DataAccess\menu.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\menu_role.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\MMicroscopicAnalysis.cs" />
+    <Compile Include="DataAccess\MEvaluationOfParticles.cs" />
+    <Compile Include="DataAccess\McustomerAddress.cs" />
     <Compile Include="DataAccess\MGcmsCas.cs" />
     <Compile Include="DataAccess\MUnit.cs" />
     <Compile Include="DataAccess\m_completion_scheduled.cs">

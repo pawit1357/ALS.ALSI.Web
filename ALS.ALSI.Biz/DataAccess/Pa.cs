@@ -26,7 +26,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public template_pa SelectByID(int _id)
         {
-            return _repository.First(x => x.sample_id == _id);
+            return _repository.Find(x => x.sample_id == _id).FirstOrDefault();
         }
 
         public void Insert()
@@ -45,6 +45,15 @@ namespace ALS.ALSI.Biz.DataAccess
             _repository.Delete(this);
         }
 
+        public static void DeleteBySampleID(int _sampleID)
+        {
+            template_pa template_pa = _repository.Find(x => x.sample_id == _sampleID).FirstOrDefault();
+            if (template_pa != null)
+            {
+                _repository.Delete(template_pa);
+            }
+
+        }
 
         public static void CloneData(int oldSampleId, int newSampleId)
         {

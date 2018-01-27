@@ -191,7 +191,9 @@ namespace ALS.ALSI.Biz.Constant
         EVALUATION_OF_PARTICLES = 1,
         GRAVIMETRY = 2,
         MICROSCOPIC_ANALLYSIS = 3,
-        DOUBLE_ANALYSIS = 4
+        DOUBLE_ANALYSIS = 4,
+        DISSOLVING = 5,
+        WASHING = 6
     }
     public enum ResultEnum
     {

@@ -179,7 +179,7 @@ namespace ALS.ALSI.Web.view.template
                     case CommandNameEnum.Edit:
                         break;
                 }
-            if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".xls") || Path.GetExtension(FileUpload1.FileName).Equals(".xlt")))
+            if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".xls") || Path.GetExtension(FileUpload1.FileName).Equals(".xlt") || Path.GetExtension(FileUpload1.FileName).Equals(".xlsx")))
             {
                 String _pathSourceFile = String.Format(Configurations.PATH_TEMPLATE, FileUpload1.FileName);
                 String _phisicalPath = String.Format(Configurations.PATH_TEMPLATE, String.Empty);
@@ -513,9 +513,165 @@ namespace ALS.ALSI.Web.view.template
                             //new tb_m_specification().DeleteByTemplateID(template_id);
                             new tb_m_specification().InsertList(specifications);
                         }
-                        #endregion
+                    #endregion
+
+                    #region "Specification No."
+                    ISheet isSpecificationNo = wd.GetSheet("Specification No.");
+                    if (isSpecificationNo != null)
+                    {
+                        List<tb_m_specification> specifications = new List<tb_m_specification>();
+                        for (int row = 0; row <= isSpecificationNo.LastRowNum; row++)
+                        {
+                            if (isSpecificationNo.GetRow(row) != null) //null is when the row only contains empty cells 
+                            {
+                                tb_m_specification specification = new tb_m_specification();
+                                specification.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                                specification.template_id = template_id;
+                                specification.A = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(0));
+                                specification.B = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(1));
+                                specification.C = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(2));
+                                specification.D = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(3));
+                                specification.E = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(4));
+                                specification.F = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(5));
+                                specification.G = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(6));
+                                specification.H = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(7));
+                                specification.I = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(8));
+                                specification.J = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(9));
+                                specification.K = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(10));
+                                specification.L = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(11));
+                                specification.M = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(12));
+                                specification.N = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(13));
+                                specification.O = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(14));
+                                specification.P = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(15));
+                                specification.Q = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(16));
+                                specification.R = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(17));
+                                specification.S = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(18));
+                                specification.T = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(19));
+                                specification.U = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(20));
+                                specification.V = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(21));
+                                specification.W = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(22));
+                                specification.X = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(23));
+                                specification.Y = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(24));
+                                specification.Z = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(25));
+
+                                specification.AA = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(26));
+                                specification.AB = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(27));
+                                specification.AC = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(28));
+                                specification.AD = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(29));
+                                specification.AE = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(30));
+                                specification.AF = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(31));
+                                specification.AG = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(32));
+                                specification.AH = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(33));
+                                specification.AI = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(34));
+                                specification.AJ = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(35));
+
+                                specification.AK = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(36));
+                                specification.AL = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(37));
+                                specification.AM = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(38));
+                                specification.AN = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(39));
+                                specification.AO = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(40));
+                                specification.AP = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(41));
+                                specification.AQ = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(42));
+                                specification.AR = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(43));
+                                specification.AS = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(44));
+                                specification.AT = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(45));
+                                specification.AU = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(46));
+                                specification.AV = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(47));
+                                specification.AW = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(48));
+                                specification.AX = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(49));
+                                specification.AY = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(50));
+                                specification.AZ = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(51));
+
+
+                                specification.RowState = CommandNameEnum.Add;
+                                specifications.Add(specification);
+                            }
+                        }
+                        //Delete
+                        //new tb_m_specification().DeleteByTemplateID(template_id);
+                        new tb_m_specification().InsertList(specifications);
                     }
-                
+                    #endregion
+                    #region "PA-DROPDOWN"
+                    ISheet isPaDropdown = wd.GetSheet("Drop down");
+                    if (isPaDropdown != null)
+                    {
+                        List<tb_m_specification> specifications = new List<tb_m_specification>();
+                        for (int row = 0; row <= isPaDropdown.LastRowNum; row++)
+                        {
+                            if (isPaDropdown.GetRow(row) != null) //null is when the row only contains empty cells 
+                            {
+                                tb_m_specification specification = new tb_m_specification();
+                                specification.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                                specification.template_id = template_id;
+                                specification.A = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(0));
+                                specification.B = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(1));
+                                specification.C = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(2));
+                                specification.D = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(3));
+                                specification.E = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(4));
+                                specification.F = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(5));
+                                specification.G = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(6));
+                                specification.H = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(7));
+                                specification.I = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(8));
+                                specification.J = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(9));
+                                specification.K = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(10));
+                                specification.L = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(11));
+                                specification.M = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(12));
+                                specification.N = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(13));
+                                specification.O = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(14));
+                                specification.P = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(15));
+                                specification.Q = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(16));
+                                specification.R = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(17));
+                                specification.S = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(18));
+                                specification.T = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(19));
+                                specification.U = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(20));
+                                specification.V = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(21));
+                                specification.W = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(22));
+                                specification.X = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(23));
+                                specification.Y = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(24));
+                                specification.Z = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(25));
+
+                                specification.AA = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(26));
+                                specification.AB = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(27));
+                                specification.AC = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(28));
+                                specification.AD = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(29));
+                                specification.AE = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(30));
+                                specification.AF = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(31));
+                                specification.AG = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(32));
+                                specification.AH = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(33));
+                                specification.AI = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(34));
+                                specification.AJ = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(35));
+                                                                            
+                                specification.AK = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(36));
+                                specification.AL = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(37));
+                                specification.AM = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(38));
+                                specification.AN = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(39));
+                                specification.AO = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(40));
+                                specification.AP = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(41));
+                                specification.AQ = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(42));
+                                specification.AR = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(43));
+                                specification.AS = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(44));
+                                specification.AT = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(45));
+                                specification.AU = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(46));
+                                specification.AV = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(47));
+                                specification.AW = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(48));
+                                specification.AX = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(49));
+                                specification.AY = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(50));
+                                specification.AZ = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(51));
+
+
+                                specification.RowState = CommandNameEnum.Add;
+                                specifications.Add(specification);
+                            }
+                        }
+                        //Delete
+                        //new tb_m_specification().DeleteByTemplateID(template_id);
+                        new tb_m_specification().InsertList(specifications);
+                    }
+                    #endregion
+
+                }
+
 
 
                 bUploadSuccess = true;

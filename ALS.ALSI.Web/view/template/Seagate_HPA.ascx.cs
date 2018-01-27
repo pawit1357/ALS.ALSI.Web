@@ -1208,6 +1208,9 @@ namespace ALS.ALSI.Web.view.template
         private void CalculateCas()
         {
 
+            List<String> ignoreItemList = new List<string>();
+            ignoreItemList.Add("NiP with AlMgSi");
+
             #region "US-LPC(0.3)"
             //=AVERAGE(B15,B16,B17)
             if (!String.IsNullOrEmpty(txt_UsLPC03_B15.Text) &&
@@ -1506,22 +1509,24 @@ namespace ALS.ALSI.Web.view.template
 
                 foreach (template_seagate_hpa_coverpage _cov in this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD)))
                 {
-                    Double _BlankCouts = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.BlankCouts);
-                    Double _RawCounts = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.RawCounts);
-                    Double _sumC = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => Convert.ToDouble(x.C));
+                    Double _BlankCouts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.BlankCouts);
+                    Double _RawCounts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.RawCounts);
+                    Double _sumC = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => Convert.ToDouble(x.C));
 
                     template_seagate_hpa_coverpage tmp = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) && x.data_group.Equals(_cov.data_group)).FirstOrDefault();
                     if (tmp != null)
                     {
+
+                        
                         tmp.BlankCouts = Convert.ToInt32(_BlankCouts);
                         tmp.RawCounts = Convert.ToInt32(_RawCounts);
                         tmp.C = _sumC + "";
                     }
                 }
 
-                Double _GrandBlankCouts = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => x.BlankCouts);
-                Double _GrandRawCounts = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => x.RawCounts);
-                Double _GrandsumC = (Double)this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => Convert.ToDouble(x.C));
+                Double _GrandBlankCouts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => x.BlankCouts);
+                Double _GrandRawCounts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => x.RawCounts);
+                Double _GrandsumC = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => Convert.ToDouble(x.C));
 
                 template_seagate_hpa_coverpage tmpGrand = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).FirstOrDefault();
                 if (tmpGrand != null)

@@ -238,6 +238,33 @@ namespace ALS.ALSI.Web.view.request {
         protected global::System.Web.UI.WebControls.TextBox txtRemark;
         
         /// <summary>
+        /// txtPartNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPartNo;
+        
+        /// <summary>
+        /// txtPartName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPartName;
+        
+        /// <summary>
+        /// txtLotNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLotNo;
+        
+        /// <summary>
         /// rdUncertaintyYes control.
         /// </summary>
         /// <remarks>

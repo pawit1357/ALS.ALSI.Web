@@ -53,6 +53,7 @@ namespace ALS.ALSI.Web.view.request
                 job.status_test_tool = rdTest_toolYes.Checked ? "Y" : "N";
                 job.status_test_method = rdTest_methodYes.Checked ? "Y" : "N";
 
+                
 
 
                 job.create_by = userLogin.id;
@@ -582,6 +583,10 @@ namespace ALS.ALSI.Web.view.request
                         jobSample.update_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
                         jobSample.update_by = userLogin.id;
                         jobSample.is_hold = "0";//0=Unhold
+                        jobSample.part_no = txtPartNo.Text;
+                        jobSample.part_no = txtPartNo.Text;
+                        jobSample.lot_no = txtLotNo.Text;
+
                         #region "Special Flow"
 
                         /*
@@ -634,11 +639,10 @@ namespace ALS.ALSI.Web.view.request
                         m_completion_scheduled cs = new m_completion_scheduled().SelectByID(Convert.ToInt32(jobSample.status_completion_scheduled));
                         if (cs != null)
                         {
-                            if (objJobInfo != null)
-                            {
-                                jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value)-1);
-                                jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date)-1);
-                                jobSample.due_date_lab = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date)-1);
+                            if (objJobInfo != null) { 
+                                jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
+                                jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date));
+                                jobSample.due_date_lab = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date));
                             }
                         }
                         else
