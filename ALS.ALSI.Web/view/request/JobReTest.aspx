@@ -91,9 +91,13 @@
                                 <asp:ListItem Value="1" Selected="True">&nbsp;&nbsp;ใช่</asp:ListItem>
                                 <asp:ListItem Value="0">&nbsp;&nbsp;ไม่</asp:ListItem>
                             </asp:RadioButtonList>
-
                         </div>
-
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Status:<span class="required">*</span></label>
+                        <div class="col-md-6">
+                            <asp:DropDownList ID="ddlStatus" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID"></asp:DropDownList>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
@@ -101,6 +105,11 @@
                             <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                     </div>
+
+
+
+
+
                     <div class="row">
                         <div class="form-actions">
                             <div class="row">

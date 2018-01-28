@@ -83,7 +83,7 @@ namespace ALS.ALSI.Biz.ReportObjects
 
                 //ATT / ELP / 16 / XXXX(เลขจ็อบ) - XX(Test)
                 String[] tmp = _sample.job_number.Split('-');
-                rpt.alsRefNo = String.Format("ATT/{0}/{1}/{2}-{3}", tmp[0], DateTime.Now.ToString("yy"), tmp[1], tmp[2]);// _sample.job_number.ToString();
+                rpt.alsRefNo = String.Format("{4}ATT/{0}/{1}/{2}-{3}", tmp[0], DateTime.Now.ToString("yy"), tmp[1], tmp[2],(_sample.amend_count>0? (_sample.amend_count == 1 ? "AM/":"AM/"+ _sample.amend_count) :""));// _sample.job_number.ToString();
                 rpt.description = "Description:" + _sample.description + "\n" +
                                   "Model:" + _sample.model + "\n" +
                                   "Surface Area:" + _sample.surface_area + "\n"+

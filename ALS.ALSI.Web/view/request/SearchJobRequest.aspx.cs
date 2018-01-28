@@ -347,8 +347,8 @@ namespace ALS.ALSI.Web.view.request
                     DateTime due_date_customer = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][12]);
                     DateTime due_date_lab = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][13]);
 
-                    String am = (Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]) == 0) ? String.Empty : String.Format("AM{0}", Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]) + 1);
-                    String r = (Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]) == 0) ? String.Empty : String.Format("R{0}", Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]) + 1);
+                    String am = (Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]) == 0) ? String.Empty : String.Format("AM{0}", Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]));
+                    String r = (Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]) == 0) ? String.Empty : String.Format("R{0}", Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]));
 
 
 

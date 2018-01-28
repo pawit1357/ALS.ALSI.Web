@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Linq;
 
 namespace ALS.ALSI.Web.view.request
 {
@@ -63,6 +65,19 @@ namespace ALS.ALSI.Web.view.request
 
         private void initialPage()
         {
+            IEnumerable<m_status> listOfStatus = new m_status().SelectByMainStatus();
+            List<String> status = new List<String>();
+            status.Add("ADMIN_CONVERT_WORD");
+            status.Add("LOGIN_SELECT_SPEC");
+            status.Add("CHEMIST_TESTING");
+            
+
+
+            ddlStatus.Items.Clear();
+            ddlStatus.DataSource = listOfStatus.Where(x=> status.Contains(x.name));
+            ddlStatus.DataBind();
+            ddlStatus.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
+
             fillinScreen();
             btnSave.Enabled = true;
             btnCancel.Enabled = true;
@@ -171,19 +186,22 @@ namespace ALS.ALSI.Web.view.request
                     break;
             }
 
-            switch (rdEditData.SelectedValue)
-            {
-                case "0"://NO
-                    newSample.job_status = Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC);
-                    break;
-                case "1"://YES
-                    newSample.job_status = Convert.ToInt16(StatusEnum.CHEMIST_TESTING);
-                    break;
-            }
+            newSample.job_status = Convert.ToInt16(ddlStatus.SelectedValue);
+            //switch (rdEditData.SelectedValue)
+            //{
+            //    case "0"://NO
+            //        newSample.job_status = Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC);
+            //        break;
+            //    case "1"://YES
+            //        newSample.job_status = Convert.ToInt16(StatusEnum.CHEMIST_TESTING);
+            //        break;
+            //}
 
-            oldSample.path_pdf = String.Empty;
-            oldSample.path_word = String.Empty;
 
+            //oldSample.path_pdf = String.Empty;
+            //oldSample.path_word = String.Empty;
+            newSample.path_pdf = String.Empty;
+            newSample.path_word = String.Empty;
             newSample.Insert();
             oldSample.Update();
 

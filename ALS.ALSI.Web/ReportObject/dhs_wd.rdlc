@@ -4711,39 +4711,10 @@
               </RightBorder>
             </Style>
           </Tablix>
-          <Subreport Name="reportHeader">
-            <ReportName>reportHeader</ReportName>
-            <Parameters>
-              <Parameter Name="CustomerPoNo">
-                <Value>=Parameters!CustomerPoNo.Value</Value>
-              </Parameter>
-              <Parameter Name="AlsThailandRefNo">
-                <Value>=Parameters!AlsThailandRefNo.Value</Value>
-              </Parameter>
-              <Parameter Name="Date">
-                <Value>=Parameters!Date.Value</Value>
-              </Parameter>
-              <Parameter Name="Company">
-                <Value>=Parameters!Company.Value</Value>
-              </Parameter>
-              <Parameter Name="Company_addr">
-                <Value>=Parameters!Company_addr.Value</Value>
-              </Parameter>
-              <Parameter Name="DateSampleReceived">
-                <Value>=Parameters!DateSampleReceived.Value</Value>
-              </Parameter>
-              <Parameter Name="DateAnalyzed">
-                <Value>=Parameters!DateAnalyzed.Value</Value>
-              </Parameter>
-              <Parameter Name="DateTestCompleted">
-                <Value>=Parameters!DateTestCompleted.Value</Value>
-              </Parameter>
-              <Parameter Name="SampleDescription">
-                <Value>=Parameters!SampleDescription.Value</Value>
-              </Parameter>
-            </Parameters>
-            <Height>1.34069in</Height>
-            <Width>6.97484in</Width>
+          <Subreport Name="Subreport2">
+            <ReportName>ReportHeader</ReportName>
+            <Height>1.3268in</Height>
+            <Width>6.93185in</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
