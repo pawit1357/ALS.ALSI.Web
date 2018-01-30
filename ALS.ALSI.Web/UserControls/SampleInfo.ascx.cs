@@ -25,7 +25,7 @@ namespace ALS.ALSI.Web.UserControls
 
 
 
-                lbRefNo.Text = String.Format("{4}/ATT/{0}/{1}/{2}-{3}", tmp[0], DateTime.Now.ToString("yy"), tmp[1], tmp[2], (_sample.amend_count > 0 ? (_sample.amend_count == 1 ? "AM" : "AM" + _sample.amend_count) : ""));
+                lbRefNo.Text = String.Format("{4}ATT/{0}/{1}/{2}-{3}", tmp[0], _job.date_of_receive.Value.ToString("yy"), tmp[1], tmp[2], (_sample.amend_count > 0 ? (_sample.amend_count == 1 ? "AM/" : "AM/" + _sample.amend_count) : ""));
 
                 ////String.Format("AM/ATT/ELP/17/XXXX-XX")
                 //lbDownloadName.Text = _sample.job_number.ToString();
