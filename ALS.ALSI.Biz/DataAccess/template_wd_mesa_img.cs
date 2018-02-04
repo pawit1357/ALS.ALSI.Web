@@ -16,6 +16,7 @@ namespace ALS.ALSI.Biz.DataAccess
     {
         public int id { get; set; }
         public Nullable<int> sample_id { get; set; }
+        public Nullable<int> seq { get; set; }
         public Nullable<int> area { get; set; }
         public string descripton { get; set; }
         public string path_sem_image_at_250x { get; set; }

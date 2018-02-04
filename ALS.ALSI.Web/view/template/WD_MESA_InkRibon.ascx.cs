@@ -704,7 +704,7 @@ namespace ALS.ALSI.Web.view.template
             string encoding = string.Empty;
             string extension = string.Empty;
 
-            List<template_wd_mesa_img> dat = this.refImg;
+            List<template_wd_mesa_img> dat = this.refImg.OrderByDescending(x => x.id).ToList();
             foreach (template_wd_mesa_img _i in dat)
             {
                 _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
@@ -716,13 +716,75 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_ink_ribbon_wd.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_idm_wd.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dat.Where(x => x.area == 1).ToList().ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dat.Where(x => x.area == 2).ToList().ToDataTable())); // Add datasource here
+
+            List<template_wd_mesa_img> tmp = new List<template_wd_mesa_img>();
+            DataTable dt1 = new DataTable();
+            DataTable dt2 = new DataTable();
+            DataTable dt3 = new DataTable();
+            DataTable dt4 = new DataTable();
+
+            if (dat.Count == 2)
+            {
+                tmp.Add(dat[0]);
+                dt1 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[1]);
+                dt2 = tmp.ToDataTable();
+            }
+            else if (dat.Count == 4)
+            {
+                tmp.Add(dat[0]);
+                dt1 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[2]);
+                dt2 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[1]);
+                dt3 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[3]);
+                dt4 = tmp.ToDataTable();
+            }
 
 
+            if (dt1 != null && dt1.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt1)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+
+            }
+            if (dt2 != null && dt2.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt2)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+
+            }
+            if (dt3 != null && dt3.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt3)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+
+            }
+            if (dt4 != null && dt4.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", dt4)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+            }
 
             string download = String.Empty;
 

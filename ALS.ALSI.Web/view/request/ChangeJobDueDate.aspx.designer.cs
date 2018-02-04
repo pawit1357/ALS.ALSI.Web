@@ -8,10 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace ALS.ALSI.Web.view.request {
-
-
-    public partial class ChangeJobDueDate
-    {
+    
+    
+    public partial class ChangeJobDueDate {
         
         /// <summary>
         /// Form1 control.
@@ -39,6 +38,15 @@ namespace ALS.ALSI.Web.view.request {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDuedate;
+        
+        /// <summary>
+        /// txtCustomerDuedate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerDuedate;
         
         /// <summary>
         /// txtRemark control.

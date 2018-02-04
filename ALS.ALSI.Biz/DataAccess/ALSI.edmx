@@ -724,6 +724,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sample_id" Type="int" />
+          <Property Name="seq" Type="int" />
           <Property Name="evaluation_of_particles_id" Type="int" />
           <Property Name="microscopic_analysis_id" Type="int" />
           <Property Name="col_a" Type="varchar" MaxLength="255" />
@@ -1593,6 +1594,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sample_id" Type="int" />
+          <Property Name="seq" Type="int" />
           <Property Name="area" Type="int" />
           <Property Name="descripton" Type="varchar" MaxLength="255" />
           <Property Name="path_sem_image_at_250x" Type="varchar" MaxLength="255" />
@@ -2755,6 +2757,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sample_id" Type="Int32" />
+          <Property Name="seq" Type="Int32" />
           <Property Name="evaluation_of_particles_id" Type="Int32" />
           <Property Name="microscopic_analysis_id" Type="Int32" />
           <Property Name="col_a" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -3625,6 +3628,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sample_id" Type="Int32" />
+          <Property Name="seq" Type="Int32" />
           <Property Name="area" Type="Int32" />
           <Property Name="descripton" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="path_sem_image_at_250x" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -4604,6 +4608,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="col_a" ColumnName="col_a" />
                 <ScalarProperty Name="microscopic_analysis_id" ColumnName="microscopic_analysis_id" />
                 <ScalarProperty Name="evaluation_of_particles_id" ColumnName="evaluation_of_particles_id" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -5473,6 +5478,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="path_sem_image_at_250x" ColumnName="path_sem_image_at_250x" />
                 <ScalarProperty Name="descripton" ColumnName="descripton" />
                 <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

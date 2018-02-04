@@ -198,7 +198,7 @@ namespace ALS.ALSI.Web.view.template
             this.refImg = template_wd_mesa_img.FindAllBySampleID(this.SampleID);
             if (this.refImg != null && this.refImg.Count > 0)
             {
-                gvRefImages.DataSource = this.refImg;
+                gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
                 gvRefImages.DataBind();
             }
             if (this.coverpages != null && this.coverpages.Count > 0)
@@ -649,6 +649,8 @@ namespace ALS.ALSI.Web.view.template
         protected void gvResult_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvResult.EditIndex = -1;
+            gvResult.DataSource = this.coverpages;
+            gvResult.DataBind();
         }
 
         protected void gvResult_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -698,7 +700,8 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
-            reportParameters.Add(new ReportParameter("ResultDesc", "-"));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+
 
             // Variables
             Warning[] warnings;
@@ -707,7 +710,7 @@ namespace ALS.ALSI.Web.view.template
             string encoding = string.Empty;
             string extension = string.Empty;
 
-            List<template_wd_mesa_img> dat = this.refImg;
+            List<template_wd_mesa_img> dat = this.refImg.OrderBy(x=>x.seq).ToList();
             foreach (template_wd_mesa_img _i in dat)
             {
                 _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
@@ -722,9 +725,73 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_idm_wd.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dat.Where(x => x.area == 1).ToList().ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dat.Where(x => x.area == 2).ToList().ToDataTable())); // Add datasource here
 
+            List<template_wd_mesa_img> tmp = new List<template_wd_mesa_img>();
+            DataTable dt1 = new DataTable();
+            DataTable dt2 = new DataTable();
+            DataTable dt3 = new DataTable();
+            DataTable dt4 = new DataTable();
+
+            if (dat.Count == 2)
+            {
+                tmp.Add(dat[0]);
+                dt1 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[1]);
+                dt2 = tmp.ToDataTable();
+            }
+            else if (dat.Count == 4)
+            {
+                tmp.Add(dat[0]);
+                dt1 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[1]);
+                dt2 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[2]);
+                dt3 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[3]);
+                dt4 = tmp.ToDataTable();
+            }
+
+
+            if(dt1!=null && dt1.Rows.Count > 0) { 
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt1)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+
+            }
+            if (dt2 != null && dt2.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt2)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+
+            }
+            if (dt3 != null && dt3.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt3)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+
+            }
+            if (dt4 != null && dt4.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", dt4)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+            }
+
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6",this.coverpages.Where(x=>!x.location_of_parts.Equals("-")))); // Add datasource here
 
 
             string download = String.Empty;
@@ -812,70 +879,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
-
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-
-
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "-"));
-            reportParameters.Add(new ReportParameter("ResultDesc", "-"));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-            List<template_wd_mesa_img> dat = this.refImg;
-            foreach (template_wd_mesa_img _i in dat)
-            {
-                _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
-                _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
-                _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
-                _i.img4 = CustomUtils.GetBytesFromImage(_i.path_edx_spectrum);
-            }
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_idm_wd_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dat.Where(x => x.area == 1).ToList().ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dat.Where(x => x.area == 2).ToList().ToDataTable())); // Add datasource here
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-
-        }
+        
         private void downloadWord()
         {
             HttpContext.Current.Response.Clear();
@@ -906,6 +910,7 @@ namespace ALS.ALSI.Web.view.template
             _img.sample_id = this.SampleID;
             _img.area = Convert.ToInt32(ddlArea.SelectedValue);
             _img.descripton = txtDesc.Text;
+            _img.seq = this.refImg.Count;
             if (!String.IsNullOrEmpty(txtDesc.Text))
             {
 
@@ -997,7 +1002,7 @@ namespace ALS.ALSI.Web.view.template
                     ddlArea.SelectedIndex = -1;
                     txtDesc.Text = string.Empty;
                 }
-                gvRefImages.DataSource = this.refImg;
+                gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
                 gvRefImages.DataBind();
             }
         }
@@ -1018,7 +1023,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
 
                     }
-                    gvRefImages.DataSource = this.refImg;
+                    gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
                     gvRefImages.DataBind();
                 }
             }
@@ -1029,6 +1034,44 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+
+        protected void gvRefImages_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvRefImages.EditIndex = e.NewEditIndex;
+            gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
+            gvRefImages.DataBind();
+
+        }
+
+        protected void gvRefImages_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq);
+            gvRefImages.DataBind();
+        }
+
+        protected void gvRefImages_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+
+            int _id = Convert.ToInt32(gvRefImages.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txtSeq = (TextBox)gvRefImages.Rows[e.RowIndex].FindControl("txtSeq");
+            Console.WriteLine();
+            if (txtSeq != null)
+            {
+                template_wd_mesa_img _tmp = this.refImg.Find(x => x.id == _id);
+                if (_tmp != null)
+                {
+                    if (CustomUtils.isNumber(txtSeq.Text)) { 
+                    _tmp.seq = (String.IsNullOrEmpty(txtSeq.Text))? 0:Convert.ToInt32(txtSeq.Text);
+                    }
+
+                }
+            }
+
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
+            gvRefImages.DataBind();
+        }
 
         protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -1084,6 +1127,7 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
         }
+
         protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (cbCheckBox.Checked)

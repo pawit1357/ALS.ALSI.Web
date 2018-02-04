@@ -151,7 +151,9 @@ namespace ALS.ALSI.Biz.Constant
         Inactive = 32,
         Sort = 33,
         Hold = 34,
-        UnHold = 35
+        UnHold = 35,
+        Up = 36,
+        Down = 37
     }
 
     public enum RowTypeEnum : int

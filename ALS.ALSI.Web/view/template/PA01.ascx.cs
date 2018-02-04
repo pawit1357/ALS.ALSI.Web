@@ -169,7 +169,7 @@ namespace ALS.ALSI.Web.view.template
             this.tbMSpecifications = new tb_m_specification().SelectBySpecificationID(this.jobSample.specification_id, this.jobSample.template_id);
             #region "Initial component"
             ddlSpecification.Items.Clear();
-            ddlSpecification.DataSource = tb_m_specification.getDistinctValue(this.tbMSpecifications.Where(x => x.A.Equals("Evaluation of Particle:")).ToList());
+            ddlSpecification.DataSource = tb_m_specification.getDistinctValue(this.tbMSpecifications.Where(x => x.A.Equals("Micropic Data:")).ToList());
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
@@ -372,25 +372,25 @@ namespace ALS.ALSI.Web.view.template
                 }
                 #endregion
                 #region "gvMicroscopicAnalysis"
-                listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Micropic Data:") && x.B.Equals(ddlSpecification.SelectedItem.Text)).ToList();
-                if (listOfSpec.Count > 1)
-                {
-                    cols = tb_m_specification.findColumnCount(listOfSpec[1]);
-                    for (int i = 0; i < cols.Count; i++)
-                    {
-                        gvMicroscopicAnalysis.Columns[i].HeaderText = cols[i];
-                        gvMicroscopicAnalysis.Columns[i].Visible = true;
-                    }
-                    gvMicroscopicAnalysis.Visible = true;
-                }
-                else
-                {
-                    for (int i = 0; i < 15; i++)
-                    {
-                        gvMicroscopicAnalysis.Columns[i].Visible = false;
-                    }
-                    gvMicroscopicAnalysis.Visible = false;
-                }
+                //listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Micropic Data:") && x.B.Equals(ddlSpecification.SelectedItem.Text)).ToList();
+                //if (listOfSpec.Count > 1)
+                //{
+                //    cols = tb_m_specification.findColumnCount(listOfSpec[1]);
+                //    for (int i = 0; i < cols.Count; i++)
+                //    {
+                //        gvMicroscopicAnalysis.Columns[i].HeaderText = cols[i];
+                //        gvMicroscopicAnalysis.Columns[i].Visible = true;
+                //    }
+                //    gvMicroscopicAnalysis.Visible = true;
+                //}
+                //else
+                //{
+                //    for (int i = 0; i < 15; i++)
+                //    {
+                //        gvMicroscopicAnalysis.Columns[i].Visible = false;
+                //    }
+                //    gvMicroscopicAnalysis.Visible = false;
+                //}
                 #endregion
                 #region "gvDissolving"
 
@@ -482,11 +482,26 @@ namespace ALS.ALSI.Web.view.template
                 //gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
                 //gvGravimetry.DataBind();
             }
-            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
-                gvMicroscopicAnalysis.DataSource = listPaDetail;
-                gvMicroscopicAnalysis.DataBind();
+                switch (ddlSpecification.SelectedItem.Text)
+                {
+                    case "PA_01_05x":
+                        gvMicroscopicAnalysis.Visible = true;
+                        gvMicroscopicAnalysis2.Visible = false;
+                        gvMicroscopicAnalysis.DataSource = listPaDetail;
+                        gvMicroscopicAnalysis.DataBind();
+                        break;
+                    case "PA_02_05x":
+                        gvMicroscopicAnalysis.Visible = false;
+                        gvMicroscopicAnalysis2.Visible = true;
+                        gvMicroscopicAnalysis2.DataSource = listPaDetail;
+                        gvMicroscopicAnalysis2.DataBind();
+                        break;
+                }
+
+
             }
             listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
@@ -500,6 +515,7 @@ namespace ALS.ALSI.Web.view.template
                 gvWashing.DataSource = listPaDetail;
                 gvWashing.DataBind();
             }
+
 
         }
 
@@ -902,11 +918,8 @@ namespace ALS.ALSI.Web.view.template
                             if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("ClassTable_FromNumber_FeretMaximum"))
                             {
                                 lbPermembrane.Text = String.Empty;
-                                foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList())
-                                {
-                                    paDetail.Remove(pd);
-                                }
 
+                                int numberOfComponents = !String.IsNullOrEmpty(txtNumberOfComponents.Text) ? Convert.ToInt32(txtNumberOfComponents.Text) : 0;
                                 List<char> cols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
                                 DataTable table = new DataTable();
                                 foreach (char c in cols)
@@ -940,29 +953,67 @@ namespace ALS.ALSI.Web.view.template
                                         row++;
                                     }
                                 }
-                                for (int r = 1; r < table.Columns.Count; r++)
+
+                                switch (ddlSpecification.SelectedItem.Text)
                                 {
+                                    case "PA_01_05x":
+                                        for (int r = 1; r < table.Columns.Count; r++)
+                                        {
+                                            template_pa_detail pad = paDetail.Where(x => x.col_d.Equals(table.Rows[0][r].ToString().Replace("\"", ""))).FirstOrDefault();
+                                            if (pad != null)
+                                            {
+                                                pad.col_e = table.Rows[2][r].ToString().Replace("\"", "");
+                                                pad.col_f = table.Rows[4][r].ToString().Replace("\"", "");
+                                                pad.col_g = table.Rows[3][r].ToString().Replace("\"", "");
+                                                pad.col_h = table.Rows[5][r].ToString().Replace("\"", "");
+                                                //
+                                                pad.col_i = (Convert.ToInt32(pad.col_e) / numberOfComponents).ToString("N1");
+                                                pad.col_j = (Convert.ToInt32(pad.col_f) / numberOfComponents).ToString("N1");
+                                                pad.col_k = (Convert.ToInt32(pad.col_g) / numberOfComponents).ToString("N1");
+                                                pad.col_l = (Convert.ToInt32(pad.col_h) / numberOfComponents).ToString("N1");
+                                                //
+                                                //pad.col_m
+                                                //pad.col_n
+                                                //pad.col_o
+                                                //pad.col_p
+                                                Console.WriteLine();
+                                            }
+                                        }
+                                        break;
+                                    case "PA_02_05x":
+                                        List<template_pa_detail> pads = paDetail.Where(x => x.col_a != null && x.col_a.Equals("Micropic Data:")).ToList();
+                                        if (pads != null && pads.Count > 0)
+                                        {
+                                            pads[0].col_d = table.Rows[2][1].ToString().Replace("\"", "");
+                                            pads[0].col_e = table.Rows[2][2].ToString().Replace("\"", "");
+                                            pads[0].col_f = table.Rows[2][3].ToString().Replace("\"", "");
+                                            pads[0].col_g = table.Rows[2][4].ToString().Replace("\"", "");
+                                            pads[0].col_h = table.Rows[2][5].ToString().Replace("\"", "");
+                                            pads[0].col_i = table.Rows[2][6].ToString().Replace("\"", "");
+                                            pads[0].col_j = table.Rows[2][7].ToString().Replace("\"", "");
+                                            pads[0].col_k = table.Rows[2][8].ToString().Replace("\"", "");
+                                            pads[0].col_l = table.Rows[2][9].ToString().Replace("\"", "");
+                                            pads[0].col_m = table.Rows[2][10].ToString().Replace("\"", "");
 
-                                    template_pa_detail tmp = new template_pa_detail();
-                                    tmp.id = CustomUtils.GetRandomNumberID();
-                                    tmp.col_a = table.Rows[0][r].ToString().Replace("\"", "");
-                                    tmp.col_b = table.Rows[1][r].ToString().Replace("\"", "");
-                                    tmp.col_c = table.Rows[2][r].ToString().Replace("\"", "");
-                                    tmp.col_d = table.Rows[3][r].ToString().Replace("\"", "");
-
-                                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-                                    tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
-                                    if (!tmp.col_a.Equals(""))
-                                    {
-                                        //tmp.col_e = (Convert.ToDouble(tmp.col_c) / Convert.ToDouble(txtParticleSize01.Text)).ToString("N2");
-                                        //tmp.col_f = (Convert.ToDouble(tmp.col_d) / Convert.ToDouble(txtParticleSize01.Text)).ToString("N2");
-                                        //tmp.col_g = ((Convert.ToDouble(tmp.col_c) / Convert.ToDouble(txtParticleSize02.Text)) * Convert.ToDouble(txtParticleSize03.Text)).ToString("N0");
-                                        //tmp.col_h = ((Convert.ToDouble(tmp.col_d) / Convert.ToDouble(txtParticleSize02.Text)) * Convert.ToDouble(txtParticleSize03.Text)).ToString("N0");
-                                        lbPermembrane.Text += string.Format("{0}{1}/", tmp.col_a, tmp.col_c);
-                                        paDetail.Add(tmp);
-                                    }
+                                            pads[1].col_d = table.Rows[4][1].ToString().Replace("\"", "");
+                                            pads[1].col_e = table.Rows[4][2].ToString().Replace("\"", "");
+                                            pads[1].col_f = table.Rows[4][3].ToString().Replace("\"", "");
+                                            pads[1].col_g = table.Rows[4][4].ToString().Replace("\"", "");
+                                            pads[1].col_h = table.Rows[4][5].ToString().Replace("\"", "");
+                                            pads[1].col_i = table.Rows[4][6].ToString().Replace("\"", "");
+                                            pads[1].col_j = table.Rows[4][7].ToString().Replace("\"", "");
+                                            pads[1].col_k = table.Rows[4][8].ToString().Replace("\"", "");
+                                            pads[1].col_l = table.Rows[4][9].ToString().Replace("\"", "");
+                                            pads[1].col_m = table.Rows[4][10].ToString().Replace("\"", "");
+                                            Console.WriteLine();
+                                        }
+                                        break;
                                 }
-                                lbPermembrane.Text = lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1);
+
+
+
+
+                                //lbPermembrane.Text = lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1);
                             }
                         }
                         else
@@ -1408,40 +1459,46 @@ namespace ALS.ALSI.Web.view.template
         {
             try
             {
-                //GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
-                //TableHeaderCell cell = new TableHeaderCell();
-                //cell.Text = "";
-                //cell.ColumnSpan = 1;
-                //row.Controls.Add(cell);
+                GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+                TableHeaderCell cell = new TableHeaderCell();
+                cell.Text = "";
+                cell.RowSpan = 1;
+                row.Controls.Add(cell);
 
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 1;
-                //cell.Text = "";
-                //row.Controls.Add(cell);
+                cell = new TableHeaderCell();
+                cell.RowSpan = 1;
+                cell.Text = "";
+                row.Controls.Add(cell);
 
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 2;
-                //cell.Text = "Particle counton membrane";
-                //cell.HorizontalAlign = HorizontalAlign.Center;
-                //row.Controls.Add(cell);
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 4;
+                cell.Text = "Particle counton membrane";
+                cell.HorizontalAlign = HorizontalAlign.Center;
+                row.Controls.Add(cell);
 
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 2;
-                //cell.Text = "Particle count /component";
-                //cell.HorizontalAlign = HorizontalAlign.Center;
-                //row.Controls.Add(cell);
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 4;
+                cell.Text = "Particles on per component";
+                cell.HorizontalAlign = HorizontalAlign.Center;
+                row.Controls.Add(cell);
 
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 2;
-                //cell.Text = "Particle count /1000cm2";
-                //cell.HorizontalAlign = HorizontalAlign.Center;
-                //row.Controls.Add(cell);
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 1;
-                //cell.Text = "";
-                //row.Controls.Add(cell);
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 4;
+                cell.Text = "Particles on per 1000 cm2";
+                cell.HorizontalAlign = HorizontalAlign.Center;
+                row.Controls.Add(cell);
 
-                //gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 1;
+                cell.Text = "";
+                row.Controls.Add(cell);
+
+                cell = new TableHeaderCell();
+                cell.ColumnSpan = 1;
+                cell.Text = "";
+                row.Controls.Add(cell);
+
+                gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
             }
             catch (Exception ex)
             {
@@ -1508,6 +1565,181 @@ namespace ALS.ALSI.Web.view.template
             gvMicroscopicAnalysis.DataBind();
         }
         #endregion
+        #region "MicroscopicAnalysis-2"
+        protected void gvMicroscopicAnalysis2_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+                {
+                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    if (_cov != null)
+                    {
+                        RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
+                        switch (cmd)
+                        {
+                            case RowTypeEnum.Hide:
+                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Hide);
+                                break;
+                            case RowTypeEnum.Normal:
+                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Normal);
+                                break;
+                        }
+
+                        gvMicroscopicAnalysis2.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+                        gvMicroscopicAnalysis2.DataBind();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
+        }
+
+        protected void gvMicroscopicAnalysis2_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+
+
+                    RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMicroscopicAnalysis2.DataKeys[e.Row.RowIndex].Values[1]);
+                    LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                    LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                    if (_btnHide != null && _btnUndo != null)
+                    {
+                        switch (cmd)
+                        {
+                            case RowTypeEnum.Hide:
+                                _btnHide.Visible = false;
+                                _btnUndo.Visible = true;
+                                e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                                break;
+                            default:
+                                _btnHide.Visible = true;
+                                _btnUndo.Visible = false;
+                                e.Row.ForeColor = System.Drawing.Color.Black;
+                                break;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
+        }
+
+        protected void gvMicroscopicAnalysis2_OnDataBound(object sender, EventArgs e)
+        {
+            try
+            {
+                //GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+                //TableHeaderCell cell = new TableHeaderCell();
+                //cell.Text = "";
+                //cell.ColumnSpan = 1;
+                //row.Controls.Add(cell);
+
+                //cell = new TableHeaderCell();
+                //cell.ColumnSpan = 1;
+                //cell.Text = "";
+                //row.Controls.Add(cell);
+
+                //cell = new TableHeaderCell();
+                //cell.ColumnSpan = 2;
+                //cell.Text = "Particle counton membrane";
+                //cell.HorizontalAlign = HorizontalAlign.Center;
+                //row.Controls.Add(cell);
+
+                //cell = new TableHeaderCell();
+                //cell.ColumnSpan = 2;
+                //cell.Text = "Particle count /component";
+                //cell.HorizontalAlign = HorizontalAlign.Center;
+                //row.Controls.Add(cell);
+
+                //cell = new TableHeaderCell();
+                //cell.ColumnSpan = 2;
+                //cell.Text = "Particle count /1000cm2";
+                //cell.HorizontalAlign = HorizontalAlign.Center;
+                //row.Controls.Add(cell);
+                //cell = new TableHeaderCell();
+                //cell.ColumnSpan = 1;
+                //cell.Text = "";
+                //row.Controls.Add(cell);
+
+                //gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
+        }
+
+
+        protected void gvMicroscopicAnalysis2_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void gvMicroscopicAnalysis2_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            try
+            {
+                gvMicroscopicAnalysis2.EditIndex = e.NewEditIndex;
+                gvMicroscopicAnalysis2.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+                gvMicroscopicAnalysis2.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
+        }
+
+        protected void gvMicroscopicAnalysis2_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int _id = Convert.ToInt32(gvMicroscopicAnalysis2.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txtA = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtA");
+            TextBox txtB = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtB");
+            TextBox txtC = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtC");
+            TextBox txtD = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtD");
+            TextBox txtE = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtE");
+            TextBox txtF = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtF");
+            TextBox txtG = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtG");
+            TextBox txtH = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtH");
+
+
+            //template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            //if (_cov != null)
+            //{
+            //    _cov.col_a = txtA.Text;
+            //    _cov.col_b = txtB.Text;
+            //    _cov.col_c = txtC.Text;
+            //    _cov.col_d = txtD.Text;
+            //    _cov.col_e = txtE.Text;
+            //    _cov.col_f = txtF.Text;
+            //    _cov.col_g = txtG.Text;
+            //    _cov.col_h = txtH.Text;
+            //}
+
+
+            gvMicroscopicAnalysis2.EditIndex = -1;
+            gvMicroscopicAnalysis2.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            gvMicroscopicAnalysis2.DataBind();
+        }
+
+        protected void gvMicroscopicAnalysis2_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvMicroscopicAnalysis2.EditIndex = -1;
+            gvMicroscopicAnalysis2.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            gvMicroscopicAnalysis2.DataBind();
+        }
+        #endregion
+
 
         #region "Dissolving"
         protected void gvDissolving_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -1822,67 +2054,46 @@ namespace ALS.ALSI.Web.view.template
 
                     foreach (var item in listOfSpec)
                     {
-                        if (row > 0)
-                        {
-                            template_pa_detail tmp = new template_pa_detail();
-                            tmp.id = CustomUtils.GetRandomNumberID();
+                        template_pa_detail tmp = new template_pa_detail();
+                        tmp.id = CustomUtils.GetRandomNumberID();
+                        tmp.seq = row;
+                        tmp.col_a = item.A;
+                        tmp.col_b = item.B;
+                        tmp.col_c = item.C;
+                        tmp.col_d = item.D;
+                        tmp.col_e = item.E;
+                        tmp.col_f = item.G;
+                        tmp.col_g = item.G;
+                        tmp.col_h = item.H;
+                        tmp.col_i = item.I;
+                        tmp.col_j = item.J;
+                        tmp.col_k = item.K;
+                        tmp.col_l = item.L;
+                        tmp.col_m = item.M;
+                        tmp.col_n = item.N;
+                        tmp.col_o = item.O;
+                        tmp.col_p = item.P;
+                        tmp.col_q = item.Q;
+                        tmp.col_r = item.R;
 
-                            tmp.col_a = item.A;
-                            tmp.col_b = item.B;
-                            tmp.col_c = item.C;
-                            tmp.col_d = item.D;
-                            tmp.col_e = item.E;
-                            tmp.col_f = item.G;
-                            tmp.col_g = item.G;
-                            tmp.col_h = item.H;
-                            tmp.col_i = item.I;
-                            tmp.col_j = item.J;
-                            tmp.col_k = item.K;
-                            tmp.col_l = item.L;
-                            tmp.col_m = item.M;
-                            tmp.col_n = item.N;
-                            tmp.col_o = item.O;
-                            tmp.col_p = item.P;
-                            tmp.col_q = item.Q;
-                            tmp.col_r = item.R;
+                        tmp.col_s = item.S;
+                        tmp.col_t = item.T;
+                        tmp.col_u = item.U;
+                        tmp.col_v = item.V;
+                        tmp.col_w = item.W;
+                        tmp.col_x = item.X;
+                        tmp.col_y = item.Y;
+                        tmp.col_z = item.Z;
 
-                            tmp.col_s = item.S;
-                            tmp.col_t = item.T;
-                            tmp.col_u = item.U;
-                            tmp.col_v = item.V;
-                            tmp.col_w = item.W;
-                            tmp.col_x = item.X;
-                            tmp.col_y = item.Y;
-                            tmp.col_z = item.Z;
-
-                            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-                            tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
-                            paDetail.Add(tmp);
-                        }
+                        tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                        tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
+                        paDetail.Add(tmp);
                         row++;
                     }
-
-
-                    List<String> cols = tb_m_specification.findColumnCount(listOfSpec[1]);
-                    for (int i = 0; i < cols.Count; i++)
-                    {
-                        gvMicroscopicAnalysis.Columns[i].HeaderText = cols[i];
-                        gvMicroscopicAnalysis.Columns[i].Visible = true;
-                    }
-
-
                     calculate();
-                    gvMicroscopicAnalysis.Visible = true;
-                }
-                else
-                {
-                    for (int i = 0; i < 15; i++)
-                    {
-                        gvMicroscopicAnalysis.Columns[i].Visible = false;
-                    }
-                    gvMicroscopicAnalysis.Visible = false;
                 }
                 #endregion
+
 
 
             }

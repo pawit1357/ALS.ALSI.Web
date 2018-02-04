@@ -16,6 +16,7 @@ namespace ALS.ALSI.Biz.DataAccess
     {
         public int id { get; set; }
         public Nullable<int> sample_id { get; set; }
+        public Nullable<int> seq { get; set; }
         public Nullable<int> evaluation_of_particles_id { get; set; }
         public Nullable<int> microscopic_analysis_id { get; set; }
         public string col_a { get; set; }

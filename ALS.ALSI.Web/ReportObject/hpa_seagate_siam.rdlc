@@ -1583,7 +1583,7 @@
             <DataSetName>DataSet1</DataSetName>
             <Top>1.67069in</Top>
             <Height>0.63179in</Height>
-            <Width>7.27601in</Width>
+            <Width>7.27599in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -2141,7 +2141,7 @@
             <DataSetName>DataSet2</DataSetName>
             <Top>2.64957in</Top>
             <Height>0.73958in</Height>
-            <Width>7.27601in</Width>
+            <Width>7.276in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -4143,7 +4143,7 @@
             <Top>10.83974cm</Top>
             <Left>0cm</Left>
             <Height>1.75464cm</Height>
-            <Width>18.48107cm</Width>
+            <Width>18.48106cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -5255,7 +5255,7 @@
             <Top>17.00372cm</Top>
             <Left>0cm</Left>
             <Height>1.75464cm</Height>
-            <Width>18.48107cm</Width>
+            <Width>18.48106cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -5520,7 +5520,7 @@
             <Top>20.40758cm</Top>
             <Left>0.00221cm</Left>
             <Height>1.75464cm</Height>
-            <Width>18.47885cm</Width>
+            <Width>18.47886cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>

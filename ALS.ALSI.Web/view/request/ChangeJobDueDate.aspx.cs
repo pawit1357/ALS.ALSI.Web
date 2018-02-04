@@ -77,6 +77,7 @@ namespace ALS.ALSI.Web.view.request
             if (this.jobSample != null)
             {
                 txtDuedate.Text = Convert.ToDateTime(this.jobSample.due_date).ToString("dd/MM/yyyy");
+                txtCustomerDuedate.Text = Convert.ToDateTime(this.jobSample.due_date_customer).ToString("dd/MM/yyyy");
                 //txtRemark.Text = this.jobSample.remarks;
             }
             else
@@ -118,7 +119,7 @@ namespace ALS.ALSI.Web.view.request
 
             this.jobSample.due_date = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
             this.jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-            this.jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+            this.jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtCustomerDuedate.Text);
             this.jobSample.Update();
             job_sample_logs tmp = new job_sample_logs
             {

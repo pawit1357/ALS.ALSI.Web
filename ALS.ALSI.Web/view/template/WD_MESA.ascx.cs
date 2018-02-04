@@ -720,35 +720,35 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", " "));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            List<template_wd_mesa_img> imgList = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
-            List<template_wd_mesa_img> tmpImg1 = new List<template_wd_mesa_img>();
-            if (imgList.Count >= 1)
-            {
-                tmpImg1.Add(imgList[0]);
-            }
+            //List<template_wd_mesa_img> imgList = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
+            //List<template_wd_mesa_img> tmpImg1 = new List<template_wd_mesa_img>();
+            //if (imgList.Count >= 1)
+            //{
+            //    tmpImg1.Add(imgList[0]);
+            //}
 
-            List<template_wd_mesa_img> tmpImg2 = new List<template_wd_mesa_img>();
-            if (imgList.Count >= 2)
-            {
-                tmpImg2.Add(imgList[1]);
-            }
+            //List<template_wd_mesa_img> tmpImg2 = new List<template_wd_mesa_img>();
+            //if (imgList.Count >= 2)
+            //{
+            //    tmpImg2.Add(imgList[1]);
+            //}
 
-            List<template_wd_mesa_img> tmpImg3 = new List<template_wd_mesa_img>();
-            if (imgList.Count >= 3)
-            {
-                tmpImg3.Add(imgList[2]);
-            }
+            //List<template_wd_mesa_img> tmpImg3 = new List<template_wd_mesa_img>();
+            //if (imgList.Count >= 3)
+            //{
+            //    tmpImg3.Add(imgList[2]);
+            //}
 
-            List<template_wd_mesa_img> tmpImg4 = new List<template_wd_mesa_img>();
-            if (imgList.Count >= 4)
-            {
-                tmpImg4.Add(imgList[3]);
-            }
+            //List<template_wd_mesa_img> tmpImg4 = new List<template_wd_mesa_img>();
+            //if (imgList.Count >= 4)
+            //{
+            //    tmpImg4.Add(imgList[3]);
+            //}
 
-            reportParameters.Add(new ReportParameter("area1_desc", (imgList.Count >= 1) ? imgList[0].descripton : " "));
-            reportParameters.Add(new ReportParameter("area2_desc", (imgList.Count >= 2) ? imgList[1].descripton : " "));
-            reportParameters.Add(new ReportParameter("area3_desc", (imgList.Count >= 3) ? imgList[2].descripton : " "));
-            reportParameters.Add(new ReportParameter("area4_desc", (imgList.Count >= 4) ? imgList[3].descripton : " "));
+            //reportParameters.Add(new ReportParameter("area1_desc", (imgList.Count >= 1) ? imgList[0].descripton : " "));
+            //reportParameters.Add(new ReportParameter("area2_desc", (imgList.Count >= 2) ? imgList[1].descripton : " "));
+            //reportParameters.Add(new ReportParameter("area3_desc", (imgList.Count >= 3) ? imgList[2].descripton : " "));
+            //reportParameters.Add(new ReportParameter("area4_desc", (imgList.Count >= 4) ? imgList[3].descripton : " "));
 
 
             // Variables
@@ -758,7 +758,7 @@ namespace ALS.ALSI.Web.view.template
             string encoding = string.Empty;
             string extension = string.Empty;
 
-            List<template_wd_mesa_img> dat = this.refImg;
+            List<template_wd_mesa_img> dat = this.refImg.OrderByDescending(x => x.id).ToList();
             foreach (template_wd_mesa_img _i in dat)
             {
                 if (_i.path_sem_image_at_2000x != null)
@@ -782,49 +782,120 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_idm_wd.rdlc");
+            //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
+
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", this.coverpages.ToDataTable())); // Add datasource here
 
 
+            List<template_wd_mesa_img> tmp = new List<template_wd_mesa_img>();
+            DataTable dt1 = new DataTable();
+            DataTable dt2 = new DataTable();
+            DataTable dt3 = new DataTable();
+            DataTable dt4 = new DataTable();
 
-
-            if (tmpImg1.Count > 0)
+            if (dat.Count == 2)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", tmpImg1.ToDataTable())); // Add datasource here
+                tmp.Add(dat[0]);
+                dt1 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[1]);
+                dt2 = tmp.ToDataTable();
+            }
+            else if (dat.Count == 4)
+            {
+                tmp.Add(dat[0]);
+                dt1 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[2]);
+                dt2 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[1]);
+                dt3 = tmp.ToDataTable();
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[3]);
+                dt4 = tmp.ToDataTable();
+            }
+
+
+            if (dt1 != null && dt1.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt1)); // Add datasource here
             }
             else
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
-            }
 
-            if (tmpImg2.Count > 0)
+            }
+            if (dt2 != null && dt2.Rows.Count > 0)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", tmpImg2.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt2)); // Add datasource here
             }
             else
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
-            }
 
-            if (tmpImg3.Count > 0)
+            }
+            if (dt3 != null && dt3.Rows.Count > 0)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", tmpImg3.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt3)); // Add datasource here
             }
             else
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
-            }
 
-            if (tmpImg4.Count > 0)
+            }
+            if (dt4 != null && dt4.Rows.Count > 0)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", tmpImg4.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", dt4)); // Add datasource here
             }
             else
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
             }
+
+
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", this.coverpages.ToDataTable())); // Add datasource here
+
+
+
+
+            //if (tmpImg1.Count > 0)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", tmpImg1.ToDataTable())); // Add datasource here
+            //}
+            //else
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+            //}
+
+            //if (tmpImg2.Count > 0)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", tmpImg2.ToDataTable())); // Add datasource here
+            //}
+            //else
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+            //}
+
+            //if (tmpImg3.Count > 0)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", tmpImg3.ToDataTable())); // Add datasource here
+            //}
+            //else
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+            //}
+
+            //if (tmpImg4.Count > 0)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", tmpImg4.ToDataTable())); // Add datasource here
+            //}
+            //else
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+            //}
 
 
 
@@ -980,7 +1051,7 @@ namespace ALS.ALSI.Web.view.template
             string encoding = string.Empty;
             string extension = string.Empty;
 
-            List<template_wd_mesa_img> dat = this.refImg;
+            List<template_wd_mesa_img> dat = this.refImg.OrderBy(x=>x.seq).ToList();
             foreach (template_wd_mesa_img _i in dat)
             {
                 _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
@@ -1162,7 +1233,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
 
                     }
-                    gvRefImages.DataSource = this.refImg;
+                    gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
                     gvRefImages.DataBind();
                 }
             }
