@@ -782,7 +782,7 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_idm_wd.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
             //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
 
             viewer.LocalReport.SetParameters(reportParameters);

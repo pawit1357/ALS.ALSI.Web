@@ -205,7 +205,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">S'pore Ref No:</label>
+                                <label class="control-label col-md-3">Other Ref No:</label>
                                 <div class="col-md-6">
                                     <asp:TextBox ID="txtS_pore_ref_no" runat="server" class="form-control"></asp:TextBox>
                                 </div>

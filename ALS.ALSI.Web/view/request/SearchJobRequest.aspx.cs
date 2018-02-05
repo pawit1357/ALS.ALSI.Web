@@ -573,13 +573,14 @@ namespace ALS.ALSI.Web.view.request
                 DataTable dt = new DataTable("DT");
 
                 dt.Columns.Add("Status", typeof(string));
+                dt.Columns.Add("Job Status", typeof(string));
                 dt.Columns.Add("Received", typeof(string));
                 dt.Columns.Add("Report Sent to Customer", typeof(string));
                 dt.Columns.Add("Receive Date", typeof(string));
                 dt.Columns.Add("Due Date", typeof(string));
                 dt.Columns.Add("ALS Ref", typeof(string));
                 dt.Columns.Add("No.Cus Ref No", typeof(string));
-                dt.Columns.Add("S Ref No", typeof(string));
+                dt.Columns.Add("Other Ref No", typeof(string));
                 dt.Columns.Add("Company", typeof(string));
                 dt.Columns.Add("Invoice", typeof(string));
                 dt.Columns.Add("Po", typeof(string));
@@ -599,8 +600,9 @@ namespace ALS.ALSI.Web.view.request
 
                     String sql = "SELECT" +
                                 "`Extent7`.`name` AS `Status`," +
+                                "`Extent9`.`name` AS `Job Status`," +
                                 "DATE_FORMAT(`Extent2`.`date_srchemist_complate`,'%e %b %Y') AS `Received`," +
-                                "`Extent2`.`date_admin_sent_to_cus` AS `Report Sent to Customer`," +
+                                "DATE_FORMAT(`Extent2`.`date_admin_sent_to_cus`,'%e %b %Y') AS  `Report Sent to Customer`," +
                                 "DATE_FORMAT(`Extent1`.`date_of_receive`,'%e %b %Y') AS `Receive Date`," +
                                 "DATE_FORMAT(`Extent2`.`due_date`,'%e %b %Y') AS `Due Date`," +
                                 "`Extent2`.`job_number` AS `ALS Ref`," +
@@ -624,7 +626,8 @@ namespace ALS.ALSI.Web.view.request
                                 " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
                                 " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
                                 " INNER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
-                                " INNER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`";
+                                " INNER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
+                                " INNER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
 
 
                     StringBuilder sqlCri = new StringBuilder();

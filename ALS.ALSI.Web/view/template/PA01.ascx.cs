@@ -6,8 +6,11 @@ using ALS.ALSI.Utils;
 using ALS.ALSI.Web.Properties;
 using ALS.ALSI.Web.view.request;
 using Microsoft.Reporting.WebForms;
+using Microsoft.Reporting.WebForms;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using Spire.Doc;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -130,7 +133,7 @@ namespace ALS.ALSI.Web.view.template
                 pPage01.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
                 pPage02.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
                 pPage03.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
-
+                pEop.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
 
                 if (status == StatusEnum.LABMANAGER_CHECKING)
                 {
@@ -168,8 +171,9 @@ namespace ALS.ALSI.Web.view.template
             template_pa_detail pad = new template_pa_detail();
             this.tbMSpecifications = new tb_m_specification().SelectBySpecificationID(this.jobSample.specification_id, this.jobSample.template_id);
             #region "Initial component"
+
             ddlSpecification.Items.Clear();
-            ddlSpecification.DataSource = tb_m_specification.getDistinctValue(this.tbMSpecifications.Where(x => x.A.Equals("Micropic Data:")).ToList());
+            ddlSpecification.DataSource = tb_m_specification.getDistinctValue(this.tbMSpecifications.Where(x => x.A.Equals("SPECIFICATION")).ToList());
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
@@ -225,7 +229,7 @@ namespace ALS.ALSI.Web.view.template
             if (this.pa != null)
             {
 
-                ddlSpecification.SelectedValue = this.pa.specification_no.ToString();
+                ddlSpecification.SelectedValue = this.pa.specification_id.ToString();
                 ddlResult.SelectedValue = this.pa.result.ToString();
                 txtPIRTDC.Text = this.pa.pirtd;
                 #region "PAGE01"
@@ -549,7 +553,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
 
                     this.pa.sample_id = this.SampleID;
-                    this.pa.specification_no = Convert.ToInt32(ddlSpecification.SelectedValue);
+                    this.pa.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                     this.pa.result = Convert.ToInt32(ddlResult.SelectedValue);
                     this.pa.pirtd = txtPIRTDC.Text;
                     this.jobSample.lot_no = txtLotNo.Text;
@@ -680,30 +684,122 @@ namespace ALS.ALSI.Web.view.template
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     this.pa.sample_id = this.SampleID;
-                    //this.pa.largest_metallic_particle = txtLms.Text;
-                    //this.pa.largest_non_metallic_particle = txtLnmp.Text;
-                    //this.pa.largest_fiber = txtLf.Text;
+                    this.pa.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                    this.pa.result = Convert.ToInt32(ddlResult.SelectedValue);
+                    this.pa.pirtd = txtPIRTDC.Text;
+                    this.jobSample.lot_no = txtLotNo.Text;
 
-                    //this.pa.em_extraction_medium = txtExtractionMedium.Text;
-                    //this.pa.em_shaking = txtShkingRewashQty.Text;
-                    //this.pa.em_wetted_surface_per_component = txtWettedSurfacePerComponent.Text;
-                    //this.pa.em_total_tested_size = txtTotalTestedSize.Text;
-                    //this.pa.extraction_procedure = txtExtractionProcedure.Text;
+                    #region "PAGE01"
+                    this.pa.lms = txtLms.Text;
+                    this.pa.lnmp = txtLnmp.Text;
+                    this.pa.lf = txtLf.Text;
+                    this.pa.doec = txtDoec.Text;
+                    this.pa.dos = txtDos.Text;
+                    this.pa.customerlimit = txtCustomerLimit.Text;
+                    this.pa.gravimetry = txtGravimetry.Text;
+                    this.pa.lmsp = txtLmsp.Text;
+                    this.pa.extractionvalue = txtExtractionValue.Text;
+                    this.pa.lnmsp = txtLnmsp.Text;
+                    this.pa.eop_g = txtEop_G.Text;
+                    this.pa.eop_lmsp = txtEop_Lmsp.Text;
+                    this.pa.eop_lnmsp = txtEop_Lnmsp.Text;
+                    this.pa.eop_pt = txtEop_pt.Text;
+                    this.pa.eop_size = txtEop_size.Text;
+                    this.pa.eop_value = txtEop_value.Text;
+                    this.pa.remark = txtEopRemark.Text;
+                    #endregion
+                    #region "PAGE02"
+                    this.pa.iscsa = CustomUtils.getCheckBoxListValue(cbCsa);
+                    this.pa.wspc = txtWspc.Text;
+                    this.pa.wvpc = txtWvpc.Text;
+                    this.pa.tls = txtTls.Text;
+                    this.pa.ispretreatmentconditioning = (cbPreTreatmentConditioning.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.pretreatmentconditioning = txtPreTreatmentConditioning.Text;
+                    this.pa.ispackingtobetested = CustomUtils.getCheckBoxListValue(cbPackingToBeTested);
+                    this.pa.iscontainer = (cbContainer.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.container_id = Convert.ToInt32(ddlContainer.SelectedValue);
+                    this.pa.isfluid1 = (cbFluid1.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.fluid1_id = Convert.ToInt32(ddlFluid1.SelectedValue);
+                    this.pa.isfluid2 = (cbFluid2.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.fluid2_id = Convert.ToInt32(ddlFluid2.SelectedValue);
+                    this.pa.isfluid3 = (cbFluid3.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.fluid3_id = Convert.ToInt32(ddlFluid3.SelectedValue);
+                    this.pa.tradename = txtTradeName.Text;
+                    this.pa.manufacturer = txtManufacturer.Text;
+                    this.pa.totalquantity = txtTotalQuantity.Text;
+                    this.pa.istshb01 = (cbTshb01.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.istshb02 = (cbTshb02.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.istshb03 = (cbTshb03.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.tshb03 = txtTshb03.Text;
+                    this.pa.ispots01 = (cbPots01.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.pots01 = txtPots01.Text;
+                    #endregion
 
-                    //this.pa.type_of_method = CustomUtils.getCheckBoxListValue(cbTypeOfMethod);
-                    //this.pa.filtration_method = CustomUtils.getCheckBoxListValue(cbFiltrationMethod);
-                    //this.pa.type_of_drying = CustomUtils.getCheckBoxListValue(cbTypeOfDrying);
-                    //this.pa.particle_sizing_counting_det1 = CustomUtils.getCheckBoxListValue(cbParticleSizingCoungtingDetermination);
-                    //this.pa.particle_sizing_counting_det2 = CustomUtils.getCheckBoxListValue(cbParticleSizingCoungtingDetermination2);
+                    #region "PAGE03"
+                    this.pa.isdissolving = (cbDissolving.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.dissolving = txtDissolving.Text;
+                    this.pa.dissolvingtime = txtDissolvingTime.Text;
+                    this.pa.ispressurerinsing = (cbPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.isinternalrinsing = (cbInternalRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.isagitation = (cbAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.iswashquantity = (cbWashQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.washquantity = txtWashQuantity.Text;
+                    this.pa.isrewashingquantity = (cbRewashingQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.rewashingquantity = txtRewashingQuantity.Text;
+                    this.pa.iswashpressurerinsing = (cbWashPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.iswashinternalrinsing = (cbWashInternalRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.iswashagitation = (cbWashAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.isfiltrationmethod = CustomUtils.getCheckBoxListValue(cbFiltrationMethod);
 
-                    //this.pa.analysis_membrane_used = txtAnalysisMembraneUsed.Text;
-                    //this.pa.particle_sizing_counting_det_a = txtPixelScaling.Text;
-                    //this.pa.particle_sizing_counting_det_b = txtCameraResolution.Text;
 
-                    //this.pa.pirtdc = txtPIRTDC.Text;
-                    //this.pa.specification_no = ddlSpecification.SelectedItem.Text;
+                    this.pa.manufacturer_id = Convert.ToInt32(ddlManufacturer.SelectedValue);
+                    this.pa.material_id = Convert.ToInt32(ddlMaterial.SelectedValue);
+                    this.pa.poresize = txtPoreSize.Text;
+                    this.pa.diameter = txtDiameter.Text;
+                    this.pa.isoven = (cbOven.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.isdesiccator = (cbDesiccator.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.isambientair = (cbAmbientAir.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.iseasydry = (cbEasyDry.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.drytime = txtDryTime.Text;
+                    this.pa.temperature = txtTemperature.Text;
+                    this.pa.gravimetricalalysis_id = Convert.ToInt32(ddlGravimetricAlalysis.SelectedValue);
+                    this.pa.model = txtModel.Text;
+                    this.pa.balanceresolution = txtBalanceResolution.Text;
+                    this.pa.lastcalibration = txtLastCalibration.Text;
+                    this.pa.iszeissaxioimager2 = (cbZEISSAxioImager2.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.ismeasuringsoftware = (cbMeasuringSoftware.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.isautomated = (cbAutomated.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.automated = txtAutomated.Text;
+                    this.pa.totalextractionvolume = txtTotalextractionVolume.Text;
+                    //this.pa.lbextractionmethod = lbExtractionMethod.Text;
+                    this.pa.numberofcomponents = txtNumberOfComponents.Text;
+                    this.pa.lbextractiontime = lbExtractionTime.Text;
+                    this.pa.measureddiameter = lbMembraneType.Text;
+                    this.pa.lbx = lbX.Text;
+                    this.pa.lby = lbY.Text;
+                    this.pa.measureddiameter = txtMeasuredDiameter.Text;
+                    this.pa.feretlmsp = txtFeretLmsp.Text;
+                    this.pa.feretlnms = txtFeretLnms.Text;
+                    this.pa.feretfb = txtFeretFb.Text;
+                    #endregion
+
+                    this.pa.img01 = img1.ImageUrl;
+                    this.pa.img02 = img2.ImageUrl;
+                    this.pa.img03 = img3.ImageUrl;
+                    this.pa.img04 = img4.ImageUrl;
+
+                    this.pa.lms_x = txtLms_X.Text;
+                    this.pa.lms_y = txtLms_Y.Text;
+
+                    this.pa.lnms_x = txtLnms_X.Text;
+                    this.pa.lnms_y = txtLnms_Y.Text;
+
+                    this.pa.lf_x = txtLf.Text;
+                    this.pa.lf_y = txtLf_Y.Text;
+
                     //Delete old
-                    this.pa.Update();
+                    template_pa.DeleteBySampleID(this.SampleID);
+                    this.pa.Insert();
                     template_pa_detail.DeleteBySampleID(this.SampleID);
                     foreach (template_pa_detail item in this.paDetail)
                     {
@@ -2162,15 +2258,121 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
+            DataTable dt = new DataTable();// Extenders.ObjectToDataTable(this.coverpages[0]);
+            //List<template_seagate_ic_coverpage> anionic = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.ANIONIC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            //List<template_seagate_ic_coverpage> cationic = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.CATIONIC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            ReportHeader reportHeader = new ReportHeader();
+            reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+
+            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", " "));
+            reportParameters.Add(new ReportParameter("partNo", " "));
+            reportParameters.Add(new ReportParameter("partName", " "));
+            reportParameters.Add(new ReportParameter("lotNo", " "));
+
+
+            //reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+
+            //reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+
+            // Variables
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/pa.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+
+            //if (anionic.Count == 0)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+            //}
+
+
+            string download = String.Empty;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
             {
-                case StatusEnum.SR_CHEMIST_CHECKING:
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (!String.IsNullOrEmpty(this.jobSample.ad_hoc_tempalte_path))
+                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
                     {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.ad_hoc_tempalte_path));
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                    }
+                    else
+                    {
+                        byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+                        if (!Directory.Exists(Server.MapPath("~/Report/")))
+                        {
+                            Directory.CreateDirectory(Server.MapPath("~/Report/"));
+                        }
+                        using (FileStream fs = File.Create(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension))
+                        {
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+
+                        #region "Insert Footer & Header from template"
+                        Document doc1 = new Document();
+                        doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
+                        Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
+                        Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
+                        Document doc2 = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
+                        foreach (Section section in doc2.Sections)
+                        {
+                            foreach (DocumentObject obj in header.ChildObjects)
+                            {
+                                section.HeadersFooters.Header.ChildObjects.Add(obj.Clone());
+                            }
+                            foreach (DocumentObject obj in footer.ChildObjects)
+                            {
+                                section.HeadersFooters.Footer.ChildObjects.Add(obj.Clone());
+                            }
+                        }
+
+
+
+                        doc2.SaveToFile(Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension);
+                        #endregion
+                        Response.ContentType = mimeType;
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                        Response.WriteFile(Server.MapPath("~/Report/" + this.jobSample.job_number + "." + extension));
+                        Response.Flush();
+
+                        #region "Delete After Download"
+                        String deleteFile1 = Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension;
+                        String deleteFile2 = Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension;
+
+                        if (File.Exists(deleteFile1))
+                        {
+                            File.Delete(deleteFile1);
+                        }
+                        if (File.Exists(deleteFile2))
+                        {
+                            File.Delete(deleteFile2);
+                        }
+                        #endregion
                     }
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:

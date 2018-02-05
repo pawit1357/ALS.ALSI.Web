@@ -620,7 +620,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sample_id" Type="int" />
-          <Property Name="specification_no" Type="int" />
+          <Property Name="specification_id" Type="int" />
           <Property Name="lms" Type="varchar" MaxLength="45" />
           <Property Name="lnmp" Type="varchar" MaxLength="45" />
           <Property Name="lf" Type="varchar" MaxLength="45" />
@@ -2653,7 +2653,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sample_id" Type="Int32" />
-          <Property Name="specification_no" Type="Int32" />
+          <Property Name="specification_id" Type="Int32" />
           <Property Name="lms" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="lnmp" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="lf" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -4569,7 +4569,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="lf" ColumnName="lf" />
                 <ScalarProperty Name="lnmp" ColumnName="lnmp" />
                 <ScalarProperty Name="lms" ColumnName="lms" />
-                <ScalarProperty Name="specification_no" ColumnName="specification_no" />
+                <ScalarProperty Name="specification_id" ColumnName="specification_id" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

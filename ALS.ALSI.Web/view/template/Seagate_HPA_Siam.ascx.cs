@@ -1783,7 +1783,7 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_seagate_siam.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_seagate.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here

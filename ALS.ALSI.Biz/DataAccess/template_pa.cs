@@ -16,7 +16,7 @@ namespace ALS.ALSI.Biz.DataAccess
     {
         public int id { get; set; }
         public Nullable<int> sample_id { get; set; }
-        public Nullable<int> specification_no { get; set; }
+        public Nullable<int> specification_id { get; set; }
         public string lms { get; set; }
         public string lnmp { get; set; }
         public string lf { get; set; }

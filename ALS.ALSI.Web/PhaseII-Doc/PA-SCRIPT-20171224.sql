@@ -10,6 +10,9 @@
 
 
 -- ELN-0664-PAB
+-- ELP-2475-HB 
+-- WD_MESA_IDM.ascx/ELP-2292-MB (rattana)
+-- WD_MESA_IDM.ascx/ELP-2072-MB
 
 
 ALTER TABLE `alsi`.`template_wd_mesa_img` 
