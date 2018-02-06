@@ -203,14 +203,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Other Ref No:</label>
-                                <div class="col-md-6">
-                                    <asp:TextBox ID="txtS_pore_ref_no" runat="server" class="form-control"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-3">Spec. Ref. & Rev. No. :</label>
@@ -333,7 +326,7 @@
                             </div>
                         </div>
                     </div>
-                                        <div class="row">
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-3">
@@ -344,7 +337,14 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Other Ref No:</label>
+                                <div class="col-md-6">
+                                    <asp:TextBox ID="txtOtherRefNo" runat="server" class="form-control"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -403,7 +403,15 @@
                                                         <asp:TextBox ID="txtRefNo" CssClass="form-control" runat="server" Text='<%# Eval("job_number")%>'></asp:TextBox>
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
-
+                                                <asp:TemplateField HeaderText="Other Ref No." ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litOtherRefNo" runat="server" Text='<%# Eval("other_ref_no")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtOtherRefNo" CssClass="form-control" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                
                                                 <asp:TemplateField HeaderText="Sample Description (Part description, Part no. etc.)" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litDescriptoin" runat="server" Text='<%# Eval("description")%>' />

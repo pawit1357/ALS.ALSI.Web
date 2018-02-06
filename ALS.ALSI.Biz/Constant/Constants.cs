@@ -36,6 +36,8 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_JOB_CHANGE_DUEDATE = APPNAME + "/view/request/ChangeJobDueDate.aspx";
         public const String LINK_JOB_CHANGE_PO = APPNAME + "/view/request/ChangeJobPo.aspx";
         public const String LINK_REPORT_DATE = APPNAME + "/view/request/ChangeReportDate.aspx";
+        public const String LINK_CHANGE_OTHER_REF_NO = APPNAME + "/view/request/ChangeOtherRefNo.aspx";
+
 
         public const String LINK_ADMIN_PRINT = APPNAME + "/view/request/AdminPrint.aspx";
         public const String LINK_AMEND = APPNAME + "/view/request/JobAmend.aspx";
@@ -114,6 +116,10 @@ namespace ALS.ALSI.Biz.Constant
                         //"Total Outgassing (no of arms: >= 4)"
         };
 
+
+        public static String[] OTHER_REF_NOS = { "Go Singapore", "Go Bangkok", "Sub Contract" };
+
+
     }
 
     public enum CommandNameEnum : int
@@ -153,7 +159,8 @@ namespace ALS.ALSI.Biz.Constant
         Hold = 34,
         UnHold = 35,
         Up = 36,
-        Down = 37
+        Down = 37,
+        ChangeOtherRefNo = 38
     }
 
     public enum RowTypeEnum : int
@@ -184,8 +191,8 @@ namespace ALS.ALSI.Biz.Constant
         ADMIN = 5,
         LABMANAGER = 6,
         ACCOUNT = 7,
-        MARKETING =8,
-        BUSINESS_MANAGER =9
+        MARKETING = 8,
+        BUSINESS_MANAGER = 9
     }
 
     public enum PAEnum
@@ -255,7 +262,7 @@ namespace ALS.ALSI.Biz.Constant
         [Description("UN_HOLD")]
         JOB_UNHOLD = 15,
         [Description("RETEST REPORT")]
-        JOB_RETEST= 16,
+        JOB_RETEST = 16,
         [Description("APPROVE AMEND")]
         JOB_AMEND = 17,
 
@@ -303,7 +310,7 @@ namespace ALS.ALSI.Biz.Constant
         [Description("132 KHz")]
         KHz_132 = 2,
         [Description("ALPC (132 KHz)")]
-        ALPC_132= 3
+        ALPC_132 = 3
     }
     public enum ParticleTypeEnum
     {
@@ -331,7 +338,7 @@ namespace ALS.ALSI.Biz.Constant
         CLASSIFICATION_TOTAL = 8,
         CLASSIFICATION_GRAND_TOTAL = 9,
         CLASSIFICATION_SUB_TOTAL = 10,
-        LPC =11,
+        LPC = 11,
         LPC05 = 12,
     }
     public enum HPAFor3Group : int

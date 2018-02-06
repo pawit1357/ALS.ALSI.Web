@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="ChangeJobDueDate.aspx.cs" Inherits="ALS.ALSI.Web.view.request.ChangeJobDueDate" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="ChangeOtherRefNo.aspx.cs" Inherits="ALS.ALSI.Web.view.request.ChangeOtherRefNo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -74,7 +74,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Change Due date</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Change Other Ref No</span>
                     <span class="caption-helper"></span>
                 </div>
                 <div class="tools">
@@ -84,45 +84,14 @@
             <div class="portlet-body form">
                 <div class="form-body">
                     <!-- BEGIN FORM-->
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Lab Due date:</label>
-                                <div class="col-md-6">
-                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
-                                        <asp:TextBox ID="txtDuedate" name="txtDuedate" runat="server" class="form-control"></asp:TextBox>
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Customer Due date:</label>
-                                <div class="col-md-6">
-                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
-                                        <asp:TextBox ID="txtCustomerDuedate" name="txtCustomerDuedate" runat="server" class="form-control"></asp:TextBox>
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Remark:</label>
+                                <label class="control-label col-md-3">Other Ref No.:</label>
                                 <div class="col-md-6">
                                     <div class="input-group" style="text-align: left">
-                                        <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" class="form-control" TextMode="MultiLine" Width="500"></asp:TextBox>
+                                        <asp:TextBox ID="txtOtherRefNo" name="txtOtherRefNo" runat="server" class="form-control"></asp:TextBox>
                                         <span class="input-group-btn"></span>
                                     </div>
                                 </div>

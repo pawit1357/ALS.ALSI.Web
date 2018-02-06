@@ -15,8 +15,8 @@
 -- WD_MESA_IDM.ascx/ELP-2072-MB
 
 
-ALTER TABLE `alsi`.`template_wd_mesa_img` 
-ADD COLUMN `seq` INT NULL DEFAULT 0 AFTER `sample_id`;
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `other_ref_no` VARCHAR(200) NULL AFTER `lot_no`;
 
 
 

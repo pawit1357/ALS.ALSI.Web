@@ -239,7 +239,7 @@ namespace ALS.ALSI.Web.view.request
             m_completion_scheduled cs = new m_completion_scheduled().SelectByID(Convert.ToInt32(CompletionScheduledEnum.NORMAL));
 
             this.CommandName = cmd;
-            this.JobID = (cmd == CommandNameEnum.Page)? 0: int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+            this.JobID = (cmd == CommandNameEnum.Page) ? 0 : int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
             this.SampleID = (cmd == CommandNameEnum.Page) ? 0 : int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
 
             switch (cmd)
@@ -279,7 +279,9 @@ namespace ALS.ALSI.Web.view.request
                 case CommandNameEnum.ChangeReportDate:
                     Server.Transfer(Constants.LINK_REPORT_DATE);
                     break;
-
+                case CommandNameEnum.ChangeOtherRefNo:
+                    Server.Transfer(Constants.LINK_CHANGE_OTHER_REF_NO);
+                    break;
                 case CommandNameEnum.Amend:
                 case CommandNameEnum.Retest:
                     Server.Transfer(Constants.LINK_RETEST);
@@ -301,7 +303,7 @@ namespace ALS.ALSI.Web.view.request
                     {
                         job_sample jobSample = new job_sample().SelectByID(this.SampleID);
                         jobSample.update_date = DateTime.Now;
-                        jobSample.due_date = (jobSample.update_date==null)? DateTime.Now.AddDays(cs.value.Value): jobSample.update_date.Value.AddDays(cs.value.Value);
+                        jobSample.due_date = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.value.Value) : jobSample.update_date.Value.AddDays(cs.value.Value);
                         jobSample.due_date_customer = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.lab_due_date.Value) : jobSample.update_date.Value.AddDays(cs.lab_due_date.Value);
                         jobSample.due_date_lab = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.customer_due_date.Value) : jobSample.update_date.Value.AddDays(cs.customer_due_date.Value);
                         jobSample.is_hold = "0";
@@ -364,6 +366,9 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnChangeInvoice = (LinkButton)e.Row.FindControl("btnChangeInvoice");
                     LinkButton btnPrintLabel = (LinkButton)e.Row.FindControl("btnPrintLabel");
                     LinkButton btnChangeReportDate = (LinkButton)e.Row.FindControl("btnChangeReportDate");
+                    LinkButton btnChangeOtherRefNo = (LinkButton)e.Row.FindControl("btnChangeOtherRefNo");
+
+
 
                     LinkButton btnAmend = (LinkButton)e.Row.FindControl("btnAmend");
                     LinkButton btnReTest = (LinkButton)e.Row.FindControl("btnReTest");
@@ -376,6 +381,10 @@ namespace ALS.ALSI.Web.view.request
                     Literal ltJobStatus = (Literal)e.Row.FindControl("ltJobStatus");
                     Literal litDueDate = (Literal)e.Row.FindControl("litDueDate");
                     Label lbJobNumber = (Label)e.Row.FindControl("lbJobNumber");
+                    Literal litOtherRefNo = (Literal)e.Row.FindControl("litOtherRefNo");
+
+
+                    
                     CompletionScheduledEnum status_completion_scheduled = (CompletionScheduledEnum)Enum.ToObject(typeof(CompletionScheduledEnum), _valueCompletion_scheduled);
 
                     StatusEnum job_status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), _valueStatus);
@@ -407,6 +416,7 @@ namespace ALS.ALSI.Web.view.request
                             btnWorkFlow.Visible = false;
                             break;
                     }
+                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN);
                     btnChangeDueDate.Visible = ((userRole == RoleEnum.SR_CHEMIST));
                     btnChangePo.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LABMANAGER));
                     btnChangeInvoice.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT));
@@ -417,7 +427,7 @@ namespace ALS.ALSI.Web.view.request
                     btnHold.Visible = ((userRole == RoleEnum.LOGIN) && !isHold);
                     btnUnHold.Visible = ((userRole == RoleEnum.LOGIN) && isHold);
 
-                    lbJobNumber.Text = String.Format("{0}{1}", lbJobNumber.Text, String.Format("{0}",String.IsNullOrEmpty(am + "" + r)? String.Empty: "("+am + "" + r+")"));
+                    lbJobNumber.Text = String.Format("{0}{1}", lbJobNumber.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
 
                     switch (userRole)
                     {
@@ -437,7 +447,17 @@ namespace ALS.ALSI.Web.view.request
                             break;
                     }
 
+                    //if (Constants.OTHER_REF_NOS.Contains(litOtherRefNo.Text))
+                    //{
+                        if (DateTime.Equals(due_date_lab, new DateTime(1, 1, 1)))
+                        {
+                            litDueDate.Text = "TBA";
+                        }
+                        else
+                        {
 
+                        }
+                    //}
 
                     #region "Job color status"
 
@@ -607,7 +627,7 @@ namespace ALS.ALSI.Web.view.request
                                 "DATE_FORMAT(`Extent2`.`due_date`,'%e %b %Y') AS `Due Date`," +
                                 "`Extent2`.`job_number` AS `ALS Ref`," +
                                 "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
-                                "`Extent1`.`s_pore_ref_no` AS `S Ref No`," +
+                                "`Extent2`.`other_ref_no` AS `S Ref No`," +
                                 "`Extent5`.`company_name` AS `Company`," +
                                 "`Extent2`.`sample_invoice` AS `Invoice`," +
                                 "`Extent2`.`sample_po` AS `Po`," +

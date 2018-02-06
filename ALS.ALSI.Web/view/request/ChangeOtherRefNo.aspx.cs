@@ -6,13 +6,14 @@ using ALS.ALSI.Web.Properties;
 using System;
 using System.Collections;
 using System.Web.UI;
+using System.Linq;
 
 namespace ALS.ALSI.Web.view.request
 {
-    public partial class ChangeJobDueDate : System.Web.UI.Page
+    public partial class ChangeOtherRefNo : System.Web.UI.Page
     {
 
-        //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ChangeJobDueDate));
+        //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ChangeReportDate));
 
         #region "Property"
         public users_login userLogin
@@ -64,7 +65,7 @@ namespace ALS.ALSI.Web.view.request
         {
 
             fillinScreen();
-            txtDuedate.Enabled = true;
+            txtOtherRefNo.Enabled = true;
             btnSave.Enabled = true;
             btnCancel.Enabled = true;
 
@@ -76,9 +77,7 @@ namespace ALS.ALSI.Web.view.request
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             if (this.jobSample != null)
             {
-                txtDuedate.Text = Convert.ToDateTime(this.jobSample.due_date).ToString("dd/MM/yyyy");
-                txtCustomerDuedate.Text = Convert.ToDateTime(this.jobSample.due_date_customer).ToString("dd/MM/yyyy");
-                //txtRemark.Text = this.jobSample.remarks;
+                txtOtherRefNo.Text = this.jobSample.other_ref_no;
             }
             else
             {
@@ -117,16 +116,18 @@ namespace ALS.ALSI.Web.view.request
         protected void btnSave_Click(object sender, EventArgs e)
         {
 
-            this.jobSample.due_date = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-            this.jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-            this.jobSample.due_date_customer = this.jobSample.due_date_lab.Value.AddDays(1);
+            this.jobSample.other_ref_no = txtOtherRefNo.Text;
+            if (Constants.OTHER_REF_NOS.Contains(this.jobSample.other_ref_no.Trim()))
+            {
+                this.jobSample.due_date_lab = new DateTime(1, 1, 1);
+            }
             this.jobSample.Update();
             job_sample_logs tmp = new job_sample_logs
             {
                 ID = 0,
                 job_sample_id = this.jobSample.ID,
-                log_title = String.Format("Change Due Date"),
-                job_remark = txtRemark.Text,
+                log_title = String.Format("Change Other Ref no."),
+                //job_remark = txtRemark.Text,
                 is_active = "0",
                 date = DateTime.Now
             };

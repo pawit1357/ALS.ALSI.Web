@@ -7,7 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
-
+using System.Linq;
 
 namespace ALS.ALSI.Web.view.request
 {
@@ -40,9 +40,9 @@ namespace ALS.ALSI.Web.view.request
                 job.customer_ref_no = txtCustomer_ref_no.Text;
                 job.company_name_to_state_in_report = txtCompany_name_to_state_in_report.InnerText;
                 job.job_number = String.IsNullOrEmpty(txtJob_number.Text) ? 0 : int.Parse(txtJob_number.Text);
-                job.job_prefix = String.IsNullOrEmpty(ddlJobNumber.SelectedValue)? 0: Convert.ToInt32(ddlJobNumber.SelectedValue);
+                job.job_prefix = String.IsNullOrEmpty(ddlJobNumber.SelectedValue) ? 0 : Convert.ToInt32(ddlJobNumber.SelectedValue);
                 job.date_of_receive = String.IsNullOrEmpty(txtDate_of_receive.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDate_of_receive.Text);
-                job.s_pore_ref_no = txtS_pore_ref_no.Text;
+                //job.s_pore_ref_no = txtS_pore_ref_no.Text;
                 job.spec_ref_rev_no = txtSpecRefRevNo.Text;
                 //job.customer_po_ref = string.Empty;//invoice
 
@@ -53,7 +53,7 @@ namespace ALS.ALSI.Web.view.request
                 job.status_test_tool = rdTest_toolYes.Checked ? "Y" : "N";
                 job.status_test_method = rdTest_methodYes.Checked ? "Y" : "N";
 
-                
+
 
 
                 job.create_by = userLogin.id;
@@ -208,7 +208,7 @@ namespace ALS.ALSI.Web.view.request
                     //txtCompany_name_to_state_in_report.Attributes["readonly"] = "readonly";
                     txtJob_number.Enabled = true;
                     txtDate_of_receive.Enabled = true;
-                    txtS_pore_ref_no.Enabled = true;
+                    //txtS_pore_ref_no.Enabled = true;
                     txtSpecRefRevNo.Enabled = true;
                     txtCustomer_ref_no.Enabled = true;
                     rdSample_enoughNo.Enabled = true;
@@ -252,7 +252,7 @@ namespace ALS.ALSI.Web.view.request
                     txtCompany_name_to_state_in_report.Attributes["readonly"] = "readonly";
                     txtJob_number.Attributes["readonly"] = "readonly";
                     txtDate_of_receive.Attributes["readonly"] = "readonly";
-                    txtS_pore_ref_no.Attributes["readonly"] = "readonly";
+                    //txtS_pore_ref_no.Attributes["readonly"] = "readonly";
                     txtSpecRefRevNo.Attributes["readonly"] = "readonly";
                     txtCustomer_ref_no.Attributes["readonly"] = "readonly";
                     rdSample_enoughNo.Attributes["readonly"] = "readonly";
@@ -298,7 +298,7 @@ namespace ALS.ALSI.Web.view.request
                 {
                     txtDepartment.Text = contactPerson.department;
                     txtEmail.Text = contactPerson.email;
-                    
+
                 }
             }
             //
@@ -308,7 +308,7 @@ namespace ALS.ALSI.Web.view.request
             {
                 ddlAddress.DataSource = litAddress;
                 ddlAddress.DataBind();
-                if (job.customer_address_id != null && job.customer_address_id>0)
+                if (job.customer_address_id != null && job.customer_address_id > 0)
                 {
                     m_customer_address addr = new m_customer_address().SelectByID(job.customer_address_id.Value);
                     if (addr != null)
@@ -346,7 +346,7 @@ namespace ALS.ALSI.Web.view.request
 
             txtDate_of_receive.Text = Convert.ToDateTime(job.date_of_receive).ToString("dd/MM/yyyy");
 
-            txtS_pore_ref_no.Text = job.s_pore_ref_no;
+            //txtS_pore_ref_no.Text = job.s_pore_ref_no;
             txtSpecRefRevNo.Text = job.spec_ref_rev_no;
             txtCustomer_ref_no.Text = job.customer_ref_no;
 
@@ -521,7 +521,7 @@ namespace ALS.ALSI.Web.view.request
                     objJobInfo.Insert();
                     break;
                 case CommandNameEnum.Edit:
-                    foreach(job_sample s in this.listSampleShow)
+                    foreach (job_sample s in this.listSampleShow)
                     {
                         s.update_by = userLogin.id;
                         s.update_date = DateTime.Now;
@@ -586,7 +586,7 @@ namespace ALS.ALSI.Web.view.request
                         jobSample.part_no = txtPartNo.Text;
                         jobSample.part_no = txtPartNo.Text;
                         jobSample.lot_no = txtLotNo.Text;
-
+                        jobSample.other_ref_no = txtOtherRefNo.Text;
                         #region "Special Flow"
 
                         /*
@@ -603,11 +603,11 @@ namespace ALS.ALSI.Web.view.request
                             switch (ddlJobNumber.SelectedItem.Text.ToUpper())
                             {
                                 case "ELS":
-                                    jobSample.template_id =1;
+                                    jobSample.template_id = 1;
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     break;
                                 case "ELN":
-                                    if (item.Text.EndsWith("PA_REPORT1")|| item.Text.EndsWith("PA_REPORT2"))
+                                    if (item.Text.EndsWith("PA_REPORT1") || item.Text.EndsWith("PA_REPORT2"))
                                     {
 
                                     }
@@ -616,7 +616,7 @@ namespace ALS.ALSI.Web.view.request
                                         jobSample.template_id = 2;
                                         jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     }
-  
+
                                     break;
                                 case "FA":
                                     jobSample.template_id = 3;
@@ -639,10 +639,19 @@ namespace ALS.ALSI.Web.view.request
                         m_completion_scheduled cs = new m_completion_scheduled().SelectByID(Convert.ToInt32(jobSample.status_completion_scheduled));
                         if (cs != null)
                         {
-                            if (objJobInfo != null) { 
-                                jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
-                                jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date));
-                                jobSample.due_date_lab = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date));
+                            if (objJobInfo != null)
+                            {
+                                if (Constants.OTHER_REF_NOS.Contains(jobSample.other_ref_no))
+                                {
+                                    jobSample.due_date_lab = new DateTime(1, 1, 1);
+                                    jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date));
+                                }
+                                else
+                                {
+                                    jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
+                                    jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date));
+                                    jobSample.due_date_lab = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date));
+                                }
                             }
                         }
                         else
@@ -760,6 +769,8 @@ namespace ALS.ALSI.Web.view.request
         {
             String jobNumber = gvSample.DataKeys[e.RowIndex].Values[2].ToString();
             TextBox _txtRefNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtRefNo");
+            TextBox _txtOtherRefNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtOtherRefNo");
+
             TextBox _txtDescriptoin = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtDescriptoin");
             TextBox _txtModel = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtModel");
             TextBox _txtSurfaceArea = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtSurfaceArea");
@@ -777,7 +788,7 @@ namespace ALS.ALSI.Web.view.request
                 jobSample.model = _txtModel.Text;
                 jobSample.surface_area = _txtSurfaceArea.Text;
                 jobSample.remarks = _txtRemark.Text;
-
+                jobSample.other_ref_no = _txtOtherRefNo.Text;
                 jobSample.no_of_report = Convert.ToInt16(_ddlNoOfReport.SelectedValue);
                 jobSample.uncertainty = _ddlUncertaint.SelectedValue;
                 jobSample.status_completion_scheduled = Convert.ToInt32(_ddlCompletionScheduled.SelectedValue);

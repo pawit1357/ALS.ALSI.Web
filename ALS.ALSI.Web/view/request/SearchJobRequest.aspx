@@ -257,8 +257,9 @@
                                         <asp:LinkButton ID="btnConvertTemplete" runat="server" ToolTip="Convert Template" CommandName="ConvertTemplate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tasks"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnWorkFlow" runat="server" ToolTip="Work Flow" CommandName="Workflow" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-briefcase"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeStatus" runat="server" ToolTip="Change Status" CommandName="ChangeStatus" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeDueDate" runat="server" ToolTip="Change DueDate" CommandName="ChangeDueDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calculator"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeReportDate" runat="server" ToolTip="Change Report Date" CommandName="ChangeReportDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calculator"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeDueDate" runat="server" ToolTip="Change DueDate" CommandName="ChangeDueDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeReportDate" runat="server" ToolTip="Change Report Date" CommandName="ChangeReportDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeOtherRefNo" runat="server" ToolTip="Change Other Ref No" CommandName="ChangeOtherRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-plane"></i></asp:LinkButton>
 
                                         <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Chnage Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
@@ -297,10 +298,7 @@
                                         <asp:Literal ID="litDueDate" runat="server" Text="-"></asp:Literal>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <%--                                <asp:BoundField HeaderText="Due Date." DataField="due_date" ItemStyle-HorizontalAlign="Center" SortExpression="due_date" DataFormatString="{0:d MMM yyyy}">
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>--%>
-                                <%--<asp:BoundField HeaderText="Ref No." DataField="job_number" ItemStyle-HorizontalAlign="Left" SortExpression="job_number" />--%>
+  
                                 <asp:TemplateField HeaderText="ALS Ref No.">
                                     <ItemTemplate>
                                         <asp:Label ID="lbJobNumber" runat="server" Text='<%# Eval("job_number")%>'></asp:Label>
@@ -309,17 +307,15 @@
                                 <asp:BoundField HeaderText="Cus Ref No." DataField="customer_ref_no" ItemStyle-HorizontalAlign="Left" SortExpression="customer_ref_no">
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
-                                <asp:BoundField HeaderText="S'Ref No." DataField="s_pore_ref_no" ItemStyle-HorizontalAlign="Left" SortExpression="s_pore_ref_no">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <%--<asp:BoundField HeaderText="Other" DataField="customer_po_ref" ItemStyle-HorizontalAlign="Left" SortExpression="customer_po_ref" />--%>
+                                                                <asp:TemplateField HeaderText="Other Ref No">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litOtherRefNo" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:Literal>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
 
-                                <%--                                        <asp:BoundField HeaderText="Company" DataField="customer" ItemStyle-HorizontalAlign="Left" SortExpression="customer" />--%>
+                
+
                                 <asp:TemplateField HeaderText="Company">
-                                    <%--                    <HeaderTemplate>
-                                                <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="True" DataTextField="company_name" DataValueField="ID" class="select2_category form-control" OnSelectedIndexChanged="ddlCompany_SelectedIndexChanged">
-                                                </asp:DropDownList>
-                                            </HeaderTemplate>--%>
                                     <ItemTemplate>
                                         <asp:Literal ID="ltCompany" runat="server" Text='<%# Eval("customer")%>'></asp:Literal>
                                     </ItemTemplate>

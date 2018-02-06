@@ -1235,6 +1235,7 @@
     <Content Include="view\jobRunning\SearchJobRunning.aspx" />
     <Content Include="view\library\Library.aspx" />
     <Content Include="view\library\SearchLibrary.aspx" />
+    <Content Include="view\request\ChangeOtherRefNo.aspx" />
     <Content Include="view\request\JobReTest.aspx" />
     <Content Include="view\request\ChangeReportDate.aspx" />
     <Content Include="view\request\AdminPrint.aspx" />
@@ -1424,6 +1425,13 @@
     </Compile>
     <Compile Include="view\library\SearchLibrary.aspx.designer.cs">
       <DependentUpon>SearchLibrary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\request\ChangeOtherRefNo.aspx.cs">
+      <DependentUpon>ChangeOtherRefNo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\request\ChangeOtherRefNo.aspx.designer.cs">
+      <DependentUpon>ChangeOtherRefNo.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\request\JobReTest.aspx.cs">
       <DependentUpon>JobReTest.aspx</DependentUpon>

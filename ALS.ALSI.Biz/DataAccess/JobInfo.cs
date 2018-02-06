@@ -144,6 +144,7 @@ namespace ALS.ALSI.Biz.DataAccess
                              select new
                              {
                                  ID = j.ID,
+                                 s.other_ref_no,
                                  s.date_srchemist_complate,
                                  s.date_admin_sent_to_cus,
                                  receive_date = j.date_of_receive,
