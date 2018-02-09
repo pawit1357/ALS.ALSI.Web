@@ -150,6 +150,32 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="pa" msprop:Generator_TableClassName="paDataTable" msprop:Generator_TableVarName="tablepa" msprop:Generator_RowChangedName="paRowChanged" msprop:Generator_TablePropName="pa" msprop:Generator_RowDeletingName="paRowDeleting" msprop:Generator_RowChangingName="paRowChanging" msprop:Generator_RowEvHandlerName="paRowChangeEventHandler" msprop:Generator_RowDeletedName="paRowDeleted" msprop:Generator_RowClassName="paRow" msprop:Generator_UserTableName="pa" msprop:Generator_RowEvArgName="paRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="col_a" msdata:Caption="img1" msprop:Generator_ColumnVarNameInTable="columncol_a" msprop:Generator_ColumnPropNameInRow="col_a" msprop:Generator_ColumnPropNameInTable="col_aColumn" msprop:Generator_UserColumnName="col_a" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="col_b" msdata:Caption="img2" msprop:Generator_ColumnVarNameInTable="columncol_b" msprop:Generator_ColumnPropNameInRow="col_b" msprop:Generator_ColumnPropNameInTable="col_bColumn" msprop:Generator_UserColumnName="col_b" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="col_c" msprop:Generator_ColumnVarNameInTable="columncol_c" msprop:Generator_ColumnPropNameInRow="col_c" msprop:Generator_ColumnPropNameInTable="col_cColumn" msprop:Generator_UserColumnName="col_c" type="xs:string" minOccurs="0" />
+              <xs:element name="col_d" msprop:Generator_ColumnVarNameInTable="columncol_d" msprop:Generator_ColumnPropNameInRow="col_d" msprop:Generator_ColumnPropNameInTable="col_dColumn" msprop:Generator_UserColumnName="col_d" type="xs:string" minOccurs="0" />
+              <xs:element name="col_e" msprop:Generator_ColumnVarNameInTable="columncol_e" msprop:Generator_ColumnPropNameInRow="col_e" msprop:Generator_ColumnPropNameInTable="col_eColumn" msprop:Generator_UserColumnName="col_e" type="xs:string" minOccurs="0" />
+              <xs:element name="col_f" msprop:Generator_ColumnVarNameInTable="columncol_f" msprop:Generator_ColumnPropNameInRow="col_f" msprop:Generator_ColumnPropNameInTable="col_fColumn" msprop:Generator_UserColumnName="col_f" type="xs:string" minOccurs="0" />
+              <xs:element name="col_g" msprop:Generator_ColumnVarNameInTable="columncol_g" msprop:Generator_ColumnPropNameInRow="col_g" msprop:Generator_ColumnPropNameInTable="col_gColumn" msprop:Generator_UserColumnName="col_g" type="xs:string" minOccurs="0" />
+              <xs:element name="col_h" msprop:Generator_ColumnVarNameInTable="columncol_h" msprop:Generator_ColumnPropNameInRow="col_h" msprop:Generator_ColumnPropNameInTable="col_hColumn" msprop:Generator_UserColumnName="col_h" type="xs:string" minOccurs="0" />
+              <xs:element name="col_i" msprop:Generator_ColumnVarNameInTable="columncol_i" msprop:Generator_ColumnPropNameInRow="col_i" msprop:Generator_ColumnPropNameInTable="col_iColumn" msprop:Generator_UserColumnName="col_i" type="xs:string" minOccurs="0" />
+              <xs:element name="col_j" msprop:Generator_ColumnVarNameInTable="columncol_j" msprop:Generator_ColumnPropNameInRow="col_j" msprop:Generator_ColumnPropNameInTable="col_jColumn" msprop:Generator_UserColumnName="col_j" type="xs:string" minOccurs="0" />
+              <xs:element name="col_k" msprop:Generator_ColumnVarNameInTable="columncol_k" msprop:Generator_ColumnPropNameInRow="col_k" msprop:Generator_ColumnPropNameInTable="col_kColumn" msprop:Generator_UserColumnName="col_k" type="xs:string" minOccurs="0" />
+              <xs:element name="col_l" msprop:Generator_ColumnVarNameInTable="columncol_l" msprop:Generator_ColumnPropNameInRow="col_l" msprop:Generator_ColumnPropNameInTable="col_lColumn" msprop:Generator_UserColumnName="col_l" type="xs:string" minOccurs="0" />
+              <xs:element name="col_m" msprop:Generator_ColumnVarNameInTable="columncol_m" msprop:Generator_ColumnPropNameInRow="col_m" msprop:Generator_ColumnPropNameInTable="col_mColumn" msprop:Generator_UserColumnName="col_m" type="xs:string" minOccurs="0" />
+              <xs:element name="col_n" msprop:Generator_ColumnVarNameInTable="columncol_n" msprop:Generator_ColumnPropNameInRow="col_n" msprop:Generator_ColumnPropNameInTable="col_nColumn" msprop:Generator_UserColumnName="col_n" type="xs:string" minOccurs="0" />
+              <xs:element name="col_o" msprop:Generator_ColumnVarNameInTable="columncol_o" msprop:Generator_ColumnPropNameInRow="col_o" msprop:Generator_ColumnPropNameInTable="col_oColumn" msprop:Generator_UserColumnName="col_o" type="xs:string" minOccurs="0" />
+              <xs:element name="img1" msprop:Generator_ColumnVarNameInTable="columnimg1" msprop:Generator_ColumnPropNameInRow="img1" msprop:Generator_ColumnPropNameInTable="img1Column" msprop:Generator_UserColumnName="img1" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="img2" msprop:Generator_ColumnVarNameInTable="columnimg2" msprop:Generator_ColumnPropNameInRow="img2" msprop:Generator_ColumnPropNameInTable="img2Column" msprop:Generator_UserColumnName="img2" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="img3" msprop:Generator_ColumnVarNameInTable="columnimg3" msprop:Generator_ColumnPropNameInRow="img3" msprop:Generator_ColumnPropNameInTable="img3Column" msprop:Generator_UserColumnName="img3" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="img4" msprop:Generator_ColumnVarNameInTable="columnimg4" msprop:Generator_ColumnPropNameInRow="img4" msprop:Generator_ColumnPropNameInTable="img4Column" msprop:Generator_UserColumnName="img4" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="img5" msprop:Generator_ColumnVarNameInTable="columnimg5" msprop:Generator_ColumnPropNameInRow="img5" msprop:Generator_ColumnPropNameInTable="img5Column" msprop:Generator_UserColumnName="img5" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

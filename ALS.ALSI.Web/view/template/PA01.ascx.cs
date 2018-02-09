@@ -335,6 +335,7 @@ namespace ALS.ALSI.Web.view.template
                 img2.ImageUrl = this.pa.img02;
                 img3.ImageUrl = this.pa.img03;
                 img4.ImageUrl = this.pa.img04;
+                img5.ImageUrl = this.pa.img05;
 
                 txtLms_X.Text = this.pa.lms_x;
                 txtLms_Y.Text = this.pa.lms_y;
@@ -656,6 +657,7 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.img02 = img2.ImageUrl;
                     this.pa.img03 = img3.ImageUrl;
                     this.pa.img04 = img4.ImageUrl;
+                    this.pa.img05 = img5.ImageUrl;
 
                     this.pa.lms_x = txtLms_X.Text;
                     this.pa.lms_y = txtLms_Y.Text;
@@ -787,6 +789,7 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.img02 = img2.ImageUrl;
                     this.pa.img03 = img3.ImageUrl;
                     this.pa.img04 = img4.ImageUrl;
+                    this.pa.img05 = img5.ImageUrl;
 
                     this.pa.lms_x = txtLms_X.Text;
                     this.pa.lms_y = txtLms_Y.Text;
@@ -2278,14 +2281,41 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", " "));
-            reportParameters.Add(new ReportParameter("partNo", " "));
-            reportParameters.Add(new ReportParameter("partName", " "));
-            reportParameters.Add(new ReportParameter("lotNo", " "));
+            reportParameters.Add(new ReportParameter("partNo", this.jobSample.part_no));
+            reportParameters.Add(new ReportParameter("partName", this.jobSample.part_name));
+            reportParameters.Add(new ReportParameter("lotNo", this.jobSample.lot_no));
+            //PAGE01
+            reportParameters.Add(new ReportParameter("p1_txtLms", txtLms.Text));
+            reportParameters.Add(new ReportParameter("p1_txtLnmp", txtLnmp.Text));
+            reportParameters.Add(new ReportParameter("p1_txtLf", txtLf.Text));
+            //PAGE02
+            reportParameters.Add(new ReportParameter("p2_specificationNo", ddlSpecification.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("p2_txtPIRTDC", txtPIRTDC.Text));
+            reportParameters.Add(new ReportParameter("p2_txtDoec", txtDoec.Text));
+            reportParameters.Add(new ReportParameter("p2_txtDos", txtDos.Text));
+            reportParameters.Add(new ReportParameter("p2_txtCustomerLimit", txtCustomerLimit.Text));
+            reportParameters.Add(new ReportParameter("p2_txtGravimetry", txtGravimetry.Text));
+            reportParameters.Add(new ReportParameter("p2_txtLmsp", txtLmsp.Text));
+            reportParameters.Add(new ReportParameter("p2_txtExtractionValue", txtExtractionValue.Text));
+            reportParameters.Add(new ReportParameter("p2_txtLnmsp", txtLnmsp.Text));
+            reportParameters.Add(new ReportParameter("p2_txtEop_G", txtEop_G.Text));
+            reportParameters.Add(new ReportParameter("p5_txtFeretLmsp", txtFeretLmsp.Text));
+            reportParameters.Add(new ReportParameter("p2_txtEop_Lmsp", txtEop_Lmsp.Text));
+            reportParameters.Add(new ReportParameter("p2_txtEop_Lnmsp", txtEop_Lnmsp.Text));
+            reportParameters.Add(new ReportParameter("p2_txtEop_pt", txtEop_pt.Text));
+            reportParameters.Add(new ReportParameter("p2_txtEop_size", txtEop_size.Text));
+            reportParameters.Add(new ReportParameter("p2_txtEop_value", txtEop_value.Text));
+            reportParameters.Add(new ReportParameter("p2_txtEopRemark", txtEopRemark.Text));
+            ///
+            reportParameters.Add(new ReportParameter("p3_cbCsa", cbCsa.SelectedValue));
+            reportParameters.Add(new ReportParameter("p3_txtWspc", txtWspc.Text));
+            reportParameters.Add(new ReportParameter("p3_txtWvpc", txtWvpc.Text));
+            reportParameters.Add(new ReportParameter("p3_txtTls", txtTls.Text));
+            reportParameters.Add(new ReportParameter("p3_txtPreTreatmentConditioning", txtPreTreatmentConditioning.Text));
+
+            
 
 
-            //reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-
-            //reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
             // Variables
             Warning[] warnings;
@@ -2300,7 +2330,22 @@ namespace ALS.ALSI.Web.view.template
             viewer.ProcessingMode = ProcessingMode.Local;
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/pa.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
+
+            List<template_pa_detail> eops = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+
+            List<template_pa> paImgs = new List<template_pa>();
+            template_pa pa = new template_pa();
+            pa.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
+            pa.img2 = CustomUtils.GetBytesFromImage(this.pa.img02);
+            pa.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
+            pa.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
+            pa.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
+            paImgs.Add(pa);
+
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", eops.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", paImgs.ToDataTable())); // Add datasource here
+            //xxxx
+
 
             //if (anionic.Count == 0)
             //{

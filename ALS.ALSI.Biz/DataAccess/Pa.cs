@@ -13,6 +13,11 @@ namespace ALS.ALSI.Biz.DataAccess
         #region "Property"
         public CommandNameEnum RowState { get; set; }
         #endregion
+        public byte[] img1 { get; set; }
+        public byte[] img2 { get; set; }
+        public byte[] img3 { get; set; }
+        public byte[] img4 { get; set; }
+        public byte[] img5 { get; set; }
 
         private static IRepository<template_pa> _repository
         {

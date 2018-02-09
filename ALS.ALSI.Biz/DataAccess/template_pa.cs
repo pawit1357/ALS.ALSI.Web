@@ -113,5 +113,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string lnms_y { get; set; }
         public string lf_x { get; set; }
         public string lf_y { get; set; }
+        public string img05 { get; set; }
     }
 }

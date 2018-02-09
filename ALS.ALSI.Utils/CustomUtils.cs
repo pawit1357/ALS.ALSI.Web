@@ -60,7 +60,7 @@ namespace ALS.ALSI.Utils
 
             //string path = HttpContext.Current.Server.MapPath(imageFile);
             //byte[] photo = File.ReadAllBytes(path);
-
+            if (imageFile == null) return null;
             var webClient = new WebClient();
 
             byte[] photo = webClient.DownloadData(imageFile);

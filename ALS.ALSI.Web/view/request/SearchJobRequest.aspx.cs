@@ -654,12 +654,14 @@ namespace ALS.ALSI.Web.view.request
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
                         sqlCri.Append(" `Extent1`.`job_prefix` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
+                        sqlCri.Append(" AND ");
                     }
                     if (!String.IsNullOrEmpty(ddlCompany.SelectedValue))
                     {
                         if (Convert.ToInt16(ddlCompany.SelectedValue) > 0)
                         {
                             sqlCri.Append(" `Extent1`.`customer_id` = " + Convert.ToInt16(ddlCompany.SelectedValue));
+                            sqlCri.Append(" AND ");
                         }
 
                     }
@@ -667,29 +669,35 @@ namespace ALS.ALSI.Web.view.request
                     if (!String.IsNullOrEmpty(ddlSpecification.SelectedValue))
                     {
                         sqlCri.Append(" `Extent3`.`id` = " + Convert.ToInt16(ddlSpecification.SelectedValue));
+                        sqlCri.Append(" AND ");
                     }
 
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
                         sqlCri.Append(" `Extent4`.`id` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
+                        sqlCri.Append(" AND ");
                     }
                     if (!String.IsNullOrEmpty(ddlJobStatus.SelectedValue))
                     {
                         sqlCri.Append(" `Extent7`.`id` = " + Convert.ToInt16(ddlJobStatus.SelectedValue));
+                        sqlCri.Append(" AND ");
                     }
 
                     if (!String.IsNullOrEmpty(txtREfNo.Text))
                     {
                         sqlCri.Append(" `Extent2`.`job_number` = '" + txtREfNo.Text + "'");
+                        sqlCri.Append(" AND ");
 
                     }
                     if (!String.IsNullOrEmpty(txtPo.Text))
                     {
                         sqlCri.Append(" `Extent2`.`sample_po` = '" + txtPo.Text + "'");
+                        sqlCri.Append(" AND ");
                     }
                     if (!String.IsNullOrEmpty(txtInvoice.Text))
                     {
                         sqlCri.Append(" `Extent1`.`sample_invoice` = '" + txtInvoice.Text + "'");
+                        sqlCri.Append(" AND ");
 
                     }
 
@@ -698,6 +706,7 @@ namespace ALS.ALSI.Web.view.request
                     if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
                     {
                         sqlCri.Append(" `Extent1`.`date_of_receive` between'" + receive_report_from.ToString("yyyy-MM-dd") + "' AND '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
+                        sqlCri.Append(" AND ");
                     }
 
                     DateTime duedate_from = String.IsNullOrEmpty(txtDuedateFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateFrom.Text);
@@ -705,6 +714,7 @@ namespace ALS.ALSI.Web.view.request
                     if (duedate_from != DateTime.MinValue && duedate_to != DateTime.MinValue)
                     {
                         sqlCri.Append(" `Extent2`.`due_date` between '" + duedate_from.ToString("yyyy-MM-dd") + "' AND '" + duedate_to.ToString("yyyy-MM-dd") + "'");
+                        sqlCri.Append(" AND ");
 
                     }
 
@@ -713,10 +723,11 @@ namespace ALS.ALSI.Web.view.request
                     if (report_to_customer_from != DateTime.MinValue && report_to_customer_to != DateTime.MinValue)
                     {
                         sqlCri.Append(" `Extent2`.`date_admin_sent_to_cus` between '" + report_to_customer_from.ToString("yyyy-MM-dd") + "' AND '" + report_to_customer_to.ToString("yyyy-MM-dd") + "'");
+                        sqlCri.Append(" AND ");
 
                     }
 
-                    sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString() : "";
+                    sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString().Substring(0,sqlCri.ToString().Length-5) : "";
                     sql += " ORDER BY `Extent2`.`job_number` DESC";
 
                     MySqlCommand cmd = new MySqlCommand(sql, conn);

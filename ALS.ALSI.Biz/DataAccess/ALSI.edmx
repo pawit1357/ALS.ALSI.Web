@@ -718,6 +718,7 @@
           <Property Name="lnms_y" Type="varchar" MaxLength="45" />
           <Property Name="lf_x" Type="varchar" MaxLength="45" />
           <Property Name="lf_y" Type="varchar" MaxLength="45" />
+          <Property Name="img05" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="template_pa_detail">
           <Key>
@@ -2752,6 +2753,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="lnms_y" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="lf_x" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="lf_y" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img05" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_pa_detail">
           <Key>
@@ -4476,6 +4478,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_pa">
             <EntityTypeMapping TypeName="ALSIModel.template_pa">
               <MappingFragment StoreEntitySet="template_pa">
+                <ScalarProperty Name="img05" ColumnName="img05" />
                 <ScalarProperty Name="lf_y" ColumnName="lf_y" />
                 <ScalarProperty Name="lf_x" ColumnName="lf_x" />
                 <ScalarProperty Name="lnms_y" ColumnName="lnms_y" />

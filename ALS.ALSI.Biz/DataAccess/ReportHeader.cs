@@ -82,8 +82,16 @@ namespace ALS.ALSI.Biz.ReportObjects
                 rpt.dateOfTestComplete = Convert.ToDateTime(_sample.date_chemist_complete);
 
                 //ATT / ELP / 16 / XXXX(เลขจ็อบ) - XX(Test)
+
+                int phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2));
+                if (DateTime.Now.Month < 4)
+                {
+                    phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2))-1;
+                }
+
+
                 String[] tmp = _sample.job_number.Split('-');
-                rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", (_sample.amend_count > 0 ? (_sample.amend_count == 1 ? "AM/" : "AM/" + _sample.amend_count) : "") , _job.date_of_receive.Value.ToString("yy"), tmp[0], tmp[1], tmp[2]);// _sample.job_number.ToString();
+                rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", (_sample.amend_count > 0 ? (_sample.amend_count == 1 ? "AM/" : "AM/" + _sample.amend_count) : ""),tmp[0], phisicalYear, tmp[1],tmp[2]);// _sample.job_number.ToString();
                 rpt.description = "Description:" + _sample.description + "\n" +
                                   "Model:" + _sample.model + "\n" +
                                   "Surface Area:" + _sample.surface_area + "\n"+
