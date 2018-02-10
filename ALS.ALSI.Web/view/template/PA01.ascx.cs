@@ -2307,14 +2307,98 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("p2_txtEop_value", txtEop_value.Text));
             reportParameters.Add(new ReportParameter("p2_txtEopRemark", txtEopRemark.Text));
             ///
-            reportParameters.Add(new ReportParameter("p3_cbCsa", cbCsa.SelectedValue));
+            reportParameters.Add(new ReportParameter("p3_cbCsa", CustomUtils.getCheckBoxListValue(cbCsa)));
             reportParameters.Add(new ReportParameter("p3_txtWspc", txtWspc.Text));
             reportParameters.Add(new ReportParameter("p3_txtWvpc", txtWvpc.Text));
             reportParameters.Add(new ReportParameter("p3_txtTls", txtTls.Text));
             reportParameters.Add(new ReportParameter("p3_txtPreTreatmentConditioning", txtPreTreatmentConditioning.Text));
+            reportParameters.Add(new ReportParameter("p3_cbPreTreatmentConditioning", cbPreTreatmentConditioning.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p3_cbPackingToBeTested", CustomUtils.getCheckBoxListValue(cbPackingToBeTested)));
+            //reportParameters.Add(new ReportParameter("p3_cbPackingToBeTested", CustomUtils.getCheckBoxListValue(cbPackingToBeTested)));
+            reportParameters.Add(new ReportParameter("p3_cbContainer", cbContainer.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p3_cbFluid1", cbFluid1.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p3_cbFluid2", cbFluid2.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p3_cbFluid3", cbFluid3.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p3_ddlContainer", ddlContainer.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("p3_ddlFluid1", ddlFluid1.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("p3_ddlFluid2", ddlFluid2.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("p3_ddlFluid3", ddlFluid3.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("p3_ddlFluid3", ddlFluid3.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("p3_txtTradeName", txtTradeName.Text));
+            reportParameters.Add(new ReportParameter("p3_txtManufacturer", txtManufacturer.Text));
+            reportParameters.Add(new ReportParameter("p3_txtTotalQuantity", txtTotalQuantity.Text));
+            reportParameters.Add(new ReportParameter("p3_cbTshb01", cbTshb01.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p3_cbTshb02", cbTshb02.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p3_cbTshb03", cbTshb03.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p3_cbPots01", cbPots01.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p3_txtTshb03", txtTshb03.Text));
+            reportParameters.Add(new ReportParameter("p4_cbDissolving", cbDissolving.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_txtDissolving", txtDissolving.Text));
+            reportParameters.Add(new ReportParameter("p4_txtDissolvingTime", txtDissolvingTime.Text));
+            reportParameters.Add(new ReportParameter("p4_cbPressureRinsing", cbPressureRinsing.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_cbInternalRinsing", cbInternalRinsing.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_cbAgitation", cbAgitation.Checked.ToString()));
+
+            reportParameters.Add(new ReportParameter("p4_cbWashQuantity", cbWashQuantity.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_txtWashQuantity", txtWashQuantity.Text));
+            reportParameters.Add(new ReportParameter("p4_cbRewashingQuantity", cbRewashingQuantity.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_txtRewashingQuantity", txtRewashingQuantity.Text));
+            reportParameters.Add(new ReportParameter("p4_cbWashPressureRinsing", cbWashPressureRinsing.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_cbWashInternalRinsing", cbWashInternalRinsing.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_cbWashAgitation", cbWashAgitation.Checked.ToString()));
+
+            reportParameters.Add(new ReportParameter("p4_cbFiltrationMethod", CustomUtils.getCheckBoxListValue(cbFiltrationMethod)));
+
+            reportParameters.Add(new ReportParameter("p4_ddlManufacturer", ddlManufacturer.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("p4_ddlMaterial", ddlMaterial.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("p4_txtPoreSize", txtPoreSize.Text));
+            reportParameters.Add(new ReportParameter("p4_txtDiameter", txtDiameter.Text));
+
+            reportParameters.Add(new ReportParameter("p4_cbOven", cbOven.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_cbDesiccator", cbDesiccator.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_cbAmbientAir", cbAmbientAir.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_cbEasyDry", cbEasyDry.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_txtDryTime", txtDryTime.Text));
+            reportParameters.Add(new ReportParameter("p4_txtTemperature", txtTemperature.Text));
+
+            reportParameters.Add(new ReportParameter("p4_ddlGravimetricAlalysis", ddlGravimetricAlalysis.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("p4_txtModel", txtModel.Text));
+            reportParameters.Add(new ReportParameter("p4_txtBalanceResolution", txtBalanceResolution.Text));
+            reportParameters.Add(new ReportParameter("p4_txtLastCalibration", txtLastCalibration.Text));
+
+            reportParameters.Add(new ReportParameter("p4_cbZEISSAxioImager2", cbZEISSAxioImager2.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_cbMeasuringSoftware", cbMeasuringSoftware.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_cbAutomated", cbAutomated.Checked.ToString()));
+            reportParameters.Add(new ReportParameter("p4_txtAutomated", txtAutomated.Text));
+
+
+            reportParameters.Add(new ReportParameter("p5_txtTotalextractionVolume", txtTotalextractionVolume.Text));
+            reportParameters.Add(new ReportParameter("p5_txtNumberOfComponents", txtNumberOfComponents.Text));
+            reportParameters.Add(new ReportParameter("p5_lbExtractionMethod", lbExtractionMethod.Text));
+            reportParameters.Add(new ReportParameter("p5_lbExtractionTime", lbExtractionTime.Text));
+            reportParameters.Add(new ReportParameter("p5_lbMembraneType", lbMembraneType.Text));
+            reportParameters.Add(new ReportParameter("p5_lbX", txtAutomated.Text));
+            reportParameters.Add(new ReportParameter("p5_lbY", txtAutomated.Text));
+            reportParameters.Add(new ReportParameter("p5_txtMeasuredDiameter", txtMeasuredDiameter.Text));
+            reportParameters.Add(new ReportParameter("p5_txtFeretLnms", txtFeretLnms.Text));
+            reportParameters.Add(new ReportParameter("p5_txtFeretFb", txtFeretFb.Text));
+
+
+            reportParameters.Add(new ReportParameter("p5_txtLms_X", txtLms_X.Text));
+            reportParameters.Add(new ReportParameter("p5_txtLms_Y", txtLms_Y.Text));
+            reportParameters.Add(new ReportParameter("p5_txtLnms_X", txtLnms_X.Text));
+            reportParameters.Add(new ReportParameter("p5_txtLnms_Y", txtLnms_Y.Text));
+            reportParameters.Add(new ReportParameter("p5_txtLf_X", txtLf_X.Text));
+            reportParameters.Add(new ReportParameter("p5_txtLf_Y", txtLf_Y.Text));
+
+
 
             
 
+                
+
+                
+                
 
 
             // Variables
@@ -2332,6 +2416,9 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
 
             List<template_pa_detail> eops = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            List<template_pa_detail> dissolvings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
+            List<template_pa_detail> washings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
+            List<template_pa_detail> mas = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
 
             List<template_pa> paImgs = new List<template_pa>();
             template_pa pa = new template_pa();
@@ -2344,6 +2431,10 @@ namespace ALS.ALSI.Web.view.template
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", eops.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", paImgs.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dissolvings.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", washings.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", mas.ToDataTable())); // Add datasource here
+
             //xxxx
 
 

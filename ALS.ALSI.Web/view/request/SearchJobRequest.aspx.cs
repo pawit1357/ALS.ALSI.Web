@@ -61,7 +61,8 @@ namespace ALS.ALSI.Web.view.request
 
                 tmp.status = String.IsNullOrEmpty(ddlJobStatus.SelectedValue) ? 0 : int.Parse(ddlJobStatus.SelectedValue);
                 tmp.jobRefNo = txtREfNo.Text;
-                tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
+                //tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
+                tmp.customerText = ddlCompany.SelectedItem.Text;
                 tmp.spec_id = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : int.Parse(ddlSpecification.SelectedValue);
                 tmp.dataGroup = String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue) ? "" : ddlTypeOfTest.SelectedItem.Text;
 
@@ -384,7 +385,7 @@ namespace ALS.ALSI.Web.view.request
                     Literal litOtherRefNo = (Literal)e.Row.FindControl("litOtherRefNo");
 
 
-                    
+
                     CompletionScheduledEnum status_completion_scheduled = (CompletionScheduledEnum)Enum.ToObject(typeof(CompletionScheduledEnum), _valueCompletion_scheduled);
 
                     StatusEnum job_status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), _valueStatus);
@@ -449,14 +450,14 @@ namespace ALS.ALSI.Web.view.request
 
                     //if (Constants.OTHER_REF_NOS.Contains(litOtherRefNo.Text))
                     //{
-                        if (DateTime.Equals(due_date_lab, new DateTime(1, 1, 1)))
-                        {
-                            litDueDate.Text = "TBA";
-                        }
-                        else
-                        {
+                    if (DateTime.Equals(due_date_lab, new DateTime(1, 1, 1)))
+                    {
+                        litDueDate.Text = "TBA";
+                    }
+                    else
+                    {
 
-                        }
+                    }
                     //}
 
                     #region "Job color status"
@@ -656,15 +657,27 @@ namespace ALS.ALSI.Web.view.request
                         sqlCri.Append(" `Extent1`.`job_prefix` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
                         sqlCri.Append(" AND ");
                     }
-                    if (!String.IsNullOrEmpty(ddlCompany.SelectedValue))
+
+
+                    if (Convert.ToInt16(ddlCompany.SelectedValue) > 0)
                     {
-                        if (Convert.ToInt16(ddlCompany.SelectedValue) > 0)
+                        if (!String.IsNullOrEmpty(ddlCompany.SelectedItem.Text))
                         {
-                            sqlCri.Append(" `Extent1`.`customer_id` = " + Convert.ToInt16(ddlCompany.SelectedValue));
+                            sqlCri.Append(" `Extent5`.`company_name` like '%" + ddlCompany.SelectedItem.Text + "%'");
                             sqlCri.Append(" AND ");
                         }
-
                     }
+
+
+                    //if (!String.IsNullOrEmpty(ddlCompany.SelectedValue))
+                    //{
+                    //    if (Convert.ToInt16(ddlCompany.SelectedValue) > 0)
+                    //    {
+                    //        sqlCri.Append(" `Extent1`.`customer_id` = " + Convert.ToInt16(ddlCompany.SelectedValue));
+                    //        sqlCri.Append(" AND ");
+                    //    }
+
+                    //}
 
                     if (!String.IsNullOrEmpty(ddlSpecification.SelectedValue))
                     {
@@ -727,7 +740,7 @@ namespace ALS.ALSI.Web.view.request
 
                     }
 
-                    sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString().Substring(0,sqlCri.ToString().Length-5) : "";
+                    sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString().Substring(0, sqlCri.ToString().Length - 5) : "";
                     sql += " ORDER BY `Extent2`.`job_number` DESC";
 
                     MySqlCommand cmd = new MySqlCommand(sql, conn);

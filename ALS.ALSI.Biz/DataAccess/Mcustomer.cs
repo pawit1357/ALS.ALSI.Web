@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Runtime.InteropServices;
+using MoreLinq;
 
 namespace ALS.ALSI.Biz.DataAccess
 {
@@ -27,7 +28,17 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public IEnumerable<m_customer> SelectAll()
         {
-            return _repository.GetAll().OrderBy(x=>x.company_name).ToList();
+            Hashtable ht = new Hashtable();
+            List<m_customer> listOfCuss = new List<m_customer>();
+            foreach(m_customer item in _repository.GetAll())
+            {
+                if (!ht.ContainsKey(item.company_name))
+                {
+                    listOfCuss.Add(item);
+                    ht.Add(item.company_name, item.company_name);
+                }
+            }
+            return listOfCuss;
         }
 
         public m_customer SelectByID(int _id)
@@ -139,15 +150,20 @@ namespace ALS.ALSI.Biz.DataAccess
                 IEnumerable dataList = null;
 
                 var result = from j in ctx.m_customer
-                             join a in ctx.m_customer_address on j.ID equals a.company_id orderby j.company_name
-                             select new { 
-                             j.ID,
-                             j.customer_code,
-                             j.company_name,
-                             j.code,
-                             a.address
+                             join a in ctx.m_customer_address on j.ID equals a.company_id 
+                             into dep from dept in dep.DefaultIfEmpty() orderby j.company_name
+                             select new
+                             {
+                                 j.ID,
+                                 j.customer_code,
+                                 j.company_name,
+                                 j.code,
+                                 dept.address
                              };
 
+
+
+                
 
 
                 if (!string.IsNullOrEmpty(this.customer_code))
@@ -164,10 +180,10 @@ namespace ALS.ALSI.Biz.DataAccess
                     switch (sortDirection)
                     {
                         case "ASC":
-                            dataList =  result.ToList().OrderBy(x => x.GetType().GetProperty(sortExpression).GetValue(x, null)).ToList();
+                            dataList = result.ToList().OrderBy(x => x.GetType().GetProperty(sortExpression).GetValue(x, null)).ToList();
                             break;
                         case "DESC":
-                            dataList =  result.ToList().OrderByDescending(x => x.GetType().GetProperty(sortExpression).GetValue(x, null)).ToList();
+                            dataList = result.ToList().OrderByDescending(x => x.GetType().GetProperty(sortExpression).GetValue(x, null)).ToList();
                             break;
 
                     }
@@ -211,5 +227,14 @@ namespace ALS.ALSI.Biz.DataAccess
         ////    }
         ////}
 
+    }
+
+    public class CustomerAndAddress
+    {
+        public int ID { get; set; }
+        public string customer_code { get; set; }
+        public string company_name { get; set; }
+        public string code { get; set; }
+        public string address { get; set; }
     }
 }

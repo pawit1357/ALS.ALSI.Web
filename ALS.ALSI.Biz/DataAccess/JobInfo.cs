@@ -12,6 +12,7 @@ namespace ALS.ALSI.Biz.DataAccess
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(job_info));
+        public String customerText { get; set; }
 
         private static IRepository<job_info> _repository
         {
@@ -187,7 +188,7 @@ namespace ALS.ALSI.Biz.DataAccess
                                 s.date_labman_complete,
                                 s.is_hold,
                                 s.amend_count,
-                                s.retest_count
+                                s.retest_count,
                              };
 
                 if (this.ID > 0)
@@ -235,8 +236,17 @@ namespace ALS.ALSI.Biz.DataAccess
                 }
                 if (this.customer_id > 0)
                 {
-                    result = result.Where(x => x.customer_id == this.customer_id);
+                    if (!String.IsNullOrEmpty(this.customerText))
+                    {
+                        result = result.Where(x => x.customer.Contains(this.customerText));
+
+
+                    }
                 }
+                //if (this.customer_id > 0)
+                //{
+                //    result = result.Where(x => x.customer_id == this.customer_id);
+                //}
                 if (this.spec_id > 0)
                 {
                     result = result.Where(x => x.spec_id == this.spec_id);

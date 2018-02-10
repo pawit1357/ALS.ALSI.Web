@@ -1985,7 +1985,10 @@
     <EmbeddedResource Include="ReportObject\!hpa_seagate_boyd.rdlc" />
     <EmbeddedResource Include="ReportObject\!hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\!hpa_seagate_siam.rdlc" />
+    <EmbeddedResource Include="ReportObject\pa - Copy %282%29.rdlc" />
+    <EmbeddedResource Include="ReportObject\pa - Copy %283%29.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy.rdlc" />
+    <EmbeddedResource Include="ReportObject\pa_04.rdlc" />
     <EmbeddedResource Include="ReportObject\pa.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\!mesa_ink_ribbon_wd.rdlc" />
