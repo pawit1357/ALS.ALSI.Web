@@ -14,7 +14,7 @@
                     <div class="actions">
                         <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn btn-default btn-sm" OnClick="btnUsLPC_Click" />
                         <asp:Button ID="btnWorkSheet" runat="server" Text="WorkSheet" CssClass="btn blue" OnClick="btnUsLPC_Click" />
-                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i>ตั้งค่า</asp:LinkButton>
 
                     </div>
                 </div>
@@ -410,9 +410,7 @@
                                     <div class="portlet-body">
                                         <div class="fa-item col-md-3 col-sm-4">
                                              <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
-                                            <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                        <span class="text-muted">(Download)</span>
-                                            </asp:LinkButton>
+                                            <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click"> <span class="text-muted">(Download)</span> </asp:LinkButton>
                                         </div>
                                     </div>
                                 </div>
@@ -426,7 +424,23 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date Analyzed:<span class="required">
+										* </span>
+                                            </label>
+                                            <div class="col-md-6">
+                                                <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
                                     <asp:Panel ID="pSpecification" runat="server">
 
                                         <div class="form-group">
@@ -573,8 +587,7 @@
                         </div>
                         <!-- /.modal-dialog -->
 
-                        <asp:LinkButton ID="lnkFake" runat="server">
-                        </asp:LinkButton>
+                        <asp:LinkButton ID="lnkFake" runat="server"> </asp:LinkButton>
                         <asp:ModalPopupExtender ID="ModolPopupExtender" runat="server" PopupControlID="pnlModalDemo"
                             TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
                             CancelControlID="btnClose">
@@ -600,8 +613,7 @@
                         </div>
                         <!-- /.modal-dialog -->
 
-                        <asp:LinkButton ID="bnErrListFake" runat="server">
-                        </asp:LinkButton>
+                        <asp:LinkButton ID="bnErrListFake" runat="server"> </asp:LinkButton>
                         <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
                             TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
                             CancelControlID="btnPopupErrorList">

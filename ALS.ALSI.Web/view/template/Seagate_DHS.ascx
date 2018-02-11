@@ -1,7 +1,5 @@
 ﻿lo8k<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_DHS.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_DHS" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-
-<form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %><form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <asp:ToolkitScriptManager ID="ToolkitScript1" runat="server" />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
@@ -291,7 +289,23 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
+                                                                        <asp:Panel ID="pAnalyzeDate" runat="server">
 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date Analyzed:<span class="required">
+										* </span>
+                                            </label>
+                                            <div class="col-md-6">
+                                                <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
                                     <asp:Panel ID="pSpecification" runat="server">
                                         <div class="row">
                                             <div class="col-md-6">

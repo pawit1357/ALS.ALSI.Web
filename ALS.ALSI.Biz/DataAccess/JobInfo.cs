@@ -209,10 +209,10 @@ namespace ALS.ALSI.Biz.DataAccess
                 //{
                 //    result = result.Where(x => x.receive_date == this.date_of_receive);
                 //}
-                if (this.customer_id > 0)
-                {
-                    result = result.Where(x => x.customer_id == this.customer_id);
-                }
+                //if (this.customer_id > 0)
+                //{
+                //    result = result.Where(x => x.customer_id == this.customer_id);
+                //}
                 if (this.contract_person_id > 0)
                 {
                     result = result.Where(x => x.contract_person_id == this.contract_person_id);

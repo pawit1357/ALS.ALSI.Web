@@ -312,23 +312,11 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
-                #region "VISIBLE RESULT DATA"
-                if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
-               && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
-                {
-                    #region ":: STAMP ANALYZED DATE ::"
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                    {
-                        if (this.jobSample.date_chemist_alalyze == null)
-                        {
-                            this.jobSample.date_chemist_alalyze = DateTime.Now;
-                            this.jobSample.Update();
-                        }
-                    }
-                    #endregion
 
-                }
-                #endregion
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
+
+
 
             }
             #endregion
@@ -512,6 +500,7 @@ namespace ALS.ALSI.Web.view.template
             pUS_LPC06.Visible = false;
             pWorksheetForHPAFiltration.Visible = false;
 
+
             switch (lbJobStatus.Text)
             {
                 case "CONVERT_PDF":
@@ -593,7 +582,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-
+                        this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         //#endregion
@@ -1517,7 +1506,7 @@ namespace ALS.ALSI.Web.view.template
                     if (tmp != null)
                     {
 
-                        
+
                         tmp.BlankCouts = Convert.ToInt32(_BlankCouts);
                         tmp.RawCounts = Convert.ToInt32(_RawCounts);
                         tmp.C = _sumC + "";
@@ -1791,7 +1780,7 @@ namespace ALS.ALSI.Web.view.template
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 25).ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(25, 25).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(50, ds5.Count-50).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(50, ds5.Count - 50).ToDataTable())); // Add datasource here
 
 
 
@@ -1904,7 +1893,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
-        
+
 
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {

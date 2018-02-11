@@ -189,15 +189,15 @@ namespace ALS.ALSI.Web.view.template
                             pLoadFile.Visible = true;
 
                         }
-                        #region ":: STAMP ANALYZED DATE ::"
+                        //#region ":: STAMP ANALYZED DATE ::"
                    
-                            if (this.jobSample.date_chemist_alalyze == null)
-                            {
-                                this.jobSample.date_chemist_alalyze = DateTime.Now;
-                                this.jobSample.Update();
-                            }
+                        //    if (this.jobSample.date_chemist_alalyze == null)
+                        //    {
+                        //        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                        //        this.jobSample.Update();
+                        //    }
                         
-                        #endregion
+                        //#endregion
                         break;
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
@@ -244,6 +244,10 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
+
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
+
                 #endregion
 
                 #region "CAS"
@@ -398,6 +402,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
+                        this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         //#endregion
                         #region "CAS#"
                         tb_m_dhs_cas.DeleteBySampleID(this.SampleID);

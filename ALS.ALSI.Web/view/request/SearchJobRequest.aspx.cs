@@ -61,7 +61,7 @@ namespace ALS.ALSI.Web.view.request
 
                 tmp.status = String.IsNullOrEmpty(ddlJobStatus.SelectedValue) ? 0 : int.Parse(ddlJobStatus.SelectedValue);
                 tmp.jobRefNo = txtREfNo.Text;
-                //tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
+                tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
                 tmp.customerText = ddlCompany.SelectedItem.Text;
                 tmp.spec_id = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : int.Parse(ddlSpecification.SelectedValue);
                 tmp.dataGroup = String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue) ? "" : ddlTypeOfTest.SelectedItem.Text;
@@ -625,10 +625,11 @@ namespace ALS.ALSI.Web.view.request
                                 "DATE_FORMAT(`Extent2`.`date_srchemist_complate`,'%e %b %Y') AS `Received`," +
                                 "DATE_FORMAT(`Extent2`.`date_admin_sent_to_cus`,'%e %b %Y') AS  `Report Sent to Customer`," +
                                 "DATE_FORMAT(`Extent1`.`date_of_receive`,'%e %b %Y') AS `Receive Date`," +
-                                "DATE_FORMAT(`Extent2`.`due_date`,'%e %b %Y') AS `Due Date`," +
+                                //"DATE_FORMAT(`Extent2`.`due_date`,'%e %b %Y') AS `Due Date`," +
+                                "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end) AS `Due Date`," +
                                 "`Extent2`.`job_number` AS `ALS Ref`," +
                                 "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
-                                "`Extent2`.`other_ref_no` AS `S Ref No`," +
+                                "`Extent2`.`other_ref_no` AS `Other Ref No`," +
                                 "`Extent5`.`company_name` AS `Company`," +
                                 "`Extent2`.`sample_invoice` AS `Invoice`," +
                                 "`Extent2`.`sample_po` AS `Po`," +

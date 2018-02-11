@@ -688,6 +688,24 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtD32;
         
         /// <summary>
+        /// pAnalyzeDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pAnalyzeDate;
+        
+        /// <summary>
+        /// txtDateAnalyzed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateAnalyzed;
+        
+        /// <summary>
         /// pSpecification control.
         /// </summary>
         /// <remarks>

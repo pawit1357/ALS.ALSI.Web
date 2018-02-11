@@ -742,7 +742,23 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date Analyzed:<span class="required">
+										* </span>
+                                            </label>
+                                            <div class="col-md-6">
+                                                <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
                                     <asp:Panel ID="pSpecification" runat="server">
                                         <%--        <div class="row">
                                             <div class="col-md-6">--%>
@@ -804,8 +820,11 @@
                                             <div class="col-md-6">
                                                 <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
                                                 <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                                                     <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
+
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 </asp:LinkButton>
                                             </div>
                                         </div>

@@ -334,20 +334,24 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
+
+
                 #region "VISIBLE RESULT DATA"
                 if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
                && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
                 {
-                    #region ":: STAMP ANALYZED DATE ::"
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                    {
-                        if (this.jobSample.date_chemist_alalyze == null)
-                        {
-                            this.jobSample.date_chemist_alalyze = DateTime.Now;
-                            this.jobSample.Update();
-                        }
-                    }
-                    #endregion
+                    //#region ":: STAMP ANALYZED DATE ::"
+                    //if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                    //{
+                    //    if (this.jobSample.date_chemist_alalyze == null)
+                    //    {
+                    //        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                    //        this.jobSample.Update();
+                    //    }
+                    //}
+                    //#endregion
 
                 }
                 #endregion
@@ -522,6 +526,7 @@ namespace ALS.ALSI.Web.view.template
 
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
+                        this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         //#endregion
                         foreach (template_seagate_hpa_coverpage ws in this.Hpas)
                         {
