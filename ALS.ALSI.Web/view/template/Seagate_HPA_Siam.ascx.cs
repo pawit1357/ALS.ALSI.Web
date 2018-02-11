@@ -1734,6 +1734,8 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text.Substring(ddlLpcType.SelectedItem.Text.IndexOf('(') + 1, (ddlLpcType.SelectedItem.Text.IndexOf(')') - 1) - ddlLpcType.SelectedItem.Text.IndexOf('('))));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+
             //tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(this.Hpas[0].specification_id));
             //if (tem != null)
             //{

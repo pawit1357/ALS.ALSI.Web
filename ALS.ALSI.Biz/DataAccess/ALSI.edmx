@@ -108,6 +108,7 @@
           <Property Name="part_name" Type="varchar" MaxLength="200" />
           <Property Name="lot_no" Type="varchar" MaxLength="200" />
           <Property Name="other_ref_no" Type="varchar" MaxLength="200" />
+          <Property Name="singapore_ref_no" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -2130,6 +2131,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="part_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="lot_no" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="other_ref_no" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="singapore_ref_no" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="ALSIModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
         </EntityType>
         <EntityType Name="job_sample_logs">
@@ -3894,6 +3896,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample">
             <EntityTypeMapping TypeName="ALSIModel.job_sample">
               <MappingFragment StoreEntitySet="job_sample">
+                <ScalarProperty Name="singapore_ref_no" ColumnName="singapore_ref_no" />
                 <ScalarProperty Name="other_ref_no" ColumnName="other_ref_no" />
                 <ScalarProperty Name="lot_no" ColumnName="lot_no" />
                 <ScalarProperty Name="part_name" ColumnName="part_name" />

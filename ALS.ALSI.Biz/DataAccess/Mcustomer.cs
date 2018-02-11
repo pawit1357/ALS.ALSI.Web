@@ -29,13 +29,25 @@ namespace ALS.ALSI.Biz.DataAccess
         public IEnumerable<m_customer> SelectAll()
         {
             Hashtable ht = new Hashtable();
+            Hashtable htCusAddr = new Hashtable();
+
+            m_customer_address cusAddr = new m_customer_address();
+            
+            foreach (m_customer_address item in cusAddr.SelectAll())
+            {
+                htCusAddr.Add(item.ID, item.company_id);
+            }
+
             List<m_customer> listOfCuss = new List<m_customer>();
             foreach(m_customer item in _repository.GetAll())
             {
-                if (!ht.ContainsKey(item.company_name))
+                if (!ht.ContainsKey(item.company_name.Trim()))
                 {
-                    listOfCuss.Add(item);
-                    ht.Add(item.company_name, item.company_name);
+                    if (htCusAddr.ContainsValue(item.ID))
+                    {
+                        listOfCuss.Add(item);
+                        ht.Add(item.company_name.Trim(), item.company_name.Trim());
+                    }
                 }
             }
             return listOfCuss;

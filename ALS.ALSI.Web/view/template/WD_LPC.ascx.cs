@@ -863,6 +863,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("txtD54", txtD54.Text));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("method", txtB21.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
             // Variables
             Warning[] warnings;

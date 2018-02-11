@@ -260,7 +260,9 @@
                                         <asp:LinkButton ID="btnChangeDueDate" runat="server" ToolTip="Change DueDate" CommandName="ChangeDueDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeReportDate" runat="server" ToolTip="Change Report Date" CommandName="ChangeReportDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeOtherRefNo" runat="server" ToolTip="Change Other Ref No" CommandName="ChangeOtherRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-plane"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeSingaporeRefNo" runat="server" ToolTip="Change Singapore RefNo" CommandName="ChangeSingaporeRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
 
+                                        
                                         <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Chnage Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnPrintLabel" runat="server" ToolTip="Print Label" CommandName="Print" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-print"></i></asp:LinkButton>
@@ -298,7 +300,7 @@
                                         <asp:Literal ID="litDueDate" runat="server" Text="-"></asp:Literal>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-  
+
                                 <asp:TemplateField HeaderText="ALS Ref No.">
                                     <ItemTemplate>
                                         <asp:Label ID="lbJobNumber" runat="server" Text='<%# Eval("job_number")%>'></asp:Label>
@@ -307,13 +309,13 @@
                                 <asp:BoundField HeaderText="Cus Ref No." DataField="customer_ref_no" ItemStyle-HorizontalAlign="Left" SortExpression="customer_ref_no">
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
-                                                                <asp:TemplateField HeaderText="Other Ref No">
+                                <asp:TemplateField HeaderText="Other Ref No">
                                     <ItemTemplate>
                                         <asp:Literal ID="litOtherRefNo" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:Literal>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
-                
+
 
                                 <asp:TemplateField HeaderText="Company">
                                     <ItemTemplate>
@@ -383,8 +385,8 @@
                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-truck">:Complete </i></div>
                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-lock">: Hold</i></div>
                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-trash-o">:Cancel </i></div>
-                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-retweet">:Retest(report) </i></div>
-                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-wrench">:Amend(report) </i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-retweet">:Retest(report) </i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-wrench">:Amend(report) </i></div>
                             <p>STATUS:</p>
                             <button type="button" class="btn red btn-sm">Cancel</button>
                             <button type="button" class="btn green btn-sm">Complete</button>

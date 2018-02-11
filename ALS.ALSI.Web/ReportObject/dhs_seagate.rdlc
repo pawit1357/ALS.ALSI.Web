@@ -1374,6 +1374,9 @@
               <Parameter Name="SampleDescription">
                 <Value>=Parameters!SampleDescription.Value</Value>
               </Parameter>
+              <Parameter Name="AlsSingaporeRefNo">
+                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
+              </Parameter>
             </Parameters>
             <Height>2.18417in</Height>
             <Width>7.15029in</Width>
@@ -1636,7 +1639,7 @@
             <Top>9.16977cm</Top>
             <Left>0cm</Left>
             <Height>1.65324cm</Height>
-            <Width>18.16171cm</Width>
+            <Width>18.16172cm</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2195,11 +2198,16 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>6</NumberOfRows>
+      <NumberOfRows>7</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -2260,6 +2268,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>5</RowIndex>
           <ParameterName>rpt_unit</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

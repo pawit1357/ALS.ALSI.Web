@@ -1428,7 +1428,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1563,7 +1562,7 @@
             <Top>3.19563in</Top>
             <Left>0.06166in</Left>
             <Height>0.57292in</Height>
-            <Width>6.98265in</Width>
+            <Width>6.98266in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -2678,6 +2677,9 @@
               </Parameter>
               <Parameter Name="SampleDescription">
                 <Value>=Parameters!SampleDescription.Value</Value>
+              </Parameter>
+              <Parameter Name="AlsSingaporeRefNo">
+                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
               </Parameter>
             </Parameters>
             <Left>0.06165in</Left>
@@ -4030,7 +4032,7 @@
             <DataSetName>DataSet5</DataSetName>
             <Top>17.84637in</Top>
             <Left>0.06882in</Left>
-            <Height>3.48977in</Height>
+            <Height>3.48976in</Height>
             <Width>6.9718in</Width>
             <ZIndex>15</ZIndex>
             <Visibility>
@@ -4401,6 +4403,11 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -4461,6 +4468,11 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>5</RowIndex>
           <ParameterName>Company_addr</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

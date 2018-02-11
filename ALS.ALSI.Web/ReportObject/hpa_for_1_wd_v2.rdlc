@@ -1334,7 +1334,7 @@
             <Top>1.61833in</Top>
             <Left>0.00695in</Left>
             <Height>0.58632in</Height>
-            <Width>7.27601in</Width>
+            <Width>7.276in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -2103,7 +2103,7 @@
             <Top>2.41284in</Top>
             <Left>0.00695in</Left>
             <Height>0.61594in</Height>
-            <Width>7.27601in</Width>
+            <Width>7.27603in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -2863,6 +2863,9 @@
               <Parameter Name="SampleDescription">
                 <Value>=Parameters!SampleDescription.Value</Value>
               </Parameter>
+              <Parameter Name="AlsSingaporeRefNo">
+                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
+              </Parameter>
             </Parameters>
             <Left>0.00695in</Left>
             <Height>1.34069in</Height>
@@ -3125,7 +3128,7 @@
             <Top>12.4461cm</Top>
             <Left>0.01765cm</Left>
             <Height>1.75464cm</Height>
-            <Width>18.48107cm</Width>
+            <Width>18.48106cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -5623,7 +5626,7 @@
         <Height>12.42589in</Height>
         <Style />
       </Body>
-      <Width>7.28296in</Width>
+      <Width>7.28298in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -5700,6 +5703,11 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -5770,6 +5778,11 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>Company_addr</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

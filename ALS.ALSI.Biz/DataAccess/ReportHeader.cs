@@ -67,7 +67,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                 _cus = _cus.SelectByID(_job.customer_id);
 
                 m_customer_address addr = new m_customer_address();
-                addr = addr.SelectByCompanyID(_cus.ID);
+                addr = addr.SelectByID(_job.customer_address_id.Value);
 
                 if (_cus != null)
                 {
@@ -92,9 +92,9 @@ namespace ALS.ALSI.Biz.ReportObjects
 
                 String[] tmp = _sample.job_number.Split('-');
                 rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", (_sample.amend_count > 0 ? (_sample.amend_count == 1 ? "AM/" : "AM/" + _sample.amend_count) : ""),tmp[0], phisicalYear, tmp[1],tmp[2]);// _sample.job_number.ToString();
-                rpt.description = "Description:" + _sample.description + "\n" +
-                                  "Model:" + _sample.model + "\n" +
-                                  "Surface Area:" + _sample.surface_area + "\n"+
+                rpt.description = (String.IsNullOrEmpty(_sample.description) ? String.Empty:"Description:" + _sample.description + "\n") +
+                                  (String.IsNullOrEmpty(_sample.model) ? String.Empty : "Model:" + _sample.model + "\n") +
+                                  (String.IsNullOrEmpty(_sample.surface_area) ? String.Empty : "Surface Area:" + _sample.surface_area + "\n")+
                                   (!String.IsNullOrEmpty(_sample.remarks)? "Remark: "+_sample.remarks+"\n":"");
 
                 rpt.model = _sample.model;

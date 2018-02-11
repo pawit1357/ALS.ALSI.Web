@@ -1102,9 +1102,8 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.52799in</Top>
-            <Left>0in</Left>
             <Height>0.56446in</Height>
-            <Width>7.26125in</Width>
+            <Width>7.26124in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1639,7 +1638,7 @@
             <Top>2.44835in</Top>
             <Left>0.0148in</Left>
             <Height>0.583in</Height>
-            <Width>7.24645in</Width>
+            <Width>7.24644in</Width>
             <ZIndex>3</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2157,7 +2156,7 @@
             <DataSetName>DataSet3</DataSetName>
             <Top>4.34404in</Top>
             <Height>0.56211in</Height>
-            <Width>7.26125in</Width>
+            <Width>7.26126in</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2230,6 +2229,9 @@
               </Parameter>
               <Parameter Name="SampleDescription">
                 <Value>=Parameters!SampleDescription.Value</Value>
+              </Parameter>
+              <Parameter Name="AlsSingaporeRefNo">
+                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
               </Parameter>
             </Parameters>
             <Left>0.0148in</Left>
@@ -2962,7 +2964,7 @@
             <DataSetName>DataSet4</DataSetName>
             <Top>3.67082in</Top>
             <Height>0.54822in</Height>
-            <Width>7.26125in</Width>
+            <Width>7.26126in</Width>
             <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -3713,7 +3715,7 @@
             <DataSetName>DataSet5</DataSetName>
             <Top>5.53313in</Top>
             <Height>0.55329in</Height>
-            <Width>7.26125in</Width>
+            <Width>7.26126in</Width>
             <ZIndex>11</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -3748,7 +3750,7 @@
         <Height>8.70506in</Height>
         <Style />
       </Body>
-      <Width>7.26125in</Width>
+      <Width>7.26126in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -3829,11 +3831,16 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>7</NumberOfRows>
+      <NumberOfRows>8</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -3904,6 +3911,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>rpt_unit2</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

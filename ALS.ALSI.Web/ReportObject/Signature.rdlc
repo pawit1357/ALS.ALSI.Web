@@ -46,23 +46,6 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontFamily>Lucida Sans</FontFamily>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
                 <Value>............................................</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
@@ -130,9 +113,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>2.66564cm</Top>
+        <Top>2.77148cm</Top>
         <Left>10.35925cm</Left>
-        <Height>2.21195cm</Height>
+        <Height>1.70854cm</Height>
         <Width>7.24052cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -225,7 +208,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.92031in</Height>
+    <Height>1.76379in</Height>
     <Style />
   </Body>
   <Width>6.92904in</Width>

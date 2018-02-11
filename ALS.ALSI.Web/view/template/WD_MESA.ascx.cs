@@ -715,6 +715,8 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", " "));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+
             //List<template_wd_mesa_img> imgList = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
             //List<template_wd_mesa_img> tmpImg1 = new List<template_wd_mesa_img>();
             //if (imgList.Count >= 1)

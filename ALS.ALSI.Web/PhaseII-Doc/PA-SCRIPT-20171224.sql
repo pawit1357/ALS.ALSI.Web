@@ -21,3 +21,5 @@
 
 
 
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `singapore_ref_no` VARCHAR(200) NULL AFTER `other_ref_no`;

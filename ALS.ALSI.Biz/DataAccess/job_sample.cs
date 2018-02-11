@@ -67,6 +67,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string part_name { get; set; }
         public string lot_no { get; set; }
         public string other_ref_no { get; set; }
+        public string singapore_ref_no { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

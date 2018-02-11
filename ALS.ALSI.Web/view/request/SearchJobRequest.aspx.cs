@@ -283,6 +283,9 @@ namespace ALS.ALSI.Web.view.request
                 case CommandNameEnum.ChangeOtherRefNo:
                     Server.Transfer(Constants.LINK_CHANGE_OTHER_REF_NO);
                     break;
+                case CommandNameEnum.ChangeSingaporeRefNo:
+                    Server.Transfer(Constants.LINK_CHANGE_SINGAPORE_REF_NO);
+                    break;
                 case CommandNameEnum.Amend:
                 case CommandNameEnum.Retest:
                     Server.Transfer(Constants.LINK_RETEST);
@@ -368,7 +371,9 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnPrintLabel = (LinkButton)e.Row.FindControl("btnPrintLabel");
                     LinkButton btnChangeReportDate = (LinkButton)e.Row.FindControl("btnChangeReportDate");
                     LinkButton btnChangeOtherRefNo = (LinkButton)e.Row.FindControl("btnChangeOtherRefNo");
+                    LinkButton btnChangeSingaporeRefNo = (LinkButton)e.Row.FindControl("btnChangeSingaporeRefNo");
 
+                    
 
 
                     LinkButton btnAmend = (LinkButton)e.Row.FindControl("btnAmend");
@@ -418,6 +423,7 @@ namespace ALS.ALSI.Web.view.request
                             break;
                     }
                     btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN);
+                    btnChangeSingaporeRefNo.Visible = (userRole == RoleEnum.CHEMIST);
                     btnChangeDueDate.Visible = ((userRole == RoleEnum.SR_CHEMIST));
                     btnChangePo.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LABMANAGER));
                     btnChangeInvoice.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT));

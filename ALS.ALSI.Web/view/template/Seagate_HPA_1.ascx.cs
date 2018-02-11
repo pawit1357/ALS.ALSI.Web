@@ -1590,6 +1590,8 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("rpt_unit", ddlLiquidParticleUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("rpt_unit2", ddlHardParticleAlalysisUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("rpt_unit3", ddlClassificationUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+
             //}
             DataTable dtSummary = new DataTable("Summary");
             DataColumn[] cols1 ={ new DataColumn("A",typeof(String)),

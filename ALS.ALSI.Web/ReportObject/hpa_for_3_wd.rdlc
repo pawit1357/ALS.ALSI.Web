@@ -343,7 +343,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>5.15056cm</Top>
+            <Top>3.54646cm</Top>
             <Left>0.00221cm</Left>
             <Height>0.52881cm</Height>
             <Width>16.47916cm</Width>
@@ -963,7 +963,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>2.26375in</Top>
+            <Top>1.63222in</Top>
             <Height>0.67328in</Height>
             <Width>6.4896in</Width>
             <ZIndex>1</ZIndex>
@@ -1029,7 +1029,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>7.49532cm</Top>
+            <Top>5.89122cm</Top>
             <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>16.48137cm</Width>
@@ -1714,7 +1714,7 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>3.20077in</Top>
+            <Top>2.56924in</Top>
             <Height>0.63333in</Height>
             <Width>6.48873in</Width>
             <ZIndex>3</ZIndex>
@@ -2242,7 +2242,7 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>6.01066in</Top>
+            <Top>5.37913in</Top>
             <Left>0.00087in</Left>
             <Height>0.58333in</Height>
             <Width>6.48873in</Width>
@@ -2296,7 +2296,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>14.6677cm</Top>
+            <Top>13.0636cm</Top>
             <Left>0.00221cm</Left>
             <Height>0.52881cm</Height>
             <Width>16.48137cm</Width>
@@ -2334,7 +2334,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>9.87973cm</Top>
+            <Top>8.27563cm</Top>
             <Left>0.4509cm</Left>
             <Height>1.11089cm</Height>
             <Width>4.1605cm</Width>
@@ -2353,7 +2353,7 @@
             <Source>Embedded</Source>
             <Value>=Parameters!img01Url.Value</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>4.39646in</Top>
+            <Top>3.76493in</Top>
             <Left>0.17752in</Left>
             <Height>1.07653in</Height>
             <Width>1.63626in</Width>
@@ -2387,7 +2387,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>14.0778cm</Top>
+            <Top>12.4737cm</Top>
             <Left>0.00221cm</Left>
             <Height>0.51935cm</Height>
             <Width>16.47916cm</Width>
@@ -2406,7 +2406,7 @@
             <Source>Embedded</Source>
             <Value>=Parameters!img02Url.Value</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>4.39646in</Top>
+            <Top>3.76493in</Top>
             <Left>2.05817in</Left>
             <Height>1.07653in</Height>
             <Width>1.63817in</Width>
@@ -2422,7 +2422,7 @@
             <Value>=Parameters!img03Url.Value</Value>
             <Sizing>FitProportional</Sizing>
             <Top>4.39646in</Top>
-            <Left>3.92274in</Left>
+            <Left>3.92361in</Left>
             <Height>1.07653in</Height>
             <Width>1.60417in</Width>
             <ZIndex>10</ZIndex>
@@ -2455,7 +2455,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>16.85456cm</Top>
+            <Top>15.25046cm</Top>
             <Left>0.00221cm</Left>
             <Height>0.52881cm</Height>
             <Width>16.48137cm</Width>
@@ -2968,7 +2968,7 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>6.87162in</Top>
+            <Top>6.24009in</Top>
             <Height>0.58333in</Height>
             <Width>6.48873in</Width>
             <ZIndex>12</ZIndex>
@@ -3021,7 +3021,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>19.00614cm</Top>
+            <Top>17.40204cm</Top>
             <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>16.48137cm</Width>
@@ -3534,7 +3534,7 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>7.7187in</Top>
+            <Top>7.08717in</Top>
             <Left>0.00087in</Left>
             <Height>0.58333in</Height>
             <Width>6.48873in</Width>
@@ -3588,7 +3588,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>9.87974cm</Top>
+            <Top>8.27564cm</Top>
             <Left>5.22819cm</Left>
             <Height>1.11089cm</Height>
             <Width>4.1605cm</Width>
@@ -3627,7 +3627,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>9.84445cm</Top>
-            <Left>9.87786cm</Left>
+            <Left>9.88007cm</Left>
             <Height>1.11089cm</Height>
             <Width>4.1605cm</Width>
             <ZIndex>16</ZIndex>
@@ -3643,7 +3643,7 @@
           </Textbox>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>8.32981in</Top>
+            <Top>7.69828in</Top>
             <Left>0.00087in</Left>
             <Height>1.04167in</Height>
             <Width>6.48786in</Width>
@@ -3654,10 +3654,42 @@
               </Border>
             </Style>
           </Subreport>
-          <Subreport Name="Subreport2">
-            <ReportName>ReportHeader</ReportName>
-            <Left>0.00087in</Left>
-            <Height>2in</Height>
+          <Subreport Name="reportHeader">
+            <ReportName>reportHeader</ReportName>
+            <Parameters>
+              <Parameter Name="CustomerPoNo">
+                <Value>=Parameters!CustomerPoNo.Value</Value>
+              </Parameter>
+              <Parameter Name="AlsThailandRefNo">
+                <Value>=Parameters!AlsThailandRefNo.Value</Value>
+              </Parameter>
+              <Parameter Name="Date">
+                <Value>=Parameters!Date.Value</Value>
+              </Parameter>
+              <Parameter Name="Company">
+                <Value>=Parameters!Company.Value</Value>
+              </Parameter>
+              <Parameter Name="Company_addr">
+                <Value>=Parameters!Company_addr.Value</Value>
+              </Parameter>
+              <Parameter Name="DateSampleReceived">
+                <Value>=Parameters!DateSampleReceived.Value</Value>
+              </Parameter>
+              <Parameter Name="DateAnalyzed">
+                <Value>=Parameters!DateAnalyzed.Value</Value>
+              </Parameter>
+              <Parameter Name="DateTestCompleted">
+                <Value>=Parameters!DateTestCompleted.Value</Value>
+              </Parameter>
+              <Parameter Name="SampleDescription">
+                <Value>=Parameters!SampleDescription.Value</Value>
+              </Parameter>
+              <Parameter Name="AlsSingaporeRefNo">
+                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Left>0.00174in</Left>
+            <Height>1.34069in</Height>
             <Width>6.48873in</Width>
             <ZIndex>18</ZIndex>
             <Style>
@@ -3667,10 +3699,10 @@
             </Style>
           </Subreport>
         </ReportItems>
-        <Height>9.42953in</Height>
+        <Height>8.73995in</Height>
         <Style />
       </Body>
-      <Width>6.4896in</Width>
+      <Width>6.49047in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -3757,6 +3789,11 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -3837,6 +3874,11 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>7</RowIndex>
           <ParameterName>rpt_unit</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

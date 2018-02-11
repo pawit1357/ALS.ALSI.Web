@@ -1317,6 +1317,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor3[0].img_path));
             reportParameters.Add(new ReportParameter("img02Url", Configurations.HOST + "" + this.HpaFor3[0].img_path1));
             reportParameters.Add(new ReportParameter("img03Url", Configurations.HOST + "" + this.HpaFor3[0].img_path2));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
             // Variables
             Warning[] warnings;

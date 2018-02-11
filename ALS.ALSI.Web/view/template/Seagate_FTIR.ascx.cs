@@ -845,6 +845,7 @@ namespace ALS.ALSI.Web.view.template
 
                 reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
                 reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
+                reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
                 // Variables
                 Warning[] warnings;
@@ -962,71 +963,7 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-
-            //DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
-            List<template_seagate_ftir_coverpage> methods = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-            List<template_seagate_ftir_coverpage> ftirs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
-            List<template_seagate_ftir_coverpage> nvrs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", " "));
-            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnit.SelectedItem.Text));
-
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_nvr_seagate_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", methods.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-
-
-
-
-        }
+        
         private void downloadWord()
         {
             HttpContext.Current.Response.Clear();

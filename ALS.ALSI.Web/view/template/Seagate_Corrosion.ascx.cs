@@ -836,6 +836,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbResultDesc.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
             // Variables
             Warning[] warnings;

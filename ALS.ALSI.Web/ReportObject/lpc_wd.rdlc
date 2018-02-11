@@ -6082,6 +6082,9 @@
               <Parameter Name="SampleDescription">
                 <Value>=Parameters!SampleDescription.Value</Value>
               </Parameter>
+              <Parameter Name="AlsSingaporeRefNo">
+                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
+              </Parameter>
             </Parameters>
             <Left>0.00001in</Left>
             <Height>2.18417in</Height>
@@ -7068,11 +7071,16 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>10</NumberOfRows>
+      <NumberOfRows>11</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -7173,6 +7181,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>9</RowIndex>
           <ParameterName>method</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>10</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

@@ -37,6 +37,7 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_JOB_CHANGE_PO = APPNAME + "/view/request/ChangeJobPo.aspx";
         public const String LINK_REPORT_DATE = APPNAME + "/view/request/ChangeReportDate.aspx";
         public const String LINK_CHANGE_OTHER_REF_NO = APPNAME + "/view/request/ChangeOtherRefNo.aspx";
+        public const String LINK_CHANGE_SINGAPORE_REF_NO = APPNAME + "/view/request/ChangeSingaporeRefNo.aspx";
 
 
         public const String LINK_ADMIN_PRINT = APPNAME + "/view/request/AdminPrint.aspx";
@@ -160,7 +161,8 @@ namespace ALS.ALSI.Biz.Constant
         UnHold = 35,
         Up = 36,
         Down = 37,
-        ChangeOtherRefNo = 38
+        ChangeOtherRefNo = 38,
+        ChangeSingaporeRefNo = 39
     }
 
     public enum RowTypeEnum : int

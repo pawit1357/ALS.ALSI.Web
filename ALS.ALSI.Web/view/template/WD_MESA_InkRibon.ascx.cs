@@ -387,7 +387,8 @@ namespace ALS.ALSI.Web.view.template
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
-                    //#endregion                    foreach (template_wd_mesa_coverpage _cover in this.coverpages)
+                    //#endregion                    
+                    foreach (template_wd_mesa_coverpage _cover in this.coverpages)
                     {
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
                         _cover.ExtractionMedium_Extraction = txtExtractionMedium_Extraction.Text;
@@ -692,6 +693,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             reportParameters.Add(new ReportParameter("ResultDesc", "-"));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
             // Variables
             Warning[] warnings;

@@ -31,7 +31,7 @@
                                         <tr>
                                             <th>Analysis</th>
                                             <th>Procedure No</th>
-                                            <th>Sample Size</th>
+                                            <th>Number of pieces used for extraction</th>
                                             <th>Extraction<br />
                                                 Medium</th>
                                             <th>Extraction<br />

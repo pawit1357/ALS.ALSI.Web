@@ -2094,6 +2094,7 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("Remark1", lbRemark1.Text));
                 reportParameters.Add(new ReportParameter("Remark2", lbRemark2.Text));
                 reportParameters.Add(new ReportParameter("Remark3", lbRemark3.Text));
+                reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
 
                 // Variables
