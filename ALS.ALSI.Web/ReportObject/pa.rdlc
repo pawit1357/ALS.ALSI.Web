@@ -15524,7 +15524,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Image Name="Image2">
+                        <Image Name="img2">
                           <Source>Database</Source>
                           <Value>=Fields!img2.Value</Value>
                           <MIMEType>image/jpeg</MIMEType>
@@ -15539,6 +15539,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Image>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

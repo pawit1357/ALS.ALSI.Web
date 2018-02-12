@@ -68,6 +68,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<template_seagate_hpa_coverpage> template_seagate_hpa_coverpage { get; set; }
         public DbSet<template_seagate_ic_coverpage> template_seagate_ic_coverpage { get; set; }
         public DbSet<template_seagate_lpc_coverpage> template_seagate_lpc_coverpage { get; set; }
+        public DbSet<template_seagate_mesa_coverpage> template_seagate_mesa_coverpage { get; set; }
+        public DbSet<template_seagate_mesa_img> template_seagate_mesa_img { get; set; }
         public DbSet<template_wd_corrosion_coverpage> template_wd_corrosion_coverpage { get; set; }
         public DbSet<template_wd_corrosion_img> template_wd_corrosion_img { get; set; }
         public DbSet<template_wd_dhs_coverpage> template_wd_dhs_coverpage { get; set; }

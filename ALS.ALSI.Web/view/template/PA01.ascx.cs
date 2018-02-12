@@ -5,6 +5,7 @@ using ALS.ALSI.Biz.ReportObjects;
 using ALS.ALSI.Utils;
 using ALS.ALSI.Web.Properties;
 using ALS.ALSI.Web.view.request;
+using Kaliko.ImageLibrary;
 using Microsoft.Reporting.WebForms;
 using Microsoft.Reporting.WebForms;
 using NPOI.HSSF.UserModel;
@@ -16,6 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -225,6 +228,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
+            this.pa = new template_pa();
             this.pa = pa.SelectByID(this.SampleID);
             if (this.pa != null)
             {
@@ -531,7 +535,6 @@ namespace ALS.ALSI.Web.view.template
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
-            this.pa = new template_pa();
 
             if (!Page.IsPostBack)
             {
@@ -1200,6 +1203,8 @@ namespace ALS.ALSI.Web.view.template
             string MM = DateTime.Now.ToString("MM");
             string dd = DateTime.Now.ToString("dd");
 
+            String randNumberJPG = String.Empty;
+            String source_fileJPG = String.Empty;
             String randNumber = String.Empty;
             String source_file = String.Empty;
             String source_file_url = String.Empty;
@@ -1208,56 +1213,110 @@ namespace ALS.ALSI.Web.view.template
             {
                 randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg02.FileName));
                 source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+                randNumberJPG = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                source_fileJPG = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumberJPG);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumberJPG));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
+
                 fileUploadImg02.SaveAs(source_file);
+                try
+                {
+
+                    var image = new KalikoImage(source_file);
+                    image.SaveJpg(source_fileJPG, 100);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine();
+                }
                 this.pa.img02 = source_file_url;
                 img2.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg03.FileName).Equals(".tif")))
             {
-                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg03.FileName));
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg02.FileName));
                 source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+                randNumberJPG = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                source_fileJPG = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumberJPG);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumberJPG));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
                 fileUploadImg03.SaveAs(source_file);
+                try
+                {
+
+                    var image = new KalikoImage(source_file);
+                    image.SaveJpg(source_fileJPG, 100);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine();
+                }
+
                 this.pa.img03 = source_file_url;
                 img3.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg04.FileName).Equals(".tif")))
             {
-                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg04.FileName));
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg02.FileName));
                 source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+                randNumberJPG = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                source_fileJPG = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumberJPG);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumberJPG));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
                 fileUploadImg04.SaveAs(source_file);
+                try
+                {
+
+                    var image = new KalikoImage(source_file);
+                    image.SaveJpg(source_fileJPG, 100);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine();
+                }
                 this.pa.img04 = source_file_url;
                 img4.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg05.FileName).Equals(".tif")))
             {
-                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg05.FileName));
+                randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileUploadImg02.FileName));
                 source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+                randNumberJPG = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                source_fileJPG = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumberJPG);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumberJPG));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
                 fileUploadImg05.SaveAs(source_file);
-                //this.pa.img05 = source_file_url;
+                try
+                {
+
+                    var image = new KalikoImage(source_file);
+                    image.SaveJpg(source_fileJPG, 100);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine();
+                }
+                this.pa.img05 = source_file_url;
                 img5.ImageUrl = source_file_url;
             }
 
@@ -2393,12 +2452,12 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            
 
-                
 
-                
-                
+
+
+
+
 
 
             // Variables
@@ -2419,18 +2478,27 @@ namespace ALS.ALSI.Web.view.template
             List<template_pa_detail> dissolvings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
             List<template_pa_detail> washings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             List<template_pa_detail> mas = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
+            
+            foreach(template_pa_detail eop in eops)
+            {
+                eop.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
+                eop.img2 = CustomUtils.GetBytesFromImage("http://localhost/uploads/2017/12/04/ELP-2410-MB/1.jpg");
+                eop.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
+                eop.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
+                eop.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
+            }
 
-            List<template_pa> paImgs = new List<template_pa>();
-            template_pa pa = new template_pa();
-            pa.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
-            pa.img2 = CustomUtils.GetBytesFromImage(this.pa.img02);
-            pa.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
-            pa.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
-            pa.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
-            paImgs.Add(pa);
+            //List<template_pa> paImgs = new List<template_pa>();
+            //template_pa _pa = new template_pa();
+            //_pa.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
+            //_pa.img2 = CustomUtils.GetBytesFromImage(this.pa.img02);
+            //_pa.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
+            //_pa.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
+            //_pa.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
+            //paImgs.Add(_pa);
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", eops.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", paImgs.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", eops.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dissolvings.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", washings.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", mas.ToDataTable())); // Add datasource here

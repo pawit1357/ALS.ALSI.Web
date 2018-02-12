@@ -1278,6 +1278,40 @@
           <Property Name="df06" Type="double" />
           <Property Name="unit" Type="int" />
         </EntityType>
+        <EntityType Name="template_seagate_mesa_coverpage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sample_id" Type="int" />
+          <Property Name="component_id" Type="int" />
+          <Property Name="location_of_parts" Type="varchar" MaxLength="255" />
+          <Property Name="specification" Type="varchar" MaxLength="255" />
+          <Property Name="result" Type="varchar" MaxLength="45" />
+          <Property Name="pass_fail" Type="varchar" MaxLength="45" />
+          <Property Name="ProcedureNo_Extraction" Type="varchar" MaxLength="45" />
+          <Property Name="ExtractionMedium_Extraction" Type="varchar" MaxLength="45" />
+          <Property Name="SampleSize_Extraction" Type="varchar" MaxLength="45" />
+          <Property Name="OvenCondition_Extraction" Type="varchar" MaxLength="200" />
+          <Property Name="ProcedureNo_IndirectMaterials" Type="varchar" MaxLength="200" />
+          <Property Name="SampleSize_IndirectMaterials" Type="varchar" MaxLength="45" />
+          <Property Name="OvenCondition_IndirectMaterials" Type="varchar" MaxLength="45" />
+          <Property Name="row_type" Type="int" />
+        </EntityType>
+        <EntityType Name="template_seagate_mesa_img">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sample_id" Type="int" />
+          <Property Name="seq" Type="int" />
+          <Property Name="area" Type="int" />
+          <Property Name="descripton" Type="varchar" MaxLength="255" />
+          <Property Name="path_sem_image_at_250x" Type="varchar" MaxLength="255" />
+          <Property Name="path_sem_image_at_500x" Type="varchar" MaxLength="255" />
+          <Property Name="path_sem_image_at_2000x" Type="varchar" MaxLength="255" />
+          <Property Name="path_edx_spectrum" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
             <PropertyRef Name="ID" />
@@ -1840,6 +1874,8 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="template_seagate_hpa_coverpage" EntityType="Self.template_seagate_hpa_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_ic_coverpage" EntityType="Self.template_seagate_ic_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_lpc_coverpage" EntityType="Self.template_seagate_lpc_coverpage" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="template_seagate_mesa_coverpage" EntityType="Self.template_seagate_mesa_coverpage" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="template_seagate_mesa_img" EntityType="Self.template_seagate_mesa_img" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_corrosion_coverpage" EntityType="Self.template_wd_corrosion_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_corrosion_img" EntityType="Self.template_wd_corrosion_img" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_dhs_coverpage" EntityType="Self.template_wd_dhs_coverpage" Schema="alsi" store:Type="Tables" />
@@ -1960,6 +1996,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="template_seagate_hpa_coverpage" EntityType="ALSIModel.template_seagate_hpa_coverpage" />
           <EntitySet Name="template_seagate_ic_coverpage" EntityType="ALSIModel.template_seagate_ic_coverpage" />
           <EntitySet Name="template_seagate_lpc_coverpage" EntityType="ALSIModel.template_seagate_lpc_coverpage" />
+          <EntitySet Name="template_seagate_mesa_coverpage" EntityType="ALSIModel.template_seagate_mesa_coverpage" />
+          <EntitySet Name="template_seagate_mesa_img" EntityType="ALSIModel.template_seagate_mesa_img" />
           <EntitySet Name="template_wd_corrosion_coverpage" EntityType="ALSIModel.template_wd_corrosion_coverpage" />
           <EntitySet Name="template_wd_corrosion_img" EntityType="ALSIModel.template_wd_corrosion_img" />
           <EntitySet Name="template_wd_dhs_coverpage" EntityType="ALSIModel.template_wd_dhs_coverpage" />
@@ -3313,6 +3351,40 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="df05" Type="Double" />
           <Property Name="df06" Type="Double" />
           <Property Name="unit" Type="Int32" />
+        </EntityType>
+        <EntityType Name="template_seagate_mesa_coverpage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sample_id" Type="Int32" />
+          <Property Name="component_id" Type="Int32" />
+          <Property Name="location_of_parts" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="specification" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="result" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pass_fail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ProcedureNo_Extraction" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ExtractionMedium_Extraction" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="SampleSize_Extraction" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="OvenCondition_Extraction" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ProcedureNo_IndirectMaterials" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SampleSize_IndirectMaterials" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="OvenCondition_IndirectMaterials" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="row_type" Type="Int32" />
+        </EntityType>
+        <EntityType Name="template_seagate_mesa_img">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sample_id" Type="Int32" />
+          <Property Name="seq" Type="Int32" />
+          <Property Name="area" Type="Int32" />
+          <Property Name="descripton" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="path_sem_image_at_250x" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="path_sem_image_at_500x" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="path_sem_image_at_2000x" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="path_edx_spectrum" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_corrosion_coverpage">
           <Key>
@@ -5148,6 +5220,42 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="specification_id" ColumnName="specification_id" />
                 <ScalarProperty Name="lpc_type" ColumnName="lpc_type" />
                 <ScalarProperty Name="particle_type" ColumnName="particle_type" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="template_seagate_mesa_coverpage">
+            <EntityTypeMapping TypeName="ALSIModel.template_seagate_mesa_coverpage">
+              <MappingFragment StoreEntitySet="template_seagate_mesa_coverpage">
+                <ScalarProperty Name="row_type" ColumnName="row_type" />
+                <ScalarProperty Name="OvenCondition_IndirectMaterials" ColumnName="OvenCondition_IndirectMaterials" />
+                <ScalarProperty Name="SampleSize_IndirectMaterials" ColumnName="SampleSize_IndirectMaterials" />
+                <ScalarProperty Name="ProcedureNo_IndirectMaterials" ColumnName="ProcedureNo_IndirectMaterials" />
+                <ScalarProperty Name="OvenCondition_Extraction" ColumnName="OvenCondition_Extraction" />
+                <ScalarProperty Name="SampleSize_Extraction" ColumnName="SampleSize_Extraction" />
+                <ScalarProperty Name="ExtractionMedium_Extraction" ColumnName="ExtractionMedium_Extraction" />
+                <ScalarProperty Name="ProcedureNo_Extraction" ColumnName="ProcedureNo_Extraction" />
+                <ScalarProperty Name="pass_fail" ColumnName="pass_fail" />
+                <ScalarProperty Name="result" ColumnName="result" />
+                <ScalarProperty Name="specification" ColumnName="specification" />
+                <ScalarProperty Name="location_of_parts" ColumnName="location_of_parts" />
+                <ScalarProperty Name="component_id" ColumnName="component_id" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="template_seagate_mesa_img">
+            <EntityTypeMapping TypeName="ALSIModel.template_seagate_mesa_img">
+              <MappingFragment StoreEntitySet="template_seagate_mesa_img">
+                <ScalarProperty Name="path_edx_spectrum" ColumnName="path_edx_spectrum" />
+                <ScalarProperty Name="path_sem_image_at_2000x" ColumnName="path_sem_image_at_2000x" />
+                <ScalarProperty Name="path_sem_image_at_500x" ColumnName="path_sem_image_at_500x" />
+                <ScalarProperty Name="path_sem_image_at_250x" ColumnName="path_sem_image_at_250x" />
+                <ScalarProperty Name="descripton" ColumnName="descripton" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

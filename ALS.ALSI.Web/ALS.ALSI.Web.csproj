@@ -73,6 +73,9 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Kaliko.ImageLibrary, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageLibrary.3.0.2\lib\net45\Kaliko.ImageLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -1291,6 +1294,7 @@
     <Content Include="view\specification\SearchSpecification.aspx" />
     <Content Include="view\specification\Specification.aspx" />
     <Content Include="view\template\Seagate_Corrosion.ascx" />
+    <Content Include="view\template\SEAGATE_MESA.ascx" />
     <Content Include="view\template\WD_MESA.ascx" />
     <Content Include="view\template\WD_MESA_IDM.ascx" />
     <Content Include="view\template\WD_MESA_InkRibon.ascx" />
@@ -1819,6 +1823,13 @@
     <Compile Include="view\template\Seagate_Corrosion.ascx.designer.cs">
       <DependentUpon>Seagate_Corrosion.ascx</DependentUpon>
     </Compile>
+    <Compile Include="view\template\SEAGATE_MESA.ascx.cs">
+      <DependentUpon>SEAGATE_MESA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\SEAGATE_MESA.ascx.designer.cs">
+      <DependentUpon>SEAGATE_MESA.ascx</DependentUpon>
+    </Compile>
     <Compile Include="view\template\WD_MESA.ascx.cs">
       <DependentUpon>WD_MESA.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1993,6 +2004,7 @@
     <EmbeddedResource Include="ReportObject\!hpa_seagate_boyd.rdlc" />
     <EmbeddedResource Include="ReportObject\!hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\!hpa_seagate_siam.rdlc" />
+    <EmbeddedResource Include="ReportObject\mesa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy %282%29.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy %283%29.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy.rdlc" />

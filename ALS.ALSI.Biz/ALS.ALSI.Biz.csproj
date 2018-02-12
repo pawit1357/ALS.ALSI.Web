@@ -283,6 +283,12 @@
     <Compile Include="DataAccess\template_seagate_lpc_coverpage.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\template_seagate_mesa_coverpage.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\template_seagate_mesa_img.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\template_wd_corrosion_coverpage.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -342,6 +348,8 @@
     <Compile Include="DataAccess\WdGCMS.cs" />
     <Compile Include="DataAccess\SeagateCorrosion.cs" />
     <Compile Include="DataAccess\SeagateCorrosionImg.cs" />
+    <Compile Include="DataAccess\SeagateMESA.cs" />
+    <Compile Include="DataAccess\SeagateMESA_Img.cs" />
     <Compile Include="DataAccess\WdMESA_Img.cs" />
     <Compile Include="DataAccess\WdMESA.cs" />
     <Compile Include="DataAccess\FTIRWDCoverpage.cs" />

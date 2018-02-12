@@ -19,7 +19,46 @@
 
 
 
-
+/*
+ELP-2478-MB
 
 ALTER TABLE `alsi`.`job_sample` 
 ADD COLUMN `singapore_ref_no` VARCHAR(200) NULL AFTER `other_ref_no`;
+
+------
+CREATE TABLE `template_seagate_mesa_coverpage` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `sample_id` int(11) DEFAULT NULL,
+  `component_id` int(11) DEFAULT NULL,
+  `location_of_parts` varchar(255) DEFAULT NULL,
+  `specification` varchar(255) DEFAULT NULL,
+  `result` varchar(45) DEFAULT NULL,
+  `pass_fail` varchar(45) DEFAULT NULL,
+  `ProcedureNo_Extraction` varchar(45) DEFAULT NULL,
+  `ExtractionMedium_Extraction` varchar(45) DEFAULT NULL,
+  `SampleSize_Extraction` varchar(45) DEFAULT NULL,
+  `OvenCondition_Extraction` varchar(200) DEFAULT NULL,
+  `ProcedureNo_IndirectMaterials` varchar(200) DEFAULT NULL,
+  `SampleSize_IndirectMaterials` varchar(45) DEFAULT NULL,
+  `OvenCondition_IndirectMaterials` varchar(45) DEFAULT NULL,
+  `row_type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `fk_sample_id_idx_5_idx` (`sample_id`),
+  KEY `fk_component_idx_5_idx` (`component_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=700 DEFAULT CHARSET=utf8;
+
+-------
+CREATE TABLE `template_seagate_mesa_img` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sample_id` int(11) DEFAULT NULL,
+  `seq` int(11) DEFAULT '0',
+  `area` int(11) DEFAULT NULL,
+  `descripton` varchar(255) DEFAULT NULL,
+  `path_sem_image_at_250x` varchar(255) DEFAULT NULL,
+  `path_sem_image_at_500x` varchar(255) DEFAULT NULL,
+  `path_sem_image_at_2000x` varchar(255) DEFAULT NULL,
+  `path_edx_spectrum` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=322 DEFAULT CHARSET=utf8;
+
+*/
