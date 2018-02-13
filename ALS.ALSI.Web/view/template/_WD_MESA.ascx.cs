@@ -19,7 +19,7 @@ using Spire.Doc.Documents;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class WD_MESA : System.Web.UI.UserControl
+    public partial class _WD_MESA : System.Web.UI.UserControl
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_MESA));

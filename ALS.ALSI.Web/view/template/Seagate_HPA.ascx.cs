@@ -1703,9 +1703,9 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no)? String.Empty: this.jobSample.singapore_ref_no)));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
-            
+
             //tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(this.Hpas[0].specification_id));
             //if (tem != null)
             //{
@@ -2467,21 +2467,45 @@ namespace ALS.ALSI.Web.view.template
 
         protected void ddlLpcType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            switch (ddlLpcType.SelectedValue)
+            {
+                case "4"://Hard Particle Analysis
+                    lbA20.Text = "(Swab Method)";
+                    txtProcedureNo_hpa.Enabled = false;
+                    txtNumberOfPieces_hpa.Enabled = false;
+                    txtExtractionMedium_hpa.Enabled = false;
+                    txtExtractionVolume_hpa.Enabled = false;
+                    gvLpc03.Visible = false;
+                    gvLpc06.Visible = false;
+                    break;
+                default:
+                    lbA20.Text = "HPA(Filtration Method)";
+                    txtProcedureNo_hpa.Enabled = true;
+                    txtNumberOfPieces_hpa.Enabled = true;
+                    txtExtractionMedium_hpa.Enabled = true;
+                    txtExtractionVolume_hpa.Enabled = true;
 
-            gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-            gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+                    gvLpc03.Visible = true;
+                    gvLpc06.Visible = true;
+
+                    gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+                    gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+
+                    #region "Datasource"
+                    gvLpc03.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).OrderBy(x => x.seq);
+                    gvLpc03.DataBind();
+                    gvLpc06.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).OrderBy(x => x.seq);
+                    gvLpc06.DataBind();
+                    #endregion
+                    break;
+            }
+
             gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
-
-            #region "Datasource"
-            gvLpc03.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC03)).OrderBy(x => x.seq);
-            gvLpc03.DataBind();
-            gvLpc06.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.LPC06)).OrderBy(x => x.seq);
-            gvLpc06.DataBind();
             gvHpa.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq);
             gvHpa.DataBind();
             gvClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION)).OrderBy(x => x.seq);
             gvClassification.DataBind();
-            #endregion
+
         }
 
         protected void txtB4_TextChanged(object sender, EventArgs e)

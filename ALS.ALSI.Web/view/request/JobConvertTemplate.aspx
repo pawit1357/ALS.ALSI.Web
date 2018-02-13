@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-<form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
+    <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
         <div class="row">
             <div class="col-md-12">
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -96,37 +96,55 @@
                     </div>
 
                     <asp:Panel ID="pUploadfile" runat="server">
-                         <div class="row">
-                        <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Uplod Spec: </label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Uplod Spec: </label>
 
-                            <div class="col-md-3">
-                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <div class="input-group input-large">
-                                        <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
-                                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
                                                                
                                             <span class="fileinput-filename"></span>
-                                        </div>
-                                        <span class="input-group-addon btn default btn-file">
-                                            <span class="fileinput-new">Select file </span>
-                                            <span class="fileinput-exists">Change </span>
-                                            <asp:FileUpload ID="FileUpload1" runat="server" />
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" />
 
-                                        </span>
-                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-                            </div>
-                             </div>
                         <br />
                     </asp:Panel>
-
+                    <!-- 
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Demo Notes</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>##ขั้นตอนการอัพเดท Specification,Detail Spec,Component</li>
+                                <li>เลือกไฟล์ที่มี </li>
+                                <li>1.1 กรณียังไม่มี template ให้สร้างไฟล์ *.ascx ก่อน</li>
+                                <li>1.2 กรณีมี template *.ascx แล้ว สามารเลือกไฟล์ *.ascx อ้างอิงแล้วอัพเดท specification,detail spec หรือ component ใหม่ได้เลย</li>
+                                <li>2. โหลด Detail Spec/Component/Specification จาก Excel</li>
+                                <li>3. The maximum file size for uploads in this demo is <strong>5 MB</strong> (default file size is unlimited).</li>
+                                <li>4. Only Excel files (<strong>*.xlt</strong>) are allowed in this demo (by default there is no file type restriction).</li>
+                                <li>** spec ref มาจาก column ที่มีค่า spefRef ค่าที่ใส่จะต้องเป็น ลำดับ column-1 เช่น specRef อยู่ในcolumn 5 ค่าที่ต้องใส่ก็จะเป็น 4</li>
+                            </ul>
+                        </div>
+                    </div>
+                    -->
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-6">

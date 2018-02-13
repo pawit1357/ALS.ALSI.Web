@@ -47,6 +47,7 @@
                                                     <asp:ListItem Value="1">LPC (68 KHz)</asp:ListItem>
                                                     <asp:ListItem Value="2">LPC (132 KHz)</asp:ListItem>
                                                     <asp:ListItem Value="3">ALPC (132 KHz)</asp:ListItem>
+                                                    <asp:ListItem Value="4">Hard Particle Analysis</asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
                                             <td>

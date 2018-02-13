@@ -283,7 +283,8 @@ namespace ALS.ALSI.Web.view.template
                 pRefImage.Visible = true;
                 gvResult.Columns[4].Visible = true;
                 gvResult.Columns[5].Visible = true;
-                gvRefImages.Columns[6].Visible = true;
+                gvRefImages.Columns[7].Visible = true;
+                gvRefImages.Columns[8].Visible = true;
             }
             else
             {
@@ -307,7 +308,8 @@ namespace ALS.ALSI.Web.view.template
                 pRefImage.Visible = false;
                 gvResult.Columns[4].Visible = false;
                 gvResult.Columns[5].Visible = false;
-                gvRefImages.Columns[6].Visible = false;
+                gvRefImages.Columns[7].Visible = false;
+                gvRefImages.Columns[8].Visible = false;
             }
 
             switch (lbJobStatus.Text)
@@ -1013,7 +1015,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
 
                     }
-                    gvRefImages.DataSource = this.refImg;
+                    gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq);
                     gvRefImages.DataBind();
                 }
             }
@@ -1024,6 +1026,35 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        protected void gvRefImages_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq);
+            gvRefImages.DataBind();
+        }
+        protected void gvRefImages_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+
+            int _id = Convert.ToInt32(gvRefImages.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txtSeq = (TextBox)gvRefImages.Rows[e.RowIndex].FindControl("txtSeq");
+            Console.WriteLine();
+            if (txtSeq != null)
+            {
+                template_wd_mesa_img _tmp = this.refImg.Find(x => x.id == _id);
+                if (_tmp != null)
+                {
+                    if (CustomUtils.isNumber(txtSeq.Text))
+                    {
+                        _tmp.seq = (String.IsNullOrEmpty(txtSeq.Text)) ? 0 : Convert.ToInt32(txtSeq.Text);
+                    }
+
+                }
+            }
+
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq);
+            gvRefImages.DataBind();
+        }
 
         protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
         {

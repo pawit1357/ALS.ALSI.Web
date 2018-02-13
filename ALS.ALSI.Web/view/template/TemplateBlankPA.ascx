@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TemplateBlank.ascx.cs" Inherits="ALS.ALSI.Web.view.template.TemplateBlank" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TemplateBlankPA.ascx.cs" Inherits="ALS.ALSI.Web.view.template.TemplateBlankPA" %>
 
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
@@ -7,7 +7,7 @@
     <asp:ToolkitScriptManager ID="ToolkitScript1" runat="server" />
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
+        <contenttemplate>
             <div class="portlet box blue-dark">
                 <div class="portlet-title">
                     <div class="caption">
@@ -24,18 +24,7 @@
                     </asp:Panel>
                     <asp:Panel ID="pCoverpage" runat="server">
 
-                        <div class="row" id="invDiv" runat="server">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Download WorkSheet:</label>
-                                    <div class="col-md-3">
-
-                                        <h5>
-                                            <asp:LinkButton ID="lbDowloadWorkSheet" runat="server" OnClick="lbDowloadWorkSheet_Click"></asp:LinkButton></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                         <asp:Panel ID="pUploadWorkSheet" runat="server">
                             <div class="row" id="Div1" runat="server">
                                 <div class="col-md-12">
@@ -66,6 +55,20 @@
                                 </div>
                             </div>
                         </asp:Panel>
+                                <asp:Panel ID="pFileDownload" runat="server">
+                        <div class="row" id="invDiv" runat="server">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Download WorkSheet:</label>
+                                    <div class="col-md-3">
+
+                                        <h5>
+                                            <asp:LinkButton ID="lbDowloadWorkSheet" runat="server" OnClick="lbDowloadWorkSheet_Click"></asp:LinkButton></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            </asp:Panel>
                     </asp:Panel>
                     <!-- END FORM-->
                     <div class="row">
@@ -246,12 +249,12 @@
                 </div>
             </div>
 
-        </ContentTemplate>
-        <Triggers>
+        </contenttemplate>
+        <triggers>
             <asp:PostBackTrigger ControlID="btnSubmit" />
             <asp:PostBackTrigger ControlID="lbDownload" />
             <asp:PostBackTrigger ControlID="lbDowloadWorkSheet" />
-        </Triggers>
+        </triggers>
     </asp:UpdatePanel>
 
 </form>

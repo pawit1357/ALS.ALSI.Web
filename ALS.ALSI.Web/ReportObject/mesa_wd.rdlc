@@ -471,8 +471,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>5.61835cm</Top>
-            <Left>0.15658cm</Left>
+            <Top>4.92905cm</Top>
+            <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>17.68524cm</Width>
             <Style>
@@ -503,7 +503,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.23397in</Height>
+                  <Height>0.34883in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -514,7 +514,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Test</Value>
+                                  <Value>Analysis</Value>
                                   <Style>
                                     <FontFamily>Lucida Sans</FontFamily>
                                   </Style>
@@ -622,7 +622,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Sample Size</Value>
+                                  <Value>Number of pieces used for extraction</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Lucida Sans</FontFamily>
@@ -732,7 +732,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.36486in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -977,9 +977,9 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>2.44792in</Top>
+            <Top>2.21821in</Top>
             <Left>0.06165in</Left>
-            <Height>0.48397in</Height>
+            <Height>0.71368in</Height>
             <Width>6.98266in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -2683,7 +2683,7 @@
               </Parameter>
             </Parameters>
             <Left>0.06165in</Left>
-            <Height>2.18417in</Height>
+            <Height>1.87113in</Height>
             <Width>6.96269in</Width>
             <ZIndex>10</ZIndex>
             <Style>

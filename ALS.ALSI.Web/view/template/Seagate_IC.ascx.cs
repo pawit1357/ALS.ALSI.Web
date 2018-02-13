@@ -929,36 +929,40 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
 
-            if (anionic.Count == 0)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
-            }
-            else
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", anionic.ToDataTable())); // Add datasource here
-                if(cationic.Count>0 && cationic.Count <= 3)
-                {
-                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
-                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
-                }
-                if (cationic.Count>3)
-                {
-                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.GetRange(0,3).ToDataTable())); // Add datasource here
-                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", cationic.GetRange(3, cationic.Count-3).ToDataTable())); // Add datasource here
-                }
 
-            }
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", anionic.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
 
-            if(cationic.Count == 0)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
-            }
-            
-           
-            
+            //if (anionic.Count == 0)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+            //}
+            //else
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", anionic.ToDataTable())); // Add datasource here
+            //    if(cationic.Count>0 && cationic.Count <= 3)
+            //    {
+            //        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
+            //        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+            //    }
+            //    if (cationic.Count>3)
+            //    {
+            //        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.GetRange(0,3).ToDataTable())); // Add datasource here
+            //        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", cationic.GetRange(3, cationic.Count-3).ToDataTable())); // Add datasource here
+            //    }
+
+            //}
+
+            //if(cationic.Count == 0)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+            //}
+
+
+
 
 
 

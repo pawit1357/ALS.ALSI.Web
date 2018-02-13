@@ -454,8 +454,17 @@
                     <div class="row">
                         <div class="col-md-9">
                             <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
-                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting">
+                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting" OnRowEditing="gvRefImages_RowEditing" OnRowUpdating="gvRefImages_RowUpdating"  OnRowCancelingEdit="gvRefImages_RowCancelingEdit">
                                 <Columns>
+                                    <asp:TemplateField HeaderText="Order" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="litSeq" runat="server" Text='<%# Eval("seq")%>' />
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:TextBox ID="txtSeq" runat="server" Text='<%# Eval("seq")%>' MaxLength="1"></asp:TextBox>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" Enabled="true" TargetControlID="txtSeq" />
+                                        </EditItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="AREA" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
                                             <asp:Literal ID="litArea" runat="server" Text='<%# Eval("area")%>' />
@@ -491,6 +500,17 @@
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
                                         </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Edit">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>' CausesValidation="false"><i class="fa fa-edit"></i></asp:LinkButton>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                CommandName="Update" CausesValidation="false"><i class="fa fa-save"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                        </EditItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
                                 <EmptyDataTemplate>

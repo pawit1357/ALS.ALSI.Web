@@ -44,7 +44,7 @@
             success: function (label) {
                 label
                     .addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
-                .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
+                    .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
             },
 
 
@@ -85,9 +85,9 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Test</th>
+                                            <th>Analysis</th>
                                             <th>Procedure No</th>
-                                            <th>Sample Size</th>
+                                            <th>Number of pieces used for extraction</th>
                                             <th>Oven Condition</th>
                                         </tr>
                                     </thead>
@@ -108,7 +108,8 @@
                                                 <asp:Label ID="lbOvenCondition_Extraction" runat="server"> </asp:Label>
                                                 <asp:TextBox ID="txtOvenCondition_Extraction" runat="server" Text="Temperature 70oC ± 2oC for 24 hours,
 Room Temperature for 24 hours
-" CssClass="form-control"></asp:TextBox>
+"
+                                                    CssClass="form-control"></asp:TextBox>
 
                                             </td>
                                         </tr>
@@ -120,15 +121,15 @@ Room Temperature for 24 hours
                         <div class="row">
                             <div class="col-md-9">
 
-                               <table>
+                                <table>
                                     <tr>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                            <asp:Label ID="lbSpecDesc" runat="server" Text="There is no Seagate's Specification for Reference."></asp:Label></td>
                                         <td>
-                                            <asp:CheckBox ID="cbCheckBox" Checked="true" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            <asp:CheckBox ID="cbCheckBox" Checked="true" runat="server" Text="No spec." OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                     </tr>
                                 </table>
                                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
@@ -174,7 +175,7 @@ Room Temperature for 24 hours
                                                     CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                     
+
                                     </Columns>
 
                                     <PagerTemplate>
@@ -213,7 +214,7 @@ Room Temperature for 24 hours
 
                     <asp:Panel ID="pRefImage" runat="server">
                         <h4 class="form-section">Reference Image:</h4>
-                    
+
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -247,7 +248,7 @@ Room Temperature for 24 hours
                                         </div>
                                     </div>
                                 </div>
-                              
+
                                 <div class="form-group">
                                     <label class="control-label col-md-3">SEM IMAGE AT 2000X: </label>
                                     <div class="col-md-3">
@@ -309,9 +310,18 @@ Room Temperature for 24 hours
                     <div class="row">
                         <div class="col-md-9">
                             <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
-                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting">
+                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting" OnRowEditing="gvRefImages_RowEditing" OnRowUpdating="gvRefImages_RowUpdating"  OnRowCancelingEdit="gvRefImages_RowCancelingEdit">
                                 <Columns>
-                                     <asp:TemplateField HeaderText="Description" ItemStyle-HorizontalAlign="Right">
+                                    <asp:TemplateField HeaderText="Order" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="litSeq" runat="server" Text='<%# Eval("seq")%>' />
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:TextBox ID="txtSeq" runat="server" Text='<%# Eval("seq")%>' MaxLength="1"></asp:TextBox>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" Enabled="true" TargetControlID="txtSeq" />
+                                        </EditItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Description" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
                                             <asp:Literal ID="litDescription" runat="server" Text='<%# Eval("descripton")%>' />
                                         </ItemTemplate>
@@ -340,6 +350,17 @@ Room Temperature for 24 hours
                                             <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="Edit">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>' CausesValidation="false"><i class="fa fa-edit"></i></asp:LinkButton>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                CommandName="Update" CausesValidation="false"><i class="fa fa-save"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                        </EditItemTemplate>
+                                    </asp:TemplateField>
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <div class="data-not-found">
@@ -360,7 +381,7 @@ Room Temperature for 24 hours
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                          <asp:Panel ID="pAnalyzeDate" runat="server">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3">

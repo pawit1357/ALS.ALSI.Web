@@ -85,25 +85,16 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             foreach (template_seagate_mesa_img tmp in _lists)
             {
-                template_seagate_mesa_img existing = _repository.Find(x => x.id == tmp.id).FirstOrDefault();
-                if (existing == null)
-                {
-                    _repository.Add(tmp);
-                }
-                else
-                {
-                    _repository.Edit(existing, tmp);
-                }
-                //switch (tmp.RowState)
+                //template_seagate_mesa_img existing = _repository.Find(x => x.id == tmp.id).FirstOrDefault();
+                //if (existing == null)
                 //{
-                //    case CommandNameEnum.Add:
-                //        _repository.Add(tmp);
-                //        break;
-                //    case CommandNameEnum.Edit:
-                //        template_seagate_mesa_img existing = _repository.Find(x => x.id == tmp.id).FirstOrDefault();
-                //        _repository.Edit(existing, tmp);
-                //        break;
+                    _repository.Add(tmp);
                 //}
+                //else
+                //{
+                //    _repository.Edit(existing, tmp);
+                //}
+
 
             }
         }

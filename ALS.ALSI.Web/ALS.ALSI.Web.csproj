@@ -1252,6 +1252,7 @@
     <Content Include="view\template\Seagate_GCMS_2.ascx" />
     <Content Include="view\template\Seagate_HPA_1.ascx" />
     <Content Include="view\template\PA01.ascx" />
+    <Content Include="view\template\TemplateBlankPA.ascx" />
     <Content Include="view\template\TemplateElwa.ascx" />
     <Content Include="view\template\TemplateGrp.ascx" />
     <Content Include="view\template\TemplateFa.ascx" />
@@ -1295,7 +1296,7 @@
     <Content Include="view\specification\Specification.aspx" />
     <Content Include="view\template\Seagate_Corrosion.ascx" />
     <Content Include="view\template\SEAGATE_MESA.ascx" />
-    <Content Include="view\template\WD_MESA.ascx" />
+    <Content Include="view\template\_WD_MESA.ascx" />
     <Content Include="view\template\WD_MESA_IDM.ascx" />
     <Content Include="view\template\WD_MESA_InkRibon.ascx" />
     <Content Include="view\type_of_test\SearchTypeOfTest.aspx" />
@@ -1528,6 +1529,13 @@
     </Compile>
     <Compile Include="view\template\PA01.ascx.designer.cs">
       <DependentUpon>PA01.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\TemplateBlankPA.ascx.cs">
+      <DependentUpon>TemplateBlankPA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\TemplateBlankPA.ascx.designer.cs">
+      <DependentUpon>TemplateBlankPA.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\TemplateElwa.ascx.cs">
       <DependentUpon>TemplateElwa.ascx</DependentUpon>
@@ -1830,12 +1838,12 @@
     <Compile Include="view\template\SEAGATE_MESA.ascx.designer.cs">
       <DependentUpon>SEAGATE_MESA.ascx</DependentUpon>
     </Compile>
-    <Compile Include="view\template\WD_MESA.ascx.cs">
-      <DependentUpon>WD_MESA.ascx</DependentUpon>
+    <Compile Include="view\template\_WD_MESA.ascx.cs">
+      <DependentUpon>_WD_MESA.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="view\template\WD_MESA.ascx.designer.cs">
-      <DependentUpon>WD_MESA.ascx</DependentUpon>
+    <Compile Include="view\template\_WD_MESA.ascx.designer.cs">
+      <DependentUpon>_WD_MESA.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\WD_MESA_IDM.ascx.cs">
       <DependentUpon>WD_MESA_IDM.ascx</DependentUpon>
@@ -1999,7 +2007,7 @@
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v3.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
-    <EmbeddedResource Include="ReportObject\hpa_for_1_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\!hpa_for_1_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\!hpa_seagate_boyd.rdlc" />
     <EmbeddedResource Include="ReportObject\!hpa_seagate.rdlc" />

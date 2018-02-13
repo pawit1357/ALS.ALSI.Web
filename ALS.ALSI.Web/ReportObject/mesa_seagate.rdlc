@@ -583,7 +583,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>5.61835cm</Top>
+            <Top>4.99991cm</Top>
             <Left>0.15658cm</Left>
             <Height>0.52881cm</Height>
             <Width>17.68524cm</Width>
@@ -615,7 +615,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.23397in</Height>
+                  <Height>0.3644in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -626,7 +626,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Test</Value>
+                                  <Value>Analysis</Value>
                                   <Style>
                                     <FontFamily>Lucida Sans</FontFamily>
                                   </Style>
@@ -734,7 +734,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Sample Size</Value>
+                                  <Value>Number of pieces used for extraction</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Lucida Sans</FontFamily>
@@ -1089,9 +1089,9 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>2.44792in</Top>
+            <Top>2.24611in</Top>
             <Left>0.06165in</Left>
-            <Height>0.48397in</Height>
+            <Height>0.6144in</Height>
             <Width>6.98266in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -2396,7 +2396,7 @@
               </Parameter>
             </Parameters>
             <Left>0.06165in</Left>
-            <Height>2.18417in</Height>
+            <Height>1.89903in</Height>
             <Width>6.96269in</Width>
             <ZIndex>9</ZIndex>
             <Style>

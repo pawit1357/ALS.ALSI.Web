@@ -283,7 +283,9 @@ namespace ALS.ALSI.Web.view.template
                 pRefImage.Visible = true;
                 gvResult.Columns[4].Visible = true;
                 gvResult.Columns[5].Visible = true;
-                gvRefImages.Columns[6].Visible = true;
+                gvRefImages.Columns[7].Visible = true;
+                gvRefImages.Columns[8].Visible = true;
+
             }
             else
             {
@@ -307,7 +309,9 @@ namespace ALS.ALSI.Web.view.template
                 pRefImage.Visible = false;
                 gvResult.Columns[4].Visible = false;
                 gvResult.Columns[5].Visible = false;
-                gvRefImages.Columns[6].Visible = false;
+                gvRefImages.Columns[7].Visible = false;
+                gvRefImages.Columns[8].Visible = false;
+
             }
 
             switch (lbJobStatus.Text)

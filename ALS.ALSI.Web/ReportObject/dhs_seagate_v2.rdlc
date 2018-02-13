@@ -279,8 +279,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>5.61835cm</Top>
-            <Left>0cm</Left>
+            <Top>4.88488cm</Top>
+            <Left>0.00002cm</Left>
             <Height>0.5288cm</Height>
             <Width>18.16172cm</Width>
             <Style>
@@ -311,7 +311,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.21862in</Height>
+                  <Height>0.36307in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -434,7 +434,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Sample Size</Value>
+                                  <Value>Number of pieces used for extraction</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Lucida Sans</FontFamily>
@@ -544,7 +544,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.20477in</Height>
+                  <Height>0.31443in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -781,8 +781,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>2.43403in</Top>
-            <Height>0.42339in</Height>
+            <Top>2.20081in</Top>
+            <Height>0.6775in</Height>
             <Width>7.15028in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -1548,7 +1548,7 @@
                 <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
               </Parameter>
             </Parameters>
-            <Height>2.18417in</Height>
+            <Height>1.85374in</Height>
             <Width>7.15029in</Width>
             <ZIndex>5</ZIndex>
             <Style>

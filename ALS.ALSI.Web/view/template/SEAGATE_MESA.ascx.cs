@@ -202,7 +202,7 @@ namespace ALS.ALSI.Web.view.template
             this.refImg = template_seagate_mesa_img.FindAllBySampleID(this.SampleID);
             if (this.refImg != null && this.refImg.Count > 0)
             {
-                gvRefImages.DataSource = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
+                gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq).ToList();
                 gvRefImages.DataBind();
             }
             if (this.coverpages != null && this.coverpages.Count > 0)
@@ -230,7 +230,8 @@ namespace ALS.ALSI.Web.view.template
                 cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
                 if (cbCheckBox.Checked)
                 {
-                    lbSpecDesc.Text = "";
+
+                    lbSpecDesc.Text = "There is no Seagate's Specification for Reference.";
                 }
                 else
                 {
@@ -238,7 +239,9 @@ namespace ALS.ALSI.Web.view.template
                     tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);// this.coverpages[0].tb_m_component;
                     if (component != null)
                     {
-                        lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
+                        //lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
+                        lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
+
                     }
                 }
 
@@ -275,7 +278,8 @@ namespace ALS.ALSI.Web.view.template
                 pRefImage.Visible = true;
                 gvResult.Columns[4].Visible = true;
                 //gvResult.Columns[5].Visible = true;
-                //gvRefImages.Columns[6].Visible = true;
+                gvRefImages.Columns[5].Visible = true;
+                gvRefImages.Columns[6].Visible = true;
             }
             else
             {
@@ -290,7 +294,8 @@ namespace ALS.ALSI.Web.view.template
                 pRefImage.Visible = false;
                 gvResult.Columns[4].Visible = false;
                 //gvResult.Columns[5].Visible = false;
-                //gvRefImages.Columns[6].Visible = false;
+                gvRefImages.Columns[5].Visible = false;
+                gvRefImages.Columns[6].Visible = false;
 
 
             }
@@ -344,17 +349,20 @@ namespace ALS.ALSI.Web.view.template
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
                     }
-                    switch (this.CommandName)
-                    {
-                        case CommandNameEnum.Add:
-                            template_seagate_mesa_coverpage.InsertList(this.coverpages);
+                    //switch (this.CommandName)
+                    //{
+                    //    case CommandNameEnum.Add:
+                    template_seagate_mesa_coverpage.DeleteBySampleID(this.SampleID);
+                    template_seagate_mesa_img.DeleteBySampleID(this.SampleID);
 
-                            break;
-                        case CommandNameEnum.Edit:
-                            template_seagate_mesa_coverpage.UpdateList(this.coverpages);
+                    template_seagate_mesa_coverpage.InsertList(this.coverpages);
+                    template_seagate_mesa_img.InsertList(this.refImg);
+                    //        break;
+                    //    case CommandNameEnum.Edit:
+                    //        template_seagate_mesa_coverpage.UpdateList(this.coverpages);
 
-                            break;
-                    }
+                    //        break;
+                    //}
 
                     break;
                 case StatusEnum.CHEMIST_TESTING:
@@ -372,8 +380,14 @@ namespace ALS.ALSI.Web.view.template
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
                     }
-                    template_seagate_mesa_coverpage.UpdateList(this.coverpages);
+
+                    template_seagate_mesa_coverpage.DeleteBySampleID(this.SampleID);
+                    template_seagate_mesa_img.DeleteBySampleID(this.SampleID);
+
+                    template_seagate_mesa_coverpage.InsertList(this.coverpages);
                     template_seagate_mesa_img.InsertList(this.refImg);
+                    //template_seagate_mesa_coverpage.UpdateList(this.coverpages);
+                    //template_seagate_mesa_img.InsertList(this.refImg);
 
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
@@ -527,7 +541,22 @@ namespace ALS.ALSI.Web.view.template
             tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(ddlComponent.SelectedValue));
             if (component != null)
             {
-                lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
+                //lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
+                if (cbCheckBox.Checked)
+                {
+                    //lbSpecDesc.Text = "There is no Seagate's Specification for Reference.";
+                    lbSpecDesc.Text = "There is no Seagate's Specification for Reference.";
+                }
+                else
+                {
+                    if (this.coverpages.Count > 0)
+                    {
+ 
+                            //lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
+                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
+                        
+                    }
+                }
 
                 txtSampleSize_Extraction.Text = component.D;
 
@@ -716,7 +745,7 @@ namespace ALS.ALSI.Web.view.template
             string encoding = string.Empty;
             string extension = string.Empty;
 
-            List<template_seagate_mesa_img> dat = this.refImg.OrderBy(x => x.seq).OrderBy(x => x.descripton).ToList();
+            List<template_seagate_mesa_img> dat = this.refImg.OrderBy(x => x.seq).ToList();
             foreach (template_seagate_mesa_img _i in dat)
             {
 
@@ -760,13 +789,13 @@ namespace ALS.ALSI.Web.view.template
             if (dat.Count >= 2)
             {
                 tmp = new List<template_seagate_mesa_img>();
-                tmp.Add(dat[2]);
+                tmp.Add(dat[1]);
                 dtQ2 = tmp.ToDataTable();
             }
             if (dat.Count >= 3)
             {
                 tmp = new List<template_seagate_mesa_img>();
-                tmp.Add(dat[1]);
+                tmp.Add(dat[2]);
                 dtQ3 = tmp.ToDataTable();
             }
             if (dat.Count >= 4)
@@ -1031,7 +1060,7 @@ namespace ALS.ALSI.Web.view.template
                     this.refImg.Add(_img);
                     txtDesc.Text = string.Empty;
                 }
-                gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq).OrderBy(x => x.descripton).ToList();
+                gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq).ToList();
                 gvRefImages.DataBind();
             }
         }
@@ -1052,17 +1081,53 @@ namespace ALS.ALSI.Web.view.template
                             break;
 
                     }
-                    gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq).OrderBy(x => x.descripton).ToList();
+                    gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq).ToList();
                     gvRefImages.DataBind();
                 }
             }
+        }
+
+        protected void gvRefImages_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvRefImages.EditIndex = e.NewEditIndex;
+            gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq).ToList();
+            gvRefImages.DataBind();
+
         }
 
         protected void gvRefImages_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
         }
+        protected void gvRefImages_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq).ToList();
+            gvRefImages.DataBind();
+        }
+        protected void gvRefImages_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
 
+            int _id = Convert.ToInt32(gvRefImages.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txtSeq = (TextBox)gvRefImages.Rows[e.RowIndex].FindControl("txtSeq");
+            Console.WriteLine();
+            if (txtSeq != null)
+            {
+                template_seagate_mesa_img _tmp = this.refImg.Find(x => x.id == _id);
+                if (_tmp != null)
+                {
+                    if (CustomUtils.isNumber(txtSeq.Text))
+                    {
+                        _tmp.seq = (String.IsNullOrEmpty(txtSeq.Text)) ? 0 : Convert.ToInt32(txtSeq.Text);
+                    }
+
+                }
+            }
+
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq).ToList();
+            gvRefImages.DataBind();
+        }
 
         protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -1073,10 +1138,13 @@ namespace ALS.ALSI.Web.view.template
         {
 
         }
+
+
         protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (cbCheckBox.Checked)
             {
+                //lbSpecDesc.Text = "There is no Seagate's Specification for Reference.";
                 lbSpecDesc.Text = "There is no Seagate's Specification for Reference.";
             }
             else
@@ -1086,6 +1154,7 @@ namespace ALS.ALSI.Web.view.template
                     tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(this.coverpages[0].component_id));
                     if (component != null)
                     {
+                        //lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
                         lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
                     }
                 }

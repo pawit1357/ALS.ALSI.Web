@@ -10,7 +10,7 @@
 namespace ALS.ALSI.Web.view.template {
     
     
-    public partial class WD_MESA {
+    public partial class TemplateBlankPA {
         
         /// <summary>
         /// Form1 control.
@@ -22,13 +22,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
         
         /// <summary>
-        /// ScriptManager1 control.
+        /// ToolkitScript1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::AjaxControlToolkit.ToolkitScriptManager ToolkitScript1;
         
         /// <summary>
         /// UpdatePanel1 control.
@@ -49,130 +49,58 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label lbJobStatus;
         
         /// <summary>
-        /// PWorking control.
+        /// btnCoverPage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PWorking;
+        protected global::System.Web.UI.WebControls.Button btnCoverPage;
         
         /// <summary>
-        /// lbProcedureNo_Extraction control.
+        /// btnDHS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbProcedureNo_Extraction;
+        protected global::System.Web.UI.WebControls.Button btnDHS;
         
         /// <summary>
-        /// txtProcedureNo_Extraction control.
+        /// pDSH control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProcedureNo_Extraction;
+        protected global::System.Web.UI.WebControls.Panel pDSH;
         
         /// <summary>
-        /// lbSampleSize_Extraction control.
+        /// pCoverpage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbSampleSize_Extraction;
+        protected global::System.Web.UI.WebControls.Panel pCoverpage;
         
         /// <summary>
-        /// txtSampleSize_Extraction control.
+        /// pUploadWorkSheet control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSampleSize_Extraction;
+        protected global::System.Web.UI.WebControls.Panel pUploadWorkSheet;
         
         /// <summary>
-        /// lbOvenCondition_Extraction control.
+        /// Div1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbOvenCondition_Extraction;
-        
-        /// <summary>
-        /// txtOvenCondition_Extraction control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOvenCondition_Extraction;
-        
-        /// <summary>
-        /// lbSpecDesc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbSpecDesc;
-        
-        /// <summary>
-        /// cbCheckBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbCheckBox;
-        
-        /// <summary>
-        /// gvResult control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvResult;
-        
-        /// <summary>
-        /// pRefImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pRefImage;
-        
-        /// <summary>
-        /// ddlArea control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlArea;
-        
-        /// <summary>
-        /// txtDesc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDesc;
-        
-        /// <summary>
-        /// FileUpload1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
         
         /// <summary>
         /// FileUpload2 control.
@@ -184,76 +112,31 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.FileUpload FileUpload2;
         
         /// <summary>
-        /// FileUpload3 control.
+        /// pFileDownload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload3;
+        protected global::System.Web.UI.WebControls.Panel pFileDownload;
         
         /// <summary>
-        /// FileUpload4 control.
+        /// invDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload4;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl invDiv;
         
         /// <summary>
-        /// btnLoadFile control.
+        /// lbDowloadWorkSheet control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLoadFile;
-        
-        /// <summary>
-        /// gvRefImages control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvRefImages;
-        
-        /// <summary>
-        /// pAnalyzeDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pAnalyzeDate;
-        
-        /// <summary>
-        /// txtDateAnalyzed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDateAnalyzed;
-        
-        /// <summary>
-        /// pSpecification control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pSpecification;
-        
-        /// <summary>
-        /// ddlComponent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlComponent;
+        protected global::System.Web.UI.WebControls.LinkButton lbDowloadWorkSheet;
         
         /// <summary>
         /// pStatus control.
@@ -319,13 +202,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pDownload;
         
         /// <summary>
-        /// litDownloadIcon control.
+        /// Div2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litDownloadIcon;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div2;
         
         /// <summary>
         /// lbDownload control.
@@ -337,13 +220,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.LinkButton lbDownload;
         
         /// <summary>
-        /// lbDownloadName control.
+        /// lbDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDownloadName;
+        protected global::System.Web.UI.WebControls.Label lbDesc;
         
         /// <summary>
         /// pUploadfile control.
@@ -355,13 +238,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Panel pUploadfile;
         
         /// <summary>
-        /// btnUpload control.
+        /// FileUpload1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload btnUpload;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
         /// Label1 control.
@@ -373,6 +256,51 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
+        /// txtDecimal01 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDecimal01;
+        
+        /// <summary>
+        /// txtDecimal02 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDecimal02;
+        
+        /// <summary>
+        /// btnClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClose;
+        
+        /// <summary>
+        /// lnkFake control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkFake;
+        
+        /// <summary>
+        /// ModolPopupExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModolPopupExtender;
+        
+        /// <summary>
         /// litErrorMessage control.
         /// </summary>
         /// <remarks>
@@ -382,13 +310,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Literal litErrorMessage;
         
         /// <summary>
-        /// btnPopupErrorList control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPopupErrorList;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
         /// bnErrListFake control.

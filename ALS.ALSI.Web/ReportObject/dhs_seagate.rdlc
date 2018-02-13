@@ -279,7 +279,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>5.61835cm</Top>
+            <Top>4.95114cm</Top>
             <Left>0cm</Left>
             <Height>0.5288cm</Height>
             <Width>18.16172cm</Width>
@@ -311,7 +311,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.21862in</Height>
+                  <Height>0.36566in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -434,7 +434,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Sample Size</Value>
+                                  <Value>Number of pieces used for extraction</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Lucida Sans</FontFamily>
@@ -544,7 +544,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.20477in</Height>
+                  <Height>0.30833in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -781,8 +781,9 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>2.43403in</Top>
-            <Height>0.42339in</Height>
+            <Top>2.2269in</Top>
+            <Left>0in</Left>
+            <Height>0.674in</Height>
             <Width>7.15028in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -848,7 +849,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>7.25784cm</Top>
-            <Left>0cm</Left>
+            <Left>0.00001cm</Left>
             <Height>0.42697cm</Height>
             <Width>18.16172cm</Width>
             <ZIndex>2</ZIndex>
@@ -1300,6 +1301,7 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet2</DataSetName>
             <Top>3.02551in</Top>
+            <Left>0in</Left>
             <Height>0.58463in</Height>
             <Width>7.15029in</Width>
             <ZIndex>3</ZIndex>
@@ -1335,6 +1337,7 @@
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
             <Top>4.82138in</Top>
+            <Left>0in</Left>
             <Height>1.19119in</Height>
             <Width>7.15028in</Width>
             <ZIndex>4</ZIndex>
@@ -1378,7 +1381,8 @@
                 <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
               </Parameter>
             </Parameters>
-            <Height>2.18417in</Height>
+            <Left>0in</Left>
+            <Height>1.87982in</Height>
             <Width>7.15029in</Width>
             <ZIndex>5</ZIndex>
             <Style>
@@ -1637,7 +1641,7 @@
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
             <Top>9.16977cm</Top>
-            <Left>0cm</Left>
+            <Left>0.00001cm</Left>
             <Height>1.65324cm</Height>
             <Width>18.16172cm</Width>
             <ZIndex>6</ZIndex>
@@ -2090,6 +2094,7 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet3</DataSetName>
             <Top>4.26103in</Top>
+            <Left>0in</Left>
             <Height>0.56036in</Height>
             <Width>7.15028in</Width>
             <ZIndex>7</ZIndex>
