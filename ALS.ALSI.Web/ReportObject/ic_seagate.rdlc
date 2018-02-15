@@ -935,7 +935,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!extraction_volume.Value</Value>
+                                  <Value>=(CDbl(Fields!extraction_volume.Value)*1000)&amp;"mL"</Value>
                                   <Style>
                                     <FontFamily>Lucida Sans</FontFamily>
                                   </Style>

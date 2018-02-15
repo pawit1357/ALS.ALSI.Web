@@ -55,6 +55,20 @@ namespace ALS.ALSI.Web.view.template
                         "    5.1  MgSiO Particle",
                         "Class 6, Other Particle"
                                    };
+        private String[] ANameSWAPKey = {
+                        "Class 1, Total Hard Particle",
+                        "Class 2, Total Magnetic Particle(Counts/part)",
+                        " *Class 3, Total Semi-hard Metal Particle",
+                        "    3.1  SST + Fe base + FeO",
+                        "    3.2  Sn base Particle",
+                        "    **3.3  PZT Particles",
+                        "Class 4, Total Soft-Metal Particle",
+                        "Class 5, Total Environment Particle",
+                        "    5.1  MgSiO Particle",
+                        "Class 6, Other Particle",
+                        "MgTiO",
+                        "NiP with AlMgSi"
+                                   };
 
         public users_login userLogin
         {
@@ -2153,6 +2167,43 @@ namespace ALS.ALSI.Web.view.template
                         _Hpas.AddRange(getTypesOfParticles(cOrderAlpc132));
                         #endregion
                         break;
+                    case LPCTypeEnum.SWAP:
+                        int cOrderSwap = 1;
+                        #region "Hard Particle Analysis"
+
+                        for (int i = 0; i < ANameSWAPKey.Length; i++)
+                        {
+                            String _val = ANameSWAPKey[i];
+                            template_seagate_hpa_coverpage _tmp = new template_seagate_hpa_coverpage();
+                            _tmp.ID = CustomUtils.GetRandomNumberID();
+                            _tmp.seq = (i + 1);
+                            _tmp.A = _val;
+                            switch (i)
+                            {
+                                case 0: _tmp.B = tem.E; break;// Class 1, Total Hard Particle
+                                case 1: _tmp.B = tem.F; break;// Class 2, Total Magnetic Particle
+                                case 2: _tmp.B = tem.G; break;// Class 3, Total Semi-hard Metal Particle
+                                case 3: _tmp.B = tem.H; break;//3.1  SST + Fe base + FeO
+                                case 4: _tmp.B = tem.I; break;//3.2  Sn base Particle
+                                case 5: _tmp.B = tem.J; break;//3.3  PZT Particles
+                                case 6: _tmp.B = tem.K; break;// Class 4, Total Soft-Metal Particle
+                                case 7: _tmp.B = tem.L; break;// Class 5, Total Environment Particle
+                                case 8: _tmp.B = tem.M; break;//5.1  MgSiO Particle
+                                case 9: _tmp.B = tem.N; break;// Class 6, Other Particle
+                                case 10: _tmp.B = tem.O; break;
+                                case 11: _tmp.B = tem.P; break;
+                            }
+                            _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.HPA);
+                            _Hpas.Add(_tmp);
+
+                        }
+                        #endregion
+                        #region "Classification"
+                        _Hpas.AddRange(getTypesOfParticles(cOrderSwap));
+                        #endregion
+                        break;
+
                 }
                 #endregion
                 #region "Header Text"

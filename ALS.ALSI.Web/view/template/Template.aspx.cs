@@ -179,7 +179,7 @@ namespace ALS.ALSI.Web.view.template
                     case CommandNameEnum.Edit:
                         break;
                 }
-            if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".xls") || Path.GetExtension(FileUpload1.FileName).Equals(".xlt") || Path.GetExtension(FileUpload1.FileName).Equals(".xlsx")))
+            if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".xls") || Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".xlt") || Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".xlsx")))
             {
                 String _pathSourceFile = String.Format(Configurations.PATH_TEMPLATE, FileUpload1.FileName);
                 String _phisicalPath = String.Format(Configurations.PATH_TEMPLATE, String.Empty);
