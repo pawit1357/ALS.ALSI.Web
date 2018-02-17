@@ -360,9 +360,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>3.44063cm</Top>
-            <Left>0.22282cm</Left>
+            <Left>0cm</Left>
             <Height>0.52881cm</Height>
-            <Width>17.71609cm</Width>
+            <Width>17.9015cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -377,19 +377,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.85123in</Width>
+                  <Width>0.87011in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.44772in</Width>
+                  <Width>1.4666in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.58314in</Width>
+                  <Width>1.60202in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31665in</Width>
+                  <Width>1.33553in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.7547in</Width>
+                  <Width>1.77358in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1028,9 +1028,8 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.58875in</Top>
-            <Left>0.08773in</Left>
             <Height>0.60571in</Height>
-            <Width>6.95344in</Width>
+            <Width>7.04784in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1095,9 +1094,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>5.60921cm</Top>
-            <Left>0.22282cm</Left>
+            <Left>0cm</Left>
             <Height>0.42295cm</Height>
-            <Width>17.60241cm</Width>
+            <Width>17.9015cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1113,19 +1112,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.88435in</Width>
+                  <Width>0.89895in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.99932in</Width>
+                  <Width>3.01392in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31985in</Width>
+                  <Width>1.33445in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.99479in</Width>
+                  <Width>1.00939in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.77653in</Width>
+                  <Width>0.79113in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1776,10 +1775,9 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <KeepTogether>true</KeepTogether>
             <DataSetName>DataSet3</DataSetName>
-            <Top>3.74212in</Top>
-            <Left>0.08773in</Left>
+            <Top>3.53004in</Top>
             <Height>0.61095in</Height>
-            <Width>6.97484in</Width>
+            <Width>7.04784in</Width>
             <ZIndex>3</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -1814,24 +1812,24 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.83799in</Width>
+                  <Width>0.85284in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.00767in</Width>
+                  <Width>3.02252in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.3282in</Width>
+                  <Width>1.34305in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.01486in</Width>
+                  <Width>1.02971in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.78488in</Width>
+                  <Width>0.79973in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.38523in</Height>
+                  <Height>0.35455in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2182,7 +2180,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.20833in</Height>
+                  <Height>0.17765in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2476,10 +2474,9 @@
             <RepeatColumnHeaders>true</RepeatColumnHeaders>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet2</DataSetName>
-            <Top>2.44043in</Top>
-            <Left>0.08773in</Left>
-            <Height>0.59356in</Height>
-            <Width>6.9736in</Width>
+            <Top>2.38876in</Top>
+            <Height>0.53219in</Height>
+            <Width>7.04784in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -2511,15 +2508,15 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>7.0535cm</Width>
+                  <Width>7.2008cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>10.5534cm</Width>
+                  <Width>10.7007cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.56581cm</Height>
+                  <Height>0.49955cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2592,7 +2589,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.52163cm</Height>
+                  <Height>0.49954cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2665,7 +2662,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.49955cm</Height>
+                  <Height>0.47746cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2756,10 +2753,10 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>7.77688cm</Top>
-            <Left>0.22282cm</Left>
-            <Height>1.58699cm</Height>
-            <Width>17.6069cm</Width>
+            <Top>7.45448cm</Top>
+            <Left>0cm</Left>
+            <Height>1.47655cm</Height>
+            <Width>17.9015cm</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2776,15 +2773,15 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>7.0535cm</Width>
+                  <Width>7.2008cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>10.5534cm</Width>
+                  <Width>10.7007cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.55548cm</Height>
+                  <Height>0.48922cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2857,7 +2854,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.55548cm</Height>
+                  <Height>0.51131cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2930,7 +2927,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.55548cm</Height>
+                  <Height>0.48922cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3021,10 +3018,10 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>11.09208cm</Top>
-            <Left>0.22282cm</Left>
-            <Height>1.66644cm</Height>
-            <Width>17.6069cm</Width>
+            <Top>10.5534cm</Top>
+            <Left>0cm</Left>
+            <Height>1.48975cm</Height>
+            <Width>17.9015cm</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -3041,19 +3038,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.19237in</Width>
+                  <Width>1.20721in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.69008in</Width>
+                  <Width>2.70492in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31985in</Width>
+                  <Width>1.33469in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.99479in</Width>
+                  <Width>1.00963in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.77653in</Width>
+                  <Width>0.79137in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -3126,7 +3123,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Analytes</Value>
+                                  <Value>Analyte</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Lucida Sans</FontFamily>
@@ -3704,10 +3701,9 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <KeepTogether>true</KeepTogether>
             <DataSetName>DataSet4</DataSetName>
-            <Top>5.09248in</Top>
-            <Left>0.08773in</Left>
+            <Top>4.75529in</Top>
             <Height>0.63523in</Height>
-            <Width>6.97362in</Width>
+            <Width>7.04784in</Width>
             <ZIndex>7</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -3740,10 +3736,9 @@
           </Tablix>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>7.1631in</Top>
-            <Left>0.08773in</Left>
+            <Top>6.62615in</Top>
             <Height>1.04167in</Height>
-            <Width>6.97484in</Width>
+            <Width>7.04784in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -3755,15 +3750,15 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>7.0535cm</Width>
+                  <Width>7.2008cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>10.5534cm</Width>
+                  <Width>10.7007cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.53196cm</Height>
+                  <Height>0.4657cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3836,7 +3831,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.53196cm</Height>
+                  <Height>0.48779cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3909,7 +3904,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.53196cm</Height>
+                  <Height>0.48779cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4000,10 +3995,10 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>14.72477cm</Top>
-            <Left>0.22282cm</Left>
-            <Height>1.59588cm</Height>
-            <Width>17.6069cm</Width>
+            <Top>13.72719cm</Top>
+            <Left>0cm</Left>
+            <Height>1.44127cm</Height>
+            <Width>17.9015cm</Width>
             <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -4020,19 +4015,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.19237in</Width>
+                  <Width>1.20721in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.69008in</Width>
+                  <Width>2.70492in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31985in</Width>
+                  <Width>1.33469in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.99479in</Width>
+                  <Width>1.00963in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.77653in</Width>
+                  <Width>0.79137in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -4683,10 +4678,9 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <KeepTogether>true</KeepTogether>
             <DataSetName>DataSet5</DataSetName>
-            <Top>6.4949in</Top>
-            <Left>0.08773in</Left>
+            <Top>5.98572in</Top>
             <Height>0.62654in</Height>
-            <Width>6.97362in</Width>
+            <Width>7.04784in</Width>
             <ZIndex>10</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -4752,9 +4746,8 @@
               </Parameter>
             </Parameters>
             <Top>0.02418in</Top>
-            <Left>0.08773in</Left>
             <Height>1.28873in</Height>
-            <Width>7.15029in</Width>
+            <Width>7.04784in</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -4763,10 +4756,10 @@
             </Style>
           </Subreport>
         </ReportItems>
-        <Height>8.23497in</Height>
+        <Height>7.66782in</Height>
         <Style />
       </Body>
-      <Width>7.23802in</Width>
+      <Width>7.04784in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

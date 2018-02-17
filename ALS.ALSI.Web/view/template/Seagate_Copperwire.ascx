@@ -1,57 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_Copperwire.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_Copperwire" %>
-<script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.date-picker').datepicker();
-
-        var form1 = $('#Form1');
-        var error1 = $('.alert-error', form1);
-        var success1 = $('.alert-success', form1);
-
-        form1.validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-inline', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
-            ignore: "",
-            rules: {
-                ctl00$ContentPlaceHolder2$ctl00$txtDesc: {
-                    required: true,
-                }
-            },
-
-            invalidHandler: function (event, validator) { //display error alert on form submit              
-                success1.hide();
-                error1.show();
-                App.scrollTo(error1, -200);
-            },
-
-            highlight: function (element) { // hightlight error inputs
-                $(element)
-                    .closest('.help-inline').removeClass('ok'); // display OK icon
-                $(element)
-                    .closest('.control-group').removeClass('success').addClass('error'); // set error class to the control group
-            },
-
-            unhighlight: function (element) { // revert the change dony by hightlight
-                $(element)
-                    .closest('.control-group').removeClass('error'); // set error class to the control group
-            },
-
-            success: function (label) {
-                label
-                    .addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
-                .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
-            },
-
-
-            submitHandler: function (form) {
-                form.submit();
-            }
-        });
-    });
-</script>
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -326,7 +274,7 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                                                        <asp:Panel ID="pAnalyzeDate" runat="server">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3">
@@ -334,12 +282,14 @@
 										* </span>
                                             </label>
                                             <div class="col-md-6">
-                                                <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
-                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                                    style="max-width: 220px">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                                     </span>
                                                 </div>
+                                                ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -405,7 +355,7 @@
                                                 <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
                                                     <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
                                                 </asp:LinkButton>
-                                                
+
                                             </div>
                                         </div>
                                         <%--      </div>
@@ -522,3 +472,30 @@
         </Triggers>
     </asp:UpdatePanel>
 </form>
+<script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
+    });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
+</script>

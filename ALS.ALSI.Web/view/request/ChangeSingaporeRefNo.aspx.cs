@@ -78,6 +78,7 @@ namespace ALS.ALSI.Web.view.request
             if (this.jobSample != null)
             {
                 txtSingaporeRefNo.Text = this.jobSample.singapore_ref_no;
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
             }
             else
             {
@@ -117,6 +118,7 @@ namespace ALS.ALSI.Web.view.request
         {
 
             this.jobSample.singapore_ref_no = txtSingaporeRefNo.Text;
+            this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
             this.jobSample.Update();
             job_sample_logs tmp = new job_sample_logs
             {

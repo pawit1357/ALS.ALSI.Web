@@ -1811,12 +1811,29 @@
 
 </form>
 
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-<script>
-    jQuery(document).ready(function () {
-
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
     });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
 </script>
-<!-- END JAVASCRIPTS -->

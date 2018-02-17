@@ -99,6 +99,24 @@
                         </div>
 
                     </div>
+                                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Date Analyze(Chemist).:</label>
+                                <div class="col-md-6">
+                                <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                    >
+                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" style="max-width: 220px" />
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-6">
@@ -120,4 +138,30 @@
 
 
     </form>
+    <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
+    });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
+</script>
 </asp:Content>

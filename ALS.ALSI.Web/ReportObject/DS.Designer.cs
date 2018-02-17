@@ -607,6 +607,8 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columnpass_fail;
             
+            private global::System.Data.DataColumn columnhpa_type;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public dataDataTable() {
@@ -834,6 +836,14 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn hpa_typeColumn {
+                get {
+                    return this.columnhpa_type;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -893,7 +903,8 @@ namespace ALS.ALSI.Web.ReportObject {
                         byte[] img1, 
                         string location_of_parts, 
                         string specification, 
-                        string pass_fail) {
+                        string pass_fail, 
+                        string hpa_type) {
                 dataRow rowdataRow = ((dataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         A,
@@ -919,7 +930,8 @@ namespace ALS.ALSI.Web.ReportObject {
                         img1,
                         location_of_parts,
                         specification,
-                        pass_fail};
+                        pass_fail,
+                        hpa_type};
                 rowdataRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdataRow);
                 return rowdataRow;
@@ -966,6 +978,7 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columnlocation_of_parts = base.Columns["location_of_parts"];
                 this.columnspecification = base.Columns["specification"];
                 this.columnpass_fail = base.Columns["pass_fail"];
+                this.columnhpa_type = base.Columns["hpa_type"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1019,6 +1032,8 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columnspecification);
                 this.columnpass_fail = new global::System.Data.DataColumn("pass_fail", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpass_fail);
+                this.columnhpa_type = new global::System.Data.DataColumn("hpa_type", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhpa_type);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4670,6 +4685,22 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string hpa_type {
+                get {
+                    try {
+                        return ((string)(this[this.tabledata.hpa_typeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'hpa_type\' in table \'data\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledata.hpa_typeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsANull() {
                 return this.IsNull(this.tabledata.AColumn);
             }
@@ -4954,6 +4985,18 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setpass_failNull() {
                 this[this.tabledata.pass_failColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Ishpa_typeNull() {
+                return this.IsNull(this.tabledata.hpa_typeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Sethpa_typeNull() {
+                this[this.tabledata.hpa_typeColumn] = global::System.Convert.DBNull;
             }
         }
         

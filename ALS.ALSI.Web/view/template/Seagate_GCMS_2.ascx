@@ -400,46 +400,46 @@
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Internal Standard Recovery (R) :</td>
+                                            <td style="text-align: right">Internal Standard Recovery (R) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB13" runat="server"></asp:TextBox></td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of C14D10 in sample (X) :</td>
+                                            <td style="text-align: right">pA of C14D10 in sample (X) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB14" runat="server"></asp:TextBox></td>
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of C14D10 in working standard (Y) :</td>
+                                            <td style="text-align: right">pA of C14D10 in working standard (Y) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB15" runat="server"></asp:TextBox></td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Concentration of C14D10 (C) :</td>
+                                            <td style="text-align: right">Concentration of C14D10 (C) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB16" runat="server"></asp:TextBox>
                                             </td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Total Concentration of C14D10 (A) :</td>
+                                            <td style="text-align: right">Total Concentration of C14D10 (A) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB17" runat="server"></asp:TextBox>
                                             </td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right"Dilution factor (D) :</td>
-                                                Dilution factor (D) :<td>
-                                                    <asp:TextBox ID="txtB18" runat="server"></asp:TextBox>
-                                                </td>
+                                            <td style="text-align: right">Dilution factor (D) :</td>
+                                            Dilution factor (D) :<td>
+                                                <asp:TextBox ID="txtB18" runat="server"></asp:TextBox>
+                                            </td>
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">IDL of RHC :</td>
+                                            <td style="text-align: right">IDL of RHC :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB19" runat="server"></asp:TextBox>
                                             </td>
@@ -461,15 +461,15 @@
                                             <th></th>
                                             <th>TOC ≤ DOP</th>
                                             <th>TOC > DOP</th>
-                                          
+
                                             <th>Repeated Hydrocarbon</th>
-                                          
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- PART 1 -->
                                         <tr>
-                                            <td style="text-align:right">Surface area of sample (cm2) :</td>
+                                            <td style="text-align: right">Surface area of sample (cm2) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB20" runat="server"></asp:TextBox>
                                             </td>
@@ -481,7 +481,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">No. of extracted sample (N) :</td>
+                                            <td style="text-align: right">No. of extracted sample (N) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB21" runat="server"></asp:TextBox>
                                             </td>
@@ -493,7 +493,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Total surface area of sample :</td>
+                                            <td style="text-align: right">Total surface area of sample :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB22" runat="server"></asp:TextBox>
                                             </td>
@@ -505,7 +505,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Concentration of C16H34 (C) :</td>
+                                            <td style="text-align: right">Concentration of C16H34 (C) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB23" runat="server"></asp:TextBox>
                                             </td>
@@ -517,7 +517,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Dilution factor (D) :</td>
+                                            <td style="text-align: right">Dilution factor (D) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB24" runat="server"></asp:TextBox>
                                             </td>
@@ -529,7 +529,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Internal Standard Recovery (R) :</td>
+                                            <td style="text-align: right">Internal Standard Recovery (R) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB25" runat="server"></asp:TextBox>
                                             </td>
@@ -542,7 +542,7 @@
                                         </tr>
                                         <!-- PART 2 -->
                                         <tr>
-                                            <td style="text-align:right">pA of C16H34 (Z) :</td>
+                                            <td style="text-align: right">pA of C16H34 (Z) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB26" runat="server"></asp:TextBox>
                                             </td>
@@ -554,7 +554,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of Motor Base :</td>
+                                            <td style="text-align: right">pA of Motor Base :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB27" runat="server"></asp:TextBox>
                                             </td>
@@ -566,7 +566,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">pA of Blank :</td>
+                                            <td style="text-align: right">pA of Blank :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB28" runat="server"></asp:TextBox>
                                             </td>
@@ -579,7 +579,7 @@
                                         </tr>
                                         <!-- PART 3 -->
                                         <tr>
-                                            <td style="text-align:right">pA of sample (Y) :</td>
+                                            <td style="text-align: right">pA of sample (Y) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB29" runat="server"></asp:TextBox>
                                             </td>
@@ -603,7 +603,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Method Detection Limit (MDL) :</td>
+                                            <td style="text-align: right">Method Detection Limit (MDL) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB31" runat="server"></asp:TextBox>
                                             </td>
@@ -616,7 +616,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td style="text-align:right">&nbsp;</td>
+                                            <td style="text-align: right">&nbsp;</td>
                                             <td>
                                                 <asp:TextBox ID="txtB32" runat="server"></asp:TextBox>
                                             </td>
@@ -647,7 +647,7 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                                                        <asp:Panel ID="pAnalyzeDate" runat="server">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3">
@@ -655,12 +655,14 @@
 										* </span>
                                             </label>
                                             <div class="col-md-6">
-                                                <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
-                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                                    style="max-width: 220px">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                                     </span>
                                                 </div>
+                                                ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -851,7 +853,7 @@
                                         <tr>
                                             <td>Motor Oil Contamination</td>
                                             <td>
-                                           <%--     <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorOilContamination_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                <%--     <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorOilContamination_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>--%>
 
                                                 <%--                <asp:DropDownList ID="ddlUnitMotorOilContamination" runat="server" class="select2_category form-control">
@@ -867,7 +869,7 @@
                                         <tr>
                                             <td>Motor Hub</td>
                                             <td>
-                                         <%--       <asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                <%--       <asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>--%>
 
                                                 <%--<asp:DropDownList ID="ddlUnitMotorHub" runat="server" class="select2_category form-control">
@@ -883,7 +885,7 @@
                                         <tr>
                                             <td>Motor Hub (Total)</td>
                                             <td>
-                                     <%--           <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHubSub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                <%--           <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitMotorHubSub_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>--%>
 
                                                 <%--                                                <asp:DropDownList ID="ddlUnitMotorHubSub" runat="server" class="select2_category form-control">
@@ -932,7 +934,7 @@
                                         <tr>
                                             <td>Compound</td>
                                             <td>
-                                        <%--        <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitCompound_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                <%--        <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnitCompound_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>--%>
 
                                                 <%--                                         <asp:DropDownList ID="ddlUnitCompound" runat="server" class="select2_category form-control">
@@ -1027,12 +1029,29 @@
                                                 </asp:DropDownList>--%>
 </form>
 
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-<script>
-    jQuery(document).ready(function () {
-
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
     });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
 </script>
-<!-- END JAVASCRIPTS -->

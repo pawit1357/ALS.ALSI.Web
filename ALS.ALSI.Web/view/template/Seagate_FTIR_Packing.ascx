@@ -486,7 +486,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                 </div>
                                 <div class="portlet-body">
 
-                                                                        <asp:Panel ID="pAnalyzeDate" runat="server">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3">
@@ -494,12 +494,14 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
 										* </span>
                                             </label>
                                             <div class="col-md-6">
-                                                <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
-                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                                    style="max-width: 220px">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                                     </span>
                                                 </div>
+                                                ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -772,11 +774,29 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
         </Triggers>
     </asp:UpdatePanel>
 </form>
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-<script>
-    jQuery(document).ready(function () {
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
     });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
 </script>
-<!-- END JAVASCRIPTS -->

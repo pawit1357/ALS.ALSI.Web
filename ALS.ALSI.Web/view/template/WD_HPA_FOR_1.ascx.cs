@@ -936,7 +936,7 @@ namespace ALS.ALSI.Web.view.template
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).ToList();
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).OrderBy(x=>x.seq).ToList();
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -976,13 +976,15 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd_v2.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", listHpa.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.ToDataTable())); // Add datasource here
-
-
+              
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.GetRange(0, 38).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", listElementalComposition.GetRange(38, 31).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", listElementalComposition.GetRange(69, listElementalComposition.Count - 69).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
 
 
 
