@@ -2003,6 +2003,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\corrosion_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\copperwire_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\dhs_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\dhs_seagate_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate_damper.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_seagate_2.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
@@ -2022,7 +2024,7 @@
     <EmbeddedResource Include="ReportObject\lpc_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\lpc_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\dhs_wd.rdlc" />
-    <EmbeddedResource Include="ReportObject\dhs_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\!dhs_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd.rdlc" />
