@@ -345,8 +345,7 @@
                                                 <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
                                                 <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
                                                     <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                                </asp:LinkButton><asp:CheckBox ID="cbNoHeader" runat="server" />
-                                                พิมพ์รายงานแบบไม่มีหัวกระดาษ
+                                                </asp:LinkButton><asp:CheckBox ID="cbNoHeader" runat="server" Visible="false" />
                                             </div>
                                         </div>
                                         <%--     </div>

@@ -304,7 +304,7 @@ namespace ALS.ALSI.Web.view.template
                             gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", component.C);
                         }
 
-   
+
 
 
                         cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
@@ -623,9 +623,9 @@ namespace ALS.ALSI.Web.view.template
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                                                     //if (Regex.IsMatch(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7)), @"^[1-9]\d*(\.\d+)?$"))
                                                     //{
-                                                        tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal01.Text)).ToString();
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal01.Text)).ToString();
                                                     //}       
-                                                break;
+                                                    break;
                                                 //case "00110011":
                                                 case "00110111"://C31
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.c31);
@@ -840,7 +840,7 @@ namespace ALS.ALSI.Web.view.template
             {
 
                 List<template_seagate_dhs_coverpage> newCoverPage = new List<template_seagate_dhs_coverpage>();
-                foreach (template_seagate_dhs_coverpage _cover in this.coverpages.Where(x=>!x.chemical_id.Equals("0")))
+                foreach (template_seagate_dhs_coverpage _cover in this.coverpages.Where(x => !x.chemical_id.Equals("0")))
                 {
                     String groupName = mappingRawData(_cover.name.Trim());
                     tb_m_dhs_cas tmp = this.tbCas.Find(x => groupName.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
@@ -951,16 +951,18 @@ namespace ALS.ALSI.Web.view.template
         {
             tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
             String unitName = "";
-            if (this.coverpages[0].unit != null)
+            if (component != null)
             {
-                if (this.coverpages[0].unit.Value > 0)
-                {
-                    tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
-                    if (_unit != null)
-                    {
-                        unitName = _unit.name;
-                    }
-                }
+                unitName = component.C;
+
+                //tb_unit unit = new tb_unit();
+
+                //tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
+                //if (_unit != null)
+                //{
+                //    unitName = _unit.name;
+                //}
+
             }
 
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
@@ -1001,25 +1003,38 @@ namespace ALS.ALSI.Web.view.template
 
             List<template_seagate_dhs_coverpage> ds2 = this.coverpages.ToList();
 
+
+
             if (ds2.Count > 0 && ds2.Count <= 10)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
             }
-            if (ds2.Count >10)
+            if (ds2.Count > 10)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0,10).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, ds2.Count-10).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 10).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, ds2.Count - 10).ToDataTable())); // Add datasource here
             }
-            if (cbNoHeader.Checked)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt)); // Add datasource here
-            }
-            else
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
 
-            }
+            //if (ds2.Count > 0 && ds2.Count <= 10)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
+            //}
+            //if (ds2.Count >10)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0,10).ToDataTable())); // Add datasource here
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, ds2.Count-10).ToDataTable())); // Add datasource here
+            //}
+            //if (cbNoHeader.Checked)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt)); // Add datasource here
+            //}
+            //else
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+
+            //}
 
 
             string download = String.Empty;
@@ -1050,7 +1065,7 @@ namespace ALS.ALSI.Web.view.template
                         doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
                         //doc1.LoadFromFile(Server.MapPath("~/template/") + "BlankLetterHeadNoPicture.doc");
 
-                        
+
                         Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
                         Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
 
@@ -1116,7 +1131,7 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-        
+
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue.ToString(), true);
@@ -1159,12 +1174,14 @@ namespace ALS.ALSI.Web.view.template
                     {
                         template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
                         //work.ID = (this.CommandName == CommandNameEnum.Add) ? index : this.coverpages[index].ID;
-                        if (!spec.B.Equals("0")){
+                        if (!spec.B.Equals("0"))
+                        {
                             if (spec.B.Equals("-") && spec.C.Equals("-"))
                             {
                                 Console.WriteLine();
                             }
-                            else {
+                            else
+                            {
                                 work.sample_id = this.SampleID;
                                 work.component_id = component.ID;
                                 work.chemical_id = spec.B;
