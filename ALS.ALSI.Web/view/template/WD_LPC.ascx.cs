@@ -819,11 +819,30 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
+            List<template_wd_lpc_coverpage> listOfBlanRows = new List<template_wd_lpc_coverpage>();
+            for (int i = 1; i <= 5; i++)
+            {
+
+                template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.A = i.ToString();
+                tmp.B = "3";
+                tmp.C = String.Empty;
+                tmp.D = String.Empty;
+                tmp.E = "-99";
+                tmp.F = "-99";
+                tmp.data_type = Convert.ToInt32(WDLpcDataType.DATA_VALUE);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                listOfBlanRows.Add(tmp);
+
+            }
 
             DataTable dt = Extenders.ObjectToDataTable(this.Lpc[0]);
             List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B != "0.200").ToList();
+
+            values.AddRange(listOfBlanRows);
+
             foreach (template_wd_lpc_coverpage lpc in specs)
             {
                 lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
@@ -835,6 +854,8 @@ namespace ALS.ALSI.Web.view.template
                 lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
                 Console.WriteLine();
             }
+
+            
 
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
@@ -851,7 +872,6 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", dt.Rows[0]["ws_c21"].ToString()));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
             reportParameters.Add(new ReportParameter("txtB48", txtB48.Text));
@@ -881,19 +901,18 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3" }).Contains(x.A)).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] { "4", "5" }).Contains(x.A)).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3","4","5" }).Contains(x.A)).OrderBy(x=>x.A).ToDataTable())); // Add datasource here
 
-            if (sumarys.Count > 0 && sumarys.Count <= 10)
-            {
+            //if (sumarys.Count > 0 && sumarys.Count <= 10)
+            //{
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, sumarys.Count).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
-            }
-            if (sumarys.Count > 10)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, 10).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", sumarys.GetRange(10, sumarys.Count - 10).ToDataTable())); // Add datasource here
-            }
+                //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+            //}
+            //if (sumarys.Count > 10)
+            //{
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, 10).ToDataTable())); // Add datasource here
+            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", sumarys.GetRange(10, sumarys.Count - 10).ToDataTable())); // Add datasource here
+            //}
 
 
 

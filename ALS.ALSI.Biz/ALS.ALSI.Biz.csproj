@@ -203,9 +203,6 @@
     <Compile Include="DataAccess\m_template.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\m_template_config.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataAccess\m_title.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>

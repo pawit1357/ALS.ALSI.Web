@@ -255,19 +255,6 @@
           <Property Name="status" Type="varchar" MaxLength="1" />
           <Property Name="version" Type="varchar" MaxLength="45" />
         </EntityType>
-        <EntityType Name="m_template_config">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="template_id" Type="int" />
-          <Property Name="A" Type="varchar" MaxLength="45" />
-          <Property Name="B" Type="varchar" MaxLength="45" />
-          <Property Name="C" Type="varchar" MaxLength="45" />
-          <Property Name="D" Type="varchar" MaxLength="45" />
-          <Property Name="E" Type="varchar" MaxLength="45" />
-          <Property Name="F" Type="varchar" MaxLength="45" />
-        </EntityType>
         <EntityType Name="m_title">
           <Key>
             <PropertyRef Name="id" />
@@ -1184,6 +1171,8 @@
           <Property Name="img_path" Type="varchar" MaxLength="150" />
           <Property Name="unit2" Type="int" />
           <Property Name="unit3" Type="int" />
+          <Property Name="note_pzt" Type="varchar" MaxLength="255" />
+          <Property Name="show_note_pzt" Type="tinyint" />
         </EntityType>
         <EntityType Name="template_seagate_ic_coverpage">
           <Key>
@@ -1847,7 +1836,6 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="m_status" EntityType="Self.m_status" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_status_group" EntityType="Self.m_status_group" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_template" EntityType="Self.m_template" Schema="alsi" store:Type="Tables" />
-          <EntitySet Name="m_template_config" EntityType="Self.m_template_config" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_title" EntityType="Self.m_title" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_type_of_test" EntityType="Self.m_type_of_test" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="menu" EntityType="Self.menu" Schema="alsi" store:Type="Tables" />
@@ -1969,7 +1957,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="m_status" EntityType="ALSIModel.m_status" />
           <EntitySet Name="m_status_group" EntityType="ALSIModel.m_status_group" />
           <EntitySet Name="m_template" EntityType="ALSIModel.m_template" />
-          <EntitySet Name="m_template_config" EntityType="ALSIModel.m_template_config" />
           <EntitySet Name="m_title" EntityType="ALSIModel.m_title" />
           <EntitySet Name="m_type_of_test" EntityType="ALSIModel.m_type_of_test" />
           <EntitySet Name="menus" EntityType="ALSIModel.menu" />
@@ -2326,19 +2313,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="create_date" Type="DateTime" />
           <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="version" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="m_template_config">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="template_id" Type="Int32" />
-          <Property Name="A" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="B" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="C" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="D" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="E" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="F" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="m_title">
           <Key>
@@ -3258,6 +3232,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="img_path" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="unit2" Type="Int32" />
           <Property Name="unit3" Type="Int32" />
+          <Property Name="note_pzt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="show_note_pzt" Type="SByte" />
         </EntityType>
         <EntityType Name="template_seagate_ic_coverpage">
           <Key>
@@ -4177,20 +4153,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="m_template_config">
-            <EntityTypeMapping TypeName="ALSIModel.m_template_config">
-              <MappingFragment StoreEntitySet="m_template_config">
-                <ScalarProperty Name="F" ColumnName="F" />
-                <ScalarProperty Name="E" ColumnName="E" />
-                <ScalarProperty Name="D" ColumnName="D" />
-                <ScalarProperty Name="C" ColumnName="C" />
-                <ScalarProperty Name="B" ColumnName="B" />
-                <ScalarProperty Name="A" ColumnName="A" />
-                <ScalarProperty Name="template_id" ColumnName="template_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="m_title">
             <EntityTypeMapping TypeName="ALSIModel.m_title">
               <MappingFragment StoreEntitySet="m_title">
@@ -5039,6 +5001,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_hpa_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_seagate_hpa_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_hpa_coverpage">
+                <ScalarProperty Name="show_note_pzt" ColumnName="show_note_pzt" />
+                <ScalarProperty Name="note_pzt" ColumnName="note_pzt" />
                 <ScalarProperty Name="unit3" ColumnName="unit3" />
                 <ScalarProperty Name="unit2" ColumnName="unit2" />
                 <ScalarProperty Name="img_path" ColumnName="img_path" />

@@ -207,92 +207,111 @@
                                         </div>
                                     </EmptyDataTemplate>
                                 </asp:GridView>
-                                <asp:GridView ID="gvClassification" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type" OnRowDataBound="gvClassification_RowDataBound" OnRowCommand="gvClassification_RowCommand">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Classification" ItemStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Type of Particles" ItemStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>'></asp:Literal>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Results, Particle/sqcm" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Label ID="litC" runat="server" Text='<%# Eval("C")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Hide">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("id")%>'><i class="fa fa-minus"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
-                                                    CommandArgument='<%# Eval("id")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                    <EmptyDataTemplate>
-                                        <div class="data-not-found">
-                                            <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:TextBox ID="lbNotePZT" runat="server" Text="Note: ** PZT Specification only applicable to Headstacks with micro-actuators."></asp:TextBox></td>
+                                                    <td>                                                            <asp:CheckBox ID="cbNotePZT" runat="server" Text="Show/Hide" /></td>
+
+                                                    </tr>
+                                            
+
+                                                 
+                                                </table>
+                                            </div>
                                         </div>
-                                    </EmptyDataTemplate>
-                                </asp:GridView>
-                                <br />
-                                <table class="table table-striped table-bordered mini">
-                                    <thead></thead>
+                                    </div>
+                                    <br />
+                                    <asp:GridView ID="gvClassification" runat="server" AutoGenerateColumns="False"
+                                        CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type" OnRowDataBound="gvClassification_RowDataBound" OnRowCommand="gvClassification_RowCommand">
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="Classification" ItemStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Type of Particles" ItemStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>'></asp:Literal>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Results, Particle/sqcm" ItemStyle-HorizontalAlign="Center">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="litC" runat="server" Text='<%# Eval("C")%>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Hide">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                        CommandArgument='<%# Eval("id")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnUndo" runat="server" ToolTip="Undo" CommandName="Normal" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                        CommandArgument='<%# Eval("id")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <EmptyDataTemplate>
+                                            <div class="data-not-found">
+                                                <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                            </div>
+                                        </EmptyDataTemplate>
+                                    </asp:GridView>
+                                    <br />
+                                    <table class="table table-striped table-bordered mini">
+                                        <thead></thead>
 
-                                    <tr runat="server" id="tr103">
-                                        <td>Analysis Details</td>
-                                        <td class="auto-style4">% Area Analysed (A/7.07mm2)</td>
-                                        <td runat="server" id="td103">
-                                            <asp:Label ID="lbC144" runat="server" />
-                                        </td>
-                                    </tr>
-                                    <tr runat="server" id="tr104">
-                                        <td></td>
-                                        <td>Area Analysed (mm2)</td>
-                                        <td runat="server" id="td104">
-                                            <asp:Label ID="lbC145" runat="server" />
-                                        </td>
-                                    </tr>
-                                    <tr runat="server" id="tr105">
-                                        <td></td>
-                                        <td>Extraction Volume (mL)</td>
-                                        <td runat="server" id="td105">
-                                            <asp:Label ID="lbC146" runat="server" />
-                                        </td>
-                                    </tr>
-                                    <tr runat="server" id="tr106">
-                                        <td></td>
-                                        <td>Filtered Volume (mL)</td>
-                                        <td runat="server" id="td106">
-                                            <asp:Label ID="lbC147" runat="server" />
-                                        </td>
-                                    </tr>
+                                        <tr runat="server" id="tr103">
+                                            <td>Analysis Details</td>
+                                            <td class="auto-style4">% Area Analysed (A/7.07mm2)</td>
+                                            <td runat="server" id="td103">
+                                                <asp:Label ID="lbC144" runat="server" />
+                                            </td>
+                                        </tr>
+                                        <tr runat="server" id="tr104">
+                                            <td></td>
+                                            <td>Area Analysed (mm2)</td>
+                                            <td runat="server" id="td104">
+                                                <asp:Label ID="lbC145" runat="server" />
+                                            </td>
+                                        </tr>
+                                        <tr runat="server" id="tr105">
+                                            <td></td>
+                                            <td>Extraction Volume (mL)</td>
+                                            <td runat="server" id="td105">
+                                                <asp:Label ID="lbC146" runat="server" />
+                                            </td>
+                                        </tr>
+                                        <tr runat="server" id="tr106">
+                                            <td></td>
+                                            <td>Filtered Volume (mL)</td>
+                                            <td runat="server" id="td106">
+                                                <asp:Label ID="lbC147" runat="server" />
+                                            </td>
+                                        </tr>
 
-                                    <tr runat="server" id="tr107">
-                                        <td></td>
-                                        <td>No of Parts Extracted</td>
-                                        <td runat="server" id="td107">
-                                            <asp:Label ID="lbC148" runat="server" />
-                                        </td>
-                                    </tr>
+                                        <tr runat="server" id="tr107">
+                                            <td></td>
+                                            <td>No of Parts Extracted</td>
+                                            <td runat="server" id="td107">
+                                                <asp:Label ID="lbC148" runat="server" />
+                                            </td>
+                                        </tr>
 
-                                    <tr runat="server" id="tr108">
-                                        <td></td>
-                                        <td>Magnification</td>
-                                        <td runat="server" id="td108">
-                                            <asp:TextBox ID="lbC149" runat="server" Text="448"> </asp:TextBox>
-                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender11" TargetControlID="lbC149"
-                                                FilterType="Custom, Numbers" ValidChars="." runat="server" />
-                                        </td>
-                                    </tr>
-                                </table>
+                                        <tr runat="server" id="tr108">
+                                            <td></td>
+                                            <td>Magnification</td>
+                                            <td runat="server" id="td108">
+                                                <asp:TextBox ID="lbC149" runat="server" Text="448"> </asp:TextBox>
+                                                <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender11" TargetControlID="lbC149"
+                                                    FilterType="Custom, Numbers" ValidChars="." runat="server" />
+                                            </td>
+                                        </tr>
+                                    </table>
 
-                            </div>
+                                </div>
                         </div>
                     </asp:Panel>
 

@@ -41,7 +41,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<m_status> m_status { get; set; }
         public DbSet<m_status_group> m_status_group { get; set; }
         public DbSet<m_template> m_template { get; set; }
-        public DbSet<m_template_config> m_template_config { get; set; }
         public DbSet<m_title> m_title { get; set; }
         public DbSet<m_type_of_test> m_type_of_test { get; set; }
         public DbSet<menu> menus { get; set; }

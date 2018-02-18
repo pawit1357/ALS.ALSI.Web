@@ -30,7 +30,7 @@
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Test</th>
+                                                    <th>Analysis</th>
                                                     <th>Procedure No</th>
                                                     <th>Number of pieces used<br />
                                                         for extraction</th>

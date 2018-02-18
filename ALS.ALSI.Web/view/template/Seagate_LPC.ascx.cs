@@ -1306,7 +1306,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
-
+            
 
             // Variables
             Warning[] warnings;
@@ -1315,16 +1315,25 @@ namespace ALS.ALSI.Web.view.template
             string encoding = string.Empty;
             string extension = string.Empty;
 
+            String[] particleSizes = new String[]  { "0.300", "0.500", "0.600" };
 
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/lpc_seagate.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
+            //foreach(var item in this.Lpcs.Where(x => x.row_type == 1 && particleSizes.Contains(x.channel_size)).ToList())
+            //{
+            //    if (item.LiquidParticleCount.IndexOf("μm")!=-1)
+            //    {
+            //        item.LiquidParticleCount = item.LiquidParticleCount.Replace("μm", "");
+            //        Console.WriteLine();
+            //    }
+            //}
 
-            DataTable dt03 = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.300")).ToList().ToDataTable();
-            DataTable dt05 = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500")).ToList().ToDataTable();
-            DataTable dt06 = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600")).ToList().ToDataTable();
+            DataTable dt03 = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.300") && x.row_state == Convert.ToInt16(RowTypeEnum.Normal)).ToList().ToDataTable();
+            DataTable dt05 = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500") && x.row_state == Convert.ToInt16(RowTypeEnum.Normal)).ToList().ToDataTable();
+            DataTable dt06 = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600") && x.row_state == Convert.ToInt16(RowTypeEnum.Normal)).ToList().ToDataTable();
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt03)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt05)); // Add datasource here

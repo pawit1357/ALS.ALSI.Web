@@ -13,4 +13,9 @@
 
 ELP-2480-HB ***** seagate hpa swap
 
+
+ALTER TABLE `alsi`.`template_seagate_hpa_coverpage` 
+ADD COLUMN `note_pzt` VARCHAR(255) NULL AFTER `unit3`,
+ADD COLUMN `show_note_pzt` TINYINT NULL DEFAULT 1 AFTER `note_pzt`;
+
 */

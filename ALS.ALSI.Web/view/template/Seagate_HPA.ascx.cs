@@ -45,7 +45,7 @@ namespace ALS.ALSI.Web.view.template
 
         private String[] ANameKey = {
                         "Class 1, Total Hard Particle",
-                        "Class 2, Total Magnetic Particle",
+                        "Class 2, Total Magnetic Particle(Counts/part)",
                         "Class 3, Total Semi-hard Metal Particle",
                         "    3.1  SST + Fe base + FeO",
                         "    3.2  Sn base Particle",
@@ -344,6 +344,8 @@ namespace ALS.ALSI.Web.view.template
                 ddlHardParticleAlalysisUnit.SelectedValue = this.Hpas[0].unit2 == null ? "0" : this.Hpas[0].unit2.Value.ToString();
                 ddlClassificationUnit.SelectedValue = this.Hpas[0].unit3 == null ? "0" : this.Hpas[0].unit3.Value.ToString();
 
+                cbNotePZT.Checked = Convert.ToBoolean(this.Hpas[0].show_note_pzt);
+                lbNotePZT.Text = this.Hpas[0].note_pzt;
 
                 tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(_cover.specification_id));
                 if (tem != null)
@@ -499,6 +501,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 this.CommandName = CommandNameEnum.Add;
                 this.Hpas = new List<template_seagate_hpa_coverpage>();
+                lbNotePZT.Text = "Note: ** PZT Specification only applicable to Headstacks with micro-actuators.";
             }
 
 
@@ -558,6 +561,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
+
                     foreach (template_seagate_hpa_coverpage ws in this.Hpas)
                     {
                         ws.sample_id = this.SampleID;
@@ -596,6 +600,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
+                        
                         this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
@@ -608,6 +613,9 @@ namespace ALS.ALSI.Web.view.template
                             ws.unit = Convert.ToInt32(ddlLiquidParticleUnit.SelectedValue);
                             ws.unit2 = Convert.ToInt32(ddlHardParticleAlalysisUnit.SelectedValue);
                             ws.unit3 = Convert.ToInt32(ddlClassificationUnit.SelectedValue);
+                            ws.show_note_pzt = Convert.ToSByte(cbNotePZT.Checked);
+                            ws.note_pzt = lbNotePZT.Text;
+
                             #region "Method/Procedure"
                             ws.ProcedureNo = txtProcedureNo.Text;
                             ws.NumberOfPieces = txtNumberOfPieces.Text;
@@ -1718,26 +1726,14 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+            reportParameters.Add(new ReportParameter("notePZT", (cbNotePZT.Checked? lbNotePZT.Text:" ")));
 
-
-            //tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(this.Hpas[0].specification_id));
-            //if (tem != null)
-            //{
-            //gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
-            //gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
-
-            //gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
-            //gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
-
-            //gvHpa.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
-            //gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
-
-            //gvClassification.Columns[2].HeaderText = String.Format("Results, {0}", ddlClassificationUnit.SelectedItem.Text);
-
+            
             reportParameters.Add(new ReportParameter("rpt_unit", ddlLiquidParticleUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("rpt_unit2", ddlHardParticleAlalysisUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("rpt_unit3", ddlClassificationUnit.SelectedItem.Text));
-            //}
+            
             DataTable dtSummary = new DataTable("Summary");
             DataColumn[] cols1 ={ new DataColumn("A",typeof(String)),
                                   new DataColumn("B",typeof(String)),
@@ -1757,17 +1753,17 @@ namespace ALS.ALSI.Web.view.template
             row = dtSummary.NewRow();
             row["A"] = "";
             row["B"] = "Extraction Volume (mL)";
-            row["C"] = lbC146.Text;
+            row["C"] = !CustomUtils.isNumber(lbC146.Text)? "":Convert.ToDouble(lbC146.Text).ToString("N0");
             dtSummary.Rows.Add(row);
             row = dtSummary.NewRow();
             row["A"] = "";
             row["B"] = "Filtered Volume (mL)";
-            row["C"] = lbC147.Text;
+            row["C"] = !CustomUtils.isNumber(lbC147.Text) ? "" : Convert.ToDouble(lbC147.Text).ToString("N0");
             dtSummary.Rows.Add(row);
             row = dtSummary.NewRow();
             row["A"] = "";
             row["B"] = "No of Parts Extracted";
-            row["C"] = lbC148.Text;
+            row["C"] = !CustomUtils.isNumber(lbC148.Text) ? "" : Convert.ToDouble(lbC148.Text).ToString("N0");
             dtSummary.Rows.Add(row);
             row = dtSummary.NewRow();
             row["A"] = "";
@@ -1795,9 +1791,8 @@ namespace ALS.ALSI.Web.view.template
 
             List<template_seagate_hpa_coverpage> ds5 = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
 
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 25).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(25, 25).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(50, ds5.Count - 50).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 32).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(32, ds5.Count - 32).ToDataTable())); // Add datasource here
 
 
 
