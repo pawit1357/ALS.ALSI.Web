@@ -578,11 +578,11 @@ namespace ALS.ALSI.Web.view.template
             if (_ddlResult1 != null)
             {
                 _ddlResult1.Items.Clear();
-                _ddlResult1.Items.Add(new ListItem("Pass Level 0", "Pass Level 0"));
-                _ddlResult1.Items.Add(new ListItem("Pass Level 1", "Pass Level 1"));
-                _ddlResult1.Items.Add(new ListItem("Pass Level 2", "Pass Level 2"));
-                _ddlResult1.Items.Add(new ListItem("Fail Level 3", "Fail Level 3"));
-                _ddlResult1.Items.Add(new ListItem("Fail Level 4", "Fail Level 4"));
+                _ddlResult1.Items.Add(new ListItem("Pass (Level 0)", "Pass (Level 0)"));
+                _ddlResult1.Items.Add(new ListItem("Pass (Level 1)", "Pass (Level 1)"));
+                _ddlResult1.Items.Add(new ListItem("Pass (Level 2)", "Pass (Level 2)"));
+                _ddlResult1.Items.Add(new ListItem("Fail (Level 3)", "Fail (Level 3)"));
+                _ddlResult1.Items.Add(new ListItem("Fail (Level 4)", "Fail (Level 4)"));
 
             }
             _ddlResult1.SelectedValue = _hResult1.Value;
@@ -592,11 +592,11 @@ namespace ALS.ALSI.Web.view.template
             if (_ddlResult2 != null)
             {
                 _ddlResult2.Items.Clear();
-                _ddlResult2.Items.Add(new ListItem("Pass Level 0", "Pass Level 0"));
-                _ddlResult2.Items.Add(new ListItem("Pass Level 1", "Pass Level 1"));
-                _ddlResult2.Items.Add(new ListItem("Pass Level 2", "Pass Level 2"));
-                _ddlResult2.Items.Add(new ListItem("Fail Level 3", "Fail Level 3"));
-                _ddlResult2.Items.Add(new ListItem("Fail Level 4", "Fail Level 4"));
+                _ddlResult2.Items.Add(new ListItem("Pass (Level 0) ", "Pass (Level 0)"));
+                _ddlResult2.Items.Add(new ListItem("Pass (Level 1) ", "Pass (Level 1)"));
+                _ddlResult2.Items.Add(new ListItem("Pass (Level 2) ", "Pass (Level 2)"));
+                _ddlResult2.Items.Add(new ListItem("Fail (Level 3) ", "Fail (Level 3)"));
+                _ddlResult2.Items.Add(new ListItem("Fail (Level 4) ", "Fail (Level 4)"));
             }
             _ddlResult2.SelectedValue = _hResult2.Value;
 
@@ -605,11 +605,11 @@ namespace ALS.ALSI.Web.view.template
             if (_ddlResult3 != null)
             {
                 _ddlResult3.Items.Clear();
-                _ddlResult3.Items.Add(new ListItem("Pass Level 0", "Pass Level 0"));
-                _ddlResult3.Items.Add(new ListItem("Pass Level 1", "Pass Level 1"));
-                _ddlResult3.Items.Add(new ListItem("Pass Level 2", "Pass Level 2"));
-                _ddlResult3.Items.Add(new ListItem("Fail Level 3", "Fail Level 3"));
-                _ddlResult3.Items.Add(new ListItem("Fail Level 4", "Fail Level 4"));
+                _ddlResult3.Items.Add(new ListItem("Pass (Level 0)", "Pass (Level 0)"));
+                _ddlResult3.Items.Add(new ListItem("Pass (Level 1)", "Pass (Level 1)"));
+                _ddlResult3.Items.Add(new ListItem("Pass (Level 2)", "Pass (Level 2)"));
+                _ddlResult3.Items.Add(new ListItem("Fail (Level 3)", "Fail (Level 3)"));
+                _ddlResult3.Items.Add(new ListItem("Fail (Level 4)", "Fail (Level 4)"));
             }
             _ddlResult3.SelectedValue = _hResult3.Value;
 

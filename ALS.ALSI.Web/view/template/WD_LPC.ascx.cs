@@ -820,10 +820,13 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
             List<template_wd_lpc_coverpage> listOfBlanRows = new List<template_wd_lpc_coverpage>();
+            List<template_wd_lpc_coverpage> listOfBlanRows2 = new List<template_wd_lpc_coverpage>();
+
+            template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
             for (int i = 1; i <= 5; i++)
             {
 
-                template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp = new template_wd_lpc_coverpage();
                 tmp.A = i.ToString();
                 tmp.B = "3";
                 tmp.C = String.Empty;
@@ -836,13 +839,44 @@ namespace ALS.ALSI.Web.view.template
 
             }
 
+            tmp = new template_wd_lpc_coverpage();
+            tmp.A = "Average";
+            tmp.B = "3";
+            tmp.C = String.Empty;
+            tmp.D = String.Empty;
+            tmp.E = "-99";
+            tmp.F = "-99";
+            tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+            tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+            listOfBlanRows2.Add(tmp);
+            tmp = new template_wd_lpc_coverpage();
+            tmp.A = "Standard Deviation";
+            tmp.B = "3";
+            tmp.C = String.Empty;
+            tmp.D = String.Empty;
+            tmp.E = "-99";
+            tmp.F = "-99";
+            tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+            tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+            listOfBlanRows2.Add(tmp);
+            tmp = new template_wd_lpc_coverpage();
+            tmp.A = "%RSD Deviation";
+            tmp.B = "3";
+            tmp.C = String.Empty;
+            tmp.D = String.Empty;
+            tmp.E = "-99";
+            tmp.F = "-99";
+            tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+            tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+            listOfBlanRows2.Add(tmp);
+
             DataTable dt = Extenders.ObjectToDataTable(this.Lpc[0]);
             List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B != "0.200").ToList();
 
             values.AddRange(listOfBlanRows);
-
+            sumarys.AddRange(listOfBlanRows2);
             foreach (template_wd_lpc_coverpage lpc in specs)
             {
                 lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
@@ -852,6 +886,8 @@ namespace ALS.ALSI.Web.view.template
             {
                 lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
                 lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
+                lpc.D = lpc.A.Replace("%", "Z");
+
                 Console.WriteLine();
             }
 
@@ -905,7 +941,7 @@ namespace ALS.ALSI.Web.view.template
 
             //if (sumarys.Count > 0 && sumarys.Count <= 10)
             //{
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, sumarys.Count).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, sumarys.Count).OrderBy(x => x.D).ToDataTable())); // Add datasource here
                 //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
             //}
             //if (sumarys.Count > 10)

@@ -238,7 +238,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 ddlComponent.SelectedValue = this.Ftir[0].component_id.Value + "";
                 ddlDetailSpec.SelectedValue = this.Ftir[0].detail_spec_id.Value + "";
-                ddlUnit.SelectedValue = (this.Ftir[0].ftir_unit == null) ? "0" : this.Ftir[0].ftir_unit.Value + "";
+                ddlUnit.SelectedValue = (this.Ftir[0].ftir_unit == null) ? "0": this.Ftir[0].ftir_unit.Value + "";
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
                 gvMethodProcedure.DataBind();
@@ -287,17 +287,28 @@ namespace ALS.ALSI.Web.view.template
                 txtC41.Text = this.Ftir[0].ftr_c41;//Reported as 
                 #endregion
                 #region "Amide"
-                txtFTIR_B42.Text = this.Ftir[0].ftr_b43; //Peak Ht at cm-1
-                txtFTIR_B43.Text = this.Ftir[0].ftr_b44;//Slope of Calibration Plot
-                txtFTIR_B44.Text = this.Ftir[0].ftr_b45;//y-intercept
-                txtFTIR_B45.Text = this.Ftir[0].ftr_b46; //Amount of Amide Detected (µg)
-                txtFTIR_B45.Text = this.Ftir[0].ftr_b48; //Method Detection Limit, MDL
-                lbFTIR_C49.Text = this.Ftir[0].ftr_c52;//Calculations
+                txtFTIR_B43.Text = this.Ftir[0].ftr_b43; //Peak Ht at cm-1
+                txtFTIR_B44.Text = this.Ftir[0].ftr_b44;//Slope of Calibration Plot
+                txtFTIR_B45.Text = this.Ftir[0].ftr_b45;//y-intercept
+                txtFTIR_B46.Text = this.Ftir[0].ftr_b46; //Amount of Amide Detected (µg)
+                txtFTIR_B48.Text = this.Ftir[0].ftr_b48; //Method Detection Limit, MDL
+                lbFTIR_C52.Text = this.Ftir[0].ftr_c52;//Calculations
                 txtC53.Text = this.Ftir[0].ftr_c53;//Reportas
                 #endregion
+                #region "Dop"
+                txtFTIR_B53.Text= this.Ftir[0].ftr_b53; //Peak Ht at cm-1
+                txtFTIR_B54.Text= this.Ftir[0].ftr_b54;//Slope of Calibration Plot
+                txtFTIR_B55.Text= this.Ftir[0].ftr_b55;//y-intercept
+                txtFTIR_B56.Text= this.Ftir[0].ftr_b56; //Amount of Amide Detected (µg)
+                txtFTIR_B58.Text= this.Ftir[0].ftr_b58; //Method Detection Limit, MDL
+                txtFTIR_C62.Text= this.Ftir[0].ftr_c62;//Calculations
+                txtFTIR_C63.Text= this.Ftir[0].ftr_c63;//Reportas
+                #endregion
+
                 #region "Unit"
                 lbAmide.Text = this.Ftir[0].amide_unit;
                 lbSilicone.Text = this.Ftir[0].silicone_unit;
+                lbDopUnit.Text = this.Ftir[0].dop_unit;
                 #endregion
 
                 CalculateCas();
@@ -450,17 +461,27 @@ namespace ALS.ALSI.Web.view.template
                         item.ftr_c41 = txtC41.Text;//Reported as 
                         #endregion
                         #region "Amide"
-                        item.ftr_b43 = txtFTIR_B42.Text; //Peak Ht at cm-1
-                        item.ftr_b44 = txtFTIR_B43.Text;//Slope of Calibration Plot
-                        item.ftr_b45 = txtFTIR_B44.Text;//y-intercept
-                        item.ftr_b46 = txtFTIR_B45.Text; //Amount of Amide Detected (µg)
-                        item.ftr_b48 = txtFTIR_B45.Text; //Method Detection Limit, MDL
-                        item.ftr_c52 = lbFTIR_C49.Text;//Calculations
+                        item.ftr_b43 = txtFTIR_B43.Text; //Peak Ht at cm-1
+                        item.ftr_b44 = txtFTIR_B44.Text;//Slope of Calibration Plot
+                        item.ftr_b45 = txtFTIR_B45.Text;//y-intercept
+                        item.ftr_b46 = txtFTIR_B46.Text; //Amount of Amide Detected (µg)
+                        item.ftr_b48 = txtFTIR_B48.Text; //Method Detection Limit, MDL
+                        item.ftr_c52 = lbFTIR_C52.Text;//Calculations
                         item.ftr_c53 = txtC53.Text;//Reportas
                         #endregion
-
+                        #region "Dop"
+                        item.ftr_b53 = txtFTIR_B53.Text; //Peak Ht at cm-1
+                        item.ftr_b54 = txtFTIR_B54.Text;//Slope of Calibration Plot
+                        item.ftr_b55 = txtFTIR_B55.Text;//y-intercept
+                        item.ftr_b56 = txtFTIR_B56.Text; //Amount of Amide Detected (µg)
+                        item.ftr_b58 = txtFTIR_B58.Text; //Method Detection Limit, MDL
+                        item.ftr_c62 = txtFTIR_C62.Text;//Calculations
+                        item.ftr_c63 = txtFTIR_C63.Text;//Reportas
+                        #endregion
                         item.amide_unit = lbAmide.Text;
                         item.silicone_unit = lbSilicone.Text;
+                        item.dop_unit = lbDopUnit.Text;
+
                     }
 
                     template_wd_ftir_coverpage.UpdateList(this.Ftir);
@@ -685,30 +706,51 @@ namespace ALS.ALSI.Web.view.template
 
                                     #endregion
                                     #region "FTIR-Amide"
-                                    txtFTIR_B42.Text = CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.B));//43-Peak Ht at 800cm-1
-                                    txtFTIR_B43.Text = CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.B));//44-Slope of Calibration Plot
-                                    txtFTIR_B44.Text = CustomUtils.GetCellValue(isheet.GetRow(45 - 1).GetCell(ExcelColumn.B));//45-y-intercept
-                                    txtFTIR_B45.Text = CustomUtils.GetCellValue(isheet.GetRow(46 - 1).GetCell(ExcelColumn.B));//46-Amount of Silicone Detected (µg)
+                                    txtFTIR_B43.Text = CustomUtils.GetCellValue(isheet.GetRow(43 - 1).GetCell(ExcelColumn.B));//43-Peak Ht at 800cm-1
+                                    txtFTIR_B44.Text = CustomUtils.GetCellValue(isheet.GetRow(44 - 1).GetCell(ExcelColumn.B));//44-Slope of Calibration Plot
+                                    txtFTIR_B45.Text = CustomUtils.GetCellValue(isheet.GetRow(45 - 1).GetCell(ExcelColumn.B));//45-y-intercept
+                                    txtFTIR_B46.Text = CustomUtils.GetCellValue(isheet.GetRow(46 - 1).GetCell(ExcelColumn.B));//46-Amount of Silicone Detected (µg)
                                     txtFTIR_B48.Text = CustomUtils.GetCellValue(isheet.GetRow(48 - 1).GetCell(ExcelColumn.B)); //48-Method Detection Limit, MDL
-                                    lbFTIR_C49.Text = CustomUtils.GetCellValue(isheet.GetRow(52 - 1).GetCell(ExcelColumn.C)); //Calculations
+                                    lbFTIR_C52.Text = CustomUtils.GetCellValue(isheet.GetRow(52 - 1).GetCell(ExcelColumn.C)); //Calculations
                                     txtC53.Text = CustomUtils.GetCellValue(isheet.GetRow(53 - 1).GetCell(ExcelColumn.C));
 
 
-                                    txtFTIR_B42.Text = String.IsNullOrEmpty(txtFTIR_B42.Text) ? "" : Convert.ToDouble(txtFTIR_B42.Text).ToString("N" + Convert.ToInt32(txtDecimal03.Text));
-                                    txtFTIR_B43.Text = String.IsNullOrEmpty(txtFTIR_B43.Text) ? "" : Convert.ToDouble(txtFTIR_B43.Text).ToString("N" + Convert.ToInt32(txtDecimal04.Text));
-                                    txtFTIR_B44.Text = String.IsNullOrEmpty(txtFTIR_B44.Text) ? "" : Convert.ToDouble(txtFTIR_B44.Text).ToString("N" + Convert.ToInt32(txtDecimal05.Text));
-                                    txtFTIR_B45.Text = String.IsNullOrEmpty(txtFTIR_B45.Text) ? "" : Convert.ToDouble(txtFTIR_B45.Text).ToString("N" + Convert.ToInt32(txtDecimal06.Text));
+                                    txtFTIR_B43.Text = String.IsNullOrEmpty(txtFTIR_B43.Text) ? "" : Convert.ToDouble(txtFTIR_B43.Text).ToString("N" + Convert.ToInt32(txtDecimal03.Text));
+                                    txtFTIR_B44.Text = String.IsNullOrEmpty(txtFTIR_B44.Text) ? "" : Convert.ToDouble(txtFTIR_B44.Text).ToString("N" + Convert.ToInt32(txtDecimal04.Text));
+                                    txtFTIR_B45.Text = String.IsNullOrEmpty(txtFTIR_B45.Text) ? "" : Convert.ToDouble(txtFTIR_B45.Text).ToString("N" + Convert.ToInt32(txtDecimal05.Text));
+                                    txtFTIR_B46.Text = String.IsNullOrEmpty(txtFTIR_B46.Text) ? "" : Convert.ToDouble(txtFTIR_B46.Text).ToString("N" + Convert.ToInt32(txtDecimal06.Text));
                                     txtFTIR_B48.Text = String.IsNullOrEmpty(txtFTIR_B48.Text) ? "" : Convert.ToDouble(txtFTIR_B48.Text).ToString("N" + Convert.ToInt32(txtDecimal07.Text));
-                                    lbFTIR_C49.Text = String.IsNullOrEmpty(lbFTIR_C49.Text) ? "" : Convert.ToDouble(lbFTIR_C49.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
+                                    lbFTIR_C52.Text = String.IsNullOrEmpty(lbFTIR_C52.Text) ? "" : Convert.ToDouble(lbFTIR_C52.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
+
+
+                                    #endregion
+                                    #region "DOP"
+                                    txtFTIR_B53.Text = CustomUtils.GetCellValue(isheet.GetRow(55 - 1).GetCell(ExcelColumn.B));//43-Peak Ht at 800cm-1
+                                    txtFTIR_B54.Text = CustomUtils.GetCellValue(isheet.GetRow(56 - 1).GetCell(ExcelColumn.B));//44-Slope of Calibration Plot
+                                    txtFTIR_B55.Text = CustomUtils.GetCellValue(isheet.GetRow(57 - 1).GetCell(ExcelColumn.B));//45-y-intercept
+                                    txtFTIR_B56.Text = CustomUtils.GetCellValue(isheet.GetRow(58 - 1).GetCell(ExcelColumn.B));//46-Amount of Silicone Detected (µg)
+
+                                    txtFTIR_B58.Text = CustomUtils.GetCellValue(isheet.GetRow(60 - 1).GetCell(ExcelColumn.B)); //48-Method Detection Limit, MDL
+                                    txtFTIR_C62.Text = CustomUtils.GetCellValue(isheet.GetRow(64 - 1).GetCell(ExcelColumn.C)); //Calculations
+                                    txtFTIR_C63.Text = CustomUtils.GetCellValue(isheet.GetRow(65 - 1).GetCell(ExcelColumn.C));
+
+
+                                    txtFTIR_B53.Text = String.IsNullOrEmpty(txtFTIR_B53.Text) ? "" : Convert.ToDouble(txtFTIR_B53.Text).ToString("N" + Convert.ToInt32(txtDecimal03.Text));
+                                    txtFTIR_B54.Text = String.IsNullOrEmpty(txtFTIR_B54.Text) ? "" : Convert.ToDouble(txtFTIR_B54.Text).ToString("N" + Convert.ToInt32(txtDecimal04.Text));
+                                    txtFTIR_B55.Text = String.IsNullOrEmpty(txtFTIR_B55.Text) ? "" : Convert.ToDouble(txtFTIR_B55.Text).ToString("N" + Convert.ToInt32(txtDecimal05.Text));
+                                    txtFTIR_B56.Text = String.IsNullOrEmpty(txtFTIR_B56.Text) ? "" : Convert.ToDouble(txtFTIR_B56.Text).ToString("N" + Convert.ToInt32(txtDecimal06.Text));
+                                    txtFTIR_B58.Text = String.IsNullOrEmpty(txtFTIR_B58.Text) ? "" : Convert.ToDouble(txtFTIR_B58.Text).ToString("N" + Convert.ToInt32(txtDecimal07.Text));
+
+                                    txtFTIR_C62.Text = String.IsNullOrEmpty(txtFTIR_C62.Text) ? "" : Convert.ToDouble(txtFTIR_C62.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
+                                    txtFTIR_C63.Text = String.IsNullOrEmpty(txtFTIR_C63.Text) ? "" : Convert.ToDouble(txtFTIR_C63.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
 
 
                                     #endregion
 
-
-
-
                                     lbAmide.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.C));
                                     lbSilicone.Text = CustomUtils.GetCellValue(isheet.GetRow(48 - 1).GetCell(ExcelColumn.C));
+                                    lbDopUnit.Text = CustomUtils.GetCellValue(isheet.GetRow(60 - 1).GetCell(ExcelColumn.C));
+
 
                                 }
                                 Console.WriteLine();
@@ -1022,66 +1064,7 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-
-            DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-            List<template_wd_ftir_coverpage> ds = this.Ftir.Where(x => x.data_type == 2 && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo + " "));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-
-            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-
-            reportParameters.Add(new ReportParameter("Test", "FTIR"));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_wd_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-
-
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds.ToList().ToDataTable()));
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-        }
+        
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue.ToString(), true);
@@ -1175,14 +1158,6 @@ namespace ALS.ALSI.Web.view.template
                 gvResult.DataBind();
 
 
-                //this.Result = listResult;
-                //gvResult.DataSource = this.Result;
-                //gvResult.DataBind();
-                //lbC28.Text = detailSpec.E.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.E);//NVR
-                //lbC30.Text = detailSpec.F.Equals("NA") ? "NA" : String.Format("<{0}", detailSpec.F); ;//FTIR
-
-                //lbE27.Text = detailSpec.D;
-                //lbD27.Text = detailSpec.D;
             }
         }
 
@@ -1270,7 +1245,7 @@ namespace ALS.ALSI.Web.view.template
 
             this.Ftir[5].D = txtC41.Text;
             this.Ftir[6].D = txtC53.Text;
-            this.Ftir[7].D = "Not Detected";
+            this.Ftir[7].D = txtFTIR_C63.Text;
             ////
 
             this.Ftir[3].E = String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("NA") || this.Ftir[3].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
@@ -1428,6 +1403,7 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
         }
+
         protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (cbCheckBox.Checked)

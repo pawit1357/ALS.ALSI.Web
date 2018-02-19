@@ -1386,7 +1386,15 @@
           <Property Name="row_type" Type="int" />
           <Property Name="amide_unit" Type="varchar" MaxLength="45" />
           <Property Name="silicone_unit" Type="varchar" MaxLength="45" />
+          <Property Name="dop_unit" Type="varchar" MaxLength="45" />
           <Property Name="ftir_unit" Type="int" />
+          <Property Name="ftr_b53" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b54" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b55" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b56" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_b58" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_c62" Type="varchar" MaxLength="45" />
+          <Property Name="ftr_c63" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_wd_ftir_coverpage_tmp">
           <Key>
@@ -3447,7 +3455,15 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_type" Type="Int32" />
           <Property Name="amide_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="silicone_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="dop_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftir_unit" Type="Int32" />
+          <Property Name="ftr_b53" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b54" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b55" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b56" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_b58" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_c62" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ftr_c63" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_ftir_coverpage_tmp">
           <Key>
@@ -5275,7 +5291,15 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_ftir_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_wd_ftir_coverpage">
               <MappingFragment StoreEntitySet="template_wd_ftir_coverpage">
+                <ScalarProperty Name="ftr_c63" ColumnName="ftr_c63" />
+                <ScalarProperty Name="ftr_c62" ColumnName="ftr_c62" />
+                <ScalarProperty Name="ftr_b58" ColumnName="ftr_b58" />
+                <ScalarProperty Name="ftr_b56" ColumnName="ftr_b56" />
+                <ScalarProperty Name="ftr_b55" ColumnName="ftr_b55" />
+                <ScalarProperty Name="ftr_b54" ColumnName="ftr_b54" />
+                <ScalarProperty Name="ftr_b53" ColumnName="ftr_b53" />
                 <ScalarProperty Name="ftir_unit" ColumnName="ftir_unit" />
+                <ScalarProperty Name="dop_unit" ColumnName="dop_unit" />
                 <ScalarProperty Name="silicone_unit" ColumnName="silicone_unit" />
                 <ScalarProperty Name="amide_unit" ColumnName="amide_unit" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />

@@ -988,7 +988,7 @@ namespace ALS.ALSI.Web.view.template
                             index++;
                         }
 
-                        DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(channel_size)).ToDataTable(), "Type", "Sample", "Value", "No. of Particles ≥ " + channel_size.Substring(0, 3) + " μm (Counts/mL)", false);
+                        DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(channel_size)).ToDataTable(), "Type", "Sample", "Value", "No. of Particles ≥ " + channel_size.Substring(0, 3) + " um (Counts/mL)", false);
                         gvWorkSheetAverage.DataSource = dtAverages;
                         gvWorkSheetAverage.DataBind();
                         #endregion
@@ -1100,7 +1100,7 @@ namespace ALS.ALSI.Web.view.template
                             listAverages.Add(lpc);
                             index++;
                         }
-                        DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(channel_size)).ToDataTable(), "Type", "Sample", "Value", "No. of Particles ≥ " + channel_size.Substring(0, 3) + " μm (Counts/mL)", false);
+                        DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(channel_size)).ToDataTable(), "Type", "Sample", "Value", "No. of Particles ≥ " + channel_size.Substring(0, 3) + " um (Counts/mL)", false);
                         gvWorkSheetAverage05.DataSource = dtAverages;
                         gvWorkSheetAverage05.DataBind();
                         #endregion
@@ -1212,7 +1212,7 @@ namespace ALS.ALSI.Web.view.template
                             listAverages.Add(lpc);
                             index++;
                         }
-                        DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(channel_size)).ToDataTable(), "Type", "Sample", "Value", "No. of Particles ≥ " + channel_size.Substring(0, 3) + " μm (Counts/mL)", false);
+                        DataTable dtAverages = PivotTable.GetInversedDataTable(listAverages.Where(x => x.ChannelSize.Equals(channel_size)).ToDataTable(), "Type", "Sample", "Value", "No. of Particles ≥ " + channel_size.Substring(0, 3) + " um (Counts/mL)", false);
                         gvWorkSheetAverage06.DataSource = dtAverages;
                         gvWorkSheetAverage06.DataBind();
                         #endregion
@@ -1324,9 +1324,9 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             //foreach(var item in this.Lpcs.Where(x => x.row_type == 1 && particleSizes.Contains(x.channel_size)).ToList())
             //{
-            //    if (item.LiquidParticleCount.IndexOf("μm")!=-1)
+            //    if (item.LiquidParticleCount.IndexOf("um")!=-1)
             //    {
-            //        item.LiquidParticleCount = item.LiquidParticleCount.Replace("μm", "");
+            //        item.LiquidParticleCount = item.LiquidParticleCount.Replace("um", "");
             //        Console.WriteLine();
             //    }
             //}
@@ -1457,7 +1457,7 @@ namespace ALS.ALSI.Web.view.template
                     results03.Add(new template_seagate_lpc_coverpage
                     {
                         channel_size = "0.300",
-                        LiquidParticleCount = (i==0)? "Total number of particles ≥ 0.3μm ":(i==1)? "1st Run":(i==2)? "2nd Run": i+"rd Run",
+                        LiquidParticleCount = (i==0)? "Total number of particles ≥ 0.3um ":(i==1)? "1st Run":(i==2)? "2nd Run": i+"rd Run",
                         SpecificationLimits = "",
                         Results = "",
                         row_state = Convert.ToInt32(RowTypeEnum.Normal),
@@ -1521,7 +1521,7 @@ namespace ALS.ALSI.Web.view.template
                     results05.Add(new template_seagate_lpc_coverpage
                     {
                         channel_size = "0.500",
-                        LiquidParticleCount = (i == 0) ? "Total number of particles ≥ 0.5μm " : (i == 1) ? "1st Run" : (i == 2) ? "2nd Run" : i + "rd Run",
+                        LiquidParticleCount = (i == 0) ? "Total number of particles ≥ 0.5um " : (i == 1) ? "1st Run" : (i == 2) ? "2nd Run" : i + "rd Run",
                         SpecificationLimits = "",
                         Results = "",
                         row_state = Convert.ToInt32(RowTypeEnum.Normal),
@@ -1586,7 +1586,7 @@ namespace ALS.ALSI.Web.view.template
                     results06.Add(new template_seagate_lpc_coverpage
                     {
                         channel_size = "0.600",
-                        LiquidParticleCount = (i == 0) ? "Total number of particles ≥ 0.6μm " : (i == 1) ? "1st Run" : (i == 2) ? "2nd Run" : i + "rd Run",
+                        LiquidParticleCount = (i == 0) ? "Total number of particles ≥ 0.6um " : (i == 1) ? "1st Run" : (i == 2) ? "2nd Run" : i + "rd Run",
                         SpecificationLimits = "",
                         Results = "",
                         row_state = Convert.ToInt32(RowTypeEnum.Normal),

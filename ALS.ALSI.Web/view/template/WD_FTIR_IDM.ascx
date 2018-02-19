@@ -394,7 +394,7 @@ The instrument detection limit for silicone oil is
                                                 <asp:TextBox ID="txtC41" runat="server" Text="" placeholder="ดึงข้อมูลจาก C41"></asp:TextBox></td>
                                         </tr>
 
-
+                                        <!-- AMIDE -->
                                         <tr runat="server" id="tr11">
                                             <td>Amide</td>
                                             <td></td>
@@ -404,28 +404,28 @@ The instrument detection limit for silicone oil is
                                         <tr runat="server" id="tr12">
                                             <td>Peak Ht at cm-<sup>1</sup></td>
                                             <td>
-                                                <asp:TextBox ID="txtFTIR_B42" runat="server" placeholder="ดึงข้อมูลจาก B43"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtFTIR_B43" runat="server" placeholder="ดึงข้อมูลจาก B43"></asp:TextBox></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
                                         <tr runat="server" id="tr13">
                                             <td>Slope of Calibration Plot</td>
                                             <td>
-                                                <asp:TextBox ID="txtFTIR_B43" runat="server" placeholder="ดึงข้อมูลจาก B44"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtFTIR_B44" runat="server" placeholder="ดึงข้อมูลจาก B44"></asp:TextBox></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
                                         <tr runat="server" id="tr14">
                                             <td>y-intercept</td>
                                             <td>
-                                                <asp:TextBox ID="txtFTIR_B44" runat="server" placeholder="ดึงข้อมูลจาก B45"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtFTIR_B45" runat="server" placeholder="ดึงข้อมูลจาก B45"></asp:TextBox></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
                                         <tr runat="server" id="tr15">
                                             <td>Amount of Silicone Detected (µg)</td>
                                             <td>
-                                                <asp:TextBox ID="txtFTIR_B45" runat="server" placeholder="ดึงข้อมูลจาก B46"></asp:TextBox>
+                                                <asp:TextBox ID="txtFTIR_B46" runat="server" placeholder="ดึงข้อมูลจาก B46"></asp:TextBox>
                                             </td>
                                             <td></td>
                                             <td></td>
@@ -444,7 +444,7 @@ The instrument detection limit for silicone oil is
                                             <td>Amide (ng/cm<sup>2</sup>) =</td>
                                             <td>(2*amide weight in ug *1000) / (S * N)</td>
                                             <td>
-                                                <asp:TextBox ID="lbFTIR_C49" runat="server" Text="" placeholder="ดึงข้อมูลจาก B52"></asp:TextBox></td>
+                                                <asp:TextBox ID="lbFTIR_C52" runat="server" Text="" placeholder="ดึงข้อมูลจาก B53"></asp:TextBox></td>
                                         </tr>
                                         <tr runat="server" id="tr19">
                                             <td></td>
@@ -452,6 +452,66 @@ The instrument detection limit for silicone oil is
                                             <td>Reported as</td>
                                             <td>
                                                 <asp:TextBox ID="txtC53" runat="server" Text="" placeholder="ดึงข้อมูลจาก C53"></asp:TextBox></td>
+                                        </tr>
+                                        
+                                        <!-- DOP -->
+                                        <tr runat="server" id="tr20">
+                                            <td>DOP</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr runat="server" id="tr21">
+                                            <td>Peak Ht at cm-<sup>1</sup></td>
+                                            <td>
+                                                <asp:TextBox ID="txtFTIR_B53" runat="server" placeholder="ดึงข้อมูลจาก B55"></asp:TextBox></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr runat="server" id="tr22">
+                                            <td>Slope of Calibration Plot</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFTIR_B54" runat="server" placeholder="ดึงข้อมูลจาก B56"></asp:TextBox></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr runat="server" id="tr23">
+                                            <td>y-intercept</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFTIR_B55" runat="server" placeholder="ดึงข้อมูลจาก B57"></asp:TextBox></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr runat="server" id="tr24">
+                                            <td>Amount of Silicone Detected (µg)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFTIR_B56" runat="server" placeholder="ดึงข้อมูลจาก B58"></asp:TextBox>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr runat="server" id="tr25">
+                                            <td>Method Detection Limit, MDL</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFTIR_B58" runat="server" Text="" placeholder="ดึงข้อมูลจาก B60"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="lbDopUnit" runat="server" Text="ng/cm2"></asp:Label></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr runat="server" id="tr26">
+                                            <td>Calculations:</td>
+                                            <td>DOP (ng/cm<sup>2</sup>) =</td>
+                                            <td>(2*amide weight in ug *1000) / (S * N)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFTIR_C62" runat="server" Text="" placeholder="ดึงข้อมูลจาก C65"></asp:TextBox></td>
+                                        </tr>
+                                        <tr runat="server" id="tr27">
+                                            <td></td>
+                                            <td></td>
+                                            <td>Reported as</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFTIR_C63" runat="server" Text="" placeholder="ดึงข้อมูลจาก C63"></asp:TextBox></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -659,7 +719,7 @@ The instrument detection limit for silicone oil is
 
                                         </tr>
                                         <tr>
-                                            <td>Unit:</td>
+                                            <td>Unit(Ftir):</td>
                                             <td>
                                                 <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
