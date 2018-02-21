@@ -13,8 +13,10 @@
 
 ELP-2480-HB ***** seagate hpa swap
 ELP-2824-LB ** wd lpc
-
-
+ELP-3028B-HB
+3128-DB
+ELP-3276-DB
+ELP-1942-DB
 
 #
 ALTER TABLE `alsi`.`template_wd_ftir_coverpage` 
@@ -36,4 +38,7 @@ update template_seagate_copperwire_coverpage set result=replace(result,'Pass Lev
 
 #
 update template_seagate_lpc_coverpage set LiquidParticleCount=replace(LiquidParticleCount,'μ','u')
+
+
+
 */

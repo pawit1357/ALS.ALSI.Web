@@ -207,6 +207,11 @@ namespace ALS.ALSI.Utils
         public static double Average(List<Double> valueList)
         {
             double result = 0.0;
+
+            if (valueList.Count == 0)
+            {
+                return result;
+            }
             foreach (double value in valueList)
             {
                 result += value;
@@ -216,6 +221,10 @@ namespace ALS.ALSI.Utils
 
         public static double StandardDeviation(List<Double> valueList)
         {
+            if(valueList.Count == 0)
+            {
+                return 0.0;
+            }
             double M = 0.0;
             double S = 0.0;
             int k = 1;

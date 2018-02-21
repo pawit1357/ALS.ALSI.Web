@@ -1005,15 +1005,15 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            if (ds2.Count > 0 && ds2.Count <= 10)
+            if (ds2.Count > 0 && ds2.Count <= 15)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
             }
-            if (ds2.Count > 10)
+            if (ds2.Count > 15)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 10).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, ds2.Count - 10).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, ds2.Count - 15).ToDataTable())); // Add datasource here
             }
 
             //if (ds2.Count > 0 && ds2.Count <= 10)

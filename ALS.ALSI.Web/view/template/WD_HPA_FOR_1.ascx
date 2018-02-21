@@ -140,7 +140,10 @@
 
                                 <h5>Stage Mimic of
                     <asp:Label ID="lbA34" runat="server" Text=""></asp:Label><br />
-                                    <asp:Label ID="lbImgPath1" runat="server" Text=""></asp:Label></h5>
+                                    <asp:Label ID="lbImgPath1" runat="server" Text=""></asp:Label>
+                                    <br />
+                                    <asp:Image ID="Image1" runat="server" Height="150px" Width="150px" />
+                                </h5>
 
                                 <%--                                <asp:Image ID="img1" runat="server" Width="120" Height="120" />--%>
                                 <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>

@@ -1013,15 +1013,15 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_dhs_coverpage> ds2 = this.coverpages.ToList();
 
 
-            if (ds2.Count > 0 && ds2.Count <= 10)
+            if (ds2.Count > 0 && ds2.Count <= 20)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
             }
-            if (ds2.Count > 10)
+            if (ds2.Count > 20)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 10).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, ds2.Count - 10).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 20).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(20, ds2.Count - 20).ToDataTable())); // Add datasource here
             }
 
 

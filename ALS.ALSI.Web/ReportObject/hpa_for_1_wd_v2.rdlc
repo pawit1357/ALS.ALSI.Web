@@ -743,6 +743,26 @@
         <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="DataSet7">
+      <Query>
+        <DataSourceName>DS</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DS</rd:DataSetName>
+        <rd:SchemaPath>D:\Work\Outsource\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:TableName>hpa_img</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -772,7 +792,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>3.40535cm</Top>
-            <Left>0.06185cm</Left>
+            <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.48107cm</Width>
             <Style>
@@ -806,7 +826,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.66676in</Height>
+                  <Height>0.51024in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1547,8 +1567,8 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.61833in</Top>
-            <Left>0.02435in</Left>
-            <Height>0.85589in</Height>
+            <Left>0in</Left>
+            <Height>0.69937in</Height>
             <Width>7.28213in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -1613,8 +1633,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>6.35506cm</Top>
-            <Left>0.06185cm</Left>
+            <Top>5.95751cm</Top>
+            <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.48107cm</Width>
             <ZIndex>2</ZIndex>
@@ -1632,19 +1652,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.61835in</Width>
+                  <Width>2.1227in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.7455in</Width>
+                  <Width>1.58028in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.00354in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.57793in</Width>
+                  <Width>1.55184in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.3368in</Width>
+                  <Width>1.0368in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1735,24 +1755,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>x</Value>
-                                  <Style>
-                                    <FontStyle>Normal</FontStyle>
-                                    <FontFamily>Lucida Sans</FontFamily>
-                                    <FontWeight>Normal</FontWeight>
-                                    <TextDecoration>None</TextDecoration>
-                                    <Color>#000000</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>x</Value>
+                                  <Value />
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Lucida Sans</FontFamily>
@@ -2052,7 +2055,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.18913in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2349,10 +2352,9 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet2</DataSetName>
-            <Top>2.73796in</Top>
-            <Left>0.02435in</Left>
-            <Height>0.61594in</Height>
-            <Width>7.28211in</Width>
+            <Top>2.58145in</Top>
+            <Height>0.55507in</Height>
+            <Width>7.29516in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -2785,8 +2787,7 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet3</DataSetName>
-            <Top>6.29444in</Top>
-            <Left>0in</Left>
+            <Top>6.00629in</Top>
             <Height>0.37463in</Height>
             <Width>7.30035in</Width>
             <ZIndex>4</ZIndex>
@@ -2842,7 +2843,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>15.38852cm</Top>
+            <Top>14.65663cm</Top>
             <Left>0.06185cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.49661cm</Width>
@@ -2857,93 +2858,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox40">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Total hard particles/cm2 = total no. of hard particles/(no. of times taped x surface area analysed)</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Stage Mimic of  Base</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Area</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>8.58947cm</Top>
-            <Left>0.06185cm</Left>
-            <Height>1.30967cm</Height>
-            <Width>18.48106cm</Width>
-            <ZIndex>6</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Image Name="Image2">
-            <Source>Embedded</Source>
-            <Value>=Parameters!img01Url.Value</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>3.92508in</Top>
-            <Left>0.02435in</Left>
-            <Height>1.07653in</Height>
-            <Width>1.35417in</Width>
-            <ZIndex>7</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
           <Textbox Name="Textbox42">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -2982,11 +2896,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>12.77464cm</Top>
-            <Left>0.06185cm</Left>
+            <Top>11.86051cm</Top>
+            <Left>0.09495cm</Left>
             <Height>0.939cm</Height>
             <Width>18.49661cm</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>true</Hidden>
             </Visibility>
@@ -3002,10 +2916,10 @@
           </Textbox>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>9.26127in</Top>
+            <Top>8.97312in</Top>
             <Height>1.04167in</Height>
             <Width>7.30646in</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3046,10 +2960,10 @@
                 <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
               </Parameter>
             </Parameters>
-            <Left>0.02435in</Left>
+            <Left>0in</Left>
             <Height>1.34069in</Height>
             <Width>7.27601in</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3304,11 +3218,14 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet3</DataSetName>
-            <Top>13.78419cm</Top>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <Top>13.0523cm</Top>
             <Left>0.06185cm</Left>
-            <Height>1.42334cm</Height>
+            <Height>1.42335cm</Height>
             <Width>18.48106cm</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -3571,11 +3488,11 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>17.01001cm</Top>
+            <Top>16.27812cm</Top>
             <Left>0cm</Left>
             <Height>1.46751cm</Height>
-            <Width>18.55845cm</Width>
-            <ZIndex>12</ZIndex>
+            <Width>18.55846cm</Width>
+            <ZIndex>10</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -4008,11 +3925,10 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet4</DataSetName>
-            <Top>7.53836in</Top>
-            <Left>0in</Left>
+            <Top>7.25021in</Top>
             <Height>0.39203in</Height>
-            <Width>7.31951in</Width>
-            <ZIndex>13</ZIndex>
+            <Width>7.3195in</Width>
+            <ZIndex>11</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -4293,11 +4209,11 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>20.30209cm</Top>
+            <Top>19.5702cm</Top>
             <Left>0cm</Left>
             <Height>1.37916cm</Height>
             <Width>18.57606cm</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>12</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -4730,11 +4646,10 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet5</DataSetName>
-            <Top>8.85185in</Top>
-            <Left>0in</Left>
+            <Top>8.5637in</Top>
             <Height>0.40942in</Height>
             <Width>7.31951in</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>13</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -4787,11 +4702,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>18.54808cm</Top>
+            <Top>17.81619cm</Top>
             <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.59156cm</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4825,11 +4740,139 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>21.88433cm</Top>
+            <Top>21.15244cm</Top>
             <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.59156cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix11">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.05323in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.94082in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Image Name="Image1">
+                          <Source>Database</Source>
+                          <Value>=First(Fields!img1.Value)</Value>
+                          <MIMEType>image/jpeg</MIMEType>
+                          <Sizing>Fit</Sizing>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Image>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details7" />
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
+            <DataSetName>DataSet7</DataSetName>
+            <Top>3.70089in</Top>
+            <Left>0.18966in</Left>
+            <Height>0.94082in</Height>
+            <Width>1.05323in</Width>
+            <ZIndex>16</ZIndex>
+            <Visibility>
+              <Hidden>=CountRows() = 0</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox47">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total hard particles/cm2 = total no. of hard particles/(no. of times taped x surface area analysed)
+Stage Mimic of  Base
+Area</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox13</rd:DefaultName>
+            <Top>8.03731cm</Top>
+            <Left>0cm</Left>
+            <Height>1.29239cm</Height>
+            <Width>18.48104cm</Width>
             <ZIndex>17</ZIndex>
+            <Visibility>
+              <Hidden>=iif(Parameters!img01Url.Value.Equals("0"),true,false)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4906,11 +4949,6 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="img01Url">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="rpt_unit">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
@@ -4926,11 +4964,16 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="img01Url">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>7</NumberOfRows>
+      <NumberOfRows>8</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -4983,11 +5026,6 @@
           <ParameterName>ResultDesc</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>5</RowIndex>
-          <ParameterName>img01Url</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>5</RowIndex>
           <ParameterName>rpt_unit</ParameterName>
@@ -5001,6 +5039,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>AlsSingaporeRefNo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>img01Url</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

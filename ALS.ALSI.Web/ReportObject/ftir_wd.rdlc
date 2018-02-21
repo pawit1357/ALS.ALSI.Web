@@ -1545,7 +1545,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!E.Value</Value>
+                                  <Value>=iif(Fields!C.Value.Equals("NA"),"NA",Fields!E.Value)</Value>
                                   <Style>
                                     <FontFamily>Lucida Sans</FontFamily>
                                   </Style>

@@ -223,7 +223,7 @@
                         <div class="actions">
 
 
-
+                            <asp:LinkButton ID="btnOperation" runat="server" class="btn btn-default btn-sm" OnClick="btnOperation_Click"> Operation</asp:LinkButton>
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>
                             <asp:LinkButton ID="btnEls" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELS</asp:LinkButton>
                             <asp:LinkButton ID="btnEln" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELN</asp:LinkButton>
@@ -273,10 +273,16 @@
 
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="cbSelect" runat="server" />
+                                        <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("ID")%>'></asp:HiddenField>
+
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="litStatus" runat="server">&nbsp;</asp:Literal>
-                                        <%--                                        <asp:HiddenField ID="csID" runat="server" Value="<%# Eval("status_completion_scheduled")%>" />--%>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center">

@@ -860,16 +860,6 @@
                                     <FontFamily>Lucida Sans</FontFamily>
                                   </Style>
                                 </TextRun>
-                                <TextRun>
-                                  <Value>MESA Defect by &amp; SEM</Value>
-                                  <Style>
-                                    <FontStyle>Normal</FontStyle>
-                                    <FontFamily>Lucida Sans</FontFamily>
-                                    <FontWeight>Normal</FontWeight>
-                                    <TextDecoration>None</TextDecoration>
-                                    <Color>#000000</Color>
-                                  </Style>
-                                </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>

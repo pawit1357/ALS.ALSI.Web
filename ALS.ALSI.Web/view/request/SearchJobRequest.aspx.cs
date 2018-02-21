@@ -661,7 +661,7 @@ namespace ALS.ALSI.Web.view.request
                     StringBuilder sqlCri = new StringBuilder();
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
-                        sqlCri.Append(" `Extent1`.`job_prefix` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
+                        sqlCri.Append(" `Extent4`.`name` = '" + ddlTypeOfTest.SelectedValue+"'");
                         sqlCri.Append(" AND ");
                     }
 
@@ -692,11 +692,11 @@ namespace ALS.ALSI.Web.view.request
                         sqlCri.Append(" AND ");
                     }
 
-                    if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
-                    {
-                        sqlCri.Append(" `Extent4`.`id` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
-                        sqlCri.Append(" AND ");
-                    }
+                    //if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
+                    //{
+                    //    sqlCri.Append(" `Extent4`.`id` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
+                    //    sqlCri.Append(" AND ");
+                    //}
                     if (!String.IsNullOrEmpty(ddlJobStatus.SelectedValue))
                     {
                         sqlCri.Append(" `Extent7`.`id` = " + Convert.ToInt16(ddlJobStatus.SelectedValue));
@@ -785,6 +785,23 @@ namespace ALS.ALSI.Web.view.request
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             ExportToExcel();
+        }
+
+        protected void btnOperation_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine();
+
+            foreach (GridViewRow row in gvJob.Rows)
+            {
+                CheckBox chk = row.Cells[1].Controls[1] as CheckBox;
+
+                if (chk != null && chk.Checked)
+                {
+                    HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
+                    Console.WriteLine();
+                    // ...
+                }
+            }
         }
     }
 }

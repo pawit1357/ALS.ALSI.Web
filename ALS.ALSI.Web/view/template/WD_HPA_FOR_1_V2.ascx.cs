@@ -278,7 +278,7 @@ namespace ALS.ALSI.Web.view.template
 
                 }
 
-
+                Image1.ImageUrl = this.HpaFor1[0].img_path;
             }
             else
             {
@@ -526,7 +526,24 @@ namespace ALS.ALSI.Web.view.template
                                 #region "IMAGES"
                                 foreach (template_wd_hpa_for1_coverpage _cov in this.HpaFor1)
                                 {
+                                    //string yyyy = DateTime.Now.ToString("yyyy");
+                                    //string MM = DateTime.Now.ToString("MM");
+                                    //string dd = DateTime.Now.ToString("dd");
+
+                                    String randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(_postedFile.FileName));
+
+                                    source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                                    source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                                    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                                    {
+                                        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                                    }
+                                    _postedFile.SaveAs(source_file);
+
                                     _cov.img_path = source_file_url;
+                                    lbImgPath1.Text = _cov.img_path;
+                                    Image1.ImageUrl = lbImgPath1.Text;
                                 }
                                 #endregion
                                 break;
@@ -839,6 +856,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
+            List<template_wd_hpa_for1_coverpage> listHpaImg = new List<template_wd_hpa_for1_coverpage>();
 
             DataTable dt = Extenders.ObjectToDataTable(this.HpaFor1[0]);
             ReportHeader reportHeader = new ReportHeader();
@@ -850,6 +868,13 @@ namespace ALS.ALSI.Web.view.template
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).OrderBy(x=>x.seq).ToList();
+
+            if (listHpa[0].img_path != null)
+            {
+                template_wd_hpa_for1_coverpage tmp = new template_wd_hpa_for1_coverpage();
+                tmp.img1 = CustomUtils.GetBytesFromImage(listHpa[0].img_path);
+                listHpaImg.Add(tmp);
+            }
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -874,7 +899,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", "", "")));
             }
-            reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor1[0].img_path));
+            reportParameters.Add(new ReportParameter("img01Url", listHpaImg.Count.ToString()));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
@@ -894,10 +919,16 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", listHpa.ToDataTable())); // Add datasource here
 
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.GetRange(0,24).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", listElementalComposition.GetRange(24, 24).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", listElementalComposition.GetRange(48, 24).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", listElementalComposition.GetRange(72, listElementalComposition.Count-72).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.GetRange(0, 38).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", listElementalComposition.GetRange(38, 31).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", listElementalComposition.GetRange(69, listElementalComposition.Count - 69).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", listHpaImg.ToDataTable())); // Add datasource here
+
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.GetRange(0,24).ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", listElementalComposition.GetRange(24, 24).ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", listElementalComposition.GetRange(48, 24).ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", listElementalComposition.GetRange(72, listElementalComposition.Count-72).ToDataTable())); // Add datasource here
 
 
 
