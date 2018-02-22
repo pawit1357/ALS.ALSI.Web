@@ -70,7 +70,12 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             return _repository.GetAll().Where(x => x.ID == _sampleID).ToList();
         }
-        
+
+        public static List<job_sample> FindAllByIds(List<int> ids)
+        {
+            return _repository.GetAll().Where(x => ids.Contains(x.ID)).ToList();
+        }
+
         public static List<job_sample> FindAllByJobID(int _job_id)
         {
             return _repository.GetAll().Where(x => x.job_id == _job_id).ToList();

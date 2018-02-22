@@ -38,6 +38,7 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_REPORT_DATE = APPNAME + "/view/request/ChangeReportDate.aspx";
         public const String LINK_CHANGE_OTHER_REF_NO = APPNAME + "/view/request/ChangeOtherRefNo.aspx";
         public const String LINK_CHANGE_SINGAPORE_REF_NO = APPNAME + "/view/request/ChangeSingaporeRefNo.aspx";
+        public const String LINK_CHANGE_JOB_GROUP = APPNAME + "/view/request/ChangeJobGroup.aspx";
 
 
         public const String LINK_ADMIN_PRINT = APPNAME + "/view/request/AdminPrint.aspx";

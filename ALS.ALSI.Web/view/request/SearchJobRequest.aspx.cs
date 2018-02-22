@@ -45,6 +45,12 @@ namespace ALS.ALSI.Web.view.request
             set { ViewState[Constants.COMMAND_NAME] = value; }
         }
 
+        public List<int> selectedList
+        {
+            get { return (List<int>)Session[GetType().Name + "selectedList"]; }
+            set { Session[GetType().Name + "selectedList"] = value; }
+        }
+
         public int JobID { get; set; }
 
         public int SampleID { get; set; }
@@ -54,10 +60,7 @@ namespace ALS.ALSI.Web.view.request
             get
             {
                 job_info tmp = new job_info();
-                //tmp.job_number = txtJobNumber.Text;
-                //tmp.date_of_receive = String.IsNullOrEmpty(txtDateOfRecieve.Text) ? DateTime.MinValue : Convert.ToDateTime(txtDateOfRecieve.Text);
-                //tmp.contract_person_id = String.IsNullOrEmpty(ddlContract_person.SelectedValue) ? 0 : int.Parse(ddlContract_person.SelectedValue);
-                //tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
+
 
                 tmp.status = String.IsNullOrEmpty(ddlJobStatus.SelectedValue) ? 0 : int.Parse(ddlJobStatus.SelectedValue);
                 tmp.jobRefNo = txtREfNo.Text;
@@ -104,6 +107,7 @@ namespace ALS.ALSI.Web.view.request
 
         private void initialPage()
         {
+            this.selectedList = new List<int>();
 
             ddlCompany.Items.Clear();
             ddlCompany.DataSource = new m_customer().SelectAll();
@@ -136,14 +140,14 @@ namespace ALS.ALSI.Web.view.request
             {
                 case RoleEnum.LOGIN:
                     lbAddJob.Visible = true;
+                    btnOperation.Visible = false;
                     break;
                 default:
                     lbAddJob.Visible = false;
-
+                    btnOperation.Visible = true;
                     break;
             }
             btnElp.CssClass = "btn blue";
-
 
         }
 
@@ -166,16 +170,16 @@ namespace ALS.ALSI.Web.view.request
                 {
                     case RoleEnum.ACCOUNT:
                     case RoleEnum.ADMIN:
-                        gvJob.Columns[3].Visible = true;
                         gvJob.Columns[4].Visible = true;
-                        gvJob.Columns[11].Visible = true;
+                        gvJob.Columns[5].Visible = true;
                         gvJob.Columns[12].Visible = true;
+                        gvJob.Columns[13].Visible = true;
                         break;
                     default:
-                        gvJob.Columns[3].Visible = false;
                         gvJob.Columns[4].Visible = false;
-                        gvJob.Columns[11].Visible = false;
+                        gvJob.Columns[5].Visible = false;
                         gvJob.Columns[12].Visible = false;
+                        gvJob.Columns[13].Visible = false;
                         break;
                 }
 
@@ -373,7 +377,7 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnChangeOtherRefNo = (LinkButton)e.Row.FindControl("btnChangeOtherRefNo");
                     LinkButton btnChangeSingaporeRefNo = (LinkButton)e.Row.FindControl("btnChangeSingaporeRefNo");
 
-                    
+
 
 
                     LinkButton btnAmend = (LinkButton)e.Row.FindControl("btnAmend");
@@ -661,7 +665,7 @@ namespace ALS.ALSI.Web.view.request
                     StringBuilder sqlCri = new StringBuilder();
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
-                        sqlCri.Append(" `Extent4`.`name` = '" + ddlTypeOfTest.SelectedValue+"'");
+                        sqlCri.Append(" `Extent4`.`name` = '" + ddlTypeOfTest.SelectedValue + "'");
                         sqlCri.Append(" AND ");
                     }
 
@@ -789,8 +793,6 @@ namespace ALS.ALSI.Web.view.request
 
         protected void btnOperation_Click(object sender, EventArgs e)
         {
-            Console.WriteLine();
-
             foreach (GridViewRow row in gvJob.Rows)
             {
                 CheckBox chk = row.Cells[1].Controls[1] as CheckBox;
@@ -798,10 +800,12 @@ namespace ALS.ALSI.Web.view.request
                 if (chk != null && chk.Checked)
                 {
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
-                    Console.WriteLine();
-                    // ...
+                    this.selectedList.Add(Convert.ToInt32(hf.Value));
                 }
             }
+            Console.WriteLine();
+            Server.Transfer(Constants.LINK_CHANGE_JOB_GROUP);
+
         }
     }
 }

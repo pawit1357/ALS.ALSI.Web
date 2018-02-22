@@ -822,12 +822,22 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_lpc_coverpage> listOfBlanRows = new List<template_wd_lpc_coverpage>();
             List<template_wd_lpc_coverpage> listOfBlanRows2 = new List<template_wd_lpc_coverpage>();
 
-            
+            List<String> nums = new List<String>();
 
             DataTable dt = Extenders.ObjectToDataTable(this.Lpc[0]);
             List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
-            List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B != "0.200").ToList();
+            foreach(template_wd_lpc_coverpage xxxx in values)
+            {
+                if (!nums.Contains(xxxx.B))
+                {
+               
+                        nums.Add(xxxx.B);
+                    
+                }
+            }
+
+            List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)  && nums.Contains(x.B) && !x.B.Equals("0.200")).ToList();
             template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
             int pc = values.Count / 5;
             for (int i = 1; i <= pc; i++)
@@ -922,8 +932,12 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("method", txtB21.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
             reportParameters.Add(new ReportParameter("partizleSizeCount", pc.ToString()));
+            reportParameters.Add(new ReportParameter("showTankCondition", (!pTankConditions.Visible).ToString()));
+
+
 
             
+
             // Variables
             Warning[] warnings;
             string[] streamIds;

@@ -276,8 +276,7 @@
                                 <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:CheckBox ID="cbSelect" runat="server" />
-                                        <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("ID")%>'></asp:HiddenField>
-
+                                        <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("SN")%>'></asp:HiddenField>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">

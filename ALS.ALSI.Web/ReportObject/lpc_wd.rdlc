@@ -4266,6 +4266,9 @@
             <Height>0.50155in</Height>
             <Width>6.89831in</Width>
             <ZIndex>7</ZIndex>
+            <Visibility>
+              <Hidden>=iif(Parameters!showTankCondition.Value.Equals("True"),True,False)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -5009,11 +5012,16 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="showTankCondition">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>11</NumberOfRows>
+      <NumberOfRows>12</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -5119,6 +5127,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>10</RowIndex>
           <ParameterName>partizleSizeCount</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>11</RowIndex>
+          <ParameterName>showTankCondition</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
