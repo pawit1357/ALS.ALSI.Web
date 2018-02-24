@@ -360,7 +360,7 @@ namespace ALS.ALSI.Web.view.request
                     String am = (Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]) == 0) ? String.Empty : String.Format("AM{0}", Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]));
                     String r = (Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]) == 0) ? String.Empty : String.Format("R{0}", Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]));
 
-
+                    Boolean isGroupSubmit = Convert.ToBoolean(gv.DataKeys[e.Row.RowIndex][16]);
 
 
 
@@ -392,6 +392,8 @@ namespace ALS.ALSI.Web.view.request
                     Literal litDueDate = (Literal)e.Row.FindControl("litDueDate");
                     Label lbJobNumber = (Label)e.Row.FindControl("lbJobNumber");
                     Literal litOtherRefNo = (Literal)e.Row.FindControl("litOtherRefNo");
+                    Literal litIcon = (Literal)e.Row.FindControl("litIcon");
+                    CheckBox cbSelect = (CheckBox)e.Row.FindControl("cbSelect");
 
 
 
@@ -405,6 +407,8 @@ namespace ALS.ALSI.Web.view.request
                     btnEdit.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT);
                     btnConvertTemplete.Visible = ((userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE);
                     btnChangeStatus.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT);
+                    cbSelect.Visible = false;
+
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
@@ -412,15 +416,48 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case RoleEnum.CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.CHEMIST_TESTING);
+                            switch (job_status)
+                            {
+                                case StatusEnum.CHEMIST_TESTING:
+                                    cbSelect.Visible = true;
+                                    break;
+                            }
                             break;
                         case RoleEnum.SR_CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.SR_CHEMIST_CHECKING);
+                            switch (job_status)
+                            {
+                                case StatusEnum.SR_CHEMIST_CHECKING:
+                                    cbSelect.Visible = true && isGroupSubmit;
+                                    break;
+                            }
                             break;
                         case RoleEnum.LABMANAGER:
                             btnWorkFlow.Visible = (job_status == StatusEnum.LABMANAGER_CHECKING);
+                            switch (job_status)
+                            {
+                                case StatusEnum.LABMANAGER_CHECKING:
+                                    cbSelect.Visible = true && isGroupSubmit;
+                                    break;
+                            }
                             break;
                         case RoleEnum.ADMIN:
                             btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF);
+                            switch (job_status)
+                            {
+                                case StatusEnum.ADMIN_CONVERT_WORD:
+                                case StatusEnum.ADMIN_CONVERT_PDF:
+                                    cbSelect.Visible = true && isGroupSubmit;
+                                    break;
+                            }
+                            break;
+                        case RoleEnum.ACCOUNT:
+                            switch (job_status)
+                            {
+                                case StatusEnum.JOB_COMPLETE:
+                                    cbSelect.Visible = true && isGroupSubmit;
+                                    break;
+                            }
                             break;
                         default:
                             btnWorkFlow.Visible = false;
@@ -487,10 +524,21 @@ namespace ALS.ALSI.Web.view.request
 
                     //jobStatus icon
                     e.Row.ForeColor = System.Drawing.Color.Black;
+                    litIcon.Visible = isGroupSubmit;
+                    litIcon.Text = isGroupSubmit? "<i class=\"fa fa-object-group\"></i>" : "";
+
+                    //cbSelect.Visible = (job_status == StatusEnum.CHEMIST_TESTING ||
+                    //    job_status == StatusEnum.CHEMIST_TESTING ||
+                    //    job_status == StatusEnum.SR_CHEMIST_CHECKING ||
+                    //    job_status == StatusEnum.LABMANAGER_CHECKING ||
+                    //     job_status == StatusEnum.ADMIN_CONVERT_WORD ||
+                    //      job_status == StatusEnum.ADMIN_CONVERT_PDF);
+
+
+
                     switch (job_status)
                     {
                         case StatusEnum.LOGIN_CONVERT_TEMPLATE:
-
                             ltJobStatus.Text = "<i class=\"fa fa-desktop\" ></i>";
                             break;
                         case StatusEnum.LOGIN_SELECT_SPEC:
@@ -498,22 +546,27 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case StatusEnum.CHEMIST_TESTING:
                             ltJobStatus.Text = "<i class=\"fa fa-flask\" ></i>";
+                            //cbSelect.Visible = true;
                             break;
                         case StatusEnum.SR_CHEMIST_CHECKING:
                             ltJobStatus.Text = "<i class=\"fa fa-check-square-o\" ></i>";
                             break;
                         case StatusEnum.LABMANAGER_CHECKING:
                             ltJobStatus.Text = "<i class=\"fa fa-user-md\" ></i>";
+
                             break;
                         case StatusEnum.ADMIN_CONVERT_WORD:
                             ltJobStatus.Text = "<i class=\"fa fa-file-word-o\" ></i>";
+
                             break;
                         case StatusEnum.ADMIN_CONVERT_PDF:
                             ltJobStatus.Text = "<i class=\"fa fa-file-pdf-o\" ></i>";
+
                             break;
                         case StatusEnum.JOB_COMPLETE:
                             e.Row.ForeColor = System.Drawing.Color.Green;
                             ltJobStatus.Text = "<i class=\"fa fa-truck\" ></i>";
+
                             break;
                         //case StatusEnum.JOB_HOLD:
                         //    ltJobStatus.Text = "<i class=\"fa fa-lock\" ></i>";

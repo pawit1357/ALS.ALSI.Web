@@ -189,6 +189,7 @@ namespace ALS.ALSI.Biz.DataAccess
                                 s.is_hold,
                                 s.amend_count,
                                 s.retest_count,
+                                s.group_submit
                              };
 
                 if (this.ID > 0)
