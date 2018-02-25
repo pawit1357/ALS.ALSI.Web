@@ -322,6 +322,9 @@ namespace ALS.ALSI.Web.view.request
                         bindingData();
                     }
                     break;
+                case CommandNameEnum.ViewFile:
+                    Server.Transfer(Constants.LINK_VIEW_FILE);
+                    break;
             }
 
         }
@@ -376,6 +379,7 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnChangeReportDate = (LinkButton)e.Row.FindControl("btnChangeReportDate");
                     LinkButton btnChangeOtherRefNo = (LinkButton)e.Row.FindControl("btnChangeOtherRefNo");
                     LinkButton btnChangeSingaporeRefNo = (LinkButton)e.Row.FindControl("btnChangeSingaporeRefNo");
+                    LinkButton btnViewFile = (LinkButton)e.Row.FindControl("btnViewFile");
 
 
 
@@ -408,7 +412,7 @@ namespace ALS.ALSI.Web.view.request
                     btnConvertTemplete.Visible = ((userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE);
                     btnChangeStatus.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT);
                     cbSelect.Visible = false;
-
+                    btnViewFile.Visible = job_status == StatusEnum.JOB_COMPLETE || userRole == RoleEnum.BUSINESS_MANAGER||userRole == RoleEnum.LABMANAGER||userRole== RoleEnum.SR_CHEMIST;
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:

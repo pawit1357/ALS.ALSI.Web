@@ -384,6 +384,7 @@
     <Compile Include="DataAccess\Users.cs" />
     <Compile Include="DataAccess\GeneralManager.cs" />
     <Compile Include="Extenders.cs" />
+    <Compile Include="FileList.cs" />
     <Compile Include="GenerateHtmlBiz.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

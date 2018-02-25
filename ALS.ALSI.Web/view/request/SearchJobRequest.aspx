@@ -261,6 +261,7 @@
                                         <asp:LinkButton ID="btnChangeReportDate" runat="server" ToolTip="Change Report Date" CommandName="ChangeReportDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeOtherRefNo" runat="server" ToolTip="Change Other Ref No" CommandName="ChangeOtherRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-plane"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeSingaporeRefNo" runat="server" ToolTip="Change Singapore RefNo" CommandName="ChangeSingaporeRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnViewFile" runat="server" ToolTip="View File" CommandName="ViewFile" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-laptop"></i></asp:LinkButton>
 
 
                                         <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>

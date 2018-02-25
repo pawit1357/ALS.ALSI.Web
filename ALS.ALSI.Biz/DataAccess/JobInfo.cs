@@ -137,6 +137,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
                 var result = from j in ctx.job_info
                              join s in ctx.job_sample on j.ID equals s.job_id
+                             join ms in ctx.m_status on s.job_status equals ms.ID
                              join sp in ctx.m_specification on s.specification_id equals sp.ID
                              join tt in ctx.m_type_of_test on s.type_of_test_id equals tt.ID
                              join c in ctx.m_customer on j.customer_id equals c.ID
@@ -189,7 +190,8 @@ namespace ALS.ALSI.Biz.DataAccess
                                 s.is_hold,
                                 s.amend_count,
                                 s.retest_count,
-                                s.group_submit
+                                s.group_submit,
+                                status_name = ms.name
                              };
 
                 if (this.ID > 0)
