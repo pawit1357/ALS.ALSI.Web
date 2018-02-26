@@ -19,9 +19,6 @@ ELP-3276-DB
 ELP-1942-DB
 
 
-#
-ALTER TABLE `alsi`.`job_sample` 
-ADD COLUMN `group_submit` TINYINT NULL DEFAULT 0 AFTER `singapore_ref_no`;
 
 
 */
