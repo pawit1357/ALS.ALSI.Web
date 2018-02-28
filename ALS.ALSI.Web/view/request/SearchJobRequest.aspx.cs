@@ -140,11 +140,11 @@ namespace ALS.ALSI.Web.view.request
             {
                 case RoleEnum.LOGIN:
                     lbAddJob.Visible = true;
-                    btnOperation.Visible = false;
+                    //btnOperation.Visible = false;
                     break;
                 default:
                     lbAddJob.Visible = false;
-                    btnOperation.Visible = true;
+                    //btnOperation.Visible = true;
                     break;
             }
             btnElp.CssClass = "btn blue";
@@ -417,6 +417,12 @@ namespace ALS.ALSI.Web.view.request
                     {
                         case RoleEnum.LOGIN:
                             btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_SELECT_SPEC);
+                            switch (job_status)
+                            {
+                                case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                                    cbSelect.Visible = true;
+                                    break;
+                            }
                             break;
                         case RoleEnum.CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.CHEMIST_TESTING);
@@ -451,18 +457,19 @@ namespace ALS.ALSI.Web.view.request
                             {
                                 case StatusEnum.ADMIN_CONVERT_WORD:
                                 case StatusEnum.ADMIN_CONVERT_PDF:
-                                    cbSelect.Visible = true && isGroupSubmit;
-                                    break;
-                            }
-                            break;
-                        case RoleEnum.ACCOUNT:
-                            switch (job_status)
-                            {
                                 case StatusEnum.JOB_COMPLETE:
                                     cbSelect.Visible = true && isGroupSubmit;
                                     break;
                             }
                             break;
+                        //case RoleEnum.ACCOUNT:
+                        //    switch (job_status)
+                        //    {
+                        //        case StatusEnum.JOB_COMPLETE:
+                        //            cbSelect.Visible = true && isGroupSubmit;
+                        //            break;
+                        //    }
+                        //    break;
                         default:
                             btnWorkFlow.Visible = false;
                             break;

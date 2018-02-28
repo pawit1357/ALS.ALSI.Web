@@ -57,7 +57,6 @@ namespace ALS.ALSI.Web.view.request
 
         private void bindingData()
         {
-            this.dataList = job_sample.FindAllByIds(this.selectedList);
             gvSample.DataSource = this.dataList;
             gvSample.DataBind();
         }
@@ -80,6 +79,7 @@ namespace ALS.ALSI.Web.view.request
             {
                 this.selectedList = new List<int>();
                 this.selectedList = prvPage.selectedList;
+                this.dataList = job_sample.FindAllByIds(this.selectedList);
 
                 ddlAssignTo.Items.Clear();
                 ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
@@ -89,15 +89,38 @@ namespace ALS.ALSI.Web.view.request
                 ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
                 ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
+                m_template template = new m_template();
+
+
+                var data = template.SelectAllByActive();
+                ddlTemplate.Items.Clear();
+                ddlTemplate.DataSource = data;
+                ddlTemplate.DataBind();
+                ddlTemplate.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
+                ddlTemplate.SelectedValue = "";
+
+                pLogin.Visible = false;
                 pChemist.Visible = false;
                 pSrChemist.Visible = false;
                 pRemark.Visible = false;
                 pDisapprove.Visible = false;
                 pAccount.Visible = false;
+                
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 switch (userRole)
                 {
+                    case RoleEnum.LOGIN:
+                        pLogin.Visible = true;
+                        pShowChemistFileUpload.Visible = false;
+                        pChemist.Visible = false;
+                        pSrChemist.Visible = false;
+                        pRemark.Visible = false;
+                        pDisapprove.Visible = false;
+                        pAccount.Visible = false;
+                        lbDesc.Text = "Login: ทำรายการแบบกลุ่ม";
+                        break;
                     case RoleEnum.CHEMIST:
+                        pLogin.Visible = false;
                         pShowChemistFileUpload.Visible = false;
                         pChemist.Visible = true;
                         pSrChemist.Visible = false;
@@ -107,6 +130,7 @@ namespace ALS.ALSI.Web.view.request
                         lbDesc.Text = "Chemist: ทำรายการแบบกลุ่ม";
                         break;
                     case RoleEnum.SR_CHEMIST:
+                        pLogin.Visible = false;
                         ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
                         ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                         pShowChemistFileUpload.Visible = false;
@@ -119,6 +143,7 @@ namespace ALS.ALSI.Web.view.request
 
                         break;
                     case RoleEnum.LABMANAGER:
+                        pLogin.Visible = false;
                         ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
                         ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                         pShowChemistFileUpload.Visible = false;
@@ -131,16 +156,20 @@ namespace ALS.ALSI.Web.view.request
 
                         break;
                     case RoleEnum.ADMIN:
+                        pLogin.Visible = false;
                         pShowChemistFileUpload.Visible = false;
                         pChemist.Visible = false;
                         pSrChemist.Visible = false;
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
-                        pAccount.Visible = false;
+                        Boolean isChangePo = this.dataList.Exists(x => x.job_status == Convert.ToInt16(StatusEnum.JOB_COMPLETE));
+                        
+                        pAccount.Visible = isChangePo;
                         lbDesc.Text = "Admin: ทำรายการแบบกลุ่ม";
 
                         break;
                     case RoleEnum.ACCOUNT:
+                        pLogin.Visible = false;
                         pChemist.Visible = false;
                         pSrChemist.Visible = false;
                         pRemark.Visible = false;
@@ -149,6 +178,7 @@ namespace ALS.ALSI.Web.view.request
                         lbDesc.Text = "Account: ทำรายการแบบกลุ่ม";
                         break;
                     default:
+                        pLogin.Visible = false;
                         pShowChemistFileUpload.Visible = false;
                         pChemist.Visible = false;
                         pSrChemist.Visible = false;
@@ -167,14 +197,44 @@ namespace ALS.ALSI.Web.view.request
             string MM = DateTime.Now.ToString("MM");
             string dd = DateTime.Now.ToString("dd");
 
-            //RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
-            //StatusEnum jobStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
-
             foreach (job_sample jobSample in this.dataList)
             {
                 StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), jobSample.job_status.ToString(), true);
                 switch (status)
                 {
+                    case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                        if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".xls") || Path.GetExtension(FileUpload1.FileName).Equals(".xlt")))
+                        {
+
+                            String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                            String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+
+                            if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                            }
+                            FileUpload1.SaveAs(source_file);
+                            jobSample.ad_hoc_tempalte_path = source_file_url;
+                        }
+
+                        jobSample.template_id = String.IsNullOrEmpty(ddlTemplate.SelectedValue) ? 0 : int.Parse(ddlTemplate.SelectedValue);
+                        switch (int.Parse(ddlTemplate.SelectedValue))
+                        {
+                            case 901://PA TAMPLATE(BLANK)
+                                jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                                break;
+                            default:
+                                if (pUploadfile.Visible)
+                                {
+                                    jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                                }
+                                else
+                                {
+                                    jobSample.job_status = Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC);
+                                }
+                                break;
+                        }
+                        break;
                     case StatusEnum.CHEMIST_TESTING:
                         jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         jobSample.date_chemist_complete = DateTime.Now;
@@ -303,5 +363,18 @@ namespace ALS.ALSI.Web.view.request
 
         }
 
+
+        protected void ddlTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //FixCode 407,408 Blank template
+            if (ddlTemplate.SelectedValue.Equals("407") || ddlTemplate.SelectedValue.Equals("408"))
+            {
+                pUploadfile.Visible = true;
+            }
+            else
+            {
+                pUploadfile.Visible = false;
+            }
+        }
     }
 }

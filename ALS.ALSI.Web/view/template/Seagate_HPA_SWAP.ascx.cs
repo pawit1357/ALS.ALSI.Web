@@ -1981,17 +1981,17 @@ namespace ALS.ALSI.Web.view.template
                     case GVTypeEnum.CLASSIFICATION_GRAND_TOTAL:
                     case GVTypeEnum.CLASSIFICATION_TOTAL:
                         e.Row.BackColor = System.Drawing.Color.Orange;
-                        _litD.Text = ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
+                        _litD.Text = !CustomUtils.isNumber(_litC.Text) ? "0" : ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
 
                         break;
                     case GVTypeEnum.CLASSIFICATION_SUB_TOTAL:
                         e.Row.BackColor = System.Drawing.Color.Yellow;
-                        _litD.Text = ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
+                        _litD.Text = !CustomUtils.isNumber(_litC.Text) ? "0" : ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
 
                         break;
                     case GVTypeEnum.CLASSIFICATION_ITEM:
                         _litB.Text = String.Format("{0}".PadRight(20, ' '), _litB.Text);
-                        _litD.Text = ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
+                        _litD.Text = !CustomUtils.isNumber(_litC.Text)? "0":((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
 
                         break;
                 }

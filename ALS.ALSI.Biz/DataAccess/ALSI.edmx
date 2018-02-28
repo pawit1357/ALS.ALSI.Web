@@ -1444,7 +1444,7 @@
           <Property Name="row_type" Type="int" />
           <Property Name="pm_procedure" Type="varchar" MaxLength="45" />
           <Property Name="pm_number_of_pieces" Type="varchar" MaxLength="45" />
-          <Property Name="pm_extraction_medium" Type="varchar" MaxLength="45" />
+          <Property Name="pm_extraction_medium" Type="varchar" MaxLength="255" />
           <Property Name="pm_extraction_volumn" Type="varchar" MaxLength="45" />
           <Property Name="pm_unit" Type="varchar" MaxLength="45" />
           <Property Name="test" Type="int" />
@@ -3514,7 +3514,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_type" Type="Int32" />
           <Property Name="pm_procedure" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="pm_number_of_pieces" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="pm_extraction_medium" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pm_extraction_medium" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="pm_extraction_volumn" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="pm_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="test" Type="Int32" />
