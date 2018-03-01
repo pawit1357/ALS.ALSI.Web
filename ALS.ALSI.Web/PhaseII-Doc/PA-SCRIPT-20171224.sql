@@ -33,20 +33,38 @@ ELP-2544-DB มากกว่า 30
 
 - hpa อัพเดท script u
 - hpa fill กระดาษแสดงไม่พอดี
--  search SEM/EDX แล้วดึงข้อมูลออกมา มันออกมาเฉพาะ type of test ที่เป็น SEM/EDXที่เป็น FA กับ ELN แต่พวกที่เป็น ELP   HPA & MESA Ghost พวกนี้ ไม่ออกมา
+-  search SEM/EDX แล้วดึงข้อมูลออกมา มันออกมาเฉพาะ type of test ที่เป็น SEM/EDX ที่เป็น FA กับ ELN แต่พวกที่เป็น ELP   HPA & MESA Ghost พวกนี้ ไม่ออกมา
 complete 
-- lpc seagate fix analysis แสดงชื่อซ้ำ เช่น LPC (132 KHz) แสดงเป็น LPC (LPC 132 KHz)
-- corrosion tank
-- dhs seagate (v2) เกินหน้ากระดาษ
-- 3063 (hpa swap ) error ELP-3063-HB
-- 3443-cvr CVR WD error Extraction Medium (ข้อความมีความยาวเกินไป)
+-- CLEAR - lpc seagate fix analysis แสดงชื่อซ้ำ เช่น LPC (132 KHz) แสดงเป็น LPC (LPC 132 KHz)
+-- CLEAR - corrosion tank
+-- CLEAR - dhs seagate (v2) เกินหน้ากระดาษ
+-- CLEAR - 3063 (hpa swap ) error ELP-3063-HB
+-- CLEAR - 3443-cvr CVR WD error Extraction Medium (ข้อความมีความยาวเกินไป)
+
+-FTIR WD  IDM  ตัวที่บอกว่า พออัพแล้วมันติด น่าจะมาจากการระบุให้ดึงข้อมมูลผิดที่
+- ELP-3218-DB  ---WD ok (32) พอดี 2 หน้า 
+- ELP-3183-DB ---WD ok เกินหน้า 3 (39)
+- ELP-2544-DB ---Seagate
+- ELP-2545-DB ---Seagate
+- ELP-3179-DB ---WD
+- ELP-3158-DB ---WD
+- ELP-2717-DB ---WD
+- ELP-2614-DB ---WD
+
+
+
+
 
 
 update template_seagate_hpa_coverpage set A = replace(A,'μ','u')
 update template_seagate_lpc_coverpage set LiquidParticleCount = replace(LiquidParticleCount,'μ','u');
 
 
-ALTER TABLE `alsi`.`template_wd_gcms_coverpage` 
-CHANGE COLUMN `pm_extraction_medium` `pm_extraction_medium` VARCHAR(255) NULL DEFAULT NULL ;
+
+#######
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `sample_prefix` VARCHAR(45) NULL AFTER `group_submit`;
+
+update job_sample set sample_prefix=SUBSTRING_INDEX(job_number,'-',1);
 
 */

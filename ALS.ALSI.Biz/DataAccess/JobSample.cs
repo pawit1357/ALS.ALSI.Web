@@ -18,6 +18,13 @@ namespace ALS.ALSI.Biz.DataAccess
             get { return ObjectFactory.GetInstance<IRepository<job_sample>>(); }
         }
 
+        //public String jobPreFix
+        //{
+        //    get
+        //    {
+        //        return this.job_number.Split('-')[0];
+        //    }
+        //}
         #region "Property"
         public CommandNameEnum RowState { get; set; }
         #endregion

@@ -110,6 +110,7 @@
           <Property Name="other_ref_no" Type="varchar" MaxLength="200" />
           <Property Name="singapore_ref_no" Type="varchar" MaxLength="200" />
           <Property Name="group_submit" Type="tinyint" />
+          <Property Name="sample_prefix" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -2167,6 +2168,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="other_ref_no" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="singapore_ref_no" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="group_submit" Type="SByte" />
+          <Property Name="sample_prefix" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="ALSIModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
         </EntityType>
         <EntityType Name="job_sample_logs">
@@ -3962,6 +3964,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample">
             <EntityTypeMapping TypeName="ALSIModel.job_sample">
               <MappingFragment StoreEntitySet="job_sample">
+                <ScalarProperty Name="sample_prefix" ColumnName="sample_prefix" />
                 <ScalarProperty Name="group_submit" ColumnName="group_submit" />
                 <ScalarProperty Name="singapore_ref_no" ColumnName="singapore_ref_no" />
                 <ScalarProperty Name="other_ref_no" ColumnName="other_ref_no" />

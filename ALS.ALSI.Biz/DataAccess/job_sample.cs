@@ -69,6 +69,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string other_ref_no { get; set; }
         public string singapore_ref_no { get; set; }
         public Nullable<sbyte> group_submit { get; set; }
+        public string sample_prefix { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

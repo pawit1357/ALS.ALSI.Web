@@ -238,14 +238,13 @@ namespace ALS.ALSI.Web.view.template
             {
                 ddlComponent.SelectedValue = this.Ftir[0].component_id.Value + "";
                 ddlDetailSpec.SelectedValue = this.Ftir[0].detail_spec_id.Value + "";
-                ddlUnit.SelectedValue = (this.Ftir[0].ftir_unit == null) ? "0": this.Ftir[0].ftir_unit.Value + "";
+                ddlUnit.SelectedValue = (this.Ftir[0].ftir_unit == null) ? "0" : this.Ftir[0].ftir_unit.Value + "";
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
                 gvMethodProcedure.DataBind();
                 gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
                 gvResult.DataBind();
 
-                CalculateCas();
 
                 #region "Unit"
                 gvResult.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
@@ -296,13 +295,13 @@ namespace ALS.ALSI.Web.view.template
                 txtC53.Text = this.Ftir[0].ftr_c53;//Reportas
                 #endregion
                 #region "Dop"
-                txtFTIR_B53.Text= this.Ftir[0].ftr_b53; //Peak Ht at cm-1
-                txtFTIR_B54.Text= this.Ftir[0].ftr_b54;//Slope of Calibration Plot
-                txtFTIR_B55.Text= this.Ftir[0].ftr_b55;//y-intercept
-                txtFTIR_B56.Text= this.Ftir[0].ftr_b56; //Amount of Amide Detected (µg)
-                txtFTIR_B58.Text= this.Ftir[0].ftr_b58; //Method Detection Limit, MDL
-                txtFTIR_C62.Text= this.Ftir[0].ftr_c62;//Calculations
-                txtFTIR_C63.Text= this.Ftir[0].ftr_c63;//Reportas
+                txtFTIR_B53.Text = this.Ftir[0].ftr_b53; //Peak Ht at cm-1
+                txtFTIR_B54.Text = this.Ftir[0].ftr_b54;//Slope of Calibration Plot
+                txtFTIR_B55.Text = this.Ftir[0].ftr_b55;//y-intercept
+                txtFTIR_B56.Text = this.Ftir[0].ftr_b56; //Amount of Amide Detected (µg)
+                txtFTIR_B58.Text = this.Ftir[0].ftr_b58; //Method Detection Limit, MDL
+                txtFTIR_C62.Text = this.Ftir[0].ftr_c62;//Calculations
+                txtFTIR_C63.Text = this.Ftir[0].ftr_c63;//Reportas
                 #endregion
 
                 #region "Unit"
@@ -696,12 +695,12 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-                                    txtFTIR_B30.Text = String.IsNullOrEmpty(txtFTIR_B30.Text) ? "" : Convert.ToDouble(txtFTIR_B30.Text).ToString("N" + Convert.ToInt32(txtDecimal03.Text));
-                                    txtFTIR_B31.Text = String.IsNullOrEmpty(txtFTIR_B31.Text) ? "" : Convert.ToDouble(txtFTIR_B31.Text).ToString("N" + Convert.ToInt32(txtDecimal04.Text));
-                                    txtFTIR_B32.Text = String.IsNullOrEmpty(txtFTIR_B32.Text) ? "" : Convert.ToDouble(txtFTIR_B32.Text).ToString("N" + Convert.ToInt32(txtDecimal05.Text));
-                                    txtFTIR_B33.Text = String.IsNullOrEmpty(txtFTIR_B33.Text) ? "" : Convert.ToDouble(txtFTIR_B33.Text).ToString("N" + Convert.ToInt32(txtDecimal06.Text));
-                                    txtFTIR_B35.Text = String.IsNullOrEmpty(txtFTIR_B35.Text) ? "" : Convert.ToDouble(txtFTIR_B35.Text).ToString("N" + Convert.ToInt32(txtDecimal07.Text));
-                                    lbFTIR_C40.Text = String.IsNullOrEmpty(lbFTIR_C40.Text) ? "" : Convert.ToDouble(lbFTIR_C40.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
+                                    txtFTIR_B30.Text = String.IsNullOrEmpty(txtFTIR_B30.Text) ? "" : txtFTIR_B30.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B30.Text).ToString("N" + Convert.ToInt32(txtDecimal03.Text));
+                                    txtFTIR_B31.Text = String.IsNullOrEmpty(txtFTIR_B31.Text) ? "" : txtFTIR_B31.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B31.Text).ToString("N" + Convert.ToInt32(txtDecimal04.Text));
+                                    txtFTIR_B32.Text = String.IsNullOrEmpty(txtFTIR_B32.Text) ? "" : txtFTIR_B32.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B32.Text).ToString("N" + Convert.ToInt32(txtDecimal05.Text));
+                                    txtFTIR_B33.Text = String.IsNullOrEmpty(txtFTIR_B33.Text) ? "" : txtFTIR_B33.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B33.Text).ToString("N" + Convert.ToInt32(txtDecimal06.Text));
+                                    txtFTIR_B35.Text = String.IsNullOrEmpty(txtFTIR_B35.Text) ? "" : txtFTIR_B35.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B35.Text).ToString("N" + Convert.ToInt32(txtDecimal07.Text));
+                                    lbFTIR_C40.Text = String.IsNullOrEmpty(lbFTIR_C40.Text) ? "" : lbFTIR_C40.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(lbFTIR_C40.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
 
 
                                     #endregion
@@ -715,12 +714,12 @@ namespace ALS.ALSI.Web.view.template
                                     txtC53.Text = CustomUtils.GetCellValue(isheet.GetRow(53 - 1).GetCell(ExcelColumn.C));
 
 
-                                    txtFTIR_B43.Text = String.IsNullOrEmpty(txtFTIR_B43.Text) ? "" : Convert.ToDouble(txtFTIR_B43.Text).ToString("N" + Convert.ToInt32(txtDecimal03.Text));
-                                    txtFTIR_B44.Text = String.IsNullOrEmpty(txtFTIR_B44.Text) ? "" : Convert.ToDouble(txtFTIR_B44.Text).ToString("N" + Convert.ToInt32(txtDecimal04.Text));
-                                    txtFTIR_B45.Text = String.IsNullOrEmpty(txtFTIR_B45.Text) ? "" : Convert.ToDouble(txtFTIR_B45.Text).ToString("N" + Convert.ToInt32(txtDecimal05.Text));
-                                    txtFTIR_B46.Text = String.IsNullOrEmpty(txtFTIR_B46.Text) ? "" : Convert.ToDouble(txtFTIR_B46.Text).ToString("N" + Convert.ToInt32(txtDecimal06.Text));
-                                    txtFTIR_B48.Text = String.IsNullOrEmpty(txtFTIR_B48.Text) ? "" : Convert.ToDouble(txtFTIR_B48.Text).ToString("N" + Convert.ToInt32(txtDecimal07.Text));
-                                    lbFTIR_C52.Text = String.IsNullOrEmpty(lbFTIR_C52.Text) ? "" : Convert.ToDouble(lbFTIR_C52.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
+                                    txtFTIR_B43.Text = String.IsNullOrEmpty(txtFTIR_B43.Text) ? "" : txtFTIR_B43.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B43.Text).ToString("N" + Convert.ToInt32(txtDecimal03.Text));
+                                    txtFTIR_B44.Text = String.IsNullOrEmpty(txtFTIR_B44.Text) ? "" : txtFTIR_B44.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B44.Text).ToString("N" + Convert.ToInt32(txtDecimal04.Text));
+                                    txtFTIR_B45.Text = String.IsNullOrEmpty(txtFTIR_B45.Text) ? "" : txtFTIR_B45.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B45.Text).ToString("N" + Convert.ToInt32(txtDecimal05.Text));
+                                    txtFTIR_B46.Text = String.IsNullOrEmpty(txtFTIR_B46.Text) ? "" : txtFTIR_B46.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B46.Text).ToString("N" + Convert.ToInt32(txtDecimal06.Text));
+                                    txtFTIR_B48.Text = String.IsNullOrEmpty(txtFTIR_B48.Text) ? "" : txtFTIR_B48.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B48.Text).ToString("N" + Convert.ToInt32(txtDecimal07.Text));
+                                    lbFTIR_C52.Text = String.IsNullOrEmpty(lbFTIR_C52.Text) ? "" : lbFTIR_C52.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(lbFTIR_C52.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
 
 
                                     #endregion
@@ -735,14 +734,13 @@ namespace ALS.ALSI.Web.view.template
                                     txtFTIR_C63.Text = CustomUtils.GetCellValue(isheet.GetRow(65 - 1).GetCell(ExcelColumn.C));
 
 
-                                    txtFTIR_B53.Text = String.IsNullOrEmpty(txtFTIR_B53.Text) ? "" : Convert.ToDouble(txtFTIR_B53.Text).ToString("N" + Convert.ToInt32(txtDecimal03.Text));
-                                    txtFTIR_B54.Text = String.IsNullOrEmpty(txtFTIR_B54.Text) ? "" : Convert.ToDouble(txtFTIR_B54.Text).ToString("N" + Convert.ToInt32(txtDecimal04.Text));
-                                    txtFTIR_B55.Text = String.IsNullOrEmpty(txtFTIR_B55.Text) ? "" : Convert.ToDouble(txtFTIR_B55.Text).ToString("N" + Convert.ToInt32(txtDecimal05.Text));
-                                    txtFTIR_B56.Text = String.IsNullOrEmpty(txtFTIR_B56.Text) ? "" : Convert.ToDouble(txtFTIR_B56.Text).ToString("N" + Convert.ToInt32(txtDecimal06.Text));
-                                    txtFTIR_B58.Text = String.IsNullOrEmpty(txtFTIR_B58.Text) ? "" : Convert.ToDouble(txtFTIR_B58.Text).ToString("N" + Convert.ToInt32(txtDecimal07.Text));
-
-                                    txtFTIR_C62.Text = String.IsNullOrEmpty(txtFTIR_C62.Text) ? "" : Convert.ToDouble(txtFTIR_C62.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
-                                    txtFTIR_C63.Text = String.IsNullOrEmpty(txtFTIR_C63.Text) ? "" : Convert.ToDouble(txtFTIR_C63.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
+                                    txtFTIR_B53.Text = String.IsNullOrEmpty(txtFTIR_B53.Text) ? "" : txtFTIR_B53.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B53.Text).ToString("N" + Convert.ToInt32(txtDecimal03.Text));
+                                    txtFTIR_B54.Text = String.IsNullOrEmpty(txtFTIR_B54.Text) ? "" : txtFTIR_B54.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B54.Text).ToString("N" + Convert.ToInt32(txtDecimal04.Text));
+                                    txtFTIR_B55.Text = String.IsNullOrEmpty(txtFTIR_B55.Text) ? "" : txtFTIR_B55.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B55.Text).ToString("N" + Convert.ToInt32(txtDecimal05.Text));
+                                    txtFTIR_B56.Text = String.IsNullOrEmpty(txtFTIR_B56.Text) ? "" : txtFTIR_B56.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B56.Text).ToString("N" + Convert.ToInt32(txtDecimal06.Text));
+                                    txtFTIR_B58.Text = String.IsNullOrEmpty(txtFTIR_B58.Text) ? "" : txtFTIR_B58.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_B58.Text).ToString("N" + Convert.ToInt32(txtDecimal07.Text));
+                                    txtFTIR_C62.Text = String.IsNullOrEmpty(txtFTIR_C62.Text) ? "" : txtFTIR_B58.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_C62.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
+                                    txtFTIR_C63.Text = String.IsNullOrEmpty(txtFTIR_C63.Text) ? "" : txtFTIR_C63.Text.Equals("Not Detected") ? "Not Detected" : Convert.ToDouble(txtFTIR_C63.Text).ToString("N" + Convert.ToInt32(txtDecimal08.Text));
 
 
                                     #endregion
@@ -1064,7 +1062,7 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-        
+
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue.ToString(), true);
@@ -1257,7 +1255,7 @@ namespace ALS.ALSI.Web.view.template
             //}
             //if (!this.Ftir[6].C.Equals("Not Detected"))
             //{
-            this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("Detected")? "FAIL": this.Ftir[6].D.Equals("NA") || this.Ftir[6].C.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : this.Ftir[6].D.Equals("Not Detected") || this.Ftir[6].C.Equals("Not Detected") || (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("Detected") ? "FAIL" : this.Ftir[6].D.Equals("NA") || this.Ftir[6].C.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : this.Ftir[6].D.Equals("Not Detected") || this.Ftir[6].C.Equals("Not Detected") || (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
             //}
             //if (!this.Ftir[7].C.Equals("Not Detected"))
             //{
@@ -1275,7 +1273,7 @@ namespace ALS.ALSI.Web.view.template
             lbA31.Text = !String.IsNullOrEmpty(txtFTIR_B35.Text) ? txtFTIR_B35.Text : txtFTIR_B48.Text;
             lbB31.Text = !String.IsNullOrEmpty(lbAmide.Text) ? lbAmide.Text : lbSilicone.Text;
 
-
+            lbA31.Text = Convert.ToDouble(lbA31.Text).ToString("N2");
             btnSubmit.Enabled = true;
         }
 

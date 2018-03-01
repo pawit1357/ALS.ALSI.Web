@@ -523,6 +523,7 @@ namespace ALS.ALSI.Web.view.request
                 case CommandNameEnum.Edit:
                     foreach (job_sample s in this.listSampleShow)
                     {
+                        s.sample_prefix = ddlJobNumber.SelectedItem.Text;
                         s.update_by = userLogin.id;
                         s.update_date = DateTime.Now;
                     }
@@ -658,6 +659,8 @@ namespace ALS.ALSI.Web.view.request
                         {
                             //logger.Debug("m_completion_scheduled is Empty!");
                         }
+                        jobSample.sample_prefix = ddlJobNumber.SelectedItem.Text;
+
                         listSample.Add(jobSample);
                     }
                     else

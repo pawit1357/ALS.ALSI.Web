@@ -13,6 +13,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(job_info));
         public String customerText { get; set; }
+        public String preFixText { get; set; }
 
         private static IRepository<job_info> _repository
         {
@@ -191,7 +192,8 @@ namespace ALS.ALSI.Biz.DataAccess
                                 s.amend_count,
                                 s.retest_count,
                                 s.group_submit,
-                                status_name = ms.name
+                                status_name = ms.name,
+                                s.sample_prefix
                              };
 
                 if (this.ID > 0)
@@ -203,9 +205,9 @@ namespace ALS.ALSI.Biz.DataAccess
                     result = result.Where(x => x.sn == this.sample_id);
                 }
 
-                if (this.job_prefix > 0)
+                if (!String.IsNullOrEmpty(this.preFixText))
                 {
-                    result = result.Where(x => x.job_prefix == this.job_prefix);
+                    result = result.Where(x => x.sample_prefix.Trim().Contains(this.preFixText.Trim()));
                 }
 
                 //if (this.date_of_receive != null && this.date_of_receive !=DateTime.MinValue)

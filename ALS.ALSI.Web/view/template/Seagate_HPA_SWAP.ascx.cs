@@ -997,7 +997,7 @@ namespace ALS.ALSI.Web.view.template
             //NumOfPiecesUse
             txt_UsLPC03_B22.Text = txtNumberOfPieces.Text;
             txt_UsLPC06_B22.Text = txtNumberOfPieces.Text;
-            txtB5.Text = txtNumberOfPieces.Text;
+            //txtB5.Text = txtNumberOfPieces.Text;
 
 
             Button btn = (Button)sender;
@@ -1388,18 +1388,18 @@ namespace ALS.ALSI.Web.view.template
                     //=ROUND(MAX(0,(C13-B13))*($B$7/$B$9)*($B$3/$B$6)/($B$4*$B$5),1)
                     //=($B$3*((C15/$B$8)-(B15/$B$6)))/($B$5*$B$4)
                     Console.WriteLine();
-                    Double b3 = Convert.ToDouble(txtB3.Text);
-                    Double b4 = Convert.ToDouble(txtB4.Text);
-                    Double b5 = Convert.ToDouble(txtB5.Text);
-                    Double b6 = Convert.ToDouble(txtB6.Text);
-                    Double b8 = Convert.ToDouble(txtB8.Text);
+                    Double b3 = !CustomUtils.isNumber(txtB3.Text) ? 0 : Convert.ToDouble(txtB3.Text);
+                    Double b4 = !CustomUtils.isNumber(txtB4.Text) ? 0 : Convert.ToDouble(txtB4.Text);
+                    Double b5 = !CustomUtils.isNumber(txtB5.Text) ? Convert.ToDouble(txtB5.Text.Split(' ')[0]) : Convert.ToDouble(txtB5.Text);
+                    Double b6 = !CustomUtils.isNumber(txtB6.Text) ? 0 : Convert.ToDouble(txtB6.Text);
+                    Double b8 = !CustomUtils.isNumber(txtB8.Text) ? 0 : Convert.ToDouble(txtB8.Text);
                     int B = (_val.BlankCouts == null) ? 0 : _val.BlankCouts.Value;
                     int C = (_val.RawCounts == null) ? 0 : _val.RawCounts.Value;
                     if (b8 > 0 && b6 > 0)
                     {
                         Double cq = (b3 * ((C / b8) - (B / b6))) / (b5 * b4);
                         _val.C = Math.Round(cq, 1).ToString();
-                        
+
                     }
                 }
 
@@ -1526,12 +1526,12 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_hpa_coverpage> listClass = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).ToList();
             foreach (template_seagate_hpa_coverpage item in listClass)
             {
-                item.C =  Convert.ToDouble(item.C).ToString("N1") + "";
+                item.C = Convert.ToDouble(item.C).ToString("N1") + "";
             }
             ;
             foreach (template_seagate_hpa_coverpage item in this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).ToList())
             {
-                item.C = item.C = (item.C == null)? 0.ToString("N1") : Convert.ToDouble(item.C).ToString("N1") + "";
+                item.C = item.C = (item.C == null) ? 0.ToString("N1") : Convert.ToDouble(item.C).ToString("N1") + "";
 
             }
             gvClassification.DataSource = listClass.OrderBy(x => x.seq);
@@ -1543,7 +1543,7 @@ namespace ALS.ALSI.Web.view.template
             #region  "Analysis Details"
             lbC144.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB3.Text) ? "0" : txtB3.Text));
             lbC145.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB4.Text) ? "0" : txtB4.Text));
-            lbC146.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB5.Text) ? "0" : txtB5.Text));
+            lbC146.Text = String.Format("{0:n2}", !CustomUtils.isNumber(txtB5.Text) ? Convert.ToDouble(txtB5.Text.Split(' ')[0]) : Convert.ToDouble(String.IsNullOrEmpty(txtB5.Text) ? "0" : txtB5.Text));
             lbC147.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB6.Text) ? "0" : txtB6.Text));
             lbC148.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB7.Text) ? "0" : txtB7.Text));
             lbC148_1.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB8.Text) ? "0" : txtB8.Text));
@@ -1991,7 +1991,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                     case GVTypeEnum.CLASSIFICATION_ITEM:
                         _litB.Text = String.Format("{0}".PadRight(20, ' '), _litB.Text);
-                        _litD.Text = !CustomUtils.isNumber(_litC.Text)? "0":((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
+                        _litD.Text = !CustomUtils.isNumber(_litC.Text) ? "0" : ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
 
                         break;
                 }

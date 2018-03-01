@@ -69,7 +69,7 @@ namespace ALS.ALSI.Web.view.request
                 tmp.spec_id = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : int.Parse(ddlSpecification.SelectedValue);
                 tmp.dataGroup = String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue) ? "" : ddlTypeOfTest.SelectedItem.Text;
 
-                tmp.job_prefix = String.IsNullOrEmpty(hPrefix.Value) ? 1 : Convert.ToInt16(hPrefix.Value);
+                tmp.preFixText = hPrefix.Value;// String.IsNullOrEmpty(hPrefix.Value) ? 1 : Convert.ToInt16(hPrefix.Value);
                 RoleEnum role = (RoleEnum)Enum.ToObject(typeof(RoleEnum), userLogin.role_id);
                 switch (role)
                 {
@@ -613,6 +613,7 @@ namespace ALS.ALSI.Web.view.request
         {
             LinkButton btn = (LinkButton)sender;
 
+            hPrefix.Value = btn.Text.ToUpper();
             btnElp.CssClass = (btnElp.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
             btnEln.CssClass = (btnEln.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
 
@@ -622,31 +623,31 @@ namespace ALS.ALSI.Web.view.request
             btnGrp.CssClass = (btnGrp.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
             btnTrb.CssClass = (btnTrb.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
 
-            switch (btn.ID)
-            {
-                case "btnElp":
-                    hPrefix.Value = "1";
-                    break;
-                case "btnEls":
-                    hPrefix.Value = "2";
-                    break;
-                case "btnFa":
-                    hPrefix.Value = "3";
-                    break;
-                case "btnElwa":
-                    hPrefix.Value = "4";
-                    break;
-                case "btnGrp":
-                    hPrefix.Value = "5";
-                    break;
-                case "btnTrb":
-                    hPrefix.Value = "6";
-                    break;
-                case "btnEln":
-                    hPrefix.Value = "7";
+            //switch (btn.ID)
+            //{
+            //    case "btnElp":
+            //        hPrefix.Value = "1";
+            //        break;
+            //    case "btnEls":
+            //        hPrefix.Value = "2";
+            //        break;
+            //    case "btnFa":
+            //        hPrefix.Value = "3";
+            //        break;
+            //    case "btnElwa":
+            //        hPrefix.Value = "4";
+            //        break;
+            //    case "btnGrp":
+            //        hPrefix.Value = "5";
+            //        break;
+            //    case "btnTrb":
+            //        hPrefix.Value = "6";
+            //        break;
+            //    case "btnEln":
+            //        hPrefix.Value = "7";
 
-                    break;
-            }
+            //        break;
+            //}
             bindingData();
             Console.WriteLine();
         }
