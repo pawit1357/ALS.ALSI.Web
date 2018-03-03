@@ -458,10 +458,15 @@ namespace ALS.ALSI.Web.view.request
                                 case StatusEnum.ADMIN_CONVERT_WORD:
                                 case StatusEnum.ADMIN_CONVERT_PDF:
                                 case StatusEnum.JOB_COMPLETE:
+                                    //case StatusEnum.LOGIN_SELECT_SPEC:
                                     cbSelect.Visible = true && isGroupSubmit;
                                     break;
+                                case StatusEnum.LOGIN_SELECT_SPEC:
+                                    cbSelect.Visible = true;
+                                    Console.WriteLine();
+                                    break;
                             }
-                            break;
+                    break;
                         //case RoleEnum.ACCOUNT:
                         //    switch (job_status)
                         //    {

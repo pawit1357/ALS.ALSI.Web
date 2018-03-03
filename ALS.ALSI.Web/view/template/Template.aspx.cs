@@ -504,14 +504,14 @@ namespace ALS.ALSI.Web.view.template
                                     specification.AY = CustomUtils.GetCellValue(isSpecification.GetRow(row).GetCell(50));
                                     specification.AZ = CustomUtils.GetCellValue(isSpecification.GetRow(row).GetCell(51));
 
-
+                                    specification.status = "A";
                                     specification.RowState = CommandNameEnum.Add;
                                     specifications.Add(specification);
                                 }
                             }
-                            //Delete
-                            //new tb_m_specification().DeleteByTemplateID(template_id);
-                            new tb_m_specification().InsertList(specifications);
+                        //Delete
+                        new tb_m_specification().DeleteByTemplateID(template_id);
+                        new tb_m_specification().InsertList(specifications);
                         }
                     #endregion
 

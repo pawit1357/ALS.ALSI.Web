@@ -241,6 +241,9 @@
     <Compile Include="DataAccess\tb_unit.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\template_img.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\template_pa.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -347,6 +350,7 @@
     <Compile Include="DataAccess\SeagateCorrosionImg.cs" />
     <Compile Include="DataAccess\SeagateMESA.cs" />
     <Compile Include="DataAccess\SeagateMESA_Img.cs" />
+    <Compile Include="DataAccess\TemplateImg.cs" />
     <Compile Include="DataAccess\WdMESA_Img.cs" />
     <Compile Include="DataAccess\WdMESA.cs" />
     <Compile Include="DataAccess\FTIRWDCoverpage.cs" />

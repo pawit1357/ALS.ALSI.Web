@@ -50,8 +50,13 @@ complete
 - ELP-3158-DB ---WD
 - ELP-2717-DB ---WD
 - ELP-2614-DB ---WD
-
-
+-----------------------------------
+Ftir , dhs ,gcms , hpa, ic ทั้ง wd seagate ค่ะ แต่ตัว hpa ตำแหน่งที่รูปจะอยู่มันจะไม่เหมือนเพื่อน
+-----------------------------------
+Seagate_FTIR.ascx(546) > ELP-0812-FB
+Seagate_FTIR_Adhesive.ascx(545) > ELP-0662-FB
+Seagate_FTIR_Packing.ascx(638)
+Seagate_FTIR_Damper.ascx(640)
 
 
 
@@ -61,10 +66,18 @@ update template_seagate_lpc_coverpage set LiquidParticleCount = replace(LiquidPa
 
 
 
-#######
-ALTER TABLE `alsi`.`job_sample` 
-ADD COLUMN `sample_prefix` VARCHAR(45) NULL AFTER `group_submit`;
+#######-----
+ALTER TABLE `alsi`.`tb_m_specification` 
+ADD COLUMN `status` VARCHAR(1) NULL DEFAULT 'A' AFTER `BZ`;
 
-update job_sample set sample_prefix=SUBSTRING_INDEX(job_number,'-',1);
+
+CREATE TABLE `template_img` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sample_id` int(11) DEFAULT NULL,
+  `seq` int(11) DEFAULT '0',
+  `img_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8;
+
 
 */

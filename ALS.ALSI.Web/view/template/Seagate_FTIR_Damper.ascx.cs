@@ -828,6 +828,17 @@ namespace ALS.ALSI.Web.view.template
                 tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
                 this.Ftir.Add(tmp);
                 #endregion
+                #region "METHOD/PROCEDURE"
+                foreach (template_seagate_ftir_coverpage _ftir in this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)))
+                {
+                    _ftir.B = String.IsNullOrEmpty(datas[1].C) ? datas[1].B : datas[1].C;
+                }
+                #endregion
+
+
+                gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                gvMethodProcedure.DataBind();
+
 
                 gvResultNvr.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
                 gvResultNvr.DataBind();

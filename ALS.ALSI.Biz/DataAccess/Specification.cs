@@ -71,7 +71,7 @@ namespace ALS.ALSI.Biz.DataAccess
         #region "Custom"
         public List<tb_m_specification> SelectBySpecificationID(int _specification_id, int _template_id)
         {
-            return _repository.Find(x => x.specification_id == _specification_id && x.template_id == _template_id).ToList();
+            return _repository.Find(x => x.specification_id == _specification_id && x.template_id == _template_id && x.status !=null && x.status.Equals("A")).ToList();
         }
 
         public void InsertList(List<tb_m_specification> _lists)
@@ -99,10 +99,13 @@ namespace ALS.ALSI.Biz.DataAccess
             //    var result = from j in ctx.tb_m_specification select j;
             //    ctx.re
             //}
-            List<tb_m_specification> lists = _repository.Find(x => x.template_id == _template_id).ToList();
+            List<tb_m_specification> lists = _repository.Find(x => x.template_id == _template_id && x.status!=null && x.status.Equals("A")).ToList();
             foreach (tb_m_specification tmp in lists)
             {
-                tmp.Delete();
+                tb_m_specification existing = _repository.Find(x => x.ID == tmp.ID).FirstOrDefault();
+                existing.status = "I";
+                _repository.Edit(existing, tmp);
+                //tmp.Delete();
                 //_repository.Delete(tmp);
             }
         }

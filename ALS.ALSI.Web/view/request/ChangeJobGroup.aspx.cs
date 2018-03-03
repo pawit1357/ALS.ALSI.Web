@@ -162,7 +162,7 @@ namespace ALS.ALSI.Web.view.request
                         pSrChemist.Visible = false;
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
-                        Boolean isChangePo = this.dataList.Exists(x => x.job_status == Convert.ToInt16(StatusEnum.JOB_COMPLETE));
+                        Boolean isChangePo = this.dataList.Exists(x => x.job_status == Convert.ToInt16(StatusEnum.JOB_COMPLETE)|| x.job_status == Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC));
                         
                         pAccount.Visible = isChangePo;
                         lbDesc.Text = "Admin: ทำรายการแบบกลุ่ม";
@@ -308,6 +308,7 @@ namespace ALS.ALSI.Web.view.request
                     case StatusEnum.ADMIN_CONVERT_PDF:
                         jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                         break;
+                    case StatusEnum.LOGIN_SELECT_SPEC:
                     case StatusEnum.JOB_COMPLETE:
                         jobSample.sample_po = txtPo.Text;
                         break;
