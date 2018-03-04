@@ -90,8 +90,16 @@ namespace ALS.ALSI.Web.view.template
             Session.Remove(GetType().Name + "SampleID");
         }
 
+
+        public List<template_img> refImg
+        {
+            get { return (List<template_img>)Session[GetType().Name + "template_img"]; }
+            set { Session[GetType().Name + "template_img"] = value; }
+        }
+
         private void initialPage()
         {
+            this.refImg = new List<template_img>();
 
             ddlAssignTo.Items.Clear();
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
@@ -287,6 +295,11 @@ namespace ALS.ALSI.Web.view.template
                 //gvWftir.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                 //gvWftir.DataBind();
 
+
+                #region "IMG"
+                this.refImg = template_img.FindAllBySampleID(this.SampleID);
+                #endregion
+
                 CalculateCas();
                 #region "Unit"
                 gvResult.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
@@ -370,7 +383,7 @@ namespace ALS.ALSI.Web.view.template
                     PWorking.Visible = false;
                     PNvr.Visible = false;
 
-                    btnLoadFile.Visible = false;
+                    //btnLoadFile.Visible = false;
                     pLoadFile.Visible = false;
 
                     //part value to cover page method/procedure
@@ -470,6 +483,13 @@ namespace ALS.ALSI.Web.view.template
                     }
                     template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_ftir_coverpage.InsertList(this.Ftir);
+
+                    template_img.DeleteBySampleID(this.SampleID);
+                    template_img.InsertList(this.refImg);
+
+                    this.jobSample.path_word = String.Empty;
+                    this.jobSample.path_pdf = String.Empty;
+
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -763,7 +783,7 @@ namespace ALS.ALSI.Web.view.template
                 #region "METHOD/PROCEDURE"
                 foreach (template_seagate_ftir_coverpage _ftir in this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)))
                 {
-                    _ftir.B =  datas[1].B;
+                    _ftir.B = datas[1].B;
                 }
                 #endregion
 
@@ -905,6 +925,10 @@ namespace ALS.ALSI.Web.view.template
             gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
             gvMethodProcedure.DataBind();
 
+            gvRefImages.DataSource = this.refImg;
+            gvRefImages.DataBind();
+            pImage.Visible = this.refImg != null && this.refImg.Count > 0;
+
             btnSubmit.Enabled = true;
         }
 
@@ -923,6 +947,12 @@ namespace ALS.ALSI.Web.view.template
                 ReportHeader reportHeader = new ReportHeader();
                 reportHeader = reportHeader.getReportHeder(this.jobSample);
 
+                List<template_img> dat = this.refImg.OrderBy(x => x.seq).ToList();
+
+                foreach (template_img _i in dat)
+                {
+                    _i.img1 = CustomUtils.GetBytesFromImage(_i.img_path);
+                }
 
                 ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -960,7 +990,16 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", methods.ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dat.ToDataTable())); // Add datasource here
 
+                if ((nvrs.Count + ftirs.Count) > 10 && dat.Count > 0)
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", nvrs.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+                }
 
 
 
@@ -1058,7 +1097,7 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        
+
         private void downloadWord()
         {
             HttpContext.Current.Response.Clear();
@@ -1331,9 +1370,30 @@ namespace ALS.ALSI.Web.view.template
                                 #endregion  
                             }
                         }
-                        else
+                        //else
+                        //{
+                        //    errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
+                        //}
+                        #endregion
+                        #region "IMG"
+                        if ((Path.GetExtension(_postedFile.FileName).ToLower().Equals(".jpg")))
                         {
-                            errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
+                            template_img _img = new template_img();
+                            _img.id = CustomUtils.GetRandomNumberID();
+                            _img.sample_id = this.SampleID;
+                            _img.seq = this.refImg.Count + 1;
+                            String fn = String.Format("{0}_IMG_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(_postedFile.FileName));
+
+                            String _source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, fn);
+                            String _source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, fn));
+
+                            if (!Directory.Exists(Path.GetDirectoryName(_source_file)))
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                            }
+                            _img.img_path = _source_file_url;
+                            this.refImg.Add(_img);
+                            _postedFile.SaveAs(_source_file);
                         }
                         #endregion
                     }
@@ -1623,7 +1683,40 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
             CalculateCas();
         }
+
+
+
+        protected void gvRefImages_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_img _mesa = this.refImg.Find(x => x.id == PKID);
+                if (_mesa != null)
+                {
+                    switch (cmd)
+                    {
+                        case CommandNameEnum.Delete:
+                            this.refImg.Remove(_mesa);
+                            break;
+
+                    }
+                    gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq);
+                    gvRefImages.DataBind();
+                }
+            }
+        }
+
+        protected void gvRefImages_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
     }
+
+
+
 }
 
 

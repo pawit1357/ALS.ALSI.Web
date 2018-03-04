@@ -55,8 +55,8 @@ Ftir , dhs ,gcms , hpa, ic ทั้ง wd seagate ค่ะ แต่ตัว 
 -----------------------------------
 Seagate_FTIR.ascx(546) > ELP-0812-FB
 Seagate_FTIR_Adhesive.ascx(545) > ELP-0662-FB
-Seagate_FTIR_Packing.ascx(638)
-Seagate_FTIR_Damper.ascx(640)
+Seagate_FTIR_Packing.ascx(638) > ELP-2947-FB
+Seagate_FTIR_Damper.ascx(640) > ELP-2987-FB
 
 
 

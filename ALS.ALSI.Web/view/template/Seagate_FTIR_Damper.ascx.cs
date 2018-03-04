@@ -80,8 +80,16 @@ namespace ALS.ALSI.Web.view.template
             Session.Remove(GetType().Name + "SampleID");
         }
 
+        public List<template_img> refImg
+        {
+            get { return (List<template_img>)Session[GetType().Name + "template_img"]; }
+            set { Session[GetType().Name + "template_img"] = value; }
+        }
+
         private void initialPage()
         {
+
+            this.refImg = new List<template_img>();
 
             ddlAssignTo.Items.Clear();
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
@@ -271,6 +279,11 @@ namespace ALS.ALSI.Web.view.template
                 gvResultFtir.DataBind();
                 gvWftir.DataSource = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
                 gvWftir.DataBind();
+
+                #region "IMG"
+                this.refImg = template_img.FindAllBySampleID(this.SampleID);
+                #endregion
+
                 CalculateCas();
                 #region "Unit"
                 gvResultNvr.Columns[1].HeaderText = String.Format("Specification Limits ({0})", ddlUnit.SelectedItem.Text);
@@ -514,6 +527,13 @@ namespace ALS.ALSI.Web.view.template
                     //template_seagate_ftir_coverpage.UpdateList(this.Ftir);
                     template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_ftir_coverpage.InsertList(this.Ftir);
+
+                    template_img.DeleteBySampleID(this.SampleID);
+                    template_img.InsertList(this.refImg);
+
+                    this.jobSample.path_word = String.Empty;
+                    this.jobSample.path_pdf = String.Empty;
+
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -919,6 +939,11 @@ namespace ALS.ALSI.Web.view.template
                 //remark
                 lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
             }
+
+            gvRefImages.DataSource = this.refImg;
+            gvRefImages.DataBind();
+            pImage.Visible = this.refImg != null && this.refImg.Count > 0;
+
             btnSubmit.Enabled = true;
         }
 
@@ -932,6 +957,13 @@ namespace ALS.ALSI.Web.view.template
                 List<template_seagate_ftir_coverpage> nvrs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
                 ReportHeader reportHeader = new ReportHeader();
                 reportHeader = reportHeader.getReportHeder(this.jobSample);
+
+                List<template_img> dat = this.refImg.OrderBy(x => x.seq).ToList();
+
+                foreach (template_img _i in dat)
+                {
+                    _i.img1 = CustomUtils.GetBytesFromImage(_i.img_path);
+                }
 
 
                 ReportParameterCollection reportParameters = new ReportParameterCollection();
@@ -1012,6 +1044,14 @@ namespace ALS.ALSI.Web.view.template
                     viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ftirs.ToDataTable())); // Add datasource here
                 }
 
+                if ( dat.Count > 0)
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", dat.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                }
 
 
                 string download = String.Empty;
@@ -1105,68 +1145,7 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-            //DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
-            List<template_seagate_ftir_coverpage> methods = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-            List<template_seagate_ftir_coverpage> ftirs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
-            List<template_seagate_ftir_coverpage> nvrs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", " "));
-            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("rpt_unit2", ""));
-
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_nvr_seagate_damper_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", methods.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-
-        }
+        
         private void downloadWord()
         {
             HttpContext.Current.Response.Clear();
@@ -1347,12 +1326,32 @@ namespace ALS.ALSI.Web.view.template
                                 #endregion
                             }
                         }
-                        else
+                        //else
+                        //{
+                        //    errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
+                        //}
+                        #endregion
+                        #region "IMG"
+                        if ((Path.GetExtension(_postedFile.FileName).ToLower().Equals(".jpg")))
                         {
-                            errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
+                            template_img _img = new template_img();
+                            _img.id = CustomUtils.GetRandomNumberID();
+                            _img.sample_id = this.SampleID;
+                            _img.seq = this.refImg.Count + 1;
+                            String fn = String.Format("{0}_IMG_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(_postedFile.FileName));
+
+                            String _source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, fn);
+                            String _source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, fn));
+
+                            if (!Directory.Exists(Path.GetDirectoryName(_source_file)))
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                            }
+                            _img.img_path = _source_file_url;
+                            this.refImg.Add(_img);
+                            _postedFile.SaveAs(_source_file);
                         }
                         #endregion
-
 
                     }
                 }
@@ -1631,6 +1630,33 @@ namespace ALS.ALSI.Web.view.template
             gvResultFtir.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
             ModolPopupExtender.Show();
             CalculateCas();
+        }
+
+        protected void gvRefImages_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_img _mesa = this.refImg.Find(x => x.id == PKID);
+                if (_mesa != null)
+                {
+                    switch (cmd)
+                    {
+                        case CommandNameEnum.Delete:
+                            this.refImg.Remove(_mesa);
+                            break;
+
+                    }
+                    gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq);
+                    gvRefImages.DataBind();
+                }
+            }
+        }
+
+        protected void gvRefImages_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
         }
 
     }
