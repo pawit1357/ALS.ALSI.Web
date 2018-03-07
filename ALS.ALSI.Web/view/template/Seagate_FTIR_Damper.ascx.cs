@@ -421,25 +421,25 @@ namespace ALS.ALSI.Web.view.template
                     pLoadFile.Visible = false;
 
                     //part value to cover page method/procedure
-                    var items = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-                    if (items.Count > 0)
-                    {
-                        items[0].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
-                        items[1].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
-                        items[2].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
-                        items[3].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
-                        items[4].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
-                        items[5].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
+                    //var items = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+                    //if (items.Count > 0)
+                    //{
+                    //    items[0].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
+                    //    items[1].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
+                    //    items[2].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
+                    //    items[3].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
+                    //    items[4].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
+                    //    items[5].C = String.Format("{0} {1}", txtWB13.Text, lbWC13Unit.Text);
 
-                        items[0].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
-                        items[1].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
-                        items[2].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
-                        items[3].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
-                        items[4].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
-                        items[5].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
+                    //    items[0].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
+                    //    items[1].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
+                    //    items[2].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
+                    //    items[3].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
+                    //    items[4].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
+                    //    items[5].E = String.Format("{0} {1}", txtWB15.Text, lbWC15Unit.Text);
 
 
-                    }
+                    //}
 
                     CalculateCas();
 
@@ -937,7 +937,8 @@ namespace ALS.ALSI.Web.view.template
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
                 gvMethodProcedure.DataBind();
                 //remark
-                lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
+                //lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
+                lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N2"));
             }
 
             gvRefImages.DataSource = this.refImg;
@@ -976,7 +977,7 @@ namespace ALS.ALSI.Web.view.template
 
                 reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
                 reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
                 reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
                 reportParameters.Add(new ReportParameter("Test", " "));
                 reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));

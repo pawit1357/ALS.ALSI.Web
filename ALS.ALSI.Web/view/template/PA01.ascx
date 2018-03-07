@@ -58,18 +58,16 @@
                                         <div class="form-group">
                                             <asp:GridView ID="gvEop" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvEop_RowDataBound" OnRowCommand="gvEop_RowCommand" OnRowCancelingEdit="gvEop_RowCancelingEdit" OnRowDeleting="gvEop_RowDeleting" OnRowEditing="gvEop_RowEditing" OnRowUpdating="gvEop_RowUpdating">
                                                 <Columns>
-                                                    <%--<asp:BoundField DataField="col_b" HeaderText="Cleanliness Class SKK: 3A_2 (Refer to S252001-1)" />
-                                                    <asp:BoundField DataField="col_c" HeaderText="Specification" />--%>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateField HeaderText="Cleanliness Class SKK: 3A_2 (Refer to S252001-1)" ItemStyle-HorizontalAlign="Right" >
                                                         <ItemTemplate>
                                                             <asp:Literal ID="litC" runat="server" Text='<%# Eval("col_c")%>'></asp:Literal>
                                                         </ItemTemplate>
                                                         <EditItemTemplate>
                                                             <asp:TextBox ID="txtC" runat="server" Text='<%# Eval("col_c")%>' CssClass="form-control"></asp:TextBox>
                                                         </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
+                                                        <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateField HeaderText="Specification" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
                                                             <asp:Literal ID="litD" runat="server" Text='<%# Eval("col_d")%>'></asp:Literal>
                                                         </ItemTemplate>
@@ -79,7 +77,7 @@
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:TemplateField>
 
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateField HeaderText="Result quantity per part" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
                                                             <asp:Literal ID="litE" runat="server" Text='<%# Eval("col_e")%>'></asp:Literal>
                                                         </ItemTemplate>
@@ -88,101 +86,6 @@
                                                         </EditItemTemplate>
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litF" runat="server" Text='<%# Eval("col_f")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtF" runat="server" Text='<%# Eval("col_f")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litG" runat="server" Text='<%# Eval("col_g")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtG" runat="server" Text='<%# Eval("col_g")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litH" runat="server" Text='<%# Eval("col_h")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtH" runat="server" Text='<%# Eval("col_h")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litI" runat="server" Text='<%# Eval("col_i")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtI" runat="server" Text='<%# Eval("col_i")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litJ" runat="server" Text='<%# Eval("col_j")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtJ" runat="server" Text='<%# Eval("col_j")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litK" runat="server" Text='<%# Eval("col_k")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtK" runat="server" Text='<%# Eval("col_k")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litL" runat="server" Text='<%# Eval("col_l")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtL" runat="server" Text='<%# Eval("col_l")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litM" runat="server" Text='<%# Eval("col_m")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtM" runat="server" Text='<%# Eval("col_m")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litN" runat="server" Text='<%# Eval("col_n")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtN" runat="server" Text='<%# Eval("col_n")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-
-                                                    <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:Literal ID="litO" runat="server" Text='<%# Eval("col_o")%>'></asp:Literal>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtO" runat="server" Text='<%# Eval("col_o")%>' CssClass="form-control"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-
-
-
-
 
                                                     <asp:TemplateField HeaderText="Edit">
                                                         <ItemTemplate>
@@ -1584,12 +1487,9 @@
 
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Specification No.:<span class="required">*</span></label>
-                                                <div class="col-md-6">
-                                                    <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="B" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                                </div>
-                                            </div>
+
+          
+
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Procedure in reference to declining curve.:<span class="required">*</span></label>
                                                 <div class="col-md-6">

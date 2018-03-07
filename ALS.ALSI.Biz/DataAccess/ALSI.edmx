@@ -276,6 +276,7 @@
           <Property Name="parent" Type="int" />
           <Property Name="status" Type="varchar" MaxLength="1" />
           <Property Name="data_group" Type="varchar" MaxLength="45" />
+          <Property Name="ref_template_id" Type="int" />
         </EntityType>
         <EntityType Name="menu">
           <Key>
@@ -2358,6 +2359,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="parent" Type="Int32" />
           <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="data_group" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ref_template_id" Type="Int32" />
         </EntityType>
         <EntityType Name="menu">
           <Key>
@@ -4209,6 +4211,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="m_type_of_test">
             <EntityTypeMapping TypeName="ALSIModel.m_type_of_test">
               <MappingFragment StoreEntitySet="m_type_of_test">
+                <ScalarProperty Name="ref_template_id" ColumnName="ref_template_id" />
                 <ScalarProperty Name="data_group" ColumnName="data_group" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="parent" ColumnName="parent" />

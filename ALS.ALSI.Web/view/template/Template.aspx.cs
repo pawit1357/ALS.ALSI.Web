@@ -582,7 +582,7 @@ namespace ALS.ALSI.Web.view.template
                                 specification.AY = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(50));
                                 specification.AZ = CustomUtils.GetCellValue(isSpecificationNo.GetRow(row).GetCell(51));
 
-
+                                specification.status = "A";
                                 specification.RowState = CommandNameEnum.Add;
                                 specifications.Add(specification);
                             }
@@ -659,7 +659,7 @@ namespace ALS.ALSI.Web.view.template
                                 specification.AY = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(50));
                                 specification.AZ = CustomUtils.GetCellValue(isPaDropdown.GetRow(row).GetCell(51));
 
-
+                                specification.status = "A";
                                 specification.RowState = CommandNameEnum.Add;
                                 specifications.Add(specification);
                             }

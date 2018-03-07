@@ -50,7 +50,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (List<int>)Session[GetType().Name + "selectedList"]; }
             set { Session[GetType().Name + "selectedList"] = value; }
         }
-
+        public Boolean isPoGroupOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isPoGroupOperation"]; }
+            set { Session[GetType().Name + "isPoGroupOperation"] = value; }
+        }
         public int JobID { get; set; }
 
         public int SampleID { get; set; }
@@ -147,6 +151,7 @@ namespace ALS.ALSI.Web.view.request
                     //btnOperation.Visible = true;
                     break;
             }
+            btnOperationPo.Visible = userRole == RoleEnum.ADMIN;
             btnElp.CssClass = "btn blue";
 
         }
@@ -154,7 +159,45 @@ namespace ALS.ALSI.Web.view.request
 
         private void bindingData()
         {
+           if (!String.IsNullOrEmpty(txtREfNo.Text) && txtREfNo.Text.Split('-').Length == 3)
+            {
+                hPrefix.Value = String.IsNullOrEmpty(txtREfNo.Text) ? "ELP" : txtREfNo.Text.Split('-')[0];
+                btnElp.CssClass = "btn btn-default btn-sm";
+                btnEln.CssClass = "btn btn-default btn-sm";
+
+                btnEls.CssClass = "btn btn-default btn-sm";
+                btnFa.CssClass = "btn btn-default btn-sm";
+                btnElwa.CssClass = "btn btn-default btn-sm";
+                btnGrp.CssClass = "btn btn-default btn-sm";
+                btnTrb.CssClass = "btn btn-default btn-sm";
+                switch (hPrefix.Value.ToUpper())
+                {
+                    case "ELP":
+                        btnElp.CssClass = "btn blue";
+                        break;
+                    case "ELS":
+                        btnEls.CssClass = "btn blue";
+                        break;
+                    case "ELN":
+                        btnEln.CssClass = "btn blue";
+                        break;
+                    case "FA":
+                        btnFa.CssClass = "btn blue";
+                        break;
+                    case "ELWA":
+                        btnElwa.CssClass = "btn blue";
+                        break;
+                    case "GRP":
+                        btnGrp.CssClass = "btn blue";
+                        break;
+                    case "TRB":
+                        btnTrb.CssClass = "btn blue";
+                        break;
+                }
+            }
             searchResult = obj.SearchData();
+
+
 
 
             gvJob.DataSource = searchResult;
@@ -412,7 +455,7 @@ namespace ALS.ALSI.Web.view.request
                     btnConvertTemplete.Visible = ((userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE);
                     btnChangeStatus.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT);
                     cbSelect.Visible = false;
-                    btnViewFile.Visible = job_status == StatusEnum.JOB_COMPLETE || userRole == RoleEnum.BUSINESS_MANAGER||userRole == RoleEnum.LABMANAGER||userRole== RoleEnum.SR_CHEMIST;
+                    btnViewFile.Visible = job_status == StatusEnum.JOB_COMPLETE || userRole == RoleEnum.BUSINESS_MANAGER || userRole == RoleEnum.LABMANAGER || userRole == RoleEnum.SR_CHEMIST;
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
@@ -453,28 +496,22 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case RoleEnum.ADMIN:
                             btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF);
-                            switch (job_status)
-                            {
-                                case StatusEnum.ADMIN_CONVERT_WORD:
-                                case StatusEnum.ADMIN_CONVERT_PDF:
-                                case StatusEnum.JOB_COMPLETE:
-                                    //case StatusEnum.LOGIN_SELECT_SPEC:
-                                    cbSelect.Visible = true && isGroupSubmit;
-                                    break;
-                                case StatusEnum.LOGIN_SELECT_SPEC:
-                                    cbSelect.Visible = true;
-                                    Console.WriteLine();
-                                    break;
-                            }
-                    break;
-                        //case RoleEnum.ACCOUNT:
-                        //    switch (job_status)
-                        //    {
-                        //        case StatusEnum.JOB_COMPLETE:
-                        //            cbSelect.Visible = true && isGroupSubmit;
-                        //            break;
-                        //    }
-                        //    break;
+                            //switch (job_status)
+                            //{
+                            //    case StatusEnum.ADMIN_CONVERT_WORD:
+                            //    case StatusEnum.ADMIN_CONVERT_PDF:
+                            //    case StatusEnum.JOB_COMPLETE:
+                            //        cbSelect.Visible = true && isGroupSubmit;
+                            //        break;
+                            //    case StatusEnum.LOGIN_SELECT_SPEC:
+                            //        cbSelect.Visible = true;
+                            //        Console.WriteLine();
+                            //        break;
+                            //}
+                            cbSelect.Visible = true;
+
+                            break;
+
                         default:
                             btnWorkFlow.Visible = false;
                             break;
@@ -541,7 +578,7 @@ namespace ALS.ALSI.Web.view.request
                     //jobStatus icon
                     e.Row.ForeColor = System.Drawing.Color.Black;
                     litIcon.Visible = isGroupSubmit;
-                    litIcon.Text = isGroupSubmit? "<i class=\"fa fa-object-group\"></i>" : "";
+                    litIcon.Text = isGroupSubmit ? "<i class=\"fa fa-object-group\"></i>" : "";
 
                     //cbSelect.Visible = (job_status == StatusEnum.CHEMIST_TESTING ||
                     //    job_status == StatusEnum.CHEMIST_TESTING ||
@@ -672,7 +709,7 @@ namespace ALS.ALSI.Web.view.request
             using (XLWorkbook wb = new XLWorkbook())
             {
                 DataTable dt = new DataTable("DT");
-
+                dt.Columns.Add("Job Type", typeof(string));
                 dt.Columns.Add("Status", typeof(string));
                 dt.Columns.Add("Job Status", typeof(string));
                 dt.Columns.Add("Received", typeof(string));
@@ -693,6 +730,7 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Type of test", typeof(string));
                 dt.Columns.Add("Modified Date", typeof(string));
                 dt.Columns.Add("Update By", typeof(string));
+
                 String conSQL = Configurations.MySQLCon;
                 using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
                 {
@@ -700,11 +738,12 @@ namespace ALS.ALSI.Web.view.request
 
 
                     String sql = "SELECT" +
+                                "`Extent2`.`sample_prefix` AS `Job Type`," +
                                 "`Extent7`.`name` AS `Status`," +
                                 "`Extent9`.`name` AS `Job Status`," +
-                                "DATE_FORMAT(`Extent2`.`date_srchemist_complate`,'%e %b %Y') AS `Received`," +
-                                "DATE_FORMAT(`Extent2`.`date_admin_sent_to_cus`,'%e %b %Y') AS  `Report Sent to Customer`," +
-                                "DATE_FORMAT(`Extent1`.`date_of_receive`,'%e %b %Y') AS `Receive Date`," +
+                                "DATE_FORMAT(`Extent2`.`date_srchemist_complate`,'%d %b %Y') AS `Received`," +
+                                "DATE_FORMAT(`Extent2`.`date_admin_sent_to_cus`,'%d %b %Y') AS  `Report Sent to Customer`," +
+                                "DATE_FORMAT(`Extent1`.`date_of_receive`,'%d %b %Y') AS `Receive Date`," +
                                 //"DATE_FORMAT(`Extent2`.`due_date`,'%e %b %Y') AS `Due Date`," +
                                 "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end) AS `Due Date`," +
                                 "`Extent2`.`job_number` AS `ALS Ref`," +
@@ -719,8 +758,9 @@ namespace ALS.ALSI.Web.view.request
                                 "`Extent2`.`surface_area` AS `Surface Area`," +
                                 "`Extent3`.`name` AS `Specification`," +
                                 "`Extent4`.`name` AS `Type of test`," +
-                                "DATE_FORMAT(`Extent2`.`update_date`,'%e %b %Y %H:%i')  AS `Modified Date`," +
+                                "DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
                                 "`Extent8`.`username` AS `Update By`" +
+                                
                                 " FROM `job_info` AS `Extent1`" +
                                 " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
                                 " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
@@ -735,7 +775,7 @@ namespace ALS.ALSI.Web.view.request
                     StringBuilder sqlCri = new StringBuilder();
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
-                        sqlCri.Append(" `Extent4`.`name` = '" + ddlTypeOfTest.SelectedValue + "'");
+                        sqlCri.Append(" `Extent4`.`data_group` = '" + ddlTypeOfTest.SelectedValue + "'");
                         sqlCri.Append(" AND ");
                     }
 
@@ -863,6 +903,11 @@ namespace ALS.ALSI.Web.view.request
 
         protected void btnOperation_Click(object sender, EventArgs e)
         {
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+            //btnOpera
+            List<int> listOfNoGroup = new List<int>();
+            LinkButton btn = (LinkButton)sender;
+            this.isPoGroupOperation = btn.ID.Equals("btnOperationPo");
             foreach (GridViewRow row in gvJob.Rows)
             {
                 CheckBox chk = row.Cells[1].Controls[1] as CheckBox;
@@ -870,9 +915,27 @@ namespace ALS.ALSI.Web.view.request
                 if (chk != null && chk.Checked)
                 {
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
-                    this.selectedList.Add(Convert.ToInt32(hf.Value));
+                    HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
+
+                    if (this.isPoGroupOperation|| userRole == RoleEnum.LOGIN)
+                    {
+                        this.selectedList.Add(Convert.ToInt32(hf.Value));
+
+                    }
+                    else
+                    {
+                        if ("1".Equals(hIsGroup.Value))
+                        {
+                            this.selectedList.Add(Convert.ToInt32(hf.Value));
+                        }
+                        else
+                        {
+                            listOfNoGroup.Add(Convert.ToInt32(hf.Value));
+                        }
+                    }
                 }
             }
+
             Console.WriteLine();
             Server.Transfer(Constants.LINK_CHANGE_JOB_GROUP);
 

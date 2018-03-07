@@ -222,6 +222,7 @@
                         </div>
                         <div class="actions">
 
+                           <asp:LinkButton ID="btnOperationPo" runat="server" class="btn btn-default btn-sm" OnClick="btnOperation_Click"> Group Po</asp:LinkButton>
 
                             <asp:LinkButton ID="btnOperation" runat="server" class="btn btn-default btn-sm" OnClick="btnOperation_Click"> Operation</asp:LinkButton>
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>
@@ -277,6 +278,8 @@
                                     <ItemTemplate>
                                         <asp:CheckBox ID="cbSelect" runat="server" />
                                         <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("SN")%>'></asp:HiddenField>
+                                        <asp:HiddenField ID="hIsGroupReport" runat="server" Value='<%# Eval("group_submit")%>'></asp:HiddenField>
+
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
