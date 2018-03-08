@@ -1285,10 +1285,11 @@ namespace ALS.ALSI.Web.view.template
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
-            //GenerateHtmlBiz genHtmlBiz = new GenerateHtmlBiz();
-            //genHtmlBiz.reportHeader = reportHeader;
-            //genHtmlBiz.download();
 
+            List<template_seagate_lpc_coverpage> breakLines = new List<template_seagate_lpc_coverpage>();
+            template_seagate_lpc_coverpage _breakLineTmp = new template_seagate_lpc_coverpage();
+            _breakLineTmp.id = 999;
+            breakLines.Add(_breakLineTmp);
 
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
@@ -1305,6 +1306,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+            reportParameters.Add(new ReportParameter("pNewPage", "1"));
 
             
 
@@ -1335,19 +1337,54 @@ namespace ALS.ALSI.Web.view.template
             DataTable dt05 = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.500") && x.row_state == Convert.ToInt16(RowTypeEnum.Normal)).ToList().ToDataTable();
             DataTable dt06 = this.Lpcs.Where(x => x.row_type == 1 && x.channel_size.Equals("0.600") && x.row_state == Convert.ToInt16(RowTypeEnum.Normal)).ToList().ToDataTable();
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt03)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt05)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt06)); // Add datasource here
 
-            if(dt05.Rows.Count == 0)
+
+            if (dt03.Rows.Count > 0 && (dt05.Rows.Count == 0 && dt06.Rows.Count == 0))
             {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt03)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", breakLines.ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
+
+            }
+            else if(dt03.Rows.Count > 0 && (dt05.Rows.Count > 0 && dt06.Rows.Count == 0))
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt03)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt05)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", breakLines.ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
+            }
+            else if (dt03.Rows.Count > 0 && (dt05.Rows.Count ==0 && dt06.Rows.Count > 0))
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt03)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt06)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", breakLines.ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
+            }
+            else if (dt03.Rows.Count > 0 && (dt05.Rows.Count > 0 && dt06.Rows.Count > 0))
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt03)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt05)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt06)); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable()));
-            }
-            else
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", breakLines.ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
+            }else if(dt03.Rows.Count == 0)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", dt06));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt05)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt06)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", breakLines.ToDataTable()));
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
+
             }
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", reportLpcs.Where(x => x.particle_type == Convert.ToInt32(ParticleTypeEnum.PAR_06)).ToDataTable())); // Add datasource here
 
 
 

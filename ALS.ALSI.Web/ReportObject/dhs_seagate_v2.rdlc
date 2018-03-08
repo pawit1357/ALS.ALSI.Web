@@ -870,7 +870,6 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>2.2269in</Top>
-            <Left>0in</Left>
             <Height>0.67399in</Height>
             <Width>7.15028in</Width>
             <ZIndex>1</ZIndex>
@@ -942,7 +941,7 @@
             <Width>18.16172cm</Width>
             <ZIndex>2</ZIndex>
             <Visibility>
-              <Hidden>=iif(Cint(Parameters!PageCount.Value)&gt;30,true,false)</Hidden>
+              <Hidden>=iif(Cint(Parameters!PageCount.Value)=0,true,false)</Hidden>
             </Visibility>
             <Style>
               <Border>
@@ -1528,7 +1527,6 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet3</DataSetName>
             <Top>5.12131in</Top>
-            <Left>0in</Left>
             <Height>0.55854in</Height>
             <Width>7.1503in</Width>
             <ZIndex>3</ZIndex>
@@ -1564,7 +1562,6 @@
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
             <Top>6.8353in</Top>
-            <Left>0in</Left>
             <Height>1.19119in</Height>
             <Width>7.15028in</Width>
             <ZIndex>4</ZIndex>
@@ -1608,7 +1605,6 @@
                 <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
               </Parameter>
             </Parameters>
-            <Left>0in</Left>
             <Height>1.87982in</Height>
             <Width>7.15029in</Width>
             <ZIndex>5</ZIndex>
@@ -1869,7 +1865,7 @@
             </PageBreak>
             <Top>14.49738cm</Top>
             <Left>0cm</Left>
-            <Height>1.34402cm</Height>
+            <Height>1.34403cm</Height>
             <Width>18.16172cm</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
@@ -2740,7 +2736,7 @@
             </PageBreak>
             <Top>11.03865cm</Top>
             <Left>0cm</Left>
-            <Height>1.36611cm</Height>
+            <Height>1.36612cm</Height>
             <Width>18.16172cm</Width>
             <ZIndex>8</ZIndex>
             <Visibility>
@@ -3328,7 +3324,6 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet2</DataSetName>
             <Top>3.71794in</Top>
-            <Left>0in</Left>
             <Height>0.55854in</Height>
             <Width>7.1503in</Width>
             <ZIndex>9</ZIndex>

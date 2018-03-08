@@ -985,7 +985,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Test", "DHS"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
-            reportParameters.Add(new ReportParameter("PageCount", ds2.Count.ToString()));
+            reportParameters.Add(new ReportParameter("PageCount", "0"));
 
             // Variables
             Warning[] warnings;
@@ -1012,6 +1012,7 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
+                reportParameters.Add(new ReportParameter("PageCount", "0"));
 
 
             }
@@ -1021,6 +1022,7 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(12, ds2.Count - 12).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+                reportParameters.Add(new ReportParameter("PageCount", "1"));
 
             }
             if (ds2.Count > 41)
@@ -1029,7 +1031,7 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(12, 29).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(41, ds2.Count - 41).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
-
+                reportParameters.Add(new ReportParameter("PageCount", "0"));
             }
 
             //if (ds2.Count > 0 && ds2.Count <= 10)
