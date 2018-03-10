@@ -1206,6 +1206,7 @@
     <Content Include="images\footer.png" />
     <Content Include="images\images.png" />
     <Content Include="images\logo.png" />
+    <Content Include="images\no_img.png" />
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
     <Content Include="PhaseII-Doc\PA-SCRIPT-20171224.sql" />

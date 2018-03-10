@@ -152,69 +152,27 @@ namespace ALS.ALSI.Web.view.template
                 }
 
                 #region ":: STAMP ANALYZED DATE ::"
-                if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                {
-                    if (this.jobSample.date_chemist_alalyze == null)
-                    {
-                        txtDateAnalyzed.Text = DateTime.Now.ToString("dd MMMM yyy");
+                //if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                //{
+                //    if (this.jobSample.date_chemist_alalyze == null)
+                //    {
+                //        txtDateAnalyzed.Text = DateTime.Now.ToString("dd MMMM yyy");
 
-                        this.jobSample.date_chemist_alalyze = DateTime.Now;
-                        this.jobSample.Update();
-                    }
-                    txtDateTestComplete.Text = this.jobSample.due_date_lab.Value.ToString("dd MMMM yyy");
-                }
+                //        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                //        this.jobSample.Update();
+                //    }
+                //    txtDateTestComplete.Text = this.jobSample.due_date_lab.Value.ToString("dd MMMM yyy");
+                //}
                 #endregion
 
-                txtAlsReferenceNo.Text = String.Format("ATT/ELN/{0}/{1}", DateTime.Now.Year.ToString().Substring(2, 2), this.jobSample.job_number);
-                txtPartDescription.Text = this.jobSample.description;
-                txtLotNo.Text = String.Empty;
+                //txtAlsReferenceNo.Text = String.Format("ATT/ELN/{0}/{1}", DateTime.Now.Year.ToString().Substring(2, 2), this.jobSample.job_number);
+                //txtPartDescription.Text = this.jobSample.description;
+                //txtLotNo.Text = String.Empty;
             }
             #endregion
 
             template_pa_detail pad = new template_pa_detail();
             this.tbMSpecifications = new tb_m_specification().SelectBySpecificationID(this.jobSample.specification_id, this.jobSample.template_id);
-            #region "Initial component"
-
-            //ddlSpecification.Items.Clear();
-            //ddlSpecification.DataSource = tb_m_specification.getDistinctValue(this.tbMSpecifications.Where(x => x.A.Equals("SPECIFICATION")).ToList());
-            //ddlSpecification.DataBind();
-            //ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-
-
-            ddlContainer.Items.Clear();
-            ddlContainer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Container"));
-            ddlContainer.DataBind();
-            ddlContainer.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-            ddlFluid1.Items.Clear();
-            ddlFluid1.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Fluid 1"));
-            ddlFluid1.DataBind();
-            ddlFluid1.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-            ddlFluid2.Items.Clear();
-            ddlFluid2.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Fluid 2"));
-            ddlFluid2.DataBind();
-            ddlFluid2.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-            ddlFluid3.Items.Clear();
-            ddlFluid3.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Fluid 3"));
-            ddlFluid3.DataBind();
-            ddlFluid3.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-
-            ddlManufacturer.Items.Clear();
-            ddlManufacturer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Analysis membrane used:") && x.B.Equals("Manufacturer"));
-            ddlManufacturer.DataBind();
-            ddlManufacturer.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-
-            ddlMaterial.Items.Clear();
-            ddlMaterial.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Analysis membrane used:") && x.B.Equals("Material"));
-            ddlMaterial.DataBind();
-            ddlMaterial.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-
-            ddlGravimetricAlalysis.Items.Clear();
-            ddlGravimetricAlalysis.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Gravimetric analysis:") && x.B.Equals("Lab Balance"));
-            ddlGravimetricAlalysis.DataBind();
-            ddlGravimetricAlalysis.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-
-            #endregion
-
             List<template_pa_detail> listPaDetail = pad.SelectBySampleID(this.SampleID);
             if (listPaDetail.Count > 0)
             {
@@ -223,8 +181,43 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 paDetail = new List<template_pa_detail>();
-
             }
+
+            #region "Initial component"
+
+            ddlContainer.Items.Clear();
+            ddlContainer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Container"));
+            ddlContainer.DataBind();
+            //ddlContainer.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+            ddlFluid1.Items.Clear();
+            ddlFluid1.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Fluid 1"));
+            ddlFluid1.DataBind();
+            //ddlFluid1.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+            ddlFluid2.Items.Clear();
+            ddlFluid2.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Fluid 2"));
+            ddlFluid2.DataBind();
+            //ddlFluid2.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+            ddlFluid3.Items.Clear();
+            ddlFluid3.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Fluid 3"));
+            ddlFluid3.DataBind();
+            //ddlFluid3.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlManufacturer.Items.Clear();
+            ddlManufacturer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Analysis membrane used:") && x.B.Equals("Manufacturer"));
+            ddlManufacturer.DataBind();
+            //ddlManufacturer.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlMaterial.Items.Clear();
+            ddlMaterial.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Analysis membrane used:") && x.B.Equals("Material"));
+            ddlMaterial.DataBind();
+            //ddlMaterial.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlGravimetricAlalysis.Items.Clear();
+            ddlGravimetricAlalysis.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Gravimetric analysis:") && x.B.Equals("Lab Balance"));
+            ddlGravimetricAlalysis.DataBind();
+            //ddlGravimetricAlalysis.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            #endregion
 
 
 
@@ -232,14 +225,9 @@ namespace ALS.ALSI.Web.view.template
             this.pa = pa.SelectByID(this.SampleID);
             if (this.pa != null)
             {
-
-                //ddlSpecification.SelectedValue = this.pa.specification_id.ToString();
                 ddlResult.SelectedValue = this.pa.result.ToString();
                 txtPIRTDC.Text = this.pa.pirtd;
                 #region "PAGE01"
-                txtLms.Text = this.pa.lms;
-                txtLnmp.Text = this.pa.lnmp;
-                txtLf.Text = this.pa.lf;
                 txtDoec.Text = this.pa.doec;
                 txtDos.Text = this.pa.dos;
                 txtCustomerLimit.Text = this.pa.customerlimit;
@@ -322,7 +310,7 @@ namespace ALS.ALSI.Web.view.template
                 cbAutomated.Checked = Convert.ToBoolean(this.pa.isautomated);
                 txtAutomated.Text = this.pa.automated;
                 txtTotalextractionVolume.Text = this.pa.totalextractionvolume;
-                //this.pa.lbextractionmethod = lbExtractionMethod.Text;
+                lbExtractionMethod.Text= this.pa.lbextractionmethod;
                 txtNumberOfComponents.Text = this.pa.numberofcomponents;
                 lbExtractionTime.Text = this.pa.lbextractiontime;
                 lbMembraneType.Text = this.pa.measureddiameter;
@@ -332,6 +320,10 @@ namespace ALS.ALSI.Web.view.template
                 txtFeretLmsp.Text = this.pa.feretlmsp;
                 txtFeretLnms.Text = this.pa.feretlnms;
                 txtFeretFb.Text = this.pa.feretfb;
+
+                txtLms.Text = this.pa.feretlmsp;
+                txtLnmp.Text = this.pa.feretlnms;
+                txtLf.Text = this.pa.feretfb;
                 #endregion
 
 
@@ -450,17 +442,17 @@ namespace ALS.ALSI.Web.view.template
 
                 #endregion
 
+                membraneType();
 
             }
             else
             {
                 this.pa = new template_pa();
-
                 #region "gvEop"
                 List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Evaluation of Particle:") && x.B.Equals("PA01")).ToList();
                 if (listOfSpec.Count > 0)
                 {
-                    foreach(tb_m_specification item in listOfSpec)
+                    foreach (tb_m_specification item in listOfSpec)
                     {
                         template_pa_detail tmp = new template_pa_detail();
                         tmp.id = CustomUtils.GetRandomNumberID();
@@ -474,12 +466,122 @@ namespace ALS.ALSI.Web.view.template
                 }
 
                 #endregion
+                #region "Microscopic Analysis"
+                listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Micropic Data:") && x.B.Equals("PA01")).ToList();
+                if (listOfSpec.Count > 1)
+                {
+                    int row = 1;
+                    foreach (var item in listOfSpec)
+                    {
+                        template_pa_detail tmp = new template_pa_detail();
+                        tmp.id = CustomUtils.GetRandomNumberID();
+                        tmp.seq = row;
+                        tmp.col_a = item.A;
+                        tmp.col_b = item.B;
+                        tmp.col_c = item.C;
+                        tmp.col_d = item.D;
+                        tmp.col_e = item.E;
+                        tmp.col_f = item.G;
+                        tmp.col_g = item.G;
+                        tmp.col_h = item.H;
+                        tmp.col_i = item.I;
+                        tmp.col_j = item.J;
+                        tmp.col_k = item.K;
+                        tmp.col_l = item.L;
+                        tmp.col_m = item.M;
+                        tmp.col_n = item.N;
+                        tmp.col_o = item.O;
+                        tmp.col_p = item.P;
+                        tmp.col_q = item.Q;
+                        tmp.col_r = item.R;
+
+                        tmp.col_s = item.S;
+                        tmp.col_t = item.T;
+                        tmp.col_u = item.U;
+                        tmp.col_v = item.V;
+                        tmp.col_w = item.W;
+                        tmp.col_x = item.X;
+                        tmp.col_y = item.Y;
+                        tmp.col_z = item.Z;
+
+                        tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                        tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
+                        paDetail.Add(tmp);
+                        row++;
+                    }
+                    calculate();
+                }
+                #endregion
+
+                //default:Agitation
+                lbExtractionMethod.Text = " Agitation";
+                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Agitation")).FirstOrDefault();
+                if (null != selectValue)
+                {
+                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
+                    {
+                        paDetail.Remove(pd);
+                    }
+
+
+                    List<String> cols = tb_m_specification.findColumnCount(selectValue);
+                    for (int i = 0; i < cols.Count; i++)
+                    {
+                        gvDissolving.Columns[i].HeaderText = cols[i];
+                        gvDissolving.Columns[i].Visible = true;
+                    }
+                    template_pa_detail tmp = new template_pa_detail();
+                    tmp.id = CustomUtils.GetRandomNumberID();
+                    tmp.col_d = "42 KHz";
+                    tmp.col_e = "24 W/L";
+                    tmp.col_f = "8 mins";
+                    tmp.col_g = "room temperature";
+                    tmp.col_h = "No";
+                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                    tmp.row_type = Convert.ToInt16(PAEnum.DISSOLVING);
+                    paDetail.Add(tmp);
+
+                }
+
+                selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Washing") && x.C.Equals("Pressure rinsing")).FirstOrDefault();
+                if (null != selectValue)
+                {
+                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
+                    {
+                        paDetail.Remove(pd);
+                    }
+
+
+                    List<String> cols = tb_m_specification.findColumnCount(selectValue);
+                    for (int i = 0; i < cols.Count; i++)
+                    {
+                        gvWashing.Columns[i].HeaderText = cols[i];
+                        gvWashing.Columns[i].Visible = true;
+                    }
+                    template_pa_detail tmp = new template_pa_detail();
+                    tmp.id = CustomUtils.GetRandomNumberID();
+                    tmp.col_d = "Flat type";
+                    tmp.col_e = "40";
+                    tmp.col_f = "0.5 L/min";
+                    tmp.col_g = "1 bar";
+                    tmp.col_h = "-";
+                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                    tmp.row_type = Convert.ToInt16(PAEnum.WASHING);
+                    paDetail.Add(tmp);
+
+                }
+
             }
 
             pPage01.Visible = true;
             pPage02.Visible = false;
             pPage03.Visible = false;
-            pCcc.Visible = false;
+            pPage04.Visible = false;
+            pPage05.Visible = false;
+            pPage06.Visible = false;
+            pPage07.Visible = false;
+            pUploadWorkSheet.Visible = false;
+            btnSubmit.Enabled = false;
 
             calculate();
 
@@ -510,26 +612,13 @@ namespace ALS.ALSI.Web.view.template
                 //gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
                 //gvGravimetry.DataBind();
             }
+            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
             listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
-                //switch (ddlSpecification.SelectedItem.Text)
-                //{
-                //    case "PA_01_05x":
-                //        gvMicroscopicAnalysis.Visible = true;
-                //        gvMicroscopicAnalysis2.Visible = false;
-                //        gvMicroscopicAnalysis.DataSource = listPaDetail;
-                //        gvMicroscopicAnalysis.DataBind();
-                //        break;
-                //    case "PA_02_05x":
-                //        gvMicroscopicAnalysis.Visible = false;
-                //        gvMicroscopicAnalysis2.Visible = true;
-                //        gvMicroscopicAnalysis2.DataSource = listPaDetail;
-                //        gvMicroscopicAnalysis2.DataBind();
-                //        break;
-                //}
-
-
+                gvMicroscopicAnalysis.Visible = true;
+                gvMicroscopicAnalysis.DataSource = listPaDetail;
+                gvMicroscopicAnalysis.DataBind();
             }
             listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
@@ -545,6 +634,9 @@ namespace ALS.ALSI.Web.view.template
             }
 
 
+            txtEop_Lmsp.Text = txtFeretLmsp.Text;
+            txtEop_Lnmsp.Text = txtFeretLnms.Text;
+            lbLf.Text = txtFeretFb.Text;
         }
 
         #endregion
@@ -579,12 +671,12 @@ namespace ALS.ALSI.Web.view.template
                     //this.pa.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                     this.pa.result = Convert.ToInt32(ddlResult.SelectedValue);
                     this.pa.pirtd = txtPIRTDC.Text;
-                    this.jobSample.lot_no = txtLotNo.Text;
+                    //this.jobSample.lot_no = txtLotNo.Text;
 
                     #region "PAGE01"
-                    this.pa.lms = txtLms.Text;
-                    this.pa.lnmp = txtLnmp.Text;
-                    this.pa.lf = txtLf.Text;
+                    //this.pa.lms = txtLms.Text;
+                    //this.pa.lnmp = txtLnmp.Text;
+                    //this.pa.lf = txtLf.Text;
                     this.pa.doec = txtDoec.Text;
                     this.pa.dos = txtDos.Text;
                     this.pa.customerlimit = txtCustomerLimit.Text;
@@ -663,7 +755,7 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.isautomated = (cbAutomated.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
                     this.pa.automated = txtAutomated.Text;
                     this.pa.totalextractionvolume = txtTotalextractionVolume.Text;
-                    //this.pa.lbextractionmethod = lbExtractionMethod.Text;
+                    this.pa.lbextractionmethod = lbExtractionMethod.Text;
                     this.pa.numberofcomponents = txtNumberOfComponents.Text;
                     this.pa.lbextractiontime = lbExtractionTime.Text;
                     this.pa.measureddiameter = lbMembraneType.Text;
@@ -687,7 +779,7 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.lnms_x = txtLnms_X.Text;
                     this.pa.lnms_y = txtLnms_Y.Text;
 
-                    this.pa.lf_x = txtLf.Text;
+                    this.pa.lf_x = txtLf_X.Text;
                     this.pa.lf_y = txtLf_Y.Text;
 
                     //Delete old
@@ -711,7 +803,7 @@ namespace ALS.ALSI.Web.view.template
                     //this.pa.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                     this.pa.result = Convert.ToInt32(ddlResult.SelectedValue);
                     this.pa.pirtd = txtPIRTDC.Text;
-                    this.jobSample.lot_no = txtLotNo.Text;
+                    //this.jobSample.lot_no = txtLotNo.Text;
 
                     #region "PAGE01"
                     this.pa.lms = txtLms.Text;
@@ -795,7 +887,7 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.isautomated = (cbAutomated.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
                     this.pa.automated = txtAutomated.Text;
                     this.pa.totalextractionvolume = txtTotalextractionVolume.Text;
-                    //this.pa.lbextractionmethod = lbExtractionMethod.Text;
+                    this.pa.lbextractionmethod = lbExtractionMethod.Text;
                     this.pa.numberofcomponents = txtNumberOfComponents.Text;
                     this.pa.lbextractiontime = lbExtractionTime.Text;
                     this.pa.measureddiameter = lbMembraneType.Text;
@@ -819,7 +911,7 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.lnms_x = txtLnms_X.Text;
                     this.pa.lnms_y = txtLnms_Y.Text;
 
-                    this.pa.lf_x = txtLf.Text;
+                    this.pa.lf_x = txtLf_X.Text;
                     this.pa.lf_y = txtLf_Y.Text;
 
                     //Delete old
@@ -977,6 +1069,8 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnCoverPage_Click(object sender, EventArgs e)
         {
+            pUploadWorkSheet.Visible = false;
+            btnSubmit.Enabled = false;
             Button btn = (Button)sender;
             switch (btn.ID)
             {
@@ -984,25 +1078,115 @@ namespace ALS.ALSI.Web.view.template
                     btnPage01.CssClass = "btn red-sunglo btn-sm";
                     btnPage02.CssClass = "btn btn-default btn-sm";
                     btnPage03.CssClass = "btn btn-default btn-sm";
+                    btnPage04.CssClass = "btn btn-default btn-sm";
+                    btnPage05.CssClass = "btn btn-default btn-sm";
+                    btnPage06.CssClass = "btn btn-default btn-sm";
+                    btnPage07.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = true;
                     pPage02.Visible = false;
                     pPage03.Visible = false;
+                    pPage04.Visible = false;
+                    pPage05.Visible = false;
+                    pPage06.Visible = false;
+                    pPage07.Visible = false;
                     break;
                 case "btnPage02":
                     btnPage01.CssClass = "btn btn-default btn-sm";
                     btnPage02.CssClass = "btn red-sunglo btn-sm";
                     btnPage03.CssClass = "btn btn-default btn-sm";
+                    btnPage04.CssClass = "btn btn-default btn-sm";
+                    btnPage05.CssClass = "btn btn-default btn-sm";
+                    btnPage06.CssClass = "btn btn-default btn-sm";
+                    btnPage07.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = true;
                     pPage03.Visible = false;
+                    pPage04.Visible = false;
+                    pPage05.Visible = false;
+                    pPage06.Visible = false;
+                    pPage07.Visible = false;
                     break;
                 case "btnPage03":
                     btnPage01.CssClass = "btn btn-default btn-sm";
                     btnPage02.CssClass = "btn btn-default btn-sm";
                     btnPage03.CssClass = "btn red-sunglo btn-sm";
+                    btnPage04.CssClass = "btn btn-default btn-sm";
+                    btnPage05.CssClass = "btn btn-default btn-sm";
+                    btnPage06.CssClass = "btn btn-default btn-sm";
+                    btnPage07.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = false;
                     pPage03.Visible = true;
+                    pPage04.Visible = false;
+                    pPage05.Visible = false;
+                    pPage06.Visible = false;
+                    pPage07.Visible = false;
+                    break;
+                case "btnPage04":
+                    btnPage01.CssClass = "btn btn-default btn-sm";
+                    btnPage02.CssClass = "btn btn-default btn-sm";
+                    btnPage03.CssClass = "btn btn-default btn-sm";
+                    btnPage04.CssClass = "btn red-sunglo btn-sm";
+                    btnPage05.CssClass = "btn btn-default btn-sm";
+                    btnPage06.CssClass = "btn btn-default btn-sm";
+                    btnPage07.CssClass = "btn btn-default btn-sm";
+                    pPage01.Visible = false;
+                    pPage02.Visible = false;
+                    pPage03.Visible = false;
+                    pPage04.Visible = true;
+                    pPage05.Visible = false;
+                    pPage06.Visible = false;
+                    pPage07.Visible = false;
+                    break;
+                case "btnPage05":
+                    btnPage01.CssClass = "btn btn-default btn-sm";
+                    btnPage02.CssClass = "btn btn-default btn-sm";
+                    btnPage03.CssClass = "btn btn-default btn-sm";
+                    btnPage04.CssClass = "btn btn-default btn-sm";
+                    btnPage05.CssClass = "btn red-sunglo btn-sm";
+                    btnPage06.CssClass = "btn btn-default btn-sm";
+                    btnPage07.CssClass = "btn btn-default btn-sm";
+                    pPage01.Visible = false;
+                    pPage02.Visible = false;
+                    pPage03.Visible = false;
+                    pPage04.Visible = false;
+                    pPage05.Visible = true;
+                    pPage06.Visible = false;
+                    pPage07.Visible = false;
+                    break;
+                case "btnPage06":
+                    btnPage01.CssClass = "btn btn-default btn-sm";
+                    btnPage02.CssClass = "btn btn-default btn-sm";
+                    btnPage03.CssClass = "btn btn-default btn-sm";
+                    btnPage04.CssClass = "btn btn-default btn-sm";
+                    btnPage05.CssClass = "btn btn-default btn-sm";
+                    btnPage06.CssClass = "btn red-sunglo btn-sm";
+                    btnPage07.CssClass = "btn btn-default btn-sm";
+                    pPage01.Visible = false;
+                    pPage02.Visible = false;
+                    pPage03.Visible = false;
+                    pPage04.Visible = false;
+                    pPage05.Visible = false;
+                    pPage06.Visible = true;
+                    pPage07.Visible = false;
+                    break;
+                case "btnPage07":
+                    btnPage01.CssClass = "btn btn-default btn-sm";
+                    btnPage02.CssClass = "btn btn-default btn-sm";
+                    btnPage03.CssClass = "btn btn-default btn-sm";
+                    btnPage04.CssClass = "btn btn-default btn-sm";
+                    btnPage05.CssClass = "btn btn-default btn-sm";
+                    btnPage06.CssClass = "btn btn-default btn-sm";
+                    btnPage07.CssClass = "btn red-sunglo btn-sm";
+                    pPage01.Visible = false;
+                    pPage02.Visible = false;
+                    pPage03.Visible = false;
+                    pPage04.Visible = false;
+                    pPage05.Visible = false;
+                    pPage06.Visible = false;
+                    pPage07.Visible = true;
+                    pUploadWorkSheet.Visible = true;
+                    btnSubmit.Enabled = true;
                     break;
             }
         }
@@ -1074,32 +1258,25 @@ namespace ALS.ALSI.Web.view.template
                                         row++;
                                     }
                                 }
+                                Console.WriteLine();
+                                for (int r = 1; r < table.Columns.Count; r++)
+                                {
+                                    template_pa_detail pad = paDetail.Where(x => x.col_d.Equals(table.Rows[0][r].ToString().Replace("\"", ""))).FirstOrDefault();
+                                    if (pad != null)
+                                    {
+                                        pad.col_e = table.Rows[2][r].ToString().Replace("\"", "");
+                                        pad.col_f = table.Rows[4][r].ToString().Replace("\"", "");
+                                        pad.col_g = table.Rows[3][r].ToString().Replace("\"", "");
+                                        pad.col_h = table.Rows[5][r].ToString().Replace("\"", "");
+                                        //
+                                        pad.col_i = (Convert.ToInt32(pad.col_e) / numberOfComponents).ToString("N1");
+                                        pad.col_j = (Convert.ToInt32(pad.col_f) / numberOfComponents).ToString("N1");
+                                        pad.col_k = (Convert.ToInt32(pad.col_g) / numberOfComponents).ToString("N1");
+                                        pad.col_l = (Convert.ToInt32(pad.col_h) / numberOfComponents).ToString("N1");
 
-                                //switch (ddlSpecification.SelectedItem.Text)
-                                //{
-                                //    case "PA_01_05x":
-                                //        for (int r = 1; r < table.Columns.Count; r++)
-                                //        {
-                                //            template_pa_detail pad = paDetail.Where(x => x.col_d.Equals(table.Rows[0][r].ToString().Replace("\"", ""))).FirstOrDefault();
-                                //            if (pad != null)
-                                //            {
-                                //                pad.col_e = table.Rows[2][r].ToString().Replace("\"", "");
-                                //                pad.col_f = table.Rows[4][r].ToString().Replace("\"", "");
-                                //                pad.col_g = table.Rows[3][r].ToString().Replace("\"", "");
-                                //                pad.col_h = table.Rows[5][r].ToString().Replace("\"", "");
-                                //                //
-                                //                pad.col_i = (Convert.ToInt32(pad.col_e) / numberOfComponents).ToString("N1");
-                                //                pad.col_j = (Convert.ToInt32(pad.col_f) / numberOfComponents).ToString("N1");
-                                //                pad.col_k = (Convert.ToInt32(pad.col_g) / numberOfComponents).ToString("N1");
-                                //                pad.col_l = (Convert.ToInt32(pad.col_h) / numberOfComponents).ToString("N1");
-                                //                //
-                                //                //pad.col_m
-                                //                //pad.col_n
-                                //                //pad.col_o
-                                //                //pad.col_p
-                                //                Console.WriteLine();
-                                //            }
-                                //        }
+                                        Console.WriteLine();
+                                    }
+                                }
                                 //        break;
                                 //    case "PA_02_05x":
                                 //        List<template_pa_detail> pads = paDetail.Where(x => x.col_a != null && x.col_a.Equals("Micropic Data:")).ToList();
@@ -1133,14 +1310,18 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-
-                                //lbPermembrane.Text = lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1);
+                                lbPermembrane.Text = lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1);
                             }
                         }
                         else
                         {
                             //errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.csv"));
                         }
+                        #endregion
+                        #region "LargestRegionsTable_fibrous"
+                        //txtFeretLmsp.Text;
+                        //txtFeretLnms.Text;
+                        //txtFeretFb.Text;
                         #endregion
                     }
                 }
@@ -1155,10 +1336,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 errors.Add(String.Format("ไม่พบไฟล์ *.csv ที่ใช้โหลดข้อมูล (Ex. ClassTable_FromNumber_FeretMaximum_A01316.csv)"));
             }
-            //if (txtParticleSize01.Text.Equals("") || txtParticleSize02.Text.Equals("") || txtParticleSize03.Text.Equals(""))
-            //{
-            //    errors.Add(String.Format("โปรดระบุข้อมูล Particle Size ที่ใช้สำหรับคำนวณ)"));
-            //}
 
             if (errors.Count > 0)
             {
@@ -1169,9 +1346,6 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 litErrorMessage.Text = String.Empty;
-                //this.tbCas = _cas;
-                //gvResult.DataSource = this.tbCas;
-                //gvResult.DataBind();
                 calculate();
             }
         }
@@ -1631,7 +1805,56 @@ namespace ALS.ALSI.Web.view.template
                 Console.WriteLine();
             }
         }
+        protected void gvMicroscopicAnalysis_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            //try
+            //{
+            //    GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+            //    TableHeaderCell cell = new TableHeaderCell();
+            //    cell.Text = "";
+            //    cell.RowSpan = 1;
+            //    row.Controls.Add(cell);
 
+            //    cell = new TableHeaderCell();
+            //    cell.RowSpan = 1;
+            //    cell.Text = "";
+            //    row.Controls.Add(cell);
+
+            //    cell = new TableHeaderCell();
+            //    cell.ColumnSpan = 2;
+            //    cell.Text = "Particle counton membrane";
+            //    cell.HorizontalAlign = HorizontalAlign.Center;
+            //    row.Controls.Add(cell);
+
+            //    cell = new TableHeaderCell();
+            //    cell.ColumnSpan = 2;
+            //    cell.Text = "Particles on per component";
+            //    cell.HorizontalAlign = HorizontalAlign.Center;
+            //    row.Controls.Add(cell);
+
+            //    cell = new TableHeaderCell();
+            //    cell.ColumnSpan = 2;
+            //    cell.Text = "Particles on per 1000 cm2";
+            //    cell.HorizontalAlign = HorizontalAlign.Center;
+            //    row.Controls.Add(cell);
+
+            //    cell = new TableHeaderCell();
+            //    cell.ColumnSpan = 1;
+            //    cell.Text = "";
+            //    row.Controls.Add(cell);
+
+            //    cell = new TableHeaderCell();
+            //    cell.ColumnSpan = 1;
+            //    cell.Text = "";
+            //    row.Controls.Add(cell);
+
+            //    gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine();
+            //}
+        }
         protected void gvMicroscopicAnalysis_OnDataBound(object sender, EventArgs e)
         {
             try
@@ -1648,19 +1871,19 @@ namespace ALS.ALSI.Web.view.template
                 row.Controls.Add(cell);
 
                 cell = new TableHeaderCell();
-                cell.ColumnSpan = 4;
+                cell.ColumnSpan = 2;
                 cell.Text = "Particle counton membrane";
                 cell.HorizontalAlign = HorizontalAlign.Center;
                 row.Controls.Add(cell);
 
                 cell = new TableHeaderCell();
-                cell.ColumnSpan = 4;
+                cell.ColumnSpan = 2;
                 cell.Text = "Particles on per component";
                 cell.HorizontalAlign = HorizontalAlign.Center;
                 row.Controls.Add(cell);
 
                 cell = new TableHeaderCell();
-                cell.ColumnSpan = 4;
+                cell.ColumnSpan = 2;
                 cell.Text = "Particles on per 1000 cm2";
                 cell.HorizontalAlign = HorizontalAlign.Center;
                 row.Controls.Add(cell);
@@ -1742,180 +1965,7 @@ namespace ALS.ALSI.Web.view.template
             gvMicroscopicAnalysis.DataBind();
         }
         #endregion
-        #region "MicroscopicAnalysis-2"
-        protected void gvMicroscopicAnalysis2_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            try
-            {
-                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
-                {
-                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
-                    if (_cov != null)
-                    {
-                        RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
-                        switch (cmd)
-                        {
-                            case RowTypeEnum.Hide:
-                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Hide);
-                                break;
-                            case RowTypeEnum.Normal:
-                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Normal);
-                                break;
-                        }
 
-                        gvMicroscopicAnalysis2.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
-                        gvMicroscopicAnalysis2.DataBind();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-            }
-        }
-
-        protected void gvMicroscopicAnalysis2_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            try
-            {
-                if (e.Row.RowType == DataControlRowType.DataRow)
-                {
-
-
-                    RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMicroscopicAnalysis2.DataKeys[e.Row.RowIndex].Values[1]);
-                    LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                    LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-
-                    if (_btnHide != null && _btnUndo != null)
-                    {
-                        switch (cmd)
-                        {
-                            case RowTypeEnum.Hide:
-                                _btnHide.Visible = false;
-                                _btnUndo.Visible = true;
-                                e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-                                break;
-                            default:
-                                _btnHide.Visible = true;
-                                _btnUndo.Visible = false;
-                                e.Row.ForeColor = System.Drawing.Color.Black;
-                                break;
-                        }
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-            }
-        }
-
-        protected void gvMicroscopicAnalysis2_OnDataBound(object sender, EventArgs e)
-        {
-            try
-            {
-                //GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
-                //TableHeaderCell cell = new TableHeaderCell();
-                //cell.Text = "";
-                //cell.ColumnSpan = 1;
-                //row.Controls.Add(cell);
-
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 1;
-                //cell.Text = "";
-                //row.Controls.Add(cell);
-
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 2;
-                //cell.Text = "Particle counton membrane";
-                //cell.HorizontalAlign = HorizontalAlign.Center;
-                //row.Controls.Add(cell);
-
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 2;
-                //cell.Text = "Particle count /component";
-                //cell.HorizontalAlign = HorizontalAlign.Center;
-                //row.Controls.Add(cell);
-
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 2;
-                //cell.Text = "Particle count /1000cm2";
-                //cell.HorizontalAlign = HorizontalAlign.Center;
-                //row.Controls.Add(cell);
-                //cell = new TableHeaderCell();
-                //cell.ColumnSpan = 1;
-                //cell.Text = "";
-                //row.Controls.Add(cell);
-
-                //gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-            }
-        }
-
-
-        protected void gvMicroscopicAnalysis2_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-
-        }
-
-        protected void gvMicroscopicAnalysis2_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            try
-            {
-                gvMicroscopicAnalysis2.EditIndex = e.NewEditIndex;
-                gvMicroscopicAnalysis2.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
-                gvMicroscopicAnalysis2.DataBind();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-            }
-        }
-
-        protected void gvMicroscopicAnalysis2_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            int _id = Convert.ToInt32(gvMicroscopicAnalysis2.DataKeys[e.RowIndex].Values[0].ToString());
-            TextBox txtA = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtA");
-            TextBox txtB = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtB");
-            TextBox txtC = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtC");
-            TextBox txtD = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtD");
-            TextBox txtE = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtE");
-            TextBox txtF = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtF");
-            TextBox txtG = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtG");
-            TextBox txtH = (TextBox)gvMicroscopicAnalysis2.Rows[e.RowIndex].FindControl("txtH");
-
-
-            //template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
-            //if (_cov != null)
-            //{
-            //    _cov.col_a = txtA.Text;
-            //    _cov.col_b = txtB.Text;
-            //    _cov.col_c = txtC.Text;
-            //    _cov.col_d = txtD.Text;
-            //    _cov.col_e = txtE.Text;
-            //    _cov.col_f = txtF.Text;
-            //    _cov.col_g = txtG.Text;
-            //    _cov.col_h = txtH.Text;
-            //}
-
-
-            gvMicroscopicAnalysis2.EditIndex = -1;
-            gvMicroscopicAnalysis2.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
-            gvMicroscopicAnalysis2.DataBind();
-        }
-
-        protected void gvMicroscopicAnalysis2_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gvMicroscopicAnalysis2.EditIndex = -1;
-            gvMicroscopicAnalysis2.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
-            gvMicroscopicAnalysis2.DataBind();
-        }
-        #endregion
 
 
         #region "Dissolving"
@@ -2135,150 +2185,6 @@ namespace ALS.ALSI.Web.view.template
 
         #endregion
 
-        //protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-
-
-        //        DropDownList ddl = (DropDownList)sender;
-
-        //        int row = 0;
-        //        #region "gvEop"
-        //        List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Evaluation of Particle:") && x.B.Equals(ddl.SelectedItem.Text)).ToList();
-        //        if (listOfSpec.Count > 1)
-        //        {
-        //            foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList())
-        //            {
-        //                paDetail.Remove(pd);
-        //            }
-
-        //            foreach (var item in listOfSpec)
-        //            {
-        //                if (row > 0)
-        //                {
-        //                    template_pa_detail tmp = new template_pa_detail();
-        //                    tmp.id = CustomUtils.GetRandomNumberID();
-
-        //                    tmp.col_a = item.A;
-        //                    tmp.col_b = item.B;
-        //                    tmp.col_c = item.C;
-        //                    tmp.col_d = item.D;
-        //                    tmp.col_e = item.E;
-        //                    tmp.col_f = item.G;
-        //                    tmp.col_g = item.G;
-        //                    tmp.col_h = item.H;
-        //                    tmp.col_i = item.I;
-        //                    tmp.col_j = item.J;
-        //                    tmp.col_k = item.K;
-        //                    tmp.col_l = item.L;
-        //                    tmp.col_m = item.M;
-        //                    tmp.col_n = item.N;
-        //                    tmp.col_o = item.O;
-        //                    tmp.col_p = item.P;
-        //                    tmp.col_q = item.Q;
-        //                    tmp.col_r = item.R;
-
-        //                    tmp.col_s = item.S;
-        //                    tmp.col_t = item.T;
-        //                    tmp.col_u = item.U;
-        //                    tmp.col_v = item.V;
-        //                    tmp.col_w = item.W;
-        //                    tmp.col_x = item.X;
-        //                    tmp.col_y = item.Y;
-        //                    tmp.col_z = item.Z;
-
-        //                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-        //                    tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
-        //                    paDetail.Add(tmp);
-        //                }
-        //                row++;
-        //            }
-
-
-        //            List<String> cols = tb_m_specification.findColumnCount(listOfSpec[0]);
-        //            for (int i = 0; i < cols.Count; i++)
-        //            {
-        //                gvEop.Columns[i].HeaderText = cols[i];
-        //                gvEop.Columns[i].Visible = true;
-        //            }
-        //            for (int i = cols.Count; i < 13; i++)
-        //            {
-        //                gvEop.Columns[i].Visible = false;
-        //            }
-
-        //            calculate();
-        //            gvEop.Visible = true;
-        //        }
-        //        else
-        //        {
-        //            for (int i = 0; i < 15; i++)
-        //            {
-        //                gvEop.Columns[i].Visible = false;
-        //            }
-        //            gvEop.Visible = false;
-        //        }
-        //        #endregion
-        //        #region "gvMicroscopicAnalysis"
-        //        row = 0;
-        //        listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Micropic Data:") && x.B.Equals(ddl.SelectedItem.Text)).ToList();
-        //        if (listOfSpec.Count > 1)
-        //        {
-        //            foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList())
-        //            {
-        //                paDetail.Remove(pd);
-        //            }
-
-        //            foreach (var item in listOfSpec)
-        //            {
-        //                template_pa_detail tmp = new template_pa_detail();
-        //                tmp.id = CustomUtils.GetRandomNumberID();
-        //                tmp.seq = row;
-        //                tmp.col_a = item.A;
-        //                tmp.col_b = item.B;
-        //                tmp.col_c = item.C;
-        //                tmp.col_d = item.D;
-        //                tmp.col_e = item.E;
-        //                tmp.col_f = item.G;
-        //                tmp.col_g = item.G;
-        //                tmp.col_h = item.H;
-        //                tmp.col_i = item.I;
-        //                tmp.col_j = item.J;
-        //                tmp.col_k = item.K;
-        //                tmp.col_l = item.L;
-        //                tmp.col_m = item.M;
-        //                tmp.col_n = item.N;
-        //                tmp.col_o = item.O;
-        //                tmp.col_p = item.P;
-        //                tmp.col_q = item.Q;
-        //                tmp.col_r = item.R;
-
-        //                tmp.col_s = item.S;
-        //                tmp.col_t = item.T;
-        //                tmp.col_u = item.U;
-        //                tmp.col_v = item.V;
-        //                tmp.col_w = item.W;
-        //                tmp.col_x = item.X;
-        //                tmp.col_y = item.Y;
-        //                tmp.col_z = item.Z;
-
-        //                tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-        //                tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
-        //                paDetail.Add(tmp);
-        //                row++;
-        //            }
-        //            calculate();
-        //        }
-        //        #endregion
-
-
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine();
-        //    }
-        //}
 
         protected void ddlMa_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2623,16 +2529,19 @@ namespace ALS.ALSI.Web.view.template
             {
                 txtTradeName.Text = selectValue.D;
                 txtManufacturer.Text = selectValue.E;
+                cbFluid1.Checked = true;
+                cbFluid2.Checked = false;
+                cbFluid3.Checked = false;
             }
-            switch (ddl.SelectedIndex)
-            {
-                case 0:
-                    cbFluid1.Checked = false;
-                    break;
-                default:
-                    cbFluid1.Checked = true;
-                    break;
-            }
+            //switch (ddl.SelectedIndex)
+            //{
+            //    case 0:
+            //        cbFluid1.Checked = false;
+            //        break;
+            //    default:
+            //        cbFluid1.Checked = true;
+            //        break;
+            //}
         }
 
         protected void ddlFluid2_SelectedIndexChanged(object sender, EventArgs e)
@@ -2643,16 +2552,19 @@ namespace ALS.ALSI.Web.view.template
             {
                 txtTradeName.Text = selectValue.D;
                 txtManufacturer.Text = selectValue.E;
+                cbFluid1.Checked = false;
+                cbFluid2.Checked = true;
+                cbFluid3.Checked = false;
             }
-            switch (ddl.SelectedIndex)
-            {
-                case 0:
-                    cbFluid2.Checked = false;
-                    break;
-                default:
-                    cbFluid2.Checked = true;
-                    break;
-            }
+            //switch (ddl.SelectedIndex)
+            //{
+            //    case 0:
+            //        cbFluid2.Checked = false;
+            //        break;
+            //    default:
+            //        cbFluid2.Checked = true;
+            //        break;
+            //}
         }
 
         protected void ddlFluid3_SelectedIndexChanged(object sender, EventArgs e)
@@ -2663,16 +2575,19 @@ namespace ALS.ALSI.Web.view.template
             {
                 txtTradeName.Text = selectValue.D;
                 txtManufacturer.Text = selectValue.E;
+                cbFluid1.Checked = false;
+                cbFluid2.Checked = false;
+                cbFluid3.Checked = true;
             }
-            switch (ddl.SelectedIndex)
-            {
-                case 0:
-                    cbFluid3.Checked = false;
-                    break;
-                default:
-                    cbFluid3.Checked = true;
-                    break;
-            }
+            //switch (ddl.SelectedIndex)
+            //{
+            //    case 0:
+            //        cbFluid3.Checked = false;
+            //        break;
+            //    default:
+            //        cbFluid3.Checked = true;
+            //        break;
+            //}
         }
 
         protected void cbFluid1_CheckedChanged(object sender, EventArgs e)
@@ -2721,18 +2636,21 @@ namespace ALS.ALSI.Web.view.template
                         cbPressureRinsing.Checked = true;
                         cbInternalRinsing.Checked = false;
                         cbAgitation.Checked = false;
+                        lbExtractionMethod.Text = "Pressure rinsing";
                         break;
                     case "cbInternalRinsing":
                         selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Internal rinsing")).FirstOrDefault();
                         cbPressureRinsing.Checked = false;
                         cbInternalRinsing.Checked = true;
                         cbAgitation.Checked = false;
+                        lbExtractionMethod.Text = " Internal rinsing";
                         break;
                     case "cbAgitation":
                         selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Agitation")).FirstOrDefault();
                         cbPressureRinsing.Checked = false;
                         cbInternalRinsing.Checked = false;
                         cbAgitation.Checked = true;
+                        lbExtractionMethod.Text = " Agitation";
                         break;
                 }
 
@@ -2845,9 +2763,76 @@ namespace ALS.ALSI.Web.view.template
         protected void ddlGravimetricAlalysis_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddl = (DropDownList)sender;
-            ////txtModel;
-            ////txtBalanceResolution;
-            ////txtLastCalibration;
+
+            tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddl.SelectedValue)).FirstOrDefault();
+            if (selectValue != null)
+            {
+                txtModel.Text = String.IsNullOrEmpty(selectValue.D) ? String.Empty : selectValue.D;
+                txtBalanceResolution.Text = String.IsNullOrEmpty(selectValue.E) ? String.Empty : selectValue.E;
+                txtLastCalibration.Text = String.IsNullOrEmpty(selectValue.F) ? String.Empty : selectValue.F;
+            }
+        }
+
+        protected void txtFeretLmsp_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            txtEop_Lmsp.Text = tb.Text;
+        }
+
+        protected void txtFeretLnms_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            txtEop_Lnmsp.Text = tb.Text;
+        }
+
+        protected void txtFeretFb_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            lbLf.Text = tb.Text;
+        }
+
+        protected void txtTotalQuantity_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            txtTotalextractionVolume.Text = tb.Text;
+        }
+
+        protected void txtAutomated_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            lbX.Text = tb.Text;
+            lbY.Text = tb.Text;
+
+        }
+
+        protected void ddlManufacturer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            membraneType();
+
+        }
+
+        protected void ddlMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            membraneType();
+
+        }
+
+        protected void txtPoreSize_TextChanged(object sender, EventArgs e)
+        {
+            membraneType();
+
+        }
+
+        protected void txtDiameter_TextChanged(object sender, EventArgs e)
+        {
+            membraneType();
+        }
+
+
+        private void membraneType()
+        {
+            lbMembraneType.Text = String.Format("{0} / {1} um, {2} mm Dia.", ddlMaterial.SelectedItem.Text, txtPoreSize.Text, txtDiameter.Text);
+
         }
     }
 }
