@@ -310,7 +310,7 @@ namespace ALS.ALSI.Web.view.template
                 cbAutomated.Checked = Convert.ToBoolean(this.pa.isautomated);
                 txtAutomated.Text = this.pa.automated;
                 txtTotalextractionVolume.Text = this.pa.totalextractionvolume;
-                lbExtractionMethod.Text= this.pa.lbextractionmethod;
+                lbExtractionMethod.Text = this.pa.lbextractionmethod;
                 txtNumberOfComponents.Text = this.pa.numberofcomponents;
                 lbExtractionTime.Text = this.pa.lbextractiontime;
                 lbMembraneType.Text = this.pa.measureddiameter;
@@ -403,7 +403,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Internal rinsing")).FirstOrDefault();
                 }
-                if (cbWashAgitation.Checked)
+                if (cbAgitation.Checked)
                 {
                     selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Agitation")).FirstOrDefault();
 
@@ -1217,9 +1217,10 @@ namespace ALS.ALSI.Web.view.template
                         }
                         _postedFile.SaveAs(source_file);
 
-                        #region "Microscopic Analysis"
+
                         if ((Path.GetExtension(_postedFile.FileName).Equals(".csv")))
                         {
+                            #region "Microscopic Analysis"
                             if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("ClassTable_FromNumber_FeretMaximum"))
                             {
                                 lbPermembrane.Text = String.Empty;
@@ -1312,17 +1313,23 @@ namespace ALS.ALSI.Web.view.template
 
                                 lbPermembrane.Text = lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1);
                             }
+                            #endregion
+                            #region "LargestRegionsTable_fibrous"
+                            if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("LargestRegionsTable_fibrous"))
+                            {
+
+                            }
+                            //txtFeretLmsp.Text;
+                            //txtFeretLnms.Text;
+                            //txtFeretFb.Text;
+                            #endregion
                         }
                         else
                         {
                             //errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.csv"));
                         }
-                        #endregion
-                        #region "LargestRegionsTable_fibrous"
-                        //txtFeretLmsp.Text;
-                        //txtFeretLnms.Text;
-                        //txtFeretFb.Text;
-                        #endregion
+
+
                     }
                 }
                 catch (Exception ex)
