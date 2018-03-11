@@ -2038,12 +2038,13 @@
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate_swap.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\ic_seagate - Copy.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy %282%29.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy %283%29.rdlc" />
+    <EmbeddedResource Include="ReportObject\pa - Copy %284%29.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_04.rdlc" />
-    <EmbeddedResource Include="ReportObject\pa.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\corrosion_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\lpc_wd.rdlc" />
@@ -2054,7 +2055,7 @@
     <EmbeddedResource Include="ReportObject\ftir_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_seagate.rdlc" />
-    <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\pa.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\reportPAHeader.rdlc" />

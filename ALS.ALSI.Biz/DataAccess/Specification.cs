@@ -163,10 +163,10 @@ namespace ALS.ALSI.Biz.DataAccess
             //{
             //    colNames.Add(specCol.B);
             //}
-            if (!String.IsNullOrEmpty(specCol.C))
-            {
-                colNames.Add(specCol.C);
-            }
+            //if (!String.IsNullOrEmpty(specCol.C))
+            //{
+            //    colNames.Add(specCol.C);
+            //}
             if (!String.IsNullOrEmpty(specCol.D))
             {
                 colNames.Add(specCol.D);

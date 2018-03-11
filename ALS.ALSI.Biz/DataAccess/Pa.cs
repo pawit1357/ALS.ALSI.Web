@@ -12,8 +12,31 @@ namespace ALS.ALSI.Biz.DataAccess
 
         #region "Property"
         public CommandNameEnum RowState { get; set; }
+
+        public String iscontainer_text { get; set; }
+        public String container_id_text { get; set; }
+        public String isfluid1_text { get; set; }
+        public String fluid1_id_text { get; set; }
+        public String isfluid2_text { get; set; }
+        public String fluid2_id_text { get; set; }
+        public String fluid3_id_text { get; set; }
+        public String isfluid3_text { get; set; }
+        public String istshb01_text { get; set; }
+        public String istshb02_text { get; set; }
+        public String ispots01_text { get; set; }
+        public String isdissolving_text { get; set; }
+        public String ispressurerinsing_text { get; set; }
+        public String isinternalrinsing_text { get; set; }
+        public String isagitation_text { get; set; }
+        public String iswashquantity_text { get; set; }
+        public String isrewashingquantity_text { get; set; }
+        public String iswashpressurerinsing_text { get; set; }
+        public String iswashinternalrinsing_text { get; set; }
+        public String isfiltrationmethod_text { get; set; }
+
+
         #endregion
-       
+
         //public byte[] img1 { get; set; }
         //public byte[] img2 { get; set; }
         //public byte[] img3 { get; set; }
