@@ -21,6 +21,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -31,6 +32,16 @@ namespace ALS.ALSI.Web.view.template
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_DHS));
+        private const String PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION = "Description of process and extraction:";
+        private const String PA_DISSOLVING = "Dissolving";
+        private const String PA_AGITATION = "Agitation";
+        private const String PA_WASHING = "Washing";
+        private const String PA_PRESURE_RINSING = "Pressure rinsing";
+        private const String PA_INTERNAL_RINSING = "Internal rinsing";
+        private const String PA_REFLECTIVE = "reflective";
+        private const String PA_NON_REFLECTIVE = "non-reflective";
+        private const String PA_FIBROUS = "fibrous";
+
         public users_login userLogin
         {
             get { return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null); }
@@ -110,9 +121,6 @@ namespace ALS.ALSI.Web.view.template
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
-
-
-
             #region "SAMPLE"
             if (this.jobSample != null)
             {
@@ -124,18 +132,20 @@ namespace ALS.ALSI.Web.view.template
 
                 pRemark.Visible = false;
                 pDisapprove.Visible = false;
-                //pCoverPage.Visible = true;
-                //pSpecification.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC);
                 pStatus.Visible = (status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.LABMANAGER_CHECKING);
                 pUploadfile.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD);
                 pDownload.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
                 btnSubmit.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
-                //btnPage01.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
-                //btnPage02.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
 
                 pPage01.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
                 pPage02.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
                 pPage03.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+                pPage04.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+                pPage05.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+                pPage06.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+                pPage07.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+
+
                 pEop.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
 
                 if (status == StatusEnum.LABMANAGER_CHECKING)
@@ -151,19 +161,10 @@ namespace ALS.ALSI.Web.view.template
                     pRemark.Visible = false;
                 }
 
-                #region ":: STAMP ANALYZED DATE ::"
-                //if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                //{
-                //    if (this.jobSample.date_chemist_alalyze == null)
-                //    {
-                //        txtDateAnalyzed.Text = DateTime.Now.ToString("dd MMMM yyy");
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
 
-                //        this.jobSample.date_chemist_alalyze = DateTime.Now;
-                //        this.jobSample.Update();
-                //    }
-                //    txtDateTestComplete.Text = this.jobSample.due_date_lab.Value.ToString("dd MMMM yyy");
-                //}
-                #endregion
+
 
                 //txtAlsReferenceNo.Text = String.Format("ATT/ELN/{0}/{1}", DateTime.Now.Year.ToString().Substring(2, 2), this.jobSample.job_number);
                 //txtPartDescription.Text = this.jobSample.description;
@@ -219,14 +220,13 @@ namespace ALS.ALSI.Web.view.template
 
             #endregion
 
-
-
             this.pa = new template_pa();
             this.pa = pa.SelectByID(this.SampleID);
             if (this.pa != null)
             {
                 ddlResult.SelectedValue = this.pa.result.ToString();
                 txtPIRTDC.Text = this.pa.pirtd;
+
                 #region "PAGE01"
                 txtDoec.Text = this.pa.doec;
                 txtDos.Text = this.pa.dos;
@@ -326,7 +326,6 @@ namespace ALS.ALSI.Web.view.template
                 txtLf.Text = this.pa.feretfb;
                 #endregion
 
-
                 img1.ImageUrl = this.pa.img01;
                 img2.ImageUrl = this.pa.img02;
                 img3.ImageUrl = this.pa.img03;
@@ -343,69 +342,22 @@ namespace ALS.ALSI.Web.view.template
                 txtLf_Y.Text = this.pa.lf_y;
 
                 #region "COLUMN HEADER"
-
                 List<String> cols = new List<string>();
                 tb_m_specification selectValue = new tb_m_specification();
 
-                #region "gvEop"
-                //List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Evaluation of Particle:") && x.B.Equals(ddlSpecification.SelectedItem.Text)).ToList();
-                //if (listOfSpec.Count > 1)
-                //{
-                //    cols = tb_m_specification.findColumnCount(listOfSpec[0]);
-                //    for (int i = 0; i < cols.Count; i++)
-                //    {
-                //        gvEop.Columns[i].HeaderText = cols[i];
-                //        gvEop.Columns[i].Visible = true;
-                //    }
-                //    for (int i = cols.Count; i < 13; i++)
-                //    {
-                //        gvEop.Columns[i].Visible = false;
-                //    }
-                //    gvEop.Visible = true;
-                //}
-                //else
-                //{
-                //    for (int i = 0; i < 15; i++)
-                //    {
-                //        gvEop.Columns[i].Visible = false;
-                //    }
-                //    gvEop.Visible = false;
-                //}
-                #endregion
-                #region "gvMicroscopicAnalysis"
-                //listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Micropic Data:") && x.B.Equals(ddlSpecification.SelectedItem.Text)).ToList();
-                //if (listOfSpec.Count > 1)
-                //{
-                //    cols = tb_m_specification.findColumnCount(listOfSpec[1]);
-                //    for (int i = 0; i < cols.Count; i++)
-                //    {
-                //        gvMicroscopicAnalysis.Columns[i].HeaderText = cols[i];
-                //        gvMicroscopicAnalysis.Columns[i].Visible = true;
-                //    }
-                //    gvMicroscopicAnalysis.Visible = true;
-                //}
-                //else
-                //{
-                //    for (int i = 0; i < 15; i++)
-                //    {
-                //        gvMicroscopicAnalysis.Columns[i].Visible = false;
-                //    }
-                //    gvMicroscopicAnalysis.Visible = false;
-                //}
-                #endregion
                 #region "gvDissolving"
 
                 if (cbPressureRinsing.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Pressure rinsing")).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                 }
                 if (cbInternalRinsing.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Internal rinsing")).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
                 }
                 if (cbAgitation.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Agitation")).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_AGITATION)).FirstOrDefault();
 
                 }
 
@@ -420,15 +372,15 @@ namespace ALS.ALSI.Web.view.template
                 #region "gvWashing"
                 if (cbWashPressureRinsing.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Washing") && x.C.Equals("Pressure rinsing")).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                 }
                 if (cbWashInternalRinsing.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Washing") && x.C.Equals("Internal rinsing")).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
                 }
                 if (cbWashAgitation.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Washing") && x.C.Equals("Agitation")).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_AGITATION)).FirstOrDefault();
                 }
 
                 cols = tb_m_specification.findColumnCount(selectValue);
@@ -439,9 +391,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 #endregion
 
-
                 #endregion
-
                 membraneType();
 
             }
@@ -514,8 +464,8 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
 
                 //default:Agitation
-                lbExtractionMethod.Text = " Agitation";
-                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Agitation")).FirstOrDefault();
+                lbExtractionMethod.Text = PA_AGITATION;
+                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_AGITATION)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
@@ -543,7 +493,7 @@ namespace ALS.ALSI.Web.view.template
 
                 }
 
-                selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Washing") && x.C.Equals("Pressure rinsing")).FirstOrDefault();
+                selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
@@ -606,16 +556,16 @@ namespace ALS.ALSI.Web.view.template
                 gvEop.DataSource = listPaDetail;
                 gvEop.DataBind();
             }
-            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
-            if (null != listPaDetail && listPaDetail.Count > 0)
-            {
-                //gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
-                //gvGravimetry.DataBind();
-            }
-            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
             listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
+                foreach (var item in listPaDetail)
+                {
+
+                    lbPermembrane.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_i).ToString("N0"));
+                }
+                lbPermembrane.Text = String.Format("N({0})", lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1));
+
                 gvMicroscopicAnalysis.Visible = true;
                 gvMicroscopicAnalysis.DataSource = listPaDetail;
                 gvMicroscopicAnalysis.DataBind();
@@ -674,9 +624,6 @@ namespace ALS.ALSI.Web.view.template
                     //this.jobSample.lot_no = txtLotNo.Text;
 
                     #region "PAGE01"
-                    //this.pa.lms = txtLms.Text;
-                    //this.pa.lnmp = txtLnmp.Text;
-                    //this.pa.lf = txtLf.Text;
                     this.pa.doec = txtDoec.Text;
                     this.pa.dos = txtDos.Text;
                     this.pa.customerlimit = txtCustomerLimit.Text;
@@ -718,7 +665,6 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.ispots01 = (cbPots01.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
                     this.pa.pots01 = txtPots01.Text;
                     #endregion
-
                     #region "PAGE03"
                     this.pa.isdissolving = (cbDissolving.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
                     this.pa.dissolving = txtDissolving.Text;
@@ -798,12 +744,13 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step2owner = userLogin.id;
 
                     //#region ":: STAMP COMPLETE DATE"
+                    #region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
+                    this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                    #endregion
                     this.pa.sample_id = this.SampleID;
-                    //this.pa.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                     this.pa.result = Convert.ToInt32(ddlResult.SelectedValue);
                     this.pa.pirtd = txtPIRTDC.Text;
-                    //this.jobSample.lot_no = txtLotNo.Text;
 
                     #region "PAGE01"
                     this.pa.lms = txtLms.Text;
@@ -1275,53 +1222,71 @@ namespace ALS.ALSI.Web.view.template
                                         pad.col_k = (Convert.ToInt32(pad.col_g) / numberOfComponents).ToString("N1");
                                         pad.col_l = (Convert.ToInt32(pad.col_h) / numberOfComponents).ToString("N1");
 
+                                        lbPermembrane.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_i).ToString("N0"));
                                         Console.WriteLine();
                                     }
                                 }
-                                //        break;
-                                //    case "PA_02_05x":
-                                //        List<template_pa_detail> pads = paDetail.Where(x => x.col_a != null && x.col_a.Equals("Micropic Data:")).ToList();
-                                //        if (pads != null && pads.Count > 0)
-                                //        {
-                                //            pads[0].col_d = table.Rows[2][1].ToString().Replace("\"", "");
-                                //            pads[0].col_e = table.Rows[2][2].ToString().Replace("\"", "");
-                                //            pads[0].col_f = table.Rows[2][3].ToString().Replace("\"", "");
-                                //            pads[0].col_g = table.Rows[2][4].ToString().Replace("\"", "");
-                                //            pads[0].col_h = table.Rows[2][5].ToString().Replace("\"", "");
-                                //            pads[0].col_i = table.Rows[2][6].ToString().Replace("\"", "");
-                                //            pads[0].col_j = table.Rows[2][7].ToString().Replace("\"", "");
-                                //            pads[0].col_k = table.Rows[2][8].ToString().Replace("\"", "");
-                                //            pads[0].col_l = table.Rows[2][9].ToString().Replace("\"", "");
-                                //            pads[0].col_m = table.Rows[2][10].ToString().Replace("\"", "");
 
-                                //            pads[1].col_d = table.Rows[4][1].ToString().Replace("\"", "");
-                                //            pads[1].col_e = table.Rows[4][2].ToString().Replace("\"", "");
-                                //            pads[1].col_f = table.Rows[4][3].ToString().Replace("\"", "");
-                                //            pads[1].col_g = table.Rows[4][4].ToString().Replace("\"", "");
-                                //            pads[1].col_h = table.Rows[4][5].ToString().Replace("\"", "");
-                                //            pads[1].col_i = table.Rows[4][6].ToString().Replace("\"", "");
-                                //            pads[1].col_j = table.Rows[4][7].ToString().Replace("\"", "");
-                                //            pads[1].col_k = table.Rows[4][8].ToString().Replace("\"", "");
-                                //            pads[1].col_l = table.Rows[4][9].ToString().Replace("\"", "");
-                                //            pads[1].col_m = table.Rows[4][10].ToString().Replace("\"", "");
-                                //            Console.WriteLine();
-                                //        }
-                                //        break;
-                                //}
-
-
-
-                                lbPermembrane.Text = lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1);
+                                lbPermembrane.Text = String.Format("N({0})", lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1));
                             }
                             #endregion
                             #region "LargestRegionsTable_fibrous"
-                            if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("LargestRegionsTable_fibrous"))
+                            if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("LargestRegionsTable"))
                             {
+                                String[] filterList = { PA_REFLECTIVE, PA_NON_REFLECTIVE, PA_FIBROUS };
+                                //String _reflective = PA_REFLECTIVE;
+                                //String _nonReflective = "non - reflective";
+                                //String _fibrous = PA_FIBROUS;
+
+                                Double largestMetallicShine = 0;
+                                Double largestNonMetallicShine = 0;
+                                Double longestFiber = 0;
+
+                                using (var reader = new StreamReader(source_file))
+                                {
+                                    int row = 0;
+                                    while (!reader.EndOfStream)
+                                    {
+                                        var line = reader.ReadLine();
+                                        var values = line.Split(',');
+                                        if (row > 0)
+                                        {
+                                            Double value = (!CustomUtils.isNumber(values[1])) ? Convert.ToDouble(0) : Convert.ToDouble(values[1]);
+                                            String filter = Regex.Replace(values[4], @"(\s+|@|&|'|\(|\)|<|>|#|\"")", "").Replace(" ", String.Empty);
+                                            if (null != filter && filterList.Contains(filter))
+                                            {
+                                                switch (filter.Trim())
+                                                {
+                                                    case PA_REFLECTIVE:
+                                                        if (value > largestMetallicShine)
+                                                        {
+                                                            largestMetallicShine = value;
+                                                        }
+                                                        break;
+                                                    case PA_NON_REFLECTIVE:
+                                                        if (value > largestNonMetallicShine)
+                                                        {
+                                                            largestNonMetallicShine = value;
+                                                        }
+                                                        break;
+                                                    case PA_FIBROUS:
+                                                        if (value > longestFiber)
+                                                        {
+                                                            longestFiber = value;
+                                                        }
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                        row++;
+                                    }
+                                }
+
+                                txtFeretLmsp.Text = largestMetallicShine.ToString("N2");
+                                txtFeretLnms.Text = largestNonMetallicShine.ToString("N2");
+                                txtFeretFb.Text = longestFiber.ToString("N2");
 
                             }
-                            //txtFeretLmsp.Text;
-                            //txtFeretLnms.Text;
-                            //txtFeretFb.Text;
                             #endregion
                         }
                         else
@@ -1640,109 +1605,6 @@ namespace ALS.ALSI.Web.view.template
             gvEop.DataBind();
         }
         #endregion
-        #region "Gravimetry"
-        protected void gvGravimetry_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            try
-            {
-                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
-                {
-                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.GRAVIMETRY) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
-                    if (_cov != null)
-                    {
-                        RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
-                        switch (cmd)
-                        {
-                            case RowTypeEnum.Hide:
-                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Hide);
-                                break;
-                            case RowTypeEnum.Normal:
-                                _cov.row_status = Convert.ToInt32(RowTypeEnum.Normal);
-                                break;
-                        }
-
-                        //gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.GRAVIMETRY)).ToList();
-                        //gvGravimetry.DataBind();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-            }
-        }
-
-        protected void gvGravimetry_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-
-
-                //RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvGravimetry.DataKeys[e.Row.RowIndex].Values[1]);
-                //LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-                //LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-
-                //if (_btnHide != null && _btnUndo != null)
-                //{
-                //    switch (cmd)
-                //    {
-                //        case RowTypeEnum.Hide:
-                //            _btnHide.Visible = false;
-                //            _btnUndo.Visible = true;
-                //            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-                //            break;
-                //        default:
-                //            _btnHide.Visible = true;
-                //            _btnUndo.Visible = false;
-                //            e.Row.ForeColor = System.Drawing.Color.Black;
-                //            break;
-                //    }
-                //}
-
-            }
-        }
-
-        protected void gvGravimetry_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-
-        }
-
-        protected void gvGravimetry_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            //gvGravimetry.EditIndex = e.NewEditIndex;
-            //gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
-            //gvGravimetry.DataBind();
-        }
-
-        protected void gvGravimetry_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            //int _id = Convert.ToInt32(gvGravimetry.DataKeys[e.RowIndex].Values[0].ToString());
-            //TextBox txtA = (TextBox)gvGravimetry.Rows[e.RowIndex].FindControl("txtA");
-            //TextBox txtB = (TextBox)gvGravimetry.Rows[e.RowIndex].FindControl("txtB");
-            //TextBox txtC = (TextBox)gvGravimetry.Rows[e.RowIndex].FindControl("txtC");
-
-
-            //template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.GRAVIMETRY) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
-            //if (_cov != null)
-            //{
-            //    _cov.col_a = txtA.Text;
-            //    _cov.col_b = txtB.Text;
-            //    _cov.col_c = txtC.Text;
-            //}
-            //gvGravimetry.EditIndex = -1;
-            //gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
-            //gvGravimetry.DataBind();
-        }
-
-        protected void gvGravimetry_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            //gvGravimetry.EditIndex = -1;
-            //gvGravimetry.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.GRAVIMETRY)).ToList();
-            //gvGravimetry.DataBind();
-        }
-        #endregion
-
         #region "MicroscopicAnalysis"
         protected void gvMicroscopicAnalysis_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -1972,10 +1834,7 @@ namespace ALS.ALSI.Web.view.template
             gvMicroscopicAnalysis.DataBind();
         }
         #endregion
-
-
-
-        #region "Dissolving"
+        #region PA_DISSOLVING
         protected void gvDissolving_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
@@ -2083,7 +1942,7 @@ namespace ALS.ALSI.Web.view.template
         }
 
         #endregion
-        #region "Washing"
+        #region PA_WASHING
         protected void gvWashing_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
@@ -2269,118 +2128,120 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", " "));
-            reportParameters.Add(new ReportParameter("partNo", this.jobSample.part_no));
-            reportParameters.Add(new ReportParameter("partName", this.jobSample.part_name));
-            reportParameters.Add(new ReportParameter("lotNo", this.jobSample.lot_no));
-            //PAGE01
-            reportParameters.Add(new ReportParameter("p1_txtLms", txtLms.Text));
-            reportParameters.Add(new ReportParameter("p1_txtLnmp", txtLnmp.Text));
-            reportParameters.Add(new ReportParameter("p1_txtLf", txtLf.Text));
-            //PAGE02
-            //reportParameters.Add(new ReportParameter("p2_specificationNo", ddlSpecification.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("p2_txtPIRTDC", txtPIRTDC.Text));
-            reportParameters.Add(new ReportParameter("p2_txtDoec", txtDoec.Text));
-            reportParameters.Add(new ReportParameter("p2_txtDos", txtDos.Text));
-            reportParameters.Add(new ReportParameter("p2_txtCustomerLimit", txtCustomerLimit.Text));
-            reportParameters.Add(new ReportParameter("p2_txtGravimetry", txtGravimetry.Text));
-            reportParameters.Add(new ReportParameter("p2_txtLmsp", txtLmsp.Text));
-            reportParameters.Add(new ReportParameter("p2_txtExtractionValue", txtExtractionValue.Text));
-            reportParameters.Add(new ReportParameter("p2_txtLnmsp", txtLnmsp.Text));
-            reportParameters.Add(new ReportParameter("p2_txtEop_G", txtEop_G.Text));
-            reportParameters.Add(new ReportParameter("p5_txtFeretLmsp", txtFeretLmsp.Text));
-            reportParameters.Add(new ReportParameter("p2_txtEop_Lmsp", txtEop_Lmsp.Text));
-            reportParameters.Add(new ReportParameter("p2_txtEop_Lnmsp", txtEop_Lnmsp.Text));
-            reportParameters.Add(new ReportParameter("p2_txtEop_pt", txtEop_pt.Text));
-            reportParameters.Add(new ReportParameter("p2_txtEop_size", txtEop_size.Text));
-            reportParameters.Add(new ReportParameter("p2_txtEop_value", txtEop_value.Text));
-            reportParameters.Add(new ReportParameter("p2_txtEopRemark", txtEopRemark.Text));
-            ///
-            reportParameters.Add(new ReportParameter("p3_cbCsa", CustomUtils.getCheckBoxListValue(cbCsa)));
-            reportParameters.Add(new ReportParameter("p3_txtWspc", txtWspc.Text));
-            reportParameters.Add(new ReportParameter("p3_txtWvpc", txtWvpc.Text));
-            reportParameters.Add(new ReportParameter("p3_txtTls", txtTls.Text));
-            reportParameters.Add(new ReportParameter("p3_txtPreTreatmentConditioning", txtPreTreatmentConditioning.Text));
-            reportParameters.Add(new ReportParameter("p3_cbPreTreatmentConditioning", cbPreTreatmentConditioning.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p3_cbPackingToBeTested", CustomUtils.getCheckBoxListValue(cbPackingToBeTested)));
+            reportParameters.Add(new ReportParameter("partNo", String.IsNullOrEmpty(this.jobSample.part_no) ? " " : this.jobSample.part_no));
+            reportParameters.Add(new ReportParameter("partName", String.IsNullOrEmpty(this.jobSample.part_name) ? " " : this.jobSample.part_name));
+            reportParameters.Add(new ReportParameter("lotNo", String.IsNullOrEmpty(this.jobSample.lot_no) ? " " : this.jobSample.lot_no));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", " "));
+
+            
+            ////PAGE01
+            //reportParameters.Add(new ReportParameter("p1_txtLms", String.IsNullOrEmpty(txtLms.Text) ? " " : txtLms.Text));
+            //reportParameters.Add(new ReportParameter("p1_txtLnmp", String.IsNullOrEmpty(txtLnmp.Text) ? " " : txtLnmp.Text));
+            //reportParameters.Add(new ReportParameter("p1_txtLf", String.IsNullOrEmpty(txtLf.Text) ? " " : txtLf.Text));
+            ////PAGE02
+            //reportParameters.Add(new ReportParameter("p2_specificationNo", "-"));
+            //reportParameters.Add(new ReportParameter("p2_txtPIRTDC", String.IsNullOrEmpty(txtPIRTDC.Text) ? " " : txtPIRTDC.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtDoec", String.IsNullOrEmpty(txtDoec.Text) ? " " : txtDoec.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtDos", String.IsNullOrEmpty(txtDos.Text) ? " " : txtDos.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtCustomerLimit", String.IsNullOrEmpty(txtCustomerLimit.Text) ? " " : txtCustomerLimit.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtGravimetry", String.IsNullOrEmpty(txtGravimetry.Text) ? " " : txtGravimetry.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtLmsp", String.IsNullOrEmpty(txtLmsp.Text) ? " " : txtLmsp.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtExtractionValue", String.IsNullOrEmpty(txtExtractionValue.Text) ? " " : txtExtractionValue.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtLnmsp", String.IsNullOrEmpty(txtLnmsp.Text) ? " " : txtLnmsp.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtEop_G", String.IsNullOrEmpty(txtEop_G.Text) ? " " : txtEop_G.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtEop_Lmsp", String.IsNullOrEmpty(txtEop_Lmsp.Text) ? " " : txtEop_Lmsp.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtEop_Lnmsp", String.IsNullOrEmpty(txtEop_Lnmsp.Text) ? " " : txtEop_Lnmsp.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtEop_pt", String.IsNullOrEmpty(txtEop_pt.Text) ? " " : txtEop_pt.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtEop_size", String.IsNullOrEmpty(txtEop_size.Text) ? " " : txtEop_size.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtEop_value", String.IsNullOrEmpty(txtEop_value.Text) ? " " : txtEop_value.Text));
+            //reportParameters.Add(new ReportParameter("p2_txtEopRemark", String.IsNullOrEmpty(txtEopRemark.Text) ? " " : txtEopRemark.Text));
+            /////
+            //reportParameters.Add(new ReportParameter("p3_cbCsa", CustomUtils.getCheckBoxListValue(cbCsa)));
+            //reportParameters.Add(new ReportParameter("p3_txtWspc", String.IsNullOrEmpty(txtWspc.Text) ? " " : txtWspc.Text));
+            //reportParameters.Add(new ReportParameter("p3_txtWvpc", String.IsNullOrEmpty(txtWvpc.Text) ? " " : txtWvpc.Text));
+            //reportParameters.Add(new ReportParameter("p3_txtTls", String.IsNullOrEmpty(txtTls.Text) ? " " : txtTls.Text));
+            //reportParameters.Add(new ReportParameter("p3_txtPreTreatmentConditioning", String.IsNullOrEmpty(txtPreTreatmentConditioning.Text) ? " " : txtPreTreatmentConditioning.Text));
+            //reportParameters.Add(new ReportParameter("p3_cbPreTreatmentConditioning", cbPreTreatmentConditioning.Checked.ToString()));
             //reportParameters.Add(new ReportParameter("p3_cbPackingToBeTested", CustomUtils.getCheckBoxListValue(cbPackingToBeTested)));
-            reportParameters.Add(new ReportParameter("p3_cbContainer", cbContainer.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p3_cbFluid1", cbFluid1.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p3_cbFluid2", cbFluid2.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p3_cbFluid3", cbFluid3.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p3_ddlContainer", ddlContainer.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("p3_ddlFluid1", ddlFluid1.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("p3_ddlFluid2", ddlFluid2.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("p3_ddlFluid3", ddlFluid3.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("p3_ddlFluid3", ddlFluid3.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("p3_txtTradeName", txtTradeName.Text));
-            reportParameters.Add(new ReportParameter("p3_txtManufacturer", txtManufacturer.Text));
-            reportParameters.Add(new ReportParameter("p3_txtTotalQuantity", txtTotalQuantity.Text));
-            reportParameters.Add(new ReportParameter("p3_cbTshb01", cbTshb01.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p3_cbTshb02", cbTshb02.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p3_cbTshb03", cbTshb03.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p3_cbPots01", cbPots01.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p3_txtTshb03", txtTshb03.Text));
-            reportParameters.Add(new ReportParameter("p4_cbDissolving", cbDissolving.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_txtDissolving", txtDissolving.Text));
-            reportParameters.Add(new ReportParameter("p4_txtDissolvingTime", txtDissolvingTime.Text));
-            reportParameters.Add(new ReportParameter("p4_cbPressureRinsing", cbPressureRinsing.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_cbInternalRinsing", cbInternalRinsing.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_cbAgitation", cbAgitation.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p3_cbContainer", cbContainer.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p3_cbFluid1", cbFluid1.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p3_cbFluid2", cbFluid2.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p3_cbFluid3", cbFluid3.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p3_ddlContainer", ddlContainer.SelectedItem.Text));
+            //reportParameters.Add(new ReportParameter("p3_ddlFluid1", ddlFluid1.SelectedItem.Text));
+            //reportParameters.Add(new ReportParameter("p3_ddlFluid2", ddlFluid2.SelectedItem.Text));
+            //reportParameters.Add(new ReportParameter("p3_ddlFluid3", ddlFluid3.SelectedItem.Text));
+            //reportParameters.Add(new ReportParameter("p3_ddlFluid3", ddlFluid3.SelectedItem.Text));
+            //reportParameters.Add(new ReportParameter("p3_txtTradeName", String.IsNullOrEmpty(txtTradeName.Text) ? " " : txtTradeName.Text));
+            //reportParameters.Add(new ReportParameter("p3_txtManufacturer", String.IsNullOrEmpty(txtManufacturer.Text) ? " " : txtManufacturer.Text));
+            //reportParameters.Add(new ReportParameter("p3_txtTotalQuantity", String.IsNullOrEmpty(txtTotalQuantity.Text) ? " " : txtTotalQuantity.Text));
+            //reportParameters.Add(new ReportParameter("p3_cbTshb01", cbTshb01.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p3_cbTshb02", cbTshb02.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p3_cbTshb03", cbTshb03.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p3_cbPots01", cbPots01.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p3_txtTshb03", String.IsNullOrEmpty(txtTshb03.Text) ? " " : txtTshb03.Text));
+            //reportParameters.Add(new ReportParameter("p4_cbDissolving", cbDissolving.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_txtDissolving", String.IsNullOrEmpty(txtDissolving.Text) ? " " : txtDissolving.Text));
+            //reportParameters.Add(new ReportParameter("p4_txtDissolvingTime", String.IsNullOrEmpty(txtDissolvingTime.Text) ? " " : txtDissolvingTime.Text));
+            //reportParameters.Add(new ReportParameter("p4_cbPressureRinsing", cbPressureRinsing.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbInternalRinsing", cbInternalRinsing.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbAgitation", cbAgitation.Checked.ToString()));
 
-            reportParameters.Add(new ReportParameter("p4_cbWashQuantity", cbWashQuantity.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_txtWashQuantity", txtWashQuantity.Text));
-            reportParameters.Add(new ReportParameter("p4_cbRewashingQuantity", cbRewashingQuantity.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_txtRewashingQuantity", txtRewashingQuantity.Text));
-            reportParameters.Add(new ReportParameter("p4_cbWashPressureRinsing", cbWashPressureRinsing.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_cbWashInternalRinsing", cbWashInternalRinsing.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_cbWashAgitation", cbWashAgitation.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbWashQuantity", cbWashQuantity.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_txtWashQuantity", String.IsNullOrEmpty(txtWashQuantity.Text) ? " " : txtWashQuantity.Text));
+            //reportParameters.Add(new ReportParameter("p4_cbRewashingQuantity", cbRewashingQuantity.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_txtRewashingQuantity", String.IsNullOrEmpty(txtRewashingQuantity.Text) ? " " : txtRewashingQuantity.Text));
+            //reportParameters.Add(new ReportParameter("p4_cbWashPressureRinsing", cbWashPressureRinsing.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbWashInternalRinsing", cbWashInternalRinsing.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbWashAgitation", cbWashAgitation.Checked.ToString()));
 
-            reportParameters.Add(new ReportParameter("p4_cbFiltrationMethod", CustomUtils.getCheckBoxListValue(cbFiltrationMethod)));
+            //reportParameters.Add(new ReportParameter("p4_cbFiltrationMethod", CustomUtils.getCheckBoxListValue(cbFiltrationMethod)));
 
-            reportParameters.Add(new ReportParameter("p4_ddlManufacturer", ddlManufacturer.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("p4_ddlMaterial", ddlMaterial.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("p4_txtPoreSize", txtPoreSize.Text));
-            reportParameters.Add(new ReportParameter("p4_txtDiameter", txtDiameter.Text));
+            //reportParameters.Add(new ReportParameter("p4_ddlManufacturer", ddlManufacturer.SelectedItem.Text));
+            //reportParameters.Add(new ReportParameter("p4_ddlMaterial", ddlMaterial.SelectedItem.Text));
+            //reportParameters.Add(new ReportParameter("p4_txtPoreSize", String.IsNullOrEmpty(txtPoreSize.Text) ? " " : txtPoreSize.Text));
+            //reportParameters.Add(new ReportParameter("p4_txtDiameter", String.IsNullOrEmpty(txtDiameter.Text) ? " " : txtDiameter.Text));
 
-            reportParameters.Add(new ReportParameter("p4_cbOven", cbOven.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_cbDesiccator", cbDesiccator.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_cbAmbientAir", cbAmbientAir.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_cbEasyDry", cbEasyDry.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_txtDryTime", txtDryTime.Text));
-            reportParameters.Add(new ReportParameter("p4_txtTemperature", txtTemperature.Text));
+            //reportParameters.Add(new ReportParameter("p4_cbOven", cbOven.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbDesiccator", cbDesiccator.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbAmbientAir", cbAmbientAir.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbEasyDry", cbEasyDry.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_txtDryTime", String.IsNullOrEmpty(txtDryTime.Text) ? " " : txtDryTime.Text));
+            //reportParameters.Add(new ReportParameter("p4_txtTemperature", String.IsNullOrEmpty(txtTemperature.Text) ? " " : txtTemperature.Text));
 
-            reportParameters.Add(new ReportParameter("p4_ddlGravimetricAlalysis", ddlGravimetricAlalysis.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("p4_txtModel", txtModel.Text));
-            reportParameters.Add(new ReportParameter("p4_txtBalanceResolution", txtBalanceResolution.Text));
-            reportParameters.Add(new ReportParameter("p4_txtLastCalibration", txtLastCalibration.Text));
+            //reportParameters.Add(new ReportParameter("p4_ddlGravimetricAlalysis", ddlGravimetricAlalysis.SelectedItem.Text));
+            //reportParameters.Add(new ReportParameter("p4_txtModel", String.IsNullOrEmpty(txtModel.Text) ? " " : txtModel.Text));
+            //reportParameters.Add(new ReportParameter("p4_txtBalanceResolution", String.IsNullOrEmpty(txtBalanceResolution.Text) ? " " : txtBalanceResolution.Text));
+            //reportParameters.Add(new ReportParameter("p4_txtLastCalibration", String.IsNullOrEmpty(txtLastCalibration.Text) ? " " : txtLastCalibration.Text));
 
-            reportParameters.Add(new ReportParameter("p4_cbZEISSAxioImager2", cbZEISSAxioImager2.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_cbMeasuringSoftware", cbMeasuringSoftware.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_cbAutomated", cbAutomated.Checked.ToString()));
-            reportParameters.Add(new ReportParameter("p4_txtAutomated", txtAutomated.Text));
-
-
-            reportParameters.Add(new ReportParameter("p5_txtTotalextractionVolume", txtTotalextractionVolume.Text));
-            reportParameters.Add(new ReportParameter("p5_txtNumberOfComponents", txtNumberOfComponents.Text));
-            reportParameters.Add(new ReportParameter("p5_lbExtractionMethod", lbExtractionMethod.Text));
-            reportParameters.Add(new ReportParameter("p5_lbExtractionTime", lbExtractionTime.Text));
-            reportParameters.Add(new ReportParameter("p5_lbMembraneType", lbMembraneType.Text));
-            reportParameters.Add(new ReportParameter("p5_lbX", txtAutomated.Text));
-            reportParameters.Add(new ReportParameter("p5_lbY", txtAutomated.Text));
-            reportParameters.Add(new ReportParameter("p5_txtMeasuredDiameter", txtMeasuredDiameter.Text));
-            reportParameters.Add(new ReportParameter("p5_txtFeretLnms", txtFeretLnms.Text));
-            reportParameters.Add(new ReportParameter("p5_txtFeretFb", txtFeretFb.Text));
+            //reportParameters.Add(new ReportParameter("p4_cbZEISSAxioImager2", cbZEISSAxioImager2.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbMeasuringSoftware", cbMeasuringSoftware.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_cbAutomated", cbAutomated.Checked.ToString()));
+            //reportParameters.Add(new ReportParameter("p4_txtAutomated", String.IsNullOrEmpty(txtAutomated.Text) ? " " : txtAutomated.Text));
 
 
-            reportParameters.Add(new ReportParameter("p5_txtLms_X", txtLms_X.Text));
-            reportParameters.Add(new ReportParameter("p5_txtLms_Y", txtLms_Y.Text));
-            reportParameters.Add(new ReportParameter("p5_txtLnms_X", txtLnms_X.Text));
-            reportParameters.Add(new ReportParameter("p5_txtLnms_Y", txtLnms_Y.Text));
-            reportParameters.Add(new ReportParameter("p5_txtLf_X", txtLf_X.Text));
-            reportParameters.Add(new ReportParameter("p5_txtLf_Y", txtLf_Y.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtTotalextractionVolume", String.IsNullOrEmpty(txtTotalextractionVolume.Text) ? " " : txtTotalextractionVolume.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtNumberOfComponents", String.IsNullOrEmpty(txtNumberOfComponents.Text) ? " " : txtNumberOfComponents.Text));
+            //reportParameters.Add(new ReportParameter("p5_lbExtractionMethod", lbExtractionMethod.Text));
+            //reportParameters.Add(new ReportParameter("p5_lbExtractionTime", "-"));// lbExtractionTime.Text));
+            //reportParameters.Add(new ReportParameter("p5_lbMembraneType", String.IsNullOrEmpty(lbMembraneType.Text) ? " " : lbMembraneType.Text));
+            //reportParameters.Add(new ReportParameter("p5_lbX", String.IsNullOrEmpty(txtAutomated.Text) ? " " : txtAutomated.Text));
+            //reportParameters.Add(new ReportParameter("p5_lbY", String.IsNullOrEmpty(txtAutomated.Text) ? " " : txtAutomated.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtMeasuredDiameter", String.IsNullOrEmpty(txtMeasuredDiameter.Text) ? " " : txtMeasuredDiameter.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtFeretLnms", String.IsNullOrEmpty(txtFeretLnms.Text) ? " " : txtFeretLnms.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtFeretLmsp", String.IsNullOrEmpty(txtFeretLmsp.Text) ? " " : txtFeretLmsp.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtFeretFb", String.IsNullOrEmpty(txtFeretFb.Text) ? " " : txtFeretFb.Text));
+
+
+            //reportParameters.Add(new ReportParameter("p5_txtLms_X", String.IsNullOrEmpty(txtLms_X.Text) ? " " : txtLms_X.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtLms_Y", String.IsNullOrEmpty(txtLms_Y.Text) ? " " : txtLms_Y.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtLnms_X", String.IsNullOrEmpty(txtLnms_X.Text) ? " " : txtLnms_X.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtLnms_Y", String.IsNullOrEmpty(txtLnms_Y.Text) ? " " : txtLnms_Y.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtLf_X", String.IsNullOrEmpty(txtLf_X.Text) ? " " : txtLf_X.Text));
+            //reportParameters.Add(new ReportParameter("p5_txtLf_Y", String.IsNullOrEmpty(txtLf_Y.Text) ? " " : txtLf_Y.Text));
 
 
 
@@ -2411,29 +2272,46 @@ namespace ALS.ALSI.Web.view.template
             List<template_pa_detail> washings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             List<template_pa_detail> mas = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
 
-            foreach (template_pa_detail eop in eops)
-            {
-                eop.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
-                eop.img2 = CustomUtils.GetBytesFromImage("http://localhost/uploads/2017/12/04/ELP-2410-MB/1.jpg");
-                eop.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
-                eop.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
-                eop.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
-            }
+            List<template_pa_detail> images = new List<template_pa_detail>();
+            template_pa_detail img = new template_pa_detail();
+            img.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
+            img.img2 = CustomUtils.GetBytesFromImage(this.pa.img02);
+            img.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
+            img.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
+            img.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
+            images.Add(img);
+            List<template_pa> pas = new List<template_pa>();
+            template_pa pa = new template_pa();
+            pa.iscontainer_text = String.Empty;
+            pa.container_id_text = String.Empty;
+            pa.isfluid1_text = String.Empty;
+            pa.fluid1_id_text = String.Empty;
+            pa.isfluid2_text = String.Empty;
+            pa.fluid2_id_text = String.Empty;
+            pa.fluid3_id_text = String.Empty;
+            pa.isfluid3_text = String.Empty;
+            pa.istshb01_text = String.Empty;
+            pa.istshb02_text = String.Empty;
+            pa.istshb02_text = String.Empty;
+            pa.ispots01_text = String.Empty;
+            pa.isdissolving_text = String.Empty;
+            pa.ispressurerinsing_text = String.Empty;
+            pa.isinternalrinsing_text = String.Empty;
+            pa.isagitation_text = String.Empty;
+            pa.iswashquantity_text = String.Empty;
+            pa.isrewashingquantity_text = String.Empty;
+            pa.iswashpressurerinsing_text = String.Empty;
+            pa.iswashinternalrinsing_text = String.Empty;
+            pa.isfiltrationmethod_text = String.Empty;
+            pas.Add(this.pa);
 
-            //List<template_pa> paImgs = new List<template_pa>();
-            //template_pa _pa = new template_pa();
-            //_pa.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
-            //_pa.img2 = CustomUtils.GetBytesFromImage(this.pa.img02);
-            //_pa.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
-            //_pa.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
-            //_pa.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
-            //paImgs.Add(_pa);
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", eops.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", eops.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dissolvings.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", washings.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", mas.ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", images.ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dissolvings.ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", washings.ToDataTable())); // Add datasource here
+            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", mas.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", pas.ToDataTable())); // Add datasource here
 
             //xxxx
 
@@ -2639,21 +2517,21 @@ namespace ALS.ALSI.Web.view.template
                 switch (ddl.ID)
                 {
                     case "cbPressureRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Pressure rinsing")).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                         cbPressureRinsing.Checked = true;
                         cbInternalRinsing.Checked = false;
                         cbAgitation.Checked = false;
-                        lbExtractionMethod.Text = "Pressure rinsing";
+                        lbExtractionMethod.Text = PA_PRESURE_RINSING;
                         break;
                     case "cbInternalRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Internal rinsing")).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
                         cbPressureRinsing.Checked = false;
                         cbInternalRinsing.Checked = true;
                         cbAgitation.Checked = false;
                         lbExtractionMethod.Text = " Internal rinsing";
                         break;
                     case "cbAgitation":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Dissolving") && x.C.Equals("Agitation")).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_AGITATION)).FirstOrDefault();
                         cbPressureRinsing.Checked = false;
                         cbInternalRinsing.Checked = false;
                         cbAgitation.Checked = true;
@@ -2707,19 +2585,19 @@ namespace ALS.ALSI.Web.view.template
                 switch (ddl.ID)
                 {
                     case "cbWashPressureRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Washing") && x.C.Equals("Pressure rinsing")).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                         cbWashPressureRinsing.Checked = true;
                         cbWashInternalRinsing.Checked = false;
                         cbWashAgitation.Checked = false;
                         break;
                     case "cbWashInternalRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Washing") && x.C.Equals("Internal rinsing")).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
                         cbWashPressureRinsing.Checked = false;
                         cbWashInternalRinsing.Checked = true;
                         cbWashAgitation.Checked = false;
                         break;
                     case "cbWashAgitation":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals("Description of process and extraction:") && x.B.Equals("Washing") && x.C.Equals("Agitation")).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_AGITATION)).FirstOrDefault();
                         cbWashPressureRinsing.Checked = false;
                         cbWashInternalRinsing.Checked = false;
                         cbWashAgitation.Checked = true;
@@ -2784,18 +2662,22 @@ namespace ALS.ALSI.Web.view.template
         {
             TextBox tb = (TextBox)sender;
             txtEop_Lmsp.Text = tb.Text;
+            txtLms.Text = tb.Text;
         }
 
         protected void txtFeretLnms_TextChanged(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
             txtEop_Lnmsp.Text = tb.Text;
+            txtLnmp.Text = tb.Text;
         }
 
         protected void txtFeretFb_TextChanged(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
             lbLf.Text = tb.Text;
+            txtLf.Text = tb.Text;
+
         }
 
         protected void txtTotalQuantity_TextChanged(object sender, EventArgs e)
@@ -2841,6 +2723,8 @@ namespace ALS.ALSI.Web.view.template
             lbMembraneType.Text = String.Format("{0} / {1} um, {2} mm Dia.", ddlMaterial.SelectedItem.Text, txtPoreSize.Text, txtDiameter.Text);
 
         }
+
+
     }
 }
 

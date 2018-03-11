@@ -185,7 +185,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -221,7 +221,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -258,7 +258,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -295,7 +295,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -312,7 +312,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -329,7 +329,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -367,7 +367,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -379,8 +379,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox41</rd:DefaultName>
-            <Top>2.23025in</Top>
-            <Height>0.25in</Height>
+            <Top>2.35525in</Top>
+            <Height>0.21522in</Height>
             <Width>2.06957in</Width>
             <ZIndex>8</ZIndex>
             <Style>
@@ -427,32 +427,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Part name: </Value>
-                    <Style>
-                      <FontFamily>Lucida Sans</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!partName.Value</Value>
-                    <Style>
-                      <FontFamily>Lucida Sans</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Lot no.: </Value>
-                    <Style>
-                      <FontFamily>Lucida Sans</FontFamily>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!lotNo.Value</Value>
+                    <Value />
                     <Style>
                       <FontFamily>Lucida Sans</FontFamily>
                     </Style>
@@ -464,9 +439,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox41</rd:DefaultName>
-            <Top>2.23025in</Top>
-            <Left>2.12513in</Left>
-            <Height>0.51087in</Height>
+            <Top>2.35525in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.21522in</Height>
             <Width>4.9878in</Width>
             <ZIndex>9</ZIndex>
             <Style>
@@ -490,7 +465,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -561,7 +536,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -587,15 +562,95 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox51">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Part name.: </Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!partName.Value</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>2.63991in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.22742in</Height>
+            <Width>4.9878in</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox52">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Lot no.: </Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!lotNo.Value</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>2.93677in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.21522in</Height>
+            <Width>4.9878in</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>2.74112in</Height>
+        <Height>3.22156in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>7.11293in</Width>
+      <Width>7.12681in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

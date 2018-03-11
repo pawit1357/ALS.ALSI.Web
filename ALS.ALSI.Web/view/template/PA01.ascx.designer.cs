@@ -145,7 +145,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLms;
+        protected global::System.Web.UI.WebControls.Label txtLms;
         
         /// <summary>
         /// Label3 control.
@@ -172,7 +172,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLnmp;
+        protected global::System.Web.UI.WebControls.Label txtLnmp;
         
         /// <summary>
         /// Label21 control.
@@ -199,7 +199,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLf;
+        protected global::System.Web.UI.WebControls.Label txtLf;
         
         /// <summary>
         /// Label23 control.
@@ -1649,6 +1649,24 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pUploadWorkSheet;
+        
+        /// <summary>
+        /// pAnalyzeDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pAnalyzeDate;
+        
+        /// <summary>
+        /// txtDateAnalyzed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateAnalyzed;
         
         /// <summary>
         /// pEop control.

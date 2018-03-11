@@ -106,7 +106,9 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label2" runat="server" CssClass="control-label col-md-3">Largest metallic shine:</asp:Label>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtLms" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <br />
+                                        <strong>
+                                            <asp:Label ID="txtLms" runat="server"></asp:Label></strong>
                                         <%--                                    <span class="help-block">This is inline help </span>--%>
                                     </div>
                                     <div>
@@ -133,7 +135,9 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label20" runat="server" CssClass="control-label col-md-3">Largest non-metallic shine:</asp:Label>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtLnmp" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <br />
+                                        <strong>
+                                            <asp:Label ID="txtLnmp" runat="server"></asp:Label></strong>
                                         <%--                                    <span class="help-block">This is inline help </span>--%>
                                     </div>
                                     <div>
@@ -160,7 +164,9 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label22" runat="server" CssClass="control-label col-md-3">Longest fiber:</asp:Label>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtLf" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <br />
+                                        <strong>
+                                            <asp:Label ID="txtLf" runat="server"></asp:Label></strong>
                                         <%--                                    <span class="help-block">This is inline help </span>--%>
                                     </div>
                                     <div>
@@ -440,7 +446,7 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label24" runat="server" CssClass="control-label col-md-3"></asp:Label>
                                     <div class="col-md-6">
-                                        <asp:Image ID="img1" runat="server" Style="width: 240px; height: 240px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" />
+                                        <asp:Image ID="img1" runat="server" Style="width: 300px; height: 240px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" />
                                     </div>
 
                                 </div>
@@ -868,15 +874,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:Literal ID="litI" runat="server" Text='<%# Eval("col_i")%>'></asp:Literal>
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="txtI" runat="server" Text='<%# Eval("col_i")%>' CssClass="form-control"></asp:TextBox>
-                                                    </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Center" />
-                                                </asp:TemplateField>
+
                                                 <asp:TemplateField HeaderText="Edit">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
@@ -1003,15 +1001,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="####" ItemStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:Literal ID="litI" runat="server" Text='<%# Eval("col_i")%>'></asp:Literal>
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="txtI" runat="server" Text='<%# Eval("col_i")%>' CssClass="form-control"></asp:TextBox>
-                                                    </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Center" />
-                                                </asp:TemplateField>
+
                                                 <asp:TemplateField HeaderText="Edit">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
@@ -1211,7 +1201,7 @@
                                                 <td>Totalextraction volume,[mL]</td>
                                                 <td>
                                                     <strong>
-                                                        <asp:Label ID="txtTotalextractionVolume" runat="server" Text="2000" CssClass="form-control"></asp:Label></strong></td>
+                                                        <asp:Label ID="txtTotalextractionVolume" runat="server" Text="2000"></asp:Label></strong></td>
                                                 <td>Extraction method</td>
                                                 <td>
                                                     <strong>
@@ -1249,19 +1239,20 @@
                                     <div class="col-md-12">
                                         <table class="table table-striped table-bordered table-advance table-hover">
                                             <tr>
-                                                <td>Scaling pixel:</td>
-                                                <td>X:
+                                                <td style="text-align: right">Scaling pixel:</td>
+                                                <td style="text-align: center">X:
                                                 </td>
-                                                <td>
+                                                <td style="text-align: center">
                                                     <strong>
                                                         <asp:Label ID="lbX" runat="server"></asp:Label></strong></td>
-                                                <td>m/pixel</td>
-                                                <td>Y:</td>
-                                                <td>
+                                                <td style="text-align: center">m/pixel</td>
+                                                <td style="text-align: center">Y:</td>
+                                                <td style="text-align: center">
                                                     <strong>
                                                         <asp:Label ID="lbY" runat="server"></asp:Label></strong></td>
-                                                <td>Measured diameter [mm]:</td>
-                                                <td>
+                                                <td style="text-align: center">m/pixel</td>
+                                                <td style="text-align: center">Measured diameter [mm]:</td>
+                                                <td style="text-align: center">
                                                     <asp:TextBox ID="txtMeasuredDiameter" runat="server" Text="43.0" CssClass="form-control"></asp:TextBox>
                                                 </td>
                                             </tr>
@@ -1541,11 +1532,11 @@
                                                         <tr>
                                                             <td>&nbsp;X&nbsp;</td>
                                                             <td>
-                                                                <asp:TextBox ID="txtLms_X" runat="server" CssClass="form-control" Width="50px"></asp:TextBox></td>
+                                                                <asp:TextBox ID="txtLms_X" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
                                                             <td>&nbsp;um,&nbsp;</td>
                                                             <td>&nbsp;Y&nbsp;</td>
                                                             <td>
-                                                                <asp:TextBox ID="txtLms_Y" runat="server" CssClass="form-control" Width="50px"></asp:TextBox></td>
+                                                                <asp:TextBox ID="txtLms_Y" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
                                                             <td>&nbsp;um&nbsp;</td>
                                                         </tr>
                                                     </table>
@@ -1562,11 +1553,11 @@
                                                         <tr>
                                                             <td>&nbsp;X&nbsp;</td>
                                                             <td>
-                                                                <asp:TextBox ID="txtLnms_X" runat="server" CssClass="form-control" Width="50px"></asp:TextBox></td>
+                                                                <asp:TextBox ID="txtLnms_X" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
                                                             <td>&nbsp;um,&nbsp;</td>
                                                             <td>&nbsp;Y&nbsp;</td>
                                                             <td>
-                                                                <asp:TextBox ID="txtLnms_Y" runat="server" CssClass="form-control" Width="50px"></asp:TextBox></td>
+                                                                <asp:TextBox ID="txtLnms_Y" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
                                                             <td>&nbsp;um&nbsp;</td>
                                                         </tr>
                                                     </table>
@@ -1583,11 +1574,11 @@
                                                         <tr>
                                                             <td>&nbsp;X&nbsp;</td>
                                                             <td>
-                                                                <asp:TextBox ID="txtLf_X" runat="server" CssClass="form-control" Width="50px"></asp:TextBox></td>
+                                                                <asp:TextBox ID="txtLf_X" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
                                                             <td>&nbsp;um,&nbsp;</td>
                                                             <td>&nbsp;Y&nbsp;</td>
                                                             <td>
-                                                                <asp:TextBox ID="txtLf_Y" runat="server" CssClass="form-control" Width="50px"></asp:TextBox></td>
+                                                                <asp:TextBox ID="txtLf_Y" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
                                                             <td>&nbsp;um&nbsp;</td>
                                                         </tr>
                                                     </table>
@@ -1769,7 +1760,25 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body">
+                                        <asp:Panel ID="pAnalyzeDate" runat="server">
 
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">
+                                                    Date Analyzed:<span class="required">
+										* </span>
+                                                </label>
+                                                <div class="col-md-6">
+                                                    <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                                        style="max-width: 220px">
+                                                        <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" />
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                    ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
 
                                         <asp:Panel ID="pEop" runat="server">
                                             <div class="form-group">
