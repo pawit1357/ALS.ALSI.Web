@@ -366,23 +366,23 @@ namespace ALS.ALSI.Web.view.template
                     pCoverpage.Visible = true;
                     PWorking.Visible = false;
                     pLoadFile.Visible = false;
-                    var items = this.Ftir.Where(x => x.data_type == 1).ToList();
-                    if (items.Count > 0)
-                    {
-                        items[0].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
-                        items[1].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
-                        items[2].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
-                        //items[3].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
-                        //items[4].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
-                        //items[5].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                    //var items = this.Ftir.Where(x => x.data_type == 1).ToList();
+                    //if (items.Count > 0)
+                    //{
+                    //    items[0].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                    //    items[1].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                    //    items[2].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                    //    //items[3].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                    //    //items[4].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
+                    //    //items[5].E = String.Format("{0} {1}", txtNVR_FTIR_B14.Text, lbNVR_FTIR_B14.Text);
 
-                        items[0].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
-                        items[1].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
-                        items[2].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
-                        //items[3].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
-                        //items[4].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
-                        //items[5].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
-                    }
+                    //    items[0].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                    //    items[1].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                    //    items[2].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                    //    //items[3].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                    //    //items[4].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                    //    //items[5].C = String.Format("{0} {1}", txtNVR_FTIR_B15.Text, lbNVR_FTIR_B15.Text);
+                    //}
                     CalculateCas();
                     break;
                 case "NVR-FTIR(Hex)":
@@ -1266,6 +1266,19 @@ namespace ALS.ALSI.Web.view.template
             gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
             gvMethodProcedure.DataBind();
 
+            foreach (var item in this.Ftir.Where(x => x.data_type == 2).ToList())
+            {
+                if (item.C.Equals("NA"))
+                {
+                    item.E = "NA";
+                }
+                if (item.C.ToUpper().Equals("Not Detected".ToUpper()) && CustomUtils.isNumber(item.D))
+                {
+                    item.E = "FAIL";
+                }
+
+            }
+
             gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
             gvResult.DataBind();
 
@@ -1273,7 +1286,7 @@ namespace ALS.ALSI.Web.view.template
             lbA31.Text = !String.IsNullOrEmpty(txtFTIR_B35.Text) ? txtFTIR_B35.Text : txtFTIR_B48.Text;
             lbB31.Text = !String.IsNullOrEmpty(lbAmide.Text) ? lbAmide.Text : lbSilicone.Text;
 
-            lbA31.Text = String.IsNullOrEmpty(lbA31.Text)? String.Empty: Convert.ToDouble(lbA31.Text).ToString("N2");
+            lbA31.Text = String.IsNullOrEmpty(lbA31.Text)? String.Empty: Convert.ToDouble(lbA31.Text).ToString("N"+txtDecimal09.Text);
             btnSubmit.Enabled = true;
         }
 
@@ -1477,6 +1490,9 @@ namespace ALS.ALSI.Web.view.template
             gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
             gvResult.DataBind();
         }
-
+        protected void txtDecimal08_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCas();
+        }
     }
 }

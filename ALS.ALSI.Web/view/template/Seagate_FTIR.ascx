@@ -543,6 +543,25 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             กำหนดทศนิยม</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                                    <h1>CoverPage</h1>
+                                    <table class="table table-striped">
+
+                                        <tr>
+                                            <th>(Note)silicon oil</th>
+                                            <th>
+                                                <asp:TextBox ID="txtDecimal10" runat="server" TextMode="Number" CssClass="form-control" Text="2" OnTextChanged="txtDecimal10_TextChanged" AutoPostBack="true"></asp:TextBox></td>
+
+
+
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+
+
+
+                                    </table>
                                     <h1>FTIR</h1>
                                     <table class="table table-striped">
                                         <tr>
@@ -620,6 +639,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
 
 
                                     </table>
+
                                 </div>
                                 <div class="modal-footer">
                                     <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />

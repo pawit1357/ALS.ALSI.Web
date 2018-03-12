@@ -34,7 +34,11 @@ namespace ALS.ALSI.Biz.DataAccess
         public String iswashinternalrinsing_text { get; set; }
         public String isfiltrationmethod_text { get; set; }
 
-
+        public byte[] img1 { get; set; }
+        public byte[] img2 { get; set; }
+        public byte[] img3 { get; set; }
+        public byte[] img4 { get; set; }
+        public byte[] img5 { get; set; }
         #endregion
 
         //public byte[] img1 { get; set; }

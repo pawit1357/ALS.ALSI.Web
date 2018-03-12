@@ -2136,7 +2136,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("lotNo", String.IsNullOrEmpty(this.jobSample.lot_no) ? " " : this.jobSample.lot_no));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", " "));
 
-            
+
             ////PAGE01
             //reportParameters.Add(new ReportParameter("p1_txtLms", String.IsNullOrEmpty(txtLms.Text) ? " " : txtLms.Text));
             //reportParameters.Add(new ReportParameter("p1_txtLnmp", String.IsNullOrEmpty(txtLnmp.Text) ? " " : txtLnmp.Text));
@@ -2272,37 +2272,33 @@ namespace ALS.ALSI.Web.view.template
             List<template_pa_detail> washings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             List<template_pa_detail> mas = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
 
-            List<template_pa_detail> images = new List<template_pa_detail>();
-            template_pa_detail img = new template_pa_detail();
-            img.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
-            img.img2 = CustomUtils.GetBytesFromImage(this.pa.img02);
-            img.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
-            img.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
-            img.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
-            images.Add(img);
+          
             List<template_pa> pas = new List<template_pa>();
-            template_pa pa = new template_pa();
-            pa.iscontainer_text = String.Empty;
-            pa.container_id_text = String.Empty;
-            pa.isfluid1_text = String.Empty;
-            pa.fluid1_id_text = String.Empty;
-            pa.isfluid2_text = String.Empty;
-            pa.fluid2_id_text = String.Empty;
-            pa.fluid3_id_text = String.Empty;
-            pa.isfluid3_text = String.Empty;
-            pa.istshb01_text = String.Empty;
-            pa.istshb02_text = String.Empty;
-            pa.istshb02_text = String.Empty;
-            pa.ispots01_text = String.Empty;
-            pa.isdissolving_text = String.Empty;
-            pa.ispressurerinsing_text = String.Empty;
-            pa.isinternalrinsing_text = String.Empty;
-            pa.isagitation_text = String.Empty;
-            pa.iswashquantity_text = String.Empty;
-            pa.isrewashingquantity_text = String.Empty;
-            pa.iswashpressurerinsing_text = String.Empty;
-            pa.iswashinternalrinsing_text = String.Empty;
-            pa.isfiltrationmethod_text = String.Empty;
+            this.pa.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
+            this.pa.img2 = CustomUtils.GetBytesFromImage(this.pa.img02);
+            this.pa.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
+            this.pa.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
+            this.pa.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
+            this.pa.iscontainer_text = cbContainer.Checked.ToString();
+            this.pa.container_id_text = ddlContainer.SelectedItem.Text;
+            this.pa.isfluid1_text = cbFluid1.Checked.ToString();
+            this.pa.fluid1_id_text = ddlFluid1.SelectedItem.Text;
+            this.pa.isfluid2_text = cbFluid2.Checked.ToString();
+            this.pa.fluid2_id_text = ddlFluid2.SelectedItem.Text;
+            this.pa.isfluid3_text = cbFluid3.Checked.ToString();
+            this.pa.fluid3_id_text = ddlFluid3.SelectedItem.Text;
+            this.pa.istshb01_text = cbTshb01.Checked.ToString();
+            this.pa.istshb02_text = cbTshb02.Checked.ToString();
+            this.pa.istshb02_text = cbTshb03.Checked.ToString();
+            this.pa.ispots01_text = cbPots01.Checked.ToString();
+            this.pa.isdissolving_text = cbDissolving.Checked.ToString();
+            this.pa.ispressurerinsing_text = cbPressureRinsing.Checked.ToString();
+            this.pa.isinternalrinsing_text = cbInternalRinsing.Checked.ToString();
+            this.pa.isagitation_text = cbAgitation.Checked.ToString();
+            this.pa.iswashquantity_text = cbWashQuantity.Checked.ToString();
+            this.pa.isrewashingquantity_text = cbRewashingQuantity.Checked.ToString();
+            this.pa.iswashpressurerinsing_text = cbWashPressureRinsing.Checked.ToString();
+            this.pa.iswashinternalrinsing_text = cbWashInternalRinsing.Checked.ToString();
             pas.Add(this.pa);
 
 

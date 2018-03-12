@@ -711,9 +711,9 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_mesa_img> dat = this.refImg.OrderBy(x=>x.seq).ToList();
             foreach (template_wd_mesa_img _i in dat)
             {
-                _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
-                _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
-                _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
+                _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
+                _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
+                _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
                 _i.img4 = CustomUtils.GetBytesFromImage(_i.path_edx_spectrum);
             }
 
@@ -730,28 +730,31 @@ namespace ALS.ALSI.Web.view.template
             DataTable dt3 = new DataTable();
             DataTable dt4 = new DataTable();
 
-            if (dat.Count == 2)
+           
+            if (dat.Count >= 1)
             {
                 tmp.Add(dat[0]);
                 dt1 = tmp.ToDataTable();
+            }
+            if (dat.Count >= 2)
+            {
                 tmp = new List<template_wd_mesa_img>();
                 tmp.Add(dat[1]);
                 dt2 = tmp.ToDataTable();
             }
-            else if (dat.Count == 4)
+            if (dat.Count >= 3)
             {
-                tmp.Add(dat[0]);
-                dt1 = tmp.ToDataTable();
-                tmp = new List<template_wd_mesa_img>();
-                tmp.Add(dat[1]);
-                dt2 = tmp.ToDataTable();
                 tmp = new List<template_wd_mesa_img>();
                 tmp.Add(dat[2]);
                 dt3 = tmp.ToDataTable();
+            }
+            if (dat.Count >= 4)
+            {
                 tmp = new List<template_wd_mesa_img>();
                 tmp.Add(dat[3]);
                 dt4 = tmp.ToDataTable();
             }
+
 
 
             if(dt1!=null && dt1.Rows.Count > 0) { 
@@ -908,7 +911,7 @@ namespace ALS.ALSI.Web.view.template
             _img.sample_id = this.SampleID;
             _img.area = Convert.ToInt32(ddlArea.SelectedValue);
             _img.descripton = txtDesc.Text;
-            _img.seq = this.refImg.Count;
+            _img.seq = this.refImg.Count+1;
             if (!String.IsNullOrEmpty(txtDesc.Text))
             {
 

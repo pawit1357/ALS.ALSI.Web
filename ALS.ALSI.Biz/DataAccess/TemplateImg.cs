@@ -86,14 +86,14 @@ namespace ALS.ALSI.Biz.DataAccess
             foreach (template_img tmp in _lists)
             {
                 template_img existing = _repository.Find(x => x.id == tmp.id).FirstOrDefault();
-                if (existing == null)
-                {
+                //if (existing == null)
+                //{
                     _repository.Add(tmp);
-                }
-                else
-                {
-                    _repository.Edit(existing, tmp);
-                }
+                //}
+                //else
+                //{
+                //    _repository.Edit(existing, tmp);
+                //}
                 //switch (tmp.RowState)
                 //{
                 //    case CommandNameEnum.Add:

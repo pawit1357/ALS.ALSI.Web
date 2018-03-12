@@ -616,6 +616,11 @@ The instrument detection limit for silicone oil is
                                                 <asp:TextBox ID="txtDecimal08" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
                                         <tr>
+                                            <td>Silicon oil(coverpage):</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal09" runat="server" TextMode="Number" CssClass="form-control" Text="2" AutoPostBack="true" OnTextChanged="txtDecimal08_TextChanged"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
                                             <td>Ftir</td>
                                             <td>
                                                 <asp:DropDownList ID="ddlFtirUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlFtirUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">

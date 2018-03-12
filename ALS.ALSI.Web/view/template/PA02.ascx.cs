@@ -2479,14 +2479,14 @@ namespace ALS.ALSI.Web.view.template
             List<template_pa_detail> washings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             List<template_pa_detail> mas = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
             
-            foreach(template_pa_detail eop in eops)
-            {
-                eop.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
-                eop.img2 = CustomUtils.GetBytesFromImage("http://localhost/uploads/2017/12/04/ELP-2410-MB/1.jpg");
-                eop.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
-                eop.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
-                eop.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
-            }
+            //foreach(template_pa_detail eop in eops)
+            //{
+            //    eop.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
+            //    eop.img2 = CustomUtils.GetBytesFromImage("http://localhost/uploads/2017/12/04/ELP-2410-MB/1.jpg");
+            //    eop.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
+            //    eop.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
+            //    eop.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
+            //}
 
             //List<template_pa> paImgs = new List<template_pa>();
             //template_pa _pa = new template_pa();

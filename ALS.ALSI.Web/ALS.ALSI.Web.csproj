@@ -32,6 +32,7 @@
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
     <Use64BitIISExpress />
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1993,6 +1994,10 @@
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="assets\global\plugins\uniform\README.md" />
     <Content Include="PhaseII-Doc\test-pa.docx" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\ALIS.pubxml" />
     <Content Include="ReportObject\DS.xsc">
       <DependentUpon>DS.xsd</DependentUpon>
@@ -2028,8 +2033,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\corrosion_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\copperwire_seagate.rdlc" />
-    <EmbeddedResource Include="ReportObject\dhs_seagate.rdlc" />
-    <EmbeddedResource Include="ReportObject\dhs_seagate_v2.rdlc" />
+    <EmbeddedResource Include="ReportObject\dhs_seagate.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportObject\dhs_seagate_v2.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate_damper.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_seagate_2.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
@@ -2038,14 +2047,16 @@
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate_swap.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
-    <EmbeddedResource Include="ReportObject\ic_seagate - Copy.rdlc" />
+    <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy %282%29.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy %283%29.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy %284%29.rdlc" />
     <EmbeddedResource Include="ReportObject\pa - Copy.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_04.rdlc" />
-    <EmbeddedResource Include="ReportObject\mesa_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\mesa_wd.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\corrosion_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\lpc_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\lpc_seagate.rdlc" />

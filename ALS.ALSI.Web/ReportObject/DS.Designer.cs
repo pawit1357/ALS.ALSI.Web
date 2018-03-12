@@ -3822,16 +3822,6 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columncol_o;
             
-            private global::System.Data.DataColumn columnimg1;
-            
-            private global::System.Data.DataColumn columnimg2;
-            
-            private global::System.Data.DataColumn columnimg3;
-            
-            private global::System.Data.DataColumn columnimg4;
-            
-            private global::System.Data.DataColumn columnimg5;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public paDataTable() {
@@ -3987,46 +3977,6 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn img1Column {
-                get {
-                    return this.columnimg1;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn img2Column {
-                get {
-                    return this.columnimg2;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn img3Column {
-                get {
-                    return this.columnimg3;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn img4Column {
-                get {
-                    return this.columnimg4;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn img5Column {
-                get {
-                    return this.columnimg5;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4062,27 +4012,7 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public paRow AddpaRow(
-                        byte[] col_a, 
-                        byte[] col_b, 
-                        string col_c, 
-                        string col_d, 
-                        string col_e, 
-                        string col_f, 
-                        string col_g, 
-                        string col_h, 
-                        string col_i, 
-                        string col_j, 
-                        string col_k, 
-                        string col_l, 
-                        string col_m, 
-                        string col_n, 
-                        string col_o, 
-                        byte[] img1, 
-                        byte[] img2, 
-                        byte[] img3, 
-                        byte[] img4, 
-                        byte[] img5) {
+            public paRow AddpaRow(byte[] col_a, byte[] col_b, string col_c, string col_d, string col_e, string col_f, string col_g, string col_h, string col_i, string col_j, string col_k, string col_l, string col_m, string col_n, string col_o) {
                 paRow rowpaRow = ((paRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         col_a,
@@ -4099,12 +4029,7 @@ namespace ALS.ALSI.Web.ReportObject {
                         col_l,
                         col_m,
                         col_n,
-                        col_o,
-                        img1,
-                        img2,
-                        img3,
-                        img4,
-                        img5};
+                        col_o};
                 rowpaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowpaRow);
                 return rowpaRow;
@@ -4142,11 +4067,6 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columncol_m = base.Columns["col_m"];
                 this.columncol_n = base.Columns["col_n"];
                 this.columncol_o = base.Columns["col_o"];
-                this.columnimg1 = base.Columns["img1"];
-                this.columnimg2 = base.Columns["img2"];
-                this.columnimg3 = base.Columns["img3"];
-                this.columnimg4 = base.Columns["img4"];
-                this.columnimg5 = base.Columns["img5"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4182,16 +4102,6 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columncol_n);
                 this.columncol_o = new global::System.Data.DataColumn("col_o", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncol_o);
-                this.columnimg1 = new global::System.Data.DataColumn("img1", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimg1);
-                this.columnimg2 = new global::System.Data.DataColumn("img2", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimg2);
-                this.columnimg3 = new global::System.Data.DataColumn("img3", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimg3);
-                this.columnimg4 = new global::System.Data.DataColumn("img4", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimg4);
-                this.columnimg5 = new global::System.Data.DataColumn("img5", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimg5);
                 this.columncol_a.Caption = "img1";
                 this.columncol_b.Caption = "img2";
             }
@@ -4441,7 +4351,7 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columniswashagitation_text;
             
-            private global::System.Data.DataColumn columnisfiltrationmethod_text;
+            private global::System.Data.DataColumn columnisfiltrationmethod;
             
             private global::System.Data.DataColumn columnmanufacturer_id;
             
@@ -4518,6 +4428,16 @@ namespace ALS.ALSI.Web.ReportObject {
             private global::System.Data.DataColumn columnlf_y;
             
             private global::System.Data.DataColumn columnimg05;
+            
+            private global::System.Data.DataColumn columnimg1;
+            
+            private global::System.Data.DataColumn columnimg2;
+            
+            private global::System.Data.DataColumn columnimg3;
+            
+            private global::System.Data.DataColumn columnimg4;
+            
+            private global::System.Data.DataColumn columnimg5;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -5010,9 +4930,9 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn isfiltrationmethod_textColumn {
+            public global::System.Data.DataColumn isfiltrationmethodColumn {
                 get {
-                    return this.columnisfiltrationmethod_text;
+                    return this.columnisfiltrationmethod;
                 }
             }
             
@@ -5322,6 +5242,46 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn img1Column {
+                get {
+                    return this.columnimg1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn img2Column {
+                get {
+                    return this.columnimg2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn img3Column {
+                get {
+                    return this.columnimg3;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn img4Column {
+                get {
+                    return this.columnimg4;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn img5Column {
+                get {
+                    return this.columnimg5;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5415,7 +5375,7 @@ namespace ALS.ALSI.Web.ReportObject {
                         string iswashpressurerinsing_text, 
                         string iswashinternalrinsing_text, 
                         string iswashagitation_text, 
-                        string isfiltrationmethod_text, 
+                        string isfiltrationmethod, 
                         short manufacturer_id, 
                         short material_id, 
                         string poresize, 
@@ -5453,7 +5413,12 @@ namespace ALS.ALSI.Web.ReportObject {
                         string lnms_y, 
                         string lf_x, 
                         string lf_y, 
-                        string img05) {
+                        string img05, 
+                        byte[] img1, 
+                        byte[] img2, 
+                        byte[] img3, 
+                        byte[] img4, 
+                        byte[] img5) {
                 template_paRow rowtemplate_paRow = ((template_paRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         lms,
@@ -5513,7 +5478,7 @@ namespace ALS.ALSI.Web.ReportObject {
                         iswashpressurerinsing_text,
                         iswashinternalrinsing_text,
                         iswashagitation_text,
-                        isfiltrationmethod_text,
+                        isfiltrationmethod,
                         manufacturer_id,
                         material_id,
                         poresize,
@@ -5551,7 +5516,12 @@ namespace ALS.ALSI.Web.ReportObject {
                         lnms_y,
                         lf_x,
                         lf_y,
-                        img05};
+                        img05,
+                        img1,
+                        img2,
+                        img3,
+                        img4,
+                        img5};
                 rowtemplate_paRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtemplate_paRow);
                 return rowtemplate_paRow;
@@ -5631,7 +5601,7 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columniswashpressurerinsing_text = base.Columns["iswashpressurerinsing_text"];
                 this.columniswashinternalrinsing_text = base.Columns["iswashinternalrinsing_text"];
                 this.columniswashagitation_text = base.Columns["iswashagitation_text"];
-                this.columnisfiltrationmethod_text = base.Columns["isfiltrationmethod_text"];
+                this.columnisfiltrationmethod = base.Columns["isfiltrationmethod"];
                 this.columnmanufacturer_id = base.Columns["manufacturer_id"];
                 this.columnmaterial_id = base.Columns["material_id"];
                 this.columnporesize = base.Columns["poresize"];
@@ -5670,6 +5640,11 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columnlf_x = base.Columns["lf_x"];
                 this.columnlf_y = base.Columns["lf_y"];
                 this.columnimg05 = base.Columns["img05"];
+                this.columnimg1 = base.Columns["img1"];
+                this.columnimg2 = base.Columns["img2"];
+                this.columnimg3 = base.Columns["img3"];
+                this.columnimg4 = base.Columns["img4"];
+                this.columnimg5 = base.Columns["img5"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5789,8 +5764,8 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columniswashinternalrinsing_text);
                 this.columniswashagitation_text = new global::System.Data.DataColumn("iswashagitation_text", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columniswashagitation_text);
-                this.columnisfiltrationmethod_text = new global::System.Data.DataColumn("isfiltrationmethod_text", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnisfiltrationmethod_text);
+                this.columnisfiltrationmethod = new global::System.Data.DataColumn("isfiltrationmethod", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnisfiltrationmethod);
                 this.columnmanufacturer_id = new global::System.Data.DataColumn("manufacturer_id", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmanufacturer_id);
                 this.columnmaterial_id = new global::System.Data.DataColumn("material_id", typeof(short), null, global::System.Data.MappingType.Element);
@@ -5867,6 +5842,16 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columnlf_y);
                 this.columnimg05 = new global::System.Data.DataColumn("img05", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnimg05);
+                this.columnimg1 = new global::System.Data.DataColumn("img1", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnimg1);
+                this.columnimg2 = new global::System.Data.DataColumn("img2", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnimg2);
+                this.columnimg3 = new global::System.Data.DataColumn("img3", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnimg3);
+                this.columnimg4 = new global::System.Data.DataColumn("img4", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnimg4);
+                this.columnimg5 = new global::System.Data.DataColumn("img5", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnimg5);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8936,86 +8921,6 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public byte[] img1 {
-                get {
-                    try {
-                        return ((byte[])(this[this.tablepa.img1Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'img1\' in table \'pa\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablepa.img1Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public byte[] img2 {
-                get {
-                    try {
-                        return ((byte[])(this[this.tablepa.img2Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'img2\' in table \'pa\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablepa.img2Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public byte[] img3 {
-                get {
-                    try {
-                        return ((byte[])(this[this.tablepa.img3Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'img3\' in table \'pa\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablepa.img3Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public byte[] img4 {
-                get {
-                    try {
-                        return ((byte[])(this[this.tablepa.img4Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'img4\' in table \'pa\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablepa.img4Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public byte[] img5 {
-                get {
-                    try {
-                        return ((byte[])(this[this.tablepa.img5Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'img5\' in table \'pa\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablepa.img5Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool Iscol_aNull() {
                 return this.IsNull(this.tablepa.col_aColumn);
             }
@@ -9192,66 +9097,6 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setcol_oNull() {
                 this[this.tablepa.col_oColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Isimg1Null() {
-                return this.IsNull(this.tablepa.img1Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Setimg1Null() {
-                this[this.tablepa.img1Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Isimg2Null() {
-                return this.IsNull(this.tablepa.img2Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Setimg2Null() {
-                this[this.tablepa.img2Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Isimg3Null() {
-                return this.IsNull(this.tablepa.img3Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Setimg3Null() {
-                this[this.tablepa.img3Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Isimg4Null() {
-                return this.IsNull(this.tablepa.img4Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Setimg4Null() {
-                this[this.tablepa.img4Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Isimg5Null() {
-                return this.IsNull(this.tablepa.img5Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Setimg5Null() {
-                this[this.tablepa.img5Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -10188,17 +10033,17 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string isfiltrationmethod_text {
+            public string isfiltrationmethod {
                 get {
                     try {
-                        return ((string)(this[this.tabletemplate_pa.isfiltrationmethod_textColumn]));
+                        return ((string)(this[this.tabletemplate_pa.isfiltrationmethodColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'isfiltrationmethod_text\' in table \'template_pa\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'isfiltrationmethod\' in table \'template_pa\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabletemplate_pa.isfiltrationmethod_textColumn] = value;
+                    this[this.tabletemplate_pa.isfiltrationmethodColumn] = value;
                 }
             }
             
@@ -10807,6 +10652,86 @@ namespace ALS.ALSI.Web.ReportObject {
                 }
                 set {
                     this[this.tabletemplate_pa.img05Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte[] img1 {
+                get {
+                    try {
+                        return ((byte[])(this[this.tabletemplate_pa.img1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'img1\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.img1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte[] img2 {
+                get {
+                    try {
+                        return ((byte[])(this[this.tabletemplate_pa.img2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'img2\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.img2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte[] img3 {
+                get {
+                    try {
+                        return ((byte[])(this[this.tabletemplate_pa.img3Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'img3\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.img3Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte[] img4 {
+                get {
+                    try {
+                        return ((byte[])(this[this.tabletemplate_pa.img4Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'img4\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.img4Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte[] img5 {
+                get {
+                    try {
+                        return ((byte[])(this[this.tabletemplate_pa.img5Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'img5\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.img5Column] = value;
                 }
             }
             
@@ -11496,14 +11421,14 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Isisfiltrationmethod_textNull() {
-                return this.IsNull(this.tabletemplate_pa.isfiltrationmethod_textColumn);
+            public bool IsisfiltrationmethodNull() {
+                return this.IsNull(this.tabletemplate_pa.isfiltrationmethodColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Setisfiltrationmethod_textNull() {
-                this[this.tabletemplate_pa.isfiltrationmethod_textColumn] = global::System.Convert.DBNull;
+            public void SetisfiltrationmethodNull() {
+                this[this.tabletemplate_pa.isfiltrationmethodColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11960,6 +11885,66 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setimg05Null() {
                 this[this.tabletemplate_pa.img05Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isimg1Null() {
+                return this.IsNull(this.tabletemplate_pa.img1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setimg1Null() {
+                this[this.tabletemplate_pa.img1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isimg2Null() {
+                return this.IsNull(this.tabletemplate_pa.img2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setimg2Null() {
+                this[this.tabletemplate_pa.img2Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isimg3Null() {
+                return this.IsNull(this.tabletemplate_pa.img3Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setimg3Null() {
+                this[this.tabletemplate_pa.img3Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isimg4Null() {
+                return this.IsNull(this.tabletemplate_pa.img4Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setimg4Null() {
+                this[this.tabletemplate_pa.img4Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isimg5Null() {
+                return this.IsNull(this.tabletemplate_pa.img5Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setimg5Null() {
+                this[this.tabletemplate_pa.img5Column] = global::System.Convert.DBNull;
             }
         }
         

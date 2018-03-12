@@ -61,7 +61,8 @@ Seagate_FTIR_Adhesive.ascx(545) > ELP-0662-FB
 Seagate_FTIR_Packing.ascx(638) > ELP-2947-FB,3331-FB
 Seagate_FTIR_Damper.ascx(640) > ELP-2987-FB
 
-
+ELP-3236-FB (test "not detect" and result has value >> must show "fail")
+ELP-1248-FB (test spec is "NA" result must "NA")
 
 
 -- CLEAR update template_seagate_hpa_coverpage set A = replace(A,'μ','u')

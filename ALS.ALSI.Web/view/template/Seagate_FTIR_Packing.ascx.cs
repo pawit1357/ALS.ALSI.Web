@@ -845,7 +845,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     //remark
                     //lbA42.Text = String.Format(" {0}  {1}  or {2} {3}.", ftirList[5].B, "ug/part", ftirList[6].B, ddlUnit.SelectedItem.Text);
-                    lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N2"));
+                    lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N"+txtDecimal10.Text));
                 }
             }
             #endregion
@@ -1722,7 +1722,10 @@ namespace ALS.ALSI.Web.view.template
         {
 
         }
-
+        protected void txtDecimal10_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCas();
+        }
     }
 
 

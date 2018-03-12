@@ -808,8 +808,15 @@ namespace ALS.ALSI.Web.view.template
                 gvResult.DataBind();
                 //remark
                 //lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
-                lbA42.Text = String.Format(" {0}  ug/part",String.IsNullOrEmpty(ftirList[5].B) ? String.Empty :  Convert.ToDouble(ftirList[5].B).ToString("N2"));
+                lbA42.Text = String.Format(" {0}  ug/part",String.IsNullOrEmpty(ftirList[5].B) ? String.Empty :  Convert.ToDouble(ftirList[5].B).ToString("N"+txtDecimal10.Text));
 
+            }
+            foreach(var item in this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList())
+            {
+                if (item.B.Equals("NA"))
+                {
+                    item.C = item.B;
+                }
             }
             gvResult.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
             gvResult.DataBind();
@@ -1476,6 +1483,10 @@ namespace ALS.ALSI.Web.view.template
             CalculateCas();
         }
 
+        protected void txtDecimal10_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCas();
+        }
     }
 }
 

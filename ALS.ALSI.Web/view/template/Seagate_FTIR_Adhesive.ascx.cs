@@ -1013,7 +1013,7 @@ namespace ALS.ALSI.Web.view.template
 
                 //remark
                 //lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
-                lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N2"));
+                lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N"+txtDecimal10));
             }
             gvRefImages.DataSource = this.refImg;
             gvRefImages.DataBind();
@@ -1718,7 +1718,10 @@ namespace ALS.ALSI.Web.view.template
         {
 
         }
-
+        protected void txtDecimal10_TextChanged(object sender, EventArgs e)
+        {
+            CalculateCas();
+        }
     }
 }
 
