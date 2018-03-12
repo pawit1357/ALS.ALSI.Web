@@ -4439,6 +4439,24 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columnimg5;
             
+            private global::System.Data.DataColumn columnisoven_text;
+            
+            private global::System.Data.DataColumn columnisdesiccator_text;
+            
+            private global::System.Data.DataColumn columngravimetricalalysis_id_text;
+            
+            private global::System.Data.DataColumn columniseasydry_text;
+            
+            private global::System.Data.DataColumn columnisambientair_text;
+            
+            private global::System.Data.DataColumn columniszeissaxioimager2_text;
+            
+            private global::System.Data.DataColumn columnismeasuringsoftware_text;
+            
+            private global::System.Data.DataColumn columnisautomated_text;
+            
+            private global::System.Data.DataColumn columnmaterial_id_text;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public template_paDataTable() {
@@ -5282,6 +5300,78 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn isoven_textColumn {
+                get {
+                    return this.columnisoven_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn isdesiccator_textColumn {
+                get {
+                    return this.columnisdesiccator_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn gravimetricalalysis_id_textColumn {
+                get {
+                    return this.columngravimetricalalysis_id_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn iseasydry_textColumn {
+                get {
+                    return this.columniseasydry_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn isambientair_textColumn {
+                get {
+                    return this.columnisambientair_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn iszeissaxioimager2_textColumn {
+                get {
+                    return this.columniszeissaxioimager2_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ismeasuringsoftware_textColumn {
+                get {
+                    return this.columnismeasuringsoftware_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn isautomated_textColumn {
+                get {
+                    return this.columnisautomated_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn material_id_textColumn {
+                get {
+                    return this.columnmaterial_id_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5418,7 +5508,16 @@ namespace ALS.ALSI.Web.ReportObject {
                         byte[] img2, 
                         byte[] img3, 
                         byte[] img4, 
-                        byte[] img5) {
+                        byte[] img5, 
+                        string isoven_text, 
+                        string isdesiccator_text, 
+                        string gravimetricalalysis_id_text, 
+                        string iseasydry_text, 
+                        string isambientair_text, 
+                        string iszeissaxioimager2_text, 
+                        string ismeasuringsoftware_text, 
+                        string isautomated_text, 
+                        string material_id_text) {
                 template_paRow rowtemplate_paRow = ((template_paRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         lms,
@@ -5521,7 +5620,16 @@ namespace ALS.ALSI.Web.ReportObject {
                         img2,
                         img3,
                         img4,
-                        img5};
+                        img5,
+                        isoven_text,
+                        isdesiccator_text,
+                        gravimetricalalysis_id_text,
+                        iseasydry_text,
+                        isambientair_text,
+                        iszeissaxioimager2_text,
+                        ismeasuringsoftware_text,
+                        isautomated_text,
+                        material_id_text};
                 rowtemplate_paRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtemplate_paRow);
                 return rowtemplate_paRow;
@@ -5645,6 +5753,15 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columnimg3 = base.Columns["img3"];
                 this.columnimg4 = base.Columns["img4"];
                 this.columnimg5 = base.Columns["img5"];
+                this.columnisoven_text = base.Columns["isoven_text"];
+                this.columnisdesiccator_text = base.Columns["isdesiccator_text"];
+                this.columngravimetricalalysis_id_text = base.Columns["gravimetricalalysis_id_text"];
+                this.columniseasydry_text = base.Columns["iseasydry_text"];
+                this.columnisambientair_text = base.Columns["isambientair_text"];
+                this.columniszeissaxioimager2_text = base.Columns["iszeissaxioimager2_text"];
+                this.columnismeasuringsoftware_text = base.Columns["ismeasuringsoftware_text"];
+                this.columnisautomated_text = base.Columns["isautomated_text"];
+                this.columnmaterial_id_text = base.Columns["material_id_text"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5852,6 +5969,24 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columnimg4);
                 this.columnimg5 = new global::System.Data.DataColumn("img5", typeof(byte[]), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnimg5);
+                this.columnisoven_text = new global::System.Data.DataColumn("isoven_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnisoven_text);
+                this.columnisdesiccator_text = new global::System.Data.DataColumn("isdesiccator_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnisdesiccator_text);
+                this.columngravimetricalalysis_id_text = new global::System.Data.DataColumn("gravimetricalalysis_id_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngravimetricalalysis_id_text);
+                this.columniseasydry_text = new global::System.Data.DataColumn("iseasydry_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columniseasydry_text);
+                this.columnisambientair_text = new global::System.Data.DataColumn("isambientair_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnisambientair_text);
+                this.columniszeissaxioimager2_text = new global::System.Data.DataColumn("iszeissaxioimager2_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columniszeissaxioimager2_text);
+                this.columnismeasuringsoftware_text = new global::System.Data.DataColumn("ismeasuringsoftware_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnismeasuringsoftware_text);
+                this.columnisautomated_text = new global::System.Data.DataColumn("isautomated_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnisautomated_text);
+                this.columnmaterial_id_text = new global::System.Data.DataColumn("material_id_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaterial_id_text);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10737,6 +10872,152 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string isoven_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.isoven_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'isoven_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.isoven_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string isdesiccator_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.isdesiccator_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'isdesiccator_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.isdesiccator_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string gravimetricalalysis_id_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.gravimetricalalysis_id_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'gravimetricalalysis_id_text\' in table \'template_pa\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.gravimetricalalysis_id_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string iseasydry_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.iseasydry_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'iseasydry_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.iseasydry_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string isambientair_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.isambientair_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'isambientair_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.isambientair_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string iszeissaxioimager2_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.iszeissaxioimager2_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'iszeissaxioimager2_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.iszeissaxioimager2_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ismeasuringsoftware_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.ismeasuringsoftware_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ismeasuringsoftware_text\' in table \'template_pa\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.ismeasuringsoftware_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string isautomated_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.isautomated_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'isautomated_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.isautomated_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string material_id_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.material_id_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'material_id_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.material_id_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IslmsNull() {
                 return this.IsNull(this.tabletemplate_pa.lmsColumn);
             }
@@ -11945,6 +12226,114 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setimg5Null() {
                 this[this.tabletemplate_pa.img5Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isisoven_textNull() {
+                return this.IsNull(this.tabletemplate_pa.isoven_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setisoven_textNull() {
+                this[this.tabletemplate_pa.isoven_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isisdesiccator_textNull() {
+                return this.IsNull(this.tabletemplate_pa.isdesiccator_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setisdesiccator_textNull() {
+                this[this.tabletemplate_pa.isdesiccator_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isgravimetricalalysis_id_textNull() {
+                return this.IsNull(this.tabletemplate_pa.gravimetricalalysis_id_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setgravimetricalalysis_id_textNull() {
+                this[this.tabletemplate_pa.gravimetricalalysis_id_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isiseasydry_textNull() {
+                return this.IsNull(this.tabletemplate_pa.iseasydry_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setiseasydry_textNull() {
+                this[this.tabletemplate_pa.iseasydry_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isisambientair_textNull() {
+                return this.IsNull(this.tabletemplate_pa.isambientair_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setisambientair_textNull() {
+                this[this.tabletemplate_pa.isambientair_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isiszeissaxioimager2_textNull() {
+                return this.IsNull(this.tabletemplate_pa.iszeissaxioimager2_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setiszeissaxioimager2_textNull() {
+                this[this.tabletemplate_pa.iszeissaxioimager2_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isismeasuringsoftware_textNull() {
+                return this.IsNull(this.tabletemplate_pa.ismeasuringsoftware_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setismeasuringsoftware_textNull() {
+                this[this.tabletemplate_pa.ismeasuringsoftware_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isisautomated_textNull() {
+                return this.IsNull(this.tabletemplate_pa.isautomated_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setisautomated_textNull() {
+                this[this.tabletemplate_pa.isautomated_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Ismaterial_id_textNull() {
+                return this.IsNull(this.tabletemplate_pa.material_id_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setmaterial_id_textNull() {
+                this[this.tabletemplate_pa.material_id_textColumn] = global::System.Convert.DBNull;
             }
         }
         

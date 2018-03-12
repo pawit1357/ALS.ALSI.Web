@@ -2289,7 +2289,7 @@ namespace ALS.ALSI.Web.view.template
             this.pa.fluid3_id_text = ddlFluid3.SelectedItem.Text;
             this.pa.istshb01_text = cbTshb01.Checked.ToString();
             this.pa.istshb02_text = cbTshb02.Checked.ToString();
-            this.pa.istshb02_text = cbTshb03.Checked.ToString();
+            this.pa.istshb03_text = cbTshb03.Checked.ToString();
             this.pa.ispots01_text = cbPots01.Checked.ToString();
             this.pa.isdissolving_text = cbDissolving.Checked.ToString();
             this.pa.ispressurerinsing_text = cbPressureRinsing.Checked.ToString();
@@ -2299,13 +2299,25 @@ namespace ALS.ALSI.Web.view.template
             this.pa.isrewashingquantity_text = cbRewashingQuantity.Checked.ToString();
             this.pa.iswashpressurerinsing_text = cbWashPressureRinsing.Checked.ToString();
             this.pa.iswashinternalrinsing_text = cbWashInternalRinsing.Checked.ToString();
+            this.pa.iswashagitation_text = cbWashAgitation.Checked.ToString();
+            this.pa.isoven_text = cbOven.Checked.ToString();
+            this.pa.isdesiccator_text = cbDesiccator.Checked.ToString();
+            this.pa.gravimetricalalysis_id_text = ddlGravimetricAlalysis.SelectedItem.Text;
+            this.pa.iseasydry_text = cbEasyDry.Checked.ToString();
+            this.pa.isambientair_text = cbAmbientAir.Checked.ToString();
+            this.pa.iszeissaxioimager2_text = cbZEISSAxioImager2.Checked.ToString();
+            this.pa.ismeasuringsoftware_text = cbMeasuringSoftware.Checked.ToString();
+            this.pa.isautomated_text = cbAutomated.Checked.ToString();
+            this.pa.material_id_text = ddlMaterial.SelectedItem.Text;
+
+            
             pas.Add(this.pa);
 
 
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", eops.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dissolvings.ToDataTable())); // Add datasource here
             //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", images.ToDataTable())); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dissolvings.ToDataTable())); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", washings.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", washings.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", eops.ToDataTable())); // Add datasource here
             //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", mas.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", pas.ToDataTable())); // Add datasource here
 
