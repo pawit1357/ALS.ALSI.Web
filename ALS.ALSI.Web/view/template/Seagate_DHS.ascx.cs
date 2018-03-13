@@ -47,7 +47,12 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_seagate_dhs_coverpage> coverpages
         {
-            get { return (List<template_seagate_dhs_coverpage>)Session[GetType().Name + "coverpages"]; }
+            get
+            {
+                List<template_seagate_dhs_coverpage> tmps = (List<template_seagate_dhs_coverpage>)Session[GetType().Name + "coverpages"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            }
             set { Session[GetType().Name + "coverpages"] = value; }
         }
 
@@ -131,7 +136,7 @@ namespace ALS.ALSI.Web.view.template
             this.tbCas = tb_m_dhs_cas.FindAllBySampleID(this.SampleID);
             if (this.tbCas != null && this.tbCas.Count > 0 && this.coverpages != null && this.coverpages.Count > 0)
             {
-                this.coverpages = this.coverpages.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal));
+                //this.coverpages = this.coverpages.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal));
 
                 gvResult.DataSource = this.tbCas;
                 gvResult.DataBind();
@@ -944,7 +949,7 @@ namespace ALS.ALSI.Web.view.template
                     newCoverPage.Add(_cover);
                 }
 
-                gvCoverPages.DataSource = newCoverPage;
+                gvCoverPages.DataSource =  newCoverPage;
                 gvCoverPages.DataBind();
 
             }
@@ -1008,7 +1013,6 @@ namespace ALS.ALSI.Web.view.template
             viewer.ProcessingMode = ProcessingMode.Local;
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
 
             List<template_seagate_dhs_coverpage> ds2 = this.coverpages.ToList();
 
@@ -1131,59 +1135,7 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-            tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
-
-            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", component.C));
-
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "DHS"));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_seagate_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
-
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-        }
+       
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {

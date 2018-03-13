@@ -243,7 +243,8 @@ namespace ALS.ALSI.Web.view.template
                 txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].number_of_pieces_used_for_extraction;
                 txtProcedureNo.Text = this.coverpages[0].procedureNo;
 
-                gvResult.DataSource = this.coverpages;
+
+                gvResult.DataSource =  this.coverpages;
                 gvResult.DataBind();
             }
             else
@@ -273,16 +274,6 @@ namespace ALS.ALSI.Web.view.template
 
             if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
             {
-                //#region ":: STAMP ANALYZED DATE ::"
-                //if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                //{
-                //    if (this.jobSample.date_chemist_alalyze == null)
-                //    {
-                //        this.jobSample.date_chemist_alalyze = DateTime.Now;
-                //        this.jobSample.Update();
-                //    }
-                //}
-                //#endregion
                 pRefImage.Visible = true;
                 gvResult.Columns[5].Visible = true;
                 gvResult.Columns[6].Visible = false;

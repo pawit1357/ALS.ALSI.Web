@@ -50,12 +50,24 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_wd_dhs_coverpage> coverpages
         {
-            get { return (List<template_wd_dhs_coverpage>)Session[GetType().Name + "coverpages"]; }
+            get {
+                List<template_wd_dhs_coverpage> tmps = (List<template_wd_dhs_coverpage>)Session[GetType().Name + "coverpages"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+
+                //return (List<template_wd_dhs_coverpage>)Session[GetType().Name + "coverpages"];
+            }
             set { Session[GetType().Name + "coverpages"] = value; }
         }
         public List<template_wd_dhs_coverpage> reportCovers
         {
-            get { return (List<template_wd_dhs_coverpage>)Session[GetType().Name + "reportCovers"]; }
+            get {
+                List<template_wd_dhs_coverpage> tmps = (List<template_wd_dhs_coverpage>)Session[GetType().Name + "reportCovers"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+
+                //return (List<template_wd_dhs_coverpage>)Session[GetType().Name + "reportCovers"];
+            }
             set { Session[GetType().Name + "reportCovers"] = value; }
         }
 

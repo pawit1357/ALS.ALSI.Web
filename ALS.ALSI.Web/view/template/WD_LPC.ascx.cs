@@ -41,7 +41,13 @@ namespace ALS.ALSI.Web.view.template
         }
         public List<template_wd_lpc_coverpage> Lpc
         {
-            get { return (List<template_wd_lpc_coverpage>)Session[GetType().Name + "Lpc"]; }
+            get {
+                List<template_wd_lpc_coverpage> tmps = (List<template_wd_lpc_coverpage>)Session[GetType().Name + "Lpc"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+
+                //return (List<template_wd_lpc_coverpage>)Session[GetType().Name + "Lpc"];
+            }
             set { Session[GetType().Name + "Lpc"] = value; }
         }
 
@@ -204,14 +210,21 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
 
                 ddlWashMethod.SelectedValue = _lpc.WashMethod;
-                if (!String.IsNullOrEmpty(_lpc.WashMethod) && _lpc.WashMethod.Equals("Flip"))
+                switch (_lpc.WashMethod)
                 {
-                    pTankConditions.Visible = false;
+                    case "Flip":
+                    case "Rinse":
+                    case "Shake":
+                        pTankConditions.Visible = false;
+                        break;
+                    case "Ultrasonic":
+                        pTankConditions.Visible = true;
+                        break;
+                    default:
+                        pTankConditions.Visible = false;
+                        break;
                 }
-                else
-                {
-                    pTankConditions.Visible = true;
-                }
+     
 
 
                 ddlSpecification.SelectedValue = _lpc.detail_spec_id.ToString();

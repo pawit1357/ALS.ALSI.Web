@@ -48,7 +48,11 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_seagate_dhs_coverpage> coverpages
         {
-            get { return (List<template_seagate_dhs_coverpage>)Session[GetType().Name + "coverpages"]; }
+            get {
+                List<template_seagate_dhs_coverpage> tmps = (List<template_seagate_dhs_coverpage>)Session[GetType().Name + "coverpages"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            }
             set { Session[GetType().Name + "coverpages"] = value; }
         }
 
@@ -125,7 +129,7 @@ namespace ALS.ALSI.Web.view.template
             this.tbCas = tb_m_dhs_cas.FindAllBySampleID(this.SampleID);
             if (this.tbCas != null && this.tbCas.Count > 0 && this.coverpages != null && this.coverpages.Count > 0)
             {
-                this.coverpages = this.coverpages.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal));
+                //this.coverpages = this.coverpages.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal));
 
                 gvResult.DataSource = this.tbCas;
                 gvResult.DataBind();
@@ -897,44 +901,11 @@ namespace ALS.ALSI.Web.view.template
                             break;
                     }
                     newCoverPage.Add(_cover);
-                    //switch (_cover.chemical_id)
-                    //{
-                    //    case "C31.0":
-                    //        List<template_seagate_dhs_coverpage> c31List = new List<template_seagate_dhs_coverpage>();
-
-                    //        List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.c31_flag != null && x.c31_flag.ToUpper().Equals(_cover.chemical_id)).ToList();
-                    //        if (childs.Count > 0)
-                    //        {
-                    //            foreach (tb_m_dhs_cas child in childs)
-                    //            {
-                    //                template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
-                    //                work.sample_id = this.SampleID;
-                    //                work.component_id = _cover.component_id;
-                    //                work.chemical_id = _cover.chemical_id;
-                    //                //work.name = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + child.library_id;
-                    //                work.name =  child.library_id;
-                    //                work.ng_part = _cover.ng_part;
-                    //                work.result = child.amount;
-                    //                work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                    //                c31List.Add(work);
-                    //            }
-                    //            _cover.ng_part = "-";
-                    //            _cover.result = "-";
-                    //        }
-                    //        else
-                    //        {
-                    //            _cover.result = "Not significant peak";
-                    //        }
-                    //        //newCoverPage.Add(_cover);
-                    //        newCoverPage.AddRange(c31List);
-                    //        break;
-                    //    default:
-                    //        newCoverPage.Add(_cover);
-                    //        break;
-                    //}
+                    
 
                 }
 
+                
                 gvCoverPages.DataSource = newCoverPage;
                 gvCoverPages.DataBind();
             }
@@ -1034,26 +1005,7 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("PageCount", "0"));
             }
 
-            //if (ds2.Count > 0 && ds2.Count <= 10)
-            //{
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
-            //}
-            //if (ds2.Count >10)
-            //{
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0,10).ToDataTable())); // Add datasource here
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(10, ds2.Count-10).ToDataTable())); // Add datasource here
-            //}
-            //if (cbNoHeader.Checked)
-            //{
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt)); // Add datasource here
-            //}
-            //else
-            //{
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
-
-            //}
-
+         
 
             string download = String.Empty;
 
