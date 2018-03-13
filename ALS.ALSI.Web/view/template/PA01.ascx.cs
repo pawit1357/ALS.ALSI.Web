@@ -2309,8 +2309,8 @@ namespace ALS.ALSI.Web.view.template
             this.pa.ismeasuringsoftware_text = cbMeasuringSoftware.Checked.ToString();
             this.pa.isautomated_text = cbAutomated.Checked.ToString();
             this.pa.material_id_text = ddlMaterial.SelectedItem.Text;
-
-            
+            this.pa.lbmembranetype = lbMembraneType.Text;
+            this.pa.lbPermembrane_text = lbPermembrane.Text;
             pas.Add(this.pa);
 
 
@@ -2318,7 +2318,7 @@ namespace ALS.ALSI.Web.view.template
             //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", images.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", washings.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", eops.ToDataTable())); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", mas.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", mas.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", pas.ToDataTable())); // Add datasource here
 
             //xxxx

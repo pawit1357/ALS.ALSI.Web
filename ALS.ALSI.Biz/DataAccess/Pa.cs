@@ -23,6 +23,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public String isfluid3_text { get; set; }
         public String istshb01_text { get; set; }
         public String istshb02_text { get; set; }
+        public String istshb03_text { get; set; }
+
         public String ispots01_text { get; set; }
         public String isdissolving_text { get; set; }
         public String ispressurerinsing_text { get; set; }
@@ -32,6 +34,21 @@ namespace ALS.ALSI.Biz.DataAccess
         public String isrewashingquantity_text { get; set; }
         public String iswashpressurerinsing_text { get; set; }
         public String iswashinternalrinsing_text { get; set; }
+        public String iswashagitation_text { get; set; }
+        public String isoven_text { get; set; }
+        public String isdesiccator_text { get; set; }
+        public String gravimetricalalysis_id_text { get; set; }
+        public String iseasydry_text { get; set; }
+        public String isambientair_text { get; set; }
+
+        public String iszeissaxioimager2_text { get; set; }
+        public String ismeasuringsoftware_text { get; set; }
+        public String isautomated_text { get; set; }
+        public String material_id_text { get; set; }
+        public String lbPermembrane_text { get; set; }
+
+
+
         public String isfiltrationmethod_text { get; set; }
 
         public byte[] img1 { get; set; }

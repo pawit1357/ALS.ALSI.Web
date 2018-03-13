@@ -792,7 +792,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>3.40535cm</Top>
-            <Left>0cm</Left>
+            <Left>0.14242cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.48107cm</Width>
             <Style>
@@ -1567,7 +1567,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.61833in</Top>
-            <Left>0in</Left>
+            <Left>0.05607in</Left>
             <Height>0.69937in</Height>
             <Width>7.28213in</Width>
             <ZIndex>1</ZIndex>
@@ -1634,7 +1634,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>5.95751cm</Top>
-            <Left>0cm</Left>
+            <Left>0.14242cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.48107cm</Width>
             <ZIndex>2</ZIndex>
@@ -2353,6 +2353,7 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet2</DataSetName>
             <Top>2.58145in</Top>
+            <Left>0.05607in</Left>
             <Height>0.55507in</Height>
             <Width>7.29516in</Width>
             <ZIndex>3</ZIndex>
@@ -2787,7 +2788,7 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet3</DataSetName>
-            <Top>6.00629in</Top>
+            <Top>6.02443in</Top>
             <Height>0.37463in</Height>
             <Width>7.30035in</Width>
             <ZIndex>4</ZIndex>
@@ -2827,7 +2828,17 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Analysis Table on</Value>
+                    <Value>Analysis Table on </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!tafdp.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
@@ -2843,7 +2854,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>14.65663cm</Top>
+            <Top>14.70271cm</Top>
             <Left>0.06185cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.49661cm</Width>
@@ -2858,68 +2869,12 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox42">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Please refer to attachment for details of results</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Note: This report was performed test by ALS Singapore</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Lucida Sans</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>11.86051cm</Top>
-            <Left>0.09495cm</Left>
-            <Height>0.939cm</Height>
-            <Width>18.49661cm</Width>
-            <ZIndex>6</ZIndex>
-            <Visibility>
-              <Hidden>true</Hidden>
-            </Visibility>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>8.97312in</Top>
+            <Top>8.99126in</Top>
             <Height>1.04167in</Height>
             <Width>7.30646in</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2960,10 +2915,10 @@
                 <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
               </Parameter>
             </Parameters>
-            <Left>0in</Left>
+            <Left>0.05607in</Left>
             <Height>1.34069in</Height>
             <Width>7.27601in</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3221,11 +3176,11 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>13.0523cm</Top>
+            <Top>13.09838cm</Top>
             <Left>0.06185cm</Left>
             <Height>1.42335cm</Height>
             <Width>18.48106cm</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>8</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -3488,11 +3443,11 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>16.27812cm</Top>
+            <Top>16.3242cm</Top>
             <Left>0cm</Left>
             <Height>1.46751cm</Height>
             <Width>18.55846cm</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -3925,10 +3880,10 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet4</DataSetName>
-            <Top>7.25021in</Top>
+            <Top>7.26835in</Top>
             <Height>0.39203in</Height>
             <Width>7.3195in</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>10</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -4209,11 +4164,11 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>19.5702cm</Top>
+            <Top>19.61628cm</Top>
             <Left>0cm</Left>
             <Height>1.37916cm</Height>
             <Width>18.57606cm</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>11</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -4646,10 +4601,10 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet5</DataSetName>
-            <Top>8.5637in</Top>
+            <Top>8.58184in</Top>
             <Height>0.40942in</Height>
             <Width>7.31951in</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>12</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -4686,7 +4641,17 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Analysis Table on Internal Surface</Value>
+                    <Value>Analysis Table on </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!tafdp.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
@@ -4702,11 +4667,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>17.81619cm</Top>
+            <Top>17.86227cm</Top>
             <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.59156cm</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4724,7 +4689,17 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Analysis Table on Internal Surface</Value>
+                    <Value>Analysis Table on </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!tafdp.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
@@ -4740,11 +4715,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>21.15244cm</Top>
+            <Top>21.19852cm</Top>
             <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.59156cm</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4759,12 +4734,12 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.05323in</Width>
+                  <Width>2.36276in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.94082in</Height>
+                  <Height>1.52914in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4806,11 +4781,11 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet7</DataSetName>
-            <Top>3.70089in</Top>
-            <Left>0.18966in</Left>
-            <Height>0.94082in</Height>
-            <Width>1.05323in</Width>
-            <ZIndex>16</ZIndex>
+            <Top>3.55826in</Top>
+            <Left>0.24573in</Left>
+            <Height>1.52914in</Height>
+            <Width>2.36276in</Width>
+            <ZIndex>15</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
             </Visibility>
@@ -4848,8 +4823,17 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Total hard particles/cm2 = total no. of hard particles/(no. of times taped x surface area analysed)
-Stage Mimic of  Base
-Area</Value>
+Stage Mimic of </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!tafdp.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
@@ -4866,10 +4850,10 @@ Area</Value>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>8.03731cm</Top>
-            <Left>0cm</Left>
-            <Height>1.29239cm</Height>
+            <Left>0.14242cm</Left>
+            <Height>0.89482cm</Height>
             <Width>18.48104cm</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>16</ZIndex>
             <Visibility>
               <Hidden>=iif(Parameters!img01Url.Value.Equals("0"),true,false)</Hidden>
             </Visibility>
@@ -4884,10 +4868,10 @@ Area</Value>
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>10.30294in</Height>
+        <Height>10.03293in</Height>
         <Style />
       </Body>
-      <Width>7.31951in</Width>
+      <Width>7.37558in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -4969,6 +4953,11 @@ Area</Value>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="tafdp">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -5044,6 +5033,11 @@ Area</Value>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>7</RowIndex>
           <ParameterName>img01Url</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>tafdp</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

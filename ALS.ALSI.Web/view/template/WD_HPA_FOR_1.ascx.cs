@@ -697,7 +697,7 @@ namespace ALS.ALSI.Web.view.template
                     if (_val.D != null)
                     {
                         String dValue = _val.D.Replace("<", "").Trim();
-                        _val.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "" : (_val.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
+                        _val.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "NA" : (_val.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
                     }
                 }
             }
@@ -709,7 +709,7 @@ namespace ALS.ALSI.Web.view.template
                 if (mgsioResult.D != null)
                 {
                     String dValue = mgsioResult.D.Replace("<", "").Trim();
-                    mgsioResult.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "" : (mgsioResult.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
+                    mgsioResult.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "NA" : (mgsioResult.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
                 }
             }
 
@@ -974,6 +974,10 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
+            reportParameters.Add(new ReportParameter("tafdp", txtB23.Text));
+
+
+            
             tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
             if (_detailSpec != null)
             {

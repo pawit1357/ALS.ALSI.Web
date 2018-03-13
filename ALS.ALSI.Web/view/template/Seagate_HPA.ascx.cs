@@ -1703,7 +1703,7 @@ namespace ALS.ALSI.Web.view.template
             row["ExtractionVolume"] = txtExtractionVolume.Text;
             dtHeader.Rows.Add(row);
             row = dtHeader.NewRow();
-            row["Analysis"] = String.Format("HPA (Filtration Method)");
+            row["Analysis"] = "HPA\n(Filtration Method)";
             row["ProcedureNo"] = txtProcedureNo_hpa.Text;
             row["NumOfPiecesUsedForExtraction"] = txtNumberOfPieces_hpa.Text;
             row["ExtractionMedium"] = txtExtractionMedium_hpa.Text;

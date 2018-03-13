@@ -104,4 +104,33 @@ UPDATE `alsi`.`m_type_of_test` SET `ref_template_id`='907' WHERE `ID`='236';
 -- INSERT INTO `alsi`.`m_specification` (`ID`, `name`, `status`) VALUES ('27', 'PA(REPORT)', 'A');
 -- INSERT INTO `alsi`.`m_type_of_test` (`ID`, `specification_id`, `prefix`, `name`, `parent`, `status`, `data_group`) VALUES ('219', '27', 'PAB', 'PA_REPORT1', '1', 'A', 'PA');
 -- INSERT INTO `alsi`.`m_type_of_test` (`ID`, `specification_id`, `prefix`, `name`, `parent`, `status`, `data_group`) VALUES ('220', '27', 'PAB', 'PA_REPORT2', '1', 'A', 'PA');
+
+
+----------------------- 2018-3-13 ---------------------------
+
+ALTER TABLE `alsi`.`template_wd_hpa_for1_coverpage` 
+CHANGE COLUMN `ParticleAnalysisBySEMEDX` `ParticleAnalysisBySEMEDX` VARCHAR(150) NULL DEFAULT NULL ,
+CHANGE COLUMN `TapedAreaForDriveParts` `TapedAreaForDriveParts` VARCHAR(150) NULL DEFAULT NULL ,
+CHANGE COLUMN `NoofTimesTaped` `NoofTimesTaped` VARCHAR(150) NULL DEFAULT NULL ,
+CHANGE COLUMN `SurfaceAreaAnalysed` `SurfaceAreaAnalysed` VARCHAR(150) NULL DEFAULT NULL ,
+CHANGE COLUMN `ParticleRanges` `ParticleRanges` VARCHAR(150) NULL DEFAULT NULL ;
+
+--
+ALTER TABLE `alsi`.`template_wd_hpa_for3_coverpage` 
+CHANGE COLUMN `TapedAreaForDriveParts` `TapedAreaForDriveParts` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `NoofTimesTaped` `NoofTimesTaped` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `SurfaceAreaAnalysed` `SurfaceAreaAnalysed` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `ParticleRanges` `ParticleRanges` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `ParticleAnalysisBySEMEDX_1` `ParticleAnalysisBySEMEDX_1` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `TapedAreaForDriveParts_1` `TapedAreaForDriveParts_1` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `NoofTimesTaped_1` `NoofTimesTaped_1` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `SurfaceAreaAnalysed_1` `SurfaceAreaAnalysed_1` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `ParticleRanges_1` `ParticleRanges_1` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `ParticleAnalysisBySEMEDX_2` `ParticleAnalysisBySEMEDX_2` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `TapedAreaForDriveParts_2` `TapedAreaForDriveParts_2` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `NoofTimesTaped_2` `NoofTimesTaped_2` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `SurfaceAreaAnalysed_2` `SurfaceAreaAnalysed_2` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `ParticleRanges_2` `ParticleRanges_2` VARCHAR(255) NULL DEFAULT NULL ;
+
+
 */

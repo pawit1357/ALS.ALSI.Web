@@ -1478,11 +1478,11 @@
           <Property Name="row_type" Type="int" />
           <Property Name="parent" Type="int" />
           <Property Name="img_path" Type="varchar" MaxLength="150" />
-          <Property Name="ParticleAnalysisBySEMEDX" Type="varchar" MaxLength="45" />
-          <Property Name="TapedAreaForDriveParts" Type="varchar" MaxLength="45" />
-          <Property Name="NoofTimesTaped" Type="varchar" MaxLength="45" />
-          <Property Name="SurfaceAreaAnalysed" Type="varchar" MaxLength="45" />
-          <Property Name="ParticleRanges" Type="varchar" MaxLength="45" />
+          <Property Name="ParticleAnalysisBySEMEDX" Type="varchar" MaxLength="150" />
+          <Property Name="TapedAreaForDriveParts" Type="varchar" MaxLength="150" />
+          <Property Name="NoofTimesTaped" Type="varchar" MaxLength="150" />
+          <Property Name="SurfaceAreaAnalysed" Type="varchar" MaxLength="150" />
+          <Property Name="ParticleRanges" Type="varchar" MaxLength="150" />
           <Property Name="unit" Type="int" />
           <Property Name="hpa_type" Type="int" />
           <Property Name="data_group" Type="varchar" MaxLength="150" />
@@ -1508,20 +1508,20 @@
           <Property Name="row_group" Type="int" />
           <Property Name="unit" Type="int" />
           <Property Name="ParticleAnalysisBySEMEDX" Type="varchar" MaxLength="255" />
-          <Property Name="TapedAreaForDriveParts" Type="varchar" MaxLength="45" />
-          <Property Name="NoofTimesTaped" Type="varchar" MaxLength="45" />
-          <Property Name="SurfaceAreaAnalysed" Type="varchar" MaxLength="45" />
-          <Property Name="ParticleRanges" Type="varchar" MaxLength="45" />
-          <Property Name="ParticleAnalysisBySEMEDX_1" Type="varchar" MaxLength="45" />
-          <Property Name="TapedAreaForDriveParts_1" Type="varchar" MaxLength="45" />
-          <Property Name="NoofTimesTaped_1" Type="varchar" MaxLength="45" />
-          <Property Name="SurfaceAreaAnalysed_1" Type="varchar" MaxLength="45" />
-          <Property Name="ParticleRanges_1" Type="varchar" MaxLength="45" />
-          <Property Name="ParticleAnalysisBySEMEDX_2" Type="varchar" MaxLength="45" />
-          <Property Name="TapedAreaForDriveParts_2" Type="varchar" MaxLength="45" />
-          <Property Name="NoofTimesTaped_2" Type="varchar" MaxLength="45" />
-          <Property Name="SurfaceAreaAnalysed_2" Type="varchar" MaxLength="45" />
-          <Property Name="ParticleRanges_2" Type="varchar" MaxLength="45" />
+          <Property Name="TapedAreaForDriveParts" Type="varchar" MaxLength="255" />
+          <Property Name="NoofTimesTaped" Type="varchar" MaxLength="255" />
+          <Property Name="SurfaceAreaAnalysed" Type="varchar" MaxLength="255" />
+          <Property Name="ParticleRanges" Type="varchar" MaxLength="255" />
+          <Property Name="ParticleAnalysisBySEMEDX_1" Type="varchar" MaxLength="255" />
+          <Property Name="TapedAreaForDriveParts_1" Type="varchar" MaxLength="255" />
+          <Property Name="NoofTimesTaped_1" Type="varchar" MaxLength="255" />
+          <Property Name="SurfaceAreaAnalysed_1" Type="varchar" MaxLength="255" />
+          <Property Name="ParticleRanges_1" Type="varchar" MaxLength="255" />
+          <Property Name="ParticleAnalysisBySEMEDX_2" Type="varchar" MaxLength="255" />
+          <Property Name="TapedAreaForDriveParts_2" Type="varchar" MaxLength="255" />
+          <Property Name="NoofTimesTaped_2" Type="varchar" MaxLength="255" />
+          <Property Name="SurfaceAreaAnalysed_2" Type="varchar" MaxLength="255" />
+          <Property Name="ParticleRanges_2" Type="varchar" MaxLength="255" />
           <Property Name="hpa_type" Type="int" />
         </EntityType>
         <EntityType Name="template_wd_ic_coverpage">
@@ -3562,11 +3562,11 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_type" Type="Int32" />
           <Property Name="parent" Type="Int32" />
           <Property Name="img_path" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="ParticleAnalysisBySEMEDX" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="TapedAreaForDriveParts" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="NoofTimesTaped" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="SurfaceAreaAnalysed" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ParticleRanges" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ParticleAnalysisBySEMEDX" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TapedAreaForDriveParts" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NoofTimesTaped" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="SurfaceAreaAnalysed" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ParticleRanges" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="unit" Type="Int32" />
           <Property Name="hpa_type" Type="Int32" />
           <Property Name="data_group" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -3592,20 +3592,20 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_group" Type="Int32" />
           <Property Name="unit" Type="Int32" />
           <Property Name="ParticleAnalysisBySEMEDX" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="TapedAreaForDriveParts" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="NoofTimesTaped" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="SurfaceAreaAnalysed" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ParticleRanges" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ParticleAnalysisBySEMEDX_1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="TapedAreaForDriveParts_1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="NoofTimesTaped_1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="SurfaceAreaAnalysed_1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ParticleRanges_1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ParticleAnalysisBySEMEDX_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="TapedAreaForDriveParts_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="NoofTimesTaped_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="SurfaceAreaAnalysed_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ParticleRanges_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TapedAreaForDriveParts" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NoofTimesTaped" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SurfaceAreaAnalysed" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ParticleRanges" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ParticleAnalysisBySEMEDX_1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TapedAreaForDriveParts_1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NoofTimesTaped_1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SurfaceAreaAnalysed_1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ParticleRanges_1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ParticleAnalysisBySEMEDX_2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TapedAreaForDriveParts_2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NoofTimesTaped_2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SurfaceAreaAnalysed_2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ParticleRanges_2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="hpa_type" Type="Int32" />
         </EntityType>
         <EntityType Name="template_wd_ic_coverpage">

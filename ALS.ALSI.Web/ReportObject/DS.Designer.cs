@@ -4457,6 +4457,8 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columnmaterial_id_text;
             
+            private global::System.Data.DataColumn columnlbPermembrane_text;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public template_paDataTable() {
@@ -5372,6 +5374,14 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn lbPermembrane_textColumn {
+                get {
+                    return this.columnlbPermembrane_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5517,7 +5527,8 @@ namespace ALS.ALSI.Web.ReportObject {
                         string iszeissaxioimager2_text, 
                         string ismeasuringsoftware_text, 
                         string isautomated_text, 
-                        string material_id_text) {
+                        string material_id_text, 
+                        string lbPermembrane_text) {
                 template_paRow rowtemplate_paRow = ((template_paRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         lms,
@@ -5629,7 +5640,8 @@ namespace ALS.ALSI.Web.ReportObject {
                         iszeissaxioimager2_text,
                         ismeasuringsoftware_text,
                         isautomated_text,
-                        material_id_text};
+                        material_id_text,
+                        lbPermembrane_text};
                 rowtemplate_paRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtemplate_paRow);
                 return rowtemplate_paRow;
@@ -5762,6 +5774,7 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columnismeasuringsoftware_text = base.Columns["ismeasuringsoftware_text"];
                 this.columnisautomated_text = base.Columns["isautomated_text"];
                 this.columnmaterial_id_text = base.Columns["material_id_text"];
+                this.columnlbPermembrane_text = base.Columns["lbPermembrane_text"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5987,6 +6000,8 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columnisautomated_text);
                 this.columnmaterial_id_text = new global::System.Data.DataColumn("material_id_text", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmaterial_id_text);
+                this.columnlbPermembrane_text = new global::System.Data.DataColumn("lbPermembrane_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlbPermembrane_text);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11018,6 +11033,22 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string lbPermembrane_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.lbPermembrane_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'lbPermembrane_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.lbPermembrane_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IslmsNull() {
                 return this.IsNull(this.tabletemplate_pa.lmsColumn);
             }
@@ -12334,6 +12365,18 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setmaterial_id_textNull() {
                 this[this.tabletemplate_pa.material_id_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IslbPermembrane_textNull() {
+                return this.IsNull(this.tabletemplate_pa.lbPermembrane_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetlbPermembrane_textNull() {
+                this[this.tabletemplate_pa.lbPermembrane_textColumn] = global::System.Convert.DBNull;
             }
         }
         
