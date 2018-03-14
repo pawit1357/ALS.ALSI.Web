@@ -32,6 +32,9 @@ namespace ALS.ALSI.Web.view.template
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_DHS));
+        private const String PA_SPECIFICATION = "PA01";
+        private const String PA_MICROPIC_DATA = "Micropic Data:";
+
         private const String PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION = "Description of process and extraction:";
         private const String PA_DISSOLVING = "Dissolving";
         private const String PA_AGITATION = "Agitation";
@@ -41,6 +44,25 @@ namespace ALS.ALSI.Web.view.template
         private const String PA_REFLECTIVE = "reflective";
         private const String PA_NON_REFLECTIVE = "non-reflective";
         private const String PA_FIBROUS = "fibrous";
+
+        //
+        private const String PA_DDL_EVALUATION_OF_PARTICLE = "Evaluation of Particle:";
+
+        private const String PA_DDL_TEST_ARRANGEMENT_ENV = "Test arrangement / Environment:";
+        private const String PA_DDL_CONTAINER = "Container";
+        private const String PA_DDL_FLUID1 = "Fluid 1";
+        private const String PA_DDL_FLUID2 = "Fluid 2";
+        private const String PA_DDL_FLUID3 = "Fluid 3";
+        private const String PA_DDL_ANALYSIS_MEMBRANE_USED = "Analysis membrane used:";
+        private const String PA_DDL_MANUFACTURER = "Manufacturer";
+        private const String PA_DDL_MATERIAL = "Material";
+
+        private const String PA_DDL_GRAVIMETRIC_ANALYSIS = "Gravimetric analysis:";
+        private const String PA_DDL_LAB_BALANCE = "Lab Balance";
+
+
+
+
 
         public users_login userLogin
         {
@@ -187,34 +209,34 @@ namespace ALS.ALSI.Web.view.template
             #region "Initial component"
 
             ddlContainer.Items.Clear();
-            ddlContainer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Container"));
+            ddlContainer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_CONTAINER));
             ddlContainer.DataBind();
             //ddlContainer.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
             ddlFluid1.Items.Clear();
-            ddlFluid1.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Fluid 1"));
+            ddlFluid1.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_FLUID1));
             ddlFluid1.DataBind();
             //ddlFluid1.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
             ddlFluid2.Items.Clear();
-            ddlFluid2.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Fluid 2"));
+            ddlFluid2.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_FLUID2));
             ddlFluid2.DataBind();
             //ddlFluid2.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
             ddlFluid3.Items.Clear();
-            ddlFluid3.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Test arrangement / Environment:") && x.B.Equals("Fluid 3"));
+            ddlFluid3.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_FLUID3));
             ddlFluid3.DataBind();
             //ddlFluid3.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlManufacturer.Items.Clear();
-            ddlManufacturer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Analysis membrane used:") && x.B.Equals("Manufacturer"));
+            ddlManufacturer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_ANALYSIS_MEMBRANE_USED) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_MANUFACTURER));
             ddlManufacturer.DataBind();
             //ddlManufacturer.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlMaterial.Items.Clear();
-            ddlMaterial.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Analysis membrane used:") && x.B.Equals("Material"));
+            ddlMaterial.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_ANALYSIS_MEMBRANE_USED) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_MATERIAL));
             ddlMaterial.DataBind();
             //ddlMaterial.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlGravimetricAlalysis.Items.Clear();
-            ddlGravimetricAlalysis.DataSource = this.tbMSpecifications.Where(x => x.A.Equals("Gravimetric analysis:") && x.B.Equals("Lab Balance"));
+            ddlGravimetricAlalysis.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_GRAVIMETRIC_ANALYSIS) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_LAB_BALANCE));
             ddlGravimetricAlalysis.DataBind();
             //ddlGravimetricAlalysis.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
@@ -399,7 +421,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 this.pa = new template_pa();
                 #region "gvEop"
-                List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Evaluation of Particle:") && x.B.Equals("PA01")).ToList();
+                List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
                 if (listOfSpec.Count > 0)
                 {
                     foreach (tb_m_specification item in listOfSpec)
@@ -417,7 +439,7 @@ namespace ALS.ALSI.Web.view.template
 
                 #endregion
                 #region "Microscopic Analysis"
-                listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals("Micropic Data:") && x.B.Equals("PA01")).ToList();
+                listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_MICROPIC_DATA) && x.B.Equals(PA_SPECIFICATION)).ToList();
                 if (listOfSpec.Count > 1)
                 {
                     int row = 1;
@@ -465,7 +487,7 @@ namespace ALS.ALSI.Web.view.template
 
                 //default:Agitation
                 lbExtractionMethod.Text = PA_AGITATION;
-                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_AGITATION)).FirstOrDefault();
+                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
@@ -493,7 +515,7 @@ namespace ALS.ALSI.Web.view.template
 
                 }
 
-                selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
@@ -561,10 +583,15 @@ namespace ALS.ALSI.Web.view.template
             {
                 foreach (var item in listPaDetail)
                 {
-
-                    lbPermembrane.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_i).ToString("N0"));
+                    if (!String.IsNullOrEmpty(item.col_i))
+                    {
+                        lbPermembrane.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_i).ToString("N0"));
+                    }
                 }
-                lbPermembrane.Text = String.Format("N({0})", lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1));
+                if (!String.IsNullOrEmpty(lbPermembrane.Text))
+                {
+                    lbPermembrane.Text = String.Format("N({0})", lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1));
+                }
 
                 gvMicroscopicAnalysis.Visible = true;
                 gvMicroscopicAnalysis.DataSource = listPaDetail;
@@ -2272,7 +2299,7 @@ namespace ALS.ALSI.Web.view.template
             List<template_pa_detail> washings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             List<template_pa_detail> mas = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
 
-          
+
             List<template_pa> pas = new List<template_pa>();
             this.pa.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
             this.pa.img2 = CustomUtils.GetBytesFromImage(this.pa.img02);
@@ -2525,21 +2552,21 @@ namespace ALS.ALSI.Web.view.template
                 switch (ddl.ID)
                 {
                     case "cbPressureRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                         cbPressureRinsing.Checked = true;
                         cbInternalRinsing.Checked = false;
                         cbAgitation.Checked = false;
                         lbExtractionMethod.Text = PA_PRESURE_RINSING;
                         break;
                     case "cbInternalRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
                         cbPressureRinsing.Checked = false;
                         cbInternalRinsing.Checked = true;
                         cbAgitation.Checked = false;
                         lbExtractionMethod.Text = " Internal rinsing";
                         break;
                     case "cbAgitation":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_DISSOLVING) && x.C.Equals(PA_AGITATION)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                         cbPressureRinsing.Checked = false;
                         cbInternalRinsing.Checked = false;
                         cbAgitation.Checked = true;
@@ -2593,19 +2620,19 @@ namespace ALS.ALSI.Web.view.template
                 switch (ddl.ID)
                 {
                     case "cbWashPressureRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                         cbWashPressureRinsing.Checked = true;
                         cbWashInternalRinsing.Checked = false;
                         cbWashAgitation.Checked = false;
                         break;
                     case "cbWashInternalRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
                         cbWashPressureRinsing.Checked = false;
                         cbWashInternalRinsing.Checked = true;
                         cbWashAgitation.Checked = false;
                         break;
                     case "cbWashAgitation":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_WASHING) && x.C.Equals(PA_AGITATION)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                         cbWashPressureRinsing.Checked = false;
                         cbWashInternalRinsing.Checked = false;
                         cbWashAgitation.Checked = true;

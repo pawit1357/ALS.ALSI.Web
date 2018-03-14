@@ -65,6 +65,14 @@ namespace ALS.ALSI.Web.view.request
         {
             gvSample.DataSource = this.dataList;
             gvSample.DataBind();
+
+            btnSave.Visible = this.dataList.Count > 0;
+            pChemist.Visible = this.dataList.Count > 0;
+            if (!btnSave.Visible)
+            {
+                lbDesc.Text = "รายการที่เลือกไม่ได้ถูกกำหนดเป็นงานแบบกลุ่ม";
+                
+            }
         }
 
         private void removeSession()

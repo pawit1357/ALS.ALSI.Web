@@ -3,19 +3,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
-<style type="text/css">
-    .auto-style1 {
-        height: 26px;
-    }
 
-    .auto-style2 {
-        width: 10px;
-    }
-
-    .auto-style3 {
-        height: 27px;
-    }
-</style>
 
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <asp:ToolkitScriptManager ID="ToolkitScript1" runat="server" />
@@ -643,22 +631,22 @@
                                                 <td style="text-align: center">
                                                     <asp:CheckBox ID="cbContainer" runat="server" Checked="true" /></td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlContainer" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control"></asp:DropDownList></td>
+                                                    <asp:DropDownList ID="ddlContainer" runat="server" DataTextField="D" DataValueField="ID" CssClass="form-control"></asp:DropDownList></td>
                                                 <td colspan="4"></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <asp:CheckBox ID="cbFluid1" runat="server" Checked="true" OnCheckedChanged="cbFluid1_CheckedChanged" AutoPostBack="true" /></td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlFluid1" runat="server" DataTextField="C" DataValueField="ID" OnSelectedIndexChanged="ddlFluid1_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>
+                                                    <asp:DropDownList ID="ddlFluid1" runat="server" DataTextField="D" DataValueField="ID" OnSelectedIndexChanged="ddlFluid1_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>
                                                 <td style="text-align: center">
                                                     <asp:CheckBox ID="cbFluid2" runat="server" OnCheckedChanged="cbFluid2_CheckedChanged" AutoPostBack="true" /></td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlFluid2" runat="server" DataTextField="C" DataValueField="ID" OnSelectedIndexChanged="ddlFluid2_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>
+                                                    <asp:DropDownList ID="ddlFluid2" runat="server" DataTextField="D" DataValueField="ID" OnSelectedIndexChanged="ddlFluid2_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>
                                                 <td style="text-align: center">
                                                     <asp:CheckBox ID="cbFluid3" runat="server" OnCheckedChanged="cbFluid3_CheckedChanged" AutoPostBack="true" /></td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlFluid3" runat="server" DataTextField="C" DataValueField="ID" OnSelectedIndexChanged="ddlFluid3_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>
+                                                    <asp:DropDownList ID="ddlFluid3" runat="server" DataTextField="D" DataValueField="ID" OnSelectedIndexChanged="ddlFluid3_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -1060,10 +1048,10 @@
                                             <tr>
                                                 <td>Manufacturer:</td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlManufacturer" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlManufacturer_SelectedIndexChanged"></asp:DropDownList></td>
+                                                    <asp:DropDownList ID="ddlManufacturer" runat="server" DataTextField="D" DataValueField="ID" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlManufacturer_SelectedIndexChanged"></asp:DropDownList></td>
                                                 <td>Material:</td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlMaterial" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlMaterial_SelectedIndexChanged"></asp:DropDownList></td>
+                                                    <asp:DropDownList ID="ddlMaterial" runat="server" DataTextField="D" DataValueField="ID" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlMaterial_SelectedIndexChanged"></asp:DropDownList></td>
                                             </tr>
                                             <tr>
                                                 <td>Pore size [um]</td>
@@ -1128,7 +1116,7 @@
                                             <tr>
                                                 <td>Lab balance</td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlGravimetricAlalysis" runat="server" DataTextField="C" DataValueField="ID" OnSelectedIndexChanged="ddlGravimetricAlalysis_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>
+                                                    <asp:DropDownList ID="ddlGravimetricAlalysis" runat="server" DataTextField="D" DataValueField="ID" OnSelectedIndexChanged="ddlGravimetricAlalysis_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>
                                                 <td>Model:</td>
                                                 <td>
                                                     <asp:TextBox ID="txtModel" runat="server" Text="CHG-252" CssClass="form-control"></asp:TextBox></td>

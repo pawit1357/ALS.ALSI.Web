@@ -64,7 +64,13 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_seagate_ic_coverpage> coverpages
         {
-            get { return (List<template_seagate_ic_coverpage>)Session[GetType().Name + "template_seagate_ic_coverpage"]; }
+            get {
+                List<template_seagate_ic_coverpage> tmps = (List<template_seagate_ic_coverpage>)Session[GetType().Name + "template_seagate_ic_coverpage"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+
+                //return (List<template_seagate_ic_coverpage>)Session[GetType().Name + "template_seagate_ic_coverpage"];
+            }
             set { Session[GetType().Name + "template_seagate_ic_coverpage"] = value; }
         }
         List<String> errors = new List<string>();
@@ -933,35 +939,7 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", anionic.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
 
-            //if (anionic.Count == 0)
-            //{
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
-            //}
-            //else
-            //{
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", anionic.ToDataTable())); // Add datasource here
-            //    if(cationic.Count>0 && cationic.Count <= 3)
-            //    {
-            //        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
-            //        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
-            //    }
-            //    if (cationic.Count>3)
-            //    {
-            //        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.GetRange(0,3).ToDataTable())); // Add datasource here
-            //        viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", cationic.GetRange(3, cationic.Count-3).ToDataTable())); // Add datasource here
-            //    }
-
-            //}
-
-            //if(cationic.Count == 0)
-            //{
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
-            //}
-
-
+         
 
 
 

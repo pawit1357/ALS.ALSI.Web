@@ -61,6 +61,15 @@ namespace ALS.ALSI.Web.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ไม่สามารถลบรายนี้ได้\nเนื่องจากมี job นำข้อมูลนี้ไปใช้.
+        /// </summary>
+        internal static string MSG_BE_USED {
+            get {
+                return ResourceManager.GetString("MSG_BE_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There an error in the data record..
         /// </summary>
         internal static string MSG_SAVE_FAIL {

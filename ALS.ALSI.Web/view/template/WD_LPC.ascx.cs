@@ -121,11 +121,12 @@ namespace ALS.ALSI.Web.view.template
             m_type_of_test typeOfTest = new m_type_of_test();
             typeOfTest = typeOfTest.SelectByID(jobSample.type_of_test_id);
 
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+
             #region "SAMPLE"
             if (this.jobSample != null)
             {
 
-                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
                 lbJobStatus.Text = Constants.GetEnumDescription(status);
                 ddlStatus.Items.Clear();
@@ -246,6 +247,8 @@ namespace ALS.ALSI.Web.view.template
 
                 gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
                 gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+
+                gvResult.Columns[6].Visible = userRole == RoleEnum.CHEMIST;
 
                 gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
                 gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
@@ -1107,11 +1110,14 @@ namespace ALS.ALSI.Web.view.template
             listOFParticle.Add("1.000");
             listOFParticle.Add("2.000");
 
+            List<template_wd_lpc_coverpage> originals = this.Lpc;
+
             List<template_wd_lpc_coverpage> tmps = new List<template_wd_lpc_coverpage>();
 
             foreach (String par in listOFParticle)
             {
                 template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.ID = CustomUtils.GetRandomNumberID();
                 tmp.A = "Average";
                 tmp.B = par;
                 tmp.C = string.Empty;
@@ -1119,11 +1125,14 @@ namespace ALS.ALSI.Web.view.template
                 tmp.E = CustomUtils.Average(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.E)).ToList()).ToString();
                 tmp.F = CustomUtils.Average(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.F)).ToList()).ToString();
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
+
                 tmps.Add(tmp);
             }
             foreach (String par in listOFParticle)
             {
                 template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.ID = CustomUtils.GetRandomNumberID();
                 tmp.A = "Standard Deviation";
                 tmp.B = par;
                 tmp.C = string.Empty;
@@ -1131,11 +1140,14 @@ namespace ALS.ALSI.Web.view.template
                 tmp.E = CustomUtils.StandardDeviation(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.E)).ToList()).ToString();
                 tmp.F = CustomUtils.StandardDeviation(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.F)).ToList()).ToString();
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
+
                 tmps.Add(tmp);
             }
             foreach (String par in listOFParticle)
             {
                 template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.ID = CustomUtils.GetRandomNumberID();
                 tmp.A = "%RSD Deviation";
                 tmp.B = par;
                 tmp.C = string.Empty;
@@ -1147,15 +1159,15 @@ namespace ALS.ALSI.Web.view.template
                 double _F = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Average")).FirstOrDefault().F);
                 double _F2 = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Standard Deviation")).FirstOrDefault().F);
 
-                tmp.E = (_E==0)? "0": ((_E2 / _E) * 100).ToString();
+                tmp.E = (_E == 0) ? "0" : ((_E2 / _E) * 100).ToString();
                 tmp.F = (_F == 0) ? "0" : ((_F2 / _F) * 100).ToString();
+                tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
                 tmps.Add(tmp);
             }
+            originals.AddRange(tmps);
 
-            this.Lpc.AddRange(tmps);
-
-
+            this.Lpc = originals;
 
 
             gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));

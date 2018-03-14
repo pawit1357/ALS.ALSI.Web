@@ -1,30 +1,11 @@
-select * from m_template where path_url like '%wd_cor%' and status='A';
+/*
 
-select id,template_id,job_number,job_status from job_sample 
-where  template_id in(492); 
--- and job_status=13 
--- and id=3823;
+select job_sample.job_number,job_sample.job_status,m_status.name,m_type_of_test.data_group,
+(select GROUP_CONCAT(username SEPARATOR ',') from users_login where responsible_test like CONCAT('%',m_type_of_test.data_group,'%') ) as chemist
+from job_sample
+left join m_type_of_test on job_sample.type_of_test_id = m_type_of_test.id
+left join m_status on m_status.ID=job_sample.job_status
+where template_id in(
+select id from m_template where path_url like '%WD_MESA_IDM.ascx' and status='A') order by job_status;
 
-select * from tb_m_specification where template_id=492;
-
-
--- select * from template_wd_corrosion_coverpage where sample_id=4088;
-
-
-
-select * from template_seagate_hpa_coverpage where sample_id=3823;
-
--- 34843
-
-select * from tb_m_component where template_id=480 order by id desc;
-
--- update tb_m_component set id
-
-
-
-select * from template_wd_corrosion_coverpage where sample_id=3726;
-
-
-select * from job_sample where job_number='ELP-0582-DB';
-
-
+*/

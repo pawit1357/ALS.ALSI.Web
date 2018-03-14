@@ -50,7 +50,13 @@ namespace ALS.ALSI.Web.view.template
         }
         public List<template_seagate_lpc_coverpage> Lpcs
         {
-            get { return (List<template_seagate_lpc_coverpage>)Session[GetType().Name + "Lpcs"]; }
+            get {
+                List<template_seagate_lpc_coverpage> tmps = (List<template_seagate_lpc_coverpage>)Session[GetType().Name + "Lpcs"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_state == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+
+                //return (List<template_seagate_lpc_coverpage>)Session[GetType().Name + "Lpcs"];
+            }
             set { Session[GetType().Name + "Lpcs"] = value; }
         }
         public string PreviousPath
@@ -1131,8 +1137,10 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
-                            listCoverPage[6].Results = lbAverage05.Text;
-
+                            if (listAverages.Count >= 6)
+                            {
+                                listCoverPage[6].Results = lbAverage05.Text;
+                            }
 
                             gvCoverPage05.DataSource = listCoverPage;
                             gvCoverPage05.DataBind();

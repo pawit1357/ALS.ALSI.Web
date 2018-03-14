@@ -1,6 +1,8 @@
 ﻿using ALS.ALSI.Biz;
 using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
+using ALS.ALSI.Utils;
+using ALS.ALSI.Web.Properties;
 using System;
 using System.Collections;
 using System.Data;
@@ -142,10 +144,18 @@ namespace ALS.ALSI.Web.view.customer
             m_customer cus = new m_customer().SelectByID(this.PKID);
             if (cus != null)
             {
-                cus.Delete();
-                //Commit
-                GeneralManager.Commit();
-                bindingData();
+                try
+                {
+                    cus.Delete();
+                    //Commit
+                    GeneralManager.Commit();
+                    bindingData();
+                }
+                catch (Exception ex) {
+                    Console.WriteLine();
+                    MessageBox.Show(this.Page, Resources.MSG_BE_USED);
+                }
+
             }
         }
 

@@ -726,65 +726,66 @@ namespace ALS.ALSI.Web.view.template
             DataTable dt3 = new DataTable();
             DataTable dt4 = new DataTable();
 
-            if (dat.Count == 2)
+            if (dat.Count >= 1)
             {
                 tmp.Add(dat[0]);
                 dt1 = tmp.ToDataTable();
+            }
+            if (dat.Count >= 2)
+            {
                 tmp = new List<template_wd_mesa_img>();
                 tmp.Add(dat[1]);
                 dt2 = tmp.ToDataTable();
             }
-            else if (dat.Count == 4)
+            if (dat.Count >= 3)
             {
-                tmp.Add(dat[0]);
-                dt1 = tmp.ToDataTable();
                 tmp = new List<template_wd_mesa_img>();
                 tmp.Add(dat[2]);
-                dt2 = tmp.ToDataTable();
-                tmp = new List<template_wd_mesa_img>();
-                tmp.Add(dat[1]);
                 dt3 = tmp.ToDataTable();
+            }
+            if (dat.Count >= 4)
+            {
                 tmp = new List<template_wd_mesa_img>();
                 tmp.Add(dat[3]);
                 dt4 = tmp.ToDataTable();
             }
-
-
-            if (dt1 != null && dt1.Rows.Count > 0)
+            if (dt1.Rows.Count > 0)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt1)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt1)); //PAGE02
             }
             else
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); //PAGE02
 
             }
-            if (dt2 != null && dt2.Rows.Count > 0)
+            if (dt1.Rows.Count > 0)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt2)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt2)); //PAGE03
             }
             else
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); //PAGE03
 
             }
-            if (dt3 != null && dt3.Rows.Count > 0)
+            if (dt1.Rows.Count > 0)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt3)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt3)); //PAGE04
             }
             else
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); //PAGE04
 
             }
-            if (dt4 != null && dt4.Rows.Count > 0)
+            if (dt1.Rows.Count > 0)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", dt4)); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", dt4)); //PAGE05
             }
             else
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); //PAGE05
+
             }
+
 
             string download = String.Empty;
 
