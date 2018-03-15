@@ -1025,7 +1025,10 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
-                            listCoverPage[6].Results = lbAverage.Text;
+                            if (listAverages.Count >= 6)
+                            {
+                                listCoverPage[6].Results = lbAverage.Text;
+                            }
 
 
                             gvCoverPage03.DataSource = listCoverPage;

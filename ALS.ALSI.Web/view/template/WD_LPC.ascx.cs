@@ -1092,6 +1092,7 @@ namespace ALS.ALSI.Web.view.template
                         val.E = String.Empty;
                     }
                 }
+
             }
 
             //Cal Average
@@ -1158,9 +1159,13 @@ namespace ALS.ALSI.Web.view.template
 
                 double _F = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Average")).FirstOrDefault().F);
                 double _F2 = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Standard Deviation")).FirstOrDefault().F);
-
-                tmp.E = (_E == 0) ? "0" : ((_E2 / _E) * 100).ToString();
-                tmp.F = (_F == 0) ? "0" : ((_F2 / _F) * 100).ToString();
+                if (_F < 0)
+                {
+                    Console.WriteLine();
+                }
+                tmp.E = (_E == 0||_E<0) ? "0" : ((_E2 / _E) * 100).ToString();
+                tmp.F = (_F == 0||_F<0) ? "0" : ((_F2 / _F) * 100).ToString();
+               
                 tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
                 tmps.Add(tmp);
@@ -1168,6 +1173,13 @@ namespace ALS.ALSI.Web.view.template
             originals.AddRange(tmps);
 
             this.Lpc = originals;
+
+
+            foreach(var val in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE)).ToList())
+            {
+                val.E = (Convert.ToDouble(val.E) < 0) ? "0" : val.E;
+                val.F = (Convert.ToDouble(val.F) < 0) ? "0" : val.F;
+            }
 
 
             gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));
