@@ -1247,6 +1247,7 @@
     <Content Include="view\request\JobReTest.aspx" />
     <Content Include="view\request\ChangeReportDate.aspx" />
     <Content Include="view\request\AdminPrint.aspx" />
+    <Content Include="view\template\PA01.ascx" />
     <Content Include="view\template\PA02.ascx" />
     <Content Include="view\template\Seagate_Copperwire.ascx" />
     <Content Include="view\template\Seagate_DHS_V2.ascx" />
@@ -1257,7 +1258,6 @@
     <Content Include="view\template\Seagate_GCMS_2.ascx" />
     <Content Include="view\template\Seagate_HPA_SWAP.ascx" />
     <Content Include="view\template\Seagate_HPA_1.ascx" />
-    <Content Include="view\template\PA01.ascx" />
     <Content Include="view\template\TemplateBlankPA.ascx" />
     <Content Include="view\template\TemplateElwa.ascx" />
     <Content Include="view\template\TemplateGrp.ascx" />
@@ -1487,6 +1487,13 @@
     <Compile Include="view\request\AdminPrint.aspx.designer.cs">
       <DependentUpon>AdminPrint.aspx</DependentUpon>
     </Compile>
+    <Compile Include="view\template\PA01.ascx.cs">
+      <DependentUpon>PA01.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\PA01.ascx.designer.cs">
+      <DependentUpon>PA01.ascx</DependentUpon>
+    </Compile>
     <Compile Include="view\template\PA02.ascx.cs">
       <DependentUpon>PA02.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1556,13 +1563,6 @@
     </Compile>
     <Compile Include="view\template\Seagate_HPA_1.ascx.designer.cs">
       <DependentUpon>Seagate_HPA_1.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="view\template\PA01.ascx.cs">
-      <DependentUpon>PA01.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="view\template\PA01.ascx.designer.cs">
-      <DependentUpon>PA01.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\TemplateBlankPA.ascx.cs">
       <DependentUpon>TemplateBlankPA.ascx</DependentUpon>
@@ -2048,6 +2048,7 @@
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\pa_02.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_04.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_wd.rdlc">
       <SubType>Designer</SubType>

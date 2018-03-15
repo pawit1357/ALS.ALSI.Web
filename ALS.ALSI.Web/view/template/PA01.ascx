@@ -34,7 +34,7 @@
                         <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Evaluation of Particles</h4>
                         <asp:GridView CssClass="table table-striped table-bordered table-advance table-hover" ID="gvEop" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvEop_RowDataBound" OnRowCommand="gvEop_RowCommand" OnRowCancelingEdit="gvEop_RowCancelingEdit" OnRowDeleting="gvEop_RowDeleting" OnRowEditing="gvEop_RowEditing" OnRowUpdating="gvEop_RowUpdating">
                             <Columns>
-                                <asp:TemplateField HeaderText="Cleanliness Class SKK: 3A_2 (Refer to S252001-1)" ItemStyle-HorizontalAlign="Right">
+                                <asp:TemplateField HeaderText="1Cleanliness Class SKK: 3ARefer to S252001-1" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litC" runat="server" Text='<%# Eval("col_c")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -53,7 +53,7 @@
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="Result quantity per part" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="Result" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="litE" runat="server" Text='<%# Eval("col_e")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -62,7 +62,7 @@
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-
+                                
                                 <asp:TemplateField HeaderText="Edit">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
@@ -336,7 +336,7 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label6" runat="server" CssClass="control-label col-md-3">Gravimetry:</asp:Label>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtEop_G" runat="server" CssClass="form-control" Text=""></asp:TextBox>
+                                        <asp:TextBox ID="txtEop_G" runat="server" CssClass="form-control" Text="" OnTextChanged="txtEop_G_TextChanged" AutoPostBack="true"></asp:TextBox>
                                         <%--                                    <span class="help-block">This is inline help </span>--%>
                                     </div>
                                     <div>
@@ -798,7 +798,7 @@
                                                 <td></td>
                                                 <td style="text-align: right">
                                                     <asp:CheckBox ID="cbAgitation" runat="server" Checked="true" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
-                                                <td>Agitation</td>
+                                                <td>Ultrasonic</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -1206,7 +1206,9 @@
                                             </tr>
                                             <tr>
                                                 <td>Total residue weight, [mg]</td>
-                                                <td></td>
+                                                <td><strong>
+                                                    <asp:Label ID="lbTotalResidueWeight" runat="server" Text="-"></asp:Label>
+                                                    </strong></td>
                                                 <td>Membrane type / size</td>
                                                 <td>
                                                     <strong>
@@ -1284,7 +1286,7 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label49" runat="server" CssClass="control-label col-md-1"></asp:Label>
                                     <div class="col-md-12">
-                                        <asp:GridView ID="gvMicroscopicAnalysis" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvMicroscopicAnalysis_RowDataBound" OnRowCommand="gvMicroscopicAnalysis_RowCommand" OnDataBound="gvMicroscopicAnalysis_OnDataBound" OnRowCancelingEdit="gvMicroscopicAnalysis_RowCancelingEdit" OnRowDeleting="gvMicroscopicAnalysis_RowDeleting" OnRowEditing="gvMicroscopicAnalysis_RowEditing" OnRowUpdating="gvMicroscopicAnalysis_RowUpdating" OnRowCreated="gvMicroscopicAnalysis_RowCreated">
+                                        <asp:GridView ID="gvMicroscopicAnalysis" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvMicroscopicAnalysis_RowDataBound" OnRowCommand="gvMicroscopicAnalysis_RowCommand" OnDataBound="gvMicroscopicAnalysis_OnDataBound" OnRowCancelingEdit="gvMicroscopicAnalysis_RowCancelingEdit" OnRowDeleting="gvMicroscopicAnalysis_RowDeleting" OnRowEditing="gvMicroscopicAnalysis_RowEditing" OnRowUpdating="gvMicroscopicAnalysis_RowUpdating">
                                             <Columns>
 
                                                 <asp:TemplateField HeaderText="Size class" ItemStyle-HorizontalAlign="Left">
@@ -1315,7 +1317,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Metal" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Non-metallic \nshine" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litF" runat="server" Text='<%# Eval("col_f")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1324,8 +1326,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-
-                                                <asp:TemplateField HeaderText="Total" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Metallic \nshine" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litG" runat="server" Text='<%# Eval("col_g")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1334,7 +1335,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Metal" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="2Fiber" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litH" runat="server" Text='<%# Eval("col_h")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1353,7 +1354,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Metal" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Non-metallic \nshine" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litJ" runat="server" Text='<%# Eval("col_j")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1362,21 +1363,28 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-
-
-                                                <%--                                                <asp:TemplateField HeaderText="Edit">
+                                                <asp:TemplateField HeaderText="Metallic \nshine" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
-
+                                                        <asp:Literal ID="litK" runat="server" Text='<%# Eval("col_k")%>'></asp:Literal>
                                                     </ItemTemplate>
                                                     <EditItemTemplate>
-                                                        <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
-                                                            CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
-                                                        <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
-                                                            CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                                        <asp:TextBox ID="txtK" runat="server" Text='<%# Eval("col_k")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="2Fiber" ItemStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litL" runat="server" Text='<%# Eval("col_l")%>'></asp:Literal>
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtL" runat="server" Text='<%# Eval("col_l")%>' CssClass="form-control"></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:TemplateField>
 
-                                                </asp:TemplateField>--%>
+
+
+
                                                 <asp:TemplateField HeaderText="Hide">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
@@ -1415,7 +1423,7 @@
                                                 <span class="input-group-addon btn default btn-file">
                                                     <span class="fileinput-new">Select file </span>
                                                     <span class="fileinput-exists">Change </span>
-                                                    <asp:FileUpload ID="FileUpload2" runat="server" />
+                                                    <asp:FileUpload ID="FileUpload2" runat="server" AllowMultiple="True" />
 
                                                 </span>
                                                 <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>

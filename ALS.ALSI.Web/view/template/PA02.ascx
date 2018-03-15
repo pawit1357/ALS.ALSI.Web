@@ -362,7 +362,7 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label6" runat="server" CssClass="control-label col-md-3">Gravimetry:</asp:Label>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtEop_G" runat="server" CssClass="form-control" Text=""></asp:TextBox>
+                                        <asp:TextBox ID="txtEop_G" runat="server" CssClass="form-control" Text="" OnTextChanged="txtEop_G_TextChanged" AutoPostBack="true"></asp:TextBox>
                                         <%--                                    <span class="help-block">This is inline help </span>--%>
                                     </div>
                                     <div>
@@ -1232,7 +1232,9 @@
                                             </tr>
                                             <tr>
                                                 <td>Total residue weight, [mg]</td>
-                                                <td></td>
+                                                <td><strong>
+                                                    <asp:Label ID="lbTotalResidueWeight" runat="server" Text="-"></asp:Label>
+                                                    </strong></td>
                                                 <td>Membrane type / size</td>
                                                 <td>
                                                     <strong>
@@ -1310,7 +1312,7 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label49" runat="server" CssClass="control-label col-md-1"></asp:Label>
                                     <div class="col-md-12">
-                                        <asp:GridView ID="gvMicroscopicAnalysis" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvMicroscopicAnalysis_RowDataBound" OnRowCommand="gvMicroscopicAnalysis_RowCommand" OnDataBound="gvMicroscopicAnalysis_OnDataBound" OnRowCancelingEdit="gvMicroscopicAnalysis_RowCancelingEdit" OnRowDeleting="gvMicroscopicAnalysis_RowDeleting" OnRowEditing="gvMicroscopicAnalysis_RowEditing" OnRowUpdating="gvMicroscopicAnalysis_RowUpdating" OnRowCreated="gvMicroscopicAnalysis_RowCreated">
+                                        <asp:GridView ID="gvMicroscopicAnalysis" CssClass="table table-striped table-hover table-bordered" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvMicroscopicAnalysis_RowDataBound" OnRowCommand="gvMicroscopicAnalysis_RowCommand" OnDataBound="gvMicroscopicAnalysis_OnDataBound" OnRowCancelingEdit="gvMicroscopicAnalysis_RowCancelingEdit" OnRowDeleting="gvMicroscopicAnalysis_RowDeleting" OnRowEditing="gvMicroscopicAnalysis_RowEditing" OnRowUpdating="gvMicroscopicAnalysis_RowUpdating">
                                             <Columns>
 
                                                 <asp:TemplateField HeaderText="Size class" ItemStyle-HorizontalAlign="Left">
@@ -1447,7 +1449,7 @@
                                                 <span class="input-group-addon btn default btn-file">
                                                     <span class="fileinput-new">Select file </span>
                                                     <span class="fileinput-exists">Change </span>
-                                                    <asp:FileUpload ID="FileUpload2" runat="server" />
+                                                    <asp:FileUpload ID="FileUpload2" runat="server" AllowMultiple="True" />
 
                                                 </span>
                                                 <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>

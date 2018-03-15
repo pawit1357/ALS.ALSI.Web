@@ -537,6 +537,10 @@
           <DataField>lbPermembrane_text</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="totalResidueWeight">
+          <DataField>totalResidueWeight</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS</rd:DataSetName>
@@ -19104,14 +19108,14 @@ Remark: 1Fibers, Dust particle and dander are allowed, however must be documente
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox215">
+                        <Textbox Name="totalResidueWeight">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!totalResidueWeight.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Lucida Sans</FontFamily>
@@ -19123,7 +19127,7 @@ Remark: 1Fibers, Dust particle and dander are allowed, however must be documente
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox215</rd:DefaultName>
+                          <rd:DefaultName>totalResidueWeight</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>White</Color>
@@ -22821,7 +22825,7 @@ Remark: 1Fibers, Dust particle and dander are allowed, however must be documente
             <Top>89.58861cm</Top>
             <Left>0.19985cm</Left>
             <Height>1.32437cm</Height>
-            <Width>18.69547cm</Width>
+            <Width>18.69548cm</Width>
             <ZIndex>28</ZIndex>
             <Style>
               <Border>
@@ -23389,7 +23393,7 @@ Remark: 1Fibers, Dust particle and dander are allowed, however must be documente
             <DataSetName>DataSet2</DataSetName>
             <Top>35.86195in</Top>
             <Left>0.11927in</Left>
-            <Height>3.58913in</Height>
+            <Height>3.58912in</Height>
             <Width>7.4391in</Width>
             <ZIndex>29</ZIndex>
             <Style>

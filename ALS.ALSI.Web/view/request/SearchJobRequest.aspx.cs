@@ -917,7 +917,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation|| userRole == RoleEnum.LOGIN)
+                    if (this.isPoGroupOperation|| userRole == RoleEnum.LOGIN||userRole== RoleEnum.CHEMIST)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
 

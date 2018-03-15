@@ -46,7 +46,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public String isautomated_text { get; set; }
         public String material_id_text { get; set; }
         public String lbPermembrane_text { get; set; }
-
+        public String totalResidueWeight { get; set; }
 
 
         public String isfiltrationmethod_text { get; set; }
@@ -126,5 +126,10 @@ namespace ALS.ALSI.Biz.DataAccess
         }
 
     }
+
+    
+
+
+
 
 }

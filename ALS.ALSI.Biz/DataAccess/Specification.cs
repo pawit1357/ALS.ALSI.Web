@@ -167,99 +167,101 @@ namespace ALS.ALSI.Biz.DataAccess
             //{
             //    colNames.Add(specCol.C);
             //}
-            if (!String.IsNullOrEmpty(specCol.D))
+            if (specCol != null)
             {
-                colNames.Add(specCol.D);
+                //if (!String.IsNullOrEmpty(specCol.D))
+                //{
+                //    colNames.Add(specCol.D);
+                //}
+                if (!String.IsNullOrEmpty(specCol.E))
+                {
+                    colNames.Add(specCol.E);
+                }
+                if (!String.IsNullOrEmpty(specCol.F))
+                {
+                    colNames.Add(specCol.F);
+                }
+                if (!String.IsNullOrEmpty(specCol.G))
+                {
+                    colNames.Add(specCol.G);
+                }
+                if (!String.IsNullOrEmpty(specCol.H))
+                {
+                    colNames.Add(specCol.H);
+                }
+                if (!String.IsNullOrEmpty(specCol.I))
+                {
+                    colNames.Add(specCol.I);
+                }
+                if (!String.IsNullOrEmpty(specCol.J))
+                {
+                    colNames.Add(specCol.J);
+                }
+                if (!String.IsNullOrEmpty(specCol.K))
+                {
+                    colNames.Add(specCol.K);
+                }
+                if (!String.IsNullOrEmpty(specCol.L))
+                {
+                    colNames.Add(specCol.L);
+                }
+                if (!String.IsNullOrEmpty(specCol.M))
+                {
+                    colNames.Add(specCol.M);
+                }
+                if (!String.IsNullOrEmpty(specCol.N))
+                {
+                    colNames.Add(specCol.N);
+                }
+                if (!String.IsNullOrEmpty(specCol.O))
+                {
+                    colNames.Add(specCol.O);
+                }
+                if (!String.IsNullOrEmpty(specCol.P))
+                {
+                    colNames.Add(specCol.P);
+                }
+                if (!String.IsNullOrEmpty(specCol.Q))
+                {
+                    colNames.Add(specCol.Q);
+                }
+                if (!String.IsNullOrEmpty(specCol.R))
+                {
+                    colNames.Add(specCol.R);
+                }
+                if (!String.IsNullOrEmpty(specCol.S))
+                {
+                    colNames.Add(specCol.S);
+                }
+                if (!String.IsNullOrEmpty(specCol.T))
+                {
+                    colNames.Add(specCol.T);
+                }
+                if (!String.IsNullOrEmpty(specCol.U))
+                {
+                    colNames.Add(specCol.U);
+                }
+                if (!String.IsNullOrEmpty(specCol.V))
+                {
+                    colNames.Add(specCol.V);
+                }
+                if (!String.IsNullOrEmpty(specCol.W))
+                {
+                    colNames.Add(specCol.W);
+                }
+                if (!String.IsNullOrEmpty(specCol.X))
+                {
+                    colNames.Add(specCol.X);
+                }
+                if (!String.IsNullOrEmpty(specCol.Y))
+                {
+                    colNames.Add(specCol.Y);
+                }
+                if (!String.IsNullOrEmpty(specCol.Z))
+                {
+                    colNames.Add(specCol.Z);
+                }
             }
-            if (!String.IsNullOrEmpty(specCol.E))
-            {
-                colNames.Add(specCol.E);
-            }
-            if (!String.IsNullOrEmpty(specCol.F))
-            {
-                colNames.Add(specCol.F);
-            }
-            if (!String.IsNullOrEmpty(specCol.G))
-            {
-                colNames.Add(specCol.G);
-            }
-            if (!String.IsNullOrEmpty(specCol.H))
-            {
-                colNames.Add(specCol.H);
-            }
-            if (!String.IsNullOrEmpty(specCol.I))
-            {
-                colNames.Add(specCol.I);
-            }
-            if (!String.IsNullOrEmpty(specCol.J))
-            {
-                colNames.Add(specCol.J);
-            }
-            if (!String.IsNullOrEmpty(specCol.K))
-            {
-                colNames.Add(specCol.K);
-            }
-            if (!String.IsNullOrEmpty(specCol.L))
-            {
-                colNames.Add(specCol.L);
-            }
-            if (!String.IsNullOrEmpty(specCol.M))
-            {
-                colNames.Add(specCol.M);
-            }
-            if (!String.IsNullOrEmpty(specCol.N))
-            {
-                colNames.Add(specCol.N);
-            }
-            if (!String.IsNullOrEmpty(specCol.O))
-            {
-                colNames.Add(specCol.O);
-            }
-            if (!String.IsNullOrEmpty(specCol.P))
-            {
-                colNames.Add(specCol.P);
-            }
-            if (!String.IsNullOrEmpty(specCol.Q))
-            {
-                colNames.Add(specCol.Q);
-            }
-            if (!String.IsNullOrEmpty(specCol.R))
-            {
-                colNames.Add(specCol.R);
-            }
-            if (!String.IsNullOrEmpty(specCol.S))
-            {
-                colNames.Add(specCol.S);
-            }
-            if (!String.IsNullOrEmpty(specCol.T))
-            {
-                colNames.Add(specCol.T);
-            }
-            if (!String.IsNullOrEmpty(specCol.U))
-            {
-                colNames.Add(specCol.U);
-            }
-            if (!String.IsNullOrEmpty(specCol.V))
-            {
-                colNames.Add(specCol.V);
-            }
-            if (!String.IsNullOrEmpty(specCol.W))
-            {
-                colNames.Add(specCol.W);
-            }
-            if (!String.IsNullOrEmpty(specCol.X))
-            {
-                colNames.Add(specCol.X);
-            }
-            if (!String.IsNullOrEmpty(specCol.Y))
-            {
-                colNames.Add(specCol.Y);
-            }
-            if (!String.IsNullOrEmpty(specCol.Z))
-            {
-                colNames.Add(specCol.Z);
-            }
-
             return colNames;
         }
 

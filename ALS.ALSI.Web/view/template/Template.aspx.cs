@@ -588,7 +588,7 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                         //Delete
-                        //new tb_m_specification().DeleteByTemplateID(template_id);
+                        new tb_m_specification().DeleteByTemplateID(template_id);
                         new tb_m_specification().InsertList(specifications);
                     }
                     #endregion

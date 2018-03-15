@@ -4459,6 +4459,8 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columnlbPermembrane_text;
             
+            private global::System.Data.DataColumn columntotalResidueWeight;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public template_paDataTable() {
@@ -5382,6 +5384,14 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn totalResidueWeightColumn {
+                get {
+                    return this.columntotalResidueWeight;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5528,7 +5538,8 @@ namespace ALS.ALSI.Web.ReportObject {
                         string ismeasuringsoftware_text, 
                         string isautomated_text, 
                         string material_id_text, 
-                        string lbPermembrane_text) {
+                        string lbPermembrane_text, 
+                        string totalResidueWeight) {
                 template_paRow rowtemplate_paRow = ((template_paRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         lms,
@@ -5641,7 +5652,8 @@ namespace ALS.ALSI.Web.ReportObject {
                         ismeasuringsoftware_text,
                         isautomated_text,
                         material_id_text,
-                        lbPermembrane_text};
+                        lbPermembrane_text,
+                        totalResidueWeight};
                 rowtemplate_paRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtemplate_paRow);
                 return rowtemplate_paRow;
@@ -5775,6 +5787,7 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columnisautomated_text = base.Columns["isautomated_text"];
                 this.columnmaterial_id_text = base.Columns["material_id_text"];
                 this.columnlbPermembrane_text = base.Columns["lbPermembrane_text"];
+                this.columntotalResidueWeight = base.Columns["totalResidueWeight"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6002,6 +6015,8 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columnmaterial_id_text);
                 this.columnlbPermembrane_text = new global::System.Data.DataColumn("lbPermembrane_text", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlbPermembrane_text);
+                this.columntotalResidueWeight = new global::System.Data.DataColumn("totalResidueWeight", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotalResidueWeight);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11049,6 +11064,22 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string totalResidueWeight {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.totalResidueWeightColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'totalResidueWeight\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.totalResidueWeightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IslmsNull() {
                 return this.IsNull(this.tabletemplate_pa.lmsColumn);
             }
@@ -12377,6 +12408,18 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetlbPermembrane_textNull() {
                 this[this.tabletemplate_pa.lbPermembrane_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IstotalResidueWeightNull() {
+                return this.IsNull(this.tabletemplate_pa.totalResidueWeightColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SettotalResidueWeightNull() {
+                this[this.tabletemplate_pa.totalResidueWeightColumn] = global::System.Convert.DBNull;
             }
         }
         
