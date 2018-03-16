@@ -374,7 +374,7 @@ namespace ALS.ALSI.Web.view.template
 
                 if (cbPressureRinsing.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION)  && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                 }
                 if (cbInternalRinsing.Checked)
                 {
@@ -563,6 +563,7 @@ namespace ALS.ALSI.Web.view.template
             pPage05.Visible = false;
             pPage06.Visible = false;
             pPage07.Visible = false;
+            pPage08.Visible = false;
             pUploadWorkSheet.Visible = false;
             btnSubmit.Enabled = false;
 
@@ -670,7 +671,7 @@ namespace ALS.ALSI.Web.view.template
             txtEop_Lnmsp.Text = txtFeretLnms.Text;
             lbLf.Text = txtFeretFb.Text;
             lbTotalResidueWeight.Text = txtEop_G.Text;
-            
+
         }
 
         #endregion
@@ -1113,6 +1114,7 @@ namespace ALS.ALSI.Web.view.template
                     btnPage05.CssClass = "btn btn-default btn-sm";
                     btnPage06.CssClass = "btn btn-default btn-sm";
                     btnPage07.CssClass = "btn btn-default btn-sm";
+                    btnPage08.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = true;
                     pPage02.Visible = false;
                     pPage03.Visible = false;
@@ -1120,6 +1122,7 @@ namespace ALS.ALSI.Web.view.template
                     pPage05.Visible = false;
                     pPage06.Visible = false;
                     pPage07.Visible = false;
+                    pPage08.Visible = false;
                     break;
                 case "btnPage02":
                     btnPage01.CssClass = "btn btn-default btn-sm";
@@ -1129,6 +1132,7 @@ namespace ALS.ALSI.Web.view.template
                     btnPage05.CssClass = "btn btn-default btn-sm";
                     btnPage06.CssClass = "btn btn-default btn-sm";
                     btnPage07.CssClass = "btn btn-default btn-sm";
+                    btnPage08.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = true;
                     pPage03.Visible = false;
@@ -1136,6 +1140,7 @@ namespace ALS.ALSI.Web.view.template
                     pPage05.Visible = false;
                     pPage06.Visible = false;
                     pPage07.Visible = false;
+                    pPage08.Visible = false;
                     break;
                 case "btnPage03":
                     btnPage01.CssClass = "btn btn-default btn-sm";
@@ -1145,6 +1150,7 @@ namespace ALS.ALSI.Web.view.template
                     btnPage05.CssClass = "btn btn-default btn-sm";
                     btnPage06.CssClass = "btn btn-default btn-sm";
                     btnPage07.CssClass = "btn btn-default btn-sm";
+                    btnPage08.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = false;
                     pPage03.Visible = true;
@@ -1152,6 +1158,7 @@ namespace ALS.ALSI.Web.view.template
                     pPage05.Visible = false;
                     pPage06.Visible = false;
                     pPage07.Visible = false;
+                    pPage08.Visible = false;
                     break;
                 case "btnPage04":
                     btnPage01.CssClass = "btn btn-default btn-sm";
@@ -1161,6 +1168,7 @@ namespace ALS.ALSI.Web.view.template
                     btnPage05.CssClass = "btn btn-default btn-sm";
                     btnPage06.CssClass = "btn btn-default btn-sm";
                     btnPage07.CssClass = "btn btn-default btn-sm";
+                    btnPage08.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = false;
                     pPage03.Visible = false;
@@ -1168,6 +1176,7 @@ namespace ALS.ALSI.Web.view.template
                     pPage05.Visible = false;
                     pPage06.Visible = false;
                     pPage07.Visible = false;
+                    pPage08.Visible = false;
                     break;
                 case "btnPage05":
                     btnPage01.CssClass = "btn btn-default btn-sm";
@@ -1177,6 +1186,7 @@ namespace ALS.ALSI.Web.view.template
                     btnPage05.CssClass = "btn red-sunglo btn-sm";
                     btnPage06.CssClass = "btn btn-default btn-sm";
                     btnPage07.CssClass = "btn btn-default btn-sm";
+                    btnPage08.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = false;
                     pPage03.Visible = false;
@@ -1184,6 +1194,7 @@ namespace ALS.ALSI.Web.view.template
                     pPage05.Visible = true;
                     pPage06.Visible = false;
                     pPage07.Visible = false;
+                    pPage08.Visible = false;
                     break;
                 case "btnPage06":
                     btnPage01.CssClass = "btn btn-default btn-sm";
@@ -1192,7 +1203,7 @@ namespace ALS.ALSI.Web.view.template
                     btnPage04.CssClass = "btn btn-default btn-sm";
                     btnPage05.CssClass = "btn btn-default btn-sm";
                     btnPage06.CssClass = "btn red-sunglo btn-sm";
-                    btnPage07.CssClass = "btn btn-default btn-sm";
+                    btnPage08.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = false;
                     pPage03.Visible = false;
@@ -1200,6 +1211,7 @@ namespace ALS.ALSI.Web.view.template
                     pPage05.Visible = false;
                     pPage06.Visible = true;
                     pPage07.Visible = false;
+                    pPage08.Visible = false;
                     break;
                 case "btnPage07":
                     btnPage01.CssClass = "btn btn-default btn-sm";
@@ -1209,6 +1221,7 @@ namespace ALS.ALSI.Web.view.template
                     btnPage05.CssClass = "btn btn-default btn-sm";
                     btnPage06.CssClass = "btn btn-default btn-sm";
                     btnPage07.CssClass = "btn red-sunglo btn-sm";
+                    btnPage08.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = false;
                     pPage03.Visible = false;
@@ -1216,6 +1229,25 @@ namespace ALS.ALSI.Web.view.template
                     pPage05.Visible = false;
                     pPage06.Visible = false;
                     pPage07.Visible = true;
+                    pPage08.Visible = false;
+                    break;
+                case "btnPage08":
+                    btnPage01.CssClass = "btn btn-default btn-sm";
+                    btnPage02.CssClass = "btn btn-default btn-sm";
+                    btnPage03.CssClass = "btn btn-default btn-sm";
+                    btnPage04.CssClass = "btn btn-default btn-sm";
+                    btnPage05.CssClass = "btn btn-default btn-sm";
+                    btnPage06.CssClass = "btn btn-default btn-sm";
+                    btnPage07.CssClass = "btn btn-default btn-sm";
+                    btnPage08.CssClass = "btn btn-sunglo btn-sm";
+                    pPage01.Visible = false;
+                    pPage02.Visible = false;
+                    pPage03.Visible = false;
+                    pPage04.Visible = false;
+                    pPage05.Visible = false;
+                    pPage06.Visible = false;
+                    pPage07.Visible = false;
+                    pPage08.Visible = true;
                     pUploadWorkSheet.Visible = true;
                     btnSubmit.Enabled = true;
                     break;
@@ -1408,7 +1440,7 @@ namespace ALS.ALSI.Web.view.template
             String source_file_jpg = String.Empty;
             String source_file_url = String.Empty;
 
-            if ((Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".JPG"))|| (Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".TIF")))
+            if ((Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".TIF")))
             {
                 jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
                 tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
@@ -2651,6 +2683,101 @@ namespace ALS.ALSI.Web.view.template
             TextBox tb = (TextBox)sender;
             lbTotalResidueWeight.Text = tb.Text;
         }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            template_pa_detail tmp = new template_pa_detail();
+            tmp.id = CustomUtils.GetRandomNumberID();
+            tmp.col_d = "1";
+            tmp.col_e = txtEC01.Text;
+            tmp.col_f = txtEC01_SHOT.Text;
+            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+            tmp.row_type = Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION);
+            paDetail.Add(tmp);
+
+            List<template_pa_detail> ecs = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
+            gvCompositionElement.DataSource = ecs;
+            gvCompositionElement.DataBind();
+            txtEC01.Text = String.Empty;
+            txtEC01_SHOT.Text = String.Empty;
+
+        }
+        protected void gvCompositionElement_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int id = int.Parse(gvCompositionElement.DataKeys[e.RowIndex].Values[0].ToString());
+
+            template_pa_detail pa = paDetail.Find(x => x.id == id);
+            if (pa != null)
+            {
+                paDetail.Remove(pa);
+                List<template_pa_detail> ecs = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
+                gvCompositionElement.DataSource = ecs;
+                gvCompositionElement.DataBind();
+            }
+       }
+
+        protected void btnAdd2_Click(object sender, EventArgs e)
+        {
+            template_pa_detail tmp = new template_pa_detail();
+            tmp.id = CustomUtils.GetRandomNumberID();
+            tmp.col_d = "2";
+            tmp.col_e = txtEC02.Text;
+            tmp.col_f = txtEC02_SHOT.Text;
+            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+            tmp.row_type = Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION);
+            paDetail.Add(tmp);
+
+            List<template_pa_detail> ecs = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
+            gvCompositionElement2.DataSource = ecs;
+            gvCompositionElement2.DataBind();
+            txtEC02.Text = String.Empty;
+            txtEC02_SHOT.Text = String.Empty;
+        }
+        protected void gvCompositionElement2_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int id = int.Parse(gvCompositionElement2.DataKeys[e.RowIndex].Values[0].ToString());
+
+            template_pa_detail pa = paDetail.Find(x => x.id == id);
+            if (pa != null)
+            {
+                paDetail.Remove(pa);
+                List<template_pa_detail> ecs = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
+                gvCompositionElement2.DataSource = ecs;
+                gvCompositionElement2.DataBind();
+            }
+        }
+        //protected void gvCompositionElement_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+        //        {
+        //            int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+        //            template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+        //            if (_cov != null)
+        //            {
+        //                RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
+        //                switch (cmd)
+        //                {
+        //                    case RowTypeEnum.Hide:
+        //                        _cov.row_status = Convert.ToInt32(RowTypeEnum.Hide);
+        //                        break;
+        //                    case RowTypeEnum.Normal:
+        //                        _cov.row_status = Convert.ToInt32(RowTypeEnum.Normal);
+        //                        break;
+        //                }
+
+        //                gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+        //                gvEop.DataBind();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine();
+        //    }
+        //}
+
     }
 }
 
