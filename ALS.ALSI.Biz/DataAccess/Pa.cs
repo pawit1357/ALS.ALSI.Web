@@ -56,6 +56,10 @@ namespace ALS.ALSI.Biz.DataAccess
         public byte[] img3 { get; set; }
         public byte[] img4 { get; set; }
         public byte[] img5 { get; set; }
+        public byte[] img6 { get; set; }
+        public byte[] img7 { get; set; }
+        public byte[] img8 { get; set; }
+        public byte[] img9 { get; set; }
         #endregion
 
         //public byte[] img1 { get; set; }

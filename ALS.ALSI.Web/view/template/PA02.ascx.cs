@@ -2265,6 +2265,8 @@ namespace ALS.ALSI.Web.view.template
             List<template_pa_detail> dissolvings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
             List<template_pa_detail> washings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             List<template_pa_detail> mas = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
+            List<template_pa_detail> ec1 = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
+            List<template_pa_detail> ec2 = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
 
 
             List<template_pa> pas = new List<template_pa>();
@@ -2273,6 +2275,12 @@ namespace ALS.ALSI.Web.view.template
             this.pa.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
             this.pa.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
             this.pa.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
+            this.pa.img6 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_01);
+            this.pa.img7 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_02);
+            this.pa.img8 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_03);
+            this.pa.img9 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_01);
+
+
             this.pa.iscontainer_text = cbContainer.Checked.ToString();
             this.pa.container_id_text = ddlContainer.SelectedItem.Text;
             this.pa.isfluid1_text = cbFluid1.Checked.ToString();
@@ -2314,6 +2322,10 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", eops.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", mas.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", pas.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ec1.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ec2.ToDataTable())); // Add datasource here
+
+
 
             //xxxx
 
