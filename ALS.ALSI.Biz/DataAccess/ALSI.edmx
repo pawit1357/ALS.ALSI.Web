@@ -720,6 +720,18 @@
           <Property Name="lf_x" Type="varchar" MaxLength="45" />
           <Property Name="lf_y" Type="varchar" MaxLength="45" />
           <Property Name="img05" Type="varchar" MaxLength="255" />
+          <Property Name="attachment_ii_01" Type="varchar" MaxLength="255" />
+          <Property Name="attachment_ii_02" Type="varchar" MaxLength="255" />
+          <Property Name="attachment_ii_03" Type="varchar" MaxLength="255" />
+          <Property Name="attachment_ii_04" Type="varchar" MaxLength="255" />
+          <Property Name="param_magnification_01" Type="varchar" MaxLength="255" />
+          <Property Name="param_magnification_02" Type="varchar" MaxLength="255" />
+          <Property Name="param_wd_01" Type="varchar" MaxLength="255" />
+          <Property Name="param_wd_02" Type="varchar" MaxLength="255" />
+          <Property Name="param_eht_01" Type="varchar" MaxLength="255" />
+          <Property Name="param_eht_02" Type="varchar" MaxLength="255" />
+          <Property Name="param_detector_01" Type="varchar" MaxLength="255" />
+          <Property Name="param_detector_02" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="template_pa_detail">
           <Key>
@@ -2804,6 +2816,18 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="lf_x" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="lf_y" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="img05" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="attachment_ii_01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="attachment_ii_02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="attachment_ii_03" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="attachment_ii_04" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="param_magnification_01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="param_magnification_02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="param_wd_01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="param_wd_02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="param_eht_01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="param_eht_02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="param_detector_01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="param_detector_02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_pa_detail">
           <Key>
@@ -4573,6 +4597,18 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_pa">
             <EntityTypeMapping TypeName="ALSIModel.template_pa">
               <MappingFragment StoreEntitySet="template_pa">
+                <ScalarProperty Name="param_detector_02" ColumnName="param_detector_02" />
+                <ScalarProperty Name="param_detector_01" ColumnName="param_detector_01" />
+                <ScalarProperty Name="param_eht_02" ColumnName="param_eht_02" />
+                <ScalarProperty Name="param_eht_01" ColumnName="param_eht_01" />
+                <ScalarProperty Name="param_wd_02" ColumnName="param_wd_02" />
+                <ScalarProperty Name="param_wd_01" ColumnName="param_wd_01" />
+                <ScalarProperty Name="param_magnification_02" ColumnName="param_magnification_02" />
+                <ScalarProperty Name="param_magnification_01" ColumnName="param_magnification_01" />
+                <ScalarProperty Name="attachment_ii_04" ColumnName="attachment_ii_04" />
+                <ScalarProperty Name="attachment_ii_03" ColumnName="attachment_ii_03" />
+                <ScalarProperty Name="attachment_ii_02" ColumnName="attachment_ii_02" />
+                <ScalarProperty Name="attachment_ii_01" ColumnName="attachment_ii_01" />
                 <ScalarProperty Name="img05" ColumnName="img05" />
                 <ScalarProperty Name="lf_y" ColumnName="lf_y" />
                 <ScalarProperty Name="lf_x" ColumnName="lf_x" />

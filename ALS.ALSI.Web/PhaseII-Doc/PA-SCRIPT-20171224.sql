@@ -133,4 +133,19 @@ CHANGE COLUMN `SurfaceAreaAnalysed_2` `SurfaceAreaAnalysed_2` VARCHAR(255) NULL 
 CHANGE COLUMN `ParticleRanges_2` `ParticleRanges_2` VARCHAR(255) NULL DEFAULT NULL ;
 
 
+--------------------- 2018-03-17 ---------------------------------------------
+ALTER TABLE `alsi`.`template_pa` 
+ADD COLUMN `attachment_ii_01` VARCHAR(255) NULL AFTER `img05`,
+ADD COLUMN `attachment_ii_02` VARCHAR(255) NULL AFTER `attachment_ii_01`,
+ADD COLUMN `attachment_ii_03` VARCHAR(255) NULL AFTER `attachment_ii_02`,
+ADD COLUMN `attachment_ii_04` VARCHAR(255) NULL AFTER `attachment_ii_03`,
+ADD COLUMN `param_magnification_01` VARCHAR(255) NULL AFTER `attachment_ii_04`,
+ADD COLUMN `param_magnification_02` VARCHAR(255) NULL AFTER `param_magnification_01`,
+ADD COLUMN `param_wd_01` VARCHAR(255) NULL AFTER `param_magnification_02`,
+ADD COLUMN `param_wd_02` VARCHAR(255) NULL AFTER `param_wd_01`,
+ADD COLUMN `param_eht_01` VARCHAR(255) NULL AFTER `param_wd_02`,
+ADD COLUMN `param_eht_02` VARCHAR(255) NULL AFTER `param_eht_01`,
+ADD COLUMN `param_detector_01` VARCHAR(255) NULL AFTER `param_eht_02`,
+ADD COLUMN `param_detector_02` VARCHAR(255) NULL AFTER `param_detector_01`;
+
 */

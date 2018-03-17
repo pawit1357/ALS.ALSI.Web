@@ -366,6 +366,19 @@ namespace ALS.ALSI.Web.view.template
                 lbX.Text = txtAutomated.Text;
                 lbY.Text = txtAutomated.Text;
 
+
+                txtParamMagnification1.Text = this.pa.param_magnification_01;
+                txtParamMagnification2.Text = this.pa.param_magnification_02;
+                txtParamWd1.Text = this.pa.param_wd_01;
+                txtParamWd2.Text = this.pa.param_wd_02;
+                txtParamEht1.Text = this.pa.param_eht_01;
+                txtParamEht2.Text = this.pa.param_eht_02;
+                txtParamDetector1.Text = this.pa.param_detector_01;
+                txtParamDetector2.Text = this.pa.param_detector_02;
+
+
+                
+
                 #region "COLUMN HEADER"
                 List<String> cols = new List<string>();
                 tb_m_specification selectValue = new tb_m_specification();
@@ -662,6 +675,23 @@ namespace ALS.ALSI.Web.view.template
                 gvWashing.DataSource = listPaDetail;
                 gvWashing.DataBind();
             }
+            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
+            if (null != listPaDetail && listPaDetail.Count > 0)
+            {
+                gvCompositionElement.DataSource = listPaDetail;
+                gvCompositionElement.DataBind();
+            }
+            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
+            if (null != listPaDetail && listPaDetail.Count > 0)
+            {
+                gvCompositionElement2.DataSource = listPaDetail;
+                gvCompositionElement2.DataBind();
+            }
+
+
+
+
+
 
             //fil data "LargestRegionsTable"
             txtLms.Text = txtFeretLmsp.Text;
@@ -945,6 +975,15 @@ namespace ALS.ALSI.Web.view.template
 
                     this.pa.lf_x = txtLf_X.Text;
                     this.pa.lf_y = txtLf_Y.Text;
+
+                    this.pa.param_magnification_01 = txtParamMagnification1.Text;
+                    this.pa.param_magnification_02 = txtParamMagnification2.Text;
+                    this.pa.param_wd_01 = txtParamWd1.Text;
+                    this.pa.param_wd_02 = txtParamWd2.Text;
+                    this.pa.param_eht_01 = txtParamEht1.Text;
+                    this.pa.param_eht_02 = txtParamEht2.Text;
+                    this.pa.param_detector_01 = txtParamDetector1.Text;
+                    this.pa.param_detector_02 = txtParamDetector2.Text;
 
                     //Delete old
                     template_pa.DeleteBySampleID(this.SampleID);
@@ -2714,7 +2753,7 @@ namespace ALS.ALSI.Web.view.template
                 gvCompositionElement.DataSource = ecs;
                 gvCompositionElement.DataBind();
             }
-       }
+        }
 
         protected void btnAdd2_Click(object sender, EventArgs e)
         {
@@ -2746,38 +2785,175 @@ namespace ALS.ALSI.Web.view.template
                 gvCompositionElement2.DataBind();
             }
         }
-        //protected void gvCompositionElement_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
-        //        {
-        //            int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-        //            template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
-        //            if (_cov != null)
-        //            {
-        //                RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
-        //                switch (cmd)
-        //                {
-        //                    case RowTypeEnum.Hide:
-        //                        _cov.row_status = Convert.ToInt32(RowTypeEnum.Hide);
-        //                        break;
-        //                    case RowTypeEnum.Normal:
-        //                        _cov.row_status = Convert.ToInt32(RowTypeEnum.Normal);
-        //                        break;
-        //                }
 
-        //                gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
-        //                gvEop.DataBind();
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine();
-        //    }
-        //}
 
+        protected void btnLoadParamImg1_Click(object sender, EventArgs e)
+        {
+            String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
+            string yyyy = DateTime.Now.ToString("yyyy");
+            string MM = DateTime.Now.ToString("MM");
+            string dd = DateTime.Now.ToString("dd");
+
+            String jpgName = String.Empty;
+            String tifName = String.Empty;
+
+            String source_file = String.Empty;
+            String source_file_jpg = String.Empty;
+            String source_file_url = String.Empty;
+            if ((Path.GetExtension(fileUpload3.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUpload3.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUpload3.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUpload3.SaveAs(source_file_jpg);
+                }
+                ///
+                this.pa.attachment_ii_01 = source_file_url;
+                Image1.ImageUrl = source_file_url;
+            }
+        }
+
+        protected void btnLoadParamImg2_Click(object sender, EventArgs e)
+        {
+            String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
+            string yyyy = DateTime.Now.ToString("yyyy");
+            string MM = DateTime.Now.ToString("MM");
+            string dd = DateTime.Now.ToString("dd");
+
+            String jpgName = String.Empty;
+            String tifName = String.Empty;
+
+            String source_file = String.Empty;
+            String source_file_jpg = String.Empty;
+            String source_file_url = String.Empty;
+            if ((Path.GetExtension(fileUpload4.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUpload4.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUpload4.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUpload4.SaveAs(source_file_jpg);
+                }
+                ///
+                this.pa.attachment_ii_02 = source_file_url;
+                Image2.ImageUrl = source_file_url;
+            }
+        }
+
+        protected void btnLoadParamImg3_Click(object sender, EventArgs e)
+        {
+            String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
+            string yyyy = DateTime.Now.ToString("yyyy");
+            string MM = DateTime.Now.ToString("MM");
+            string dd = DateTime.Now.ToString("dd");
+
+            String jpgName = String.Empty;
+            String tifName = String.Empty;
+
+            String source_file = String.Empty;
+            String source_file_jpg = String.Empty;
+            String source_file_url = String.Empty;
+            if ((Path.GetExtension(fileUpload5.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUpload5.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUpload5.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUpload5.SaveAs(source_file_jpg);
+                }
+                ///
+                this.pa.attachment_ii_03 = source_file_url;
+                Image3.ImageUrl = source_file_url;
+            }
+        }
+
+        protected void btnLoadParamImg4_Click(object sender, EventArgs e)
+        {
+            String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
+            string yyyy = DateTime.Now.ToString("yyyy");
+            string MM = DateTime.Now.ToString("MM");
+            string dd = DateTime.Now.ToString("dd");
+
+            String jpgName = String.Empty;
+            String tifName = String.Empty;
+
+            String source_file = String.Empty;
+            String source_file_jpg = String.Empty;
+            String source_file_url = String.Empty;
+            if ((Path.GetExtension(fileUpload6.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUpload6.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUpload6.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUpload6.SaveAs(source_file_jpg);
+                }
+                ///
+                this.pa.attachment_ii_04 = source_file_url;
+                Image4.ImageUrl = source_file_url;
+            }
+        }
     }
 }
 

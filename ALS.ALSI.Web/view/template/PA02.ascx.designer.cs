@@ -1678,40 +1678,40 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// TextBox44 control.
+        /// txtParamMagnification1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox44;
+        protected global::System.Web.UI.WebControls.TextBox txtParamMagnification1;
         
         /// <summary>
-        /// TextBox45 control.
+        /// txtParamWd1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox45;
+        protected global::System.Web.UI.WebControls.TextBox txtParamWd1;
         
         /// <summary>
-        /// TextBox46 control.
+        /// txtParamEht1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox46;
+        protected global::System.Web.UI.WebControls.TextBox txtParamEht1;
         
         /// <summary>
-        /// TextBox47 control.
+        /// txtParamDetector1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox47;
+        protected global::System.Web.UI.WebControls.TextBox txtParamDetector1;
         
         /// <summary>
         /// fileUpload3 control.
@@ -1723,13 +1723,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.FileUpload fileUpload3;
         
         /// <summary>
-        /// Button2 control.
+        /// btnLoadParamImg1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnLoadParamImg1;
         
         /// <summary>
         /// Image2 control.
@@ -1786,13 +1786,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.FileUpload fileUpload4;
         
         /// <summary>
-        /// Button3 control.
+        /// btnLoadParamImg2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.Button btnLoadParamImg2;
         
         /// <summary>
         /// Image3 control.
@@ -1804,40 +1804,40 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Image Image3;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtParamMagnification2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtParamMagnification2;
         
         /// <summary>
-        /// TextBox2 control.
+        /// txtParamWd2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox txtParamWd2;
         
         /// <summary>
-        /// TextBox3 control.
+        /// txtParamEht2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox txtParamEht2;
         
         /// <summary>
-        /// TextBox4 control.
+        /// txtParamDetector2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox txtParamDetector2;
         
         /// <summary>
         /// fileUpload5 control.
@@ -1849,13 +1849,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.FileUpload fileUpload5;
         
         /// <summary>
-        /// Button4 control.
+        /// btnLoadParamImg3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button4;
+        protected global::System.Web.UI.WebControls.Button btnLoadParamImg3;
         
         /// <summary>
         /// Image4 control.
@@ -1912,13 +1912,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.FileUpload fileUpload6;
         
         /// <summary>
-        /// Button6 control.
+        /// btnLoadParamImg4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button6;
+        protected global::System.Web.UI.WebControls.Button btnLoadParamImg4;
         
         /// <summary>
         /// pUploadWorkSheet control.

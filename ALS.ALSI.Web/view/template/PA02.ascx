@@ -1793,7 +1793,7 @@
                                                         <tr>
                                                             <td>Magnification:</td>
                                                             <td>
-                                                                <asp:TextBox ID="TextBox44" runat="server" CssClass="form-control"></asp:TextBox>
+                                                                <asp:TextBox ID="txtParamMagnification1" runat="server" CssClass="form-control"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1802,7 +1802,7 @@
                                                         <tr>
                                                             <td>WD:</td>
                                                             <td>
-                                                                <asp:TextBox ID="TextBox45" runat="server" CssClass="form-control"></asp:TextBox>
+                                                                <asp:TextBox ID="txtParamWd1" runat="server" CssClass="form-control"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1811,7 +1811,7 @@
                                                         <tr>
                                                             <td>EHT:</td>
                                                             <td>
-                                                                <asp:TextBox ID="TextBox46" runat="server" CssClass="form-control"></asp:TextBox>
+                                                                <asp:TextBox ID="txtParamEht1" runat="server" CssClass="form-control"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1820,7 +1820,7 @@
                                                         <tr>
                                                             <td>Detector:</td>
                                                             <td>
-                                                                <asp:TextBox ID="TextBox47" runat="server" CssClass="form-control"></asp:TextBox>
+                                                                <asp:TextBox ID="txtParamDetector1" runat="server" CssClass="form-control"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1838,7 +1838,7 @@
                                                                         </span><a class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput" href="javascript:;">Remove </a>
                                                                     </div>
                                                                     <br />
-                                                                    <asp:Button ID="Button2" runat="server" CssClass="btn blue" OnClick="btnLoadImg_Click" Text="Load" />
+                                                                    <asp:Button ID="btnLoadParamImg1" runat="server" CssClass="btn blue" OnClick="btnLoadParamImg1_Click" Text="Load" />
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -1910,7 +1910,7 @@
                                                                         </span><a class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput" href="javascript:;">Remove </a>
                                                                     </div>
                                                                     <br />
-                                                                    <asp:Button ID="Button3" runat="server" CssClass="btn blue" OnClick="btnLoadImg_Click" Text="Load" />
+                                                                    <asp:Button ID="btnLoadParamImg2" runat="server" CssClass="btn blue" OnClick="btnLoadParamImg2_Click" Text="Load" />
                                                                 </div>
                                                             </td>
                                                             <td>&nbsp;</td>
@@ -1926,7 +1926,6 @@
                                 </div>
                             </div>
                         </div>
-                    <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Particle nature determination by SEM/EDX</h4>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -1947,7 +1946,7 @@
                                                         <tr>
                                                             <td>Magnification:</td>
                                                             <td>
-                                                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"></asp:TextBox>
+                                                                <asp:TextBox ID="txtParamMagnification2" runat="server" CssClass="form-control"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1956,7 +1955,7 @@
                                                         <tr>
                                                             <td>WD:</td>
                                                             <td>
-                                                                <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control"></asp:TextBox>
+                                                                <asp:TextBox ID="txtParamWd2" runat="server" CssClass="form-control"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1965,7 +1964,7 @@
                                                         <tr>
                                                             <td>EHT:</td>
                                                             <td>
-                                                                <asp:TextBox ID="TextBox3" runat="server" CssClass="form-control"></asp:TextBox>
+                                                                <asp:TextBox ID="txtParamEht2" runat="server" CssClass="form-control"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1974,7 +1973,7 @@
                                                         <tr>
                                                             <td>Detector:</td>
                                                             <td>
-                                                                <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control"></asp:TextBox>
+                                                                <asp:TextBox ID="txtParamDetector2" runat="server" CssClass="form-control"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1992,7 +1991,7 @@
                                                                         </span><a class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput" href="javascript:;">Remove </a>
                                                                     </div>
                                                                     <br />
-                                                                    <asp:Button ID="Button4" runat="server" CssClass="btn blue" OnClick="btnLoadImg_Click" Text="Load" />
+                                                                    <asp:Button ID="btnLoadParamImg3" runat="server" CssClass="btn blue" OnClick="btnLoadParamImg3_Click" Text="Load" />
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -2064,7 +2063,7 @@
                                                                         </span><a class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput" href="javascript:;">Remove </a>
                                                                     </div>
                                                                     <br />
-                                                                    <asp:Button ID="Button6" runat="server" CssClass="btn blue" OnClick="btnLoadImg_Click" Text="Load" />
+                                                                    <asp:Button ID="btnLoadParamImg4" runat="server" CssClass="btn blue" OnClick="btnLoadParamImg4_Click" Text="Load" />
                                                                 </div>
                                                             </td>
                                                             <td>&nbsp;</td>

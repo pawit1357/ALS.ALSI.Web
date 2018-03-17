@@ -114,5 +114,17 @@ namespace ALS.ALSI.Biz.DataAccess
         public string lf_x { get; set; }
         public string lf_y { get; set; }
         public string img05 { get; set; }
+        public string attachment_ii_01 { get; set; }
+        public string attachment_ii_02 { get; set; }
+        public string attachment_ii_03 { get; set; }
+        public string attachment_ii_04 { get; set; }
+        public string param_magnification_01 { get; set; }
+        public string param_magnification_02 { get; set; }
+        public string param_wd_01 { get; set; }
+        public string param_wd_02 { get; set; }
+        public string param_eht_01 { get; set; }
+        public string param_eht_02 { get; set; }
+        public string param_detector_01 { get; set; }
+        public string param_detector_02 { get; set; }
     }
 }
