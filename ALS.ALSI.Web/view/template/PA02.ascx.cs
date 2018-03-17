@@ -167,6 +167,7 @@ namespace ALS.ALSI.Web.view.template
                 pPage05.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
                 pPage06.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
                 pPage07.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+                pPage08.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
 
 
                 pEop.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
