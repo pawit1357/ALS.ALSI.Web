@@ -355,6 +355,14 @@ namespace ALS.ALSI.Web.view.template
                 img4.ImageUrl = this.pa.img04;
                 img5.ImageUrl = this.pa.img05;
 
+
+                Image1.ImageUrl = this.pa.attachment_ii_01;
+                Image2.ImageUrl = this.pa.attachment_ii_02;
+                Image3.ImageUrl = this.pa.attachment_ii_03;
+                Image4.ImageUrl = this.pa.attachment_ii_04;
+
+
+
                 txtLms_X.Text = this.pa.lms_x;
                 txtLms_Y.Text = this.pa.lms_y;
 
@@ -1278,7 +1286,7 @@ namespace ALS.ALSI.Web.view.template
                     btnPage05.CssClass = "btn btn-default btn-sm";
                     btnPage06.CssClass = "btn btn-default btn-sm";
                     btnPage07.CssClass = "btn btn-default btn-sm";
-                    btnPage08.CssClass = "btn btn-sunglo btn-sm";
+                    btnPage08.CssClass = "btn red-sunglo btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = false;
                     pPage03.Visible = false;
