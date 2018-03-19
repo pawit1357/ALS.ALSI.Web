@@ -92,7 +92,15 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_seagate_hpa_coverpage> Hpas
         {
-            get { return (List<template_seagate_hpa_coverpage>)Session[GetType().Name + "Hpas"]; }
+            get
+            {
+                List<template_seagate_hpa_coverpage> tmps = (List<template_seagate_hpa_coverpage>)Session[GetType().Name + "Hpas"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+                //return (List<template_seagate_hpa_coverpage>)Session[GetType().Name + "Hpas"];
+            }
+            //return (List<template_seagate_hpa_coverpage>)Session[GetType().Name + "Hpas"];
+
             set { Session[GetType().Name + "Hpas"] = value; }
         }
 
@@ -600,7 +608,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-                        
+
                         this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
@@ -1727,13 +1735,13 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("notePZT", (cbNotePZT.Checked? lbNotePZT.Text:" ")));
+            reportParameters.Add(new ReportParameter("notePZT", (cbNotePZT.Checked ? lbNotePZT.Text : " ")));
 
-            
+
             reportParameters.Add(new ReportParameter("rpt_unit", ddlLiquidParticleUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("rpt_unit2", ddlHardParticleAlalysisUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("rpt_unit3", ddlClassificationUnit.SelectedItem.Text));
-            
+
             DataTable dtSummary = new DataTable("Summary");
             DataColumn[] cols1 ={ new DataColumn("A",typeof(String)),
                                   new DataColumn("B",typeof(String)),
@@ -1753,7 +1761,7 @@ namespace ALS.ALSI.Web.view.template
             row = dtSummary.NewRow();
             row["A"] = "";
             row["B"] = "Extraction Volume (mL)";
-            row["C"] = !CustomUtils.isNumber(lbC146.Text)? "":Convert.ToDouble(lbC146.Text).ToString("N0");
+            row["C"] = !CustomUtils.isNumber(lbC146.Text) ? "" : Convert.ToDouble(lbC146.Text).ToString("N0");
             dtSummary.Rows.Add(row);
             row = dtSummary.NewRow();
             row["A"] = "";
@@ -1791,8 +1799,9 @@ namespace ALS.ALSI.Web.view.template
 
             List<template_seagate_hpa_coverpage> ds5 = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
 
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 32).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(32, ds5.Count - 32).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 30).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(30, 30).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(60, ds5.Count - 60).ToDataTable())); // Add datasource here
 
 
 

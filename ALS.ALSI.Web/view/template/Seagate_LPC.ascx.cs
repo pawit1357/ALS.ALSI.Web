@@ -545,9 +545,9 @@ namespace ALS.ALSI.Web.view.template
                                 surfaceArea = txtSurfaceArea06.Text;
                             }
 
-                            _tmp.SurfaceArea = Convert.ToDouble(surfaceArea);
-                            _tmp.template_type = Convert.ToInt32(ddlTemplateType.SelectedValue);
-                            _tmp.unit = Convert.ToInt32(ddlUnit.SelectedValue);
+                            _tmp.SurfaceArea = !CustomUtils.isNumber(surfaceArea)? 0 : Convert.ToDouble(surfaceArea);
+                            _tmp.template_type = !CustomUtils.isNumber(ddlTemplateType.SelectedValue) ? 0 : Convert.ToInt32(ddlTemplateType.SelectedValue);
+                            _tmp.unit = !CustomUtils.isNumber(ddlUnit.SelectedValue) ? 0 : Convert.ToInt32(ddlUnit.SelectedValue);
                         }
 
                         objWork.DeleteBySampleID(this.SampleID);
@@ -1254,7 +1254,10 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
-                            listCoverPage[6].Results = lbAverage06.Text;
+                            if (listAverages.Count >= 6)
+                            {
+                                listCoverPage[6].Results = lbAverage06.Text;
+                            }
 
 
                             gvCoverPage06.DataSource = listCoverPage;

@@ -21,6 +21,7 @@ ELP-1942-DB
 
 PA01 > ELN-0839-PAB
 PA02 > ELN-0841-PAB
+PA03 > ELN-0842-PAB,ELN-0843-PAB (result กับ max value of EOV ผิด)
 
 
 fix

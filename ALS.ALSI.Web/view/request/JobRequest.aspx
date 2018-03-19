@@ -393,7 +393,7 @@
                                     <div style="width: 100%; overflow-x: scroll; overflow-y: hidden; padding-bottom: 10px;" runat="server">
 
                                         <asp:GridView ID="gvSample" runat="server" AutoGenerateColumns="False" AllowPaging="True"
-                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_id,job_number,no_of_report,uncertainty,status_completion_scheduled" OnRowCancelingEdit="gvSample_RowCancelingEdit" OnRowDataBound="gvSample_RowDataBound" OnRowDeleting="gvSample_RowDeleting" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" OnSelectedIndexChanging="gvSample_SelectedIndexChanging" OnPageIndexChanging="gvSample_PageIndexChanging">
+                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_id,job_number,no_of_report,uncertainty,status_completion_scheduled,amend_count,retest_count" OnRowCancelingEdit="gvSample_RowCancelingEdit" OnRowDataBound="gvSample_RowDataBound" OnRowDeleting="gvSample_RowDeleting" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" OnSelectedIndexChanging="gvSample_SelectedIndexChanging" OnPageIndexChanging="gvSample_PageIndexChanging">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Ref No." ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
@@ -411,7 +411,7 @@
                                                         <asp:TextBox ID="txtOtherRefNo" CssClass="form-control" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:TextBox>
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
-                                                
+
                                                 <asp:TemplateField HeaderText="Sample Description (Part description, Part no. etc.)" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litDescriptoin" runat="server" Text='<%# Eval("description")%>' />
@@ -482,29 +482,8 @@
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
-                                            <PagerTemplate>
-                                                <div class="pagination">
-                                                    <ul>
-                                                        <li>
-                                                            <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
-                                                                CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
-                                                        </li>
-                                                        <li>
-                                                            <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
-                                                                CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
-                                                        </li>
-                                                        <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
-                                                        <li>
-                                                            <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
-                                                                CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
-                                                        </li>
-                                                        <li>
-                                                            <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
-                                                                CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </PagerTemplate>
+                                            <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
+
                                             <EmptyDataTemplate>
                                                 <div class="data-not-found">
                                                     <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />

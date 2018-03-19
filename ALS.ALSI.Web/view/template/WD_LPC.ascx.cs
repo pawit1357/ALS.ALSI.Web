@@ -1076,9 +1076,11 @@ namespace ALS.ALSI.Web.view.template
         
         private void CalculateCas()
         {
-            foreach (template_wd_lpc_coverpage val in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC)))
+            List<template_wd_lpc_coverpage> calList = this.Lpc;
+
+            foreach (template_wd_lpc_coverpage val in calList.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC)))
             {
-                template_wd_lpc_coverpage tmp = Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.A.Equals("Average") && Convert.ToDouble(x.B) == Convert.ToDouble(val.B)).FirstOrDefault();
+                template_wd_lpc_coverpage tmp = calList.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.A.Equals("Average") && Convert.ToDouble(x.B) == Convert.ToDouble(val.B)).FirstOrDefault();
                 if (tmp != null)
                 {
                     val.D = tmp.F;
@@ -1097,9 +1099,9 @@ namespace ALS.ALSI.Web.view.template
 
             //Cal Average
 
-            foreach (template_wd_lpc_coverpage item in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList())
+            foreach (template_wd_lpc_coverpage item in calList.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList())
             {
-                this.Lpc.Remove(item);
+                calList.Remove(item);
             }
 
             List<String> listOFParticle = new List<String>();
@@ -1111,7 +1113,6 @@ namespace ALS.ALSI.Web.view.template
             listOFParticle.Add("1.000");
             listOFParticle.Add("2.000");
 
-            List<template_wd_lpc_coverpage> originals = this.Lpc;
 
             List<template_wd_lpc_coverpage> tmps = new List<template_wd_lpc_coverpage>();
 
@@ -1170,9 +1171,9 @@ namespace ALS.ALSI.Web.view.template
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
                 tmps.Add(tmp);
             }
-            originals.AddRange(tmps);
+            calList.AddRange(tmps);
 
-            this.Lpc = originals;
+            this.Lpc = calList;
 
 
             foreach(var val in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE)).ToList())

@@ -81,7 +81,12 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_seagate_hpa_coverpage> Hpas
         {
-            get { return (List<template_seagate_hpa_coverpage>)Session[GetType().Name + "Hpas"]; }
+            get {
+                List<template_seagate_hpa_coverpage> tmps = (List<template_seagate_hpa_coverpage>)Session[GetType().Name + "Hpas"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+                //return (List<template_seagate_hpa_coverpage>)Session[GetType().Name + "Hpas"];
+            }
             set { Session[GetType().Name + "Hpas"] = value; }
         }
 

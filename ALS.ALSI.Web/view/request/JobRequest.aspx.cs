@@ -621,7 +621,7 @@ namespace ALS.ALSI.Web.view.request
                                             jobSample.template_id = 2;
                                             break;
                                     }
-                  
+
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
 
                                     break;
@@ -682,13 +682,13 @@ namespace ALS.ALSI.Web.view.request
             gvSample.DataBind();
             //Clear old value
 
-            txtDescriptoin.Text = string.Empty;
-            txtModel.Text = string.Empty;
-            txtSurfaceArea.Text = string.Empty;
-            txtRemark.Text = string.Empty;
-            rdUncertaintyNo.Checked = true;
-            ddlSecification_id.SelectedIndex = -1;
-            ddlCompletionScheduled.SelectedIndex = -1;
+            //txtDescriptoin.Text = string.Empty;
+            //txtModel.Text = string.Empty;
+            //txtSurfaceArea.Text = string.Empty;
+            //txtRemark.Text = string.Empty;
+            //rdUncertaintyNo.Checked = true;
+            //ddlSecification_id.SelectedIndex = -1;
+            //ddlCompletionScheduled.SelectedIndex = -1;
             lstTypeOfTest.ClearSelection();
 
         }
@@ -699,21 +699,43 @@ namespace ALS.ALSI.Web.view.request
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //int _step6owner = Convert.ToInt32(gv.DataKeys[e.Row.RowIndex][5]);
-                LinkButton btnDelete = (LinkButton)e.Row.FindControl("btnDelete");
-                LinkButton btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
-                Literal _litStatus_completion_scheduled = (Literal)e.Row.FindControl("litStatus_completion_scheduled");
-                if (btnDelete != null)
+                try
                 {
-                    m_completion_scheduled m_completion_scheduled = new m_completion_scheduled();
-                    m_completion_scheduled = m_completion_scheduled.SelectByID(Convert.ToInt32(_litStatus_completion_scheduled.Text));
-                    if (m_completion_scheduled != null)
+
+
+                    LinkButton btnDelete = (LinkButton)e.Row.FindControl("btnDelete");
+                    LinkButton btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
+                    Literal litRefNo = (Literal)e.Row.FindControl("litRefNo");
+
+                    if (litRefNo != null)
                     {
-                        _litStatus_completion_scheduled.Text = m_completion_scheduled.name;
+                        int amend_count = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][6]);
+                        int retest_count = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][7]);
+
+                        String am = (amend_count == 0) ? String.Empty : String.Format("AM{0}", amend_count);
+                        String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
+
+                        litRefNo.Text = String.Format("{0}{1}", litRefNo.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
                     }
-                    btnDelete.Visible = !(this.CommandName == CommandNameEnum.View);
-                    btnEdit.Visible = !(this.CommandName == CommandNameEnum.View);
+
+                    Literal _litStatus_completion_scheduled = (Literal)e.Row.FindControl("litStatus_completion_scheduled");
+                    if (btnDelete != null)
+                    {
+                        m_completion_scheduled m_completion_scheduled = new m_completion_scheduled();
+                        m_completion_scheduled = m_completion_scheduled.SelectByID(Convert.ToInt32(_litStatus_completion_scheduled.Text));
+                        if (m_completion_scheduled != null)
+                        {
+                            _litStatus_completion_scheduled.Text = m_completion_scheduled.name;
+                        }
+                        btnDelete.Visible = !(this.CommandName == CommandNameEnum.View);
+                        btnEdit.Visible = !(this.CommandName == CommandNameEnum.View);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine();
+                }
+
             }
         }
 
@@ -749,10 +771,23 @@ namespace ALS.ALSI.Web.view.request
 
             String _no_of_report = gvSample.DataKeys[e.NewEditIndex].Values[3].ToString();
             String _uncertainty = gvSample.DataKeys[e.NewEditIndex].Values[4].ToString();
+
             String _status_completion_scheduled = gvSample.DataKeys[e.NewEditIndex].Values[5].ToString();
             DropDownList _ddlNoOfReport = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlNoOfReport");
             DropDownList _ddlUncertaint = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlUncertaint");
             DropDownList _ddlCompletionScheduled = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlCompletionScheduled");
+
+            int amend_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[6].ToString());
+            int retest_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[7].ToString());
+            String am = (amend_count == 0) ? String.Empty : String.Format("AM{0}", amend_count);
+            String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
+
+            TextBox txtRefNo = (TextBox)gvSample.Rows[e.NewEditIndex].FindControl("txtRefNo");
+            txtRefNo.Text = String.Format("{0}{1}", txtRefNo.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
+
+            txtRefNo.Enabled = (this.CommandName == CommandNameEnum.Add);// (amend_count == 0 && retest_count == 0);
+
+
 
             _ddlNoOfReport.Items.Clear();
             for (int i = 1; i <= 5; i++)
@@ -777,6 +812,7 @@ namespace ALS.ALSI.Web.view.request
         protected void gvSample_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             String jobNumber = gvSample.DataKeys[e.RowIndex].Values[2].ToString();
+            int Id = Convert.ToInt32(gvSample.DataKeys[e.RowIndex].Values[0].ToString());
             TextBox _txtRefNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtRefNo");
             TextBox _txtOtherRefNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtOtherRefNo");
 
@@ -788,11 +824,14 @@ namespace ALS.ALSI.Web.view.request
             DropDownList _ddlUncertaint = (DropDownList)gvSample.Rows[e.RowIndex].FindControl("ddlUncertaint");
             DropDownList _ddlCompletionScheduled = (DropDownList)gvSample.Rows[e.RowIndex].FindControl("ddlCompletionScheduled");
 
-            job_sample jobSample = listSample.Find(x => x.job_number == jobNumber);
+            job_sample jobSample = listSample.Find(x => x.ID == Id);
             if (jobSample != null)
             {
                 jobSample.job_id = objJobInfo.ID;
-                jobSample.job_number = _txtRefNo.Text;
+                if (this.CommandName == CommandNameEnum.Add)
+                {
+                    jobSample.job_number = _txtRefNo.Text;
+                }
                 jobSample.description = _txtDescriptoin.Text;
                 jobSample.model = _txtModel.Text;
                 jobSample.surface_area = _txtSurfaceArea.Text;

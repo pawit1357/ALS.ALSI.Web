@@ -1248,6 +1248,7 @@
     <Content Include="view\request\ChangeReportDate.aspx" />
     <Content Include="view\request\AdminPrint.aspx" />
     <Content Include="view\template\PA01.ascx" />
+    <Content Include="view\template\PA03.ascx" />
     <Content Include="view\template\PA02.ascx" />
     <Content Include="view\template\Seagate_Copperwire.ascx" />
     <Content Include="view\template\Seagate_DHS_V2.ascx" />
@@ -1493,6 +1494,13 @@
     </Compile>
     <Compile Include="view\template\PA01.ascx.designer.cs">
       <DependentUpon>PA01.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\PA03.ascx.cs">
+      <DependentUpon>PA03.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\PA03.ascx.designer.cs">
+      <DependentUpon>PA03.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\PA02.ascx.cs">
       <DependentUpon>PA02.ascx</DependentUpon>
