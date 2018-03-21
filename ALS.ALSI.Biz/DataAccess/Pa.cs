@@ -48,6 +48,20 @@ namespace ALS.ALSI.Biz.DataAccess
         public String lbPermembrane_text { get; set; }
         public String totalResidueWeight { get; set; }
 
+        public String dh_col1 { get; set; }
+        public String dh_col2 { get; set; }
+        public String dh_col3 { get; set; }
+        public String dh_col4 { get; set; }
+        public String dh_col5 { get; set; }
+
+        public String wh_col1 { get; set; }
+        public String wh_col2 { get; set; }
+        public String wh_col3 { get; set; }
+        public String wh_col4 { get; set; }
+        public String wh_col5 { get; set; }
+
+
+
 
         public String isfiltrationmethod_text { get; set; }
 
@@ -131,7 +145,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
     }
 
-    
+
 
 
 

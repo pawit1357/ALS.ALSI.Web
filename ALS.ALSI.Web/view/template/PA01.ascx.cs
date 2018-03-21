@@ -5,27 +5,17 @@ using ALS.ALSI.Biz.ReportObjects;
 using ALS.ALSI.Utils;
 using ALS.ALSI.Web.Properties;
 using ALS.ALSI.Web.view.request;
-using Kaliko.ImageLibrary;
 using Microsoft.Reporting.WebForms;
-using Microsoft.Reporting.WebForms;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using Spire.Doc;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -121,11 +111,11 @@ namespace ALS.ALSI.Web.view.template
         public List<String> WashingHeaders
         {
             get { return (List<String>)Session[GetType().Name + "WashingHeaders"]; }
-            set { Session[GetType().Name + "SampleID"] = value; }
+            set { Session[GetType().Name + "WashingHeaders"] = value; }
         }
 
 
-        
+
         List<String> errors = new List<string>();
 
         private void removeSession()
@@ -148,7 +138,8 @@ namespace ALS.ALSI.Web.view.template
         {
 
             this.CommandName = CommandNameEnum.Add;
-
+            this.WashingHeaders = new List<string>();
+            this.DissolvingHeaders = new List<string>();
             ddlAssignTo.Items.Clear();
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
@@ -387,7 +378,7 @@ namespace ALS.ALSI.Web.view.template
 
                 if (cbPressureRinsing.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION)  && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                 }
                 if (cbInternalRinsing.Checked)
                 {
@@ -682,7 +673,7 @@ namespace ALS.ALSI.Web.view.template
             txtEop_Lnmsp.Text = txtFeretLnms.Text;
             lbLf.Text = txtFeretFb.Text;
             lbTotalResidueWeight.Text = txtEop_G.Text;
-            
+
         }
 
         #endregion
@@ -1422,7 +1413,7 @@ namespace ALS.ALSI.Web.view.template
             String source_file_jpg = String.Empty;
             String source_file_url = String.Empty;
 
-            if ((Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".JPG"))|| (Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".TIF")))
+            if ((Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".TIF")))
             {
                 jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
                 tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
@@ -2179,6 +2170,18 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", " "));
 
 
+            reportParameters.Add(new ReportParameter("dh_col1", this.DissolvingHeaders[0]));
+            reportParameters.Add(new ReportParameter("dh_col2", this.DissolvingHeaders[1]));
+            reportParameters.Add(new ReportParameter("dh_col3", this.DissolvingHeaders[2]));
+            reportParameters.Add(new ReportParameter("dh_col4", this.DissolvingHeaders[3]));
+            reportParameters.Add(new ReportParameter("dh_col5", this.DissolvingHeaders[4]));
+
+            reportParameters.Add(new ReportParameter("wh_col1", this.WashingHeaders[0]));
+            reportParameters.Add(new ReportParameter("wh_col2", this.WashingHeaders[1]));
+            reportParameters.Add(new ReportParameter("wh_col3", this.WashingHeaders[2]));
+            reportParameters.Add(new ReportParameter("wh_col4", this.WashingHeaders[3]));
+            reportParameters.Add(new ReportParameter("wh_col5", this.WashingHeaders[4]));
+
 
 
             // Variables
@@ -2240,6 +2243,19 @@ namespace ALS.ALSI.Web.view.template
             this.pa.lbmembranetype = lbMembraneType.Text;
             this.pa.lbPermembrane_text = lbPermembrane.Text;
             this.pa.totalResidueWeight = lbTotalResidueWeight.Text;
+
+            this.pa.dh_col1 = this.DissolvingHeaders[0];
+            this.pa.dh_col2 = this.DissolvingHeaders[1];
+            this.pa.dh_col3 = this.DissolvingHeaders[2];
+            this.pa.dh_col4 = this.DissolvingHeaders[3];
+            this.pa.dh_col5 = this.DissolvingHeaders[4];
+
+            this.pa.wh_col1 = this.WashingHeaders[0];
+            this.pa.wh_col2 = this.WashingHeaders[1];
+            this.pa.wh_col3 = this.WashingHeaders[2];
+            this.pa.wh_col4 = this.WashingHeaders[3];
+            this.pa.wh_col5 = this.WashingHeaders[4];
+
             pas.Add(this.pa);
 
 
