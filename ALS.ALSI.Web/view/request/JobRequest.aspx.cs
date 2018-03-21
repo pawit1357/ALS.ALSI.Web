@@ -62,7 +62,7 @@ namespace ALS.ALSI.Web.view.request
                 job.update_date = DateTime.Now;
                 job.document_type = "1";
 
-                job.jobSample = listSample;
+                job.jobSample = listSampleShow;
                 return job;
             }
         }
@@ -592,7 +592,7 @@ namespace ALS.ALSI.Web.view.request
                         jobSample.update_by = userLogin.id;
                         jobSample.is_hold = "0";//0=Unhold
                         jobSample.part_no = txtPartNo.Text;
-                        jobSample.part_no = txtPartNo.Text;
+                        jobSample.part_name = txtPartName.Text;
                         jobSample.lot_no = txtLotNo.Text;
                         jobSample.other_ref_no = txtOtherRefNo.Text;
                         #region "Special Flow"
@@ -615,19 +615,16 @@ namespace ALS.ALSI.Web.view.request
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     break;
                                 case "ELN":
-                                    switch (item.Text)
+
+                                    if (tmp.ref_template_id != null)
                                     {
-                                        case "PA-[PAB]PA_REPORT1":
-                                        case "PA-[PAB]PA_REPORT2":
-                                        case "PA-[PAB]PA_REPORT3":
-                                        case "PA-[PAB]PA_REPORT4":
-                                        case "PA-[PAB]PA_REPORT5":
-                                            jobSample.template_id = tmp.ref_template_id.Value;
-                                            break;
-                                        default:
-                                            jobSample.template_id = 2;
-                                            break;
+                                        jobSample.template_id = tmp.ref_template_id.Value;
                                     }
+                                    else
+                                    {
+                                        jobSample.template_id = 2;
+                                    }
+
 
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
 
@@ -736,7 +733,7 @@ namespace ALS.ALSI.Web.view.request
                         {
                             _litStatus_completion_scheduled.Text = m_completion_scheduled.name;
                         }
-                        btnDelete.Visible = false;
+                        btnDelete.Visible = (this.CommandName == CommandNameEnum.Add);
                         btnEdit.Visible = !(this.CommandName == CommandNameEnum.View);
                     }
                 }
@@ -833,6 +830,11 @@ namespace ALS.ALSI.Web.view.request
             DropDownList _ddlUncertaint = (DropDownList)gvSample.Rows[e.RowIndex].FindControl("ddlUncertaint");
             DropDownList _ddlCompletionScheduled = (DropDownList)gvSample.Rows[e.RowIndex].FindControl("ddlCompletionScheduled");
 
+            TextBox _txtPartNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtPartNo");
+            TextBox _txtPartName = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtPartName");
+            TextBox _txtLotNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtLotNo");
+
+
             job_sample jobSample = listSample.Find(x => x.ID == Id);
             if (jobSample != null)
             {
@@ -849,6 +851,10 @@ namespace ALS.ALSI.Web.view.request
                 jobSample.no_of_report = Convert.ToInt16(_ddlNoOfReport.SelectedValue);
                 jobSample.uncertainty = _ddlUncertaint.SelectedValue;
                 jobSample.status_completion_scheduled = Convert.ToInt32(_ddlCompletionScheduled.SelectedValue);
+
+                jobSample.part_no = _txtPartNo.Text;
+                jobSample.part_name = _txtPartName.Text;
+                jobSample.lot_no = _txtLotNo.Text;
 
             }
             gvSample.EditIndex = -1;

@@ -562,18 +562,37 @@
                                                 <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
                                         </tr>
                                         <tr>
-                                            <td>Unit</td>
+                                            <td colspan="2">Unit</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Specification Limits/Average of ? data points</td>
                                             <td>
                                                 <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
 
-                                                <%--                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
-                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blank/Sample</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit2" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
 
-                                                </asp:DropDownList>--%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blank-corrected</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit3" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blank-corrected(2)</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit4" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
 
                                             </td>
                                         </tr>

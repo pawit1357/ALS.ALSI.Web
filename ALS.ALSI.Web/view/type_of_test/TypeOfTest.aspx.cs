@@ -1,4 +1,4 @@
-﻿    using ALS.ALSI.Biz;
+﻿using ALS.ALSI.Biz;
 using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using System;
@@ -50,6 +50,10 @@ namespace ALS.ALSI.Web.view.type_of_test
                 tmp.parent = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? -1 : int.Parse(ddlSpecification.SelectedValue);
                 tmp.status = "A";
                 tmp.data_group = txtDataGroup.Text;
+                if (Convert.ToInt16(ddlPathUrl.SelectedValue) > 0)
+                {
+                    tmp.ref_template_id = Convert.ToInt16(ddlPathUrl.SelectedValue);
+                }
                 return tmp;
             }
         }
@@ -65,6 +69,14 @@ namespace ALS.ALSI.Web.view.type_of_test
             ddlSpecification.DataSource = specification.SelectAll();
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
+            m_template template = new m_template();
+
+            ddlPathUrl.Items.Clear();
+            ddlPathUrl.DataSource = template.SelectAllByActive();
+            ddlPathUrl.DataBind();
+            ddlPathUrl.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
+
+
 
             switch (CommandName)
             {
@@ -103,19 +115,22 @@ namespace ALS.ALSI.Web.view.type_of_test
         }
         private void fillinScreen()
         {
-                m_type_of_test type_of_test = new m_type_of_test().SelectByID(this.PKID);
-                ddlSpecification.SelectedValue = type_of_test.specification_id.ToString();
-                txtPrefix.Text = type_of_test.prefix;
-                txtName.Text = type_of_test.name;
+            m_type_of_test type_of_test = new m_type_of_test().SelectByID(this.PKID);
+            ddlSpecification.SelectedValue = type_of_test.specification_id.ToString();
+            txtPrefix.Text = type_of_test.prefix;
+            txtName.Text = type_of_test.name;
+            if (type_of_test.ref_template_id != null)
+            {
+                ddlPathUrl.SelectedValue = type_of_test.ref_template_id.Value.ToString();
+            }
+            //ddlTypeOfTest.Items.Clear();
+            //ddlTypeOfTest.DataSource = type_of_test.SelectParent(type_of_test.specification_id);
+            //ddlTypeOfTest.DataBind();
+            //ddlTypeOfTest.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
-                //ddlTypeOfTest.Items.Clear();
-                //ddlTypeOfTest.DataSource = type_of_test.SelectParent(type_of_test.specification_id);
-                //ddlTypeOfTest.DataBind();
-                //ddlTypeOfTest.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
+            //ddlTypeOfTest.SelectedValue = type_of_test.parent.ToString();
+            txtDataGroup.Text = type_of_test.data_group;
 
-                //ddlTypeOfTest.SelectedValue = type_of_test.parent.ToString();
-                txtDataGroup.Text = type_of_test.data_group;
-          
         }
         private void removeSession()
         {
@@ -166,11 +181,11 @@ namespace ALS.ALSI.Web.view.type_of_test
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-                //ddlTypeOfTest.Items.Clear();
-                //ddlTypeOfTest.DataSource = new m_type_of_test().SelectParent(String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : Convert.ToInt32(ddlSpecification.SelectedValue));
-                //ddlTypeOfTest.DataBind();
-                //ddlTypeOfTest.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
-            
+            //ddlTypeOfTest.Items.Clear();
+            //ddlTypeOfTest.DataSource = new m_type_of_test().SelectParent(String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : Convert.ToInt32(ddlSpecification.SelectedValue));
+            //ddlTypeOfTest.DataBind();
+            //ddlTypeOfTest.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
+
         }
     }
 }

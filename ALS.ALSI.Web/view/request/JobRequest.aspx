@@ -444,6 +444,32 @@
                                                         <asp:TextBox ID="txtRemark" CssClass="form-control" runat="server" Text='<%# Eval("remarks")%>'></asp:TextBox>
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Part No" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litPartNo" runat="server" Text='<%# Eval("part_no")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtPartNo" CssClass="form-control" runat="server" Text='<%# Eval("part_no")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="txtPart Name" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litPartName" runat="server" Text='<%# Eval("part_name")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtPartName" CssClass="form-control" runat="server" Text='<%# Eval("part_name")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Lot No" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litLotNo" runat="server" Text='<%# Eval("lot_no")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtLotNo" CssClass="form-control" runat="server" Text='<%# Eval("lot_no")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+
                                                 <asp:TemplateField HeaderText="No.of Report:" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litNoOfReport" runat="server" Text='<%# Eval("no_of_report")%>' />
@@ -563,7 +589,7 @@
                             </div>
                         </div>
                     </div>
-                                        <h4 class="form-section">Job Status</h4>
+                    <h4 class="form-section">Job Status</h4>
 
                     <div class="row">
                         <div class="col-md-6">

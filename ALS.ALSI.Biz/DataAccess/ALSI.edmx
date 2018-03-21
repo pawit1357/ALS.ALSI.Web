@@ -1629,6 +1629,9 @@
           <Property Name="data_type" Type="int" />
           <Property Name="WashMethod" Type="varchar" MaxLength="45" />
           <Property Name="unit" Type="int" />
+          <Property Name="unit2" Type="int" />
+          <Property Name="unit3" Type="int" />
+          <Property Name="unit4" Type="int" />
         </EntityType>
         <EntityType Name="template_wd_mesa_coverpage">
           <Key>
@@ -3729,6 +3732,9 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="data_type" Type="Int32" />
           <Property Name="WashMethod" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="unit" Type="Int32" />
+          <Property Name="unit2" Type="Int32" />
+          <Property Name="unit3" Type="Int32" />
+          <Property Name="unit4" Type="Int32" />
         </EntityType>
         <EntityType Name="template_wd_mesa_coverpage">
           <Key>
@@ -5614,6 +5620,9 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_lpc_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_wd_lpc_coverpage">
               <MappingFragment StoreEntitySet="template_wd_lpc_coverpage">
+                <ScalarProperty Name="unit4" ColumnName="unit4" />
+                <ScalarProperty Name="unit3" ColumnName="unit3" />
+                <ScalarProperty Name="unit2" ColumnName="unit2" />
                 <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="WashMethod" ColumnName="WashMethod" />
                 <ScalarProperty Name="data_type" ColumnName="data_type" />

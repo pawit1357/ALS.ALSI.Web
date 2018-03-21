@@ -41,7 +41,8 @@ namespace ALS.ALSI.Web.view.template
         }
         public List<template_wd_lpc_coverpage> Lpc
         {
-            get {
+            get
+            {
                 List<template_wd_lpc_coverpage> tmps = (List<template_wd_lpc_coverpage>)Session[GetType().Name + "Lpc"];
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
@@ -117,6 +118,22 @@ namespace ALS.ALSI.Web.view.template
             ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("LPC")).ToList();
             ddlUnit.DataBind();
             ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnit2.Items.Clear();
+            ddlUnit2.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("LPC")).ToList();
+            ddlUnit2.DataBind();
+            ddlUnit2.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnit3.Items.Clear();
+            ddlUnit3.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("LPC")).ToList();
+            ddlUnit3.DataBind();
+            ddlUnit3.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnit4.Items.Clear();
+            ddlUnit4.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("LPC")).ToList();
+            ddlUnit4.DataBind();
+            ddlUnit4.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
 
             m_type_of_test typeOfTest = new m_type_of_test();
             typeOfTest = typeOfTest.SelectByID(jobSample.type_of_test_id);
@@ -225,12 +242,16 @@ namespace ALS.ALSI.Web.view.template
                         pTankConditions.Visible = false;
                         break;
                 }
-     
+
 
 
                 ddlSpecification.SelectedValue = _lpc.detail_spec_id.ToString();
                 ddlComponent.SelectedValue = _lpc.component_id.ToString();
                 ddlUnit.SelectedValue = _lpc.unit.ToString();
+                ddlUnit2.SelectedValue = _lpc.unit2.ToString();
+                ddlUnit3.SelectedValue = _lpc.unit3.ToString();
+                ddlUnit4.SelectedValue = _lpc.unit4.ToString();
+
 
                 this.CommandName = CommandNameEnum.Edit;
 
@@ -242,16 +263,16 @@ namespace ALS.ALSI.Web.view.template
                 gvSpec.Columns[2].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
                 gvSpec.Columns[3].HeaderText = String.Format("Average of {0} {1} points({2})", typeOfTest.name.Split(' ')[1].ToLower(), typeOfTest.name.Split(' ')[2].ToLower(), ddlUnit.SelectedItem.Text);
 
-                gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit.SelectedItem.Text);
-                gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit2.SelectedItem.Text);
+                gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit2.SelectedItem.Text);
 
-                gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
-                gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit3.SelectedItem.Text);
+                gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit4.SelectedItem.Text);
 
                 gvResult.Columns[6].Visible = userRole == RoleEnum.CHEMIST;
 
-                gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
-                gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+                gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit3.SelectedItem.Text);
+                gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit4.SelectedItem.Text);
                 #endregion
                 CalculateCas();
             }
@@ -262,6 +283,22 @@ namespace ALS.ALSI.Web.view.template
                 txtB54.Text = "20.2 L";
                 txtC54.Text = "68 kHz";
                 txtD54.Text = "4.8 W/L";
+                //init
+
+//44  LPC Counts/ cm2  1
+//45  LPC Counts/ Swab tip 1
+//46  LPC Particles/ cm2   1
+//47  LPC Particles/ Tip   1
+//48  LPC Particles/ Tweezer   1
+//49  LPC Counts/ part 1
+//50  LPC Particles/ part  1
+
+
+                ddlUnit.SelectedValue = "46";
+                ddlUnit2.SelectedValue = "56";
+                ddlUnit3.SelectedValue = "49";
+                ddlUnit4.SelectedValue = "44";
+
             }
 
             #endregion
@@ -272,7 +309,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            litDownloadIcon.Text = "<i class=\"fa fa-"+(lbJobStatus.Text.Equals("CONVERT_PDF")? "file-pdf-o" : "file-word-o") +"\"></i>";
+            litDownloadIcon.Text = "<i class=\"fa fa-" + (lbJobStatus.Text.Equals("CONVERT_PDF") ? "file-pdf-o" : "file-word-o") + "\"></i>";
 
 
         }
@@ -394,6 +431,9 @@ namespace ALS.ALSI.Web.view.template
                                 #endregion
                                 cov.WashMethod = ddlWashMethod.SelectedValue;
                                 cov.unit = Convert.ToInt32(ddlUnit.SelectedValue);
+                                cov.unit2 = Convert.ToInt32(ddlUnit2.SelectedValue);
+                                cov.unit3 = Convert.ToInt32(ddlUnit3.SelectedValue);
+                                cov.unit4 = Convert.ToInt32(ddlUnit4.SelectedValue);
 
                             }
                             objWork.DeleteBySampleID(this.SampleID);
@@ -843,17 +883,17 @@ namespace ALS.ALSI.Web.view.template
             DataTable dt = Extenders.ObjectToDataTable(this.Lpc[0]);
             List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
-            foreach(template_wd_lpc_coverpage xxxx in values)
+            foreach (template_wd_lpc_coverpage xxxx in values)
             {
                 if (!nums.Contains(xxxx.B))
                 {
-               
-                        nums.Add(xxxx.B);
-                    
+
+                    nums.Add(xxxx.B);
+
                 }
             }
 
-            List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)  && nums.Contains(x.B) && !x.B.Equals("0.200")).ToList();
+            List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && nums.Contains(x.B) && !x.B.Equals("0.200")).ToList();
             template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
             int pc = values.Count / 5;
             for (int i = 1; i <= pc; i++)
@@ -918,7 +958,7 @@ namespace ALS.ALSI.Web.view.template
                 Console.WriteLine();
             }
 
-            
+
 
             ReportHeader reportHeader = new ReportHeader();
             reportHeader = reportHeader.getReportHeder(this.jobSample);
@@ -945,6 +985,10 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("txtC54", txtC54.Text));
             reportParameters.Add(new ReportParameter("txtD54", txtD54.Text));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnit2.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit3", ddlUnit3.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit4", ddlUnit4.SelectedItem.Text));
+
             reportParameters.Add(new ReportParameter("method", txtB21.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
             reportParameters.Add(new ReportParameter("partizleSizeCount", pc.ToString()));
@@ -952,7 +996,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-            
+
 
             // Variables
             Warning[] warnings;
@@ -970,18 +1014,19 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3","4","5" }).Contains(x.A)).OrderBy(x=>x.A).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3", "4" }).Contains(x.A)).OrderBy(x => x.A).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] { "5" }).Contains(x.A)).OrderBy(x => x.A).ToDataTable())); // Add datasource here
 
             //if (sumarys.Count > 0 && sumarys.Count <= 10)
             //{
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, sumarys.Count).OrderBy(x => x.D).ToDataTable())); // Add datasource here
-                //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
-            //}
-            //if (sumarys.Count > 10)
-            //{
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, 10).ToDataTable())); // Add datasource here
-            //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", sumarys.GetRange(10, sumarys.Count - 10).ToDataTable())); // Add datasource here
-            //}
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, sumarys.Count).OrderBy(x => x.D).ToDataTable())); // Add datasource here
+                                                                                                                                                      //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                                                                                                                                                      //}
+                                                                                                                                                      //if (sumarys.Count > 10)
+                                                                                                                                                     //{
+                                                                                                                                                      //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, 10).ToDataTable())); // Add datasource here
+                                                                                                                                                      //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", sumarys.GetRange(10, sumarys.Count - 10).ToDataTable())); // Add datasource here
+                                                                                                                                                      //}
 
 
 
@@ -1071,9 +1116,9 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-        
+
         #region "Custom method"
-        
+
         private void CalculateCas()
         {
             List<template_wd_lpc_coverpage> calList = this.Lpc;
@@ -1164,9 +1209,9 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Console.WriteLine();
                 }
-                tmp.E = (_E == 0||_E<0) ? "0" : ((_E2 / _E) * 100).ToString();
-                tmp.F = (_F == 0||_F<0) ? "0" : ((_F2 / _F) * 100).ToString();
-               
+                tmp.E = (_E == 0 || _E < 0) ? "0" : ((_E2 / _E) * 100).ToString();
+                tmp.F = (_F == 0 || _F < 0) ? "0" : ((_F2 / _F) * 100).ToString();
+
                 tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
                 tmps.Add(tmp);
@@ -1176,7 +1221,7 @@ namespace ALS.ALSI.Web.view.template
             this.Lpc = calList;
 
 
-            foreach(var val in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE)).ToList())
+            foreach (var val in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE)).ToList())
             {
                 val.E = (Convert.ToDouble(val.E) < 0) ? "0" : val.E;
                 val.F = (Convert.ToDouble(val.F) < 0) ? "0" : val.F;
@@ -1433,18 +1478,19 @@ namespace ALS.ALSI.Web.view.template
             m_type_of_test typeOfTest = new m_type_of_test();
             typeOfTest = typeOfTest.SelectByID(jobSample.type_of_test_id);
 
+            #region "Unit"
             gvSpec.Columns[2].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
             gvSpec.Columns[3].HeaderText = String.Format("Average of {0} {1} points({2})", typeOfTest.name.Split(' ')[1].ToLower(), typeOfTest.name.Split(' ')[2].ToLower(), ddlUnit.SelectedItem.Text);
 
+            gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit2.SelectedItem.Text);
+            gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit2.SelectedItem.Text);
 
-            gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit.SelectedItem.Text);
-            gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit3.SelectedItem.Text);
+            gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit4.SelectedItem.Text);
 
-            gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
-            gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
-
-            gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
-            gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+            gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit3.SelectedItem.Text);
+            gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit4.SelectedItem.Text);
+            #endregion
 
             CalculateCas();
         }

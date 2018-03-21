@@ -158,4 +158,24 @@ ADD COLUMN `amend_or_retest` VARCHAR(1) NULL COMMENT 'A= Amend,R= Retest' AFTER 
 ADD COLUMN `last_status` INT NULL AFTER `amend_or_retest`;
 
 
+
+--------------------- 2018-03-21 ----------------------------------
+select * from tb_unit where unit_group='LPC';
+
+
+INSERT INTO `alsi`.`tb_unit` (`id`, `unit_group`, `name`) VALUES ('56', 'LPC', 'Counts/mL');
+UPDATE `alsi`.`tb_unit` SET `value`='1' WHERE `id`='56';
+
+ALTER TABLE `alsi`.`template_wd_lpc_coverpage` 
+ADD COLUMN `unit2` INT NULL AFTER `unit`,
+ADD COLUMN `unit3` INT NULL AFTER `unit2`,
+ADD COLUMN `unit4` INT NULL AFTER `unit3`;
+
+ALTER TABLE `alsi`.`template_wd_lpc_coverpage` 
+CHANGE COLUMN `unit` `unit` INT(11) NULL DEFAULT 46 ,
+CHANGE COLUMN `unit2` `unit2` INT(11) NULL DEFAULT 56 ,
+CHANGE COLUMN `unit3` `unit3` INT(11) NULL DEFAULT 49 ,
+CHANGE COLUMN `unit4` `unit4` INT(11) NULL DEFAULT 44 ;
+
+
 */

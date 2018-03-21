@@ -77,6 +77,19 @@
                             </div>
                         </div>
                     </div>
+                                        <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Ref Template:<span class="required"></span></label>
+                                <div class="col-md-6">
+                                            <asp:DropDownList ID="ddlPathUrl" runat="server" DataTextField="name" DataValueField="ID" CssClass="select2_category form-control"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-6">

@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ALS.ALSI.Web.view.type_of_test {
+namespace ALS.ALSI.Web.view.request {
     
     
-    public partial class TypeOfTest {
+    public partial class EditSample {
         
         /// <summary>
         /// Form1 control.
@@ -22,58 +22,49 @@ namespace ALS.ALSI.Web.view.type_of_test {
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
         
         /// <summary>
-        /// lbCommandName control.
+        /// gvJob control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCommandName;
+        protected global::System.Web.UI.WebControls.GridView gvJob;
         
         /// <summary>
-        /// ddlSpecification control.
+        /// lbTitleName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSpecification;
+        protected global::System.Web.UI.WebControls.Label lbTitleName;
         
         /// <summary>
-        /// txtPrefix control.
+        /// rdEditData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrefix;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdEditData;
         
         /// <summary>
-        /// txtName control.
+        /// ddlStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
         
         /// <summary>
-        /// txtDataGroup control.
+        /// txtRemark control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataGroup;
-        
-        /// <summary>
-        /// ddlPathUrl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPathUrl;
+        protected global::System.Web.UI.WebControls.TextBox txtRemark;
         
         /// <summary>
         /// btnSave control.
@@ -91,6 +82,6 @@ namespace ALS.ALSI.Web.view.type_of_test {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
+        protected global::System.Web.UI.WebControls.Button btnCancel;
     }
 }
