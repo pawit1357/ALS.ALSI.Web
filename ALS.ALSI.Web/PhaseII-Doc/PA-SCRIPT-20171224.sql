@@ -149,4 +149,13 @@ ADD COLUMN `param_eht_02` VARCHAR(255) NULL AFTER `param_eht_01`,
 ADD COLUMN `param_detector_01` VARCHAR(255) NULL AFTER `param_eht_02`,
 ADD COLUMN `param_detector_02` VARCHAR(255) NULL AFTER `param_detector_01`;
 
+-------------------- 2018-03-20 ----------------------------------------
+ALTER TABLE `alsi`.`template_seagate_copperwire_coverpage` 
+ADD COLUMN `seq` INT NULL DEFAULT 0 AFTER `ID`;
+
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `amend_or_retest` VARCHAR(1) NULL COMMENT 'A= Amend,R= Retest' AFTER `sample_prefix`,
+ADD COLUMN `last_status` INT NULL AFTER `amend_or_retest`;
+
+
 */

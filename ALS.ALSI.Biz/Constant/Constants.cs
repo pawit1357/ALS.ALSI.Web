@@ -31,6 +31,9 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_JOB_WORK_FLOW = APPNAME + "/view/request/JobWorkFlow.aspx";
         public const String LINK_JOB_CONVERT_TEMPLATE = APPNAME + "/view/request/JobConvertTemplate.aspx";
         public const String LINK_JOB_REQUEST = APPNAME + "/view/request/JobRequest.aspx";
+        public const String LINK_EDIT_SAMPLE = APPNAME + "/view/request/EditSample.aspx";
+
+        
         public const String LINK_SEARCH_JOB_REQUEST = APPNAME + "/view/request/SearchJobRequest.aspx";
         public const String LINK_JOB_CHANGE_STATUS = APPNAME + "/view/request/ChangeJobsStatus.aspx";
         public const String LINK_JOB_CHANGE_DUEDATE = APPNAME + "/view/request/ChangeJobDueDate.aspx";

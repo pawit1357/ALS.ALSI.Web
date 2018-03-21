@@ -563,6 +563,20 @@
                             </div>
                         </div>
                     </div>
+                                        <h4 class="form-section">Job Status</h4>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Status:<span class="required">*</span></label>
+                                <div class="col-md-9">
+                                    <asp:DropDownList ID="ddlStatus" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
 
                     <!-- END FORM-->
                     <div class="form-actions">

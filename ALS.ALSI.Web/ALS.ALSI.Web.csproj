@@ -1241,6 +1241,7 @@
     <Content Include="view\library\Library.aspx" />
     <Content Include="view\library\SearchLibrary.aspx" />
     <Content Include="view\request\ChangeJobGroup.aspx" />
+    <Content Include="view\request\EditSample.aspx" />
     <Content Include="view\request\ViewFile.aspx" />
     <Content Include="view\request\ChangeSingaporeRefNo.aspx" />
     <Content Include="view\request\ChangeOtherRefNo.aspx" />
@@ -1445,6 +1446,13 @@
     </Compile>
     <Compile Include="view\request\ChangeJobGroup.aspx.designer.cs">
       <DependentUpon>ChangeJobGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\request\EditSample.aspx.cs">
+      <DependentUpon>EditSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\request\EditSample.aspx.designer.cs">
+      <DependentUpon>EditSample.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\request\ViewFile.aspx.cs">
       <DependentUpon>ViewFile.aspx</DependentUpon>
@@ -2056,8 +2064,8 @@
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\pa_03.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_02.rdlc" />
-    <EmbeddedResource Include="ReportObject\pa_04.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_wd.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>

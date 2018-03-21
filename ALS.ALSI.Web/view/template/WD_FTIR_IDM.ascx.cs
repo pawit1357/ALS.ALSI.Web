@@ -51,6 +51,12 @@ namespace ALS.ALSI.Web.view.template
         public List<template_wd_ftir_coverpage> Ftir
         {
             get { return (List<template_wd_ftir_coverpage>)Session[GetType().Name + "Ftir"]; }
+            //get
+            //{
+            //    List<template_wd_ftir_coverpage> tmps = (List<template_wd_ftir_coverpage>)Session[GetType().Name + "Ftir"];
+            //    RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+            //    return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            //}
             set { Session[GetType().Name + "Ftir"] = value; }
         }
 
@@ -119,7 +125,9 @@ namespace ALS.ALSI.Web.view.template
                 pUploadfile.Visible = false;
                 pDownload.Visible = false;
                 btnSubmit.Visible = false;
+
                 //btnCalculate.Visible = false;
+
                 switch (userRole)
                 {
                     case RoleEnum.LOGIN:
@@ -790,7 +798,7 @@ namespace ALS.ALSI.Web.view.template
 
             try
             {
-                DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
+                DataTable dt = Extenders.ObjectToDataTable(this.Ftir.Where(x => x.data_type == 1 && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault());
                 ReportHeader reportHeader = new ReportHeader();
                 reportHeader = reportHeader.getReportHeder(this.jobSample);
 
@@ -1261,11 +1269,37 @@ namespace ALS.ALSI.Web.view.template
             //{
             this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") || this.Ftir[7].C.Equals("NA") ? "NA" : (this.Ftir[7].D.ToUpper().Equals("Not Detected".ToUpper())) ? "PASS" : this.Ftir[7].D.ToUpper().Equals("Not Detected".ToUpper()) || this.Ftir[7].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
             //}
+            //List<template_wd_ftir_coverpage> tmps = this.Ftir;
+            //tmps[3].D = lbC26.Text;
+            //tmps[4].D = lbC26.Text;
+            //if (tmps.Count >= 6)
+            //{
+            //    tmps[5].D = txtC41.Text;
+            //}
+            //if (tmps.Count >= 7)
+            //{
+            //    tmps[6].D = txtC53.Text;
+            //}
+            //if (tmps.Count >= 8)
+            //{
+            //    tmps[7].D = txtFTIR_C63.Text;
+            //}
+            //////
 
-
-            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
-            gvMethodProcedure.DataBind();
-
+            //tmps[3].E = String.IsNullOrEmpty(tmps[3].D) ? "" : tmps[3].D.Equals("NA") || tmps[3].C.Equals("NA") ? "NA" : ((Convert.ToDouble(tmps[3].D) < Convert.ToDouble(tmps[3].C.Replace("<", "").Trim()) || tmps[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+            //tmps[4].E = String.IsNullOrEmpty(tmps[4].D) ? "" : tmps[4].D.Equals("NA") || tmps[4].C.Equals("NA") ? "NA" : ((Convert.ToDouble(tmps[4].D) < Convert.ToDouble(tmps[4].C.Replace("<", "").Trim()) || tmps[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+            //if (tmps.Count >= 6)
+            //{
+            //    tmps[5].E = String.IsNullOrEmpty(tmps[5].D) ? "" : tmps[5].D.Equals("NA") || tmps[5].C.Equals("NA") ? "NA" : (tmps[5].D.Equals("< MDL")) ? "PASS" : tmps[5].D.ToUpper().Equals("Not Detected".ToUpper()) || tmps[5].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(tmps[5].D) < Convert.ToDouble(tmps[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            //}
+            //if (tmps.Count >= 7)
+            //{
+            //    tmps[6].E = String.IsNullOrEmpty(tmps[6].D) ? "" : tmps[6].D.Equals("Detected") ? "FAIL" : tmps[6].D.Equals("NA") || tmps[6].C.Equals("NA") ? "NA" : (tmps[6].D.Equals("< MDL")) ? "PASS" : tmps[6].D.Equals("Not Detected") || tmps[6].C.Equals("Not Detected") || (Convert.ToDouble(tmps[6].D) < Convert.ToDouble(tmps[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            //}
+            //if (tmps.Count >= 8)
+            //{
+            //    tmps[7].E = String.IsNullOrEmpty(tmps[7].D) ? "" : tmps[7].D.Equals("NA") || tmps[7].C.Equals("NA") ? "NA" : (tmps[7].D.ToUpper().Equals("Not Detected".ToUpper())) ? "PASS" : tmps[7].D.ToUpper().Equals("Not Detected".ToUpper()) || tmps[7].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(tmps[7].D) < Convert.ToDouble(tmps[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            //}
             foreach (var item in this.Ftir.Where(x => x.data_type == 2).ToList())
             {
                 if (item.C.Equals("NA"))
@@ -1276,9 +1310,14 @@ namespace ALS.ALSI.Web.view.template
                 {
                     item.E = "FAIL";
                 }
-
             }
 
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+            this.Ftir = (userRole == RoleEnum.CHEMIST) ? this.Ftir : this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+
+
+            gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == 1).ToList();
+            gvMethodProcedure.DataBind();
             gvResult.DataSource = this.Ftir.Where(x => x.data_type == 2).ToList();
             gvResult.DataBind();
 
@@ -1286,7 +1325,7 @@ namespace ALS.ALSI.Web.view.template
             lbA31.Text = !String.IsNullOrEmpty(txtFTIR_B35.Text) ? txtFTIR_B35.Text : txtFTIR_B48.Text;
             lbB31.Text = !String.IsNullOrEmpty(lbAmide.Text) ? lbAmide.Text : lbSilicone.Text;
 
-            lbA31.Text = String.IsNullOrEmpty(lbA31.Text)? String.Empty: Convert.ToDouble(lbA31.Text).ToString("N"+txtDecimal09.Text);
+            lbA31.Text = String.IsNullOrEmpty(lbA31.Text) ? String.Empty : Convert.ToDouble(lbA31.Text).ToString("N" + txtDecimal09.Text);
             btnSubmit.Enabled = true;
         }
 

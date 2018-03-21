@@ -52,6 +52,13 @@ namespace ALS.ALSI.Web.view.request
             get { return (int)ViewState[GetType().Name + "SampleID"]; }
             set { ViewState[GetType().Name + "SampleID"] = value; }
         }
+
+        public job_sample jobSample
+        {
+            get { return (job_sample)Session[GetType().Name + "job_sample"]; }
+            set { Session[GetType().Name + "job_sample"] = value; }
+        }
+
         public job_info objInfo
         {
             get
@@ -88,9 +95,10 @@ namespace ALS.ALSI.Web.view.request
         private void fillinScreen()
         {
 
-            job_info jobInfo = new job_info().SelectByID(this.JobID);
-            if (jobInfo != null)
+            jobSample = new job_sample().SelectByID(this.SampleID);
+            if (jobSample != null)
             {
+
             }
             else
             {
@@ -101,7 +109,9 @@ namespace ALS.ALSI.Web.view.request
 
         private void bindingData()
         {
-            searchResult = objInfo.SearchData();
+            job_info jobInfo = new job_info();
+            jobInfo.sample_id = this.SampleID;
+            searchResult = jobInfo.SearchData();
             gvJob.DataSource = searchResult;
             gvJob.DataBind();
         }
@@ -171,35 +181,20 @@ namespace ALS.ALSI.Web.view.request
             newSample.update_date = DateTime.Now;
             newSample.amend_count = 0;
             newSample.retest_count = 0;
-
+            newSample.amend_or_retest = (this.CommandName == CommandNameEnum.Amend) ? "A" : "R";
+            newSample.sample_prefix = oldSample.sample_prefix;
             switch (this.CommandName)
             {
                 case CommandNameEnum.Amend:
-                    oldSample.job_status = Convert.ToInt16(StatusEnum.JOB_AMEND);
-                    oldSample.amend_count = (oldSample.amend_count == null || oldSample.amend_count == 0) ? 0 : oldSample.amend_count;
                     newSample.amend_count = oldSample.amend_count + 1;
                     break;
                 case CommandNameEnum.Retest:
-                    oldSample.job_status = Convert.ToInt16(StatusEnum.JOB_RETEST);
-                    oldSample.retest_count = (oldSample.retest_count == null || oldSample.retest_count == 0) ? 0 : oldSample.retest_count;
                     newSample.retest_count = oldSample.retest_count + 1;
                     break;
             }
 
             newSample.job_status = Convert.ToInt16(ddlStatus.SelectedValue);
-            //switch (rdEditData.SelectedValue)
-            //{
-            //    case "0"://NO
-            //        newSample.job_status = Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC);
-            //        break;
-            //    case "1"://YES
-            //        newSample.job_status = Convert.ToInt16(StatusEnum.CHEMIST_TESTING);
-            //        break;
-            //}
 
-
-            //oldSample.path_pdf = String.Empty;
-            //oldSample.path_word = String.Empty;
             newSample.path_pdf = String.Empty;
             newSample.path_word = String.Empty;
             newSample.Insert();

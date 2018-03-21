@@ -112,7 +112,16 @@ namespace ALS.ALSI.Web.view.template
             get { return (int)Session[GetType().Name + "SampleID"]; }
             set { Session[GetType().Name + "SampleID"] = value; }
         }
-
+        public List<String> DissolvingHeaders
+        {
+            get { return (List<String>)Session[GetType().Name + "DissolvingHeaders"]; }
+            set { Session[GetType().Name + "DissolvingHeaders"] = value; }
+        }
+        public List<String> WashingHeaders
+        {
+            get { return (List<String>)Session[GetType().Name + "WashingHeaders"]; }
+            set { Session[GetType().Name + "WashingHeaders"] = value; }
+        }
         List<String> errors = new List<string>();
 
         private void removeSession()
@@ -389,7 +398,6 @@ namespace ALS.ALSI.Web.view.template
                 
 
                 #region "COLUMN HEADER"
-                List<String> cols = new List<string>();
                 tb_m_specification selectValue = new tb_m_specification();
 
                 #region "gvDissolving"
@@ -409,10 +417,10 @@ namespace ALS.ALSI.Web.view.template
                 }
 
 
-                cols = tb_m_specification.findColumnCount(selectValue);
-                for (int i = 0; i < cols.Count; i++)
+                this.DissolvingHeaders = tb_m_specification.findColumnCount(selectValue);
+                for (int i = 0; i < this.DissolvingHeaders.Count; i++)
                 {
-                    gvDissolving.Columns[i].HeaderText = cols[i];
+                    gvDissolving.Columns[i].HeaderText = this.DissolvingHeaders[i];
                     gvDissolving.Columns[i].Visible = true;
                 }
                 #endregion
@@ -430,10 +438,10 @@ namespace ALS.ALSI.Web.view.template
                     selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                 }
 
-                cols = tb_m_specification.findColumnCount(selectValue);
-                for (int i = 0; i < cols.Count; i++)
+                this.WashingHeaders = tb_m_specification.findColumnCount(selectValue);
+                for (int i = 0; i < this.WashingHeaders.Count; i++)
                 {
-                    gvWashing.Columns[i].HeaderText = cols[i];
+                    gvWashing.Columns[i].HeaderText = this.WashingHeaders[i];
                     gvWashing.Columns[i].Visible = true;
                 }
                 #endregion
@@ -449,10 +457,12 @@ namespace ALS.ALSI.Web.view.template
                 List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
                 if (listOfSpec.Count > 0)
                 {
+                    int row = 1;
                     foreach (tb_m_specification item in listOfSpec)
                     {
                         template_pa_detail tmp = new template_pa_detail();
                         tmp.id = CustomUtils.GetRandomNumberID();
+                        tmp.id = row;
                         tmp.col_c = item.C;
                         tmp.col_d = item.D;
                         tmp.col_e = item.E;
@@ -462,6 +472,7 @@ namespace ALS.ALSI.Web.view.template
                         tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                         tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
                         paDetail.Add(tmp);
+                        row++;
                     }
 
                 }
@@ -609,7 +620,7 @@ namespace ALS.ALSI.Web.view.template
             lbPermembrane.Text = String.Empty;
 
             List<template_pa_detail> listMicroPicData = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
-            List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
                 template_pa_detail refPa = listPaDetail[listPaDetail.Count - 1];

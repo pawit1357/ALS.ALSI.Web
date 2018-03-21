@@ -15,6 +15,7 @@ namespace ALS.ALSI.Biz.DataAccess
     public partial class template_seagate_copperwire_coverpage
     {
         public int ID { get; set; }
+        public Nullable<int> seq { get; set; }
         public Nullable<int> sample_id { get; set; }
         public Nullable<int> specification_id { get; set; }
         public string procedureNo { get; set; }

@@ -145,6 +145,7 @@ namespace ALS.ALSI.Web.view.request
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.CommandName = (prvPage == null) ? this.CommandName : prvPage.CommandName;
             this.JobID = (prvPage == null) ? this.JobID : prvPage.JobID;
+            this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
 
             if (!Page.IsPostBack)
@@ -190,7 +191,10 @@ namespace ALS.ALSI.Web.view.request
             ddlAddress.Items.Clear();
             ddlAddress.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
-
+            ddlStatus.Items.Clear();
+            ddlStatus.DataSource = new m_status().SelectByMainStatus();
+            ddlStatus.DataBind();
+            ddlStatus.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
 
             switch (CommandName)
@@ -360,12 +364,14 @@ namespace ALS.ALSI.Web.view.request
 
 
             this.listSample = job_sample.FindAllByJobID(job.ID);
+            this.listSample = (this.CommandName == CommandNameEnum.Edit) ? this.listSample.Where(x => x.ID.Equals(this.SampleID)).ToList() : this.listSample;
             foreach (job_sample tmp in this.listSample)
             {
                 tmp.RowState = CommandNameEnum.Edit;
             }
 
-
+            ddlStatus.SelectedValue = listSample[0].job_status.ToString();
+            ddlStatus.Enabled = (this.CommandName == CommandNameEnum.Edit);
             gvSample.DataSource = listSample;
             gvSample.DataBind();
 
@@ -523,6 +529,7 @@ namespace ALS.ALSI.Web.view.request
                 case CommandNameEnum.Edit:
                     foreach (job_sample s in this.listSampleShow)
                     {
+                        s.job_status = Convert.ToInt16(ddlStatus.SelectedValue);
                         s.sample_prefix = ddlJobNumber.SelectedItem.Text;
                         s.update_by = userLogin.id;
                         s.update_date = DateTime.Now;
@@ -716,6 +723,8 @@ namespace ALS.ALSI.Web.view.request
                         String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
 
                         litRefNo.Text = String.Format("{0}{1}", litRefNo.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
+
+
                     }
 
                     Literal _litStatus_completion_scheduled = (Literal)e.Row.FindControl("litStatus_completion_scheduled");
@@ -727,7 +736,7 @@ namespace ALS.ALSI.Web.view.request
                         {
                             _litStatus_completion_scheduled.Text = m_completion_scheduled.name;
                         }
-                        btnDelete.Visible = !(this.CommandName == CommandNameEnum.View);
+                        btnDelete.Visible = false;
                         btnEdit.Visible = !(this.CommandName == CommandNameEnum.View);
                     }
                 }
@@ -777,8 +786,8 @@ namespace ALS.ALSI.Web.view.request
             DropDownList _ddlUncertaint = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlUncertaint");
             DropDownList _ddlCompletionScheduled = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlCompletionScheduled");
 
-            int amend_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[6].ToString());
-            int retest_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[7].ToString());
+            int amend_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[6] == null ? "0" : gvSample.DataKeys[e.NewEditIndex].Values[6].ToString());
+            int retest_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[7] == null ? "0" : gvSample.DataKeys[e.NewEditIndex].Values[7].ToString());
             String am = (amend_count == 0) ? String.Empty : String.Format("AM{0}", amend_count);
             String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
 

@@ -293,6 +293,8 @@ namespace ALS.ALSI.Web.view.request
             switch (cmd)
             {
                 case CommandNameEnum.Edit:
+                    //Server.Transfer(Constants.LINK_EDIT_SAMPLE);
+                    //break;
                 case CommandNameEnum.View:
                     Server.Transfer(Constants.LINK_JOB_REQUEST);
                     break;
@@ -450,10 +452,10 @@ namespace ALS.ALSI.Web.view.request
                     ltJobStatus.Text = Constants.GetEnumDescription(job_status);
                     RoleEnum userRole = (RoleEnum)Enum.ToObject(typeof(RoleEnum), userLogin.role_id);
 
-                    btnInfo.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT);
-                    btnEdit.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT);
-                    btnConvertTemplete.Visible = ((userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE);
-                    btnChangeStatus.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT);
+                    btnInfo.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
+                    btnEdit.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
+                    btnConvertTemplete.Visible = ((userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE) && !isHold;
+                    btnChangeStatus.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
                     cbSelect.Visible = false;
                     btnViewFile.Visible = job_status == StatusEnum.JOB_COMPLETE || userRole == RoleEnum.BUSINESS_MANAGER || userRole == RoleEnum.LABMANAGER || userRole == RoleEnum.SR_CHEMIST;
                     switch (userRole)
@@ -516,18 +518,18 @@ namespace ALS.ALSI.Web.view.request
                             btnWorkFlow.Visible = false;
                             break;
                     }
-                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN);
-                    btnChangeSingaporeRefNo.Visible = (userRole == RoleEnum.CHEMIST);
-                    btnChangeDueDate.Visible = ((userRole == RoleEnum.SR_CHEMIST));
-                    btnChangePo.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LABMANAGER));
-                    btnChangeInvoice.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT));
-                    btnPrintLabel.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT);
-                    btnChangeReportDate.Visible = ((userRole == RoleEnum.ADMIN));
-                    btnAmend.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE);
-                    btnReTest.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE);
+                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN)&&!isHold;
+                    btnChangeSingaporeRefNo.Visible = (userRole == RoleEnum.CHEMIST) && !isHold;
+                    btnChangeDueDate.Visible = ((userRole == RoleEnum.SR_CHEMIST)) && !isHold;
+                    btnChangePo.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LABMANAGER)) && !isHold;
+                    btnChangeInvoice.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT)) && !isHold;
+                    btnPrintLabel.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
+                    btnChangeReportDate.Visible = ((userRole == RoleEnum.ADMIN)) && !isHold;
+                    btnAmend.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE) && !isHold;
+                    btnReTest.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE) && !isHold;
                     btnHold.Visible = ((userRole == RoleEnum.LOGIN) && !isHold);
                     btnUnHold.Visible = ((userRole == RoleEnum.LOGIN) && isHold);
-
+                    btnWorkFlow.Visible = !isHold;
                     lbJobNumber.Text = String.Format("{0}{1}", lbJobNumber.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
 
                     switch (userRole)
