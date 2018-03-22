@@ -248,7 +248,7 @@
                         <asp:Label ID="lbTotalRecords" runat="server" Text="" Visible="false"></asp:Label>
 
                         <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False"
-                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,due_date,is_hold,due_date_customer,due_date_lab,amend_count,retest_count,group_submit" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
+                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,due_date,is_hold,due_date_customer,due_date_lab,amend_count,retest_count,group_submit,amend_or_retest" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
                             <Columns>
                                 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>

@@ -713,14 +713,28 @@ namespace ALS.ALSI.Web.view.request
 
                     if (litRefNo != null)
                     {
-                        int amend_count = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][6]);
-                        int retest_count = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][7]);
+                        //int amend_count = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][6]);
+                        //int retest_count = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][7]);
 
-                        String am = (amend_count == 0) ? String.Empty : String.Format("AM{0}", amend_count);
-                        String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
+                        //String am = (amend_count == 0) ? String.Empty : String.Format("AM{0}", amend_count);
+                        //String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
 
-                        litRefNo.Text = String.Format("{0}{1}", litRefNo.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
+                        //litRefNo.Text = String.Format("{0}{1}", litRefNo.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
+                        #region "Check Amend/Retest"
+                        int amCount = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][6]);
+                        int reCount = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][7]);
+                        String amendOrRetest = gvSample.DataKeys[e.Row.RowIndex][8] == null ? String.Empty : gvSample.DataKeys[e.Row.RowIndex][8].ToString();
 
+                        switch (amendOrRetest)
+                        {
+                            case "AM":
+                                litRefNo.Text = String.Format("{0}({1}{2})", litRefNo.Text, amendOrRetest, amCount);
+                                break;
+                            case "R":
+                                litRefNo.Text = String.Format("{0}({1}{2})", litRefNo.Text, amendOrRetest, reCount);
+                                break;
+                        }
+                        #endregion
 
                     }
 
@@ -783,13 +797,32 @@ namespace ALS.ALSI.Web.view.request
             DropDownList _ddlUncertaint = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlUncertaint");
             DropDownList _ddlCompletionScheduled = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlCompletionScheduled");
 
-            int amend_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[6] == null ? "0" : gvSample.DataKeys[e.NewEditIndex].Values[6].ToString());
-            int retest_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[7] == null ? "0" : gvSample.DataKeys[e.NewEditIndex].Values[7].ToString());
-            String am = (amend_count == 0) ? String.Empty : String.Format("AM{0}", amend_count);
-            String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
+            //int amend_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[6] == null ? "0" : gvSample.DataKeys[e.NewEditIndex].Values[6].ToString());
+            //int retest_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[7] == null ? "0" : gvSample.DataKeys[e.NewEditIndex].Values[7].ToString());
+            //String am = (amend_count == 0) ? String.Empty : String.Format("AM{0}", amend_count);
+            //String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
 
             TextBox txtRefNo = (TextBox)gvSample.Rows[e.NewEditIndex].FindControl("txtRefNo");
-            txtRefNo.Text = String.Format("{0}{1}", txtRefNo.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
+            //txtRefNo.Text = String.Format("{0}{1}", txtRefNo.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
+
+
+            #region "Check Amend/Retest"
+            int amCount = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex][6]);
+            int reCount = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex][7]);
+            String amendOrRetest = gvSample.DataKeys[e.NewEditIndex][8] == null ? String.Empty : gvSample.DataKeys[e.NewEditIndex][8].ToString();
+
+            switch (amendOrRetest)
+            {
+                case "AM":
+                    txtRefNo.Text = String.Format("{0}({1}{2})", txtRefNo.Text, amendOrRetest, amCount);
+                    break;
+                case "R":
+                    txtRefNo.Text = String.Format("{0}({1}{2})", txtRefNo.Text, amendOrRetest, reCount);
+                    break;
+            }
+            #endregion
+
+
 
             txtRefNo.Enabled = (this.CommandName == CommandNameEnum.Add);// (amend_count == 0 && retest_count == 0);
 

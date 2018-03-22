@@ -45,6 +45,19 @@ namespace ALS.ALSI.Biz.DataAccess
             return _repository.Find(x => x.job_number == jobNumber && x.job_status == Convert.ToInt16(status)).ToList();
         }
 
+
+        public int findAmendOrRetestCount(String jobNumber, String amendOrRetest)
+        {
+            int result = 0;
+            List<job_sample> listOfSample = _repository.Find(x => x.job_number == jobNumber && x.amend_or_retest == amendOrRetest).ToList();
+
+            if(listOfSample!=null && listOfSample.Count > 0)
+            {
+                result = listOfSample.Count;
+            }
+            return result;
+        }
+
         public void Insert()
         {
             _repository.Add(this);

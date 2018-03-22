@@ -2,10 +2,8 @@
 using ALS.ALSI.Biz.Constant;
 using StructureMap;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity.Validation;
 using System.Linq;
 
 namespace ALS.ALSI.Biz.DataAccess
@@ -21,6 +19,7 @@ namespace ALS.ALSI.Biz.DataAccess
         }
 
         #region "Property"
+        public String job_number { get; set; }
         public String resposible { get; set; }
         public int role_id { get; set; }
         #endregion
@@ -89,7 +88,8 @@ namespace ALS.ALSI.Biz.DataAccess
                                  l.log_title,
                                  l.job_remark,
                                  l.date,
-                                 j.job_status
+                                 j.job_status,
+                                 j.job_number
                              };
 
                 DataTable dt = result.ToDataTable();
@@ -111,9 +111,10 @@ namespace ALS.ALSI.Biz.DataAccess
                     int jobStatus = Convert.ToInt16(dr["job_status"]);
                     string logTitle = dr["log_title"].ToString();
                     string jobRemark = dr["job_remark"].ToString();
+                    string jobNumber = dr["job_number"].ToString();
+
                     DateTime date = Convert.ToDateTime(dr["date"].ToString());
 
-                    //string jobRemark = dr[""];
 
                     StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), dr["job_status"].ToString(), true);
                     switch (status)
@@ -125,7 +126,8 @@ namespace ALS.ALSI.Biz.DataAccess
                             {
                                 job_sample_logs jobSampleLog = new job_sample_logs
                                 {
-                                    log_title = logTitle,
+                                    log_title = String.Format("{0}->{1}", job_number, logTitle),
+                                    job_number = jobNumber,
                                     job_remark = jobRemark,
                                     date = date
                                 };
@@ -137,7 +139,8 @@ namespace ALS.ALSI.Biz.DataAccess
                             {
                                 job_sample_logs jobSampleLog = new job_sample_logs
                                 {
-                                    log_title = logTitle,
+                                    log_title =  logTitle,
+                                    job_number = jobNumber,
                                     job_remark = jobRemark,
                                     date = date
                                 };
@@ -149,7 +152,8 @@ namespace ALS.ALSI.Biz.DataAccess
                             {
                                 job_sample_logs jobSampleLog = new job_sample_logs
                                 {
-                                    log_title = logTitle,
+                                    log_title = String.Format("{0}->{1}", job_number, logTitle),
+                                    job_number = jobNumber,
                                     job_remark = jobRemark,
                                     date = date
                                 };
@@ -161,7 +165,8 @@ namespace ALS.ALSI.Biz.DataAccess
                             {
                                 job_sample_logs jobSampleLog = new job_sample_logs
                                 {
-                                    log_title = logTitle,
+                                    log_title = String.Format("{0}->{1}", job_number, logTitle),
+                                    job_number = jobNumber,
                                     job_remark = jobRemark,
                                     date = date
                                 };
@@ -173,7 +178,8 @@ namespace ALS.ALSI.Biz.DataAccess
                             {
                                 job_sample_logs jobSampleLog = new job_sample_logs
                                 {
-                                    log_title = logTitle,
+                                    log_title = String.Format("{0}->{1}", job_number, logTitle),
+                                    job_number = jobNumber,
                                     job_remark = jobRemark,
                                     date = date
                                 };
@@ -185,7 +191,8 @@ namespace ALS.ALSI.Biz.DataAccess
                             {
                                 job_sample_logs jobSampleLog = new job_sample_logs
                                 {
-                                    log_title = logTitle,
+                                    log_title = String.Format("{0}->{1}", job_number, logTitle),
+                                    job_number = jobNumber,
                                     job_remark = jobRemark,
                                     date = date
                                 };

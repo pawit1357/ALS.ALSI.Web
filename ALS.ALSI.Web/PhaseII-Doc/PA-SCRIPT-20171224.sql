@@ -177,5 +177,11 @@ CHANGE COLUMN `unit2` `unit2` INT(11) NULL DEFAULT 56 ,
 CHANGE COLUMN `unit3` `unit3` INT(11) NULL DEFAULT 49 ,
 CHANGE COLUMN `unit4` `unit4` INT(11) NULL DEFAULT 44 ;
 
+update template_wd_lpc_coverpage set unit=46,unit2=56,unit3=49,unit4=44;
+
+---------------------------------------------------------
+ALTER TABLE `alsi`.`job_sample` 
+CHANGE COLUMN `amend_or_retest` `amend_or_retest` VARCHAR(2) NULL DEFAULT NULL COMMENT 'AM= Amend,R= Retest' ,
+
 
 */

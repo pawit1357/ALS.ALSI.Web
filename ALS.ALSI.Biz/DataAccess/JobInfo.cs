@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ALS.ALSI.Biz.DataAccess
 {
-    public partial class job_info 
+    public partial class job_info
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(job_info));
@@ -86,7 +86,8 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             job_info existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
             _repository.Edit(existing, this);
-            if(this.jobSample !=null){
+            if (this.jobSample != null)
+            {
                 foreach (job_sample sample in this.jobSample)
                 {
                     sample.job_id = this.ID;
@@ -185,15 +186,16 @@ namespace ALS.ALSI.Biz.DataAccess
                                  type_of_test_id = tt.ID,
                                  type_of_test_name = tt.name,
                                  spec_id = sp.ID,
-                                s.date_login_received_sample,
-                                s.date_chemist_alalyze,
-                                s.date_labman_complete,
-                                s.is_hold,
-                                s.amend_count,
-                                s.retest_count,
-                                s.group_submit,
-                                status_name = ms.name,
-                                s.sample_prefix
+                                 s.date_login_received_sample,
+                                 s.date_chemist_alalyze,
+                                 s.date_labman_complete,
+                                 s.is_hold,
+                                 s.amend_count,
+                                 s.retest_count,
+                                 s.group_submit,
+                                 status_name = ms.name,
+                                 s.sample_prefix,
+                                 s.amend_or_retest
                              };
 
                 if (this.ID > 0)

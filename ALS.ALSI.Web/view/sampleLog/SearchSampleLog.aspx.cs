@@ -1,8 +1,11 @@
-﻿using ALS.ALSI.Biz.Constant;
+﻿using ALS.ALSI.Biz;
+using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -17,9 +20,9 @@ namespace ALS.ALSI.Web.view.sampleLog
             get { return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null); }
         }
 
-        public List<job_sample_logs> searchResult
+        public IEnumerable searchResult
         {
-            get { return (List<job_sample_logs>)Session[GetType().Name + "SearchRole"]; }
+            get { return (IEnumerable)Session[GetType().Name + "SearchRole"]; }
             set { Session[GetType().Name + "SearchRole"] = value; }
         }
 
@@ -51,41 +54,77 @@ namespace ALS.ALSI.Web.view.sampleLog
 
         private void bindingData()
         {
-            //searchResult = obj.SelectNotification();
+            using (var ctx = new ALSIEntities())
+            {
+                job_sample_logs jsl = new job_sample_logs();
+                var result = from l in ctx.job_sample_logs
+                             join j in ctx.job_sample on l.job_sample_id equals j.ID
+                             orderby l.date descending
+                             select new
+                             {
+                                 l.ID,
+                                 j.step1owner,
+                                 j.step2owner,
+                                 j.step3owner,
+                                 j.step4owner,
+                                 j.step5owner,
+                                 j.step6owner,
+                                 j.step7owner,
+                                 l.log_title,
+                                 l.job_remark,
+                                 l.date,
+                                 j.job_status,
+                                 j.job_number
+                             };
 
+                RoleEnum roleEnum = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString());
+                switch (roleEnum)
+                {
+                    case RoleEnum.LOGIN:
+                        result = result.Where(x => x.step1owner == userLogin.id || x.step2owner == userLogin.id);
+                        break;
+                    case RoleEnum.CHEMIST:
+                        result = result.Where(x => x.step3owner == userLogin.id);
+                        break;
+                    case RoleEnum.SR_CHEMIST:
+                        result = result.Where(x => x.step4owner == userLogin.id);
+                        break;
+                    case RoleEnum.ADMIN:
+                        result = result.Where(x => x.step6owner == userLogin.id || x.step7owner == userLogin.id);
+                        break;
+                    case RoleEnum.LABMANAGER:
+                        result = result.Where(x => x.step5owner == userLogin.id);
+                        break;
+                }
+                DataTable dt = result.ToDataTable();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int id = Convert.ToInt32(dr["ID"].ToString());
+                    job_sample_logs _jsl = jsl.SelectByID(id);
+                    if (_jsl != null)
+                    {
+                        _jsl.is_active = "1";
+                        _jsl.Update();
+                    }
 
-            //Show only 5 Row
-            //List<job_sample_logs> tmp = new List<job_sample_logs>();
-            //foreach (job_sample_logs log in searchResult)
-            //{
-            //    if (userLogin.responsible_test != null)
-            //    {
-            //        if (userLogin.responsible_test.StartsWith(log.job_sample.m_type_of_test.name))
-            //        {
-            //            tmp.Add(log);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        //1. Show By Role if not having responsible.
-            //        if (userLogin.role_id == log.m_status.m_role.ID)
-            //        {
-            //            tmp.Add(log);
-            //        }
-            //    }
-            //}
+                    Console.WriteLine();
 
-            //searchResult = tmp;
-            //gvResult.DataSource = searchResult;
-            //gvResult.DataBind();
-            //if (gvResult.Rows.Count > 0)
-            //{
-            //    lbTotalRecords.Text = String.Format(Constants.TOTAL_RECORDS, gvResult.Rows.Count);
-            //}
-            //else
-            //{
-            //    lbTotalRecords.Text = string.Empty;
-            //}
+                }
+                searchResult = result.ToList();
+                gvResult.DataSource = searchResult;
+                gvResult.DataBind();
+                //Commit
+                GeneralManager.Commit();
+
+                //if (gvResult.Rows.Count > 0)
+                //{
+                //    lbTotalRecords.Text = String.Format(Constants.TOTAL_RECORDS, gvResult.Rows.Count);
+                //}
+                //else
+                //{
+                //    lbTotalRecords.Text = string.Empty;
+                //}
+            }
         }
 
         private void removeSession()
@@ -104,40 +143,6 @@ namespace ALS.ALSI.Web.view.sampleLog
             }
         }
 
-        //protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
-        //    this.CommandName = cmd;
-        //    switch (cmd)
-        //    {
-        //        case CommandNameEnum.Edit:
-        //        case CommandNameEnum.View:
-        //            this.PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COLON)[0]);
-        //            Server.Transfer(Constants.LINK_ROLE);
-        //            break;
-        //    }
-        //}
-
-        protected void lbAdd_Click(object sender, EventArgs e)
-        {
-            this.CommandName = CommandNameEnum.Add;
-            Server.Transfer(Constants.LINK_ROLE);
-        }
-
-        //protected void gvResult_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        //{
-        //    this.PKID = int.Parse(e.Keys[0].ToString().Split(Constants.CHAR_COLON)[0]);
-
-        //    job_sample_logs cus = new job_sample_logs().SelectByID(this.PKID);
-        //    if (cus != null)
-        //    {
-        //        cus.Delete();
-        //        //Commit
-        //        GeneralManager.Commit();
-
-        //        bindingData();
-        //    }
-        //}
 
         protected void gvResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -155,10 +160,6 @@ namespace ALS.ALSI.Web.view.sampleLog
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            //txtId.Text = string.Empty;
-            //txtName.Text = string.Empty;
-            lbTotalRecords.Text = string.Empty;
-
             removeSession();
             bindingData();
         }

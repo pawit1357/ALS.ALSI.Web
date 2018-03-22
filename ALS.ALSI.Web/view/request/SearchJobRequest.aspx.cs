@@ -159,7 +159,7 @@ namespace ALS.ALSI.Web.view.request
 
         private void bindingData()
         {
-           if (!String.IsNullOrEmpty(txtREfNo.Text) && txtREfNo.Text.Split('-').Length == 3)
+            if (!String.IsNullOrEmpty(txtREfNo.Text) && txtREfNo.Text.Split('-').Length == 3)
             {
                 hPrefix.Value = String.IsNullOrEmpty(txtREfNo.Text) ? "ELP" : txtREfNo.Text.Split('-')[0];
                 btnElp.CssClass = "btn btn-default btn-sm";
@@ -293,8 +293,8 @@ namespace ALS.ALSI.Web.view.request
             switch (cmd)
             {
                 case CommandNameEnum.Edit:
-                    //Server.Transfer(Constants.LINK_EDIT_SAMPLE);
-                    //break;
+                //Server.Transfer(Constants.LINK_EDIT_SAMPLE);
+                //break;
                 case CommandNameEnum.View:
                     Server.Transfer(Constants.LINK_JOB_REQUEST);
                     break;
@@ -389,6 +389,24 @@ namespace ALS.ALSI.Web.view.request
             {
                 try
                 {
+                    //0|ID,
+                    //1|job_status,
+                    //2|job_role,
+                    //3|status_completion_scheduled,
+                    //4|step1owner,
+                    //5|tep2owner,
+                    //6|step3owner,
+                    //7|step4owner,
+                    //8|step5owner,
+                    //9|step6owner,
+                    //10|due_date,
+                    //11|is_hold,
+                    //12|due_date_customer,
+                    //13|due_date_lab,
+                    //14|amend_count,
+                    //15|retest_count,
+                    //16|group_submit,
+                    //17|amend_or_retest
                     GridView gv = (GridView)sender;
 
                     int _valueStatus = Convert.ToInt32(gv.DataKeys[e.Row.RowIndex][1]);
@@ -404,9 +422,6 @@ namespace ALS.ALSI.Web.view.request
                     DateTime due_date = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][10]);
                     DateTime due_date_customer = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][12]);
                     DateTime due_date_lab = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][13]);
-
-                    String am = (Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]) == 0) ? String.Empty : String.Format("AM{0}", Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]));
-                    String r = (Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]) == 0) ? String.Empty : String.Format("R{0}", Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]));
 
                     Boolean isGroupSubmit = Convert.ToBoolean(gv.DataKeys[e.Row.RowIndex][16]);
 
@@ -444,7 +459,21 @@ namespace ALS.ALSI.Web.view.request
                     Literal litIcon = (Literal)e.Row.FindControl("litIcon");
                     CheckBox cbSelect = (CheckBox)e.Row.FindControl("cbSelect");
 
+                    #region "Check Amend/Retest"
+                    int amCount = Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]);
+                    int reCount = Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]);
+                    String amendOrRetest = gv.DataKeys[e.Row.RowIndex][17] == null ? String.Empty : gv.DataKeys[e.Row.RowIndex][17].ToString();
 
+                    switch (amendOrRetest)
+                    {
+                        case "AM":
+                            lbJobNumber.Text = String.Format("{0}({1}{2})", lbJobNumber.Text, amendOrRetest, amCount);
+                            break;
+                        case "R":
+                            lbJobNumber.Text = String.Format("{0}({1}{2})", lbJobNumber.Text, amendOrRetest, reCount);
+                            break;
+                    }
+                    #endregion
 
                     CompletionScheduledEnum status_completion_scheduled = (CompletionScheduledEnum)Enum.ToObject(typeof(CompletionScheduledEnum), _valueCompletion_scheduled);
 
@@ -518,7 +547,7 @@ namespace ALS.ALSI.Web.view.request
                             btnWorkFlow.Visible = false;
                             break;
                     }
-                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN)&&!isHold;
+                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN) && !isHold;
                     btnChangeSingaporeRefNo.Visible = (userRole == RoleEnum.CHEMIST) && !isHold;
                     btnChangeDueDate.Visible = ((userRole == RoleEnum.SR_CHEMIST)) && !isHold;
                     btnChangePo.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LABMANAGER)) && !isHold;
@@ -530,7 +559,9 @@ namespace ALS.ALSI.Web.view.request
                     btnHold.Visible = ((userRole == RoleEnum.LOGIN) && !isHold);
                     btnUnHold.Visible = ((userRole == RoleEnum.LOGIN) && isHold);
                     btnWorkFlow.Visible = !isHold;
-                    lbJobNumber.Text = String.Format("{0}{1}", lbJobNumber.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
+
+
+
 
                     switch (userRole)
                     {
@@ -550,8 +581,6 @@ namespace ALS.ALSI.Web.view.request
                             break;
                     }
 
-                    //if (Constants.OTHER_REF_NOS.Contains(litOtherRefNo.Text))
-                    //{
                     if (DateTime.Equals(due_date_lab, new DateTime(1, 1, 1)))
                     {
                         litDueDate.Text = "TBA";
@@ -560,7 +589,7 @@ namespace ALS.ALSI.Web.view.request
                     {
 
                     }
-                    //}
+
 
                     #region "Job color status"
 
@@ -762,7 +791,7 @@ namespace ALS.ALSI.Web.view.request
                                 "`Extent4`.`name` AS `Type of test`," +
                                 "DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
                                 "`Extent8`.`username` AS `Update By`" +
-                                
+
                                 " FROM `job_info` AS `Extent1`" +
                                 " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
                                 " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
@@ -919,7 +948,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation|| userRole == RoleEnum.LOGIN||userRole== RoleEnum.CHEMIST)
+                    if (this.isPoGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
 

@@ -77,11 +77,11 @@ namespace ALS.ALSI.Web.view.request
             status.Add("ADMIN_CONVERT_WORD");
             status.Add("LOGIN_SELECT_SPEC");
             status.Add("CHEMIST_TESTING");
-            
+
 
 
             ddlStatus.Items.Clear();
-            ddlStatus.DataSource = listOfStatus.Where(x=> status.Contains(x.name));
+            ddlStatus.DataSource = listOfStatus.Where(x => status.Contains(x.name));
             ddlStatus.DataBind();
             ddlStatus.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
@@ -181,17 +181,21 @@ namespace ALS.ALSI.Web.view.request
             newSample.update_date = DateTime.Now;
             newSample.amend_count = 0;
             newSample.retest_count = 0;
-            newSample.amend_or_retest = (this.CommandName == CommandNameEnum.Amend) ? "A" : "R";
+            newSample.amend_or_retest = (this.CommandName == CommandNameEnum.Amend) ? "AM" : "R";
             newSample.sample_prefix = oldSample.sample_prefix;
-            switch (this.CommandName)
+
+            switch (newSample.amend_or_retest)
             {
-                case CommandNameEnum.Amend:
-                    newSample.amend_count = oldSample.amend_count + 1;
+                case "AM":
+                    newSample.amend_count = newSample.findAmendOrRetestCount(newSample.job_number, newSample.amend_or_retest)+1;
+
                     break;
-                case CommandNameEnum.Retest:
-                    newSample.retest_count = oldSample.retest_count + 1;
+                case "R":
+                    newSample.retest_count = newSample.findAmendOrRetestCount(newSample.job_number, newSample.amend_or_retest)+1;
                     break;
             }
+
+
 
             newSample.job_status = Convert.ToInt16(ddlStatus.SelectedValue);
 

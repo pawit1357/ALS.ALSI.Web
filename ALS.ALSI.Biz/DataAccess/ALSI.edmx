@@ -111,7 +111,7 @@
           <Property Name="singapore_ref_no" Type="varchar" MaxLength="200" />
           <Property Name="group_submit" Type="tinyint" />
           <Property Name="sample_prefix" Type="varchar" MaxLength="45" />
-          <Property Name="amend_or_retest" Type="varchar" MaxLength="1" />
+          <Property Name="amend_or_retest" Type="varchar" MaxLength="2" />
           <Property Name="last_status" Type="int" />
         </EntityType>
         <EntityType Name="job_sample_logs">
@@ -2200,7 +2200,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="singapore_ref_no" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="group_submit" Type="SByte" />
           <Property Name="sample_prefix" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="amend_or_retest" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="amend_or_retest" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="last_status" Type="Int32" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="ALSIModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
         </EntityType>

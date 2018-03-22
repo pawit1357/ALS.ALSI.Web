@@ -393,7 +393,7 @@
                                     <div style="width: 100%; overflow-x: scroll; overflow-y: hidden; padding-bottom: 10px;" runat="server">
 
                                         <asp:GridView ID="gvSample" runat="server" AutoGenerateColumns="False" AllowPaging="True"
-                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_id,job_number,no_of_report,uncertainty,status_completion_scheduled,amend_count,retest_count" OnRowCancelingEdit="gvSample_RowCancelingEdit" OnRowDataBound="gvSample_RowDataBound" OnRowDeleting="gvSample_RowDeleting" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" OnSelectedIndexChanging="gvSample_SelectedIndexChanging" OnPageIndexChanging="gvSample_PageIndexChanging">
+                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_id,job_number,no_of_report,uncertainty,status_completion_scheduled,amend_count,retest_count,amend_or_retest" OnRowCancelingEdit="gvSample_RowCancelingEdit" OnRowDataBound="gvSample_RowDataBound" OnRowDeleting="gvSample_RowDeleting" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" OnSelectedIndexChanging="gvSample_SelectedIndexChanging" OnPageIndexChanging="gvSample_PageIndexChanging">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Ref No." ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
