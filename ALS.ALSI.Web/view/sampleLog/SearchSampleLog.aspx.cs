@@ -82,20 +82,26 @@ namespace ALS.ALSI.Web.view.sampleLog
                 {
                     case RoleEnum.LOGIN:
                         result = result.Where(x => x.step1owner == userLogin.id || x.step2owner == userLogin.id);
+                        result = result.Where(x => x.job_status == 11);// Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC));
                         break;
                     case RoleEnum.CHEMIST:
                         result = result.Where(x => x.step3owner == userLogin.id);
+                        result = result.Where(x => x.job_status == 12);// Convert.ToInt16(StatusEnum.CHEMIST_TESTING));
                         break;
                     case RoleEnum.SR_CHEMIST:
                         result = result.Where(x => x.step4owner == userLogin.id);
+                        result = result.Where(x => x.job_status == 4);// Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING));
                         break;
                     case RoleEnum.ADMIN:
                         result = result.Where(x => x.step6owner == userLogin.id || x.step7owner == userLogin.id);
+                        //result = result.Where(x => x.job_status == Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF)||x.job_status == Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD));
                         break;
                     case RoleEnum.LABMANAGER:
                         result = result.Where(x => x.step5owner == userLogin.id);
+                        result = result.Where(x => x.job_status == 9);// Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING));
                         break;
                 }
+
                 DataTable dt = result.ToDataTable();
                 foreach (DataRow dr in dt.Rows)
                 {

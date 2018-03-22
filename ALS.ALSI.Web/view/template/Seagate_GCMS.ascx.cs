@@ -713,9 +713,9 @@ namespace ALS.ALSI.Web.view.template
                     {
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
-                            //#region ":: STAMP COMPLETE DATE"
-                            //this.jobSample.sr_approve_date = DateTime.Now;
-                            //#endregion
+                            #region ":: STAMP COMPLETE DATE"
+                            this.jobSample.date_srchemist_complate = DateTime.Now;
+                            #endregion
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
