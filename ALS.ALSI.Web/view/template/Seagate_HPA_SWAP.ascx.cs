@@ -1593,8 +1593,8 @@ namespace ALS.ALSI.Web.view.template
             row["NumOfPiecesUsedForExtraction"] = txtNumberOfPieces.Text;
             dtHeader.Rows.Add(row);
 
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 

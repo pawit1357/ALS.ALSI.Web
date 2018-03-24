@@ -1715,8 +1715,8 @@ namespace ALS.ALSI.Web.view.template
             row["ExtractionMedium"] = txtExtractionMedium_hpa.Text;
             row["ExtractionVolume"] = txtExtractionVolume_hpa.Text;
             dtHeader.Rows.Add(row);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -1731,9 +1731,9 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? "" : this.jobSample.singapore_ref_no)));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("notePZT", (cbNotePZT.Checked ? lbNotePZT.Text : " ")));
+            reportParameters.Add(new ReportParameter("notePZT", (cbNotePZT.Checked ? String.IsNullOrEmpty(lbNotePZT.Text)? " ":lbNotePZT.Text : " ")));
 
 
             reportParameters.Add(new ReportParameter("rpt_unit", ddlLiquidParticleUnit.SelectedItem.Text));

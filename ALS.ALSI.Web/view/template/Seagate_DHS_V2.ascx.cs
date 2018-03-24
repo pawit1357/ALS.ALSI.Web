@@ -938,8 +938,8 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_dhs_coverpage> ds2 = this.coverpages.ToList();
 
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 

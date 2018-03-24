@@ -23,7 +23,7 @@ namespace ALS.ALSI.Web.view.template
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_DHS));
-        private const String PA_SPECIFICATION = "PA03";
+        private String PA_SPECIFICATION = "PA01";
         private const String PA_MICROPIC_DATA = "Micropic Data:";
 
         private const String PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION = "Description of process and extraction:";
@@ -38,7 +38,6 @@ namespace ALS.ALSI.Web.view.template
 
         //
         private const String PA_DDL_EVALUATION_OF_PARTICLE = "Evaluation of Particle:";
-
         private const String PA_DDL_TEST_ARRANGEMENT_ENV = "Test arrangement / Environment:";
         private const String PA_DDL_CONTAINER = "Container";
         private const String PA_DDL_FLUID1 = "Fluid 1";
@@ -50,6 +49,10 @@ namespace ALS.ALSI.Web.view.template
 
         private const String PA_DDL_GRAVIMETRIC_ANALYSIS = "Gravimetric analysis:";
         private const String PA_DDL_LAB_BALANCE = "Lab Balance";
+
+        private const String PA_DDL_SPECIFICATION_NO = "SpecificationNo";
+        private const String PA_DDL_OPERATOR_NAME = "Operator Name";
+
 
 
 
@@ -138,6 +141,8 @@ namespace ALS.ALSI.Web.view.template
             this.CommandName = CommandNameEnum.Add;
             this.WashingHeaders = new List<string>();
             this.DissolvingHeaders = new List<string>();
+
+
             ddlAssignTo.Items.Clear();
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
@@ -213,36 +218,44 @@ namespace ALS.ALSI.Web.view.template
             #region "Initial component"
 
             ddlContainer.Items.Clear();
-            ddlContainer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_CONTAINER));
+            ddlContainer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.C.Equals(PA_DDL_CONTAINER));
             ddlContainer.DataBind();
             //ddlContainer.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
             ddlFluid1.Items.Clear();
-            ddlFluid1.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_FLUID1));
+            ddlFluid1.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.C.Equals(PA_DDL_FLUID1));
             ddlFluid1.DataBind();
             //ddlFluid1.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
             ddlFluid2.Items.Clear();
-            ddlFluid2.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_FLUID2));
+            ddlFluid2.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.C.Equals(PA_DDL_FLUID2));
             ddlFluid2.DataBind();
             //ddlFluid2.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
             ddlFluid3.Items.Clear();
-            ddlFluid3.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_FLUID3));
+            ddlFluid3.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_TEST_ARRANGEMENT_ENV) && x.C.Equals(PA_DDL_FLUID3));
             ddlFluid3.DataBind();
             //ddlFluid3.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlManufacturer.Items.Clear();
-            ddlManufacturer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_ANALYSIS_MEMBRANE_USED) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_MANUFACTURER));
+            ddlManufacturer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_ANALYSIS_MEMBRANE_USED) && x.C.Equals(PA_DDL_MANUFACTURER));
             ddlManufacturer.DataBind();
             //ddlManufacturer.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlMaterial.Items.Clear();
-            ddlMaterial.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_ANALYSIS_MEMBRANE_USED) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_MATERIAL));
+            ddlMaterial.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_ANALYSIS_MEMBRANE_USED) && x.C.Equals(PA_DDL_MATERIAL));
             ddlMaterial.DataBind();
             //ddlMaterial.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
             ddlGravimetricAlalysis.Items.Clear();
-            ddlGravimetricAlalysis.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_GRAVIMETRIC_ANALYSIS) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DDL_LAB_BALANCE));
+            ddlGravimetricAlalysis.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_GRAVIMETRIC_ANALYSIS) && x.C.Equals(PA_DDL_LAB_BALANCE));
             ddlGravimetricAlalysis.DataBind();
             //ddlGravimetricAlalysis.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+            ddlSpecification.Items.Clear();
+            ddlSpecification.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_SPECIFICATION_NO));
+            ddlSpecification.DataBind();
+
+
+            ddlOperatorName.Items.Clear();
+            ddlOperatorName.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_OPERATOR_NAME));
+            ddlOperatorName.DataBind();
 
             #endregion
 
@@ -622,7 +635,7 @@ namespace ALS.ALSI.Web.view.template
             List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
-                template_pa_detail refPa = listPaDetail.Where(x => x.col_c.Replace("\n",String.Empty).Equals("Result[per part]")).FirstOrDefault();//[listPaDetail.Count - 1];
+                template_pa_detail refPa = listPaDetail.Where(x => x.col_c.Replace("\n", String.Empty).Equals("Result[per part]")).FirstOrDefault();//[listPaDetail.Count - 1];
                 if (refPa != null)
                 {
                     refPa.col_d = (listMicroPicData.Count >= 1) ? listMicroPicData[0].col_i : String.Empty;
@@ -730,6 +743,17 @@ namespace ALS.ALSI.Web.view.template
             lbLf.Text = txtFeretFb.Text;
             lbTotalResidueWeight.Text = txtEop_G.Text;
 
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
+            pdCustomer.Text = reportHeader.addr1;
+            pdAlsRefNo.Text = reportHeader.alsRefNo;
+            pdPartName.Text = this.jobSample.part_name;
+            pdAnalysisDate.Text = reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy");
+            paPartNo.Text = this.jobSample.part_no;
+
+            pdLotNo.Text = this.jobSample.lot_no;
+            pdSpecification.Text = ddlSpecification.SelectedItem.Text;
+
         }
 
         #endregion
@@ -739,6 +763,7 @@ namespace ALS.ALSI.Web.view.template
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
+            this.PA_SPECIFICATION = "PA5x_BOSCH0442S00155";
 
             if (!Page.IsPostBack)
             {
@@ -2249,8 +2274,7 @@ namespace ALS.ALSI.Web.view.template
         {
 
             DataTable dt = new DataTable();// Extenders.ObjectToDataTable(this.coverpages[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
 
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
@@ -2298,7 +2322,7 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/pa_03.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
 
-            List<template_pa_detail> eops = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x=>x.seq).ToList();
+            List<template_pa_detail> eops = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             List<template_pa_detail> dissolvings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
             List<template_pa_detail> washings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             List<template_pa_detail> mas = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();

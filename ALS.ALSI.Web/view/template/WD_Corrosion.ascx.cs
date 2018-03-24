@@ -804,8 +804,8 @@ namespace ALS.ALSI.Web.view.template
             dtResult.Rows.Add(row1);
 
 
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 

@@ -55,7 +55,7 @@ namespace ALS.ALSI.Biz.ReportObjects
             }
         }
 
-        public ReportHeader getReportHeder(job_sample _sample)
+        public static ReportHeader getReportHeder(job_sample _sample)
         {
             ReportHeader rpt = new ReportHeader();
 
@@ -86,16 +86,26 @@ namespace ALS.ALSI.Biz.ReportObjects
                 int phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2));
                 if (DateTime.Now.Month < 4)
                 {
-                    phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2))-1;
+                    phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2)) - 1;
                 }
 
+                String AmRetest = String.Empty;
+                switch (_sample.amend_or_retest)
+                {
+                    case "AM":
+                        AmRetest = (_sample.amend_count > 0) ? "AM" + _sample.amend_count + "/" : String.Empty;
+                        break;
+                    case "R":
+                        AmRetest = (_sample.retest_count > 0) ? "R" + _sample.retest_count + "/" : String.Empty;
+                        break;
+                }
 
                 String[] tmp = _sample.job_number.Split('-');
-                rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", (_sample.amend_count > 0 ? (_sample.amend_count == 1 ? "AM/" : "AM/" + _sample.amend_count) : ""),tmp[0], phisicalYear, tmp[1],tmp[2]);// _sample.job_number.ToString();
-                rpt.description = (String.IsNullOrEmpty(_sample.description) ? String.Empty:"Description:" + _sample.description + "\n") +
+                rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
+                rpt.description = (String.IsNullOrEmpty(_sample.description) ? String.Empty : "Description:" + _sample.description + "\n") +
                                   (String.IsNullOrEmpty(_sample.model) ? String.Empty : "Model:" + _sample.model + "\n") +
-                                  (String.IsNullOrEmpty(_sample.surface_area) ? String.Empty : "Surface Area:" + _sample.surface_area + "\n")+
-                                  (!String.IsNullOrEmpty(_sample.remarks)? "Remark: "+_sample.remarks+"\n":"");
+                                  (String.IsNullOrEmpty(_sample.surface_area) ? String.Empty : "Surface Area:" + _sample.surface_area + "\n") +
+                                  (!String.IsNullOrEmpty(_sample.remarks) ? "Remark: " + _sample.remarks + "\n" : "");
 
                 rpt.model = _sample.model;
                 rpt.surface_areas = _sample.surface_area;

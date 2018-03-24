@@ -170,7 +170,7 @@
                             </Columns>
                         </asp:GridView>
                         <div class="note note-success">
-  Remark: 1 Particles is metallic shine+non-metall shine particles without fibers on membrane.
+                            Remark: 1 Particles is metallic shine+non-metall shine particles without fibers on membrane.
 2Fiber according to 0442S00025 chapter 1.3.
 
                         </div>
@@ -263,7 +263,34 @@
                         </div>
                     </asp:Panel>
                     <asp:Panel ID="pPage02" runat="server">
+                        <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Specifications</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <asp:Label ID="Label51" runat="server" CssClass="control-label col-md-3">Specification No.:</asp:Label>
+                                    <div class="col-md-6">
+                                        <asp:DropDownList ID="ddlSpecification" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control"></asp:DropDownList>
+                                    </div>
+                                    <div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <asp:Label ID="Label52" runat="server" CssClass="control-label col-md-3">Procedure in reference to declining curve.:</asp:Label>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtPIRTDC" runat="server" CssClass="form-control"></asp:TextBox>
 
+                                    </div>
+                                    <div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
                         <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Deviation</h4>
                         <div class="row">
                             <div class="col-md-6">
@@ -1263,6 +1290,57 @@
 
                     </asp:Panel>
                     <asp:Panel ID="pPage05" runat="server">
+                        <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Project Data:</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <asp:Label ID="Label53" runat="server" CssClass="control-label col-md-1"></asp:Label>
+                                    <div class="col-md-12">
+                                        <table class="table table-striped table-bordered table-advance table-hover">
+                                            <tr>
+                                                <td>Customer:</td>
+                                                <td>
+                                                    <strong>
+                                                        <asp:Label ID="pdCustomer" runat="server" Text=""></asp:Label></strong></td>
+                                                <td>ALS reference no.:</td>
+                                                <td>
+                                                    <strong>
+                                                        <asp:Label ID="pdAlsRefNo" runat="server" Text=""></asp:Label></strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Part name:</td>
+                                                <td><strong>
+                                                    <asp:Label ID="pdPartName" runat="server" Text=""></asp:Label></strong></td>
+                                                <td>Analysis date:</td>
+                                                <td>
+                                                    <strong>
+                                                        <asp:Label ID="pdAnalysisDate" runat="server" Text="-"></asp:Label></strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Part no.:</td>
+                                                <td><strong>
+                                                    <asp:Label ID="paPartNo" runat="server" Text="-"></asp:Label>
+                                                </strong></td>
+                                                <td>Operator name:</td>
+                                                <td>
+                                                     <asp:DropDownList ID="ddlOperatorName" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control"></asp:DropDownList></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lot no.:</td>
+                                                <td><strong>
+                                                    <asp:Label ID="pdLotNo" runat="server" Text="-"></asp:Label>
+                                                </strong></td>
+                                                <td>Specification:</td>
+                                                <td>
+                                                    <strong>
+                                                        <asp:Label ID="pdSpecification" runat="server" Text=""></asp:Label></strong></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                         <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Sample Data</h4>
                         <div class="row">
                             <div class="col-md-12">
@@ -1832,64 +1910,64 @@
                     </asp:Panel>
                     <asp:Panel ID="pPage08" runat="server">
                         <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Particle nature determination by SEM/EDX</h4>
-                </div>
 
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
+
+                        <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-striped table-bordered table-advance table-hover">
-                                    <tr>
-                                        <td colspan="2"><b>Image</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center">
-                                            <asp:Image ID="Image1" runat="server" Style="width: 500px; height: 350px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" />
-                                        </td>
-                                        <td>
-                                            <table>
-                                                <tr>
-                                                    <td colspan="2"><b>SEM/EDX Parameters</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Magnification:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtParamMagnification1" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>WD:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtParamWd1" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>EHT:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtParamEht1" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Detector:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtParamDetector1" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <table class="table table-striped table-bordered table-advance table-hover">
+                                            <tr>
+                                                <td colspan="2"><b>Image</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <asp:Image ID="Image1" runat="server" Style="width: 500px; height: 350px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" />
+                                                </td>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td colspan="2"><b>SEM/EDX Parameters</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Magnification:</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtParamMagnification1" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>WD:</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtParamWd1" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>EHT:</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtParamEht1" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Detector:</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtParamDetector1" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;
 
                                                       <div class="fileinput fileinput-new" data-provides="fileinput">
                                                           <div class="input-group input-large">
@@ -1905,21 +1983,21 @@
                                                       </div>
 
 
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
 
-                                        </td>
+                                                </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><b>SEM photograph of the largest metallic shine particle by SEM/EDX</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center">
-                                            <asp:Image ID="Image2" runat="server" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" Style="width: 500px; height: 350px;" />
-                                        </td>
-                                        <td>&nbsp;
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><b>SEM photograph of the largest metallic shine particle by SEM/EDX</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <asp:Image ID="Image2" runat="server" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" Style="width: 500px; height: 350px;" />
+                                                </td>
+                                                <td>&nbsp;
                                                     <table>
                                                         <tr>
                                                             <td colspan="3"><b>Element composition:</b></td>
@@ -1981,71 +2059,71 @@
                                                             <td>&nbsp;</td>
                                                         </tr>
                                                     </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><b>EDX spectram of the largest metallic shine particle</b></td>
-                                    </tr>
-                                </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><b>EDX spectram of the largest metallic shine particle</b></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
+                        <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-striped table-bordered table-advance table-hover">
-                                    <tr>
-                                        <td colspan="2"><b>Image</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center">
-                                            <asp:Image ID="Image3" runat="server" Style="width: 500px; height: 350px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" />
-                                        </td>
-                                        <td>
-                                            <table>
-                                                <tr>
-                                                    <td colspan="2"><b>SEM/EDX Parameters</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Magnification:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtParamMagnification2" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>WD:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtParamWd2" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>EHT:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtParamEht2" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Detector:</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtParamDetector2" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <table class="table table-striped table-bordered table-advance table-hover">
+                                            <tr>
+                                                <td colspan="2"><b>Image</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <asp:Image ID="Image3" runat="server" Style="width: 500px; height: 350px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" />
+                                                </td>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td colspan="2"><b>SEM/EDX Parameters</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Magnification:</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtParamMagnification2" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>WD:</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtParamWd2" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>EHT:</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtParamEht2" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Detector:</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtParamDetector2" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">&nbsp;
                                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                                     <div class="input-group input-large">
                                                                         <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
@@ -2058,21 +2136,21 @@
                                                                     <br />
                                                                     <asp:Button ID="btnLoadParamImg3" runat="server" CssClass="btn blue" OnClick="btnLoadParamImg3_Click" Text="Load" />
                                                                 </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
 
-                                        </td>
+                                                </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><b>SEM photograph of Middle member by SEM/EDX</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center">
-                                            <asp:Image ID="Image4" runat="server" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" Style="width: 500px; height: 350px;" />
-                                        </td>
-                                        <td>&nbsp;
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><b>SEM photograph of Middle member by SEM/EDX</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <asp:Image ID="Image4" runat="server" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" Style="width: 500px; height: 350px;" />
+                                                </td>
+                                                <td>&nbsp;
                                                     <table>
                                                         <tr>
                                                             <td colspan="3"><b>Element composition:</b></td>
@@ -2134,17 +2212,17 @@
                                                             <td>&nbsp;</td>
                                                         </tr>
                                                     </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><b>EDX spectrum of Middle member</b></td>
-                                    </tr>
-                                </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><b>EDX spectrum of Middle member</b></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                </asp:Panel>
+                    </asp:Panel>
 
                     <asp:Panel ID="pUploadWorkSheet" runat="server">
                         <div class="row">
@@ -2194,12 +2272,7 @@
 
 
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Procedure in reference to declining curve.:<span class="required">*</span></label>
-                                                <div class="col-md-6">
-                                                    <asp:TextBox ID="txtPIRTDC" runat="server" CssClass="form-control"></asp:TextBox>
-                                                </div>
-                                            </div>
+
 
 
                                             <br />
@@ -2316,87 +2389,87 @@
 
 
 
-                <div class="form-actions">
+                    <div class="form-actions">
 
-                    <div class="modal-wide" id="pnlModalDemo" style="display: none;">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h class="modal-title">
+                        <div class="modal-wide" id="pnlModalDemo" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h class="modal-title">
                                             กำหนดทศนิยมให้คอลัมภ์</h>
-                            </div>
-                            <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                                <table class="table table-striped">
-                                    <tr>
-                                        <td>Amout</td>
-                                        <td>
-                                            <asp:TextBox ID="txtDecimal01" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total Outgassing</td>
-                                        <td>
-                                            <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-
-                    <asp:LinkButton ID="lnkFake" runat="server">
-                    </asp:LinkButton>
-                    <asp:ModalPopupExtender ID="ModolPopupExtender" runat="server" PopupControlID="pnlModalDemo"
-                        TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
-                        CancelControlID="btnClose">
-                    </asp:ModalPopupExtender>
-
-                    <!-- POPUP -->
-
-                    <div class="modal-wide" id="popupErrorList" style="display: none;">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h class="modal-title">
-                                            รายการปัญหา</h>
-                            </div>
-                            <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                                <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
-
-                            </div>
-                            <div class="modal-footer">
-                                <asp:Button ID="Button1" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-
-                    <asp:LinkButton ID="bnErrListFake" runat="server">
-                    </asp:LinkButton>
-                    <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
-                        TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
-                        CancelControlID="btnClose">
-                    </asp:ModalPopupExtender>
-
-                    <!-- END POPUP -->
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-9">
-                                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn green" />
-                                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="disable btn" OnClick="btnCancel_Click" />
+                                </div>
+                                <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <td>Amout</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal01" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Outgassing</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
                                 </div>
                             </div>
+                            <!-- /.modal-content -->
                         </div>
-                        <div class="col-md-6">
+                        <!-- /.modal-dialog -->
+
+                        <asp:LinkButton ID="lnkFake" runat="server">
+                        </asp:LinkButton>
+                        <asp:ModalPopupExtender ID="ModolPopupExtender" runat="server" PopupControlID="pnlModalDemo"
+                            TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
+                            CancelControlID="btnClose">
+                        </asp:ModalPopupExtender>
+
+                        <!-- POPUP -->
+
+                        <div class="modal-wide" id="popupErrorList" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h class="modal-title">
+                                            รายการปัญหา</h>
+                                </div>
+                                <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                                    <asp:Literal ID="litErrorMessage" runat="server"></asp:Literal>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button ID="Button1" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+
+                        <asp:LinkButton ID="bnErrListFake" runat="server">
+                        </asp:LinkButton>
+                        <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
+                            TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
+                            CancelControlID="btnClose">
+                        </asp:ModalPopupExtender>
+
+                        <!-- END POPUP -->
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn green" />
+                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="disable btn" OnClick="btnCancel_Click" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
             </div>
 
 

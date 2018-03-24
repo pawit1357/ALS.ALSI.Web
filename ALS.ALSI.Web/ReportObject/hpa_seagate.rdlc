@@ -927,8 +927,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>3.51119cm</Top>
-            <Left>0.00001cm</Left>
+            <Top>4.40943cm</Top>
+            <Left>0.02102cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.48107cm</Width>
             <Style>
@@ -1597,8 +1597,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>1.59055in</Top>
-            <Left>0in</Left>
+            <Top>1.94419in</Top>
+            <Left>0.00827in</Left>
             <Height>0.63869in</Height>
             <Width>7.29121in</Width>
             <ZIndex>1</ZIndex>
@@ -1664,8 +1664,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>7.4209cm</Top>
-            <Left>0.00001cm</Left>
+            <Top>8.31914cm</Top>
+            <Left>0.02102cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.48424cm</Width>
             <ZIndex>2</ZIndex>
@@ -2156,8 +2156,8 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet2</DataSetName>
-            <Top>3.15758in</Top>
-            <Left>0in</Left>
+            <Top>3.51122in</Top>
+            <Left>0.00827in</Left>
             <Height>0.62654in</Height>
             <Width>7.29121in</Width>
             <ZIndex>3</ZIndex>
@@ -2664,8 +2664,8 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet3</DataSetName>
-            <Top>3.83968in</Top>
-            <Left>0in</Left>
+            <Top>4.19332in</Top>
+            <Left>0.00827in</Left>
             <Height>0.62654in</Height>
             <Width>7.27601in</Width>
             <ZIndex>4</ZIndex>
@@ -3188,8 +3188,8 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet4</DataSetName>
-            <Top>4.50967in</Top>
-            <Left>0in</Left>
+            <Top>4.86331in</Top>
+            <Left>0.00827in</Left>
             <Height>0.67001in</Height>
             <Width>7.29121in</Width>
             <ZIndex>5</ZIndex>
@@ -3612,8 +3612,8 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet5</DataSetName>
-            <Top>6.03158in</Top>
-            <Left>0in</Left>
+            <Top>6.38522in</Top>
+            <Left>0.00827in</Left>
             <Height>0.3278in</Height>
             <Width>7.27602in</Width>
             <ZIndex>6</ZIndex>
@@ -3666,8 +3666,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>13.40367cm</Top>
-            <Left>0.00001cm</Left>
+            <Top>14.30191cm</Top>
+            <Left>0.02102cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.50376cm</Width>
             <ZIndex>7</ZIndex>
@@ -3879,9 +3879,10 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet8</DataSetName>
-            <Top>8.92363in</Top>
+            <Top>9.27727in</Top>
+            <Left>0.00827in</Left>
             <Height>0.18913in</Height>
-            <Width>7.29121in</Width>
+            <Width>7.29122in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -4160,8 +4161,8 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>5.83866cm</Top>
-            <Left>0.00001cm</Left>
+            <Top>6.7369cm</Top>
+            <Left>0.02102cm</Left>
             <Height>1.51168cm</Height>
             <Width>18.48106cm</Width>
             <ZIndex>9</ZIndex>
@@ -4566,8 +4567,8 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet6</DataSetName>
-            <Top>6.9927in</Top>
-            <Left>0.00894in</Left>
+            <Top>7.34634in</Top>
+            <Left>0.01721in</Left>
             <Height>0.3278in</Height>
             <Width>7.27601in</Width>
             <ZIndex>10</ZIndex>
@@ -4848,8 +4849,8 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>14.00303cm</Top>
-            <Left>0.00001cm</Left>
+            <Top>14.90127cm</Top>
+            <Left>0.02102cm</Left>
             <Height>1.24663cm</Height>
             <Width>18.51964cm</Width>
             <ZIndex>11</ZIndex>
@@ -5112,8 +5113,8 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>21.01751cm</Top>
-            <Left>0cm</Left>
+            <Top>21.91575cm</Top>
+            <Left>0.02101cm</Left>
             <Height>1.335cm</Height>
             <Width>18.48106cm</Width>
             <ZIndex>12</ZIndex>
@@ -5211,8 +5212,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet9</DataSetName>
-            <Top>23.3228cm</Top>
-            <Left>0.28179cm</Left>
+            <Top>24.22104cm</Top>
+            <Left>0.3028cm</Left>
             <Height>3.81938cm</Height>
             <Width>4.95391cm</Width>
             <ZIndex>13</ZIndex>
@@ -5224,54 +5225,11 @@
           </Tablix>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>10.71367in</Top>
+            <Top>11.06731in</Top>
+            <Left>0.00827in</Left>
             <Height>1.04167in</Height>
             <Width>7.27601in</Width>
             <ZIndex>14</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Subreport>
-          <Subreport Name="reportHeader">
-            <ReportName>reportHeader</ReportName>
-            <Parameters>
-              <Parameter Name="CustomerPoNo">
-                <Value>=Parameters!CustomerPoNo.Value</Value>
-              </Parameter>
-              <Parameter Name="AlsThailandRefNo">
-                <Value>=Parameters!AlsThailandRefNo.Value</Value>
-              </Parameter>
-              <Parameter Name="Date">
-                <Value>=Parameters!Date.Value</Value>
-              </Parameter>
-              <Parameter Name="Company">
-                <Value>=Parameters!Company.Value</Value>
-              </Parameter>
-              <Parameter Name="Company_addr">
-                <Value>=Parameters!Company_addr.Value</Value>
-              </Parameter>
-              <Parameter Name="DateAnalyzed">
-                <Value>=Parameters!DateAnalyzed.Value</Value>
-              </Parameter>
-              <Parameter Name="DateTestCompleted">
-                <Value>=Parameters!DateTestCompleted.Value</Value>
-              </Parameter>
-              <Parameter Name="SampleDescription">
-                <Value>=Parameters!SampleDescription.Value</Value>
-              </Parameter>
-              <Parameter Name="AlsSingaporeRefNo">
-                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
-              </Parameter>
-              <Parameter Name="DateSampleReceived">
-                <Value>=Parameters!DateSampleReceived.Value</Value>
-              </Parameter>
-            </Parameters>
-            <Left>0in</Left>
-            <Height>1.34069in</Height>
-            <Width>7.27601in</Width>
-            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5529,11 +5487,11 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>16.31175cm</Top>
-            <Left>0.00001cm</Left>
+            <Top>17.20999cm</Top>
+            <Left>0.02102cm</Left>
             <Height>1.37916cm</Height>
             <Width>18.51964cm</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Color>White</Color>
@@ -5935,10 +5893,11 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet7</DataSetName>
-            <Top>7.91903in</Top>
+            <Top>8.27267in</Top>
+            <Left>0.00827in</Left>
             <Height>0.3278in</Height>
             <Width>7.27601in</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -6216,11 +6175,11 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>18.66463cm</Top>
-            <Left>0cm</Left>
+            <Top>19.56287cm</Top>
+            <Left>0.02101cm</Left>
             <Height>1.37916cm</Height>
             <Width>18.51964cm</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Color>White</Color>
@@ -6229,11 +6188,622 @@
               <FontSize>11pt</FontSize>
             </Style>
           </Tablix>
+          <Textbox Name="CustomerPoNo">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!CustomerPoNo.Value</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>CustomerPoNo</rd:DefaultName>
+            <Top>0.33322in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.16667in</Height>
+            <Width>5.14527in</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="AlsThailandRefNo">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!AlsThailandRefNo.Value</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>AlsThailandRefNo</rd:DefaultName>
+            <Top>0.49989in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.16667in</Height>
+            <Width>5.14527in</Width>
+            <ZIndex>19</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Date">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Format(Parameters!Date.Value, "dd MMMM yyyy")</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Date</rd:DefaultName>
+            <Top>0.86101in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.16666in</Height>
+            <Width>5.14527in</Width>
+            <ZIndex>20</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Company">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!Company.Value</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!Company_addr.Value</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Company</rd:DefaultName>
+            <Top>1.04156in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.19445in</Height>
+            <Width>5.14527in</Width>
+            <ZIndex>21</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="DateSampleReceived">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Format(Parameters!DateSampleReceived.Value, "dd MMMM yyyy")</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Format(Parameters!DateAnalyzed.Value, "dd MMMM yyyy")</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Format(Parameters!DateTestCompleted.Value, "dd MMMM yyyy")</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>DateSampleReceived</rd:DefaultName>
+            <Top>1.2499in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.19444in</Height>
+            <Width>5.14527in</Width>
+            <ZIndex>22</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox47">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>CUSTOMER PO NO.: </Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>0.33322in</Top>
+            <Height>0.16667in</Height>
+            <Width>2.06957in</Width>
+            <ZIndex>23</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox48">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>ALS THAILAND REF NO.:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>0.49989in</Top>
+            <Height>0.16667in</Height>
+            <Width>2.06957in</Width>
+            <ZIndex>24</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox49">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DATE:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>0.86101in</Top>
+            <Height>0.16666in</Height>
+            <Width>2.06957in</Width>
+            <ZIndex>25</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox50">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>COMPANY:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>1.04156in</Top>
+            <Height>0.19445in</Height>
+            <Width>2.06957in</Width>
+            <ZIndex>26</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox51">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DATE SAMPLE RECEIVED:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DATE ANALYZED:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DATE TEST COMPLETED:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>1.2499in</Top>
+            <Height>0.19444in</Height>
+            <Width>2.06957in</Width>
+            <ZIndex>27</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+                <Width>0.5pt</Width>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox52">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SAMPLE DESCRIPTION:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>1.45822in</Top>
+            <Height>0.25in</Height>
+            <Width>2.06957in</Width>
+            <ZIndex>28</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox53">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>One lot of sample was received with references:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!SampleDescription.Value</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>1.45822in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.25in</Height>
+            <Width>5.14527in</Width>
+            <ZIndex>29</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox18">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>REPORT</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontSize>15pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox13</rd:DefaultName>
+            <Top>0.10589cm</Top>
+            <Left>0cm</Left>
+            <Height>0.74048cm</Height>
+            <Width>18.50207cm</Width>
+            <ZIndex>30</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox54">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>ALS SINGAPORE REF NO.:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>0.68045in</Top>
+            <Height>0.16667in</Height>
+            <Width>2.06957in</Width>
+            <ZIndex>31</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!AlsSingaporeRefNo.Value.Equals(""),True, False)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="AlsThailandRefNo2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>AlsThailandRefNo</rd:DefaultName>
+            <Top>0.68045in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.16667in</Height>
+            <Width>5.14527in</Width>
+            <ZIndex>32</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!AlsSingaporeRefNo.Value.Equals(""),True, False)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>11.75534in</Height>
+        <Height>12.10898in</Height>
         <Style />
       </Body>
-      <Width>7.29121in</Width>
+      <Width>7.29949in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

@@ -958,10 +958,8 @@ namespace ALS.ALSI.Web.view.template
                 Console.WriteLine();
             }
 
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
 
-
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 

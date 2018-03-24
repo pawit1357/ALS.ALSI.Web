@@ -859,8 +859,8 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_hpa_for1_coverpage> listHpaImg = new List<template_wd_hpa_for1_coverpage>();
 
             DataTable dt = Extenders.ObjectToDataTable(this.HpaFor1[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             List<template_wd_hpa_for1_coverpage> listHpa = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).OrderBy(x => x.seq).ToList();
             List<template_wd_hpa_for1_coverpage> listElementalComposition = this.HpaFor1.Where(x =>
@@ -1046,8 +1046,8 @@ namespace ALS.ALSI.Web.view.template
 
 
             DataTable dt = Extenders.ObjectToDataTable(this.HpaFor1[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             List<template_wd_hpa_for1_coverpage> listHpa = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
             List<template_wd_hpa_for1_coverpage> listElementalComposition = this.HpaFor1.Where(x =>

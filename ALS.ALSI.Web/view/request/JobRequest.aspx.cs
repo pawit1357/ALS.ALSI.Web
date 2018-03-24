@@ -747,7 +747,7 @@ namespace ALS.ALSI.Web.view.request
                         {
                             _litStatus_completion_scheduled.Text = m_completion_scheduled.name;
                         }
-                        btnDelete.Visible = (this.CommandName == CommandNameEnum.Add);
+                        //btnDelete.Visible = (this.CommandName == CommandNameEnum.Add);
                         btnEdit.Visible = !(this.CommandName == CommandNameEnum.View);
                     }
                 }
@@ -824,7 +824,7 @@ namespace ALS.ALSI.Web.view.request
 
 
 
-            txtRefNo.Enabled = (this.CommandName == CommandNameEnum.Add);// (amend_count == 0 && retest_count == 0);
+            //txtRefNo.Enabled = (this.CommandName == CommandNameEnum.Add);// (amend_count == 0 && retest_count == 0);
 
 
 

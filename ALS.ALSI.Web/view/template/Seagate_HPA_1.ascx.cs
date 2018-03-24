@@ -1568,8 +1568,8 @@ namespace ALS.ALSI.Web.view.template
             row["ExtractionMedium"] = txtExtractionMedium_hpa.Text;
             row["ExtractionVolume"] = txtExtractionVolume_hpa.Text;
             dtHeader.Rows.Add(row);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -1805,8 +1805,8 @@ namespace ALS.ALSI.Web.view.template
             row["ExtractionMedium"] = txtExtractionMedium_hpa.Text;
             row["ExtractionVolume"] = txtExtractionVolume_hpa.Text;
             dtHeader.Rows.Add(row);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 

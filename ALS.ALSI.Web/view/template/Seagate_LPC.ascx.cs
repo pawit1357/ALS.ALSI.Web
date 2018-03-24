@@ -1294,8 +1294,8 @@ namespace ALS.ALSI.Web.view.template
             template_seagate_lpc_coverpage objCoverPage = new template_seagate_lpc_coverpage();
             DataTable dt = Extenders.ObjectToDataTable(this.Lpcs[0]);
             List<ReportLPC> reportLpcs = objCoverPage.generateReport(this.Lpcs);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 

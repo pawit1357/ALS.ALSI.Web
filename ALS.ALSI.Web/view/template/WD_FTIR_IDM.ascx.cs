@@ -799,8 +799,8 @@ namespace ALS.ALSI.Web.view.template
             try
             {
                 DataTable dt = Extenders.ObjectToDataTable(this.Ftir.Where(x => x.data_type == 1 && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault());
-                ReportHeader reportHeader = new ReportHeader();
-                reportHeader = reportHeader.getReportHeder(this.jobSample);
+                ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
                 List<template_wd_ftir_coverpage> ds = this.Ftir.Where(x => x.data_type == 2 && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
 

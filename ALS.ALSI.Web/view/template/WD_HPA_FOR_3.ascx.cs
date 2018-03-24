@@ -1298,8 +1298,8 @@ namespace ALS.ALSI.Web.view.template
                 x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_SUB_TOTAL) ||
                 x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_GRAND_TOTAL)).OrderBy(x => x.seq).ToList();
 
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
@@ -1501,8 +1501,8 @@ namespace ALS.ALSI.Web.view.template
                 x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_SUB_TOTAL) ||
                 x.row_group == Convert.ToInt32(HPAFor3Group.SWAGE_GRAND_TOTAL)).OrderBy(x => x.seq).ToList();
 
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
