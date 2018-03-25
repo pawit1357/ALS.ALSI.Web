@@ -1430,11 +1430,11 @@
                                             <tr>
                                                 <td style="text-align: right">Feret(max) [um]</td>
                                                 <td>
-                                                    <asp:TextBox ID="txtFeretLmsp" runat="server" Text="227.08" CssClass="form-control" OnTextChanged="txtFeretLmsp_TextChanged" AutoPostBack="true"></asp:TextBox></td>
+                                                    <asp:TextBox ID="txtFeretLmsp" runat="server" Text="" CssClass="form-control" OnTextChanged="txtFeretLmsp_TextChanged" AutoPostBack="true"></asp:TextBox></td>
                                                 <td>
-                                                    <asp:TextBox ID="txtFeretLnms" runat="server" Text="518.97" CssClass="form-control" OnTextChanged="txtFeretLnms_TextChanged" AutoPostBack="true"></asp:TextBox></td>
+                                                    <asp:TextBox ID="txtFeretLnms" runat="server" Text="" CssClass="form-control" OnTextChanged="txtFeretLnms_TextChanged" AutoPostBack="true"></asp:TextBox></td>
                                                 <td>
-                                                    <asp:TextBox ID="txtFeretFb" runat="server" Text="285.26" CssClass="form-control" OnTextChanged="txtFeretFb_TextChanged" AutoPostBack="true"></asp:TextBox></td>
+                                                    <asp:TextBox ID="txtFeretFb" runat="server" Text="" CssClass="form-control" OnTextChanged="txtFeretFb_TextChanged" AutoPostBack="true"></asp:TextBox></td>
                                             </tr>
                                         </table>
                                     </div>

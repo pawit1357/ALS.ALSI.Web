@@ -463,27 +463,32 @@ namespace ALS.ALSI.Web.view.template
                 List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
                 if (listOfSpec.Count > 0)
                 {
+
                     int seq = 1;
                     foreach (tb_m_specification item in listOfSpec)
                     {
-                        template_pa_detail tmp = new template_pa_detail();
-                        tmp.id = CustomUtils.GetRandomNumberID();
-                        tmp.seq = seq;
-                        tmp.col_c = item.C;
-                        tmp.col_d = item.D;
-                        tmp.col_e = item.E;
-                        tmp.col_f = item.F;
-                        tmp.col_g = item.G;
-                        tmp.col_h = item.H;
-                        tmp.col_i = item.I;
-                        tmp.col_j = item.J;
-                        tmp.col_k = item.K;
-                        tmp.col_l = item.L;
-                        tmp.col_m = item.M;
-                        tmp.col_n = item.N;
-                        tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-                        tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
-                        paDetail.Add(tmp);
+                        if (seq > 1)
+                        {
+                            template_pa_detail tmp = new template_pa_detail();
+                            tmp.id = CustomUtils.GetRandomNumberID();
+                            tmp.seq = seq;
+                            tmp.col_c = item.C;
+                            tmp.col_d = item.D;
+                            tmp.col_e = item.E;
+                            tmp.col_f = item.F;
+                            tmp.col_g = item.G;
+                            tmp.col_h = item.H;
+                            tmp.col_i = item.I;
+                            tmp.col_j = item.J;
+                            tmp.col_k = item.K;
+                            tmp.col_l = item.L;
+                            tmp.col_m = item.M;
+                            tmp.col_n = item.N;
+                            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                            tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
+                            paDetail.Add(tmp);
+
+                        }
                         seq++;
                     }
 
@@ -493,6 +498,7 @@ namespace ALS.ALSI.Web.view.template
                 listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_MICROPIC_DATA) && x.B.Equals(PA_SPECIFICATION)).ToList();
                 if (listOfSpec.Count > 1)
                 {
+
                     int row = 1;
                     foreach (var item in listOfSpec)
                     {
@@ -651,6 +657,39 @@ namespace ALS.ALSI.Web.view.template
                     refPa.col_n = "Not to evaluate";
 
                 }
+                #region "SET HEADER"
+                List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
+                tb_m_specification headerRow = listOfSpec.FirstOrDefault();
+                gvEop.Columns[0].HeaderText = headerRow.C;
+                gvEop.Columns[1].HeaderText = headerRow.D;
+                gvEop.Columns[2].HeaderText = headerRow.E;
+                gvEop.Columns[3].HeaderText = headerRow.F;
+                gvEop.Columns[4].HeaderText = headerRow.G;
+                gvEop.Columns[5].HeaderText = headerRow.H;
+                gvEop.Columns[6].HeaderText = headerRow.I;
+                gvEop.Columns[7].HeaderText = headerRow.J;
+                gvEop.Columns[8].HeaderText = headerRow.K;
+                gvEop.Columns[9].HeaderText = headerRow.L;
+                gvEop.Columns[10].HeaderText = headerRow.M;
+                gvEop.Columns[11].HeaderText = headerRow.N;
+
+
+                gvEop.Columns[0].Visible = !String.IsNullOrEmpty(headerRow.C);
+                gvEop.Columns[1].Visible = !String.IsNullOrEmpty(headerRow.D);
+                gvEop.Columns[2].Visible = !String.IsNullOrEmpty(headerRow.E);
+                gvEop.Columns[3].Visible = !String.IsNullOrEmpty(headerRow.F);
+                gvEop.Columns[4].Visible = !String.IsNullOrEmpty(headerRow.G);
+                gvEop.Columns[5].Visible = !String.IsNullOrEmpty(headerRow.H);
+                gvEop.Columns[6].Visible = !String.IsNullOrEmpty(headerRow.I);
+                gvEop.Columns[7].Visible = !String.IsNullOrEmpty(headerRow.J);
+                gvEop.Columns[8].Visible = !String.IsNullOrEmpty(headerRow.K);
+                gvEop.Columns[9].Visible = !String.IsNullOrEmpty(headerRow.L);
+                gvEop.Columns[10].Visible = !String.IsNullOrEmpty(headerRow.M);
+                gvEop.Columns[11].Visible = !String.IsNullOrEmpty(headerRow.N);
+
+
+                //headerRow                                                  
+                #endregion
                 gvEop.DataSource = listPaDetail;
                 gvEop.DataBind();
             }
@@ -1361,8 +1400,8 @@ namespace ALS.ALSI.Web.view.template
             for (int i = 0; i < FileUpload2.PostedFiles.Count; i++)
             {
                 HttpPostedFile _postedFile = FileUpload2.PostedFiles[i];
-                try
-                {
+                //try
+                //{
                     if (_postedFile.ContentLength > 0)
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
@@ -1388,11 +1427,12 @@ namespace ALS.ALSI.Web.view.template
                             using (var reader = new StreamReader(_postedFile.FileName))
                             {
                                 int row = 0;
+                                int colCount = 0;
                                 while (!reader.EndOfStream)
                                 {
                                     var line = reader.ReadLine();
 
-                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("LargestRegionsTable"))
+                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("LargestRegionsTable".ToLower()))
                                     {
                                         if (line.IndexOf("<Cell>") != -1)
                                         {
@@ -1430,21 +1470,29 @@ namespace ALS.ALSI.Web.view.template
                                             }
                                         }
                                     }
-                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("reflectiveTable"))
+                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("reflectiveTable".ToLower()))
                                     {
+                                        if (line.IndexOf("ExpandedColumnCount") !=-1){
+                                            colCount = CustomUtils.isNumber(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) ? Convert.ToInt16(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) : 0;
+                                            Console.WriteLine();
+                                        }
                                         if (line.IndexOf("<Cell>") != -1)
                                         {
                                             String[] tmp = line.Replace("ss:Type=\"String\"", String.Empty).Replace("ss:Type=\"Number\"", String.Empty).Replace(" ", String.Empty).Replace("</Data>", "#").Replace("<Data>", String.Empty).Replace("<Cell>", String.Empty).Replace("</Cell>", String.Empty).Split('#');
-                                            if (tmp.Length == 15)
+                                            if (tmp.Length == (colCount+1))
                                             {
-                                                index = (!CustomUtils.isNumber(tmp[0])) ? Convert.ToInt16(0) : Convert.ToInt16(tmp[0]);
+                                                double x = Convert.ToDouble(tmp[1]);
+                                                //double y = Convert.ToDouble(tmp[2]);
+                                                template_pa_detail _tmp = paList.Where(o => o.col_c.StartsWith(x.ToString())).FirstOrDefault();
+                                                //index = (!CustomUtils.isNumber(tmp[0])) ? Convert.ToInt16(0) : Convert.ToInt16(tmp[0]);
                                                 value = (!CustomUtils.isNumber(tmp[3])) ? Convert.ToDouble(0) : Convert.ToDouble(tmp[3]);
-                                                paList[index].col_g = value.ToString();
+                                                _tmp.col_g = value.ToString();
                                                 Console.WriteLine();
+                                                row++;
                                             }
                                         }
                                     }
-                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("non-reflectiveTable"))
+                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("non-reflectiveTable".ToLower()))
                                     {
                                         if (line.IndexOf("<Cell>") != -1)
                                         {
@@ -1458,7 +1506,7 @@ namespace ALS.ALSI.Web.view.template
                                             }
                                         }
                                     }
-                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).StartsWith("fibrousTable"))
+                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("fibrousTable".ToLower()))
                                     {
                                         if (line.IndexOf("<Cell>") != -1)
                                         {
@@ -1486,13 +1534,13 @@ namespace ALS.ALSI.Web.view.template
 
 
                     }
-                }
-                catch (Exception ex)
-                {
-                    errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
+                //}
+                //catch (Exception ex)
+                //{
+                //    errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
 
-                    Console.WriteLine();
-                }
+                //    Console.WriteLine();
+                //}
             }
             paList[0].col_e = "Not to evaluate";
             paList[0].col_f = "Not to evaluate";

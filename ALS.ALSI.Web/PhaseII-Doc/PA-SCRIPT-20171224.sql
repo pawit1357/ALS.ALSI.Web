@@ -183,5 +183,6 @@ update template_wd_lpc_coverpage set unit=46,unit2=56,unit3=49,unit4=44;
 ALTER TABLE `alsi`.`job_sample` 
 CHANGE COLUMN `amend_or_retest` `amend_or_retest` VARCHAR(2) NULL DEFAULT NULL COMMENT 'AM= Amend,R= Retest' ,
 
-
+ขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขข
+ELN-0854-PAB
 */
