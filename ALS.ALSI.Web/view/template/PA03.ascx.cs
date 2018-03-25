@@ -29,6 +29,7 @@ namespace ALS.ALSI.Web.view.template
         private const String PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION = "Description of process and extraction:";
         private const String PA_DISSOLVING = "Dissolving";
         private const String PA_AGITATION = "Agitation";
+        private const String PA_ULTRASONIC = "Ultrasonic";
         private const String PA_WASHING = "Washing";
         private const String PA_PRESURE_RINSING = "Pressure rinsing";
         private const String PA_INTERNAL_RINSING = "Internal rinsing";
@@ -52,7 +53,7 @@ namespace ALS.ALSI.Web.view.template
 
         private const String PA_DDL_SPECIFICATION_NO = "SpecificationNo";
         private const String PA_DDL_OPERATOR_NAME = "Operator Name";
-
+        private const String PA_PER_LIST = "Per";
 
 
 
@@ -257,6 +258,12 @@ namespace ALS.ALSI.Web.view.template
             ddlOperatorName.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_OPERATOR_NAME));
             ddlOperatorName.DataBind();
 
+            ddlPer.Items.Clear();
+            ddlPer.DataSource = this.tbMSpecifications.Where(x => x.A.Equals(PA_PER_LIST));
+            ddlPer.DataBind();
+
+
+
             #endregion
 
             this.pa = new template_pa();
@@ -319,15 +326,17 @@ namespace ALS.ALSI.Web.view.template
                 txtDissolving.Text = this.pa.dissolving;
                 txtDissolvingTime.Text = this.pa.dissolvingtime;
                 cbPressureRinsing.Checked = Convert.ToBoolean(this.pa.ispressurerinsing);
-                cbInternalRinsing.Checked = Convert.ToBoolean(this.pa.isinternalrinsing);
                 cbAgitation.Checked = Convert.ToBoolean(this.pa.isagitation);
+                cbUntrasonic.Checked = Convert.ToBoolean(this.pa.isUltrasonic);
+                ddlRinsing.SelectedValue = this.pa.rinsing_id.ToString();
                 cbWashQuantity.Checked = Convert.ToBoolean(this.pa.iswashquantity);
                 txtWashQuantity.Text = this.pa.washquantity;
                 cbRewashingQuantity.Checked = Convert.ToBoolean(this.pa.isrewashingquantity);
                 txtRewashingQuantity.Text = this.pa.rewashingquantity;
                 cbWashPressureRinsing.Checked = Convert.ToBoolean(this.pa.iswashpressurerinsing);
-                cbWashInternalRinsing.Checked = Convert.ToBoolean(this.pa.iswashinternalrinsing);
                 cbWashAgitation.Checked = Convert.ToBoolean(this.pa.iswashagitation);
+                cbWashUltrasonic.Checked = Convert.ToBoolean(this.pa.iswashUltrasonic);
+                dllWashPressureRinsing.SelectedValue = this.pa.washpressurerinsing_id.ToString();
                 CustomUtils.setCheckBoxListValue(ref cbFiltrationMethod, this.pa.isfiltrationmethod);
 
                 ddlManufacturer.SelectedValue = this.pa.manufacturer_id.ToString();
@@ -400,8 +409,15 @@ namespace ALS.ALSI.Web.view.template
                 txtParamDetector1.Text = this.pa.param_detector_01;
                 txtParamDetector2.Text = this.pa.param_detector_02;
 
+                ddlSpecification.SelectedValue = this.pa.specification_no.ToString();
+                ddlOperatorName.SelectedValue = this.pa.operater_name.ToString();
 
 
+                txtPerComponentTotal.Text = this.pa.per_component_total;
+                txtPerComponentMetallicShine.Text = this.pa.per_component_metallicshine;
+                txtPermembraneMetallicShine.Text = this.pa.per_membrane_metallicshine;
+
+                lbPer.Text = this.pa.per_text;
 
                 #region "COLUMN HEADER"
                 tb_m_specification selectValue = new tb_m_specification();
@@ -410,17 +426,26 @@ namespace ALS.ALSI.Web.view.template
 
                 if (cbPressureRinsing.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
-                }
-                if (cbInternalRinsing.Checked)
-                {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
+                    switch (ddlRinsing.SelectedValue)
+                    {
+                        case "0":
+                            selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                            break;
+                        case "1":
+                            selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
+                            break;
+                    }
+
                 }
                 if (cbAgitation.Checked)
                 {
                     selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
-
                 }
+                if (cbUntrasonic.Checked)
+                {
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_ULTRASONIC)).FirstOrDefault();
+                }
+
 
 
                 this.DissolvingHeaders = tb_m_specification.findColumnCount(selectValue);
@@ -433,15 +458,24 @@ namespace ALS.ALSI.Web.view.template
                 #region "gvWashing"
                 if (cbWashPressureRinsing.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                    switch (dllWashPressureRinsing.SelectedValue)
+                    {
+                        case "0":
+                            selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                            break;
+                        case "1":
+                            selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
+                            break;
+                    }
                 }
-                if (cbWashInternalRinsing.Checked)
-                {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
-                }
+
                 if (cbWashAgitation.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
+                }
+                if (cbWashUltrasonic.Checked)
+                {
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_ULTRASONIC)).FirstOrDefault();
                 }
 
                 this.WashingHeaders = tb_m_specification.findColumnCount(selectValue);
@@ -543,7 +577,7 @@ namespace ALS.ALSI.Web.view.template
 
                 //default:Agitation
                 lbExtractionMethod.Text = PA_AGITATION;
-                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
+                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
@@ -571,7 +605,7 @@ namespace ALS.ALSI.Web.view.template
 
                 }
 
-                selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
@@ -599,7 +633,7 @@ namespace ALS.ALSI.Web.view.template
 
                 }
                 ////
-                selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddlFluid1.SelectedValue) && x.B.Equals(PA_SPECIFICATION)).FirstOrDefault();
+                selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddlFluid1.SelectedValue)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     txtTradeName.Text = selectValue.E;
@@ -635,7 +669,8 @@ namespace ALS.ALSI.Web.view.template
         private void calculate()
         {
 
-            lbPermembrane.Text = String.Empty;
+            lbPermembraneTotal.Text = String.Empty;
+            txtPermembraneMetallicShine.Text = String.Empty;
 
             List<template_pa_detail> listMicroPicData = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
             List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
@@ -717,9 +752,9 @@ namespace ALS.ALSI.Web.view.template
 
                         if (!pad.col_d.Equals("-"))
                         {
-                            lbPermembrane.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_i).ToString("N0"));
+                            lbPermembraneTotal.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_i).ToString("N0"));
+                            txtPermembraneMetallicShine.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_j).ToString("N0"));
                         }
-
                     }
                     else
                     {
@@ -729,14 +764,19 @@ namespace ALS.ALSI.Web.view.template
                 {
                     if (!String.IsNullOrEmpty(item.col_i))
                     {
-                        lbPermembrane.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_i).ToString("N0"));
+                        lbPermembraneTotal.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_i).ToString("N0"));
+                        txtPermembraneMetallicShine.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_j).ToString("N0"));
                     }
                 }
-                if (!String.IsNullOrEmpty(lbPermembrane.Text))
-                {
-                    lbPermembrane.Text = String.Format("N({0})", lbPermembrane.Text.Substring(0, lbPermembrane.Text.Length - 1));
-                }
 
+                if (!String.IsNullOrEmpty(lbPermembraneTotal.Text))
+                {
+                    lbPermembraneTotal.Text = String.Format("N({0})", lbPermembraneTotal.Text.Substring(0, lbPermembraneTotal.Text.Length - 1));
+                }
+                if (!String.IsNullOrEmpty(txtPermembraneMetallicShine.Text))
+                {
+                    txtPermembraneMetallicShine.Text = String.Format("N({0})", txtPermembraneMetallicShine.Text.Substring(0, txtPermembraneMetallicShine.Text.Length - 1));
+                }
                 gvMicroscopicAnalysis.Visible = true;
                 gvMicroscopicAnalysis.DataSource = listMicroPicData;
                 gvMicroscopicAnalysis.DataBind();
@@ -793,6 +833,13 @@ namespace ALS.ALSI.Web.view.template
             pdLotNo.Text = this.jobSample.lot_no;
             pdSpecification.Text = ddlSpecification.SelectedItem.Text;
 
+            if (CustomUtils.isNumber(txtDissolving.Text) && CustomUtils.isNumber(txtWashQuantity.Text) && CustomUtils.isNumber(txtRewashingQuantity.Text))
+            {
+                txtTotalQuantity.Text = (Convert.ToDouble(txtDissolving.Text) + Convert.ToDouble(txtWashQuantity.Text) + Convert.ToDouble(txtRewashingQuantity.Text)) + "";
+            }
+            txtTotalextractionVolume.Text = txtTotalQuantity.Text;
+            lbX.Text = txtAutomated.Text;
+            lbY.Text = txtAutomated.Text;
         }
 
         #endregion
@@ -802,7 +849,7 @@ namespace ALS.ALSI.Web.view.template
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
-            this.PA_SPECIFICATION = "PA5x_BOSCH0442S00155";
+            this.PA_SPECIFICATION = "PA5x_BOSCHF00VP19194";
 
             if (!Page.IsPostBack)
             {
@@ -823,127 +870,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
-
-                    this.pa.sample_id = this.SampleID;
-                    //this.pa.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
-                    this.pa.result = Convert.ToInt32(ddlResult.SelectedValue);
-                    this.pa.pirtd = txtPIRTDC.Text;
-                    //this.jobSample.lot_no = txtLotNo.Text;
-
-                    #region "PAGE01"
-                    this.pa.doec = txtDoec.Text;
-                    this.pa.dos = txtDos.Text;
-                    this.pa.customerlimit = txtCustomerLimit.Text;
-                    this.pa.gravimetry = txtGravimetry.Text;
-                    this.pa.lmsp = txtLmsp.Text;
-                    this.pa.extractionvalue = txtExtractionValue.Text;
-                    this.pa.lnmsp = txtLnmsp.Text;
-                    this.pa.eop_g = txtEop_G.Text;
-                    this.pa.eop_lmsp = txtEop_Lmsp.Text;
-                    this.pa.eop_lnmsp = txtEop_Lnmsp.Text;
-                    this.pa.eop_pt = txtEop_pt.Text;
-                    this.pa.eop_size = txtEop_size.Text;
-                    this.pa.eop_value = txtEop_value.Text;
-                    this.pa.remark = txtEopRemark.Text;
-                    #endregion
-                    #region "PAGE02"
-                    this.pa.iscsa = CustomUtils.getCheckBoxListValue(cbCsa);
-                    this.pa.wspc = txtWspc.Text;
-                    this.pa.wvpc = txtWvpc.Text;
-                    this.pa.tls = txtTls.Text;
-                    this.pa.ispretreatmentconditioning = (cbPreTreatmentConditioning.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.pretreatmentconditioning = txtPreTreatmentConditioning.Text;
-                    this.pa.ispackingtobetested = CustomUtils.getCheckBoxListValue(cbPackingToBeTested);
-                    this.pa.iscontainer = (cbContainer.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.container_id = Convert.ToInt32(ddlContainer.SelectedValue);
-                    this.pa.isfluid1 = (cbFluid1.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.fluid1_id = Convert.ToInt32(ddlFluid1.SelectedValue);
-                    this.pa.isfluid2 = (cbFluid2.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.fluid2_id = Convert.ToInt32(ddlFluid2.SelectedValue);
-                    this.pa.isfluid3 = (cbFluid3.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.fluid3_id = Convert.ToInt32(ddlFluid3.SelectedValue);
-                    this.pa.tradename = txtTradeName.Text;
-                    this.pa.manufacturer = txtManufacturer.Text;
-                    this.pa.totalquantity = txtTotalQuantity.Text;
-                    this.pa.istshb01 = (cbTshb01.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.istshb02 = (cbTshb02.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.istshb03 = (cbTshb03.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.tshb03 = txtTshb03.Text;
-                    this.pa.ispots01 = (cbPots01.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.pots01 = txtPots01.Text;
-                    #endregion
-                    #region "PAGE03"
-                    this.pa.isdissolving = (cbDissolving.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.dissolving = txtDissolving.Text;
-                    this.pa.dissolvingtime = txtDissolvingTime.Text;
-                    this.pa.ispressurerinsing = (cbPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isinternalrinsing = (cbInternalRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isagitation = (cbAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.iswashquantity = (cbWashQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.washquantity = txtWashQuantity.Text;
-                    this.pa.isrewashingquantity = (cbRewashingQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.rewashingquantity = txtRewashingQuantity.Text;
-                    this.pa.iswashpressurerinsing = (cbWashPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.iswashinternalrinsing = (cbWashInternalRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.iswashagitation = (cbWashAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isfiltrationmethod = CustomUtils.getCheckBoxListValue(cbFiltrationMethod);
-
-
-                    this.pa.manufacturer_id = Convert.ToInt32(ddlManufacturer.SelectedValue);
-                    this.pa.material_id = Convert.ToInt32(ddlMaterial.SelectedValue);
-                    this.pa.poresize = txtPoreSize.Text;
-                    this.pa.diameter = txtDiameter.Text;
-                    this.pa.isoven = (cbOven.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isdesiccator = (cbDesiccator.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isambientair = (cbAmbientAir.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.iseasydry = (cbEasyDry.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.drytime = txtDryTime.Text;
-                    this.pa.temperature = txtTemperature.Text;
-                    this.pa.gravimetricalalysis_id = Convert.ToInt32(ddlGravimetricAlalysis.SelectedValue);
-                    this.pa.model = txtModel.Text;
-                    this.pa.balanceresolution = txtBalanceResolution.Text;
-                    this.pa.lastcalibration = txtLastCalibration.Text;
-                    this.pa.iszeissaxioimager2 = (cbZEISSAxioImager2.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.ismeasuringsoftware = (cbMeasuringSoftware.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isautomated = (cbAutomated.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.automated = txtAutomated.Text;
-                    this.pa.totalextractionvolume = txtTotalextractionVolume.Text;
-                    this.pa.lbextractionmethod = lbExtractionMethod.Text;
-                    this.pa.numberofcomponents = txtNumberOfComponents.Text;
-                    this.pa.lbextractiontime = lbExtractionTime.Text;
-                    this.pa.measureddiameter = lbMembraneType.Text;
-                    this.pa.lbx = lbX.Text;
-                    this.pa.lby = lbY.Text;
-                    this.pa.measureddiameter = txtMeasuredDiameter.Text;
-                    this.pa.feretlmsp = txtFeretLmsp.Text;
-                    this.pa.feretlnms = txtFeretLnms.Text;
-                    this.pa.feretfb = txtFeretFb.Text;
-                    #endregion
-
-                    this.pa.img01 = img1.ImageUrl;
-                    this.pa.img02 = img2.ImageUrl;
-                    this.pa.img03 = img3.ImageUrl;
-                    this.pa.img04 = img4.ImageUrl;
-                    this.pa.img05 = img5.ImageUrl;
-
-                    this.pa.lms_x = txtLms_X.Text;
-                    this.pa.lms_y = txtLms_Y.Text;
-
-                    this.pa.lnms_x = txtLnms_X.Text;
-                    this.pa.lnms_y = txtLnms_Y.Text;
-
-                    this.pa.lf_x = txtLf_X.Text;
-                    this.pa.lf_y = txtLf_Y.Text;
-
-                    //Delete old
-                    template_pa.DeleteBySampleID(this.SampleID);
-                    this.pa.Insert();
-                    template_pa_detail.DeleteBySampleID(this.SampleID);
-                    foreach (template_pa_detail item in this.paDetail)
-                    {
-                        item.sample_id = this.SampleID;
-                    }
-                    template_pa_detail.InsertList(this.paDetail);
                     break;
                 case StatusEnum.CHEMIST_TESTING:
 
@@ -1010,15 +936,17 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.dissolving = txtDissolving.Text;
                     this.pa.dissolvingtime = txtDissolvingTime.Text;
                     this.pa.ispressurerinsing = (cbPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isinternalrinsing = (cbInternalRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
                     this.pa.isagitation = (cbAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.isUltrasonic = (cbUntrasonic.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.rinsing_id = Convert.ToInt16(ddlRinsing.SelectedValue);
                     this.pa.iswashquantity = (cbWashQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
                     this.pa.washquantity = txtWashQuantity.Text;
                     this.pa.isrewashingquantity = (cbRewashingQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
                     this.pa.rewashingquantity = txtRewashingQuantity.Text;
                     this.pa.iswashpressurerinsing = (cbWashPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.iswashinternalrinsing = (cbWashInternalRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
                     this.pa.iswashagitation = (cbWashAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.iswashUltrasonic = (cbWashUltrasonic.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.pa.washpressurerinsing_id = Convert.ToInt16(dllWashPressureRinsing.SelectedValue);
                     this.pa.isfiltrationmethod = CustomUtils.getCheckBoxListValue(cbFiltrationMethod);
 
 
@@ -1077,6 +1005,14 @@ namespace ALS.ALSI.Web.view.template
                     this.pa.param_detector_01 = txtParamDetector1.Text;
                     this.pa.param_detector_02 = txtParamDetector2.Text;
 
+                    this.pa.per_component_total = txtPerComponentTotal.Text;
+                    this.pa.per_component_metallicshine = txtPerComponentMetallicShine.Text;
+                    this.pa.per_membrane_metallicshine = txtPermembraneMetallicShine.Text;
+
+                    this.pa.specification_no = Convert.ToInt32(ddlSpecification.SelectedValue);
+                    this.pa.operater_name = Convert.ToInt32(ddlOperatorName.SelectedValue);
+
+                    this.pa.per_text = lbPer.Text;
                     //Delete old
                     template_pa.DeleteBySampleID(this.SampleID);
                     this.pa.Insert();
@@ -1334,6 +1270,7 @@ namespace ALS.ALSI.Web.view.template
                     btnPage04.CssClass = "btn btn-default btn-sm";
                     btnPage05.CssClass = "btn btn-default btn-sm";
                     btnPage06.CssClass = "btn red-sunglo btn-sm";
+                    btnPage07.CssClass = "btn btn-default btn-sm";
                     btnPage08.CssClass = "btn btn-default btn-sm";
                     pPage01.Visible = false;
                     pPage02.Visible = false;
@@ -1402,138 +1339,177 @@ namespace ALS.ALSI.Web.view.template
                 HttpPostedFile _postedFile = FileUpload2.PostedFiles[i];
                 //try
                 //{
-                    if (_postedFile.ContentLength > 0)
+                if (_postedFile.ContentLength > 0)
+                {
+                    string yyyy = DateTime.Now.ToString("yyyy");
+                    string MM = DateTime.Now.ToString("MM");
+                    string dd = DateTime.Now.ToString("dd");
+
+                    String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
+
+                    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                     {
-                        string yyyy = DateTime.Now.ToString("yyyy");
-                        string MM = DateTime.Now.ToString("MM");
-                        string dd = DateTime.Now.ToString("dd");
+                        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                    }
+                    _postedFile.SaveAs(source_file);
 
-                        String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
 
-                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                    if ((Path.GetExtension(_postedFile.FileName).Equals(".xml")))
+                    {
+                        #region "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx"
+
+
+                        int index = 0;
+                        Double value = 0;
+                        using (var reader = new StreamReader(_postedFile.FileName))
                         {
-                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                        }
-                        _postedFile.SaveAs(source_file);
-
-
-                        if ((Path.GetExtension(_postedFile.FileName).Equals(".xml")))
-                        {
-                            #region "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx"
-
-
-                            int index = 0;
-                            Double value = 0;
-                            using (var reader = new StreamReader(_postedFile.FileName))
+                            int row = 0;
+                            int colCount = 0;
+                            while (!reader.EndOfStream)
                             {
-                                int row = 0;
-                                int colCount = 0;
-                                while (!reader.EndOfStream)
+                                var line = reader.ReadLine();
+
+                                if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("LargestRegionsTable".ToLower()))
                                 {
-                                    var line = reader.ReadLine();
-
-                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("LargestRegionsTable".ToLower()))
+                                    if (line.IndexOf("<Cell>") != -1)
                                     {
-                                        if (line.IndexOf("<Cell>") != -1)
+                                        String[] tmp = line.Replace("ss:Type=\"String\"", String.Empty).Replace("ss:Type=\"Number\"", String.Empty).Replace(" ", String.Empty).Replace("</Data>", "#").Replace("<Data>", String.Empty).Replace("<Cell>", String.Empty).Replace("</Cell>", String.Empty).Split('#');
+                                        if (tmp.Length == 13)
                                         {
-                                            String[] tmp = line.Replace("ss:Type=\"String\"", String.Empty).Replace("ss:Type=\"Number\"", String.Empty).Replace(" ", String.Empty).Replace("</Data>", "#").Replace("<Data>", String.Empty).Replace("<Cell>", String.Empty).Replace("</Cell>", String.Empty).Split('#');
-                                            if (tmp.Length == 13)
+                                            value = (!CustomUtils.isNumber(tmp[1])) ? Convert.ToDouble(0) : Convert.ToDouble(tmp[1]);
+                                            String filter = Regex.Replace(tmp[4], @"(\s+|@|&|'|\(|\)|<|>|#|\"")", "").Replace(" ", String.Empty);
+                                            if (null != filter && filterList.Contains(filter))
                                             {
-                                                value = (!CustomUtils.isNumber(tmp[1])) ? Convert.ToDouble(0) : Convert.ToDouble(tmp[1]);
-                                                String filter = Regex.Replace(tmp[4], @"(\s+|@|&|'|\(|\)|<|>|#|\"")", "").Replace(" ", String.Empty);
-                                                if (null != filter && filterList.Contains(filter))
+                                                switch (filter.Trim())
                                                 {
-                                                    switch (filter.Trim())
-                                                    {
-                                                        case PA_REFLECTIVE:
-                                                            if (value > largestMetallicShine)
-                                                            {
-                                                                largestMetallicShine = value;
-                                                            }
-                                                            break;
-                                                        case PA_NON_REFLECTIVE:
-                                                            if (value > largestNonMetallicShine)
-                                                            {
-                                                                largestNonMetallicShine = value;
-                                                            }
-                                                            break;
-                                                        case PA_FIBROUS:
-                                                            if (value > longestFiber)
-                                                            {
-                                                                longestFiber = value;
-                                                            }
-                                                            break;
-                                                    }
-
+                                                    case PA_REFLECTIVE:
+                                                        if (value > largestMetallicShine)
+                                                        {
+                                                            largestMetallicShine = value;
+                                                        }
+                                                        break;
+                                                    case PA_NON_REFLECTIVE:
+                                                        if (value > largestNonMetallicShine)
+                                                        {
+                                                            largestNonMetallicShine = value;
+                                                        }
+                                                        break;
+                                                    case PA_FIBROUS:
+                                                        if (value > longestFiber)
+                                                        {
+                                                            longestFiber = value;
+                                                        }
+                                                        break;
                                                 }
-                                                Console.WriteLine();
+
                                             }
-                                        }
-                                    }
-                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("reflectiveTable".ToLower()))
-                                    {
-                                        if (line.IndexOf("ExpandedColumnCount") !=-1){
-                                            colCount = CustomUtils.isNumber(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) ? Convert.ToInt16(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) : 0;
                                             Console.WriteLine();
                                         }
-                                        if (line.IndexOf("<Cell>") != -1)
-                                        {
-                                            String[] tmp = line.Replace("ss:Type=\"String\"", String.Empty).Replace("ss:Type=\"Number\"", String.Empty).Replace(" ", String.Empty).Replace("</Data>", "#").Replace("<Data>", String.Empty).Replace("<Cell>", String.Empty).Replace("</Cell>", String.Empty).Split('#');
-                                            if (tmp.Length == (colCount+1))
-                                            {
-                                                double x = Convert.ToDouble(tmp[1]);
-                                                //double y = Convert.ToDouble(tmp[2]);
-                                                template_pa_detail _tmp = paList.Where(o => o.col_c.StartsWith(x.ToString())).FirstOrDefault();
-                                                //index = (!CustomUtils.isNumber(tmp[0])) ? Convert.ToInt16(0) : Convert.ToInt16(tmp[0]);
-                                                value = (!CustomUtils.isNumber(tmp[3])) ? Convert.ToDouble(0) : Convert.ToDouble(tmp[3]);
-                                                _tmp.col_g = value.ToString();
-                                                Console.WriteLine();
-                                                row++;
-                                            }
-                                        }
-                                    }
-                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("non-reflectiveTable".ToLower()))
-                                    {
-                                        if (line.IndexOf("<Cell>") != -1)
-                                        {
-                                            String[] tmp = line.Replace("ss:Type=\"String\"", String.Empty).Replace("ss:Type=\"Number\"", String.Empty).Replace(" ", String.Empty).Replace("</Data>", "#").Replace("<Data>", String.Empty).Replace("<Cell>", String.Empty).Replace("</Cell>", String.Empty).Split('#');
-                                            if (tmp.Length == 15)
-                                            {
-                                                index = (!CustomUtils.isNumber(tmp[0])) ? Convert.ToInt16(0) : Convert.ToInt16(tmp[0]);
-                                                value = (!CustomUtils.isNumber(tmp[3])) ? Convert.ToDouble(0) : Convert.ToDouble(tmp[3]);
-                                                paList[index].col_f = value.ToString();
-                                                Console.WriteLine();
-                                            }
-                                        }
-                                    }
-                                    if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("fibrousTable".ToLower()))
-                                    {
-                                        if (line.IndexOf("<Cell>") != -1)
-                                        {
-                                            String[] tmp = line.Replace("ss:Type=\"String\"", String.Empty).Replace("ss:Type=\"Number\"", String.Empty).Replace(" ", String.Empty).Replace("</Data>", "#").Replace("<Data>", String.Empty).Replace("<Cell>", String.Empty).Replace("</Cell>", String.Empty).Split('#');
-                                            if (tmp.Length == 15)
-                                            {
-                                                index = (!CustomUtils.isNumber(tmp[0])) ? Convert.ToInt16(0) : Convert.ToInt16(tmp[0]);
-                                                value = (!CustomUtils.isNumber(tmp[3])) ? Convert.ToDouble(0) : Convert.ToDouble(tmp[3]);
-                                                paList[index].col_h = value.ToString();
-                                                Console.WriteLine();
-
-                                            }
-                                        }
-
                                     }
                                 }
+                                if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("reflectiveTable".ToLower()))
+                                {
+                                    if (line.IndexOf("ExpandedColumnCount") != -1)
+                                    {
+                                        colCount = CustomUtils.isNumber(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) ? Convert.ToInt16(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) : 0;
+                                        Console.WriteLine();
+                                    }
+                                    if (line.IndexOf("<Cell>") != -1)
+                                    {
+                                        String[] tmp = line.Replace("ss:Type=\"String\"", String.Empty).Replace("ss:Type=\"Number\"", String.Empty).Replace(" ", String.Empty).Replace("</Data>", "#").Replace("<Data>", String.Empty).Replace("<Cell>", String.Empty).Replace("</Cell>", String.Empty).Split('#');
+                                        if (tmp.Length == (colCount + 1))
+                                        {
+                                            double x = Convert.ToDouble(tmp[1]);
+                                            foreach (var item in paList)
+                                            {
+                                                String val = Regex.Match(item.col_c, @"\d+").Value;
+                                                item.col_z = val;
+                                            }
+
+
+                                            template_pa_detail _tmp = paList.Where(o => o.col_z.StartsWith(x.ToString())).FirstOrDefault();
+                                            if (_tmp != null)
+                                            {
+                                                value = (!CustomUtils.isNumber(tmp[3])) ? Convert.ToDouble(0) : Convert.ToDouble(tmp[3]);
+                                                _tmp.col_g = value.ToString();
+                                            }
+                                            row++;
+                                        }
+                                    }
+                                }
+                                if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("non-reflectiveTable".ToLower()))
+                                {
+                                    if (line.IndexOf("ExpandedColumnCount") != -1)
+                                    {
+                                        colCount = CustomUtils.isNumber(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) ? Convert.ToInt16(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) : 0;
+                                        Console.WriteLine();
+                                    }
+                                    if (line.IndexOf("<Cell>") != -1)
+                                    {
+                                        String[] tmp = line.Replace("ss:Type=\"String\"", String.Empty).Replace("ss:Type=\"Number\"", String.Empty).Replace(" ", String.Empty).Replace("</Data>", "#").Replace("<Data>", String.Empty).Replace("<Cell>", String.Empty).Replace("</Cell>", String.Empty).Split('#');
+                                        if (tmp.Length == (colCount + 1))
+                                        {
+                                            double x = Convert.ToDouble(tmp[1]);
+                                            foreach (var item in paList)
+                                            {
+                                                String val = Regex.Match(item.col_c, @"\d+").Value;
+                                                item.col_z = val;
+                                            }
+
+
+                                            template_pa_detail _tmp = paList.Where(o => o.col_z.StartsWith(x.ToString())).FirstOrDefault();
+                                            if (_tmp != null)
+                                            {
+                                                value = (!CustomUtils.isNumber(tmp[3])) ? Convert.ToDouble(0) : Convert.ToDouble(tmp[3]);
+                                                _tmp.col_f = value.ToString();
+                                            }
+                                            row++;
+                                        }
+                                    }
+                                }
+                                if (Path.GetFileNameWithoutExtension(_postedFile.FileName).ToLower().StartsWith("fibrousTable".ToLower()))
+                                {
+                                    if (line.IndexOf("ExpandedColumnCount") != -1)
+                                    {
+                                        colCount = CustomUtils.isNumber(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) ? Convert.ToInt16(Regex.Match(line.Split('=')[1].Split(' ')[0], @"\d+").Value) : 0;
+                                        Console.WriteLine();
+                                    }
+                                    if (line.IndexOf("<Cell>") != -1)
+                                    {
+                                        String[] tmp = line.Replace("ss:Type=\"String\"", String.Empty).Replace("ss:Type=\"Number\"", String.Empty).Replace(" ", String.Empty).Replace("</Data>", "#").Replace("<Data>", String.Empty).Replace("<Cell>", String.Empty).Replace("</Cell>", String.Empty).Split('#');
+                                        if (tmp.Length == (colCount + 1))
+                                        {
+                                            double x = Convert.ToDouble(tmp[1]);
+                                            foreach (var item in paList)
+                                            {
+                                                String val = Regex.Match(item.col_c, @"\d+").Value;
+                                                item.col_z = val;
+                                            }
+
+
+                                            template_pa_detail _tmp = paList.Where(o => o.col_z.StartsWith(x.ToString())).FirstOrDefault();
+                                            if (_tmp != null)
+                                            {
+                                                value = (!CustomUtils.isNumber(tmp[3])) ? Convert.ToDouble(0) : Convert.ToDouble(tmp[3]);
+                                                _tmp.col_h = value.ToString();
+                                            }
+                                            row++;
+                                        }
+                                    }
+
+                                }
                             }
-
-                            #endregion
-                        }
-                        else
-                        {
-                            //errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.csv"));
                         }
 
-
+                        #endregion
                     }
+                    else
+                    {
+                        //errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.csv"));
+                    }
+
+
+                }
                 //}
                 //catch (Exception ex)
                 //{
@@ -1542,16 +1518,17 @@ namespace ALS.ALSI.Web.view.template
                 //    Console.WriteLine();
                 //}
             }
-            paList[0].col_e = "Not to evaluate";
-            paList[0].col_f = "Not to evaluate";
-            paList[0].col_g = "Not to evaluate";
-            paList[0].col_h = "Not to evaluate";//
+            //paList[0].col_e = "Not to evaluate";
+            //paList[0].col_f = "Not to evaluate";
+            //paList[0].col_g = "Not to evaluate";
+            //paList[0].col_h = "Not to evaluate";//
 
-            paList[0].col_i = "Not to evaluate";//
-            paList[0].col_j = "Not to evaluate";//
-            paList[0].col_k = "Not to evaluate";//
-            paList[0].col_l = "Not to evaluate";//
+            //paList[0].col_i = "Not to evaluate";//
+            //paList[0].col_j = "Not to evaluate";//
+            //paList[0].col_k = "Not to evaluate";//
+            //paList[0].col_l = "Not to evaluate";//
             //fill value.
+
             txtFeretLmsp.Text = largestMetallicShine.ToString("N2");
             txtFeretLnms.Text = largestNonMetallicShine.ToString("N2");
             txtFeretFb.Text = longestFiber.ToString("N2");
@@ -2404,12 +2381,12 @@ namespace ALS.ALSI.Web.view.template
             this.pa.ispots01_text = cbPots01.Checked.ToString();
             this.pa.isdissolving_text = cbDissolving.Checked.ToString();
             this.pa.ispressurerinsing_text = cbPressureRinsing.Checked.ToString();
-            this.pa.isinternalrinsing_text = cbInternalRinsing.Checked.ToString();
+            //this.pa.isinternalrinsing_text = cbInternalRinsing.Checked.ToString();
             this.pa.isagitation_text = cbAgitation.Checked.ToString();
             this.pa.iswashquantity_text = cbWashQuantity.Checked.ToString();
             this.pa.isrewashingquantity_text = cbRewashingQuantity.Checked.ToString();
             this.pa.iswashpressurerinsing_text = cbWashPressureRinsing.Checked.ToString();
-            this.pa.iswashinternalrinsing_text = cbWashInternalRinsing.Checked.ToString();
+            //this.pa.iswashinternalrinsing_text = cbWashInternalRinsing.Checked.ToString();
             this.pa.iswashagitation_text = cbWashAgitation.Checked.ToString();
             this.pa.isoven_text = cbOven.Checked.ToString();
             this.pa.isdesiccator_text = cbDesiccator.Checked.ToString();
@@ -2421,7 +2398,7 @@ namespace ALS.ALSI.Web.view.template
             this.pa.isautomated_text = cbAutomated.Checked.ToString();
             this.pa.material_id_text = ddlMaterial.SelectedItem.Text;
             this.pa.lbmembranetype = lbMembraneType.Text;
-            this.pa.lbPermembrane_text = lbPermembrane.Text;
+            this.pa.lbPermembrane_text = lbPermembraneTotal.Text;
             this.pa.totalResidueWeight = lbTotalResidueWeight.Text;
 
 
@@ -2546,7 +2523,7 @@ namespace ALS.ALSI.Web.view.template
         protected void ddlFluid1_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddl = (DropDownList)sender;
-            tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddl.SelectedValue) && x.B.Equals(PA_SPECIFICATION)).FirstOrDefault();
+            tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddl.SelectedValue)).FirstOrDefault();
             if (null != selectValue)
             {
                 txtTradeName.Text = selectValue.E;
@@ -2569,7 +2546,7 @@ namespace ALS.ALSI.Web.view.template
         protected void ddlFluid2_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddl = (DropDownList)sender;
-            tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddl.SelectedValue) && x.B.Equals(PA_SPECIFICATION)).FirstOrDefault();
+            tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddl.SelectedValue)).FirstOrDefault();
             if (null != selectValue)
             {
                 txtTradeName.Text = selectValue.E;
@@ -2592,7 +2569,7 @@ namespace ALS.ALSI.Web.view.template
         protected void ddlFluid3_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddl = (DropDownList)sender;
-            tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddl.SelectedValue) && x.B.Equals(PA_SPECIFICATION)).FirstOrDefault();
+            tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddl.SelectedValue)).FirstOrDefault();
             if (null != selectValue)
             {
                 txtTradeName.Text = selectValue.E;
@@ -2614,75 +2591,97 @@ namespace ALS.ALSI.Web.view.template
 
         protected void cbFluid1_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox ddl = (CheckBox)sender;
-            switch (ddl.Checked)
-            {
-                case false:
-                    ddlFluid1.SelectedIndex = 0;
-                    break;
-            }
+            cbFluid1.Checked = true;
+            cbFluid2.Checked = false;
+            cbFluid3.Checked = false;
+            ddlFluid1.SelectedIndex = 0;
+            ddlFluid1.SelectedIndex = 0;
+            ddlFluid1.SelectedIndex = 0;
+            //CheckBox ddl = (CheckBox)sender;
+            //switch (ddl.Checked)
+            //{
+            //    case false:
+            //        ddlFluid1.SelectedIndex = 0;
+            //        break;
+            //}
         }
 
         protected void cbFluid2_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox ddl = (CheckBox)sender;
-            switch (ddl.Checked)
-            {
-                case false:
-                    ddlFluid2.SelectedIndex = 0;
-                    break;
-            }
+            cbFluid1.Checked = false;
+            cbFluid2.Checked = true;
+            cbFluid3.Checked = false;
+            ddlFluid1.SelectedIndex = 0;
+            ddlFluid1.SelectedIndex = 0;
+            ddlFluid1.SelectedIndex = 0;
+
+            //CheckBox ddl = (CheckBox)sender;
+            //switch (ddl.Checked)
+            //{
+            //    case false:
+            //        ddlFluid2.SelectedIndex = 0;
+            //        break;
+            //    case true:
+            //        cbFluid1.Checked = false;
+            //        break;
+            //}
         }
 
         protected void cbFluid3_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox ddl = (CheckBox)sender;
-            switch (ddl.Checked)
-            {
-                case false:
-                    ddlFluid3.SelectedIndex = 0;
-                    break;
-            }
+            cbFluid1.Checked = false;
+            cbFluid2.Checked = false;
+            cbFluid3.Checked = true;
+            ddlFluid1.SelectedIndex = 0;
+            ddlFluid1.SelectedIndex = 0;
+            ddlFluid1.SelectedIndex = 0;
+            //CheckBox ddl = (CheckBox)sender;
+            //switch (ddl.Checked)
+            //{
+            //    case false:
+            //        ddlFluid3.SelectedIndex = 0;
+            //        break;
+            //}
         }
 
         protected void cbDissolving_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox ddl = (CheckBox)sender;
             tb_m_specification selectValue = null;
+            ddlRinsing.SelectedIndex = 0;
+
             if (ddl.Checked)
             {
                 switch (ddl.ID)
                 {
                     case "cbPressureRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                         cbPressureRinsing.Checked = true;
-                        cbInternalRinsing.Checked = false;
                         cbAgitation.Checked = false;
+                        cbUntrasonic.Checked = false;
                         lbExtractionMethod.Text = PA_PRESURE_RINSING;
                         break;
-                    case "cbInternalRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
-                        cbPressureRinsing.Checked = false;
-                        cbInternalRinsing.Checked = true;
-                        cbAgitation.Checked = false;
-                        lbExtractionMethod.Text = " Internal rinsing";
-                        break;
                     case "cbAgitation":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                         cbPressureRinsing.Checked = false;
-                        cbInternalRinsing.Checked = false;
                         cbAgitation.Checked = true;
-                        lbExtractionMethod.Text = " Agitation";
+                        cbUntrasonic.Checked = false;
+                        lbExtractionMethod.Text = PA_AGITATION;
+                        break;
+                    case "cbUntrasonic":
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_ULTRASONIC)).FirstOrDefault();
+                        cbPressureRinsing.Checked = false;
+                        cbAgitation.Checked = false;
+                        cbUntrasonic.Checked = true;
+                        lbExtractionMethod.Text = PA_ULTRASONIC;
                         break;
                 }
-
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
                     {
                         paDetail.Remove(pd);
                     }
-
 
                     List<String> cols = tb_m_specification.findColumnCount(selectValue);
                     for (int i = 0; i < cols.Count; i++)
@@ -2717,27 +2716,28 @@ namespace ALS.ALSI.Web.view.template
         {
             CheckBox ddl = (CheckBox)sender;
             tb_m_specification selectValue = null;
+            dllWashPressureRinsing.SelectedIndex = 0;
             if (ddl.Checked)
             {
                 switch (ddl.ID)
                 {
                     case "cbWashPressureRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                         cbWashPressureRinsing.Checked = true;
-                        cbWashInternalRinsing.Checked = false;
                         cbWashAgitation.Checked = false;
-                        break;
-                    case "cbWashInternalRinsing":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
-                        cbWashPressureRinsing.Checked = false;
-                        cbWashInternalRinsing.Checked = true;
-                        cbWashAgitation.Checked = false;
+                        cbWashUltrasonic.Checked = false;
                         break;
                     case "cbWashAgitation":
-                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                         cbWashPressureRinsing.Checked = false;
-                        cbWashInternalRinsing.Checked = false;
                         cbWashAgitation.Checked = true;
+                        cbWashUltrasonic.Checked = false;
+                        break;
+                    case "cbWashUltrasonic":
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_ULTRASONIC)).FirstOrDefault();
+                        cbWashPressureRinsing.Checked = false;
+                        cbWashAgitation.Checked = false;
+                        cbWashUltrasonic.Checked = true;
                         break;
                 }
 
@@ -2817,11 +2817,11 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        protected void txtTotalQuantity_TextChanged(object sender, EventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            txtTotalextractionVolume.Text = tb.Text;
-        }
+        //protected void txtTotalQuantity_TextChanged(object sender, EventArgs e)
+        //{
+        //    TextBox tb = (TextBox)sender;
+        //    txtTotalextractionVolume.Text = tb.Text;
+        //}
 
         protected void txtAutomated_TextChanged(object sender, EventArgs e)
         {
@@ -3097,6 +3097,121 @@ namespace ALS.ALSI.Web.view.template
                 this.pa.attachment_ii_04 = source_file_url;
                 Image4.ImageUrl = source_file_url;
             }
+        }
+
+        protected void txtDissolving_TextChanged(object sender, EventArgs e)
+        {
+
+            if (CustomUtils.isNumber(txtDissolving.Text) && CustomUtils.isNumber(txtWashQuantity.Text) && CustomUtils.isNumber(txtRewashingQuantity.Text))
+            {
+                txtTotalQuantity.Text = (Convert.ToDouble(txtDissolving.Text) + Convert.ToDouble(txtWashQuantity.Text) + Convert.ToDouble(txtRewashingQuantity.Text)) + "";
+            }
+        }
+
+        protected void ddlRinsing_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddl = (DropDownList)sender;
+            tb_m_specification selectValue = null;
+            if (cbPressureRinsing.Checked)
+            {
+                switch (ddl.SelectedValue)
+                {
+                    case "0":
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                        lbExtractionMethod.Text = PA_PRESURE_RINSING;
+                        break;
+                    case "1":
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
+                        lbExtractionMethod.Text = PA_INTERNAL_RINSING;
+                        break;
+                }
+
+                if (null != selectValue)
+                {
+                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
+                    {
+                        paDetail.Remove(pd);
+                    }
+
+
+                    List<String> cols = tb_m_specification.findColumnCount(selectValue);
+                    for (int i = 0; i < cols.Count; i++)
+                    {
+                        gvWashing.Columns[i].HeaderText = cols[i];
+                        gvWashing.Columns[i].Visible = true;
+                    }
+                    template_pa_detail tmp = new template_pa_detail();
+                    tmp.id = CustomUtils.GetRandomNumberID();
+                    tmp.col_d = "Flat type";
+                    tmp.col_e = "40";
+                    tmp.col_f = "0.5 L/min";
+                    tmp.col_g = "1 bar";
+                    tmp.col_h = "-";
+                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                    tmp.row_type = Convert.ToInt16(PAEnum.DISSOLVING);
+                    paDetail.Add(tmp);
+
+                }
+
+                calculate();
+            }
+        }
+
+        protected void dllWashPressureRinsing_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddl = (DropDownList)sender;
+            tb_m_specification selectValue = null;
+            if (cbWashPressureRinsing.Checked)
+            {
+                switch (ddl.SelectedValue)
+                {
+                    case "0":
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                        break;
+                    case "1":
+                        selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_INTERNAL_RINSING)).FirstOrDefault();
+                        break;
+                }
+
+                if (null != selectValue)
+                {
+                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
+                    {
+                        paDetail.Remove(pd);
+                    }
+
+
+                    List<String> cols = tb_m_specification.findColumnCount(selectValue);
+                    for (int i = 0; i < cols.Count; i++)
+                    {
+                        gvWashing.Columns[i].HeaderText = cols[i];
+                        gvWashing.Columns[i].Visible = true;
+                    }
+                    template_pa_detail tmp = new template_pa_detail();
+                    tmp.id = CustomUtils.GetRandomNumberID();
+                    tmp.col_d = "Flat type";
+                    tmp.col_e = "40";
+                    tmp.col_f = "0.5 L/min";
+                    tmp.col_g = "1 bar";
+                    tmp.col_h = "-";
+                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                    tmp.row_type = Convert.ToInt16(PAEnum.WASHING);
+                    paDetail.Add(tmp);
+
+                }
+
+                calculate();
+            }
+        }
+
+        protected void ddlPer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbPer.Text = ddlPer.SelectedItem.Text;
+        }
+
+        protected void btnSrChemistTest_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

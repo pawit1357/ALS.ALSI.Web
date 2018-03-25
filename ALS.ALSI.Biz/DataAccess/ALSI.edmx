@@ -734,6 +734,16 @@
           <Property Name="param_eht_02" Type="varchar" MaxLength="255" />
           <Property Name="param_detector_01" Type="varchar" MaxLength="255" />
           <Property Name="param_detector_02" Type="varchar" MaxLength="255" />
+          <Property Name="iswashUltrasonic" Type="tinyint" />
+          <Property Name="isUltrasonic" Type="tinyint" />
+          <Property Name="rinsing_id" Type="int" />
+          <Property Name="washpressurerinsing_id" Type="int" />
+          <Property Name="per_component_total" Type="varchar" MaxLength="45" />
+          <Property Name="per_component_metallicshine" Type="varchar" MaxLength="45" />
+          <Property Name="per_membrane_metallicshine" Type="varchar" MaxLength="45" />
+          <Property Name="specification_no" Type="int" />
+          <Property Name="operater_name" Type="int" />
+          <Property Name="per_text" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_pa_detail">
           <Key>
@@ -2836,6 +2846,16 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="param_eht_02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="param_detector_01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="param_detector_02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="iswashUltrasonic" Type="SByte" />
+          <Property Name="isUltrasonic" Type="SByte" />
+          <Property Name="rinsing_id" Type="Int32" />
+          <Property Name="washpressurerinsing_id" Type="Int32" />
+          <Property Name="per_component_total" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="per_component_metallicshine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="per_membrane_metallicshine" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="specification_no" Type="Int32" />
+          <Property Name="operater_name" Type="Int32" />
+          <Property Name="per_text" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_pa_detail">
           <Key>
@@ -4611,6 +4631,16 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_pa">
             <EntityTypeMapping TypeName="ALSIModel.template_pa">
               <MappingFragment StoreEntitySet="template_pa">
+                <ScalarProperty Name="per_text" ColumnName="per_text" />
+                <ScalarProperty Name="operater_name" ColumnName="operater_name" />
+                <ScalarProperty Name="specification_no" ColumnName="specification_no" />
+                <ScalarProperty Name="per_membrane_metallicshine" ColumnName="per_membrane_metallicshine" />
+                <ScalarProperty Name="per_component_metallicshine" ColumnName="per_component_metallicshine" />
+                <ScalarProperty Name="per_component_total" ColumnName="per_component_total" />
+                <ScalarProperty Name="washpressurerinsing_id" ColumnName="washpressurerinsing_id" />
+                <ScalarProperty Name="rinsing_id" ColumnName="rinsing_id" />
+                <ScalarProperty Name="isUltrasonic" ColumnName="isUltrasonic" />
+                <ScalarProperty Name="iswashUltrasonic" ColumnName="iswashUltrasonic" />
                 <ScalarProperty Name="param_detector_02" ColumnName="param_detector_02" />
                 <ScalarProperty Name="param_detector_01" ColumnName="param_detector_01" />
                 <ScalarProperty Name="param_eht_02" ColumnName="param_eht_02" />

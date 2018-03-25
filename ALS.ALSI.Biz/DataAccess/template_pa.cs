@@ -126,5 +126,15 @@ namespace ALS.ALSI.Biz.DataAccess
         public string param_eht_02 { get; set; }
         public string param_detector_01 { get; set; }
         public string param_detector_02 { get; set; }
+        public Nullable<sbyte> iswashUltrasonic { get; set; }
+        public Nullable<sbyte> isUltrasonic { get; set; }
+        public Nullable<int> rinsing_id { get; set; }
+        public Nullable<int> washpressurerinsing_id { get; set; }
+        public string per_component_total { get; set; }
+        public string per_component_metallicshine { get; set; }
+        public string per_membrane_metallicshine { get; set; }
+        public Nullable<int> specification_no { get; set; }
+        public Nullable<int> operater_name { get; set; }
+        public string per_text { get; set; }
     }
 }

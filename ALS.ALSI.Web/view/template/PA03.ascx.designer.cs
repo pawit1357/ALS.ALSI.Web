@@ -838,7 +838,7 @@ namespace ALS.ALSI.Web.view.template {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTotalQuantity;
+        protected global::System.Web.UI.WebControls.Label txtTotalQuantity;
         
         /// <summary>
         /// Label35 control.
@@ -976,13 +976,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.CheckBox cbPressureRinsing;
         
         /// <summary>
-        /// cbInternalRinsing control.
+        /// ddlRinsing control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbInternalRinsing;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRinsing;
         
         /// <summary>
         /// cbAgitation control.
@@ -992,6 +992,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbAgitation;
+        
+        /// <summary>
+        /// cbUntrasonic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbUntrasonic;
         
         /// <summary>
         /// Label37 control.
@@ -1066,13 +1075,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.CheckBox cbWashPressureRinsing;
         
         /// <summary>
-        /// cbWashInternalRinsing control.
+        /// dllWashPressureRinsing control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbWashInternalRinsing;
+        protected global::System.Web.UI.WebControls.DropDownList dllWashPressureRinsing;
         
         /// <summary>
         /// cbWashAgitation control.
@@ -1082,6 +1091,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbWashAgitation;
+        
+        /// <summary>
+        /// cbWashUltrasonic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbWashUltrasonic;
         
         /// <summary>
         /// Label40 control.
@@ -1543,6 +1561,42 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtFeretFb;
         
         /// <summary>
+        /// Label54 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label54;
+        
+        /// <summary>
+        /// ddlPer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPer;
+        
+        /// <summary>
+        /// Label55 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label55;
+        
+        /// <summary>
+        /// btnSrChemistTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSrChemistTest;
+        
+        /// <summary>
         /// Label49 control.
         /// </summary>
         /// <remarks>
@@ -1597,40 +1651,49 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Label Label50;
         
         /// <summary>
-        /// TextBox41 control.
+        /// txtPerComponentTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox41;
+        protected global::System.Web.UI.WebControls.TextBox txtPerComponentTotal;
         
         /// <summary>
-        /// TextBox42 control.
+        /// txtPerComponentMetallicShine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox42;
+        protected global::System.Web.UI.WebControls.TextBox txtPerComponentMetallicShine;
         
         /// <summary>
-        /// lbPermembrane control.
+        /// lbPer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbPermembrane;
+        protected global::System.Web.UI.WebControls.TextBox lbPer;
         
         /// <summary>
-        /// TextBox43 control.
+        /// lbPermembraneTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox43;
+        protected global::System.Web.UI.WebControls.Label lbPermembraneTotal;
+        
+        /// <summary>
+        /// txtPermembraneMetallicShine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPermembraneMetallicShine;
         
         /// <summary>
         /// pPage07 control.

@@ -806,7 +806,8 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label34" runat="server" CssClass="control-label col-md-3">Total quantity [mL]:</asp:Label>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtTotalQuantity" runat="server" CssClass="form-control" OnTextChanged="txtTotalQuantity_TextChanged" AutoPostBack="true"></asp:TextBox>
+
+                                        <asp:Label ID="txtTotalQuantity" runat="server"></asp:Label>
                                     </div>
                                     <div>
                                     </div>
@@ -893,7 +894,7 @@
                                                     <asp:CheckBox ID="cbDissolving" runat="server" Checked="true" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
                                                 <td>dissolving quanitty</td>
                                                 <td>
-                                                    <asp:TextBox ID="txtDissolving" runat="server" Text="1000" CssClass="form-control"></asp:TextBox></td>
+                                                    <asp:TextBox ID="txtDissolving" runat="server" Text="1000" CssClass="form-control" OnTextChanged="txtDissolving_TextChanged" AutoPostBack="true"></asp:TextBox></td>
                                                 <td>mL</td>
                                                 <td>dissolving time:</td>
                                                 <td>
@@ -903,14 +904,24 @@
                                             <tr>
                                                 <td style="text-align: center">
                                                     <asp:CheckBox ID="cbPressureRinsing" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
-                                                <td>Pressure rinsing</td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlRinsing" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlRinsing_SelectedIndexChanged" AutoPostBack="true">
+
+                                                        <asp:ListItem Value="0">Pressure rinsing</asp:ListItem>
+                                                        <asp:ListItem Value="1">Internal rinsingn</asp:ListItem>
+
+                                                    </asp:DropDownList>
+
+
+                                                </td>
                                                 <td style="text-align: right">
-                                                    <asp:CheckBox ID="cbInternalRinsing" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
-                                                <td>Internal rinsing</td>
-                                                <td></td>
+                                                    <asp:CheckBox ID="cbAgitation" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
+                                                <td>Agitation</td>
+
                                                 <td style="text-align: right">
-                                                    <asp:CheckBox ID="cbAgitation" runat="server" Checked="true" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
+                                                    <asp:CheckBox ID="cbUntrasonic" runat="server" Checked="true" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
                                                 <td>Ultrasonic</td>
+                                                <td></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -1017,26 +1028,32 @@
                                                     <asp:CheckBox ID="cbWashQuantity" runat="server" Checked="true"></asp:CheckBox></td>
                                                 <td>Wash quantity</td>
                                                 <td>
-                                                    <asp:TextBox ID="txtWashQuantity" runat="server" Text="500" CssClass="form-control"></asp:TextBox></td>
+                                                    <asp:TextBox ID="txtWashQuantity" runat="server" Text="500" CssClass="form-control" OnTextChanged="txtDissolving_TextChanged" AutoPostBack="true"></asp:TextBox></td>
                                                 <td>mL</td>
                                                 <td style="text-align: center">
                                                     <asp:CheckBox ID="cbRewashingQuantity" runat="server"></asp:CheckBox></td>
                                                 <td>Rewashing quantity</td>
                                                 <td>
-                                                    <asp:TextBox ID="txtRewashingQuantity" runat="server" Text="500" CssClass="form-control"></asp:TextBox></td>
+                                                    <asp:TextBox ID="txtRewashingQuantity" runat="server" Text="500" CssClass="form-control" OnTextChanged="txtDissolving_TextChanged" AutoPostBack="true"></asp:TextBox></td>
                                                 <td>mL</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <asp:CheckBox ID="cbWashPressureRinsing" runat="server" OnCheckedChanged="cbWashQuantity_CheckedChanged" AutoPostBack="true" Checked="true"></asp:CheckBox></td>
-                                                <td>Pressure rinsing</td>
-                                                <td style="text-align: right">
-                                                    <asp:CheckBox ID="cbWashInternalRinsing" runat="server" OnCheckedChanged="cbWashQuantity_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
-                                                <td>Internal rinsing</td>
-                                                <td></td>
+                                                <td>
+                                                    <asp:DropDownList ID="dllWashPressureRinsing" runat="server" CssClass="form-control" OnSelectedIndexChanged="dllWashPressureRinsing_SelectedIndexChanged" AutoPostBack="true">
+
+                                                        <asp:ListItem Value="0">Pressure rinsing</asp:ListItem>
+                                                        <asp:ListItem Value="1">Internal rinsingn</asp:ListItem>
+
+                                                    </asp:DropDownList></td>
                                                 <td style="text-align: right">
                                                     <asp:CheckBox ID="cbWashAgitation" runat="server" OnCheckedChanged="cbWashQuantity_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
                                                 <td>Agitation</td>
+                                                <td></td>
+                                                <td style="text-align: right">
+                                                    <asp:CheckBox ID="cbWashUltrasonic" runat="server" OnCheckedChanged="cbWashQuantity_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
+                                                <td>Ultrasonic</td>
                                                 <td></td>
                                             </tr>
                                         </table>
@@ -1323,7 +1340,7 @@
                                                 </strong></td>
                                                 <td>Operator name:</td>
                                                 <td>
-                                                     <asp:DropDownList ID="ddlOperatorName" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control"></asp:DropDownList></td>
+                                                    <asp:DropDownList ID="ddlOperatorName" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control"></asp:DropDownList></td>
                                             </tr>
                                             <tr>
                                                 <td>Lot no.:</td>
@@ -1444,6 +1461,26 @@
                         </div>
 
                         <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Microscopic Sample</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <asp:Label ID="Label54" runat="server" CssClass="control-label col-md-1">Select:</asp:Label>
+                                    <div class="col-md-4">
+                                        <asp:DropDownList ID="ddlPer" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control" OnSelectedIndexChanged="ddlPer_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <asp:Label ID="Label55" runat="server" CssClass="control-label col-md-1">Select:</asp:Label>
+                                    <div class="col-md-4">
+                                        <asp:Button ID="btnSrChemistTest" runat="server" Text="Sr.Test" CssClass="btn btn-default btn-sm" OnClick="btnSrChemistTest_Click"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -1629,21 +1666,21 @@
                                             <tr>
                                                 <td>per component</td>
                                                 <td>
-                                                    <asp:TextBox ID="TextBox41" runat="server" CssClass="form-control"></asp:TextBox></td>
+                                                    <asp:TextBox ID="txtPerComponentTotal" runat="server" CssClass="form-control"></asp:TextBox></td>
                                                 <td>
-                                                    <asp:TextBox ID="TextBox42" runat="server" CssClass="form-control"></asp:TextBox></td>
+                                                    <asp:TextBox ID="txtPerComponentMetallicShine" runat="server" CssClass="form-control"></asp:TextBox></td>
                                             </tr>
                                             <tr>
-                                                <td>Extended(B/C/D/E/F/G/H/I/J/K)</td>
+                                                <td>Extended<br />(B/C/D/E/F/G/H/I/J/K)</td>
                                                 <td style="text-decoration-style: dotted">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>Metallic shine</td>
                                             </tr>
                                             <tr>
-                                                <td>per component:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                <td><asp:TextBox ID="lbPer" runat="server" Text="Per Component"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td style="text-decoration-style: dotted">
-                                                    <asp:Label ID="lbPermembrane" runat="server" Text=""></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <asp:Label ID="lbPermembraneTotal" runat="server" Text=""></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>
-                                                    <asp:TextBox ID="TextBox43" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <asp:TextBox ID="txtPermembraneMetallicShine" runat="server" CssClass="form-control"></asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>
@@ -1731,10 +1768,10 @@
                                                             <td colspan="6">Largest fiber</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>&nbsp;X&nbsp;</td>
+                                                            <td>&nbsp;&nbsp;</td>
                                                             <td>
-                                                                <asp:TextBox ID="txtLf_X" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
-                                                            <td>&nbsp;um,&nbsp;</td>
+                                                                <asp:TextBox ID="txtLf_X" runat="server" CssClass="form-control" Width="120px" Visible="false"></asp:TextBox></td>
+                                                            <td>&nbsp;&nbsp;</td>
                                                             <td>&nbsp;Y&nbsp;</td>
                                                             <td>
                                                                 <asp:TextBox ID="txtLf_Y" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>

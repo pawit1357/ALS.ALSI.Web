@@ -185,4 +185,26 @@ CHANGE COLUMN `amend_or_retest` `amend_or_retest` VARCHAR(2) NULL DEFAULT NULL C
 
 ขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขข
 ELN-0854-PAB
+
+------------------------------------- 2018-03-25 ------------------------
+ALTER TABLE `alsi`.`template_pa` 
+ADD COLUMN `iswashUltrasonic` VARCHAR(45) NULL AFTER `param_detector_02`,
+ADD COLUMN `isUltrasonic` VARCHAR(45) NULL AFTER `iswashUltrasonic`,
+ADD COLUMN `rinsing_id` INT NULL AFTER `isUltrasonic`,
+ADD COLUMN `washpressurerinsing_id` INT NULL AFTER `rinsing_id`,
+ADD COLUMN `per_component_total` VARCHAR(45) NULL AFTER `washpressurerinsing_id`,
+ADD COLUMN `per_component_metallicshine` VARCHAR(45) NULL AFTER `per_component_total`,
+ADD COLUMN `per_membrane_metallicshine` VARCHAR(45) NULL AFTER `per_component_metallicshine`;
+
+ALTER TABLE `alsi`.`template_pa` 
+CHANGE COLUMN `iswashUltrasonic` `iswashUltrasonic` TINYINT(4) NULL DEFAULT NULL ,
+CHANGE COLUMN `isUltrasonic` `isUltrasonic` TINYINT(4) NULL DEFAULT NULL ;
+
+ALTER TABLE `alsi`.`template_pa` 
+ADD COLUMN `specification_no` INT NULL AFTER `per_membrane_metallicshine`,
+ADD COLUMN `operater_name` INT NULL AFTER `specification_no`;
+
+ALTER TABLE `alsi`.`template_pa` 
+ADD COLUMN `per_text` VARCHAR(45) NULL AFTER `operater_name`;
+
 */
