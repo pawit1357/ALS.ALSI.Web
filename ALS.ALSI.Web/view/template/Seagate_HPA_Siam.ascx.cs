@@ -579,16 +579,8 @@ namespace ALS.ALSI.Web.view.template
                         #endregion
 
                     }
-                    objWork.DeleteBySampleID(this.SampleID);
-                    //switch (this.CommandName)
-                    //{
-                    //    case CommandNameEnum.Add:
+                    template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.Hpas);
-                    //        break;
-                    //    case CommandNameEnum.Edit:
-                    //        objWork.UpdateList(this.Hpas);
-                    //        break;
-                    //}
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     if (this.Hpas.Count > 0)
@@ -704,7 +696,8 @@ namespace ALS.ALSI.Web.view.template
                             #endregion
 
                         }
-                        objWork.UpdateList(this.Hpas);
+                        template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
+                        objWork.InsertList(this.Hpas);
                     }
                     else
                     {

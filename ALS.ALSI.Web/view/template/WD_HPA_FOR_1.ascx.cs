@@ -1500,6 +1500,8 @@ namespace ALS.ALSI.Web.view.template
             mappingValues["Total MgSiO Particles"] = "Total - Magnetic Particles";
             mappingValues["Total Steel Particles"] = "Total - Steel Particle";
             mappingValues["Total Magnetic Particles"] = "Total - Magnetic Particles";
+            mappingValues["Total hard Particle"] = "Total - Hard Particles";
+
 
             //SST400s(Fe / Cr)
 

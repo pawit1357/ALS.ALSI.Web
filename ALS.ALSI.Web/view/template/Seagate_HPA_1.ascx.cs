@@ -512,8 +512,7 @@ namespace ALS.ALSI.Web.view.template
                         ws.unit2 = Convert.ToInt32(ddlHardParticleAlalysisUnit.SelectedValue);
                         ws.unit3 = Convert.ToInt32(ddlClassificationUnit.SelectedValue);
                     }
-                    objWork.DeleteBySampleID(this.SampleID);
-
+                    template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.Hpas);
 
                     break;
@@ -560,7 +559,7 @@ namespace ALS.ALSI.Web.view.template
 
                         }
 
-                        objWork.DeleteBySampleID(this.SampleID);
+                        template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
                         objWork.InsertList(this.Hpas);
                     }
                     else

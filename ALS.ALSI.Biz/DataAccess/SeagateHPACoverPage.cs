@@ -97,7 +97,7 @@ namespace ALS.ALSI.Biz.DataAccess
         }
 
 
-        public void DeleteBySampleID(int _sampleID)
+        public static void DeleteBySampleID(int _sampleID)
         {
             List<template_seagate_hpa_coverpage> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
             foreach (template_seagate_hpa_coverpage tmp in lists)

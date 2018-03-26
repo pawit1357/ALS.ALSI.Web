@@ -591,16 +591,8 @@ namespace ALS.ALSI.Web.view.template
                         ws.unit2 = Convert.ToInt32(ddlHardParticleAlalysisUnit.SelectedValue);
                         ws.unit3 = Convert.ToInt32(ddlClassificationUnit.SelectedValue);
                     }
-                    objWork.DeleteBySampleID(this.SampleID);
-                    //switch (this.CommandName)
-                    //{
-                    //    case CommandNameEnum.Add:
+                    template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.Hpas);
-                    //        break;
-                    //    case CommandNameEnum.Edit:
-                    //        objWork.UpdateList(this.Hpas);
-                    //        break;
-                    //}
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     if (this.Hpas.Count > 0)
@@ -613,113 +605,114 @@ namespace ALS.ALSI.Web.view.template
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         //#endregion
-                        foreach (template_seagate_hpa_coverpage ws in this.Hpas)
-                        {
-                            ws.sample_id = this.SampleID;
-                            ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
-                            ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
-                            ws.unit = Convert.ToInt32(ddlLiquidParticleUnit.SelectedValue);
-                            ws.unit2 = Convert.ToInt32(ddlHardParticleAlalysisUnit.SelectedValue);
-                            ws.unit3 = Convert.ToInt32(ddlClassificationUnit.SelectedValue);
-                            ws.show_note_pzt = Convert.ToSByte(cbNotePZT.Checked);
-                            ws.note_pzt = lbNotePZT.Text;
+                        template_seagate_hpa_coverpage ws = this.Hpas[0];
 
-                            #region "Method/Procedure"
-                            ws.ProcedureNo = txtProcedureNo.Text;
-                            ws.NumberOfPieces = txtNumberOfPieces.Text;
-                            ws.ExtractionMedium = txtExtractionMedium.Text;
-                            ws.ExtractionVolume = txtExtractionVolume.Text;
+                        ws.sample_id = this.SampleID;
+                        ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                        ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
+                        ws.unit = Convert.ToInt32(ddlLiquidParticleUnit.SelectedValue);
+                        ws.unit2 = Convert.ToInt32(ddlHardParticleAlalysisUnit.SelectedValue);
+                        ws.unit3 = Convert.ToInt32(ddlClassificationUnit.SelectedValue);
+                        ws.show_note_pzt = Convert.ToSByte(cbNotePZT.Checked);
+                        ws.note_pzt = lbNotePZT.Text;
 
-                            ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
-                            ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
-                            ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
-                            ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
-                            #endregion
+                        #region "Method/Procedure"
+                        ws.ProcedureNo = txtProcedureNo.Text;
+                        ws.NumberOfPieces = txtNumberOfPieces.Text;
+                        ws.ExtractionMedium = txtExtractionMedium.Text;
+                        ws.ExtractionVolume = txtExtractionVolume.Text;
 
-                            #region "region "US-LPC(0.3)"
-                            ws.us03_b14 = txt_UsLPC03_B14.Text;
-                            ws.us03_b15 = txt_UsLPC03_B15.Text;
-                            ws.us03_b16 = txt_UsLPC03_B16.Text;
-                            ws.us03_b17 = txt_UsLPC03_B17.Text;
+                        ws.ProcedureNo_hpa = txtProcedureNo_hpa.Text;
+                        ws.NumberOfPieces_hpa = txtNumberOfPieces_hpa.Text;
+                        ws.ExtractionMedium_hpa = txtExtractionMedium_hpa.Text;
+                        ws.ExtractionVolume_hpa = txtExtractionVolume_hpa.Text;
+                        #endregion
 
-                            ws.us03_c14 = txt_UsLPC03_C14.Text;
-                            ws.us03_c15 = txt_UsLPC03_C15.Text;
-                            ws.us03_c16 = txt_UsLPC03_C16.Text;
-                            ws.us03_c17 = txt_UsLPC03_C17.Text;
+                        #region "region "US-LPC(0.3)"
+                        ws.us03_b14 = txt_UsLPC03_B14.Text;
+                        ws.us03_b15 = txt_UsLPC03_B15.Text;
+                        ws.us03_b16 = txt_UsLPC03_B16.Text;
+                        ws.us03_b17 = txt_UsLPC03_B17.Text;
 
-                            ws.us03_d14 = txt_UsLPC03_D14.Text;
-                            ws.us03_d15 = txt_UsLPC03_D15.Text;
-                            ws.us03_d16 = txt_UsLPC03_D16.Text;
-                            ws.us03_d17 = txt_UsLPC03_D17.Text;
+                        ws.us03_c14 = txt_UsLPC03_C14.Text;
+                        ws.us03_c15 = txt_UsLPC03_C15.Text;
+                        ws.us03_c16 = txt_UsLPC03_C16.Text;
+                        ws.us03_c17 = txt_UsLPC03_C17.Text;
 
-                            ws.us03_e14 = txt_UsLPC03_E14.Text;
-                            ws.us03_e15 = txt_UsLPC03_E15.Text;
-                            ws.us03_e16 = txt_UsLPC03_E16.Text;
-                            ws.us03_e17 = txt_UsLPC03_E17.Text;
+                        ws.us03_d14 = txt_UsLPC03_D14.Text;
+                        ws.us03_d15 = txt_UsLPC03_D15.Text;
+                        ws.us03_d16 = txt_UsLPC03_D16.Text;
+                        ws.us03_d17 = txt_UsLPC03_D17.Text;
 
-                            ws.us03_f14 = txt_UsLPC03_F14.Text;
-                            ws.us03_f15 = txt_UsLPC03_F15.Text;
-                            ws.us03_f16 = txt_UsLPC03_F16.Text;
-                            ws.us03_f17 = txt_UsLPC03_F17.Text;
+                        ws.us03_e14 = txt_UsLPC03_E14.Text;
+                        ws.us03_e15 = txt_UsLPC03_E15.Text;
+                        ws.us03_e16 = txt_UsLPC03_E16.Text;
+                        ws.us03_e17 = txt_UsLPC03_E17.Text;
 
-                            ws.us03_g14 = txt_UsLPC03_G14.Text;
-                            ws.us03_g15 = txt_UsLPC03_G15.Text;
-                            ws.us03_g16 = txt_UsLPC03_G16.Text;
-                            ws.us03_g17 = txt_UsLPC03_G17.Text;
+                        ws.us03_f14 = txt_UsLPC03_F14.Text;
+                        ws.us03_f15 = txt_UsLPC03_F15.Text;
+                        ws.us03_f16 = txt_UsLPC03_F16.Text;
+                        ws.us03_f17 = txt_UsLPC03_F17.Text;
 
-                            ws.us03_b25 = txt_UsLPC03_B25_1.Text;
-                            ws.us03_d25 = txt_UsLPC03_D25.Text;
-                            ws.us03_f25 = txt_UsLPC03_F25.Text;
-                            #endregion
+                        ws.us03_g14 = txt_UsLPC03_G14.Text;
+                        ws.us03_g15 = txt_UsLPC03_G15.Text;
+                        ws.us03_g16 = txt_UsLPC03_G16.Text;
+                        ws.us03_g17 = txt_UsLPC03_G17.Text;
 
-                            #region "region "US-LPC(0.6)"
-                            ws.us06_b14 = txt_UsLPC06_B14.Text;
-                            ws.us06_b15 = txt_UsLPC06_B15.Text;
-                            ws.us06_b16 = txt_UsLPC06_B16.Text;
-                            ws.us06_b17 = txt_UsLPC06_B17.Text;
+                        ws.us03_b25 = txt_UsLPC03_B25_1.Text;
+                        ws.us03_d25 = txt_UsLPC03_D25.Text;
+                        ws.us03_f25 = txt_UsLPC03_F25.Text;
+                        #endregion
 
-                            ws.us06_c14 = txt_UsLPC06_C14.Text;
-                            ws.us06_c15 = txt_UsLPC06_C15.Text;
-                            ws.us06_c16 = txt_UsLPC06_C16.Text;
-                            ws.us06_c17 = txt_UsLPC06_C17.Text;
+                        #region "region "US-LPC(0.6)"
+                        ws.us06_b14 = txt_UsLPC06_B14.Text;
+                        ws.us06_b15 = txt_UsLPC06_B15.Text;
+                        ws.us06_b16 = txt_UsLPC06_B16.Text;
+                        ws.us06_b17 = txt_UsLPC06_B17.Text;
 
-                            ws.us06_d14 = txt_UsLPC06_D14.Text;
-                            ws.us06_d15 = txt_UsLPC06_D15.Text;
-                            ws.us06_d16 = txt_UsLPC06_D16.Text;
-                            ws.us06_d17 = txt_UsLPC06_D17.Text;
+                        ws.us06_c14 = txt_UsLPC06_C14.Text;
+                        ws.us06_c15 = txt_UsLPC06_C15.Text;
+                        ws.us06_c16 = txt_UsLPC06_C16.Text;
+                        ws.us06_c17 = txt_UsLPC06_C17.Text;
 
-                            ws.us06_e14 = txt_UsLPC06_E14.Text;
-                            ws.us06_e15 = txt_UsLPC06_E15.Text;
-                            ws.us06_e16 = txt_UsLPC06_E16.Text;
-                            ws.us06_e17 = txt_UsLPC06_E17.Text;
+                        ws.us06_d14 = txt_UsLPC06_D14.Text;
+                        ws.us06_d15 = txt_UsLPC06_D15.Text;
+                        ws.us06_d16 = txt_UsLPC06_D16.Text;
+                        ws.us06_d17 = txt_UsLPC06_D17.Text;
 
-                            ws.us06_f14 = txt_UsLPC06_F14.Text;
-                            ws.us06_f15 = txt_UsLPC06_F15.Text;
-                            ws.us06_f16 = txt_UsLPC06_F16.Text;
-                            ws.us06_f17 = txt_UsLPC06_F17.Text;
+                        ws.us06_e14 = txt_UsLPC06_E14.Text;
+                        ws.us06_e15 = txt_UsLPC06_E15.Text;
+                        ws.us06_e16 = txt_UsLPC06_E16.Text;
+                        ws.us06_e17 = txt_UsLPC06_E17.Text;
 
-                            ws.us06_g14 = txt_UsLPC06_G14.Text;
-                            ws.us06_g15 = txt_UsLPC06_G15.Text;
-                            ws.us06_g16 = txt_UsLPC06_G16.Text;
-                            ws.us06_g17 = txt_UsLPC06_G17.Text;
+                        ws.us06_f14 = txt_UsLPC06_F14.Text;
+                        ws.us06_f15 = txt_UsLPC06_F15.Text;
+                        ws.us06_f16 = txt_UsLPC06_F16.Text;
+                        ws.us06_f17 = txt_UsLPC06_F17.Text;
 
-                            ws.us06_b25 = txt_UsLPC06_B25.Text;
-                            ws.us06_d25 = txt_UsLPC06_D25.Text;
-                            ws.us06_f25 = txt_UsLPC06_F25.Text;
-                            #endregion
+                        ws.us06_g14 = txt_UsLPC06_G14.Text;
+                        ws.us06_g15 = txt_UsLPC06_G15.Text;
+                        ws.us06_g16 = txt_UsLPC06_G16.Text;
+                        ws.us06_g17 = txt_UsLPC06_G17.Text;
 
-                            #region "Worksheet for HPA - Filtration"
-                            ws.ws_b3 = txtB3.Text;
-                            ws.ws_b4 = txtB4.Text;
-                            ws.ws_b5 = txtB5.Text;
-                            ws.ws_b6 = txtB6.Text;
-                            ws.ws_b7 = txtB7.Text;
-                            ws.ws_b8 = txtB8.Text;
-                            ws.ws_b9 = txtB9.Text;
-                            #endregion
+                        ws.us06_b25 = txt_UsLPC06_B25.Text;
+                        ws.us06_d25 = txt_UsLPC06_D25.Text;
+                        ws.us06_f25 = txt_UsLPC06_F25.Text;
+                        #endregion
 
-                        }
-                        objWork.UpdateList(this.Hpas);
+                        #region "Worksheet for HPA - Filtration"
+                        ws.ws_b3 = txtB3.Text;
+                        ws.ws_b4 = txtB4.Text;
+                        ws.ws_b5 = txtB5.Text;
+                        ws.ws_b6 = txtB6.Text;
+                        ws.ws_b7 = txtB7.Text;
+                        ws.ws_b8 = txtB8.Text;
+                        ws.ws_b9 = txtB9.Text;
+                        #endregion
+
+                        //}
+                        template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
+                        objWork.InsertList(this.Hpas);
                     }
                     else
                     {
@@ -1666,7 +1659,8 @@ namespace ALS.ALSI.Web.view.template
             lbC148.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB5.Text) ? "0" : txtB5.Text));
             //lbC149.Text = "446";                         
             #endregion
-
+            txt_UsLPC06_B21.Text = txtB4.Text;
+            txt_UsLPC03_B21.Text = txtB4.Text;
         }
 
         #endregion
@@ -1733,7 +1727,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? "" : this.jobSample.singapore_ref_no)));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("notePZT", (cbNotePZT.Checked ? String.IsNullOrEmpty(lbNotePZT.Text)? " ":lbNotePZT.Text : " ")));
+            reportParameters.Add(new ReportParameter("notePZT", (cbNotePZT.Checked ? String.IsNullOrEmpty(lbNotePZT.Text) ? " " : lbNotePZT.Text : " ")));
 
 
             reportParameters.Add(new ReportParameter("rpt_unit", ddlLiquidParticleUnit.SelectedItem.Text));
