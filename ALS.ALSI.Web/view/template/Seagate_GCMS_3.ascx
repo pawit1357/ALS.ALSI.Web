@@ -1422,20 +1422,91 @@
                                             <td>
                                                 <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
+                                        <!-- MOTOR OIL -->
+                                        <tr>
+                                            <td colspan="2">MOTOR OIL</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Result</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult01" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <!-- MOTOR HUB -->
+                                        <tr>
+                                            <td colspan="2">MOTOR HUB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Repeated Hydrocarbon (C20-C40 Alkanes)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>Compunds <= DOP	</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtFloatResult03" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
                                         <tr>
                                             <td>Compunds >= DOP	</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtFloatResult04" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
                                         <tr>
-                                            <td>Repeated Hydrocarcon</td>
+                                            <td>Total Organic Compound (TOC)</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtFloatResult05" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <!-- MOTOR BASE -->
+                                        <tr>
+                                            <td colspan="2">MOTOR BASE</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Repeated Hydrocarbon (C20-C40 Alkanes)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult06" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compunds <= DOP	</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult07" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compunds >= DOP	</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult08" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Organic Compound (TOC)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult09" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <!-- COMPOUNDS -->
+                                        <tr>
+                                            <td colspan="2">COMPOUNDS</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Repeated Hydrocarbon (C20-C40 Alkanes)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult10" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compunds <= DOP	</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult11" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compunds >= DOP	</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult12" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                                              <tr>
+                                            <td>Total Organic Compound (TOC)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult13" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                                                                <tr>
+                                            <td colspan="2">&nbsp;</td>
                                         </tr>
                                         <tr>
                                             <td>Minimum RHC Detection Limit</td>

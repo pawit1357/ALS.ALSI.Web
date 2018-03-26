@@ -185,6 +185,7 @@ CHANGE COLUMN `amend_or_retest` `amend_or_retest` VARCHAR(2) NULL DEFAULT NULL C
 
 ขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขขข
 ELN-0854-PAB
+ELN-0855-PAB > PA5x_BOSCH0442S00155 > (D:\ALS\PA_RawData_02\Template_PAB_01)
 
 ------------------------------------- 2018-03-25 ------------------------
 ALTER TABLE `alsi`.`template_pa` 

@@ -10,6 +10,7 @@ using Spire.Doc;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -138,6 +139,7 @@ namespace ALS.ALSI.Web.view.template
 
         private void initialPage()
         {
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
             this.CommandName = CommandNameEnum.Add;
             this.WashingHeaders = new List<string>();
@@ -156,7 +158,6 @@ namespace ALS.ALSI.Web.view.template
             if (this.jobSample != null)
             {
 
-                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
                 lbJobStatus.Text = Constants.GetEnumDescription(status);
                 ddlStatus.Items.Clear();
@@ -178,7 +179,7 @@ namespace ALS.ALSI.Web.view.template
                 pPage08.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
 
 
-                pEop.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
+                //pEop.Enabled = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING);
 
                 if (status == StatusEnum.LABMANAGER_CHECKING)
                 {
@@ -419,6 +420,7 @@ namespace ALS.ALSI.Web.view.template
 
                 lbPer.Text = this.pa.per_text;
 
+
                 #region "COLUMN HEADER"
                 tb_m_specification selectValue = new tb_m_specification();
 
@@ -439,11 +441,11 @@ namespace ALS.ALSI.Web.view.template
                 }
                 if (cbAgitation.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                 }
                 if (cbUntrasonic.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.B.Equals(PA_SPECIFICATION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_ULTRASONIC)).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION)  && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_ULTRASONIC)).FirstOrDefault();
                 }
 
 
@@ -652,6 +654,15 @@ namespace ALS.ALSI.Web.view.template
             pUploadWorkSheet.Visible = false;
             btnSubmit.Enabled = false;
 
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+            pdCustomer.Text = reportHeader.addr1;
+            pdAlsRefNo.Text = reportHeader.alsRefNo;
+            pdPartName.Text = this.jobSample.part_name;
+            pdAnalysisDate.Text = reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy");
+            paPartNo.Text = this.jobSample.part_no;
+            pdLotNo.Text = this.jobSample.lot_no;
+
+            btnSrChemistTest.Visible = userRole == RoleEnum.SR_CHEMIST;
             calculate();
 
             switch (lbJobStatus.Text)
@@ -727,6 +738,9 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
                 gvEop.DataSource = listPaDetail;
                 gvEop.DataBind();
+
+                //GridView1.DataSource = listPaDetail;
+                //GridView1.DataBind();
             }
             if (null != listMicroPicData && listMicroPicData.Count > 0)
             {
@@ -744,30 +758,30 @@ namespace ALS.ALSI.Web.view.template
                             double _col_g = !CustomUtils.isNumber(pad.col_g) ? 0 : Convert.ToDouble(pad.col_g);
                             double _col_h = !CustomUtils.isNumber(pad.col_h) ? 0 : Convert.ToDouble(pad.col_h);
 
-                            pad.col_i = (Convert.ToDouble(_col_e) / numberOfComponents).ToString("N2");
-                            pad.col_j = (Convert.ToDouble(_col_f) / numberOfComponents).ToString("N2");
-                            pad.col_k = (Convert.ToDouble(_col_g) / numberOfComponents).ToString("N2");
-                            pad.col_l = (Convert.ToDouble(_col_h) / numberOfComponents).ToString("N2");
+                            pad.col_i = (Convert.ToDouble(_col_e) / numberOfComponents).ToString("N" + txtDecimal01.Text);
+                            pad.col_j = (Convert.ToDouble(_col_f) / numberOfComponents).ToString("N" + txtDecimal02.Text);
+                            pad.col_k = (Convert.ToDouble(_col_g) / numberOfComponents).ToString("N" + txtDecimal03.Text);
+                            pad.col_l = (Convert.ToDouble(_col_h) / numberOfComponents).ToString("N" + txtDecimal04.Text);
                         }
 
                         if (!pad.col_d.Equals("-"))
                         {
                             lbPermembraneTotal.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_i).ToString("N0"));
-                            txtPermembraneMetallicShine.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_j).ToString("N0"));
+                            txtPermembraneMetallicShine.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_k).ToString("N0"));
                         }
                     }
                     else
                     {
                     }
                 }
-                foreach (var item in listPaDetail)
-                {
-                    if (!String.IsNullOrEmpty(item.col_i))
-                    {
-                        lbPermembraneTotal.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_i).ToString("N0"));
-                        txtPermembraneMetallicShine.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_j).ToString("N0"));
-                    }
-                }
+                //foreach (var item in listPaDetail)
+                //{
+                //    if (!String.IsNullOrEmpty(item.col_i))
+                //    {
+                //        lbPermembraneTotal.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_i).ToString("N0"));
+                //        txtPermembraneMetallicShine.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_j).ToString("N0"));
+                //    }
+                //}
 
                 if (!String.IsNullOrEmpty(lbPermembraneTotal.Text))
                 {
@@ -822,15 +836,7 @@ namespace ALS.ALSI.Web.view.template
             lbLf.Text = txtFeretFb.Text;
             lbTotalResidueWeight.Text = txtEop_G.Text;
 
-            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
 
-            pdCustomer.Text = reportHeader.addr1;
-            pdAlsRefNo.Text = reportHeader.alsRefNo;
-            pdPartName.Text = this.jobSample.part_name;
-            pdAnalysisDate.Text = reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy");
-            paPartNo.Text = this.jobSample.part_no;
-
-            pdLotNo.Text = this.jobSample.lot_no;
             pdSpecification.Text = ddlSpecification.SelectedItem.Text;
 
             if (CustomUtils.isNumber(txtDissolving.Text) && CustomUtils.isNumber(txtWashQuantity.Text) && CustomUtils.isNumber(txtRewashingQuantity.Text))
@@ -849,7 +855,7 @@ namespace ALS.ALSI.Web.view.template
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
-            this.PA_SPECIFICATION = "PA5x_BOSCHF00VP19194";
+            this.PA_SPECIFICATION = "PA5x_BOSCH0442S00155";
 
             if (!Page.IsPostBack)
             {
@@ -1031,8 +1037,6 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-
-
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
                             break;
@@ -1804,6 +1808,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
 
+
             }
         }
 
@@ -1815,7 +1820,7 @@ namespace ALS.ALSI.Web.view.template
         protected void gvEop_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvEop.EditIndex = e.NewEditIndex;
-            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             gvEop.DataBind();
         }
 
@@ -1835,14 +1840,14 @@ namespace ALS.ALSI.Web.view.template
                 _cov.col_e = txtE.Text;
             }
             gvEop.EditIndex = -1;
-            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x=>x.seq).ToList();
             gvEop.DataBind();
         }
 
         protected void gvEop_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvEop.EditIndex = -1;
-            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             gvEop.DataBind();
         }
         #endregion
@@ -1907,7 +1912,14 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                         }
                     }
+                    e.Row.Cells[2].BackColor = Color.LightSteelBlue;
+                    e.Row.Cells[6].BackColor = Color.LightSteelBlue;
 
+                }
+                else if (e.Row.RowType == DataControlRowType.Header)
+                {
+                    e.Row.Cells[2].BackColor = Color.LightSteelBlue;
+                    e.Row.Cells[6].BackColor = Color.LightSteelBlue;
                 }
             }
             catch (Exception ex)
@@ -2789,9 +2801,9 @@ namespace ALS.ALSI.Web.view.template
             tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.ID == Convert.ToInt32(ddl.SelectedValue)).FirstOrDefault();
             if (selectValue != null)
             {
-                txtModel.Text = String.IsNullOrEmpty(selectValue.D) ? String.Empty : selectValue.D;
-                txtBalanceResolution.Text = String.IsNullOrEmpty(selectValue.E) ? String.Empty : selectValue.E;
-                txtLastCalibration.Text = String.IsNullOrEmpty(selectValue.F) ? String.Empty : selectValue.F;
+                txtModel.Text = String.IsNullOrEmpty(selectValue.D) ? String.Empty : selectValue.E;
+                txtBalanceResolution.Text = String.IsNullOrEmpty(selectValue.F) ? String.Empty : selectValue.F;
+                //txtLastCalibration.Text = String.IsNullOrEmpty(selectValue.F) ? String.Empty : selectValue.F;
             }
         }
 
@@ -3211,8 +3223,39 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSrChemistTest_Click(object sender, EventArgs e)
         {
+            calculate();
+        }
+
+        protected void btnShowUnit_Click(object sender, EventArgs e)
+        {
+            ModolPopupExtender.Show();
 
         }
+
+        //protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    Console.WriteLine();
+        //}
+
+        //protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        //{
+        //    GridView1.EditIndex = e.NewEditIndex;
+        //    GridView1.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+        //    GridView1.DataBind();
+        //}
+
+        //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    Console.WriteLine();
+        //}
+
+        //protected void registerpostback()
+        //{
+        //    foreach (GridView gr in GridView1.Rows)
+        //    {
+        //        Console.WriteLine();
+        //    }
+        //}
     }
 }
 

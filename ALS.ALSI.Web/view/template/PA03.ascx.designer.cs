@@ -121,6 +121,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.Button btnPage08;
         
         /// <summary>
+        /// btnShowUnit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnShowUnit;
+        
+        /// <summary>
         /// pPage01 control.
         /// </summary>
         /// <remarks>
@@ -1579,24 +1588,6 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.DropDownList ddlPer;
         
         /// <summary>
-        /// Label55 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label55;
-        
-        /// <summary>
-        /// btnSrChemistTest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSrChemistTest;
-        
-        /// <summary>
         /// Label49 control.
         /// </summary>
         /// <remarks>
@@ -2306,6 +2297,33 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDecimal02;
+        
+        /// <summary>
+        /// txtDecimal03 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDecimal03;
+        
+        /// <summary>
+        /// txtDecimal04 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDecimal04;
+        
+        /// <summary>
+        /// btnSrChemistTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSrChemistTest;
         
         /// <summary>
         /// btnClose control.

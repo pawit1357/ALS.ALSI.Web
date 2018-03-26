@@ -10,6 +10,8 @@
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+
+
             <div class="portlet box blue-dark">
                 <div class="portlet-title">
                     <div class="caption">
@@ -24,6 +26,7 @@
                         <asp:Button ID="btnPage06" runat="server" Text="P06" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
                         <asp:Button ID="btnPage07" runat="server" Text="P07" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
                         <asp:Button ID="btnPage08" runat="server" Text="P08" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" Visible="false" />
+                        <asp:LinkButton ID="btnShowUnit" runat="server" OnClick="btnShowUnit_Click" CssClass="btn green"> <i class="fa fa-sort-numeric-asc"></i> SetUp  (Float)</asp:LinkButton>
 
 
                     </div>
@@ -33,6 +36,8 @@
                     <asp:Panel ID="pPage01" runat="server">
 
                         <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Evaluation of Particles</h4>
+
+
                         <asp:GridView CssClass="table table-striped table-bordered table-advance table-hover" ID="gvEop" runat="server" AutoGenerateColumns="False" DataKeyNames="ID,row_status" OnRowDataBound="gvEop_RowDataBound" OnRowCommand="gvEop_RowCommand" OnRowCancelingEdit="gvEop_RowCancelingEdit" OnRowDeleting="gvEop_RowDeleting" OnRowEditing="gvEop_RowEditing" OnRowUpdating="gvEop_RowUpdating">
                             <Columns>
                                 <asp:TemplateField HeaderText="1Particle size [µm]" ItemStyle-HorizontalAlign="Right">
@@ -54,7 +59,7 @@
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="50-100" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="50-100" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litE" runat="server" Text='<%# Eval("col_e")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -63,7 +68,7 @@
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="100-150" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="100-150" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litF" runat="server" Text='<%# Eval("col_f")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -72,7 +77,7 @@
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="150-200" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="150-200" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litG" runat="server" Text='<%# Eval("col_g")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -81,7 +86,7 @@
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="200-300" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="200-300" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litH" runat="server" Text='<%# Eval("col_h")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -90,7 +95,7 @@
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="300-400" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="300-400" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litI" runat="server" Text='<%# Eval("col_i")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -99,7 +104,7 @@
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="400-600" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="400-600" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litJ" runat="server" Text='<%# Eval("col_j")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -108,7 +113,7 @@
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="600-800" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="600-800" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litK" runat="server" Text='<%# Eval("col_k")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -117,7 +122,7 @@
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="800-1000" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="800-1000" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litL" runat="server" Text='<%# Eval("col_l")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -126,7 +131,7 @@
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText=">1000" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText=">1000" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litM" runat="server" Text='<%# Eval("col_m")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -136,7 +141,7 @@
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="2Fiber" ItemStyle-HorizontalAlign="Center">
+                                <asp:TemplateField HeaderText="2Fiber" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Literal ID="litN" runat="server" Text='<%# Eval("col_n")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -148,11 +153,10 @@
 
                                 <asp:TemplateField HeaderText="Edit">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
-
+                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>' CausesValidation="false"><i class="fa fa-edit"></i></asp:LinkButton>
                                     </ItemTemplate>
                                     <EditItemTemplate>
-                                        <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                        <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" CausesValidation="false"
                                             CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
                                         <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
                                             CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
@@ -903,7 +907,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
-                                                    <asp:CheckBox ID="cbPressureRinsing" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
+                                                    <asp:CheckBox ID="cbPressureRinsing" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true" Checked="true"></asp:CheckBox></td>
                                                 <td>
                                                     <asp:DropDownList ID="ddlRinsing" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlRinsing_SelectedIndexChanged" AutoPostBack="true">
 
@@ -919,7 +923,7 @@
                                                 <td>Agitation</td>
 
                                                 <td style="text-align: right">
-                                                    <asp:CheckBox ID="cbUntrasonic" runat="server" Checked="true" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
+                                                    <asp:CheckBox ID="cbUntrasonic" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
                                                 <td>Ultrasonic</td>
                                                 <td></td>
                                             </tr>
@@ -1206,7 +1210,7 @@
                                         <table class="table table-striped table-bordered table-advance table-hover">
                                             <tr>
                                                 <td style="text-align: right">
-                                                    <asp:CheckBox ID="cbOven" runat="server" /></td>
+                                                    <asp:CheckBox ID="cbOven" runat="server" Checked="true" /></td>
                                                 <td>Oven</td>
                                                 <td style="text-align: right">
                                                     <asp:CheckBox ID="cbDesiccator" runat="server" /></td>
@@ -1467,18 +1471,12 @@
                                     <asp:Label ID="Label54" runat="server" CssClass="control-label col-md-1">Select:</asp:Label>
                                     <div class="col-md-4">
                                         <asp:DropDownList ID="ddlPer" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control" OnSelectedIndexChanged="ddlPer_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <asp:Label ID="Label55" runat="server" CssClass="control-label col-md-1">Select:</asp:Label>
-                                    <div class="col-md-4">
-                                        <asp:Button ID="btnSrChemistTest" runat="server" Text="Sr.Test" CssClass="btn btn-default btn-sm" OnClick="btnSrChemistTest_Click"/>
 
                                     </div>
+                                    <span class="input-group-btn"></span>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="row">
@@ -1671,14 +1669,16 @@
                                                     <asp:TextBox ID="txtPerComponentMetallicShine" runat="server" CssClass="form-control"></asp:TextBox></td>
                                             </tr>
                                             <tr>
-                                                <td>Extended<br />(B/C/D/E/F/G/H/I/J/K)</td>
+                                                <td>Extended<br />
+                                                    (B/C/D/E/F/G/H/I/J/K)</td>
                                                 <td style="text-decoration-style: dotted">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>Metallic shine</td>
                                             </tr>
                                             <tr>
-                                                <td><asp:TextBox ID="lbPer" runat="server" Text="Per Component"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                <td>
+                                                    <asp:TextBox ID="lbPer" runat="server" Text="Per Component" CssClass="form-control"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td style="text-decoration-style: dotted">
-                                                    <asp:Label ID="lbPermembraneTotal" runat="server" Text=""></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <asp:Label ID="lbPermembraneTotal" runat="server" Text="" CssClass="form-control"></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>
                                                     <asp:TextBox ID="txtPermembraneMetallicShine" runat="server" CssClass="form-control"></asp:TextBox>
                                                 </td>
@@ -2423,28 +2423,43 @@
                         </div>
                     </asp:Panel>
 
-
-
-
                     <div class="form-actions">
 
                         <div class="modal-wide" id="pnlModalDemo" style="display: none;">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h class="modal-title">
-                                            กำหนดทศนิยมให้คอลัมภ์</h>
+                                            :: Setup Float ::</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
                                     <table class="table table-striped">
                                         <tr>
-                                            <td>Amout</td>
+                                            <td colspan="2">Particles per component</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Total:</td>
                                             <td>
                                                 <asp:TextBox ID="txtDecimal01" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
                                         <tr>
-                                            <td>Total Outgassing</td>
+                                            <td style="text-align: right">Non-metallic shine:</td>
                                             <td>
                                                 <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Metallic shine:</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Fiber:</td>
+                                            <td>
+                                                <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <asp:Button ID="btnSrChemistTest" runat="server" Text="Sr.Chemist (Calulate)" CssClass="btn btn-default btn-sm" OnClick="btnSrChemistTest_Click" /></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -2509,26 +2524,25 @@
                 </div>
             </div>
 
-
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="btnLoadFile" />
             <asp:PostBackTrigger ControlID="btnLoadImg" />
             <asp:PostBackTrigger ControlID="btnLoadImg1" />
             <asp:PostBackTrigger ControlID="btnLoadParamImg1" />
-
             <asp:PostBackTrigger ControlID="btnLoadParamImg2" />
-
             <asp:PostBackTrigger ControlID="btnLoadParamImg3" />
-
             <asp:PostBackTrigger ControlID="btnLoadParamImg4" />
 
             <asp:PostBackTrigger ControlID="btnSubmit" />
             <asp:PostBackTrigger ControlID="lbDownload" />
-
+<%--                        <asp:PostBackTrigger ControlID="btnShowUnit" />--%>
 
         </Triggers>
     </asp:UpdatePanel>
+
+
+
 
 </form>
 

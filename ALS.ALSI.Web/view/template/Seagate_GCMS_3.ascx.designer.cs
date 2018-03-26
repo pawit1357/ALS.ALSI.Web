@@ -1606,31 +1606,121 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtDecimal02;
         
         /// <summary>
-        /// txtDecimal03 control.
+        /// txtFloatResult01 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDecimal03;
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult01;
         
         /// <summary>
-        /// txtDecimal04 control.
+        /// txtFloatResult02 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDecimal04;
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult02;
         
         /// <summary>
-        /// txtDecimal05 control.
+        /// txtFloatResult03 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDecimal05;
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult03;
+        
+        /// <summary>
+        /// txtFloatResult04 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult04;
+        
+        /// <summary>
+        /// txtFloatResult05 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult05;
+        
+        /// <summary>
+        /// txtFloatResult06 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult06;
+        
+        /// <summary>
+        /// txtFloatResult07 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult07;
+        
+        /// <summary>
+        /// txtFloatResult08 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult08;
+        
+        /// <summary>
+        /// txtFloatResult09 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult09;
+        
+        /// <summary>
+        /// txtFloatResult10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult10;
+        
+        /// <summary>
+        /// txtFloatResult11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult11;
+        
+        /// <summary>
+        /// txtFloatResult12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult12;
+        
+        /// <summary>
+        /// txtFloatResult13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFloatResult13;
         
         /// <summary>
         /// txtDecimal06 control.

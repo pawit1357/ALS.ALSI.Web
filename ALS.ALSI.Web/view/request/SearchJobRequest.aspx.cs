@@ -67,7 +67,7 @@ namespace ALS.ALSI.Web.view.request
 
 
                 tmp.status = String.IsNullOrEmpty(ddlJobStatus.SelectedValue) ? 0 : int.Parse(ddlJobStatus.SelectedValue);
-                tmp.jobRefNo = txtREfNo.Text;
+                tmp.jobRefNo = txtREfNo.Text.TrimEnd();
                 tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
                 tmp.customerText = ddlCompany.SelectedItem.Text;
                 tmp.spec_id = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : int.Parse(ddlSpecification.SelectedValue);

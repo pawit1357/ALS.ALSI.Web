@@ -1835,36 +1835,34 @@ namespace ALS.ALSI.Web.view.template
 
             #region "Binding"
 
+            #region "MOTOR OILS"
             List<template_seagate_gcms_coverpage> motorOils = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
             if (motorOils.Count > 0)
             {
-
-
-
+                foreach(var item in motorOils)
+                {
+                    item.C = String.IsNullOrEmpty(item.C)? String.Empty: CustomUtils.isNumber(item.C) ? String.Empty : Convert.ToDouble(item.C).ToString("N" + txtFloatResult01.Text);
+                }
                 gvMotorOil.DataSource = motorOils;
                 gvMotorOil.DataBind();
-
                 gvMotorOil.Visible = true;
             }
             else
             {
                 gvMotorOil.Visible = false;
             }
+            #endregion
 
+            #region "MOTOR HUBS"
             List<template_seagate_gcms_coverpage> motorHubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-")).ToList();
             if (motorHubs.Count > 0)
             {
-
                 if (!String.IsNullOrEmpty(txtD50.Text) && !String.IsNullOrEmpty(txtD50.Text))
                 {
-                    motorHubs[0].C = (Convert.ToDecimal(txtD50.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD50.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    motorHubs[0].C = (Convert.ToDecimal(txtD50.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD50.Text), Convert.ToInt16(txtFloatResult02.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
                 }
-
                 gvMotorHub.DataSource = motorHubs;
                 gvMotorHub.DataBind();
-
-
-
                 gvMotorHub.Visible = true;
             }
             else
@@ -1872,14 +1870,12 @@ namespace ALS.ALSI.Web.view.template
                 gvMotorHub.Visible = false;
             }
 
-
-
             List<template_seagate_gcms_coverpage> motorHubSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB) && !x.A.Equals("-")).ToList();
             if (motorHubSubs.Count > 0)
             {
-                motorHubSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB50.Text) ? "0" : txtB50.Text), 2) + "";//Compounds with RT ≤ DOP
-                motorHubSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC50.Text) ? "0" : txtC50.Text), 2) + "";//Compounds with RT > DOP
-                motorHubSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorHubSubs[1].C) + Convert.ToDecimal(motorHubSubs[2].C)) + ""), 2) + "";//Total Organic Compound (TOC)
+                motorHubSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB50.Text) ? "0" : txtB50.Text), Convert.ToInt16(txtFloatResult03.Text)) + "";//Compounds with RT ≤ DOP
+                motorHubSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC50.Text) ? "0" : txtC50.Text), Convert.ToInt16(txtFloatResult04.Text)) + "";//Compounds with RT > DOP
+                motorHubSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorHubSubs[1].C) + Convert.ToDecimal(motorHubSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult05.Text)) + "";//Total Organic Compound (TOC)
 
                 motorHubSubs[1].C = (Convert.ToDouble(motorHubSubs[1].C) == 0) ? "Not Detecte" : motorHubSubs[1].C;
                 motorHubSubs[2].C = (Convert.ToDouble(motorHubSubs[2].C) == 0) ? "Not Detecte" : motorHubSubs[2].C;
@@ -1895,20 +1891,18 @@ namespace ALS.ALSI.Web.view.template
             {
                 gvMotorHubSub.Visible = false;
             }
+            #endregion
 
-
-
+            #region "MOTOR BASES"
             List<template_seagate_gcms_coverpage> motorBases = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE) && !x.A.Equals("-")).ToList();
             if (motorBases.Count > 0)
             {
                 if (!String.IsNullOrEmpty(txtD30.Text))
                 {
-                    motorBases[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    motorBases[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
                 }
                 gvMotorBase.DataSource = motorBases;
-
                 gvMotorBase.DataBind();
-
                 gvMotorBase.Visible = true;
             }
             else
@@ -1920,11 +1914,9 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorBaseSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-")).ToList();
             if (motorBaseSubs.Count > 0)
             {
-
-                motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), 2) + "";//Compounds with RT ≤ DOP
-                motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), 2) + "";//Compounds with RT > DOP
-                motorBaseSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorBaseSubs[1].C) + Convert.ToDecimal(motorBaseSubs[2].C)) + ""), 2) + "";//Total Organic Compound (TOC)
-
+                motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), Convert.ToInt16(txtFloatResult07.Text)) + "";//Compounds with RT ≤ DOP
+                motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), Convert.ToInt16(txtFloatResult08.Text)) + "";//Compounds with RT > DOP
+                motorBaseSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorBaseSubs[1].C) + Convert.ToDecimal(motorBaseSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult09.Text)) + "";//Total Organic Compound (TOC)
 
                 motorBaseSubs[1].C = (Convert.ToDouble(motorBaseSubs[1].C) == 0) ? "Not Detecte" : motorBaseSubs[1].C;
                 motorBaseSubs[2].C = (Convert.ToDouble(motorBaseSubs[2].C) == 0) ? "Not Detecte" : motorBaseSubs[2].C;
@@ -1932,28 +1924,22 @@ namespace ALS.ALSI.Web.view.template
 
                 gvMotorBaseSub.DataSource = motorBaseSubs;
                 gvMotorBaseSub.DataBind();
-
-
                 gvMotorBaseSub.Visible = true;
             }
             else
             {
                 gvMotorBaseSub.Visible = false;
             }
+            #endregion
 
-
-
+            #region "COMPOUNDS"
             List<template_seagate_gcms_coverpage> compounds = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND) && !x.A.Equals("-")).ToList();
             if (compounds.Count > 0)
             {
-
                 if (!String.IsNullOrEmpty(txtD30.Text))
                 {
-                    compounds[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    compounds[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), Convert.ToInt32(txtFloatResult10.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
                 }
-
-
-
                 gvCompound.DataSource = compounds;
                 gvCompound.DataBind();
 
@@ -1967,15 +1953,14 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
             if (compoundSubs.Count > 0)
             {
-                compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), 2) + "";//Compounds with RT > DOP
-                compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), 2) + "";//Compounds with RT > DOP
+                compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), Convert.ToInt32(txtFloatResult11.Text)) + "";//Compounds with RT > DOP
+                compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), Convert.ToInt32(txtFloatResult12.Text)) + "";//Compounds with RT > DOP
                 compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
                 if (compounds.Count > 3)
                 {
-                    compoundSubs[4].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE30.Text) ? "0" : txtE30.Text), 2) + "";//Compounds with RT > DOP
+                    compoundSubs[4].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE30.Text) ? "0" : txtE30.Text), Convert.ToInt32(txtFloatResult13.Text)) + "";//Compounds with RT > DOP
                 }
-                //compoundSubs[5].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtF30.Text) ? "0" : txtF30.Text), 2) + "";//Compounds with RT > DOP
-                //compoundSubs[3].C = (Convert.ToDecimal(compoundSubs[4].C) + Convert.ToDecimal(compoundSubs[5].C)) + "";
+
 
 
 
@@ -1985,20 +1970,16 @@ namespace ALS.ALSI.Web.view.template
                 {
                     compoundSubs[4].C = (Convert.ToDouble(compoundSubs[4].C) == 0) ? "Not Detecte" : compoundSubs[4].C;
                 }
-                //compoundSubs[4].C = (Convert.ToDouble(compoundSubs[5].C) == 0) ? "Not Detecte" : compoundSubs[4].C;
-
-
-
 
                 gvCompoundSub.DataSource = compoundSubs;
                 gvCompoundSub.DataBind();
-
                 gvCompoundSub.Visible = true;
             }
             else
             {
                 gvCompoundSub.Visible = false;
             }
+            #endregion
             #endregion
         }
 
