@@ -1241,6 +1241,7 @@
     <Content Include="view\jobRunning\SearchJobRunning.aspx" />
     <Content Include="view\library\Library.aspx" />
     <Content Include="view\library\SearchLibrary.aspx" />
+    <Content Include="view\request\ChangeJobSrCompleteDate.aspx" />
     <Content Include="view\request\ChangeJobGroup.aspx" />
     <Content Include="view\request\EditSample.aspx" />
     <Content Include="view\request\ViewFile.aspx" />
@@ -1440,6 +1441,13 @@
     </Compile>
     <Compile Include="view\library\SearchLibrary.aspx.designer.cs">
       <DependentUpon>SearchLibrary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\request\ChangeJobSrCompleteDate.aspx.cs">
+      <DependentUpon>ChangeJobSrCompleteDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\request\ChangeJobSrCompleteDate.aspx.designer.cs">
+      <DependentUpon>ChangeJobSrCompleteDate.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\request\ChangeJobGroup.aspx.cs">
       <DependentUpon>ChangeJobGroup.aspx</DependentUpon>

@@ -208,4 +208,8 @@ ADD COLUMN `operater_name` INT NULL AFTER `specification_no`;
 ALTER TABLE `alsi`.`template_pa` 
 ADD COLUMN `per_text` VARCHAR(45) NULL AFTER `operater_name`;
 
+---------------------------------------------------
+PA5x_BOSCH0442S00155 > D:\ALS\PA_RawData_02\Template_PAB_01 > ELN-0856-PAB 
+PA5x_BOSCHF00VP19194 > D:\ALS\PA_RawData_02\Template_PAB_02 >
+PA5x_BOSCH0442S00155PRV  > D:\ALS\PA_RawData_02\Template_PAB_02 >
 */

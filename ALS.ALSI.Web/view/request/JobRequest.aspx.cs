@@ -62,7 +62,7 @@ namespace ALS.ALSI.Web.view.request
                 job.update_date = DateTime.Now;
                 job.document_type = "1";
 
-                job.jobSample = listSampleShow;
+                job.jobSample = listSample;
                 return job;
             }
         }
@@ -527,7 +527,7 @@ namespace ALS.ALSI.Web.view.request
                     objJobInfo.Insert();
                     break;
                 case CommandNameEnum.Edit:
-                    foreach (job_sample s in this.listSampleShow)
+                    foreach (job_sample s in this.listSample)
                     {
                         s.job_status = Convert.ToInt16(ddlStatus.SelectedValue);
                         s.sample_prefix = ddlJobNumber.SelectedItem.Text;

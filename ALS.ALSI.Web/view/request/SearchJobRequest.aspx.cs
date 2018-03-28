@@ -310,6 +310,10 @@ namespace ALS.ALSI.Web.view.request
                 case CommandNameEnum.ChangeDueDate:
                     Server.Transfer(Constants.LINK_JOB_CHANGE_DUEDATE);
                     break;
+                case CommandNameEnum.ChangeSrCompleteDate:
+                    Server.Transfer(Constants.LINK_JOB_SR_COMPLETE_DATE);
+                    break;
+                    
                 case CommandNameEnum.ChangePo:
                     Server.Transfer(Constants.LINK_JOB_CHANGE_PO);
                     break;
@@ -440,7 +444,9 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnChangeOtherRefNo = (LinkButton)e.Row.FindControl("btnChangeOtherRefNo");
                     LinkButton btnChangeSingaporeRefNo = (LinkButton)e.Row.FindControl("btnChangeSingaporeRefNo");
                     LinkButton btnViewFile = (LinkButton)e.Row.FindControl("btnViewFile");
+                    LinkButton btnChangeSrCompleteDate = (LinkButton)e.Row.FindControl("btnChangeSrCompleteDate");
 
+                    
 
 
 
@@ -487,6 +493,10 @@ namespace ALS.ALSI.Web.view.request
                     btnChangeStatus.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
                     cbSelect.Visible = false;
                     btnViewFile.Visible = job_status == StatusEnum.JOB_COMPLETE || userRole == RoleEnum.BUSINESS_MANAGER || userRole == RoleEnum.LABMANAGER || userRole == RoleEnum.SR_CHEMIST;
+
+                    btnChangeSrCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN) && !isHold;
+
+
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
