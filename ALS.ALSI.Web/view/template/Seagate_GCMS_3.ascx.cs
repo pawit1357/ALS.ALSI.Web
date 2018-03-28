@@ -1841,7 +1841,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 foreach(var item in motorOils)
                 {
-                    item.C = String.IsNullOrEmpty(item.C)? String.Empty: CustomUtils.isNumber(item.C) ? String.Empty : Convert.ToDouble(item.C).ToString("N" + txtFloatResult01.Text);
+                    item.C = String.IsNullOrEmpty(item.C)? String.Empty: item.C.Equals("Not Detected")? item.C: CustomUtils.isNumber(item.C) ? String.Empty : Convert.ToDouble(item.C).ToString("N" + txtFloatResult01.Text);
                 }
                 gvMotorOil.DataSource = motorOils;
                 gvMotorOil.DataBind();

@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PA03.ascx.cs" Inherits="ALS.ALSI.Web.view.template.PA03" %>
+﻿
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PA03.ascx.cs" Inherits="ALS.ALSI.Web.view.template.PA03" %>
 
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
@@ -273,7 +274,7 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label51" runat="server" CssClass="control-label col-md-3">Specification No.:</asp:Label>
                                     <div class="col-md-6">
-                                        <asp:DropDownList ID="ddlSpecification" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlSpecification" runat="server" DataTextField="C" DataValueField="ID" CssClass="form-control" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                     </div>
                                     <div>
                                         <br />
@@ -868,7 +869,7 @@
                                             <tr>
                                                 <td colspan="2" style="text-align: right">Positoin of test specimen:</td>
                                                 <td style="text-align: center">
-                                                    <asp:CheckBox ID="cbPots01" runat="server"></asp:CheckBox></td>
+                                                    <asp:CheckBox ID="cbPots01" runat="server" Checked="true"></asp:CheckBox></td>
                                                 <td style="text-align: center" colspan="3">
                                                     <asp:TextBox ID="txtPots01" runat="server" Text="Alternating" CssClass="form-control"></asp:TextBox></td>
                                             </tr>
@@ -1213,7 +1214,7 @@
                                                     <asp:CheckBox ID="cbOven" runat="server" Checked="true" /></td>
                                                 <td>Oven</td>
                                                 <td style="text-align: right">
-                                                    <asp:CheckBox ID="cbDesiccator" runat="server" /></td>
+                                                    <asp:CheckBox ID="cbDesiccator" runat="server" Checked="true" /></td>
                                                 <td>Desiccator</td>
                                                 <td style="text-align: right">
                                                     <asp:CheckBox ID="cbAmbientAir" runat="server" /></td>

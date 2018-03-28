@@ -27,14 +27,22 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public String ispots01_text { get; set; }
         public String isdissolving_text { get; set; }
-        public String ispressurerinsing_text { get; set; }
-        public String isinternalrinsing_text { get; set; }
+
         public String isagitation_text { get; set; }
+        public String ispressurerinsing_text { get; set; }
+        public String isultrasonic_text { get; set; }
+        //public String isinternalrinsing_text { get; set; }
+
         public String iswashquantity_text { get; set; }
         public String isrewashingquantity_text { get; set; }
-        public String iswashpressurerinsing_text { get; set; }
-        public String iswashinternalrinsing_text { get; set; }
+
         public String iswashagitation_text { get; set; }
+        public String iswashpressurerinsing_text { get; set; }
+        public String iswashultrasonic_text { get; set; }
+
+        //public String iswashinternalrinsing_text { get; set; }
+
+
         public String isoven_text { get; set; }
         public String isdesiccator_text { get; set; }
         public String gravimetricalalysis_id_text { get; set; }
@@ -45,6 +53,9 @@ namespace ALS.ALSI.Biz.DataAccess
         public String ismeasuringsoftware_text { get; set; }
         public String isautomated_text { get; set; }
         public String material_id_text { get; set; }
+        public String manufacturer_id_text { get; set; }
+
+        
         public String lbPermembrane_text { get; set; }
         public String totalResidueWeight { get; set; }
 

@@ -4505,6 +4505,12 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columnwh_col5;
             
+            private global::System.Data.DataColumn columnisultrasonic_text;
+            
+            private global::System.Data.DataColumn columniswashultrasonic_text;
+            
+            private global::System.Data.DataColumn columnmanufacturer_id_text;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public template_paDataTable() {
@@ -5612,6 +5618,30 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn isultrasonic_textColumn {
+                get {
+                    return this.columnisultrasonic_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn iswashultrasonic_textColumn {
+                get {
+                    return this.columniswashultrasonic_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn manufacturer_id_textColumn {
+                get {
+                    return this.columnmanufacturer_id_text;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5781,7 +5811,10 @@ namespace ALS.ALSI.Web.ReportObject {
                         string wh_col2, 
                         string wh_col3, 
                         string wh_col4, 
-                        string wh_col5) {
+                        string wh_col5, 
+                        string isultrasonic_text, 
+                        string iswashultrasonic_text, 
+                        string manufacturer_id_text) {
                 template_paRow rowtemplate_paRow = ((template_paRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         lms,
@@ -5917,7 +5950,10 @@ namespace ALS.ALSI.Web.ReportObject {
                         wh_col2,
                         wh_col3,
                         wh_col4,
-                        wh_col5};
+                        wh_col5,
+                        isultrasonic_text,
+                        iswashultrasonic_text,
+                        manufacturer_id_text};
                 rowtemplate_paRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtemplate_paRow);
                 return rowtemplate_paRow;
@@ -6074,6 +6110,9 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columnwh_col3 = base.Columns["wh_col3"];
                 this.columnwh_col4 = base.Columns["wh_col4"];
                 this.columnwh_col5 = base.Columns["wh_col5"];
+                this.columnisultrasonic_text = base.Columns["isultrasonic_text"];
+                this.columniswashultrasonic_text = base.Columns["iswashultrasonic_text"];
+                this.columnmanufacturer_id_text = base.Columns["manufacturer_id_text"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6347,6 +6386,12 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columnwh_col4);
                 this.columnwh_col5 = new global::System.Data.DataColumn("wh_col5", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnwh_col5);
+                this.columnisultrasonic_text = new global::System.Data.DataColumn("isultrasonic_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnisultrasonic_text);
+                this.columniswashultrasonic_text = new global::System.Data.DataColumn("iswashultrasonic_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columniswashultrasonic_text);
+                this.columnmanufacturer_id_text = new global::System.Data.DataColumn("manufacturer_id_text", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmanufacturer_id_text);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11762,6 +11807,54 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string isultrasonic_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.isultrasonic_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'isultrasonic_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.isultrasonic_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string iswashultrasonic_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.iswashultrasonic_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'iswashultrasonic_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.iswashultrasonic_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string manufacturer_id_text {
+                get {
+                    try {
+                        return ((string)(this[this.tabletemplate_pa.manufacturer_id_textColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'manufacturer_id_text\' in table \'template_pa\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletemplate_pa.manufacturer_id_textColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IslmsNull() {
                 return this.IsNull(this.tabletemplate_pa.lmsColumn);
             }
@@ -13366,6 +13459,42 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setwh_col5Null() {
                 this[this.tabletemplate_pa.wh_col5Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isisultrasonic_textNull() {
+                return this.IsNull(this.tabletemplate_pa.isultrasonic_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setisultrasonic_textNull() {
+                this[this.tabletemplate_pa.isultrasonic_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isiswashultrasonic_textNull() {
+                return this.IsNull(this.tabletemplate_pa.iswashultrasonic_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setiswashultrasonic_textNull() {
+                this[this.tabletemplate_pa.iswashultrasonic_textColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Ismanufacturer_id_textNull() {
+                return this.IsNull(this.tabletemplate_pa.manufacturer_id_textColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setmanufacturer_id_textNull() {
+                this[this.tabletemplate_pa.manufacturer_id_textColumn] = global::System.Convert.DBNull;
             }
         }
         

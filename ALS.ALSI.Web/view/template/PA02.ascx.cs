@@ -2307,12 +2307,12 @@ namespace ALS.ALSI.Web.view.template
             this.pa.ispots01_text = cbPots01.Checked.ToString();
             this.pa.isdissolving_text = cbDissolving.Checked.ToString();
             this.pa.ispressurerinsing_text = cbPressureRinsing.Checked.ToString();
-            this.pa.isinternalrinsing_text = cbInternalRinsing.Checked.ToString();
+            //this.pa.isultrasonic_text = cbultr.Checked.ToString();
             this.pa.isagitation_text = cbAgitation.Checked.ToString();
             this.pa.iswashquantity_text = cbWashQuantity.Checked.ToString();
             this.pa.isrewashingquantity_text = cbRewashingQuantity.Checked.ToString();
             this.pa.iswashpressurerinsing_text = cbWashPressureRinsing.Checked.ToString();
-            this.pa.iswashinternalrinsing_text = cbWashInternalRinsing.Checked.ToString();
+            //this.pa.iswashinternalrinsing_text = cbWashInternalRinsing.Checked.ToString();
             this.pa.iswashagitation_text = cbWashAgitation.Checked.ToString();
             this.pa.isoven_text = cbOven.Checked.ToString();
             this.pa.isdesiccator_text = cbDesiccator.Checked.ToString();

@@ -24,7 +24,7 @@ namespace ALS.ALSI.Web.view.template
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_DHS));
-        private String PA_SPECIFICATION = "PA01";
+        private String PA_SPECIFICATION = "PA5x_BOSCH0442S00155";
         private const String PA_MICROPIC_DATA = "Micropic Data:";
 
         private const String PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION = "Description of process and extraction:";
@@ -57,26 +57,23 @@ namespace ALS.ALSI.Web.view.template
         private const String PA_PER_LIST = "Per";
 
 
-
-
-
+        #region "Property"
         public users_login userLogin
         {
             get { return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null); }
         }
 
-        #region "Property"
         public CommandNameEnum CommandName
         {
             get { return (CommandNameEnum)ViewState[Constants.COMMAND_NAME]; }
             set { ViewState[Constants.COMMAND_NAME] = value; }
         }
+
         public job_sample jobSample
         {
             get { return (job_sample)Session["job_sample"]; }
             set { Session["job_sample"] = value; }
         }
-
 
         public template_pa pa
         {
@@ -120,6 +117,7 @@ namespace ALS.ALSI.Web.view.template
         }
 
         List<String> errors = new List<string>();
+        #endregion
 
         private void removeSession()
         {
@@ -273,6 +271,8 @@ namespace ALS.ALSI.Web.view.template
             {
                 ddlResult.SelectedValue = this.pa.result.ToString();
                 txtPIRTDC.Text = this.pa.pirtd;
+                ddlSpecification.SelectedValue = this.pa.specification_no.ToString();
+                this.PA_SPECIFICATION = ddlSpecification.SelectedItem.Text;
 
                 #region "PAGE01"
                 txtDoec.Text = this.pa.doec;
@@ -423,7 +423,42 @@ namespace ALS.ALSI.Web.view.template
 
                 #region "COLUMN HEADER"
                 tb_m_specification selectValue = new tb_m_specification();
+                #region "gvEop"
+                List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
+                if (listOfSpec.Count > 0)
+                {
+                    tb_m_specification item = listOfSpec.FirstOrDefault();
+                    //
+                    gvEop.Columns[0].HeaderText = item.C;
+                    gvEop.Columns[1].HeaderText = item.D;
+                    gvEop.Columns[2].HeaderText = item.E;
+                    gvEop.Columns[3].HeaderText = item.F;
+                    gvEop.Columns[4].HeaderText = item.G;
+                    gvEop.Columns[5].HeaderText = item.H;
+                    gvEop.Columns[6].HeaderText = item.I;
+                    gvEop.Columns[7].HeaderText = item.J;
+                    gvEop.Columns[8].HeaderText = item.K;
+                    gvEop.Columns[9].HeaderText = item.L;
+                    gvEop.Columns[10].HeaderText = item.M;
+                    gvEop.Columns[11].HeaderText = item.N;
 
+
+                    gvEop.Columns[0].Visible = !String.IsNullOrEmpty(gvEop.Columns[0].HeaderText);
+                    gvEop.Columns[1].Visible = !String.IsNullOrEmpty(gvEop.Columns[1].HeaderText);
+                    gvEop.Columns[2].Visible = !String.IsNullOrEmpty(gvEop.Columns[2].HeaderText);
+                    gvEop.Columns[3].Visible = !String.IsNullOrEmpty(gvEop.Columns[3].HeaderText);
+                    gvEop.Columns[4].Visible = !String.IsNullOrEmpty(gvEop.Columns[4].HeaderText);
+                    gvEop.Columns[5].Visible = !String.IsNullOrEmpty(gvEop.Columns[5].HeaderText);
+                    gvEop.Columns[6].Visible = !String.IsNullOrEmpty(gvEop.Columns[6].HeaderText);
+                    gvEop.Columns[7].Visible = !String.IsNullOrEmpty(gvEop.Columns[7].HeaderText);
+                    gvEop.Columns[8].Visible = !String.IsNullOrEmpty(gvEop.Columns[8].HeaderText);
+                    gvEop.Columns[9].Visible = !String.IsNullOrEmpty(gvEop.Columns[9].HeaderText);
+                    gvEop.Columns[10].Visible = !String.IsNullOrEmpty(gvEop.Columns[10].HeaderText);
+                    gvEop.Columns[11].Visible = !String.IsNullOrEmpty(gvEop.Columns[11].HeaderText);
+                    //
+
+                }
+                #endregion
                 #region "gvDissolving"
 
                 if (cbPressureRinsing.Checked)
@@ -445,7 +480,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 if (cbUntrasonic.Checked)
                 {
-                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION)  && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_ULTRASONIC)).FirstOrDefault();
+                    selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_ULTRASONIC)).FirstOrDefault();
                 }
 
 
@@ -495,6 +530,9 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 this.pa = new template_pa();
+
+                this.PA_SPECIFICATION = ddlSpecification.SelectedItem.Text;
+
                 #region "gvEop"
                 List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
                 if (listOfSpec.Count > 0)
@@ -524,6 +562,37 @@ namespace ALS.ALSI.Web.view.template
                             tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
                             paDetail.Add(tmp);
 
+                        }
+                        else
+                        {
+                            //
+                            gvEop.Columns[0].HeaderText = item.C;
+                            gvEop.Columns[1].HeaderText = item.D;
+                            gvEop.Columns[2].HeaderText = item.E;
+                            gvEop.Columns[3].HeaderText = item.F;
+                            gvEop.Columns[4].HeaderText = item.G;
+                            gvEop.Columns[5].HeaderText = item.H;
+                            gvEop.Columns[6].HeaderText = item.I;
+                            gvEop.Columns[7].HeaderText = item.J;
+                            gvEop.Columns[8].HeaderText = item.K;
+                            gvEop.Columns[9].HeaderText = item.L;
+                            gvEop.Columns[10].HeaderText = item.M;
+                            gvEop.Columns[11].HeaderText = item.N;
+
+
+                            gvEop.Columns[0].Visible = !String.IsNullOrEmpty(gvEop.Columns[0].HeaderText);
+                            gvEop.Columns[1].Visible = !String.IsNullOrEmpty(gvEop.Columns[1].HeaderText);
+                            gvEop.Columns[2].Visible = !String.IsNullOrEmpty(gvEop.Columns[2].HeaderText);
+                            gvEop.Columns[3].Visible = !String.IsNullOrEmpty(gvEop.Columns[3].HeaderText);
+                            gvEop.Columns[4].Visible = !String.IsNullOrEmpty(gvEop.Columns[4].HeaderText);
+                            gvEop.Columns[5].Visible = !String.IsNullOrEmpty(gvEop.Columns[5].HeaderText);
+                            gvEop.Columns[6].Visible = !String.IsNullOrEmpty(gvEop.Columns[6].HeaderText);
+                            gvEop.Columns[7].Visible = !String.IsNullOrEmpty(gvEop.Columns[7].HeaderText);
+                            gvEop.Columns[8].Visible = !String.IsNullOrEmpty(gvEop.Columns[8].HeaderText);
+                            gvEop.Columns[9].Visible = !String.IsNullOrEmpty(gvEop.Columns[9].HeaderText);
+                            gvEop.Columns[10].Visible = !String.IsNullOrEmpty(gvEop.Columns[10].HeaderText);
+                            gvEop.Columns[11].Visible = !String.IsNullOrEmpty(gvEop.Columns[11].HeaderText);
+                            //
                         }
                         seq++;
                     }
@@ -578,8 +647,8 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
 
                 //default:Agitation
-                lbExtractionMethod.Text = PA_AGITATION;
-                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
+                lbExtractionMethod.Text = PA_PRESURE_RINSING;
+                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
@@ -687,60 +756,9 @@ namespace ALS.ALSI.Web.view.template
             List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
-                template_pa_detail refPa = listPaDetail.Where(x => x.col_c.Replace("\n", String.Empty).Equals("Result[per part]")).FirstOrDefault();//[listPaDetail.Count - 1];
-                if (refPa != null)
-                {
-                    refPa.col_d = (listMicroPicData.Count >= 1) ? listMicroPicData[0].col_i : String.Empty;
-                    refPa.col_e = (listMicroPicData.Count >= 2) ? listMicroPicData[1].col_i : String.Empty;
-                    refPa.col_f = (listMicroPicData.Count >= 3) ? listMicroPicData[2].col_i : String.Empty;
-                    refPa.col_g = (listMicroPicData.Count >= 4) ? listMicroPicData[3].col_i : String.Empty;
-                    refPa.col_h = (listMicroPicData.Count >= 5) ? listMicroPicData[4].col_i : String.Empty;
-                    refPa.col_i = (listMicroPicData.Count >= 6) ? listMicroPicData[5].col_i : String.Empty;
-                    refPa.col_j = (listMicroPicData.Count >= 7) ? listMicroPicData[6].col_i : String.Empty;
-                    refPa.col_k = (listMicroPicData.Count >= 8) ? listMicroPicData[7].col_i : String.Empty;
-                    refPa.col_l = (listMicroPicData.Count >= 9) ? listMicroPicData[8].col_i : String.Empty;
-                    refPa.col_m = (listMicroPicData.Count >= 10) ? listMicroPicData[9].col_i : String.Empty;
-                    refPa.col_n = "Not to evaluate";
-
-                }
-                #region "SET HEADER"
-                List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
-                tb_m_specification headerRow = listOfSpec.FirstOrDefault();
-                gvEop.Columns[0].HeaderText = headerRow.C;
-                gvEop.Columns[1].HeaderText = headerRow.D;
-                gvEop.Columns[2].HeaderText = headerRow.E;
-                gvEop.Columns[3].HeaderText = headerRow.F;
-                gvEop.Columns[4].HeaderText = headerRow.G;
-                gvEop.Columns[5].HeaderText = headerRow.H;
-                gvEop.Columns[6].HeaderText = headerRow.I;
-                gvEop.Columns[7].HeaderText = headerRow.J;
-                gvEop.Columns[8].HeaderText = headerRow.K;
-                gvEop.Columns[9].HeaderText = headerRow.L;
-                gvEop.Columns[10].HeaderText = headerRow.M;
-                gvEop.Columns[11].HeaderText = headerRow.N;
-
-
-                gvEop.Columns[0].Visible = !String.IsNullOrEmpty(headerRow.C);
-                gvEop.Columns[1].Visible = !String.IsNullOrEmpty(headerRow.D);
-                gvEop.Columns[2].Visible = !String.IsNullOrEmpty(headerRow.E);
-                gvEop.Columns[3].Visible = !String.IsNullOrEmpty(headerRow.F);
-                gvEop.Columns[4].Visible = !String.IsNullOrEmpty(headerRow.G);
-                gvEop.Columns[5].Visible = !String.IsNullOrEmpty(headerRow.H);
-                gvEop.Columns[6].Visible = !String.IsNullOrEmpty(headerRow.I);
-                gvEop.Columns[7].Visible = !String.IsNullOrEmpty(headerRow.J);
-                gvEop.Columns[8].Visible = !String.IsNullOrEmpty(headerRow.K);
-                gvEop.Columns[9].Visible = !String.IsNullOrEmpty(headerRow.L);
-                gvEop.Columns[10].Visible = !String.IsNullOrEmpty(headerRow.M);
-                gvEop.Columns[11].Visible = !String.IsNullOrEmpty(headerRow.N);
-
-
                 //headerRow                                                  
-                #endregion
                 gvEop.DataSource = listPaDetail;
                 gvEop.DataBind();
-
-                //GridView1.DataSource = listPaDetail;
-                //GridView1.DataBind();
             }
             if (null != listMicroPicData && listMicroPicData.Count > 0)
             {
@@ -764,6 +782,8 @@ namespace ALS.ALSI.Web.view.template
                             pad.col_l = (Convert.ToDouble(_col_h) / numberOfComponents).ToString("N" + txtDecimal04.Text);
                         }
 
+
+
                         if (!pad.col_d.Equals("-"))
                         {
                             lbPermembraneTotal.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_i).ToString("N0"));
@@ -772,24 +792,35 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
+                        pad.col_e = String.IsNullOrEmpty(pad.col_e) ? "Not to evaluate" : pad.col_e;
+                        pad.col_f = String.IsNullOrEmpty(pad.col_f) ? "Not to evaluate" : pad.col_f;
+                        pad.col_g = String.IsNullOrEmpty(pad.col_g) ? "Not to evaluate" : pad.col_g;
+                        pad.col_h = String.IsNullOrEmpty(pad.col_h) ? "Not to evaluate" : pad.col_h;
+                        pad.col_i = String.IsNullOrEmpty(pad.col_i) ? "Not to evaluate" : pad.col_i;
+                        pad.col_j = String.IsNullOrEmpty(pad.col_j) ? "Not to evaluate" : pad.col_j;
+                        pad.col_k = String.IsNullOrEmpty(pad.col_k) ? "Not to evaluate" : pad.col_k;
+                        pad.col_l = String.IsNullOrEmpty(pad.col_l) ? "Not to evaluate" : pad.col_l;
+                        pad.col_m = String.IsNullOrEmpty(pad.col_m) ? "Not to evaluate" : pad.col_m;
+                        pad.col_n = String.IsNullOrEmpty(pad.col_n) ? "Not to evaluate" : pad.col_n;
                     }
                 }
-                //foreach (var item in listPaDetail)
-                //{
-                //    if (!String.IsNullOrEmpty(item.col_i))
-                //    {
-                //        lbPermembraneTotal.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_i).ToString("N0"));
-                //        txtPermembraneMetallicShine.Text += String.Format("{0}{1}/", item.col_d, Convert.ToDouble(item.col_j).ToString("N0"));
-                //    }
-                //}
+
 
                 if (!String.IsNullOrEmpty(lbPermembraneTotal.Text))
                 {
                     lbPermembraneTotal.Text = String.Format("N({0})", lbPermembraneTotal.Text.Substring(0, lbPermembraneTotal.Text.Length - 1));
                 }
+                else
+                {
+                    lbPermembraneTotal.Text = "-";
+                }
                 if (!String.IsNullOrEmpty(txtPermembraneMetallicShine.Text))
                 {
                     txtPermembraneMetallicShine.Text = String.Format("N({0})", txtPermembraneMetallicShine.Text.Substring(0, txtPermembraneMetallicShine.Text.Length - 1));
+                }
+                else
+                {
+                    txtPermembraneMetallicShine.Text = "-";
                 }
                 gvMicroscopicAnalysis.Visible = true;
                 gvMicroscopicAnalysis.DataSource = listMicroPicData;
@@ -801,7 +832,7 @@ namespace ALS.ALSI.Web.view.template
 
                 gvDissolving.DataSource = listPaDetail;
                 gvDissolving.DataBind();
-                lbExtractionTime.Text = listPaDetail[0].col_f;
+                //lbExtractionTime.Text = listPaDetail[0].col_f;
             }
             listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
@@ -835,7 +866,7 @@ namespace ALS.ALSI.Web.view.template
             txtEop_Lnmsp.Text = txtFeretLnms.Text;
             lbLf.Text = txtFeretFb.Text;
             lbTotalResidueWeight.Text = txtEop_G.Text;
-
+            lbExtractionTime.Text = txtDissolvingTime.Text;
 
             pdSpecification.Text = ddlSpecification.SelectedItem.Text;
 
@@ -846,16 +877,16 @@ namespace ALS.ALSI.Web.view.template
             txtTotalextractionVolume.Text = txtTotalQuantity.Text;
             lbX.Text = txtAutomated.Text;
             lbY.Text = txtAutomated.Text;
+            lbPer.Text = ddlPer.SelectedItem.Text;
         }
 
-        #endregion
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
-            this.PA_SPECIFICATION = "PA5x_BOSCH0442S00155";
 
             if (!Page.IsPostBack)
             {
@@ -1830,17 +1861,71 @@ namespace ALS.ALSI.Web.view.template
             TextBox txtC = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtC");
             TextBox txtD = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtD");
             TextBox txtE = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtE");
+            TextBox txtF = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtF");
+            TextBox txtG = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtG");
+            TextBox txtH = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtH");
+            TextBox txtI = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtI");
+            TextBox txtJ = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtJ");
+            TextBox txtK = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtK");
+            TextBox txtL = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtL");
+            TextBox txtM = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtM");
+            TextBox txtN = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtN");
 
 
             template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
             if (_cov != null)
             {
-                _cov.col_c = txtC.Text;
-                _cov.col_d = txtD.Text;
-                _cov.col_e = txtE.Text;
+                if (txtC != null)
+                {
+                    _cov.col_c = txtC.Text;
+                }
+                if (txtD != null)
+                {
+                    _cov.col_d = txtD.Text;
+                }
+                if (txtE != null)
+                {
+                    _cov.col_e = txtE.Text;
+                }
+                if (txtF != null)
+                {
+                    _cov.col_f = txtF.Text;
+                }
+                if (txtG != null)
+                {
+                    _cov.col_g = txtG.Text;
+                }
+                if (txtH != null)
+                {
+                    _cov.col_h = txtH.Text;
+                }
+                if (txtI != null)
+                {
+                    _cov.col_i = txtI.Text;
+                }
+                if (txtJ != null)
+                {
+                    _cov.col_j = txtJ.Text;
+                }
+                if (txtK != null)
+                {
+                    _cov.col_k = txtK.Text;
+                }
+                if (txtL != null)
+                {
+                    _cov.col_l = txtL.Text;
+                }
+                if (txtM != null)
+                {
+                    _cov.col_m = txtM.Text;
+                }
+                if (txtN != null)
+                {
+                    _cov.col_n = txtN.Text;
+                }
             }
             gvEop.EditIndex = -1;
-            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x=>x.seq).ToList();
+            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             gvEop.DataBind();
         }
 
@@ -2121,12 +2206,30 @@ namespace ALS.ALSI.Web.view.template
             template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.DISSOLVING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
             if (_cov != null)
             {
-                _cov.col_d = txtD.Text;
-                _cov.col_e = txtE.Text;
-                _cov.col_f = txtF.Text;
-                _cov.col_g = txtG.Text;
-                _cov.col_h = txtH.Text;
-                _cov.col_i = txtI.Text;
+                if (txtD != null)
+                {
+                    _cov.col_d = txtD.Text;
+                }
+                if (txtE != null)
+                {
+                    _cov.col_e = txtE.Text;
+                }
+                if (txtF != null)
+                {
+                    _cov.col_f = txtF.Text;
+                }
+                if (txtG != null)
+                {
+                    _cov.col_g = txtG.Text;
+                }
+                if (txtH != null)
+                {
+                    _cov.col_h = txtH.Text;
+                }
+                if (txtI != null)
+                {
+                    _cov.col_i = txtI.Text;
+                }
             }
             gvDissolving.EditIndex = -1;
             gvDissolving.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
@@ -2229,12 +2332,31 @@ namespace ALS.ALSI.Web.view.template
             template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.WASHING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
             if (_cov != null)
             {
-                _cov.col_d = txtD.Text;
-                _cov.col_e = txtE.Text;
-                _cov.col_f = txtF.Text;
-                _cov.col_g = txtG.Text;
-                _cov.col_h = txtH.Text;
-                _cov.col_i = txtI.Text;
+                if (txtD != null)
+                {
+                    _cov.col_d = txtD.Text;
+                }
+                if (txtE != null)
+                {
+                    _cov.col_e = txtE.Text;
+                }
+                if (txtF != null)
+                {
+                    _cov.col_f = txtF.Text;
+                }
+                if (txtG != null)
+                {
+                    _cov.col_g = txtG.Text;
+                }
+                if (txtH != null)
+                {
+                    _cov.col_h = txtH.Text;
+                }
+                if (txtI != null)
+                {
+                    _cov.col_i = txtI.Text;
+                }
+
             }
             gvWashing.EditIndex = -1;
             gvWashing.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
@@ -2253,13 +2375,6 @@ namespace ALS.ALSI.Web.view.template
 
         protected void ddlMa_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            //m_microscopic_analysis tem = new m_microscopic_analysis().SelectByID(int.Parse(ddlEop.SelectedValue));
-
-            //if (tem != null)
-            //{
-
-            //}
         }
 
         protected void txtParticleSize01_TextChanged(object sender, EventArgs e)
@@ -2343,7 +2458,15 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("wh_col3", this.WashingHeaders[2]));
             reportParameters.Add(new ReportParameter("wh_col4", this.WashingHeaders[3]));
             reportParameters.Add(new ReportParameter("wh_col5", this.WashingHeaders[4]));
+            reportParameters.Add(new ReportParameter("specification_no", ddlSpecification.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("operator_name", ddlOperatorName.SelectedItem.Text));
 
+            reportParameters.Add(new ReportParameter("TestResult", (ddlResult.SelectedItem.Text.Equals("-NONE-")? " ": ddlResult.SelectedItem.Text)));
+
+            reportParameters.Add(new ReportParameter("dissolving_rinsing", ddlRinsing.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("wash_rinsing",dllWashPressureRinsing.SelectedItem.Text));
+
+            
 
             // Variables
             Warning[] warnings;
@@ -2392,14 +2515,22 @@ namespace ALS.ALSI.Web.view.template
             this.pa.istshb03_text = cbTshb03.Checked.ToString();
             this.pa.ispots01_text = cbPots01.Checked.ToString();
             this.pa.isdissolving_text = cbDissolving.Checked.ToString();
-            this.pa.ispressurerinsing_text = cbPressureRinsing.Checked.ToString();
-            //this.pa.isinternalrinsing_text = cbInternalRinsing.Checked.ToString();
+
             this.pa.isagitation_text = cbAgitation.Checked.ToString();
+            this.pa.ispressurerinsing_text = cbPressureRinsing.Checked.ToString();
+            this.pa.isultrasonic_text = cbUntrasonic.Checked.ToString();
+
+
+            
             this.pa.iswashquantity_text = cbWashQuantity.Checked.ToString();
             this.pa.isrewashingquantity_text = cbRewashingQuantity.Checked.ToString();
-            this.pa.iswashpressurerinsing_text = cbWashPressureRinsing.Checked.ToString();
-            //this.pa.iswashinternalrinsing_text = cbWashInternalRinsing.Checked.ToString();
+
+
             this.pa.iswashagitation_text = cbWashAgitation.Checked.ToString();
+            this.pa.iswashpressurerinsing_text = cbWashPressureRinsing.Checked.ToString();
+            this.pa.iswashultrasonic_text = cbWashUltrasonic.Checked.ToString();
+
+
             this.pa.isoven_text = cbOven.Checked.ToString();
             this.pa.isdesiccator_text = cbDesiccator.Checked.ToString();
             this.pa.gravimetricalalysis_id_text = ddlGravimetricAlalysis.SelectedItem.Text;
@@ -2409,6 +2540,7 @@ namespace ALS.ALSI.Web.view.template
             this.pa.ismeasuringsoftware_text = cbMeasuringSoftware.Checked.ToString();
             this.pa.isautomated_text = cbAutomated.Checked.ToString();
             this.pa.material_id_text = ddlMaterial.SelectedItem.Text;
+            this.pa.manufacturer_id_text = ddlManufacturer.SelectedItem.Text;
             this.pa.lbmembranetype = lbMembraneType.Text;
             this.pa.lbPermembrane_text = lbPermembraneTotal.Text;
             this.pa.totalResidueWeight = lbTotalResidueWeight.Text;
@@ -2475,7 +2607,7 @@ namespace ALS.ALSI.Web.view.template
 
                         #region "Insert Footer & Header from template"
                         Document doc1 = new Document();
-                        doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
+                        doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - PA.doc");
                         Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
                         Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
                         Document doc2 = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
@@ -2544,15 +2676,6 @@ namespace ALS.ALSI.Web.view.template
                 cbFluid2.Checked = false;
                 cbFluid3.Checked = false;
             }
-            //switch (ddl.SelectedIndex)
-            //{
-            //    case 0:
-            //        cbFluid1.Checked = false;
-            //        break;
-            //    default:
-            //        cbFluid1.Checked = true;
-            //        break;
-            //}
         }
 
         protected void ddlFluid2_SelectedIndexChanged(object sender, EventArgs e)
@@ -2567,15 +2690,6 @@ namespace ALS.ALSI.Web.view.template
                 cbFluid2.Checked = true;
                 cbFluid3.Checked = false;
             }
-            //switch (ddl.SelectedIndex)
-            //{
-            //    case 0:
-            //        cbFluid2.Checked = false;
-            //        break;
-            //    default:
-            //        cbFluid2.Checked = true;
-            //        break;
-            //}
         }
 
         protected void ddlFluid3_SelectedIndexChanged(object sender, EventArgs e)
@@ -2590,15 +2704,6 @@ namespace ALS.ALSI.Web.view.template
                 cbFluid2.Checked = false;
                 cbFluid3.Checked = true;
             }
-            //switch (ddl.SelectedIndex)
-            //{
-            //    case 0:
-            //        cbFluid3.Checked = false;
-            //        break;
-            //    default:
-            //        cbFluid3.Checked = true;
-            //        break;
-            //}
         }
 
         protected void cbFluid1_CheckedChanged(object sender, EventArgs e)
@@ -2609,13 +2714,6 @@ namespace ALS.ALSI.Web.view.template
             ddlFluid1.SelectedIndex = 0;
             ddlFluid1.SelectedIndex = 0;
             ddlFluid1.SelectedIndex = 0;
-            //CheckBox ddl = (CheckBox)sender;
-            //switch (ddl.Checked)
-            //{
-            //    case false:
-            //        ddlFluid1.SelectedIndex = 0;
-            //        break;
-            //}
         }
 
         protected void cbFluid2_CheckedChanged(object sender, EventArgs e)
@@ -2626,17 +2724,6 @@ namespace ALS.ALSI.Web.view.template
             ddlFluid1.SelectedIndex = 0;
             ddlFluid1.SelectedIndex = 0;
             ddlFluid1.SelectedIndex = 0;
-
-            //CheckBox ddl = (CheckBox)sender;
-            //switch (ddl.Checked)
-            //{
-            //    case false:
-            //        ddlFluid2.SelectedIndex = 0;
-            //        break;
-            //    case true:
-            //        cbFluid1.Checked = false;
-            //        break;
-            //}
         }
 
         protected void cbFluid3_CheckedChanged(object sender, EventArgs e)
@@ -2647,13 +2734,6 @@ namespace ALS.ALSI.Web.view.template
             ddlFluid1.SelectedIndex = 0;
             ddlFluid1.SelectedIndex = 0;
             ddlFluid1.SelectedIndex = 0;
-            //CheckBox ddl = (CheckBox)sender;
-            //switch (ddl.Checked)
-            //{
-            //    case false:
-            //        ddlFluid3.SelectedIndex = 0;
-            //        break;
-            //}
         }
 
         protected void cbDissolving_CheckedChanged(object sender, EventArgs e)
@@ -2829,12 +2909,6 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        //protected void txtTotalQuantity_TextChanged(object sender, EventArgs e)
-        //{
-        //    TextBox tb = (TextBox)sender;
-        //    txtTotalextractionVolume.Text = tb.Text;
-        //}
-
         protected void txtAutomated_TextChanged(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -2858,7 +2932,6 @@ namespace ALS.ALSI.Web.view.template
         protected void txtPoreSize_TextChanged(object sender, EventArgs e)
         {
             membraneType();
-
         }
 
         protected void txtDiameter_TextChanged(object sender, EventArgs e)
@@ -3113,11 +3186,10 @@ namespace ALS.ALSI.Web.view.template
 
         protected void txtDissolving_TextChanged(object sender, EventArgs e)
         {
-
-            if (CustomUtils.isNumber(txtDissolving.Text) && CustomUtils.isNumber(txtWashQuantity.Text) && CustomUtils.isNumber(txtRewashingQuantity.Text))
-            {
-                txtTotalQuantity.Text = (Convert.ToDouble(txtDissolving.Text) + Convert.ToDouble(txtWashQuantity.Text) + Convert.ToDouble(txtRewashingQuantity.Text)) + "";
-            }
+            Double val1 = CustomUtils.isNumber(txtDissolving.Text) ? Convert.ToDouble(txtDissolving.Text) : 0;
+            Double val2 = CustomUtils.isNumber(txtWashQuantity.Text) ? Convert.ToDouble(txtWashQuantity.Text) : 0;
+            Double val3 = CustomUtils.isNumber(txtRewashingQuantity.Text) ? Convert.ToDouble(txtRewashingQuantity.Text) : 0;
+            txtTotalQuantity.Text = (val1 + val2 + val3) + "";
         }
 
         protected void ddlRinsing_SelectedIndexChanged(object sender, EventArgs e)
@@ -3232,30 +3304,131 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        //protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    Console.WriteLine();
-        //}
+        protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.PA_SPECIFICATION = ddlSpecification.SelectedItem.Text;
+            #region "gvEop"
+            List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
+            if (listOfSpec.Count > 0)
+            {
 
-        //protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
-        //{
-        //    GridView1.EditIndex = e.NewEditIndex;
-        //    GridView1.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
-        //    GridView1.DataBind();
-        //}
+                foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList())
+                {
+                    paDetail.Remove(pd);
+                }
 
-        //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    Console.WriteLine();
-        //}
+                int seq = 1;
+                foreach (tb_m_specification item in listOfSpec)
+                {
+                    if (seq > 1)
+                    {
+                        template_pa_detail tmp = new template_pa_detail();
+                        tmp.id = CustomUtils.GetRandomNumberID();
+                        tmp.seq = seq;
+                        tmp.col_c = item.C;
+                        tmp.col_d = item.D;
+                        tmp.col_e = item.E;
+                        tmp.col_f = item.F;
+                        tmp.col_g = item.G;
+                        tmp.col_h = item.H;
+                        tmp.col_i = item.I;
+                        tmp.col_j = item.J;
+                        tmp.col_k = item.K;
+                        tmp.col_l = item.L;
+                        tmp.col_m = item.M;
+                        tmp.col_n = item.N;
+                        tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                        tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
+                        paDetail.Add(tmp);
 
-        //protected void registerpostback()
-        //{
-        //    foreach (GridView gr in GridView1.Rows)
-        //    {
-        //        Console.WriteLine();
-        //    }
-        //}
+                    }
+                    else
+                    {
+                        //
+                        gvEop.Columns[0].HeaderText = item.C;
+                        gvEop.Columns[1].HeaderText = item.D;
+                        gvEop.Columns[2].HeaderText = item.E;
+                        gvEop.Columns[3].HeaderText = item.F;
+                        gvEop.Columns[4].HeaderText = item.G;
+                        gvEop.Columns[5].HeaderText = item.H;
+                        gvEop.Columns[6].HeaderText = item.I;
+                        gvEop.Columns[7].HeaderText = item.J;
+                        gvEop.Columns[8].HeaderText = item.K;
+                        gvEop.Columns[9].HeaderText = item.L;
+                        gvEop.Columns[10].HeaderText = item.M;
+                        gvEop.Columns[11].HeaderText = item.N;
+
+
+                        gvEop.Columns[0].Visible = !String.IsNullOrEmpty(gvEop.Columns[0].HeaderText);
+                        gvEop.Columns[1].Visible = !String.IsNullOrEmpty(gvEop.Columns[1].HeaderText);
+                        gvEop.Columns[2].Visible = !String.IsNullOrEmpty(gvEop.Columns[2].HeaderText);
+                        gvEop.Columns[3].Visible = !String.IsNullOrEmpty(gvEop.Columns[3].HeaderText);
+                        gvEop.Columns[4].Visible = !String.IsNullOrEmpty(gvEop.Columns[4].HeaderText);
+                        gvEop.Columns[5].Visible = !String.IsNullOrEmpty(gvEop.Columns[5].HeaderText);
+                        gvEop.Columns[6].Visible = !String.IsNullOrEmpty(gvEop.Columns[6].HeaderText);
+                        gvEop.Columns[7].Visible = !String.IsNullOrEmpty(gvEop.Columns[7].HeaderText);
+                        gvEop.Columns[8].Visible = !String.IsNullOrEmpty(gvEop.Columns[8].HeaderText);
+                        gvEop.Columns[9].Visible = !String.IsNullOrEmpty(gvEop.Columns[9].HeaderText);
+                        gvEop.Columns[10].Visible = !String.IsNullOrEmpty(gvEop.Columns[10].HeaderText);
+                        gvEop.Columns[11].Visible = !String.IsNullOrEmpty(gvEop.Columns[11].HeaderText);
+                        //
+                    }
+                    seq++;
+                }
+
+            }
+            #endregion
+            #region "Microscopic Analysis"
+            listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_MICROPIC_DATA) && x.B.Equals(PA_SPECIFICATION)).ToList();
+            if (listOfSpec.Count > 1)
+            {
+                foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList())
+                {
+                    paDetail.Remove(pd);
+                }
+                int row = 1;
+                foreach (var item in listOfSpec)
+                {
+                    template_pa_detail tmp = new template_pa_detail();
+                    tmp.id = CustomUtils.GetRandomNumberID();
+                    tmp.seq = row;
+                    tmp.col_a = item.A;
+                    tmp.col_b = item.B;
+                    tmp.col_c = item.C;
+                    tmp.col_d = item.D;
+                    tmp.col_e = item.E;
+                    tmp.col_f = item.G;
+                    tmp.col_g = item.G;
+                    tmp.col_h = item.H;
+                    tmp.col_i = item.I;
+                    tmp.col_j = item.J;
+                    tmp.col_k = item.K;
+                    tmp.col_l = item.L;
+                    tmp.col_m = item.M;
+                    tmp.col_n = item.N;
+                    tmp.col_o = item.O;
+                    tmp.col_p = item.P;
+                    tmp.col_q = item.Q;
+                    tmp.col_r = item.R;
+
+                    tmp.col_s = item.S;
+                    tmp.col_t = item.T;
+                    tmp.col_u = item.U;
+                    tmp.col_v = item.V;
+                    tmp.col_w = item.W;
+                    tmp.col_x = item.X;
+                    tmp.col_y = item.Y;
+                    tmp.col_z = item.Z;
+
+                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
+                    tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
+                    paDetail.Add(tmp);
+                    row++;
+                }
+            }
+            #endregion
+        }
+
     }
 }
 

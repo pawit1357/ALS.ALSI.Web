@@ -2035,6 +2035,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="template\no_report.doc" />
+    <Content Include="template\Blank Letter Head - PA.doc" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
