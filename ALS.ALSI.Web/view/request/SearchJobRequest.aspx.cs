@@ -500,7 +500,7 @@ namespace ALS.ALSI.Web.view.request
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
-                            btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_SELECT_SPEC);
+                            btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_SELECT_SPEC) && !isHold;
                             switch (job_status)
                             {
                                 case StatusEnum.LOGIN_CONVERT_TEMPLATE:
@@ -509,7 +509,7 @@ namespace ALS.ALSI.Web.view.request
                             }
                             break;
                         case RoleEnum.CHEMIST:
-                            btnWorkFlow.Visible = (job_status == StatusEnum.CHEMIST_TESTING);
+                            btnWorkFlow.Visible = (job_status == StatusEnum.CHEMIST_TESTING) && !isHold;
                             switch (job_status)
                             {
                                 case StatusEnum.CHEMIST_TESTING:
@@ -518,7 +518,7 @@ namespace ALS.ALSI.Web.view.request
                             }
                             break;
                         case RoleEnum.SR_CHEMIST:
-                            btnWorkFlow.Visible = (job_status == StatusEnum.SR_CHEMIST_CHECKING);
+                            btnWorkFlow.Visible = (job_status == StatusEnum.SR_CHEMIST_CHECKING) && !isHold;
                             switch (job_status)
                             {
                                 case StatusEnum.SR_CHEMIST_CHECKING:
@@ -527,7 +527,7 @@ namespace ALS.ALSI.Web.view.request
                             }
                             break;
                         case RoleEnum.LABMANAGER:
-                            btnWorkFlow.Visible = (job_status == StatusEnum.LABMANAGER_CHECKING);
+                            btnWorkFlow.Visible = (job_status == StatusEnum.LABMANAGER_CHECKING) && !isHold;
                             switch (job_status)
                             {
                                 case StatusEnum.LABMANAGER_CHECKING:
@@ -536,7 +536,7 @@ namespace ALS.ALSI.Web.view.request
                             }
                             break;
                         case RoleEnum.ADMIN:
-                            btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF);
+                            btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF) && !isHold;
                             //switch (job_status)
                             //{
                             //    case StatusEnum.ADMIN_CONVERT_WORD:
@@ -568,7 +568,7 @@ namespace ALS.ALSI.Web.view.request
                     btnReTest.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE) && !isHold;
                     btnHold.Visible = ((userRole == RoleEnum.LOGIN) && !isHold);
                     btnUnHold.Visible = ((userRole == RoleEnum.LOGIN) && isHold);
-                    btnWorkFlow.Visible = !isHold;
+                    //btnWorkFlow.Visible = !isHold;
 
 
 

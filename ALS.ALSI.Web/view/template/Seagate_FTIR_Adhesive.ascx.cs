@@ -343,16 +343,16 @@ namespace ALS.ALSI.Web.view.template
                 tmp.row_type = 1;
                 tmp.data_type = 1;
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR Release Liner, ultra-low Silicone facing adhesive(outside)";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
-                tmp.C = "20 cm²";
-                tmp.D = "n-hexane(HPLC Grade)";
-                tmp.E = "10 mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
-                this.Ftir.Add(tmp);
+                //tmp = new template_seagate_ftir_coverpage();
+                //tmp.ID = this.Ftir.Count + 1;
+                //tmp.A = "FTIR Release Liner, ultra-low Silicone facing adhesive(outside)";
+                //tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                //tmp.C = "20 cm²";
+                //tmp.D = "n-hexane(HPLC Grade)";
+                //tmp.E = "10 mL";
+                //tmp.row_type = 1;
+                //tmp.data_type = 1;
+                //this.Ftir.Add(tmp);
                 #endregion
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
@@ -754,16 +754,16 @@ namespace ALS.ALSI.Web.view.template
                 tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 tmp.data_type = Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE);
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR Release Liner, ultra-low Silicone facing adhesive(outside)";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
-                tmp.C = "20 cm²";
-                tmp.D = "n-hexane(HPLC Grade)";
-                tmp.E = "10 mL";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE);
-                this.Ftir.Add(tmp);
+                //tmp = new template_seagate_ftir_coverpage();
+                //tmp.ID = this.Ftir.Count + 1;
+                //tmp.A = "FTIR Release Liner, ultra-low Silicone facing adhesive(outside)";
+                //tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
+                //tmp.C = "20 cm²";
+                //tmp.D = "n-hexane(HPLC Grade)";
+                //tmp.E = "10 mL";
+                //tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                //tmp.data_type = Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE);
+                //this.Ftir.Add(tmp);
                 #endregion
 
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
@@ -887,7 +887,7 @@ namespace ALS.ALSI.Web.view.template
 
                     tmp = new template_seagate_ftir_coverpage();
                     tmp.ID = this.Ftir.Count + 1;
-                    tmp.A = "Release Liner, ultra-low Silicone facing adhesive (inside)";
+                    tmp.A = datas[4].P;
                     tmp.B = item.P;
                     tmp.C = "";
                     tmp.D = "";
@@ -896,16 +896,16 @@ namespace ALS.ALSI.Web.view.template
                     tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
                     this.Ftir.Add(tmp);
 
-                    tmp = new template_seagate_ftir_coverpage();
-                    tmp.ID = this.Ftir.Count + 1;
-                    tmp.A = "Release Liner, ultra-low Silicone facing adhesive (outside)";
-                    tmp.B = item.P;
-                    tmp.C = "";
-                    tmp.D = "";
-                    tmp.E = "";
-                    tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                    tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
-                    this.Ftir.Add(tmp);
+                    //tmp = new template_seagate_ftir_coverpage();
+                    //tmp.ID = this.Ftir.Count + 1;
+                    //tmp.A = "Release Liner, ultra-low Silicone facing adhesive (outside)";
+                    //tmp.B = item.P;
+                    //tmp.C = "";
+                    //tmp.D = "";
+                    //tmp.E = "";
+                    //tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                    //tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
+                    //this.Ftir.Add(tmp);
 
                     tmp = new template_seagate_ftir_coverpage();
                     tmp.ID = this.Ftir.Count + 1;

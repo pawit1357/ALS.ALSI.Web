@@ -2261,6 +2261,17 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", dt6));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", dt7));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet8", dt8));
+
+                if (dt2.Rows.Count > 0 && dt3.Rows.Count > 0 && dt4.Rows.Count > 0 && dt5.Rows.Count > 0)
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet9", dt));
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet9", new DataTable()));
+
+                }
+
                 //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND)).ToList().ToDataTable()));
 
 

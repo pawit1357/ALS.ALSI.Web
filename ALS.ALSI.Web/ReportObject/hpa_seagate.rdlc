@@ -6263,7 +6263,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Format(Parameters!Date.Value, "dd MMMM yyyy")</Value>
+                    <Value>=Parameters!Date.Value</Value>
                     <Style>
                       <FontFamily>Lucida Sans</FontFamily>
                     </Style>
@@ -6344,7 +6344,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Format(Parameters!DateSampleReceived.Value, "dd MMMM yyyy")</Value>
+                    <Value>=Parameters!DateSampleReceived.Value</Value>
                     <Style>
                       <FontFamily>Lucida Sans</FontFamily>
                     </Style>
@@ -6357,7 +6357,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Format(Parameters!DateAnalyzed.Value, "dd MMMM yyyy")</Value>
+                    <Value>=Parameters!DateAnalyzed.Value</Value>
                     <Style>
                       <FontFamily>Lucida Sans</FontFamily>
                     </Style>
@@ -6370,7 +6370,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Format(Parameters!DateTestCompleted.Value, "dd MMMM yyyy")</Value>
+                    <Value>=Parameters!DateTestCompleted.Value</Value>
                     <Style>
                       <FontFamily>Lucida Sans</FontFamily>
                     </Style>

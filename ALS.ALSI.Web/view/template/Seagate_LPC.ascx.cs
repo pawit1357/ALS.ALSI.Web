@@ -50,7 +50,8 @@ namespace ALS.ALSI.Web.view.template
         }
         public List<template_seagate_lpc_coverpage> Lpcs
         {
-            get {
+            get
+            {
                 List<template_seagate_lpc_coverpage> tmps = (List<template_seagate_lpc_coverpage>)Session[GetType().Name + "Lpcs"];
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_state == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
@@ -545,7 +546,7 @@ namespace ALS.ALSI.Web.view.template
                                 surfaceArea = txtSurfaceArea06.Text;
                             }
 
-                            _tmp.SurfaceArea = !CustomUtils.isNumber(surfaceArea)? 0 : Convert.ToDouble(surfaceArea);
+                            _tmp.SurfaceArea = !CustomUtils.isNumber(surfaceArea) ? 0 : Convert.ToDouble(surfaceArea);
                             _tmp.template_type = !CustomUtils.isNumber(ddlTemplateType.SelectedValue) ? 0 : Convert.ToInt32(ddlTemplateType.SelectedValue);
                             _tmp.unit = !CustomUtils.isNumber(ddlUnit.SelectedValue) ? 0 : Convert.ToInt32(ddlUnit.SelectedValue);
                         }
@@ -1021,14 +1022,13 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[4].Results = listAverages[3].Value;
                             }
-                            if (listAverages.Count >=5)
+                            if (listAverages.Count >= 5)
                             {
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
-                            if (listAverages.Count >= 6)
-                            {
-                                listCoverPage[6].Results = lbAverage.Text;
-                            }
+
+                            listCoverPage[listCoverPage.Count - 1].Results = lbAverage.Text;
+
 
 
                             gvCoverPage03.DataSource = listCoverPage;
@@ -1136,14 +1136,13 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[4].Results = listAverages[3].Value;
                             }
-                            if (listAverages.Count >=5)
+                            if (listAverages.Count >= 5)
                             {
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
-                            if (listAverages.Count >= 6)
-                            {
-                                listCoverPage[6].Results = lbAverage05.Text;
-                            }
+
+                            listCoverPage[listCoverPage.Count-1].Results = lbAverage05.Text;
+
 
                             gvCoverPage05.DataSource = listCoverPage;
                             gvCoverPage05.DataBind();
@@ -1254,10 +1253,9 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
-                            if (listAverages.Count >= 6)
-                            {
-                                listCoverPage[6].Results = lbAverage06.Text;
-                            }
+
+                            listCoverPage[listCoverPage.Count - 1].Results = lbAverage06.Text;
+
 
 
                             gvCoverPage06.DataSource = listCoverPage;
@@ -1322,7 +1320,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
             reportParameters.Add(new ReportParameter("pNewPage", "1"));
 
-            
+
 
             // Variables
             Warning[] warnings;
@@ -1331,7 +1329,7 @@ namespace ALS.ALSI.Web.view.template
             string encoding = string.Empty;
             string extension = string.Empty;
 
-            String[] particleSizes = new String[]  { "0.300", "0.500", "0.600" };
+            String[] particleSizes = new String[] { "0.300", "0.500", "0.600" };
 
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
@@ -1363,7 +1361,7 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
 
             }
-            else if(dt03.Rows.Count > 0 && (dt05.Rows.Count > 0 && dt06.Rows.Count == 0))
+            else if (dt03.Rows.Count > 0 && (dt05.Rows.Count > 0 && dt06.Rows.Count == 0))
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt03)); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt05)); // Add datasource here
@@ -1372,7 +1370,7 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
             }
-            else if (dt03.Rows.Count > 0 && (dt05.Rows.Count ==0 && dt06.Rows.Count > 0))
+            else if (dt03.Rows.Count > 0 && (dt05.Rows.Count == 0 && dt06.Rows.Count > 0))
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt03)); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
@@ -1389,7 +1387,8 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable()));
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", breakLines.ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
-            }else if(dt03.Rows.Count == 0)
+            }
+            else if (dt03.Rows.Count == 0)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt05)); // Add datasource here
@@ -1487,7 +1486,7 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-        
+
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
             tb_m_specification tem = new tb_m_specification().SelectByID(int.Parse(ddlSpecification.SelectedValue));
@@ -1503,12 +1502,12 @@ namespace ALS.ALSI.Web.view.template
 
                 #region "0.300"
                 List<template_seagate_lpc_coverpage> results03 = new List<template_seagate_lpc_coverpage>();
-                for(int i= 0; i <= 5; i++)
+                for (int i = 0; i <= 5; i++)
                 {
                     results03.Add(new template_seagate_lpc_coverpage
                     {
                         channel_size = "0.300",
-                        LiquidParticleCount = (i==0)? "Total number of particles ≥ 0.3um ":(i==1)? "1st Run":(i==2)? "2nd Run": i+"rd Run",
+                        LiquidParticleCount = (i == 0) ? "Total number of particles ≥ 0.3um " : (i == 1) ? "1st Run" : (i == 2) ? "2nd Run" : i + "rd Run",
                         SpecificationLimits = "",
                         Results = "",
                         row_state = Convert.ToInt32(RowTypeEnum.Normal),

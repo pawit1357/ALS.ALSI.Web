@@ -1220,7 +1220,7 @@ namespace ALS.ALSI.Web.view.template
 
             List<String> ignoreItemList = new List<string>();
             ignoreItemList.Add("NiP with AlMgSi");
-
+            
             #region "US-LPC(0.3)"
             //=AVERAGE(B15,B16,B17)
             if (!String.IsNullOrEmpty(txt_UsLPC03_B15.Text) &&
