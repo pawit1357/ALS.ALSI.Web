@@ -144,7 +144,7 @@ namespace ALS.ALSI.Biz.DataAccess
                              join tt in ctx.m_type_of_test on s.type_of_test_id equals tt.ID
                              join c in ctx.m_customer on j.customer_id equals c.ID
                              join cp in ctx.m_customer_contract_person on j.contract_person_id equals cp.ID
-                             orderby s.job_number descending
+                             orderby  s.ID descending
                              select new
                              {
                                  ID = j.ID,

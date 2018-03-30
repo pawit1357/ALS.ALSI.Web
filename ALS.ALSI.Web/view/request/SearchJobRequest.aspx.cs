@@ -313,7 +313,7 @@ namespace ALS.ALSI.Web.view.request
                 case CommandNameEnum.ChangeSrCompleteDate:
                     Server.Transfer(Constants.LINK_JOB_SR_COMPLETE_DATE);
                     break;
-                    
+
                 case CommandNameEnum.ChangePo:
                     Server.Transfer(Constants.LINK_JOB_CHANGE_PO);
                     break;
@@ -446,7 +446,7 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnViewFile = (LinkButton)e.Row.FindControl("btnViewFile");
                     LinkButton btnChangeSrCompleteDate = (LinkButton)e.Row.FindControl("btnChangeSrCompleteDate");
 
-                    
+
 
 
 
@@ -745,6 +745,7 @@ namespace ALS.ALSI.Web.view.request
 
         protected void ExportToExcel()
         {
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
 
             using (XLWorkbook wb = new XLWorkbook())
@@ -784,33 +785,59 @@ namespace ALS.ALSI.Web.view.request
                                 "`Extent9`.`name` AS `Job Status`," +
                                 "DATE_FORMAT(`Extent2`.`date_srchemist_complate`,'%d %b %Y') AS `Received`," +
                                 "DATE_FORMAT(`Extent2`.`date_admin_sent_to_cus`,'%d %b %Y') AS  `Report Sent to Customer`," +
-                                "DATE_FORMAT(`Extent1`.`date_of_receive`,'%d %b %Y') AS `Receive Date`," +
-                                //"DATE_FORMAT(`Extent2`.`due_date`,'%e %b %Y') AS `Due Date`," +
-                                "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end) AS `Due Date`," +
-                                "`Extent2`.`job_number` AS `ALS Ref`," +
-                                "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
-                                "`Extent2`.`other_ref_no` AS `Other Ref No`," +
-                                "`Extent5`.`company_name` AS `Company`," +
-                                "`Extent2`.`sample_invoice` AS `Invoice`," +
-                                "`Extent2`.`sample_po` AS `Po`," +
-                                "`Extent6`.`name` as `Contact`," +
-                                "`Extent2`.`description` AS `Description`," +
-                                "`Extent2`.`model` AS Model," +
-                                "`Extent2`.`surface_area` AS `Surface Area`," +
-                                "`Extent3`.`name` AS `Specification`," +
-                                "`Extent4`.`name` AS `Type of test`," +
-                                "DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
-                                "`Extent8`.`username` AS `Update By`" +
+                                "DATE_FORMAT(`Extent1`.`date_of_receive`,'%d %b %Y') AS `Receive Date`,";
+                    switch (userRole)
+                    {
+                        case RoleEnum.LOGIN:
+                        case RoleEnum.CHEMIST:
+                        case RoleEnum.SR_CHEMIST:
+                        case RoleEnum.LABMANAGER:
+                            //litDueDate.Text = due_date_lab.ToString("dd MMM yyyy");
+                            sql += "DATE_FORMAT((case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end),'%e %b %Y') AS `Due Date`,";
 
-                                " FROM `job_info` AS `Extent1`" +
-                                " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
-                                " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
-                                " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
-                                " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
-                                " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
-                                " INNER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
-                                " INNER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
-                                " INNER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
+                            break;
+                        case RoleEnum.ADMIN:
+                        case RoleEnum.MARKETING:
+                        case RoleEnum.BUSINESS_MANAGER:
+                            //litDueDate.Text = due_date_customer.ToString("dd MMM yyyy");
+                            sql += "DATE_FORMAT((case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_customer` end),'%e %b %Y') AS `Due Date`,";
+
+                            break;
+                        default:
+                            //litDueDate.Text = due_date_lab.ToString("dd MMM yyyy");
+                            sql += "DATE_FORMAT((case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end),'%e %b %Y') AS `Due Date`,";
+
+                            break;
+                    }
+                    sql += "`Extent2`.`job_number` AS `ALS Ref`," +
+                     "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
+                     "`Extent2`.`other_ref_no` AS `Other Ref No`," +
+                     "`Extent5`.`company_name` AS `Company`," +
+                     "`Extent2`.`sample_invoice` AS `Invoice`," +
+                     "`Extent2`.`sample_po` AS `Po`," +
+                     "`Extent6`.`name` as `Contact`," +
+                     "`Extent2`.`description` AS `Description`," +
+                     "`Extent2`.`model` AS Model," +
+                     "`Extent2`.`surface_area` AS `Surface Area`," +
+                     "`Extent3`.`name` AS `Specification`," +
+                     "`Extent4`.`name` AS `Type of test`," +
+                     "DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
+                     "`Extent8`.`username` AS `Update By`" +
+
+                     " FROM `job_info` AS `Extent1`" +
+                     " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
+                     " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
+                     " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
+                     " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
+                     " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
+                     " INNER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
+                     " INNER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
+                     " INNER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
+
+
+
+
+
 
 
                     StringBuilder sqlCri = new StringBuilder();
@@ -903,7 +930,7 @@ namespace ALS.ALSI.Web.view.request
                     }
 
                     sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString().Substring(0, sqlCri.ToString().Length - 5) : "";
-                    sql += " ORDER BY `Extent2`.`job_number` DESC";
+                    sql += " ORDER BY `Extent2`.`ID` DESC";
 
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
 

@@ -872,10 +872,10 @@ namespace ALS.ALSI.Web.view.request
             if (jobSample != null)
             {
                 jobSample.job_id = objJobInfo.ID;
-                if (this.CommandName == CommandNameEnum.Add)
-                {
+                //if (this.CommandName == CommandNameEnum.Add)
+                //{
                     jobSample.job_number = _txtRefNo.Text;
-                }
+                //}
                 jobSample.description = _txtDescriptoin.Text;
                 jobSample.model = _txtModel.Text;
                 jobSample.surface_area = _txtSurfaceArea.Text;
