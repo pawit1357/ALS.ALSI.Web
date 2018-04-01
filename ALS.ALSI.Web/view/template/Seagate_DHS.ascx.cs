@@ -520,32 +520,32 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step4owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
+                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
 
 
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        FileUpload1.SaveAs(source_file);
+                        this.jobSample.path_pdf = source_file_url;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        //lbMessage.Text = string.Empty;
+                    }
+                    else
+                    {
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
+                    }
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
 

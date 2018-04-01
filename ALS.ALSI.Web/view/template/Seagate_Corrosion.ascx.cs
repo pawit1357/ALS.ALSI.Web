@@ -472,32 +472,32 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
+                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
 
 
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        btnUpload.SaveAs(source_file);
+                        this.jobSample.path_pdf = source_file_url;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        //lbMessage.Text = string.Empty;
+                    }
+                    else
+                    {
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
+                    }
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
 
@@ -846,32 +846,26 @@ namespace ALS.ALSI.Web.view.template
             string extension = string.Empty;
 
 
-            //DataTable dtResult = new DataTable("temperature_humidity_parameters");
-            //DataColumn[] cols1 ={ new DataColumn("specification",typeof(String)),
-            //                      new DataColumn("result",typeof(String))
-            //                  };
-            //dtResult.Columns.AddRange(cols1);
-            //DataRow row1 = dtResult.NewRow();
-            //row1["temperature_humidity_parameters"] = component.B;
-            //row1["specification"] = component.C;
-            //row1["result"] = this.coverpages[0].result;
-            //dtResult.Rows.Add(row1);
 
 
 
             List<template_seagate_corrosion_img> dat = new List<template_seagate_corrosion_img>();
             template_seagate_corrosion_img tmp = new template_seagate_corrosion_img();
             template_seagate_corrosion_img corImg = this.refImg.Where(x => x.img_type.Value == 1).FirstOrDefault();
-            if (corImg != null)
+            try
             {
-                tmp.img1 = CustomUtils.GetBytesFromImage(corImg.path_img1);
+                if (corImg != null)
+                {
+                    tmp.img1 = CustomUtils.GetBytesFromImage(corImg.path_img1);
+                }
+                corImg = this.refImg.Where(x => x.img_type.Value == 2).FirstOrDefault();
+                if (corImg != null)
+                {
+                    tmp.img2 = CustomUtils.GetBytesFromImage(corImg.path_img1);
+                }
+                dat.Add(tmp);
             }
-            corImg = this.refImg.Where(x => x.img_type.Value == 2).FirstOrDefault();
-            if (corImg != null)
-            {
-                tmp.img2 = CustomUtils.GetBytesFromImage(corImg.path_img1);
-            }
-            dat.Add(tmp);
+            catch (Exception ex) { }
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;

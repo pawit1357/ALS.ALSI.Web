@@ -212,4 +212,218 @@ ADD COLUMN `per_text` VARCHAR(45) NULL AFTER `operater_name`;
 PA5x_BOSCH0442S00155 > D:\ALS\PA_RawData_02\Template_PAB_01 > ELN-0856-PAB 
 PA5x_BOSCHF00VP19194 > D:\ALS\PA_RawData_02\Template_PAB_02 >
 PA5x_BOSCH0442S00155PRV  > D:\ALS\PA_RawData_02\Template_PAB_02 >
+
+
+$("#req-department_id")
+
+ var txt_pathogen_name = $('#txt_pathogen_name');
+ var txt_pathogen_code = $('#txt_pathogen_code');
+ var txt_pathogen_volume = $('#txt_pathogen_volume');
+ var txt_supervisor = $('#txt_supervisor');
+ var txt_manufacture_plant = $('#txt_manufacture_plant');
+ var txt_manufacture_fuse = $('#txt_manufacture_fuse');
+ var txt_manufacture_prepare = $('#txt_manufacture_prepare');
+ var txt_manufacture_transform = $('#txt_manufacture_transform');
+ var txt_manufacture_packing = $('#txt_manufacture_packing');
+ var txt_manufacture_total_packing = $('#txt_manufacture_total_packing');
+ var txt_distribute_sell = $('#txt_distribute_sell');
+ var txt_distribute_pay = $('#txt_distribute_pay');
+ var txt_distribute_give = $('#txt_distribute_give');
+ var txt_distribute_exchange = $('#txt_distribute_exchange');
+ var txt_distribute_donate = $('#txt_distribute_donate');
+ var txt_distribute_lost = $('#txt_distribute_lost');
+ var txt_distribute_discard = $('#txt_distribute_discard');
+ var txt_distribute_destroy = $('#txt_distribute_destroy');
+ var txt_import = $('#txt_import');
+ var txt_export = $('#txt_export');
+ var txt_import_to_other = $('#txt_import_to_other');
+ ----------------------
+
+'<td><input style="width : 100px !important;" id="pathogen_name" type="text" value="'+txt_pathogen_name+'"class="form-control" name="pathogen_name[]"></td>'+
+'<td><input style="width : 100px !important;" id="pathogen_code" type="text" value="'+txt_pathogen_code+'"class="form-control" name="pathogen_code[]"></td>'+
+'<td><input style="width : 100px !important;" id="pathogen_volume" type="text" value="'+txt_pathogen_volume+'"class="form-control" name="pathogen_volume[]"></td>'+
+'<td><input style="width : 100px !important;" id="supervisor" type="text" value="'+txt_supervisor+'"class="form-control" name="supervisor[]"></td>'+
+'<td><input style="width : 60px !important;" id="manufacture_plant" type="text" value="'+txt_manufacture_plant+'"class="form-control" name="manufacture_plant[]"></td>'+
+'<td><input style="width : 60px !important;" id="manufacture_fuse" type="text" value="'+txt_manufacture_fuse+'"class="form-control" name="manufacture_fuse[]"></td>'+
+'<td><input style="width : 60px !important;" id="manufacture_prepare" type="text" value="'+txt_manufacture_prepare+'"class="form-control" name="manufacture_prepare[]"></td>'+
+'<td><input style="width : 60px !important;" id="manufacture_transform" type="text" value="'+txt_manufacture_transform+'"class="form-control" name="manufacture_transform[]"></td>'+
+'<td><input style="width : 60px !important;" id="manufacture_packing" type="text" value="'+txt_manufacture_packing+'"class="form-control" name="manufacture_packing[]"></td>'+
+'<td><input style="width : 60px !important;" id="manufacture_total_packing" type="text" value="'+txt_manufacture_total_packing+'"class="form-control" name="manufacture_total_packing[]"></td>'+
+'<td><input style="width : 60px !important;" id="distribute_sell" type="text" value="'+txt_distribute_sell+'"class="form-control" name="distribute_sell[]"></td>'+
+'<td><input style="width : 60px !important;" id="distribute_pay" type="text" value="'+txt_distribute_pay+'"class="form-control" name="distribute_pay[]"></td>'+
+'<td><input style="width : 60px !important;" id="distribute_give" type="text" value="'+txt_distribute_give+'"class="form-control" name="distribute_give[]"></td>'+
+'<td><input style="width : 60px !important;" id="distribute_exchange" type="text" value="'+txt_distribute_exchange+'"class="form-control" name="distribute_exchange[]"></td>'+
+'<td><input style="width : 60px !important;" id="distribute_donate" type="text" value="'+txt_distribute_donate+'"class="form-control" name="distribute_donate[]"></td>'+
+'<td><input style="width : 60px !important;" id="distribute_lost" type="text" value="'+txt_distribute_lost+'"class="form-control" name="distribute_lost[]"></td>'+
+'<td><input style="width : 60px !important;" id="distribute_discard" type="text" value="'+txt_distribute_discard+'"class="form-control" name="distribute_discard[]"></td>'+
+'<td><input style="width : 60px !important;" id="distribute_destroy" type="text" value="'+txt_distribute_destroy+'"class="form-control" name="distribute_destroy[]"></td>'+
+'<td><input style="width : 60px !important;" id="import" type="text" value="'+txt_import+'"class="form-control" name="import[]"></td>'+
+'<td><input style="width : 60px !important;" id="export" type="text" value="'+txt_export+'"class="form-control" name="export[]"></td>'+
+'<td><input style="width : 60px !important;" id="import_to_other" type="text" value="'+txt_import_to_other+'"class="form-control" name="import_to_other[]"></td>'+
+
+<td><input style="width : 100px !important;" id="txt_pathogen_name" type="text" value=""class="form-control"></td>
+<td><input style="width : 100px !important;" id="txt_pathogen_code" type="text" value=""class="form-control"></td>
+<td><input style="width : 100px !important;" id="txt_pathogen_volume" type="text" value=""class="form-control"></td>
+<td><input style="width : 100px !important;" id="txt_supervisor" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_manufacture_plant" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_manufacture_fuse" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_manufacture_prepare" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_manufacture_transform" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_manufacture_packing" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_manufacture_total_packing" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_distribute_sell" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_distribute_pay" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_distribute_give" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_distribute_exchange" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_distribute_donate" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_distribute_lost" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_distribute_discard" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_distribute_destroy" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_import" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_export" type="text" value=""class="form-control"></td>
+<td><input style="width : 60px !important;" id="txt_import_to_other" type="text" value=""class="form-control"></td>
+
+ -----------------------
+
+ 	    	    	'<td>'+txt_pathogen_name+'</td>'+
+	    	    	'<td>'+txt_pathogen_code+'</td>'+
+	    	    	'<td>'+txt_pathogen_volume +'</td>'+
+	    	    	'<td>'+txt_supervisor+'</td>'+
+	    	    	'<td>'+txt_manufacture_plant+'</td>'+
+	    	    	'<td>'+txt_manufacture_fuse+'</td>'+
+	    	    	'<td>'+txt_manufacture_prepare+'</td>'+
+	    	    	'<td>'+txt_manufacture_transform+'</td>'+
+	    	    	'<td>'+txt_manufacture_packing+'</td>'+
+	    	    	'<td>'+txt_manufacture_total_packing+'</td>'+
+	    	    	'<td>'+txt_distribute_sell+'</td>'+
+	    	    	'<td>'+txt_distribute_pay+'</td>'+
+	    	    	'<td>'+txt_distribute_give+'</td>'+
+	    	    	'<td>'+txt_distribute_exchange+'</td>'+
+	    	    	'<td>'+txt_distribute_donate+'</td>'+
+	    	    	'<td>'+txt_distribute_lost+'</td>'+
+	    	    	'<td>'+txt_distribute_discard+'</td>'+
+	    	    	'<td>'+txt_distribute_destroy+'</td>'+
+	    	    	'<td>'+txt_import+'</td>'+
+	    	    	'<td>'+txt_export+'</td>'+
+	    	    	'<td>'+txt_import_to_other+'</td>'+
+	    	    	'<td>'++'</td>'+
+
+
+					pathogen_name[]
+					pathogen_code[]
+					pathogen_volume[]
+					supervisor[]
+					manufacture_plant[]
+					manufacture_fuse[]
+					manufacture_prepare[]
+					manufacture_transform[]
+					manufacture_packing[]
+					manufacture_total_packing[]
+					distribute_sell[]
+					distribute_pay[]
+					distribute_give[]
+					distribute_exchange[]
+					distribute_donate[]
+					distribute_lost[]
+					distribute_discard[]
+					distribute_destroy[]
+					import[]
+					export[]
+					import_to_other[]
+
+					txt_pathogen_name
+					txt_pathogen_code
+					txt_pathogen_volume
+					txt_supervisor
+					txt_manufacture_plant
+					txt_manufacture_fuse
+					txt_manufacture_prepare
+					txt_manufacture_transform
+					txt_manufacture_packing
+					txt_manufacture_total_packing
+					txt_distribute_sell
+					txt_distribute_pay
+					txt_distribute_give
+					txt_distribute_exchange
+					txt_distribute_donate
+					txt_distribute_lost
+					txt_distribute_discard
+					txt_distribute_destroy
+					txt_import
+					txt_export
+					txt_import_to_other
+
+
+
+
+
+					----------------
+					pathogen_name
+					pathogen_code
+					pathogen_volume
+					supervisor
+					manufacture_plant
+					manufacture_fuse
+					manufacture_prepare
+					manufacture_transform
+					manufacture_packing
+					manufacture_total_packing
+					distribute_sell
+					distribute_pay
+					distribute_give
+					distribute_exchange
+					distribute_donate
+					distribute_lost
+					distribute_discard
+					distribute_destroy
+					import
+					export
+					import_to_other
+
+					--
+					$pathogen_name = $_POST['pathogen_name']
+					$pathogen_code = $_POST['pathogen_code']
+					$pathogen_volume = $_POST['pathogen_volume']
+					$supervisor = $_POST['supervisor']
+					$manufacture_plant = $_POST['manufacture_plant']
+					$manufacture_fuse = $_POST['manufacture_fuse']
+					$manufacture_prepare = $_POST['manufacture_prepare']
+					$manufacture_transform = $_POST['manufacture_transform']
+					$manufacture_packing = $_POST['manufacture_packing']
+					$manufacture_total_packing = $_POST['manufacture_total_packing']
+					$distribute_sell = $_POST['distribute_sell']
+					$distribute_pay = $_POST['distribute_pay']
+					$distribute_give = $_POST['distribute_give']
+					$distribute_exchange = $_POST['distribute_exchange']
+					$distribute_donate = $_POST['distribute_donate']
+					$distribute_lost = $_POST['distribute_lost']
+					$distribute_discard = $_POST['distribute_discard']
+					$distribute_destroy = $_POST['distribute_destroy']
+					$import = $_POST['import']
+					$export = $_POST['export']
+					$import_to_other = $_POST['import_to_other']
+
+					------
+					$model->pathogen_name
+					$model->pathogen_code
+					$model->pathogen_volume
+					$model->supervisor
+					$model->manufacture_plant
+					$model->manufacture_fuse
+					$model->manufacture_prepare
+					$model->manufacture_transform
+					$model->manufacture_packing
+					$model->manufacture_total_packing
+					$model->distribute_sell
+					$model->distribute_pay
+					$model->distribute_give
+					$model->distribute_exchange
+					$model->distribute_donate
+					$model->distribute_lost
+					$model->distribute_discard
+					$model->distribute_destroy
+					$model->import
+					$model->export
+					$model->import_to_other
+
 */
