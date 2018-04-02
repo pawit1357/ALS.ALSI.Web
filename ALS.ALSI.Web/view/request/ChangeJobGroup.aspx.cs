@@ -50,7 +50,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isPoGroupOperation"]; }
             set { Session[GetType().Name + "isPoGroupOperation"] = value; }
         }
-
+        public Boolean isChangeDueDateGroup
+        {
+            get { return (Boolean)Session[GetType().Name + "isChangeDueDateGroup"]; }
+            set { Session[GetType().Name + "isChangeDueDateGroup"] = value; }
+        }
         private void initialPage()
         {
             btnSave.Enabled = true;
@@ -67,11 +71,12 @@ namespace ALS.ALSI.Web.view.request
             gvSample.DataBind();
 
             btnSave.Visible = this.dataList.Count > 0;
-            pChemist.Visible = this.dataList.Count > 0;
+            pChemist.Visible = (this.dataList.Count > 0) && !this.isChangeDueDateGroup && !this.isPoGroupOperation;
+            pChangeDueDate.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && this.isChangeDueDateGroup;
             if (!btnSave.Visible)
             {
                 lbDesc.Text = "รายการที่เลือกไม่ได้ถูกกำหนดเป็นงานแบบกลุ่ม";
-                
+
             }
         }
 
@@ -94,6 +99,7 @@ namespace ALS.ALSI.Web.view.request
                 this.selectedList = new List<int>();
                 this.selectedList = prvPage.selectedList;
                 this.isPoGroupOperation = prvPage.isPoGroupOperation;
+                this.isChangeDueDateGroup = prvPage.isDuedateGroupOperation;
                 this.dataList = job_sample.FindAllByIds(this.selectedList);
 
                 ddlAssignTo.Items.Clear();
@@ -120,7 +126,7 @@ namespace ALS.ALSI.Web.view.request
                 pRemark.Visible = false;
                 pDisapprove.Visible = false;
                 pAccount.Visible = false;
-                
+                pChangeDueDate.Visible = false;
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 switch (userRole)
                 {
@@ -132,6 +138,7 @@ namespace ALS.ALSI.Web.view.request
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         pAccount.Visible = false;
+                        pChangeDueDate.Visible = false;
                         lbDesc.Text = "Login: ทำรายการแบบกลุ่ม";
                         break;
                     case RoleEnum.CHEMIST:
@@ -142,6 +149,7 @@ namespace ALS.ALSI.Web.view.request
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         pAccount.Visible = false;
+                        pChangeDueDate.Visible = false;
                         lbDesc.Text = "Chemist: ทำรายการแบบกลุ่ม";
                         break;
                     case RoleEnum.SR_CHEMIST:
@@ -150,10 +158,11 @@ namespace ALS.ALSI.Web.view.request
                         ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                         pShowChemistFileUpload.Visible = false;
                         pChemist.Visible = false;
-                        pSrChemist.Visible = true;
+                        pSrChemist.Visible = !isChangeDueDateGroup;
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         pAccount.Visible = false;
+                        pChangeDueDate.Visible = isChangeDueDateGroup;
                         lbDesc.Text = "Sr.Chemist: ทำรายการแบบกลุ่ม";
 
                         break;
@@ -167,6 +176,7 @@ namespace ALS.ALSI.Web.view.request
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         pAccount.Visible = false;
+                        pChangeDueDate.Visible = false;
                         lbDesc.Text = "Lab Mnager: ทำรายการแบบกลุ่ม";
 
                         break;
@@ -178,7 +188,7 @@ namespace ALS.ALSI.Web.view.request
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         //Boolean isChangePo = this.dataList.Exists(x => x.job_status == Convert.ToInt16(StatusEnum.JOB_COMPLETE)|| x.job_status == Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC));
-                        
+                        pChangeDueDate.Visible = isChangeDueDateGroup;
                         pAccount.Visible = this.isPoGroupOperation;
                         lbDesc.Text = "Admin: ทำรายการแบบกลุ่ม";
 
@@ -190,6 +200,7 @@ namespace ALS.ALSI.Web.view.request
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         pAccount.Visible = true;
+                        pChangeDueDate.Visible = false;
                         lbDesc.Text = "Account: ทำรายการแบบกลุ่ม";
                         break;
                     default:
@@ -200,6 +211,7 @@ namespace ALS.ALSI.Web.view.request
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         pAccount.Visible = false;
+                        pChangeDueDate.Visible = false;
                         break;
                 }
                 initialPage();
@@ -211,12 +223,27 @@ namespace ALS.ALSI.Web.view.request
             string yyyy = DateTime.Now.ToString("yyyy");
             string MM = DateTime.Now.ToString("MM");
             string dd = DateTime.Now.ToString("dd");
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
             foreach (job_sample jobSample in this.dataList)
             {
                 if (this.isPoGroupOperation)
                 {
                     jobSample.sample_po = txtPo.Text;
+                }
+                if (this.isChangeDueDateGroup)
+                {
+                    switch (userRole)
+                    {
+                        case RoleEnum.SR_CHEMIST:
+                            jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+
+                            break;
+                        case RoleEnum.ADMIN:
+                            jobSample.date_admin_sent_to_cus = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+
+                            break;
+                    }
                 }
                 else
                 {
@@ -295,6 +322,7 @@ namespace ALS.ALSI.Web.view.request
                             }
                             break;
                         case StatusEnum.SR_CHEMIST_CHECKING:
+
                             StatusEnum _srChemistSelectedStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
                             switch (_srChemistSelectedStatus)
                             {
@@ -308,9 +336,11 @@ namespace ALS.ALSI.Web.view.request
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     break;
                             }
+
                             break;
 
                         case StatusEnum.LABMANAGER_CHECKING:
+
                             StatusEnum _labmanSelectedStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
                             switch (_labmanSelectedStatus)
                             {
@@ -321,6 +351,7 @@ namespace ALS.ALSI.Web.view.request
                                     jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
                                     break;
                             }
+
                             break;
                         case StatusEnum.ADMIN_CONVERT_WORD:
 

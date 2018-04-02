@@ -425,5 +425,7 @@ $("#req-department_id")
 					$model->import
 					$model->export
 					$model->import_to_other
+					----------------------
+					UPDATE `alsi`.`m_completion_scheduled` SET `lab_due_date`='2', `customer_due_date`='2' WHERE `ID`='3';
 
 */

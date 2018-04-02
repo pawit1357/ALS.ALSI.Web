@@ -221,10 +221,10 @@
 
                         </div>
                         <div class="actions">
+                            <asp:LinkButton ID="btnOperation" runat="server" class="btn yellow-crusta" OnClick="btnOperation_Click"> Operation</asp:LinkButton>
+                            <asp:LinkButton ID="btnOperationPo" runat="server" class="btn purple-plum" OnClick="btnOperation_Click"> Group Po</asp:LinkButton>
+                            <asp:LinkButton ID="btnOperationDueDate" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group Duedate</asp:LinkButton>
 
-                           <asp:LinkButton ID="btnOperationPo" runat="server" class="btn btn-default btn-sm" OnClick="btnOperation_Click"> Group Po</asp:LinkButton>
-
-                            <asp:LinkButton ID="btnOperation" runat="server" class="btn btn-default btn-sm" OnClick="btnOperation_Click"> Operation</asp:LinkButton>
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>
                             <asp:LinkButton ID="btnEls" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELS</asp:LinkButton>
                             <asp:LinkButton ID="btnEln" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELN</asp:LinkButton>

@@ -55,6 +55,18 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isPoGroupOperation"]; }
             set { Session[GetType().Name + "isPoGroupOperation"] = value; }
         }
+
+        public Boolean isDuedateGroupOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isDuedateGroupOperation"]; }
+            set { Session[GetType().Name + "isDuedateGroupOperation"] = value; }
+        }
+
+        public Boolean isOnSelect
+        {
+            get { return (Boolean)Session[GetType().Name + "isOnSelect"]; }
+            set { Session[GetType().Name + "isOnSelect"] = value; }
+        }
         public int JobID { get; set; }
 
         public int SampleID { get; set; }
@@ -112,6 +124,7 @@ namespace ALS.ALSI.Web.view.request
         private void initialPage()
         {
             this.selectedList = new List<int>();
+            this.isOnSelect = false;
 
             ddlCompany.Items.Clear();
             ddlCompany.DataSource = new m_customer().SelectAll();
@@ -151,8 +164,10 @@ namespace ALS.ALSI.Web.view.request
                     //btnOperation.Visible = true;
                     break;
             }
-            btnOperationPo.Visible = userRole == RoleEnum.ADMIN;
+            btnOperationPo.Visible = (userRole == RoleEnum.ADMIN);
+            btnOperationDueDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN);
             btnElp.CssClass = "btn blue";
+            btnOperationDueDate.Text = (userRole == RoleEnum.ADMIN) ? "Sent To Cus.(date)" : (userRole == RoleEnum.SR_CHEMIST) ? "Due date" : "";
 
         }
 
@@ -496,6 +511,7 @@ namespace ALS.ALSI.Web.view.request
 
                     btnChangeSrCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN) && !isHold;
 
+               
 
                     switch (userRole)
                     {
@@ -519,12 +535,16 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case RoleEnum.SR_CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.SR_CHEMIST_CHECKING) && !isHold;
-                            switch (job_status)
-                            {
-                                case StatusEnum.SR_CHEMIST_CHECKING:
-                                    cbSelect.Visible = true && isGroupSubmit;
-                                    break;
-                            }
+                            //switch (job_status)
+                            //{
+                            //    case StatusEnum.SR_CHEMIST_CHECKING:
+                            //        cbSelect.Visible = true;
+                            //        break;
+                            //    default:
+                            //        cbSelect.Visible = this.isOnSelect;
+                            //        break;
+                            //}
+                            cbSelect.Visible = true;
                             break;
                         case RoleEnum.LABMANAGER:
                             btnWorkFlow.Visible = (job_status == StatusEnum.LABMANAGER_CHECKING) && !isHold;
@@ -975,7 +995,10 @@ namespace ALS.ALSI.Web.view.request
             //btnOpera
             List<int> listOfNoGroup = new List<int>();
             LinkButton btn = (LinkButton)sender;
+
             this.isPoGroupOperation = btn.ID.Equals("btnOperationPo");
+            this.isDuedateGroupOperation = btn.ID.Equals("btnOperationDueDate");
+
             foreach (GridViewRow row in gvJob.Rows)
             {
                 CheckBox chk = row.Cells[1].Controls[1] as CheckBox;
@@ -985,10 +1008,9 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
-
                     }
                     else
                     {
@@ -1003,10 +1025,9 @@ namespace ALS.ALSI.Web.view.request
                     }
                 }
             }
-
-            Console.WriteLine();
             Server.Transfer(Constants.LINK_CHANGE_JOB_GROUP);
-
         }
+
+
     }
 }
