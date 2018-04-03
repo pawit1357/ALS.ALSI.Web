@@ -62,10 +62,10 @@ namespace ALS.ALSI.Web.view.request
             set { Session[GetType().Name + "isDuedateGroupOperation"] = value; }
         }
 
-        public Boolean isOnSelect
+        public Boolean isInvoiceGroupOperation
         {
-            get { return (Boolean)Session[GetType().Name + "isOnSelect"]; }
-            set { Session[GetType().Name + "isOnSelect"] = value; }
+            get { return (Boolean)Session[GetType().Name + "isInvoiceGroupOperation"]; }
+            set { Session[GetType().Name + "isInvoiceGroupOperation"] = value; }
         }
         public int JobID { get; set; }
 
@@ -124,7 +124,6 @@ namespace ALS.ALSI.Web.view.request
         private void initialPage()
         {
             this.selectedList = new List<int>();
-            this.isOnSelect = false;
 
             ddlCompany.Items.Clear();
             ddlCompany.DataSource = new m_customer().SelectAll();
@@ -164,11 +163,12 @@ namespace ALS.ALSI.Web.view.request
                     //btnOperation.Visible = true;
                     break;
             }
+            btnOperation.Visible = (userRole != RoleEnum.ACCOUNT);
             btnOperationPo.Visible = (userRole == RoleEnum.ADMIN);
             btnOperationDueDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN);
             btnElp.CssClass = "btn blue";
             btnOperationDueDate.Text = (userRole == RoleEnum.ADMIN) ? "Sent To Cus.(date)" : (userRole == RoleEnum.SR_CHEMIST) ? "Due date" : "";
-
+            btnOperationGroupInvoice.Visible = (userRole == RoleEnum.ACCOUNT);
         }
 
 
@@ -571,6 +571,10 @@ namespace ALS.ALSI.Web.view.request
                             //}
                             cbSelect.Visible = true;
 
+                            break;
+                        case RoleEnum.ACCOUNT:
+                            btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF) && !isHold;
+                            cbSelect.Visible = true;
                             break;
 
                         default:
@@ -998,6 +1002,7 @@ namespace ALS.ALSI.Web.view.request
 
             this.isPoGroupOperation = btn.ID.Equals("btnOperationPo");
             this.isDuedateGroupOperation = btn.ID.Equals("btnOperationDueDate");
+            this.isInvoiceGroupOperation = btn.ID.Equals("btnOperationGroupInvoice");
 
             foreach (GridViewRow row in gvJob.Rows)
             {
@@ -1008,7 +1013,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation|| this.isInvoiceGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
                     }

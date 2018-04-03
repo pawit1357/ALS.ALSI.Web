@@ -193,6 +193,15 @@ namespace ALS.ALSI.Web.view.request {
         protected global::System.Web.UI.WebControls.LinkButton btnOperationDueDate;
         
         /// <summary>
+        /// btnOperationGroupInvoice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnOperationGroupInvoice;
+        
+        /// <summary>
         /// btnElp control.
         /// </summary>
         /// <remarks>

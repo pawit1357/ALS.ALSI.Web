@@ -257,6 +257,22 @@
                                 </div>
                             </div>
                         </div>
+
+                    </asp:Panel>
+                    <asp:Panel ID="pAccount2" runat="server">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Invoice:</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group" style="text-align: left">
+                                            <asp:TextBox ID="txtInvoice" name="txtInvoice" runat="server" class="form-control"></asp:TextBox>
+                                            <span class="input-group-btn"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </asp:Panel>
                     <asp:Panel ID="pChangeDueDate" runat="server">
                         <div class="row">

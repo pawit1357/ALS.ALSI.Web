@@ -425,7 +425,33 @@ $("#req-department_id")
 					$model->import
 					$model->export
 					$model->import_to_other
+
+
+
+					 
 					----------------------
 					UPDATE `alsi`.`m_completion_scheduled` SET `lab_due_date`='2', `customer_due_date`='2' WHERE `ID`='3';
+					Description: An unhandled exception occurred during the execution of the current web request. Please review the stack trace for more information about the error and where it originated in the code. 
 
+Exception Details: System.IO.FileNotFoundException: Could not find file 'c:\windows\system32\inetsrv\reflectiveTable_A03359.xml'.
+
+Source Error: 
+
+An unhandled exception was generated during the execution of the current web request. Information regarding the origin and location of the exception can be identified using the exception stack trace below.
+
+Stack Trace: 
+
+
+[FileNotFoundException: Could not find file 'c:\windows\system32\inetsrv\reflectiveTable_A03359.xml'.]
+   System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath) +1346
+   System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost) +1132
+   System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost) +146
+   System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost) +179
+   System.IO.StreamReader..ctor(String path) +53
+   ALS.ALSI.Web.view.template.PA03.btnLoadFile_Click(Object sender, EventArgs e) in D:\Work\Outsource\ALS.ALSI.Web\ALS.ALSI.Web\view\template\PA03.ascx.cs:1399
+   System.Web.UI.WebControls.Button.OnClick(EventArgs e) +11773973
+   System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument) +150
+
+----------------
+ELN-PA-TEST01 (ใช้ทดสอบที่ ALS)
 */

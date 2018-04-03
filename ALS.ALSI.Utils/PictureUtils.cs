@@ -6,9 +6,10 @@ namespace ALS.ALSI.Utils
 {
     public class PictureUtils
     {
+
         public static void convertTifToJpg(String destinationFileTif,String outputFileJpg)
         {
-          
+
             Stream _stream = new FileStream(destinationFileTif, (FileMode)FileAccess.ReadWrite);
             MemoryStream storeStream = new MemoryStream();
             storeStream.SetLength(_stream.Length);
@@ -21,7 +22,9 @@ namespace ALS.ALSI.Utils
             storeStream.Flush();
             storeStream.Close();
             _stream.Close();
-   
+
+
+
         }
     }
 }

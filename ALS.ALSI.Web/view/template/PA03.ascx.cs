@@ -647,8 +647,8 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
 
                 //default:Agitation
-                lbExtractionMethod.Text = PA_PRESURE_RINSING;
-                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                lbExtractionMethod.Text = PA_AGITATION;
+                tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
@@ -676,7 +676,7 @@ namespace ALS.ALSI.Web.view.template
 
                 }
 
-                selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_PRESURE_RINSING)).FirstOrDefault();
+                selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                 if (null != selectValue)
                 {
                     foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
@@ -1389,14 +1389,14 @@ namespace ALS.ALSI.Web.view.template
                     _postedFile.SaveAs(source_file);
 
 
-                    if ((Path.GetExtension(_postedFile.FileName).Equals(".xml")))
+                    if ((Path.GetExtension(_postedFile.FileName).Equals(".xml")) || (Path.GetExtension(_postedFile.FileName).Equals(".txt")) || (Path.GetExtension(_postedFile.FileName).Equals(".csv")))
                     {
                         #region "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx"
 
 
                         int index = 0;
                         Double value = 0;
-                        using (var reader = new StreamReader(_postedFile.FileName))
+                        using (var reader = new StreamReader(source_file))
                         {
                             int row = 0;
                             int colCount = 0;
@@ -1542,8 +1542,6 @@ namespace ALS.ALSI.Web.view.template
                     {
                         //errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.csv"));
                     }
-
-
                 }
                 //}
                 //catch (Exception ex)
@@ -1553,25 +1551,16 @@ namespace ALS.ALSI.Web.view.template
                 //    Console.WriteLine();
                 //}
             }
-            //paList[0].col_e = "Not to evaluate";
-            //paList[0].col_f = "Not to evaluate";
-            //paList[0].col_g = "Not to evaluate";
-            //paList[0].col_h = "Not to evaluate";//
 
-            //paList[0].col_i = "Not to evaluate";//
-            //paList[0].col_j = "Not to evaluate";//
-            //paList[0].col_k = "Not to evaluate";//
-            //paList[0].col_l = "Not to evaluate";//
-            //fill value.
 
             txtFeretLmsp.Text = largestMetallicShine.ToString("N2");
             txtFeretLnms.Text = largestNonMetallicShine.ToString("N2");
             txtFeretFb.Text = longestFiber.ToString("N2");
 
-            if (!FileUpload2.HasFile)
-            {
-                errors.Add(String.Format("ไม่พบไฟล์ *.csv ที่ใช้โหลดข้อมูล (Ex. ClassTable_FromNumber_FeretMaximum_A01316.csv)"));
-            }
+            //if (!FileUpload2.HasFile)
+            //{
+            //    errors.Add(String.Format("ไม่พบไฟล์ *.csv ที่ใช้โหลดข้อมูล (Ex. ClassTable_FromNumber_FeretMaximum_A01316.csv)"));
+            //}
 
             if (errors.Count > 0)
             {
@@ -1613,7 +1602,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
-                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
                 {
                     fileUploadImg01.SaveAs(source_file);
                     PictureUtils.convertTifToJpg(source_file, source_file_jpg);
@@ -1671,7 +1660,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
-                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
                 {
                     fileUploadImg02.SaveAs(source_file);
                     PictureUtils.convertTifToJpg(source_file, source_file_jpg);
@@ -1697,7 +1686,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
-                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
                 {
                     fileUploadImg03.SaveAs(source_file);
                     PictureUtils.convertTifToJpg(source_file, source_file_jpg);
@@ -1723,7 +1712,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
-                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
                 {
                     fileUploadImg04.SaveAs(source_file);
                     PictureUtils.convertTifToJpg(source_file, source_file_jpg);
@@ -1749,7 +1738,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
-                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
                 {
                     fileUploadImg05.SaveAs(source_file);
                     PictureUtils.convertTifToJpg(source_file, source_file_jpg);
@@ -2461,12 +2450,12 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("specification_no", ddlSpecification.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("operator_name", ddlOperatorName.SelectedItem.Text));
 
-            reportParameters.Add(new ReportParameter("TestResult", (ddlResult.SelectedItem.Text.Equals("-NONE-")? " ": ddlResult.SelectedItem.Text)));
+            reportParameters.Add(new ReportParameter("TestResult", (ddlResult.SelectedItem.Text.Equals("-NONE-") ? " " : ddlResult.SelectedItem.Text)));
 
             reportParameters.Add(new ReportParameter("dissolving_rinsing", ddlRinsing.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("wash_rinsing",dllWashPressureRinsing.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("wash_rinsing", dllWashPressureRinsing.SelectedItem.Text));
 
-            
+
 
             // Variables
             Warning[] warnings;
@@ -2521,7 +2510,7 @@ namespace ALS.ALSI.Web.view.template
             this.pa.isultrasonic_text = cbUntrasonic.Checked.ToString();
 
 
-            
+
             this.pa.iswashquantity_text = cbWashQuantity.Checked.ToString();
             this.pa.isrewashingquantity_text = cbRewashingQuantity.Checked.ToString();
 
@@ -3042,7 +3031,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
-                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
                 {
                     fileUpload3.SaveAs(source_file);
                     PictureUtils.convertTifToJpg(source_file, source_file_jpg);
@@ -3084,7 +3073,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
-                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
                 {
                     fileUpload4.SaveAs(source_file);
                     PictureUtils.convertTifToJpg(source_file, source_file_jpg);
@@ -3126,7 +3115,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
-                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
                 {
                     fileUpload5.SaveAs(source_file);
                     PictureUtils.convertTifToJpg(source_file, source_file_jpg);
@@ -3168,7 +3157,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                 }
-                if (Path.GetFileNameWithoutExtension(source_file).ToUpper().Equals(".TIF"))
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
                 {
                     fileUpload6.SaveAs(source_file);
                     PictureUtils.convertTifToJpg(source_file, source_file_jpg);

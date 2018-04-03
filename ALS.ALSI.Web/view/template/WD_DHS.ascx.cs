@@ -948,10 +948,8 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
 
-            List<template_wd_dhs_coverpage> ds3 = this.reportCovers.ToList();
             List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
 
-            ds2.AddRange(ds3.GetRange(0, 42));
 
             if (ds2.Count > 0 && ds2.Count <= 16)
             {

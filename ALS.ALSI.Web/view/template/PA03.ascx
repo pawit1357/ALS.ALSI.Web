@@ -1,5 +1,4 @@
-﻿
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PA03.ascx.cs" Inherits="ALS.ALSI.Web.view.template.PA03" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PA03.ascx.cs" Inherits="ALS.ALSI.Web.view.template.PA03" %>
 
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
@@ -907,8 +906,12 @@
                                                 <td>sec.</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: center">
-                                                    <asp:CheckBox ID="cbPressureRinsing" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true" Checked="true"></asp:CheckBox></td>
+
+                                                <td style="text-align: right">
+                                                    <asp:CheckBox ID="cbAgitation" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true" Checked="true"></asp:CheckBox></td>
+                                                <td>Agitation</td>
+                                                <td style="text-align: right">
+                                                    <asp:CheckBox ID="cbPressureRinsing" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
                                                 <td>
                                                     <asp:DropDownList ID="ddlRinsing" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlRinsing_SelectedIndexChanged" AutoPostBack="true">
 
@@ -919,10 +922,6 @@
 
 
                                                 </td>
-                                                <td style="text-align: right">
-                                                    <asp:CheckBox ID="cbAgitation" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
-                                                <td>Agitation</td>
-
                                                 <td style="text-align: right">
                                                     <asp:CheckBox ID="cbUntrasonic" runat="server" OnCheckedChanged="cbDissolving_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
                                                 <td>Ultrasonic</td>
@@ -1035,7 +1034,7 @@
                                                 <td>
                                                     <asp:TextBox ID="txtWashQuantity" runat="server" Text="500" CssClass="form-control" OnTextChanged="txtDissolving_TextChanged" AutoPostBack="true"></asp:TextBox></td>
                                                 <td>mL</td>
-                                                <td style="text-align: center">
+                                                <td style="text-align: right">
                                                     <asp:CheckBox ID="cbRewashingQuantity" runat="server"></asp:CheckBox></td>
                                                 <td>Rewashing quantity</td>
                                                 <td>
@@ -1043,8 +1042,13 @@
                                                 <td>mL</td>
                                             </tr>
                                             <tr>
+
+                                                <td style="text-align: right">
+                                                    <asp:CheckBox ID="cbWashAgitation" runat="server" OnCheckedChanged="cbWashQuantity_CheckedChanged" AutoPostBack="true" Checked="true"></asp:CheckBox></td>
+                                                <td>Agitation</td>
+                                                <td></td>
                                                 <td style="text-align: center">
-                                                    <asp:CheckBox ID="cbWashPressureRinsing" runat="server" OnCheckedChanged="cbWashQuantity_CheckedChanged" AutoPostBack="true" Checked="true"></asp:CheckBox></td>
+                                                    <asp:CheckBox ID="cbWashPressureRinsing" runat="server" OnCheckedChanged="cbWashQuantity_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
                                                 <td>
                                                     <asp:DropDownList ID="dllWashPressureRinsing" runat="server" CssClass="form-control" OnSelectedIndexChanged="dllWashPressureRinsing_SelectedIndexChanged" AutoPostBack="true">
 
@@ -1052,10 +1056,6 @@
                                                         <asp:ListItem Value="1">Internal rinsingn</asp:ListItem>
 
                                                     </asp:DropDownList></td>
-                                                <td style="text-align: right">
-                                                    <asp:CheckBox ID="cbWashAgitation" runat="server" OnCheckedChanged="cbWashQuantity_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
-                                                <td>Agitation</td>
-                                                <td></td>
                                                 <td style="text-align: right">
                                                     <asp:CheckBox ID="cbWashUltrasonic" runat="server" OnCheckedChanged="cbWashQuantity_CheckedChanged" AutoPostBack="true"></asp:CheckBox></td>
                                                 <td>Ultrasonic</td>
@@ -2527,6 +2527,7 @@
 
         </ContentTemplate>
         <Triggers>
+
             <asp:PostBackTrigger ControlID="btnLoadFile" />
             <asp:PostBackTrigger ControlID="btnLoadImg" />
             <asp:PostBackTrigger ControlID="btnLoadImg1" />
@@ -2537,8 +2538,7 @@
 
             <asp:PostBackTrigger ControlID="btnSubmit" />
             <asp:PostBackTrigger ControlID="lbDownload" />
-<%--                        <asp:PostBackTrigger ControlID="btnShowUnit" />--%>
-
+            <%--                        <asp:PostBackTrigger ControlID="btnShowUnit" />--%>
         </Triggers>
     </asp:UpdatePanel>
 
