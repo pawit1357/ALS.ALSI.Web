@@ -76,7 +76,10 @@ namespace ALS.ALSI.Web.view.request
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             if (this.jobSample != null)
             {
-                txtDuedate.Text = Convert.ToDateTime(this.jobSample.date_admin_sent_to_cus).ToString("dd/MM/yyyy");
+                if (this.jobSample.date_admin_sent_to_cus != null)
+                {
+                    txtDuedate.Text = Convert.ToDateTime(this.jobSample.date_admin_sent_to_cus).ToString("dd/MM/yyyy");
+                }
                 //txtRemark.Text = this.jobSample.remarks;
             }
             else
@@ -116,7 +119,15 @@ namespace ALS.ALSI.Web.view.request
         protected void btnSave_Click(object sender, EventArgs e)
         {
 
-            this.jobSample.date_admin_sent_to_cus = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);// Convert.ToDateTime(txtDuedate.Text);
+            if (String.IsNullOrEmpty(txtDuedate.Text))
+            {
+                jobSample.date_admin_sent_to_cus = null;
+
+            }
+            else
+            {
+                jobSample.date_admin_sent_to_cus = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+            }
             this.jobSample.Update();
             job_sample_logs tmp = new job_sample_logs
             {

@@ -254,12 +254,25 @@ namespace ALS.ALSI.Web.view.request
                     switch (userRole)
                     {
                         case RoleEnum.SR_CHEMIST:
-                            jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                            if (String.IsNullOrEmpty(txtDuedate.Text))
+                            {
+                                jobSample.due_date_lab = null;
 
+                            }
+                            else
+                            {
+                                jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                            }
                             break;
                         case RoleEnum.ADMIN:
-                            jobSample.date_admin_sent_to_cus = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-
+                            if (String.IsNullOrEmpty(txtDuedate.Text))
+                            {
+                                jobSample.date_admin_sent_to_cus = null;
+                            }
+                            else
+                            {
+                                jobSample.date_admin_sent_to_cus = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                            }
                             break;
                     }
                 }
