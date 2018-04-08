@@ -148,15 +148,6 @@ namespace ALS.ALSI.Web.view.request {
         protected global::System.Web.UI.WebControls.TextBox txtDate_of_receive;
         
         /// <summary>
-        /// txtS_pore_ref_no control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtS_pore_ref_no;
-        
-        /// <summary>
         /// txtSpecRefRevNo control.
         /// </summary>
         /// <remarks>
@@ -236,6 +227,42 @@ namespace ALS.ALSI.Web.view.request {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtRemark;
+        
+        /// <summary>
+        /// txtPartNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPartNo;
+        
+        /// <summary>
+        /// txtPartName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPartName;
+        
+        /// <summary>
+        /// txtLotNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLotNo;
+        
+        /// <summary>
+        /// txtOtherRefNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOtherRefNo;
         
         /// <summary>
         /// rdUncertaintyYes control.
@@ -371,6 +398,15 @@ namespace ALS.ALSI.Web.view.request {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rdTest_methodNo;
+        
+        /// <summary>
+        /// ddlStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
         
         /// <summary>
         /// btnSave control.

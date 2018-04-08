@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  als.alsi.web:
+    image: alsalsiweb
+    build:
+      context: .\ALS.ALSI.Web
+      dockerfile: Dockerfile

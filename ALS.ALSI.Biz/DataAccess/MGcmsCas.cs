@@ -25,6 +25,28 @@ namespace ALS.ALSI.Biz.DataAccess
             get { return ObjectFactory.GetInstance<IRepository<tb_m_gcms_cas>>(); }
         }
 
+        public static void CloneData(int oldSampleId, int newSampleId)
+        {
+            try
+            {
+                List<tb_m_gcms_cas> lists = _repository.Find(x => x.sample_id == oldSampleId).ToList();
+                if (null != lists && lists.Count > 0)
+                {
+                    foreach (tb_m_gcms_cas item in lists)
+                    {
+                        item.sample_id = newSampleId;
+                        item.Insert();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+ 
+
         #region "Custom"
 
         public IEnumerable<tb_m_gcms_cas> SelectAll()

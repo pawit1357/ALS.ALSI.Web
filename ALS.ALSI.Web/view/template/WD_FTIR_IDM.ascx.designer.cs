@@ -499,13 +499,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow tr12;
         
         /// <summary>
-        /// txtFTIR_B42 control.
+        /// txtFTIR_B43 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B42;
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B43;
         
         /// <summary>
         /// tr13 control.
@@ -517,13 +517,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow tr13;
         
         /// <summary>
-        /// txtFTIR_B43 control.
+        /// txtFTIR_B44 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B43;
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B44;
         
         /// <summary>
         /// tr14 control.
@@ -535,13 +535,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow tr14;
         
         /// <summary>
-        /// txtFTIR_B44 control.
+        /// txtFTIR_B45 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B44;
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B45;
         
         /// <summary>
         /// tr15 control.
@@ -553,13 +553,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow tr15;
         
         /// <summary>
-        /// txtFTIR_B45 control.
+        /// txtFTIR_B46 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B45;
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B46;
         
         /// <summary>
         /// tr16 control.
@@ -598,13 +598,13 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow tr17;
         
         /// <summary>
-        /// lbFTIR_C49 control.
+        /// lbFTIR_C52 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox lbFTIR_C49;
+        protected global::System.Web.UI.WebControls.TextBox lbFTIR_C52;
         
         /// <summary>
         /// tr19 control.
@@ -623,6 +623,168 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtC53;
+        
+        /// <summary>
+        /// tr20 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr20;
+        
+        /// <summary>
+        /// tr21 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr21;
+        
+        /// <summary>
+        /// txtFTIR_B53 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B53;
+        
+        /// <summary>
+        /// tr22 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr22;
+        
+        /// <summary>
+        /// txtFTIR_B54 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B54;
+        
+        /// <summary>
+        /// tr23 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr23;
+        
+        /// <summary>
+        /// txtFTIR_B55 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B55;
+        
+        /// <summary>
+        /// tr24 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr24;
+        
+        /// <summary>
+        /// txtFTIR_B56 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B56;
+        
+        /// <summary>
+        /// tr25 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr25;
+        
+        /// <summary>
+        /// txtFTIR_B58 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_B58;
+        
+        /// <summary>
+        /// lbDopUnit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbDopUnit;
+        
+        /// <summary>
+        /// tr26 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr26;
+        
+        /// <summary>
+        /// txtFTIR_C62 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_C62;
+        
+        /// <summary>
+        /// tr27 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr27;
+        
+        /// <summary>
+        /// txtFTIR_C63 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFTIR_C63;
+        
+        /// <summary>
+        /// pAnalyzeDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pAnalyzeDate;
+        
+        /// <summary>
+        /// txtDateAnalyzed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateAnalyzed;
         
         /// <summary>
         /// pSpecification control.
@@ -839,6 +1001,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDecimal08;
+        
+        /// <summary>
+        /// txtDecimal09 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDecimal09;
         
         /// <summary>
         /// ddlUnit control.

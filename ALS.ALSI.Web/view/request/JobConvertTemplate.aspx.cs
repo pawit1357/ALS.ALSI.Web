@@ -161,13 +161,23 @@ namespace ALS.ALSI.Web.view.request
 
 
                     this.jobSample.template_id = String.IsNullOrEmpty(ddlTemplate.SelectedValue) ? 0 : int.Parse(ddlTemplate.SelectedValue);
-                    if (pUploadfile.Visible)
+                    switch (int.Parse(ddlTemplate.SelectedValue))
                     {
-                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                        case 901://PA TAMPLATE(BLANK)
+                            this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                            break;
+                        default:
+                            if (pUploadfile.Visible)
+                            {
+                                this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                            }
+                            else
+                            {
+                                this.jobSample.job_status = Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC);
+                            }
+                            break;
                     }
-                    else {
-                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC);
-                    }
+
 
                     this.jobSample.Update();
                     break;

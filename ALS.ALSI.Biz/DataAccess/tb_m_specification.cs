@@ -95,5 +95,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string BX { get; set; }
         public string BY { get; set; }
         public string BZ { get; set; }
+        public string status { get; set; }
     }
 }

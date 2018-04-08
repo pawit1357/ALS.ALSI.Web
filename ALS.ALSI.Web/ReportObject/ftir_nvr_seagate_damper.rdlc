@@ -407,6 +407,62 @@
         <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="DataSet6">
+      <Query>
+        <DataSourceName>DS</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="area">
+          <DataField>area</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="descripton">
+          <DataField>descripton</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="img1">
+          <DataField>img1</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="img2">
+          <DataField>img2</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="img3">
+          <DataField>img3</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="img4">
+          <DataField>img4</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="location_of_parts">
+          <DataField>location_of_parts</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specification">
+          <DataField>specification</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="pass_fail">
+          <DataField>pass_fail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DS</rd:DataSetName>
+        <rd:SchemaPath>D:\Work\Outsource\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:TableName>wd_mesa</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -1102,9 +1158,8 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.52799in</Top>
-            <Left>0in</Left>
             <Height>0.56446in</Height>
-            <Width>7.26125in</Width>
+            <Width>7.26124in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1639,7 +1694,7 @@
             <Top>2.44835in</Top>
             <Left>0.0148in</Left>
             <Height>0.583in</Height>
-            <Width>7.24645in</Width>
+            <Width>7.24644in</Width>
             <ZIndex>3</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2157,7 +2212,7 @@
             <DataSetName>DataSet3</DataSetName>
             <Top>4.34404in</Top>
             <Height>0.56211in</Height>
-            <Width>7.26125in</Width>
+            <Width>7.26126in</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2190,8 +2245,7 @@
           </Tablix>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>6.54165in</Top>
-            <Left>0.0148in</Left>
+            <Top>7.5928in</Top>
             <Height>1.3895in</Height>
             <Width>7.21685in</Width>
             <ZIndex>6</ZIndex>
@@ -2230,6 +2284,9 @@
               </Parameter>
               <Parameter Name="SampleDescription">
                 <Value>=Parameters!SampleDescription.Value</Value>
+              </Parameter>
+              <Parameter Name="AlsSingaporeRefNo">
+                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
               </Parameter>
             </Parameters>
             <Left>0.0148in</Left>
@@ -2962,7 +3019,7 @@
             <DataSetName>DataSet4</DataSetName>
             <Top>3.67082in</Top>
             <Height>0.54822in</Height>
-            <Width>7.26125in</Width>
+            <Width>7.26126in</Width>
             <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -3713,7 +3770,7 @@
             <DataSetName>DataSet5</DataSetName>
             <Top>5.53313in</Top>
             <Height>0.55329in</Height>
-            <Width>7.26125in</Width>
+            <Width>7.26126in</Width>
             <ZIndex>11</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -3744,11 +3801,96 @@
               </RightBorder>
             </Style>
           </Tablix>
+          <Tablix Name="Tablix9">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.38445in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>1.17365in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Image Name="Image7">
+                          <Source>Database</Source>
+                          <Value>=Fields!img1.Value</Value>
+                          <MIMEType>image/jpeg</MIMEType>
+                          <Sizing>Fit</Sizing>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Image>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details6" />
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
+            <DataSetName>DataSet6</DataSetName>
+            <Top>6.39137in</Top>
+            <Left>0.04441in</Left>
+            <Height>1.17365in</Height>
+            <Width>1.38445in</Width>
+            <ZIndex>12</ZIndex>
+            <Visibility>
+              <Hidden>=CountRows() = 0</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+            </Style>
+          </Tablix>
         </ReportItems>
-        <Height>8.70506in</Height>
+        <Height>8.9823in</Height>
         <Style />
       </Body>
-      <Width>7.26125in</Width>
+      <Width>7.26126in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -3829,11 +3971,16 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>7</NumberOfRows>
+      <NumberOfRows>8</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -3904,6 +4051,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>rpt_unit2</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

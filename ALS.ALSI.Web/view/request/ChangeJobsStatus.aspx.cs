@@ -91,7 +91,12 @@ namespace ALS.ALSI.Web.view.request
                 StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
                 switch (status)
                 {
-                    case StatusEnum.JOB_HOLD:
+
+                    //case StatusEnum.JOB_HOLD:
+                    //break;
+                    //case StatusEnum.JOB_UNHOLD:
+                    //break;
+
                     case StatusEnum.JOB_CANCEL:
                     case StatusEnum.JOB_COMPLETE:
                         ddlStatus.SelectedValue = Convert.ToInt16(status).ToString();

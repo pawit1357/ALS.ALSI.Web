@@ -7,7 +7,7 @@
         <%--        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>--%>
-        <asp:HiddenField ID="hPrefix" Value="1" runat="server" />
+        <asp:HiddenField ID="hPrefix" Value="ELP" runat="server" />
 
         <div class="portlet light bordered">
             <div class="portlet-title">
@@ -104,7 +104,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Received Report From:</label>
+                                <label class="control-label col-md-3">Date Receive Sample (From):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtReceivedReportFrom" runat="server" class="form-control"></asp:TextBox>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Received Report To:</label>
+                                <label class="control-label col-md-3">Date Receive Sample (To):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtReceivedReportTo" runat="server" class="form-control"></asp:TextBox>
@@ -133,7 +133,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Report To Customer From:</label>
+                                <label class="control-label col-md-3">Report To Customer (From):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtReportToCustomerFrom" runat="server" class="form-control"></asp:TextBox>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Report To Customer To:</label>
+                                <label class="control-label col-md-3">Report To Customer (To):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtReportToCustomerTo" runat="server" class="form-control"></asp:TextBox>
@@ -162,7 +162,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Duedate From:</label>
+                                <label class="control-label col-md-3">Duedate (From):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtDuedateFrom" runat="server" class="form-control"></asp:TextBox>
@@ -175,7 +175,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Duedate Customer To:</label>
+                                <label class="control-label col-md-3">Duedate (To):</label>
                                 <div class="col-md-6">
                                     <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
                                         <asp:TextBox ID="txtDuedateTo" runat="server" class="form-control"></asp:TextBox>
@@ -211,8 +211,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
-<%--                <div class="portlet light portlet-fit portlet-datatable bordered" id="form_wizard_1">--%>
-                            <div class="portlet box blue-dark">
+                <%--                <div class="portlet light portlet-fit portlet-datatable bordered" id="form_wizard_1">--%>
+                <div class="portlet box blue-dark">
 
                     <div class="portlet-title">
                         <div class="caption">
@@ -221,8 +221,10 @@
 
                         </div>
                         <div class="actions">
-                           
-                      
+                            <asp:LinkButton ID="btnOperation" runat="server" class="btn yellow-crusta" OnClick="btnOperation_Click"> Operation</asp:LinkButton>
+                            <asp:LinkButton ID="btnOperationPo" runat="server" class="btn purple-plum" OnClick="btnOperation_Click"> Group Po</asp:LinkButton>
+                            <asp:LinkButton ID="btnOperationDueDate" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group Duedate</asp:LinkButton>
+<asp:LinkButton ID="btnOperationGroupInvoice" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group Invoice</asp:LinkButton>
 
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>
                             <asp:LinkButton ID="btnEls" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELS</asp:LinkButton>
@@ -247,35 +249,52 @@
                         <asp:Label ID="lbTotalRecords" runat="server" Text="" Visible="false"></asp:Label>
 
                         <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False"
-                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
+                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,due_date,is_hold,due_date_customer,due_date_lab,amend_count,retest_count,group_submit,amend_or_retest" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
                             <Columns>
-                                <asp:TemplateField HeaderText="">
+                                <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
 
-                                        <asp:LinkButton ID="btnInfo" runat="server" ToolTip="Info" CommandName="View" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-search"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnInfo" runat="server" ToolTip="Info" CommandName="View" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-search"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-edit"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnConvertTemplete" runat="server" ToolTip="Convert Template" CommandName="ConvertTemplate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tasks"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnWorkFlow" runat="server" ToolTip="Work Flow" CommandName="Workflow" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-briefcase"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeStatus" runat="server" ToolTip="Change Status" CommandName="ChangeStatus" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeDueDate" runat="server" ToolTip="Change DueDate" CommandName="ChangeDueDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calculator"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeReportDate" runat="server" ToolTip="Change Report Date" CommandName="ChangeReportDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calculator"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeDueDate" runat="server" ToolTip="Change DueDate" CommandName="ChangeDueDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeReportDate" runat="server" ToolTip="Change Report Date" CommandName="ChangeReportDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeOtherRefNo" runat="server" ToolTip="Change Other Ref No" CommandName="ChangeOtherRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-plane"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeSingaporeRefNo" runat="server" ToolTip="Change Singapore RefNo" CommandName="ChangeSingaporeRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnViewFile" runat="server" ToolTip="View File" CommandName="ViewFile" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-laptop"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeSrCompleteDate" runat="server" ToolTip="Change Sr Complete Date" CommandName="ChangeSrCompleteDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
+
 
                                         <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Chnage Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnPrintLabel" runat="server" ToolTip="Print Label" CommandName="Print" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-print"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnAmend" runat="server" ToolTip="Change Amend" CommandName="Amend" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-pencil-square"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnAmend" runat="server" ToolTip="Amend" CommandName="Amend" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-wrench"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnReTest" runat="server" ToolTip="ReTest" CommandName="Retest" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-retweet"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnHold" runat="server" ToolTip="Hold" CommandName="Hold" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-toggle-off"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnUnHold" runat="server" ToolTip="UnHold" CommandName="UnHold" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-toggle-on"></i></asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="cbSelect" runat="server" />
+                                        <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("SN")%>'></asp:HiddenField>
+                                        <asp:HiddenField ID="hIsGroupReport" runat="server" Value='<%# Eval("group_submit")%>'></asp:HiddenField>
 
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="#">
+                                <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="litStatus" runat="server">&nbsp;</asp:Literal>
+
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Status">
+                                <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="ltJobStatus" runat="server" Text="-"></asp:Literal>
+                                        <asp:Literal ID="litIcon" runat="server"></asp:Literal>
+
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField HeaderText="Received." DataField="date_srchemist_complate" ItemStyle-HorizontalAlign="Center" SortExpression="date_srchemist_complate" DataFormatString="{0:d MMM yyyy}">
@@ -289,10 +308,12 @@
                                 <asp:BoundField HeaderText="Receive Date." DataField="receive_date" ItemStyle-HorizontalAlign="Center" SortExpression="receive_date" DataFormatString="{0:d MMM yyyy}">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
-                                <asp:BoundField HeaderText="Due Date." DataField="due_date" ItemStyle-HorizontalAlign="Center" SortExpression="due_date" DataFormatString="{0:d MMM yyyy}">
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>
-                                <%--<asp:BoundField HeaderText="Ref No." DataField="job_number" ItemStyle-HorizontalAlign="Left" SortExpression="job_number" />--%>
+                                <asp:TemplateField HeaderText="Due Date.">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litDueDate" runat="server" Text="-"></asp:Literal>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+
                                 <asp:TemplateField HeaderText="ALS Ref No.">
                                     <ItemTemplate>
                                         <asp:Label ID="lbJobNumber" runat="server" Text='<%# Eval("job_number")%>'></asp:Label>
@@ -301,17 +322,15 @@
                                 <asp:BoundField HeaderText="Cus Ref No." DataField="customer_ref_no" ItemStyle-HorizontalAlign="Left" SortExpression="customer_ref_no">
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
-                                <asp:BoundField HeaderText="S'Ref No." DataField="s_pore_ref_no" ItemStyle-HorizontalAlign="Left" SortExpression="s_pore_ref_no">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <%--<asp:BoundField HeaderText="Other" DataField="customer_po_ref" ItemStyle-HorizontalAlign="Left" SortExpression="customer_po_ref" />--%>
+                                <asp:TemplateField HeaderText="Other Ref No">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litOtherRefNo" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:Literal>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
 
-                                <%--                                        <asp:BoundField HeaderText="Company" DataField="customer" ItemStyle-HorizontalAlign="Left" SortExpression="customer" />--%>
+
+
                                 <asp:TemplateField HeaderText="Company">
-                                    <%--                    <HeaderTemplate>
-                                                <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="True" DataTextField="company_name" DataValueField="ID" class="select2_category form-control" OnSelectedIndexChanged="ddlCompany_SelectedIndexChanged">
-                                                </asp:DropDownList>
-                                            </HeaderTemplate>--%>
                                     <ItemTemplate>
                                         <asp:Literal ID="ltCompany" runat="server" Text='<%# Eval("customer")%>'></asp:Literal>
                                     </ItemTemplate>
@@ -379,6 +398,8 @@
                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-truck">:Complete </i></div>
                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-lock">: Hold</i></div>
                             <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-trash-o">:Cancel </i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-retweet">:Retest(report) </i></div>
+                            <div class="btn-group btn-group-xs btn-group-solid"><i class="fa fa-wrench">:Amend(report) </i></div>
                             <p>STATUS:</p>
                             <button type="button" class="btn red btn-sm">Cancel</button>
                             <button type="button" class="btn green btn-sm">Complete</button>

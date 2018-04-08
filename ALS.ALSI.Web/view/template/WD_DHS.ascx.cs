@@ -50,12 +50,24 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_wd_dhs_coverpage> coverpages
         {
-            get { return (List<template_wd_dhs_coverpage>)Session[GetType().Name + "coverpages"]; }
+            get {
+                List<template_wd_dhs_coverpage> tmps = (List<template_wd_dhs_coverpage>)Session[GetType().Name + "coverpages"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+
+                //return (List<template_wd_dhs_coverpage>)Session[GetType().Name + "coverpages"];
+            }
             set { Session[GetType().Name + "coverpages"] = value; }
         }
         public List<template_wd_dhs_coverpage> reportCovers
         {
-            get { return (List<template_wd_dhs_coverpage>)Session[GetType().Name + "reportCovers"]; }
+            get {
+                List<template_wd_dhs_coverpage> tmps = (List<template_wd_dhs_coverpage>)Session[GetType().Name + "reportCovers"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+
+                //return (List<template_wd_dhs_coverpage>)Session[GetType().Name + "reportCovers"];
+            }
             set { Session[GetType().Name + "reportCovers"] = value; }
         }
 
@@ -104,12 +116,12 @@ namespace ALS.ALSI.Web.view.template
             this.coverpages = template_wd_dhs_coverpage.FindAllBySampleID(this.SampleID);
 
             ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
             ddlSpecification.Items.Clear();
             ddlSpecification.DataSource = detailSpec.SelectAll();
@@ -189,21 +201,21 @@ namespace ALS.ALSI.Web.view.template
                             pLoadFile.Visible = true;
 
                         }
-                        #region ":: STAMP ANALYZED DATE ::"
-                   
-                            if (this.jobSample.date_chemist_alalyze == null)
-                            {
-                                this.jobSample.date_chemist_alalyze = DateTime.Now;
-                                this.jobSample.Update();
-                            }
-                        
-                        #endregion
+                        //#region ":: STAMP ANALYZED DATE ::"
+
+                        //    if (this.jobSample.date_chemist_alalyze == null)
+                        //    {
+                        //        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                        //        this.jobSample.Update();
+                        //    }
+
+                        //#endregion
                         break;
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -231,8 +243,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -244,6 +256,10 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
+
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
+
                 #endregion
 
                 #region "CAS"
@@ -254,7 +270,7 @@ namespace ALS.ALSI.Web.view.template
                     gvResult.DataBind();
                 }
                 #endregion
-                
+
                 #region "COVERPAGE"
                 if (this.coverpages != null && this.coverpages.Count > 0)
                 {
@@ -317,7 +333,7 @@ namespace ALS.ALSI.Web.view.template
                     else
                     {
                         detailSpec = detailSpec.SelectByID(this.coverpages[0].detail_spec_id.Value);
-                            if (detailSpec != null)
+                        if (detailSpec != null)
                         {
                             lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", detailSpec.B, detailSpec.A);
                         }
@@ -398,6 +414,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
+                        this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         //#endregion
                         #region "CAS#"
                         tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
@@ -412,7 +429,7 @@ namespace ALS.ALSI.Web.view.template
                             _val.pm_number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                             _val.pm_extraction_medium = txtExtractionMedium.Text;
                             _val.pm_extraction_volume = txtExtractionVolume.Text;
-                            _val.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                            _val.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                         }
                         template_wd_dhs_coverpage.UpdateList(this.coverpages);
                     }
@@ -506,7 +523,32 @@ namespace ALS.ALSI.Web.view.template
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
 
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
+
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+
+
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        FileUpload1.SaveAs(source_file);
+                        this.jobSample.path_pdf = source_file_url;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        //lbMessage.Text = string.Empty;
+                    }
+                    else
+                    {
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
+                    }
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
 
@@ -521,6 +563,8 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
                 //########
+                this.jobSample.update_date = DateTime.Now;
+                this.jobSample.update_by = userLogin.id;
                 this.jobSample.Update();
                 //Commit
                 GeneralManager.Commit();
@@ -612,15 +656,15 @@ namespace ALS.ALSI.Web.view.template
                                                     break;
                                                 case "11111111"://NORMAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal01.Text)).ToString();
                                                     break;
                                                 case "00010011"://TOTAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
-                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal01.Text)).ToString();
                                                     break;
                                                 case "00100011"://TOTAL OUT GAS
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalOutGas);
-                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal02.Text)).ToString();
                                                     break;
                                                 case "00100010"://SAMPLE SIZE
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.SampleSize);
@@ -869,9 +913,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
-                DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
@@ -881,11 +925,12 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("rpt_unit", unitName));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "DHS"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
 
             // Variables
@@ -905,42 +950,55 @@ namespace ALS.ALSI.Web.view.template
 
             List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
 
-            if (ds2.Count > 0 && ds2.Count <= 13)
-            {
+            //List<template_wd_dhs_coverpage> ds3 = this.reportCovers.ToList();
+            //ds2.AddRange(ds3.GetRange(0, 50));// = ds3.GetRange(0, 71);
 
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
+            if (ds2.Count > 0 && ds2.Count <= 15)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count-15).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
-
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
             }
-
-
-            if (ds2.Count > 13 && ds2.Count <= 40)
+            if (ds2.Count > 15 && ds2.Count <= 46)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 13).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(13 ,ds2.Count-13).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, ds2.Count - 15).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
-            }
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
 
-            if (ds2.Count > 40 && ds2.Count <= 67)
+            }
+            if (ds2.Count > 46 && ds2.Count <= 77)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 13).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(13, 27).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(40, ds2.Count-40).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(46, ds2.Count-46).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
-
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
             }
-            if (ds2.Count > 67)
+            if (ds2.Count > 77 && ds2.Count <=108)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 13).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(13, 27).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(40, 27).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(67, ds2.Count-67).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(46, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(77, ds2.Count - 77).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
             }
-
-
+            if (ds2.Count > 108)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(46, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(77, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds2.GetRange(108, ds2.Count - 108).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
+            }
 
 
 
@@ -1026,7 +1084,7 @@ namespace ALS.ALSI.Web.view.template
                     break;
             }
         }
-        
+
 
 
         #endregion

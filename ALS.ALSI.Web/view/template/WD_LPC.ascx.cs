@@ -41,7 +41,14 @@ namespace ALS.ALSI.Web.view.template
         }
         public List<template_wd_lpc_coverpage> Lpc
         {
-            get { return (List<template_wd_lpc_coverpage>)Session[GetType().Name + "Lpc"]; }
+            get
+            {
+                List<template_wd_lpc_coverpage> tmps = (List<template_wd_lpc_coverpage>)Session[GetType().Name + "Lpc"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+
+                //return (List<template_wd_lpc_coverpage>)Session[GetType().Name + "Lpc"];
+            }
             set { Session[GetType().Name + "Lpc"] = value; }
         }
 
@@ -112,137 +119,82 @@ namespace ALS.ALSI.Web.view.template
             ddlUnit.DataBind();
             ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            ddlUnit2.Items.Clear();
+            ddlUnit2.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("LPC")).ToList();
+            ddlUnit2.DataBind();
+            ddlUnit2.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnit3.Items.Clear();
+            ddlUnit3.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("LPC")).ToList();
+            ddlUnit3.DataBind();
+            ddlUnit3.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            ddlUnit4.Items.Clear();
+            ddlUnit4.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("LPC")).ToList();
+            ddlUnit4.DataBind();
+            ddlUnit4.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+
+            m_type_of_test typeOfTest = new m_type_of_test();
+            typeOfTest = typeOfTest.SelectByID(jobSample.type_of_test_id);
+
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+
             #region "SAMPLE"
             if (this.jobSample != null)
             {
-                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+
                 StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
                 lbJobStatus.Text = Constants.GetEnumDescription(status);
                 ddlStatus.Items.Clear();
 
                 pRemark.Visible = false;
                 pDisapprove.Visible = false;
-                pSpecification.Visible = false;
-                pStatus.Visible = false;
-                pUploadfile.Visible = false;
-                pDownload.Visible = false;
-                btnSubmit.Visible = false;
-
-                switch (userRole)
+                pCoverPage.Visible = true;
+                pDSH.Visible = false;
+                pTankConditions.Visible = false;
+                pSpecification.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC);
+                pStatus.Visible = (status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.LABMANAGER_CHECKING);
+                pUploadfile.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD);
+                pDownload.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+                btnSubmit.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+                btnCoverPage.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                btnWorkSheet.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                txtB21.Enabled = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                txtC21.Enabled = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                txtD21.Enabled = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                txtE21.Enabled = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                gvSpec.Columns[5].Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                if (status == StatusEnum.LABMANAGER_CHECKING)
                 {
-                    case RoleEnum.LOGIN:
-                        if (status == StatusEnum.LOGIN_SELECT_SPEC)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = true;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.CHEMIST:
-                        if (status == StatusEnum.CHEMIST_TESTING)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.SR_CHEMIST:
-                        if (status == StatusEnum.SR_CHEMIST_CHECKING)
-                        {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = true;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.ADMIN:
-                        if (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = true;
-                            pDownload.Visible = true;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.LABMANAGER:
-                        if (status == StatusEnum.LABMANAGER_CHECKING)
-                        {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = true;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = true;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                }
-                #region "METHOD/PROCEDURE:"
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
 
-                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                }
+                else if (status == StatusEnum.SR_CHEMIST_CHECKING)
                 {
-
-
-
-                    #region ":: STAMP ANALYZED DATE ::"
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                    {
-                        if (this.jobSample.date_chemist_alalyze == null)
-                        {
-                            this.jobSample.date_chemist_alalyze = DateTime.Now;
-                            this.jobSample.Update();
-                        }
-                    }
-                    #endregion
-
-
-                    txtB21.Enabled = true;
-                    txtC21.Enabled = true;
-                    txtD21.Enabled = true;
-                    txtE21.Enabled = true;
-                    gvSpec.Columns[5].Visible = true;
-                    btnCoverPage.Visible = true;
-                    btnWorkSheet.Visible = true;
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                    ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                    pRemark.Visible = false;
                 }
-                else
-                {
-                    txtB21.Enabled = false;
-                    txtC21.Enabled = false;
-                    txtD21.Enabled = false;
-                    txtE21.Enabled = false;
-                    gvSpec.Columns[5].Visible = false;
-                    btnCoverPage.Visible = false;
-                    btnWorkSheet.Visible = false;
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
-                    {
-                        btnCoverPage.Visible = true;
-                        btnWorkSheet.Visible = true;
-                    }
-                }
-                #endregion
+
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
+
+                //#region ":: STAMP ANALYZED DATE ::"
+                //if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                //{
+                //    if (this.jobSample.date_chemist_alalyze == null)
+                //    {
+                //        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                //        this.jobSample.Update();
+                //    }
+                //}
+                //#endregion
             }
-
             #endregion
 
-            #region "WorkSheet"
+            #region "WORKSHEET"
             this.Lpc = template_wd_lpc_coverpage.FindAllBySampleID(this.SampleID);
             if (this.Lpc != null && this.Lpc.Count > 0)
             {
@@ -252,10 +204,8 @@ namespace ALS.ALSI.Web.view.template
                 if (tem != null)
                 {
                     lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", tem.B, tem.A);
-
-                    //lbSpecRev.Text = tem.B;
-                    //lbComponent.Text = tem.A;
                 }
+
                 //Method
                 txtB21.Text = _lpc.ProcedureNo;
                 txtC21.Text = _lpc.NumberOfPieces;
@@ -263,13 +213,12 @@ namespace ALS.ALSI.Web.view.template
                 txtE21.Text = _lpc.ExtractionVolume;
 
                 lbTestMethod.Text = txtB21.Text;
+
                 #region "Test Method: 92-004230 Rev. AK"
                 txtB48.Text = _lpc.ws_b15;//Surface Area, cm²
                 txtB49.Text = _lpc.ExtractionVolume;
                 txtB50.Text = _lpc.ws_b17;
                 txtB51.Text = _lpc.NumberOfPieces;
-
-
                 #endregion
 
                 #region "Tank Conditions"
@@ -279,49 +228,77 @@ namespace ALS.ALSI.Web.view.template
                 #endregion
 
                 ddlWashMethod.SelectedValue = _lpc.WashMethod;
-                if (!String.IsNullOrEmpty(_lpc.WashMethod) && _lpc.WashMethod.Equals("Flip"))
+                switch (_lpc.WashMethod)
                 {
-                    pTankConditions.Visible = false;
+                    case "Flip":
+                    case "Rinse":
+                    case "Shake":
+                        pTankConditions.Visible = false;
+                        break;
+                    case "Ultrasonic":
+                        pTankConditions.Visible = true;
+                        break;
+                    default:
+                        pTankConditions.Visible = false;
+                        break;
                 }
-                else
-                {
-                    pTankConditions.Visible = true;
-                }
+
 
 
                 ddlSpecification.SelectedValue = _lpc.detail_spec_id.ToString();
                 ddlComponent.SelectedValue = _lpc.component_id.ToString();
                 ddlUnit.SelectedValue = _lpc.unit.ToString();
+                ddlUnit2.SelectedValue = _lpc.unit2.ToString();
+                ddlUnit3.SelectedValue = _lpc.unit3.ToString();
+                ddlUnit4.SelectedValue = _lpc.unit4.ToString();
+
 
                 this.CommandName = CommandNameEnum.Edit;
 
                 gvSpec.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC));
                 gvSpec.DataBind();
-                CalculateCas();
+
 
                 #region "Unit"
                 gvSpec.Columns[2].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
-                gvSpec.Columns[3].HeaderText = String.Format("Average of 5 data points({0})", ddlUnit.SelectedItem.Text);
+                gvSpec.Columns[3].HeaderText = String.Format("Average of {0} {1} points({2})", typeOfTest.name.Split(' ')[1].ToLower(), typeOfTest.name.Split(' ')[2].ToLower(), ddlUnit.SelectedItem.Text);
 
-                gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit.SelectedItem.Text);
-                gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit2.SelectedItem.Text);
+                gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit2.SelectedItem.Text);
 
-                gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
-                gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit3.SelectedItem.Text);
+                gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit4.SelectedItem.Text);
 
-                gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
-                gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+                gvResult.Columns[6].Visible = userRole == RoleEnum.CHEMIST;
+
+                gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit3.SelectedItem.Text);
+                gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit4.SelectedItem.Text);
                 #endregion
+                CalculateCas();
             }
             else
             {
                 this.Lpc = new List<template_wd_lpc_coverpage>();
                 this.CommandName = CommandNameEnum.Add;
-
-
                 txtB54.Text = "20.2 L";
                 txtC54.Text = "68 kHz";
                 txtD54.Text = "4.8 W/L";
+                //init
+
+//44  LPC Counts/ cm2  1
+//45  LPC Counts/ Swab tip 1
+//46  LPC Particles/ cm2   1
+//47  LPC Particles/ Tip   1
+//48  LPC Particles/ Tweezer   1
+//49  LPC Counts/ part 1
+//50  LPC Particles/ part  1
+
+
+                ddlUnit.SelectedValue = "46";
+                ddlUnit2.SelectedValue = "56";
+                ddlUnit3.SelectedValue = "49";
+                ddlUnit4.SelectedValue = "44";
+
             }
 
             #endregion
@@ -330,19 +307,11 @@ namespace ALS.ALSI.Web.view.template
             btnCoverPage.CssClass = "btn blue";
             btnWorkSheet.CssClass = "btn green";
 
-            pCoverPage.Visible = true;
-            pDSH.Visible = false;
 
-            switch (lbJobStatus.Text)
-            {
-                case "CONVERT_PDF":
-                    litDownloadIcon.Text = "<i class=\"fa fa-file-pdf-o\"></i>";
-                    break;
-                default:
-                    litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
-                    break;
-            }
-            pTankConditions.Visible = false;
+
+            litDownloadIcon.Text = "<i class=\"fa fa-" + (lbJobStatus.Text.Equals("CONVERT_PDF") ? "file-pdf-o" : "file-word-o") + "\"></i>";
+
+
         }
 
         #endregion
@@ -406,7 +375,7 @@ namespace ALS.ALSI.Web.view.template
                             cov.ws_d21 = txtD54.Text;
                             #endregion
                             cov.WashMethod = ddlWashMethod.SelectedValue;
-                            cov.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                            cov.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                         }
                         objWork.DeleteBySampleID(this.SampleID);
                         objWork.InsertList(this.Lpc.ToList());
@@ -437,6 +406,7 @@ namespace ALS.ALSI.Web.view.template
                             this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                             //#region ":: STAMP COMPLETE DATE"
                             this.jobSample.date_chemist_complete = DateTime.Now;
+                            this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                             //#endregion
                             //Add new
                             foreach (template_wd_lpc_coverpage cov in this.Lpc)
@@ -460,7 +430,10 @@ namespace ALS.ALSI.Web.view.template
                                 cov.ws_d21 = txtD54.Text;
                                 #endregion
                                 cov.WashMethod = ddlWashMethod.SelectedValue;
-                                cov.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                                cov.unit = Convert.ToInt32(ddlUnit.SelectedValue);
+                                cov.unit2 = Convert.ToInt32(ddlUnit2.SelectedValue);
+                                cov.unit3 = Convert.ToInt32(ddlUnit3.SelectedValue);
+                                cov.unit4 = Convert.ToInt32(ddlUnit4.SelectedValue);
 
                             }
                             objWork.DeleteBySampleID(this.SampleID);
@@ -556,7 +529,32 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
+
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+
+
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        FileUpload1.SaveAs(source_file);
+                        this.jobSample.path_pdf = source_file_url;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        //lbMessage.Text = string.Empty;
+                    }
+                    else
+                    {
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
+                    }
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
 
@@ -571,6 +569,8 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
                 //########
+                this.jobSample.update_date = DateTime.Now;
+                this.jobSample.update_by = userLogin.id;
                 this.jobSample.Update();
 
                 //Commit
@@ -658,10 +658,10 @@ namespace ALS.ALSI.Web.view.template
                                                 switch (lpc.type)
                                                 {
                                                     case "Blank":
-                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt16(txtDecimal01.Text)));
+                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt32(txtDecimal01.Text)));
                                                         break;
                                                     case "Sample":
-                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal02.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt16(txtDecimal02.Text)));
+                                                        lpc.C = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal02.Text)), Math.Round(Double.Parse(lpc.C), Convert.ToInt32(txtDecimal02.Text)));
                                                         break;
                                                 }
                                                 lpcs.Add(lpc);
@@ -710,7 +710,7 @@ namespace ALS.ALSI.Web.view.template
                         tmp.E = result.ToString("N" + txtDecimal03.Text);
                         tmp.F = result2.ToString("N" + txtDecimal04.Text);
 
-                        tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
+                        tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                         tmp.data_type = Convert.ToInt32(WDLpcDataType.DATA_VALUE);
                         tmps.Add(tmp);
                     }
@@ -766,7 +766,7 @@ namespace ALS.ALSI.Web.view.template
             this.Lpc.AddRange(tmps);
 
             int order = 1;
-            foreach (template_wd_lpc_coverpage lpc in this.Lpc.Where(x => x.data_type == Convert.ToInt16(WDLpcDataType.DATA_VALUE)))
+            foreach (template_wd_lpc_coverpage lpc in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE)))
             {
                 lpc.ID = order;
                 order++;
@@ -900,25 +900,91 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownload_Click(object sender, EventArgs e)
         {
+            List<template_wd_lpc_coverpage> listOfBlanRows = new List<template_wd_lpc_coverpage>();
+            List<template_wd_lpc_coverpage> listOfBlanRows2 = new List<template_wd_lpc_coverpage>();
+
+            List<String> nums = new List<String>();
 
             DataTable dt = Extenders.ObjectToDataTable(this.Lpc[0]);
             List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
-            List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B != "0.200").ToList();
+            foreach (template_wd_lpc_coverpage xxxx in values)
+            {
+                if (!nums.Contains(xxxx.B))
+                {
+
+                    nums.Add(xxxx.B);
+
+                }
+            }
+
+            List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && nums.Contains(x.B) && !x.B.Equals("0.200")).ToList();
+            template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+            int pc = values.Count / 5;
+            for (int i = 1; i <= pc; i++)
+            {
+
+                tmp = new template_wd_lpc_coverpage();
+                tmp.A = i.ToString();
+                tmp.B = "3";
+                tmp.C = String.Empty;
+                tmp.D = String.Empty;
+                tmp.E = "-99";
+                tmp.F = "-99";
+                tmp.data_type = Convert.ToInt32(WDLpcDataType.DATA_VALUE);
+                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                listOfBlanRows.Add(tmp);
+
+            }
+
+            tmp = new template_wd_lpc_coverpage();
+            tmp.A = "Average";
+            tmp.B = "3";
+            tmp.C = String.Empty;
+            tmp.D = String.Empty;
+            tmp.E = "-99";
+            tmp.F = "-99";
+            tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+            tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+            listOfBlanRows2.Add(tmp);
+            tmp = new template_wd_lpc_coverpage();
+            tmp.A = "Standard Deviation";
+            tmp.B = "3";
+            tmp.C = String.Empty;
+            tmp.D = String.Empty;
+            tmp.E = "-99";
+            tmp.F = "-99";
+            tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+            tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+            listOfBlanRows2.Add(tmp);
+            tmp = new template_wd_lpc_coverpage();
+            tmp.A = "%RSD Deviation";
+            tmp.B = "3";
+            tmp.C = String.Empty;
+            tmp.D = String.Empty;
+            tmp.E = "-99";
+            tmp.F = "-99";
+            tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+            tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+            listOfBlanRows2.Add(tmp);
+            values.AddRange(listOfBlanRows);
+            sumarys.AddRange(listOfBlanRows2);
             foreach (template_wd_lpc_coverpage lpc in specs)
             {
-                lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
                 Console.WriteLine();
             }
             foreach (template_wd_lpc_coverpage lpc in sumarys)
             {
-                lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
-                lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
+                lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
+                lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt32(txtDecimal01.Text)));
+                lpc.D = lpc.A.Replace("%", "Z");
+
                 Console.WriteLine();
             }
 
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -929,10 +995,9 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", dt.Rows[0]["ws_c21"].ToString()));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
 
             reportParameters.Add(new ReportParameter("txtB48", txtB48.Text));
@@ -943,6 +1008,18 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("txtC54", txtC54.Text));
             reportParameters.Add(new ReportParameter("txtD54", txtD54.Text));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnit2.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit3", ddlUnit3.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit4", ddlUnit4.SelectedItem.Text));
+
+            reportParameters.Add(new ReportParameter("method", txtB21.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+            reportParameters.Add(new ReportParameter("partizleSizeCount", pc.ToString()));
+            reportParameters.Add(new ReportParameter("showTankCondition", (!pTankConditions.Visible).ToString()));
+
+
+
+
 
             // Variables
             Warning[] warnings;
@@ -960,19 +1037,19 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3" }).Contains(x.A)).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] { "4", "5" }).Contains(x.A)).ToDataTable())); // Add datasource here
-           
-            if(sumarys.Count>0 && sumarys.Count <= 10)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0,sumarys.Count).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
-            }
-            if (sumarys.Count >10)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, 10).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", sumarys.GetRange(10, sumarys.Count-10).ToDataTable())); // Add datasource here
-            }
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3", "4" }).Contains(x.A)).OrderBy(x => x.A).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] { "5" }).Contains(x.A)).OrderBy(x => x.A).ToDataTable())); // Add datasource here
+
+            //if (sumarys.Count > 0 && sumarys.Count <= 10)
+            //{
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, sumarys.Count).OrderBy(x => x.D).ToDataTable())); // Add datasource here
+                                                                                                                                                      //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+                                                                                                                                                      //}
+                                                                                                                                                      //if (sumarys.Count > 10)
+                                                                                                                                                     //{
+                                                                                                                                                      //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.GetRange(0, 10).ToDataTable())); // Add datasource here
+                                                                                                                                                      //    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", sumarys.GetRange(10, sumarys.Count - 10).ToDataTable())); // Add datasource here
+                                                                                                                                                      //}
 
 
 
@@ -1063,240 +1140,15 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-            DataTable dt = Extenders.ObjectToDataTable(this.Lpc[0]);
-            List<template_wd_lpc_coverpage> specs = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
-            List<template_wd_lpc_coverpage> values = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
-            List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList();
-            foreach (template_wd_lpc_coverpage lpc in specs)
-            {
-                lpc.D = Math.Round(Convert.ToDouble(lpc.D)) + "";//.ToString("N"+txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
-                Console.WriteLine();
-            }
-            foreach (template_wd_lpc_coverpage lpc in sumarys)
-            {
-                lpc.E = Convert.ToDouble(lpc.E).ToString("N" + txtDecimal01.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
-                lpc.F = Convert.ToDouble(lpc.F).ToString("N" + txtDecimal02.Text);// String.Format(getDecimalFormat(Convert.ToInt16(txtDecimal01.Text)), Math.Round(Double.Parse(lpc.D), Convert.ToInt16(txtDecimal01.Text)));
-                Console.WriteLine();
-            }
-
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", dt.Rows[0]["ws_c21"].ToString()));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-
-            reportParameters.Add(new ReportParameter("txtB48", txtB48.Text));
-            reportParameters.Add(new ReportParameter("txtB49", txtB49.Text));
-            reportParameters.Add(new ReportParameter("txtB50", txtB50.Text));
-            reportParameters.Add(new ReportParameter("txtB51", txtB51.Text));
-            reportParameters.Add(new ReportParameter("txtB54", txtB54.Text));
-            reportParameters.Add(new ReportParameter("txtC54", txtC54.Text));
-            reportParameters.Add(new ReportParameter("txtD54", txtD54.Text));
-            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/lpc_wd_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", values.Where(x => (new String[] { "1", "2", "3" }).Contains(x.A)).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", values.Where(x => (new String[] { "4", "5" }).Contains(x.A)).ToDataTable())); // Add datasource here
-
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", sumarys.ToDataTable())); // Add datasource here
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-        }
         #region "Custom method"
-
-        private String validateDSHFile(IList<HttpPostedFile> _files)
-        {
-            Boolean isFound_b1 = false;
-            Boolean isFound_b2 = false;
-            Boolean isFound_b3 = false;
-            Boolean isFound_b4 = false;
-            Boolean isFound_b5 = false;
-
-            Boolean isFound_s1 = false;
-            Boolean isFound_s2 = false;
-            Boolean isFound_s3 = false;
-            Boolean isFound_s4 = false;
-            Boolean isFound_s5 = false;
-            Boolean isFoundWrongExtension = false;
-
-            String result = String.Empty;
-
-            String[] files = new String[_files.Count];
-            if (files.Length == 10)
-            {
-                for (int i = 0; i < _files.Count; i++)
-                {
-                    files[i] = _files[i].FileName;
-                    if (!Path.GetExtension(_files[i].FileName).Trim().Equals(".xls"))
-                    {
-                        isFoundWrongExtension = true;
-                        break;
-                    }
-                }
-                if (!isFoundWrongExtension)
-                {
-
-                    //Find B1
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B1"))
-                        {
-                            isFound_b1 = true;
-                            break;
-                        }
-                    }
-
-                    //Find B2
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B2"))
-                        {
-                            isFound_b2 = true;
-                            break;
-                        }
-                    }
-                    //Find B3
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B3"))
-                        {
-                            isFound_b3 = true;
-                            break;
-                        }
-                    }
-                    //Find B4
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B4"))
-                        {
-                            isFound_b4 = true;
-                            break;
-                        }
-                    }
-                    //Find B5
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("B5"))
-                        {
-                            isFound_b5 = true;
-                            break;
-                        }
-                    }
-                    //Find S1
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S1"))
-                        {
-                            isFound_s1 = true;
-                            break;
-                        }
-                    }
-
-                    //Find S2
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S2"))
-                        {
-                            isFound_s2 = true;
-                            break;
-                        }
-                    }
-                    //Find S3
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S3"))
-                        {
-                            isFound_s3 = true;
-                            break;
-                        }
-                    }
-                    //Find S4
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S4"))
-                        {
-                            isFound_s4 = true;
-                            break;
-                        }
-                    }
-                    //Find S5
-                    foreach (String file in files)
-                    {
-                        if (Path.GetFileNameWithoutExtension(file).ToUpper().Equals("S5"))
-                        {
-                            isFound_s5 = true;
-                            break;
-                        }
-                    }
-                    result = (!isFound_b1) ? result += "File not found B1.xls" :
-                                (!isFound_b2) ? result += "File not found B2.xls" :
-                                (!isFound_b3) ? result += "File not found B3.xls" :
-                                 (!isFound_b4) ? result += "File not found B3.xls" :
-                                  (!isFound_b5) ? result += "File not found B3.xls" :
-                                (!isFound_s1) ? result += "File not found S1.xls" :
-                                (!isFound_s2) ? result += "File not found S2.xls" :
-                                (!isFound_s3) ? result += "File not found S3.xls" :
-                                 (!isFound_s4) ? result += "File not found S3.xls" :
-                                  (!isFound_s5) ? result += "File not found S3.xls" : String.Empty;
-                }
-                else
-                {
-                    result = "File extension must be *.txt";
-                }
-            }
-            else
-            {
-                result = "You must to select 6 files for upload.";
-            }
-            return result;
-        }
 
         private void CalculateCas()
         {
-            foreach (template_wd_lpc_coverpage val in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC)))
+            List<template_wd_lpc_coverpage> calList = this.Lpc;
+
+            foreach (template_wd_lpc_coverpage val in calList.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SPEC)))
             {
-                template_wd_lpc_coverpage tmp = Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.A.Equals("Average") && Convert.ToDouble(x.B) == Convert.ToDouble(val.B)).FirstOrDefault();
+                template_wd_lpc_coverpage tmp = calList.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.A.Equals("Average") && Convert.ToDouble(x.B) == Convert.ToDouble(val.B)).FirstOrDefault();
                 if (tmp != null)
                 {
                     val.D = tmp.F;
@@ -1310,13 +1162,14 @@ namespace ALS.ALSI.Web.view.template
                         val.E = String.Empty;
                     }
                 }
+
             }
 
             //Cal Average
 
-            foreach(template_wd_lpc_coverpage item in this.Lpc.Where(x=>x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList())
+            foreach (template_wd_lpc_coverpage item in calList.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY)).ToList())
             {
-                this.Lpc.Remove(item);
+                calList.Remove(item);
             }
 
             List<String> listOFParticle = new List<String>();
@@ -1328,11 +1181,13 @@ namespace ALS.ALSI.Web.view.template
             listOFParticle.Add("1.000");
             listOFParticle.Add("2.000");
 
+
             List<template_wd_lpc_coverpage> tmps = new List<template_wd_lpc_coverpage>();
 
             foreach (String par in listOFParticle)
             {
                 template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.ID = CustomUtils.GetRandomNumberID();
                 tmp.A = "Average";
                 tmp.B = par;
                 tmp.C = string.Empty;
@@ -1340,11 +1195,14 @@ namespace ALS.ALSI.Web.view.template
                 tmp.E = CustomUtils.Average(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.E)).ToList()).ToString();
                 tmp.F = CustomUtils.Average(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.F)).ToList()).ToString();
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
+
                 tmps.Add(tmp);
             }
             foreach (String par in listOFParticle)
             {
                 template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.ID = CustomUtils.GetRandomNumberID();
                 tmp.A = "Standard Deviation";
                 tmp.B = par;
                 tmp.C = string.Empty;
@@ -1352,11 +1210,14 @@ namespace ALS.ALSI.Web.view.template
                 tmp.E = CustomUtils.StandardDeviation(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.E)).ToList()).ToString();
                 tmp.F = CustomUtils.StandardDeviation(this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE) && x.B.Equals(par) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).Select(x => Convert.ToDouble(x.F)).ToList()).ToString();
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
+                tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
+
                 tmps.Add(tmp);
             }
             foreach (String par in listOFParticle)
             {
                 template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+                tmp.ID = CustomUtils.GetRandomNumberID();
                 tmp.A = "%RSD Deviation";
                 tmp.B = par;
                 tmp.C = string.Empty;
@@ -1367,16 +1228,27 @@ namespace ALS.ALSI.Web.view.template
 
                 double _F = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Average")).FirstOrDefault().F);
                 double _F2 = double.Parse(tmps.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && x.B.Equals(par) && x.A.Equals("Standard Deviation")).FirstOrDefault().F);
+                if (_F < 0)
+                {
+                    Console.WriteLine();
+                }
+                tmp.E = (_E == 0 || _E < 0) ? "0" : ((_E2 / _E) * 100).ToString();
+                tmp.F = (_F == 0 || _F < 0) ? "0" : ((_F2 / _F) * 100).ToString();
 
-                tmp.E = ((_E2 / _E) * 100).ToString();
-                tmp.F = ((_F2 / _F) * 100).ToString();
+                tmp.row_type = Convert.ToInt16(RowTypeEnum.Normal);
                 tmp.data_type = Convert.ToInt32(WDLpcDataType.SUMMARY);
                 tmps.Add(tmp);
             }
+            calList.AddRange(tmps);
 
-            this.Lpc.AddRange(tmps);
+            this.Lpc = calList;
 
 
+            foreach (var val in this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE)).ToList())
+            {
+                val.E = (Convert.ToDouble(val.E) < 0) ? "0" : val.E;
+                val.F = (Convert.ToDouble(val.F) < 0) ? "0" : val.F;
+            }
 
 
             gvResult.DataSource = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.DATA_VALUE));
@@ -1626,18 +1498,24 @@ namespace ALS.ALSI.Web.view.template
 
         protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            m_type_of_test typeOfTest = new m_type_of_test();
+            typeOfTest = typeOfTest.SelectByID(jobSample.type_of_test_id);
+
+            #region "Unit"
             gvSpec.Columns[2].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
-            gvSpec.Columns[3].HeaderText = String.Format("Average of 5 data points({0})", ddlUnit.SelectedItem.Text);
+            gvSpec.Columns[3].HeaderText = String.Format("Average of {0} {1} points({2})", typeOfTest.name.Split(' ')[1].ToLower(), typeOfTest.name.Split(' ')[2].ToLower(), ddlUnit.SelectedItem.Text);
 
-            gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit.SelectedItem.Text);
-            gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit2.SelectedItem.Text);
+            gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit2.SelectedItem.Text);
 
-            gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
-            gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit3.SelectedItem.Text);
+            gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit4.SelectedItem.Text);
 
-            gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
-            gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit.SelectedItem.Text);
+            gvStatic.Columns[2].HeaderText = String.Format("Blank-corrected({0})", ddlUnit3.SelectedItem.Text);
+            gvStatic.Columns[3].HeaderText = String.Format("Blank-corrected({0})", ddlUnit4.SelectedItem.Text);
+            #endregion
 
+            CalculateCas();
         }
     }
 }

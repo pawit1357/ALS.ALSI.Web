@@ -331,6 +331,94 @@
         <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="DataSet6">
+      <Query>
+        <DataSourceName>DS</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="name">
+          <DataField>name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ng_part">
+          <DataField>ng_part</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="analytes">
+          <DataField>analytes</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specification_limits">
+          <DataField>specification_limits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result_pass_or_false">
+          <DataField>result_pass_or_false</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="chemical_id">
+          <DataField>chemical_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DS</rd:DataSetName>
+        <rd:SchemaPath>D:\Work\Outsource\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:TableName>dhs_data</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet7">
+      <Query>
+        <DataSourceName>DS</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="name">
+          <DataField>name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ng_part">
+          <DataField>ng_part</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result">
+          <DataField>result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="analytes">
+          <DataField>analytes</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="specification_limits">
+          <DataField>specification_limits</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="result_pass_or_false">
+          <DataField>result_pass_or_false</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="chemical_id">
+          <DataField>chemical_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DS</rd:DataSetName>
+        <rd:SchemaPath>D:\Work\Outsource\ALS.ALSI.Web\ALS.ALSI.Web\ReportObject\DS.xsd</rd:SchemaPath>
+        <rd:TableName>dhs_data</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -361,8 +449,8 @@
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>3.44063cm</Top>
             <Left>0cm</Left>
-            <Height>0.52881cm</Height>
-            <Width>17.71609cm</Width>
+            <Height>0.45368cm</Height>
+            <Width>17.9015cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -377,24 +465,24 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.85123in</Width>
+                  <Width>0.87011in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.44772in</Width>
+                  <Width>1.4666in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.58314in</Width>
+                  <Width>1.60202in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31665in</Width>
+                  <Width>1.33553in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.7547in</Width>
+                  <Width>1.77358in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.35571in</Height>
+                  <Height>0.33832in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -405,7 +493,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Test</Value>
+                                  <Value>Analysis</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Lucida Sans</FontFamily>
@@ -1027,9 +1115,9 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>1.58875in</Top>
-            <Height>0.60571in</Height>
-            <Width>6.95344in</Width>
+            <Top>1.54708in</Top>
+            <Height>0.58832in</Height>
+            <Width>7.04784in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1093,10 +1181,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>5.60921cm</Top>
+            <Top>6.8428cm</Top>
             <Left>0cm</Left>
             <Height>0.42295cm</Height>
-            <Width>17.60241cm</Width>
+            <Width>17.90151cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1112,24 +1200,24 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.88435in</Width>
+                  <Width>0.68552in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.99932in</Width>
+                  <Width>3.41545in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31985in</Width>
+                  <Width>1.33841in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.99479in</Width>
+                  <Width>0.9683in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.77653in</Width>
+                  <Width>0.64014in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.40262in</Height>
+                  <Height>0.35914in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1480,7 +1568,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.20833in</Height>
+                  <Height>0.18224in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1775,9 +1863,9 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <KeepTogether>true</KeepTogether>
             <DataSetName>DataSet3</DataSetName>
-            <Top>3.74212in</Top>
-            <Height>0.61095in</Height>
-            <Width>6.97484in</Width>
+            <Top>3.97912in</Top>
+            <Height>0.54138in</Height>
+            <Width>7.04782in</Width>
             <ZIndex>3</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -1812,24 +1900,24 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.83799in</Width>
+                  <Width>0.67863in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.00767in</Width>
+                  <Width>3.37965in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.3282in</Width>
+                  <Width>1.34874in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.01486in</Width>
+                  <Width>1.00066in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.78488in</Width>
+                  <Width>0.64018in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.38523in</Height>
+                  <Height>0.35455in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2180,7 +2268,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.20833in</Height>
+                  <Height>0.17765in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2474,9 +2562,9 @@
             <RepeatColumnHeaders>true</RepeatColumnHeaders>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet2</DataSetName>
-            <Top>2.44043in</Top>
-            <Height>0.59356in</Height>
-            <Width>6.9736in</Width>
+            <Top>2.8883in</Top>
+            <Height>0.5322in</Height>
+            <Width>7.04786in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -2508,15 +2596,15 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>7.0535cm</Width>
+                  <Width>7.2008cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>10.5534cm</Width>
+                  <Width>10.7007cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.56581cm</Height>
+                  <Height>0.43329cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2589,7 +2677,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.52163cm</Height>
+                  <Height>0.41119cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2662,7 +2750,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.49955cm</Height>
+                  <Height>0.43329cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2753,10 +2841,10 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>7.77688cm</Top>
+            <Top>8.75865cm</Top>
             <Left>0cm</Left>
-            <Height>1.58699cm</Height>
-            <Width>17.6069cm</Width>
+            <Height>1.27777cm</Height>
+            <Width>17.9015cm</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -2773,15 +2861,15 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>7.0535cm</Width>
+                  <Width>7.2008cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>10.5534cm</Width>
+                  <Width>10.7007cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.55548cm</Height>
+                  <Height>0.46713cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2854,7 +2942,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.55548cm</Height>
+                  <Height>0.40087cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2927,7 +3015,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.55548cm</Height>
+                  <Height>0.44504cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3018,10 +3106,10 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>11.09208cm</Top>
+            <Top>11.51735cm</Top>
             <Left>0cm</Left>
-            <Height>1.66644cm</Height>
-            <Width>17.6069cm</Width>
+            <Height>1.31304cm</Height>
+            <Width>17.9015cm</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -3038,24 +3126,24 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.19237in</Width>
+                  <Width>0.70138in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.69008in</Width>
+                  <Width>3.41076in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31985in</Width>
+                  <Width>1.33469in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.99479in</Width>
+                  <Width>0.96085in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.77653in</Width>
+                  <Width>0.64014in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.38523in</Height>
+                  <Height>0.33305in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3123,7 +3211,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Analytes</Value>
+                                  <Value>Analyte</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Lucida Sans</FontFamily>
@@ -3406,7 +3494,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.18044in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3701,9 +3789,9 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <KeepTogether>true</KeepTogether>
             <DataSetName>DataSet4</DataSetName>
-            <Top>5.09248in</Top>
-            <Height>0.63523in</Height>
-            <Width>6.97362in</Width>
+            <Top>5.07911in</Top>
+            <Height>0.51349in</Height>
+            <Width>7.04782in</Width>
             <ZIndex>7</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -3736,9 +3824,9 @@
           </Tablix>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>7.1631in</Top>
+            <Top>6.73949in</Top>
             <Height>1.04167in</Height>
-            <Width>6.97484in</Width>
+            <Width>7.04782in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -3750,15 +3838,15 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>7.0535cm</Width>
+                  <Width>7.2008cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>10.5534cm</Width>
+                  <Width>10.7007cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.53196cm</Height>
+                  <Height>0.42153cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3831,7 +3919,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.53196cm</Height>
+                  <Height>0.4657cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3904,7 +3992,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.53196cm</Height>
+                  <Height>0.4657cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3995,10 +4083,10 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>14.72477cm</Top>
+            <Top>14.31108cm</Top>
             <Left>0cm</Left>
-            <Height>1.59588cm</Height>
-            <Width>17.6069cm</Width>
+            <Height>1.35293cm</Height>
+            <Width>17.9015cm</Width>
             <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -4015,24 +4103,24 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.19237in</Width>
+                  <Width>0.70136in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.69008in</Width>
+                  <Width>3.41078in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31985in</Width>
+                  <Width>1.33469in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.99479in</Width>
+                  <Width>0.96458in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.77653in</Width>
+                  <Width>0.63641in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.37654in</Height>
+                  <Height>0.33306in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4383,7 +4471,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.19783in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4678,9 +4766,9 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <KeepTogether>true</KeepTogether>
             <DataSetName>DataSet5</DataSetName>
-            <Top>6.4949in</Top>
-            <Height>0.62654in</Height>
-            <Width>6.97362in</Width>
+            <Top>6.19471in</Top>
+            <Height>0.53089in</Height>
+            <Width>7.04782in</Width>
             <ZIndex>10</ZIndex>
             <Visibility>
               <Hidden>=CountRows() = 0</Hidden>
@@ -4741,9 +4829,13 @@
               <Parameter Name="SampleDescription">
                 <Value>=Parameters!SampleDescription.Value</Value>
               </Parameter>
+              <Parameter Name="AlsSingaporeRefNo">
+                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
+              </Parameter>
             </Parameters>
-            <Height>1.34069in</Height>
-            <Width>6.97484in</Width>
+            <Top>0.02418in</Top>
+            <Height>1.28873in</Height>
+            <Width>7.04784in</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -4751,11 +4843,276 @@
               </Border>
             </Style>
           </Subreport>
+          <Tablix Name="Tablix10">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>7.10417cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>10.60407cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.43329cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox22">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>ALS THAILAND REF NO.:</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>White</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox28">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Parameters!AlsThailandRefNo.Value</Value>
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox16</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>White</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.41119cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox30">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>DATE:</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox17</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>White</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox64">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Parameters!Date.Value</Value>
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox38</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>White</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.43329cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox80">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>COMPANY:</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox40</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>White</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox83">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Parameters!Company.Value</Value>
+                                  <Style>
+                                    <FontFamily>Lucida Sans</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox49</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>White</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet7</DataSetName>
+            <PageBreak>
+              <BreakLocation>Start</BreakLocation>
+            </PageBreak>
+            <Top>5.49447cm</Top>
+            <Left>0.19322cm</Left>
+            <Height>1.27777cm</Height>
+            <Width>17.70824cm</Width>
+            <ZIndex>12</ZIndex>
+            <Visibility>
+              <Hidden>=CountRows() = 0</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Color>White</Color>
+                <Style>None</Style>
+              </Border>
+              <FontSize>11pt</FontSize>
+            </Style>
+          </Tablix>
         </ReportItems>
-        <Height>8.23497in</Height>
+        <Height>7.78116in</Height>
         <Style />
       </Body>
-      <Width>6.97484in</Width>
+      <Width>7.04786in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -4827,11 +5184,16 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>6</NumberOfRows>
+      <NumberOfRows>7</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -4892,6 +5254,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>5</RowIndex>
           <ParameterName>rpt_unit</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

@@ -20,7 +20,7 @@
                     <div class="actions">
                         <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
                         <asp:Button ID="btnWorking" runat="server" Text="Workingpg-IC" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
-                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i>ตั้งค่า</asp:LinkButton>
 
                     </div>
                 </div>
@@ -415,7 +415,25 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date Analyzed:<span class="required">
+										* </span>
+                                            </label>
+                                            <div class="col-md-6">
+                                                <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                                    style="max-width: 220px">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                                ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
                                     <asp:Panel ID="pSpecification" runat="server">
                                         <%--                                        <div class="row">--%>
                                         <%--                                            <div class="col-md-6">--%>
@@ -483,8 +501,7 @@
                                             <div class="col-md-6">
                                                 <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
                                                 <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                    <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                                </asp:LinkButton>
+                                                    <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label></asp:LinkButton>
                                             </div>
                                         </div>
                                         <%--      </div>
@@ -630,8 +647,7 @@
                     </div>
                     <!-- /.modal-dialog -->
 
-                    <asp:LinkButton ID="lnkFake" runat="server">
-                    </asp:LinkButton>
+                    <asp:LinkButton ID="lnkFake" runat="server"> </asp:LinkButton>
                     <asp:ModalPopupExtender ID="ModolPopupExtender" runat="server" PopupControlID="pnlModalDemo"
                         TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
                         CancelControlID="btnClose">
@@ -657,8 +673,7 @@
                     </div>
                     <!-- /.modal-dialog -->
 
-                    <asp:LinkButton ID="bnErrListFake" runat="server">
-                    </asp:LinkButton>
+                    <asp:LinkButton ID="bnErrListFake" runat="server"> </asp:LinkButton>
                     <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
                         TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
                         CancelControlID="btnPopupErrorList">
@@ -676,3 +691,29 @@
         </Triggers>
     </asp:UpdatePanel>
 </form>
+<script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
+    });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
+</script>

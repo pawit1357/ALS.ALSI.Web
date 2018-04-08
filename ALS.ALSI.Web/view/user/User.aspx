@@ -117,7 +117,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">User:<span class="required">*</span></label>
                                 <div class="col-md-6">
-                                    <asp:TextBox ID="txtUser" runat="server" class="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtUser" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
                         </div>

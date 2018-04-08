@@ -57,7 +57,13 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_wd_hpa_for1_coverpage> HpaFor1
         {
-            get { return (List<template_wd_hpa_for1_coverpage>)Session[GetType().Name + "HpaFor1"]; }
+            //get { return (List<template_wd_hpa_for1_coverpage>)Session[GetType().Name + "HpaFor1"]; }
+            get
+            {
+                List<template_wd_hpa_for1_coverpage> tmps = (List<template_wd_hpa_for1_coverpage>)Session[GetType().Name + "HpaFor1"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            }
             set { Session[GetType().Name + "HpaFor1"] = value; }
         }
 
@@ -77,15 +83,16 @@ namespace ALS.ALSI.Web.view.template
 
         private void initialPage()
         {
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
             #region "Initial UI Component"
             ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
             tb_m_detail_spec detailSpec = new tb_m_detail_spec();
             detailSpec.specification_id = this.jobSample.specification_id;
@@ -118,7 +125,6 @@ namespace ALS.ALSI.Web.view.template
             if (this.jobSample != null)
             {
                 lbJobStatus.Text = Constants.GetEnumDescription(status);
-                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
                 pRemark.Visible = false;
                 pDisapprove.Visible = false;
@@ -161,8 +167,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -191,8 +197,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -205,21 +211,15 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
+
 
                 if (status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING
                     && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) || userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
                 {
 
-                    #region ":: STAMP ANALYZED DATE ::"
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                    {
-                        if (this.jobSample.date_chemist_alalyze == null)
-                        {
-                            this.jobSample.date_chemist_alalyze = DateTime.Now;
-                            this.jobSample.Update();
-                        }
-                    }
-                    #endregion
+
 
 
 
@@ -286,7 +286,8 @@ namespace ALS.ALSI.Web.view.template
 
                 }
 
-
+                Image1.ImageUrl = this.HpaFor1[0].img_path;
+                gvResult.Columns[5].Visible = (userRole == RoleEnum.CHEMIST);
             }
             else
             {
@@ -353,7 +354,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.sample_id = this.SampleID;
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
-                        _cover.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                        _cover.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
                     objWork.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.HpaFor1);
@@ -365,6 +366,7 @@ namespace ALS.ALSI.Web.view.template
 
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
+                    this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                     //#endregion
                     foreach (template_wd_hpa_for1_coverpage _cover in this.HpaFor1)
                     {
@@ -377,7 +379,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.sample_id = this.SampleID;
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
-                        _cover.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                        _cover.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
 
                     objWork.UpdateList(this.HpaFor1);
@@ -474,6 +476,8 @@ namespace ALS.ALSI.Web.view.template
 
             }
             //########
+            this.jobSample.update_date = DateTime.Now;
+            this.jobSample.update_by = userLogin.id;
             this.jobSample.Update();
             //Commit
             GeneralManager.Commit();
@@ -531,7 +535,20 @@ namespace ALS.ALSI.Web.view.template
                                 #region "IMAGES"
                                 foreach (template_wd_hpa_for1_coverpage _cov in this.HpaFor1)
                                 {
+                                    String randNumber = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(_postedFile.FileName));
+
+                                    source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, randNumber);
+                                    source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, randNumber));
+
+                                    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                                    {
+                                        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                                    }
+                                    _postedFile.SaveAs(source_file);
+
                                     _cov.img_path = source_file_url;
+                                    lbImgPath1.Text = _cov.img_path;
+                                    Image1.ImageUrl = lbImgPath1.Text;
                                 }
                                 #endregion
                                 break;
@@ -585,7 +602,7 @@ namespace ALS.ALSI.Web.view.template
             #region "SET DATA TO FORM"
 
             #endregion
-
+            CalculateCas();
             //btnSubmit.Enabled = true;
         }
 
@@ -597,7 +614,8 @@ namespace ALS.ALSI.Web.view.template
                 txtD23.Focus();
 
             }
-            else {
+            else
+            {
                 CalculateCas();
             }
 
@@ -630,9 +648,9 @@ namespace ALS.ALSI.Web.view.template
 
         private void CalculateCas()
         {
-
+            List<template_wd_hpa_for1_coverpage> tmps = this.HpaFor1;
             //Item-Line
-            List<template_wd_hpa_for1_coverpage> itemLines = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> itemLines = tmps.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) || x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).OrderBy(x => x.seq).ToList();
 
             foreach (template_wd_hpa_for1_coverpage _val in itemLines)
             {
@@ -651,7 +669,7 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
             //Total-Line
-            List<template_wd_hpa_for1_coverpage> totalLines = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> totalLines = tmps.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in totalLines)
             {
                 _val.C = 0;
@@ -662,7 +680,7 @@ namespace ALS.ALSI.Web.view.template
                 _val.C = itemLines.Where(x => x.data_group.Equals(_val.data_group) && x.hpa_type != Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).Sum(x => Convert.ToInt32(x.C));
                 _val.D = itemLines.Where(x => x.data_group.Equals(_val.data_group) && x.hpa_type != Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).Sum(x => Convert.ToInt32(x.D)).ToString();
             }
-            List<template_wd_hpa_for1_coverpage> grandTotal = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> grandTotal = tmps.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in grandTotal)
             {
                 _val.C = 0;
@@ -675,41 +693,43 @@ namespace ALS.ALSI.Web.view.template
             }
             //Add MgSiO
 
-
             //Result-Line
-            List<template_wd_hpa_for1_coverpage> resultLine = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
+            List<template_wd_hpa_for1_coverpage> resultLine = tmps.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in resultLine)
             {
                 template_wd_hpa_for1_coverpage mappedValue = totalLines.Where(x => x.B.Equals(mappingRawData((_val.A)))).FirstOrDefault();
                 if (mappedValue != null)
                 {
-                    _val.C = Convert.ToInt16(mappedValue.D);
+                    _val.C = Convert.ToInt32(mappedValue.D);
                     if (_val.D != null)
                     {
                         String dValue = _val.D.Replace("<", "").Trim();
-                        _val.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "" : (_val.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
+                        _val.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "NA" : (_val.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
                     }
                 }
             }
             template_wd_hpa_for1_coverpage mgsioResult = resultLine.Where(x => x.A.Equals("Total MgSiO Particles")).FirstOrDefault();
             if (mgsioResult != null)
             {
-                template_wd_hpa_for1_coverpage mappedValue = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).FirstOrDefault();
-                mgsioResult.C = Convert.ToInt16(mappedValue.D);
+                template_wd_hpa_for1_coverpage mappedValue = tmps.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).FirstOrDefault();
+                mgsioResult.C = Convert.ToInt32(mappedValue.D);
                 if (mgsioResult.D != null)
                 {
                     String dValue = mgsioResult.D.Replace("<", "").Trim();
-                    mgsioResult.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "" : (mgsioResult.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
+                    mgsioResult.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "NA" : (mgsioResult.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
                 }
             }
 
+            this.HpaFor1 = tmps;
 
             gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA) && !x.A.Equals("0")).OrderBy(x => x.seq).ToList();
             gvResult.DataBind();
 
             gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
             gvResult_1.DataBind();
-            
+
+            lbA34.Text = txtB23.Text;
+            lbA48.Text = txtB23.Text;
         }
 
         #endregion
@@ -929,17 +949,26 @@ namespace ALS.ALSI.Web.view.template
         protected void lbDownload_Click(object sender, EventArgs e)
         {
 
+            List<template_wd_hpa_for1_coverpage> listHpaImg = new List<template_wd_hpa_for1_coverpage>();
 
             DataTable dt = Extenders.ObjectToDataTable(this.HpaFor1[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             List<template_wd_hpa_for1_coverpage> listHpa = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
             List<template_wd_hpa_for1_coverpage> listElementalComposition = this.HpaFor1.Where(x =>
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).ToList();
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).OrderBy(x => x.seq).ToList();
+
+            if (listHpa[0].img_path != null)
+            {
+                template_wd_hpa_for1_coverpage tmp = new template_wd_hpa_for1_coverpage();
+                tmp.img1 = CustomUtils.GetBytesFromImage(listHpa[0].img_path);
+                listHpaImg.Add(tmp);
+            }
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -951,10 +980,14 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
 
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
+            reportParameters.Add(new ReportParameter("tafdp", txtB23.Text));
+
+
+
             tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
             if (_detailSpec != null)
             {
@@ -964,8 +997,11 @@ namespace ALS.ALSI.Web.view.template
             {
                 reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", "", "")));
             }
-            reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor1[0].img_path));
+            reportParameters.Add(new ReportParameter("img01Url", listHpaImg.Count.ToString()));
+
+            //reportParameters.Add(new ReportParameter("img01Url", (this.HpaFor1[0].img_path == null) ? "-" : this.HpaFor1[0].img_path));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
             // Variables
             Warning[] warnings;
@@ -978,14 +1014,17 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd_v2.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", listHpa.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.ToDataTable())); // Add datasource here
 
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.GetRange(0, 38).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", listElementalComposition.GetRange(38, 31).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", listElementalComposition.GetRange(69, listElementalComposition.Count - 69).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
 
-
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", listHpaImg.ToDataTable())); // Add datasource here
 
 
 
@@ -1097,8 +1136,8 @@ namespace ALS.ALSI.Web.view.template
 
 
             DataTable dt = Extenders.ObjectToDataTable(this.HpaFor1[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             List<template_wd_hpa_for1_coverpage> listHpa = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
             List<template_wd_hpa_for1_coverpage> listElementalComposition = this.HpaFor1.Where(x =>
@@ -1121,7 +1160,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
             if (_detailSpec != null)
@@ -1455,12 +1494,14 @@ namespace ALS.ALSI.Web.view.template
 
         private String mappingRawData(String _val)
         {
-            String result = _val;
+            String result = Regex.Replace(_val, @"\t|\n|\r", String.Empty);
             Hashtable mappingValues = new Hashtable();
             mappingValues["Total hard Particle (Including Magnetic Particles)"] = "Total - Hard Particles";
             mappingValues["Total MgSiO Particles"] = "Total - Magnetic Particles";
             mappingValues["Total Steel Particles"] = "Total - Steel Particle";
             mappingValues["Total Magnetic Particles"] = "Total - Magnetic Particles";
+            mappingValues["Total hard Particle"] = "Total - Hard Particles";
+
 
             //SST400s(Fe / Cr)
 
@@ -1498,12 +1539,12 @@ namespace ALS.ALSI.Web.view.template
         {
             if (cbCheckBox.Checked)
             {
-                
+
                 lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
             }
             else
             {
-                
+
                 tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
                 if (_detailSpec != null)
                 {

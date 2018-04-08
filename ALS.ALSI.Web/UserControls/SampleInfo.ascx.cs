@@ -21,7 +21,13 @@ namespace ALS.ALSI.Web.UserControls
                 lbDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
                 lbCompany.Text = String.Format("{0}<br />{1}", cus.company_name, cus.address);
                 lbDateSampleReceived.Text = Convert.ToDateTime(_job.date_of_receive).ToString("MM/dd/yyyy");
-                lbRefNo.Text = _sample.job_number.ToString();
+                String[] tmp = _sample.job_number.Split('-');
+
+
+
+                lbRefNo.Text = String.Format("{4}ATT/{0}/{1}/{2}-{3}", tmp[0], _job.date_of_receive.Value.ToString("yy"), tmp[1], tmp[2], (_sample.amend_count > 0 ? (_sample.amend_count == 1 ? "AM/" : "AM/" + _sample.amend_count) : ""));
+
+                ////String.Format("AM/ATT/ELP/17/XXXX-XX")
                 //lbDownloadName.Text = _sample.job_number.ToString();
                 lbDateTestCompleted.Text = Convert.ToDateTime(_sample.due_date).ToString("MM/dd/yyyy");
 

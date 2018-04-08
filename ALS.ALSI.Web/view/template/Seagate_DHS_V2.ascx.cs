@@ -48,7 +48,11 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_seagate_dhs_coverpage> coverpages
         {
-            get { return (List<template_seagate_dhs_coverpage>)Session[GetType().Name + "coverpages"]; }
+            get {
+                List<template_seagate_dhs_coverpage> tmps = (List<template_seagate_dhs_coverpage>)Session[GetType().Name + "coverpages"];
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            }
             set { Session[GetType().Name + "coverpages"] = value; }
         }
 
@@ -102,12 +106,12 @@ namespace ALS.ALSI.Web.view.template
             comp.template_id = this.jobSample.template_id;
 
             ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
 
             ddlComponent.Items.Clear();
@@ -125,7 +129,7 @@ namespace ALS.ALSI.Web.view.template
             this.tbCas = tb_m_dhs_cas.FindAllBySampleID(this.SampleID);
             if (this.tbCas != null && this.tbCas.Count > 0 && this.coverpages != null && this.coverpages.Count > 0)
             {
-                this.coverpages = this.coverpages.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal));
+                //this.coverpages = this.coverpages.FindAll(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal));
 
                 gvResult.DataSource = this.tbCas;
                 gvResult.DataBind();
@@ -182,8 +186,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -210,8 +214,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -223,20 +227,15 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
+
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
+
                 #region "VISIBLE RESULT DATA"
 
                 if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
-                    #region ":: STAMP ANALYZED DATE ::"
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                    {
-                        if (this.jobSample.date_chemist_alalyze == null)
-                        {
-                            this.jobSample.date_chemist_alalyze = DateTime.Now;
-                            this.jobSample.Update();
-                        }
-                    }
-                    #endregion
+
 
 
                     txtProcedureNo.Enabled = true;
@@ -309,7 +308,7 @@ namespace ALS.ALSI.Web.view.template
                             gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", component.C);
                         }
 
-   
+
 
 
                         cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
@@ -415,7 +414,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.step3owner = userLogin.id;
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-
+                        this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         #region "CAS#"
                         tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
                         tb_m_dhs_cas.InsertList(this.tbCas);
@@ -427,7 +426,7 @@ namespace ALS.ALSI.Web.view.template
                             _val.procedureNo = txtProcedureNo.Text;
                             _val.sampleSize = txtSampleSize.Text;
                             _val.SamplingTime = txtSamplingTime.Text;
-                            _val.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                            _val.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                         }
                         template_seagate_dhs_coverpage.UpdateList(this.coverpages);
                         #endregion
@@ -519,8 +518,32 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
+                    if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
 
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+
+
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        FileUpload1.SaveAs(source_file);
+                        this.jobSample.path_pdf = source_file_url;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        //lbMessage.Text = string.Empty;
+                    }
+                    else
+                    {
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
+                    }
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
 
@@ -534,6 +557,8 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
                 //########
+                this.jobSample.update_date = DateTime.Now;
+                this.jobSample.update_by = userLogin.id;
                 this.jobSample.Update();
 
                 //Commit
@@ -626,22 +651,22 @@ namespace ALS.ALSI.Web.view.template
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                                                     //if (Regex.IsMatch(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7)), @"^[1-9]\d*(\.\d+)?$"))
                                                     //{
-                                                        tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal01.Text)).ToString();
                                                     //}       
-                                                break;
+                                                    break;
                                                 //case "00110011":
                                                 case "00110111"://C31
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.c31);
-                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal01.Text)).ToString();
                                                     break;
                                                 case "00010011"://TOTAL
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
-                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal01.Text)).ToString();
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal01.Text)).ToString();
                                                     break;
                                                 case "00110011":
                                                 case "00100011"://TOTAL OUT GAS
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalOutGas);
-                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt16(txtDecimal02.Text)).ToString();
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal02.Text)).ToString();
                                                     break;
                                                 case "00100010"://SAMPLE SIZE
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.SampleSize);
@@ -843,7 +868,7 @@ namespace ALS.ALSI.Web.view.template
             {
 
                 List<template_seagate_dhs_coverpage> newCoverPage = new List<template_seagate_dhs_coverpage>();
-                foreach (template_seagate_dhs_coverpage _cover in this.coverpages.Where(x=>!x.chemical_id.Equals("0")))
+                foreach (template_seagate_dhs_coverpage _cover in this.coverpages.Where(x => !x.chemical_id.Equals("0")))
                 {
                     String groupName = mappingRawData(_cover.name.Trim());
                     tb_m_dhs_cas tmp = this.tbCas.Find(x => groupName.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
@@ -900,44 +925,11 @@ namespace ALS.ALSI.Web.view.template
                             break;
                     }
                     newCoverPage.Add(_cover);
-                    //switch (_cover.chemical_id)
-                    //{
-                    //    case "C31.0":
-                    //        List<template_seagate_dhs_coverpage> c31List = new List<template_seagate_dhs_coverpage>();
-
-                    //        List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.c31_flag != null && x.c31_flag.ToUpper().Equals(_cover.chemical_id)).ToList();
-                    //        if (childs.Count > 0)
-                    //        {
-                    //            foreach (tb_m_dhs_cas child in childs)
-                    //            {
-                    //                template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
-                    //                work.sample_id = this.SampleID;
-                    //                work.component_id = _cover.component_id;
-                    //                work.chemical_id = _cover.chemical_id;
-                    //                //work.name = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + child.library_id;
-                    //                work.name =  child.library_id;
-                    //                work.ng_part = _cover.ng_part;
-                    //                work.result = child.amount;
-                    //                work.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                    //                c31List.Add(work);
-                    //            }
-                    //            _cover.ng_part = "-";
-                    //            _cover.result = "-";
-                    //        }
-                    //        else
-                    //        {
-                    //            _cover.result = "Not significant peak";
-                    //        }
-                    //        //newCoverPage.Add(_cover);
-                    //        newCoverPage.AddRange(c31List);
-                    //        break;
-                    //    default:
-                    //        newCoverPage.Add(_cover);
-                    //        break;
-                    //}
+                    
 
                 }
 
+                
                 gvCoverPages.DataSource = newCoverPage;
                 gvCoverPages.DataBind();
             }
@@ -954,21 +946,24 @@ namespace ALS.ALSI.Web.view.template
         {
             tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
             String unitName = "";
-            if (this.coverpages[0].unit != null)
+            if (component != null)
             {
-                if (this.coverpages[0].unit.Value > 0)
-                {
-                    tb_unit _unit = new tb_unit().SelectByID(this.coverpages[0].unit.Value);
-                    if (_unit != null)
-                    {
-                        unitName = _unit.name;
-                    }
-                }
+                unitName = component.C;
+
+                //tb_unit unit = new tb_unit();
+
+                //tb_unit _unit = unit.SelectByID(this.coverpages[0].unit.Value);
+                //if (_unit != null)
+                //{
+                //    unitName = _unit.name;
+                //}
+
             }
+            List<template_seagate_dhs_coverpage> ds2 = this.coverpages.ToList();
 
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -979,11 +974,13 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("rpt_unit", this.coverpages[0].unit != null ? unitName : component.C));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "DHS"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+            reportParameters.Add(new ReportParameter("PageCount", "0"));
 
             // Variables
             Warning[] warnings;
@@ -1001,28 +998,38 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
 
-            List<template_seagate_dhs_coverpage> ds2 = this.coverpages.ToList();
 
-            if (ds2.Count > 0 && ds2.Count <= 8)
+            //ds2 = ds2.GetRange(0, 18);
+
+            if (ds2.Count > 0 && ds2.Count <= 12)
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
-            }
-            if (ds2.Count >8)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0,8).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(8, ds2.Count-8).ToDataTable())); // Add datasource here
-            }
-            if (cbNoHeader.Checked)
-            {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt)); // Add datasource here
-            }
-            else
-            {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(0, ds2.Count).ToDataTable())); // Add datasource here
+                reportParameters.Add(new ReportParameter("PageCount", "0"));
+
 
             }
+            if (ds2.Count > 12 && ds2.Count <= 41)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 12).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(12, ds2.Count - 12).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+                reportParameters.Add(new ReportParameter("PageCount", "1"));
 
+            }
+            if (ds2.Count > 41)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 12).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(12, 29).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(41, ds2.Count - 41).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+                reportParameters.Add(new ReportParameter("PageCount", "0"));
+            }
+
+         
 
             string download = String.Empty;
 
@@ -1052,7 +1059,7 @@ namespace ALS.ALSI.Web.view.template
                         doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
                         //doc1.LoadFromFile(Server.MapPath("~/template/") + "BlankLetterHeadNoPicture.doc");
 
-                        
+
                         Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
                         Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
 
@@ -1118,62 +1125,7 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-            tb_m_component component = new tb_m_component().SelectByID(this.coverpages[0].component_id.Value);
 
-
-            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", component.C));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "DHS"));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_seagate_v2_pdf.rdlc");
-            //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/Report1.rdlc");
-
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.ToDataTable())); // Add datasource here
-
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-        }
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue.ToString(), true);
@@ -1216,12 +1168,14 @@ namespace ALS.ALSI.Web.view.template
                     {
                         template_seagate_dhs_coverpage work = new template_seagate_dhs_coverpage();
                         //work.ID = (this.CommandName == CommandNameEnum.Add) ? index : this.coverpages[index].ID;
-                        if (!spec.B.Equals("0")){
+                        if (!spec.B.Equals("0"))
+                        {
                             if (spec.B.Equals("-") && spec.C.Equals("-"))
                             {
                                 Console.WriteLine();
                             }
-                            else {
+                            else
+                            {
                                 work.sample_id = this.SampleID;
                                 work.component_id = component.ID;
                                 work.chemical_id = spec.B;

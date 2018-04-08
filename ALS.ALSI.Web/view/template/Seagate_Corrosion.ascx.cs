@@ -85,12 +85,12 @@ namespace ALS.ALSI.Web.view.template
         {
 
             ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
             tb_m_specification comp = new tb_m_specification();
             comp.specification_id = this.jobSample.specification_id;
@@ -164,8 +164,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -192,8 +192,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -205,6 +205,11 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
+
+                #region ":: STAMP ANALYZED DATE ::"
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
+                #endregion
             }
             #endregion
             #region "WORKING"
@@ -289,16 +294,7 @@ namespace ALS.ALSI.Web.view.template
 
             if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
             {
-                #region ":: STAMP ANALYZED DATE ::"
-                if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                {
-                    if (this.jobSample.date_chemist_alalyze == null)
-                    {
-                        this.jobSample.date_chemist_alalyze = DateTime.Now;
-                        this.jobSample.Update();
-                    }
-                }
-                #endregion
+
                 pRefImage.Visible = true;
                 gvResult.Columns[3].Visible = true;
                 gvResult.Columns[4].Visible = false;
@@ -364,9 +360,9 @@ namespace ALS.ALSI.Web.view.template
                     template_seagate_corrosion_coverpage.DeleteBySampleID(this.SampleID);
                     foreach (template_seagate_corrosion_coverpage _cover in this.coverpages)
                     {
-                        _cover.procedureNo_id = Convert.ToInt16(ddlMethod.SelectedValue);
-                        _cover.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
-                        _cover.temperature_humidity_parameters_id = Convert.ToInt16(ddlTemp.SelectedValue);
+                        _cover.procedureNo_id = Convert.ToInt32(ddlMethod.SelectedValue);
+                        _cover.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                        _cover.temperature_humidity_parameters_id = Convert.ToInt32(ddlTemp.SelectedValue);
                         _cover.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                     }
                     template_seagate_corrosion_coverpage.InsertList(this.coverpages);
@@ -378,12 +374,13 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
+                    this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                     //#endregion
 
                     foreach (template_seagate_corrosion_coverpage _cover in this.coverpages)
                     {
-                        _cover.procedureNo_id = Convert.ToInt16(ddlMethod.SelectedValue);
-                        _cover.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
+                        _cover.procedureNo_id = Convert.ToInt32(ddlMethod.SelectedValue);
+                        _cover.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         _cover.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                     }
 
@@ -475,32 +472,32 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
+                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
 
 
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        btnUpload.SaveAs(source_file);
+                        this.jobSample.path_pdf = source_file_url;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        //lbMessage.Text = string.Empty;
+                    }
+                    else
+                    {
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
+                    }
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
 
@@ -515,6 +512,8 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 litErrorMessage.Text = String.Empty;
+                this.jobSample.update_date = DateTime.Now;
+                this.jobSample.update_by = userLogin.id;
                 this.jobSample.Update();
                 //Commit
                 GeneralManager.Commit();
@@ -666,7 +665,7 @@ namespace ALS.ALSI.Web.view.template
                 if (_tmp != null)
                 {
                     _tmp.result = _ddlResult.SelectedValue;
-                    //_tmp.temperature_humidity_parameters_id = Convert.ToInt16(_ddlhTemperature_humidity_parameters.SelectedValue);
+                    //_tmp.temperature_humidity_parameters_id = Convert.ToInt32(_ddlhTemperature_humidity_parameters.SelectedValue);
                     //_tmp.specification = _txtSpecification.Text;
                     //_tmp.temperature_humidity_parameters = _ddlhTemperature_humidity_parameters.SelectedItem.Text;
                     //
@@ -821,8 +820,8 @@ namespace ALS.ALSI.Web.view.template
             this.coverpages[0].procedureNo = txtProcedureNo.Text;
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
 
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -833,10 +832,11 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             reportParameters.Add(new ReportParameter("ResultDesc", lbResultDesc.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
             // Variables
             Warning[] warnings;
@@ -846,32 +846,26 @@ namespace ALS.ALSI.Web.view.template
             string extension = string.Empty;
 
 
-            //DataTable dtResult = new DataTable("temperature_humidity_parameters");
-            //DataColumn[] cols1 ={ new DataColumn("specification",typeof(String)),
-            //                      new DataColumn("result",typeof(String))
-            //                  };
-            //dtResult.Columns.AddRange(cols1);
-            //DataRow row1 = dtResult.NewRow();
-            //row1["temperature_humidity_parameters"] = component.B;
-            //row1["specification"] = component.C;
-            //row1["result"] = this.coverpages[0].result;
-            //dtResult.Rows.Add(row1);
 
 
 
             List<template_seagate_corrosion_img> dat = new List<template_seagate_corrosion_img>();
             template_seagate_corrosion_img tmp = new template_seagate_corrosion_img();
             template_seagate_corrosion_img corImg = this.refImg.Where(x => x.img_type.Value == 1).FirstOrDefault();
-            if (corImg != null)
+            try
             {
-                tmp.img1 = CustomUtils.GetBytesFromImage(corImg.path_img1);
+                if (corImg != null)
+                {
+                    tmp.img1 = CustomUtils.GetBytesFromImage(corImg.path_img1);
+                }
+                corImg = this.refImg.Where(x => x.img_type.Value == 2).FirstOrDefault();
+                if (corImg != null)
+                {
+                    tmp.img2 = CustomUtils.GetBytesFromImage(corImg.path_img1);
+                }
+                dat.Add(tmp);
             }
-            corImg = this.refImg.Where(x => x.img_type.Value == 2).FirstOrDefault();
-            if (corImg != null)
-            {
-                tmp.img2 = CustomUtils.GetBytesFromImage(corImg.path_img1);
-            }
-            dat.Add(tmp);
+            catch (Exception ex) { }
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
@@ -995,8 +989,8 @@ namespace ALS.ALSI.Web.view.template
 
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
 
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 

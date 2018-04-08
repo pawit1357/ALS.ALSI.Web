@@ -75,7 +75,7 @@
                                             </tr>
                                         </table>
 
-                     <%--                   <h6>The Specification is based on WD's specification Doc No 
+                                        <%--                   <h6>The Specification is based on WD's specification Doc No 
                             <asp:Label ID="lbDocNo" runat="server" Text=""></asp:Label>
                                             for
                             <asp:Label ID="lbComponent" runat="server" Text=""></asp:Label>
@@ -140,7 +140,10 @@
 
                                 <h5>Stage Mimic of
                     <asp:Label ID="lbA34" runat="server" Text=""></asp:Label><br />
-                                    <asp:Label ID="lbImgPath1" runat="server" Text=""></asp:Label></h5>
+                                    <asp:Label ID="lbImgPath1" runat="server" Text=""></asp:Label>
+                                    <br />
+                                    <asp:Image ID="Image1" runat="server" Height="150px" Width="150px" />
+                                </h5>
 
                                 <%--                                <asp:Image ID="img1" runat="server" Width="120" Height="120" />--%>
                                 <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>
@@ -260,7 +263,25 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date Analyzed:<span class="required">
+										* </span>
+                                            </label>
+                                            <div class="col-md-6">
+                                                <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                                    style="max-width: 220px">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                                ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
                                     <asp:Panel ID="pSpecification" runat="server">
                                         <%--                                        <div class="row">--%>
                                         <%--                                            <div class="col-md-6">--%>
@@ -461,3 +482,29 @@
         </Triggers>
     </asp:UpdatePanel>
 </form>
+<script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
+    });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
+</script>

@@ -7,9 +7,6 @@ namespace ALS.ALSI.Biz.ReportObjects
 {
     public class ReportHeader
     {
-
-
-
         public String cusRefNo { get; set; }
         public String alsRefNo { get; set; }
         public DateTime cur_date { get; set; }
@@ -22,7 +19,6 @@ namespace ALS.ALSI.Biz.ReportObjects
         public String model { get; set; }
         public String surface_areas { get; set; }
         public String remark { get; set; }
-
 
         #region "Custom"
         public IEnumerable getReportHeader(int sample_id)
@@ -55,7 +51,7 @@ namespace ALS.ALSI.Biz.ReportObjects
             }
         }
 
-        public ReportHeader getReportHeder(job_sample _sample)
+        public static ReportHeader getReportHeder(job_sample _sample)
         {
             ReportHeader rpt = new ReportHeader();
 
@@ -67,7 +63,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                 _cus = _cus.SelectByID(_job.customer_id);
 
                 m_customer_address addr = new m_customer_address();
-                addr = addr.SelectByCompanyID(_cus.ID);
+                addr = addr.SelectByID(_job.customer_address_id.Value);
 
                 if (_cus != null)
                 {
@@ -82,12 +78,30 @@ namespace ALS.ALSI.Biz.ReportObjects
                 rpt.dateOfTestComplete = Convert.ToDateTime(_sample.date_chemist_complete);
 
                 //ATT / ELP / 16 / XXXX(เลขจ็อบ) - XX(Test)
+
+                int phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2));
+                if (DateTime.Now.Month < 4)
+                {
+                    phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2)) - 1;
+                }
+
+                String AmRetest = String.Empty;
+                switch (_sample.amend_or_retest)
+                {
+                    case "AM":
+                        AmRetest = (_sample.amend_count > 0) ? "AM" + _sample.amend_count + "/" : String.Empty;
+                        break;
+                    case "R":
+                        AmRetest = (_sample.retest_count > 0) ? "R" + _sample.retest_count + "/" : String.Empty;
+                        break;
+                }
+
                 String[] tmp = _sample.job_number.Split('-');
-                rpt.alsRefNo = String.Format("ATT/{0}/{1}/{2}-{3}", tmp[0], DateTime.Now.ToString("yy"), tmp[1], tmp[2]);// _sample.job_number.ToString();
-                rpt.description = "Description:" + _sample.description + "\n" +
-                                  "Model:" + _sample.model + "\n" +
-                                  "Surface Area:" + _sample.surface_area + "\n"+
-                                  (!String.IsNullOrEmpty(_sample.remarks)? "Remark: "+_sample.remarks+"\n":"");
+                rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
+                rpt.description = (String.IsNullOrEmpty(_sample.description) ? String.Empty : "Description:" + _sample.description + "\n") +
+                                  (String.IsNullOrEmpty(_sample.model) ? String.Empty : "Model:" + _sample.model + "\n") +
+                                  (String.IsNullOrEmpty(_sample.surface_area) ? String.Empty : "Surface Area:" + _sample.surface_area + "\n") +
+                                  (!String.IsNullOrEmpty(_sample.remarks) ? "Remark: " + _sample.remarks + "\n" : "");
 
                 rpt.model = _sample.model;
                 rpt.surface_areas = _sample.surface_area;
@@ -95,28 +109,6 @@ namespace ALS.ALSI.Biz.ReportObjects
             }
             return rpt;
         }
-
         #endregion
-
-
-
-        //select 
-        //i.customer_po_ref cusRefNo,
-        //s.job_number alsRefNo,
-        //i.date_of_receive cur_date,
-        //m.company_name addr1,
-        //m.address addr2,
-        //i.date_of_receive dateOfDampleRecieve,
-        //i.date_of_request dateOfAnalyze,
-        //s.due_date dateOfTestComplete,
-        //s.description,
-        //s.model,
-        //s.surface_area,
-        //s.remarks
-        //from job_info i 
-        //left join job_sample s on i.ID = s.job_id
-        //left join m_customer m on i.customer_id = m.ID
-        //where s.ID =12
-
     }
 }

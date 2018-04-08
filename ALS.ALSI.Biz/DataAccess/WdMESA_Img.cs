@@ -1,6 +1,7 @@
 ﻿using ALS.ALIS.Repository.Interface;
 using ALS.ALSI.Biz.Constant;
 using StructureMap;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,7 +51,25 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             _repository.Delete(this);
         }
-
+        public static void CloneData(int oldSampleId, int newSampleId)
+        {
+            try
+            {
+                List<template_wd_mesa_img> lists = _repository.Find(x => x.sample_id == oldSampleId).ToList();
+                if (null != lists && lists.Count > 0)
+                {
+                    foreach (template_wd_mesa_img item in lists)
+                    {
+                        item.sample_id = newSampleId;
+                        item.Insert();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
         #region "Custom"
 
         public static void DeleteBySampleID(int _sampleID)

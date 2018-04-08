@@ -18,6 +18,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> status_group_id { get; set; }
         public Nullable<int> status_for_role { get; set; }
         public string name { get; set; }
+        public string status { get; set; }
     
         public virtual m_role m_role { get; set; }
         public virtual m_status_group m_status_group { get; set; }

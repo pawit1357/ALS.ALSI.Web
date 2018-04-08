@@ -85,12 +85,12 @@ namespace ALS.ALSI.Web.view.template
         {
             //this.refImg = new List<template_wd_mesa_img>();
             ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
 
             tb_m_component comp = new tb_m_component();
@@ -150,8 +150,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -178,8 +178,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -191,6 +191,8 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
             }
             #endregion
             #region "WORKING"
@@ -198,7 +200,7 @@ namespace ALS.ALSI.Web.view.template
             this.refImg = template_wd_mesa_img.FindAllBySampleID(this.SampleID);
             if (this.refImg != null && this.refImg.Count > 0)
             {
-                gvRefImages.DataSource = this.refImg;
+                gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
                 gvRefImages.DataBind();
             }
             if (this.coverpages != null && this.coverpages.Count > 0)
@@ -258,16 +260,7 @@ namespace ALS.ALSI.Web.view.template
 
             if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
             {
-                #region ":: STAMP ANALYZED DATE ::"
-                if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                {
-                    if (this.jobSample.date_chemist_alalyze == null)
-                    {
-                        this.jobSample.date_chemist_alalyze = DateTime.Now;
-                        this.jobSample.Update();
-                    }
-                }
-                #endregion
+
 
 
                 txtProcedureNo_Extraction.Visible = true;
@@ -290,7 +283,9 @@ namespace ALS.ALSI.Web.view.template
                 pRefImage.Visible = true;
                 gvResult.Columns[4].Visible = true;
                 gvResult.Columns[5].Visible = true;
-                gvRefImages.Columns[6].Visible = true;
+                gvRefImages.Columns[7].Visible = true;
+                gvRefImages.Columns[8].Visible = true;
+
             }
             else
             {
@@ -314,7 +309,9 @@ namespace ALS.ALSI.Web.view.template
                 pRefImage.Visible = false;
                 gvResult.Columns[4].Visible = false;
                 gvResult.Columns[5].Visible = false;
-                gvRefImages.Columns[6].Visible = false;
+                gvRefImages.Columns[7].Visible = false;
+                gvRefImages.Columns[8].Visible = false;
+
             }
 
             switch (lbJobStatus.Text)
@@ -361,9 +358,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-                    //#region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_chemist_complete = DateTime.Now;
-                    //#endregion
+
                     foreach (template_wd_mesa_coverpage _cover in this.coverpages)
                     {
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
@@ -394,6 +389,10 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
+                    //#region ":: STAMP COMPLETE DATE"
+                    this.jobSample.date_chemist_complete = DateTime.Now;
+                    this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                    //#endregion
                     foreach (template_wd_mesa_coverpage _cover in this.coverpages)
                     {
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
@@ -415,8 +414,6 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-
-
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
                             break;
@@ -492,32 +489,32 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
+                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
 
 
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        btnUpload.SaveAs(source_file);
+                        this.jobSample.path_pdf = source_file_url;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        //lbMessage.Text = string.Empty;
+                    }
+                    else
+                    {
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
+                    }
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
 
@@ -532,6 +529,8 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
                 //########
+                this.jobSample.update_date = DateTime.Now;
+                this.jobSample.update_by = userLogin.id;
                 this.jobSample.Update();
                 //Commit
                 GeneralManager.Commit();
@@ -647,6 +646,8 @@ namespace ALS.ALSI.Web.view.template
         protected void gvResult_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvResult.EditIndex = -1;
+            gvResult.DataSource = this.coverpages;
+            gvResult.DataBind();
         }
 
         protected void gvResult_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -680,8 +681,8 @@ namespace ALS.ALSI.Web.view.template
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
 
 
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -693,10 +694,12 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "-"));
-            reportParameters.Add(new ReportParameter("ResultDesc", "-"));
+            reportParameters.Add(new ReportParameter("Test", " "));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+
 
             // Variables
             Warning[] warnings;
@@ -705,23 +708,90 @@ namespace ALS.ALSI.Web.view.template
             string encoding = string.Empty;
             string extension = string.Empty;
 
-            List<template_wd_mesa_img> dat = this.refImg;
+            List<template_wd_mesa_img> dat = this.refImg.OrderBy(x=>x.seq).ToList();
             foreach (template_wd_mesa_img _i in dat)
             {
-                _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
-                _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
-                _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
+                _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
+                _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
+                _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
                 _i.img4 = CustomUtils.GetBytesFromImage(_i.path_edx_spectrum);
             }
 
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_idm_wd.rdlc");
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dat.Where(x => x.area == 1).ToList().ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dat.Where(x => x.area == 2).ToList().ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6",this.coverpages.Where(x=>!x.location_of_parts.Equals("-")))); // Add datasource here
+
+            List<template_wd_mesa_img> tmp = new List<template_wd_mesa_img>();
+            DataTable dt1 = new DataTable();
+            DataTable dt2 = new DataTable();
+            DataTable dt3 = new DataTable();
+            DataTable dt4 = new DataTable();
+
+
+
+
+            if (dat.Count >= 1)
+            {
+                tmp.Add(dat[0]);
+                dt1 = tmp.ToDataTable();
+            }
+            if (dat.Count >= 2)
+            {
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[1]);
+                dt2 = tmp.ToDataTable();
+            }
+            if (dat.Count >= 3)
+            {
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[2]);
+                dt3 = tmp.ToDataTable();
+            }
+            if (dat.Count >= 4)
+            {
+                tmp = new List<template_wd_mesa_img>();
+                tmp.Add(dat[3]);
+                dt4 = tmp.ToDataTable();
+            }
+            if (dt1.Rows.Count > 0) { 
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt1)); //PAGE02
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", new DataTable())); //PAGE02
+
+            }
+            if (dt1.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dt2)); //PAGE03
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); //PAGE03
+
+            }
+            if (dt1.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dt3)); //PAGE04
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); //PAGE04
+
+            }
+            if (dt1.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", dt4)); //PAGE05
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); //PAGE05
+
+            }
 
 
 
@@ -810,70 +880,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
-
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-            DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
-
-
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "-"));
-            reportParameters.Add(new ReportParameter("ResultDesc", "-"));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-            List<template_wd_mesa_img> dat = this.refImg;
-            foreach (template_wd_mesa_img _i in dat)
-            {
-                _i.img1 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_2000x);
-                _i.img2 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_250x);
-                _i.img3 = CustomUtils.GetBytesFromImage(_i.path_sem_image_at_500x);
-                _i.img4 = CustomUtils.GetBytesFromImage(_i.path_edx_spectrum);
-            }
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_idm_wd_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dat.Where(x => x.area == 1).ToList().ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", dat.Where(x => x.area == 2).ToList().ToDataTable())); // Add datasource here
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-
-        }
+        
         private void downloadWord()
         {
             HttpContext.Current.Response.Clear();
@@ -904,6 +911,7 @@ namespace ALS.ALSI.Web.view.template
             _img.sample_id = this.SampleID;
             _img.area = Convert.ToInt32(ddlArea.SelectedValue);
             _img.descripton = txtDesc.Text;
+            _img.seq = this.refImg.Count+1;
             if (!String.IsNullOrEmpty(txtDesc.Text))
             {
 
@@ -995,7 +1003,7 @@ namespace ALS.ALSI.Web.view.template
                     ddlArea.SelectedIndex = -1;
                     txtDesc.Text = string.Empty;
                 }
-                gvRefImages.DataSource = this.refImg;
+                gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
                 gvRefImages.DataBind();
             }
         }
@@ -1016,7 +1024,7 @@ namespace ALS.ALSI.Web.view.template
                             break;
 
                     }
-                    gvRefImages.DataSource = this.refImg;
+                    gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
                     gvRefImages.DataBind();
                 }
             }
@@ -1027,6 +1035,44 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+
+        protected void gvRefImages_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvRefImages.EditIndex = e.NewEditIndex;
+            gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
+            gvRefImages.DataBind();
+
+        }
+
+        protected void gvRefImages_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg.OrderBy(x => x.seq);
+            gvRefImages.DataBind();
+        }
+
+        protected void gvRefImages_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+
+            int _id = Convert.ToInt32(gvRefImages.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txtSeq = (TextBox)gvRefImages.Rows[e.RowIndex].FindControl("txtSeq");
+            Console.WriteLine();
+            if (txtSeq != null)
+            {
+                template_wd_mesa_img _tmp = this.refImg.Find(x => x.id == _id);
+                if (_tmp != null)
+                {
+                    if (CustomUtils.isNumber(txtSeq.Text)) { 
+                    _tmp.seq = (String.IsNullOrEmpty(txtSeq.Text))? 0:Convert.ToInt32(txtSeq.Text);
+                    }
+
+                }
+            }
+
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg.OrderBy(x=>x.seq);
+            gvRefImages.DataBind();
+        }
 
         protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -1082,6 +1128,7 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
         }
+
         protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (cbCheckBox.Checked)

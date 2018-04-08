@@ -125,15 +125,6 @@
                                             </div>
                                         </div>
 
-                                        <%--                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Download:</label>
-                                            <div class="col-md-6">
-                                                <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
-                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                    <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                                </asp:LinkButton>
-                                            </div>
-                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pUploadfile" runat="server">
@@ -258,13 +249,8 @@
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="btnSubmit" />
-            <%--            <asp:PostBackTrigger ControlID="FileUpload1" />--%>
-            <%--            <asp:PostBackTrigger ControlID="FileUpload2" />--%>
             <asp:PostBackTrigger ControlID="lbDownload" />
             <asp:PostBackTrigger ControlID="lbDowloadWorkSheet" />
-
-
-            <%--<asp:PostBackTrigger ControlID="lbDecimal" />--%>
         </Triggers>
     </asp:UpdatePanel>
 

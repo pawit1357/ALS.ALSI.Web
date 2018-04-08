@@ -81,11 +81,6 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 
-                    
-
-
-
-
                 <asp:Literal ID="litAlert" runat="server"></asp:Literal>
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -221,7 +216,6 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="page-footer">
         <div class="page-footer-inner">
             2015 &copy;  ALS TESTING SERVICES (THAILAND) CO., LTD. Part of the ALS Laboratory Group A Campbell Brothers Limited Company.
-           
         </div>
         <div class="scroll-to-top">
             <i class="icon-arrow-up"></i>

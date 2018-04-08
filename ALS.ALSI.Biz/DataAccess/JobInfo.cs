@@ -8,10 +8,12 @@ using System.Linq;
 
 namespace ALS.ALSI.Biz.DataAccess
 {
-    public partial class job_info 
+    public partial class job_info
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(job_info));
+        public String customerText { get; set; }
+        public String preFixText { get; set; }
 
         private static IRepository<job_info> _repository
         {
@@ -84,7 +86,8 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             job_info existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
             _repository.Edit(existing, this);
-            if(this.jobSample !=null){
+            if (this.jobSample != null)
+            {
                 foreach (job_sample sample in this.jobSample)
                 {
                     sample.job_id = this.ID;
@@ -136,18 +139,22 @@ namespace ALS.ALSI.Biz.DataAccess
 
                 var result = from j in ctx.job_info
                              join s in ctx.job_sample on j.ID equals s.job_id
+                             join ms in ctx.m_status on s.job_status equals ms.ID
                              join sp in ctx.m_specification on s.specification_id equals sp.ID
                              join tt in ctx.m_type_of_test on s.type_of_test_id equals tt.ID
                              join c in ctx.m_customer on j.customer_id equals c.ID
                              join cp in ctx.m_customer_contract_person on j.contract_person_id equals cp.ID
-                             orderby s.job_number descending
+                             orderby  s.ID descending
                              select new
                              {
                                  ID = j.ID,
+                                 s.other_ref_no,
                                  s.date_srchemist_complate,
                                  s.date_admin_sent_to_cus,
                                  receive_date = j.date_of_receive,
                                  due_date = s.due_date,
+                                 s.due_date_customer,
+                                 s.due_date_lab,
                                  job_number = s.job_number,
                                  customer_ref_no = j.customer_ref_no,
                                  s_pore_ref_no = j.s_pore_ref_no,
@@ -179,9 +186,16 @@ namespace ALS.ALSI.Biz.DataAccess
                                  type_of_test_id = tt.ID,
                                  type_of_test_name = tt.name,
                                  spec_id = sp.ID,
-                                s.date_login_received_sample,
-                                s.date_chemist_alalyze,
-                                s.date_labman_complete,
+                                 s.date_login_received_sample,
+                                 s.date_chemist_alalyze,
+                                 s.date_labman_complete,
+                                 s.is_hold,
+                                 s.amend_count,
+                                 s.retest_count,
+                                 s.group_submit,
+                                 status_name = ms.name,
+                                 s.sample_prefix,
+                                 s.amend_or_retest
                              };
 
                 if (this.ID > 0)
@@ -193,19 +207,19 @@ namespace ALS.ALSI.Biz.DataAccess
                     result = result.Where(x => x.sn == this.sample_id);
                 }
 
-                if (this.job_prefix > 0)
+                if (!String.IsNullOrEmpty(this.preFixText))
                 {
-                    result = result.Where(x => x.job_prefix == this.job_prefix);
+                    result = result.Where(x => x.sample_prefix.Trim().Contains(this.preFixText.Trim()));
                 }
 
                 //if (this.date_of_receive != null && this.date_of_receive !=DateTime.MinValue)
                 //{
                 //    result = result.Where(x => x.receive_date == this.date_of_receive);
                 //}
-                if (this.customer_id > 0)
-                {
-                    result = result.Where(x => x.customer_id == this.customer_id);
-                }
+                //if (this.customer_id > 0)
+                //{
+                //    result = result.Where(x => x.customer_id == this.customer_id);
+                //}
                 if (this.contract_person_id > 0)
                 {
                     result = result.Where(x => x.contract_person_id == this.contract_person_id);
@@ -229,8 +243,17 @@ namespace ALS.ALSI.Biz.DataAccess
                 }
                 if (this.customer_id > 0)
                 {
-                    result = result.Where(x => x.customer_id == this.customer_id);
+                    if (!String.IsNullOrEmpty(this.customerText))
+                    {
+                        result = result.Where(x => x.customer.Contains(this.customerText));
+
+
+                    }
                 }
+                //if (this.customer_id > 0)
+                //{
+                //    result = result.Where(x => x.customer_id == this.customer_id);
+                //}
                 if (this.spec_id > 0)
                 {
                     result = result.Where(x => x.spec_id == this.spec_id);

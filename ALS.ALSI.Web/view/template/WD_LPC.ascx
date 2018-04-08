@@ -14,7 +14,7 @@
                     <div class="actions">
                         <asp:Button ID="btnCoverPage" runat="server" Text="Cover Page" CssClass="btn btn-default btn-sm" OnClick="btnUsLPC_Click" />
                         <asp:Button ID="btnWorkSheet" runat="server" Text="WorkSheet" CssClass="btn blue" OnClick="btnUsLPC_Click" />
-                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
+                        <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i>ตั้งค่า</asp:LinkButton>
 
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Test</th>
+                                                    <th>Analysis</th>
                                                     <th>Procedure No</th>
                                                     <th>Number of pieces used<br />
                                                         for extraction</th>
@@ -64,10 +64,6 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h6>Results:</h6>
-                                        <%--      <h6>The specification is based on Western Digital's document no.
-                                            <asp:Label ID="lbSpecRev" runat="server" Text=""></asp:Label>for
-                                            <asp:Label ID="lbComponent" runat="server" Text=""></asp:Label>
-                                        </h6>--%>
                                         <table>
                                             <tr>
                                                 <td>
@@ -296,7 +292,7 @@
                             <br />
                             <%--Run--%>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-9">
 
                                     <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                         CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
@@ -358,43 +354,41 @@
                             <br />
                             <%--Statistics--%>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <asp:GridView ID="gvStatic" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" DataKeyNames="ID,row_type" OnRowDataBound="gvStatic_RowDataBound">
-                                            <Columns>
-                                                <asp:TemplateField HeaderText="Statistics" ItemStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:Literal ID="lbStatistics" runat="server" Text='<%# Eval("A")%>'></asp:Literal>
-                                                    </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                </asp:TemplateField>
+                                <div class="col-md-9">
+                                    <asp:GridView ID="gvStatic" runat="server" AutoGenerateColumns="False"
+                                        CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" DataKeyNames="ID,row_type" OnRowDataBound="gvStatic_RowDataBound">
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="Statistics" ItemStyle-HorizontalAlign="Center">
+                                                <ItemTemplate>
+                                                    <asp:Literal ID="lbStatistics" runat="server" Text='<%# Eval("A")%>'></asp:Literal>
+                                                </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="Left" />
+                                            </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Accumulative Size (µm)" ItemStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:Literal ID="litAccumulativeSize" runat="server" Text='<%# Eval("B")%>' />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Accumulative Size (µm)" ItemStyle-HorizontalAlign="Center">
+                                                <ItemTemplate>
+                                                    <asp:Literal ID="litAccumulativeSize" runat="server" Text='<%# Eval("B")%>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Blank-corrected(Counts/part)" ItemStyle-HorizontalAlign="Right">
-                                                    <ItemTemplate>
-                                                        <asp:Literal ID="litBlankCorredted" runat="server" Text='<%# Eval("E")%>' />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Blank-corrected(Counts/cm²)" ItemStyle-HorizontalAlign="Right">
-                                                    <ItemTemplate>
-                                                        <asp:Literal ID="litBlankCorredtedCM2" runat="server" Text='<%# Eval("F")%>' />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
+                                            <asp:TemplateField HeaderText="Blank-corrected(Counts/part)" ItemStyle-HorizontalAlign="Right">
+                                                <ItemTemplate>
+                                                    <asp:Literal ID="litBlankCorredted" runat="server" Text='<%# Eval("E")%>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Blank-corrected(Counts/cm²)" ItemStyle-HorizontalAlign="Right">
+                                                <ItemTemplate>
+                                                    <asp:Literal ID="litBlankCorredtedCM2" runat="server" Text='<%# Eval("F")%>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
 
-                                            <EmptyDataTemplate>
-                                                <div class="data-not-found">
-                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                                </div>
-                                            </EmptyDataTemplate>
-                                        </asp:GridView>
-                                    </div>
+                                        <EmptyDataTemplate>
+                                            <div class="data-not-found">
+                                                <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                            </div>
+                                        </EmptyDataTemplate>
+                                    </asp:GridView>
                                 </div>
                             </div>
 
@@ -404,6 +398,24 @@
                     <div class="row">
                         <div class="col-md-12">
                             <!-- BEGIN Portlet PORTLET-->
+
+                            <asp:Panel ID="pDownload" runat="server">
+                                <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-docs font-grey-gallery"></i>
+                                            <span class="caption-subject bold font-grey-gallery uppercase">File From [ADMIN] *.docx|*.pdf </span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="fa-item col-md-3 col-sm-4">
+                                            <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
+                                            <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click"> <span class="text-muted">(Download)</span> </asp:LinkButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </asp:Panel>
+
                             <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption">
@@ -412,83 +424,77 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date Analyzed:<span class="required">
+										* </span>
+                                            </label>
+                                            <div class="col-md-6">
+                                                <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                                    style="max-width: 220px">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                                ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
                                     <asp:Panel ID="pSpecification" runat="server">
-                                        <%--                                        <div class="row">--%>
-                                        <%--                                            <div class="col-md-6">--%>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Component:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlComponent" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlComponent_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <%--</div>
-                                            <div class="col-md-6">--%>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Detail Spec:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <%--                                            </div>--%>
 
-                                        <%--                                        </div>--%>
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pStatus" runat="server">
-                                        <%--  <div class="row">
-                                            <div class="col-md-6">--%>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <%--    </div>
-                                        </div>--%>
+
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pRemark" runat="server">
-                                        <%--    <div class="row">
-                                            <div class="col-md-6">--%>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
                                             </div>
                                         </div>
-                                        <%--    </div>
-                                        </div>--%>
+
                                         <br />
                                     </asp:Panel>
                                     <asp:Panel ID="pDisapprove" runat="server">
-                                        <%--  <div class="row">
-                                            <div class="col-md-6">--%>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Assign To:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:DropDownList ID="ddlAssignTo" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID" AutoPostBack="true"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <%--    </div>
-                                        </div>--%>
+
                                         <br />
                                     </asp:Panel>
-                                    <asp:Panel ID="pDownload" runat="server">
-                                        <%--          <div class="row">
-                                            <div class="col-md-6">--%>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Download:</label>
-                                            <div class="col-md-6">
-                                                <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
-                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
-                                                    <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
-                                                </asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <%--      </div>
-                                        </div>--%>
-                                        <br />
-                                    </asp:Panel>
+
                                     <asp:Panel ID="pUploadfile" runat="server">
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Uplod file: </label>
@@ -519,28 +525,8 @@
                                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                         <br />
                                     </asp:Panel>
-                                    <%--                                    <asp:Panel ID="pUploadfile" runat="server">
 
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Uplod file:</label>
-                                                    <div class="col-md-6">
-                                                        <asp:HiddenField ID="HiddenField1" runat="server" />
-                                                        <span class="btn green fileinput-button">
-                                                            <i class="fa fa-plus"></i>
-                                                            <span>Add files...</span>
-                                                            <asp:FileUpload ID="FileUpload1" runat="server" />
-                                                        </span>
-                                                        <h6>***อัพโหลดไฟล์ *.docx|doc</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <asp:Label ID="Label213" runat="server" Text=""></asp:Label>
-                                        <br />
-                                    </asp:Panel>--%>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
@@ -576,18 +562,37 @@
                                                 <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="0"></asp:TextBox></td>
                                         </tr>
                                         <tr>
-                                            <td>Unit</td>
+                                            <td colspan="2">Unit</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Specification Limits/Average of ? data points</td>
                                             <td>
                                                 <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
 
-                                                <%--                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
-                                                    <asp:ListItem Value="4">mg</asp:ListItem>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blank/Sample</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit2" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
 
-                                                </asp:DropDownList>--%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blank-corrected</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit3" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blank-corrected(2)</td>
+                                            <td>
+                                                <asp:DropDownList ID="ddlUnit4" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                </asp:DropDownList>
 
                                             </td>
                                         </tr>
@@ -603,8 +608,7 @@
                         </div>
                         <!-- /.modal-dialog -->
 
-                        <asp:LinkButton ID="lnkFake" runat="server">
-                        </asp:LinkButton>
+                        <asp:LinkButton ID="lnkFake" runat="server"> </asp:LinkButton>
                         <asp:ModalPopupExtender ID="ModolPopupExtender" runat="server" PopupControlID="pnlModalDemo"
                             TargetControlID="lnkFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalDemo"
                             CancelControlID="btnClose">
@@ -630,8 +634,7 @@
                         </div>
                         <!-- /.modal-dialog -->
 
-                        <asp:LinkButton ID="bnErrListFake" runat="server">
-                        </asp:LinkButton>
+                        <asp:LinkButton ID="bnErrListFake" runat="server"> </asp:LinkButton>
                         <asp:ModalPopupExtender ID="modalErrorList" runat="server" PopupControlID="popupErrorList"
                             TargetControlID="bnErrListFake" BackgroundCssClass="modal-backdrop modal-print-form fade in" BehaviorID="mpModalErrorList"
                             CancelControlID="btnPopupErrorList">
@@ -664,3 +667,29 @@
         </Triggers>
     </asp:UpdatePanel>
 </form>
+<script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
+    });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
+</script>

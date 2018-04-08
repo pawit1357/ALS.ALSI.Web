@@ -11,6 +11,7 @@ using System.Web;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Net;
+using System.Web.UI.WebControls;
 
 namespace ALS.ALSI.Utils
 {
@@ -56,10 +57,10 @@ namespace ALS.ALSI.Utils
         }
         public static byte[] GetBytesFromImage(String imageFile)
         {
-           
+
             //string path = HttpContext.Current.Server.MapPath(imageFile);
             //byte[] photo = File.ReadAllBytes(path);
-
+            if (imageFile == null) return null;
             var webClient = new WebClient();
 
             byte[] photo = webClient.DownloadData(imageFile);
@@ -144,48 +145,48 @@ namespace ALS.ALSI.Utils
             {
                 ErrorIndex = String.Format("Row({0}),Column({1})  Error Value = {2}", _cell.RowIndex + 1, _cell.ColumnIndex + 1, returnValue);
 
-            switch (_cell.CellType)
-            {
-                case CellType.Blank:
+                switch (_cell.CellType)
+                {
+                    case CellType.Blank:
                         returnValue = "";
-                    break;
-                case CellType.Boolean:
-                    break;
-                case CellType.Error:
-                    break;
-                case CellType.Formula:
-                    //DataFormatter df = new DataFormatter();
-                    //String asItLooksInExcel = df.FormatCellValue(_cell);
-                    if(_cell.CachedFormulaResultType == CellType.Error)
-                    {
-                        returnValue = "";
-                    }
-                    else if (_cell.CachedFormulaResultType == CellType.Numeric)
-                    {
-                        returnValue = _cell.NumericCellValue.ToString();//.CellFormula.ToString();
-                    }
-                    else
-                    {
-                        returnValue = _cell.StringCellValue;//.CellFormula.ToString();
-                    }
+                        break;
+                    case CellType.Boolean:
+                        break;
+                    case CellType.Error:
+                        break;
+                    case CellType.Formula:
+                        //DataFormatter df = new DataFormatter();
+                        //String asItLooksInExcel = df.FormatCellValue(_cell);
+                        if (_cell.CachedFormulaResultType == CellType.Error)
+                        {
+                            returnValue = "";
+                        }
+                        else if (_cell.CachedFormulaResultType == CellType.Numeric)
+                        {
+                            returnValue = _cell.NumericCellValue.ToString();//.CellFormula.ToString();
+                        }
+                        else
+                        {
+                            returnValue = _cell.StringCellValue;//.CellFormula.ToString();
+                        }
 
-                    break;
-                case CellType.Numeric:
-                    if (DateUtil.IsCellDateFormatted(_cell))
-                    {
-                        returnValue = _cell.DateCellValue.ToString();
-                    }
-                    else
-                    {
-                        returnValue = _cell.NumericCellValue.ToString();
-                    }
-                    break;
-                case CellType.String:
-                    returnValue = _cell.StringCellValue.ToString();
-                    break;
-                case CellType.Unknown:
-                    break;
-            }
+                        break;
+                    case CellType.Numeric:
+                        if (DateUtil.IsCellDateFormatted(_cell))
+                        {
+                            returnValue = _cell.DateCellValue.ToString();
+                        }
+                        else
+                        {
+                            returnValue = _cell.NumericCellValue.ToString();
+                        }
+                        break;
+                    case CellType.String:
+                        returnValue = _cell.StringCellValue.ToString();
+                        break;
+                    case CellType.Unknown:
+                        break;
+                }
 
             }
             //}
@@ -206,6 +207,11 @@ namespace ALS.ALSI.Utils
         public static double Average(List<Double> valueList)
         {
             double result = 0.0;
+
+            if (valueList.Count == 0)
+            {
+                return result;
+            }
             foreach (double value in valueList)
             {
                 result += value;
@@ -215,6 +221,10 @@ namespace ALS.ALSI.Utils
 
         public static double StandardDeviation(List<Double> valueList)
         {
+            if(valueList.Count == 0)
+            {
+                return 0.0;
+            }
             double M = 0.0;
             double S = 0.0;
             int k = 1;
@@ -272,15 +282,19 @@ namespace ALS.ALSI.Utils
         public static String removeSpacialCharacter(String originalStr)
         {
             String returnStr = originalStr;
-            String[] spcialChar = { "!","@","#","$","%","^","&","*","(",")","-","+" };
-            foreach(String s in spcialChar)
+            String[] spcialChar = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "+" };
+            foreach (String s in spcialChar)
             {
                 returnStr = returnStr.Replace(s, "_");
             }
             return returnStr.Trim();
         }
 
-
+        private static long GenerateId()
+        {
+            byte[] buffer = Guid.NewGuid().ToByteArray();
+            return BitConverter.ToInt64(buffer, 0);
+        }
 
         public static int getUnitByName(String _name)
         {
@@ -309,18 +323,21 @@ namespace ALS.ALSI.Utils
 
             switch (unit)
             {
-                case 1: result = "ug/sq cm";
+                case 1:
+                    result = "ug/sq cm";
                     break;
-                case 1000: result = "ng/cm2";
+                case 1000:
+                    result = "ng/cm2";
                     break;
-                default: result = "mg";
+                default:
+                    result = "mg";
                     break;
             }
 
             return result;
         }
 
-        public static String showOnCoverPageValue(String val,int digit)
+        public static String showOnCoverPageValue(String val, int digit)
         {
             String returnResult = String.Empty;
             switch (val)
@@ -336,7 +353,7 @@ namespace ALS.ALSI.Utils
                     returnResult = val;
                     break;
                 default:
-                    returnResult = Convert.ToDouble(val).ToString("N"+digit);
+                    returnResult = Convert.ToDouble(val).ToString("N" + digit);
                     break;
             }
             return returnResult;
@@ -344,7 +361,7 @@ namespace ALS.ALSI.Utils
         }
 
 
-        public static List<DetailSpecComponent> GetComponent(List<tb_m_detail_spec> _data, tb_m_detail_spec _value,List<int> ignoreOrder)
+        public static List<DetailSpecComponent> GetComponent(List<tb_m_detail_spec> _data, tb_m_detail_spec _value, List<int> ignoreOrder)
         {
             List<DetailSpecComponent> specs = new List<DetailSpecComponent>();
 
@@ -382,7 +399,8 @@ namespace ALS.ALSI.Utils
                                     {
                                         spec.name = specName;
                                     }
-                                    else {
+                                    else
+                                    {
                                         spec.name = specName.Substring(0, specName.IndexOf('(') == -1 ? specName.Length : specName.IndexOf('(')).Trim();
                                     }
                                     break;
@@ -408,9 +426,40 @@ namespace ALS.ALSI.Utils
                     specs.Add(spec);
                 }
             }
-            return specs.Where(x=> !ignoreOrder.Contains(x.order)).OrderBy(x => x.order).ToList();
+            return specs.Where(x => !ignoreOrder.Contains(x.order)).OrderBy(x => x.order).ToList();
         }
 
+
+        public static String getCheckBoxListValue(CheckBoxList cb)
+        {
+            String returnMsg = String.Empty;
+
+            foreach (ListItem lst in cb.Items)
+            {
+                if (lst.Selected == true)
+                {
+                    returnMsg += String.Format("{0},", lst.Value);
+                }
+            }
+            return returnMsg.Length > 0 ? returnMsg.Substring(0, returnMsg.Length - 1) : String.Empty;
+        }
+
+        public static void setCheckBoxListValue(ref CheckBoxList cb, String _selectedValue)
+        {
+            if (_selectedValue != null)
+            {
+                String[] selectedValue = _selectedValue.Split(',');
+
+                foreach (ListItem lst in cb.Items)
+                {
+                    if (selectedValue.Contains(lst.Value))
+                    {
+                        lst.Selected = true;
+                    }
+
+                }
+            }
+        }
 
     }
 }

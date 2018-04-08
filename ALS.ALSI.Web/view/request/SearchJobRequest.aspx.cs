@@ -1,4 +1,5 @@
-﻿using ALS.ALSI.Biz.Constant;
+﻿using ALS.ALSI.Biz;
+using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
 using ClosedXML.Excel;
@@ -23,6 +24,7 @@ namespace ALS.ALSI.Web.view.request
     {
 
         #region "Property"
+
         public users_login userLogin
         {
             get
@@ -43,6 +45,28 @@ namespace ALS.ALSI.Web.view.request
             set { ViewState[Constants.COMMAND_NAME] = value; }
         }
 
+        public List<int> selectedList
+        {
+            get { return (List<int>)Session[GetType().Name + "selectedList"]; }
+            set { Session[GetType().Name + "selectedList"] = value; }
+        }
+        public Boolean isPoGroupOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isPoGroupOperation"]; }
+            set { Session[GetType().Name + "isPoGroupOperation"] = value; }
+        }
+
+        public Boolean isDuedateGroupOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isDuedateGroupOperation"]; }
+            set { Session[GetType().Name + "isDuedateGroupOperation"] = value; }
+        }
+
+        public Boolean isInvoiceGroupOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isInvoiceGroupOperation"]; }
+            set { Session[GetType().Name + "isInvoiceGroupOperation"] = value; }
+        }
         public int JobID { get; set; }
 
         public int SampleID { get; set; }
@@ -52,18 +76,16 @@ namespace ALS.ALSI.Web.view.request
             get
             {
                 job_info tmp = new job_info();
-                //tmp.job_number = txtJobNumber.Text;
-                //tmp.date_of_receive = String.IsNullOrEmpty(txtDateOfRecieve.Text) ? DateTime.MinValue : Convert.ToDateTime(txtDateOfRecieve.Text);
-                //tmp.contract_person_id = String.IsNullOrEmpty(ddlContract_person.SelectedValue) ? 0 : int.Parse(ddlContract_person.SelectedValue);
-                //tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
+
 
                 tmp.status = String.IsNullOrEmpty(ddlJobStatus.SelectedValue) ? 0 : int.Parse(ddlJobStatus.SelectedValue);
-                tmp.jobRefNo = txtREfNo.Text;
+                tmp.jobRefNo = txtREfNo.Text.TrimEnd();
                 tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
+                tmp.customerText = ddlCompany.SelectedItem.Text;
                 tmp.spec_id = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : int.Parse(ddlSpecification.SelectedValue);
                 tmp.dataGroup = String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue) ? "" : ddlTypeOfTest.SelectedItem.Text;
 
-                tmp.job_prefix = String.IsNullOrEmpty(hPrefix.Value) ? 1 : Convert.ToInt16(hPrefix.Value);
+                tmp.preFixText = hPrefix.Value;// String.IsNullOrEmpty(hPrefix.Value) ? 1 : Convert.ToInt16(hPrefix.Value);
                 RoleEnum role = (RoleEnum)Enum.ToObject(typeof(RoleEnum), userLogin.role_id);
                 switch (role)
                 {
@@ -95,13 +117,13 @@ namespace ALS.ALSI.Web.view.request
                 return tmp;
             }
         }
-
         #endregion
 
         #region "Method"
 
         private void initialPage()
         {
+            this.selectedList = new List<int>();
 
             ddlCompany.Items.Clear();
             ddlCompany.DataSource = new m_customer().SelectAll();
@@ -125,37 +147,72 @@ namespace ALS.ALSI.Web.view.request
             ddlTypeOfTest.DataBind();
             ddlTypeOfTest.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
+
             bindingData();
 
-
-
-            //prefix tab
-            //btnElp.CssClass = "btn green";
-            //btnEls.CssClass = "btn blue";
-            //btnFa.CssClass = "btn blue";
-            //btnElwa.CssClass = "btn blue";
-            //btnGrp.CssClass = "btn blue";
-            //btnTrb.CssClass = "btn blue";
 
             RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
             switch (userRole)
             {
                 case RoleEnum.LOGIN:
                     lbAddJob.Visible = true;
+                    //btnOperation.Visible = false;
                     break;
                 default:
                     lbAddJob.Visible = false;
-
+                    //btnOperation.Visible = true;
                     break;
             }
+            btnOperation.Visible = (userRole != RoleEnum.ACCOUNT);
+            btnOperationPo.Visible = (userRole == RoleEnum.ADMIN);
+            btnOperationDueDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN);
             btnElp.CssClass = "btn blue";
-
-
+            btnOperationDueDate.Text = (userRole == RoleEnum.ADMIN) ? "Sent To Cus.(date)" : (userRole == RoleEnum.SR_CHEMIST) ? "Due date" : "";
+            btnOperationGroupInvoice.Visible = (userRole == RoleEnum.ACCOUNT);
         }
+
 
         private void bindingData()
         {
+            if (!String.IsNullOrEmpty(txtREfNo.Text) && txtREfNo.Text.Split('-').Length == 3)
+            {
+                hPrefix.Value = String.IsNullOrEmpty(txtREfNo.Text) ? "ELP" : txtREfNo.Text.Split('-')[0];
+                btnElp.CssClass = "btn btn-default btn-sm";
+                btnEln.CssClass = "btn btn-default btn-sm";
+
+                btnEls.CssClass = "btn btn-default btn-sm";
+                btnFa.CssClass = "btn btn-default btn-sm";
+                btnElwa.CssClass = "btn btn-default btn-sm";
+                btnGrp.CssClass = "btn btn-default btn-sm";
+                btnTrb.CssClass = "btn btn-default btn-sm";
+                switch (hPrefix.Value.ToUpper())
+                {
+                    case "ELP":
+                        btnElp.CssClass = "btn blue";
+                        break;
+                    case "ELS":
+                        btnEls.CssClass = "btn blue";
+                        break;
+                    case "ELN":
+                        btnEln.CssClass = "btn blue";
+                        break;
+                    case "FA":
+                        btnFa.CssClass = "btn blue";
+                        break;
+                    case "ELWA":
+                        btnElwa.CssClass = "btn blue";
+                        break;
+                    case "GRP":
+                        btnGrp.CssClass = "btn blue";
+                        break;
+                    case "TRB":
+                        btnTrb.CssClass = "btn blue";
+                        break;
+                }
+            }
             searchResult = obj.SearchData();
+
+
 
 
             gvJob.DataSource = searchResult;
@@ -171,24 +228,19 @@ namespace ALS.ALSI.Web.view.request
                 {
                     case RoleEnum.ACCOUNT:
                     case RoleEnum.ADMIN:
-                        gvJob.Columns[3].Visible = true;
                         gvJob.Columns[4].Visible = true;
-                        gvJob.Columns[11].Visible = true;
+                        gvJob.Columns[5].Visible = true;
                         gvJob.Columns[12].Visible = true;
+                        gvJob.Columns[13].Visible = true;
                         break;
                     default:
-                        gvJob.Columns[3].Visible = false;
                         gvJob.Columns[4].Visible = false;
-                        gvJob.Columns[11].Visible = false;
+                        gvJob.Columns[5].Visible = false;
                         gvJob.Columns[12].Visible = false;
+                        gvJob.Columns[13].Visible = false;
                         break;
                 }
 
-
-                //DropDownList ddlCompany = (DropDownList)gvJob.HeaderRow.FindControl("ddlCompany");
-                //ddlCompany.DataSource = new m_customer().SelectAll();
-                //ddlCompany.DataBind();
-                //ddlCompany.Items.Insert(0, new ListItem("Company", "0"));
             }
             else
             {
@@ -245,48 +297,45 @@ namespace ALS.ALSI.Web.view.request
 
         protected void gvJob_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+
             CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+            m_completion_scheduled cs = new m_completion_scheduled().SelectByID(Convert.ToInt32(CompletionScheduledEnum.NORMAL));
+
             this.CommandName = cmd;
+            this.JobID = (cmd == CommandNameEnum.Page) ? 0 : int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+            this.SampleID = (cmd == CommandNameEnum.Page) ? 0 : int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
+
             switch (cmd)
             {
                 case CommandNameEnum.Edit:
+                //Server.Transfer(Constants.LINK_EDIT_SAMPLE);
+                //break;
                 case CommandNameEnum.View:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
                     Server.Transfer(Constants.LINK_JOB_REQUEST);
                     break;
                 case CommandNameEnum.ConvertTemplate:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
                     Server.Transfer(Constants.LINK_JOB_CONVERT_TEMPLATE);
                     break;
                 case CommandNameEnum.Workflow:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
                     Server.Transfer(Constants.LINK_JOB_WORK_FLOW);
                     break;
                 case CommandNameEnum.ChangeStatus:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
                     Server.Transfer(Constants.LINK_JOB_CHANGE_STATUS);
                     break;
                 case CommandNameEnum.ChangeDueDate:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
                     Server.Transfer(Constants.LINK_JOB_CHANGE_DUEDATE);
                     break;
+                case CommandNameEnum.ChangeSrCompleteDate:
+                    Server.Transfer(Constants.LINK_JOB_SR_COMPLETE_DATE);
+                    break;
+
                 case CommandNameEnum.ChangePo:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
                     Server.Transfer(Constants.LINK_JOB_CHANGE_PO);
                     break;
                 case CommandNameEnum.ChangeInvoice:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
                     Server.Transfer(Constants.LINK_JOB_CHANGE_INVOICE);
                     break;
                 case CommandNameEnum.Print:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
                     if (userLogin.role_id == Convert.ToInt32(RoleEnum.ADMIN))
                     {
                         Server.Transfer(Constants.LINK_ADMIN_PRINT);
@@ -297,20 +346,48 @@ namespace ALS.ALSI.Web.view.request
                     }
                     break;
                 case CommandNameEnum.ChangeReportDate:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
                     Server.Transfer(Constants.LINK_REPORT_DATE);
                     break;
-
-                case CommandNameEnum.Amend:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
-                    Server.Transfer(Constants.LINK_AMEND);
+                case CommandNameEnum.ChangeOtherRefNo:
+                    Server.Transfer(Constants.LINK_CHANGE_OTHER_REF_NO);
                     break;
+                case CommandNameEnum.ChangeSingaporeRefNo:
+                    Server.Transfer(Constants.LINK_CHANGE_SINGAPORE_REF_NO);
+                    break;
+                case CommandNameEnum.Amend:
                 case CommandNameEnum.Retest:
-                    this.JobID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    this.SampleID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
                     Server.Transfer(Constants.LINK_RETEST);
+                    break;
+                case CommandNameEnum.Hold:
+                    if (cs != null)
+                    {
+                        job_sample jobSample = new job_sample().SelectByID(this.SampleID);
+                        jobSample.update_date = DateTime.Now;
+                        jobSample.is_hold = "1";
+                        jobSample.Update();
+                        //Commit
+                        GeneralManager.Commit();
+                        bindingData();
+                    }
+                    break;
+                case CommandNameEnum.UnHold:
+                    if (cs != null)
+                    {
+                        job_sample jobSample = new job_sample().SelectByID(this.SampleID);
+                        jobSample.update_date = DateTime.Now;
+                        jobSample.due_date = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.value.Value) : jobSample.update_date.Value.AddDays(cs.value.Value);
+                        jobSample.due_date_customer = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.lab_due_date.Value) : jobSample.update_date.Value.AddDays(cs.lab_due_date.Value);
+                        jobSample.due_date_lab = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.customer_due_date.Value) : jobSample.update_date.Value.AddDays(cs.customer_due_date.Value);
+                        jobSample.is_hold = "0";
+                        jobSample.job_status = Convert.ToInt16(StatusEnum.CHEMIST_TESTING);
+                        jobSample.Update();
+                        //Commit
+                        GeneralManager.Commit();
+                        bindingData();
+                    }
+                    break;
+                case CommandNameEnum.ViewFile:
+                    Server.Transfer(Constants.LINK_VIEW_FILE);
                     break;
             }
 
@@ -331,6 +408,24 @@ namespace ALS.ALSI.Web.view.request
             {
                 try
                 {
+                    //0|ID,
+                    //1|job_status,
+                    //2|job_role,
+                    //3|status_completion_scheduled,
+                    //4|step1owner,
+                    //5|tep2owner,
+                    //6|step3owner,
+                    //7|step4owner,
+                    //8|step5owner,
+                    //9|step6owner,
+                    //10|due_date,
+                    //11|is_hold,
+                    //12|due_date_customer,
+                    //13|due_date_lab,
+                    //14|amend_count,
+                    //15|retest_count,
+                    //16|group_submit,
+                    //17|amend_or_retest
                     GridView gv = (GridView)sender;
 
                     int _valueStatus = Convert.ToInt32(gv.DataKeys[e.Row.RowIndex][1]);
@@ -342,6 +437,15 @@ namespace ALS.ALSI.Web.view.request
                     int _step5owner = Convert.ToInt32(gv.DataKeys[e.Row.RowIndex][8]);
                     int _step6owner = Convert.ToInt32(gv.DataKeys[e.Row.RowIndex][9]);
 
+                    Boolean isHold = gv.DataKeys[e.Row.RowIndex][11].Equals("1") ? true : false;
+                    DateTime due_date = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][10]);
+                    DateTime due_date_customer = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][12]);
+                    DateTime due_date_lab = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][13]);
+
+                    Boolean isGroupSubmit = Convert.ToBoolean(gv.DataKeys[e.Row.RowIndex][16]);
+
+
+
                     LinkButton btnInfo = (LinkButton)e.Row.FindControl("btnInfo");
                     LinkButton btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
                     LinkButton btnConvertTemplete = (LinkButton)e.Row.FindControl("btnConvertTemplete");
@@ -352,120 +456,172 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnChangeInvoice = (LinkButton)e.Row.FindControl("btnChangeInvoice");
                     LinkButton btnPrintLabel = (LinkButton)e.Row.FindControl("btnPrintLabel");
                     LinkButton btnChangeReportDate = (LinkButton)e.Row.FindControl("btnChangeReportDate");
+                    LinkButton btnChangeOtherRefNo = (LinkButton)e.Row.FindControl("btnChangeOtherRefNo");
+                    LinkButton btnChangeSingaporeRefNo = (LinkButton)e.Row.FindControl("btnChangeSingaporeRefNo");
+                    LinkButton btnViewFile = (LinkButton)e.Row.FindControl("btnViewFile");
+                    LinkButton btnChangeSrCompleteDate = (LinkButton)e.Row.FindControl("btnChangeSrCompleteDate");
+
+
+
+
 
                     LinkButton btnAmend = (LinkButton)e.Row.FindControl("btnAmend");
                     LinkButton btnReTest = (LinkButton)e.Row.FindControl("btnReTest");
 
+                    LinkButton btnHold = (LinkButton)e.Row.FindControl("btnHold");
+                    LinkButton btnUnHold = (LinkButton)e.Row.FindControl("btnUnHold");
 
 
                     Literal litStatus = (Literal)e.Row.FindControl("litStatus");
                     Literal ltJobStatus = (Literal)e.Row.FindControl("ltJobStatus");
+                    Literal litDueDate = (Literal)e.Row.FindControl("litDueDate");
                     Label lbJobNumber = (Label)e.Row.FindControl("lbJobNumber");
+                    Literal litOtherRefNo = (Literal)e.Row.FindControl("litOtherRefNo");
+                    Literal litIcon = (Literal)e.Row.FindControl("litIcon");
+                    CheckBox cbSelect = (CheckBox)e.Row.FindControl("cbSelect");
+
+                    #region "Check Amend/Retest"
+                    int amCount = Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][14]);
+                    int reCount = Convert.ToInt16(gv.DataKeys[e.Row.RowIndex][15]);
+                    String amendOrRetest = gv.DataKeys[e.Row.RowIndex][17] == null ? String.Empty : gv.DataKeys[e.Row.RowIndex][17].ToString();
+
+                    switch (amendOrRetest)
+                    {
+                        case "AM":
+                            lbJobNumber.Text = String.Format("{0}({1}{2})", lbJobNumber.Text, amendOrRetest, amCount);
+                            break;
+                        case "R":
+                            lbJobNumber.Text = String.Format("{0}({1}{2})", lbJobNumber.Text, amendOrRetest, reCount);
+                            break;
+                    }
+                    #endregion
+
                     CompletionScheduledEnum status_completion_scheduled = (CompletionScheduledEnum)Enum.ToObject(typeof(CompletionScheduledEnum), _valueCompletion_scheduled);
 
                     StatusEnum job_status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), _valueStatus);
                     ltJobStatus.Text = Constants.GetEnumDescription(job_status);
-                    RoleEnum role = (RoleEnum)Enum.ToObject(typeof(RoleEnum), userLogin.role_id);
-                    switch (role)
+                    RoleEnum userRole = (RoleEnum)Enum.ToObject(typeof(RoleEnum), userLogin.role_id);
+
+                    btnInfo.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
+                    btnEdit.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
+                    btnConvertTemplete.Visible = ((userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE) && !isHold;
+                    btnChangeStatus.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
+                    cbSelect.Visible = false;
+                    btnViewFile.Visible = job_status == StatusEnum.JOB_COMPLETE || userRole == RoleEnum.BUSINESS_MANAGER || userRole == RoleEnum.LABMANAGER || userRole == RoleEnum.SR_CHEMIST;
+
+                    btnChangeSrCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN) && !isHold;
+
+
+
+                    switch (userRole)
                     {
-                        case RoleEnum.ROOT:
-                            btnInfo.Visible = true;
-                            btnEdit.Visible = true;
-                            btnConvertTemplete.Visible = true;
-                            btnChangeStatus.Visible = true;
-                            btnWorkFlow.Visible = true;
-                            btnChangeDueDate.Visible = true;
-                            btnChangePo.Visible = true;
-                            btnChangeInvoice.Visible = true;
-                            btnPrintLabel.Visible = true;
-                            btnChangeReportDate.Visible = false;
-                            btnAmend.Visible = false;
-                            btnReTest.Visible = false;
-                            break;
                         case RoleEnum.LOGIN:
-                            btnInfo.Visible = true;
-                            btnEdit.Visible = true;
-                            btnConvertTemplete.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE) ? true : false;
-                            btnChangeStatus.Visible = true;
-                            btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE || job_status == StatusEnum.CHEMIST_TESTING) ? false : true;
-                            btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = false;
-                            btnChangeInvoice.Visible = false;
-                            btnPrintLabel.Visible = true;
-                            btnChangeReportDate.Visible = false;
-                            btnAmend.Visible = false;
-                            btnReTest.Visible = false;
+                            btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_SELECT_SPEC) && !isHold;
+                            switch (job_status)
+                            {
+                                case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                                    cbSelect.Visible = true;
+                                    break;
+                            }
                             break;
                         case RoleEnum.CHEMIST:
-                            btnInfo.Visible = false;
-                            btnEdit.Visible = false;
-                            btnConvertTemplete.Visible = false;
-                            btnChangeStatus.Visible = false;
-                            btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE || job_status == StatusEnum.LOGIN_SELECT_SPEC) ? false : true;
-                            btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = false;
-                            btnChangeInvoice.Visible = false;
-                            btnPrintLabel.Visible = false;
-                            btnChangeReportDate.Visible = false;
-                            btnAmend.Visible = false;
-                            btnReTest.Visible = false;
+                            btnWorkFlow.Visible = (job_status == StatusEnum.CHEMIST_TESTING) && !isHold;
+                            switch (job_status)
+                            {
+                                case StatusEnum.CHEMIST_TESTING:
+                                    cbSelect.Visible = true;
+                                    break;
+                            }
                             break;
                         case RoleEnum.SR_CHEMIST:
-                            btnInfo.Visible = false;
-                            btnEdit.Visible = false;
-                            btnConvertTemplete.Visible = false;
-                            btnChangeStatus.Visible = false;
-                            btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE || job_status == StatusEnum.LOGIN_SELECT_SPEC || job_status == StatusEnum.CHEMIST_TESTING) ? false : true;
-                            btnChangeDueDate.Visible = true;
-                            btnChangePo.Visible = true;
-                            btnChangeInvoice.Visible = false;
-                            btnPrintLabel.Visible = false;
-                            btnChangeReportDate.Visible = false;
-                            btnAmend.Visible = false;
-                            btnReTest.Visible = false;
+                            btnWorkFlow.Visible = (job_status == StatusEnum.SR_CHEMIST_CHECKING) && !isHold;
+                            //switch (job_status)
+                            //{
+                            //    case StatusEnum.SR_CHEMIST_CHECKING:
+                            //        cbSelect.Visible = true;
+                            //        break;
+                            //    default:
+                            //        cbSelect.Visible = this.isOnSelect;
+                            //        break;
+                            //}
+                            cbSelect.Visible = true;
                             break;
                         case RoleEnum.LABMANAGER:
-                            btnInfo.Visible = false;
-                            btnEdit.Visible = false;
-                            btnConvertTemplete.Visible = false;
-                            btnChangeStatus.Visible = false;
-                            btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE || job_status == StatusEnum.LOGIN_SELECT_SPEC || job_status == StatusEnum.CHEMIST_TESTING) ? false : true;
-                            btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = true;
-                            btnChangeInvoice.Visible = false;
-                            btnPrintLabel.Visible = false;
-                            btnChangeReportDate.Visible = false;
-                            btnAmend.Visible = false;
-                            btnReTest.Visible = false;
+                            btnWorkFlow.Visible = (job_status == StatusEnum.LABMANAGER_CHECKING) && !isHold;
+                            switch (job_status)
+                            {
+                                case StatusEnum.LABMANAGER_CHECKING:
+                                    cbSelect.Visible = true && isGroupSubmit;
+                                    break;
+                            }
                             break;
                         case RoleEnum.ADMIN:
-                            btnInfo.Visible = false;
-                            btnEdit.Visible = false;
-                            btnConvertTemplete.Visible = false;
-                            btnChangeStatus.Visible = false;
-                            btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE || job_status == StatusEnum.LOGIN_SELECT_SPEC || job_status == StatusEnum.CHEMIST_TESTING) ? false : true;
-                            btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = true;
-                            btnChangeInvoice.Visible = false;
-                            btnPrintLabel.Visible = true;
-                            btnChangeReportDate.Visible = true;
-                            btnAmend.Visible = false;
-                            btnReTest.Visible = false;
+                            btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF) && !isHold;
+                            //switch (job_status)
+                            //{
+                            //    case StatusEnum.ADMIN_CONVERT_WORD:
+                            //    case StatusEnum.ADMIN_CONVERT_PDF:
+                            //    case StatusEnum.JOB_COMPLETE:
+                            //        cbSelect.Visible = true && isGroupSubmit;
+                            //        break;
+                            //    case StatusEnum.LOGIN_SELECT_SPEC:
+                            //        cbSelect.Visible = true;
+                            //        Console.WriteLine();
+                            //        break;
+                            //}
+                            cbSelect.Visible = true;
+
                             break;
                         case RoleEnum.ACCOUNT:
-                            btnInfo.Visible = false;
-                            btnEdit.Visible = false;
-                            btnConvertTemplete.Visible = false;
-                            btnChangeStatus.Visible = false;
-                            btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE || job_status == StatusEnum.LOGIN_SELECT_SPEC || job_status == StatusEnum.CHEMIST_TESTING) ? false : true;
-                            btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = true;
-                            btnChangeInvoice.Visible = true;
-                            btnPrintLabel.Visible = false;
-                            btnChangeReportDate.Visible = false;
-                            btnAmend.Visible = false;
-                            btnReTest.Visible = false;
+                            btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF) && !isHold;
+                            cbSelect.Visible = true;
                             break;
+
+                        default:
+                            btnWorkFlow.Visible = false;
+                            break;
+                    }
+                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN) && !isHold;
+                    btnChangeSingaporeRefNo.Visible = (userRole == RoleEnum.CHEMIST) && !isHold;
+                    btnChangeDueDate.Visible = ((userRole == RoleEnum.SR_CHEMIST)) && !isHold;
+                    btnChangePo.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LABMANAGER)) && !isHold;
+                    btnChangeInvoice.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT)) && !isHold;
+                    btnPrintLabel.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
+                    btnChangeReportDate.Visible = ((userRole == RoleEnum.ADMIN)) && !isHold;
+                    btnAmend.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE) && !isHold;
+                    btnReTest.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE) && !isHold;
+                    btnHold.Visible = ((userRole == RoleEnum.LOGIN) && !isHold);
+                    btnUnHold.Visible = ((userRole == RoleEnum.LOGIN) && isHold);
+                    //btnWorkFlow.Visible = !isHold;
+
+
+
+
+                    switch (userRole)
+                    {
+                        case RoleEnum.LOGIN:
+                        case RoleEnum.CHEMIST:
+                        case RoleEnum.SR_CHEMIST:
+                        case RoleEnum.LABMANAGER:
+                            litDueDate.Text = due_date_lab.ToString("dd MMM yyyy");
+                            break;
+                        case RoleEnum.ADMIN:
+                        case RoleEnum.MARKETING:
+                        case RoleEnum.BUSINESS_MANAGER:
+                            litDueDate.Text = due_date_customer.ToString("dd MMM yyyy");
+                            break;
+                        default:
+                            litDueDate.Text = due_date_lab.ToString("dd MMM yyyy");
+                            break;
+                    }
+
+                    if (DateTime.Equals(due_date_lab, new DateTime(1, 1, 1)))
+                    {
+                        litDueDate.Text = "TBA";
+                    }
+                    else
+                    {
+
                     }
 
 
@@ -484,54 +640,20 @@ namespace ALS.ALSI.Web.view.request
                             break;
                     }
 
-                    switch (job_status)
-                    {
-
-                        case StatusEnum.JOB_CANCEL:
-                            e.Row.ForeColor = System.Drawing.Color.Red;
-                            btnInfo.Visible = false;
-                            btnEdit.Visible = false;
-                            btnConvertTemplete.Visible = false;
-                            btnChangeStatus.Visible = true;
-                            btnWorkFlow.Visible = false;
-                            btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = false;
-                            btnChangeInvoice.Visible = false;
-                            btnAmend.Visible = false;
-                            btnReTest.Visible = false;
-                            break;
-                        case StatusEnum.JOB_COMPLETE:
-                            e.Row.ForeColor = System.Drawing.Color.Green;
-                            btnInfo.Visible = false;
-                            btnEdit.Visible = false;
-                            btnConvertTemplete.Visible = false;
-                            btnChangeStatus.Visible = true;
-                            btnWorkFlow.Visible = false;
-                            btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = false;
-                            btnChangeInvoice.Visible = false;
-                            btnPrintLabel.Visible = (userLogin.role_id == Convert.ToInt32(RoleEnum.ADMIN)) ? true : false;
-                            btnAmend.Visible = true;
-                            btnReTest.Visible = true;
-                            break;
-                        case StatusEnum.JOB_HOLD:
-                            e.Row.ForeColor = System.Drawing.Color.Violet;
-                            btnInfo.Visible = false;
-                            btnEdit.Visible = false;
-                            btnConvertTemplete.Visible = false;
-                            btnChangeStatus.Visible = true;
-                            btnWorkFlow.Visible = false;
-                            btnChangeDueDate.Visible = false;
-                            btnChangePo.Visible = false;
-                            btnChangeInvoice.Visible = false;
-                            btnAmend.Visible = false;
-                            btnReTest.Visible = false;
-                            break;
-                        default:
-                            e.Row.ForeColor = System.Drawing.Color.Black;
-                            break;
-                    }
                     //jobStatus icon
+                    e.Row.ForeColor = System.Drawing.Color.Black;
+                    litIcon.Visible = isGroupSubmit;
+                    litIcon.Text = isGroupSubmit ? "<i class=\"fa fa-object-group\"></i>" : "";
+
+                    //cbSelect.Visible = (job_status == StatusEnum.CHEMIST_TESTING ||
+                    //    job_status == StatusEnum.CHEMIST_TESTING ||
+                    //    job_status == StatusEnum.SR_CHEMIST_CHECKING ||
+                    //    job_status == StatusEnum.LABMANAGER_CHECKING ||
+                    //     job_status == StatusEnum.ADMIN_CONVERT_WORD ||
+                    //      job_status == StatusEnum.ADMIN_CONVERT_PDF);
+
+
+
                     switch (job_status)
                     {
                         case StatusEnum.LOGIN_CONVERT_TEMPLATE:
@@ -542,30 +664,49 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case StatusEnum.CHEMIST_TESTING:
                             ltJobStatus.Text = "<i class=\"fa fa-flask\" ></i>";
+                            //cbSelect.Visible = true;
                             break;
                         case StatusEnum.SR_CHEMIST_CHECKING:
                             ltJobStatus.Text = "<i class=\"fa fa-check-square-o\" ></i>";
                             break;
                         case StatusEnum.LABMANAGER_CHECKING:
                             ltJobStatus.Text = "<i class=\"fa fa-user-md\" ></i>";
+
                             break;
                         case StatusEnum.ADMIN_CONVERT_WORD:
                             ltJobStatus.Text = "<i class=\"fa fa-file-word-o\" ></i>";
+
                             break;
                         case StatusEnum.ADMIN_CONVERT_PDF:
                             ltJobStatus.Text = "<i class=\"fa fa-file-pdf-o\" ></i>";
+
                             break;
                         case StatusEnum.JOB_COMPLETE:
+                            e.Row.ForeColor = System.Drawing.Color.Green;
                             ltJobStatus.Text = "<i class=\"fa fa-truck\" ></i>";
+
                             break;
-                        case StatusEnum.JOB_HOLD:
-                            ltJobStatus.Text = "<i class=\"fa fa-lock\" ></i>";
-                            break;
+                        //case StatusEnum.JOB_HOLD:
+                        //    ltJobStatus.Text = "<i class=\"fa fa-lock\" ></i>";
+                        //    break;
                         case StatusEnum.JOB_CANCEL:
+                            e.Row.ForeColor = System.Drawing.Color.Red;
                             ltJobStatus.Text = "<i class=\"fa fa-trash-o\"></i>";
                             break;
+                        case StatusEnum.JOB_RETEST:
+                            e.Row.ForeColor = System.Drawing.Color.Gray;
+                            ltJobStatus.Text = "<i class=\"fa fa-retweet\"></i>";
+                            break;
+                        case StatusEnum.JOB_AMEND:
+                            e.Row.ForeColor = System.Drawing.Color.Gray;
+                            ltJobStatus.Text = "<i class=\"fa fa-wrench\"></i>";
+                            break;
                     }
-
+                    if (isHold)
+                    {
+                        e.Row.ForeColor = System.Drawing.Color.Gray;
+                        ltJobStatus.Text = "<i class=\"fa fa-lock\" ></i>";
+                    }
                     #endregion
                 }
                 catch (Exception ex)
@@ -579,6 +720,7 @@ namespace ALS.ALSI.Web.view.request
         {
             LinkButton btn = (LinkButton)sender;
 
+            hPrefix.Value = btn.Text.ToUpper();
             btnElp.CssClass = (btnElp.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
             btnEln.CssClass = (btnEln.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
 
@@ -588,31 +730,31 @@ namespace ALS.ALSI.Web.view.request
             btnGrp.CssClass = (btnGrp.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
             btnTrb.CssClass = (btnTrb.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
 
-            switch (btn.ID)
-            {
-                case "btnElp":
-                    hPrefix.Value = "1";
-                    break;
-                case "btnEls":
-                    hPrefix.Value = "2";
-                    break;
-                case "btnFa":
-                    hPrefix.Value = "3";
-                    break;
-                case "btnElwa":
-                    hPrefix.Value = "4";
-                    break;
-                case "btnGrp":
-                    hPrefix.Value = "5";
-                    break;
-                case "btnTrb":
-                    hPrefix.Value = "6";
-                    break;
-                case "btnEln":
-                    hPrefix.Value = "7";
+            //switch (btn.ID)
+            //{
+            //    case "btnElp":
+            //        hPrefix.Value = "1";
+            //        break;
+            //    case "btnEls":
+            //        hPrefix.Value = "2";
+            //        break;
+            //    case "btnFa":
+            //        hPrefix.Value = "3";
+            //        break;
+            //    case "btnElwa":
+            //        hPrefix.Value = "4";
+            //        break;
+            //    case "btnGrp":
+            //        hPrefix.Value = "5";
+            //        break;
+            //    case "btnTrb":
+            //        hPrefix.Value = "6";
+            //        break;
+            //    case "btnEln":
+            //        hPrefix.Value = "7";
 
-                    break;
-            }
+            //        break;
+            //}
             bindingData();
             Console.WriteLine();
         }
@@ -622,25 +764,24 @@ namespace ALS.ALSI.Web.view.request
 
         }
 
-
-
-
         protected void ExportToExcel()
         {
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
 
             using (XLWorkbook wb = new XLWorkbook())
             {
                 DataTable dt = new DataTable("DT");
-
+                dt.Columns.Add("Job Type", typeof(string));
                 dt.Columns.Add("Status", typeof(string));
+                dt.Columns.Add("Job Status", typeof(string));
                 dt.Columns.Add("Received", typeof(string));
                 dt.Columns.Add("Report Sent to Customer", typeof(string));
                 dt.Columns.Add("Receive Date", typeof(string));
                 dt.Columns.Add("Due Date", typeof(string));
                 dt.Columns.Add("ALS Ref", typeof(string));
                 dt.Columns.Add("No.Cus Ref No", typeof(string));
-                dt.Columns.Add("S Ref No", typeof(string));
+                dt.Columns.Add("Other Ref No", typeof(string));
                 dt.Columns.Add("Company", typeof(string));
                 dt.Columns.Add("Invoice", typeof(string));
                 dt.Columns.Add("Po", typeof(string));
@@ -650,108 +791,129 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Surface Area", typeof(string));
                 dt.Columns.Add("Specification", typeof(string));
                 dt.Columns.Add("Type of test", typeof(string));
+                dt.Columns.Add("Modified Date", typeof(string));
+                dt.Columns.Add("Update By", typeof(string));
+                dt.Columns.Add("Chemist Complete Date", typeof(string));
+                dt.Columns.Add("Data Group", typeof(string));
 
                 String conSQL = Configurations.MySQLCon;
                 using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
                 {
                     conn.Open();
-
-
                     String sql = "SELECT" +
+                                "`Extent2`.`sample_prefix` AS `Job Type`," +
                                 "`Extent7`.`name` AS `Status`," +
-                                "DATE_FORMAT(`Extent2`.`date_srchemist_complate`,'%e %b %Y') AS `Received`," +
-                                "`Extent2`.`date_admin_sent_to_cus` AS `Report Sent to Customer`," +
-                                "DATE_FORMAT(`Extent1`.`date_of_receive`,'%e %b %Y') AS `Receive Date`," +
-                                "DATE_FORMAT(`Extent2`.`due_date`,'%e %b %Y') AS `Due Date`," +
-                                "`Extent2`.`job_number` AS `ALS Ref`," +
-                                "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
-                                "`Extent1`.`s_pore_ref_no` AS `S Ref No`," +
-                                "`Extent5`.`company_name` AS `Company`," +
-                                "`Extent2`.`sample_invoice` AS `Invoice`," +
-                                "`Extent2`.`sample_po` AS `Po`," +
-                                "`Extent6`.`name` as `Contact`," +
-                                "`Extent2`.`description` AS `Description`," +
-                                "`Extent2`.`model` AS Model," +
-                                "`Extent2`.`surface_area` AS `Surface Area`," +
-                                "`Extent3`.`name` AS `Specification`," +
-                                "`Extent4`.`name` AS `Type of test`" +
-                                " FROM `job_info` AS `Extent1`" +
-                                " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
-                                " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
-                                " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
-                                " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
-                                " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
-                                " INNER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`";
+                                "`Extent9`.`name` AS `Job Status`," +
+                                "DATE_FORMAT(`Extent2`.`date_srchemist_complate`,'%d %b %Y') AS `Received`," +
+                                "DATE_FORMAT(`Extent2`.`date_admin_sent_to_cus`,'%d %b %Y') AS  `Report Sent to Customer`," +
+                                "DATE_FORMAT(`Extent1`.`date_of_receive`,'%d %b %Y') AS `Receive Date`,";
+                    switch (userRole)
+                    {
+                        case RoleEnum.LOGIN:
+                        case RoleEnum.CHEMIST:
+                        case RoleEnum.SR_CHEMIST:
+                        case RoleEnum.LABMANAGER:
+                            sql += "DATE_FORMAT((case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end),'%e %b %Y') AS `Due Date`,";
+                            break;
+                        case RoleEnum.ADMIN:
+                        case RoleEnum.MARKETING:
+                        case RoleEnum.BUSINESS_MANAGER:
+                            sql += "DATE_FORMAT((case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_customer` end),'%e %b %Y') AS `Due Date`,";
 
+                            break;
+                        default:
+                            sql += "DATE_FORMAT((case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end),'%e %b %Y') AS `Due Date`,";
+                            break;
+                    }
+                    sql += "`Extent2`.`job_number` AS `ALS Ref`," +
+                     "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
+                     "`Extent2`.`other_ref_no` AS `Other Ref No`," +
+                     "`Extent5`.`company_name` AS `Company`," +
+                     "`Extent2`.`sample_invoice` AS `Invoice`," +
+                     "`Extent2`.`sample_po` AS `Po`," +
+                     "`Extent6`.`name` as `Contact`," +
+                     "`Extent2`.`description` AS `Description`," +
+                     "`Extent2`.`model` AS Model," +
+                     "`Extent2`.`surface_area` AS `Surface Area`," +
+                     "`Extent3`.`name` AS `Specification`," +
+                     "`Extent4`.`name` AS `Type of test`," +
+                     "DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
+                     "`Extent8`.`username` AS `Update By`," +
+                     "DATE_FORMAT(`Extent2`.`date_chemist_complete`,'%d %b %Y %H:%i')  AS `Chemist Complete Date`," +
+                     "`Extent4`.`data_group` AS `Data Group`" +
+                     " FROM `job_info` AS `Extent1`" +
+                     " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
+                     " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
+                     " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
+                     " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
+                     " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
+                     " INNER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
+                     " INNER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
+                     " INNER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
 
                     StringBuilder sqlCri = new StringBuilder();
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
-                        sqlCri.Append(" `Extent1`.`job_prefix` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
+                        sqlCri.Append(" `Extent4`.`data_group` = '" + ddlTypeOfTest.SelectedValue + "'");
+                        sqlCri.Append(" AND ");
                     }
-                    if (!String.IsNullOrEmpty(ddlCompany.SelectedValue))
+                    if (Convert.ToInt16(ddlCompany.SelectedValue) > 0)
                     {
-                        if (Convert.ToInt16(ddlCompany.SelectedValue) > 0)
+                        if (!String.IsNullOrEmpty(ddlCompany.SelectedItem.Text))
                         {
-                            sqlCri.Append(" `Extent1`.`customer_id` = " + Convert.ToInt16(ddlCompany.SelectedValue));
+                            sqlCri.Append(" `Extent5`.`company_name` like '%" + ddlCompany.SelectedItem.Text + "%'");
+                            sqlCri.Append(" AND ");
                         }
-
                     }
-
                     if (!String.IsNullOrEmpty(ddlSpecification.SelectedValue))
                     {
                         sqlCri.Append(" `Extent3`.`id` = " + Convert.ToInt16(ddlSpecification.SelectedValue));
-                    }
-
-                    if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
-                    {
-                        sqlCri.Append(" `Extent4`.`id` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
+                        sqlCri.Append(" AND ");
                     }
                     if (!String.IsNullOrEmpty(ddlJobStatus.SelectedValue))
                     {
                         sqlCri.Append(" `Extent7`.`id` = " + Convert.ToInt16(ddlJobStatus.SelectedValue));
+                        sqlCri.Append(" AND ");
                     }
-
                     if (!String.IsNullOrEmpty(txtREfNo.Text))
                     {
-                        sqlCri.Append(" `Extent2`.`job_number` = '" + txtREfNo.Text+"'");
+                        sqlCri.Append(" `Extent2`.`job_number` = '" + txtREfNo.Text + "'");
+                        sqlCri.Append(" AND ");
 
                     }
                     if (!String.IsNullOrEmpty(txtPo.Text))
                     {
-                        sqlCri.Append(" `Extent2`.`sample_po` = '" + txtPo.Text+"'");
+                        sqlCri.Append(" `Extent2`.`sample_po` = '" + txtPo.Text + "'");
+                        sqlCri.Append(" AND ");
                     }
                     if (!String.IsNullOrEmpty(txtInvoice.Text))
                     {
-                        sqlCri.Append(" `Extent1`.`sample_invoice` = '" + txtInvoice.Text+"'");
-
+                        sqlCri.Append(" `Extent1`.`sample_invoice` = '" + txtInvoice.Text + "'");
+                        sqlCri.Append(" AND ");
                     }
-
                     DateTime receive_report_from = String.IsNullOrEmpty(txtReceivedReportFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportFrom.Text);
                     DateTime receive_report_to = String.IsNullOrEmpty(txtReceivedReportTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportTo.Text);
                     if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
                     {
                         sqlCri.Append(" `Extent1`.`date_of_receive` between'" + receive_report_from.ToString("yyyy-MM-dd") + "' AND '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
+                        sqlCri.Append(" AND ");
                     }
-
                     DateTime duedate_from = String.IsNullOrEmpty(txtDuedateFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateFrom.Text);
                     DateTime duedate_to = String.IsNullOrEmpty(txtDuedateTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateTo.Text);
                     if (duedate_from != DateTime.MinValue && duedate_to != DateTime.MinValue)
                     {
                         sqlCri.Append(" `Extent2`.`due_date` between '" + duedate_from.ToString("yyyy-MM-dd") + "' AND '" + duedate_to.ToString("yyyy-MM-dd") + "'");
-
+                        sqlCri.Append(" AND ");
                     }
-
                     DateTime report_to_customer_from = String.IsNullOrEmpty(txtReportToCustomerFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerFrom.Text);
                     DateTime report_to_customer_to = String.IsNullOrEmpty(txtReportToCustomerTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerTo.Text);
                     if (report_to_customer_from != DateTime.MinValue && report_to_customer_to != DateTime.MinValue)
                     {
                         sqlCri.Append(" `Extent2`.`date_admin_sent_to_cus` between '" + report_to_customer_from.ToString("yyyy-MM-dd") + "' AND '" + report_to_customer_to.ToString("yyyy-MM-dd") + "'");
-
+                        sqlCri.Append(" AND ");
                     }
-
-                    sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString() : "";
-                    sql += " ORDER BY `Extent2`.`job_number` DESC";
+                    sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString().Substring(0, sqlCri.ToString().Length - 5) : "";
+                    sql += " ORDER BY `Extent2`.`ID` DESC";
 
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
 
@@ -759,9 +921,6 @@ namespace ALS.ALSI.Web.view.request
                     dt.Load(sdr);
                     Console.WriteLine();
                 }
-
-                job_info _jobInfo = new job_info();
-
                 wb.Worksheets.Add(dt);
 
                 Response.Clear();
@@ -789,5 +948,47 @@ namespace ALS.ALSI.Web.view.request
         {
             ExportToExcel();
         }
+
+        protected void btnOperation_Click(object sender, EventArgs e)
+        {
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+            //btnOpera
+            List<int> listOfNoGroup = new List<int>();
+            LinkButton btn = (LinkButton)sender;
+
+            this.isPoGroupOperation = btn.ID.Equals("btnOperationPo");
+            this.isDuedateGroupOperation = btn.ID.Equals("btnOperationDueDate");
+            this.isInvoiceGroupOperation = btn.ID.Equals("btnOperationGroupInvoice");
+
+            foreach (GridViewRow row in gvJob.Rows)
+            {
+                CheckBox chk = row.Cells[1].Controls[1] as CheckBox;
+
+                if (chk != null && chk.Checked)
+                {
+                    HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
+                    HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
+
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
+                    {
+                        this.selectedList.Add(Convert.ToInt32(hf.Value));
+                    }
+                    else
+                    {
+                        if ("1".Equals(hIsGroup.Value))
+                        {
+                            this.selectedList.Add(Convert.ToInt32(hf.Value));
+                        }
+                        else
+                        {
+                            listOfNoGroup.Add(Convert.ToInt32(hf.Value));
+                        }
+                    }
+                }
+            }
+            Server.Transfer(Constants.LINK_CHANGE_JOB_GROUP);
+        }
+
+
     }
 }

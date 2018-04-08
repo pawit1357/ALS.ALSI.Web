@@ -31,7 +31,7 @@
                                         <tr>
                                             <th>Analysis</th>
                                             <th>Procedure No</th>
-                                            <th>Sample Size</th>
+                                            <th>Number of pieces used for extraction</th>
                                             <th>Extraction<br />
                                                 Medium</th>
                                             <th>Extraction<br />
@@ -91,7 +91,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Results" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
+                                                <asp:Literal ID="litResults" runat="server" Text='<%# Eval("C")%>' />
 
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -499,18 +499,17 @@
                             </div>
                         </div>
                         <br />
-                        
+
                         <asp:TextBox ID="lbRemark1" runat="server" Width="400px"></asp:TextBox><br />
                         <asp:TextBox ID="lbRemark2" runat="server" Width="400px"></asp:TextBox><br />
                         <asp:TextBox ID="lbRemark3" runat="server" Width="400px"></asp:TextBox><br />
                         <asp:TextBox ID="lbRemark4" runat="server" Width="400px"></asp:TextBox><br />
                         <asp:TextBox ID="lbRemark5" runat="server" Width="400px"></asp:TextBox><br />
                         <%--<asp:Label ID="lbRemark1" runat="server" Text=""></asp:Label><br />--%>
-             <%--           <asp:Label ID="lbRemark2" runat="server" Text=""></asp:Label><br />
+                        <%--           <asp:Label ID="lbRemark2" runat="server" Text=""></asp:Label><br />
                         <asp:Label ID="lbRemark3" runat="server" Text=""></asp:Label><br />
                         <asp:Label ID="lbRemark4" runat="server" Text=""></asp:Label><br />
                         <asp:Label ID="lbRemark5" runat="server" Text=""></asp:Label>--%>
-
                     </asp:Panel>
 
 
@@ -1276,7 +1275,25 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date Analyzed:<span class="required">
+										* </span>
+                                            </label>
+                                            <div class="col-md-6">
+                                                <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                                    style="max-width: 220px">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                                ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
                                     <asp:Panel ID="pSpecification" runat="server">
                                         <%--      <div class="row">
                                             <div class="col-md-6">--%>
@@ -1405,20 +1422,91 @@
                                             <td>
                                                 <asp:TextBox ID="txtDecimal02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
+                                        <!-- MOTOR OIL -->
+                                        <tr>
+                                            <td colspan="2">MOTOR OIL</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Result</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult01" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <!-- MOTOR HUB -->
+                                        <tr>
+                                            <td colspan="2">MOTOR HUB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Repeated Hydrocarbon (C20-C40 Alkanes)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult02" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>Compunds <= DOP	</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal03" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtFloatResult03" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
                                         <tr>
                                             <td>Compunds >= DOP	</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal04" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtFloatResult04" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
                                         <tr>
-                                            <td>Repeated Hydrocarcon</td>
+                                            <td>Total Organic Compound (TOC)</td>
                                             <td>
-                                                <asp:TextBox ID="txtDecimal05" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtFloatResult05" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <!-- MOTOR BASE -->
+                                        <tr>
+                                            <td colspan="2">MOTOR BASE</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Repeated Hydrocarbon (C20-C40 Alkanes)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult06" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compunds <= DOP	</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult07" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compunds >= DOP	</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult08" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Organic Compound (TOC)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult09" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <!-- COMPOUNDS -->
+                                        <tr>
+                                            <td colspan="2">COMPOUNDS</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Repeated Hydrocarbon (C20-C40 Alkanes)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult10" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compunds <= DOP	</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult11" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compunds >= DOP	</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult12" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                                              <tr>
+                                            <td>Total Organic Compound (TOC)</td>
+                                            <td>
+                                                <asp:TextBox ID="txtFloatResult13" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
+                                        </tr>
+                                                                                <tr>
+                                            <td colspan="2">&nbsp;</td>
                                         </tr>
                                         <tr>
                                             <td>Minimum RHC Detection Limit</td>
@@ -1601,12 +1689,29 @@
                                                 </asp:DropDownList>--%>
 </form>
 
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-<script>
-    jQuery(document).ready(function () {
-
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
     });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
 </script>
-<!-- END JAVASCRIPTS -->

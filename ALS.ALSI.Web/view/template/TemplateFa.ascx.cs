@@ -41,7 +41,7 @@ namespace ALS.ALSI.Web.view.template
             get { return (job_sample)Session["job_sample"]; }
             set { Session["job_sample"] = value; }
         }
-        
+
 
         public List<template_wd_dhs_coverpage> reportCovers
         {
@@ -121,7 +121,7 @@ namespace ALS.ALSI.Web.view.template
                 pUploadWorkSheet.Visible = false;
                 pCoverpage.Visible = true;
 
-               
+
                 switch (userRole)
                 {
                     case RoleEnum.LOGIN:
@@ -172,7 +172,7 @@ namespace ALS.ALSI.Web.view.template
                                 pDownload.Visible = true;
                                 btnSubmit.Visible = true;
                                 pCoverpage.Visible = false;
-                                
+
                                 lbDesc.Text = "สำหรับดาวโหลดไฟล์ word ที่มาจาก Chemist มาปรับแก้";
                                 break;
                             case StatusEnum.ADMIN_CONVERT_PDF:
@@ -198,7 +198,7 @@ namespace ALS.ALSI.Web.view.template
                         //    pCoverpage.Visible = false;
                         //}
                         break;
-                        
+
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
@@ -326,7 +326,6 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-
 
                             this.jobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
@@ -459,7 +458,7 @@ namespace ALS.ALSI.Web.view.template
         {
             Response.Redirect(this.PreviousPath);
         }
-        
+
 
 
         protected void btnCoverPage_Click(object sender, EventArgs e)
@@ -483,8 +482,8 @@ namespace ALS.ALSI.Web.view.template
         }
 
         #endregion
-        
-        
+
+
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue.ToString(), true);

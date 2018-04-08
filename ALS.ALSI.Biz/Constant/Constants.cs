@@ -31,11 +31,24 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_JOB_WORK_FLOW = APPNAME + "/view/request/JobWorkFlow.aspx";
         public const String LINK_JOB_CONVERT_TEMPLATE = APPNAME + "/view/request/JobConvertTemplate.aspx";
         public const String LINK_JOB_REQUEST = APPNAME + "/view/request/JobRequest.aspx";
+        public const String LINK_EDIT_SAMPLE = APPNAME + "/view/request/EditSample.aspx";
+
+        
         public const String LINK_SEARCH_JOB_REQUEST = APPNAME + "/view/request/SearchJobRequest.aspx";
         public const String LINK_JOB_CHANGE_STATUS = APPNAME + "/view/request/ChangeJobsStatus.aspx";
         public const String LINK_JOB_CHANGE_DUEDATE = APPNAME + "/view/request/ChangeJobDueDate.aspx";
+        public const String LINK_JOB_SR_COMPLETE_DATE = APPNAME + "/view/request/ChangeJobSrCompleteDate.aspx";
+
+
+        
         public const String LINK_JOB_CHANGE_PO = APPNAME + "/view/request/ChangeJobPo.aspx";
         public const String LINK_REPORT_DATE = APPNAME + "/view/request/ChangeReportDate.aspx";
+        public const String LINK_CHANGE_OTHER_REF_NO = APPNAME + "/view/request/ChangeOtherRefNo.aspx";
+        public const String LINK_CHANGE_SINGAPORE_REF_NO = APPNAME + "/view/request/ChangeSingaporeRefNo.aspx";
+        public const String LINK_CHANGE_JOB_GROUP = APPNAME + "/view/request/ChangeJobGroup.aspx";
+        public const String LINK_VIEW_FILE = APPNAME + "/view/request/ViewFile.aspx";
+
+        
 
         public const String LINK_ADMIN_PRINT = APPNAME + "/view/request/AdminPrint.aspx";
         public const String LINK_AMEND = APPNAME + "/view/request/JobAmend.aspx";
@@ -114,6 +127,10 @@ namespace ALS.ALSI.Biz.Constant
                         //"Total Outgassing (no of arms: >= 4)"
         };
 
+
+        public static String[] OTHER_REF_NOS = { "Go Singapore", "Go Bangkok", "Sub Contract" };
+
+
     }
 
     public enum CommandNameEnum : int
@@ -149,7 +166,15 @@ namespace ALS.ALSI.Biz.Constant
         Retest = 30,
         Normal = 31,
         Inactive = 32,
-        Sort = 33
+        Sort = 33,
+        Hold = 34,
+        UnHold = 35,
+        Up = 36,
+        Down = 37,
+        ChangeOtherRefNo = 38,
+        ChangeSingaporeRefNo = 39,
+        ViewFile = 40,
+        ChangeSrCompleteDate = 41
     }
 
     public enum RowTypeEnum : int
@@ -179,9 +204,22 @@ namespace ALS.ALSI.Biz.Constant
         SR_CHEMIST = 4,
         ADMIN = 5,
         LABMANAGER = 6,
-        ACCOUNT = 7
+        ACCOUNT = 7,
+        MARKETING = 8,
+        BUSINESS_MANAGER = 9
     }
 
+    public enum PAEnum
+    {
+        EVALUATION_OF_PARTICLES = 1,
+        GRAVIMETRY = 2,
+        MICROSCOPIC_ANALLYSIS = 3,
+        DOUBLE_ANALYSIS = 4,
+        DISSOLVING = 5,
+        WASHING = 6,
+        SEM_EDX_PARAMETERS =7,
+        ELEMENT_COMPOSITION =8
+    }
     public enum ResultEnum
     {
         [Description("-")]
@@ -237,7 +275,12 @@ namespace ALS.ALSI.Biz.Constant
         ADMIN_CONVERT_WORD = 13,
         [Description("CONVERT_PDF")]
         ADMIN_CONVERT_PDF = 14,
-
+        [Description("UN_HOLD")]
+        JOB_UNHOLD = 15,
+        [Description("RETEST REPORT")]
+        JOB_RETEST = 16,
+        [Description("APPROVE AMEND")]
+        JOB_AMEND = 17,
 
     }
 
@@ -283,7 +326,9 @@ namespace ALS.ALSI.Biz.Constant
         [Description("132 KHz")]
         KHz_132 = 2,
         [Description("ALPC (132 KHz)")]
-        ALPC_132= 3
+        ALPC_132 = 3,
+        [Description("SWAP (Method)")]
+        SWAP = 4,
     }
     public enum ParticleTypeEnum
     {
@@ -311,7 +356,7 @@ namespace ALS.ALSI.Biz.Constant
         CLASSIFICATION_TOTAL = 8,
         CLASSIFICATION_GRAND_TOTAL = 9,
         CLASSIFICATION_SUB_TOTAL = 10,
-        LPC =11,
+        LPC = 11,
         LPC05 = 12,
     }
     public enum HPAFor3Group : int

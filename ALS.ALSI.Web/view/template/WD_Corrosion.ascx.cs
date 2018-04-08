@@ -86,12 +86,12 @@ namespace ALS.ALSI.Web.view.template
         {
 
             ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt16(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt16(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt16(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
             tb_m_specification comp = new tb_m_specification();
             comp.specification_id = this.jobSample.specification_id;
@@ -174,8 +174,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt16(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -202,8 +202,8 @@ namespace ALS.ALSI.Web.view.template
                     case RoleEnum.LABMANAGER:
                         if (status == StatusEnum.LABMANAGER_CHECKING)
                         {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt16(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                             pRemark.Visible = false;
                             pDisapprove.Visible = false;
                             pSpecification.Visible = false;
@@ -215,6 +215,8 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
             }
             #endregion
             #region "WORKING"
@@ -232,31 +234,40 @@ namespace ALS.ALSI.Web.view.template
                 ddlSpecification.SelectedValue = cover.specification_id.ToString();
                 txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].number_of_pieces_used_for_extraction;
 
+               
+
+
                 tb_m_specification procedure = new tb_m_specification().SelectByID(this.coverpages[0].procedureNo_id.Value);
                 if (procedure != null)
                 {
-
+                    ddlMethod.SelectedValue = this.coverpages[0].procedureNo_id.Value.ToString();
                     txtProcedureNo.Text = procedure.A;
                     cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
 
                     tb_m_specification specification = new tb_m_specification().SelectByID(this.coverpages[0].specification_id.Value);
                     if (specification != null)
                     {
+                        ddlSpecification.SelectedValue = this.coverpages[0].specification_id.Value.ToString();
                         if (cbCheckBox.Checked)
                         {
-                            lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
+                            lbResultDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
                         }
                         else
                         {
-                            lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", specification.B);
+                            lbResultDesc.Text = String.Format("The specification is based on Western Digital 's document no. {0}", specification.B);
 
                         }
                     }
 
-                    tb_m_specification temp = new tb_m_specification().SelectByID(this.coverpages[0].temperature_humidity_parameters_id.Value);
-                    if (temp != null)
+                    if (this.coverpages[0].temperature_humidity_parameters_id != null)
                     {
-                        this.coverpages[0].temperature_humidity_parameters = temp.C;
+                        ddlTemp.SelectedValue = this.coverpages[0].temperature_humidity_parameters_id.Value.ToString();
+
+                        tb_m_specification temp = new tb_m_specification().SelectByID(this.coverpages[0].temperature_humidity_parameters_id.Value);
+                        if (temp != null)
+                        {
+                            this.coverpages[0].temperature_humidity_parameters = temp.C;
+                        }
                     }
                 }
 
@@ -276,7 +287,7 @@ namespace ALS.ALSI.Web.view.template
                 cov.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
 
                 cov.temperature_humidity_parameters = "85oC, 85%RH, 24hours";
-                cov.specification = "No observable discoloration or spots at 10x";
+                cov.specification = "No observable discoloration or spots at 40x";
                 cov.result = "";
                 this.coverpages.Add(cov);
                 gvResult.DataSource = this.coverpages;
@@ -286,16 +297,16 @@ namespace ALS.ALSI.Web.view.template
 
             if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
             {
-                #region ":: STAMP ANALYZED DATE ::"
-                if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                {
-                    if (this.jobSample.date_chemist_alalyze == null)
-                    {
-                        this.jobSample.date_chemist_alalyze = DateTime.Now;
-                        this.jobSample.Update();
-                    }
-                }
-                #endregion
+                //#region ":: STAMP ANALYZED DATE ::"
+                //if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
+                //{
+                //    if (this.jobSample.date_chemist_alalyze == null)
+                //    {
+                //        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                //        this.jobSample.Update();
+                //    }
+                //}
+                //#endregion
 
 
                 pRefImage.Visible = true;
@@ -364,9 +375,9 @@ namespace ALS.ALSI.Web.view.template
                     template_wd_corrosion_coverpage.DeleteBySampleID(this.SampleID);
                     foreach (template_wd_corrosion_coverpage _cover in this.coverpages)
                     {
-                        _cover.procedureNo_id = Convert.ToInt16(ddlMethod.SelectedValue);
-                        _cover.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
-                        _cover.temperature_humidity_parameters_id = Convert.ToInt16(ddlTemp.SelectedValue);
+                        _cover.procedureNo_id = Convert.ToInt32(ddlMethod.SelectedValue);
+                        _cover.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                        _cover.temperature_humidity_parameters_id = Convert.ToInt32(ddlTemp.SelectedValue);
                         _cover.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                     }
                     template_wd_corrosion_coverpage.InsertList(this.coverpages);
@@ -378,12 +389,14 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
+                    this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                     //#endregion
 
                     foreach (template_wd_corrosion_coverpage _cover in this.coverpages)
                     {
-                        //_cover.procedureNo_id = Convert.ToInt16(ddlComponent.SelectedValue);
-                        _cover.specification_id = Convert.ToInt16(ddlSpecification.SelectedValue);
+                        _cover.procedureNo_id = Convert.ToInt32(ddlMethod.SelectedValue);
+                        _cover.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                        _cover.temperature_humidity_parameters_id = Convert.ToInt32(ddlTemp.SelectedValue);
                         _cover.number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                         _cover.procedureNo = txtProcedureNo.Text;
                     }
@@ -479,32 +492,32 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
+                    if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
+                    {
+                        string yyyy = DateTime.Now.ToString("yyyy");
+                        string MM = DateTime.Now.ToString("MM");
+                        string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
 
 
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                        }
+                        btnUpload.SaveAs(source_file);
+                        this.jobSample.path_pdf = source_file_url;
+                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        //lbMessage.Text = string.Empty;
+                    }
+                    else
+                    {
+                        errors.Add("Invalid File. Please upload a File with extension .pdf");
+                        //lbMessage.Attributes["class"] = "alert alert-error";
+                        //isValid = false;
+                    }
+                    //this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
 
@@ -519,6 +532,8 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
                 //########
+                this.jobSample.update_date = DateTime.Now;
+                this.jobSample.update_by = userLogin.id;
                 this.jobSample.Update();
                 //Commit
                 GeneralManager.Commit();
@@ -547,7 +562,7 @@ namespace ALS.ALSI.Web.view.template
             {
 
                 this.coverpages[0].temperature_humidity_parameters = ddlTemp.SelectedItem.Text;
-                this.coverpages[0].specification = "No observable discoloration or spots at 10x";
+                this.coverpages[0].specification = "No observable discoloration or spots at 40x";
                 this.coverpages[0].result = "";
                 gvResult.DataSource = this.coverpages;
                 gvResult.DataBind();
@@ -555,7 +570,7 @@ namespace ALS.ALSI.Web.view.template
         }
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lbResultDesc.Text = String.Format("The specification is based on Seagate's document no. {0}", ddlSpecification.SelectedItem.Text);
+            lbResultDesc.Text = String.Format("The specification is based on Western Digital 's document no. {0}", ddlSpecification.SelectedItem.Text);
         }
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -649,7 +664,7 @@ namespace ALS.ALSI.Web.view.template
                 if (_tmp != null)
                 {
                     _tmp.result = _ddlResult.SelectedValue;
-                    //_tmp.temperature_humidity_parameters_id = Convert.ToInt16(_ddlhTemperature_humidity_parameters.SelectedValue);
+                    //_tmp.temperature_humidity_parameters_id = Convert.ToInt32(_ddlhTemperature_humidity_parameters.SelectedValue);
                     //_tmp.specification = _txtSpecification.Text;
                     //_tmp.temperature_humidity_parameters = _ddlhTemperature_humidity_parameters.SelectedItem.Text;
                     //
@@ -783,14 +798,14 @@ namespace ALS.ALSI.Web.view.template
                               };
             dtResult.Columns.AddRange(cols1);
             DataRow row1 = dtResult.NewRow();
-            row1["B"] = component.B;
-            row1["C"] = component.C;
+            row1["B"] = ddlTemp.SelectedItem.Text;
+            row1["C"] = component.D;
             row1["result"] = this.coverpages[0].result;
             dtResult.Rows.Add(row1);
 
 
-            ReportHeader reportHeader = new ReportHeader();
-            reportHeader = reportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
 
@@ -801,10 +816,11 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
             reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
-            reportParameters.Add(new ReportParameter("ResultDesc", ""));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbResultDesc.Text));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
             // Variables
             Warning[] warnings;

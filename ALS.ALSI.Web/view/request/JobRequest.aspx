@@ -203,14 +203,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">S'pore Ref No:</label>
-                                <div class="col-md-6">
-                                    <asp:TextBox ID="txtS_pore_ref_no" runat="server" class="form-control"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-3">Spec. Ref. & Rev. No. :</label>
@@ -312,6 +305,47 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Part no:<span class="required">&nbsp; </span>
+                                </label>
+                                <div class="col-md-6" id="divSurfaceArea">
+                                    <asp:TextBox ID="txtPartNo" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Part name:</label>
+                                <div class="col-md-6">
+                                    <asp:TextBox ID="txtPartName" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Lot no:<span class="required">&nbsp; </span>
+                                </label>
+                                <div class="col-md-6" id="divSurfaceArea">
+                                    <asp:TextBox ID="txtLotNo" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Other Ref No:</label>
+                                <div class="col-md-6">
+                                    <asp:TextBox ID="txtOtherRefNo" runat="server" class="form-control"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -359,7 +393,7 @@
                                     <div style="width: 100%; overflow-x: scroll; overflow-y: hidden; padding-bottom: 10px;" runat="server">
 
                                         <asp:GridView ID="gvSample" runat="server" AutoGenerateColumns="False" AllowPaging="True"
-                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_id,job_number,no_of_report,uncertainty,status_completion_scheduled" OnRowCancelingEdit="gvSample_RowCancelingEdit" OnRowDataBound="gvSample_RowDataBound" OnRowDeleting="gvSample_RowDeleting" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" OnSelectedIndexChanging="gvSample_SelectedIndexChanging" OnPageIndexChanging="gvSample_PageIndexChanging">
+                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_id,job_number,no_of_report,uncertainty,status_completion_scheduled,amend_count,retest_count,amend_or_retest" OnRowCancelingEdit="gvSample_RowCancelingEdit" OnRowDataBound="gvSample_RowDataBound" OnRowDeleting="gvSample_RowDeleting" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" OnSelectedIndexChanging="gvSample_SelectedIndexChanging" OnPageIndexChanging="gvSample_PageIndexChanging">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Ref No." ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
@@ -367,6 +401,14 @@
                                                     </ItemTemplate>
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtRefNo" CssClass="form-control" runat="server" Text='<%# Eval("job_number")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Other Ref No." ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litOtherRefNo" runat="server" Text='<%# Eval("other_ref_no")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtOtherRefNo" CssClass="form-control" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:TextBox>
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
 
@@ -402,6 +444,32 @@
                                                         <asp:TextBox ID="txtRemark" CssClass="form-control" runat="server" Text='<%# Eval("remarks")%>'></asp:TextBox>
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Part No" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litPartNo" runat="server" Text='<%# Eval("part_no")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtPartNo" CssClass="form-control" runat="server" Text='<%# Eval("part_no")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="txtPart Name" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litPartName" runat="server" Text='<%# Eval("part_name")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtPartName" CssClass="form-control" runat="server" Text='<%# Eval("part_name")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Lot No" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litLotNo" runat="server" Text='<%# Eval("lot_no")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtLotNo" CssClass="form-control" runat="server" Text='<%# Eval("lot_no")%>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+
                                                 <asp:TemplateField HeaderText="No.of Report:" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litNoOfReport" runat="server" Text='<%# Eval("no_of_report")%>' />
@@ -440,29 +508,8 @@
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
-                                            <PagerTemplate>
-                                                <div class="pagination">
-                                                    <ul>
-                                                        <li>
-                                                            <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
-                                                                CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
-                                                        </li>
-                                                        <li>
-                                                            <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
-                                                                CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
-                                                        </li>
-                                                        <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
-                                                        <li>
-                                                            <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
-                                                                CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
-                                                        </li>
-                                                        <li>
-                                                            <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
-                                                                CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </PagerTemplate>
+                                            <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
+
                                             <EmptyDataTemplate>
                                                 <div class="data-not-found">
                                                     <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
@@ -542,6 +589,20 @@
                             </div>
                         </div>
                     </div>
+                    <h4 class="form-section">Job Status</h4>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Status:<span class="required">*</span></label>
+                                <div class="col-md-9">
+                                    <asp:DropDownList ID="ddlStatus" runat="server" class="select2_category form-control" DataTextField="name" DataValueField="ID"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
 
                     <!-- END FORM-->
                     <div class="form-actions">

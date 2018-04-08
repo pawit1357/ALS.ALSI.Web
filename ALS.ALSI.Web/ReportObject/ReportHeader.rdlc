@@ -34,7 +34,7 @@
             </Paragraphs>
             <rd:DefaultName>CustomerPoNo</rd:DefaultName>
             <Top>0.29153in</Top>
-            <Left>2.11124in</Left>
+            <Left>2.13901in</Left>
             <Height>0.16667in</Height>
             <Width>4.9878in</Width>
             <Style>
@@ -67,7 +67,7 @@
             </Paragraphs>
             <rd:DefaultName>AlsThailandRefNo</rd:DefaultName>
             <Top>0.4582in</Top>
-            <Left>2.11124in</Left>
+            <Left>2.13901in</Left>
             <Height>0.16667in</Height>
             <Width>4.9878in</Width>
             <ZIndex>1</ZIndex>
@@ -100,10 +100,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Date</rd:DefaultName>
-            <Top>0.62487in</Top>
-            <Left>2.11124in</Left>
+            <Top>0.81932in</Top>
+            <Left>2.13901in</Left>
             <Height>0.16666in</Height>
-            <Width>4.9878in</Width>
+            <Width>4.94613in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -147,10 +147,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Company</rd:DefaultName>
-            <Top>0.76544in</Top>
-            <Left>2.11124in</Left>
+            <Top>0.99987in</Top>
+            <Left>2.13901in</Left>
             <Height>0.19445in</Height>
-            <Width>4.9878in</Width>
+            <Width>4.94613in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -207,8 +207,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>DateSampleReceived</rd:DefaultName>
-            <Top>1.00155in</Top>
-            <Left>2.11124in</Left>
+            <Top>1.20821in</Top>
+            <Left>2.13901in</Left>
             <Height>0.19444in</Height>
             <Width>4.9878in</Width>
             <ZIndex>4</ZIndex>
@@ -309,7 +309,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox41</rd:DefaultName>
-            <Top>0.62487in</Top>
+            <Top>0.81932in</Top>
             <Height>0.16666in</Height>
             <Width>2.06957in</Width>
             <ZIndex>7</ZIndex>
@@ -340,12 +340,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox41</rd:DefaultName>
-            <Top>0.79152in</Top>
-            <Height>0.16836in</Height>
+            <Top>0.99987in</Top>
+            <Height>0.19445in</Height>
             <Width>2.06957in</Width>
             <ZIndex>8</ZIndex>
             <Style>
@@ -409,7 +411,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox41</rd:DefaultName>
-            <Top>1.00155in</Top>
+            <Top>1.20821in</Top>
             <Height>0.19444in</Height>
             <Width>2.06957in</Width>
             <ZIndex>9</ZIndex>
@@ -445,7 +447,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox41</rd:DefaultName>
-            <Top>1.23766in</Top>
+            <Top>1.41653in</Top>
             <Height>0.25in</Height>
             <Width>2.06957in</Width>
             <ZIndex>10</ZIndex>
@@ -493,8 +495,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox41</rd:DefaultName>
-            <Top>1.23766in</Top>
-            <Left>2.11124in</Left>
+            <Top>1.41653in</Top>
+            <Left>2.13901in</Left>
             <Height>0.25in</Height>
             <Width>4.9878in</Width>
             <ZIndex>11</ZIndex>
@@ -533,7 +535,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>0cm</Top>
-            <Left>0cm</Left>
+            <Left>0.07055cm</Left>
             <Height>0.74048cm</Height>
             <Width>18.03156cm</Width>
             <ZIndex>12</ZIndex>
@@ -547,15 +549,90 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox46">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>ALS SINGAPORE REF NO.:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>0.63876in</Top>
+            <Height>0.16667in</Height>
+            <Width>2.06957in</Width>
+            <ZIndex>13</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!AlsSingaporeRefNo.Value.Equals(""),True, False)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="AlsThailandRefNo2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
+                    <Style>
+                      <FontFamily>Lucida Sans</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>AlsThailandRefNo</rd:DefaultName>
+            <Top>0.63876in</Top>
+            <Left>2.13901in</Left>
+            <Height>0.16667in</Height>
+            <Width>4.97391in</Width>
+            <ZIndex>14</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!AlsSingaporeRefNo.Value.Equals(""),True, False)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>1.49939in</Height>
+        <Height>1.66653in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>7.09904in</Width>
+      <Width>7.12681in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -605,6 +682,11 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="SampleDescription">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
@@ -659,6 +741,11 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>SampleDescription</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

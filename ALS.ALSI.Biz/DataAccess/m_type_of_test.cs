@@ -21,5 +21,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> parent { get; set; }
         public string status { get; set; }
         public string data_group { get; set; }
+        public Nullable<int> ref_template_id { get; set; }
     }
 }

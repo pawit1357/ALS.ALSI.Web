@@ -7,7 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
-
+using System.Linq;
 
 namespace ALS.ALSI.Web.view.request
 {
@@ -40,9 +40,9 @@ namespace ALS.ALSI.Web.view.request
                 job.customer_ref_no = txtCustomer_ref_no.Text;
                 job.company_name_to_state_in_report = txtCompany_name_to_state_in_report.InnerText;
                 job.job_number = String.IsNullOrEmpty(txtJob_number.Text) ? 0 : int.Parse(txtJob_number.Text);
-                job.job_prefix = String.IsNullOrEmpty(ddlJobNumber.SelectedValue)? 0: Convert.ToInt32(ddlJobNumber.SelectedValue);
+                job.job_prefix = String.IsNullOrEmpty(ddlJobNumber.SelectedValue) ? 0 : Convert.ToInt32(ddlJobNumber.SelectedValue);
                 job.date_of_receive = String.IsNullOrEmpty(txtDate_of_receive.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDate_of_receive.Text);
-                job.s_pore_ref_no = txtS_pore_ref_no.Text;
+                //job.s_pore_ref_no = txtS_pore_ref_no.Text;
                 job.spec_ref_rev_no = txtSpecRefRevNo.Text;
                 //job.customer_po_ref = string.Empty;//invoice
 
@@ -52,6 +52,7 @@ namespace ALS.ALSI.Web.view.request
                 job.status_personel_and_workload = rdTest_toolYes.Checked ? "Y" : "N";
                 job.status_test_tool = rdTest_toolYes.Checked ? "Y" : "N";
                 job.status_test_method = rdTest_methodYes.Checked ? "Y" : "N";
+
 
 
 
@@ -144,6 +145,7 @@ namespace ALS.ALSI.Web.view.request
             SearchJobRequest prvPage = Page.PreviousPage as SearchJobRequest;
             this.CommandName = (prvPage == null) ? this.CommandName : prvPage.CommandName;
             this.JobID = (prvPage == null) ? this.JobID : prvPage.JobID;
+            this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
 
             if (!Page.IsPostBack)
@@ -189,7 +191,10 @@ namespace ALS.ALSI.Web.view.request
             ddlAddress.Items.Clear();
             ddlAddress.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
-
+            ddlStatus.Items.Clear();
+            ddlStatus.DataSource = new m_status().SelectByMainStatus();
+            ddlStatus.DataBind();
+            ddlStatus.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
 
             switch (CommandName)
@@ -207,7 +212,7 @@ namespace ALS.ALSI.Web.view.request
                     //txtCompany_name_to_state_in_report.Attributes["readonly"] = "readonly";
                     txtJob_number.Enabled = true;
                     txtDate_of_receive.Enabled = true;
-                    txtS_pore_ref_no.Enabled = true;
+                    //txtS_pore_ref_no.Enabled = true;
                     txtSpecRefRevNo.Enabled = true;
                     txtCustomer_ref_no.Enabled = true;
                     rdSample_enoughNo.Enabled = true;
@@ -251,7 +256,7 @@ namespace ALS.ALSI.Web.view.request
                     txtCompany_name_to_state_in_report.Attributes["readonly"] = "readonly";
                     txtJob_number.Attributes["readonly"] = "readonly";
                     txtDate_of_receive.Attributes["readonly"] = "readonly";
-                    txtS_pore_ref_no.Attributes["readonly"] = "readonly";
+                    //txtS_pore_ref_no.Attributes["readonly"] = "readonly";
                     txtSpecRefRevNo.Attributes["readonly"] = "readonly";
                     txtCustomer_ref_no.Attributes["readonly"] = "readonly";
                     rdSample_enoughNo.Attributes["readonly"] = "readonly";
@@ -297,7 +302,7 @@ namespace ALS.ALSI.Web.view.request
                 {
                     txtDepartment.Text = contactPerson.department;
                     txtEmail.Text = contactPerson.email;
-                    
+
                 }
             }
             //
@@ -307,7 +312,7 @@ namespace ALS.ALSI.Web.view.request
             {
                 ddlAddress.DataSource = litAddress;
                 ddlAddress.DataBind();
-                if (job.customer_address_id != null && job.customer_address_id>0)
+                if (job.customer_address_id != null && job.customer_address_id > 0)
                 {
                     m_customer_address addr = new m_customer_address().SelectByID(job.customer_address_id.Value);
                     if (addr != null)
@@ -345,7 +350,7 @@ namespace ALS.ALSI.Web.view.request
 
             txtDate_of_receive.Text = Convert.ToDateTime(job.date_of_receive).ToString("dd/MM/yyyy");
 
-            txtS_pore_ref_no.Text = job.s_pore_ref_no;
+            //txtS_pore_ref_no.Text = job.s_pore_ref_no;
             txtSpecRefRevNo.Text = job.spec_ref_rev_no;
             txtCustomer_ref_no.Text = job.customer_ref_no;
 
@@ -359,12 +364,14 @@ namespace ALS.ALSI.Web.view.request
 
 
             this.listSample = job_sample.FindAllByJobID(job.ID);
+            this.listSample = (this.CommandName == CommandNameEnum.Edit) ? this.listSample.Where(x => x.ID.Equals(this.SampleID)).ToList() : this.listSample;
             foreach (job_sample tmp in this.listSample)
             {
                 tmp.RowState = CommandNameEnum.Edit;
             }
 
-
+            ddlStatus.SelectedValue = listSample[0].job_status.ToString();
+            ddlStatus.Enabled = (this.CommandName == CommandNameEnum.Edit);
             gvSample.DataSource = listSample;
             gvSample.DataBind();
 
@@ -520,6 +527,14 @@ namespace ALS.ALSI.Web.view.request
                     objJobInfo.Insert();
                     break;
                 case CommandNameEnum.Edit:
+                    foreach (job_sample s in this.listSample)
+                    {
+                        s.job_status = Convert.ToInt16(ddlStatus.SelectedValue);
+                        s.sample_prefix = ddlJobNumber.SelectedItem.Text;
+                        s.update_by = userLogin.id;
+                        s.update_date = DateTime.Now;
+                    }
+
                     objJobInfo.Update();
                     break;
             }
@@ -572,8 +587,16 @@ namespace ALS.ALSI.Web.view.request
 
                         jobSample.job_role = userLogin.role_id;
                         jobSample.status_completion_scheduled = Convert.ToInt32(ddlCompletionScheduled.SelectedValue);
-
+                        //jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
+                        jobSample.update_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
+                        jobSample.update_by = userLogin.id;
+                        jobSample.is_hold = "0";//0=Unhold
+                        jobSample.part_no = txtPartNo.Text;
+                        jobSample.part_name = txtPartName.Text;
+                        jobSample.lot_no = txtLotNo.Text;
+                        jobSample.other_ref_no = txtOtherRefNo.Text;
                         #region "Special Flow"
+
                         /*
                         *ELP:       Login(convert template , select spec) > Chemist testing > Sr. chemist checking > Admin(Word) > Lab Manager > Admin (Upload file PDF)
                         ELS:       	Login(convert template(Ad hoc template)) >Chemist testing(Upload file) > Sr. chemist checking
@@ -582,17 +605,29 @@ namespace ALS.ALSI.Web.view.request
                         GRP:       	Login > Admin(Upload file PDF)
                         ELWA :    	Login > Chemist testing(Upload file) > Sr. chemist checking > Admin(Word) > Lab Manager > Admin (Upload file PDF)
                          * */
+
                         if (!String.IsNullOrEmpty(ddlJobNumber.SelectedValue))
                         {
                             switch (ddlJobNumber.SelectedItem.Text.ToUpper())
                             {
                                 case "ELS":
-                                    jobSample.template_id =1;
+                                    jobSample.template_id = 1;
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                                     break;
                                 case "ELN":
-                                    jobSample.template_id = 2;
+
+                                    if (tmp.ref_template_id != null)
+                                    {
+                                        jobSample.template_id = tmp.ref_template_id.Value;
+                                    }
+                                    else
+                                    {
+                                        jobSample.template_id = 2;
+                                    }
+
+
                                     jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+
                                     break;
                                 case "FA":
                                     jobSample.template_id = 3;
@@ -617,13 +652,25 @@ namespace ALS.ALSI.Web.view.request
                         {
                             if (objJobInfo != null)
                             {
-                                jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
+                                if (Constants.OTHER_REF_NOS.Contains(jobSample.other_ref_no))
+                                {
+                                    jobSample.due_date_lab = new DateTime(1, 1, 1);
+                                    jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date));
+                                }
+                                else
+                                {
+                                    jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
+                                    jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date));
+                                    jobSample.due_date_lab = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date));
+                                }
                             }
                         }
                         else
                         {
                             //logger.Debug("m_completion_scheduled is Empty!");
                         }
+                        jobSample.sample_prefix = ddlJobNumber.SelectedItem.Text;
+
                         listSample.Add(jobSample);
                     }
                     else
@@ -639,13 +686,13 @@ namespace ALS.ALSI.Web.view.request
             gvSample.DataBind();
             //Clear old value
 
-            txtDescriptoin.Text = string.Empty;
-            txtModel.Text = string.Empty;
-            txtSurfaceArea.Text = string.Empty;
-            txtRemark.Text = string.Empty;
-            rdUncertaintyNo.Checked = true;
-            ddlSecification_id.SelectedIndex = -1;
-            ddlCompletionScheduled.SelectedIndex = -1;
+            //txtDescriptoin.Text = string.Empty;
+            //txtModel.Text = string.Empty;
+            //txtSurfaceArea.Text = string.Empty;
+            //txtRemark.Text = string.Empty;
+            //rdUncertaintyNo.Checked = true;
+            //ddlSecification_id.SelectedIndex = -1;
+            //ddlCompletionScheduled.SelectedIndex = -1;
             lstTypeOfTest.ClearSelection();
 
         }
@@ -656,21 +703,59 @@ namespace ALS.ALSI.Web.view.request
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //int _step6owner = Convert.ToInt32(gv.DataKeys[e.Row.RowIndex][5]);
-                LinkButton btnDelete = (LinkButton)e.Row.FindControl("btnDelete");
-                LinkButton btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
-                Literal _litStatus_completion_scheduled = (Literal)e.Row.FindControl("litStatus_completion_scheduled");
-                if (btnDelete != null)
+                try
                 {
-                    m_completion_scheduled m_completion_scheduled = new m_completion_scheduled();
-                    m_completion_scheduled = m_completion_scheduled.SelectByID(Convert.ToInt32(_litStatus_completion_scheduled.Text));
-                    if (m_completion_scheduled != null)
+
+
+                    LinkButton btnDelete = (LinkButton)e.Row.FindControl("btnDelete");
+                    LinkButton btnEdit = (LinkButton)e.Row.FindControl("btnEdit");
+                    Literal litRefNo = (Literal)e.Row.FindControl("litRefNo");
+
+                    if (litRefNo != null)
                     {
-                        _litStatus_completion_scheduled.Text = m_completion_scheduled.name;
+                        //int amend_count = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][6]);
+                        //int retest_count = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][7]);
+
+                        //String am = (amend_count == 0) ? String.Empty : String.Format("AM{0}", amend_count);
+                        //String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
+
+                        //litRefNo.Text = String.Format("{0}{1}", litRefNo.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
+                        #region "Check Amend/Retest"
+                        int amCount = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][6]);
+                        int reCount = Convert.ToInt16(gvSample.DataKeys[e.Row.RowIndex][7]);
+                        String amendOrRetest = gvSample.DataKeys[e.Row.RowIndex][8] == null ? String.Empty : gvSample.DataKeys[e.Row.RowIndex][8].ToString();
+
+                        switch (amendOrRetest)
+                        {
+                            case "AM":
+                                litRefNo.Text = String.Format("{0}({1}{2})", litRefNo.Text, amendOrRetest, amCount);
+                                break;
+                            case "R":
+                                litRefNo.Text = String.Format("{0}({1}{2})", litRefNo.Text, amendOrRetest, reCount);
+                                break;
+                        }
+                        #endregion
+
                     }
-                    btnDelete.Visible = !(this.CommandName == CommandNameEnum.View);
-                    btnEdit.Visible = !(this.CommandName == CommandNameEnum.View);
+
+                    Literal _litStatus_completion_scheduled = (Literal)e.Row.FindControl("litStatus_completion_scheduled");
+                    if (btnDelete != null)
+                    {
+                        m_completion_scheduled m_completion_scheduled = new m_completion_scheduled();
+                        m_completion_scheduled = m_completion_scheduled.SelectByID(Convert.ToInt32(_litStatus_completion_scheduled.Text));
+                        if (m_completion_scheduled != null)
+                        {
+                            _litStatus_completion_scheduled.Text = m_completion_scheduled.name;
+                        }
+                        //btnDelete.Visible = (this.CommandName == CommandNameEnum.Add);
+                        btnEdit.Visible = !(this.CommandName == CommandNameEnum.View);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine();
+                }
+
             }
         }
 
@@ -706,10 +791,42 @@ namespace ALS.ALSI.Web.view.request
 
             String _no_of_report = gvSample.DataKeys[e.NewEditIndex].Values[3].ToString();
             String _uncertainty = gvSample.DataKeys[e.NewEditIndex].Values[4].ToString();
+
             String _status_completion_scheduled = gvSample.DataKeys[e.NewEditIndex].Values[5].ToString();
             DropDownList _ddlNoOfReport = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlNoOfReport");
             DropDownList _ddlUncertaint = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlUncertaint");
             DropDownList _ddlCompletionScheduled = (DropDownList)gvSample.Rows[e.NewEditIndex].FindControl("ddlCompletionScheduled");
+
+            //int amend_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[6] == null ? "0" : gvSample.DataKeys[e.NewEditIndex].Values[6].ToString());
+            //int retest_count = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex].Values[7] == null ? "0" : gvSample.DataKeys[e.NewEditIndex].Values[7].ToString());
+            //String am = (amend_count == 0) ? String.Empty : String.Format("AM{0}", amend_count);
+            //String r = (retest_count == 0) ? String.Empty : String.Format("R{0}", retest_count);
+
+            TextBox txtRefNo = (TextBox)gvSample.Rows[e.NewEditIndex].FindControl("txtRefNo");
+            //txtRefNo.Text = String.Format("{0}{1}", txtRefNo.Text, String.Format("{0}", String.IsNullOrEmpty(am + "" + r) ? String.Empty : "(" + am + "" + r + ")"));
+
+
+            #region "Check Amend/Retest"
+            //int amCount = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex][6]);
+            //int reCount = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex][7]);
+            String amendOrRetest = gvSample.DataKeys[e.NewEditIndex][8] == null ? String.Empty : gvSample.DataKeys[e.NewEditIndex][8].ToString();
+
+            //switch (amendOrRetest)
+            //{
+            //    case "AM":
+            //        txtRefNo.Text = String.Format("{0}({1}{2})", txtRefNo.Text.Split('(')[0], amendOrRetest, amCount);
+            //        break;
+            //    case "R":
+            //        txtRefNo.Text = String.Format("{0}({1}{2})", txtRefNo.Text.Split('(')[0], amendOrRetest, reCount);
+            //        break;
+            //}
+            #endregion
+
+
+
+            txtRefNo.Enabled = String.IsNullOrEmpty(amendOrRetest);
+
+
 
             _ddlNoOfReport.Items.Clear();
             for (int i = 1; i <= 5; i++)
@@ -734,7 +851,10 @@ namespace ALS.ALSI.Web.view.request
         protected void gvSample_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             String jobNumber = gvSample.DataKeys[e.RowIndex].Values[2].ToString();
+            int Id = Convert.ToInt32(gvSample.DataKeys[e.RowIndex].Values[0].ToString());
             TextBox _txtRefNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtRefNo");
+            TextBox _txtOtherRefNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtOtherRefNo");
+
             TextBox _txtDescriptoin = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtDescriptoin");
             TextBox _txtModel = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtModel");
             TextBox _txtSurfaceArea = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtSurfaceArea");
@@ -743,19 +863,31 @@ namespace ALS.ALSI.Web.view.request
             DropDownList _ddlUncertaint = (DropDownList)gvSample.Rows[e.RowIndex].FindControl("ddlUncertaint");
             DropDownList _ddlCompletionScheduled = (DropDownList)gvSample.Rows[e.RowIndex].FindControl("ddlCompletionScheduled");
 
-            job_sample jobSample = listSample.Find(x => x.job_number == jobNumber);
+            TextBox _txtPartNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtPartNo");
+            TextBox _txtPartName = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtPartName");
+            TextBox _txtLotNo = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txtLotNo");
+
+
+            job_sample jobSample = listSample.Find(x => x.ID == Id);
             if (jobSample != null)
             {
                 jobSample.job_id = objJobInfo.ID;
-                jobSample.job_number = _txtRefNo.Text;
+                //if (this.CommandName == CommandNameEnum.Add)
+                //{
+                    jobSample.job_number = _txtRefNo.Text;
+                //}
                 jobSample.description = _txtDescriptoin.Text;
                 jobSample.model = _txtModel.Text;
                 jobSample.surface_area = _txtSurfaceArea.Text;
                 jobSample.remarks = _txtRemark.Text;
-
+                jobSample.other_ref_no = _txtOtherRefNo.Text;
                 jobSample.no_of_report = Convert.ToInt16(_ddlNoOfReport.SelectedValue);
                 jobSample.uncertainty = _ddlUncertaint.SelectedValue;
                 jobSample.status_completion_scheduled = Convert.ToInt32(_ddlCompletionScheduled.SelectedValue);
+
+                jobSample.part_no = _txtPartNo.Text;
+                jobSample.part_name = _txtPartName.Text;
+                jobSample.lot_no = _txtLotNo.Text;
 
             }
             gvSample.EditIndex = -1;

@@ -247,8 +247,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>5.25639cm</Top>
-            <Left>0.0022cm</Left>
+            <Top>3.59835cm</Top>
+            <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>16.48138cm</Width>
             <Style>
@@ -867,7 +867,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>2.34708in</Top>
+            <Top>1.69431in</Top>
             <Height>0.66458in</Height>
             <Width>6.4896in</Width>
             <ZIndex>1</ZIndex>
@@ -933,7 +933,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>7.82601cm</Top>
+            <Top>6.16797cm</Top>
             <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>16.48137cm</Width>
@@ -1638,8 +1638,7 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>3.35874in</Top>
-            <Left>0.00087in</Left>
+            <Top>2.70597in</Top>
             <Height>0.63333in</Height>
             <Width>6.48873in</Width>
             <ZIndex>3</ZIndex>
@@ -2167,7 +2166,7 @@
             <PageBreak>
               <BreakLocation>Start</BreakLocation>
             </PageBreak>
-            <Top>6.47804in</Top>
+            <Top>6.32527in</Top>
             <Height>0.58333in</Height>
             <Width>6.48873in</Width>
             <ZIndex>4</ZIndex>
@@ -2204,7 +2203,17 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Analysis Table on Base</Value>
+                    <Value>Analysis Table on </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!tafdp.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
@@ -2220,8 +2229,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>15.74903cm</Top>
-            <Left>0.00221cm</Left>
+            <Top>15.36099cm</Top>
+            <Left>0cm</Left>
             <Height>0.52881cm</Height>
             <Width>16.48137cm</Width>
             <ZIndex>5</ZIndex>
@@ -2259,7 +2268,17 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Stage Mimic of  Base</Value>
+                    <Value>Stage Mimic of  </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Lucida Sans</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!tafdp.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Lucida Sans</FontFamily>
@@ -2275,7 +2294,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>10.31626cm</Top>
+            <Top>8.65822cm</Top>
             <Left>0cm</Left>
             <Height>1.11089cm</Height>
             <Width>16.48137cm</Width>
@@ -2294,10 +2313,10 @@
             <Source>Embedded</Source>
             <Value>=Parameters!img01Url.Value</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>4.55443in</Top>
-            <Left>0.00087in</Left>
-            <Height>1.07653in</Height>
-            <Width>1.35417in</Width>
+            <Top>3.91555in</Top>
+            <Left>0.17174in</Left>
+            <Height>1.56264in</Height>
+            <Width>2.34547in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -2343,8 +2362,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>14.47903cm</Top>
-            <Left>0.00221cm</Left>
+            <Top>14.09099cm</Top>
+            <Left>0cm</Left>
             <Height>1.09361cm</Height>
             <Width>16.47916cm</Width>
             <ZIndex>8</ZIndex>
@@ -2360,10 +2379,9 @@
           </Textbox>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>7.13082in</Top>
-            <Left>0.06988in</Left>
+            <Top>6.97805in</Top>
             <Height>1.04167in</Height>
-            <Width>6.41885in</Width>
+            <Width>6.4896in</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -2371,10 +2389,41 @@
               </Border>
             </Style>
           </Subreport>
-          <Subreport Name="Subreport2">
-            <ReportName>ReportHeader</ReportName>
-            <Left>0.00087in</Left>
-            <Height>2in</Height>
+          <Subreport Name="reportHeader">
+            <ReportName>reportHeader</ReportName>
+            <Parameters>
+              <Parameter Name="CustomerPoNo">
+                <Value>=Parameters!CustomerPoNo.Value</Value>
+              </Parameter>
+              <Parameter Name="AlsThailandRefNo">
+                <Value>=Parameters!AlsThailandRefNo.Value</Value>
+              </Parameter>
+              <Parameter Name="Date">
+                <Value>=Parameters!Date.Value</Value>
+              </Parameter>
+              <Parameter Name="Company">
+                <Value>=Parameters!Company.Value</Value>
+              </Parameter>
+              <Parameter Name="Company_addr">
+                <Value>=Parameters!Company_addr.Value</Value>
+              </Parameter>
+              <Parameter Name="DateSampleReceived">
+                <Value>=Parameters!DateSampleReceived.Value</Value>
+              </Parameter>
+              <Parameter Name="DateAnalyzed">
+                <Value>=Parameters!DateAnalyzed.Value</Value>
+              </Parameter>
+              <Parameter Name="DateTestCompleted">
+                <Value>=Parameters!DateTestCompleted.Value</Value>
+              </Parameter>
+              <Parameter Name="SampleDescription">
+                <Value>=Parameters!SampleDescription.Value</Value>
+              </Parameter>
+              <Parameter Name="AlsSingaporeRefNo">
+                <Value>=Parameters!AlsSingaporeRefNo.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Height>1.34069in</Height>
             <Width>6.48873in</Width>
             <ZIndex>10</ZIndex>
             <Style>
@@ -2384,7 +2433,7 @@
             </Style>
           </Subreport>
         </ReportItems>
-        <Height>8.2417in</Height>
+        <Height>8.01972in</Height>
         <Style />
       </Body>
       <Width>6.4896in</Width>
@@ -2464,11 +2513,21 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="AlsSingaporeRefNo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tafdp">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>7</NumberOfRows>
+      <NumberOfRows>8</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -2534,6 +2593,16 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>Company_addr</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>AlsSingaporeRefNo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>tafdp</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

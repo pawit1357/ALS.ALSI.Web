@@ -30,7 +30,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public IEnumerable<m_status> SelectByMainStatus()
         {
-            return _repository.GetAll().Where(x=>x.status_group_id == 1).ToList();
+            return _repository.GetAll().Where(x=>x.status_group_id == 1  && x.status.Equals("A")).ToList();
         }
 
         public m_status SelectByID(int _id)

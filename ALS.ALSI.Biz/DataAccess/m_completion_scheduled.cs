@@ -17,5 +17,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public int ID { get; set; }
         public string name { get; set; }
         public Nullable<int> value { get; set; }
+        public Nullable<int> lab_due_date { get; set; }
+        public Nullable<int> customer_due_date { get; set; }
     }
 }

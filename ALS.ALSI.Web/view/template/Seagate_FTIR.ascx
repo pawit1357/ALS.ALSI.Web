@@ -186,8 +186,47 @@
                                     </div>
                                 </div>
                                 <br />
+                                <asp:Panel ID="pImage" runat="server">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h6>Image:</h6>
+                                        <!-- IMG -->
+                                        <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
+                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Literal ID="litSeq" runat="server" Text='<%# Eval("seq")%>' />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtSeq" runat="server" Text='<%# Eval("seq")%>' MaxLength="1"></asp:TextBox>
+                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" Enabled="true" TargetControlID="txtSeq" />
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
 
-                                &nbsp;<h6>
+                                                <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Right">
+                                                    <ItemTemplate>
+                                                        <asp:Image ID="litSemImageat250x" runat="server" ImageUrl='<%# Eval("img_path")%>' Width="120" Height="120" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Delete">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                            <EmptyDataTemplate>
+                                                <div class="data-not-found">
+                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                </div>
+                                            </EmptyDataTemplate>
+                                        </asp:GridView>
+                                        <!-- IMG -->
+                                    </div>
+                                </div>
+                              </asp:Panel>
+                                    &nbsp;<h6>
                                     <%--=CONCATENATE("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is ", ROUND('working-FTIR'!$B$24,7),"--%> 
 Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is
                     <asp:Label ID="lbA42" runat="server" Text=""></asp:Label>
@@ -198,14 +237,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                     </asp:Panel>
                     <asp:Panel ID="pLoadFile" runat="server">
 
-                        <%--                <div class="form-group">
-                            <label class="control-label col-md-3">ทศนิยม</label>
-                            <div class="col-md-9">
-                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
-                                </div>
-                            </div>
-                        </div>--%>
+
                         <div class="form-group">
                             <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -378,7 +410,25 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                 </div>
                                 <div class="portlet-body">
 
+                                    <asp:Panel ID="pAnalyzeDate" runat="server">
 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date Analyzed:<span class="required">
+										* </span>
+                                            </label>
+                                            <div class="col-md-6">
+                                                <div id='datepicker' class="input-group date datepicker col-md-6" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2"
+                                                    style="max-width: 220px">
+                                                    <asp:TextBox ID="txtDateAnalyzed" runat="server" CssClass="form-control" size="16" type="text" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                                ป้อนวันที่ในรูปแบบ dd/MM/yyyy ( วัน/เดือน/ปี(ค.ศ.) ) ตัวอย่าง 18/02/2018
+
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
                                     <asp:Panel ID="pSpecification" runat="server">
                                         <%--     <div class="row">
                                             <div class="col-md-6">--%>
@@ -493,6 +543,25 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             กำหนดทศนิยม</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
+                                    <h1>CoverPage</h1>
+                                    <table class="table table-striped">
+
+                                        <tr>
+                                            <th>(Note)silicon oil</th>
+                                            <th>
+                                                <asp:TextBox ID="txtDecimal10" runat="server" TextMode="Number" CssClass="form-control" Text="2" OnTextChanged="txtDecimal10_TextChanged" AutoPostBack="true"></asp:TextBox></td>
+
+
+
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+
+
+
+                                    </table>
                                     <h1>FTIR</h1>
                                     <table class="table table-striped">
                                         <tr>
@@ -570,6 +639,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
 
 
                                     </table>
+
                                 </div>
                                 <div class="modal-footer">
                                     <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
@@ -639,11 +709,29 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
         </Triggers>
     </asp:UpdatePanel>
 </form>
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-<script>
-    jQuery(document).ready(function () {
+<script type="text/javascript">
+    //On Page Load.
+    $(function () {
+        SetDatePicker();
     });
+
+    //On UpdatePanel Refresh.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (prm != null) {
+        prm.add_endRequest(function (sender, e) {
+            if (sender._postBackSettings.panelsToUpdate != null) {
+                SetDatePicker();
+                $(".datepicker-orient-bottom").hide();
+            }
+        });
+    };
+
+    function SetDatePicker() {
+        $("#datepicker").datepicker();
+        if ($("#txtDateAnalyzed").val() == "") {
+            var dateNow = new Date();
+            $('#datepicker').datepicker("setDate", dateNow);
+        }
+    }
 </script>
-<!-- END JAVASCRIPTS -->
