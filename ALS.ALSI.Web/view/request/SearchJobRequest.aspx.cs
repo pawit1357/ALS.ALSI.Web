@@ -511,7 +511,7 @@ namespace ALS.ALSI.Web.view.request
 
                     btnChangeSrCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN) && !isHold;
 
-               
+
 
                     switch (userRole)
                     {
@@ -764,9 +764,6 @@ namespace ALS.ALSI.Web.view.request
 
         }
 
-
-
-
         protected void ExportToExcel()
         {
             RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
@@ -796,13 +793,13 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Type of test", typeof(string));
                 dt.Columns.Add("Modified Date", typeof(string));
                 dt.Columns.Add("Update By", typeof(string));
+                dt.Columns.Add("Chemist Complete Date", typeof(string));
+                dt.Columns.Add("Data Group", typeof(string));
 
                 String conSQL = Configurations.MySQLCon;
                 using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
                 {
                     conn.Open();
-
-
                     String sql = "SELECT" +
                                 "`Extent2`.`sample_prefix` AS `Job Type`," +
                                 "`Extent7`.`name` AS `Status`," +
@@ -816,21 +813,16 @@ namespace ALS.ALSI.Web.view.request
                         case RoleEnum.CHEMIST:
                         case RoleEnum.SR_CHEMIST:
                         case RoleEnum.LABMANAGER:
-                            //litDueDate.Text = due_date_lab.ToString("dd MMM yyyy");
                             sql += "DATE_FORMAT((case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end),'%e %b %Y') AS `Due Date`,";
-
                             break;
                         case RoleEnum.ADMIN:
                         case RoleEnum.MARKETING:
                         case RoleEnum.BUSINESS_MANAGER:
-                            //litDueDate.Text = due_date_customer.ToString("dd MMM yyyy");
                             sql += "DATE_FORMAT((case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_customer` end),'%e %b %Y') AS `Due Date`,";
 
                             break;
                         default:
-                            //litDueDate.Text = due_date_lab.ToString("dd MMM yyyy");
                             sql += "DATE_FORMAT((case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end),'%e %b %Y') AS `Due Date`,";
-
                             break;
                     }
                     sql += "`Extent2`.`job_number` AS `ALS Ref`," +
@@ -846,8 +838,9 @@ namespace ALS.ALSI.Web.view.request
                      "`Extent3`.`name` AS `Specification`," +
                      "`Extent4`.`name` AS `Type of test`," +
                      "DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
-                     "`Extent8`.`username` AS `Update By`" +
-
+                     "`Extent8`.`username` AS `Update By`," +
+                     "DATE_FORMAT(`Extent2`.`date_chemist_complete`,'%d %b %Y %H:%i')  AS `Chemist Complete Date`," +
+                     "`Extent4`.`data_group` AS `Data Group`" +
                      " FROM `job_info` AS `Extent1`" +
                      " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
                      " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
@@ -858,20 +851,12 @@ namespace ALS.ALSI.Web.view.request
                      " INNER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
                      " INNER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
 
-
-
-
-
-
-
                     StringBuilder sqlCri = new StringBuilder();
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
                         sqlCri.Append(" `Extent4`.`data_group` = '" + ddlTypeOfTest.SelectedValue + "'");
                         sqlCri.Append(" AND ");
                     }
-
-
                     if (Convert.ToInt16(ddlCompany.SelectedValue) > 0)
                     {
                         if (!String.IsNullOrEmpty(ddlCompany.SelectedItem.Text))
@@ -880,35 +865,16 @@ namespace ALS.ALSI.Web.view.request
                             sqlCri.Append(" AND ");
                         }
                     }
-
-
-                    //if (!String.IsNullOrEmpty(ddlCompany.SelectedValue))
-                    //{
-                    //    if (Convert.ToInt16(ddlCompany.SelectedValue) > 0)
-                    //    {
-                    //        sqlCri.Append(" `Extent1`.`customer_id` = " + Convert.ToInt16(ddlCompany.SelectedValue));
-                    //        sqlCri.Append(" AND ");
-                    //    }
-
-                    //}
-
                     if (!String.IsNullOrEmpty(ddlSpecification.SelectedValue))
                     {
                         sqlCri.Append(" `Extent3`.`id` = " + Convert.ToInt16(ddlSpecification.SelectedValue));
                         sqlCri.Append(" AND ");
                     }
-
-                    //if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
-                    //{
-                    //    sqlCri.Append(" `Extent4`.`id` = " + Convert.ToInt16(ddlTypeOfTest.SelectedValue));
-                    //    sqlCri.Append(" AND ");
-                    //}
                     if (!String.IsNullOrEmpty(ddlJobStatus.SelectedValue))
                     {
                         sqlCri.Append(" `Extent7`.`id` = " + Convert.ToInt16(ddlJobStatus.SelectedValue));
                         sqlCri.Append(" AND ");
                     }
-
                     if (!String.IsNullOrEmpty(txtREfNo.Text))
                     {
                         sqlCri.Append(" `Extent2`.`job_number` = '" + txtREfNo.Text + "'");
@@ -924,9 +890,7 @@ namespace ALS.ALSI.Web.view.request
                     {
                         sqlCri.Append(" `Extent1`.`sample_invoice` = '" + txtInvoice.Text + "'");
                         sqlCri.Append(" AND ");
-
                     }
-
                     DateTime receive_report_from = String.IsNullOrEmpty(txtReceivedReportFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportFrom.Text);
                     DateTime receive_report_to = String.IsNullOrEmpty(txtReceivedReportTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportTo.Text);
                     if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
@@ -934,25 +898,20 @@ namespace ALS.ALSI.Web.view.request
                         sqlCri.Append(" `Extent1`.`date_of_receive` between'" + receive_report_from.ToString("yyyy-MM-dd") + "' AND '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
                         sqlCri.Append(" AND ");
                     }
-
                     DateTime duedate_from = String.IsNullOrEmpty(txtDuedateFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateFrom.Text);
                     DateTime duedate_to = String.IsNullOrEmpty(txtDuedateTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateTo.Text);
                     if (duedate_from != DateTime.MinValue && duedate_to != DateTime.MinValue)
                     {
                         sqlCri.Append(" `Extent2`.`due_date` between '" + duedate_from.ToString("yyyy-MM-dd") + "' AND '" + duedate_to.ToString("yyyy-MM-dd") + "'");
                         sqlCri.Append(" AND ");
-
                     }
-
                     DateTime report_to_customer_from = String.IsNullOrEmpty(txtReportToCustomerFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerFrom.Text);
                     DateTime report_to_customer_to = String.IsNullOrEmpty(txtReportToCustomerTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerTo.Text);
                     if (report_to_customer_from != DateTime.MinValue && report_to_customer_to != DateTime.MinValue)
                     {
                         sqlCri.Append(" `Extent2`.`date_admin_sent_to_cus` between '" + report_to_customer_from.ToString("yyyy-MM-dd") + "' AND '" + report_to_customer_to.ToString("yyyy-MM-dd") + "'");
                         sqlCri.Append(" AND ");
-
                     }
-
                     sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString().Substring(0, sqlCri.ToString().Length - 5) : "";
                     sql += " ORDER BY `Extent2`.`ID` DESC";
 
@@ -962,9 +921,6 @@ namespace ALS.ALSI.Web.view.request
                     dt.Load(sdr);
                     Console.WriteLine();
                 }
-
-                job_info _jobInfo = new job_info();
-
                 wb.Worksheets.Add(dt);
 
                 Response.Clear();
@@ -1013,7 +969,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation || this.isDuedateGroupOperation|| this.isInvoiceGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
                     }

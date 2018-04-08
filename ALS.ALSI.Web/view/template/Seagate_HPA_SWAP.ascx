@@ -39,7 +39,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <asp:Label ID="lbA20" runat="server" Text="Hard Particle Analysis(Swab Method)"></asp:Label>
+                                                <asp:Label ID="lbA20" runat="server" Text="Hard Particle Analysis"></asp:Label>
                                                 <asp:Label ID="lbA20_1" runat="server" Text="(Swab Method)"></asp:Label>
 
                                             </td>

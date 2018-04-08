@@ -807,24 +807,24 @@ namespace ALS.ALSI.Web.view.request
 
 
             #region "Check Amend/Retest"
-            int amCount = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex][6]);
-            int reCount = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex][7]);
+            //int amCount = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex][6]);
+            //int reCount = Convert.ToInt16(gvSample.DataKeys[e.NewEditIndex][7]);
             String amendOrRetest = gvSample.DataKeys[e.NewEditIndex][8] == null ? String.Empty : gvSample.DataKeys[e.NewEditIndex][8].ToString();
 
-            switch (amendOrRetest)
-            {
-                case "AM":
-                    txtRefNo.Text = String.Format("{0}({1}{2})", txtRefNo.Text, amendOrRetest, amCount);
-                    break;
-                case "R":
-                    txtRefNo.Text = String.Format("{0}({1}{2})", txtRefNo.Text, amendOrRetest, reCount);
-                    break;
-            }
+            //switch (amendOrRetest)
+            //{
+            //    case "AM":
+            //        txtRefNo.Text = String.Format("{0}({1}{2})", txtRefNo.Text.Split('(')[0], amendOrRetest, amCount);
+            //        break;
+            //    case "R":
+            //        txtRefNo.Text = String.Format("{0}({1}{2})", txtRefNo.Text.Split('(')[0], amendOrRetest, reCount);
+            //        break;
+            //}
             #endregion
 
 
 
-            //txtRefNo.Enabled = (this.CommandName == CommandNameEnum.Add);// (amend_count == 0 && retest_count == 0);
+            txtRefNo.Enabled = String.IsNullOrEmpty(amendOrRetest);
 
 
 

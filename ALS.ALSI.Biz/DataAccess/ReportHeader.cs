@@ -7,9 +7,6 @@ namespace ALS.ALSI.Biz.ReportObjects
 {
     public class ReportHeader
     {
-
-
-
         public String cusRefNo { get; set; }
         public String alsRefNo { get; set; }
         public DateTime cur_date { get; set; }
@@ -22,7 +19,6 @@ namespace ALS.ALSI.Biz.ReportObjects
         public String model { get; set; }
         public String surface_areas { get; set; }
         public String remark { get; set; }
-
 
         #region "Custom"
         public IEnumerable getReportHeader(int sample_id)
@@ -113,28 +109,6 @@ namespace ALS.ALSI.Biz.ReportObjects
             }
             return rpt;
         }
-
         #endregion
-
-
-
-        //select 
-        //i.customer_po_ref cusRefNo,
-        //s.job_number alsRefNo,
-        //i.date_of_receive cur_date,
-        //m.company_name addr1,
-        //m.address addr2,
-        //i.date_of_receive dateOfDampleRecieve,
-        //i.date_of_request dateOfAnalyze,
-        //s.due_date dateOfTestComplete,
-        //s.description,
-        //s.model,
-        //s.surface_area,
-        //s.remarks
-        //from job_info i 
-        //left join job_sample s on i.ID = s.job_id
-        //left join m_customer m on i.customer_id = m.ID
-        //where s.ID =12
-
     }
 }

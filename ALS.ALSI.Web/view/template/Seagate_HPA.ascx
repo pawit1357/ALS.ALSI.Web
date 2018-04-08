@@ -429,9 +429,9 @@
                                         </tr>
                                         <tr runat="server" id="tr9">
                                             <td>Sample</td>
-                                            <td colspan="2">1</td>
-                                            <td colspan="2">2</td>
-                                            <td colspan="2">3</td>
+                                            <td colspan="2" style="text-align:center">1</td>
+                                            <td colspan="2" style="text-align:center">2</td>
+                                            <td colspan="2" style="text-align:center">3</td>
                                         </tr>
                                         <tr runat="server" id="tr10">
                                             <td>No. of Particles ≥ 0.3µm<br />
@@ -567,9 +567,9 @@
                                         </tr>
                                         <tr runat="server" id="tr20">
                                             <td>Sample</td>
-                                            <td colspan="2">1</td>
-                                            <td colspan="2">2</td>
-                                            <td colspan="2">3</td>
+                                            <td colspan="2" style="text-align:center">1</td>
+                                            <td colspan="2" style="text-align:center">2</td>
+                                            <td colspan="2" style="text-align:center">3</td>
                                         </tr>
                                         <tr runat="server" id="tr21">
                                             <td>No. of Particles ≥ 0.6µm<br />
