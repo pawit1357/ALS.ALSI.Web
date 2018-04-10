@@ -113,7 +113,7 @@ namespace ALS.ALSI.Web.view.request
 
                 tmp.report_to_customer_from = String.IsNullOrEmpty(txtReportToCustomerFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerFrom.Text);
                 tmp.report_to_customer_to = String.IsNullOrEmpty(txtReportToCustomerTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerTo.Text);
-
+                tmp.userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 return tmp;
             }
         }
@@ -902,7 +902,23 @@ namespace ALS.ALSI.Web.view.request
                     DateTime duedate_to = String.IsNullOrEmpty(txtDuedateTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateTo.Text);
                     if (duedate_from != DateTime.MinValue && duedate_to != DateTime.MinValue)
                     {
-                        sqlCri.Append(" `Extent2`.`due_date` between '" + duedate_from.ToString("yyyy-MM-dd") + "' AND '" + duedate_to.ToString("yyyy-MM-dd") + "'");
+                        switch (userRole)
+                        {
+                            case RoleEnum.LOGIN:
+                            case RoleEnum.CHEMIST:
+                            case RoleEnum.SR_CHEMIST:
+                            case RoleEnum.LABMANAGER:
+                                sqlCri.Append(" `Extent2`.`due_date_lab` between '" + duedate_from.ToString("yyyy-MM-dd") + "' AND '" + duedate_to.ToString("yyyy-MM-dd") + "'");
+                                break;
+                            case RoleEnum.ADMIN:
+                            case RoleEnum.MARKETING:
+                            case RoleEnum.BUSINESS_MANAGER:
+                                sqlCri.Append(" `Extent2`.`due_date_customer` between '" + duedate_from.ToString("yyyy-MM-dd") + "' AND '" + duedate_to.ToString("yyyy-MM-dd") + "'");
+                                break;
+                            default:
+                                sqlCri.Append(" `Extent2`.`due_date_lab` between '" + duedate_from.ToString("yyyy-MM-dd") + "' AND '" + duedate_to.ToString("yyyy-MM-dd") + "'");
+                                break;
+                        }
                         sqlCri.Append(" AND ");
                     }
                     DateTime report_to_customer_from = String.IsNullOrEmpty(txtReportToCustomerFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerFrom.Text);

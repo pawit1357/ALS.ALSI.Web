@@ -82,6 +82,7 @@ namespace ALS.ALSI.Biz.DataAccess
                 _repository.Add(tmp);
             }
         }
+
         public void UpdateList(List<template_seagate_hpa_coverpage> _lists)
         {
             foreach (template_seagate_hpa_coverpage tmp in _lists)
@@ -99,37 +100,16 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public static void DeleteBySampleID(int _sampleID)
         {
-            List<template_seagate_hpa_coverpage> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
-            foreach (template_seagate_hpa_coverpage tmp in lists)
-            {
-                _repository.Delete(tmp);
-            }
+            MaintenanceBiz.ExecuteCommand("delete from template_seagate_hpa_coverpage where sample_id="+ _sampleID);
+
+            //List<template_seagate_hpa_coverpage> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
+            //foreach (template_seagate_hpa_coverpage tmp in lists)
+            //{
+            //    _repository.Delete(tmp);
+            //}
+
         }
 
-        //public void InsertList(List<template_seagate_hpa_coverpage> _lists)
-        //{
-        //    foreach (template_seagate_hpa_coverpage tmp in _lists)
-        //    {
-        //        switch (tmp.RowState)
-        //        {
-        //            case CommandNameEnum.Add:
-        //                _repository.Add(tmp);
-        //                break;
-        //            case CommandNameEnum.Edit:
-        //                template_seagate_hpa_coverpage existing = _repository.Find(x => x.ID == tmp.ID).FirstOrDefault();
-        //                _repository.Edit(existing, tmp);
-        //                break;
-        //        }
-
-        //    }
-        //}
-        //public void UpdateList(List<template_seagate_hpa_coverpage> _lists)
-        //{
-        //    foreach (template_seagate_hpa_coverpage tmp in _lists)
-        //    {
-        //        tmp.Update();
-        //    }
-        //}
         public static List<template_seagate_hpa_coverpage> FindAllBySampleID(int _sampleID)
         {
             return _repository.GetAll().Where(x => x.sample_id == _sampleID).ToList();

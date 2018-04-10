@@ -951,52 +951,52 @@ namespace ALS.ALSI.Web.view.template
             List<template_wd_dhs_coverpage> ds2 = this.reportCovers.ToList();
 
             //List<template_wd_dhs_coverpage> ds3 = this.reportCovers.ToList();
-            //ds2.AddRange(ds3.GetRange(0, 50));// = ds3.GetRange(0, 71);
+            //ds2 = ds3.GetRange(0, 38);
 
-            if (ds2.Count > 0 && ds2.Count <= 15)
+            if (ds2.Count > 0 && ds2.Count <= 14)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count-15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, ds2.Count-14).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds2.GetRange(0, 14).ToDataTable())); // Add datasource here
             }
-            if (ds2.Count > 15 && ds2.Count <= 46)
+            if (ds2.Count > 14 && ds2.Count <= 45)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, ds2.Count - 15).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 14).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(14, ds2.Count - 14).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
 
             }
-            if (ds2.Count > 46 && ds2.Count <= 77)
+            if (ds2.Count > 45 && ds2.Count <= 76)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, 31).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(46, ds2.Count-46).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 14).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(14, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(45, ds2.Count-45).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
             }
-            if (ds2.Count > 77 && ds2.Count <=108)
+            if (ds2.Count > 76 && ds2.Count <=107)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, 31).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(46, 31).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(77, ds2.Count - 77).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 14).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(14, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(45, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(76, ds2.Count - 76).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
             }
-            if (ds2.Count > 108)
+            if (ds2.Count > 107)
             {
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 15).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(15, 31).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(46, 31).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(77, 31).ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds2.GetRange(108, ds2.Count - 108).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", ds2.GetRange(0, 14).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ds2.GetRange(14, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", ds2.GetRange(45, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds2.GetRange(76, 31).ToDataTable())); // Add datasource here
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds2.GetRange(107, ds2.Count - 107).ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", new DataTable())); // Add datasource here
             }
 

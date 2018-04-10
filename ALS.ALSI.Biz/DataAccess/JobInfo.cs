@@ -15,6 +15,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public String customerText { get; set; }
         public String preFixText { get; set; }
 
+        public RoleEnum userRole { get; set; }
+
         private static IRepository<job_info> _repository
         {
             get { return ObjectFactory.GetInstance<IRepository<job_info>>(); }
@@ -118,6 +120,7 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             using (ALSIEntities ctx = new ALSIEntities())
             {
+
                 //Status 
                 //    Received.	 Report x
                 //    Sent to Customer  x
@@ -277,7 +280,24 @@ namespace ALS.ALSI.Biz.DataAccess
                 }
                 if (this.duedate_from != DateTime.MinValue && this.duedate_to != DateTime.MinValue)
                 {
-                    result = result.Where(x => x.due_date >= this.duedate_from && x.due_date <= this.duedate_to);
+                    //
+                    switch (userRole)
+                    {
+                        case RoleEnum.LOGIN:
+                        case RoleEnum.CHEMIST:
+                        case RoleEnum.SR_CHEMIST:
+                        case RoleEnum.LABMANAGER:
+                            result = result.Where(x => x.due_date_lab >= this.duedate_from && x.due_date_lab <= this.duedate_to);
+                            break;
+                        case RoleEnum.ADMIN:
+                        case RoleEnum.MARKETING:
+                        case RoleEnum.BUSINESS_MANAGER:
+                            result = result.Where(x => x.due_date_customer >= this.duedate_from && x.due_date_customer <= this.duedate_to);
+                            break;
+                        default:
+                            result = result.Where(x => x.due_date_lab >= this.duedate_from && x.due_date_lab <= this.duedate_to);
+                            break;
+                    }
                 }
                 if (this.report_to_customer_from != DateTime.MinValue && this.report_to_customer_to != DateTime.MinValue)
                 {

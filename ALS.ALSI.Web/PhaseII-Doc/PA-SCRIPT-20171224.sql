@@ -54,6 +54,7 @@ complete
 -- CLEAR- ELP-3158-DB ---WD
 -- CLEAR- ELP-2717-DB ---WD
 -- CLEAR- ELP-2614-DB ---WD
+
 -----------------------------------
 Ftir , dhs ,gcms , hpa, ic ทั้ง wd seagate ค่ะ แต่ตัว hpa ตำแหน่งที่รูปจะอยู่มันจะไม่เหมือนเพื่อน
 -----------------------------------
@@ -105,7 +106,6 @@ UPDATE `alsi`.`m_type_of_test` SET `ref_template_id`='907' WHERE `ID`='236';
 -- INSERT INTO `alsi`.`m_specification` (`ID`, `name`, `status`) VALUES ('27', 'PA(REPORT)', 'A');
 -- INSERT INTO `alsi`.`m_type_of_test` (`ID`, `specification_id`, `prefix`, `name`, `parent`, `status`, `data_group`) VALUES ('219', '27', 'PAB', 'PA_REPORT1', '1', 'A', 'PA');
 -- INSERT INTO `alsi`.`m_type_of_test` (`ID`, `specification_id`, `prefix`, `name`, `parent`, `status`, `data_group`) VALUES ('220', '27', 'PAB', 'PA_REPORT2', '1', 'A', 'PA');
-
 
 ----------------------- 2018-3-13 ---------------------------
 

@@ -1545,12 +1545,16 @@ namespace ALS.ALSI.Web.view.template
             #endregion
 
             #region  "Analysis Details"
-            lbC144.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB3.Text) ? "0" : txtB3.Text));
-            lbC145.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB4.Text) ? "0" : txtB4.Text));
-            lbC146.Text = String.Format("{0:n2}", !CustomUtils.isNumber(txtB5.Text) ? Convert.ToDouble(txtB5.Text.Split(' ')[0]) : Convert.ToDouble(!CustomUtils.isNumber(txtB5.Text) ? "0" : txtB5.Text));
-            lbC147.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB6.Text) ? "0" : txtB6.Text));
-            lbC148.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB7.Text) ? "0" : txtB7.Text));
-            lbC148_1.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB8.Text) ? "0" : txtB8.Text));
+            try
+            {
+                lbC144.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB3.Text) ? "0" : txtB3.Text));
+                lbC145.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB4.Text) ? "0" : txtB4.Text));
+                lbC146.Text = String.Format("{0:n2}", !CustomUtils.isNumber(txtB5.Text) ? Convert.ToDouble(txtB5.Text.Split(' ')[0]) : Convert.ToDouble(!CustomUtils.isNumber(txtB5.Text) ? "0" : txtB5.Text));
+                lbC147.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB6.Text) ? "0" : txtB6.Text));
+                lbC148.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB7.Text) ? "0" : txtB7.Text));
+                lbC148_1.Text = String.Format("{0:n2}", Convert.ToDouble(String.IsNullOrEmpty(txtB8.Text) ? "0" : txtB8.Text));
+            }
+            catch (Exception ex) { }
             #endregion
 
         }
