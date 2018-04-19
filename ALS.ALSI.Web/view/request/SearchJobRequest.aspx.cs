@@ -813,16 +813,17 @@ namespace ALS.ALSI.Web.view.request
                         case RoleEnum.CHEMIST:
                         case RoleEnum.SR_CHEMIST:
                         case RoleEnum.LABMANAGER:
-                            sql += "DATE_FORMAT((case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end),'%e %b %Y') AS `Due Date`,";
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due Date`,";
                             break;
                         case RoleEnum.ADMIN:
                         case RoleEnum.MARKETING:
                         case RoleEnum.BUSINESS_MANAGER:
-                            sql += "DATE_FORMAT((case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_customer` end),'%e %b %Y') AS `Due Date`,";
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else DATE_FORMAT(`Extent2`.`due_date_customer`,'%e %b %Y') end) end) AS `Due Date`,";
+
 
                             break;
                         default:
-                            sql += "DATE_FORMAT((case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else `Extent2`.`due_date_lab` end),'%e %b %Y') AS `Due Date`,";
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due Date`,";
                             break;
                     }
                     sql += "`Extent2`.`job_number` AS `ALS Ref`," +
@@ -845,11 +846,11 @@ namespace ALS.ALSI.Web.view.request
                      " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
                      " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
                      " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
-                     " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
-                     " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
-                     " INNER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
-                     " INNER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
-                     " INNER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
+                     " LEFT OUTER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
+                     " LEFT OUTER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
+                     " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
+                     " LEFT OUTER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
+                     " LEFT OUTER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
 
                     StringBuilder sqlCri = new StringBuilder();
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))

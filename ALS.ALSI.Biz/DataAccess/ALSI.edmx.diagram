@@ -16,10 +16,10 @@
         <EntityTypeShape EntityType="ALSIModel.m_customer_contract_person" Width="1.5" PointX="3" PointY="6.875" />
         <EntityTypeShape EntityType="ALSIModel.m_evaluation_of_particles" Width="1.5" PointX="5.75" PointY="14.5" />
         <EntityTypeShape EntityType="ALSIModel.m_microscopic_analysis" Width="1.5" PointX="2.75" PointY="14.5" />
-        <EntityTypeShape EntityType="ALSIModel.m_role" Width="1.5" PointX="0.75" PointY="14" />
+        <EntityTypeShape EntityType="ALSIModel.m_role" Width="1.5" PointX="0.75" PointY="3" />
         <EntityTypeShape EntityType="ALSIModel.m_specification" Width="1.5" PointX="12.75" PointY="5.5" />
         <EntityTypeShape EntityType="ALSIModel.m_status" Width="1.5" PointX="3" PointY="2.75" />
-        <EntityTypeShape EntityType="ALSIModel.m_status_group" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="ALSIModel.m_status_group" Width="1.5" PointX="0.75" PointY="13.875" />
         <EntityTypeShape EntityType="ALSIModel.m_template" Width="1.5" PointX="14.75" PointY="2.5" />
         <EntityTypeShape EntityType="ALSIModel.m_title" Width="1.5" PointX="7.75" PointY="4" />
         <EntityTypeShape EntityType="ALSIModel.m_type_of_test" Width="1.5" PointX="14.75" PointY="7.5" />

@@ -262,6 +262,8 @@ namespace ALS.ALSI.Web.view.request
                             else
                             {
                                 jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                                jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
+
                             }
                             break;
                         case RoleEnum.ADMIN:

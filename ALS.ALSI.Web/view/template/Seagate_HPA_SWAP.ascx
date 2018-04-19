@@ -611,12 +611,12 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Counts/sqcm (X)" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:Label ID="litC" runat="server" Text='<%# Eval("C")%>'></asp:Label>
+                                                <asp:Label ID="litC" runat="server" Text='<%# Eval("D")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Counts/sqcm" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:Label ID="litD" runat="server"></asp:Label>
+                                                <asp:Label ID="litD" runat="server" Text='<%# Eval("C")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

@@ -148,7 +148,7 @@
                                 <%--                                <asp:Image ID="img1" runat="server" Width="120" Height="120" />--%>
                                 <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>
                                 <h6>Please refer to attachment for details of results</h6>
-                                <h6>Note: This report was performed test by ALS Singapore.</h6>
+                                <h6><asp:TextBox id="txtNote" runat="server" value="Note: This report was performed test by ALS Singapore." CssClass="form-control" /></h6>
                                 <br />
 
                                 <h5>Analysis Table on

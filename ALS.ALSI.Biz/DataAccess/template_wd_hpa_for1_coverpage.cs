@@ -35,5 +35,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> unit { get; set; }
         public Nullable<int> hpa_type { get; set; }
         public string data_group { get; set; }
+        public string note { get; set; }
     }
 }

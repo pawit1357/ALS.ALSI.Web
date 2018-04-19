@@ -214,7 +214,7 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <asp:TextBox ID="lbNotePZT" runat="server" Text="Note: ** PZT Specification only applicable to Headstacks with micro-actuators."></asp:TextBox></td>
+                                                            <asp:TextBox ID="lbNotePZT" runat="server" Text="Note: ** PZT Specification only applicable to Headstacks with micro-actuators." ></asp:TextBox></td>
                                                     <td>                                                            <asp:CheckBox ID="cbNotePZT" runat="server" Text="Show/Hide" /></td>
 
                                                     </tr>

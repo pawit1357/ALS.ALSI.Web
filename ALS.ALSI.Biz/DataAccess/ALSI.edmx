@@ -1127,6 +1127,7 @@
           <Property Name="A" Type="varchar" MaxLength="150" />
           <Property Name="B" Type="varchar" MaxLength="150" />
           <Property Name="C" Type="varchar" MaxLength="100" />
+          <Property Name="D" Type="varchar" MaxLength="45" />
           <Property Name="lpc_type" Type="int" />
           <Property Name="hpa_type" Type="int" />
           <Property Name="row_type" Type="int" />
@@ -1511,6 +1512,7 @@
           <Property Name="unit" Type="int" />
           <Property Name="hpa_type" Type="int" />
           <Property Name="data_group" Type="varchar" MaxLength="150" />
+          <Property Name="note" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="template_wd_hpa_for3_coverpage">
           <Key>
@@ -3239,6 +3241,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="A" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="B" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="C" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="D" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="lpc_type" Type="Int32" />
           <Property Name="hpa_type" Type="Int32" />
           <Property Name="row_type" Type="Int32" />
@@ -3623,6 +3626,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="unit" Type="Int32" />
           <Property Name="hpa_type" Type="Int32" />
           <Property Name="data_group" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_hpa_for3_coverpage">
           <Key>
@@ -5224,6 +5228,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
                 <ScalarProperty Name="hpa_type" ColumnName="hpa_type" />
                 <ScalarProperty Name="lpc_type" ColumnName="lpc_type" />
+                <ScalarProperty Name="D" ColumnName="D" />
                 <ScalarProperty Name="C" ColumnName="C" />
                 <ScalarProperty Name="B" ColumnName="B" />
                 <ScalarProperty Name="A" ColumnName="A" />
@@ -5520,6 +5525,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_hpa_for1_coverpage">
             <EntityTypeMapping TypeName="ALSIModel.template_wd_hpa_for1_coverpage">
               <MappingFragment StoreEntitySet="template_wd_hpa_for1_coverpage">
+                <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="data_group" ColumnName="data_group" />
                 <ScalarProperty Name="hpa_type" ColumnName="hpa_type" />
                 <ScalarProperty Name="unit" ColumnName="unit" />

@@ -81,7 +81,8 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_seagate_hpa_coverpage> Hpas
         {
-            get {
+            get
+            {
                 List<template_seagate_hpa_coverpage> tmps = (List<template_seagate_hpa_coverpage>)Session[GetType().Name + "Hpas"];
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
@@ -1101,6 +1102,17 @@ namespace ALS.ALSI.Web.view.template
 
             List<String> ignoreItemList = new List<string>();
             ignoreItemList.Add("NiP with AlMgSi");
+            ignoreItemList.Add("MgTiO");
+
+            List<String> class2Items = new List<string>();
+            class2Items.Add("Nd based");
+            class2Items.Add("Sm based");
+            class2Items.Add("Sr based");
+
+
+
+
+
 
             #region "US-LPC(0.3)"
             //=AVERAGE(B15,B16,B17)
@@ -1391,28 +1403,45 @@ namespace ALS.ALSI.Web.view.template
                     //=ROUND(MAX(0,(C13-B13))*($B$7/$B$9)*($B$3/$B$6)/($B$4*$B$5),1)
                     //=ROUND(MAX(0,(C13-B13))*($B$7/$B$9)*($B$3/$B$6)/($B$4*$B$5),1)
                     //=($B$3*((C15/$B$8)-(B15/$B$6)))/($B$5*$B$4)
-                    Console.WriteLine();
-                    Double b3 = !CustomUtils.isNumber(txtB3.Text) ? 0 : Convert.ToDouble(txtB3.Text);
-                    Double b4 = !CustomUtils.isNumber(txtB4.Text) ? 0 : Convert.ToDouble(txtB4.Text);
-                    Double b5 = !CustomUtils.isNumber(txtB5.Text) ? Convert.ToDouble(txtB5.Text.Split(' ')[0]) : Convert.ToDouble(txtB5.Text);
-                    Double b6 = !CustomUtils.isNumber(txtB6.Text) ? 0 : Convert.ToDouble(txtB6.Text);
-                    Double b8 = !CustomUtils.isNumber(txtB8.Text) ? 0 : Convert.ToDouble(txtB8.Text);
-                    int B = (_val.BlankCouts == null) ? 0 : _val.BlankCouts.Value;
-                    int C = (_val.RawCounts == null) ? 0 : _val.RawCounts.Value;
-                    if (b8 > 0 && b6 > 0)
+                    if (class2Items.Contains(_val.B))
                     {
-                        Double cq = (b3 * ((C / b8) - (B / b6))) / (b5 * b4);
-                        _val.C = Math.Round(cq, 1).ToString();
+                        int B = (_val.BlankCouts == null) ? 0 : _val.BlankCouts.Value;
+                        int C = (_val.RawCounts == null) ? 0 : _val.RawCounts.Value;
+                        Double cq = C - B;
+                        Console.WriteLine();
+                        _val.D = Math.Round(cq, 1).ToString();
+                        _val.C = (cq < 0) ? "0.0" : Math.Round(cq, 1).ToString();
+                    }
+                    else
+                    {
+                        Double b3 = !CustomUtils.isNumber(txtB3.Text) ? 0 : Convert.ToDouble(txtB3.Text);
+                        Double b4 = !CustomUtils.isNumber(txtB4.Text) ? 0 : Convert.ToDouble(txtB4.Text);
+                        Double b5 = !CustomUtils.isNumber(txtB5.Text) ? Convert.ToDouble(txtB5.Text.Split(' ')[0]) : Convert.ToDouble(txtB5.Text);
+                        Double b6 = !CustomUtils.isNumber(txtB6.Text) ? 0 : Convert.ToDouble(txtB6.Text);
+                        Double b8 = !CustomUtils.isNumber(txtB8.Text) ? 0 : Convert.ToDouble(txtB8.Text);
+                        int B = (_val.BlankCouts == null) ? 0 : _val.BlankCouts.Value;
+                        int C = (_val.RawCounts == null) ? 0 :  _val.RawCounts.Value;
+                        if (b8 > 0 && b6 > 0)
+                        {
+                            Double cq = (b3 * ((C / b8) - (B / b6))) / (b5 * b4);
+                            _val.C =(cq<0)? "0.0": Math.Round(cq, 1).ToString();
+                            _val.D = Math.Round(cq, 1).ToString();
 
+                        }
                     }
                 }
 
 
+
                 foreach (template_seagate_hpa_coverpage _cov in this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD)))
                 {
-                    Double _BlankCouts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.BlankCouts);
-                    Double _RawCounts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.RawCounts);
+                    Double _BlankCouts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => Convert.ToDouble(x.BlankCouts));
+                    Double _RawCounts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => Convert.ToDouble(x.RawCounts));
                     Double _sumC = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => Convert.ToDouble(x.C));
+                    Double _sumD = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => Convert.ToDouble(x.D));
+
+
+
 
                     template_seagate_hpa_coverpage tmp = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) && x.data_group.Equals(_cov.data_group)).FirstOrDefault();
                     if (tmp != null)
@@ -1422,12 +1451,14 @@ namespace ALS.ALSI.Web.view.template
                         tmp.BlankCouts = Convert.ToInt32(_BlankCouts);
                         tmp.RawCounts = Convert.ToInt32(_RawCounts);
                         tmp.C = _sumC + "";
+                        tmp.D = _sumD + "";
                     }
                 }
 
                 Double _GrandBlankCouts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => x.BlankCouts);
                 Double _GrandRawCounts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => x.RawCounts);
-                Double _GrandsumC = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => Convert.ToDouble(x.C));
+                Double _GrandsumC = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ).Sum(x => Convert.ToDouble(x.C));
+                Double _GrandsumD = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).Sum(x => Convert.ToDouble(x.D));
 
                 template_seagate_hpa_coverpage tmpGrand = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).FirstOrDefault();
                 if (tmpGrand != null)
@@ -1435,6 +1466,7 @@ namespace ALS.ALSI.Web.view.template
                     tmpGrand.BlankCouts = Convert.ToInt32(_GrandBlankCouts);
                     tmpGrand.RawCounts = Convert.ToInt32(_GrandRawCounts);
                     tmpGrand.C = _GrandsumC + "";
+                    tmpGrand.D = _GrandsumD + "";
                 }
                 //Grand Total
 
@@ -1448,12 +1480,14 @@ namespace ALS.ALSI.Web.view.template
                 Double _sumTotalSST_BlankCounts = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => x.BlankCouts);
                 Double _sumTotalSST_RawCounts = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => x.RawCounts);
                 Double _sumTotalSST = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => Convert.ToDouble(x.C));
+                Double _sumTotalSSTD = (Double)this.Hpas.Where(x => listOfSst.Contains(x.B)).Sum(x => Convert.ToDouble(x.D));
                 template_seagate_hpa_coverpage cov = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total SST")).FirstOrDefault();
                 if (cov != null)
                 {
                     cov.BlankCouts = Convert.ToInt32(_sumTotalSST_BlankCounts);
                     cov.RawCounts = Convert.ToInt32(_sumTotalSST_RawCounts);
                     cov.C = _sumTotalSST + "";
+                    cov.D = _sumTotalSSTD + "";
                 }
                 //Total Ni
                 List<String> listOfNi = new List<string>();
@@ -1462,12 +1496,15 @@ namespace ALS.ALSI.Web.view.template
                 Double _sumTotalNi_BlankCounts = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => x.BlankCouts);
                 Double _sumTotalNi_RawCounts = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => x.RawCounts);
                 Double _sumTotalNi = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => Convert.ToDouble(x.C));
+                Double _sumTotalNiD = (Double)this.Hpas.Where(x => listOfNi.Contains(x.B)).Sum(x => Convert.ToDouble(x.D));
+
                 template_seagate_hpa_coverpage covNi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total Ni")).FirstOrDefault();
                 if (covNi != null)
                 {
                     covNi.BlankCouts = Convert.ToInt32(_sumTotalNi_BlankCounts);
                     covNi.RawCounts = Convert.ToInt32(_sumTotalNi_RawCounts);
                     covNi.C = _sumTotalNi + "";
+                    covNi.D = _sumTotalNiD + "";
                 }
                 #endregion
 
@@ -1498,6 +1535,24 @@ namespace ALS.ALSI.Web.view.template
                 string Sn_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Sn based")).FirstOrDefault().C;
                 string PbZrTi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("PbZrTi")).FirstOrDefault().C;
                 string MgSiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgSiO")).FirstOrDefault().C;
+                string MgTiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgTiO")).FirstOrDefault().C;
+                string NiPwithAlMgSi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("NiP with AlMgSi")).FirstOrDefault().C;
+
+
+
+                
+                //Class 1, Total Hard Particle
+                //Class 2, Total Magnetic Particle(Counts / part)
+                //* Class 3, Total Semi-hard Metal Particle
+                //3.1 SST + Fe base + FeO
+                //3.2 Sn base Particle
+                //* *3.3 PZT Particles
+                //Class 4, Total Soft-Metal Particle
+                //Class 5, Total Environment Particle
+                //5.1 MgSiO Particle
+                //Class 6, Other Particle
+                //MgTiO
+                //NiP with AlMgSi
 
 
                 hpas[0].C = Convert.ToDouble(sumOfHpas[0].C).ToString("N1");//[0]
@@ -1510,7 +1565,8 @@ namespace ALS.ALSI.Web.view.template
                 hpas[7].C = Convert.ToDouble(sumOfHpas[4].C).ToString("N1");//[7]
                 hpas[8].C = Convert.ToDouble(MgSiO).ToString("N1");//[8]
                 hpas[9].C = Convert.ToDouble(sumOfHpas[5].C).ToString("N1");//[9]
-
+                hpas[10].C = Convert.ToDouble(MgTiO).ToString("N1");//[8]
+                hpas[11].C = Convert.ToDouble(NiPwithAlMgSi).ToString("N1");//[8]
 
 
 
@@ -1532,14 +1588,15 @@ namespace ALS.ALSI.Web.view.template
             {
                 item.C = Convert.ToDouble(item.C).ToString("N1") + "";
             }
-            ;
+            
             foreach (template_seagate_hpa_coverpage item in this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).ToList())
             {
-                item.C = item.C = (item.C == null) ? 0.ToString("N1") : Convert.ToDouble(item.C).ToString("N1") + "";
+                item.C = (item.C == null) ? 0.ToString("N1") : Convert.ToDouble(item.C).ToString("N1") + "";
 
             }
             gvClassification.DataSource = listClass.OrderBy(x => x.seq);
             gvClassification.DataBind();
+
             gvHpa.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq);
             gvHpa.DataBind();
             #endregion
@@ -1989,17 +2046,17 @@ namespace ALS.ALSI.Web.view.template
                     case GVTypeEnum.CLASSIFICATION_GRAND_TOTAL:
                     case GVTypeEnum.CLASSIFICATION_TOTAL:
                         e.Row.BackColor = System.Drawing.Color.Orange;
-                        _litD.Text = !CustomUtils.isNumber(_litC.Text) ? "0" : ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
+                        //_litD.Text = !CustomUtils.isNumber(_litC.Text) ? "0" : ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
 
                         break;
                     case GVTypeEnum.CLASSIFICATION_SUB_TOTAL:
                         e.Row.BackColor = System.Drawing.Color.Yellow;
-                        _litD.Text = !CustomUtils.isNumber(_litC.Text) ? "0" : ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
+                        //_litD.Text = !CustomUtils.isNumber(_litC.Text) ? "0" : ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
 
                         break;
                     case GVTypeEnum.CLASSIFICATION_ITEM:
                         _litB.Text = String.Format("{0}".PadRight(20, ' '), _litB.Text);
-                        _litD.Text = !CustomUtils.isNumber(_litC.Text) ? "0" : ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
+                        //_litD.Text = !CustomUtils.isNumber(_litC.Text) ? "0" : ((Convert.ToDouble(_litC.Text) <= 0) ? "0" : _litC.Text);
 
                         break;
                 }

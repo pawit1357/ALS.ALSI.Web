@@ -246,7 +246,7 @@ namespace ALS.ALSI.Web.view.template
                 txtC23.Text = _cover.NoofTimesTaped;
                 txtD23.Text = _cover.SurfaceAreaAnalysed;
                 txtE23.Text = _cover.ParticleRanges;
-
+                txtNote.Text = String.IsNullOrEmpty(_cover.note) ? "Note: This report was performed test by ALS Singapore." : _cover.note;
                 ddlComponent.SelectedValue = _cover.component_id.ToString();
                 ddlSpecification.SelectedValue = _cover.detail_spec_id.ToString();
                 ddlUnit.SelectedValue = _cover.unit.ToString();
@@ -341,7 +341,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.NoofTimesTaped = txtC23.Text;
                         _cover.SurfaceAreaAnalysed = txtD23.Text;
                         _cover.ParticleRanges = txtE23.Text;
-
+                        _cover.note = txtNote.Text;
                         _cover.sample_id = this.SampleID;
                         _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
@@ -659,7 +659,7 @@ namespace ALS.ALSI.Web.view.template
                     double _rc = Convert.ToDouble(_val.C);
                     double c23 = Convert.ToDouble(txtC23.Text);
                     double d23 = Convert.ToDouble(txtD23.Text);
-                    double result = Math.Round(_rc / c23 / d23 , MidpointRounding.AwayFromZero);
+                    double result = Math.Round(_rc / c23 / d23, MidpointRounding.AwayFromZero);
                     _val.D = result.ToString();
                 }
             }
@@ -688,7 +688,7 @@ namespace ALS.ALSI.Web.view.template
             }
             //Add MgSiO
 
-            
+
             //Result-Line
             List<template_wd_hpa_for1_coverpage> resultLine = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
             foreach (template_wd_hpa_for1_coverpage _val in resultLine)
@@ -715,27 +715,6 @@ namespace ALS.ALSI.Web.view.template
                     mgsioResult.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "NA" : (mgsioResult.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
                 }
             }
-
-
-
-
-            //MgSiO
-
-            //List<template_wd_hpa_for1_coverpage> mgSiOLineResult = this.HpaFor1.Where(x =>  x.B.Equals(mappingRawData(("Total MgSiO Particles")))).ToList();
-            //foreach (template_wd_hpa_for1_coverpage _val in mgSiOLineResult)
-            //{
-            //    template_wd_hpa_for1_coverpage mappedValue = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL)).FirstOrDefault();
-            //    if (mappedValue != null)
-            //    {
-            //        _val.C = Convert.ToInt32(mappedValue.D);
-            //        if (_val.D != null)
-            //        {
-            //            String dValue = _val.D.Replace("<", "").Trim();
-            //            _val.E = dValue.Equals("NA") ? "NA" : dValue.Equals("TBD") ? "" : (_val.C > Convert.ToInt32(dValue)) ? "FAIL" : "PASS";
-            //        }
-            //    }
-            //}
-
 
 
             gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
@@ -867,7 +846,7 @@ namespace ALS.ALSI.Web.view.template
                 (x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
                 x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).OrderBy(x=>x.seq).ToList();
+                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).OrderBy(x => x.seq).ToList();
 
             if (listHpa[0].img_path != null)
             {
@@ -892,7 +871,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Test", "-"));
             reportParameters.Add(new ReportParameter("tafdp", txtB23.Text));
 
-            
+
             tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
             if (_detailSpec != null)
             {
@@ -927,14 +906,6 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", listElementalComposition.GetRange(69, listElementalComposition.Count - 69).ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", listHpaImg.ToDataTable())); // Add datasource here
-
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.GetRange(0,24).ToDataTable())); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", listElementalComposition.GetRange(24, 24).ToDataTable())); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", listElementalComposition.GetRange(48, 24).ToDataTable())); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", listElementalComposition.GetRange(72, listElementalComposition.Count-72).ToDataTable())); // Add datasource here
-
-
-
 
 
 
@@ -1017,103 +988,13 @@ namespace ALS.ALSI.Web.view.template
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
 
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
                     break;
             }
 
 
 
         }
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
 
-
-            DataTable dt = Extenders.ObjectToDataTable(this.HpaFor1[0]);
-            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
-
-
-            List<template_wd_hpa_for1_coverpage> listHpa = this.HpaFor1.Where(x => x.hpa_type == 3).OrderBy(x => x.seq).ToList();
-            List<template_wd_hpa_for1_coverpage> listElementalComposition = this.HpaFor1.Where(x =>
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) ||
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL) ||
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) ||
-                x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)).ToList();
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-
-
-
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "-"));
-            tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
-            if (_detailSpec != null)
-            {
-                reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", _detailSpec.B, _detailSpec.A)));
-            }
-            else
-            {
-                reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", "", "")));
-            }
-
-            reportParameters.Add(new ReportParameter("img01Url", Configurations.HOST + "" + this.HpaFor1[0].img_path));
-            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", listHpa.ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.ToDataTable())); // Add datasource here
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-        }
 
         #region "DHS GRID."
         protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -1387,7 +1268,8 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Mg-Si-O-Al");
             items.Add("Al-S/Si");
             items.Add("Al-Si Base");
-            items.Add("AlSi/Fe-Cr-Ni-Mn-Cu");
+            //items.Add("AlSi/Fe-Cr-Ni-Mn-Cu");
+            items.Add("AlSi/Fe-Cr-Mn-Cu");
             items.Add("-Total - Al Based Particle");
             items.Add("#Cu-Zn base");
             items.Add("Zn");
@@ -1412,116 +1294,6 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Other");
             items.Add("Disk Material");
             items.Add("$Grand Total of All Particles");
-
-            //Hashtable items = new Hashtable();
-
-            /*
-            # = Group
-            - = Total
-            $ = Grand Total
-            -------------------------
-            */
-            //items.Add("Hard Particles", "#Hard Particles");
-            //items.Add("Hard Particles", "Al-O");
-            //items.Add("Hard Particles", "Al-Si-O");
-            //items.Add("Hard Particles", "Si-O");
-            //items.Add("Hard Particles", "Si-C");
-            //items.Add("Hard Particles", "Al-Cu-O");
-            //items.Add("Hard Particles", "Al-Mg-O");
-            //items.Add("Hard Particles", "Al-Si-Cu-O");
-            //items.Add("Hard Particles", "Al-Si-Fe-O");
-            //items.Add("Hard Particles", "Al-Si-Mg-O");
-            //items.Add("Hard Particles", "Al-Ti-O");
-            //items.Add("Hard Particles", "Ti-O");
-            //items.Add("Hard Particles", "Ti-C");
-            //items.Add("Hard Particles", "Ti-B");
-            //items.Add("Hard Particles", "Ti-N");
-            //items.Add("Hard Particles", "W-O");
-            //items.Add("Hard Particles", "W-C");
-            //items.Add("Hard Particles", "Zr-O");
-            //items.Add("Hard Particles", "Zr-C");
-            //items.Add("Hard Particles", "Pb-Zr-Ti-O (PZT)");
-            //items.Add("Hard Particles", "-Total - Hard Particles");
-
-            //items.Add("Magnetic Particles", "#Magnetic Particles");
-            //items.Add("Magnetic Particles", "Fe-Nd");
-            //items.Add("Magnetic Particles", "Sm-Co");
-            //items.Add("Magnetic Particles", "Fe-Sr");
-            //items.Add("Magnetic Particles", "-Total - Magnetic Particles");
-
-            //items.Add("Steel Particle", "#Steel Particle");
-            //items.Add("Steel Particle", "SS 300- Fe-Cr-Ni");
-            //items.Add("Steel Particle", "SS 300- Fe-Cr-Ni-Mn");
-            //items.Add("Steel Particle", "SS 300- Fe-Cr-Ni-Si");
-            //items.Add("Steel Particle", "SS 400- Fe-Cr ");
-            //items.Add("Steel Particle", "SS 400- Fe-Cr-Mn");
-            //items.Add("Steel Particle", "Other Steel - Fe");
-            //items.Add("Steel Particle", "Other Steel - Fe-Mn");
-            //items.Add("Steel Particle", "Other Steel - Fe-Ni");
-            //items.Add("Steel Particle", "Other Steel - Fe-O");
-            //items.Add("Steel Particle", "-Total - Steel Particle");
-
-            //items.Add("Cr-Rich", "#Cr-Rich");
-            //items.Add("Cr-Rich", "*Mg-Si-O");
-            //items.Add("Cr-Rich", "Cr-O");
-            //items.Add("Cr-Rich", "Cr-Mn");
-            //items.Add("Cr-Rich", "-Total -Cr-Rich");
-
-            //items.Add("Fe Base", "#Fe Base");
-            //items.Add("Fe Base", "Fe-Cu");
-            //items.Add("Fe Base", "Fe-Cr/S");
-            //items.Add("Fe Base", "SCrMn/Fe");
-            //items.Add("Fe Base", "Pb");
-            //items.Add("Fe Base", "-Total - Fe Base Particle");
-
-            //items.Add("Ni-Base", "#Ni-Base");
-            //items.Add("Ni-Base", "Ni");
-            //items.Add("Ni-Base", "Ni-P");
-            //items.Add("Ni-Base", "NiP/Al");
-            //items.Add("Ni-Base", "NiP/Fe");
-            //items.Add("Ni-Base", "NiP Base");
-            //items.Add("Ni-Base", "-Total - Ni-Base Particle");
-
-            //items.Add("Al Based", "#Al Based");
-            //items.Add("Al Based", "Al");
-            //items.Add("Al Based", "Al-Mg");
-            //items.Add("Al Based", "Al-Ti-Si");
-            //items.Add("Al Based", "Al-Cu");
-            //items.Add("Al Based", "Al-Si-Cu");
-            //items.Add("Al Based", "Al-Si/Fe");
-            //items.Add("Al Based", "Al-Si-Mg");
-            //items.Add("Al Based", "Mg-Si-O-Al");
-            //items.Add("Al Based", "Al-S/Si");
-            //items.Add("Al Based", "Al-Si Base");
-            //items.Add("Al Based", "AlSi/Fe-Cr-Ni-Mn-Cu");
-            //items.Add("Al Based", "-Total - Al Based Particle");
-
-            //items.Add("Cu-Zn base", "#Cu-Zn base");
-            //items.Add("Cu-Zn base", "Zn");
-            //items.Add("Cu-Zn base", "Cu");
-            //items.Add("Cu-Zn base", "Cu-Zn");
-            //items.Add("Cu-Zn base", "Cu-S");
-            //items.Add("Cu-Zn base", "Cu-Zn Base");
-            //items.Add("Cu-Zn base", "Cu-S-Al-O Base");
-            //items.Add("Cu-Zn base", "Cu-Au");
-            //items.Add("Cu-Zn base", "-Total - Cu-Zn Base Particle");
-
-            ////items.Add("Other","#Other";
-            //items.Add("Other", "Sn Base");
-            //items.Add("Other", "Sb Base");
-            //items.Add("Other", "Ba-S Base");
-            //items.Add("Other", "Ag-S");
-            //items.Add("Other", "Ti-O/Al-Si-Fe");
-            //items.Add("Other", "Ti Base");
-            //items.Add("Other", "AlSi/K");
-            //items.Add("Other", "Ca");
-            //items.Add("Other", "Na-Cl");
-            //items.Add("Other", "F-O");
-            //items.Add("Other", "Other");
-            //items.Add("Other", "Disk Material");
-            //items.Add("Grand Total of All Particles", "$Grand Total of All Particles");
-
-
 
             String LastGroup = String.Empty;
             foreach (String item in items)

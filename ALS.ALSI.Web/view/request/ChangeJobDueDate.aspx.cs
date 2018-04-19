@@ -119,7 +119,7 @@ namespace ALS.ALSI.Web.view.request
 
             this.jobSample.due_date = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
             this.jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-            this.jobSample.due_date_customer = this.jobSample.due_date_lab.Value.AddDays(1);
+            this.jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
             this.jobSample.Update();
             job_sample_logs tmp = new job_sample_logs
             {
