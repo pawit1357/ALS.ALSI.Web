@@ -1220,12 +1220,6 @@ namespace ALS.ALSI.Web.view.template
 
             List<String> ignoreItemList = new List<string>();
             ignoreItemList.Add("NiP with AlMgSi");
-            ignoreItemList.Add("MgTiO");
-
-            List<String> class2Items = new List<string>();
-            class2Items.Add("Nd based");
-            class2Items.Add("Sm based");
-            class2Items.Add("Sr based");
 
             #region "US-LPC(0.3)"
             //=AVERAGE(B15,B16,B17)
