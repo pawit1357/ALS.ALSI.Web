@@ -844,13 +844,22 @@ namespace ALS.ALSI.Web.view.request
                      "`Extent4`.`data_group` AS `Data Group`" +
                      " FROM `job_info` AS `Extent1`" +
                      " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
+                     " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
                      " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
                      " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
-                     " LEFT OUTER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
-                     " LEFT OUTER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
-                     " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
+                     " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
+                     " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
                      " LEFT OUTER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
                      " LEFT OUTER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
+
+                    //var result = from j in ctx.job_info
+                    //             join s in ctx.job_sample on j.ID equals s.job_id
+                    //             join ms in ctx.m_status on s.job_status equals ms.ID
+                    //             join sp in ctx.m_specification on s.specification_id equals sp.ID
+                    //             join tt in ctx.m_type_of_test on s.type_of_test_id equals tt.ID
+                    //             join c in ctx.m_customer on j.customer_id equals c.ID
+                    //             join cp in ctx.m_customer_contract_person on j.contract_person_id equals cp.ID
+
 
                     StringBuilder sqlCri = new StringBuilder();
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
@@ -878,7 +887,7 @@ namespace ALS.ALSI.Web.view.request
                     }
                     if (!String.IsNullOrEmpty(txtREfNo.Text))
                     {
-                        sqlCri.Append(" `Extent2`.`job_number` = '" + txtREfNo.Text + "'");
+                        sqlCri.Append(" `Extent2`.`job_number` like '%" + txtREfNo.Text + "%'");
                         sqlCri.Append(" AND ");
 
                     }

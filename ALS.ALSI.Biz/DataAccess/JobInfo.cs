@@ -143,7 +143,7 @@ namespace ALS.ALSI.Biz.DataAccess
                 var result = from j in ctx.job_info
                              join s in ctx.job_sample on j.ID equals s.job_id
                              join ms in ctx.m_status on s.job_status equals ms.ID
-                             join sp in ctx.m_specification on s.specification_id equals sp.ID
+                             join sp in ctx.m_specification on s.specification_id equals sp.ID 
                              join tt in ctx.m_type_of_test on s.type_of_test_id equals tt.ID
                              join c in ctx.m_customer on j.customer_id equals c.ID
                              join cp in ctx.m_customer_contract_person on j.contract_person_id equals cp.ID
@@ -164,12 +164,12 @@ namespace ALS.ALSI.Biz.DataAccess
                                  customer = c.company_name,
                                  s.sample_invoice,
                                  sample_po = s.sample_po,
-                                 contract_person = cp.name,
+                                 contract_person = (cp.name==null)? "": cp.name,
                                  description = s.description,
                                  model = s.model,
                                  surface_area = s.surface_area,
-                                 specification = sp.name,
-                                 type_of_test = tt.name,
+                                 specification = (sp.name == null)? "" : sp.name,
+                                 type_of_test = (tt.name == null)? "": tt.name,
                                  customer_id = c.ID,
                                  job_status = s.job_status,
                                  create_date = j.create_date,

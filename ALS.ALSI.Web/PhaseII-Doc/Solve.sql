@@ -5,7 +5,7 @@ from job_sample
 left join m_type_of_test on job_sample.type_of_test_id = m_type_of_test.id
 left join m_status on m_status.ID=job_sample.job_status
 left join m_template on job_sample.template_id = m_template.id
-where m_template.path_url like '%Seagate_HPA%' 
+where m_template.path_url like '%WD_HPA_FOR_1_V2%' 
 and m_template.status='A'
 order by job_sample.job_status;
 */
