@@ -1507,7 +1507,7 @@
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Total" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Particles on membrane/<br>Total" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litE" runat="server" Text='<%# Eval("col_e")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1516,7 +1516,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Non-metallic \nshine" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Particles on membrane/<br>Non-metallic<br>shine" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litF" runat="server" Text='<%# Eval("col_f")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1525,7 +1525,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Metallic \nshine" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Particles on membrane/<br>Metallic<br>shine" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litG" runat="server" Text='<%# Eval("col_g")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1534,7 +1534,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="2Fiber" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Particles on membrane/<br>2Fiber" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litH" runat="server" Text='<%# Eval("col_h")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1544,7 +1544,7 @@
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Total" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Particles per component/<br>Total" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litI" runat="server" Text='<%# Eval("col_i")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1553,7 +1553,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Non-metallic \nshine" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Particles per component/<br>Non-metallic<br>shine" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litJ" runat="server" Text='<%# Eval("col_j")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1562,7 +1562,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Metallic \nshine" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Particles per component/<br>Metallic<br>shine" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litK" runat="server" Text='<%# Eval("col_k")%>'></asp:Literal>
                                                     </ItemTemplate>
@@ -1571,7 +1571,7 @@
                                                     </EditItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="2Fiber" ItemStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="Particles per component/<br>2Fiber" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Literal ID="litL" runat="server" Text='<%# Eval("col_l")%>'></asp:Literal>
                                                     </ItemTemplate>

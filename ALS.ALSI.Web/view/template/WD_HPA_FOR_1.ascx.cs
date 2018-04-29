@@ -1420,7 +1420,9 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Mg-Si-O-Al");
             items.Add("Al-S/Si");
             items.Add("Al-Si Base");
-            items.Add("AlSi/Fe-Cr-Ni-Mn-Cu");
+            //items.Add("AlSi/Fe-Cr-Ni-Mn-Cu");
+            items.Add("AlSi/Fe-Cr-Mn-Cu");
+
             items.Add("-Total - Al Based Particle");
             items.Add("#Cu-Zn base");
             items.Add("Zn");

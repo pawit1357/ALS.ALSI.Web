@@ -228,6 +228,19 @@ ALTER TABLE `alsi`.`template_seagate_hpa_coverpage`
 ADD COLUMN `D` VARCHAR(45) NULL AFTER `C`;
 
 
+---------------------------------- 2018-4-29 ----------------------------------------------
+ALTER TABLE `alsi2`.`users_login` 
+DROP FOREIGN KEY `fk_role_id`;
+ALTER TABLE `alsi2`.`users_login` 
+ADD INDEX `fk_role_id_idx` (`role_id` ASC),
+DROP INDEX `fk_role_id_idx` ;
+ALTER TABLE `alsi2`.`users_login` 
+ADD CONSTRAINT `fk_role_id`
+  FOREIGN KEY (`role_id`)
+  REFERENCES `alsi2`.`m_role` (`ID`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
 */
 
 
