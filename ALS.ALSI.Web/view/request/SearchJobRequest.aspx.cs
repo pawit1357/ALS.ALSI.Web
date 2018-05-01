@@ -581,7 +581,7 @@ namespace ALS.ALSI.Web.view.request
                             btnWorkFlow.Visible = false;
                             break;
                     }
-                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN||userRole == RoleEnum.SR_CHEMIST) && !isHold;
+                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN) && !isHold;
                     btnChangeSingaporeRefNo.Visible = (userRole == RoleEnum.CHEMIST) && !isHold;
                     btnChangeDueDate.Visible = ((userRole == RoleEnum.SR_CHEMIST)) && !isHold;
                     btnChangePo.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LABMANAGER)) && !isHold;

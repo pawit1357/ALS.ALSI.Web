@@ -1,10 +1,16 @@
-﻿using ALS.ALSI.Biz.DataAccess;
+﻿using ALS.ALSI.Biz.Constant;
+using ALS.ALSI.Biz.DataAccess;
 using System;
 
 namespace ALS.ALSI.Web.UserControls
 {
     public partial class SampleInfo : System.Web.UI.UserControl
     {
+        public users_login userLogin
+        {
+            get { return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -43,11 +49,10 @@ namespace ALS.ALSI.Web.UserControls
                 String[] tmp = _sample.job_number.Split('-');
                 lbRefNo.Text = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
 
-                //lbRefNo.Text = String.Format("{4}ATT/{0}/{1}/{2}-{3}", tmp[0], _job.date_of_receive.Value.ToString("yy"), tmp[1], tmp[2], (_sample.amend_count > 0 ? (_sample.amend_count == 1 ? "AM/" : "AM/" + _sample.amend_count) : ""));
 
-                ////String.Format("AM/ATT/ELP/17/XXXX-XX")
-                //lbDownloadName.Text = _sample.job_number.ToString();
-                lbDateTestCompleted.Text = Convert.ToDateTime(_sample.due_date).ToString("MM/dd/yyyy");
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+
+                lbDateTestCompleted.Text = (userRole == RoleEnum.CHEMIST)? "-": Convert.ToDateTime(_sample.date_chemist_complete).ToString("MM/dd/yyyy");
 
                 lbSampleDescription.Text = String.Format("Description:{0}<br />Model:{1}<br />Surface Area:{2}<br />Remark:{3}<br />", _sample.description, _sample.model, _sample.surface_area, _sample.remarks);
 

@@ -76,9 +76,19 @@ namespace ALS.ALSI.Web.view.request
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             if (this.jobSample != null)
             {
-                txtDuedate.Text = Convert.ToDateTime(this.jobSample.due_date).ToString("dd/MM/yyyy");
-                txtCustomerDuedate.Text = Convert.ToDateTime(this.jobSample.due_date_customer).ToString("dd/MM/yyyy");
-                //txtRemark.Text = this.jobSample.remarks;
+                if(this.jobSample.due_date_lab.Value.Year==1 && this.jobSample.due_date_lab.Value.Month == 1&& this.jobSample.due_date_lab.Value.Day == 1)
+                {
+                    txtDuedate.Text =DateTime.Now.ToString("dd/MM/yyyy");
+                    cbIsTba.Checked = true;
+                }
+                else
+                {
+                    txtDuedate.Text = Convert.ToDateTime(this.jobSample.due_date).ToString("dd/MM/yyyy");
+                    cbIsTba.Checked = false;
+                }
+                //txtDuedate.Text = Convert.ToDateTime(this.jobSample.due_date).ToString("dd/MM/yyyy");
+                //txtCustomerDuedate.Text = Convert.ToDateTime(this.jobSample.due_date_customer).ToString("dd/MM/yyyy");
+                txtRemark.Text = this.jobSample.remarks;
             }
             else
             {
@@ -118,8 +128,17 @@ namespace ALS.ALSI.Web.view.request
         {
 
             this.jobSample.due_date = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-            this.jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-            this.jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
+            if (cbIsTba.Checked)
+            {
+                this.jobSample.due_date_lab = new DateTime(1, 1, 1);
+                this.jobSample.due_date_customer = new DateTime(1, 1, 1);
+            }
+            else
+            {
+                this.jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                this.jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
+            }
+
             this.jobSample.Update();
             job_sample_logs tmp = new job_sample_logs
             {

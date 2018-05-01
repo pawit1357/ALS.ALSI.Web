@@ -241,6 +241,12 @@ ADD CONSTRAINT `fk_role_id`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
+
+  ---------------------------------- 2018-5-1 ----------------------------------------------
+
+
+  INSERT INTO `alsi`.`role` (`ROLE_ID`, `ROLE_NAME`, `ROLE_DESC`, `UPDATE_BY`, `CREATE_DATE`, `UPDATE_DATE`) VALUES ('8', 'Marketing', 'Marketing', 'SYSTEM', '2015-02-13', '2015-02-13');
+
 */
 
 
