@@ -1,4 +1,5 @@
-﻿using ALS.ALSI.Biz.DataAccess;
+﻿using ALS.ALSI.Biz.Constant;
+using ALS.ALSI.Biz.DataAccess;
 using System;
 using System.Collections;
 using System.Linq;
@@ -80,7 +81,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                 //ATT / ELP / 16 / XXXX(เลขจ็อบ) - XX(Test)
 
                 int phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2));
-                if (DateTime.Now.Month < 4)
+                if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
                 {
                     phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2)) - 1;
                 }
@@ -92,7 +93,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                         AmRetest = (_sample.amend_count > 0) ? "AM" + ((_sample.amend_count==1)? "":_sample.amend_count+"") + "/" : String.Empty;
                         break;
                     case "R":
-                        AmRetest = (_sample.retest_count > 0) ? "R" + ((_sample.retest_count==0)? "": _sample.retest_count+"") + "/" : String.Empty;
+                        AmRetest = (_sample.retest_count > 0) ? "R" + ((_sample.retest_count==1)? "": _sample.retest_count+"") + "/" : String.Empty;
                         break;
                 }
 

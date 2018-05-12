@@ -247,6 +247,49 @@ ADD CONSTRAINT `fk_role_id`
 
   INSERT INTO `alsi`.`role` (`ROLE_ID`, `ROLE_NAME`, `ROLE_DESC`, `UPDATE_BY`, `CREATE_DATE`, `UPDATE_DATE`) VALUES ('8', 'Marketing', 'Marketing', 'SYSTEM', '2015-02-13', '2015-02-13');
 
+
+
+  -------------------------------- 2018-05-09 -----------------------------
+  ALTER TABLE `alsi`.`template_pa` 
+ADD COLUMN `img06` VARCHAR(255) NULL AFTER `per_text`,
+ADD COLUMN `img07` VARCHAR(255) NULL AFTER `img06`,
+ADD COLUMN `img08` VARCHAR(255) NULL AFTER `img07`,
+ADD COLUMN `img09` VARCHAR(255) NULL AFTER `img08`,
+ADD COLUMN `img10` VARCHAR(255) NULL AFTER `img09`,
+ADD COLUMN `img11` VARCHAR(255) NULL AFTER `img10`,
+ADD COLUMN `attachment_ii_05` VARCHAR(255) NULL AFTER `img11`,
+ADD COLUMN `lms_x_r2` VARCHAR(45) NULL AFTER `attachment_ii_05`,
+ADD COLUMN `lms_y_r2` VARCHAR(45) NULL AFTER `lms_x_r2`,
+ADD COLUMN `lnms_x_r2` VARCHAR(45) NULL AFTER `lms_y_r2`,
+ADD COLUMN `lnms_y_r2` VARCHAR(45) NULL AFTER `lnms_x_r2`,
+ADD COLUMN `lf_x_r2` VARCHAR(45) NULL AFTER `lnms_y_r2`,
+ADD COLUMN `lf_y_r2` VARCHAR(45) NULL AFTER `lf_x_r2`,
+ADD COLUMN `lms_x_r3` VARCHAR(45) NULL AFTER `lf_y_r2`,
+ADD COLUMN `lms_y_r3` VARCHAR(45) NULL AFTER `lms_x_r3`,
+ADD COLUMN `lnms_x_r3` VARCHAR(45) NULL AFTER `lms_y_r3`,
+ADD COLUMN `lnms_y_r3` VARCHAR(45) NULL AFTER `lnms_x_r3`,
+ADD COLUMN `lf_x_r3` VARCHAR(45) NULL AFTER `lnms_y_r3`,
+ADD COLUMN `lf_y_r3` VARCHAR(45) NULL AFTER `lf_x_r3`;
+
+
+--- 2018-05-14 ---
+
+-- check num of uncomplete last physical year (2017)
+select count(job_sample.job_number) -- ,job_info.date_of_receive,job_sample.job_status 
+from job_sample where job_id in (select id from job_info
+where job_info.date_of_receive <= '2018-03-31') and job_sample.job_status <> 3;
+
+-- update all to job_complete
+update  job_sample set job_sample.job_status=3  where job_id in (select id from job_info
+where job_info.date_of_receive <= '2018-03-31') and job_sample.job_status <> 3
+
+-- update job to "job_delete"
+INSERT INTO `alsi`.`m_status` (`ID`, `status_group_id`, `status_for_role`, `name`, `status`) VALUES ('0', '1', '2', 'JOB DELETE', 'A');
+---
+select * from job_sample where job_number in ('ELN-1020-PAB','ELN-1019-PAB');
+update job_sample set job_status=0 where job_number in ('ELN-1020-PAB','ELN-1019-PAB');
+
+
 */
 
 

@@ -261,9 +261,16 @@ namespace ALS.ALSI.Web.view.request
                             }
                             else
                             {
-                                jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-                                jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
-
+                                if (cbIsTba.Checked)
+                                {
+                                    jobSample.due_date_lab = new DateTime(1, 1, 1);
+                                    jobSample.due_date_customer = new DateTime(1, 1, 1);
+                                }
+                                else
+                                {
+                                    jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                                    jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
+                                }
                             }
                             break;
                         case RoleEnum.ADMIN:

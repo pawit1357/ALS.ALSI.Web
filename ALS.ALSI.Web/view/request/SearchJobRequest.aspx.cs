@@ -4,6 +4,7 @@ using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
 using ClosedXML.Excel;
 using MySql.Data.MySqlClient;
+using NPOI.HSSF.UserModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -114,6 +115,7 @@ namespace ALS.ALSI.Web.view.request
                 tmp.report_to_customer_from = String.IsNullOrEmpty(txtReportToCustomerFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerFrom.Text);
                 tmp.report_to_customer_to = String.IsNullOrEmpty(txtReportToCustomerTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerTo.Text);
                 tmp.userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                tmp.physicalYear = Convert.ToInt16(ddlPhysicalYear.SelectedValue);
                 return tmp;
             }
         }
@@ -147,6 +149,26 @@ namespace ALS.ALSI.Web.view.request
             ddlTypeOfTest.DataBind();
             ddlTypeOfTest.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
+            List<PhysicalYear> yesrList = new List<PhysicalYear>();
+            for (int i = DateTime.Now.Year - 3; i < DateTime.Now.Year + 3; i++)
+            {
+                PhysicalYear _year = new PhysicalYear();
+                _year.year = i;
+                yesrList.Add(_year);
+            }
+
+            ddlPhysicalYear.Items.Clear();
+            ddlPhysicalYear.DataSource = yesrList;
+            ddlPhysicalYear.DataBind();
+
+            if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
+            {
+                ddlPhysicalYear.SelectedValue = (DateTime.Now.Year - 1).ToString();
+            }
+            else
+            {
+                ddlPhysicalYear.SelectedValue = (DateTime.Now.Year).ToString();
+            }
 
             bindingData();
 
@@ -170,7 +192,6 @@ namespace ALS.ALSI.Web.view.request
             btnOperationDueDate.Text = (userRole == RoleEnum.ADMIN) ? "Sent To Cus.(date)" : (userRole == RoleEnum.SR_CHEMIST) ? "Due date" : "";
             btnOperationGroupInvoice.Visible = (userRole == RoleEnum.ACCOUNT);
         }
-
 
         private void bindingData()
         {
@@ -852,16 +873,15 @@ namespace ALS.ALSI.Web.view.request
                      " LEFT OUTER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
                      " LEFT OUTER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
 
-                    //var result = from j in ctx.job_info
-                    //             join s in ctx.job_sample on j.ID equals s.job_id
-                    //             join ms in ctx.m_status on s.job_status equals ms.ID
-                    //             join sp in ctx.m_specification on s.specification_id equals sp.ID
-                    //             join tt in ctx.m_type_of_test on s.type_of_test_id equals tt.ID
-                    //             join c in ctx.m_customer on j.customer_id equals c.ID
-                    //             join cp in ctx.m_customer_contract_person on j.contract_person_id equals cp.ID
 
 
                     StringBuilder sqlCri = new StringBuilder();
+
+                    sqlCri.Append(" YEAR(`Extent1`.`date_of_receive`) = '" + ddlPhysicalYear.SelectedValue + "'");
+                    sqlCri.Append(" AND ");
+                    sqlCri.Append(" `Extent2`.`job_status` <> 0");
+                    sqlCri.Append(" AND ");
+                    
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
                         sqlCri.Append(" `Extent4`.`data_group` = '" + ddlTypeOfTest.SelectedValue + "'");
@@ -965,6 +985,7 @@ namespace ALS.ALSI.Web.view.request
 
         }
 
+
         public override void VerifyRenderingInServerForm(Control control)
         {
             /* Verifies that the control is rendered */
@@ -972,6 +993,7 @@ namespace ALS.ALSI.Web.view.request
 
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
+
             ExportToExcel();
         }
 

@@ -1516,86 +1516,17 @@ namespace ALS.ALSI.Web.view.template
         private void GenerrateCoverPage()
         {
 
-
             //Note: This report was performed test by ALS Singapore.
             if (!string.IsNullOrEmpty(txtD31.Text))
             {
-                lbRemark1.Text = String.Format("1.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD31.Text), 3),txtD32.Text);
+                lbRemark1.Text = String.Format("1.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD31.Text), 3), txtD32.Text);
             }
             if (!string.IsNullOrEmpty(txtC31.Text))
             {
-                lbRemark2.Text = String.Format("2.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC31.Text), 3),txtC32.Text);
+                lbRemark2.Text = String.Format("2.) Minimun RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC31.Text), 3), txtC32.Text);
             }
-            //if (!string.IsNullOrEmpty(txtB49.Text))
-            //{
-            //    lbRemark3.Text = String.Format("Minimum RHC Detection Limit of Hub is {0} g/cm2", Math.Round(Convert.ToDecimal(txtB49.Text), 3));
-            //}
 
             #region "Binding"
-
-            //List<template_seagate_gcms_coverpage> motorOils = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
-            //if (motorOils.Count > 0)
-            //{
-
-            //    double c0 = Convert.ToDouble(String.IsNullOrEmpty(lbB30_MO.Text) ? "0" : lbB30_MO.Text) + Convert.ToDouble(String.IsNullOrEmpty(lbC30_MO.Text) ? "0" : lbC30_MO.Text);
-            //    double c1 = Convert.ToDouble(String.IsNullOrEmpty(lbB31_MO.Text) ? "0" : lbB31_MO.Text) + Convert.ToDouble(String.IsNullOrEmpty(lbC31_MO.Text) ? "0" : lbC31_MO.Text);
-
-
-            //    motorOils[0].C = c0 == 0 ? "Not Detected" : Math.Round(c0, 2) + "";
-            //    motorOils[1].C = c1 == 0 ? "Not Detected" : Math.Round(c1, 2) + "";
-
-            //    gvMotorOil.DataSource = motorOils;
-            //    gvMotorOil.DataBind();
-            //    gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
-            //    gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
-            //    gvMotorOil.Visible = true;
-            //}
-            //else
-            //{
-            //    gvMotorOil.Visible = false;
-            //}
-
-            //List<template_seagate_gcms_coverpage> motorHubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-")).ToList();
-            //if (motorHubs.Count > 0)
-            //{
-
-            //    if (!String.IsNullOrEmpty(lbD43.Text) && !String.IsNullOrEmpty(lbB31_MO.Text))
-            //    {
-            //        motorHubs[0].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbB31_MO.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
-            //    }
-
-            //    gvMotorHub.DataSource = motorHubs;
-            //    gvMotorHub.DataBind();
-
-
-            //    gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHub.SelectedItem.Text);
-            //    gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
-            //    gvMotorHub.Visible = true;
-            //}
-            //else
-            //{
-            //    gvMotorHub.Visible = false;
-            //}
-
-
-
-            //List<template_seagate_gcms_coverpage> motorHubSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB) && !x.A.Equals("-")).ToList();
-            //if (motorHubSubs.Count > 0)
-            //{
-            //    motorHubSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB43.Text) ? "0" : lbB43.Text), 2) + "";//Compounds with RT ≤ DOP
-            //    motorHubSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbC43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
-            //    motorHubSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorHubSubs[1].C) + Convert.ToDecimal(motorHubSubs[2].C)) + ""), 2) + "";//Total Organic Compound (TOC)
-            //    gvMotorHubSub.DataSource = motorHubSubs;
-            //    gvMotorHubSub.DataBind();
-
-            //    gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
-            //    gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
-            //    gvMotorHubSub.Visible = true;
-            //}
-            //else
-            //{
-            //    gvMotorHubSub.Visible = false;
-            //}
 
 
 
@@ -1618,7 +1549,6 @@ namespace ALS.ALSI.Web.view.template
                 gvMotorBase.Visible = false;
             }
 
-
             List<template_seagate_gcms_coverpage> motorBaseSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-")).ToList();
             if (motorBaseSubs.Count > 0)
             {
@@ -1638,55 +1568,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 gvMotorBaseSub.Visible = false;
             }
-
-
-
-            //List<template_seagate_gcms_coverpage> compounds = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND) && !x.A.Equals("-")).ToList();
-            //if (compounds.Count > 0)
-            //{
-
-            //    if (!String.IsNullOrEmpty(lbD43.Text))
-            //    {
-            //        compounds[0].C = (Convert.ToDecimal(lbD43.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(lbD43.Text), 2) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
-            //    }
-
-
-
-
-            //    gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompound.SelectedItem.Text);
-            //    gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
-
-            //    gvCompound.DataSource = compounds;
-            //    gvCompound.DataBind();
-
-            //    gvCompound.Visible = true;
-            //}
-            //else
-            //{
-            //    gvCompound.Visible = false;
-            //}
-
-            //List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
-            //if (compoundSubs.Count > 0)
-            //{
-            //    compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbB43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
-            //    compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(lbC43.Text) ? "0" : lbC43.Text), 2) + "";//Compounds with RT > DOP
-
-            //    compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
-
-
-            //    gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitCompound.SelectedItem.Text);
-            //    gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitCompound.SelectedItem.Text);
-
-            //    gvCompoundSub.DataSource = compoundSubs;
-            //    gvCompoundSub.DataBind();
-
-            //    gvCompoundSub.Visible = true;
-            //}
-            //else
-            //{
-            //    gvCompoundSub.Visible = false;
-            //}
             #endregion
         }
 
@@ -2055,7 +1936,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
-        
+
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
@@ -2083,8 +1964,8 @@ namespace ALS.ALSI.Web.view.template
 
         //protected void ddlUnitMotorOilContamination_SelectedIndexChanged(object sender, EventArgs e)
         //{
-            //gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
-            //gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+        //gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+        //gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
         //    ModolPopupExtender.Show();
         //    GenerrateCoverPage();
         //}
@@ -2104,8 +1985,8 @@ namespace ALS.ALSI.Web.view.template
         }
         //protected void ddlUnitMotorHubSub_SelectedIndexChanged(object sender, EventArgs e)
         //{
-            //gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorHubSub.SelectedItem.Text);
-            //gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+        //gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+        //gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
         //    ModolPopupExtender.Show();
         //    GenerrateCoverPage();
         //}

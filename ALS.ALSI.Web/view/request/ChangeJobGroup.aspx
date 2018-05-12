@@ -284,6 +284,8 @@
                                             <asp:TextBox ID="txtDuedate" name="txtDuedate" runat="server" class="form-control"></asp:TextBox>
                                             <span class="input-group-btn">
                                                 <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:CheckBox ID="cbIsTba" runat="server" CssClass="checkbox-inline"  Text="TBA(duedate)" />
+
                                             </span>
                                         </div>
                                     </div>

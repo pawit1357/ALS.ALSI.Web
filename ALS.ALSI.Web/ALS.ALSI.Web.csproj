@@ -1250,9 +1250,9 @@
     <Content Include="view\request\JobReTest.aspx" />
     <Content Include="view\request\ChangeReportDate.aspx" />
     <Content Include="view\request\AdminPrint.aspx" />
-    <Content Include="view\template\PA01.ascx" />
+    <Content Include="view\template\-PA01.ascx" />
     <Content Include="view\template\PA03.ascx" />
-    <Content Include="view\template\PA02.ascx" />
+    <Content Include="view\template\-PA02.ascx" />
     <Content Include="view\template\Seagate_Copperwire.ascx" />
     <Content Include="view\template\Seagate_DHS_V2.ascx" />
     <Content Include="view\template\Seagate_FTIR_Damper.ascx" />
@@ -1505,12 +1505,12 @@
     <Compile Include="view\request\AdminPrint.aspx.designer.cs">
       <DependentUpon>AdminPrint.aspx</DependentUpon>
     </Compile>
-    <Compile Include="view\template\PA01.ascx.cs">
-      <DependentUpon>PA01.ascx</DependentUpon>
+    <Compile Include="view\template\-PA01.ascx.cs">
+      <DependentUpon>-PA01.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="view\template\PA01.ascx.designer.cs">
-      <DependentUpon>PA01.ascx</DependentUpon>
+    <Compile Include="view\template\-PA01.ascx.designer.cs">
+      <DependentUpon>-PA01.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\PA03.ascx.cs">
       <DependentUpon>PA03.ascx</DependentUpon>
@@ -1519,12 +1519,12 @@
     <Compile Include="view\template\PA03.ascx.designer.cs">
       <DependentUpon>PA03.ascx</DependentUpon>
     </Compile>
-    <Compile Include="view\template\PA02.ascx.cs">
-      <DependentUpon>PA02.ascx</DependentUpon>
+    <Compile Include="view\template\-PA02.ascx.cs">
+      <DependentUpon>-PA02.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="view\template\PA02.ascx.designer.cs">
-      <DependentUpon>PA02.ascx</DependentUpon>
+    <Compile Include="view\template\-PA02.ascx.designer.cs">
+      <DependentUpon>-PA02.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\Seagate_Copperwire.ascx.cs">
       <DependentUpon>Seagate_Copperwire.ascx</DependentUpon>

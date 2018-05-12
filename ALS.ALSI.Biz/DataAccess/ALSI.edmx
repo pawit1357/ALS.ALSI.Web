@@ -744,6 +744,25 @@
           <Property Name="specification_no" Type="int" />
           <Property Name="operater_name" Type="int" />
           <Property Name="per_text" Type="varchar" MaxLength="45" />
+          <Property Name="img06" Type="varchar" MaxLength="255" />
+          <Property Name="img07" Type="varchar" MaxLength="255" />
+          <Property Name="img08" Type="varchar" MaxLength="255" />
+          <Property Name="img09" Type="varchar" MaxLength="255" />
+          <Property Name="img10" Type="varchar" MaxLength="255" />
+          <Property Name="img11" Type="varchar" MaxLength="255" />
+          <Property Name="attachment_ii_05" Type="varchar" MaxLength="255" />
+          <Property Name="lms_x_r2" Type="varchar" MaxLength="45" />
+          <Property Name="lms_y_r2" Type="varchar" MaxLength="45" />
+          <Property Name="lnms_x_r2" Type="varchar" MaxLength="45" />
+          <Property Name="lnms_y_r2" Type="varchar" MaxLength="45" />
+          <Property Name="lf_x_r2" Type="varchar" MaxLength="45" />
+          <Property Name="lf_y_r2" Type="varchar" MaxLength="45" />
+          <Property Name="lms_x_r3" Type="varchar" MaxLength="45" />
+          <Property Name="lms_y_r3" Type="varchar" MaxLength="45" />
+          <Property Name="lnms_x_r3" Type="varchar" MaxLength="45" />
+          <Property Name="lnms_y_r3" Type="varchar" MaxLength="45" />
+          <Property Name="lf_x_r3" Type="varchar" MaxLength="45" />
+          <Property Name="lf_y_r3" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_pa_detail">
           <Key>
@@ -1798,18 +1817,6 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_role_id">
-          <End Role="role" Type="Self.role" Multiplicity="1" />
-          <End Role="users_login" Type="Self.users_login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="role">
-              <PropertyRef Name="ROLE_ID" />
-            </Principal>
-            <Dependent Role="users_login">
-              <PropertyRef Name="role_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_sample_idx_4">
           <End Role="job_sample" Type="Self.job_sample" Multiplicity="0..1" />
           <End Role="template_wd_ir_coverpage" Type="Self.template_wd_ir_coverpage" Multiplicity="*" />
@@ -1963,10 +1970,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
             <End Role="job_running" EntitySet="job_running" />
             <End Role="job_info" EntitySet="job_info" />
           </AssociationSet>
-          <AssociationSet Name="fk_role_id" Association="Self.fk_role_id">
-            <End Role="role" EntitySet="role" />
-            <End Role="users_login" EntitySet="users_login" />
-          </AssociationSet>
           <AssociationSet Name="fk_sample_idx_4" Association="Self.fk_sample_idx_4">
             <End Role="job_sample" EntitySet="job_sample" />
             <End Role="template_wd_ir_coverpage" EntitySet="template_wd_ir_coverpage" />
@@ -2093,10 +2096,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           </AssociationSet>
           <AssociationSet Name="fk_title_id_2" Association="ALSIModel.fk_title_id_2">
             <End Role="m_title" EntitySet="m_title" />
-            <End Role="users_login" EntitySet="users_login" />
-          </AssociationSet>
-          <AssociationSet Name="fk_role_id" Association="ALSIModel.fk_role_id">
-            <End Role="role" EntitySet="roles" />
             <End Role="users_login" EntitySet="users_login" />
           </AssociationSet>
         </EntityContainer>
@@ -2433,7 +2432,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="UPDATE_BY" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CREATE_DATE" Type="DateTime" Nullable="false" />
           <Property Name="UPDATE_DATE" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="users_login" Relationship="ALSIModel.fk_role_id" FromRole="role" ToRole="users_login" />
         </EntityType>
         <EntityType Name="tb_m_component">
           <Key>
@@ -2858,6 +2856,25 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="specification_no" Type="Int32" />
           <Property Name="operater_name" Type="Int32" />
           <Property Name="per_text" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="img06" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img07" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img08" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img09" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img10" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="img11" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="attachment_ii_05" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="lms_x_r2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lms_y_r2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lnms_x_r2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lnms_y_r2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lf_x_r2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lf_y_r2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lms_x_r3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lms_y_r3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lnms_x_r3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lnms_y_r3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lf_x_r3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lf_y_r3" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_pa_detail">
           <Key>
@@ -3814,7 +3831,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="last_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="mobile_phone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="m_title" Relationship="ALSIModel.fk_title_id_2" FromRole="users_login" ToRole="m_title" />
-          <NavigationProperty Name="role" Relationship="ALSIModel.fk_role_id" FromRole="users_login" ToRole="role" />
         </EntityType>
         <EntityType Name="users_responsible">
           <Key>
@@ -3970,18 +3986,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
             </Principal>
             <Dependent Role="users_login">
               <PropertyRef Name="personal_title" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_role_id">
-          <End Type="ALSIModel.role" Role="role" Multiplicity="1" />
-          <End Type="ALSIModel.users_login" Role="users_login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="role">
-              <PropertyRef Name="ROLE_ID" />
-            </Principal>
-            <Dependent Role="users_login">
-              <PropertyRef Name="role_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4635,6 +4639,25 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_pa">
             <EntityTypeMapping TypeName="ALSIModel.template_pa">
               <MappingFragment StoreEntitySet="template_pa">
+                <ScalarProperty Name="lf_y_r3" ColumnName="lf_y_r3" />
+                <ScalarProperty Name="lf_x_r3" ColumnName="lf_x_r3" />
+                <ScalarProperty Name="lnms_y_r3" ColumnName="lnms_y_r3" />
+                <ScalarProperty Name="lnms_x_r3" ColumnName="lnms_x_r3" />
+                <ScalarProperty Name="lms_y_r3" ColumnName="lms_y_r3" />
+                <ScalarProperty Name="lms_x_r3" ColumnName="lms_x_r3" />
+                <ScalarProperty Name="lf_y_r2" ColumnName="lf_y_r2" />
+                <ScalarProperty Name="lf_x_r2" ColumnName="lf_x_r2" />
+                <ScalarProperty Name="lnms_y_r2" ColumnName="lnms_y_r2" />
+                <ScalarProperty Name="lnms_x_r2" ColumnName="lnms_x_r2" />
+                <ScalarProperty Name="lms_y_r2" ColumnName="lms_y_r2" />
+                <ScalarProperty Name="lms_x_r2" ColumnName="lms_x_r2" />
+                <ScalarProperty Name="attachment_ii_05" ColumnName="attachment_ii_05" />
+                <ScalarProperty Name="img11" ColumnName="img11" />
+                <ScalarProperty Name="img10" ColumnName="img10" />
+                <ScalarProperty Name="img09" ColumnName="img09" />
+                <ScalarProperty Name="img08" ColumnName="img08" />
+                <ScalarProperty Name="img07" ColumnName="img07" />
+                <ScalarProperty Name="img06" ColumnName="img06" />
                 <ScalarProperty Name="per_text" ColumnName="per_text" />
                 <ScalarProperty Name="operater_name" ColumnName="operater_name" />
                 <ScalarProperty Name="specification_no" ColumnName="specification_no" />

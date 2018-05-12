@@ -82,7 +82,7 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_TYPE_OF_TEST = APPNAME + "/view/type_of_test/TypeOfTest.aspx";
 
 
-
+        public const int PHYSICAL_YEAR = 4;
 
 
         public static string GetEnumDescription(Enum value)
@@ -238,6 +238,8 @@ namespace ALS.ALSI.Biz.Constant
 
     public enum StatusEnum
     {
+        [Description("DELETE")]
+        JOB_DELETE = 0,
         [Description("CANCEL")]
         JOB_CANCEL = 1,
         [Description("HOLD")]
@@ -280,8 +282,7 @@ namespace ALS.ALSI.Biz.Constant
         [Description("RETEST REPORT")]
         JOB_RETEST = 16,
         [Description("APPROVE AMEND")]
-        JOB_AMEND = 17,
-
+        JOB_AMEND = 17
     }
 
     public enum CompletionScheduledEnum
@@ -424,3 +425,7 @@ namespace ALS.ALSI.Biz.Constant
     }
 }
 
+public class PhysicalYear
+{
+    public int year { get; set; }
+}

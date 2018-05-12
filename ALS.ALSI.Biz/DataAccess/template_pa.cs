@@ -136,5 +136,24 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> specification_no { get; set; }
         public Nullable<int> operater_name { get; set; }
         public string per_text { get; set; }
+        public string img06 { get; set; }
+        public string img07 { get; set; }
+        public string img08 { get; set; }
+        public string img09 { get; set; }
+        public string img10 { get; set; }
+        public string img11 { get; set; }
+        public string attachment_ii_05 { get; set; }
+        public string lms_x_r2 { get; set; }
+        public string lms_y_r2 { get; set; }
+        public string lnms_x_r2 { get; set; }
+        public string lnms_y_r2 { get; set; }
+        public string lf_x_r2 { get; set; }
+        public string lf_y_r2 { get; set; }
+        public string lms_x_r3 { get; set; }
+        public string lms_y_r3 { get; set; }
+        public string lnms_x_r3 { get; set; }
+        public string lnms_y_r3 { get; set; }
+        public string lf_x_r3 { get; set; }
+        public string lf_y_r3 { get; set; }
     }
 }

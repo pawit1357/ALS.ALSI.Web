@@ -1236,9 +1236,9 @@ namespace ALS.ALSI.Web.view.template
                                     String txtMotorOilBase25 = isheet.GetRow(34 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
                                     String txtMotorOilBase35 = isheet.GetRow(35 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
 
-                                    txtMotorOilHub = CustomUtils.showOnCoverPageValue(txtMotorOilHub,2);// String.IsNullOrEmpty(txtMotorOilHub)|| txtMotorOilHub.Equals("0.00") ? "" : txtMotorOilHub.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilHub) ? txtMotorOilHub : Convert.ToDouble(txtMotorOilHub).ToString("N2");
-                                    txtMotorOilBase25 = CustomUtils.showOnCoverPageValue(txtMotorOilBase25, 2);//String.IsNullOrEmpty(txtMotorOilBase25)|| txtMotorOilBase25.Equals("0.00") ? "" : txtMotorOilBase25.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase25) ? txtMotorOilBase25 : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
-                                    txtMotorOilBase35 = CustomUtils.showOnCoverPageValue(txtMotorOilBase35, 2);//String.IsNullOrEmpty(txtMotorOilBase35) || txtMotorOilBase35.Equals("0.00") ? "":"";// : txtMotorOilBase35.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase35) ? txtMotorOilBase35 : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
+                                    txtMotorOilHub = CustomUtils.showOnCoverPageValue(txtMotorOilHub, Convert.ToInt16(txtFloatResult01.Text));// String.IsNullOrEmpty(txtMotorOilHub)|| txtMotorOilHub.Equals("0.00") ? "" : txtMotorOilHub.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilHub) ? txtMotorOilHub : Convert.ToDouble(txtMotorOilHub).ToString("N2");
+                                    txtMotorOilBase25 = CustomUtils.showOnCoverPageValue(txtMotorOilBase25, Convert.ToInt16(txtFloatResult01.Text));//String.IsNullOrEmpty(txtMotorOilBase25)|| txtMotorOilBase25.Equals("0.00") ? "" : txtMotorOilBase25.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase25) ? txtMotorOilBase25 : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
+                                    txtMotorOilBase35 = CustomUtils.showOnCoverPageValue(txtMotorOilBase35, Convert.ToInt16(txtFloatResult01.Text));//String.IsNullOrEmpty(txtMotorOilBase35) || txtMotorOilBase35.Equals("0.00") ? "":"";// : txtMotorOilBase35.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase35) ? txtMotorOilBase35 : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
 
                                     List<template_seagate_gcms_coverpage> motorOilsUpdate = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
                                     if (motorOilsUpdate.Count > 0)
@@ -1864,9 +1864,19 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorOils = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
             if (motorOils.Count > 0)
             {
-                foreach(var item in motorOils)
+                foreach (var item in motorOils)
                 {
-                    item.C = String.IsNullOrEmpty(item.C)? String.Empty: item.C.Equals("Not Detected")? item.C: CustomUtils.isNumber(item.C) ? String.Empty : Convert.ToDouble(item.C).ToString("N" + txtFloatResult01.Text);
+
+                    if (CustomUtils.isNumber(item.C))
+                    {
+                        item.C = Convert.ToDouble(item.C).ToString("N" + txtFloatResult01.Text);
+                    }
+                    else
+                    {
+                        item.C = String.IsNullOrEmpty(item.C) ? String.Empty : item.C;
+
+                    }
+
                 }
                 gvMotorOil.DataSource = motorOils;
                 gvMotorOil.DataBind();
@@ -1902,9 +1912,9 @@ namespace ALS.ALSI.Web.view.template
                 motorHubSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC50.Text) ? "0" : txtC50.Text), Convert.ToInt16(txtFloatResult04.Text)) + "";//Compounds with RT > DOP
                 motorHubSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorHubSubs[1].C) + Convert.ToDecimal(motorHubSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult05.Text)) + "";//Total Organic Compound (TOC)
 
-                motorHubSubs[1].C = (Convert.ToDouble(motorHubSubs[1].C) == 0) ? "Not Detecte" : motorHubSubs[1].C;
-                motorHubSubs[2].C = (Convert.ToDouble(motorHubSubs[2].C) == 0) ? "Not Detecte" : motorHubSubs[2].C;
-                motorHubSubs[0].C = (Convert.ToDouble(motorHubSubs[0].C) == 0) ? "Not Detecte" : motorHubSubs[0].C;
+                motorHubSubs[1].C = (Convert.ToDouble(motorHubSubs[1].C) == 0) ? "Not Detected" : motorHubSubs[1].C;
+                motorHubSubs[2].C = (Convert.ToDouble(motorHubSubs[2].C) == 0) ? "Not Detected" : motorHubSubs[2].C;
+                motorHubSubs[0].C = (Convert.ToDouble(motorHubSubs[0].C) == 0) ? "Not Detected" : motorHubSubs[0].C;
 
                 gvMotorHubSub.DataSource = motorHubSubs;
                 gvMotorHubSub.DataBind();
@@ -1943,9 +1953,9 @@ namespace ALS.ALSI.Web.view.template
                 motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), Convert.ToInt16(txtFloatResult08.Text)) + "";//Compounds with RT > DOP
                 motorBaseSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorBaseSubs[1].C) + Convert.ToDecimal(motorBaseSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult09.Text)) + "";//Total Organic Compound (TOC)
 
-                motorBaseSubs[1].C = (Convert.ToDouble(motorBaseSubs[1].C) == 0) ? "Not Detecte" : motorBaseSubs[1].C;
-                motorBaseSubs[2].C = (Convert.ToDouble(motorBaseSubs[2].C) == 0) ? "Not Detecte" : motorBaseSubs[2].C;
-                motorBaseSubs[0].C = (Convert.ToDouble(motorBaseSubs[0].C) == 0) ? "Not Detecte" : motorBaseSubs[0].C;
+                motorBaseSubs[1].C = (Convert.ToDouble(motorBaseSubs[1].C) == 0) ? "Not Detected" : motorBaseSubs[1].C;
+                motorBaseSubs[2].C = (Convert.ToDouble(motorBaseSubs[2].C) == 0) ? "Not Detected" : motorBaseSubs[2].C;
+                motorBaseSubs[0].C = (Convert.ToDouble(motorBaseSubs[0].C) == 0) ? "Not Detected" : motorBaseSubs[0].C;
 
                 gvMotorBaseSub.DataSource = motorBaseSubs;
                 gvMotorBaseSub.DataBind();
@@ -1989,11 +1999,11 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-                compoundSubs[1].C = (Convert.ToDouble(compoundSubs[1].C) == 0) ? "Not Detecte" : compoundSubs[1].C;
-                compoundSubs[2].C = (Convert.ToDouble(compoundSubs[2].C) == 0) ? "Not Detecte" : compoundSubs[2].C;
+                compoundSubs[1].C = (Convert.ToDouble(compoundSubs[1].C) == 0) ? "Not Detected" : compoundSubs[1].C;
+                compoundSubs[2].C = (Convert.ToDouble(compoundSubs[2].C) == 0) ? "Not Detected" : compoundSubs[2].C;
                 if (compounds.Count > 3)
                 {
-                    compoundSubs[4].C = (Convert.ToDouble(compoundSubs[4].C) == 0) ? "Not Detecte" : compoundSubs[4].C;
+                    compoundSubs[4].C = (Convert.ToDouble(compoundSubs[4].C) == 0) ? "Not Detected" : compoundSubs[4].C;
                 }
 
                 gvCompoundSub.DataSource = compoundSubs;

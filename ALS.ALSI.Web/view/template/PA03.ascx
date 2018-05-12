@@ -26,7 +26,7 @@
                         <asp:Button ID="btnPage06" runat="server" Text="P06" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
                         <asp:Button ID="btnPage07" runat="server" Text="P07" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" />
                         <asp:Button ID="btnPage08" runat="server" Text="P08" CssClass="btn btn-default btn-sm" OnClick="btnCoverPage_Click" Visible="false" />
-                        <asp:LinkButton ID="btnShowUnit" runat="server" OnClick="btnShowUnit_Click" CssClass="btn green"> <i class="fa fa-sort-numeric-asc"></i> SetUp  (Float)</asp:LinkButton>
+                        <asp:LinkButton ID="btnShowUnit" runat="server" OnClick="btnShowUnit_Click" CssClass="btn green"> <i class="fa fa-sort-numeric-asc"></i> SetUp&nbsp; (Float)</asp:LinkButton>
 
 
                     </div>
@@ -34,7 +34,30 @@
                 <div class="portlet-body">
 
                     <asp:Panel ID="pPage01" runat="server">
+                        <asp:Panel ID="pEop" runat="server">
+                            <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Test result</h4>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <asp:Label ID="Label55" runat="server" CssClass="control-label col-md-3"></asp:Label>
+                                        <div class="col-md-6">
+                                            <asp:DropDownList ID="ddlResult" runat="server" CssClass="form-control">
+                                                <asp:ListItem Value="0" Selected="True">-NONE-</asp:ListItem>
+                                                <asp:ListItem Value="1">TEST FAILED</asp:ListItem>
+                                                <asp:ListItem Value="2">TEST PASSED</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div>
+                                            <br />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <br />
+                        </asp:Panel>
                         <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Evaluation of Particles</h4>
 
 
@@ -174,9 +197,9 @@
                             </Columns>
                         </asp:GridView>
                         <div class="note note-success">
-                            Remark: 1 Particles is metallic shine+non-metall shine particles without fibers on membrane.
-2Fiber according to 0442S00025 chapter 1.3.
+                            <asp:Label ID="lbP1Note" runat="server"></asp:Label><br />
 
+                            <asp:Label ID="lbP1Remark" runat="server"></asp:Label>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -1597,11 +1620,12 @@
                                     </div>
 
                                 </div>
-                                <%--  <div class="note note-success">
-                                  Remark:	1Metallic + Non-metallic particles without fibers.
-	2Fibers defined as Non-metallic, Length/Width > 10.                 
+                                <div class="note note-success">
+                                    Remark:	1Metallic + Non-metallic particles without fibers.<br />
+                                    2Fiber definded as Non-metallic, Length/Width > 10.<br />
+                                    3The system rounds the number of particles mathetically when related 
+
                                 </div>
-                                --%>
                             </div>
                             <!--/span-->
 
@@ -1679,7 +1703,7 @@
                                                 <td>
                                                     <asp:TextBox ID="lbPer" runat="server" Text="Per Component" CssClass="form-control"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td style="text-decoration-style: dotted">
-                                                    <asp:Label ID="lbPermembraneTotal" runat="server" Text="" CssClass="form-control"></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <asp:TextBox ID="lbPermembraneTotal" runat="server" Text="" CssClass="form-control"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>
                                                     <asp:TextBox ID="txtPermembraneMetallicShine" runat="server" CssClass="form-control"></asp:TextBox>
                                                 </td>
@@ -1781,6 +1805,145 @@
                                                     </table>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center">Overview of filter (2)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table style="text-align: center">
+                                                        <tr>
+                                                            <td colspan="6">
+                                                                <asp:Image ID="img6" runat="server" Style="width: 200px; height: 180px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="6" class="auto-style3">Largest metallic shine</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;X&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLms_X_R2" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um,&nbsp;</td>
+                                                            <td>&nbsp;Y&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLms_Y_R2" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um&nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <table style="text-align: center">
+                                                        <tr>
+                                                            <td colspan="6" style="text-align: center">
+                                                                <asp:Image ID="img7" runat="server" Style="width: 200px; height: 180px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="6">Largest non-metallic shine</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;X&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLnms_X_R2" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um,&nbsp;</td>
+                                                            <td>&nbsp;Y&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLnms_Y_R2" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um&nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <table style="text-align: center">
+                                                        <tr>
+                                                            <td colspan="6" style="text-align: center">
+                                                                <asp:Image ID="img8" runat="server" Style="width: 200px; height: 180px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="6">Largest fiber</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLf_X_R2" runat="server" CssClass="form-control" Width="120px" Visible="false"></asp:TextBox></td>
+                                                            <td>&nbsp;&nbsp;</td>
+                                                            <td>&nbsp;Y&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLf_Y_R2" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um&nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center">Overview of filter (3)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table style="text-align: center">
+                                                        <tr>
+                                                            <td colspan="6">
+                                                                <asp:Image ID="img9" runat="server" Style="width: 200px; height: 180px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="6" class="auto-style3">Largest metallic shine</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;X&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLms_X_R3" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um,&nbsp;</td>
+                                                            <td>&nbsp;Y&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLms_Y_R3" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um&nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <table style="text-align: center">
+                                                        <tr>
+                                                            <td colspan="6" style="text-align: center">
+                                                                <asp:Image ID="img10" runat="server" Style="width: 200px; height: 180px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="6">Largest non-metallic shine</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;X&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLnms_X_R3" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um,&nbsp;</td>
+                                                            <td>&nbsp;Y&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLnms_Y_R3" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um&nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <table style="text-align: center">
+                                                        <tr>
+                                                            <td colspan="6" style="text-align: center">
+                                                                <asp:Image ID="img11" runat="server" Style="width: 200px; height: 180px;" BorderStyle="Dotted" ImageUrl="~/images/no_img.png" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="6">Largest fiber</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLf_X_R3" runat="server" CssClass="form-control" Width="120px" Visible="false"></asp:TextBox></td>
+                                                            <td>&nbsp;&nbsp;</td>
+                                                            <td>&nbsp;Y&nbsp;</td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtLf_Y_R3" runat="server" CssClass="form-control" Width="120px"></asp:TextBox></td>
+                                                            <td>&nbsp;um&nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+
+
                                         </table>
                                     </div>
                                 </div>
@@ -1901,7 +2064,6 @@
                             </div>
 
                         </div>
-
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -1926,7 +2088,7 @@
 
                                             </div>
                                             <br />
-                                            <asp:Button ID="btnLoadImg" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadImg_Click" />
+
 
 
                                         </div>
@@ -1942,9 +2104,280 @@
                             </div>
 
                         </div>
+                        <!-- ROW 2 -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Largest metallic shine (2)</label>
+
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="fileUploadImg03_R2" runat="server" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
 
 
+                                            </div>
+                                            <br />
 
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Largest non-metallic shine (2)</label>
+
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="fileUploadImg04_R2" runat="server" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+
+                                            </div>
+                                            <br />
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Largest fiber&nbsp; (2)</label>
+
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="fileUploadImg05_R2" runat="server" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+
+                                            </div>
+                                            <br />
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- ROW 3 -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Largest metallic shine (3)</label>
+
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="fileUploadImg03_R3" runat="server" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+
+                                            </div>
+                                            <br />
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Largest non-metallic shine (3)</label>
+
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="fileUploadImg04_R3" runat="server" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+
+                                            </div>
+                                            <br />
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Largest fiber (3)</label>
+
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="fileUploadImg05_R3" runat="server" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+
+                                            </div>
+                                            <br />
+                                            <asp:Button ID="btnLoadImg" runat="server" Text="Load (Image)" CssClass="btn blue" OnClick="btnLoadImg_Click" />
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+                        </div>
+                        <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Attached file</h4>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Attached file</label>
+
+                                    <div class="col-md-3">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-large" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                               
+                                            <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new">Select file </span>
+                                                    <span class="fileinput-exists">Change </span>
+                                                    <asp:FileUpload ID="fileAttachedDoc" runat="server" />
+
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                            </div>
+
+                                            <span>สามารถเลือกไฟล์ *.doc|*.docx เพื่ออัพโหลดเป็น attached file 
+                                            </span>
+                                            <br />
+                                            <asp:Button ID="btnLoadAtt" runat="server" Text="Load (Attached file)" CssClass="btn red" OnClick="btnLoadImg_Click" />
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+                        </div>
                     </asp:Panel>
                     <asp:Panel ID="pPage08" runat="server">
                         <h4 class="caption-subject bold uppercase"><i class="fa fa-clone"></i>&nbsp;&nbsp;Particle nature determination by SEM/EDX</h4>
@@ -2294,27 +2727,7 @@
                                             </div>
                                         </asp:Panel>
 
-                                        <asp:Panel ID="pEop" runat="server">
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Test result.:</label>
-                                                <div class="col-md-6">
 
-                                                    <asp:DropDownList ID="ddlResult" runat="server" CssClass="form-control">
-                                                        <asp:ListItem Value="0" Selected="True">-NONE-</asp:ListItem>
-                                                        <asp:ListItem Value="1">TEST FAILED</asp:ListItem>
-                                                        <asp:ListItem Value="2">TEST PASSED</asp:ListItem>
-                                                    </asp:DropDownList>
-
-                                                </div>
-                                            </div>
-
-
-
-
-
-
-                                            <br />
-                                        </asp:Panel>
                                         <!-- 
                                     <asp:Panel ID="pMa" runat="server">
 
@@ -2369,7 +2782,11 @@
                                                             <h5>
                                                                 <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
                                                                     <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>&nbsp;Download
-                                                                </asp:LinkButton></h5>
+                                                                </asp:LinkButton>
+
+                                                            </h5>
+                                                            <asp:LinkButton ID="lbDownloadAtt" runat="server" OnClick="lbDownloadAtt_Click">PA Attached file.</asp:LinkButton>
+
                                                             <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label>
                                                         </div>
                                                     </div>
@@ -2460,7 +2877,9 @@
                                         <tr>
                                             <td></td>
                                             <td>
-                                                <asp:Button ID="btnSrChemistTest" runat="server" Text="Sr.Chemist (Calulate)" CssClass="btn btn-default btn-sm" OnClick="btnSrChemistTest_Click" /></td>
+                                                <asp:Button ID="btnSrChemistTest" runat="server" Text="Sr.Chemist (Calulate)" CssClass="btn btn-default btn-sm" OnClick="btnSrChemistTest_Click" />
+                                                <span>สำหรับให้นักเคมีเปลี่ยนทศนิยม</span>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -2531,6 +2950,9 @@
             <asp:PostBackTrigger ControlID="btnLoadFile" />
             <asp:PostBackTrigger ControlID="btnLoadImg" />
             <asp:PostBackTrigger ControlID="btnLoadImg1" />
+            <asp:PostBackTrigger ControlID="btnLoadAtt" />
+
+
             <asp:PostBackTrigger ControlID="btnLoadParamImg1" />
             <asp:PostBackTrigger ControlID="btnLoadParamImg2" />
             <asp:PostBackTrigger ControlID="btnLoadParamImg3" />
@@ -2538,6 +2960,8 @@
 
             <asp:PostBackTrigger ControlID="btnSubmit" />
             <asp:PostBackTrigger ControlID="lbDownload" />
+                        <asp:PostBackTrigger ControlID="lbDownloadAtt" />
+
             <%--                        <asp:PostBackTrigger ControlID="btnShowUnit" />--%>
         </Triggers>
     </asp:UpdatePanel>

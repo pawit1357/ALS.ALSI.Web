@@ -42,7 +42,7 @@ namespace ALS.ALSI.Web.UserControls
                         AmRetest = (_sample.amend_count > 0) ? "AM" + ((_sample.amend_count == 1) ? "" : _sample.amend_count + "") + "/" : String.Empty;
                         break;
                     case "R":
-                        AmRetest = (_sample.retest_count > 0) ? "R" + ((_sample.retest_count == 0) ? "" : _sample.retest_count + "") + "/" : String.Empty;
+                        AmRetest = (_sample.retest_count > 0) ? "R" + ((_sample.retest_count == 1) ? "" : _sample.retest_count + "") + "/" : String.Empty;
                         break;
                 }
 

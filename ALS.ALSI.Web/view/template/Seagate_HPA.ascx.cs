@@ -1600,26 +1600,27 @@ namespace ALS.ALSI.Web.view.template
 
                 List<template_seagate_hpa_coverpage> sumOfHpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_TOTAL)).OrderBy(x => x.data_group).ToList();
                 List<template_seagate_hpa_coverpage> hpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
+                if (hpas.Count > 0)
+                {
+                    string TotalSST = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total SST")).FirstOrDefault().C;
+                    string Fe_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Fe based")).FirstOrDefault().C;
+                    string FeO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("FeO")).FirstOrDefault().C;
+                    string Sn_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Sn based")).FirstOrDefault().C;
+                    string PbZrTi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("PbZrTi")).FirstOrDefault().C;
+                    string MgSiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgSiO")).FirstOrDefault().C;
 
-                string TotalSST = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total SST")).FirstOrDefault().C;
-                string Fe_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Fe based")).FirstOrDefault().C;
-                string FeO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("FeO")).FirstOrDefault().C;
-                string Sn_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Sn based")).FirstOrDefault().C;
-                string PbZrTi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("PbZrTi")).FirstOrDefault().C;
-                string MgSiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgSiO")).FirstOrDefault().C;
 
-
-                hpas[0].C = Convert.ToDouble(sumOfHpas[0].C).ToString("N1");//[0]
-                hpas[1].C = Convert.ToDouble(sumOfHpas[1].C).ToString("N1");//[1]
-                hpas[2].C = Convert.ToDouble(sumOfHpas[2].C).ToString("N1");//[2]
-                hpas[3].C = Convert.ToDouble(Convert.ToDouble(TotalSST) + Convert.ToDouble(Fe_based) + Convert.ToDouble(FeO)).ToString("N1");//[3]
-                hpas[4].C = Convert.ToDouble(Sn_based).ToString("N1");//[4]
-                hpas[5].C = Convert.ToDouble(PbZrTi).ToString("N1");//[5]
-                hpas[6].C = Convert.ToDouble(sumOfHpas[3].C).ToString("N1");//[6]
-                hpas[7].C = Convert.ToDouble(sumOfHpas[4].C).ToString("N1");//[7]
-                hpas[8].C = Convert.ToDouble(MgSiO).ToString("N1");//[8]
-                hpas[9].C = Convert.ToDouble(sumOfHpas[5].C).ToString("N1");//[9]
-
+                    hpas[0].C = Convert.ToDouble(sumOfHpas[0].C).ToString("N1");//[0]
+                    hpas[1].C = Convert.ToDouble(sumOfHpas[1].C).ToString("N1");//[1]
+                    hpas[2].C = Convert.ToDouble(sumOfHpas[2].C).ToString("N1");//[2]
+                    hpas[3].C = Convert.ToDouble(Convert.ToDouble(TotalSST) + Convert.ToDouble(Fe_based) + Convert.ToDouble(FeO)).ToString("N1");//[3]
+                    hpas[4].C = Convert.ToDouble(Sn_based).ToString("N1");//[4]
+                    hpas[5].C = Convert.ToDouble(PbZrTi).ToString("N1");//[5]
+                    hpas[6].C = Convert.ToDouble(sumOfHpas[3].C).ToString("N1");//[6]
+                    hpas[7].C = Convert.ToDouble(sumOfHpas[4].C).ToString("N1");//[7]
+                    hpas[8].C = Convert.ToDouble(MgSiO).ToString("N1");//[8]
+                    hpas[9].C = Convert.ToDouble(sumOfHpas[5].C).ToString("N1");//[9]
+                }
 
 
 

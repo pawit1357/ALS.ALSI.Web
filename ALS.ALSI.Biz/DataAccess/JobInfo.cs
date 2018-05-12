@@ -14,7 +14,7 @@ namespace ALS.ALSI.Biz.DataAccess
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(job_info));
         public String customerText { get; set; }
         public String preFixText { get; set; }
-
+        public int physicalYear { get; set; }
         public RoleEnum userRole { get; set; }
 
         private static IRepository<job_info> _repository
@@ -147,6 +147,7 @@ namespace ALS.ALSI.Biz.DataAccess
                              join tt in ctx.m_type_of_test on s.type_of_test_id equals tt.ID
                              join c in ctx.m_customer on j.customer_id equals c.ID
                              join cp in ctx.m_customer_contract_person on j.contract_person_id equals cp.ID
+                             where j.date_of_receive.Value.Year == this.physicalYear
                              orderby  s.ID descending
                              select new
                              {
@@ -304,7 +305,7 @@ namespace ALS.ALSI.Biz.DataAccess
                     result = result.Where(x => x.date_admin_sent_to_cus >= this.report_to_customer_from && x.date_admin_sent_to_cus <= this.report_to_customer_to);
                 }
 
-                return result.ToList();
+                return result.Where(x=>x.job_status != 0).ToList();// JOB_STATUS EQUAL0 EQUAL "JOB_DELETE"
             }
         }
 

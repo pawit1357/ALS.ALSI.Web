@@ -340,7 +340,7 @@ namespace ALS.ALSI.Utils
         public static String showOnCoverPageValue(String val, int digit)
         {
             String returnResult = String.Empty;
-            switch (val)
+            switch (Regex.Replace(val, @"\s+", ""))
             {
                 case "":
                 case "0":
@@ -349,11 +349,11 @@ namespace ALS.ALSI.Utils
                     break;
                 case " <MDL":
                 case "<MDL":
-                case "Not Detected":
+                case "NotDetected":
                     returnResult = val;
                     break;
                 default:
-                    returnResult = Convert.ToDouble(val).ToString("N" + digit);
+                    returnResult = Math.Round(Convert.ToDouble(val), digit).ToString();// Convert.ToDouble(val).ToString("N" + digit);
                     break;
             }
             return returnResult;

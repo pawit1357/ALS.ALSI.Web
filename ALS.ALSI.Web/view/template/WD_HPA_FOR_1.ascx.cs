@@ -1496,7 +1496,10 @@ namespace ALS.ALSI.Web.view.template
 
         private String mappingRawData(String _val)
         {
-            String result = Regex.Replace(_val, @"\t|\n|\r", String.Empty);
+            String result = Regex.Replace(_val, @"\t|\n|\r|^\s+|\s+$", String.Empty);
+            //result = Regex.Replace(result, @"^\s+|\s+$", String.Empty);
+
+           
             Hashtable mappingValues = new Hashtable();
             mappingValues["Total hard Particle (Including Magnetic Particles)"] = "Total - Hard Particles";
             mappingValues["Total MgSiO Particles"] = "Total - Magnetic Particles";
@@ -1511,7 +1514,7 @@ namespace ALS.ALSI.Web.view.template
 
             foreach (DictionaryEntry entry in mappingValues)
             {
-                if (entry.Key.Equals(Regex.Replace(_val, @"\r\n?|\n", "")))
+                if (entry.Key.Equals(Regex.Replace(_val, @"\t|\n|\r|^\s+|\s+$", String.Empty)))
                 {
                     result = entry.Value.ToString();
                     break;

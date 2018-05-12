@@ -8,6 +8,7 @@ using ALS.ALSI.Web.view.request;
 using Microsoft.Reporting.WebForms;
 using Spire.Doc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -381,6 +382,14 @@ namespace ALS.ALSI.Web.view.template
                 img4.ImageUrl = this.pa.img04;
                 img5.ImageUrl = this.pa.img05;
 
+                img6.ImageUrl = this.pa.img06;
+                img7.ImageUrl = this.pa.img07;
+                img8.ImageUrl = this.pa.img08;
+                img9.ImageUrl = this.pa.img09;
+                img10.ImageUrl = this.pa.img10;
+                img11.ImageUrl = this.pa.img11;
+
+
 
                 Image1.ImageUrl = this.pa.attachment_ii_01;
                 Image2.ImageUrl = this.pa.attachment_ii_02;
@@ -397,6 +406,22 @@ namespace ALS.ALSI.Web.view.template
 
                 txtLf_X.Text = this.pa.lf_x;
                 txtLf_Y.Text = this.pa.lf_y;
+
+                txtLms_X_R2.Text = this.pa.lms_x_r2;
+                txtLms_Y_R2.Text = this.pa.lms_y_r2;
+                txtLnms_X_R2.Text = this.pa.lnms_x_r2;
+                txtLnms_Y_R2.Text = this.pa.lnms_y_r2;
+                txtLf_X_R2.Text = this.pa.lf_x_r2;
+                txtLf_Y_R2.Text = this.pa.lf_y_r2;
+
+                txtLms_X_R3.Text = this.pa.lms_x_r3;
+                txtLms_Y_R3.Text = this.pa.lms_y_r3;
+                txtLnms_X_R3.Text = this.pa.lnms_x_r3;
+                txtLnms_Y_R3.Text = this.pa.lnms_y_r3;
+                txtLf_X_R3.Text = this.pa.lf_x_r3;
+                txtLf_Y_R3.Text = this.pa.lf_y_r3;
+
+
                 lbX.Text = txtAutomated.Text;
                 lbY.Text = txtAutomated.Text;
 
@@ -532,6 +557,13 @@ namespace ALS.ALSI.Web.view.template
                 this.pa = new template_pa();
 
                 this.PA_SPECIFICATION = ddlSpecification.SelectedItem.Text;
+
+                tb_m_specification selectedSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_SPECIFICATION_NO) && x.C.Equals(this.PA_SPECIFICATION)).FirstOrDefault();
+                if (selectedSpec != null)
+                {
+                    lbP1Note.Text = (selectedSpec.D == null) ? String.Empty : selectedSpec.D;
+                    lbP1Remark.Text = (selectedSpec.E == null) ? String.Empty : selectedSpec.E;
+                }
 
                 #region "gvEop"
                 List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
@@ -748,7 +780,6 @@ namespace ALS.ALSI.Web.view.template
 
         private void calculate()
         {
-
             lbPermembraneTotal.Text = String.Empty;
             txtPermembraneMetallicShine.Text = String.Empty;
 
@@ -756,6 +787,101 @@ namespace ALS.ALSI.Web.view.template
             List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
+                Boolean isPrv = ddlSpecification.SelectedItem.Text.Equals("PA5x_BOSCH0442S00155PRV") ? true : false;
+                template_pa_detail val = null;
+                if (gvEop.Columns[1].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[1].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_d = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[2].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[2].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_e = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[3].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[3].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_f = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[4].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[4].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_g = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[5].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[5].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_h = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[6].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[6].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_i = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[7].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[7].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_j = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[8].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[8].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_k = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[9].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[9].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_l = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[10].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[10].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_m = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+                if (gvEop.Columns[11].Visible)
+                {
+                    val = listMicroPicData.Where(x => x.col_c.Equals(mappingRawData(gvEop.Columns[11].HeaderText))).FirstOrDefault();
+                    if (val != null)
+                    {
+                        listPaDetail[1].col_n = isPrv ? val.col_i : val.col_e;
+                    }
+                }
+
+
+
+
+
                 //headerRow                                                  
                 gvEop.DataSource = listPaDetail;
                 gvEop.DataBind();
@@ -782,13 +908,12 @@ namespace ALS.ALSI.Web.view.template
                             pad.col_l = (Convert.ToDouble(_col_h) / numberOfComponents).ToString("N" + txtDecimal04.Text);
                         }
 
-
-
                         if (!pad.col_d.Equals("-"))
                         {
                             lbPermembraneTotal.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_i).ToString("N0"));
                             txtPermembraneMetallicShine.Text += String.Format("{0}{1}/", pad.col_d, Convert.ToDouble(pad.col_k).ToString("N0"));
                         }
+
                     }
                     else
                     {
@@ -879,8 +1004,6 @@ namespace ALS.ALSI.Web.view.template
             lbY.Text = txtAutomated.Text;
             lbPer.Text = ddlPer.SelectedItem.Text;
         }
-
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -1026,12 +1149,29 @@ namespace ALS.ALSI.Web.view.template
 
                     this.pa.lms_x = txtLms_X.Text;
                     this.pa.lms_y = txtLms_Y.Text;
-
                     this.pa.lnms_x = txtLnms_X.Text;
                     this.pa.lnms_y = txtLnms_Y.Text;
-
                     this.pa.lf_x = txtLf_X.Text;
                     this.pa.lf_y = txtLf_Y.Text;
+
+                    this.pa.lms_x_r2 = txtLms_X_R2.Text;
+                    this.pa.lms_y_r2 = txtLms_Y_R2.Text;
+                    this.pa.lnms_x_r2 = txtLnms_X_R2.Text;
+                    this.pa.lnms_y_r2 = txtLnms_Y_R2.Text;
+                    this.pa.lf_x_r2 = txtLf_X_R2.Text;
+                    this.pa.lf_y_r2 = txtLf_Y_R2.Text;
+
+                    this.pa.lms_x_r3 = txtLms_X_R3.Text;
+                    this.pa.lms_y_r3 = txtLms_Y_R3.Text;
+                    this.pa.lnms_x_r3 = txtLnms_X_R3.Text;
+                    this.pa.lnms_y_r3 = txtLnms_Y_R3.Text;
+                    this.pa.lf_x_r3 = txtLf_X_R3.Text;
+                    this.pa.lf_y_r3 = txtLf_Y_R3.Text;
+
+
+
+
+
 
                     this.pa.param_magnification_01 = txtParamMagnification1.Text;
                     this.pa.param_magnification_02 = txtParamMagnification2.Text;
@@ -1557,6 +1697,17 @@ namespace ALS.ALSI.Web.view.template
             txtFeretLnms.Text = largestNonMetallicShine.ToString("N2");
             txtFeretFb.Text = longestFiber.ToString("N2");
 
+            txtLms_Y.Text = txtFeretLmsp.Text;
+            txtLnms_Y.Text = txtFeretLnms.Text;
+            txtLf_Y.Text = txtFeretFb.Text;
+
+            txtLms_Y_R2.Text = txtFeretLmsp.Text;
+            txtLnms_Y_R2.Text = txtFeretLnms.Text;
+            txtLf_Y_R2.Text = txtFeretFb.Text;
+
+            txtLms_Y_R3.Text = txtFeretLmsp.Text;
+            txtLnms_Y_R3.Text = txtFeretLnms.Text;
+            txtLf_Y_R3.Text = txtFeretFb.Text;
             //if (!FileUpload2.HasFile)
             //{
             //    errors.Add(String.Format("ไม่พบไฟล์ *.csv ที่ใช้โหลดข้อมูล (Ex. ClassTable_FromNumber_FeretMaximum_A01316.csv)"));
@@ -1751,6 +1902,183 @@ namespace ALS.ALSI.Web.view.template
                 this.pa.img05 = source_file_url;
                 img5.ImageUrl = source_file_url;
             }
+            //ROW2
+            if ((Path.GetExtension(fileUploadImg03_R2.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg03_R2.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUploadImg03_R2.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUploadImg03_R2.SaveAs(source_file_jpg);
+                }
+                this.pa.img06 = source_file_url;
+                img6.ImageUrl = source_file_url;
+            }
+            if ((Path.GetExtension(fileUploadImg04_R2.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg04_R2.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUploadImg04_R2.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUploadImg04_R2.SaveAs(source_file_jpg);
+                }
+                this.pa.img07 = source_file_url;
+                img7.ImageUrl = source_file_url;
+            }
+            if ((Path.GetExtension(fileUploadImg05_R2.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg05_R2.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUploadImg05_R2.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUploadImg04_R2.SaveAs(source_file_jpg);
+                }
+                this.pa.img08 = source_file_url;
+                img8.ImageUrl = source_file_url;
+            }
+            //ROW3
+            if ((Path.GetExtension(fileUploadImg03_R3.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg03_R3.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUploadImg03_R3.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUploadImg03_R3.SaveAs(source_file_jpg);
+                }
+                this.pa.img09 = source_file_url;
+                img9.ImageUrl = source_file_url;
+            }
+            if ((Path.GetExtension(fileUploadImg04_R3.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg04_R3.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUploadImg04_R3.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUploadImg04_R3.SaveAs(source_file_jpg);
+                }
+                this.pa.img10 = source_file_url;
+                img10.ImageUrl = source_file_url;
+            }
+            if ((Path.GetExtension(fileUploadImg05_R3.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg05_R3.FileName).ToUpper().Equals(".TIF")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                }
+                if (Path.GetExtension(source_file).ToUpper().Equals(".TIF"))
+                {
+                    fileUploadImg05_R3.SaveAs(source_file);
+                    PictureUtils.convertTifToJpg(source_file, source_file_jpg);
+
+                }
+                else
+                {
+                    fileUploadImg05_R3.SaveAs(source_file_jpg);
+                }
+                this.pa.img11 = source_file_url;
+                img11.ImageUrl = source_file_url;
+            }
+
+
+            if ((Path.GetExtension(fileAttachedDoc.FileName).ToUpper().Equals(".DOC")) || (Path.GetExtension(fileAttachedDoc.FileName).ToUpper().Equals(".DOCX")))
+            {
+                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileAttachedDoc.FileName));
+
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+
+                if (!Directory.Exists(Path.GetDirectoryName(source_file_jpg)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(source_file_jpg));
+                }
+
+                fileAttachedDoc.SaveAs(source_file_jpg);
+
+                this.pa.attachment_ii_05 = source_file_url;
+            }
+
             if (errors.Count > 0)
             {
                 litErrorMessage.Text = MessageBox.GenWarnning(errors);
@@ -2485,11 +2813,19 @@ namespace ALS.ALSI.Web.view.template
             this.pa.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
             this.pa.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
             this.pa.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
+
             this.pa.img6 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_01);
             this.pa.img7 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_02);
             this.pa.img8 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_03);
             this.pa.img9 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_01);
 
+            this.pa.img3R2 = CustomUtils.GetBytesFromImage(this.pa.img06);
+            this.pa.img4R2 = CustomUtils.GetBytesFromImage(this.pa.img07);
+            this.pa.img5R2 = CustomUtils.GetBytesFromImage(this.pa.img08);
+
+            this.pa.img3R3 = CustomUtils.GetBytesFromImage(this.pa.img09);
+            this.pa.img4R3 = CustomUtils.GetBytesFromImage(this.pa.img10);
+            this.pa.img5R3 = CustomUtils.GetBytesFromImage(this.pa.img11);
 
             this.pa.iscontainer_text = cbContainer.Checked.ToString();
             this.pa.container_id_text = ddlContainer.SelectedItem.Text;
@@ -2596,7 +2932,8 @@ namespace ALS.ALSI.Web.view.template
 
                         #region "Insert Footer & Header from template"
                         Document doc1 = new Document();
-                        doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - PA.doc");
+                        //doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - PA.doc");
+                        doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
                         Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
                         Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
                         Document doc2 = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
@@ -2928,7 +3265,6 @@ namespace ALS.ALSI.Web.view.template
             membraneType();
         }
 
-
         private void membraneType()
         {
             lbMembraneType.Text = String.Format("{0} / {1} um, {2} mm Dia.", ddlMaterial.SelectedItem.Text, txtPoreSize.Text, txtDiameter.Text);
@@ -2959,6 +3295,7 @@ namespace ALS.ALSI.Web.view.template
             txtEC01_SHOT.Text = String.Empty;
 
         }
+
         protected void gvCompositionElement_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int id = int.Parse(gvCompositionElement.DataKeys[e.RowIndex].Values[0].ToString());
@@ -2990,6 +3327,7 @@ namespace ALS.ALSI.Web.view.template
             txtEC02.Text = String.Empty;
             txtEC02_SHOT.Text = String.Empty;
         }
+
         protected void gvCompositionElement2_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int id = int.Parse(gvCompositionElement2.DataKeys[e.RowIndex].Values[0].ToString());
@@ -3004,7 +3342,7 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
-
+        #region "LOAD IMG"
         protected void btnLoadParamImg1_Click(object sender, EventArgs e)
         {
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -3172,7 +3510,7 @@ namespace ALS.ALSI.Web.view.template
                 Image4.ImageUrl = source_file_url;
             }
         }
-
+        #endregion
         protected void txtDissolving_TextChanged(object sender, EventArgs e)
         {
             Double val1 = CustomUtils.isNumber(txtDissolving.Text) ? Convert.ToDouble(txtDissolving.Text) : 0;
@@ -3296,6 +3634,14 @@ namespace ALS.ALSI.Web.view.template
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.PA_SPECIFICATION = ddlSpecification.SelectedItem.Text;
+
+            tb_m_specification selectedSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_SPECIFICATION_NO) && x.C.Equals(this.PA_SPECIFICATION)).FirstOrDefault();
+            if (selectedSpec != null)
+            {
+                lbP1Note.Text = (selectedSpec.D == null) ? String.Empty : selectedSpec.D;
+                lbP1Remark.Text = (selectedSpec.E == null) ? String.Empty : selectedSpec.E;
+            }
+
             #region "gvEop"
             List<tb_m_specification> listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_EVALUATION_OF_PARTICLE) && x.B.Equals(PA_SPECIFICATION)).ToList();
             if (listOfSpec.Count > 0)
@@ -3418,6 +3764,48 @@ namespace ALS.ALSI.Web.view.template
             #endregion
         }
 
+        private String mappingRawData(String _val)
+        {
+            String result = Regex.Replace(_val, @"\t|\n|\r|^\s+|\s+$", String.Empty);
+            //HEADER | DB DATA
+
+            Hashtable mappingValues = new Hashtable();
+            mappingValues["X ≥ 400"] = "400 ≥ X";
+            //-----------------
+
+            mappingValues["25-50"] = "25 ≤ X < 50";
+            mappingValues["50-100"] = "50 ≤ X < 100";
+            mappingValues["100-150"] = "100 ≤ X < 150";
+            mappingValues["150-200"] = "150 ≤ X < 200";
+            mappingValues["200-300"] = "200 ≤ X < 300";
+            mappingValues["300-400"] = "300 ≤ X < 400";
+            mappingValues["400-600"] = "400 ≤ X < 600";
+            mappingValues["600-800"] = "600 ≤ X < 800";
+            mappingValues["800-1000"] = "800 ≤X < 1000";
+            mappingValues[">1000"] = "X > 1000";
+
+
+
+            //SST400s(Fe / Cr)
+
+
+
+            foreach (DictionaryEntry entry in mappingValues)
+            {
+                if (Regex.Replace(entry.Key.ToString(), @"\t|\n|\r|^\s+|\s+$", String.Empty).Equals(Regex.Replace(_val, @"\t|\n|\r|^\s+|\s+$", String.Empty)))
+                {
+                    result = entry.Value.ToString();
+                    break;
+                }
+            }
+            return result;
+        }
+
+        protected void lbDownloadAtt_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(String.Format("{0}", this.pa.attachment_ii_05));
+
+        }
     }
 }
 
