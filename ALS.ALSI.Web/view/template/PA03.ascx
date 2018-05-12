@@ -79,7 +79,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtD" runat="server" Text='<%# Eval("col_d")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField HeaderText="50-100" ItemStyle-HorizontalAlign="Right">
@@ -89,7 +89,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtE" runat="server" Text='<%# Eval("col_e")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="100-150" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
@@ -98,7 +98,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtF" runat="server" Text='<%# Eval("col_f")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="150-200" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
@@ -107,7 +107,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtG" runat="server" Text='<%# Eval("col_g")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="200-300" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
@@ -116,7 +116,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtH" runat="server" Text='<%# Eval("col_h")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="300-400" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
@@ -125,7 +125,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtI" runat="server" Text='<%# Eval("col_i")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="400-600" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
@@ -134,7 +134,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtJ" runat="server" Text='<%# Eval("col_j")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="600-800" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
@@ -143,7 +143,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtK" runat="server" Text='<%# Eval("col_k")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="800-1000" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
@@ -152,7 +152,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtL" runat="server" Text='<%# Eval("col_l")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText=">1000" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
@@ -161,7 +161,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtM" runat="server" Text='<%# Eval("col_m")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField HeaderText="2Fiber" ItemStyle-HorizontalAlign="Right">
@@ -171,7 +171,7 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtN" runat="server" Text='<%# Eval("col_n")%>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField HeaderText="Edit">
@@ -1518,7 +1518,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtC" runat="server" Text='<%# Eval("col_c")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Code" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
@@ -1527,7 +1527,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtD" runat="server" Text='<%# Eval("col_d")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Particles on membrane/<br>Total" ItemStyle-HorizontalAlign="Center">
@@ -1537,7 +1537,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtE" runat="server" Text='<%# Eval("col_e")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Particles on membrane/<br>Non-metallic<br>shine" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
@@ -1546,7 +1546,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtF" runat="server" Text='<%# Eval("col_f")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Particles on membrane/<br>Metallic<br>shine" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
@@ -1555,7 +1555,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtG" runat="server" Text='<%# Eval("col_g")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Particles on membrane/<br>2Fiber" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
@@ -1564,7 +1564,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtH" runat="server" Text='<%# Eval("col_h")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Particles per component/<br>Total" ItemStyle-HorizontalAlign="Center">
@@ -1574,7 +1574,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtI" runat="server" Text='<%# Eval("col_i")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Particles per component/<br>Non-metallic<br>shine" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
@@ -1583,7 +1583,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtJ" runat="server" Text='<%# Eval("col_j")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Particles per component/<br>Metallic<br>shine" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
@@ -1592,7 +1592,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtK" runat="server" Text='<%# Eval("col_k")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Particles per component/<br>2Fiber" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
@@ -1601,7 +1601,7 @@
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="txtL" runat="server" Text='<%# Eval("col_l")%>' CssClass="form-control"></asp:TextBox>
                                                     </EditItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Right" />
                                                 </asp:TemplateField>
 
 
