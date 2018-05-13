@@ -2785,7 +2785,7 @@
                                                                 </asp:LinkButton>
 
                                                             </h5>
-                                                            <asp:LinkButton ID="lbDownloadAtt" runat="server" OnClick="lbDownloadAtt_Click">PA Attached file.</asp:LinkButton>
+                                                            <asp:LinkButton ID="lbDownloadAtt" runat="server" OnClick="lbDownloadAtt_Click"><i class="fa fa-bookmark-o"></i> Attached file.</asp:LinkButton>
 
                                                             <asp:Label ID="lbDesc" runat="server" Text=""></asp:Label>
                                                         </div>

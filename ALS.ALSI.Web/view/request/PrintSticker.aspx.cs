@@ -65,15 +65,31 @@ namespace ALS.ALSI.Web.view.request
             get { return (int)Session[GetType().Name + "SampleID"]; }
             set { Session[GetType().Name + "SampleID"] = value; }
         }
+
         public job_info objInfo
         {
-            get
-            {
-                job_info tmp = new job_info();
-                tmp.ID = JobID;
-                return tmp;
-            }
+            get { return (job_info)Session[GetType().Name + "objInfo"]; }
+            set { Session[GetType().Name + "objInfo"] = value; }
         }
+
+
+        //public int PhysicalYear
+        //{
+        //    get { return (int)Session[GetType().Name + "PhysicalYear"]; }
+        //    set { Session[GetType().Name + "PhysicalYear"] = value; }
+        //}
+
+        //public job_info objInfo
+        //{
+        //    get;set;
+            //get
+            //{
+            //    job_info tmp = new job_info();
+            //    tmp.ID = JobID;
+            //    tmp.physicalYear = PhysicalYear;
+            //    return tmp;
+            //}
+        //}
 
 
         private void initialPage()
@@ -205,6 +221,10 @@ namespace ALS.ALSI.Web.view.request
             this.JobID = (prvPage == null) ? this.JobID : prvPage.JobID;
             this.SampleID = (prvPage == null) ? this.SampleID : prvPage.SampleID;
             this.PreviousPath = Constants.LINK_SEARCH_JOB_REQUEST;
+            if (this.objInfo == null)
+            {
+                this.objInfo = prvPage.obj;
+            }
 
             if (!Page.IsPostBack)
             {

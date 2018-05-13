@@ -1208,7 +1208,9 @@
     <Content Include="images\footer.png" />
     <Content Include="images\images.png" />
     <Content Include="images\logo.png" />
-    <Content Include="images\no_img.png" />
+    <Content Include="images\no_img.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
     <Content Include="PhaseII-Doc\PA-SCRIPT-20171224.sql" />
@@ -2071,6 +2073,7 @@
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\pa03_edit.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_03.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_02.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_wd.rdlc">

@@ -120,7 +120,17 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             using (ALSIEntities ctx = new ALSIEntities())
             {
-
+                //if (this.physicalYear == 0)
+                //{
+                //    if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
+                //    {
+                //        this.physicalYear = (DateTime.Now.Year - 1);
+                //    }
+                //    else
+                //    {
+                //        this.physicalYear = (DateTime.Now.Year);
+                //    }
+                //}
                 //Status 
                 //    Received.	 Report x
                 //    Sent to Customer  x

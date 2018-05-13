@@ -5,7 +5,7 @@ from job_sample
 left join m_type_of_test on job_sample.type_of_test_id = m_type_of_test.id
 left join m_status on m_status.ID=job_sample.job_status
 left join m_template on job_sample.template_id = m_template.id
-where m_template.path_url like '%/PA03%' 
+where m_template.path_url like '%PA03%' 
 and m_template.status='A'
 order by job_sample.job_status;
 */
@@ -37,3 +37,6 @@ where job_info.date_of_receive <= '2018-03-31') and job_sample.job_status <> 3;
 -- update job to "job_delete"
 select * from job_sample where job_number in ('ELN-1020-PAB','ELN-1019-PAB');
 update job_sample set job_status=0 where job_number in ('ELN-1020-PAB','ELN-1019-PAB');
+
+
+update job_sample set job_status=12 where job_number='ELN-0002-PAB';

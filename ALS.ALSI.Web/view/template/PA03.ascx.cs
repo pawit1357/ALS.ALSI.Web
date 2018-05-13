@@ -2783,8 +2783,9 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("dissolving_rinsing", ddlRinsing.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("wash_rinsing", dllWashPressureRinsing.SelectedItem.Text));
 
+            reportParameters.Add(new ReportParameter("showAttachedII", (this.pa.img06 == null)? "HIDDEN":""));
 
-
+            
             // Variables
             Warning[] warnings;
             string[] streamIds;
