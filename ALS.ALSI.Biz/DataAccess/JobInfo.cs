@@ -157,7 +157,6 @@ namespace ALS.ALSI.Biz.DataAccess
                              join tt in ctx.m_type_of_test on s.type_of_test_id equals tt.ID
                              join c in ctx.m_customer on j.customer_id equals c.ID
                              join cp in ctx.m_customer_contract_person on j.contract_person_id equals cp.ID
-                             where j.date_of_receive.Value.Year == this.physicalYear
                              orderby  s.ID descending
                              select new
                              {
@@ -212,6 +211,10 @@ namespace ALS.ALSI.Biz.DataAccess
                                  s.amend_or_retest
                              };
 
+                if(this.physicalYear > 0)
+                {
+                    result = result.Where(x=>x.receive_date.Value.Year == this.physicalYear);
+                }
                 if (this.ID > 0)
                 {
                     result = result.Where(x => x.ID == this.ID);

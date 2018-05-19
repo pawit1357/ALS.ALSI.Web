@@ -13,23 +13,23 @@ namespace ALS.ALSI.Web.view.request
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AdminPrint));
 
         #region "Property"
-        protected String type_of_test
+        protected String Type_of_test
         {
             get { return (String)Session[GetType().Name + "type_of_test"]; }
             set { Session[GetType().Name + "type_of_test"] = value; }
         }
 
-        protected String sample_diposition
+        protected String Sample_diposition
         {
             get { return (String)Session[GetType().Name + "sample_diposition"]; }
             set { Session[GetType().Name + "sample_diposition"] = value; }
         }
-        public users_login userLogin
+        public users_login UserLogin
         {
             get { return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null); }
         }
 
-        public IEnumerable searchResult
+        public IEnumerable SearchResult
         {
             get { return (IEnumerable)Session[GetType().Name + "PrintSticker"]; }
             set { Session[GetType().Name + "PrintSticker"] = value; }
@@ -53,25 +53,27 @@ namespace ALS.ALSI.Web.view.request
             set { Session[GetType().Name + "JobID"] = value; }
         }
 
-        public job_info objInfo
+        public job_info ObjInfo
         {
             get
             {
-                job_info tmp = new job_info();
-                tmp.ID = JobID;
+                job_info tmp = new job_info
+                {
+                    ID = JobID
+                };
                 return tmp;
             }
         }
 
 
-        private void initialPage()
+        private void InitialPage()
         {
-            fillinScreen();
+            FillinScreen();
             btnCancel.Enabled = true;
-            bindingData();
+            BindingData();
         }
 
-        private void fillinScreen()
+        private void FillinScreen()
         {
             job_info jobInfo = new job_info().SelectByID(this.JobID);
             if (jobInfo != null)
@@ -117,18 +119,18 @@ namespace ALS.ALSI.Web.view.request
             }
             else
             {
-                btnCancel_Click(null, null);
+                BtnCancel_Click(null, null);
             }
         }
 
-        private void bindingData()
+        private void BindingData()
         {
-            searchResult = objInfo.SearchData();
-            gvJob.DataSource = searchResult;
+            SearchResult = ObjInfo.SearchData();
+            gvJob.DataSource = SearchResult;
             gvJob.DataBind();
         }
 
-        private void removeSession()
+        private void RemoveSession()
         {
             Session.Remove(GetType().Name);
             Session.Remove(GetType().Name + Constants.PREVIOUS_PATH);
@@ -150,23 +152,23 @@ namespace ALS.ALSI.Web.view.request
 
             if (!Page.IsPostBack)
             {
-                initialPage();
+                InitialPage();
             }
         }
-        protected void btnCancel_Click(object sender, EventArgs e)
+        protected void BtnCancel_Click(object sender, EventArgs e)
         {
-            removeSession();
+            RemoveSession();
             Response.Redirect(PreviousPath);
         }
 
-        protected void btnPrint_Click(object sender, EventArgs e)
+        protected void BtnPrint_Click(object sender, EventArgs e)
         {
 
         }
 
 
 
-        protected void gvJob_SelectedIndexChanged(object sender, EventArgs e)
+        protected void GvJob_SelectedIndexChanged(object sender, EventArgs e)
         {
             int key = Convert.ToInt32(gvJob.SelectedDataKey.Value);
 
@@ -205,11 +207,11 @@ namespace ALS.ALSI.Web.view.request
                     {
                         if (jobInfo.sample_diposition.Equals("Y"))
                         {
-                            sample_diposition = "<i class=\"icon-check\"></i>Discard<i class=\"icon-check-empty\"></i>Return";
+                            Sample_diposition = "<i class=\"icon-check\"></i>Discard<i class=\"icon-check-empty\"></i>Return";
                         }
                         else
                         {
-                            sample_diposition = "<i class=\"icon-check-empty\"></i>Discard <i class=\"icon-check\"></i>Return";
+                            Sample_diposition = "<i class=\"icon-check-empty\"></i>Discard <i class=\"icon-check\"></i>Return";
                         }
                     }
                 }
@@ -217,7 +219,7 @@ namespace ALS.ALSI.Web.view.request
             }
             else
             {
-                btnCancel_Click(null, null);
+                BtnCancel_Click(null, null);
             }
 
             Console.WriteLine();

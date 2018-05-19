@@ -953,12 +953,14 @@ namespace ALS.ALSI.Web.view.template
                         List<template_seagate_lpc_coverpage> last3Results = new List<template_seagate_lpc_coverpage>();
                         foreach (var item in AverageOfLast3)
                         {
-                            template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
-                            //Average of last 3
-                            lpc.RunNumber = 5;
-                            lpc.Run = "Average of last 3";
-                            lpc.type = item.Key;
-                            lpc.channel_size = channel_size;
+                            template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage
+                            {
+                                //Average of last 3
+                                RunNumber = 5,
+                                Run = "Average of last 3",
+                                type = item.Key,
+                                channel_size = channel_size
+                            };
                             double _value = runResults.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.channel_size.Equals(channel_size)).Average(x => Convert.ToDouble(x.Results));
                             lpc.Results = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt32(txtDecimal03.Text)));
                             last3Results.Add(lpc);
@@ -975,13 +977,15 @@ namespace ALS.ALSI.Web.view.template
                         int index = 1;
                         foreach (var item in listAverage)
                         {
-                            LPC lpc = new LPC();
-                            //Average of last 3
-                            lpc.RunNumber = 6;
-                            lpc.Run = "";
-                            lpc.Sample = "";
-                            lpc.type = item.Key.Replace("Blank", "").Replace("B", "").Trim();
-                            lpc.ChannelSize = channel_size;
+                            LPC lpc = new LPC
+                            {
+                                //Average of last 3
+                                RunNumber = 6,
+                                Run = "",
+                                Sample = "",
+                                Type = item.Key.Replace("Blank", "").Replace("B", "").Trim(),
+                                ChannelSize = channel_size
+                            };
                             template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
                             template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
 
@@ -1068,12 +1072,14 @@ namespace ALS.ALSI.Web.view.template
                         List<template_seagate_lpc_coverpage> last3Results = new List<template_seagate_lpc_coverpage>();
                         foreach (var item in AverageOfLast3)
                         {
-                            template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
-                            //Average of last 3
-                            lpc.RunNumber = 5;
-                            lpc.Run = "Average of last 3";
-                            lpc.type = item.Key;
-                            lpc.channel_size = channel_size;
+                            template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage
+                            {
+                                //Average of last 3
+                                RunNumber = 5,
+                                Run = "Average of last 3",
+                                type = item.Key,
+                                channel_size = channel_size
+                            };
                             double _value = runResults.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.channel_size.Equals(channel_size)).Average(x => Convert.ToDouble(x.Results));
                             lpc.Results = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt32(txtDecimal03.Text)));
                             last3Results.Add(lpc);
@@ -1090,13 +1096,15 @@ namespace ALS.ALSI.Web.view.template
                         int index = 1;
                         foreach (var item in listAverage)
                         {
-                            LPC lpc = new LPC();
-                            //Average of last 3
-                            lpc.RunNumber = 6;
-                            lpc.Run = "";
-                            lpc.Sample = "";
-                            lpc.type = item.Key.Replace("Blank", "").Replace("B", "").Trim();
-                            lpc.ChannelSize = channel_size;
+                            LPC lpc = new LPC
+                            {
+                                //Average of last 3
+                                RunNumber = 6,
+                                Run = "",
+                                Sample = "",
+                                Type = item.Key.Replace("Blank", "").Replace("B", "").Trim(),
+                                ChannelSize = channel_size
+                            };
                             template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
                             template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
 
@@ -1181,12 +1189,14 @@ namespace ALS.ALSI.Web.view.template
                         List<template_seagate_lpc_coverpage> last3Results = new List<template_seagate_lpc_coverpage>();
                         foreach (var item in AverageOfLast3)
                         {
-                            template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage();
-                            //Average of last 3
-                            lpc.RunNumber = 5;
-                            lpc.Run = "Average of last 3";
-                            lpc.type = item.Key;
-                            lpc.channel_size = channel_size;
+                            template_seagate_lpc_coverpage lpc = new template_seagate_lpc_coverpage
+                            {
+                                //Average of last 3
+                                RunNumber = 5,
+                                Run = "Average of last 3",
+                                type = item.Key,
+                                channel_size = channel_size
+                            };
                             double _value = runResults.Where(x => x.type.Equals(item.Key) && x.RunNumber > 1 && x.channel_size.Equals(channel_size)).Average(x => Convert.ToDouble(x.Results));
                             lpc.Results = String.Format(getDecimalFormat(Convert.ToInt32(txtDecimal03.Text)), Math.Round(_value, Convert.ToInt32(txtDecimal03.Text)));
                             last3Results.Add(lpc);
@@ -1203,13 +1213,15 @@ namespace ALS.ALSI.Web.view.template
                         int index = 1;
                         foreach (var item in listAverage)
                         {
-                            LPC lpc = new LPC();
-                            //Average of last 3
-                            lpc.RunNumber = 6;
-                            lpc.Run = "";
-                            lpc.Sample = "";
-                            lpc.type = item.Key.Replace("Blank", "").Replace("B", "").Trim();
-                            lpc.ChannelSize = channel_size;
+                            LPC lpc = new LPC
+                            {
+                                //Average of last 3
+                                RunNumber = 6,
+                                Run = "",
+                                Sample = "",
+                                Type = item.Key.Replace("Blank", "").Replace("B", "").Trim(),
+                                ChannelSize = channel_size
+                            };
                             template_seagate_lpc_coverpage lpcBlank = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("B" + index)).FirstOrDefault();
                             template_seagate_lpc_coverpage lpcSaple = last3Results.Where(x => x.RunNumber == 5 && x.type.Equals("S" + index)).FirstOrDefault();
 
@@ -1297,8 +1309,10 @@ namespace ALS.ALSI.Web.view.template
 
 
             List<template_seagate_lpc_coverpage> breakLines = new List<template_seagate_lpc_coverpage>();
-            template_seagate_lpc_coverpage _breakLineTmp = new template_seagate_lpc_coverpage();
-            _breakLineTmp.id = 999;
+            template_seagate_lpc_coverpage _breakLineTmp = new template_seagate_lpc_coverpage
+            {
+                id = 999
+            };
             breakLines.Add(_breakLineTmp);
 
 
@@ -1330,8 +1344,10 @@ namespace ALS.ALSI.Web.view.template
             String[] particleSizes = new String[] { "0.300", "0.500", "0.600" };
 
             // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
+            ReportViewer viewer = new ReportViewer
+            {
+                ProcessingMode = ProcessingMode.Local
+            };
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/lpc_seagate.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             //foreach(var item in this.Lpcs.Where(x => x.row_type == 1 && particleSizes.Contains(x.channel_size)).ToList())
@@ -1514,9 +1530,11 @@ namespace ALS.ALSI.Web.view.template
                     running++;
                 }
 
-                template_seagate_lpc_coverpage tmp03 = new template_seagate_lpc_coverpage();
-                tmp03.channel_size = "0.300";
-                tmp03.LiquidParticleCount = "Average";
+                template_seagate_lpc_coverpage tmp03 = new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.300",
+                    LiquidParticleCount = "Average"
+                };
                 string spec03 = string.Empty;
                 switch (template_type)
                 {
@@ -1578,10 +1596,11 @@ namespace ALS.ALSI.Web.view.template
                     running++;
                 }
 
-                template_seagate_lpc_coverpage tmp05 = new template_seagate_lpc_coverpage();
-
-                tmp05.channel_size = "0.500";
-                tmp05.LiquidParticleCount = "Average";
+                template_seagate_lpc_coverpage tmp05 = new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.500",
+                    LiquidParticleCount = "Average"
+                };
                 string spec05 = string.Empty;
                 switch (template_type)
                 {
@@ -1643,9 +1662,11 @@ namespace ALS.ALSI.Web.view.template
                     running++;
                 }
 
-                template_seagate_lpc_coverpage tmp06 = new template_seagate_lpc_coverpage();
-                tmp06.channel_size = "0.600";
-                tmp06.LiquidParticleCount = "Average";
+                template_seagate_lpc_coverpage tmp06 = new template_seagate_lpc_coverpage
+                {
+                    channel_size = "0.600",
+                    LiquidParticleCount = "Average"
+                };
                 string spec06 = string.Empty;
                 switch (template_type)
                 {
@@ -2018,7 +2039,7 @@ namespace ALS.ALSI.Web.view.template
 
     public class LPC
     {
-        public string type { get; set; }
+        public string Type { get; set; }
         public string Run { get; set; }
         public int RunNumber { get; set; }
         public string Sample { get; set; }

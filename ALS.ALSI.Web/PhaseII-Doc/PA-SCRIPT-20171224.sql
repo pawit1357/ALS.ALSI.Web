@@ -73,22 +73,22 @@ ELP-1248-FB (test spec is "NA" result must "NA")
 
 
 #######-----
---ALTER TABLE `alsi`.`tb_m_specification` 
---ADD COLUMN `status` VARCHAR(1) NULL DEFAULT 'A' AFTER `BZ`;
+ALTER TABLE `alsi`.`tb_m_specification` 
+ADD COLUMN `status` VARCHAR(1) NULL DEFAULT 'A' AFTER `BZ`;
 
 
---CREATE TABLE `template_img` (
---  `id` int(11) NOT NULL AUTO_INCREMENT,
---  `sample_id` int(11) DEFAULT NULL,
---  `seq` int(11) DEFAULT '0',
---  `img_path` varchar(255) DEFAULT NULL,
---  PRIMARY KEY (`id`)
---) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8;
+CREATE TABLE `template_img` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sample_id` int(11) DEFAULT NULL,
+  `seq` int(11) DEFAULT '0',
+  `img_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8;
 
 
 
---ALTER TABLE `alsi`.`m_type_of_test` 
---ADD COLUMN `ref_template_id` INT NULL AFTER `data_group`;
+ALTER TABLE `alsi`.`m_type_of_test` 
+ADD COLUMN `ref_template_id` INT NULL AFTER `data_group`;
 
 
 INSERT INTO `alsi`.`m_template` (`ID`, `specification_id`, `name`, `path_url`, `requestor`, `modified_by`, `verified_by`, `validated_by`, `modified_date`, `create_date`, `status`) VALUES ('927', '27', 'PA-REPORT01', '~/view/template/PA01.ascx', '2', '2', '2', '2', '2017-12-24', '2017-12-24', 'A');
@@ -103,9 +103,9 @@ UPDATE `alsi`.`m_type_of_test` SET `ref_template_id`='905' WHERE `ID`='234';
 UPDATE `alsi`.`m_type_of_test` SET `ref_template_id`='906' WHERE `ID`='235';
 UPDATE `alsi`.`m_type_of_test` SET `ref_template_id`='907' WHERE `ID`='236';
 
--- INSERT INTO `alsi`.`m_specification` (`ID`, `name`, `status`) VALUES ('27', 'PA(REPORT)', 'A');
--- INSERT INTO `alsi`.`m_type_of_test` (`ID`, `specification_id`, `prefix`, `name`, `parent`, `status`, `data_group`) VALUES ('219', '27', 'PAB', 'PA_REPORT1', '1', 'A', 'PA');
--- INSERT INTO `alsi`.`m_type_of_test` (`ID`, `specification_id`, `prefix`, `name`, `parent`, `status`, `data_group`) VALUES ('220', '27', 'PAB', 'PA_REPORT2', '1', 'A', 'PA');
+ INSERT INTO `alsi`.`m_specification` (`ID`, `name`, `status`) VALUES ('27', 'PA(REPORT)', 'A');
+ INSERT INTO `alsi`.`m_type_of_test` (`ID`, `specification_id`, `prefix`, `name`, `parent`, `status`, `data_group`) VALUES ('219', '27', 'PAB', 'PA_REPORT1', '1', 'A', 'PA');
+ INSERT INTO `alsi`.`m_type_of_test` (`ID`, `specification_id`, `prefix`, `name`, `parent`, `status`, `data_group`) VALUES ('220', '27', 'PAB', 'PA_REPORT2', '1', 'A', 'PA');
 
 ----------------------- 2018-3-13 ---------------------------
 
@@ -284,10 +284,10 @@ update  job_sample set job_sample.job_status=3  where job_id in (select id from 
 where job_info.date_of_receive <= '2018-03-31') and job_sample.job_status <> 3
 
 -- update job to "job_delete"
-INSERT INTO `alsi`.`m_status` (`ID`, `status_group_id`, `status_for_role`, `name`, `status`) VALUES ('0', '1', '2', 'JOB DELETE', 'A');
+x INSERT INTO `alsi`.`m_status` (`ID`, `status_group_id`, `status_for_role`, `name`, `status`) VALUES ('0', '1', '2', 'JOB DELETE', 'A');
 ---
-select * from job_sample where job_number in ('ELN-1020-PAB','ELN-1019-PAB');
-update job_sample set job_status=0 where job_number in ('ELN-1020-PAB','ELN-1019-PAB');
+x select * from job_sample where job_number in ('ELN-1020-PAB','ELN-1019-PAB');
+x update job_sample set job_status=0 where job_number in ('ELN-1020-PAB','ELN-1019-PAB');
 
 
 */

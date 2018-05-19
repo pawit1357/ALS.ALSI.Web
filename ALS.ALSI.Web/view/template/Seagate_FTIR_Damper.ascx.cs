@@ -297,65 +297,77 @@ namespace ALS.ALSI.Web.view.template
 
 
                 #region "Procedure"
-                template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR (Adhesive side)";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
-                tmp.C = "16 pieces";
-                tmp.D = "n - hexane (HPLC Grade)";
-                tmp.E = "10 mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
+                template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "FTIR (Adhesive side)",
+                    B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M",
+                    C = "16 pieces",
+                    D = "n - hexane (HPLC Grade)",
+                    E = "10 mL",
+                    row_type = 1,
+                    data_type = 1
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR (Non - Adhesive side)";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
-                tmp.C = "16 pieces";
-                tmp.D = "n - hexane (HPLC Grade)";
-                tmp.E = "10 mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "FTIR (Non - Adhesive side)",
+                    B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M",
+                    C = "16 pieces",
+                    D = "n - hexane (HPLC Grade)",
+                    E = "10 mL",
+                    row_type = 1,
+                    data_type = 1
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR (Release Liner, ultra - low Silicone, facing adhesive side)";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
-                tmp.C = "20 cm²";
-                tmp.D = "n - hexane (HPLC Grade)";
-                tmp.E = "10 mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "FTIR (Release Liner, ultra - low Silicone, facing adhesive side)",
+                    B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M",
+                    C = "20 cm²",
+                    D = "n - hexane (HPLC Grade)",
+                    E = "10 mL",
+                    row_type = 1,
+                    data_type = 1
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR (Release Liner, ultra - low Silicone, back, not facing adhesive side)";
-                tmp.B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M";
-                tmp.C = "20 cm²";
-                tmp.D = "n - hexane (HPLC Grade)";
-                tmp.E = "10 mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "FTIR (Release Liner, ultra - low Silicone, back, not facing adhesive side)",
+                    B = "20800032-001 Rev. C,20800014 - 001 Rev.G,20800033 - 001 Rev.M",
+                    C = "20 cm²",
+                    D = "n - hexane (HPLC Grade)",
+                    E = "10 mL",
+                    row_type = 1,
+                    data_type = 1
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR";
-                tmp.B = "20800032-001 Rev. B,20800014 - 001 Rev.G";
-                tmp.C = "";
-                tmp.D = "n - hexane (HPLC Grade)";
-                tmp.E = "10 mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "FTIR",
+                    B = "20800032-001 Rev. B,20800014 - 001 Rev.G",
+                    C = "",
+                    D = "n - hexane (HPLC Grade)",
+                    E = "10 mL",
+                    row_type = 1,
+                    data_type = 1
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "FTIR";
-                tmp.B = "20800032-001 Rev. B,20800014 - 001 Rev.G";
-                tmp.C = "";
-                tmp.D = "n - hexane (HPLC Grade)";
-                tmp.E = "20 mL";
-                tmp.row_type = 1;
-                tmp.data_type = 1;
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "FTIR",
+                    B = "20800032-001 Rev. B,20800014 - 001 Rev.G",
+                    C = "",
+                    D = "n - hexane (HPLC Grade)",
+                    E = "20 mL",
+                    row_type = 1,
+                    data_type = 1
+                };
                 this.Ftir.Add(tmp);
                 #endregion
                 gvMethodProcedure.DataSource = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
@@ -725,127 +737,151 @@ namespace ALS.ALSI.Web.view.template
     */
 
                 #region "NVR"
-                template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Damper, Adhesive side";
-                tmp.B = item.E;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
+                template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Damper, Adhesive side",
+                    B = item.E,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Damper, non-Adhesive side";
-                tmp.B = item.F;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Damper, non-Adhesive side",
+                    B = item.F,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Release Liner, Silicone";
-                tmp.B = item.G;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Release Liner, Silicone",
+                    B = item.G,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Release Liner, non-Silicone";
-                tmp.B = item.H;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Release Liner, non-Silicone",
+                    B = item.H,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Release Liner, ultra-low Silicone (facing adhesive side)";
-                tmp.B = item.I;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Release Liner, ultra-low Silicone (facing adhesive side)",
+                    B = item.I,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Release Liner, ultra-low Silicone (back, not facing adhesive side)";
-                tmp.B = item.J;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Release Liner, ultra-low Silicone (back, not facing adhesive side)",
+                    B = item.J,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.NVR_SPEC)
+                };
                 this.Ftir.Add(tmp);
                 #endregion
                 #region "FTIR"
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Damper, Adhesive side";
-                tmp.B = item.L;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Damper, Adhesive side",
+                    B = item.L,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Damper, non-Adhesive side";
-                tmp.B = item.M;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Damper, non-Adhesive side",
+                    B = item.M,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Release Liner, Silicone";
-                tmp.B = item.N;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Release Liner, Silicone",
+                    B = item.N,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Release Liner, non-Silicone";
-                tmp.B = item.O;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Release Liner, non-Silicone",
+                    B = item.O,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Release Liner, ultra-low Silicone (facing adhesive side)";
-                tmp.B = item.P;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Release Liner, ultra-low Silicone (facing adhesive side)",
+                    B = item.P,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)
+                };
                 this.Ftir.Add(tmp);
-                tmp = new template_seagate_ftir_coverpage();
-                tmp.ID = this.Ftir.Count + 1;
-                tmp.A = "Release Liner, ultra-low Silicone (back, not facing adhesive side)";
-                tmp.B = item.Q;
-                tmp.C = "";
-                tmp.D = "";
-                tmp.E = "";
-                tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC);
+                tmp = new template_seagate_ftir_coverpage
+                {
+                    ID = this.Ftir.Count + 1,
+                    A = "Release Liner, ultra-low Silicone (back, not facing adhesive side)",
+                    B = item.Q,
+                    C = "",
+                    D = "",
+                    E = "",
+                    row_type = Convert.ToInt32(RowTypeEnum.Normal),
+                    data_type = Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)
+                };
                 this.Ftir.Add(tmp);
                 #endregion
                 #region "METHOD/PROCEDURE"
@@ -967,25 +1003,26 @@ namespace ALS.ALSI.Web.view.template
                 }
 
 
-                ReportParameterCollection reportParameters = new ReportParameterCollection();
+                ReportParameterCollection reportParameters = new ReportParameterCollection
+                {
+                    new ReportParameter("CustomerPoNo", reportHeader.cusRefNo),
+                    new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo),
+                    new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""),
+                    new ReportParameter("Company", reportHeader.addr1),
+                    new ReportParameter("Company_addr", reportHeader.addr2),
 
-                reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-                reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-                reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+                    new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""),
+                    new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""),
+                    new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""),
+                    new ReportParameter("SampleDescription", reportHeader.description),
+                    new ReportParameter("Test", " "),
+                    new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text),
+                    new ReportParameter("rpt_unit2", ddlUnit.SelectedItem.Text),
 
-                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-                reportParameters.Add(new ReportParameter("Test", " "));
-                reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-                reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnit.SelectedItem.Text));
-
-                reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-                reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
-                reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+                    new ReportParameter("ResultDesc", lbSpecDesc.Text),
+                    new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)),
+                    new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no))
+                };
 
                 // Variables
                 Warning[] warnings;
@@ -996,8 +1033,10 @@ namespace ALS.ALSI.Web.view.template
 
 
                 // Setup the report viewer object and get the array of bytes
-                ReportViewer viewer = new ReportViewer();
-                viewer.ProcessingMode = ProcessingMode.Local;
+                ReportViewer viewer = new ReportViewer
+                {
+                    ProcessingMode = ProcessingMode.Local
+                };
                 viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_nvr_seagate_damper.rdlc");
                 viewer.LocalReport.SetParameters(reportParameters);
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", methods.ToDataTable())); // Add datasource here
@@ -1253,13 +1292,15 @@ namespace ALS.ALSI.Web.view.template
 
                                     for (int row = 18; row < 29; row++)
                                     {
-                                        template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
-                                        tmp.ID = row;
-                                        tmp.A = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.A));
-                                        tmp.B = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.B));
-                                        tmp.C = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C));
-                                        tmp.D = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.D));
-                                        tmp.E = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.E));
+                                        template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage
+                                        {
+                                            ID = row,
+                                            A = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.A)),
+                                            B = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.B)),
+                                            C = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C)),
+                                            D = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.D)),
+                                            E = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.E))
+                                        };
 
                                         switch ((row - 18) + 1)
                                         {
@@ -1335,10 +1376,12 @@ namespace ALS.ALSI.Web.view.template
                         #region "IMG"
                         if ((Path.GetExtension(_postedFile.FileName).ToLower().Equals(".jpg")))
                         {
-                            template_img _img = new template_img();
-                            _img.id = CustomUtils.GetRandomNumberID();
-                            _img.sample_id = this.SampleID;
-                            _img.seq = this.refImg.Count + 1;
+                            template_img _img = new template_img
+                            {
+                                id = CustomUtils.GetRandomNumberID(),
+                                sample_id = this.SampleID,
+                                seq = this.refImg.Count + 1
+                            };
                             String fn = String.Format("{0}_IMG_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(_postedFile.FileName));
 
                             String _source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, fn);

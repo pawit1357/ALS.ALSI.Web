@@ -59,7 +59,7 @@ namespace ALS.ALSI.Web.view.template
 
 
         #region "Property"
-        public users_login userLogin
+        public users_login UserLogin
         {
             get { return ((Session[Constants.SESSION_USER] != null) ? (users_login)Session[Constants.SESSION_USER] : null); }
         }
@@ -70,19 +70,19 @@ namespace ALS.ALSI.Web.view.template
             set { ViewState[Constants.COMMAND_NAME] = value; }
         }
 
-        public job_sample jobSample
+        public job_sample JobSample
         {
             get { return (job_sample)Session["job_sample"]; }
             set { Session["job_sample"] = value; }
         }
 
-        public template_pa pa
+        public template_pa Pa
         {
             get { return (template_pa)Session[GetType().Name + "pa"]; }
             set { Session[GetType().Name + "pa"] = value; }
         }
 
-        public List<template_pa_detail> paDetail
+        public List<template_pa_detail> PaDetail
         {
             get { return (List<template_pa_detail>)Session[GetType().Name + "paDetail"]; }
             set { Session[GetType().Name + "paDetail"] = value; }
@@ -138,7 +138,7 @@ namespace ALS.ALSI.Web.view.template
 
         private void initialPage()
         {
-            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), UserLogin.role_id.ToString(), true);
 
             this.CommandName = CommandNameEnum.Add;
             this.WashingHeaders = new List<string>();
@@ -154,10 +154,10 @@ namespace ALS.ALSI.Web.view.template
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt16(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
             #region "SAMPLE"
-            if (this.jobSample != null)
+            if (this.JobSample != null)
             {
 
-                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.JobSample.job_status.ToString(), true);
                 lbJobStatus.Text = Constants.GetEnumDescription(status);
                 ddlStatus.Items.Clear();
 
@@ -193,7 +193,7 @@ namespace ALS.ALSI.Web.view.template
                     pRemark.Visible = false;
                 }
 
-                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                txtDateAnalyzed.Text = (this.JobSample.date_chemist_alalyze != null) ? this.JobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
                 pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
 
 
@@ -205,15 +205,15 @@ namespace ALS.ALSI.Web.view.template
             #endregion
 
             template_pa_detail pad = new template_pa_detail();
-            this.tbMSpecifications = new tb_m_specification().SelectBySpecificationID(this.jobSample.specification_id, this.jobSample.template_id);
+            this.tbMSpecifications = new tb_m_specification().SelectBySpecificationID(this.JobSample.specification_id, this.JobSample.template_id);
             List<template_pa_detail> listPaDetail = pad.SelectBySampleID(this.SampleID);
             if (listPaDetail.Count > 0)
             {
-                this.paDetail = listPaDetail;
+                this.PaDetail = listPaDetail;
             }
             else
             {
-                paDetail = new List<template_pa_detail>();
+                PaDetail = new List<template_pa_detail>();
             }
 
             #region "Initial component"
@@ -266,184 +266,184 @@ namespace ALS.ALSI.Web.view.template
 
             #endregion
 
-            this.pa = new template_pa();
-            this.pa = pa.SelectByID(this.SampleID);
-            if (this.pa != null)
+            this.Pa = new template_pa();
+            this.Pa = Pa.SelectByID(this.SampleID);
+            if (this.Pa != null)
             {
-                ddlResult.SelectedValue = this.pa.result.ToString();
-                txtPIRTDC.Text = this.pa.pirtd;
-                ddlSpecification.SelectedValue = this.pa.specification_no.ToString();
+                ddlResult.SelectedValue = this.Pa.result.ToString();
+                txtPIRTDC.Text = this.Pa.pirtd;
+                ddlSpecification.SelectedValue = this.Pa.specification_no.ToString();
                 this.PA_SPECIFICATION = ddlSpecification.SelectedItem.Text;
 
                 #region "PAGE01"
-                txtDoec.Text = this.pa.doec;
-                txtDos.Text = this.pa.dos;
-                txtCustomerLimit.Text = this.pa.customerlimit;
-                txtGravimetry.Text = this.pa.gravimetry;
-                txtLmsp.Text = this.pa.lmsp;
-                txtExtractionValue.Text = this.pa.extractionvalue;
-                txtLnmsp.Text = this.pa.lnmsp;
-                txtEop_G.Text = this.pa.eop_g;
-                txtEop_Lmsp.Text = this.pa.eop_lmsp;
-                txtEop_Lnmsp.Text = this.pa.eop_lnmsp;
-                txtEop_pt.Text = this.pa.eop_pt;
-                txtEop_size.Text = this.pa.eop_size;
-                txtEop_value.Text = this.pa.eop_value;
-                txtEopRemark.Text = this.pa.remark;
+                txtDoec.Text = this.Pa.doec;
+                txtDos.Text = this.Pa.dos;
+                txtCustomerLimit.Text = this.Pa.customerlimit;
+                txtGravimetry.Text = this.Pa.gravimetry;
+                txtLmsp.Text = this.Pa.lmsp;
+                txtExtractionValue.Text = this.Pa.extractionvalue;
+                txtLnmsp.Text = this.Pa.lnmsp;
+                txtEop_G.Text = this.Pa.eop_g;
+                txtEop_Lmsp.Text = this.Pa.eop_lmsp;
+                txtEop_Lnmsp.Text = this.Pa.eop_lnmsp;
+                txtEop_pt.Text = this.Pa.eop_pt;
+                txtEop_size.Text = this.Pa.eop_size;
+                txtEop_value.Text = this.Pa.eop_value;
+                txtEopRemark.Text = this.Pa.remark;
                 #endregion
 
                 #region "PAGE02"
-                CustomUtils.setCheckBoxListValue(ref cbCsa, this.pa.iscsa);
-                txtWspc.Text = this.pa.wspc;
-                txtWvpc.Text = this.pa.wvpc;
-                txtTls.Text = this.pa.tls;
-                cbPreTreatmentConditioning.Checked = Convert.ToBoolean(this.pa.ispretreatmentconditioning);
-                txtPreTreatmentConditioning.Text = this.pa.pretreatmentconditioning;
-                CustomUtils.setCheckBoxListValue(ref cbPackingToBeTested, this.pa.ispackingtobetested);
+                CustomUtils.setCheckBoxListValue(ref cbCsa, this.Pa.iscsa);
+                txtWspc.Text = this.Pa.wspc;
+                txtWvpc.Text = this.Pa.wvpc;
+                txtTls.Text = this.Pa.tls;
+                cbPreTreatmentConditioning.Checked = Convert.ToBoolean(this.Pa.ispretreatmentconditioning);
+                txtPreTreatmentConditioning.Text = this.Pa.pretreatmentconditioning;
+                CustomUtils.setCheckBoxListValue(ref cbPackingToBeTested, this.Pa.ispackingtobetested);
 
-                cbContainer.Checked = Convert.ToBoolean(this.pa.iscontainer);
-                ddlContainer.SelectedValue = this.pa.container_id.ToString();
+                cbContainer.Checked = Convert.ToBoolean(this.Pa.iscontainer);
+                ddlContainer.SelectedValue = this.Pa.container_id.ToString();
 
-                cbFluid1.Checked = Convert.ToBoolean(this.pa.isfluid1);
-                ddlFluid1.SelectedValue = this.pa.fluid1_id.ToString();
-                cbFluid2.Checked = Convert.ToBoolean(this.pa.isfluid2);
-                ddlFluid2.SelectedValue = this.pa.fluid2_id.ToString();
-                cbFluid3.Checked = Convert.ToBoolean(this.pa.isfluid3);
-                ddlFluid3.SelectedValue = this.pa.fluid3_id.ToString();
+                cbFluid1.Checked = Convert.ToBoolean(this.Pa.isfluid1);
+                ddlFluid1.SelectedValue = this.Pa.fluid1_id.ToString();
+                cbFluid2.Checked = Convert.ToBoolean(this.Pa.isfluid2);
+                ddlFluid2.SelectedValue = this.Pa.fluid2_id.ToString();
+                cbFluid3.Checked = Convert.ToBoolean(this.Pa.isfluid3);
+                ddlFluid3.SelectedValue = this.Pa.fluid3_id.ToString();
 
-                txtTradeName.Text = this.pa.tradename;
-                txtManufacturer.Text = this.pa.manufacturer;
-                txtTotalQuantity.Text = this.pa.totalquantity;
-                cbTshb01.Checked = Convert.ToBoolean(this.pa.istshb01);
-                cbTshb02.Checked = Convert.ToBoolean(this.pa.istshb02);
-                cbTshb03.Checked = Convert.ToBoolean(this.pa.istshb03);
+                txtTradeName.Text = this.Pa.tradename;
+                txtManufacturer.Text = this.Pa.manufacturer;
+                txtTotalQuantity.Text = this.Pa.totalquantity;
+                cbTshb01.Checked = Convert.ToBoolean(this.Pa.istshb01);
+                cbTshb02.Checked = Convert.ToBoolean(this.Pa.istshb02);
+                cbTshb03.Checked = Convert.ToBoolean(this.Pa.istshb03);
 
-                txtTshb03.Text = this.pa.tshb03;
-                cbPots01.Checked = Convert.ToBoolean(this.pa.ispots01);
-                txtPots01.Text = this.pa.pots01;
+                txtTshb03.Text = this.Pa.tshb03;
+                cbPots01.Checked = Convert.ToBoolean(this.Pa.ispots01);
+                txtPots01.Text = this.Pa.pots01;
                 #endregion
 
                 #region "PAGE03"
-                cbDissolving.Checked = Convert.ToBoolean(this.pa.isdissolving);
-                txtDissolving.Text = this.pa.dissolving;
-                txtDissolvingTime.Text = this.pa.dissolvingtime;
-                cbPressureRinsing.Checked = Convert.ToBoolean(this.pa.ispressurerinsing);
-                cbAgitation.Checked = Convert.ToBoolean(this.pa.isagitation);
-                cbUntrasonic.Checked = Convert.ToBoolean(this.pa.isUltrasonic);
-                ddlRinsing.SelectedValue = this.pa.rinsing_id.ToString();
-                cbWashQuantity.Checked = Convert.ToBoolean(this.pa.iswashquantity);
-                txtWashQuantity.Text = this.pa.washquantity;
-                cbRewashingQuantity.Checked = Convert.ToBoolean(this.pa.isrewashingquantity);
-                txtRewashingQuantity.Text = this.pa.rewashingquantity;
-                cbWashPressureRinsing.Checked = Convert.ToBoolean(this.pa.iswashpressurerinsing);
-                cbWashAgitation.Checked = Convert.ToBoolean(this.pa.iswashagitation);
-                cbWashUltrasonic.Checked = Convert.ToBoolean(this.pa.iswashUltrasonic);
-                dllWashPressureRinsing.SelectedValue = this.pa.washpressurerinsing_id.ToString();
-                CustomUtils.setCheckBoxListValue(ref cbFiltrationMethod, this.pa.isfiltrationmethod);
+                cbDissolving.Checked = Convert.ToBoolean(this.Pa.isdissolving);
+                txtDissolving.Text = this.Pa.dissolving;
+                txtDissolvingTime.Text = this.Pa.dissolvingtime;
+                cbPressureRinsing.Checked = Convert.ToBoolean(this.Pa.ispressurerinsing);
+                cbAgitation.Checked = Convert.ToBoolean(this.Pa.isagitation);
+                cbUntrasonic.Checked = Convert.ToBoolean(this.Pa.isUltrasonic);
+                ddlRinsing.SelectedValue = this.Pa.rinsing_id.ToString();
+                cbWashQuantity.Checked = Convert.ToBoolean(this.Pa.iswashquantity);
+                txtWashQuantity.Text = this.Pa.washquantity;
+                cbRewashingQuantity.Checked = Convert.ToBoolean(this.Pa.isrewashingquantity);
+                txtRewashingQuantity.Text = this.Pa.rewashingquantity;
+                cbWashPressureRinsing.Checked = Convert.ToBoolean(this.Pa.iswashpressurerinsing);
+                cbWashAgitation.Checked = Convert.ToBoolean(this.Pa.iswashagitation);
+                cbWashUltrasonic.Checked = Convert.ToBoolean(this.Pa.iswashUltrasonic);
+                dllWashPressureRinsing.SelectedValue = this.Pa.washpressurerinsing_id.ToString();
+                CustomUtils.setCheckBoxListValue(ref cbFiltrationMethod, this.Pa.isfiltrationmethod);
 
-                ddlManufacturer.SelectedValue = this.pa.manufacturer_id.ToString();
-                ddlMaterial.SelectedValue = this.pa.material_id.ToString();
-                txtPoreSize.Text = this.pa.poresize;
-                txtDiameter.Text = this.pa.diameter;
-                cbOven.Checked = Convert.ToBoolean(this.pa.isoven);
-                cbDesiccator.Checked = Convert.ToBoolean(this.pa.isdesiccator);
-                cbAmbientAir.Checked = Convert.ToBoolean(this.pa.isambientair);
-                cbEasyDry.Checked = Convert.ToBoolean(this.pa.iseasydry);
-                txtDryTime.Text = this.pa.drytime;
-                txtTemperature.Text = this.pa.temperature;
-                ddlGravimetricAlalysis.SelectedValue = this.pa.gravimetricalalysis_id.ToString();
-                txtModel.Text = this.pa.model;
-                txtBalanceResolution.Text = this.pa.balanceresolution;
-                txtLastCalibration.Text = this.pa.lastcalibration;
-                cbZEISSAxioImager2.Checked = Convert.ToBoolean(this.pa.iszeissaxioimager2);
-                cbMeasuringSoftware.Checked = Convert.ToBoolean(this.pa.ismeasuringsoftware);
-                cbAutomated.Checked = Convert.ToBoolean(this.pa.isautomated);
-                txtAutomated.Text = this.pa.automated;
-                txtTotalextractionVolume.Text = this.pa.totalextractionvolume;
-                lbExtractionMethod.Text = this.pa.lbextractionmethod;
-                txtNumberOfComponents.Text = this.pa.numberofcomponents;
-                lbExtractionTime.Text = this.pa.lbextractiontime;
-                lbMembraneType.Text = this.pa.measureddiameter;
-                lbX.Text = this.pa.lbx;
-                lbY.Text = this.pa.lby;
-                txtMeasuredDiameter.Text = this.pa.measureddiameter;
-                txtFeretLmsp.Text = this.pa.feretlmsp;
-                txtFeretLnms.Text = this.pa.feretlnms;
-                txtFeretFb.Text = this.pa.feretfb;
+                ddlManufacturer.SelectedValue = this.Pa.manufacturer_id.ToString();
+                ddlMaterial.SelectedValue = this.Pa.material_id.ToString();
+                txtPoreSize.Text = this.Pa.poresize;
+                txtDiameter.Text = this.Pa.diameter;
+                cbOven.Checked = Convert.ToBoolean(this.Pa.isoven);
+                cbDesiccator.Checked = Convert.ToBoolean(this.Pa.isdesiccator);
+                cbAmbientAir.Checked = Convert.ToBoolean(this.Pa.isambientair);
+                cbEasyDry.Checked = Convert.ToBoolean(this.Pa.iseasydry);
+                txtDryTime.Text = this.Pa.drytime;
+                txtTemperature.Text = this.Pa.temperature;
+                ddlGravimetricAlalysis.SelectedValue = this.Pa.gravimetricalalysis_id.ToString();
+                txtModel.Text = this.Pa.model;
+                txtBalanceResolution.Text = this.Pa.balanceresolution;
+                txtLastCalibration.Text = this.Pa.lastcalibration;
+                cbZEISSAxioImager2.Checked = Convert.ToBoolean(this.Pa.iszeissaxioimager2);
+                cbMeasuringSoftware.Checked = Convert.ToBoolean(this.Pa.ismeasuringsoftware);
+                cbAutomated.Checked = Convert.ToBoolean(this.Pa.isautomated);
+                txtAutomated.Text = this.Pa.automated;
+                txtTotalextractionVolume.Text = this.Pa.totalextractionvolume;
+                lbExtractionMethod.Text = this.Pa.lbextractionmethod;
+                txtNumberOfComponents.Text = this.Pa.numberofcomponents;
+                lbExtractionTime.Text = this.Pa.lbextractiontime;
+                lbMembraneType.Text = this.Pa.measureddiameter;
+                lbX.Text = this.Pa.lbx;
+                lbY.Text = this.Pa.lby;
+                txtMeasuredDiameter.Text = this.Pa.measureddiameter;
+                txtFeretLmsp.Text = this.Pa.feretlmsp;
+                txtFeretLnms.Text = this.Pa.feretlnms;
+                txtFeretFb.Text = this.Pa.feretfb;
 
-                txtLms.Text = this.pa.feretlmsp;
-                txtLnmp.Text = this.pa.feretlnms;
-                txtLf.Text = this.pa.feretfb;
+                txtLms.Text = this.Pa.feretlmsp;
+                txtLnmp.Text = this.Pa.feretlnms;
+                txtLf.Text = this.Pa.feretfb;
                 #endregion
 
-                img1.ImageUrl = this.pa.img01;
-                img2.ImageUrl = this.pa.img02;
-                img3.ImageUrl = this.pa.img03;
-                img4.ImageUrl = this.pa.img04;
-                img5.ImageUrl = this.pa.img05;
+                img1.ImageUrl = this.Pa.img01;
+                img2.ImageUrl = this.Pa.img02;
+                img3.ImageUrl = this.Pa.img03;
+                img4.ImageUrl = this.Pa.img04;
+                img5.ImageUrl = this.Pa.img05;
 
-                img6.ImageUrl = this.pa.img06;
-                img7.ImageUrl = this.pa.img07;
-                img8.ImageUrl = this.pa.img08;
-                img9.ImageUrl = this.pa.img09;
-                img10.ImageUrl = this.pa.img10;
-                img11.ImageUrl = this.pa.img11;
-
-
-
-                Image1.ImageUrl = this.pa.attachment_ii_01;
-                Image2.ImageUrl = this.pa.attachment_ii_02;
-                Image3.ImageUrl = this.pa.attachment_ii_03;
-                Image4.ImageUrl = this.pa.attachment_ii_04;
+                img6.ImageUrl = this.Pa.img06;
+                img7.ImageUrl = this.Pa.img07;
+                img8.ImageUrl = this.Pa.img08;
+                img9.ImageUrl = this.Pa.img09;
+                img10.ImageUrl = this.Pa.img10;
+                img11.ImageUrl = this.Pa.img11;
 
 
 
-                txtLms_X.Text = this.pa.lms_x;
-                txtLms_Y.Text = this.pa.lms_y;
+                Image1.ImageUrl = this.Pa.attachment_ii_01;
+                Image2.ImageUrl = this.Pa.attachment_ii_02;
+                Image3.ImageUrl = this.Pa.attachment_ii_03;
+                Image4.ImageUrl = this.Pa.attachment_ii_04;
 
-                txtLnms_X.Text = this.pa.lnms_x;
-                txtLnms_Y.Text = this.pa.lnms_y;
 
-                txtLf_X.Text = this.pa.lf_x;
-                txtLf_Y.Text = this.pa.lf_y;
 
-                txtLms_X_R2.Text = this.pa.lms_x_r2;
-                txtLms_Y_R2.Text = this.pa.lms_y_r2;
-                txtLnms_X_R2.Text = this.pa.lnms_x_r2;
-                txtLnms_Y_R2.Text = this.pa.lnms_y_r2;
-                txtLf_X_R2.Text = this.pa.lf_x_r2;
-                txtLf_Y_R2.Text = this.pa.lf_y_r2;
+                txtLms_X.Text = this.Pa.lms_x;
+                txtLms_Y.Text = this.Pa.lms_y;
 
-                txtLms_X_R3.Text = this.pa.lms_x_r3;
-                txtLms_Y_R3.Text = this.pa.lms_y_r3;
-                txtLnms_X_R3.Text = this.pa.lnms_x_r3;
-                txtLnms_Y_R3.Text = this.pa.lnms_y_r3;
-                txtLf_X_R3.Text = this.pa.lf_x_r3;
-                txtLf_Y_R3.Text = this.pa.lf_y_r3;
+                txtLnms_X.Text = this.Pa.lnms_x;
+                txtLnms_Y.Text = this.Pa.lnms_y;
+
+                txtLf_X.Text = this.Pa.lf_x;
+                txtLf_Y.Text = this.Pa.lf_y;
+
+                txtLms_X_R2.Text = this.Pa.lms_x_r2;
+                txtLms_Y_R2.Text = this.Pa.lms_y_r2;
+                txtLnms_X_R2.Text = this.Pa.lnms_x_r2;
+                txtLnms_Y_R2.Text = this.Pa.lnms_y_r2;
+                txtLf_X_R2.Text = this.Pa.lf_x_r2;
+                txtLf_Y_R2.Text = this.Pa.lf_y_r2;
+
+                txtLms_X_R3.Text = this.Pa.lms_x_r3;
+                txtLms_Y_R3.Text = this.Pa.lms_y_r3;
+                txtLnms_X_R3.Text = this.Pa.lnms_x_r3;
+                txtLnms_Y_R3.Text = this.Pa.lnms_y_r3;
+                txtLf_X_R3.Text = this.Pa.lf_x_r3;
+                txtLf_Y_R3.Text = this.Pa.lf_y_r3;
 
 
                 lbX.Text = txtAutomated.Text;
                 lbY.Text = txtAutomated.Text;
 
 
-                txtParamMagnification1.Text = this.pa.param_magnification_01;
-                txtParamMagnification2.Text = this.pa.param_magnification_02;
-                txtParamWd1.Text = this.pa.param_wd_01;
-                txtParamWd2.Text = this.pa.param_wd_02;
-                txtParamEht1.Text = this.pa.param_eht_01;
-                txtParamEht2.Text = this.pa.param_eht_02;
-                txtParamDetector1.Text = this.pa.param_detector_01;
-                txtParamDetector2.Text = this.pa.param_detector_02;
+                txtParamMagnification1.Text = this.Pa.param_magnification_01;
+                txtParamMagnification2.Text = this.Pa.param_magnification_02;
+                txtParamWd1.Text = this.Pa.param_wd_01;
+                txtParamWd2.Text = this.Pa.param_wd_02;
+                txtParamEht1.Text = this.Pa.param_eht_01;
+                txtParamEht2.Text = this.Pa.param_eht_02;
+                txtParamDetector1.Text = this.Pa.param_detector_01;
+                txtParamDetector2.Text = this.Pa.param_detector_02;
 
-                ddlSpecification.SelectedValue = this.pa.specification_no.ToString();
-                ddlOperatorName.SelectedValue = this.pa.operater_name.ToString();
+                ddlSpecification.SelectedValue = this.Pa.specification_no.ToString();
+                ddlOperatorName.SelectedValue = this.Pa.operater_name.ToString();
 
 
-                txtPerComponentTotal.Text = this.pa.per_component_total;
-                txtPerComponentMetallicShine.Text = this.pa.per_component_metallicshine;
-                txtPermembraneMetallicShine.Text = this.pa.per_membrane_metallicshine;
+                txtPerComponentTotal.Text = this.Pa.per_component_total;
+                txtPerComponentMetallicShine.Text = this.Pa.per_component_metallicshine;
+                txtPermembraneMetallicShine.Text = this.Pa.per_membrane_metallicshine;
 
-                lbPer.Text = this.pa.per_text;
+                lbPer.Text = this.Pa.per_text;
 
 
                 #region "COLUMN HEADER"
@@ -554,15 +554,15 @@ namespace ALS.ALSI.Web.view.template
             }
             else
             {
-                this.pa = new template_pa();
+                this.Pa = new template_pa();
 
                 this.PA_SPECIFICATION = ddlSpecification.SelectedItem.Text;
 
                 tb_m_specification selectedSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_DDL_SPECIFICATION_NO) && x.C.Equals(this.PA_SPECIFICATION)).FirstOrDefault();
                 if (selectedSpec != null)
                 {
-                    lbP1Note.Text = (selectedSpec.D == null) ? String.Empty : selectedSpec.D;
-                    lbP1Remark.Text = (selectedSpec.E == null) ? String.Empty : selectedSpec.E;
+                    lbP1Note.Text = selectedSpec.D ?? String.Empty;
+                    lbP1Remark.Text = selectedSpec.E ?? String.Empty;
                 }
 
                 #region "gvEop"
@@ -575,24 +575,26 @@ namespace ALS.ALSI.Web.view.template
                     {
                         if (seq > 1)
                         {
-                            template_pa_detail tmp = new template_pa_detail();
-                            tmp.id = CustomUtils.GetRandomNumberID();
-                            tmp.seq = seq;
-                            tmp.col_c = item.C;
-                            tmp.col_d = item.D;
-                            tmp.col_e = item.E;
-                            tmp.col_f = item.F;
-                            tmp.col_g = item.G;
-                            tmp.col_h = item.H;
-                            tmp.col_i = item.I;
-                            tmp.col_j = item.J;
-                            tmp.col_k = item.K;
-                            tmp.col_l = item.L;
-                            tmp.col_m = item.M;
-                            tmp.col_n = item.N;
-                            tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-                            tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
-                            paDetail.Add(tmp);
+                            template_pa_detail tmp = new template_pa_detail
+                            {
+                                id = CustomUtils.GetRandomNumberID(),
+                                seq = seq,
+                                col_c = item.C,
+                                col_d = item.D,
+                                col_e = item.E,
+                                col_f = item.F,
+                                col_g = item.G,
+                                col_h = item.H,
+                                col_i = item.I,
+                                col_j = item.J,
+                                col_k = item.K,
+                                col_l = item.L,
+                                col_m = item.M,
+                                col_n = item.N,
+                                row_status = Convert.ToInt16(RowTypeEnum.Normal),
+                                row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)
+                            };
+                            PaDetail.Add(tmp);
 
                         }
                         else
@@ -639,40 +641,42 @@ namespace ALS.ALSI.Web.view.template
                     int row = 1;
                     foreach (var item in listOfSpec)
                     {
-                        template_pa_detail tmp = new template_pa_detail();
-                        tmp.id = CustomUtils.GetRandomNumberID();
-                        tmp.seq = row;
-                        tmp.col_a = item.A;
-                        tmp.col_b = item.B;
-                        tmp.col_c = item.C;
-                        tmp.col_d = item.D;
-                        tmp.col_e = item.E;
-                        tmp.col_f = item.G;
-                        tmp.col_g = item.G;
-                        tmp.col_h = item.H;
-                        tmp.col_i = item.I;
-                        tmp.col_j = item.J;
-                        tmp.col_k = item.K;
-                        tmp.col_l = item.L;
-                        tmp.col_m = item.M;
-                        tmp.col_n = item.N;
-                        tmp.col_o = item.O;
-                        tmp.col_p = item.P;
-                        tmp.col_q = item.Q;
-                        tmp.col_r = item.R;
+                        template_pa_detail tmp = new template_pa_detail
+                        {
+                            id = CustomUtils.GetRandomNumberID(),
+                            seq = row,
+                            col_a = item.A,
+                            col_b = item.B,
+                            col_c = item.C,
+                            col_d = item.D,
+                            col_e = item.E,
+                            col_f = item.G,
+                            col_g = item.G,
+                            col_h = item.H,
+                            col_i = item.I,
+                            col_j = item.J,
+                            col_k = item.K,
+                            col_l = item.L,
+                            col_m = item.M,
+                            col_n = item.N,
+                            col_o = item.O,
+                            col_p = item.P,
+                            col_q = item.Q,
+                            col_r = item.R,
 
-                        tmp.col_s = item.S;
-                        tmp.col_t = item.T;
-                        tmp.col_u = item.U;
-                        tmp.col_v = item.V;
-                        tmp.col_w = item.W;
-                        tmp.col_x = item.X;
-                        tmp.col_y = item.Y;
-                        tmp.col_z = item.Z;
+                            col_s = item.S,
+                            col_t = item.T,
+                            col_u = item.U,
+                            col_v = item.V,
+                            col_w = item.W,
+                            col_x = item.X,
+                            col_y = item.Y,
+                            col_z = item.Z,
 
-                        tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-                        tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
-                        paDetail.Add(tmp);
+                            row_status = Convert.ToInt16(RowTypeEnum.Normal),
+                            row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)
+                        };
+                        PaDetail.Add(tmp);
                         row++;
                     }
                 }
@@ -683,9 +687,9 @@ namespace ALS.ALSI.Web.view.template
                 tb_m_specification selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_DISSOLVING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                 if (null != selectValue)
                 {
-                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
+                    foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
                     {
-                        paDetail.Remove(pd);
+                        PaDetail.Remove(pd);
                     }
 
 
@@ -695,25 +699,27 @@ namespace ALS.ALSI.Web.view.template
                         gvDissolving.Columns[i].HeaderText = cols[i];
                         gvDissolving.Columns[i].Visible = true;
                     }
-                    template_pa_detail tmp = new template_pa_detail();
-                    tmp.id = CustomUtils.GetRandomNumberID();
-                    tmp.col_d = "42 KHz";
-                    tmp.col_e = "24 W/L";
-                    tmp.col_f = "8 mins";
-                    tmp.col_g = "room temperature";
-                    tmp.col_h = "No";
-                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-                    tmp.row_type = Convert.ToInt16(PAEnum.DISSOLVING);
-                    paDetail.Add(tmp);
+                    template_pa_detail tmp = new template_pa_detail
+                    {
+                        id = CustomUtils.GetRandomNumberID(),
+                        col_d = "42 KHz",
+                        col_e = "24 W/L",
+                        col_f = "8 mins",
+                        col_g = "room temperature",
+                        col_h = "No",
+                        row_status = Convert.ToInt16(RowTypeEnum.Normal),
+                        row_type = Convert.ToInt16(PAEnum.DISSOLVING)
+                    };
+                    PaDetail.Add(tmp);
 
                 }
 
                 selectValue = this.tbMSpecifications.Where(x => x.A.Equals(PA_DESCRIPTION_OF_PROCESS_AND_EXTRACTION) && x.C.Equals(PA_WASHING) && x.D.Equals(PA_AGITATION)).FirstOrDefault();
                 if (null != selectValue)
                 {
-                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
+                    foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
                     {
-                        paDetail.Remove(pd);
+                        PaDetail.Remove(pd);
                     }
 
 
@@ -723,16 +729,18 @@ namespace ALS.ALSI.Web.view.template
                         gvWashing.Columns[i].HeaderText = cols[i];
                         gvWashing.Columns[i].Visible = true;
                     }
-                    template_pa_detail tmp = new template_pa_detail();
-                    tmp.id = CustomUtils.GetRandomNumberID();
-                    tmp.col_d = "Flat type";
-                    tmp.col_e = "40";
-                    tmp.col_f = "0.5 L/min";
-                    tmp.col_g = "1 bar";
-                    tmp.col_h = "-";
-                    tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
-                    tmp.row_type = Convert.ToInt16(PAEnum.WASHING);
-                    paDetail.Add(tmp);
+                    template_pa_detail tmp = new template_pa_detail
+                    {
+                        id = CustomUtils.GetRandomNumberID(),
+                        col_d = "Flat type",
+                        col_e = "40",
+                        col_f = "0.5 L/min",
+                        col_g = "1 bar",
+                        col_h = "-",
+                        row_status = Convert.ToInt16(RowTypeEnum.Normal),
+                        row_type = Convert.ToInt16(PAEnum.WASHING)
+                    };
+                    PaDetail.Add(tmp);
 
                 }
                 ////
@@ -755,13 +763,13 @@ namespace ALS.ALSI.Web.view.template
             pUploadWorkSheet.Visible = false;
             btnSubmit.Enabled = false;
 
-            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.JobSample);
             pdCustomer.Text = reportHeader.addr1;
             pdAlsRefNo.Text = reportHeader.alsRefNo;
-            pdPartName.Text = this.jobSample.part_name;
+            pdPartName.Text = this.JobSample.part_name;
             pdAnalysisDate.Text = reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy");
-            paPartNo.Text = this.jobSample.part_no;
-            pdLotNo.Text = this.jobSample.lot_no;
+            paPartNo.Text = this.JobSample.part_no;
+            pdLotNo.Text = this.JobSample.lot_no;
 
             btnSrChemistTest.Visible = userRole == RoleEnum.SR_CHEMIST;
             calculate();
@@ -783,8 +791,8 @@ namespace ALS.ALSI.Web.view.template
             lbPermembraneTotal.Text = String.Empty;
             txtPermembraneMetallicShine.Text = String.Empty;
 
-            List<template_pa_detail> listMicroPicData = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
-            List<template_pa_detail> listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
+            List<template_pa_detail> listMicroPicData = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
+            List<template_pa_detail> listPaDetail = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
                 Boolean isPrv = ddlSpecification.SelectedItem.Text.Equals("PA5x_BOSCH0442S00155PRV") ? true : false;
@@ -951,7 +959,7 @@ namespace ALS.ALSI.Web.view.template
                 gvMicroscopicAnalysis.DataSource = listMicroPicData;
                 gvMicroscopicAnalysis.DataBind();
             }
-            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
+            listPaDetail = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
 
@@ -959,19 +967,19 @@ namespace ALS.ALSI.Web.view.template
                 gvDissolving.DataBind();
                 //lbExtractionTime.Text = listPaDetail[0].col_f;
             }
-            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
+            listPaDetail = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
                 gvWashing.DataSource = listPaDetail;
                 gvWashing.DataBind();
             }
-            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
+            listPaDetail = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
                 gvCompositionElement.DataSource = listPaDetail;
                 gvCompositionElement.DataBind();
             }
-            listPaDetail = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
+            listPaDetail = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
             if (null != listPaDetail && listPaDetail.Count > 0)
             {
                 gvCompositionElement2.DataSource = listPaDetail;
@@ -1025,180 +1033,180 @@ namespace ALS.ALSI.Web.view.template
 
             Boolean isValid = true;
 
-            StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+            StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.JobSample.job_status.ToString(), true);
             switch (status)
             {
                 case StatusEnum.LOGIN_SELECT_SPEC:
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                    this.JobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     break;
                 case StatusEnum.CHEMIST_TESTING:
 
-                    this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
-                    this.jobSample.step2owner = userLogin.id;
+                    this.JobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
+                    this.JobSample.step2owner = UserLogin.id;
 
                     //#region ":: STAMP COMPLETE DATE"
                     #region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_chemist_complete = DateTime.Now;
-                    this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                    this.JobSample.date_chemist_complete = DateTime.Now;
+                    this.JobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                     #endregion
-                    this.pa.sample_id = this.SampleID;
-                    this.pa.result = Convert.ToInt32(ddlResult.SelectedValue);
-                    this.pa.pirtd = txtPIRTDC.Text;
+                    this.Pa.sample_id = this.SampleID;
+                    this.Pa.result = Convert.ToInt32(ddlResult.SelectedValue);
+                    this.Pa.pirtd = txtPIRTDC.Text;
 
                     #region "PAGE01"
-                    this.pa.lms = txtLms.Text;
-                    this.pa.lnmp = txtLnmp.Text;
-                    this.pa.lf = txtLf.Text;
-                    this.pa.doec = txtDoec.Text;
-                    this.pa.dos = txtDos.Text;
-                    this.pa.customerlimit = txtCustomerLimit.Text;
-                    this.pa.gravimetry = txtGravimetry.Text;
-                    this.pa.lmsp = txtLmsp.Text;
-                    this.pa.extractionvalue = txtExtractionValue.Text;
-                    this.pa.lnmsp = txtLnmsp.Text;
-                    this.pa.eop_g = txtEop_G.Text;
-                    this.pa.eop_lmsp = txtEop_Lmsp.Text;
-                    this.pa.eop_lnmsp = txtEop_Lnmsp.Text;
-                    this.pa.eop_pt = txtEop_pt.Text;
-                    this.pa.eop_size = txtEop_size.Text;
-                    this.pa.eop_value = txtEop_value.Text;
-                    this.pa.remark = txtEopRemark.Text;
+                    this.Pa.lms = txtLms.Text;
+                    this.Pa.lnmp = txtLnmp.Text;
+                    this.Pa.lf = txtLf.Text;
+                    this.Pa.doec = txtDoec.Text;
+                    this.Pa.dos = txtDos.Text;
+                    this.Pa.customerlimit = txtCustomerLimit.Text;
+                    this.Pa.gravimetry = txtGravimetry.Text;
+                    this.Pa.lmsp = txtLmsp.Text;
+                    this.Pa.extractionvalue = txtExtractionValue.Text;
+                    this.Pa.lnmsp = txtLnmsp.Text;
+                    this.Pa.eop_g = txtEop_G.Text;
+                    this.Pa.eop_lmsp = txtEop_Lmsp.Text;
+                    this.Pa.eop_lnmsp = txtEop_Lnmsp.Text;
+                    this.Pa.eop_pt = txtEop_pt.Text;
+                    this.Pa.eop_size = txtEop_size.Text;
+                    this.Pa.eop_value = txtEop_value.Text;
+                    this.Pa.remark = txtEopRemark.Text;
                     #endregion
                     #region "PAGE02"
-                    this.pa.iscsa = CustomUtils.getCheckBoxListValue(cbCsa);
-                    this.pa.wspc = txtWspc.Text;
-                    this.pa.wvpc = txtWvpc.Text;
-                    this.pa.tls = txtTls.Text;
-                    this.pa.ispretreatmentconditioning = (cbPreTreatmentConditioning.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.pretreatmentconditioning = txtPreTreatmentConditioning.Text;
-                    this.pa.ispackingtobetested = CustomUtils.getCheckBoxListValue(cbPackingToBeTested);
-                    this.pa.iscontainer = (cbContainer.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.container_id = Convert.ToInt32(ddlContainer.SelectedValue);
-                    this.pa.isfluid1 = (cbFluid1.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.fluid1_id = Convert.ToInt32(ddlFluid1.SelectedValue);
-                    this.pa.isfluid2 = (cbFluid2.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.fluid2_id = Convert.ToInt32(ddlFluid2.SelectedValue);
-                    this.pa.isfluid3 = (cbFluid3.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.fluid3_id = Convert.ToInt32(ddlFluid3.SelectedValue);
-                    this.pa.tradename = txtTradeName.Text;
-                    this.pa.manufacturer = txtManufacturer.Text;
-                    this.pa.totalquantity = txtTotalQuantity.Text;
-                    this.pa.istshb01 = (cbTshb01.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.istshb02 = (cbTshb02.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.istshb03 = (cbTshb03.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.tshb03 = txtTshb03.Text;
-                    this.pa.ispots01 = (cbPots01.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.pots01 = txtPots01.Text;
+                    this.Pa.iscsa = CustomUtils.getCheckBoxListValue(cbCsa);
+                    this.Pa.wspc = txtWspc.Text;
+                    this.Pa.wvpc = txtWvpc.Text;
+                    this.Pa.tls = txtTls.Text;
+                    this.Pa.ispretreatmentconditioning = (cbPreTreatmentConditioning.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.pretreatmentconditioning = txtPreTreatmentConditioning.Text;
+                    this.Pa.ispackingtobetested = CustomUtils.getCheckBoxListValue(cbPackingToBeTested);
+                    this.Pa.iscontainer = (cbContainer.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.container_id = Convert.ToInt32(ddlContainer.SelectedValue);
+                    this.Pa.isfluid1 = (cbFluid1.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.fluid1_id = Convert.ToInt32(ddlFluid1.SelectedValue);
+                    this.Pa.isfluid2 = (cbFluid2.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.fluid2_id = Convert.ToInt32(ddlFluid2.SelectedValue);
+                    this.Pa.isfluid3 = (cbFluid3.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.fluid3_id = Convert.ToInt32(ddlFluid3.SelectedValue);
+                    this.Pa.tradename = txtTradeName.Text;
+                    this.Pa.manufacturer = txtManufacturer.Text;
+                    this.Pa.totalquantity = txtTotalQuantity.Text;
+                    this.Pa.istshb01 = (cbTshb01.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.istshb02 = (cbTshb02.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.istshb03 = (cbTshb03.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.tshb03 = txtTshb03.Text;
+                    this.Pa.ispots01 = (cbPots01.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.pots01 = txtPots01.Text;
                     #endregion
 
                     #region "PAGE03"
-                    this.pa.isdissolving = (cbDissolving.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.dissolving = txtDissolving.Text;
-                    this.pa.dissolvingtime = txtDissolvingTime.Text;
-                    this.pa.ispressurerinsing = (cbPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isagitation = (cbAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isUltrasonic = (cbUntrasonic.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.rinsing_id = Convert.ToInt16(ddlRinsing.SelectedValue);
-                    this.pa.iswashquantity = (cbWashQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.washquantity = txtWashQuantity.Text;
-                    this.pa.isrewashingquantity = (cbRewashingQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.rewashingquantity = txtRewashingQuantity.Text;
-                    this.pa.iswashpressurerinsing = (cbWashPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.iswashagitation = (cbWashAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.iswashUltrasonic = (cbWashUltrasonic.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.washpressurerinsing_id = Convert.ToInt16(dllWashPressureRinsing.SelectedValue);
-                    this.pa.isfiltrationmethod = CustomUtils.getCheckBoxListValue(cbFiltrationMethod);
+                    this.Pa.isdissolving = (cbDissolving.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.dissolving = txtDissolving.Text;
+                    this.Pa.dissolvingtime = txtDissolvingTime.Text;
+                    this.Pa.ispressurerinsing = (cbPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.isagitation = (cbAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.isUltrasonic = (cbUntrasonic.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.rinsing_id = Convert.ToInt16(ddlRinsing.SelectedValue);
+                    this.Pa.iswashquantity = (cbWashQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.washquantity = txtWashQuantity.Text;
+                    this.Pa.isrewashingquantity = (cbRewashingQuantity.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.rewashingquantity = txtRewashingQuantity.Text;
+                    this.Pa.iswashpressurerinsing = (cbWashPressureRinsing.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.iswashagitation = (cbWashAgitation.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.iswashUltrasonic = (cbWashUltrasonic.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.washpressurerinsing_id = Convert.ToInt16(dllWashPressureRinsing.SelectedValue);
+                    this.Pa.isfiltrationmethod = CustomUtils.getCheckBoxListValue(cbFiltrationMethod);
 
 
-                    this.pa.manufacturer_id = Convert.ToInt32(ddlManufacturer.SelectedValue);
-                    this.pa.material_id = Convert.ToInt32(ddlMaterial.SelectedValue);
-                    this.pa.poresize = txtPoreSize.Text;
-                    this.pa.diameter = txtDiameter.Text;
-                    this.pa.isoven = (cbOven.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isdesiccator = (cbDesiccator.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isambientair = (cbAmbientAir.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.iseasydry = (cbEasyDry.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.drytime = txtDryTime.Text;
-                    this.pa.temperature = txtTemperature.Text;
-                    this.pa.gravimetricalalysis_id = Convert.ToInt32(ddlGravimetricAlalysis.SelectedValue);
-                    this.pa.model = txtModel.Text;
-                    this.pa.balanceresolution = txtBalanceResolution.Text;
-                    this.pa.lastcalibration = txtLastCalibration.Text;
-                    this.pa.iszeissaxioimager2 = (cbZEISSAxioImager2.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.ismeasuringsoftware = (cbMeasuringSoftware.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.isautomated = (cbAutomated.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                    this.pa.automated = txtAutomated.Text;
-                    this.pa.totalextractionvolume = txtTotalextractionVolume.Text;
-                    this.pa.lbextractionmethod = lbExtractionMethod.Text;
-                    this.pa.numberofcomponents = txtNumberOfComponents.Text;
-                    this.pa.lbextractiontime = lbExtractionTime.Text;
-                    this.pa.measureddiameter = lbMembraneType.Text;
-                    this.pa.lbx = lbX.Text;
-                    this.pa.lby = lbY.Text;
-                    this.pa.measureddiameter = txtMeasuredDiameter.Text;
-                    this.pa.feretlmsp = txtFeretLmsp.Text;
-                    this.pa.feretlnms = txtFeretLnms.Text;
-                    this.pa.feretfb = txtFeretFb.Text;
+                    this.Pa.manufacturer_id = Convert.ToInt32(ddlManufacturer.SelectedValue);
+                    this.Pa.material_id = Convert.ToInt32(ddlMaterial.SelectedValue);
+                    this.Pa.poresize = txtPoreSize.Text;
+                    this.Pa.diameter = txtDiameter.Text;
+                    this.Pa.isoven = (cbOven.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.isdesiccator = (cbDesiccator.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.isambientair = (cbAmbientAir.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.iseasydry = (cbEasyDry.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.drytime = txtDryTime.Text;
+                    this.Pa.temperature = txtTemperature.Text;
+                    this.Pa.gravimetricalalysis_id = Convert.ToInt32(ddlGravimetricAlalysis.SelectedValue);
+                    this.Pa.model = txtModel.Text;
+                    this.Pa.balanceresolution = txtBalanceResolution.Text;
+                    this.Pa.lastcalibration = txtLastCalibration.Text;
+                    this.Pa.iszeissaxioimager2 = (cbZEISSAxioImager2.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.ismeasuringsoftware = (cbMeasuringSoftware.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.isautomated = (cbAutomated.Checked) ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                    this.Pa.automated = txtAutomated.Text;
+                    this.Pa.totalextractionvolume = txtTotalextractionVolume.Text;
+                    this.Pa.lbextractionmethod = lbExtractionMethod.Text;
+                    this.Pa.numberofcomponents = txtNumberOfComponents.Text;
+                    this.Pa.lbextractiontime = lbExtractionTime.Text;
+                    this.Pa.measureddiameter = lbMembraneType.Text;
+                    this.Pa.lbx = lbX.Text;
+                    this.Pa.lby = lbY.Text;
+                    this.Pa.measureddiameter = txtMeasuredDiameter.Text;
+                    this.Pa.feretlmsp = txtFeretLmsp.Text;
+                    this.Pa.feretlnms = txtFeretLnms.Text;
+                    this.Pa.feretfb = txtFeretFb.Text;
                     #endregion
 
-                    this.pa.img01 = img1.ImageUrl;
-                    this.pa.img02 = img2.ImageUrl;
-                    this.pa.img03 = img3.ImageUrl;
-                    this.pa.img04 = img4.ImageUrl;
-                    this.pa.img05 = img5.ImageUrl;
+                    this.Pa.img01 = img1.ImageUrl;
+                    this.Pa.img02 = img2.ImageUrl;
+                    this.Pa.img03 = img3.ImageUrl;
+                    this.Pa.img04 = img4.ImageUrl;
+                    this.Pa.img05 = img5.ImageUrl;
 
-                    this.pa.lms_x = txtLms_X.Text;
-                    this.pa.lms_y = txtLms_Y.Text;
-                    this.pa.lnms_x = txtLnms_X.Text;
-                    this.pa.lnms_y = txtLnms_Y.Text;
-                    this.pa.lf_x = txtLf_X.Text;
-                    this.pa.lf_y = txtLf_Y.Text;
+                    this.Pa.lms_x = txtLms_X.Text;
+                    this.Pa.lms_y = txtLms_Y.Text;
+                    this.Pa.lnms_x = txtLnms_X.Text;
+                    this.Pa.lnms_y = txtLnms_Y.Text;
+                    this.Pa.lf_x = txtLf_X.Text;
+                    this.Pa.lf_y = txtLf_Y.Text;
 
-                    this.pa.lms_x_r2 = txtLms_X_R2.Text;
-                    this.pa.lms_y_r2 = txtLms_Y_R2.Text;
-                    this.pa.lnms_x_r2 = txtLnms_X_R2.Text;
-                    this.pa.lnms_y_r2 = txtLnms_Y_R2.Text;
-                    this.pa.lf_x_r2 = txtLf_X_R2.Text;
-                    this.pa.lf_y_r2 = txtLf_Y_R2.Text;
+                    this.Pa.lms_x_r2 = txtLms_X_R2.Text;
+                    this.Pa.lms_y_r2 = txtLms_Y_R2.Text;
+                    this.Pa.lnms_x_r2 = txtLnms_X_R2.Text;
+                    this.Pa.lnms_y_r2 = txtLnms_Y_R2.Text;
+                    this.Pa.lf_x_r2 = txtLf_X_R2.Text;
+                    this.Pa.lf_y_r2 = txtLf_Y_R2.Text;
 
-                    this.pa.lms_x_r3 = txtLms_X_R3.Text;
-                    this.pa.lms_y_r3 = txtLms_Y_R3.Text;
-                    this.pa.lnms_x_r3 = txtLnms_X_R3.Text;
-                    this.pa.lnms_y_r3 = txtLnms_Y_R3.Text;
-                    this.pa.lf_x_r3 = txtLf_X_R3.Text;
-                    this.pa.lf_y_r3 = txtLf_Y_R3.Text;
-
-
+                    this.Pa.lms_x_r3 = txtLms_X_R3.Text;
+                    this.Pa.lms_y_r3 = txtLms_Y_R3.Text;
+                    this.Pa.lnms_x_r3 = txtLnms_X_R3.Text;
+                    this.Pa.lnms_y_r3 = txtLnms_Y_R3.Text;
+                    this.Pa.lf_x_r3 = txtLf_X_R3.Text;
+                    this.Pa.lf_y_r3 = txtLf_Y_R3.Text;
 
 
 
 
-                    this.pa.param_magnification_01 = txtParamMagnification1.Text;
-                    this.pa.param_magnification_02 = txtParamMagnification2.Text;
-                    this.pa.param_wd_01 = txtParamWd1.Text;
-                    this.pa.param_wd_02 = txtParamWd2.Text;
-                    this.pa.param_eht_01 = txtParamEht1.Text;
-                    this.pa.param_eht_02 = txtParamEht2.Text;
-                    this.pa.param_detector_01 = txtParamDetector1.Text;
-                    this.pa.param_detector_02 = txtParamDetector2.Text;
 
-                    this.pa.per_component_total = txtPerComponentTotal.Text;
-                    this.pa.per_component_metallicshine = txtPerComponentMetallicShine.Text;
-                    this.pa.per_membrane_metallicshine = txtPermembraneMetallicShine.Text;
 
-                    this.pa.specification_no = Convert.ToInt32(ddlSpecification.SelectedValue);
-                    this.pa.operater_name = Convert.ToInt32(ddlOperatorName.SelectedValue);
+                    this.Pa.param_magnification_01 = txtParamMagnification1.Text;
+                    this.Pa.param_magnification_02 = txtParamMagnification2.Text;
+                    this.Pa.param_wd_01 = txtParamWd1.Text;
+                    this.Pa.param_wd_02 = txtParamWd2.Text;
+                    this.Pa.param_eht_01 = txtParamEht1.Text;
+                    this.Pa.param_eht_02 = txtParamEht2.Text;
+                    this.Pa.param_detector_01 = txtParamDetector1.Text;
+                    this.Pa.param_detector_02 = txtParamDetector2.Text;
 
-                    this.pa.per_text = lbPer.Text;
+                    this.Pa.per_component_total = txtPerComponentTotal.Text;
+                    this.Pa.per_component_metallicshine = txtPerComponentMetallicShine.Text;
+                    this.Pa.per_membrane_metallicshine = txtPermembraneMetallicShine.Text;
+
+                    this.Pa.specification_no = Convert.ToInt32(ddlSpecification.SelectedValue);
+                    this.Pa.operater_name = Convert.ToInt32(ddlOperatorName.SelectedValue);
+
+                    this.Pa.per_text = lbPer.Text;
                     //Delete old
                     template_pa.DeleteBySampleID(this.SampleID);
-                    this.pa.Insert();
+                    this.Pa.Insert();
                     template_pa_detail.DeleteBySampleID(this.SampleID);
-                    foreach (template_pa_detail item in this.paDetail)
+                    foreach (template_pa_detail item in this.PaDetail)
                     {
                         item.sample_id = this.SampleID;
                     }
-                    template_pa_detail.InsertList(this.paDetail);
+                    template_pa_detail.InsertList(this.PaDetail);
 
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
@@ -1206,18 +1214,18 @@ namespace ALS.ALSI.Web.view.template
                     switch (srChemistApproveStatus)
                     {
                         case StatusEnum.SR_CHEMIST_APPROVE:
-                            this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
+                            this.JobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-                            this.jobSample.date_srchemist_complate = DateTime.Now;
+                            this.JobSample.date_srchemist_complate = DateTime.Now;
                             #endregion
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:
-                            this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                            this.JobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                             #region "LOG"
                             job_sample_logs jobSampleLog = new job_sample_logs
                             {
                                 ID = 0,
-                                job_sample_id = this.jobSample.ID,
+                                job_sample_id = this.JobSample.ID,
                                 log_title = String.Format("Sr.Chemist DisApprove"),
                                 job_remark = txtRemark.Text,
                                 is_active = "0",
@@ -1227,24 +1235,24 @@ namespace ALS.ALSI.Web.view.template
                             #endregion
                             break;
                     }
-                    this.jobSample.step4owner = userLogin.id;
+                    this.JobSample.step4owner = UserLogin.id;
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:
                     StatusEnum labApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
                     switch (labApproveStatus)
                     {
                         case StatusEnum.LABMANAGER_APPROVE:
-                            this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
+                            this.JobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
 
-                            this.jobSample.date_labman_complete = DateTime.Now;
+                            this.JobSample.date_labman_complete = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
-                            this.jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
+                            this.JobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
                             #region "LOG"
                             job_sample_logs jobSampleLog = new job_sample_logs
                             {
                                 ID = 0,
-                                job_sample_id = this.jobSample.ID,
+                                job_sample_id = this.JobSample.ID,
                                 log_title = String.Format("Lab Manager DisApprove"),
                                 job_remark = txtRemark.Text,
                                 is_active = "0",
@@ -1254,7 +1262,7 @@ namespace ALS.ALSI.Web.view.template
                             #endregion
                             break;
                     }
-                    this.jobSample.step5owner = userLogin.id;
+                    this.JobSample.step5owner = UserLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_WORD:
                     if (FileUpload1.HasFile)// && (Path.GetExtension(FileUpload1.FileName).Equals(".doc") || Path.GetExtension(FileUpload1.FileName).Equals(".docx")))
@@ -1263,8 +1271,8 @@ namespace ALS.ALSI.Web.view.template
                         string MM = DateTime.Now.ToString("MM");
                         string dd = DateTime.Now.ToString("dd");
 
-                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
-                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, Path.GetFileName(FileUpload1.FileName));
 
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
@@ -1272,14 +1280,14 @@ namespace ALS.ALSI.Web.view.template
                             Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                         }
                         FileUpload1.SaveAs(source_file);
-                        this.jobSample.path_word = source_file_url;
-                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
+                        this.JobSample.path_word = source_file_url;
+                        this.JobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
                     }
                     else
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                     }
-                    this.jobSample.step6owner = userLogin.id;
+                    this.JobSample.step6owner = UserLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
                     if (FileUpload1.HasFile) // && (Path.GetExtension(FileUpload1.FileName).Equals(".pdf")))
@@ -1288,8 +1296,8 @@ namespace ALS.ALSI.Web.view.template
                         string MM = DateTime.Now.ToString("MM");
                         string dd = DateTime.Now.ToString("dd");
 
-                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
-                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, Path.GetFileName(FileUpload1.FileName));
+                        String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, Path.GetFileName(FileUpload1.FileName));
 
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
@@ -1297,9 +1305,9 @@ namespace ALS.ALSI.Web.view.template
                             Directory.CreateDirectory(Path.GetDirectoryName(source_file));
                         }
                         FileUpload1.SaveAs(source_file);
-                        this.jobSample.path_pdf = source_file_url;
-                        this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                        this.jobSample.step7owner = userLogin.id;
+                        this.JobSample.path_pdf = source_file_url;
+                        this.JobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
+                        this.JobSample.step7owner = UserLogin.id;
 
                         //lbMessage.Text = string.Empty;
                     }
@@ -1322,7 +1330,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 litErrorMessage.Text = String.Empty;
                 //########
-                this.jobSample.Update();
+                this.JobSample.Update();
 
                 //Commit
                 GeneralManager.Commit();
@@ -1505,7 +1513,7 @@ namespace ALS.ALSI.Web.view.template
             Double largestNonMetallicShine = 0;
             Double longestFiber = 0;
             string sheetName = string.Empty;
-            List<template_pa_detail> paList = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            List<template_pa_detail> paList = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
 
             List<tb_m_dhs_cas> _cas = new List<tb_m_dhs_cas>();
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -1520,7 +1528,7 @@ namespace ALS.ALSI.Web.view.template
                     string MM = DateTime.Now.ToString("MM");
                     string dd = DateTime.Now.ToString("dd");
 
-                    String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(_postedFile.FileName));
+                    String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, Path.GetFileName(_postedFile.FileName));
 
                     if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                     {
@@ -1742,12 +1750,12 @@ namespace ALS.ALSI.Web.view.template
 
             if ((Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg01.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -1764,7 +1772,7 @@ namespace ALS.ALSI.Web.view.template
                     fileUploadImg01.SaveAs(source_file_jpg);
                 }
 
-                this.pa.img01 = source_file_url;
+                this.Pa.img01 = source_file_url;
                 img1.ImageUrl = source_file_url;
 
 
@@ -1800,12 +1808,12 @@ namespace ALS.ALSI.Web.view.template
 
             if ((Path.GetExtension(fileUploadImg02.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg02.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -1821,17 +1829,17 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg02.SaveAs(source_file_jpg);
                 }
-                this.pa.img02 = source_file_url;
+                this.Pa.img02 = source_file_url;
                 img2.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg03.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg03.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -1847,17 +1855,17 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg03.SaveAs(source_file_jpg);
                 }
-                this.pa.img03 = source_file_url;
+                this.Pa.img03 = source_file_url;
                 img3.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg04.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg04.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -1873,17 +1881,17 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg04.SaveAs(source_file_jpg);
                 }
-                this.pa.img04 = source_file_url;
+                this.Pa.img04 = source_file_url;
                 img4.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg05.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg05.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -1899,18 +1907,18 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg05.SaveAs(source_file_jpg);
                 }
-                this.pa.img05 = source_file_url;
+                this.Pa.img05 = source_file_url;
                 img5.ImageUrl = source_file_url;
             }
             //ROW2
             if ((Path.GetExtension(fileUploadImg03_R2.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg03_R2.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -1926,17 +1934,17 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg03_R2.SaveAs(source_file_jpg);
                 }
-                this.pa.img06 = source_file_url;
+                this.Pa.img06 = source_file_url;
                 img6.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg04_R2.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg04_R2.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -1952,17 +1960,17 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg04_R2.SaveAs(source_file_jpg);
                 }
-                this.pa.img07 = source_file_url;
+                this.Pa.img07 = source_file_url;
                 img7.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg05_R2.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg05_R2.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -1978,18 +1986,18 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg04_R2.SaveAs(source_file_jpg);
                 }
-                this.pa.img08 = source_file_url;
+                this.Pa.img08 = source_file_url;
                 img8.ImageUrl = source_file_url;
             }
             //ROW3
             if ((Path.GetExtension(fileUploadImg03_R3.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg03_R3.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -2005,17 +2013,17 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg03_R3.SaveAs(source_file_jpg);
                 }
-                this.pa.img09 = source_file_url;
+                this.Pa.img09 = source_file_url;
                 img9.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg04_R3.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg04_R3.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -2031,17 +2039,17 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg04_R3.SaveAs(source_file_jpg);
                 }
-                this.pa.img10 = source_file_url;
+                this.Pa.img10 = source_file_url;
                 img10.ImageUrl = source_file_url;
             }
             if ((Path.GetExtension(fileUploadImg05_R3.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUploadImg05_R3.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -2057,17 +2065,17 @@ namespace ALS.ALSI.Web.view.template
                 {
                     fileUploadImg05_R3.SaveAs(source_file_jpg);
                 }
-                this.pa.img11 = source_file_url;
+                this.Pa.img11 = source_file_url;
                 img11.ImageUrl = source_file_url;
             }
 
 
             if ((Path.GetExtension(fileAttachedDoc.FileName).ToUpper().Equals(".DOC")) || (Path.GetExtension(fileAttachedDoc.FileName).ToUpper().Equals(".DOCX")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileAttachedDoc.FileName));
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), Path.GetExtension(fileAttachedDoc.FileName));
 
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file_jpg)))
                 {
@@ -2076,7 +2084,7 @@ namespace ALS.ALSI.Web.view.template
 
                 fileAttachedDoc.SaveAs(source_file_jpg);
 
-                this.pa.attachment_ii_05 = source_file_url;
+                this.Pa.attachment_ii_05 = source_file_url;
             }
 
             if (errors.Count > 0)
@@ -2103,7 +2111,7 @@ namespace ALS.ALSI.Web.view.template
                 if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
                 {
                     int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    template_pa_detail _cov = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
                     if (_cov != null)
                     {
                         RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
@@ -2117,7 +2125,7 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                         }
 
-                        gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
+                        gvEop.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
                         gvEop.DataBind();
                     }
                 }
@@ -2168,7 +2176,7 @@ namespace ALS.ALSI.Web.view.template
         protected void gvEop_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvEop.EditIndex = e.NewEditIndex;
-            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
+            gvEop.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             gvEop.DataBind();
         }
 
@@ -2189,7 +2197,7 @@ namespace ALS.ALSI.Web.view.template
             TextBox txtN = (TextBox)gvEop.Rows[e.RowIndex].FindControl("txtN");
 
 
-            template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            template_pa_detail _cov = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
             if (_cov != null)
             {
                 if (txtC != null)
@@ -2242,14 +2250,14 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
             gvEop.EditIndex = -1;
-            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
+            gvEop.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             gvEop.DataBind();
         }
 
         protected void gvEop_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvEop.EditIndex = -1;
-            gvEop.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
+            gvEop.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
             gvEop.DataBind();
         }
         #endregion
@@ -2261,7 +2269,7 @@ namespace ALS.ALSI.Web.view.template
                 if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
                 {
                     int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    template_pa_detail _cov = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
                     if (_cov != null)
                     {
                         RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
@@ -2275,7 +2283,7 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                         }
 
-                        gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+                        gvMicroscopicAnalysis.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
                         gvMicroscopicAnalysis.DataBind();
                     }
                 }
@@ -2335,26 +2343,34 @@ namespace ALS.ALSI.Web.view.template
             try
             {
                 GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
-                TableHeaderCell cell = new TableHeaderCell();
-                cell.Text = "";
-                cell.RowSpan = 1;
+                TableHeaderCell cell = new TableHeaderCell
+                {
+                    Text = "",
+                    RowSpan = 1
+                };
                 row.Controls.Add(cell);
 
-                cell = new TableHeaderCell();
-                cell.RowSpan = 1;
-                cell.Text = "";
+                cell = new TableHeaderCell
+                {
+                    RowSpan = 1,
+                    Text = ""
+                };
                 row.Controls.Add(cell);
 
-                cell = new TableHeaderCell();
-                cell.ColumnSpan = 4;
-                cell.Text = "Particles on membrane";
-                cell.HorizontalAlign = HorizontalAlign.Center;
+                cell = new TableHeaderCell
+                {
+                    ColumnSpan = 4,
+                    Text = "Particles on membrane",
+                    HorizontalAlign = HorizontalAlign.Center
+                };
                 row.Controls.Add(cell);
 
-                cell = new TableHeaderCell();
-                cell.ColumnSpan = 4;
-                cell.Text = "3Particles per component";
-                cell.HorizontalAlign = HorizontalAlign.Center;
+                cell = new TableHeaderCell
+                {
+                    ColumnSpan = 4,
+                    Text = "3Particles per component",
+                    HorizontalAlign = HorizontalAlign.Center
+                };
                 row.Controls.Add(cell);
 
                 //cell = new TableHeaderCell();
@@ -2387,7 +2403,7 @@ namespace ALS.ALSI.Web.view.template
             try
             {
                 gvMicroscopicAnalysis.EditIndex = e.NewEditIndex;
-                gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+                gvMicroscopicAnalysis.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
                 gvMicroscopicAnalysis.DataBind();
             }
             catch (Exception ex)
@@ -2424,14 +2440,14 @@ namespace ALS.ALSI.Web.view.template
 
 
             gvMicroscopicAnalysis.EditIndex = -1;
-            gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            gvMicroscopicAnalysis.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
             gvMicroscopicAnalysis.DataBind();
         }
 
         protected void gvMicroscopicAnalysis_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvMicroscopicAnalysis.EditIndex = -1;
-            gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
+            gvMicroscopicAnalysis.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
             gvMicroscopicAnalysis.DataBind();
         }
         #endregion
@@ -2443,7 +2459,7 @@ namespace ALS.ALSI.Web.view.template
                 if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
                 {
                     int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.DISSOLVING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    template_pa_detail _cov = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.DISSOLVING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
                     if (_cov != null)
                     {
                         RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
@@ -2457,7 +2473,7 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                         }
 
-                        gvDissolving.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.DISSOLVING)).ToList();
+                        gvDissolving.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.DISSOLVING)).ToList();
                         gvDissolving.DataBind();
                     }
                 }
@@ -2506,7 +2522,7 @@ namespace ALS.ALSI.Web.view.template
         protected void gvDissolving_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvDissolving.EditIndex = e.NewEditIndex;
-            gvDissolving.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
+            gvDissolving.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
             gvDissolving.DataBind();
         }
 
@@ -2520,7 +2536,7 @@ namespace ALS.ALSI.Web.view.template
             TextBox txtH = (TextBox)gvDissolving.Rows[e.RowIndex].FindControl("txtH");
             TextBox txtI = (TextBox)gvDissolving.Rows[e.RowIndex].FindControl("txtI");
 
-            template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.DISSOLVING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            template_pa_detail _cov = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.DISSOLVING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
             if (_cov != null)
             {
                 if (txtD != null)
@@ -2549,14 +2565,14 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
             gvDissolving.EditIndex = -1;
-            gvDissolving.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
+            gvDissolving.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
             gvDissolving.DataBind();
         }
 
         protected void gvDissolving_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvDissolving.EditIndex = -1;
-            gvDissolving.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
+            gvDissolving.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
             gvDissolving.DataBind();
         }
 
@@ -2569,7 +2585,7 @@ namespace ALS.ALSI.Web.view.template
                 if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
                 {
                     int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.WASHING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    template_pa_detail _cov = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.WASHING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
                     if (_cov != null)
                     {
                         RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
@@ -2583,7 +2599,7 @@ namespace ALS.ALSI.Web.view.template
                                 break;
                         }
 
-                        gvWashing.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.WASHING)).ToList();
+                        gvWashing.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.WASHING)).ToList();
                         gvWashing.DataBind();
                     }
                 }
@@ -2632,7 +2648,7 @@ namespace ALS.ALSI.Web.view.template
         protected void gvWashing_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvWashing.EditIndex = e.NewEditIndex;
-            gvWashing.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
+            gvWashing.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             gvWashing.DataBind();
         }
 
@@ -2646,7 +2662,7 @@ namespace ALS.ALSI.Web.view.template
             TextBox txtH = (TextBox)gvWashing.Rows[e.RowIndex].FindControl("txtH");
             TextBox txtI = (TextBox)gvWashing.Rows[e.RowIndex].FindControl("txtI");
 
-            template_pa_detail _cov = paDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.WASHING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            template_pa_detail _cov = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.WASHING) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
             if (_cov != null)
             {
                 if (txtD != null)
@@ -2676,14 +2692,14 @@ namespace ALS.ALSI.Web.view.template
 
             }
             gvWashing.EditIndex = -1;
-            gvWashing.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
+            gvWashing.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             gvWashing.DataBind();
         }
 
         protected void gvWashing_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvWashing.EditIndex = -1;
-            gvWashing.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
+            gvWashing.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
             gvWashing.DataBind();
         }
 
@@ -2743,7 +2759,7 @@ namespace ALS.ALSI.Web.view.template
         {
 
             DataTable dt = new DataTable();// Extenders.ObjectToDataTable(this.coverpages[0]);
-            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.JobSample);
 
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
@@ -2759,9 +2775,9 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", " "));
-            reportParameters.Add(new ReportParameter("partNo", String.IsNullOrEmpty(this.jobSample.part_no) ? " " : this.jobSample.part_no));
-            reportParameters.Add(new ReportParameter("partName", String.IsNullOrEmpty(this.jobSample.part_name) ? " " : this.jobSample.part_name));
-            reportParameters.Add(new ReportParameter("lotNo", String.IsNullOrEmpty(this.jobSample.lot_no) ? " " : this.jobSample.lot_no));
+            reportParameters.Add(new ReportParameter("partNo", String.IsNullOrEmpty(this.JobSample.part_no) ? " " : this.JobSample.part_no));
+            reportParameters.Add(new ReportParameter("partName", String.IsNullOrEmpty(this.JobSample.part_name) ? " " : this.JobSample.part_name));
+            reportParameters.Add(new ReportParameter("lotNo", String.IsNullOrEmpty(this.JobSample.lot_no) ? " " : this.JobSample.lot_no));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", " "));
 
             reportParameters.Add(new ReportParameter("dh_col1", this.DissolvingHeaders[0]));
@@ -2783,7 +2799,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("dissolving_rinsing", ddlRinsing.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("wash_rinsing", dllWashPressureRinsing.SelectedItem.Text));
 
-            reportParameters.Add(new ReportParameter("showAttachedII", (this.pa.img06 == null)? "HIDDEN":""));
+            reportParameters.Add(new ReportParameter("showAttachedII", (this.Pa.img06 == null)? "HIDDEN":""));
 
             
             // Variables
@@ -2800,91 +2816,91 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/pa_03.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
 
-            List<template_pa_detail> eops = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
-            List<template_pa_detail> dissolvings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
-            List<template_pa_detail> washings = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
-            List<template_pa_detail> mas = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
-            List<template_pa_detail> ec1 = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
-            List<template_pa_detail> ec2 = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
+            List<template_pa_detail> eops = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).OrderBy(x => x.seq).ToList();
+            List<template_pa_detail> dissolvings = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList();
+            List<template_pa_detail> washings = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList();
+            List<template_pa_detail> mas = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).OrderBy(x => x.seq).ToList();
+            List<template_pa_detail> ec1 = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
+            List<template_pa_detail> ec2 = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
 
 
             List<template_pa> pas = new List<template_pa>();
-            this.pa.img1 = CustomUtils.GetBytesFromImage(this.pa.img01);
-            this.pa.img2 = CustomUtils.GetBytesFromImage(this.pa.img02);
-            this.pa.img3 = CustomUtils.GetBytesFromImage(this.pa.img03);
-            this.pa.img4 = CustomUtils.GetBytesFromImage(this.pa.img04);
-            this.pa.img5 = CustomUtils.GetBytesFromImage(this.pa.img05);
+            this.Pa.img1 = CustomUtils.GetBytesFromImage(this.Pa.img01);
+            this.Pa.img2 = CustomUtils.GetBytesFromImage(this.Pa.img02);
+            this.Pa.img3 = CustomUtils.GetBytesFromImage(this.Pa.img03);
+            this.Pa.img4 = CustomUtils.GetBytesFromImage(this.Pa.img04);
+            this.Pa.img5 = CustomUtils.GetBytesFromImage(this.Pa.img05);
 
-            this.pa.img6 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_01);
-            this.pa.img7 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_02);
-            this.pa.img8 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_03);
-            this.pa.img9 = CustomUtils.GetBytesFromImage(this.pa.attachment_ii_01);
+            this.Pa.img6 = CustomUtils.GetBytesFromImage(this.Pa.attachment_ii_01);
+            this.Pa.img7 = CustomUtils.GetBytesFromImage(this.Pa.attachment_ii_02);
+            this.Pa.img8 = CustomUtils.GetBytesFromImage(this.Pa.attachment_ii_03);
+            this.Pa.img9 = CustomUtils.GetBytesFromImage(this.Pa.attachment_ii_01);
 
-            this.pa.img3R2 = CustomUtils.GetBytesFromImage(this.pa.img06);
-            this.pa.img4R2 = CustomUtils.GetBytesFromImage(this.pa.img07);
-            this.pa.img5R2 = CustomUtils.GetBytesFromImage(this.pa.img08);
+            this.Pa.img3R2 = CustomUtils.GetBytesFromImage(this.Pa.img06);
+            this.Pa.img4R2 = CustomUtils.GetBytesFromImage(this.Pa.img07);
+            this.Pa.img5R2 = CustomUtils.GetBytesFromImage(this.Pa.img08);
 
-            this.pa.img3R3 = CustomUtils.GetBytesFromImage(this.pa.img09);
-            this.pa.img4R3 = CustomUtils.GetBytesFromImage(this.pa.img10);
-            this.pa.img5R3 = CustomUtils.GetBytesFromImage(this.pa.img11);
+            this.Pa.img3R3 = CustomUtils.GetBytesFromImage(this.Pa.img09);
+            this.Pa.img4R3 = CustomUtils.GetBytesFromImage(this.Pa.img10);
+            this.Pa.img5R3 = CustomUtils.GetBytesFromImage(this.Pa.img11);
 
-            this.pa.iscontainer_text = cbContainer.Checked.ToString();
-            this.pa.container_id_text = ddlContainer.SelectedItem.Text;
-            this.pa.isfluid1_text = cbFluid1.Checked.ToString();
-            this.pa.fluid1_id_text = ddlFluid1.SelectedItem.Text;
-            this.pa.isfluid2_text = cbFluid2.Checked.ToString();
-            this.pa.fluid2_id_text = ddlFluid2.SelectedItem.Text;
-            this.pa.isfluid3_text = cbFluid3.Checked.ToString();
-            this.pa.fluid3_id_text = ddlFluid3.SelectedItem.Text;
-            this.pa.istshb01_text = cbTshb01.Checked.ToString();
-            this.pa.istshb02_text = cbTshb02.Checked.ToString();
-            this.pa.istshb03_text = cbTshb03.Checked.ToString();
-            this.pa.ispots01_text = cbPots01.Checked.ToString();
-            this.pa.isdissolving_text = cbDissolving.Checked.ToString();
+            this.Pa.iscontainer_text = cbContainer.Checked.ToString();
+            this.Pa.container_id_text = ddlContainer.SelectedItem.Text;
+            this.Pa.isfluid1_text = cbFluid1.Checked.ToString();
+            this.Pa.fluid1_id_text = ddlFluid1.SelectedItem.Text;
+            this.Pa.isfluid2_text = cbFluid2.Checked.ToString();
+            this.Pa.fluid2_id_text = ddlFluid2.SelectedItem.Text;
+            this.Pa.isfluid3_text = cbFluid3.Checked.ToString();
+            this.Pa.fluid3_id_text = ddlFluid3.SelectedItem.Text;
+            this.Pa.istshb01_text = cbTshb01.Checked.ToString();
+            this.Pa.istshb02_text = cbTshb02.Checked.ToString();
+            this.Pa.istshb03_text = cbTshb03.Checked.ToString();
+            this.Pa.ispots01_text = cbPots01.Checked.ToString();
+            this.Pa.isdissolving_text = cbDissolving.Checked.ToString();
 
-            this.pa.isagitation_text = cbAgitation.Checked.ToString();
-            this.pa.ispressurerinsing_text = cbPressureRinsing.Checked.ToString();
-            this.pa.isultrasonic_text = cbUntrasonic.Checked.ToString();
-
-
-
-            this.pa.iswashquantity_text = cbWashQuantity.Checked.ToString();
-            this.pa.isrewashingquantity_text = cbRewashingQuantity.Checked.ToString();
+            this.Pa.isagitation_text = cbAgitation.Checked.ToString();
+            this.Pa.ispressurerinsing_text = cbPressureRinsing.Checked.ToString();
+            this.Pa.isultrasonic_text = cbUntrasonic.Checked.ToString();
 
 
-            this.pa.iswashagitation_text = cbWashAgitation.Checked.ToString();
-            this.pa.iswashpressurerinsing_text = cbWashPressureRinsing.Checked.ToString();
-            this.pa.iswashultrasonic_text = cbWashUltrasonic.Checked.ToString();
+
+            this.Pa.iswashquantity_text = cbWashQuantity.Checked.ToString();
+            this.Pa.isrewashingquantity_text = cbRewashingQuantity.Checked.ToString();
 
 
-            this.pa.isoven_text = cbOven.Checked.ToString();
-            this.pa.isdesiccator_text = cbDesiccator.Checked.ToString();
-            this.pa.gravimetricalalysis_id_text = ddlGravimetricAlalysis.SelectedItem.Text;
-            this.pa.iseasydry_text = cbEasyDry.Checked.ToString();
-            this.pa.isambientair_text = cbAmbientAir.Checked.ToString();
-            this.pa.iszeissaxioimager2_text = cbZEISSAxioImager2.Checked.ToString();
-            this.pa.ismeasuringsoftware_text = cbMeasuringSoftware.Checked.ToString();
-            this.pa.isautomated_text = cbAutomated.Checked.ToString();
-            this.pa.material_id_text = ddlMaterial.SelectedItem.Text;
-            this.pa.manufacturer_id_text = ddlManufacturer.SelectedItem.Text;
-            this.pa.lbmembranetype = lbMembraneType.Text;
-            this.pa.lbPermembrane_text = lbPermembraneTotal.Text;
-            this.pa.totalResidueWeight = lbTotalResidueWeight.Text;
+            this.Pa.iswashagitation_text = cbWashAgitation.Checked.ToString();
+            this.Pa.iswashpressurerinsing_text = cbWashPressureRinsing.Checked.ToString();
+            this.Pa.iswashultrasonic_text = cbWashUltrasonic.Checked.ToString();
 
 
-            this.pa.dh_col1 = this.DissolvingHeaders[0];
-            this.pa.dh_col2 = this.DissolvingHeaders[1];
-            this.pa.dh_col3 = this.DissolvingHeaders[2];
-            this.pa.dh_col4 = this.DissolvingHeaders[3];
-            this.pa.dh_col5 = this.DissolvingHeaders[4];
+            this.Pa.isoven_text = cbOven.Checked.ToString();
+            this.Pa.isdesiccator_text = cbDesiccator.Checked.ToString();
+            this.Pa.gravimetricalalysis_id_text = ddlGravimetricAlalysis.SelectedItem.Text;
+            this.Pa.iseasydry_text = cbEasyDry.Checked.ToString();
+            this.Pa.isambientair_text = cbAmbientAir.Checked.ToString();
+            this.Pa.iszeissaxioimager2_text = cbZEISSAxioImager2.Checked.ToString();
+            this.Pa.ismeasuringsoftware_text = cbMeasuringSoftware.Checked.ToString();
+            this.Pa.isautomated_text = cbAutomated.Checked.ToString();
+            this.Pa.material_id_text = ddlMaterial.SelectedItem.Text;
+            this.Pa.manufacturer_id_text = ddlManufacturer.SelectedItem.Text;
+            this.Pa.lbmembranetype = lbMembraneType.Text;
+            this.Pa.lbPermembrane_text = lbPermembraneTotal.Text;
+            this.Pa.totalResidueWeight = lbTotalResidueWeight.Text;
 
-            this.pa.wh_col1 = this.WashingHeaders[0];
-            this.pa.wh_col2 = this.WashingHeaders[1];
-            this.pa.wh_col3 = this.WashingHeaders[2];
-            this.pa.wh_col4 = this.WashingHeaders[3];
-            this.pa.wh_col5 = this.WashingHeaders[4];
 
-            pas.Add(this.pa);
+            this.Pa.dh_col1 = this.DissolvingHeaders[0];
+            this.Pa.dh_col2 = this.DissolvingHeaders[1];
+            this.Pa.dh_col3 = this.DissolvingHeaders[2];
+            this.Pa.dh_col4 = this.DissolvingHeaders[3];
+            this.Pa.dh_col5 = this.DissolvingHeaders[4];
+
+            this.Pa.wh_col1 = this.WashingHeaders[0];
+            this.Pa.wh_col2 = this.WashingHeaders[1];
+            this.Pa.wh_col3 = this.WashingHeaders[2];
+            this.Pa.wh_col4 = this.WashingHeaders[3];
+            this.Pa.wh_col5 = this.WashingHeaders[4];
+
+            pas.Add(this.Pa);
 
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dissolvings.ToDataTable())); // Add datasource here
@@ -2910,13 +2926,13 @@ namespace ALS.ALSI.Web.view.template
 
             string download = String.Empty;
 
-            StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+            StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.JobSample.job_status.ToString(), true);
             switch (status)
             {
                 case StatusEnum.ADMIN_CONVERT_WORD:
-                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    if (!String.IsNullOrEmpty(this.JobSample.path_word))
                     {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.JobSample.path_word));
                     }
                     else
                     {
@@ -2926,7 +2942,7 @@ namespace ALS.ALSI.Web.view.template
                         {
                             Directory.CreateDirectory(Server.MapPath("~/Report/"));
                         }
-                        using (FileStream fs = File.Create(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension))
+                        using (FileStream fs = File.Create(Server.MapPath("~/Report/") + this.JobSample.job_number + "_orginal." + extension))
                         {
                             fs.Write(bytes, 0, bytes.Length);
                         }
@@ -2937,7 +2953,7 @@ namespace ALS.ALSI.Web.view.template
                         doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
                         Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
                         Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
-                        Document doc2 = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
+                        Document doc2 = new Document(Server.MapPath("~/Report/") + this.JobSample.job_number + "_orginal." + extension);
                         foreach (Section section in doc2.Sections)
                         {
                             foreach (DocumentObject obj in header.ChildObjects)
@@ -2952,16 +2968,16 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-                        doc2.SaveToFile(Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension);
+                        doc2.SaveToFile(Server.MapPath("~/Report/") + this.JobSample.job_number + "." + extension);
                         #endregion
                         Response.ContentType = mimeType;
-                        Response.AddHeader("Content-Disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-                        Response.WriteFile(Server.MapPath("~/Report/" + this.jobSample.job_number + "." + extension));
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + this.JobSample.job_number + "." + extension);
+                        Response.WriteFile(Server.MapPath("~/Report/" + this.JobSample.job_number + "." + extension));
                         Response.Flush();
 
                         #region "Delete After Download"
-                        String deleteFile1 = Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension;
-                        String deleteFile2 = Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension;
+                        String deleteFile1 = Server.MapPath("~/Report/") + this.JobSample.job_number + "." + extension;
+                        String deleteFile2 = Server.MapPath("~/Report/") + this.JobSample.job_number + "_orginal." + extension;
 
                         if (File.Exists(deleteFile1))
                         {
@@ -2977,15 +2993,15 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LABMANAGER_CHECKING:
                 case StatusEnum.LABMANAGER_APPROVE:
                 case StatusEnum.LABMANAGER_DISAPPROVE:
-                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    if (!String.IsNullOrEmpty(this.JobSample.path_word))
                     {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.JobSample.path_word));
                     }
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    if (!String.IsNullOrEmpty(this.JobSample.path_word))
                     {
-                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.JobSample.path_word));
                     }
                     break;
             }
@@ -3097,9 +3113,9 @@ namespace ALS.ALSI.Web.view.template
                 }
                 if (null != selectValue)
                 {
-                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
+                    foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
                     {
-                        paDetail.Remove(pd);
+                        PaDetail.Remove(pd);
                     }
 
                     List<String> cols = tb_m_specification.findColumnCount(selectValue);
@@ -3117,15 +3133,15 @@ namespace ALS.ALSI.Web.view.template
                     tmp.col_h = "No";
                     tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                     tmp.row_type = Convert.ToInt16(PAEnum.DISSOLVING);
-                    paDetail.Add(tmp);
+                    PaDetail.Add(tmp);
 
                 }
             }
             else
             {
-                foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
+                foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
                 {
-                    paDetail.Remove(pd);
+                    PaDetail.Remove(pd);
                 }
             }
             calculate();
@@ -3162,9 +3178,9 @@ namespace ALS.ALSI.Web.view.template
 
                 if (null != selectValue)
                 {
-                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
+                    foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
                     {
-                        paDetail.Remove(pd);
+                        PaDetail.Remove(pd);
                     }
 
 
@@ -3183,15 +3199,15 @@ namespace ALS.ALSI.Web.view.template
                     tmp.col_h = "-";
                     tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                     tmp.row_type = Convert.ToInt16(PAEnum.WASHING);
-                    paDetail.Add(tmp);
+                    PaDetail.Add(tmp);
 
                 }
             }
             else
             {
-                foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
+                foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
                 {
-                    paDetail.Remove(pd);
+                    PaDetail.Remove(pd);
                 }
             }
             calculate();
@@ -3287,9 +3303,9 @@ namespace ALS.ALSI.Web.view.template
             tmp.col_f = txtEC01_SHOT.Text;
             tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
             tmp.row_type = Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION);
-            paDetail.Add(tmp);
+            PaDetail.Add(tmp);
 
-            List<template_pa_detail> ecs = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
+            List<template_pa_detail> ecs = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
             gvCompositionElement.DataSource = ecs;
             gvCompositionElement.DataBind();
             txtEC01.Text = String.Empty;
@@ -3301,11 +3317,11 @@ namespace ALS.ALSI.Web.view.template
         {
             int id = int.Parse(gvCompositionElement.DataKeys[e.RowIndex].Values[0].ToString());
 
-            template_pa_detail pa = paDetail.Find(x => x.id == id);
+            template_pa_detail pa = PaDetail.Find(x => x.id == id);
             if (pa != null)
             {
-                paDetail.Remove(pa);
-                List<template_pa_detail> ecs = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
+                PaDetail.Remove(pa);
+                List<template_pa_detail> ecs = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("1")).ToList();
                 gvCompositionElement.DataSource = ecs;
                 gvCompositionElement.DataBind();
             }
@@ -3320,9 +3336,9 @@ namespace ALS.ALSI.Web.view.template
             tmp.col_f = txtEC02_SHOT.Text;
             tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
             tmp.row_type = Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION);
-            paDetail.Add(tmp);
+            PaDetail.Add(tmp);
 
-            List<template_pa_detail> ecs = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
+            List<template_pa_detail> ecs = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
             gvCompositionElement2.DataSource = ecs;
             gvCompositionElement2.DataBind();
             txtEC02.Text = String.Empty;
@@ -3333,11 +3349,11 @@ namespace ALS.ALSI.Web.view.template
         {
             int id = int.Parse(gvCompositionElement2.DataKeys[e.RowIndex].Values[0].ToString());
 
-            template_pa_detail pa = paDetail.Find(x => x.id == id);
+            template_pa_detail pa = PaDetail.Find(x => x.id == id);
             if (pa != null)
             {
-                paDetail.Remove(pa);
-                List<template_pa_detail> ecs = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
+                PaDetail.Remove(pa);
+                List<template_pa_detail> ecs = PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.ELEMENT_COMPOSITION) && x.col_d.Equals("2")).ToList();
                 gvCompositionElement2.DataSource = ecs;
                 gvCompositionElement2.DataBind();
             }
@@ -3359,12 +3375,12 @@ namespace ALS.ALSI.Web.view.template
             String source_file_url = String.Empty;
             if ((Path.GetExtension(fileUpload3.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUpload3.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -3381,7 +3397,7 @@ namespace ALS.ALSI.Web.view.template
                     fileUpload3.SaveAs(source_file_jpg);
                 }
                 ///
-                this.pa.attachment_ii_01 = source_file_url;
+                this.Pa.attachment_ii_01 = source_file_url;
                 Image1.ImageUrl = source_file_url;
             }
         }
@@ -3401,12 +3417,12 @@ namespace ALS.ALSI.Web.view.template
             String source_file_url = String.Empty;
             if ((Path.GetExtension(fileUpload4.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUpload4.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -3423,7 +3439,7 @@ namespace ALS.ALSI.Web.view.template
                     fileUpload4.SaveAs(source_file_jpg);
                 }
                 ///
-                this.pa.attachment_ii_02 = source_file_url;
+                this.Pa.attachment_ii_02 = source_file_url;
                 Image2.ImageUrl = source_file_url;
             }
         }
@@ -3443,12 +3459,12 @@ namespace ALS.ALSI.Web.view.template
             String source_file_url = String.Empty;
             if ((Path.GetExtension(fileUpload5.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUpload5.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -3465,7 +3481,7 @@ namespace ALS.ALSI.Web.view.template
                     fileUpload5.SaveAs(source_file_jpg);
                 }
                 ///
-                this.pa.attachment_ii_03 = source_file_url;
+                this.Pa.attachment_ii_03 = source_file_url;
                 Image3.ImageUrl = source_file_url;
             }
         }
@@ -3485,12 +3501,12 @@ namespace ALS.ALSI.Web.view.template
             String source_file_url = String.Empty;
             if ((Path.GetExtension(fileUpload6.FileName).ToUpper().Equals(".JPG")) || (Path.GetExtension(fileUpload6.FileName).ToUpper().Equals(".TIF")))
             {
-                jpgName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
-                tifName = String.Format("{0}_{1}{2}{3}", this.jobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
+                jpgName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".jpg");
+                tifName = String.Format("{0}_{1}{2}{3}", this.JobSample.job_number, DateTime.Now.ToString("yyyyMMdd"), CustomUtils.GenerateRandom(1000000, 9999999), ".tif");
 
-                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, tifName);
-                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, jpgName);
-                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, jpgName));
+                source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, tifName);
+                source_file_jpg = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.JobSample.job_number, jpgName);
+                source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.JobSample.job_number, jpgName));
 
                 if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                 {
@@ -3507,7 +3523,7 @@ namespace ALS.ALSI.Web.view.template
                     fileUpload6.SaveAs(source_file_jpg);
                 }
                 ///
-                this.pa.attachment_ii_04 = source_file_url;
+                this.Pa.attachment_ii_04 = source_file_url;
                 Image4.ImageUrl = source_file_url;
             }
         }
@@ -3540,9 +3556,9 @@ namespace ALS.ALSI.Web.view.template
 
                 if (null != selectValue)
                 {
-                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
+                    foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.DISSOLVING)).ToList())
                     {
-                        paDetail.Remove(pd);
+                        PaDetail.Remove(pd);
                     }
 
 
@@ -3561,7 +3577,7 @@ namespace ALS.ALSI.Web.view.template
                     tmp.col_h = "-";
                     tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                     tmp.row_type = Convert.ToInt16(PAEnum.DISSOLVING);
-                    paDetail.Add(tmp);
+                    PaDetail.Add(tmp);
 
                 }
 
@@ -3587,9 +3603,9 @@ namespace ALS.ALSI.Web.view.template
 
                 if (null != selectValue)
                 {
-                    foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
+                    foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.WASHING)).ToList())
                     {
-                        paDetail.Remove(pd);
+                        PaDetail.Remove(pd);
                     }
 
 
@@ -3608,7 +3624,7 @@ namespace ALS.ALSI.Web.view.template
                     tmp.col_h = "-";
                     tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                     tmp.row_type = Convert.ToInt16(PAEnum.WASHING);
-                    paDetail.Add(tmp);
+                    PaDetail.Add(tmp);
 
                 }
 
@@ -3648,9 +3664,9 @@ namespace ALS.ALSI.Web.view.template
             if (listOfSpec.Count > 0)
             {
 
-                foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList())
+                foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES)).ToList())
                 {
-                    paDetail.Remove(pd);
+                    PaDetail.Remove(pd);
                 }
 
                 int seq = 1;
@@ -3675,7 +3691,7 @@ namespace ALS.ALSI.Web.view.template
                         tmp.col_n = item.N;
                         tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                         tmp.row_type = Convert.ToInt16(PAEnum.EVALUATION_OF_PARTICLES);
-                        paDetail.Add(tmp);
+                        PaDetail.Add(tmp);
 
                     }
                     else
@@ -3718,9 +3734,9 @@ namespace ALS.ALSI.Web.view.template
             listOfSpec = this.tbMSpecifications.Where(x => x.A.Equals(PA_MICROPIC_DATA) && x.B.Equals(PA_SPECIFICATION)).ToList();
             if (listOfSpec.Count > 1)
             {
-                foreach (template_pa_detail pd in paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList())
+                foreach (template_pa_detail pd in PaDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList())
                 {
-                    paDetail.Remove(pd);
+                    PaDetail.Remove(pd);
                 }
                 int row = 1;
                 foreach (var item in listOfSpec)
@@ -3758,7 +3774,7 @@ namespace ALS.ALSI.Web.view.template
 
                     tmp.row_status = Convert.ToInt16(RowTypeEnum.Normal);
                     tmp.row_type = Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS);
-                    paDetail.Add(tmp);
+                    PaDetail.Add(tmp);
                     row++;
                 }
             }
@@ -3804,7 +3820,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void lbDownloadAtt_Click(object sender, EventArgs e)
         {
-            Response.Redirect(String.Format("{0}", this.pa.attachment_ii_05));
+            Response.Redirect(String.Format("{0}", this.Pa.attachment_ii_05));
 
         }
     }

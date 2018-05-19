@@ -105,13 +105,17 @@ namespace ALS.ALSI.Web.view.template
         private void initialPage()
         {
             this.CommandName = CommandNameEnum.Add;
-            tb_m_detail_spec detailSpec = new tb_m_detail_spec();
-            detailSpec.specification_id = this.jobSample.specification_id;
-            detailSpec.template_id = this.jobSample.template_id;
+            tb_m_detail_spec detailSpec = new tb_m_detail_spec
+            {
+                specification_id = this.jobSample.specification_id,
+                template_id = this.jobSample.template_id
+            };
 
-            tb_m_component comp = new tb_m_component();
-            comp.specification_id = this.jobSample.specification_id;
-            comp.template_id = this.jobSample.template_id;
+            tb_m_component comp = new tb_m_component
+            {
+                specification_id = this.jobSample.specification_id,
+                template_id = this.jobSample.template_id
+            };
 
             this.coverpages = template_wd_dhs_coverpage.FindAllBySampleID(this.SampleID);
 
@@ -627,17 +631,19 @@ namespace ALS.ALSI.Web.view.template
                                     {
                                         if (isheet.GetRow(j) != null)
                                         {
-                                            tb_m_dhs_cas tmp = new tb_m_dhs_cas();
-                                            tmp.ID = j;
-                                            tmp.sample_id = this.SampleID;
-                                            tmp.pk = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(0));
-                                            tmp.rt = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1));
-                                            tmp.library_id = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(2));
-                                            tmp.classification = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(3));
-                                            tmp.cas = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(4));
-                                            tmp.qual = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(5));
-                                            tmp.area = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(6));
-                                            tmp.amount = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7));
+                                            tb_m_dhs_cas tmp = new tb_m_dhs_cas
+                                            {
+                                                ID = j,
+                                                sample_id = this.SampleID,
+                                                pk = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(0)),
+                                                rt = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(1)),
+                                                library_id = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(2)),
+                                                classification = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(3)),
+                                                cas = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(4)),
+                                                qual = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(5)),
+                                                area = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(6)),
+                                                amount = CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))
+                                            };
 
                                             String compare_date = (string.IsNullOrEmpty(tmp.pk) ? "0" : "1") + "" +
                                                (string.IsNullOrEmpty(tmp.rt) ? "0" : "1") + "" +
@@ -819,18 +825,22 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DdlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tb_m_detail_spec detailSpec = new tb_m_detail_spec();
-            detailSpec.specification_id = this.jobSample.specification_id;
-            detailSpec.template_id = this.jobSample.template_id;
+            tb_m_detail_spec detailSpec = new tb_m_detail_spec
+            {
+                specification_id = this.jobSample.specification_id,
+                template_id = this.jobSample.template_id
+            };
 
 
 
             List<tb_m_detail_spec> _headerDs = detailSpec.SelectAll().Take(3).ToList();
-            List<tb_m_detail_spec> headerDs = new List<tb_m_detail_spec>();
-            headerDs.Add(_headerDs[1]);
-            headerDs.Add(_headerDs[2]);
+            List<tb_m_detail_spec> headerDs = new List<tb_m_detail_spec>
+            {
+                _headerDs[1],
+                _headerDs[2]
+            };
 
 
             detailSpec = detailSpec.SelectByID(int.Parse(ddlSpecification.SelectedValue));
@@ -841,11 +851,13 @@ namespace ALS.ALSI.Web.view.template
                 List<template_wd_dhs_coverpage> tmp = new List<template_wd_dhs_coverpage>();
                 foreach (DetailSpecComponent item in CustomUtils.GetComponent(headerDs, detailSpec, ignoreIndex))
                 {
-                    template_wd_dhs_coverpage work = new template_wd_dhs_coverpage();
-                    work.sample_id = this.SampleID;
-                    work.detail_spec_id = detailSpec.ID;
-                    work.analytes = item.name;
-                    work.specification_limits = item.value;
+                    template_wd_dhs_coverpage work = new template_wd_dhs_coverpage
+                    {
+                        sample_id = this.SampleID,
+                        detail_spec_id = detailSpec.ID,
+                        analytes = item.name,
+                        specification_limits = item.value
+                    };
                     work.specification_limits = ((work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.NA)) || work.specification_limits.Equals(Constants.GetEnumDescription(ResultEnum.ND))) ? work.specification_limits : work.specification_limits.Equals("0") ? work.specification_limits : String.Format("<{0}", work.specification_limits));
                     work.result = string.Empty;
                     work.result_pass_or_false = String.Empty;
@@ -916,21 +928,22 @@ namespace ALS.ALSI.Web.view.template
             DataTable dt = Extenders.ObjectToDataTable(this.coverpages[0]);
             ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
 
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("rpt_unit", unitName));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", "DHS"));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+            ReportParameterCollection reportParameters = new ReportParameterCollection
+            {
+                new ReportParameter("CustomerPoNo", reportHeader.cusRefNo),
+                new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo),
+                new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""),
+                new ReportParameter("Company", reportHeader.addr1),
+                new ReportParameter("Company_addr", reportHeader.addr2),
+                new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""),
+                new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""),
+                new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""),
+                new ReportParameter("rpt_unit", unitName),
+                new ReportParameter("SampleDescription", reportHeader.description),
+                new ReportParameter("Test", "DHS"),
+                new ReportParameter("ResultDesc", lbSpecDesc.Text),
+                new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no))
+            };
 
 
             // Variables
@@ -942,8 +955,10 @@ namespace ALS.ALSI.Web.view.template
 
 
             // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
+            ReportViewer viewer = new ReportViewer
+            {
+                ProcessingMode = ProcessingMode.Local
+            };
             viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_wd.rdlc");
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
@@ -1204,15 +1219,17 @@ namespace ALS.ALSI.Web.view.template
                             List<tb_m_dhs_cas> childsTake2 = this.tbCas.Where(x => x.classification.Equals("Others")).OrderByDescending(x => Convert.ToDouble(x.amount)).Take(2).ToList().OrderBy(x => x.amoutDecimal).Take(2).ToList();
                             foreach (tb_m_dhs_cas child in childsTake2)
                             {
-                                template_wd_dhs_coverpage work = new template_wd_dhs_coverpage();
-                                work.ID = CustomUtils.GetRandomNumberID();
-                                work.detail_spec_id = _cover.detail_spec_id;
-                                work.sample_id = this.SampleID;
-                                work.analytes = "- " + child.library_id;
-                                work.result = child.amount == null ? string.Empty : child.amount.ToString();
-                                work.result_pass_or_false = String.Empty;
-                                work.specification_limits = "-";
-                                work.row_type = _cover.row_type;
+                                template_wd_dhs_coverpage work = new template_wd_dhs_coverpage
+                                {
+                                    ID = CustomUtils.GetRandomNumberID(),
+                                    detail_spec_id = _cover.detail_spec_id,
+                                    sample_id = this.SampleID,
+                                    analytes = "- " + child.library_id,
+                                    result = child.amount == null ? string.Empty : child.amount.ToString(),
+                                    result_pass_or_false = String.Empty,
+                                    specification_limits = "-",
+                                    row_type = _cover.row_type
+                                };
                                 newCoverPage.Add(work);
                             }
                             break;
@@ -1223,15 +1240,17 @@ namespace ALS.ALSI.Web.view.template
                             List<tb_m_dhs_cas> childs = this.tbCas.Where(x => x.classification.Equals(_cover.analytes.Replace("Total", "").Trim()) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
                             foreach (tb_m_dhs_cas child in childs)
                             {
-                                template_wd_dhs_coverpage work = new template_wd_dhs_coverpage();
-                                work.ID = CustomUtils.GetRandomNumberID();
-                                work.detail_spec_id = _cover.detail_spec_id;
-                                work.sample_id = this.SampleID;
-                                work.analytes = "- " + child.library_id;
-                                work.result = child.amount == null ? string.Empty : child.amount.ToString();
-                                work.result_pass_or_false = String.Empty;
-                                work.specification_limits = "-";
-                                work.row_type = _cover.row_type;
+                                template_wd_dhs_coverpage work = new template_wd_dhs_coverpage
+                                {
+                                    ID = CustomUtils.GetRandomNumberID(),
+                                    detail_spec_id = _cover.detail_spec_id,
+                                    sample_id = this.SampleID,
+                                    analytes = "- " + child.library_id,
+                                    result = child.amount == null ? string.Empty : child.amount.ToString(),
+                                    result_pass_or_false = String.Empty,
+                                    specification_limits = "-",
+                                    row_type = _cover.row_type
+                                };
                                 newCoverPage.Add(work);
                             }
                             break;
@@ -1335,7 +1354,7 @@ namespace ALS.ALSI.Web.view.template
         }
 
 
-        protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
+        protected void CbCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (cbCheckBox.Checked)
             {
@@ -1352,7 +1371,7 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DdlUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", ddlUnit.SelectedItem.Text);
             gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);

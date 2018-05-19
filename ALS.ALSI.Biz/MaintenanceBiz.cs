@@ -25,12 +25,14 @@ namespace ALS.ALSI.Biz
                 {
                     connection.Open();
                     //create mysql command
-                    MySqlCommand cmd = new MySqlCommand();
+                    MySqlCommand cmd = new MySqlCommand
+                    {
 
-                    //Assign the query using CommandText
-                    cmd.CommandText = sql;
-                    //Assign the connection using Connection
-                    cmd.Connection = connection;
+                        //Assign the query using CommandText
+                        CommandText = sql,
+                        //Assign the connection using Connection
+                        Connection = connection
+                    };
 
                     //Execute query
                     cmd.ExecuteNonQuery();
@@ -39,6 +41,7 @@ namespace ALS.ALSI.Biz
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
 
@@ -69,7 +72,7 @@ namespace ALS.ALSI.Biz
             {
                 connection.Open();
 
-                List<String> sqlSelectTables = table();
+                List<String> sqlSelectTables = Table();
 
                 foreach (String sql in sqlSelectTables)
                 {
@@ -166,7 +169,7 @@ namespace ALS.ALSI.Biz
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine();
+                        Console.WriteLine(ex.Message);
                     }
                 }
             }
@@ -200,40 +203,42 @@ namespace ALS.ALSI.Biz
         }
 
 
-        private static List<String> table()
+        private static List<String> Table()
         {
-            List<String> tableSql = new List<String>();
-            tableSql.Add("select * from job_info;");
-            tableSql.Add("select * from job_sample;");
-            tableSql.Add("select * from m_template;");
-            tableSql.Add("select * from tb_m_component;");
-            tableSql.Add("select * from tb_m_detail_spec;");
-            tableSql.Add("select * from tb_m_detail_spec_ref;");
-            tableSql.Add("select * from tb_m_specification;");
-            tableSql.Add("select * from template_seagate_copperwire_coverpage;");
-            tableSql.Add("select * from template_seagate_copperwire_img;");
-            tableSql.Add("select * from template_seagate_corrosion_coverpage;");
-            tableSql.Add("select * from template_seagate_corrosion_img;");
-            tableSql.Add("select * from template_seagate_dhs_coverpage;");
-            tableSql.Add("select * from template_seagate_ftir_coverpage;");
-            tableSql.Add("select * from template_seagate_gcms_coverpage;");
-            tableSql.Add("select * from template_seagate_gcms_coverpage_img;");
-            tableSql.Add("select * from template_seagate_hpa_coverpage;");
-            tableSql.Add("select * from template_seagate_ic_coverpage;");
-            tableSql.Add("select * from template_seagate_lpc_coverpage;");
-            tableSql.Add("select * from template_wd_corrosion_coverpage;");
-            tableSql.Add("select * from template_wd_corrosion_img;");
-            tableSql.Add("select * from template_wd_dhs_coverpage;");
-            tableSql.Add("select * from template_wd_ftir_coverpage;");
-            tableSql.Add("select * from template_wd_ftir_coverpage_tmp;");
-            tableSql.Add("select * from template_wd_gcms_coverpage;");
-            tableSql.Add("select * from template_wd_hpa_for1_coverpage;");
-            tableSql.Add("select * from template_wd_hpa_for3_coverpage;");
-            tableSql.Add("select * from template_wd_ic_coverpage;");
-            tableSql.Add("select * from template_wd_ir_coverpage;");
-            tableSql.Add("select * from template_wd_lpc_coverpage;");
-            tableSql.Add("select * from template_wd_mesa_coverpage;");
-            tableSql.Add("select * from template_wd_mesa_img;");
+            List<String> tableSql = new List<String>
+            {
+                "select * from job_info;",
+                "select * from job_sample;",
+                "select * from m_template;",
+                "select * from tb_m_component;",
+                "select * from tb_m_detail_spec;",
+                "select * from tb_m_detail_spec_ref;",
+                "select * from tb_m_specification;",
+                "select * from template_seagate_copperwire_coverpage;",
+                "select * from template_seagate_copperwire_img;",
+                "select * from template_seagate_corrosion_coverpage;",
+                "select * from template_seagate_corrosion_img;",
+                "select * from template_seagate_dhs_coverpage;",
+                "select * from template_seagate_ftir_coverpage;",
+                "select * from template_seagate_gcms_coverpage;",
+                "select * from template_seagate_gcms_coverpage_img;",
+                "select * from template_seagate_hpa_coverpage;",
+                "select * from template_seagate_ic_coverpage;",
+                "select * from template_seagate_lpc_coverpage;",
+                "select * from template_wd_corrosion_coverpage;",
+                "select * from template_wd_corrosion_img;",
+                "select * from template_wd_dhs_coverpage;",
+                "select * from template_wd_ftir_coverpage;",
+                "select * from template_wd_ftir_coverpage_tmp;",
+                "select * from template_wd_gcms_coverpage;",
+                "select * from template_wd_hpa_for1_coverpage;",
+                "select * from template_wd_hpa_for3_coverpage;",
+                "select * from template_wd_ic_coverpage;",
+                "select * from template_wd_ir_coverpage;",
+                "select * from template_wd_lpc_coverpage;",
+                "select * from template_wd_mesa_coverpage;",
+                "select * from template_wd_mesa_img;"
+            };
 
 
             return tableSql;
