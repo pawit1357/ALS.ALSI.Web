@@ -816,6 +816,7 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Update By", typeof(string));
                 dt.Columns.Add("Chemist Complete Date", typeof(string));
                 dt.Columns.Add("Data Group", typeof(string));
+                dt.Columns.Add("Receive Date(For filter)", typeof(DateTime));
 
                 String conSQL = Configurations.MySQLCon;
                 using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
@@ -839,7 +840,7 @@ namespace ALS.ALSI.Web.view.request
                         case RoleEnum.ADMIN:
                         case RoleEnum.MARKETING:
                         case RoleEnum.BUSINESS_MANAGER:
-                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else DATE_FORMAT(`Extent2`.`due_date_customer`,'%e %b %Y') end) end) AS `Due Date`,";
+                            sql += "(CASE WHEN ISNULL(`Extent2`.`due_date_lab`) THEN 'TBA' ELSE (case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else DATE_FORMAT(`Extent2`.`due_date_customer`,'%e %b %Y') end) end) END) AS `Due Date`,";
 
 
                             break;
@@ -847,7 +848,10 @@ namespace ALS.ALSI.Web.view.request
                             sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due Date`,";
                             break;
                     }
-                    sql += "`Extent2`.`job_number` AS `ALS Ref`," +
+
+
+
+                    sql += "(case when isnull(`Extent2`.`amend_or_retest`) then `Extent2`.`job_number` else concat(`Extent2`.`job_number`,(case when `Extent2`.`amend_or_retest` ='AM' then CONCAT('(',`Extent2`.`amend_or_retest`,`Extent2`.`amend_count`,')') else CONCAT('(',`Extent2`.`amend_or_retest`,`Extent2`.`retest_count`,')') end)) end) AS `ALS Ref`," +
                      "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
                      "`Extent2`.`other_ref_no` AS `Other Ref No`," +
                      "`Extent5`.`company_name` AS `Company`," +
@@ -862,7 +866,8 @@ namespace ALS.ALSI.Web.view.request
                      "DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
                      "`Extent8`.`username` AS `Update By`," +
                      "DATE_FORMAT(`Extent2`.`date_chemist_complete`,'%d %b %Y %H:%i')  AS `Chemist Complete Date`," +
-                     "`Extent4`.`data_group` AS `Data Group`" +
+                     "`Extent4`.`data_group` AS `Data Group`," +
+                     "`Extent1`.`date_of_receive` as `Receive Date(For filter)`" +
                      " FROM `job_info` AS `Extent1`" +
                      " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
                      " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
@@ -872,7 +877,6 @@ namespace ALS.ALSI.Web.view.request
                      " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
                      " LEFT OUTER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
                      " LEFT OUTER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
-
 
 
                     StringBuilder sqlCri = new StringBuilder();
@@ -907,7 +911,7 @@ namespace ALS.ALSI.Web.view.request
                     }
                     if (!String.IsNullOrEmpty(txtREfNo.Text))
                     {
-                        sqlCri.Append(" `Extent2`.`job_number` like '%" + txtREfNo.Text + "%'");
+                        sqlCri.Append(" `Extent2`.`job_number` like '%" + txtREfNo.Text.Trim() + "%'");
                         sqlCri.Append(" AND ");
 
                     }
