@@ -128,7 +128,7 @@ namespace ALS.ALSI.Web.view.request
             this.selectedList = new List<int>();
 
             ddlCompany.Items.Clear();
-            ddlCompany.DataSource = new m_customer().SelectAll();
+            ddlCompany.DataSource = new m_customer().SelectAll().OrderBy(x=>x.company_name);
             ddlCompany.DataBind();
             ddlCompany.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
@@ -796,10 +796,11 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Job Type", typeof(string));
                 dt.Columns.Add("Status", typeof(string));
                 dt.Columns.Add("Job Status", typeof(string));
-                dt.Columns.Add("Received", typeof(string));
-                dt.Columns.Add("Report Sent to Customer", typeof(string));
-                dt.Columns.Add("Receive Date", typeof(string));
-                dt.Columns.Add("Due Date", typeof(string));
+                dt.Columns.Add("Received", typeof(DateTime));
+                dt.Columns.Add("Report Sent to Customer", typeof(DateTime)); 
+                dt.Columns.Add("Receive Date", typeof(DateTime));
+                dt.Columns.Add("Due Date", typeof(DateTime));
+                dt.Columns.Add("TBA FLAG", typeof(string));
                 dt.Columns.Add("ALS Ref", typeof(string));
                 dt.Columns.Add("No.Cus Ref No", typeof(string));
                 dt.Columns.Add("Other Ref No", typeof(string));
@@ -812,11 +813,11 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Surface Area", typeof(string));
                 dt.Columns.Add("Specification", typeof(string));
                 dt.Columns.Add("Type of test", typeof(string));
-                dt.Columns.Add("Modified Date", typeof(string));
-                dt.Columns.Add("Update By", typeof(string));
-                dt.Columns.Add("Chemist Complete Date", typeof(string));
+                //dt.Columns.Add("Modified Date", typeof(string));
+                //dt.Columns.Add("Update By", typeof(string));
+                dt.Columns.Add("Chemist Complete", typeof(DateTime));
                 dt.Columns.Add("Data Group", typeof(string));
-                dt.Columns.Add("Receive Date(For filter)", typeof(DateTime));
+                //dt.Columns.Add("Receive Date(For filter)", typeof(DateTime));
 
                 String conSQL = Configurations.MySQLCon;
                 using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
@@ -826,26 +827,31 @@ namespace ALS.ALSI.Web.view.request
                                 "`Extent2`.`sample_prefix` AS `Job Type`," +
                                 "`Extent7`.`name` AS `Status`," +
                                 "`Extent9`.`name` AS `Job Status`," +
-                                "DATE_FORMAT(`Extent2`.`date_srchemist_complate`,'%d %b %Y') AS `Received`," +
-                                "DATE_FORMAT(`Extent2`.`date_admin_sent_to_cus`,'%d %b %Y') AS  `Report Sent to Customer`," +
-                                "DATE_FORMAT(`Extent1`.`date_of_receive`,'%d %b %Y') AS `Receive Date`,";
+                                "`Extent2`.`date_srchemist_complate` AS `Received`," +
+                                "`Extent2`.`date_admin_sent_to_cus` AS  `Report Sent to Customer`," +
+                                "`Extent1`.`date_of_receive`AS `Receive Date`,";
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
                         case RoleEnum.CHEMIST:
                         case RoleEnum.SR_CHEMIST:
                         case RoleEnum.LABMANAGER:
-                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due Date`,";
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then '0001-01-01' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due Date`,";
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else '' end) AS `TBA FLAG`,";
+
                             break;
                         case RoleEnum.ADMIN:
                         case RoleEnum.MARKETING:
                         case RoleEnum.BUSINESS_MANAGER:
-                            sql += "(CASE WHEN ISNULL(`Extent2`.`due_date_lab`) THEN 'TBA' ELSE (case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else DATE_FORMAT(`Extent2`.`due_date_customer`,'%e %b %Y') end) end) END) AS `Due Date`,";
+                            sql += "(CASE WHEN ISNULL(`Extent2`.`due_date_lab`) THEN '0001-01-01' ELSE (case when `Extent2`.`due_date_lab` = '0001-01-01' then '0001-01-01' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then '0001-01-01' else DATE_FORMAT(`Extent2`.`due_date_customer`,'%e %b %Y') end) end) END) AS `Due Date`,";
+                            sql += "(CASE WHEN ISNULL(`Extent2`.`due_date_lab`) THEN 'TBA' ELSE (case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else '' end) end) END) AS `TBA FLAG`,";
 
 
                             break;
                         default:
-                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due Date`,";
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then '0001-01-01' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due Date`,";
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else '' end) AS `TBA FLAG`,";
+
                             break;
                     }
 
@@ -863,11 +869,11 @@ namespace ALS.ALSI.Web.view.request
                      "`Extent2`.`surface_area` AS `Surface Area`," +
                      "`Extent3`.`name` AS `Specification`," +
                      "`Extent4`.`name` AS `Type of test`," +
-                     "DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
-                     "`Extent8`.`username` AS `Update By`," +
-                     "DATE_FORMAT(`Extent2`.`date_chemist_complete`,'%d %b %Y %H:%i')  AS `Chemist Complete Date`," +
-                     "`Extent4`.`data_group` AS `Data Group`," +
-                     "`Extent1`.`date_of_receive` as `Receive Date(For filter)`" +
+                     //"DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
+                     //"`Extent8`.`username` AS `Update By`," +
+                     "`Extent2`.`date_chemist_complete` AS `Chemist Complete`," +
+                     "`Extent4`.`data_group` AS `Data Group`" +
+                     //"`Extent1`.`date_of_receive` as `Receive Date(For filter)`" +
                      " FROM `job_info` AS `Extent1`" +
                      " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
                      " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +

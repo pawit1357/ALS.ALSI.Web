@@ -15,10 +15,10 @@ namespace ALS.ALSI.Biz.DataAccess
     public partial class template_pa_detail
     {
         public int id { get; set; }
-        public Nullable<int> sample_id { get; set; }
-        public Nullable<int> seq { get; set; }
-        public Nullable<int> evaluation_of_particles_id { get; set; }
-        public Nullable<int> microscopic_analysis_id { get; set; }
+        public int sample_id { get; set; }
+        public int seq { get; set; }
+        public int evaluation_of_particles_id { get; set; }
+        public int microscopic_analysis_id { get; set; }
         public string col_a { get; set; }
         public string col_b { get; set; }
         public string col_c { get; set; }
@@ -45,7 +45,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string col_x { get; set; }
         public string col_y { get; set; }
         public string col_z { get; set; }
-        public Nullable<int> row_type { get; set; }
-        public Nullable<int> row_status { get; set; }
+        public int row_type { get; set; }
+        public int row_status { get; set; }
     }
 }

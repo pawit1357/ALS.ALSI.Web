@@ -25,7 +25,7 @@
                                         <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Physical Year:</label>
+                                <label class="control-label col-md-3">Fiscal Year:</label>
                                 <div class="col-md-6">
                                     <div class="form-group" style="text-align: left">
                                         <asp:DropDownList ID="ddlPhysicalYear" runat="server" class="select2_category form-control" DataTextField="year" DataValueField="year"></asp:DropDownList>

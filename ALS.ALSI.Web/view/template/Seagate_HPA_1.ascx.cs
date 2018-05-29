@@ -334,7 +334,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
-                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_analyze != null) ? this.jobSample.date_chemist_analyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
                 pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
 
 
@@ -345,9 +345,9 @@ namespace ALS.ALSI.Web.view.template
                     //#region ":: STAMP ANALYZED DATE ::"
                     //if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                     //{
-                    //    if (this.jobSample.date_chemist_alalyze == null)
+                    //    if (this.jobSample.date_chemist_analyze == null)
                     //    {
-                    //        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                    //        this.jobSample.date_chemist_analyze = DateTime.Now;
                     //        this.jobSample.Update();
                     //    }
                     //}
@@ -525,7 +525,7 @@ namespace ALS.ALSI.Web.view.template
 
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
-                        this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                        this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         //#endregion
                         foreach (template_seagate_hpa_coverpage ws in this.Hpas)
                         {
@@ -1744,175 +1744,12 @@ namespace ALS.ALSI.Web.view.template
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
                     }
 
-                    //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                    //{
-                    //    Word2Pdf objWorPdf = new Word2Pdf();
-                    //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-                    //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-                    //    try
-                    //    {
-                    //        objWorPdf.Word2PdfCOnversion();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Console.WriteLine();
-                    //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-                    //    }
-                    //}
+                
                     break;
             }
 
         }
 
-        protected void lbDownloadPdf_Click(object sender, EventArgs e)
-        {
-
-            DataTable dtImgs = new DataTable("hpa_imgs");
-            if (this.Hpas[0].img_path != null)
-            {
-                // Define all the columns once.
-                DataColumn[] imgCol = { new DataColumn("img1", typeof(Byte[])) };
-                dtImgs.Columns.AddRange(imgCol);
-                DataRow imgRow = dtImgs.NewRow();
-                imgRow["img1"] = CustomUtils.GetBytesFromImage(this.Hpas[0].img_path);
-                dtImgs.Rows.Add(imgRow);
-            }
-            DataTable dtHeader = new DataTable("MethodProcedure");
-
-            // Define all the columns once.
-            DataColumn[] cols ={ new DataColumn("Analysis",typeof(String)),
-                                  new DataColumn("ProcedureNo",typeof(String)),
-                                  new DataColumn("NumOfPiecesUsedForExtraction",typeof(String)),
-                                  new DataColumn("ExtractionMedium",typeof(String)),
-                                  new DataColumn("ExtractionVolume",typeof(String)),
-                              };
-            dtHeader.Columns.AddRange(cols);
-            DataRow row = dtHeader.NewRow();
-            row["Analysis"] = String.Format("LPC {0}", ddlLpcType.SelectedItem.Text);
-            row["ProcedureNo"] = txtProcedureNo.Text;
-            row["NumOfPiecesUsedForExtraction"] = txtNumberOfPieces.Text;
-            row["ExtractionMedium"] = txtExtractionMedium.Text;
-            row["ExtractionVolume"] = txtExtractionVolume.Text;
-            dtHeader.Rows.Add(row);
-            row = dtHeader.NewRow();
-            row["Analysis"] = String.Format("HPA (Filtration Method)");
-            row["ProcedureNo"] = txtProcedureNo_hpa.Text;
-            row["NumOfPiecesUsedForExtraction"] = txtNumberOfPieces_hpa.Text;
-            row["ExtractionMedium"] = txtExtractionMedium_hpa.Text;
-            row["ExtractionVolume"] = txtExtractionVolume_hpa.Text;
-            dtHeader.Rows.Add(row);
-            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
-
-
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
-            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            reportParameters.Add(new ReportParameter("Test", ddlLpcType.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-            //tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(this.Hpas[0].specification_id));
-            //if (tem != null)
-            //{
-            reportParameters.Add(new ReportParameter("rpt_unit", ddlLiquidParticleUnit.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("rpt_unit2", ddlHardParticleAlalysisUnit.SelectedItem.Text));
-            reportParameters.Add(new ReportParameter("rpt_unit3", ddlClassificationUnit.SelectedItem.Text));
-            //}
-            DataTable dtSummary = new DataTable("Summary");
-            DataColumn[] cols1 ={ new DataColumn("A",typeof(String)),
-                                  new DataColumn("B",typeof(String)),
-                                  new DataColumn("C",typeof(String)),
-                              };
-            dtSummary.Columns.AddRange(cols1);
-            row = dtSummary.NewRow();
-            row["A"] = "Analysis Details";
-            row["B"] = "% Area Analysed (A/7.07mm2)";
-            row["C"] = lbC144.Text;
-            dtSummary.Rows.Add(row);
-            row = dtSummary.NewRow();
-            row["A"] = "";
-            row["B"] = "Area Analysed (mm2)";
-            row["C"] = lbC145.Text;
-            dtSummary.Rows.Add(row);
-            row = dtSummary.NewRow();
-            row["A"] = "";
-            row["B"] = "Extraction Volume (mL)";
-            row["C"] = lbC146.Text;
-            dtSummary.Rows.Add(row);
-            row = dtSummary.NewRow();
-            row["A"] = "";
-            row["B"] = "Filtered Volume (mL)";
-            row["C"] = lbC147.Text;
-            dtSummary.Rows.Add(row);
-            row = dtSummary.NewRow();
-            row["A"] = "";
-            row["B"] = "No of Parts Extracted";
-            row["C"] = lbC148.Text;
-            dtSummary.Rows.Add(row);
-            row = dtSummary.NewRow();
-            row["A"] = "";
-            row["B"] = "Magnification";
-            row["C"] = lbC149.Text;
-            dtSummary.Rows.Add(row);
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            ReportViewer viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_seagate_pdf.rdlc");
-            viewer.LocalReport.SetParameters(reportParameters);
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(HPAType.LPC03) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(HPAType.LPC06) && x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(HPAType.HPA)).OrderBy(x => x.seq).ToDataTable())); // Add datasource here
-
-            List<template_seagate_hpa_coverpage> ds5 = this.Hpas.Where(x =>
-                 x.hpa_type == Convert.ToInt32(HPAType.CLASSIFICATION_ITEM) ||
-                 x.hpa_type == Convert.ToInt32(HPAType.CLASSIFICATION_SUB_TOTAL) ||
-                 x.hpa_type == Convert.ToInt32(HPAType.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
-
-
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 16).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(16, 23).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(39, ds5.Count - 39).ToDataTable())); // Add datasource here
-
-
-
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet8", dtSummary)); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet9", dtImgs)); // Add datasource here
-
-
-
-
-
-
-            byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush(); // send it to the client to download
-
-
-        }
         protected void ddlSpecification_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -1941,6 +1778,7 @@ namespace ALS.ALSI.Web.view.template
                 LPCTypeEnum lpcType = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(ddlLpcType.SelectedValue));
                 switch (lpcType)
                 {
+                    case LPCTypeEnum.LPC:
                     case LPCTypeEnum.KHz_68://(68 KHz)
                         int cOrder = 1;
                         #region "LPC 0.3"

@@ -42,6 +42,7 @@ namespace ALS.ALSI.Web.view.request
                 job.job_number = String.IsNullOrEmpty(txtJob_number.Text) ? 0 : int.Parse(txtJob_number.Text);
                 job.job_prefix = String.IsNullOrEmpty(ddlJobNumber.SelectedValue) ? 0 : Convert.ToInt32(ddlJobNumber.SelectedValue);
                 job.date_of_receive = String.IsNullOrEmpty(txtDate_of_receive.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDate_of_receive.Text);
+               
                 //job.s_pore_ref_no = txtS_pore_ref_no.Text;
                 job.spec_ref_rev_no = txtSpecRefRevNo.Text;
                 //job.customer_po_ref = string.Empty;//invoice
@@ -564,35 +565,39 @@ namespace ALS.ALSI.Web.view.request
                     m_type_of_test tmp = new m_type_of_test().SelectByID(int.Parse(item.Value));
                     if (tmp != null)
                     {
-                        job_sample jobSample = new job_sample();
-                        jobSample.ID = CustomUtils.GetRandomNumberID();
-                        jobSample.template_id = -1;
+                        job_sample jobSample = new job_sample
+                        {
+                            ID = CustomUtils.GetRandomNumberID(),
+                            template_id = -1,
 
 
-                        jobSample.job_id = Convert.ToInt32(hJobID.Value);
-                        jobSample.type_of_test_id = tmp.ID;
-                        jobSample.specification_id = String.IsNullOrEmpty(ddlSecification_id.SelectedValue) ? 0 : int.Parse(ddlSecification_id.SelectedValue);
-                        jobSample.job_number = ddlJobNumber.SelectedItem.Text + "-" + txtJob_number.Text + "-" + tmp.prefix;
-                        jobSample.description = txtDescriptoin.Text;
-                        jobSample.model = txtModel.Text;
-                        jobSample.surface_area = txtSurfaceArea.Text;
-                        jobSample.remarks = txtRemark.Text;
-                        jobSample.no_of_report = 1;// Convert.ToInt16(ddlNoOfReport.SelectedValue);
-                        jobSample.uncertainty = (rdUncertaintyYes.Checked) ? "Y" : "N";
-                        jobSample.RowState = CommandNameEnum.Add;
-                        jobSample.job_status = Convert.ToInt32(StatusEnum.LOGIN_CONVERT_TEMPLATE);
+                            job_id = Convert.ToInt32(hJobID.Value),
+                            type_of_test_id = tmp.ID,
+                            specification_id = String.IsNullOrEmpty(ddlSecification_id.SelectedValue) ? 0 : int.Parse(ddlSecification_id.SelectedValue),
+                            job_number = ddlJobNumber.SelectedItem.Text + "-" + txtJob_number.Text + "-" + tmp.prefix,
+                            description = txtDescriptoin.Text,
+                            model = txtModel.Text,
+                            surface_area = txtSurfaceArea.Text,
+                            remarks = txtRemark.Text,
+                            no_of_report = 1,// Convert.ToInt16(ddlNoOfReport.SelectedValue);
+                            uncertainty = (rdUncertaintyYes.Checked) ? "Y" : "N",
+                            RowState = CommandNameEnum.Add,
+                            job_status = Convert.ToInt32(StatusEnum.LOGIN_CONVERT_TEMPLATE),
 
 
-                        jobSample.job_role = userLogin.role_id;
-                        jobSample.status_completion_scheduled = Convert.ToInt32(ddlCompletionScheduled.SelectedValue);
-                        //jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
-                        jobSample.update_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
-                        jobSample.update_by = userLogin.id;
-                        jobSample.is_hold = "0";//0=Unhold
-                        jobSample.part_no = txtPartNo.Text;
-                        jobSample.part_name = txtPartName.Text;
-                        jobSample.lot_no = txtLotNo.Text;
-                        jobSample.other_ref_no = txtOtherRefNo.Text;
+                            job_role = userLogin.role_id,
+                            status_completion_scheduled = Convert.ToInt32(ddlCompletionScheduled.SelectedValue),
+                            //jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value);
+                            date_login_inprogress = DateTime.Now,
+
+                            update_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value),
+                            update_by = userLogin.id,
+                            is_hold = "0",//0=Unhold
+                            part_no = txtPartNo.Text,
+                            part_name = txtPartName.Text,
+                            lot_no = txtLotNo.Text,
+                            other_ref_no = txtOtherRefNo.Text
+                        };
                         #region "Special Flow"
 
                         /*

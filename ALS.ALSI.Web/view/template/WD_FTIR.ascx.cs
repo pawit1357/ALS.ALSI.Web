@@ -198,7 +198,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
-                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_analyze != null) ? this.jobSample.date_chemist_analyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
                 pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
                 #region "METHOD/PROCEDURE:"
                 if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
@@ -206,9 +206,9 @@ namespace ALS.ALSI.Web.view.template
                     //#region ":: STAMP ANALYZED DATE ::"
                     //if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                     //{
-                    //    if (this.jobSample.date_chemist_alalyze == null)
+                    //    if (this.jobSample.date_chemist_analyze == null)
                     //    {
-                    //        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                    //        this.jobSample.date_chemist_analyze = DateTime.Now;
                     //        this.jobSample.Update();
                     //    }
                     //}
@@ -422,7 +422,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-                    this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                    this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     foreach (template_wd_ftir_coverpage item in this.Ftir)
                     {

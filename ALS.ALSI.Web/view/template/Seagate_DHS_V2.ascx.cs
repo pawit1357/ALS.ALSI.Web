@@ -228,7 +228,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
 
-                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_analyze != null) ? this.jobSample.date_chemist_analyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
                 pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
 
                 #region "VISIBLE RESULT DATA"
@@ -414,7 +414,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.step3owner = userLogin.id;
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-                        this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                        this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         #region "CAS#"
                         tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
                         tb_m_dhs_cas.InsertList(this.tbCas);

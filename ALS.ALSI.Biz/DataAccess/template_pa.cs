@@ -15,8 +15,8 @@ namespace ALS.ALSI.Biz.DataAccess
     public partial class template_pa
     {
         public int id { get; set; }
-        public Nullable<int> sample_id { get; set; }
-        public Nullable<int> specification_id { get; set; }
+        public int sample_id { get; set; }
+        public int specification_id { get; set; }
         public string lms { get; set; }
         public string lnmp { get; set; }
         public string lf { get; set; }
@@ -34,65 +34,65 @@ namespace ALS.ALSI.Biz.DataAccess
         public string eop_size { get; set; }
         public string eop_value { get; set; }
         public string remark { get; set; }
-        public Nullable<int> result { get; set; }
+        public int result { get; set; }
         public string pirtd { get; set; }
         public string iscsa { get; set; }
         public string wspc { get; set; }
         public string tls { get; set; }
-        public Nullable<sbyte> ispretreatmentconditioning { get; set; }
+        public sbyte ispretreatmentconditioning { get; set; }
         public string pretreatmentconditioning { get; set; }
         public string ispackingtobetested { get; set; }
-        public Nullable<sbyte> iscontainer { get; set; }
-        public Nullable<int> container_id { get; set; }
-        public Nullable<sbyte> isfluid1 { get; set; }
-        public Nullable<int> fluid1_id { get; set; }
-        public Nullable<sbyte> isfluid2 { get; set; }
-        public Nullable<int> fluid2_id { get; set; }
-        public Nullable<sbyte> isfluid3 { get; set; }
-        public Nullable<int> fluid3_id { get; set; }
+        public sbyte iscontainer { get; set; }
+        public int container_id { get; set; }
+        public sbyte isfluid1 { get; set; }
+        public int fluid1_id { get; set; }
+        public sbyte isfluid2 { get; set; }
+        public int fluid2_id { get; set; }
+        public sbyte isfluid3 { get; set; }
+        public int fluid3_id { get; set; }
         public string tradename { get; set; }
         public string manufacturer { get; set; }
         public string totalquantity { get; set; }
-        public Nullable<sbyte> istshb01 { get; set; }
-        public Nullable<sbyte> istshb02 { get; set; }
-        public Nullable<sbyte> istshb03 { get; set; }
+        public sbyte istshb01 { get; set; }
+        public sbyte istshb02 { get; set; }
+        public sbyte istshb03 { get; set; }
         public string tshb03 { get; set; }
         public string img03 { get; set; }
         public string img02 { get; set; }
         public string img01 { get; set; }
-        public Nullable<sbyte> ispots01 { get; set; }
+        public sbyte ispots01 { get; set; }
         public string pots01 { get; set; }
-        public Nullable<sbyte> isdissolving { get; set; }
+        public sbyte isdissolving { get; set; }
         public string dissolving { get; set; }
         public string dissolvingtime { get; set; }
-        public Nullable<sbyte> ispressurerinsing { get; set; }
-        public Nullable<sbyte> isinternalrinsing { get; set; }
-        public Nullable<sbyte> isagitation { get; set; }
-        public Nullable<sbyte> iswashquantity { get; set; }
+        public sbyte ispressurerinsing { get; set; }
+        public sbyte isinternalrinsing { get; set; }
+        public sbyte isagitation { get; set; }
+        public sbyte iswashquantity { get; set; }
         public string washquantity { get; set; }
-        public Nullable<sbyte> isrewashingquantity { get; set; }
+        public sbyte isrewashingquantity { get; set; }
         public string rewashingquantity { get; set; }
-        public Nullable<sbyte> iswashpressurerinsing { get; set; }
-        public Nullable<sbyte> iswashinternalrinsing { get; set; }
-        public Nullable<sbyte> iswashagitation { get; set; }
+        public sbyte iswashpressurerinsing { get; set; }
+        public sbyte iswashinternalrinsing { get; set; }
+        public sbyte iswashagitation { get; set; }
         public string isfiltrationmethod { get; set; }
-        public Nullable<int> manufacturer_id { get; set; }
-        public Nullable<int> material_id { get; set; }
+        public int manufacturer_id { get; set; }
+        public int material_id { get; set; }
         public string poresize { get; set; }
         public string diameter { get; set; }
-        public Nullable<sbyte> isoven { get; set; }
-        public Nullable<sbyte> isdesiccator { get; set; }
-        public Nullable<sbyte> isambientair { get; set; }
-        public Nullable<sbyte> iseasydry { get; set; }
+        public sbyte isoven { get; set; }
+        public sbyte isdesiccator { get; set; }
+        public sbyte isambientair { get; set; }
+        public sbyte iseasydry { get; set; }
         public string drytime { get; set; }
         public string temperature { get; set; }
-        public Nullable<int> gravimetricalalysis_id { get; set; }
+        public int gravimetricalalysis_id { get; set; }
         public string model { get; set; }
         public string balanceresolution { get; set; }
         public string lastcalibration { get; set; }
-        public Nullable<sbyte> iszeissaxioimager2 { get; set; }
-        public Nullable<sbyte> ismeasuringsoftware { get; set; }
-        public Nullable<sbyte> isautomated { get; set; }
+        public sbyte iszeissaxioimager2 { get; set; }
+        public sbyte ismeasuringsoftware { get; set; }
+        public sbyte isautomated { get; set; }
         public string automated { get; set; }
         public string totalextractionvolume { get; set; }
         public string lbextractionmethod { get; set; }
@@ -126,15 +126,15 @@ namespace ALS.ALSI.Biz.DataAccess
         public string param_eht_02 { get; set; }
         public string param_detector_01 { get; set; }
         public string param_detector_02 { get; set; }
-        public Nullable<sbyte> iswashUltrasonic { get; set; }
-        public Nullable<sbyte> isUltrasonic { get; set; }
-        public Nullable<int> rinsing_id { get; set; }
-        public Nullable<int> washpressurerinsing_id { get; set; }
+        public sbyte iswashUltrasonic { get; set; }
+        public sbyte isUltrasonic { get; set; }
+        public int rinsing_id { get; set; }
+        public int washpressurerinsing_id { get; set; }
         public string per_component_total { get; set; }
         public string per_component_metallicshine { get; set; }
         public string per_membrane_metallicshine { get; set; }
-        public Nullable<int> specification_no { get; set; }
-        public Nullable<int> operater_name { get; set; }
+        public int specification_no { get; set; }
+        public int operater_name { get; set; }
         public string per_text { get; set; }
         public string img06 { get; set; }
         public string img07 { get; set; }

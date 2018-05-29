@@ -330,7 +330,7 @@ namespace ALS.ALSI.Web.view.request
                         case StatusEnum.CHEMIST_TESTING:
                             jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                             jobSample.date_chemist_complete = DateTime.Now;
-                            //jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                            //jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                             if (rdWithReport.Checked)
                             {
 

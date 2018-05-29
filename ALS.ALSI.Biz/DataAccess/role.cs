@@ -14,11 +14,18 @@ namespace ALS.ALSI.Biz.DataAccess
     
     public partial class role
     {
+        public role()
+        {
+            this.users_login = new HashSet<users_login>();
+        }
+    
         public int ROLE_ID { get; set; }
         public string ROLE_NAME { get; set; }
         public string ROLE_DESC { get; set; }
         public string UPDATE_BY { get; set; }
         public System.DateTime CREATE_DATE { get; set; }
         public System.DateTime UPDATE_DATE { get; set; }
+    
+        public virtual ICollection<users_login> users_login { get; set; }
     }
 }

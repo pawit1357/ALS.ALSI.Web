@@ -193,7 +193,7 @@ namespace ALS.ALSI.Web.view.template
                     pRemark.Visible = false;
                 }
 
-                txtDateAnalyzed.Text = (this.JobSample.date_chemist_alalyze != null) ? this.JobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                txtDateAnalyzed.Text = (this.JobSample.date_chemist_analyze != null) ? this.JobSample.date_chemist_analyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
                 pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
 
 
@@ -1038,16 +1038,17 @@ namespace ALS.ALSI.Web.view.template
             {
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.JobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+
                     break;
                 case StatusEnum.CHEMIST_TESTING:
 
                     this.JobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.JobSample.step2owner = UserLogin.id;
 
-                    //#region ":: STAMP COMPLETE DATE"
                     #region ":: STAMP COMPLETE DATE"
+                    this.JobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                     this.JobSample.date_chemist_complete = DateTime.Now;
-                    this.JobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                    this.JobSample.date_srchemist_analyze = DateTime.Now;
                     #endregion
                     this.Pa.sample_id = this.SampleID;
                     this.Pa.result = Convert.ToInt32(ddlResult.SelectedValue);
@@ -1217,6 +1218,7 @@ namespace ALS.ALSI.Web.view.template
                             this.JobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
                             this.JobSample.date_srchemist_complate = DateTime.Now;
+                            this.JobSample.date_admin_word_inprogress = DateTime.Now;
                             #endregion
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:
@@ -1245,6 +1247,7 @@ namespace ALS.ALSI.Web.view.template
                             this.JobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
 
                             this.JobSample.date_labman_complete = DateTime.Now;
+                            this.JobSample.date_admin_pdf_inprogress = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
                             this.JobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
@@ -1282,6 +1285,8 @@ namespace ALS.ALSI.Web.view.template
                         FileUpload1.SaveAs(source_file);
                         this.JobSample.path_word = source_file_url;
                         this.JobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
+                        this.JobSample.date_admin_word_complete = DateTime.Now;
+                        this.JobSample.date_labman_analyze = DateTime.Now;
                     }
                     else
                     {
@@ -1308,7 +1313,7 @@ namespace ALS.ALSI.Web.view.template
                         this.JobSample.path_pdf = source_file_url;
                         this.JobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                         this.JobSample.step7owner = UserLogin.id;
-
+                        this.jobSample.date_admin_pdf_complete = DateTime.Now;
                         //lbMessage.Text = string.Empty;
                     }
                     else

@@ -49,13 +49,20 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<System.DateTime> due_date { get; set; }
         public Nullable<System.DateTime> due_date_customer { get; set; }
         public Nullable<System.DateTime> due_date_lab { get; set; }
-        public Nullable<System.DateTime> date_login_received_sample { get; set; }
-        public Nullable<System.DateTime> date_chemist_alalyze { get; set; }
+        public Nullable<System.DateTime> date_login_inprogress { get; set; }
+        public Nullable<System.DateTime> date_login_complete { get; set; }
+        public Nullable<System.DateTime> date_chemist_analyze { get; set; }
         public Nullable<System.DateTime> date_chemist_complete { get; set; }
+        public Nullable<System.DateTime> date_srchemist_analyze { get; set; }
         public Nullable<System.DateTime> date_srchemist_complate { get; set; }
-        public Nullable<System.DateTime> date_admin_sent_to_cus { get; set; }
-        public Nullable<System.DateTime> sr_approve_date { get; set; }
+        public Nullable<System.DateTime> date_admin_word_inprogress { get; set; }
+        public Nullable<System.DateTime> date_admin_word_complete { get; set; }
+        public Nullable<System.DateTime> date_labman_analyze { get; set; }
         public Nullable<System.DateTime> date_labman_complete { get; set; }
+        public Nullable<System.DateTime> date_admin_sent_to_cus { get; set; }
+        public Nullable<System.DateTime> date_admin_pdf_inprogress { get; set; }
+        public Nullable<System.DateTime> date_admin_pdf_complete { get; set; }
+        public Nullable<System.DateTime> sr_approve_date { get; set; }
         public string ad_hoc_tempalte_path { get; set; }
         public string is_no_spec { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
@@ -72,6 +79,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string sample_prefix { get; set; }
         public string amend_or_retest { get; set; }
         public Nullable<int> last_status { get; set; }
+        public string job_samplecol { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

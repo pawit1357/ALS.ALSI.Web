@@ -201,7 +201,7 @@
                                             <tr>
 
                                                 <td>
-                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged1" AutoPostBack="true" /></td>
                                             </tr>
                                         </table>
                                         <asp:GridView ID="gvCoverPages" runat="server" AutoGenerateColumns="False"
@@ -325,7 +325,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="A" DataValueField="ID" OnSelectedIndexChanged="DdlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
                                         <%--      </div>
@@ -468,7 +468,7 @@
                                         <tr>
                                             <td>Unit</td>
                                             <td>
-                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="DdlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList></td>
                                         </tr>
                                     </table>

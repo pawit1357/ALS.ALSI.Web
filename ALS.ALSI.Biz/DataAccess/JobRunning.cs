@@ -57,6 +57,7 @@ namespace ALS.ALSI.Biz.DataAccess
         #region "Custom"
         public static int GetRunning(int id)
         {
+            
             using (ALSIEntities ctx = new ALSIEntities())
             {
                 job_running running = (from c in ctx.job_running where c.ID == id select c).FirstOrDefault();

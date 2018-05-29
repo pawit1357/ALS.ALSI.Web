@@ -330,6 +330,8 @@ namespace ALS.ALSI.Biz.Constant
         ALPC_132 = 3,
         [Description("SWAP (Method)")]
         SWAP = 4,
+        [Description("LPC")]
+        LPC = 5,
     }
     public enum ParticleTypeEnum
     {

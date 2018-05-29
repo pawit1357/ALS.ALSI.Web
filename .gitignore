@@ -210,3 +210,6 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+ALS.ALSI.Biz/Binaries/
+ALS.ALSI.Biz/docs/
+ALS.ALSI.Web/docs/

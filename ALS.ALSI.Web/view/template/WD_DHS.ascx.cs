@@ -207,9 +207,9 @@ namespace ALS.ALSI.Web.view.template
                         }
                         //#region ":: STAMP ANALYZED DATE ::"
 
-                        //    if (this.jobSample.date_chemist_alalyze == null)
+                        //    if (this.jobSample.date_chemist_analyze == null)
                         //    {
-                        //        this.jobSample.date_chemist_alalyze = DateTime.Now;
+                        //        this.jobSample.date_chemist_analyze = DateTime.Now;
                         //        this.jobSample.Update();
                         //    }
 
@@ -261,7 +261,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
 
-                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_analyze != null) ? this.jobSample.date_chemist_analyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
                 pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
 
                 #endregion
@@ -418,7 +418,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
-                        this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                        this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         //#endregion
                         #region "CAS#"
                         tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
@@ -1354,7 +1354,32 @@ namespace ALS.ALSI.Web.view.template
         }
 
 
-        protected void CbCheckBox_CheckedChanged(object sender, EventArgs e)
+        //protected void CbCheckBox_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (cbCheckBox.Checked)
+        //    {
+        //        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+        //    }
+        //    else
+        //    {
+        //        tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.coverpages[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
+        //        if (_detailSpec != null)
+        //        {
+        //            lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", _detailSpec.B, _detailSpec.A);
+        //        }
+        //    }
+
+        //}
+
+        protected void DdlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", ddlUnit.SelectedItem.Text);
+            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
+            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", ddlUnit.SelectedItem.Text);
+            ModolPopupExtender.Show();
+        }
+
+        protected void cbCheckBox_CheckedChanged1(object sender, EventArgs e)
         {
             if (cbCheckBox.Checked)
             {
@@ -1368,15 +1393,6 @@ namespace ALS.ALSI.Web.view.template
                     lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's document no. {0} {1}", _detailSpec.B, _detailSpec.A);
                 }
             }
-
-        }
-
-        protected void DdlUnit_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", ddlUnit.SelectedItem.Text);
-            gvCoverPages.Columns[3].HeaderText = String.Format("Results,({0})", ddlUnit.SelectedItem.Text);
-            gvResult.Columns[7].HeaderText = String.Format("Amount,({0})", ddlUnit.SelectedItem.Text);
-            ModolPopupExtender.Show();
         }
     }
 }

@@ -335,7 +335,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
 
-                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_analyze != null) ? this.jobSample.date_chemist_analyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
                 pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
 
 
@@ -601,7 +601,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.step3owner = userLogin.id;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
 
-                        this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                        this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         //#endregion
@@ -2164,6 +2164,7 @@ namespace ALS.ALSI.Web.view.template
                         _Hpas.AddRange(getTypesOfParticles(cOrderAlpc132));
                         #endregion
                         break;
+                    case LPCTypeEnum.LPC:
                     case LPCTypeEnum.SWAP:
                         int cOrderSwap = 1;
                         #region "Hard Particle Analysis"

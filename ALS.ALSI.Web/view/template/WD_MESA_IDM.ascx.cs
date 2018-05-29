@@ -191,7 +191,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                         break;
                 }
-                txtDateAnalyzed.Text = (this.jobSample.date_chemist_alalyze != null) ? this.jobSample.date_chemist_alalyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                txtDateAnalyzed.Text = (this.jobSample.date_chemist_analyze != null) ? this.jobSample.date_chemist_analyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
                 pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
             }
             #endregion
@@ -391,7 +391,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_complete = DateTime.Now;
-                    this.jobSample.date_chemist_alalyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                    this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                     //#endregion
                     foreach (template_wd_mesa_coverpage _cover in this.coverpages)
                     {
@@ -403,7 +403,11 @@ namespace ALS.ALSI.Web.view.template
                         //_cover.SampleSize_IndirectMaterials = txtSampleSize_IndirectMaterials.Text;
                         //_cover.OvenCondition_IndirectMaterials = txtOvenCondition_IndirectMaterials.Text;
                     }
-                    template_wd_mesa_coverpage.UpdateList(this.coverpages);
+
+                    template_wd_mesa_coverpage.DeleteBySampleID(this.SampleID);
+                    template_wd_mesa_coverpage.InsertList(this.coverpages);
+
+                    template_wd_mesa_img.DeleteBySampleID(this.SampleID);
                     template_wd_mesa_img.InsertList(this.refImg);
 
                     break;

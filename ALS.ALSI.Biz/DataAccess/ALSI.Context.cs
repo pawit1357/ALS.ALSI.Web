@@ -34,8 +34,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<m_customer> m_customer { get; set; }
         public DbSet<m_customer_address> m_customer_address { get; set; }
         public DbSet<m_customer_contract_person> m_customer_contract_person { get; set; }
-        public DbSet<m_evaluation_of_particles> m_evaluation_of_particles { get; set; }
-        public DbSet<m_microscopic_analysis> m_microscopic_analysis { get; set; }
         public DbSet<m_role> m_role { get; set; }
         public DbSet<m_specification> m_specification { get; set; }
         public DbSet<m_status> m_status { get; set; }
@@ -54,9 +52,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<tb_m_gcms_cas> tb_m_gcms_cas { get; set; }
         public DbSet<tb_m_specification> tb_m_specification { get; set; }
         public DbSet<tb_unit> tb_unit { get; set; }
-        public DbSet<template_img> template_img { get; set; }
-        public DbSet<template_pa> template_pa { get; set; }
-        public DbSet<template_pa_detail> template_pa_detail { get; set; }
         public DbSet<template_seagate_copperwire_coverpage> template_seagate_copperwire_coverpage { get; set; }
         public DbSet<template_seagate_copperwire_img> template_seagate_copperwire_img { get; set; }
         public DbSet<template_seagate_corrosion_coverpage> template_seagate_corrosion_coverpage { get; set; }
@@ -87,5 +82,10 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<users_responsible> users_responsible { get; set; }
         public DbSet<users_role> users_role { get; set; }
         public DbSet<users_logged> users_logged { get; set; }
+        public DbSet<m_microscopic_analysis> m_microscopic_analysis { get; set; }
+        public DbSet<template_pa> template_pa { get; set; }
+        public DbSet<template_pa_detail> template_pa_detail { get; set; }
+        public DbSet<template_img> template_img { get; set; }
+        public DbSet<m_evaluation_of_particles> m_evaluation_of_particles { get; set; }
     }
 }

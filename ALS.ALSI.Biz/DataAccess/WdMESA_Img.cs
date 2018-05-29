@@ -85,15 +85,15 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             foreach (template_wd_mesa_img tmp in _lists)
             {
-                template_wd_mesa_img existing = _repository.Find(x => x.id == tmp.id).FirstOrDefault();
-                if (existing == null)
-                {
+                //template_wd_mesa_img existing = _repository.Find(x => x.id == tmp.id).FirstOrDefault();
+                //if (existing == null)
+                //{
                     _repository.Add(tmp);
-                }
-                else
-                {
-                    _repository.Edit(existing, tmp);
-                }
+                //}
+                //else
+                //{
+                //    _repository.Edit(existing, tmp);
+                //}
                 //switch (tmp.RowState)
                 //{
                 //    case CommandNameEnum.Add:

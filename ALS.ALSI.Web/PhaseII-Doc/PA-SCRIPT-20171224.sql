@@ -1,7 +1,7 @@
 ﻿-- *******************************************************************************************************************************
 -- 2017-12-24 (PA REPORT)
 -- *******************************************************************************************************************************
---update job_sample set sample_prefix=SUBSTRING_INDEX(job_number,'-',1);
+--update job_sample set sample_prefix=SUBvarchar(45)_INDEX(job_number,'-',1);
 
 -- ELN-0664-PAB
 -- ELP-2475-HB 
@@ -292,4 +292,71 @@ x update job_sample set job_status=0 where job_number in ('ELN-1020-PAB','ELN-10
 
 */
 
+--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ ---- 2018-05-26 ---
+ /*
+ update tb_m_specification set E='silicone (adhesive side)',F='silicone (Facing adhesive side)' where template_id=638 and id=16813;
 
+ ALTER TABLE `alsi`.`job_sample` 
+CHANGE COLUMN `date_labman_complete` `date_labman_complete` DATE NULL DEFAULT NULL AFTER `date_admin_sent_to_cus`;
+ALTER TABLE `alsi`.`job_sample` 
+CHANGE COLUMN `date_chemist_analyze` `date_chemist_analyze` DATE NULL DEFAULT NULL ;
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `date_srchemist_analyze` DATE NULL AFTER `date_chemist_complete`;
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `date_labman_analyze` DATE NULL AFTER `date_admin_sent_to_cus`,
+ADD COLUMN `job_samplecol` VARCHAR(45) NULL AFTER `last_status`;
+ALTER TABLE `alsi`.`job_sample` 
+CHANGE COLUMN `date_admin_sent_to_cus` `date_admin_sent_to_cus` DATE NULL DEFAULT NULL AFTER `date_labman_complete`;
+
+ALTER TABLE `alsi`.`job_sample` 
+CHANGE COLUMN `date_login_received_sample` `date_login_inprogress` DATE NULL DEFAULT NULL ;
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `date_login_complete` VARCHAR(45) NULL AFTER `job_samplecol`;
+ALTER TABLE `alsi`.`job_sample` 
+CHANGE COLUMN `date_login_complete` `date_login_complete` DATE NULL DEFAULT NULL AFTER `date_login_inprogress`;
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `date_admin_word_inprogress` DATE NULL AFTER `date_srchemist_complate`,
+ADD COLUMN `date_admin_word_complete` DATE NULL AFTER `date_admin_word_inprogress`,
+ADD COLUMN `date_admin_pdf_inprogress` DATE NULL AFTER `date_admin_sent_to_cus`,
+ADD COLUMN `date_admin_pdf_complete` DATE NULL AFTER `date_admin_pdf_inprogress`;
+
+
+----------
+
+
+int id
+int(11) sample_id
+int(11) seq
+int(11) evaluation_of_particles_id
+int(11) microscopic_analysis_id
+varchar(45) col_a
+varchar(45) col_b
+varchar(45) col_c
+varchar(45) col_d
+varchar(45) col_e
+varchar(45) col_f
+varchar(45) col_g
+varchar(45) col_h
+varchar(45) col_i
+varchar(45) col_j
+varchar(45) col_k
+varchar(45) col_l
+varchar(45) col_m
+varchar(45) col_n
+varchar(45) col_o
+varchar(45) col_p
+varchar(45) col_q
+varchar(45) col_r
+varchar(45) col_s
+varchar(45) col_t
+varchar(45) col_u
+varchar(45) col_v
+varchar(45) col_w
+varchar(45) col_x
+varchar(45) col_y
+varchar(45) col_z
+int(11) row_type
+int(11) row_status
+
+*/

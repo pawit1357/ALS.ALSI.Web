@@ -75,7 +75,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                 rpt.cur_date = DateTime.Now;
 
                 rpt.dateOfDampleRecieve = Convert.ToDateTime(_job.date_of_receive);
-                rpt.dateOfAnalyze = Convert.ToDateTime(_sample.date_chemist_alalyze);
+                rpt.dateOfAnalyze = Convert.ToDateTime(_sample.date_chemist_analyze);
                 rpt.dateOfTestComplete = Convert.ToDateTime(_sample.date_chemist_complete);
 
                 //ATT / ELP / 16 / XXXX(เลขจ็อบ) - XX(Test)
