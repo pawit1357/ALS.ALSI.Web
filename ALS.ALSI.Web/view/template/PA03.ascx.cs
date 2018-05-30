@@ -1313,7 +1313,7 @@ namespace ALS.ALSI.Web.view.template
                         this.JobSample.path_pdf = source_file_url;
                         this.JobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                         this.JobSample.step7owner = UserLogin.id;
-                        this.jobSample.date_admin_pdf_complete = DateTime.Now;
+                        this.JobSample.date_admin_pdf_complete = DateTime.Now;
                         //lbMessage.Text = string.Empty;
                     }
                     else

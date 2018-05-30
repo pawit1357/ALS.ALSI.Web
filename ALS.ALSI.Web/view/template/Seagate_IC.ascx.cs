@@ -64,7 +64,8 @@ namespace ALS.ALSI.Web.view.template
 
         public List<template_seagate_ic_coverpage> coverpages
         {
-            get {
+            get
+            {
                 List<template_seagate_ic_coverpage> tmps = (List<template_seagate_ic_coverpage>)Session[GetType().Name + "template_seagate_ic_coverpage"];
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 return (userRole == RoleEnum.CHEMIST) ? tmps : tmps.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
@@ -399,23 +400,19 @@ namespace ALS.ALSI.Web.view.template
                         _cover.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         _cover.b10 = txtB10.Text;
                     }
-                    //switch (this.CommandName)
-                    //{
-                    //    case CommandNameEnum.Add:
-                            template_seagate_ic_coverpage.InsertList(this.coverpages);
-                            //break;
-                    //    case CommandNameEnum.Edit:
-                    //        template_seagate_ic_coverpage.UpdateList(this.coverpages);
-                    //        break;
-                    //}
+
+                    template_seagate_ic_coverpage.InsertList(this.coverpages);
+                    this.jobSample.date_login_complete = DateTime.Now;
+                    this.jobSample.date_chemist_analyze = DateTime.Now;
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                     //#region ":: STAMP COMPLETE DATE"
-                    this.jobSample.date_chemist_complete = DateTime.Now;
                     this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                    this.jobSample.date_chemist_complete = DateTime.Now;
+                    this.jobSample.date_srchemist_analyze = DateTime.Now;
                     //#endregion
                     foreach (template_seagate_ic_coverpage _cover in this.coverpages)
                     {
@@ -437,8 +434,8 @@ namespace ALS.ALSI.Web.view.template
                         case StatusEnum.SR_CHEMIST_APPROVE:
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
                             #region ":: STAMP COMPLETE DATE"
-
                             this.jobSample.date_srchemist_complate = DateTime.Now;
+                            this.jobSample.date_admin_word_inprogress = DateTime.Now;
                             #endregion
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:
@@ -468,6 +465,7 @@ namespace ALS.ALSI.Web.view.template
                             this.jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
 
                             this.jobSample.date_labman_complete = DateTime.Now;
+                            this.jobSample.date_admin_pdf_inprogress = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
                             this.jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
@@ -506,6 +504,8 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.path_word = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
                         //lbMessage.Text = string.Empty;
+                        this.jobSample.date_admin_word_complete = DateTime.Now;
+                        this.jobSample.date_labman_analyze = DateTime.Now;
                     }
                     else
                     {
@@ -534,6 +534,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.path_pdf = source_file_url;
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                         //lbMessage.Text = string.Empty;
+                        this.jobSample.date_admin_pdf_complete = DateTime.Now;
                     }
                     else
                     {
@@ -939,7 +940,7 @@ namespace ALS.ALSI.Web.view.template
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", anionic.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", cationic.ToDataTable())); // Add datasource here
 
-         
+
 
 
 
@@ -988,7 +989,7 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
 
-                       
+
 
                         doc2.SaveToFile(Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension);
                         #endregion
@@ -1145,7 +1146,7 @@ namespace ALS.ALSI.Web.view.template
                 HttpPostedFile _postedFile = FileUpload1.PostedFiles[i];
                 try
                 {
-                    if ((Path.GetExtension(_postedFile.FileName).Equals(".xls") || Path.GetExtension(_postedFile.FileName).Equals(".xlsx")|| Path.GetExtension(_postedFile.FileName).Equals(".xlt")))
+                    if ((Path.GetExtension(_postedFile.FileName).Equals(".xls") || Path.GetExtension(_postedFile.FileName).Equals(".xlsx") || Path.GetExtension(_postedFile.FileName).Equals(".xlt")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");
@@ -1209,7 +1210,7 @@ namespace ALS.ALSI.Web.view.template
                                                 ic.wg = (String.IsNullOrEmpty(ic.wg)) ? "" : Convert.ToDouble(ic.wg).ToString("N" + txtDecimal06.Text);
                                                 ic.wh = (String.IsNullOrEmpty(ic.wh)) ? "" : Convert.ToDouble(ic.wh).ToString("N" + txtDecimal07.Text);
 
-                                                ic.wi = ic.wi.ToUpper().Equals("Not Detected".ToUpper())? ic.wi : (String.IsNullOrEmpty(ic.wi)) ? "" : (!ic.wi.StartsWith("<") ? "" : "<") + Convert.ToDouble(ic.wi.Replace("<", "").Trim()).ToString("N" + txtDecimal08.Text);
+                                                ic.wi = ic.wi.ToUpper().Equals("Not Detected".ToUpper()) ? ic.wi : (String.IsNullOrEmpty(ic.wi)) ? "" : (!ic.wi.StartsWith("<") ? "" : "<") + Convert.ToDouble(ic.wi.Replace("<", "").Trim()).ToString("N" + txtDecimal08.Text);
                                                 Console.WriteLine();
                                             }
                                         }

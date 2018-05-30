@@ -492,7 +492,8 @@ namespace ALS.ALSI.Web.view.template
                     }
                     template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_ftir_coverpage.InsertList(this.Ftir);
-
+                    this.JobSample.date_login_complete = DateTime.Now;
+                    this.JobSample.date_chemist_analyze = DateTime.Now;
                     break;
                 case StatusEnum.CHEMIST_TESTING:
                     this.JobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
@@ -500,8 +501,9 @@ namespace ALS.ALSI.Web.view.template
                     this.JobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
 
                     //#region ":: STAMP COMPLETE DATE"
-                    this.JobSample.date_chemist_complete = DateTime.Now;
                     this.JobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                    this.JobSample.date_chemist_complete = DateTime.Now;
+                    this.JobSample.date_srchemist_analyze = DateTime.Now;
                     //#endregion
 
                     #region "NVR"
@@ -575,6 +577,7 @@ namespace ALS.ALSI.Web.view.template
                             #region ":: STAMP COMPLETE DATE"
 
                             this.JobSample.date_srchemist_complate = DateTime.Now;
+                            this.JobSample.date_admin_word_inprogress = DateTime.Now;
                             #endregion
                             break;
                         case StatusEnum.SR_CHEMIST_DISAPPROVE:
@@ -604,6 +607,7 @@ namespace ALS.ALSI.Web.view.template
                             this.JobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
 
                             this.JobSample.date_labman_complete = DateTime.Now;
+                            this.JobSample.date_admin_pdf_inprogress = DateTime.Now;
                             break;
                         case StatusEnum.LABMANAGER_DISAPPROVE:
                             this.JobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
@@ -642,6 +646,8 @@ namespace ALS.ALSI.Web.view.template
                         this.JobSample.path_word = source_file_url;
                         this.JobSample.job_status = Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING);
                         //lbMessage.Text = string.Empty;
+                        this.JobSample.date_admin_word_complete = DateTime.Now;
+                        this.JobSample.date_labman_analyze = DateTime.Now;
                     }
                     else
                     {
@@ -671,6 +677,7 @@ namespace ALS.ALSI.Web.view.template
                         this.JobSample.path_pdf = source_file_url;
                         this.JobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                         //lbMessage.Text = string.Empty;
+                        this.JobSample.date_admin_pdf_complete = DateTime.Now;
                     }
                     else
                     {
