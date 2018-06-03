@@ -103,8 +103,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public string img_path { get; set; }
         public Nullable<int> unit2 { get; set; }
         public Nullable<int> unit3 { get; set; }
-        public Nullable<sbyte> show_note_pzt { get; set; }
         public string note_pzt { get; set; }
+        public Nullable<sbyte> show_note_pzt { get; set; }
         public string ftr_b53 { get; set; }
         public string ftr_b54 { get; set; }
         public string ftr_b55 { get; set; }

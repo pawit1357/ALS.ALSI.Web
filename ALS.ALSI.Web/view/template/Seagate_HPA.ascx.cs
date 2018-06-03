@@ -1949,6 +1949,7 @@ namespace ALS.ALSI.Web.view.template
                 LPCTypeEnum lpcType = (LPCTypeEnum)Enum.ToObject(typeof(LPCTypeEnum), Convert.ToInt32(ddlLpcType.SelectedValue));
                 switch (lpcType)
                 {
+                    case LPCTypeEnum.LPC:
                     case LPCTypeEnum.KHz_68://(68 KHz)
                         int cOrder = 1;
                         #region "LPC 0.3"
@@ -2173,7 +2174,6 @@ namespace ALS.ALSI.Web.view.template
                         _Hpas.AddRange(getTypesOfParticles(cOrderAlpc132));
                         #endregion
                         break;
-                    case LPCTypeEnum.LPC:
                     case LPCTypeEnum.SWAP:
                         int cOrderSwap = 1;
                         #region "Hard Particle Analysis"
@@ -2782,6 +2782,7 @@ namespace ALS.ALSI.Web.view.template
             CalculateCas();
             ModolPopupExtender.Show();
         }
+
         protected void ddlClassificationUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             gvClassification.Columns[2].HeaderText = String.Format("Results, {0}", ddlClassificationUnit.SelectedItem.Text);
@@ -2789,6 +2790,7 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
 
         }
+
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             ModolPopupExtender.Show();

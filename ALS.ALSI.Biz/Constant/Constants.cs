@@ -37,10 +37,12 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_SEARCH_JOB_REQUEST = APPNAME + "/view/request/SearchJobRequest.aspx";
         public const String LINK_JOB_CHANGE_STATUS = APPNAME + "/view/request/ChangeJobsStatus.aspx";
         public const String LINK_JOB_CHANGE_DUEDATE = APPNAME + "/view/request/ChangeJobDueDate.aspx";
-        public const String LINK_JOB_SR_COMPLETE_DATE = APPNAME + "/view/request/ChangeJobSrCompleteDate.aspx";
+
+        public const String LINK_JOB_SR_CHEMIST_STARTJOB_DATE = APPNAME + "/view/request/ChangeSrChemistStartJobDate.aspx";
+        public const String LINK_JOB_ADMIN_STARTJOB_DATE = APPNAME + "/view/request/ChangeAdminStartJobDate.aspx";
 
 
-        
+
         public const String LINK_JOB_CHANGE_PO = APPNAME + "/view/request/ChangeJobPo.aspx";
         public const String LINK_REPORT_DATE = APPNAME + "/view/request/ChangeReportDate.aspx";
         public const String LINK_CHANGE_OTHER_REF_NO = APPNAME + "/view/request/ChangeOtherRefNo.aspx";
@@ -174,7 +176,9 @@ namespace ALS.ALSI.Biz.Constant
         ChangeOtherRefNo = 38,
         ChangeSingaporeRefNo = 39,
         ViewFile = 40,
-        ChangeSrCompleteDate = 41
+        ChangeSrChemistStartJobDate = 41,
+        ChangeAdminStartJobDate = 42,
+
     }
 
     public enum RowTypeEnum : int

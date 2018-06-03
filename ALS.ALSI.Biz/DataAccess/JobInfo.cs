@@ -120,36 +120,7 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             using (ALSIEntities ctx = new ALSIEntities())
             {
-                //if (this.physicalYear == 0)
-                //{
-                //    if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
-                //    {
-                //        this.physicalYear = (DateTime.Now.Year - 1);
-                //    }
-                //    else
-                //    {
-                //        this.physicalYear = (DateTime.Now.Year);
-                //    }
-                //}
-                //Status 
-                //    Received.	 Report x
-                //    Sent to Customer  x
-                //    Receive Date.	
-                //    Due Date.	
-                //    ALS Ref 
-                //    No.Cus 
-                //    Ref 
-                //    No.S'Ref No.	
-                //    Company	
-                //    Invoice	
-                //    Po	
-                //    Contact	
-                //    Description	
-                //    Model	
-                //    Surface Area	
-                //    Specification	
-                //    Type of test
-
+             
                 var result = from j in ctx.job_info
                              join s in ctx.job_sample on j.ID equals s.job_id
                              join ms in ctx.m_status on s.job_status equals ms.ID

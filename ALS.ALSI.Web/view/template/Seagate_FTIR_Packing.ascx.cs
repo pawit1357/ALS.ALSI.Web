@@ -819,7 +819,7 @@ namespace ALS.ALSI.Web.view.template
 
             #region "FTIR"
             //FTIR
-            List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+            List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
             if (ftir2.Count > 0)
             {
 
@@ -830,29 +830,33 @@ namespace ALS.ALSI.Web.view.template
                     Boolean con1 = ftirList[ftirList.Count - 1].A.Replace("Amount", "").Replace("(", "").Replace(")", "").Trim().Equals(ddlUnit.SelectedItem.Text.ToLower());
                     Boolean con2 = ftirList[ftirList.Count - 2].A.Replace("Amount", "").Replace("(", "").Replace(")", "").Trim().Equals(ddlUnit.SelectedItem.Text.ToLower());
 
-                    template_seagate_ftir_coverpage tmp = ftir2.Where(x => x.A.Equals("Silicone")).FirstOrDefault();
-                    if (tmp != null)
+//B|Silicone 
+//F|Silicone(release side)
+//G|Silicone(non - release side)
+//E|Hydrocarbon 
+//B|Silicone Oil  
+//D|Phthalate   
+//C|Amide
+                    try
                     {
-                        tmp.C = (con1) ? ftirList[ftirList.Count - 1].B : ftirList[ftirList.Count - 2].B;//Silicone
+
+
+                        ftir2[0].C = (con1) ? ftirList[ftirList.Count - 1].B : ftirList[ftirList.Count - 2].B;
+                        ftir2[1].C = (con1) ? ftirList[ftirList.Count - 1].F : ftirList[ftirList.Count - 2].F;
+                        ftir2[2].C = (con1) ? ftirList[ftirList.Count - 1].G : ftirList[ftirList.Count - 2].G;
+                        ftir2[3].C = (con1) ? ftirList[ftirList.Count - 1].E : ftirList[ftirList.Count - 2].E;
+                        ftir2[4].C = (con1) ? ftirList[ftirList.Count - 1].B : ftirList[ftirList.Count - 2].B;
+                        ftir2[5].C = (con1) ? ftirList[ftirList.Count - 1].D : ftirList[ftirList.Count - 2].D;
+                        ftir2[6].C = (con1) ? ftirList[ftirList.Count - 1].C : ftirList[ftirList.Count - 2].C;
+
                     }
-                    tmp = ftir2.Where(x => x.A.Equals("Amide")).FirstOrDefault();
-                    if (tmp != null)
-                    {
-                        tmp.C = (con1) ? ftirList[ftirList.Count - 1].C : ftirList[ftirList.Count - 2].C;//Amide Slip Agent
+                    catch (Exception ex) {
+                        Console.WriteLine(ex.Message);
                     }
-                    tmp = ftir2.Where(x => x.A.Equals("Phthalate")).FirstOrDefault();
-                    if (tmp != null)
-                    {
-                        tmp.C = tmp.C = (con1) ? ftirList[ftirList.Count - 1].D : ftirList[ftirList.Count - 2].D; ;//Phthalate
-                    }
-                    tmp = ftir2.Where(x => x.A.Equals("Hydrocarbon")).FirstOrDefault();
-                    if (tmp != null)
-                    {
-                        tmp.C = tmp.C = (con1) ? ftirList[ftirList.Count - 1].E : ftirList[ftirList.Count - 2].E; ;//Hydrocarbon
-                    }
+
+
                     //remark
-                    //lbA42.Text = String.Format(" {0}  {1}  or {2} {3}.", ftirList[5].B, "ug/part", ftirList[6].B, ddlUnit.SelectedItem.Text);
-                    lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N"+txtDecimal10.Text));
+                    lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N" + txtDecimal10.Text));
                 }
             }
             #endregion
@@ -1000,7 +1004,7 @@ namespace ALS.ALSI.Web.view.template
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dat.ToDataTable())); // Add datasource here
 
-                if ((nvrs.Count + ftirs.Count) >= 4 )
+                if ((nvrs.Count + ftirs.Count) >= 4)
                 {
                     viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", nvrs.ToDataTable())); // Add datasource here
                 }
@@ -1181,7 +1185,6 @@ namespace ALS.ALSI.Web.view.template
                         string dd = DateTime.Now.ToString("dd");
 
                         String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
-                        //String source_file_url = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(FileUpload1.FileName));
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
@@ -1220,6 +1223,8 @@ namespace ALS.ALSI.Web.view.template
                                         tmp.C = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C));
                                         tmp.D = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.D));
                                         tmp.E = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.E));
+                                        tmp.F = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.F));
+                                        tmp.G = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.G));
 
                                         switch ((row - 18) + 1)
                                         {
@@ -1228,64 +1233,70 @@ namespace ALS.ALSI.Web.view.template
                                                 tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal01.Text);
                                                 tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal01.Text);
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal01.Text);
+                                                tmp.F = (String.IsNullOrEmpty(tmp.F)) ? "" : Convert.ToDouble(tmp.F).ToString("N" + txtDecimal01.Text);
+                                                tmp.G = (String.IsNullOrEmpty(tmp.G)) ? "" : Convert.ToDouble(tmp.G).ToString("N" + txtDecimal01.Text);
+
                                                 break;
                                             case 3://Slope of curve, m
                                                 tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal02.Text);
                                                 tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal02.Text);
                                                 tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal02.Text);
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal02.Text);
+                                                tmp.F = (String.IsNullOrEmpty(tmp.F)) ? "" : Convert.ToDouble(tmp.F).ToString("N" + txtDecimal01.Text);
+                                                tmp.G = (String.IsNullOrEmpty(tmp.G)) ? "" : Convert.ToDouble(tmp.G).ToString("N" + txtDecimal01.Text);
                                                 break;
                                             case 4://y - intercept, c
                                                 tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal03.Text);
                                                 tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal03.Text);
                                                 tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal03.Text);
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal03.Text);
+                                                tmp.F = (String.IsNullOrEmpty(tmp.F)) ? "" : Convert.ToDouble(tmp.F).ToString("N" + txtDecimal01.Text);
+                                                tmp.G = (String.IsNullOrEmpty(tmp.G)) ? "" : Convert.ToDouble(tmp.G).ToString("N" + txtDecimal01.Text);
                                                 break;
                                             case 5:// Amount, x (ug) = (y - c) / m
                                                 tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal04.Text);
                                                 tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal04.Text);
                                                 tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal04.Text);
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal04.Text);
+                                                tmp.F = (String.IsNullOrEmpty(tmp.F)) ? "" : Convert.ToDouble(tmp.F).ToString("N" + txtDecimal01.Text);
+                                                tmp.G = (String.IsNullOrEmpty(tmp.G)) ? "" : Convert.ToDouble(tmp.G).ToString("N" + txtDecimal01.Text);
                                                 break;
                                             case 6:// Instrument Detection Limit(ug)
                                                 tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal05.Text);
                                                 tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal05.Text);
                                                 tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal05.Text);
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal05.Text);
+                                                tmp.F = (String.IsNullOrEmpty(tmp.F)) ? "" : Convert.ToDouble(tmp.F).ToString("N" + txtDecimal01.Text);
+                                                tmp.G = (String.IsNullOrEmpty(tmp.G)) ? "" : Convert.ToDouble(tmp.G).ToString("N" + txtDecimal01.Text);
                                                 break;
                                             case 7:// Instrument Detection Limit(ng / sqcm)
                                                 tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal06.Text);
                                                 tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal06.Text);
                                                 tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal06.Text);
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal06.Text);
+                                                tmp.F = (String.IsNullOrEmpty(tmp.F)) ? "" : Convert.ToDouble(tmp.F).ToString("N" + txtDecimal01.Text);
+                                                tmp.G = (String.IsNullOrEmpty(tmp.G)) ? "" : Convert.ToDouble(tmp.G).ToString("N" + txtDecimal01.Text);
                                                 break;
                                             case 8:
                                                 tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Detected") ? tmp.B : tmp.B.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.B : (tmp.B.Trim().Equals("<IDL") || tmp.B.Trim().Equals("< IDL")) ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
                                                 tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Detected") ? tmp.C : tmp.C.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.C : (tmp.C.Trim().Equals("<IDL") || tmp.C.Trim().Equals("< IDL")) ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
                                                 tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Detected") ? tmp.D : tmp.D.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.D : (tmp.D.Trim().Equals("<IDL") || tmp.D.Trim().Equals("< IDL")) ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Detected") ? tmp.E : tmp.E.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.E : (tmp.E.Trim().Equals("<IDL") || tmp.E.Trim().Equals("< IDL")) ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
+
+                                                tmp.F = (String.IsNullOrEmpty(tmp.F)) ? "" : tmp.F.Equals("Detected") ? tmp.F : tmp.F.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.F : (tmp.F.Trim().Equals("<IDL") || tmp.F.Trim().Equals("< IDL")) ? tmp.F : Convert.ToDouble(tmp.F).ToString("N" + txtDecimal07.Text);
+                                                tmp.G = (String.IsNullOrEmpty(tmp.G)) ? "" : tmp.G.Equals("Detected") ? tmp.G : tmp.G.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.G : (tmp.G.Trim().Equals("<IDL") || tmp.G.Trim().Equals("< IDL")) ? tmp.G : Convert.ToDouble(tmp.G).ToString("N" + txtDecimal07.Text);
+
                                                 break;
                                             case 9:
                                                 tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Detected") ? tmp.B : tmp.B.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.B : (tmp.B.Trim().Equals("<IDL") || tmp.B.Trim().Equals("< IDL")) ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
                                                 tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Detected") ? tmp.C : tmp.C.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.C : (tmp.C.Trim().Equals("<IDL") || tmp.C.Trim().Equals("< IDL")) ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
                                                 tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Detected") ? tmp.D : tmp.D.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.D : (tmp.D.Trim().Equals("<IDL") || tmp.D.Trim().Equals("< IDL")) ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
                                                 tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Detected") ? tmp.E : tmp.E.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.E : (tmp.E.Trim().Equals("<IDL") || tmp.E.Trim().Equals("< IDL")) ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
+
+                                                tmp.F = (String.IsNullOrEmpty(tmp.F)) ? "" : tmp.F.Equals("Detected") ? tmp.F : tmp.F.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.F : (tmp.F.Trim().Equals("<IDL") || tmp.F.Trim().Equals("< IDL")) ? tmp.F : Convert.ToDouble(tmp.F).ToString("N" + txtDecimal07.Text);
+                                                tmp.G = (String.IsNullOrEmpty(tmp.G)) ? "" : tmp.G.Equals("Detected") ? tmp.G : tmp.G.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.G : (tmp.G.Trim().Equals("<IDL") || tmp.G.Trim().Equals("< IDL")) ? tmp.G : Convert.ToDouble(tmp.G).ToString("N" + txtDecimal07.Text);
                                                 break;
-                                                //case 8:
-                                                //    tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Detected") ? tmp.B : tmp.B.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.B : tmp.B.Trim().Equals("<IDL".Trim()) ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
-                                                //    tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Detected") ? tmp.C : tmp.C.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.C : tmp.C.Trim().Equals("<IDL".Trim()) ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
-                                                //    tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Detected") ? tmp.D : tmp.D.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.D : tmp.D.Trim().Equals("<IDL".Trim()) ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
-                                                //    tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Detected") ? tmp.E : tmp.E.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.E : tmp.E.Trim().Equals("<IDL".Trim()) ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
-                                                //    break;
-                                                //case 9:
-                                                //    tmp.B = (String.IsNullOrEmpty(tmp.B)) ? "" : tmp.B.Equals("Detected") ? tmp.B : tmp.B.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.B : tmp.B.Trim().Equals("<IDL".Trim()) ? tmp.B : Convert.ToDouble(tmp.B).ToString("N" + txtDecimal07.Text);
-                                                //    tmp.C = (String.IsNullOrEmpty(tmp.C)) ? "" : tmp.C.Equals("Detected") ? tmp.C : tmp.C.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.C : tmp.C.Trim().Equals("<IDL".Trim()) ? tmp.C : Convert.ToDouble(tmp.C).ToString("N" + txtDecimal07.Text);
-                                                //    tmp.D = (String.IsNullOrEmpty(tmp.D)) ? "" : tmp.D.Equals("Detected") ? tmp.D : tmp.D.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.D : tmp.D.Trim().Equals("<IDL".Trim()) ? tmp.D : Convert.ToDouble(tmp.D).ToString("N" + txtDecimal07.Text);
-                                                //    tmp.E = (String.IsNullOrEmpty(tmp.E)) ? "" : tmp.E.Equals("Detected") ? tmp.E : tmp.E.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.E : tmp.E.Trim().Equals("<IDL".Trim()) ? tmp.E : Convert.ToDouble(tmp.E).ToString("N" + txtDecimal07.Text);
-                                                //    break;
-                                                //Amount(ng / cm2)
-                                                //Amount(ug / cm2)
-                                        }
+                                            }
                                         tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                                         tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA);
                                         if (!String.IsNullOrEmpty(tmp.A))

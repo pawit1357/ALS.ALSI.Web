@@ -76,15 +76,18 @@ namespace ALS.ALSI.Web.view.request
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             if (this.jobSample != null)
             {
-                if(this.jobSample.due_date_lab.Value.Year==1 && this.jobSample.due_date_lab.Value.Month == 1&& this.jobSample.due_date_lab.Value.Day == 1)
+                if (this.jobSample.due_date_lab != null)
                 {
-                    txtDuedate.Text =DateTime.Now.ToString("dd/MM/yyyy");
-                    cbIsTba.Checked = true;
-                }
-                else
-                {
-                    txtDuedate.Text = Convert.ToDateTime(this.jobSample.due_date).ToString("dd/MM/yyyy");
-                    cbIsTba.Checked = false;
+                    if (this.jobSample.due_date_lab.Value.Year == 1 && this.jobSample.due_date_lab.Value.Month == 1 && this.jobSample.due_date_lab.Value.Day == 1)
+                    {
+                        txtDuedate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                        cbIsTba.Checked = true;
+                    }
+                    else
+                    {
+                        txtDuedate.Text = Convert.ToDateTime(this.jobSample.due_date_lab).ToString("dd/MM/yyyy");
+                        cbIsTba.Checked = false;
+                    }
                 }
                 //txtDuedate.Text = Convert.ToDateTime(this.jobSample.due_date).ToString("dd/MM/yyyy");
                 //txtCustomerDuedate.Text = Convert.ToDateTime(this.jobSample.due_date_customer).ToString("dd/MM/yyyy");

@@ -16,10 +16,5 @@ namespace ALS.ALSI.Biz.DataAccess
     {
         public int id { get; set; }
         public Nullable<int> template_id { get; set; }
-        public Nullable<int> seq { get; set; }
-        public string A { get; set; }
-        public string B { get; set; }
-        public string C { get; set; }
-        public string status { get; set; }
     }
 }

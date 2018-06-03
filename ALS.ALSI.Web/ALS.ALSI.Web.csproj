@@ -1219,7 +1219,9 @@
     <Content Include="PhaseII-Doc\Dump20171206-after-update.sql" />
     <Content Include="PhaseII-Doc\Dump20171206.sql" />
     <Content Include="PhaseII-Doc\PhaseII.sql" />
+    <Content Include="PhaseII-Doc\script02.sql" />
     <Content Include="PhaseII-Doc\Solve.sql" />
+    <Content Include="PhaseII-Doc\ตรวจสอบ due_date แบบ normal ที่เกิน 8 วัน.sql" />
     <Content Include="ReadMe\script-solve.sql" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
@@ -1243,7 +1245,8 @@
     <Content Include="view\jobRunning\SearchJobRunning.aspx" />
     <Content Include="view\library\Library.aspx" />
     <Content Include="view\library\SearchLibrary.aspx" />
-    <Content Include="view\request\ChangeJobSrCompleteDate.aspx" />
+    <Content Include="view\request\ChangeAdminStartJobDate.aspx" />
+    <Content Include="view\request\ChangeSrChemistStartJobDate.aspx" />
     <Content Include="view\request\ChangeJobGroup.aspx" />
     <Content Include="view\request\EditSample.aspx" />
     <Content Include="view\request\ViewFile.aspx" />
@@ -1444,12 +1447,19 @@
     <Compile Include="view\library\SearchLibrary.aspx.designer.cs">
       <DependentUpon>SearchLibrary.aspx</DependentUpon>
     </Compile>
-    <Compile Include="view\request\ChangeJobSrCompleteDate.aspx.cs">
-      <DependentUpon>ChangeJobSrCompleteDate.aspx</DependentUpon>
+    <Compile Include="view\request\ChangeAdminStartJobDate.aspx.cs">
+      <DependentUpon>ChangeAdminStartJobDate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="view\request\ChangeJobSrCompleteDate.aspx.designer.cs">
-      <DependentUpon>ChangeJobSrCompleteDate.aspx</DependentUpon>
+    <Compile Include="view\request\ChangeAdminStartJobDate.aspx.designer.cs">
+      <DependentUpon>ChangeAdminStartJobDate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\request\ChangeSrChemistStartJobDate.aspx.cs">
+      <DependentUpon>ChangeSrChemistStartJobDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\request\ChangeSrChemistStartJobDate.aspx.designer.cs">
+      <DependentUpon>ChangeSrChemistStartJobDate.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\request\ChangeJobGroup.aspx.cs">
       <DependentUpon>ChangeJobGroup.aspx</DependentUpon>
@@ -2020,6 +2030,8 @@
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.woff" />
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="assets\global\plugins\uniform\README.md" />
+    <Content Include="PhaseII-Doc\alsi-script-1.zip" />
+    <Content Include="PhaseII-Doc\alsi-script-2.zip" />
     <None Include="Properties\PublishProfiles\ALIS.pubxml" />
     <Content Include="ReportObject\DS.xsc">
       <DependentUpon>DS.xsd</DependentUpon>

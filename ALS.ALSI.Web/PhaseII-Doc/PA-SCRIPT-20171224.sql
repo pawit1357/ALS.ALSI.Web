@@ -294,8 +294,9 @@ x update job_sample set job_status=0 where job_number in ('ELN-1020-PAB','ELN-10
 
 --XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  ---- 2018-05-26 ---
- /*
- update tb_m_specification set E='silicone (adhesive side)',F='silicone (Facing adhesive side)' where template_id=638 and id=16813;
+ /*16813
+ select * from tb_m_specification where template_id=956;
+ update tb_m_specification set E='silicone (adhesive side)',F='silicone (Facing adhesive side)' where template_id=638 and id=19378;
 
  ALTER TABLE `alsi`.`job_sample` 
 CHANGE COLUMN `date_labman_complete` `date_labman_complete` DATE NULL DEFAULT NULL AFTER `date_admin_sent_to_cus`;
@@ -322,41 +323,15 @@ ADD COLUMN `date_admin_pdf_inprogress` DATE NULL AFTER `date_admin_sent_to_cus`,
 ADD COLUMN `date_admin_pdf_complete` DATE NULL AFTER `date_admin_pdf_inprogress`;
 
 
-----------
+ ---- 2018-05-31 ---
+UPDATE `alsi`.`m_status` SET `status` = 'I' WHERE (`ID` = '17');
+UPDATE `alsi`.`m_status` SET `status` = 'I' WHERE (`ID` = '16');
+UPDATE `alsi`.`m_status` SET `status` = 'I' WHERE (`ID` = '18');
 
 
-int id
-int(11) sample_id
-int(11) seq
-int(11) evaluation_of_particles_id
-int(11) microscopic_analysis_id
-varchar(45) col_a
-varchar(45) col_b
-varchar(45) col_c
-varchar(45) col_d
-varchar(45) col_e
-varchar(45) col_f
-varchar(45) col_g
-varchar(45) col_h
-varchar(45) col_i
-varchar(45) col_j
-varchar(45) col_k
-varchar(45) col_l
-varchar(45) col_m
-varchar(45) col_n
-varchar(45) col_o
-varchar(45) col_p
-varchar(45) col_q
-varchar(45) col_r
-varchar(45) col_s
-varchar(45) col_t
-varchar(45) col_u
-varchar(45) col_v
-varchar(45) col_w
-varchar(45) col_x
-varchar(45) col_y
-varchar(45) col_z
-int(11) row_type
-int(11) row_status
+-------------- 2018-06-03 --------------------
+ALTER TABLE `alsi`.`template_wd_gcms_coverpage` 
+CHANGE COLUMN `pm_extraction_volumn` `pm_extraction_volumn` VARCHAR(255) NULL DEFAULT NULL ;
+
 
 */

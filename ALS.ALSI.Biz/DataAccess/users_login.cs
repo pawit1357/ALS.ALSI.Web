@@ -31,6 +31,5 @@ namespace ALS.ALSI.Biz.DataAccess
         public string mobile_phone { get; set; }
     
         public virtual m_title m_title { get; set; }
-        public virtual role role { get; set; }
     }
 }

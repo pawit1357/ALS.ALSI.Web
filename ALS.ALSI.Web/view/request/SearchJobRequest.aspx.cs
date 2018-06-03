@@ -128,7 +128,7 @@ namespace ALS.ALSI.Web.view.request
             this.selectedList = new List<int>();
 
             ddlCompany.Items.Clear();
-            ddlCompany.DataSource = new m_customer().SelectAll().OrderBy(x=>x.company_name);
+            ddlCompany.DataSource = new m_customer().SelectAll().OrderBy(x => x.company_name);
             ddlCompany.DataBind();
             ddlCompany.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
@@ -346,10 +346,12 @@ namespace ALS.ALSI.Web.view.request
                 case CommandNameEnum.ChangeDueDate:
                     Server.Transfer(Constants.LINK_JOB_CHANGE_DUEDATE);
                     break;
-                case CommandNameEnum.ChangeSrCompleteDate:
-                    Server.Transfer(Constants.LINK_JOB_SR_COMPLETE_DATE);
+                case CommandNameEnum.ChangeSrChemistStartJobDate:
+                    Server.Transfer(Constants.LINK_JOB_SR_CHEMIST_STARTJOB_DATE);
                     break;
-
+                case CommandNameEnum.ChangeAdminStartJobDate:
+                    Server.Transfer(Constants.LINK_JOB_ADMIN_STARTJOB_DATE);
+                    break;
                 case CommandNameEnum.ChangePo:
                     Server.Transfer(Constants.LINK_JOB_CHANGE_PO);
                     break;
@@ -480,7 +482,8 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnChangeOtherRefNo = (LinkButton)e.Row.FindControl("btnChangeOtherRefNo");
                     LinkButton btnChangeSingaporeRefNo = (LinkButton)e.Row.FindControl("btnChangeSingaporeRefNo");
                     LinkButton btnViewFile = (LinkButton)e.Row.FindControl("btnViewFile");
-                    LinkButton btnChangeSrCompleteDate = (LinkButton)e.Row.FindControl("btnChangeSrCompleteDate");
+                    LinkButton btnChangeSrChemistStartJobDate = (LinkButton)e.Row.FindControl("btnChangeSrChemistStartJobDate");
+                    LinkButton btnChangeAdminStartJobsDate = (LinkButton)e.Row.FindControl("btnChangeAdminStartJobsDate");
 
 
 
@@ -530,9 +533,8 @@ namespace ALS.ALSI.Web.view.request
                     cbSelect.Visible = false;
                     btnViewFile.Visible = job_status == StatusEnum.JOB_COMPLETE || userRole == RoleEnum.BUSINESS_MANAGER || userRole == RoleEnum.LABMANAGER || userRole == RoleEnum.SR_CHEMIST;
 
-                    btnChangeSrCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN) && !isHold;
-
-
+                    btnChangeSrChemistStartJobDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold;
+                    btnChangeAdminStartJobsDate.Visible = (userRole == RoleEnum.ADMIN) && !isHold;
 
                     switch (userRole)
                     {
@@ -797,7 +799,7 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Status", typeof(string));
                 dt.Columns.Add("Job Status", typeof(string));
                 dt.Columns.Add("Received", typeof(DateTime));
-                dt.Columns.Add("Report Sent to Customer", typeof(DateTime)); 
+                dt.Columns.Add("Report Sent to Customer", typeof(DateTime));
                 dt.Columns.Add("Receive Date", typeof(DateTime));
                 dt.Columns.Add("Due Date", typeof(DateTime));
                 dt.Columns.Add("TBA FLAG", typeof(string));
@@ -815,9 +817,22 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Type of test", typeof(string));
                 //dt.Columns.Add("Modified Date", typeof(string));
                 //dt.Columns.Add("Update By", typeof(string));
-                dt.Columns.Add("Chemist Complete", typeof(DateTime));
+                //dt.Columns.Add("Chemist Complete", typeof(DateTime));
                 dt.Columns.Add("Data Group", typeof(string));
                 //dt.Columns.Add("Receive Date(For filter)", typeof(DateTime));
+
+                dt.Columns.Add("date_login_inprogress", typeof(DateTime));
+                dt.Columns.Add("date_login_complete", typeof(DateTime));
+                dt.Columns.Add("date_chemist_inprogress", typeof(DateTime));
+                dt.Columns.Add("date_chemist_complete", typeof(DateTime));
+                dt.Columns.Add("date_srchemist_inprogress", typeof(DateTime));
+                dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
+                dt.Columns.Add("date_admin_word_inprogress", typeof(DateTime));
+                dt.Columns.Add("date_admin_word_complete", typeof(DateTime));
+                dt.Columns.Add("date_labman_inprogress", typeof(DateTime));
+                dt.Columns.Add("date_labman_complete", typeof(DateTime));
+                dt.Columns.Add("date_admin_pdf_inprogress", typeof(DateTime));
+                dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
 
                 String conSQL = Configurations.MySQLCon;
                 using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
@@ -871,9 +886,21 @@ namespace ALS.ALSI.Web.view.request
                      "`Extent4`.`name` AS `Type of test`," +
                      //"DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
                      //"`Extent8`.`username` AS `Update By`," +
-                     "`Extent2`.`date_chemist_complete` AS `Chemist Complete`," +
-                     "`Extent4`.`data_group` AS `Data Group`" +
-                     //"`Extent1`.`date_of_receive` as `Receive Date(For filter)`" +
+                     //"`Extent2`.`date_chemist_complete` AS `Chemist Complete`," +
+                     "`Extent4`.`data_group` AS `Data Group`," +
+                    //"`Extent1`.`date_of_receive` as `Receive Date(For filter)`" +
+                    "`Extent2`.`date_login_inprogress` AS `date_login_inprogress`," +
+                    "`Extent2`.`date_login_complete` AS `date_login_complete`," +
+                    "`Extent2`.`date_chemist_analyze` AS `date_chemist_inprogress`," +
+                    "`Extent2`.`date_chemist_complete` AS `date_chemist_complete`," +
+                    "`Extent2`.`date_srchemist_analyze` AS `date_srchemist_inprogress`," +
+                    "`Extent2`.`date_srchemist_complate` AS `date_srchemist_complate`," +
+                    "`Extent2`.`date_admin_word_inprogress` AS `date_admin_word_inprogress`," +
+                    "`Extent2`.`date_admin_word_complete` AS `date_admin_word_complete`," +
+                    "`Extent2`.`date_labman_analyze` AS `date_labman_inprogress`," +
+                    "`Extent2`.`date_labman_complete` AS `date_labman_complete`," +
+                    "`Extent2`.`date_admin_pdf_inprogress` AS `date_admin_pdf_inprogress`," +
+                    "`Extent2`.`date_admin_pdf_complete` AS `date_admin_pdf_complete`" +
                      " FROM `job_info` AS `Extent1`" +
                      " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
                      " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
@@ -891,7 +918,7 @@ namespace ALS.ALSI.Web.view.request
                     sqlCri.Append(" AND ");
                     sqlCri.Append(" `Extent2`.`job_status` <> 0");
                     sqlCri.Append(" AND ");
-                    
+
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
                         sqlCri.Append(" `Extent4`.`data_group` = '" + ddlTypeOfTest.SelectedValue + "'");

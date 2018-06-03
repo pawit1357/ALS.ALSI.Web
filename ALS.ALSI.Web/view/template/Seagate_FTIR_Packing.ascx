@@ -230,46 +230,46 @@
                                     </div>
                                 </div>
                                 <br />
-                                 <asp:Panel ID="pImage" runat="server">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <h6>Image:</h6>
-                                        <!-- IMG -->
-                                        <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting">
-                                            <Columns>
-                                                <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:Literal ID="litSeq" runat="server" Text='<%# Eval("seq")%>' />
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="txtSeq" runat="server" Text='<%# Eval("seq")%>' MaxLength="1"></asp:TextBox>
-                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" Enabled="true" TargetControlID="txtSeq" />
-                                                    </EditItemTemplate>
-                                                </asp:TemplateField>
+                                <asp:Panel ID="pImage" runat="server">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h6>Image:</h6>
+                                            <!-- IMG -->
+                                            <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
+                                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litSeq" runat="server" Text='<%# Eval("seq")%>' />
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtSeq" runat="server" Text='<%# Eval("seq")%>' MaxLength="1"></asp:TextBox>
+                                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" Enabled="true" TargetControlID="txtSeq" />
+                                                        </EditItemTemplate>
+                                                    </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Right">
-                                                    <ItemTemplate>
-                                                        <asp:Image ID="litSemImageat250x" runat="server" ImageUrl='<%# Eval("img_path")%>' Width="120" Height="120" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Right">
+                                                        <ItemTemplate>
+                                                            <asp:Image ID="litSemImageat250x" runat="server" ImageUrl='<%# Eval("img_path")%>' Width="120" Height="120" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Delete">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                            <EmptyDataTemplate>
-                                                <div class="data-not-found">
-                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                                </div>
-                                            </EmptyDataTemplate>
-                                        </asp:GridView>
-                                        <!-- IMG -->
+                                                    <asp:TemplateField HeaderText="Delete">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                                <EmptyDataTemplate>
+                                                    <div class="data-not-found">
+                                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                    </div>
+                                                </EmptyDataTemplate>
+                                            </asp:GridView>
+                                            <!-- IMG -->
+                                        </div>
                                     </div>
-                                </div>
-                              </asp:Panel>
+                                </asp:Panel>
                                 &nbsp;<h6>
                                     <%--=CONCATENATE("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is ", ROUND('working-FTIR'!$B$24,7),"--%> 
 Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is
@@ -387,6 +387,18 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <asp:TemplateField HeaderText="Hydrocarbon" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litE" runat="server" Text='<%# Eval("E")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Silicone (Adhesive side)" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litF" runat="server" Text='<%# Eval("F")%>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Silicone (Facing adhesive side)" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litG" runat="server" Text='<%# Eval("G")%>'></asp:Literal>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
@@ -658,7 +670,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             กำหนดทศนิยม</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                                      <h1>CoverPage</h1>
+                                    <h1>CoverPage</h1>
                                     <table class="table table-striped">
 
                                         <tr>
