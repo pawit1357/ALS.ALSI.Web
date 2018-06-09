@@ -352,6 +352,11 @@ namespace ALS.ALSI.Web.view.request
                 case CommandNameEnum.ChangeAdminStartJobDate:
                     Server.Transfer(Constants.LINK_JOB_ADMIN_STARTJOB_DATE);
                     break;
+                case CommandNameEnum.ChangeSrChemistCompleteDate:
+                    Server.Transfer(Constants.LINK_JOB_SR_CHEMIST_COMPLATE_DATE);
+                    break;
+
+                    
                 case CommandNameEnum.ChangePo:
                     Server.Transfer(Constants.LINK_JOB_CHANGE_PO);
                     break;
@@ -484,10 +489,11 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnViewFile = (LinkButton)e.Row.FindControl("btnViewFile");
                     LinkButton btnChangeSrChemistStartJobDate = (LinkButton)e.Row.FindControl("btnChangeSrChemistStartJobDate");
                     LinkButton btnChangeAdminStartJobsDate = (LinkButton)e.Row.FindControl("btnChangeAdminStartJobsDate");
+                    LinkButton btnChangeSrChemistCompleteDate = (LinkButton)e.Row.FindControl("btnChangeSrChemistCompleteDate");
 
 
 
-
+                    
 
                     LinkButton btnAmend = (LinkButton)e.Row.FindControl("btnAmend");
                     LinkButton btnReTest = (LinkButton)e.Row.FindControl("btnReTest");
@@ -535,7 +541,7 @@ namespace ALS.ALSI.Web.view.request
 
                     btnChangeSrChemistStartJobDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold;
                     btnChangeAdminStartJobsDate.Visible = (userRole == RoleEnum.ADMIN) && !isHold;
-
+                    btnChangeSrChemistCompleteDate.Visible = (userRole == RoleEnum.ADMIN || userRole == RoleEnum.SR_CHEMIST) && !isHold;
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
@@ -815,12 +821,7 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("Surface Area", typeof(string));
                 dt.Columns.Add("Specification", typeof(string));
                 dt.Columns.Add("Type of test", typeof(string));
-                //dt.Columns.Add("Modified Date", typeof(string));
-                //dt.Columns.Add("Update By", typeof(string));
-                //dt.Columns.Add("Chemist Complete", typeof(DateTime));
                 dt.Columns.Add("Data Group", typeof(string));
-                //dt.Columns.Add("Receive Date(For filter)", typeof(DateTime));
-
                 dt.Columns.Add("date_login_inprogress", typeof(DateTime));
                 dt.Columns.Add("date_login_complete", typeof(DateTime));
                 dt.Columns.Add("date_chemist_inprogress", typeof(DateTime));
@@ -884,23 +885,19 @@ namespace ALS.ALSI.Web.view.request
                      "`Extent2`.`surface_area` AS `Surface Area`," +
                      "`Extent3`.`name` AS `Specification`," +
                      "`Extent4`.`name` AS `Type of test`," +
-                     //"DATE_FORMAT(`Extent2`.`update_date`,'%d %b %Y %H:%i')  AS `Modified Date`," +
-                     //"`Extent8`.`username` AS `Update By`," +
-                     //"`Extent2`.`date_chemist_complete` AS `Chemist Complete`," +
                      "`Extent4`.`data_group` AS `Data Group`," +
-                    //"`Extent1`.`date_of_receive` as `Receive Date(For filter)`" +
-                    "`Extent2`.`date_login_inprogress` AS `date_login_inprogress`," +
-                    "`Extent2`.`date_login_complete` AS `date_login_complete`," +
-                    "`Extent2`.`date_chemist_analyze` AS `date_chemist_inprogress`," +
-                    "`Extent2`.`date_chemist_complete` AS `date_chemist_complete`," +
-                    "`Extent2`.`date_srchemist_analyze` AS `date_srchemist_inprogress`," +
-                    "`Extent2`.`date_srchemist_complate` AS `date_srchemist_complate`," +
-                    "`Extent2`.`date_admin_word_inprogress` AS `date_admin_word_inprogress`," +
-                    "`Extent2`.`date_admin_word_complete` AS `date_admin_word_complete`," +
-                    "`Extent2`.`date_labman_analyze` AS `date_labman_inprogress`," +
-                    "`Extent2`.`date_labman_complete` AS `date_labman_complete`," +
-                    "`Extent2`.`date_admin_pdf_inprogress` AS `date_admin_pdf_inprogress`," +
-                    "`Extent2`.`date_admin_pdf_complete` AS `date_admin_pdf_complete`" +
+                     "`Extent2`.`date_login_inprogress` AS `date_login_inprogress`," +
+                     "`Extent2`.`date_login_complete` AS `date_login_complete`," +
+                     "`Extent2`.`date_chemist_analyze` AS `date_chemist_inprogress`," +
+                     "`Extent2`.`date_chemist_complete` AS `date_chemist_complete`," +
+                     "`Extent2`.`date_srchemist_analyze` AS `date_srchemist_inprogress`," +
+                     "`Extent2`.`date_srchemist_complate` AS `date_srchemist_complate`," +
+                     "`Extent2`.`date_admin_word_inprogress` AS `date_admin_word_inprogress`," +
+                     "`Extent2`.`date_admin_word_complete` AS `date_admin_word_complete`," +
+                     "`Extent2`.`date_labman_analyze` AS `date_labman_inprogress`," +
+                     "`Extent2`.`date_labman_complete` AS `date_labman_complete`," +
+                     "`Extent2`.`date_admin_pdf_inprogress` AS `date_admin_pdf_inprogress`," +
+                     "`Extent2`.`date_admin_pdf_complete` AS `date_admin_pdf_complete`" +
                      " FROM `job_info` AS `Extent1`" +
                      " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
                      " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +

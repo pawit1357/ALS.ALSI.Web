@@ -415,6 +415,8 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
+                        this.jobSample.path_word = String.Empty;
+                        this.jobSample.path_pdf = String.Empty;
                         #region "CAS#"
                         tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
                         tb_m_dhs_cas.InsertList(this.tbCas);

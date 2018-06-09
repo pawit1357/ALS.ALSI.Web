@@ -570,6 +570,8 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         this.jobSample.date_srchemist_analyze = DateTime.Now;
+                        this.jobSample.path_word = String.Empty;
+                        this.jobSample.path_pdf = String.Empty;
                         #endregion
                         #region "CAS#"
                         tb_m_gcms_cas.DeleteBySampleID(this.SampleID);

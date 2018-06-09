@@ -1246,6 +1246,7 @@
     <Content Include="view\library\Library.aspx" />
     <Content Include="view\library\SearchLibrary.aspx" />
     <Content Include="view\request\ChangeAdminStartJobDate.aspx" />
+    <Content Include="view\request\ChangeSrChemistCompleteDate.aspx" />
     <Content Include="view\request\ChangeSrChemistStartJobDate.aspx" />
     <Content Include="view\request\ChangeJobGroup.aspx" />
     <Content Include="view\request\EditSample.aspx" />
@@ -1453,6 +1454,13 @@
     </Compile>
     <Compile Include="view\request\ChangeAdminStartJobDate.aspx.designer.cs">
       <DependentUpon>ChangeAdminStartJobDate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\request\ChangeSrChemistCompleteDate.aspx.cs">
+      <DependentUpon>ChangeSrChemistCompleteDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\request\ChangeSrChemistCompleteDate.aspx.designer.cs">
+      <DependentUpon>ChangeSrChemistCompleteDate.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\request\ChangeSrChemistStartJobDate.aspx.cs">
       <DependentUpon>ChangeSrChemistStartJobDate.aspx</DependentUpon>

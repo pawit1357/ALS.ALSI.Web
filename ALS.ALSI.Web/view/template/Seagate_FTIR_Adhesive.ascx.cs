@@ -499,7 +499,8 @@ namespace ALS.ALSI.Web.view.template
                     this.JobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.JobSample.step3owner = UserLogin.id;
                     this.JobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-
+                    this.JobSample.path_word = String.Empty;
+                    this.JobSample.path_pdf = String.Empty;
                     //#region ":: STAMP COMPLETE DATE"
                     this.JobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                     this.JobSample.date_chemist_complete = DateTime.Now;

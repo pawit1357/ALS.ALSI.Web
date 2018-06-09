@@ -367,7 +367,8 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     this.jobSample.date_srchemist_analyze = DateTime.Now;
                     //#endregion
-
+                    this.jobSample.path_word = String.Empty;
+                    this.jobSample.path_pdf = String.Empty;
                     foreach (template_seagate_mesa_coverpage _cover in this.coverpages)
                     {
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;

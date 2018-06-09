@@ -278,7 +278,9 @@
                                         <asp:LinkButton ID="btnViewFile" runat="server" ToolTip="View File" CommandName="ViewFile" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-laptop"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeSrChemistStartJobDate" runat="server" ToolTip="Change Sr.Chemist start job date" CommandName="ChangeSrChemistStartJobDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeAdminStartJobsDate" runat="server" ToolTip="Change admin start job date" CommandName="ChangeAdminStartJobDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnChangeSrChemistCompleteDate" runat="server" ToolTip="Change Sr.Chemist Complete Date" CommandName="ChangeSrChemistCompleteDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
 
+                                        
 
                                         <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Chnage Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>

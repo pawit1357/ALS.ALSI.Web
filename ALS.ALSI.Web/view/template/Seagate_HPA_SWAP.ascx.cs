@@ -508,6 +508,8 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         this.jobSample.date_srchemist_analyze = DateTime.Now;
+                        this.jobSample.path_word = String.Empty;
+                        this.jobSample.path_pdf = String.Empty;
                         //#endregion
                         foreach (template_seagate_hpa_coverpage ws in this.Hpas)
                         {
@@ -2174,6 +2176,7 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Pt based");
             items.Add("CrCoNiP (disc material)");
             items.Add("NiP with AlMgSi");
+            items.Add("GaAs");
             items.Add("-Total Semi-Hard Metal Particles");
             items.Add("#Class 4 Particles,i.e.soft - metal particles");
             items.Add("Ag based");

@@ -317,28 +317,34 @@ namespace ALS.ALSI.Web.view.template
                 ddlTemplateType.SelectedValue = this.Lpcs[0].template_type.ToString();
                 ddlUnit.SelectedValue = this.Lpcs[0].unit + "";
                 tb_m_specification tem = new tb_m_specification().SelectByID(this.Lpcs[0].specification_id.Value);
-
-                if (tem != null)
+                cbCheckBox.Checked = this.jobSample.is_no_spec.Equals("1");
+                if (cbCheckBox.Checked)
                 {
-                    switch (ddlTemplateType.SelectedValue)
-                    {
-                        case "1":
-                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C + "" + tem.D, tem.B);
-
-                            //lbDocNo.Text = tem.C + "" + tem.D;
-                            //lbCommodity.Text = tem.B;
-                            break;
-                        case "2":
-                            //lbDocNo.Text = tem.C;
-                            //lbCommodity.Text = tem.B;
-
-                            lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C, tem.B);
-
-                            break;
-                    }
+                    lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "Seagate");
                 }
+                else
+                {
+                    if (tem != null)
+                    {
+                        switch (ddlTemplateType.SelectedValue)
+                        {
+                            case "1":
+                                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C + "" + tem.D, tem.B);
 
+                                //lbDocNo.Text = tem.C + "" + tem.D;
+                                //lbCommodity.Text = tem.B;
+                                break;
+                            case "2":
+                                //lbDocNo.Text = tem.C;
+                                //lbCommodity.Text = tem.B;
 
+                                lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.C, tem.B);
+
+                                break;
+                        }
+                    }
+
+                }
                 var results = this.Lpcs.GroupBy(n => new { n.channel_size })
                 .Select(g => new
                 {
@@ -351,6 +357,8 @@ namespace ALS.ALSI.Web.view.template
                 CheckBoxList1.Items[0].Selected = false;
                 CheckBoxList1.Items[1].Selected = false;
                 CheckBoxList1.Items[2].Selected = false;
+
+
 
                 foreach (var item in results)
                 {
@@ -509,7 +517,8 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                         this.jobSample.step3owner = userLogin.id;
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-
+                        this.jobSample.path_word = String.Empty;
+                        this.jobSample.path_pdf = String.Empty;
                         //#region ":: STAMP COMPLETE DATE"
                         this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         this.jobSample.date_chemist_complete = DateTime.Now;
@@ -1152,7 +1161,7 @@ namespace ALS.ALSI.Web.view.template
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
 
-                            listCoverPage[listCoverPage.Count-1].Results = lbAverage05.Text;
+                            listCoverPage[listCoverPage.Count - 1].Results = lbAverage05.Text;
 
 
                             gvCoverPage05.DataSource = listCoverPage;

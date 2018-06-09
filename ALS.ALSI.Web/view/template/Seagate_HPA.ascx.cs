@@ -53,7 +53,9 @@ namespace ALS.ALSI.Web.view.template
                         "Class 4, Total Soft-Metal Particle",
                         "Class 5, Total Environment Particle",
                         "    5.1  MgSiO Particle",
-                        "Class 6, Other Particle"
+                        "Class 6, Other Particle",
+                        "MgTiO",
+                        "NiP with AlMgSi"
                                    };
         private String[] ANameSWAPKey = {
                         "Class 1, Total Hard Particle",
@@ -608,6 +610,8 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                         this.jobSample.date_chemist_complete = DateTime.Now;
                         this.jobSample.date_srchemist_analyze = DateTime.Now;
+                        this.jobSample.path_word = String.Empty;
+                        this.jobSample.path_pdf = String.Empty;
                         //#endregion
                         template_seagate_hpa_coverpage ws = this.Hpas[0];
 
@@ -2006,6 +2010,9 @@ namespace ALS.ALSI.Web.view.template
                                 case 7: _tmp.B = tem.AE; break;// Class 5, Total Environment Particle
                                 case 8: _tmp.B = tem.P; break;//5.1  MgSiO Particle
                                 case 9: _tmp.B = tem.AG; break;// Class 6, Other Particle
+                                case 10: _tmp.B = tem.AK; break;// MgTio
+                                case 11: _tmp.B = tem.AL; break;// NiP with ALIGSi
+
                             }
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.HPA);
@@ -2076,6 +2083,8 @@ namespace ALS.ALSI.Web.view.template
                                 case 7: _tmp.B = tem.AF; break;// Class 5, Total Environment Particle
                                 case 8: _tmp.B = tem.Q; break;//5.1  MgSiO Particle
                                 case 9: _tmp.B = tem.AH; break;// Class 6, Other Particle
+                                case 10: _tmp.B = tem.AK; break;// MgTio
+                                case 11: _tmp.B = tem.AL; break;// NiP with ALIGSi
                             }
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.HPA);
@@ -2163,6 +2172,8 @@ namespace ALS.ALSI.Web.view.template
                                 case 7: _tmp.B = tem.AF; break;// Class 5, Total Environment Particle
                                 case 8: _tmp.B = tem.Q; break;//5.1  MgSiO Particle
                                 case 9: _tmp.B = tem.AH; break;// Class 6, Other Particle
+                                case 10: _tmp.B = tem.AK; break;// MgTio
+                                case 11: _tmp.B = tem.AL; break;// NiP with ALIGSi
                             }
                             _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             _tmp.hpa_type = Convert.ToInt32(GVTypeEnum.HPA);
@@ -2641,6 +2652,7 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Pt based");
             items.Add("CrCoNiP (disc material)");
             items.Add("NiP with AlMgSi");
+            items.Add("GaAs");
             items.Add("-Total Semi-Hard Metal Particles");
             items.Add("#Class 4 Particles,i.e.soft - metal particles");
             items.Add("Ag based");
