@@ -184,6 +184,13 @@ namespace ALS.ALSI.Web.view.request
             newSample.amend_or_retest = (this.CommandName == CommandNameEnum.Amend) ? "AM" : "R";
             newSample.sample_prefix = oldSample.sample_prefix;
 
+            newSample.date_chemist_analyze = oldSample.date_chemist_analyze;
+            newSample.date_chemist_complete = oldSample.date_chemist_complete;
+            newSample.date_srchemist_complate = oldSample.date_srchemist_complate;
+
+            //UPDATE `alsi`.`job_sample` SET `date_chemist_analyze` = '2017-09-25', `date_chemist_complete` = '2017-09-20', `date_srchemist_complate` = '2017-09-27' WHERE(`ID` = '13833');
+
+
             switch (newSample.amend_or_retest)
             {
                 case "AM":

@@ -207,25 +207,9 @@ namespace ALS.ALSI.Web.view.template
                 pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
                 #region "METHOD/PROCEDURE:"
 
-                //if (status == StatusEnum.CHEMIST_TESTING ||
-                //    status == StatusEnum.SR_CHEMIST_CHECKING ||
-                //    status == StatusEnum.LOGIN_SELECT_SPEC
-                //    && userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST) ||
-                //    userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
-                //{
-
                 if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
                 {
-                    //#region ":: STAMP ANALYZED DATE ::"
-                    //if (userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                    //{
-                    //    if (this.jobSample.date_chemist_analyze == null)
-                    //    {
-                    //        this.jobSample.date_chemist_analyze = DateTime.Now;
-                    //        this.jobSample.Update();
-                    //    }
-                    //}
-                    //#endregion
+
 
 
                     ddlA19.Enabled = true;
@@ -311,6 +295,12 @@ namespace ALS.ALSI.Web.view.template
                 txtDilutionFactor05.Text = (this.Lpcs[0].df05 == null) ? "1" : this.Lpcs[0].df05.ToString();
                 txtDilutionFactor06.Text = (this.Lpcs[0].df06 == null) ? "1" : this.Lpcs[0].df06.ToString();
 
+
+                txtDecimal01.Text = (this.Lpcs[0].decimal01 == null) ? "2" : this.Lpcs[0].decimal01.ToString();
+                txtDecimal02.Text = (this.Lpcs[0].decimal02 == null) ? "2" : this.Lpcs[0].decimal02.ToString();
+                txtDecimal03.Text = (this.Lpcs[0].decimal03 == null) ? "2" : this.Lpcs[0].decimal03.ToString();
+                txtDecimal04.Text = (this.Lpcs[0].decimal04 == null) ? "2" : this.Lpcs[0].decimal04.ToString();
+                txtDecimal05.Text = (this.Lpcs[0].decimal05 == null) ? "2" : this.Lpcs[0].decimal05.ToString();
 
 
 
@@ -541,6 +531,13 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.df03 = Convert.ToDouble(txtDilutionFactor.Text);
                             _tmp.df05 = Convert.ToDouble(txtDilutionFactor05.Text);
                             _tmp.df06 = Convert.ToDouble(txtDilutionFactor06.Text);
+
+                            _tmp.decimal01 = Convert.ToInt16(txtDecimal01.Text);
+                            _tmp.decimal02 = Convert.ToInt16(txtDecimal02.Text);
+                            _tmp.decimal03 = Convert.ToInt16(txtDecimal03.Text);
+                            _tmp.decimal04 = Convert.ToInt16(txtDecimal04.Text);
+                            _tmp.decimal05 = Convert.ToInt16(txtDecimal05.Text);
+                            //_tmp.d
 
                             //_tmp.channel_size = ch_size;
                             String surfaceArea = "0";
@@ -1043,7 +1040,7 @@ namespace ALS.ALSI.Web.view.template
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
 
-                            listCoverPage[listCoverPage.Count - 1].Results = lbAverage.Text;
+                            listCoverPage[listCoverPage.Count - 1].Results =Convert.ToDouble( lbAverage.Text).ToString("F"+ txtDecimal04.Text);
 
 
 
@@ -1161,7 +1158,7 @@ namespace ALS.ALSI.Web.view.template
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
 
-                            listCoverPage[listCoverPage.Count - 1].Results = lbAverage05.Text;
+                            listCoverPage[listCoverPage.Count - 1].Results = Convert.ToDouble(lbAverage05.Text).ToString("F" + txtDecimal04.Text); 
 
 
                             gvCoverPage05.DataSource = listCoverPage;
@@ -1278,7 +1275,7 @@ namespace ALS.ALSI.Web.view.template
                                 listCoverPage[5].Results = listAverages[4].Value;
                             }
 
-                            listCoverPage[listCoverPage.Count - 1].Results = lbAverage06.Text;
+                            listCoverPage[listCoverPage.Count - 1].Results = Convert.ToDouble(lbAverage06.Text).ToString("F" + txtDecimal04.Text);
 
 
 
@@ -1565,7 +1562,10 @@ namespace ALS.ALSI.Web.view.template
                                 spec03 = string.Empty;
                                 break;
                             case "4"://> LPC(Tray)
-                                spec03 = string.Empty;
+                                spec03 = tem.J;
+                                break;
+                            case "5"://> ALPC(132 KHz)
+                                spec03 = tem.L;
                                 break;
                         }
                         break;
@@ -1633,6 +1633,9 @@ namespace ALS.ALSI.Web.view.template
                             case "4"://> LPC(Tray)
                                 spec05 = string.Empty;
                                 break;
+                            case "5"://> ALPC(132 KHz)
+                                spec05 = string.Empty;
+                                break;
                         }
                         break;
                     case 2://IDM
@@ -1697,7 +1700,10 @@ namespace ALS.ALSI.Web.view.template
                                 spec06 = String.Empty;
                                 break;
                             case "4"://> LPC(Tray)
-                                spec06 = String.Empty;
+                                spec06 = tem.K;
+                                break;
+                            case "5"://> ALPC(132 KHz)
+                                spec06 = tem.M;
                                 break;
                         }
                         break;

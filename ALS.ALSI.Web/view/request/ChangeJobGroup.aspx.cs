@@ -61,7 +61,11 @@ namespace ALS.ALSI.Web.view.request
             set { Session[GetType().Name + "isInvoiceGroupOperation"] = value; }
         }
 
-
+        public Boolean isSentToCusDateOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isSentToCusDateOperation"]; }
+            set { Session[GetType().Name + "isSentToCusDateOperation"] = value; }
+        }
         private void initialPage()
         {
             btnSave.Enabled = true;
@@ -78,8 +82,8 @@ namespace ALS.ALSI.Web.view.request
             gvSample.DataBind();
 
             btnSave.Visible = this.dataList.Count > 0;
-            pChemist.Visible = (this.dataList.Count > 0) && !this.isChangeDueDateGroup && !this.isPoGroupOperation && !this.isInvoiceGroupOperation;
-            pChangeDueDate.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && this.isChangeDueDateGroup && !this.isInvoiceGroupOperation;
+            pChemist.Visible = (this.dataList.Count > 0) && !this.isChangeDueDateGroup && !this.isPoGroupOperation && !this.isInvoiceGroupOperation && !this.isSentToCusDateOperation;
+            pChangeDueDate.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && (this.isChangeDueDateGroup|| this.isSentToCusDateOperation) && !this.isInvoiceGroupOperation ;
 
             pAccount2.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && !this.isChangeDueDateGroup && this.isInvoiceGroupOperation;
             if (!btnSave.Visible)
@@ -110,6 +114,7 @@ namespace ALS.ALSI.Web.view.request
                 this.isPoGroupOperation = prvPage.isPoGroupOperation;
                 this.isChangeDueDateGroup = prvPage.isDuedateGroupOperation;
                 this.isInvoiceGroupOperation = prvPage.isInvoiceGroupOperation;
+                this.isSentToCusDateOperation = prvPage.isSentToCusDateOperation;
                 this.dataList = job_sample.FindAllByIds(this.selectedList);
 
                 ddlAssignTo.Items.Clear();
@@ -138,6 +143,14 @@ namespace ALS.ALSI.Web.view.request
                 pAccount.Visible = false;
                 pChangeDueDate.Visible = false;
                 pAccount2.Visible = false;
+                String desc2 = String.Empty;
+                if (isPoGroupOperation) desc2 = "(PO)";
+                if (isChangeDueDateGroup) desc2 = "(Duedate)";
+                if (isInvoiceGroupOperation) desc2 = "(Invoice)";
+                if (isSentToCusDateOperation) desc2 = "(Date Admin Sent to Customer)";
+
+
+
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 switch (userRole)
                 {
@@ -151,7 +164,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
                         pAccount2.Visible = false;
-                        lbDesc.Text = "Login: ทำรายการแบบกลุ่ม";
+                        lbDesc.Text = "Login: ทำรายการแบบกลุ่ม"+ desc2;
                         break;
                     case RoleEnum.CHEMIST:
                         pLogin.Visible = false;
@@ -163,7 +176,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
                         pAccount2.Visible = false;
-                        lbDesc.Text = "Chemist: ทำรายการแบบกลุ่ม";
+                        lbDesc.Text = "Chemist: ทำรายการแบบกลุ่ม" + desc2;
                         break;
                     case RoleEnum.SR_CHEMIST:
                         pLogin.Visible = false;
@@ -177,7 +190,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = isChangeDueDateGroup;
                         pAccount2.Visible = false;
-                        lbDesc.Text = "Sr.Chemist: ทำรายการแบบกลุ่ม";
+                        lbDesc.Text = "Sr.Chemist: ทำรายการแบบกลุ่ม" + desc2;
 
                         break;
                     case RoleEnum.LABMANAGER:
@@ -192,7 +205,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
                         pAccount2.Visible = false;
-                        lbDesc.Text = "Lab Mnager: ทำรายการแบบกลุ่ม";
+                        lbDesc.Text = "Lab Mnager: ทำรายการแบบกลุ่ม" + desc2;
 
                         break;
                     case RoleEnum.ADMIN:
@@ -203,10 +216,10 @@ namespace ALS.ALSI.Web.view.request
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         //Boolean isChangePo = this.dataList.Exists(x => x.job_status == Convert.ToInt16(StatusEnum.JOB_COMPLETE)|| x.job_status == Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC));
-                        pChangeDueDate.Visible = isChangeDueDateGroup;
+                        pChangeDueDate.Visible =  isChangeDueDateGroup|| isSentToCusDateOperation;
                         pAccount.Visible = this.isPoGroupOperation;
                         pAccount2.Visible = false;
-                        lbDesc.Text = "Admin: ทำรายการแบบกลุ่ม";
+                        lbDesc.Text = "Admin: ทำรายการแบบกลุ่ม" + desc2;
 
                         break;
                     case RoleEnum.ACCOUNT:
@@ -218,7 +231,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
                         pAccount2.Visible = this.isInvoiceGroupOperation;
-                        lbDesc.Text = "Account: ทำรายการแบบกลุ่ม";
+                        lbDesc.Text = "Account: ทำรายการแบบกลุ่ม" + desc2;
                         break;
                     default:
                         pLogin.Visible = false;
@@ -268,11 +281,41 @@ namespace ALS.ALSI.Web.view.request
                                 }
                                 else
                                 {
-                                    jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-                                    jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
+
+                                    switch (jobSample.status_completion_scheduled.Value)
+                                    {
+                                        case 1:
+                                        case 2:
+                                            jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                                            jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
+                                            break;
+                                        case 3:
+                                            jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                                            jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                                            break;
+                                    }
+
                                 }
                             }
                             break;
+                        case RoleEnum.ADMIN:
+                            //if (String.IsNullOrEmpty(txtDuedate.Text))
+                            //{
+                            //    jobSample.due_date_lab = null;
+                            //    jobSample.due_date_customer = null;
+                            //}
+                            //else
+                            //{
+                                jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                                jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                            //}
+                            break;
+                    }
+                }
+                else if (this.isSentToCusDateOperation)
+                {
+                    switch (userRole)
+                    {
                         case RoleEnum.ADMIN:
                             if (String.IsNullOrEmpty(txtDuedate.Text))
                             {
@@ -295,7 +338,7 @@ namespace ALS.ALSI.Web.view.request
                     switch (status)
                     {
                         case StatusEnum.LOGIN_CONVERT_TEMPLATE:
-                            if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).Equals(".xls") || Path.GetExtension(FileUpload1.FileName).Equals(".xlt")))
+                            if (FileUpload1.HasFile)// && (Path.GetExtension(FileUpload1.FileName).Equals(".xls") || Path.GetExtension(FileUpload1.FileName).Equals(".xlt")))
                             {
 
                                 String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, jobSample.job_number, Path.GetFileName(FileUpload1.FileName));

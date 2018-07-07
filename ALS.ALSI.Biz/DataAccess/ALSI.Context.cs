@@ -34,6 +34,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<m_customer> m_customer { get; set; }
         public DbSet<m_customer_address> m_customer_address { get; set; }
         public DbSet<m_customer_contract_person> m_customer_contract_person { get; set; }
+        public DbSet<m_evaluation_of_particles> m_evaluation_of_particles { get; set; }
+        public DbSet<m_microscopic_analysis> m_microscopic_analysis { get; set; }
         public DbSet<m_role> m_role { get; set; }
         public DbSet<m_specification> m_specification { get; set; }
         public DbSet<m_status> m_status { get; set; }
@@ -44,6 +46,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<menu> menus { get; set; }
         public DbSet<menu_role> menu_role { get; set; }
         public DbSet<role> roles { get; set; }
+        public DbSet<sample_method_procedure> sample_method_procedure { get; set; }
         public DbSet<tb_m_component> tb_m_component { get; set; }
         public DbSet<tb_m_detail_spec> tb_m_detail_spec { get; set; }
         public DbSet<tb_m_detail_spec_ref> tb_m_detail_spec_ref { get; set; }
@@ -52,6 +55,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<tb_m_gcms_cas> tb_m_gcms_cas { get; set; }
         public DbSet<tb_m_specification> tb_m_specification { get; set; }
         public DbSet<tb_unit> tb_unit { get; set; }
+        public DbSet<template_f_ic> template_f_ic { get; set; }
         public DbSet<template_img> template_img { get; set; }
         public DbSet<template_pa> template_pa { get; set; }
         public DbSet<template_pa_detail> template_pa_detail { get; set; }
@@ -85,7 +89,5 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<users_responsible> users_responsible { get; set; }
         public DbSet<users_role> users_role { get; set; }
         public DbSet<users_logged> users_logged { get; set; }
-        public DbSet<m_evaluation_of_particles> m_evaluation_of_particles { get; set; }
-        public DbSet<m_microscopic_analysis> m_microscopic_analysis { get; set; }
     }
 }

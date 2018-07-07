@@ -18,6 +18,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Linq;
 using Spire.Doc;
+using System.Text.RegularExpressions;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -251,7 +252,7 @@ namespace ALS.ALSI.Web.view.template
 
                 ddlFtirUnit.SelectedValue = this.Ftir[0].ftir_unit.ToString();
 
-                CalculateCas();
+                //CalculateCas();
 
                 #region "Unit"
                 gvResult.Columns[2].HeaderText = String.Format("Specification Limits ({0})", ddlFtirUnit.SelectedItem.Text);
@@ -1068,24 +1069,8 @@ namespace ALS.ALSI.Web.view.template
             this.Ftir[3].D = lbC26.Text;//NVR
             this.Ftir[4].D = txtC41.Text;//FTIR
 
-            //this.Ftir[5].D = txtC41.Text;
-            //this.Ftir[6].D = txtC53.Text;
-            //this.Ftir[7].D = "Not Detected";
-            ////
-            if (!this.Ftir[3].C.Equals("-"))
-            {
-                this.Ftir[3].E = String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-            }
-
-            if (!this.Ftir[4].C.Equals("-") && !this.Ftir[4].C.Equals("Not Detected"))
-            {
-
-                this.Ftir[4].E = this.Ftir[4].D.ToUpper().Equals("Not Detected".ToUpper()) ? "PASS" : String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-
-            }
-            //this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") ? "NA" : (this.Ftir[7].D.Equals("Not Detected")) ? "PASS" : (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            this.Ftir[3].E = getCalResult(this.Ftir[3].C, this.Ftir[3].D);
+            this.Ftir[4].E = getCalResult(this.Ftir[4].C, this.Ftir[4].D);
 
 
             //part value to cover page method/procedure
@@ -1130,6 +1115,40 @@ namespace ALS.ALSI.Web.view.template
             btnSubmit.Enabled = true;
         }
 
+
+        public String getCalResult(String specVal, String val)
+        {
+
+            String result = val;
+            Boolean resultD = new Regex(@"[\d]").IsMatch(val);
+            if (resultD)
+            {
+                Boolean resultC = new Regex(@"[\d]").IsMatch(specVal.Replace("<", "").Trim());
+                if (resultC)
+                {
+                    if (Convert.ToDouble(val) < Convert.ToDouble(specVal.Replace("<", "").Trim()))
+                    {
+                        result = "PASS";
+                    }
+                    else
+                    {
+                        result = "FAIL";
+                    }
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                if (val.Equals("Not Detected"))
+                {
+                    result = "PASS";
+                }
+            }
+            return result;
+        }
         #endregion
 
         protected void LinkButton1_Click(object sender, EventArgs e)

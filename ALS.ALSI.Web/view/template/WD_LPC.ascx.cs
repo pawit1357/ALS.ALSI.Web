@@ -20,6 +20,7 @@ using System.Configuration;
 using System.Text;
 using ALSALSI.Biz;
 using Spire.Doc;
+using System.Text.RegularExpressions;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -261,11 +262,12 @@ namespace ALS.ALSI.Web.view.template
 
                 #region "Unit"
                 gvSpec.Columns[2].HeaderText = String.Format("Specification Limits({0})", ddlUnit.SelectedItem.Text);
-                gvSpec.Columns[3].HeaderText = String.Format("Average of {0} {1} points({2})", typeOfTest.name.Split(' ')[1].ToLower(), typeOfTest.name.Split(' ')[2].ToLower(), ddlUnit.SelectedItem.Text);
+                gvSpec.Columns[3].HeaderText = String.Format("Average of {0} data points({1})", Regex.Match(typeOfTest.name, @"\d+").Value, ddlUnit.SelectedItem.Text);
+
 
                 gvResult.Columns[2].HeaderText = String.Format("Blank({0})", ddlUnit2.SelectedItem.Text);
                 gvResult.Columns[3].HeaderText = String.Format("Sample({0})", ddlUnit2.SelectedItem.Text);
-
+           
                 gvResult.Columns[4].HeaderText = String.Format("Blank-corrected({0})", ddlUnit3.SelectedItem.Text);
                 gvResult.Columns[5].HeaderText = String.Format("Blank-corrected({0})", ddlUnit4.SelectedItem.Text);
 
@@ -929,6 +931,11 @@ namespace ALS.ALSI.Web.view.template
 
             List<template_wd_lpc_coverpage> sumarys = this.Lpc.Where(x => x.data_type == Convert.ToInt32(WDLpcDataType.SUMMARY) && nums.Contains(x.B) && !x.B.Equals("0.200")).ToList();
             template_wd_lpc_coverpage tmp = new template_wd_lpc_coverpage();
+            m_type_of_test typeOfTest = new m_type_of_test();
+            typeOfTest = typeOfTest.SelectByID(jobSample.type_of_test_id);
+
+            
+
             int pc = values.Count / 5;
             for (int i = 1; i <= pc; i++)
             {
@@ -1023,7 +1030,7 @@ namespace ALS.ALSI.Web.view.template
 
             reportParameters.Add(new ReportParameter("method", txtB21.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
-            reportParameters.Add(new ReportParameter("partizleSizeCount", pc.ToString()));
+            reportParameters.Add(new ReportParameter("partizleSizeCount", Regex.Match(typeOfTest.name, @"\d+").Value));
             reportParameters.Add(new ReportParameter("showTankCondition", (!pTankConditions.Visible).ToString()));
 
 

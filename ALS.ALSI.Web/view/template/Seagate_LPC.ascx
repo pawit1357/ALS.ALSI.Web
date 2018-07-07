@@ -44,6 +44,8 @@
                                                             <asp:ListItem Value="1">LPC (68 KHz)</asp:ListItem>
                                                             <asp:ListItem Value="2">LPC (132 KHz)</asp:ListItem>
                                                             <asp:ListItem Value="4">LPC(Tray)</asp:ListItem>
+                                                            <asp:ListItem Value="5">ALPC(132 KHz)</asp:ListItem>
+
                                                         </asp:DropDownList>
                                                     </td>
                                                     <td>

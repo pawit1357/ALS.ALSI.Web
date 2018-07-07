@@ -1541,7 +1541,7 @@ namespace ALS.ALSI.Web.view.template
                 string Fe_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Fe based")).FirstOrDefault().C;
                 string FeO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("FeO")).FirstOrDefault().C;
                 string Sn_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Sn based")).FirstOrDefault().C;
-                string PbZrTi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("PbZrTi")).FirstOrDefault().C;
+                string PbZrTi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("PZT")).FirstOrDefault().C;
                 string MgSiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgSiO")).FirstOrDefault().C;
                 string MgTiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgTiO")).FirstOrDefault().C;
                 string NiPwithAlMgSi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("NiP with AlMgSi")).FirstOrDefault().C;
@@ -2167,7 +2167,9 @@ namespace ALS.ALSI.Web.view.template
             items.Add("*Total Ni");
             items.Add("Sn based");
             items.Add("Ti based");
-            items.Add("PbZrTi");
+            //items.Add("PbZrTi");
+            items.Add("PZT");
+
             items.Add("MgTiO");
             items.Add("SnPb");
             items.Add("AlSi (FeCrCuZnMn)");
@@ -2176,7 +2178,8 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Pt based");
             items.Add("CrCoNiP (disc material)");
             items.Add("NiP with AlMgSi");
-            items.Add("GaAs");
+            //items.Add("GaAs");
+            items.Add("Ga/As");
             items.Add("-Total Semi-Hard Metal Particles");
             items.Add("#Class 4 Particles,i.e.soft - metal particles");
             items.Add("Ag based");
@@ -2185,7 +2188,8 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Cu based");
             items.Add("Sb based");
             items.Add("Zn based");
-            items.Add("Bi/SnBi");
+            //items.Add("Bi/SnBi");
+            items.Add("SnBi");
             items.Add("NiFe");
             items.Add("ZnPFe");
             items.Add("NiPCr");
@@ -2260,7 +2264,7 @@ namespace ALS.ALSI.Web.view.template
             String result = _val;
             Hashtable mappingValues = new Hashtable();
             //mappingValues["SST300s with possible Si"] = "SST300s (Fe/Cr/Ni)";
-            mappingValues["SST300s with possible Si and Mn"] = "SST3xx with possible Si and/or Mn";
+            //mappingValues["SST300s with possible Si and Mn"] = "SST3xx with possible Si and/or Mn";
             //mappingValues["SST400s with possible Si"] = "SST400s (Fe/Cr)";
 
 

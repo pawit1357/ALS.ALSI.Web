@@ -71,6 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ALS.ALSI.Biz\Binaries\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -152,6 +155,7 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="Spire.Doc">
       <HintPath>..\ALS.ALSI.Biz\Binaries\Spire.Doc.dll</HintPath>
     </Reference>
@@ -1294,6 +1298,7 @@
     <Content Include="view\template\WD_DHS.ascx" />
     <Content Include="view\template\WD_FTIR.ascx" />
     <Content Include="view\template\WD_GCMS.ascx" />
+    <Content Include="view\template\FT_IC.ascx" />
     <Content Include="view\template\WD_IC.ascx" />
     <Content Include="view\template\WD_LPC.ascx" />
     <Content Include="view\request\ChangeJobDueDate.aspx" />
@@ -1791,6 +1796,13 @@
     <Compile Include="view\template\WD_GCMS.ascx.designer.cs">
       <DependentUpon>WD_GCMS.ascx</DependentUpon>
     </Compile>
+    <Compile Include="view\template\FT_IC.ascx.cs">
+      <DependentUpon>FT_IC.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\FT_IC.ascx.designer.cs">
+      <DependentUpon>FT_IC.ascx</DependentUpon>
+    </Compile>
     <Compile Include="view\template\WD_IC.ascx.cs">
       <DependentUpon>WD_IC.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2111,6 +2123,7 @@
     <EmbeddedResource Include="ReportObject\pa.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\reportHeader - Copy.rdlc" />
     <EmbeddedResource Include="ReportObject\reportPAHeader.rdlc" />
     <EmbeddedResource Include="ReportObject\reportHeader.rdlc" />
     <EmbeddedResource Include="ReportObject\rptStricker.rdlc" />

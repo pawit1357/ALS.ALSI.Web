@@ -56,7 +56,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isPoGroupOperation"]; }
             set { Session[GetType().Name + "isPoGroupOperation"] = value; }
         }
-
+        public Boolean isSentToCusDateOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isSentToCusDateOperation"]; }
+            set { Session[GetType().Name + "isSentToCusDateOperation"] = value; }
+        }
         public Boolean isDuedateGroupOperation
         {
             get { return (Boolean)Session[GetType().Name + "isDuedateGroupOperation"]; }
@@ -68,6 +72,7 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isInvoiceGroupOperation"]; }
             set { Session[GetType().Name + "isInvoiceGroupOperation"] = value; }
         }
+
         public int JobID { get; set; }
 
         public int SampleID { get; set; }
@@ -188,8 +193,9 @@ namespace ALS.ALSI.Web.view.request
             btnOperation.Visible = (userRole != RoleEnum.ACCOUNT);
             btnOperationPo.Visible = (userRole == RoleEnum.ADMIN);
             btnOperationDueDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN);
+            btnOperationSentToCus.Visible=(userRole == RoleEnum.ADMIN);
             btnElp.CssClass = "btn blue";
-            btnOperationDueDate.Text = (userRole == RoleEnum.ADMIN) ? "Sent To Cus.(date)" : (userRole == RoleEnum.SR_CHEMIST) ? "Due date" : "";
+            //btnOperationDueDate.Text =  "Due date" : "";
             btnOperationGroupInvoice.Visible = (userRole == RoleEnum.ACCOUNT);
         }
 
@@ -356,7 +362,7 @@ namespace ALS.ALSI.Web.view.request
                     Server.Transfer(Constants.LINK_JOB_SR_CHEMIST_COMPLATE_DATE);
                     break;
 
-                    
+
                 case CommandNameEnum.ChangePo:
                     Server.Transfer(Constants.LINK_JOB_CHANGE_PO);
                     break;
@@ -493,7 +499,7 @@ namespace ALS.ALSI.Web.view.request
 
 
 
-                    
+
 
                     LinkButton btnAmend = (LinkButton)e.Row.FindControl("btnAmend");
                     LinkButton btnReTest = (LinkButton)e.Row.FindControl("btnReTest");
@@ -541,7 +547,7 @@ namespace ALS.ALSI.Web.view.request
 
                     btnChangeSrChemistStartJobDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold;
                     btnChangeAdminStartJobsDate.Visible = (userRole == RoleEnum.ADMIN) && !isHold;
-                    btnChangeSrChemistCompleteDate.Visible = (userRole == RoleEnum.ADMIN || userRole == RoleEnum.SR_CHEMIST) && !isHold;
+                    btnChangeSrChemistCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold;
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
@@ -842,7 +848,7 @@ namespace ALS.ALSI.Web.view.request
                     String sql = "SELECT" +
                                 "`Extent2`.`sample_prefix` AS `Job Type`," +
                                 "`Extent7`.`name` AS `Status`," +
-                                "`Extent9`.`name` AS `Job Status`," +
+                                "(case when `Extent2`.`is_hold`='1' then 'Hold' else `Extent9`.`name` end) AS `Job Status`," +
                                 "`Extent2`.`date_srchemist_complate` AS `Received`," +
                                 "`Extent2`.`date_admin_sent_to_cus` AS  `Report Sent to Customer`," +
                                 "`Extent1`.`date_of_receive`AS `Receive Date`,";
@@ -1041,7 +1047,7 @@ namespace ALS.ALSI.Web.view.request
             this.isPoGroupOperation = btn.ID.Equals("btnOperationPo");
             this.isDuedateGroupOperation = btn.ID.Equals("btnOperationDueDate");
             this.isInvoiceGroupOperation = btn.ID.Equals("btnOperationGroupInvoice");
-
+            this.isSentToCusDateOperation = btn.ID.Equals("btnOperationSentToCus");
             foreach (GridViewRow row in gvJob.Rows)
             {
                 CheckBox chk = row.Cells[1].Controls[1] as CheckBox;
@@ -1051,7 +1057,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
                     }

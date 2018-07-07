@@ -538,6 +538,12 @@ namespace ALS.ALSI.Web.view.template
             tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(ddlComponent.SelectedValue));
             if (component != null)
             {
+                txtProcedureNo_Extraction.Text = component.F;
+                lbProcedureNo_Extraction.Text = component.F;
+                lbSampleSize_Extraction.Text = component.D;
+                txtSampleSize_Extraction.Text = component.D;
+                lbOvenCondition_Extraction.Text = component.G;
+                txtOvenCondition_Extraction.Text = component.G;
                 //lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
                 if (cbCheckBox.Checked)
                 {

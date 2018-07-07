@@ -188,6 +188,7 @@ namespace ALS.ALSI.Utils
                         break;
                 }
 
+                ErrorIndex = String.Empty;
             }
             //}
             return returnValue;//_cell.ToString();// returnValue.Length>255 ? returnValue.Substring(0,255):returnValue;

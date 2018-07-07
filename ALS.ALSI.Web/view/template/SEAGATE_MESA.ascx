@@ -69,9 +69,9 @@
                                         <tr>
                                             <td>Ghost Test on Drive Component</td>
                                             <td>
-                                                <asp:Label ID="lbProcedureNo_Extraction" runat="server" Text="D0000406026 Rev.A">
+                                                <asp:Label ID="lbProcedureNo_Extraction" runat="server" Text="">
                                                 </asp:Label>
-                                                <asp:TextBox ID="txtProcedureNo_Extraction" runat="server" Text="D0000406026 Rev.A" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox ID="txtProcedureNo_Extraction" runat="server" Text="" CssClass="form-control"></asp:TextBox>
                                             </td>
                                             <td>
                                                 <asp:Label ID="lbSampleSize_Extraction" runat="server">

@@ -138,8 +138,23 @@ namespace ALS.ALSI.Web.view.request
             }
             else
             {
-                this.jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-                this.jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
+
+                //1|Normal
+                //2|Urgent
+                //3|Express
+
+                switch (this.jobSample.status_completion_scheduled.Value)
+                {
+                    case 1:
+                    case 2:
+                        this.jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                        this.jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
+                        break;
+                    case 3:
+                        this.jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                        this.jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                        break;
+                }
             }
 
             this.jobSample.Update();

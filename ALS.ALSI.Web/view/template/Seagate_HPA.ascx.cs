@@ -195,9 +195,9 @@ namespace ALS.ALSI.Web.view.template
 
                             gvLpc03.Columns[3].Visible = false;
                             gvLpc06.Columns[3].Visible = false;
-                            gvHpa.Columns[3].Visible = false;
+                            gvHpa.Columns[3].Visible = true;
                             gvClassification.Columns[3].Visible = false;
-
+                            gvWsClassification.Columns[3].Visible = true;
                             txtProcedureNo.ReadOnly = true;
                             txtNumberOfPieces.ReadOnly = true;
                             txtExtractionMedium.ReadOnly = true;
@@ -226,8 +226,8 @@ namespace ALS.ALSI.Web.view.template
                             gvLpc03.Columns[3].Visible = true;
                             gvLpc06.Columns[3].Visible = true;
                             gvHpa.Columns[3].Visible = true;
-                            gvClassification.Columns[3].Visible = true;
-
+                            gvClassification.Columns[3].Visible = false;
+                            gvWsClassification.Columns[3].Visible = true;
                             txtProcedureNo.ReadOnly = false;
                             txtNumberOfPieces.ReadOnly = false;
                             txtExtractionMedium.ReadOnly = false;
@@ -259,7 +259,7 @@ namespace ALS.ALSI.Web.view.template
                             gvLpc06.Columns[3].Visible = false;
                             gvHpa.Columns[3].Visible = false;
                             gvClassification.Columns[3].Visible = false;
-
+                            gvWsClassification.Columns[3].Visible = false;
                             txtProcedureNo.ReadOnly = true;
                             txtNumberOfPieces.ReadOnly = true;
                             txtExtractionMedium.ReadOnly = true;
@@ -289,7 +289,7 @@ namespace ALS.ALSI.Web.view.template
                             gvLpc06.Columns[3].Visible = false;
                             gvHpa.Columns[3].Visible = false;
                             gvClassification.Columns[3].Visible = false;
-
+                            gvWsClassification.Columns[3].Visible = false;
                             txtProcedureNo.ReadOnly = true;
                             txtNumberOfPieces.ReadOnly = true;
                             txtExtractionMedium.ReadOnly = true;
@@ -321,7 +321,7 @@ namespace ALS.ALSI.Web.view.template
                             gvLpc06.Columns[3].Visible = false;
                             gvHpa.Columns[3].Visible = false;
                             gvClassification.Columns[3].Visible = false;
-
+                            gvWsClassification.Columns[3].Visible = false;
                             txtProcedureNo.ReadOnly = true;
                             txtNumberOfPieces.ReadOnly = true;
                             txtExtractionMedium.ReadOnly = true;
@@ -1224,6 +1224,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     break;
             }
+            CalculateCas();
         }
 
         #region "Custom method"
@@ -1233,6 +1234,7 @@ namespace ALS.ALSI.Web.view.template
 
             List<String> ignoreItemList = new List<string>();
             ignoreItemList.Add("NiP with AlMgSi");
+            ignoreItemList.Add("MgTiO");
 
             #region "US-LPC(0.3)"
             //=AVERAGE(B15,B16,B17)
@@ -1530,6 +1532,7 @@ namespace ALS.ALSI.Web.view.template
                 }
 
 
+
                 foreach (template_seagate_hpa_coverpage _cov in this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_HEAD)))
                 {
                     Double _BlankCouts = (Double)this.Hpas.Where(x => !ignoreItemList.Contains(x.B) && x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.data_group.Equals(_cov.data_group)).Sum(x => x.BlankCouts);
@@ -1615,12 +1618,24 @@ namespace ALS.ALSI.Web.view.template
                 List<template_seagate_hpa_coverpage> hpas = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
                 if (hpas.Count > 0)
                 {
-                    string TotalSST = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total SST")).FirstOrDefault().C;
-                    string Fe_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Fe based")).FirstOrDefault().C;
-                    string FeO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("FeO")).FirstOrDefault().C;
-                    string Sn_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Sn based")).FirstOrDefault().C;
-                    string PbZrTi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("PbZrTi")).FirstOrDefault().C;
-                    string MgSiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgSiO")).FirstOrDefault().C;
+                    template_seagate_hpa_coverpage cTotalSST = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_SUB_TOTAL) && x.B.Equals("Total SST") && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault();
+                    template_seagate_hpa_coverpage cFe_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Fe based") && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault();
+                    template_seagate_hpa_coverpage cFeO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("FeO") && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault();
+                    template_seagate_hpa_coverpage cSn_based = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("Sn based") && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault();
+                    template_seagate_hpa_coverpage cPbZrTi = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("PbZrTi") && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault();
+                    template_seagate_hpa_coverpage cMgSiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgSiO") && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault();
+                    template_seagate_hpa_coverpage cMgTiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("MgTiO") && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault();
+                    template_seagate_hpa_coverpage cNiPwithAlMgSiO = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.B.Equals("NiP with AlMgSi") && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).FirstOrDefault();
+
+
+                    string TotalSST = (cTotalSST == null) ? "0" : cTotalSST.C;
+                    string Fe_based = (cFe_based == null) ? "0" : cFe_based.C;
+                    string FeO = (cFeO == null) ? "0" : cFeO.C;
+                    string Sn_based = (cSn_based == null) ? "0" : cSn_based.C;
+                    string PbZrTi = (cPbZrTi == null) ? "0" : cPbZrTi.C;
+                    string MgSiO = (cMgSiO == null) ? "0" : cMgSiO.C;
+                    string MgTiO = (cMgTiO == null) ? "0" : cMgTiO.C;
+                    string NiPwithAlMgSiO = (cNiPwithAlMgSiO == null) ? "0" : cNiPwithAlMgSiO.C;
 
 
                     hpas[0].C = Convert.ToDouble(sumOfHpas[0].C).ToString("N1");//[0]
@@ -1633,6 +1648,15 @@ namespace ALS.ALSI.Web.view.template
                     hpas[7].C = Convert.ToDouble(sumOfHpas[4].C).ToString("N1");//[7]
                     hpas[8].C = Convert.ToDouble(MgSiO).ToString("N1");//[8]
                     hpas[9].C = Convert.ToDouble(sumOfHpas[5].C).ToString("N1");//[9]
+                    if (hpas.Count >= 11)
+                    {
+                        hpas[10].C = Convert.ToDouble(MgTiO).ToString("N1");//[10]}
+                    }
+                    if (hpas.Count >= 12)
+                    {
+                        hpas[11].C = Convert.ToDouble(NiPwithAlMgSiO).ToString("N1");//[11] }
+
+                    }
                 }
 
 
@@ -1654,7 +1678,7 @@ namespace ALS.ALSI.Web.view.template
             x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL)
             ).OrderBy(x => x.seq);
             gvWsClassification.DataBind();
-            List<template_seagate_hpa_coverpage> listClass = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).ToList();
+            List<template_seagate_hpa_coverpage> listClass = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM) && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
             foreach (template_seagate_hpa_coverpage item in listClass)
             {
                 item.C = Convert.ToDouble(item.C).ToString("N1") + "";
@@ -2454,7 +2478,7 @@ namespace ALS.ALSI.Web.view.template
                             tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                             break;
                     }
-                    gvClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION)).OrderBy(x => x.seq);
+                    gvClassification.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq);
                     gvClassification.DataBind();
                 }
             }
@@ -2494,8 +2518,28 @@ namespace ALS.ALSI.Web.view.template
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 Literal _litB = (Literal)e.Row.FindControl("litB");
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+                int PKID = Convert.ToInt32(gvWsClassification.DataKeys[e.Row.RowIndex].Values[0].ToString());
+                RowTypeEnum cmd1 = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvWsClassification.DataKeys[e.Row.RowIndex].Values[1]);
 
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    switch (cmd1)
+                    {
+                        case RowTypeEnum.Hide:
 
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
                 GVTypeEnum cmd = (GVTypeEnum)Enum.ToObject(typeof(GVTypeEnum), (int)gvWsClassification.DataKeys[e.Row.RowIndex].Values[2]);
                 switch (cmd)
                 {
@@ -2512,7 +2556,38 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
         }
+        protected void gvWsClassification_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_seagate_hpa_coverpage tmp = this.Hpas.Find(x => x.ID == PKID);
+                if (tmp != null)
+                {
+                    switch (cmd)
+                    {
+                        case RowTypeEnum.Hide:
+                            tmp.row_type = Convert.ToInt32(RowTypeEnum.Hide);
 
+                            break;
+                        case RowTypeEnum.Normal:
+                            tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                            break;
+                    }
+
+                    //List<int> listOfWs = new List<int>();
+                    //listOfWs.Add(Convert.ToInt16(GVTypeEnum.CLASSIFICATION_ITEM));
+                    //listOfWs.Add(Convert.ToInt16(GVTypeEnum.CLASSIFICATION_GRAND_TOTAL));
+                    //listOfWs.Add(Convert.ToInt16(GVTypeEnum.CLASSIFICATION_TOTAL));
+                    //listOfWs.Add(Convert.ToInt16(GVTypeEnum.CLASSIFICATION_SUB_TOTAL));
+
+                    CalculateCas();
+                    ////gvWsClassification.DataSource = this.Hpas.Where(x => listOfWs.Contains( x.hpa_type.Value) ).OrderBy(x => x.seq);
+                    ////gvWsClassification.DataBind();
+                }
+            }
+        }
         private void downloadWord()
         {
             HttpContext.Current.Response.Clear();
@@ -2643,7 +2718,8 @@ namespace ALS.ALSI.Web.view.template
             items.Add("*Total Ni");
             items.Add("Sn based");
             items.Add("Ti based");
-            items.Add("PbZrTi");
+            //items.Add("PbZrTi");
+            items.Add("PZT");
             items.Add("MgTiO");
             items.Add("SnPb");
             items.Add("AlSi (FeCrCuZnMn)");
@@ -2652,7 +2728,8 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Pt based");
             items.Add("CrCoNiP (disc material)");
             items.Add("NiP with AlMgSi");
-            items.Add("GaAs");
+            //items.Add("GaAs");
+            items.Add("Ga/As");
             items.Add("-Total Semi-Hard Metal Particles");
             items.Add("#Class 4 Particles,i.e.soft - metal particles");
             items.Add("Ag based");
@@ -2661,7 +2738,9 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Cu based");
             items.Add("Sb based");
             items.Add("Zn based");
-            items.Add("Bi/SnBi");
+            //items.Add("Bi/SnBi");
+            items.Add("SnBi");
+
             items.Add("NiFe");
             items.Add("ZnPFe");
             items.Add("NiPCr");

@@ -80,7 +80,7 @@
                                 <asp:GridView ID="gvHpa" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,row_type" OnRowDataBound="gvHpa_RowDataBound" OnRowCommand="gvHpa_RowCommand">
                                     <Columns>
-                                        <asp:TemplateField HeaderText="Hard Particle Analysis(LPC 68 KHz)" ItemStyle-HorizontalAlign="Left">
+                                        <asp:TemplateField HeaderText="Hard Particle Analysis" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Literal ID="litA" runat="server" Text='<%# Eval("A")%>' />
                                             </ItemTemplate>

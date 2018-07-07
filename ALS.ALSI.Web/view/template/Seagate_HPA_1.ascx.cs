@@ -1459,7 +1459,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Sn_based = tmp.C;
                 }
-                tmp = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(HPAType.CLASSIFICATION_ITEM) && x.B.Equals("PbZrTi")).FirstOrDefault();
+                tmp = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(HPAType.CLASSIFICATION_ITEM) && x.B.Equals("PZT")).FirstOrDefault();
                 if (tmp != null)
                 {
                     PbZrTi = tmp.C;
@@ -2348,12 +2348,15 @@ namespace ALS.ALSI.Web.view.template
         {
 
             gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+            gvLpc05.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
             gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
             gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
 
             #region "Datasource"
             gvLpc03.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(HPAType.LPC03)).OrderBy(x => x.seq);
             gvLpc03.DataBind();
+            gvLpc05.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(HPAType.LPC05)).OrderBy(x => x.seq);
+            gvLpc05.DataBind();
             gvLpc06.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(HPAType.LPC06)).OrderBy(x => x.seq);
             gvLpc06.DataBind();
             gvHpa.DataSource = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(HPAType.HPA)).OrderBy(x => x.seq);
@@ -2429,7 +2432,8 @@ namespace ALS.ALSI.Web.view.template
             items.Add("*Total Ni");
             items.Add("Sn based");
             items.Add("Ti based");
-            items.Add("PbZrTi");
+            //items.Add("PbZrTi");
+            items.Add("PZT");
             items.Add("MgTiO");
             items.Add("SnPb");
             items.Add("AlSi (FeCrCuZnMn)");
@@ -2438,6 +2442,7 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Pt based");
             items.Add("CrCoNiP (disc material)");
             items.Add("NiP with AlMgSi");
+            items.Add("Ga/As");
             items.Add("-Total Semi-Hard Metal Particles");
             items.Add("#Class 4 Particles,i.e.soft - metal particles");
             items.Add("Ag based");
@@ -2446,7 +2451,8 @@ namespace ALS.ALSI.Web.view.template
             items.Add("Cu based");
             items.Add("Sb based");
             items.Add("Zn based");
-            items.Add("Bi/SnBi");
+            //items.Add("Bi/SnBi");
+            items.Add("SnBi");
             items.Add("NiFe");
             items.Add("ZnPFe");
             items.Add("NiPCr");

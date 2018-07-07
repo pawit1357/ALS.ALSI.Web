@@ -431,6 +431,21 @@ namespace ALS.ALSI.Biz.Constant
         COMPOUND = 6,
         COMPOUND_SUB = 7
     }
+
+
+    public enum FreeTemplateIcEnum : int
+    {
+        METHOD_PROCECURE = 1,
+        CP_ANIONS = 2,
+        CP_CATIONS = 3,
+        WS_ANIONS = 4,
+        WS_CATIONS = 5
+    }
+    public enum FreeTemplateStatusEnum : int
+    {
+        ACTIVE = 1,
+        IN_ACTIVE = 0
+    }
 }
 
 public class PhysicalYear

@@ -155,6 +155,20 @@ namespace ALS.ALSI.Web.view.request
                         this.jobSample.path_word = String.Empty;
                         this.jobSample.path_pdf = String.Empty;
                     }
+
+
+
+                    this.jobSample.date_srchemist_analyze = null;
+                    this.jobSample.date_srchemist_complate = null;
+                    this.jobSample.date_admin_word_inprogress = null;
+                    this.jobSample.date_admin_word_complete = null;
+                    this.jobSample.date_labman_analyze = null;
+                    this.jobSample.date_labman_complete = null;
+                    this.jobSample.date_admin_sent_to_cus = null;
+                    this.jobSample.date_admin_pdf_inprogress = null;
+                    this.jobSample.date_admin_pdf_complete = null;
+
+
                     this.jobSample.Update();
                     break;
             }

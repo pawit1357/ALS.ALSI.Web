@@ -65,8 +65,16 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public void Update()
         {
-            job_sample existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
-            _repository.Edit(existing, this);
+            try
+            {
+                job_sample existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
+                _repository.Edit(existing, this);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         public void Delete()

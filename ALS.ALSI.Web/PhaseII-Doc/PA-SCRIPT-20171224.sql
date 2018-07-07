@@ -334,4 +334,44 @@ ALTER TABLE `alsi`.`template_wd_gcms_coverpage`
 CHANGE COLUMN `pm_extraction_volumn` `pm_extraction_volumn` VARCHAR(255) NULL DEFAULT NULL ;
 
 
+
+---------------- 2018-06-29 -----------------------
+ALTER TABLE `alsi`.`template_seagate_lpc_coverpage` 
+ADD COLUMN `decimal01` INT NULL AFTER `unit`,
+ADD COLUMN `decimal02` INT NULL AFTER `decimal01`,
+ADD COLUMN `decimal03` INT NULL AFTER `decimal02`,
+ADD COLUMN `decimal04` INT NULL AFTER `decimal03`,
+ADD COLUMN `decimal05` INT NULL AFTER `decimal04`;
+
+
+----------------------------------------------------
+CREATE TABLE `alsi`.`sample_method_procedure` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `sample_id` INT NULL,
+    `row_type` INT NULL,
+    `col_1` VARCHAR(200) NULL,
+    `col_2` VARCHAR(200) NULL,
+    `col_3` VARCHAR(200) NULL,
+    `col_4` VARCHAR(200) NULL,
+    `col_5` VARCHAR(200) NULL,
+    `col_6` VARCHAR(200) NULL,
+    `col_7` VARCHAR(200) NULL,
+    `col_8` VARCHAR(200) NULL,
+    `col_9` VARCHAR(200) NULL,
+    `col_10` VARCHAR(200) NULL,
+    `col_11` VARCHAR(200) NULL,
+    `col_12` VARCHAR(200) NULL,
+    `col_13` VARCHAR(200) NULL,
+    `col_14` VARCHAR(200) NULL,
+    `col_15` VARCHAR(200) NULL,
+    `col_16` VARCHAR(200) NULL,
+    `col_17` VARCHAR(200) NULL,
+    `col_18` VARCHAR(200) NULL,
+	`col_19` VARCHAR(200) NULL,
+	`col_20` VARCHAR(200) NULL,
+    PRIMARY KEY (`id`)
+);
+
+
+
 */

@@ -1,14 +1,17 @@
-﻿using ALS.ALSI.Biz.ReportObjects;
-using NotesFor.HtmlToOpenXml;
+﻿using ALS.ALSI.Biz.DataAccess;
+using ALS.ALSI.Biz.ReportObjects;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using NotesFor.HtmlToOpenXml;
+using OfficeOpenXml;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Text;
-using System;
-using System.Web.UI;
+using System.Text.RegularExpressions;
 using System.Web;
-using System.Data;
 
 namespace ALS.ALSI.Biz
 {
@@ -34,7 +37,7 @@ namespace ALS.ALSI.Biz
         public String UltrasonicPower { get; set; }
 
 
-    public GenerateHtmlBiz()
+        public GenerateHtmlBiz()
         {
             PageCount = 1;
             PageTotal = 1;
@@ -43,6 +46,61 @@ namespace ALS.ALSI.Biz
             //ShowFooter = false;
         }
 
+        public static void test()
+        {
+
+            List<tb_m_specification> specifications = new List<tb_m_specification>();
+
+
+
+            FileInfo fileInfo = new FileInfo(@"D:\IC.xlsx");
+            using (var package = new ExcelPackage(fileInfo))
+            {
+
+                ExcelWorksheet sConfig = package.Workbook.Worksheets["Config"];
+
+                ExcelWorksheet sCoverPage = package.Workbook.Worksheets["Coverpage-TH"];
+                var methodProcedureHeaders = sCoverPage.Cells[sConfig.Cells["C3"].Text];
+                foreach (var item in methodProcedureHeaders) 
+                {
+                    //tb_m_specification mSpec = new tb_m_specification
+                    //{
+                    //    ID = Convert.ToInt16(Regex.Replace(item.Address, @"[^\d]", "")),
+                    //    A = (item.Value == null) ? String.Empty : item.Value.ToString()
+                    //};
+                    Console.WriteLine();
+                }
+
+                //ExcelWorksheet sSpecification = package.Workbook.Worksheets["Specification"];
+                //var _specifications = sSpecification.Cells[sConfig.Cells["C2"].Text];
+                //foreach(var item in _specifications)
+                //{
+                //    tb_m_specification mSpec = new tb_m_specification
+                //    {
+                //        ID = Convert.ToInt16(Regex.Replace(item.Address, @"[^\d]", "")),
+                //        A = (item.Value==null)? String.Empty: item.Value.ToString()
+                //    };
+                //    specifications.Add(mSpec);
+
+                //    Console.WriteLine();
+                //}
+
+                Console.WriteLine();
+                //Config
+                //var sheet = package.Workbook.Worksheets.Add("Formula");
+
+                //sheet.Cells["B2"].Value = "2";
+                //sheet.Cells["C2"].Value = "2";
+
+                //sheet.Cells["E2"].Formula = "B2*C2"; // quantity * price
+
+                //sheet.Calculate();
+                //String xxx = sheet.Cells["E2"].Text;
+                Console.WriteLine();
+            }
+
+
+        }
         private string getHeaderInfo()
         {
             StringBuilder _header = new StringBuilder();
@@ -115,9 +173,9 @@ namespace ALS.ALSI.Biz
             html.Append("</table>");
             //Result
             html.Append("<p style=\"font-family:arial;font-size:11pt;\">Results:</p>");
-            html.Append("<p style=\"font-family:arial;font-size:11pt;\">"+ String.Format("The specification is based on Western Digital's document no. {0} for {1}", DocumentNo, SpecDetail) + "</p>");
+            html.Append("<p style=\"font-family:arial;font-size:11pt;\">" + String.Format("The specification is based on Western Digital's document no. {0} for {1}", DocumentNo, SpecDetail) + "</p>");
 
-            
+
             html.Append("<table border=\"1\" width=\"100%\">");
             html.Append("<tr>");
             html.Append("<td align=\"center\"  bgcolor=\"#D3D3D3\" width=\"15%\">Required Test</td>");
@@ -246,7 +304,7 @@ namespace ALS.ALSI.Biz
 
         public void download(HttpContext p, string _filename)
         {
-            
+
             string filename = _filename + ".docx";
             string contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
             //string html = File.ReadAllText(Server.MapPath("~/Template.html"));
@@ -343,4 +401,3 @@ namespace ALS.ALSI.Biz
 //                Response.AppendHeader("Content-Type", "application/msword");
 //                Response.AppendHeader("Content-disposition", "attachment; filename=myword.doc");
 //                Response.Write(strBody);
-    

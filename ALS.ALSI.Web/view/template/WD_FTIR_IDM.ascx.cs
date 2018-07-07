@@ -85,6 +85,16 @@ namespace ALS.ALSI.Web.view.template
 
         private void initialPage()
         {
+
+            ddlAssignTo.Items.Clear();
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+
+
             tb_m_detail_spec detailSpec = new tb_m_detail_spec();
             detailSpec.specification_id = this.jobSample.specification_id;
             detailSpec.template_id = this.jobSample.template_id;
@@ -835,23 +845,21 @@ namespace ALS.ALSI.Web.view.template
 
 
                 List<template_wd_ftir_coverpage> ds = this.Ftir.Where(x => x.data_type == 2 && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
+                var testName = ds.GroupBy(cc => cc.A).Select(dd => new { n = string.Join("/", ds.Select(ee => ee.A).ToList().Distinct()) }).FirstOrDefault();
 
                 ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-                reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo + " "));
-                reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+                reportParameters.Add(new ReportParameter("CustomerPoNo", String.IsNullOrEmpty(reportHeader.cusRefNo) ? "-" : reportHeader.cusRefNo));
+                reportParameters.Add(new ReportParameter("AlsThailandRefNo", String.IsNullOrEmpty(reportHeader.alsRefNo) ? "-" : reportHeader.alsRefNo));
                 reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-                reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+                reportParameters.Add(new ReportParameter("Company", String.IsNullOrEmpty(reportHeader.addr1) ? "-" : reportHeader.addr1));
+                reportParameters.Add(new ReportParameter("Company_addr", String.IsNullOrEmpty(reportHeader.addr2) ? "-" : reportHeader.addr2));
                 reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
                 reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
                 reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-
+                reportParameters.Add(new ReportParameter("SampleDescription", String.IsNullOrEmpty(reportHeader.description)? "-":reportHeader.description));
                 reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-
-                reportParameters.Add(new ReportParameter("Test", "FTIR"));
-                reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+                reportParameters.Add(new ReportParameter("Test", testName.n));
+                reportParameters.Add(new ReportParameter("ResultDesc", String.IsNullOrEmpty(lbSpecDesc.Text)? "-":lbSpecDesc.Text));
                 reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
                 reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
