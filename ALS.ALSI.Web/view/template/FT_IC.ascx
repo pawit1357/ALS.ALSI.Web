@@ -1333,27 +1333,15 @@
                                     <tr>
                                         <td>Unit</td>
                                         <td>
-                                            <%--                                            <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
-                                            </asp:DropDownList>--%>
+                                            <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                            </asp:DropDownList>
 
-                                            <%--         <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged">
-                                                <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                <asp:ListItem Value="3">mg</asp:ListItem>
-                                            </asp:DropDownList>--%>
                                         </td>
                                     </tr>
-                                    <%--                      <tr>
-                                        <td>for use in Total</td>
-                                        <td>
-                                            <asp:TextBox ID="txtDecimal09" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
 
-
-                                    </tr>--%>
                                 </table>
                             </div>
                             <div class="modal-footer">
-                                <%--                                <asp:Button ID="OK" runat="server" CssClass="btn purple" Style="margin-top: 10px; margin-left: 20px;" Text="บันทึก" OnClick="OK_Click" />--%>
 
                                 <asp:Button ID="btnClose" CssClass="btn default" Style="margin-top: 10px;" runat="server" Text="ปิด" />
                             </div>

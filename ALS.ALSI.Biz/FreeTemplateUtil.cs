@@ -15,6 +15,7 @@ namespace ALS.ALSI.Biz
 
         public static char DELIMITER = '#';
         public static char DELIMITER_SEMI_COLON = ':';
+        public static char DELIMITER_EXCLAMATION_MARK = '!';
 
 
         private FileInfo fs;

@@ -435,11 +435,16 @@ namespace ALS.ALSI.Biz.Constant
 
     public enum FreeTemplateIcEnum : int
     {
-        METHOD_PROCECURE = 1,
-        CP_ANIONS = 2,
-        CP_CATIONS = 3,
-        WS_ANIONS = 4,
-        WS_CATIONS = 5
+        METHOD_PROCECURE_HEADER = 1,
+        METHOD_PROCECURE = 2,
+        CP_ANIONS_HEADER = 3,
+        CP_ANIONS = 4,
+        CP_CATIONS_HEADER = 5,
+        CP_CATIONS = 6,
+        WS_ANIONS_HEADER = 7,
+        WS_ANIONS = 8,
+        WS_CATIONS_HEADER = 9,
+        WS_CATIONS = 10
     }
     public enum FreeTemplateStatusEnum : int
     {

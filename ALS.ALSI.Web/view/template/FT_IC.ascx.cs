@@ -18,7 +18,6 @@ using System.Data;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
 using Spire.Doc;
-//using OfficeOpenXml;
 using System.Text.RegularExpressions;
 using System.Collections;
 using OfficeOpenXml;
@@ -71,16 +70,6 @@ namespace ALS.ALSI.Web.view.template
             set { Session[GetType().Name + "ics"] = value; }
         }
 
-        //public ExcelWorksheet wCoverPage
-        //{
-        //    get { return (ExcelWorksheet)Session[GetType().Name + "wCoverPage"]; }
-        //    set { Session[GetType().Name + "wCoverPage"] = value; }
-        //}
-        //public ExcelWorksheet wSpecification
-        //{
-        //    get { return (ExcelWorksheet)Session[GetType().Name + "wCoverPage"]; }
-        //    set { Session[GetType().Name + "wCoverPage"] = value; }
-        //}
         public Hashtable configs
         {
             get { return (Hashtable)Session[GetType().Name + "configs"]; }
@@ -96,35 +85,12 @@ namespace ALS.ALSI.Web.view.template
             get { return (List<tb_m_specification>)Session[GetType().Name + "listSpecificatons"]; }
             set { Session[GetType().Name + "listSpecificatons"] = value; }
         }
-        //public List<template_f_ic> listResult
-        //{
-        //    get { return (List<template_f_ic>)Session[GetType().Name + "listResult"]; }
-        //    set { Session[GetType().Name + "listResult"] = value; }
-        //}
 
+        private String SheetSpecification = "Specification";
         private String SheetCoverPageName = "Coverpage-TH";
         private String SheetWorkSheetName = "IC";
 
 
-        //private DataTable ConvertToDataTable(ExcelWorksheet oSheet)
-        //{
-        //    int totalRows = 24;// oSheet.Dimension.End.Row;
-        //    int totalCols = 5;// oSheet.Dimension.End.Column;
-        //    DataTable dt = new DataTable(oSheet.Name);
-        //    DataRow dr = null;
-        //    for (int r = 23; r <= totalRows; r++)
-        //    {
-        //        if (r > 23) dr = dt.Rows.Add();
-        //        for (int c = 1; c <= totalCols; c++)
-        //        {
-        //            if (r == 23)
-        //                dt.Columns.Add(oSheet.Cells[r, c].Value.ToString());
-        //            else
-        //                dr[c - 1] = oSheet.Cells[r, c].Value.ToString();
-        //        }
-        //    }
-        //    return dt;
-        //}
 
         private void initialPage()
         {
@@ -133,26 +99,6 @@ namespace ALS.ALSI.Web.view.template
 
             m_template template = new m_template().SelectByID(this.jobSample.template_id);
 
-            //Workbook book = new Workbook();
-            //book.LoadFromFile("sample.xlsx");
-            //book.SaveToFile("result.xls", ExcelVersion.Version97to2003);
-
-
-
-            //FileInfo excel = new FileInfo(template.path_source_file);
-            //using (var package = new ExcelPackage(excel))
-            //{
-            //    var workbook = package.Workbook;
-
-            //    //*** Sheet 1
-            //    var worksheet = workbook.Worksheets["Coverpage-TH"];//.First();
-
-            //    //*** DataTable & DataSource
-            //    DataTable dt = ConvertToDataTable(worksheet);
-
-            //    GridView5.DataSource = dt;
-            //    GridView5.DataBind();
-            //}
 
 
 
@@ -213,28 +159,32 @@ namespace ALS.ALSI.Web.view.template
                 gvMethodProcedure.DataBind();
 
                 #endregion
-                #region "RESULT"
-                String[] resultGv1 = configs["results.group.1.header.values"].ToString().Split(FreeTemplateUtil.DELIMITER);
+                //#region "RESULT"
+                //String[] resultGv1 = configs["results.group.1.header.values"].ToString().Split(FreeTemplateUtil.DELIMITER);
 
-                for (int i = 0; i < GridView1.Columns.Count - 1; i++)
-                {
-                    if (i < resultGv1.Length)
-                    {
-                        GridView1.Columns[i].Visible = true;
-                        GridView1.Columns[i].HeaderText = resultGv1[i];
-                    }
-                    else
-                    {
-                        GridView1.Columns[i].Visible = false;
-                    }
-                }
-                #endregion
+                //for (int i = 0; i < GridView1.Columns.Count - 1; i++)
+                //{
+                //    if (i < resultGv1.Length)
+                //    {
+                //        GridView1.Columns[i].Visible = true;
+                //        GridView1.Columns[i].HeaderText = resultGv1[i];
+                //    }
+                //    else
+                //    {
+                //        GridView1.Columns[i].Visible = false;
+                //    }
+                //}
+                //#endregion
 
             }
             //this.listResult.Add(new template_f_ic { id = 0, row_type = 1 });//header
             //GridView1.DataSource = this.listResult.Where(x => x.row_type == 1);
             //GridView1.DataBind();
 
+
+
+
+            #region "SHOW COMPONENT"
 
             ddlComponent.Items.Clear();
             ddlComponent.DataSource = listSpecificatons;
@@ -250,254 +200,87 @@ namespace ALS.ALSI.Web.view.template
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
 
 
-            //tb_unit unit = new tb_unit();
-            //ddlUnit.Items.Clear();
-            //ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("IC")).ToList();
-            //ddlUnit.DataBind();
-            //ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+            tb_unit unit = new tb_unit();
+            ddlUnit.Items.Clear();
+            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("IC")).ToList();
+            ddlUnit.DataBind();
+            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
 
 
-
-
-            #region "SAMPLE"
-            this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            if (this.jobSample != null)
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+
+            switch (userRole)
             {
-                lbJobStatus.Text = Constants.GetEnumDescription(status);
-
-
-                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
-                pRemark.Visible = false;
-                pDisapprove.Visible = false;
-                pSpecification.Visible = false;
-                pStatus.Visible = false;
-                pUploadfile.Visible = false;
-                pDownload.Visible = false;
-                btnSubmit.Visible = false;
-                switch (userRole)
-                {
-                    case RoleEnum.LOGIN:
-                        if (status == StatusEnum.LOGIN_SELECT_SPEC)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = true;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.CHEMIST:
-                        if (status == StatusEnum.CHEMIST_TESTING)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.SR_CHEMIST:
-                        if (status == StatusEnum.SR_CHEMIST_CHECKING)
-                        {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = true;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = false;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.ADMIN:
-                        if (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD)
-                        {
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = false;
-                            pUploadfile.Visible = true;
-                            pDownload.Visible = true;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                    case RoleEnum.LABMANAGER:
-                        if (status == StatusEnum.LABMANAGER_CHECKING)
-                        {
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
-                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
-                            pRemark.Visible = false;
-                            pDisapprove.Visible = false;
-                            pSpecification.Visible = false;
-                            pStatus.Visible = true;
-                            pUploadfile.Visible = false;
-                            pDownload.Visible = true;
-                            btnSubmit.Visible = true;
-                        }
-                        break;
-                }
-
-                txtDateAnalyzed.Text = (this.jobSample.date_chemist_analyze != null) ? this.jobSample.date_chemist_analyze.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
-                pAnalyzeDate.Visible = userRole == RoleEnum.CHEMIST;
-                #region "VISIBLE RESULT DATA"
-
-
-                if (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST))
-                {
-
-
-                    //txtProcedureNo.Enabled = true;
-                    //txtNumOfPiecesUsedForExtraction.Enabled = false;
-                    //txtExtractionMedium.Enabled = true;
-                    //txtExtractionVolume.Enabled = false;
-                    //gvAnionic.Columns[5].Visible = true;
-                    //gvCationic.Columns[5].Visible = true;
-                    btnCoverPage.Visible = true;
-                    btnWorking.Visible = true;
-                    pLoadFile.Visible = true;
-                }
-                else
-                {
-                    //txtProcedureNo.Enabled = false;
-                    //txtNumOfPiecesUsedForExtraction.Enabled = false;
-                    //txtExtractionMedium.Enabled = false;
-                    //txtExtractionVolume.Enabled = false;
-                    //gvAnionic.Columns[5].Visible = false;
-                    //gvCationic.Columns[5].Visible = false;
-                    btnCoverPage.Visible = false;
-                    btnWorking.Visible = false;
-                    pLoadFile.Visible = false;
-                    if (userLogin.role_id == Convert.ToInt32(RoleEnum.SR_CHEMIST))
+                case RoleEnum.LOGIN:
+                    break;
+                case RoleEnum.CHEMIST:
+                    break;
+                case RoleEnum.SR_CHEMIST:
+                    if (status == StatusEnum.SR_CHEMIST_CHECKING)
                     {
-                        btnCoverPage.Visible = true;
-                        btnWorking.Visible = true;
+                        ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                        ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                        pRemark.Visible = false;
+                        pDisapprove.Visible = false;
+                        pSpecification.Visible = false;
+                        pStatus.Visible = true;
+                        pUploadfile.Visible = false;
+                        pDownload.Visible = false;
+                        btnSubmit.Visible = true;
                     }
-
-                }
-                #endregion
-
-
+                    break;
+                case RoleEnum.ADMIN:
+                    if (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD)
+                    {
+                        pRemark.Visible = false;
+                        pDisapprove.Visible = false;
+                        pSpecification.Visible = false;
+                        pStatus.Visible = false;
+                        pUploadfile.Visible = true;
+                        pDownload.Visible = true;
+                        btnSubmit.Visible = true;
+                    }
+                    break;
+                case RoleEnum.LABMANAGER:
+                    if (status == StatusEnum.LABMANAGER_CHECKING)
+                    {
+                        ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                        ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                        pRemark.Visible = false;
+                        pDisapprove.Visible = false;
+                        pSpecification.Visible = false;
+                        pStatus.Visible = true;
+                        pUploadfile.Visible = false;
+                        pDownload.Visible = true;
+                        btnSubmit.Visible = true;
+                    }
+                    break;
             }
-            #endregion
 
-            #region "WORKING"
-            //this.coverpages = template_wd_ic_coverpage.FindAllBySampleID(this.SampleID);
-            //if (this.coverpages != null && this.coverpages.Count > 0)
-            //{
-            //    this.CommandName = CommandNameEnum.Edit;
-            //    template_wd_ic_coverpage ic = this.coverpages[0];
-            //    /*METHOD/PROCEDURE:*/
-            //    //txtProcedureNo.Text = ic.ProcedureNo;
-            //    //txtNumOfPiecesUsedForExtraction.Text = ic.NumOfPiecesUsedForExtraction;
-            //    //txtExtractionMedium.Text = ic.ExtractionMedium;
-            //    //txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}mL", Convert.ToInt32((1000 * Convert.ToDouble(ic.ExtractionVolume)))));
-
-            //    ddlComponent.SelectedValue = ic.component_id.ToString();
-                //ddlDetailSpec.SelectedValue = ic.detail_spec_id.ToString();
-
-                //detailSpec = new tb_m_detail_spec().SelectByID(Convert.ToInt32(ic.detail_spec_id));
-                //if (detailSpec != null)
-                //{
-                //    /*RESULT*/
-                //    cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
-                //    if (cbCheckBox.Checked)
-                //    {
-                //        lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
-                //    }
-                //    else
-                //    {
-
-                //        lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0} {1}", detailSpec.B, detailSpec.A);
-
-                //    }
-
-
-                //    txtB11.Text = ic.ExtractionVolume;
-                //    txtB12.Text = ic.b12;
-                //    txtB13.Text = ic.NumOfPiecesUsedForExtraction;
-
-                //    txtProcedureNo.Text = ic.ProcedureNo;
-                //    txtNumOfPiecesUsedForExtraction.Text = ic.NumOfPiecesUsedForExtraction;
-                //    txtExtractionMedium.Text = ic.ExtractionMedium;
-                //    txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}mL", (1000 * Convert.ToDouble(ic.ExtractionVolume))));
-                //    #region "Unit"
-                //    if (ic.wunit != null)
-                //    {
-                //        ddlUnit.SelectedValue = ic.wunit.Value.ToString();
-                //    }
-                //    if (ic.wunit != null)
-                //    {
-                //        ddlUnit.SelectedValue = ic.wunit.Value.ToString();
-
-                //        gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-
-                //        gvResultAnions.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
-                //        gvResultAnions.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
-                //        gvResultAnions.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
-                //        gvResultAnions.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-                //        gvResultAnions.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-                //        gvResultAnions.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
-
-                //        gvResultCations.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
-                //        gvResultCations.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
-                //        gvResultCations.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
-                //        gvResultCations.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-                //        gvResultCations.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-                //        gvResultCations.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
-
-                //    }
-                //    else
-                //    {
-                //        gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //        gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-                //    }
-                //    #endregion  
-                //    calculateByFormular();
-                //}
-                //gvAnionic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.ANIONIC));
-                //gvAnionic.DataBind();
-                //gvCationic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.CATIONIC));
-                //gvCationic.DataBind();
-
-                //gvResultAnions.DataSource = this.coverpages.Where(x => x.ic_type.Value == 1).ToList();
-                //gvResultAnions.DataBind();
-                //gvResultCations.DataSource = this.coverpages.Where(x => x.ic_type.Value == 2).ToList();
-                //gvResultCations.DataBind();
-            //}
-            //else
-            //{
-            //    this.coverpages = new List<template_wd_ic_coverpage>();
-            //}
-
-            #endregion
 
 
 
             //Disable Save button
             btnCoverPage.CssClass = "btn blue";
             btnWorking.CssClass = "btn green";
-            pCoverpage.Visible = true;
-            pWorkingIC.Visible = true;
-            pUploadfile.Visible = true;
             btnCoverPage.Visible = true;
             btnWorking.Visible = true;
-            pLoadFile.Visible = true;
+
+
+            pCoverpage.Visible = true;
+            pWorkingIC.Visible = false;
+            pLoadFile.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+            pRemark.Visible = false;
+            pDisapprove.Visible = false;
+            pSpecification.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC);
+            pStatus.Visible = (status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.LABMANAGER_CHECKING);
+            pUploadfile.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD);
+            pDownload.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+            pAnalyzeDate.Visible = (status == StatusEnum.CHEMIST_TESTING);
+            btnSubmit.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+
 
             switch (lbJobStatus.Text)
             {
@@ -508,6 +291,7 @@ namespace ALS.ALSI.Web.view.template
                     litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
                     break;
             }
+            #endregion
 
         }
         #endregion
@@ -866,11 +650,6 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        protected void btnCalulate_Click(object sender, EventArgs e)
-        {
-            btnSubmit.Enabled = true;
-            //calculateByFormular();
-        }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
@@ -879,6 +658,10 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnCoverPage_Click(object sender, EventArgs e)
         {
+
+            pCoverpage.Visible = false;
+            pWorkingIC.Visible = false;
+
             Button btn = (Button)sender;
             switch (btn.Text)
             {
@@ -887,32 +670,30 @@ namespace ALS.ALSI.Web.view.template
                     btnWorking.CssClass = "btn blue";
                     pCoverpage.Visible = true;
                     pWorkingIC.Visible = false;
-
-                    //txtNumOfPiecesUsedForExtraction.Text = txtB13.Text;
-                    //txtExtractionVolume.Text = (String.IsNullOrEmpty(txtB11.Text) ? String.Empty : String.Format("{0}mL", Convert.ToInt32((1000 * Convert.ToDouble(txtB11.Text)))));
-                    //calculateByFormular();
+                    pSpecification.Visible = true;
+                    pLoadFile.Visible = false;
+                    Cal();
                     break;
                 case "Workingpg-IC":
                     btnCoverPage.CssClass = "btn blue";
                     btnWorking.CssClass = "btn green";
                     pCoverpage.Visible = false;
                     pWorkingIC.Visible = true;
+                    pSpecification.Visible = false;
+                    pLoadFile.Visible = true;
                     break;
             }
         }
 
 
-        protected DataFormatter dataFormatter;
-
 
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
 
-            //List<template_f_ic> ics = new List<template_f_ic>();
             this.workSheetData = new Hashtable();
 
-            List<template_f_ic> removeList = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS)).ToList();
-            for (int i=0;i< removeList.Count; i++)
+            List<template_f_ic> removeList = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS) || x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS_HEADER) || x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS_HEADER)).ToList();
+            for (int i = 0; i < removeList.Count; i++)
             {
                 this.ics.Remove(removeList[i]);
             }
@@ -947,7 +728,7 @@ namespace ALS.ALSI.Web.view.template
                             ISheet isheet = wb.GetSheet("IC");
                             if (isheet == null)
                             {
-                                errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", "IC"));
+                                errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", this.SheetWorkSheetName));
                             }
                             else
                             {
@@ -956,46 +737,47 @@ namespace ALS.ALSI.Web.view.template
                                 txtB13.Text = FreeTemplateUtil.GetCellValue(isheet, this.configs["ic.no.of.parts.extracted"].ToString());
 
                                 #region "anions"
-                                String[] anionsRanges = this.configs["ic.anions.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
+                                String[] anionsRanges = this.configs["ic.anions.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
                                 int anionsColBegin = FreeTemplateUtil.GetColIndex(anionsRanges[0]);
                                 int anionsColEnd = FreeTemplateUtil.GetColIndex(anionsRanges[1]);
                                 int anionsRowBegin = FreeTemplateUtil.GetRowIndex(anionsRanges[0]);
                                 int anionsRowEnd = FreeTemplateUtil.GetRowIndex(anionsRanges[1]);
-                                for (int r = anionsRowBegin; r < anionsRowEnd; r++)
+                                for (int r = anionsRowBegin; r <= anionsRowEnd; r++)
                                 {
                                     template_f_ic ic = new template_f_ic();
-                                    for (int c = anionsColBegin; c < anionsColEnd; c++)
+                                    int colIndex = 1;
+                                    for (int c = anionsColBegin; c <= anionsColEnd; c++)
                                     {
                                         String key = String.Format("{0}!{1}{2}", this.SheetWorkSheetName, FreeTemplateUtil.GetColName(c), (r + 1));
                                         String value = CustomUtils.GetCellValue(isheet.GetRow(r).GetCell(c));
-                                        this.workSheetData[key] = String.Format("{0}", value);
+                                        this.workSheetData[key] = (Regex.IsMatch(value, @"^[0-9][\.\d]*(,\d+)?$")) ? Convert.ToDouble(value).ToString("N" + getDigit(colIndex)) : String.Format("{0}", value);
                                         setValueToTemplate(ref ic, c, value);
-
+                                        colIndex++;
                                     }
-                                    ic.row_type = Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS);
+                                    ic.row_type = (r == anionsRowBegin) ? Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS);
                                     ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
-                                   this.ics.Add(ic);
+                                    this.ics.Add(ic);
                                 }
                                 #endregion
                                 #region "cations"
-                                String[] cationsRanges = this.configs["ic.cations.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
-                                int cationsColBegin = FreeTemplateUtil.GetColIndex(anionsRanges[0]);
-                                int cationsColEnd = FreeTemplateUtil.GetColIndex(anionsRanges[1]);
-                                int cationsRowBegin = FreeTemplateUtil.GetRowIndex(anionsRanges[0]);
-                                int cationsRowEnd = FreeTemplateUtil.GetRowIndex(anionsRanges[1]);
-                                for (int r = cationsRowBegin; r < cationsRowEnd; r++)
+                                String[] cationsRanges = this.configs["ic.cations.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
+                                int cationsColBegin = FreeTemplateUtil.GetColIndex(cationsRanges[0]);
+                                int cationsColEnd = FreeTemplateUtil.GetColIndex(cationsRanges[1]);
+                                int cationsRowBegin = FreeTemplateUtil.GetRowIndex(cationsRanges[0]);
+                                int cationsRowEnd = FreeTemplateUtil.GetRowIndex(cationsRanges[1]);
+                                for (int r = cationsRowBegin; r <= cationsRowEnd; r++)
                                 {
                                     template_f_ic ic = new template_f_ic();
-
-                                    for (int c = cationsColBegin; c < cationsColEnd; c++)
+                                    int colIndex = 1;
+                                    for (int c = cationsColBegin; c <= cationsColEnd; c++)
                                     {
                                         String key = String.Format("{0}!{1}{2}", this.SheetWorkSheetName, FreeTemplateUtil.GetColName(c), (r + 1));
                                         String value = CustomUtils.GetCellValue(isheet.GetRow(r).GetCell(c));
-                                        this.workSheetData[key] = String.Format("{0}", value);
+                                        this.workSheetData[key] = (Regex.IsMatch(value, @"^[0-9][\.\d]*(,\d+)?$")) ? Convert.ToDouble(value).ToString("N" + getDigit(colIndex)) : String.Format("{0}", value);
                                         setValueToTemplate(ref ic, c, value);
-
+                                        colIndex++;
                                     }
-                                    ic.row_type = Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS);
+                                    ic.row_type = (r == cationsRowBegin) ? Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS);
                                     ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
                                     ics.Add(ic);
                                 }
@@ -1167,195 +949,125 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-        //protected void ddlDetailSpec_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    tb_m_detail_spec tem = new tb_m_detail_spec().SelectByID(int.Parse(ddlDetailSpec.SelectedValue));
-        //    if (tem != null)
-        //    {
-        //        /*RESULT*/
-        //        lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0} {1}", tem.B, tem.A);
-
-        //        gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", tem.C);
-        //        gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", tem.C);
-        //        gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", tem.C);
-        //        gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", tem.C);
-        //        gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", tem.C);
-        //        gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", tem.C);
-
-        //        List<template_wd_ic_coverpage> listCover = new List<template_wd_ic_coverpage>();
-        //        #region "*Anionic*"
-        //        template_wd_ic_coverpage _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 1;
-        //        _tmp.A = "Fluoride as F";
-        //        _tmp.B = tem.D;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 2;
-        //        _tmp.A = "Chloride as Cl";
-        //        _tmp.B = tem.E;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 3;
-        //        _tmp.A = "Nitrite as NO2";
-        //        _tmp.B = tem.F;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 4;
-        //        _tmp.A = "Bromide as Br";
-        //        _tmp.B = tem.G;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 5;
-        //        _tmp.A = "Nitrate as NO3";
-        //        _tmp.B = tem.H;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 6;
-        //        _tmp.A = "Sulfate as SO4";
-        //        _tmp.B = tem.I;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 7;
-        //        _tmp.A = "Phosphate as PO4";
-        //        _tmp.B = tem.J;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 8;
-        //        _tmp.A = "Total Anions";
-        //        _tmp.B = tem.K;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        #endregion
-        //        #region "*Cationic*"
-
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 8;
-        //        _tmp.A = "Lithium as Li";
-        //        _tmp.B = tem.M;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 9;
-        //        _tmp.A = "Sodium as Na";
-        //        _tmp.B = tem.P;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 10;
-        //        _tmp.A = "Ammonium as NH4";
-        //        _tmp.B = tem.L;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 11;
-        //        _tmp.A = "Potassium as K";
-        //        _tmp.B = tem.O;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 12;
-        //        _tmp.A = "Magnesium as Mg";
-        //        _tmp.B = tem.Q;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 13;
-        //        _tmp.A = "Calcium as Ca";
-        //        _tmp.B = tem.N;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        _tmp = new template_wd_ic_coverpage();
-        //        _tmp.id = 14;
-        //        _tmp.A = "Total Cations";
-        //        _tmp.B = tem.R;
-        //        _tmp.wunitText = tem.C;
-        //        _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
-        //        _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //        listCover.Add(_tmp);
-        //        #endregion
-        //        this.coverpages = listCover;
-        //        gvAnionic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.ANIONIC));
-        //        gvAnionic.DataBind();
-        //        gvCationic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.CATIONIC));
-        //        gvCationic.DataBind();
-
-        //        btnSubmit.Enabled = true;
-        //    }
-        //}
 
         protected void ddlComponent_SelectedIndexChanged(object sender, EventArgs e)
         {
+            List<template_f_ic> removeList = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_HEADER) || x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS) || x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS_HEADER) || x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS)).ToList();
+            for (int i = 0; i < removeList.Count; i++)
+            {
+                this.ics.Remove(removeList[i]);
+            }
+
             m_template template = new m_template().SelectByID(this.jobSample.template_id);
 
-            //FileInfo fileInfo = new FileInfo(template.path_source_file);
-            //using (var package = new ExcelPackage(fileInfo))
-            //{
-            //    FreeTemplateUtil ftu = new FreeTemplateUtil(fileInfo);
-            //    this.configs = ftu.getConfigValue();
-            //    this.listSpecificatons = ftu.getSpecification();
-            //    this.wCoverPage = package.Workbook.Worksheets["Coverpage-TH"];
-            //    this.wSpecification = package.Workbook.Worksheets["Specification"];
-            //    String yyyy = this.wSpecification.Cells["F17"].Value.ToString();
-            //    Console.WriteLine();
-            //}
-
-            int maxRow = Convert.ToInt16(this.configs["results.group.1.maxrow"].ToString());
-            for (int r = 0; r < maxRow; r++)
+            FileInfo fileInfo = new FileInfo(template.path_source_file);
+            using (var package = new ExcelPackage(fileInfo))
             {
-                try
+                ExcelWorksheet wSpecification = package.Workbook.Worksheets["Specification"];
+                ExcelWorksheet wCoverpage = package.Workbook.Worksheets["Coverpage-TH"];
+
+                #region "anions"
+                String[] anionsRanges = this.configs["result.anions.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
+                int anionsColBegin = FreeTemplateUtil.GetColIndex(anionsRanges[0]);
+                int anionsColEnd = FreeTemplateUtil.GetColIndex(anionsRanges[1]);
+                int anionsRowBegin = FreeTemplateUtil.GetRowIndex(anionsRanges[0]);
+                int anionsRowEnd = FreeTemplateUtil.GetRowIndex(anionsRanges[1]);
+                for (int r = anionsRowBegin; r <= anionsRowEnd; r++)
                 {
                     template_f_ic ic = new template_f_ic();
-                    ic.id = (r + 1);
-                    ic.row_type = 2;
-                    String[] cols = this.configs["results.group.1.header.values"].ToString().Split(FreeTemplateUtil.DELIMITER);
-                    for (int c = 0; c < cols.Length; c++)
+                    int colIndex = 1;
+                    for (int c = anionsColBegin; c <= anionsColEnd; c++)
                     {
-                        String _val = this.configs[String.Format("results.group.1.row.{0}.col.{1}", (r + 1), (c + 1))].ToString();
-                        setValueToTemplate(ref ic, c, _val);
+                        if (r == anionsRowBegin)
+                        {
+                            String value = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
+                            setValueToTemplate(ref ic, c, value);
+                        }
+                        else
+                        {
+                            String type = this.configs[String.Format("result.anions.type.col.{0}", colIndex)].ToString();
+                            String key = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
+                            String value = String.Empty;
+                            switch (type.ToUpper())
+                            {
+                                case "TEXT":
+                                    value = key;
+                                    break;
+                                case "FORMULA":
+                                    if (key.IndexOf(this.SheetSpecification) != -1)
+                                    {
+                                        String _key = String.Format("{0}{1}", key.Split(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK)[1], ddlComponent.SelectedValue);
+                                        value = wSpecification.Cells[_key].Value.ToString();
+                                        value = Regex.IsMatch(value, @"^\d+$") ? String.Format("< {0}", value) : value;
+
+                                        Console.WriteLine();
+                                    }
+                                    else
+                                    {
+                                        value = key;
+                                    }
+                                    break;
+                            }
+                            setValueToTemplate(ref ic, c, value);
+                        }
+                        colIndex++;
                     }
+                    ic.row_type = (r == anionsRowBegin) ? Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS);
+                    ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
                     this.ics.Add(ic);
                 }
-                catch (Exception ex) { }
+                #endregion
+                #region "cations"
+                String[] cationsRanges = this.configs["result.cations.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
+                int cationsColBegin = FreeTemplateUtil.GetColIndex(cationsRanges[0]);
+                int cationsColEnd = FreeTemplateUtil.GetColIndex(cationsRanges[1]);
+                int cationsRowBegin = FreeTemplateUtil.GetRowIndex(cationsRanges[0]);
+                int cationsRowEnd = FreeTemplateUtil.GetRowIndex(cationsRanges[1]);
+                for (int r = cationsRowBegin; r <= cationsRowEnd; r++)
+                {
+                    template_f_ic ic = new template_f_ic();
+                    int colIndex = 1;
+                    for (int c = cationsColBegin; c <= cationsColEnd; c++)
+                    {
+                        if (r == cationsRowBegin)
+                        {
+                            String value = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
+                            setValueToTemplate(ref ic, c, value);
+                        }
+                        else
+                        {
+                            String type = this.configs[String.Format("result.cations.type.col.{0}", colIndex)].ToString();
+                            String key = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
+                            String value = String.Empty;
+                            switch (type.ToUpper())
+                            {
+                                case "TEXT":
+                                    value = key;
+                                    break;
+                                case "FORMULA":
+                                    if (key.IndexOf(this.SheetSpecification) != -1)
+                                    {
+                                        String _key = String.Format("{0}{1}", key.Split(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK)[1], ddlComponent.SelectedValue);
+                                        value = wSpecification.Cells[_key].Value.ToString();
+                                        value = Regex.IsMatch(value, @"^\d+$") ? String.Format("< {0}", value) : value;
+                                    }
+                                    else
+                                    {
+                                        value = key;
+                                    }
+                                    break;
+                            }
+                            setValueToTemplate(ref ic, c, value);
+                        }
+                        colIndex++;
+                    }
+                    ic.row_type = (r == cationsRowBegin) ? Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS);
+                    ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+                    this.ics.Add(ic);
+                }
+                #endregion
             }
             Cal();
-
         }
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -1378,201 +1090,82 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
-        //protected void gvAnionic_RowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.DataRow)
-        //    {
-        //        int PKID = Convert.ToInt32(gvAnionic.DataKeys[e.Row.RowIndex].Values[0].ToString());
-
-        //        RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvAnionic.DataKeys[e.Row.RowIndex].Values[1]);
-        //        LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-        //        LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-        //        Literal litSpecificationLimits = (Literal)e.Row.FindControl("litSpecificationLimits");
-
-        //        if (_btnHide != null && _btnUndo != null)
-        //        {
-        //            switch (cmd)
-        //            {
-        //                case RowTypeEnum.Hide:
-
-        //                    _btnHide.Visible = false;
-        //                    _btnUndo.Visible = true;
-        //                    e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-        //                    break;
-        //                default:
-        //                    _btnHide.Visible = true;
-        //                    _btnUndo.Visible = false;
-        //                    e.Row.ForeColor = System.Drawing.Color.Black;
-        //                    break;
-        //            }
-        //            litSpecificationLimits.Text = litSpecificationLimits.Text.Equals("NA") ? litSpecificationLimits.Text : String.Format("{0}{1}", (litSpecificationLimits.Text.IndexOf("-") != -1 ? "" : "<"), litSpecificationLimits.Text);
-        //        }
-        //    }
-        //}
-
-        //protected void gvCationic_RowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.DataRow)
-        //    {
-
-        //        int PKID = Convert.ToInt32(gvCationic.DataKeys[e.Row.RowIndex].Values[0].ToString());
-        //        RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvCationic.DataKeys[e.Row.RowIndex].Values[1]);
-        //        LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
-        //        LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
-        //        Literal litSpecificationLimits = (Literal)e.Row.FindControl("litSpecificationLimits");
-        //        if (_btnHide != null && _btnUndo != null)
-        //        {
-        //            switch (cmd)
-        //            {
-        //                case RowTypeEnum.Hide:
-
-        //                    _btnHide.Visible = false;
-        //                    _btnUndo.Visible = true;
-        //                    e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
-        //                    break;
-        //                default:
-        //                    _btnHide.Visible = true;
-        //                    _btnUndo.Visible = false;
-        //                    e.Row.ForeColor = System.Drawing.Color.Black;
-        //                    break;
-        //            }
-        //            litSpecificationLimits.Text = litSpecificationLimits.Text.Equals("NA") ? litSpecificationLimits.Text : String.Format("{0}{1}", (litSpecificationLimits.Text.IndexOf("-") != -1 ? "" : "<"), litSpecificationLimits.Text);
-
-        //        }
-        //    }
-        //}
-
-        //protected void gvAnionic_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
-        //    if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
-        //    {
-        //        int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-        //        template_wd_ic_coverpage gcms = this.coverpages.Find(x => x.id == PKID);
-        //        if (gcms != null)
-        //        {
-        //            switch (cmd)
-        //            {
-        //                case RowTypeEnum.Hide:
-        //                    gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
-
-        //                    break;
-        //                case RowTypeEnum.Normal:
-        //                    gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //                    break;
-        //            }
-        //            gvAnionic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.ANIONIC));
-        //            gvAnionic.DataBind();
-        //        }
-        //    }
-        //}
-
-        //protected void gvCationic_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), e.CommandName, true);
-        //    if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
-        //    {
-        //        int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-        //        template_wd_ic_coverpage gcms = this.coverpages.Find(x => x.id == PKID);
-        //        if (gcms != null)
-        //        {
-        //            switch (cmd)
-        //            {
-        //                case RowTypeEnum.Hide:
-        //                    gcms.row_type = Convert.ToInt32(RowTypeEnum.Hide);
-
-        //                    break;
-        //                case RowTypeEnum.Normal:
-        //                    gcms.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-        //                    break;
-        //            }
-        //            gvCationic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.CATIONIC));
-        //            gvCationic.DataBind();
-        //        }
-        //    }
-        //}
-
         private void Cal()
         {
-
-
-            GridView1.DataSource = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE));
-            GridView1.DataBind();
-            GridView3.DataSource = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS));
-            GridView3.DataBind();
-            GridView4.DataSource = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS));
-            GridView4.DataBind();
-
-
-
-            //Decimal b11 = Convert.ToDecimal(String.IsNullOrEmpty(txtB11.Text) ? "0" : txtB11.Text);
-            //Decimal b12 = Convert.ToDecimal(String.IsNullOrEmpty(txtB12.Text) ? "0" : txtB12.Text);
-            //Decimal b13 = Convert.ToDecimal(String.IsNullOrEmpty(txtB13.Text) ? "0" : txtB13.Text);
-
-            //if (b11 != 0 && b12 != 0 && b13 != 0)
-            //{
-
-            //    gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //    gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //    gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //    gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //    gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //    gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-
-            //}
             //try
             //{
-            //    foreach (template_wd_ic_coverpage _val in this.coverpages)
-            //    {
+            #region "render header"
+            template_f_ic hGv1 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_HEADER)).FirstOrDefault();
+            template_f_ic hGv2 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS_HEADER)).FirstOrDefault();
+            template_f_ic hGv3 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS_HEADER)).FirstOrDefault();
+            template_f_ic hGv4 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS_HEADER)).FirstOrDefault();
 
-            //        if (!String.IsNullOrEmpty(_val.B))
-            //        {
-            //            if (_val.wf != null)
-            //            {
-            //                String secValue = _val.B.Split(' ')[0];
-            //                _val.E = (secValue.Equals("NA") || (secValue.Equals("-")) ? "NA" : (CustomUtils.isNumber(_val.wj) ? Convert.ToDouble(_val.wj) : 0) < Convert.ToDouble(secValue) ? "PASS" : "FAIL");
-            //            }
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine("");
-            //}
+            setGridViewHeader(ref GridView1, hGv1);
+            setGridViewHeader(ref GridView2, hGv2);
+            setGridViewHeader(ref GridView3, hGv3);
+            setGridViewHeader(ref GridView4, hGv4);
+            #endregion
+            #region "render data"
+            List<template_f_ic> listCpAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS)).ToList();
+            List<template_f_ic> listCpCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS)).ToList();
+            List<template_f_ic> listWsAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS)).ToList();
+            List<template_f_ic> listWsCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS)).ToList();
+            for (int r = 0; r < listWsAnions.Count; r++)
+            {
+                setCalValue(listWsAnions[r]);
+            }
+            for (int r = 0; r < listWsCations.Count; r++)
+            {
+                setCalValue(listWsCations[r]);
+            }
+            for (int r = 0; r < listCpAnions.Count; r++)
+            {
+                setCalValue(listCpAnions[r]);
+            }
+            for (int r = 0; r < listCpCations.Count; r++)
+            {
+                setCalValue(listCpCations[r]);
+            }
 
 
-            //gvAnionic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.ANIONIC));
-            //gvAnionic.DataBind();
-            //gvCationic.DataSource = this.coverpages.Where(x => x.ic_type == Convert.ToInt32(ICTypeEnum.CATIONIC));
-            //gvCationic.DataBind();
+            GridView1.DataSource = listCpAnions;
+            GridView1.DataBind();
+            GridView2.DataSource = listCpCations;
+            GridView2.DataBind();
+            GridView3.DataSource = listWsAnions;
+            GridView3.DataBind();
+            GridView4.DataSource = listWsCations;
+            GridView4.DataBind();
+            #endregion
+
         }
 
-        //protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-        //    gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-        //    gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-        //    gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-        //    gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-        //    gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+        protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            //gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            //gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            //gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            //gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
+            //gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
 
 
-        //    gvResultAnions.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
-        //    gvResultAnions.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
-        //    gvResultAnions.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
-        //    gvResultAnions.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-        //    gvResultAnions.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-        //    gvResultAnions.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
+            //gvResultAnions.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
+            //gvResultAnions.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
+            //gvResultAnions.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
+            //gvResultAnions.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+            //gvResultAnions.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+            //gvResultAnions.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
 
-        //    gvResultCations.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
-        //    gvResultCations.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
-        //    gvResultCations.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
-        //    gvResultCations.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-        //    gvResultCations.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-        //    gvResultCations.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
-        //    ModolPopupExtender.Show();
-        //    calculateByFormular();
-        //}
+            //gvResultCations.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
+            //gvResultCations.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
+            //gvResultCations.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
+            //gvResultCations.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+            //gvResultCations.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
+            //gvResultCations.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
+            //ModolPopupExtender.Show();
+            //calculateByFormular();
+        }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
@@ -1607,29 +1200,265 @@ namespace ALS.ALSI.Web.view.template
         {
             switch (c + 1)
             {
-                case 1: ic.col_1 = _val; break;
-                case 2: ic.col_2 = _val; break;
-                case 3: ic.col_3 = _val; break;
-                case 4: ic.col_4 = _val; break;
-                case 5: ic.col_5 = _val; break;
-                case 6: ic.col_6 = _val; break;
-                case 7: ic.col_7 = _val; break;
-                case 8: ic.col_8 = _val; break;
-                case 9: ic.col_9 = _val; break;
-                case 10: ic.col_10 = _val; break;
-                case 11: ic.col_11 = _val; break;
-                case 12: ic.col_12 = _val; break;
-                case 13: ic.col_13 = _val; break;
-                case 14: ic.col_14 = _val; break;
-                case 15: ic.col_15 = _val; break;
-                case 16: ic.col_16 = _val; break;
-                case 17: ic.col_17 = _val; break;
-                case 18: ic.col_18 = _val; break;
-                case 19: ic.col_19 = _val; break;
-                case 20: ic.col_20 = _val; break;
+                case 1:
+                    ic.col_1 = _val;
+                    break;
+                case 2:
+                    ic.col_2 = _val;
+                    break;
+                case 3:
+                    ic.col_3 = _val;
+                    break;
+                case 4:
+                    ic.col_4 = _val;
+                    break;
+                case 5:
+                    ic.col_5 = _val;
+                    break;
+                case 6:
+                    ic.col_6 = _val;
+                    break;
+                case 7:
+                    ic.col_7 = _val;
+                    break;
+                case 8:
+                    ic.col_8 = _val;
+                    break;
+                case 9:
+                    ic.col_9 = _val;
+                    break;
+                case 10:
+                    ic.col_10 = _val;
+                    break;
+                case 11:
+                    ic.col_11 = _val;
+                    break;
+                case 12:
+                    ic.col_12 = _val;
+                    break;
+                case 13:
+                    ic.col_13 = _val;
+                    break;
+                case 14:
+                    ic.col_14 = _val;
+                    break;
+                case 15:
+                    ic.col_15 = _val;
+                    break;
+                case 16:
+                    ic.col_16 = _val;
+                    break;
+                case 17:
+                    ic.col_17 = _val;
+                    break;
+                case 18:
+                    ic.col_18 = _val;
+                    break;
+                case 19:
+                    ic.col_19 = _val;
+                    break;
+                case 20:
+                    ic.col_20 = _val;
+                    break;
             }
         }
 
+        private void setGridViewHeader(ref GridView gv, template_f_ic _header)
+        {
+            if (_header != null)
+            {
+                for (int c = 0; c < gv.Columns.Count - 1; c++)
+                {
+                    String headerName = String.Empty;
+                    switch (c + 1)
+                    {
+                        case 1: headerName = _header.col_1; break;
+                        case 2: headerName = _header.col_2; break;
+                        case 3: headerName = _header.col_3; break;
+                        case 4: headerName = _header.col_4; break;
+                        case 5: headerName = _header.col_5; break;
+                        case 6: headerName = _header.col_6; break;
+                        case 7: headerName = _header.col_7; break;
+                        case 8: headerName = _header.col_8; break;
+                        case 9: headerName = _header.col_9; break;
+                        case 10: headerName = _header.col_10; break;
+                        case 11: headerName = _header.col_11; break;
+                        case 12: headerName = _header.col_12; break;
+                        case 13: headerName = _header.col_13; break;
+                        case 14: headerName = _header.col_14; break;
+                        case 15: headerName = _header.col_15; break;
+                        case 16: headerName = _header.col_16; break;
+                        case 17: headerName = _header.col_17; break;
+                        case 18: headerName = _header.col_18; break;
+                        case 19: headerName = _header.col_19; break;
+                        case 20: headerName = _header.col_20; break;
+                    }
 
+                    if (!String.IsNullOrEmpty(headerName))
+                    {
+                        gv.Columns[c].Visible = true;
+                        gv.Columns[c].HeaderText = headerName;
+                    }
+                    else
+                    {
+                        gv.Columns[c].Visible = false;
+                    }
+                }
+            }
+        }
+
+        private void setCalValue(template_f_ic ic)
+        {
+            if (this.workSheetData != null)
+            {
+                if (ic.col_1 != null)
+                {
+                    ic.col_1 = ((ic.col_1.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_1] == null) ? null : this.workSheetData[ic.col_1].ToString()) : ic.col_1);
+                    //if(ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS)|| ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS)
+                    //if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    //{
+                    //    if (Regex.IsMatch(ic.col_1, @"^\d+$"))
+                    //        ic.col_1 = Convert.ToDouble(ic.col_1).ToString("N" + txtDecimal01.Text);
+                    //}
+                }
+                if (ic.col_2 != null)
+                {
+                    ic.col_2 = ((ic.col_2.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_2] == null) ? null : this.workSheetData[ic.col_2].ToString()) : ic.col_2);
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    {
+                        if (Regex.IsMatch(ic.col_2, @"^[0-9][\.\d]*(,\d+)?$"))
+
+                            ic.col_2 = Convert.ToDouble(ic.col_2).ToString("N" + txtDecimal01.Text);
+                    }
+                }
+                if (ic.col_3 != null)
+                {
+                    ic.col_3 = ((ic.col_3.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_3] == null) ? null : this.workSheetData[ic.col_3].ToString()) : ic.col_3);
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    {
+                        if (Regex.IsMatch(ic.col_3, @"^[0-9][\.\d]*(,\d+)?$"))
+                            ic.col_3 = Convert.ToDouble(ic.col_3).ToString("N" + txtDecimal02.Text);
+                    }
+                }
+                if (ic.col_4 != null)
+                {
+                    ic.col_4 = ((ic.col_4.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_4] == null) ? null : this.workSheetData[ic.col_4].ToString()) : ic.col_4);
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    {
+                        if (Regex.IsMatch(ic.col_4, @"^[0-9][\.\d]*(,\d+)?$"))
+                            ic.col_4 = Convert.ToDouble(ic.col_4).ToString("N" + txtDecimal03.Text);
+                    }
+                }
+                if (ic.col_5 != null)
+                {
+                    ic.col_5 = ((ic.col_5.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_5] == null) ? null : this.workSheetData[ic.col_5].ToString()) : ic.col_5);
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    {
+                        if (Regex.IsMatch(ic.col_5, @"^[0-9][\.\d]*(,\d+)?$"))
+                            ic.col_5 = Convert.ToDouble(ic.col_5).ToString("N" + txtDecimal04.Text);
+                    }
+                }
+                if (ic.col_6 != null)
+                {
+                    ic.col_6 = ((ic.col_6.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_6] == null) ? null : this.workSheetData[ic.col_6].ToString()) : ic.col_6);
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    {
+                        if (Regex.IsMatch(ic.col_6, @"^[0-9][\.\d]*(,\d+)?$"))
+                            ic.col_6 = Convert.ToDouble(ic.col_6).ToString("N" + txtDecimal05.Text);
+                    }
+                }
+                if (ic.col_7 != null)
+                {
+                    ic.col_7 = ((ic.col_7.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_7] == null) ? null : this.workSheetData[ic.col_7].ToString()) : ic.col_7);
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    {
+                        if (Regex.IsMatch(ic.col_7, @"^[0-9][\.\d]*(,\d+)?$"))
+                            ic.col_7 = Convert.ToDouble(ic.col_7).ToString("N" + txtDecimal06.Text);
+                    }
+                }
+                if (ic.col_8 != null)
+                {
+                    ic.col_8 = ((ic.col_8.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_8] == null) ? null : this.workSheetData[ic.col_8].ToString()) : ic.col_8);
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    {
+                        if (Regex.IsMatch(ic.col_8, @"^[0-9][\.\d]*(,\d+)?$"))
+                            ic.col_8 = Convert.ToDouble(ic.col_8).ToString("N" + txtDecimal07.Text);
+                    }
+                }
+                if (ic.col_9 != null)
+                {
+                    ic.col_9 = ((ic.col_9.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_9] == null) ? null : this.workSheetData[ic.col_9].ToString()) : ic.col_9);
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    {
+                        if (Regex.IsMatch(ic.col_9, @"^[0-9][\.\d]*(,\d+)?$"))
+                            ic.col_8 = Convert.ToDouble(ic.col_9).ToString("N" + txtDecimal08.Text);
+                    }
+                }
+                if (ic.col_10 != null)
+                {
+                    ic.col_10 = ((ic.col_10.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_10] == null) ? null : this.workSheetData[ic.col_10].ToString()) : ic.col_10);
+                }
+
+                if (ic.col_11 != null)
+                {
+                    ic.col_11 = ((ic.col_11.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_11] == null) ? null : this.workSheetData[ic.col_11].ToString()) : ic.col_11);
+                }
+                if (ic.col_12 != null)
+                {
+                    ic.col_12 = ((ic.col_12.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_12] == null) ? null : this.workSheetData[ic.col_12].ToString()) : ic.col_12);
+                }
+                if (ic.col_13 != null)
+                {
+                    ic.col_13 = ((ic.col_13.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_13] == null) ? null : this.workSheetData[ic.col_13].ToString()) : ic.col_13);
+                }
+                if (ic.col_14 != null)
+                {
+                    ic.col_14 = ((ic.col_14.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_14] == null) ? null : this.workSheetData[ic.col_14].ToString()) : ic.col_14);
+                }
+                if (ic.col_15 != null)
+                {
+                    ic.col_15 = ((ic.col_15.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_15] == null) ? null : this.workSheetData[ic.col_15].ToString()) : ic.col_15);
+                }
+                if (ic.col_16 != null)
+                {
+                    ic.col_16 = ((ic.col_16.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_16] == null) ? null : this.workSheetData[ic.col_16].ToString()) : ic.col_16);
+                }
+                if (ic.col_17 != null)
+                {
+                    ic.col_17 = ((ic.col_17.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_17] == null) ? null : this.workSheetData[ic.col_17].ToString()) : ic.col_17);
+                }
+                if (ic.col_18 != null)
+                {
+                    ic.col_18 = ((ic.col_18.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_18] == null) ? null : this.workSheetData[ic.col_18].ToString()) : ic.col_18);
+                }
+                if (ic.col_19 != null)
+                {
+                    ic.col_19 = ((ic.col_19.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_19] == null) ? null : this.workSheetData[ic.col_19].ToString()) : ic.col_19);
+                }
+                if (ic.col_20 != null)
+                {
+                    ic.col_20 = ((ic.col_20.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_20] == null) ? null : this.workSheetData[ic.col_20].ToString()) : ic.col_20);
+                }
+            }
+
+        }
+
+        private int getDigit(int colIndex)
+        {
+            int digit = 0;
+            switch (colIndex)
+            {
+                case 1: break;//Col Name
+                case 2: digit = Convert.ToInt32(txtDecimal01.Text); break;
+                case 3: digit = Convert.ToInt32(txtDecimal02.Text); break;
+                case 4: digit = Convert.ToInt32(txtDecimal03.Text); break;
+                case 5: digit = Convert.ToInt32(txtDecimal04.Text); break;
+                case 6: digit = Convert.ToInt32(txtDecimal05.Text); break;
+                case 7: digit = Convert.ToInt32(txtDecimal06.Text); break;
+                case 8: digit = Convert.ToInt32(txtDecimal07.Text); break;
+
+            }
+            return digit;
+        }
     }
 }
