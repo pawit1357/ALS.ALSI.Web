@@ -46,8 +46,11 @@ namespace ALS.ALSI.Web.UserControls
                         break;
                 }
 
+
                 String[] tmp = _sample.job_number.Split('-');
-                lbRefNo.Text = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
+                lbRefNo.Text = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);
+                
+                lbSupplementToReportNo.Text = String.IsNullOrEmpty(AmRetest)? "-": String.Format("ATT/{0}/{1}/{2}-{3}",  tmp[0], phisicalYear, tmp[1], tmp[2]);
 
 
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
@@ -60,7 +63,7 @@ namespace ALS.ALSI.Web.UserControls
                 mSpec = mSpec.SelectByID(_sample.specification_id);
                 m_type_of_test typeOfTest = new m_type_of_test();
                 typeOfTest = typeOfTest.SelectByID(_sample.type_of_test_id);
-                txtSpec.Text = String.Format("Specification [{0}]-->Type Of Test [{1}]", (mSpec==null) ? String.Empty : mSpec.name, typeOfTest.name);
+                txtSpec.Text = String.Format("{0}/{1}", (mSpec==null) ? String.Empty : mSpec.name, typeOfTest.name);
             }
         }
     }

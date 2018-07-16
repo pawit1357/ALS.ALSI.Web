@@ -356,24 +356,21 @@ namespace ALS.ALSI.Web.view.template
 
                 cbNotePZT.Checked = Convert.ToBoolean(this.Hpas[0].show_note_pzt);
                 lbNotePZT.Text = this.Hpas[0].note_pzt;
+                txtProcedureNo.Text = _cover.ProcedureNo;
+                txtNumberOfPieces.Text = _cover.NumberOfPieces;
+                txtExtractionMedium.Text = _cover.ExtractionMedium;
+                txtExtractionVolume.Text = _cover.ExtractionVolume;
+
+                txtProcedureNo_hpa.Text = _cover.ProcedureNo_hpa;
+                txtNumberOfPieces_hpa.Text = _cover.NumberOfPieces_hpa;
+                txtExtractionMedium_hpa.Text = _cover.ExtractionMedium_hpa;
+                txtExtractionVolume_hpa.Text = _cover.ExtractionVolume_hpa;
+                ddlLpcType.SelectedValue = _cover.lpc_type.ToString();
 
                 tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(_cover.specification_id));
                 if (tem != null)
                 {
                     ddlSpecification.SelectedValue = tem.ID.ToString();
-                    ddlLpcType.SelectedValue = _cover.lpc_type.ToString();
-
-
-                    #region "Method"
-                    txtProcedureNo.Text = _cover.ProcedureNo;
-                    txtNumberOfPieces.Text = _cover.NumberOfPieces;
-                    txtExtractionMedium.Text = _cover.ExtractionMedium;
-                    txtExtractionVolume.Text = _cover.ExtractionVolume;
-
-                    txtProcedureNo_hpa.Text = _cover.ProcedureNo_hpa;
-                    txtNumberOfPieces_hpa.Text = _cover.NumberOfPieces_hpa;
-                    txtExtractionMedium_hpa.Text = _cover.ExtractionMedium_hpa;
-                    txtExtractionVolume_hpa.Text = _cover.ExtractionVolume_hpa;
 
                     cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
 
@@ -386,126 +383,126 @@ namespace ALS.ALSI.Web.view.template
                         lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", tem.B + " ", tem.A);
 
                     }
-                    #endregion
 
-                    #region "region "US-LPC(0.3)"
-                    txt_UsLPC03_B14.Text = _cover.us03_b14;
-                    txt_UsLPC03_B15.Text = _cover.us03_b15;
-                    txt_UsLPC03_B16.Text = _cover.us03_b16;
-                    txt_UsLPC03_B17.Text = _cover.us03_b17;
-
-                    txt_UsLPC03_C14.Text = _cover.us03_c14;
-                    txt_UsLPC03_C15.Text = _cover.us03_c15;
-                    txt_UsLPC03_C16.Text = _cover.us03_c16;
-                    txt_UsLPC03_C17.Text = _cover.us03_c17;
-
-                    txt_UsLPC03_D14.Text = _cover.us03_d14;
-                    txt_UsLPC03_D15.Text = _cover.us03_d15;
-                    txt_UsLPC03_D16.Text = _cover.us03_d16;
-                    txt_UsLPC03_D17.Text = _cover.us03_d17;
-
-                    txt_UsLPC03_E14.Text = _cover.us03_e14;
-                    txt_UsLPC03_E15.Text = _cover.us03_e15;
-                    txt_UsLPC03_E16.Text = _cover.us03_e16;
-                    txt_UsLPC03_E17.Text = _cover.us03_e17;
-
-                    txt_UsLPC03_F14.Text = _cover.us03_f14;
-                    txt_UsLPC03_F15.Text = _cover.us03_f15;
-                    txt_UsLPC03_F16.Text = _cover.us03_f16;
-                    txt_UsLPC03_F17.Text = _cover.us03_f17;
-
-                    txt_UsLPC03_G14.Text = _cover.us03_g14;
-                    txt_UsLPC03_G15.Text = _cover.us03_g15;
-                    txt_UsLPC03_G16.Text = _cover.us03_g16;
-                    txt_UsLPC03_G17.Text = _cover.us03_g17;
-
-                    txt_UsLPC03_B25_1.Text = _cover.us03_b25;
-                    txt_UsLPC03_D25.Text = _cover.us03_d25;
-                    txt_UsLPC03_F25.Text = _cover.us03_f25;
-                    #endregion
-
-                    #region "region "US-LPC(0.6)"
-                    txt_UsLPC06_B14.Text = _cover.us06_b14;
-                    txt_UsLPC06_B15.Text = _cover.us06_b15;
-                    txt_UsLPC06_B16.Text = _cover.us06_b16;
-                    txt_UsLPC06_B17.Text = _cover.us06_b17;
-
-                    txt_UsLPC06_C14.Text = _cover.us06_c14;
-                    txt_UsLPC06_C15.Text = _cover.us06_c15;
-                    txt_UsLPC06_C16.Text = _cover.us06_c16;
-                    txt_UsLPC06_C17.Text = _cover.us06_c17;
-
-                    txt_UsLPC06_D14.Text = _cover.us06_d14;
-                    txt_UsLPC06_D15.Text = _cover.us06_d15;
-                    txt_UsLPC06_D16.Text = _cover.us06_d16;
-                    txt_UsLPC06_D17.Text = _cover.us06_d17;
-
-                    txt_UsLPC06_E14.Text = _cover.us06_e14;
-                    txt_UsLPC06_E15.Text = _cover.us06_e15;
-                    txt_UsLPC06_E16.Text = _cover.us06_e16;
-                    txt_UsLPC06_E17.Text = _cover.us06_e17;
-
-                    txt_UsLPC06_F14.Text = _cover.us06_f14;
-                    txt_UsLPC06_F15.Text = _cover.us06_f15;
-                    txt_UsLPC06_F16.Text = _cover.us06_f16;
-                    txt_UsLPC06_F17.Text = _cover.us06_f17;
-
-                    txt_UsLPC06_G14.Text = _cover.us06_g14;
-                    txt_UsLPC06_G15.Text = _cover.us06_g15;
-                    txt_UsLPC06_G16.Text = _cover.us06_g16;
-                    txt_UsLPC06_G17.Text = _cover.us06_g17;
-
-                    txt_UsLPC06_B25.Text = _cover.us06_b25;
-                    txt_UsLPC06_D25.Text = _cover.us06_d25;
-                    txt_UsLPC06_F25.Text = _cover.us06_f25;
-                    #endregion
-
-                    #region "Worksheet for HPA - Filtration"
-                    txtB3.Text = _cover.ws_b3;
-                    txtB4.Text = _cover.ws_b4;
-                    txtB5.Text = _cover.ws_b5;
-                    txtB6.Text = (_cover.ws_b6 == null) ? "50" : _cover.ws_b6;
-                    txtB7.Text = (_cover.ws_b7 == null) ? "7.071" : _cover.ws_b7;
-                    txtB8.Text = _cover.ws_b8;
-                    txtB9.Text = _cover.ws_b9;
-                    #endregion
-
-                    //#region "Header Text"
-                    //gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                    //gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                    //gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
-
-                    //gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                    //gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                    //gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
-
-                    //gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
-                    //gvHpa.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                    //gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
-                    //#endregion
-
-
-
-
-                    #region "Unit"
-
-                    gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                    gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                    gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
-
-                    gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
-                    gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
-
-                    gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
-                    gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
-
-                    gvHpa.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
-                    gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
-
-                    gvClassification.Columns[2].HeaderText = String.Format("Results, {0}", ddlClassificationUnit.SelectedItem.Text);
-                    #endregion
-                    CalculateCas();
                 }
+                #region "region "US-LPC(0.3)"
+                txt_UsLPC03_B14.Text = _cover.us03_b14;
+                txt_UsLPC03_B15.Text = _cover.us03_b15;
+                txt_UsLPC03_B16.Text = _cover.us03_b16;
+                txt_UsLPC03_B17.Text = _cover.us03_b17;
+
+                txt_UsLPC03_C14.Text = _cover.us03_c14;
+                txt_UsLPC03_C15.Text = _cover.us03_c15;
+                txt_UsLPC03_C16.Text = _cover.us03_c16;
+                txt_UsLPC03_C17.Text = _cover.us03_c17;
+
+                txt_UsLPC03_D14.Text = _cover.us03_d14;
+                txt_UsLPC03_D15.Text = _cover.us03_d15;
+                txt_UsLPC03_D16.Text = _cover.us03_d16;
+                txt_UsLPC03_D17.Text = _cover.us03_d17;
+
+                txt_UsLPC03_E14.Text = _cover.us03_e14;
+                txt_UsLPC03_E15.Text = _cover.us03_e15;
+                txt_UsLPC03_E16.Text = _cover.us03_e16;
+                txt_UsLPC03_E17.Text = _cover.us03_e17;
+
+                txt_UsLPC03_F14.Text = _cover.us03_f14;
+                txt_UsLPC03_F15.Text = _cover.us03_f15;
+                txt_UsLPC03_F16.Text = _cover.us03_f16;
+                txt_UsLPC03_F17.Text = _cover.us03_f17;
+
+                txt_UsLPC03_G14.Text = _cover.us03_g14;
+                txt_UsLPC03_G15.Text = _cover.us03_g15;
+                txt_UsLPC03_G16.Text = _cover.us03_g16;
+                txt_UsLPC03_G17.Text = _cover.us03_g17;
+
+                txt_UsLPC03_B25_1.Text = _cover.us03_b25;
+                txt_UsLPC03_D25.Text = _cover.us03_d25;
+                txt_UsLPC03_F25.Text = _cover.us03_f25;
+                #endregion
+
+                #region "region "US-LPC(0.6)"
+                txt_UsLPC06_B14.Text = _cover.us06_b14;
+                txt_UsLPC06_B15.Text = _cover.us06_b15;
+                txt_UsLPC06_B16.Text = _cover.us06_b16;
+                txt_UsLPC06_B17.Text = _cover.us06_b17;
+
+                txt_UsLPC06_C14.Text = _cover.us06_c14;
+                txt_UsLPC06_C15.Text = _cover.us06_c15;
+                txt_UsLPC06_C16.Text = _cover.us06_c16;
+                txt_UsLPC06_C17.Text = _cover.us06_c17;
+
+                txt_UsLPC06_D14.Text = _cover.us06_d14;
+                txt_UsLPC06_D15.Text = _cover.us06_d15;
+                txt_UsLPC06_D16.Text = _cover.us06_d16;
+                txt_UsLPC06_D17.Text = _cover.us06_d17;
+
+                txt_UsLPC06_E14.Text = _cover.us06_e14;
+                txt_UsLPC06_E15.Text = _cover.us06_e15;
+                txt_UsLPC06_E16.Text = _cover.us06_e16;
+                txt_UsLPC06_E17.Text = _cover.us06_e17;
+
+                txt_UsLPC06_F14.Text = _cover.us06_f14;
+                txt_UsLPC06_F15.Text = _cover.us06_f15;
+                txt_UsLPC06_F16.Text = _cover.us06_f16;
+                txt_UsLPC06_F17.Text = _cover.us06_f17;
+
+                txt_UsLPC06_G14.Text = _cover.us06_g14;
+                txt_UsLPC06_G15.Text = _cover.us06_g15;
+                txt_UsLPC06_G16.Text = _cover.us06_g16;
+                txt_UsLPC06_G17.Text = _cover.us06_g17;
+
+                txt_UsLPC06_B25.Text = _cover.us06_b25;
+                txt_UsLPC06_D25.Text = _cover.us06_d25;
+                txt_UsLPC06_F25.Text = _cover.us06_f25;
+                #endregion
+
+                #region "Worksheet for HPA - Filtration"
+                txtB3.Text = _cover.ws_b3;
+                txtB4.Text = _cover.ws_b4;
+                txtB5.Text = _cover.ws_b5;
+                txtB6.Text = (_cover.ws_b6 == null) ? "50" : _cover.ws_b6;
+                txtB7.Text = (_cover.ws_b7 == null) ? "7.071" : _cover.ws_b7;
+                txtB8.Text = _cover.ws_b8;
+                txtB9.Text = _cover.ws_b9;
+                #endregion
+
+                //#region "Header Text"
+                //gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+                //gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
+                //gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+
+                //gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+                //gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
+                //gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+
+                //gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
+                //gvHpa.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
+                //gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
+                //#endregion
+
+
+
+
+                #region "Unit"
+
+                gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+                gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
+                gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
+
+                gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+                gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+
+                gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+                gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", ddlLiquidParticleUnit.SelectedItem.Text);
+
+                gvHpa.Columns[1].HeaderText = String.Format("Specification Limit, ({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
+                gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", ddlHardParticleAlalysisUnit.SelectedItem.Text);
+
+                gvClassification.Columns[2].HeaderText = String.Format("Results, {0}", ddlClassificationUnit.SelectedItem.Text);
+                #endregion
+                CalculateCas();
+
             }
             else
             {
@@ -616,7 +613,7 @@ namespace ALS.ALSI.Web.view.template
                         template_seagate_hpa_coverpage ws = this.Hpas[0];
 
                         ws.sample_id = this.SampleID;
-                        ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
+                        //ws.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         ws.lpc_type = Convert.ToInt32(ddlLpcType.SelectedValue);
                         ws.unit = Convert.ToInt32(ddlLiquidParticleUnit.SelectedValue);
                         ws.unit2 = Convert.ToInt32(ddlHardParticleAlalysisUnit.SelectedValue);
@@ -1766,7 +1763,9 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? "" : this.jobSample.singapore_ref_no)));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("notePZT", (cbNotePZT.Checked ? String.IsNullOrEmpty(lbNotePZT.Text) ? " " : lbNotePZT.Text : " ")));
+            reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
 
+            
 
             reportParameters.Add(new ReportParameter("rpt_unit", ddlLiquidParticleUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("rpt_unit2", ddlHardParticleAlalysisUnit.SelectedItem.Text));

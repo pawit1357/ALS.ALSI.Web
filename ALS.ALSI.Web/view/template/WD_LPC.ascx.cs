@@ -1032,7 +1032,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
             reportParameters.Add(new ReportParameter("partizleSizeCount", Regex.Match(typeOfTest.name, @"\d+").Value));
             reportParameters.Add(new ReportParameter("showTankCondition", (!pTankConditions.Visible).ToString()));
-
+            reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
 
 
 

@@ -15,9 +15,9 @@
                         <i class="fa fa-cogs"></i>WORKING SHEET &nbsp;<i class="icon-tasks"></i> (<asp:Label ID="lbJobStatus" runat="server" Text=""></asp:Label>)
                     </div>
                     <div class="actions">
-                        <asp:Button ID="btnCoverPage" runat="server" Text="CoverPage" CssClass="btn green" OnClick="btnWorkingFTIR_Click" />
-                        <asp:Button ID="btnWorkingFTIR" runat="server" Text="FTIR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
-                        <asp:Button ID="btnWorkingNVR" runat="server" Text="NVR" CssClass="btn blue" OnClick="btnWorkingFTIR_Click" />
+                        <asp:Button ID="btnCoverPage" runat="server" Text="CoverPage" CssClass="btn green" OnClick="BtnWorkingFTIR_Click" />
+                        <asp:Button ID="btnWorkingFTIR" runat="server" Text="FTIR" CssClass="btn blue" OnClick="BtnWorkingFTIR_Click" />
+                        <asp:Button ID="btnWorkingNVR" runat="server" Text="NVR" CssClass="btn blue" OnClick="BtnWorkingFTIR_Click" />
                         <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                                         <div class="col-md-9">
 
                                             <asp:GridView ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False"
-                                                CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
+                                                CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="GvMethodProcedure_RowDataBound" OnRowCommand="GvProcedure_RowCommand" OnRowCancelingEdit="GvMethodProcedure_RowCancelingEdit" OnRowEditing="GvMethodProcedure_RowEditing" OnRowUpdating="GvMethodProcedure_RowUpdating">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Analysis" ItemStyle-HorizontalAlign="Left">
                                                         <ItemTemplate>
@@ -129,11 +129,11 @@
                                             <tr>
 
                                                 <td>
-                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="CbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                             </tr>
                                         </table>
                                         <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult_RowDataBound" OnRowCommand="gvResult_RowCommand">
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="GvResult_RowDataBound" OnRowCommand="GvResult_RowCommand">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Non-Volatile Residue" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
@@ -176,7 +176,7 @@
 
                                         <br />
                                         <asp:GridView ID="gvResult1" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="gvResult1_RowDataBound" OnRowCommand="gvResult1_RowCommand">
+                                            CssClass="table table-striped table-bordered mini" ShowHeaderWhenEmpty="True" ShowFooter="True" DataKeyNames="ID,row_type" OnRowDataBound="GvResult1_RowDataBound" OnRowCommand="GvResult1_RowCommand">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Silicone Contamination" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
@@ -218,46 +218,46 @@
                                     </div>
                                 </div>
                                 <br />
-                                  <asp:Panel ID="pImage" runat="server">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <h6>Image:</h6>
-                                        <!-- IMG -->
-                                        <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
-                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting">
-                                            <Columns>
-                                                <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:Literal ID="litSeq" runat="server" Text='<%# Eval("seq")%>' />
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="txtSeq" runat="server" Text='<%# Eval("seq")%>' MaxLength="1"></asp:TextBox>
-                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" Enabled="true" TargetControlID="txtSeq" />
-                                                    </EditItemTemplate>
-                                                </asp:TemplateField>
+                                <asp:Panel ID="pImage" runat="server">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h6>Image:</h6>
+                                            <!-- IMG -->
+                                            <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
+                                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="GvRefImages_RowCommand" OnRowDeleting="GvRefImages_RowDeleting">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:Literal ID="litSeq" runat="server" Text='<%# Eval("seq")%>' />
+                                                        </ItemTemplate>
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="txtSeq" runat="server" Text='<%# Eval("seq")%>' MaxLength="1"></asp:TextBox>
+                                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" Enabled="true" TargetControlID="txtSeq" />
+                                                        </EditItemTemplate>
+                                                    </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Right">
-                                                    <ItemTemplate>
-                                                        <asp:Image ID="litSemImageat250x" runat="server" ImageUrl='<%# Eval("img_path")%>' Width="120" Height="120" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Right">
+                                                        <ItemTemplate>
+                                                            <asp:Image ID="litSemImageat250x" runat="server" ImageUrl='<%# Eval("img_path")%>' Width="120" Height="120" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Delete">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                            <EmptyDataTemplate>
-                                                <div class="data-not-found">
-                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                                </div>
-                                            </EmptyDataTemplate>
-                                        </asp:GridView>
-                                        <!-- IMG -->
+                                                    <asp:TemplateField HeaderText="Delete">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                                <EmptyDataTemplate>
+                                                    <div class="data-not-found">
+                                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                    </div>
+                                                </EmptyDataTemplate>
+                                            </asp:GridView>
+                                            <!-- IMG -->
+                                        </div>
                                     </div>
-                                </div>
-                              </asp:Panel>
+                                </asp:Panel>
                                 &nbsp;<h6>
                                     <%--=CONCATENATE("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is ", ROUND('working-FTIR'!$B$24,7),"--%> 
 Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is
@@ -303,7 +303,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                             <label class="control-label col-md-3"></label>
                             <div class="col-md-9">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="btnLoadFile_Click" />
+                                    <asp:Button ID="btnLoadFile" runat="server" Text="Load" CssClass="btn blue" OnClick="BtnLoadFile_Click" />
 
                                 </div>
                             </div>
@@ -481,7 +481,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Specification:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="B" DataValueField="ID" OnSelectedIndexChanged="ddlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlSpecification" runat="server" CssClass="select2_category form-control" DataTextField="B" DataValueField="ID"  OnSelectedIndexChanged="DdlSpecification_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
                                         <%--   </div>
@@ -494,7 +494,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Approve Status:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select2_category form-control" DataTextField="name" DataValueField="ID" OnSelectedIndexChanged="DdlStatus_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                             </div>
                                         </div>
                                         <%--     </div>
@@ -534,7 +534,7 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             <label class="control-label col-md-3">Download:</label>
                                             <div class="col-md-6">
                                                 <asp:Literal ID="litDownloadIcon" runat="server"></asp:Literal>
-                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="lbDownload_Click">
+                                                <asp:LinkButton ID="lbDownload" runat="server" OnClick="LbDownload_Click">
                                                     <asp:Label ID="lbDownloadName" runat="server" Text="Download"></asp:Label>
                                                 </asp:LinkButton>
                                             </div>
@@ -588,13 +588,13 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                             กำหนดทศนิยม</h>
                                 </div>
                                 <div class="modal-body" style="width: 600px; height: 400px; overflow-x: hidden; overflow-y: scroll; padding-bottom: 10px;">
-                                     <h1>CoverPage</h1>
+                                    <h1>CoverPage</h1>
                                     <table class="table table-striped">
 
                                         <tr>
                                             <th>(Note)silicon oil</th>
                                             <th>
-                                                <asp:TextBox ID="txtDecimal10" runat="server" TextMode="Number" CssClass="form-control" Text="2" OnTextChanged="txtDecimal10_TextChanged" AutoPostBack="true"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDecimal10" runat="server" TextMode="Number" CssClass="form-control" Text="2" OnTextChanged="TxtDecimal10_TextChanged" AutoPostBack="true"></asp:TextBox></td>
 
 
 
@@ -666,13 +666,10 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                                         <tr>
                                             <th>Unit</th>
                                             <th>
-                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
+                                                <asp:DropDownList ID="ddlUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="DdlUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                                 </asp:DropDownList>
 
-                                                <%--           <asp:DropDownList ID="ddlUnit" runat="server" CssClass="select2_category form-control" AutoPostBack="True">
-                                                    <asp:ListItem Value="1" Selected="True">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="2">ug/cm2</asp:ListItem>
-                                                </asp:DropDownList>--%>
+
 
 
                                             </th>
@@ -728,8 +725,8 @@ Note: The above analysis was carried out using FTIR spectrometer equipped with a
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn green" />
-                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="disable btn" OnClick="btnCancel_Click" />
+                                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="BtnSubmit_Click" CssClass="btn green" />
+                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="disable btn" OnClick="BtnCancel_Click"/>
                                     </div>
                                 </div>
                             </div>

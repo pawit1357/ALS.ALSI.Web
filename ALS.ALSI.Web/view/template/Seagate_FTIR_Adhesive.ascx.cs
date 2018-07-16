@@ -73,7 +73,7 @@ namespace ALS.ALSI.Web.view.template
             get { return (int)Session[GetType().Name + "SampleID"]; }
             set { Session[GetType().Name + "SampleID"] = value; }
         }
-        public List<template_img>  RefImg
+        public List<template_img> RefImg
         {
             get { return (List<template_img>)Session[GetType().Name + "template_img"]; }
             set { Session[GetType().Name + "template_img"] = value; }
@@ -1032,7 +1032,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 String unit = ddlUnit.SelectedItem.Text;// Convert.ToInt32(ddlUnit.SelectedValue);
 
-                List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC) ).ToList();
+                List<template_seagate_ftir_coverpage> ftir2 = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
 
                 if (ftir2.Count > 0)
                 {
@@ -1048,7 +1048,7 @@ namespace ALS.ALSI.Web.view.template
                     ftir2[2].C = (unit.Equals("ng/cm2")) ? ftirList[7].D : ftirList[8].D;
                     ftir2[3].C = (unit.Equals("ng/cm2")) ? ftirList[7].E : ftirList[8].E;
                     ftir2[4].C = (unit.Equals("ng/cm2")) ? ftirList[7].F : ftirList[8].F;
-                    ftir2[5].C = (unit.Equals("ng/cm2")) ? ftirList[7].G : ftirList[8].G;                   
+                    ftir2[5].C = (unit.Equals("ng/cm2")) ? ftirList[7].G : ftirList[8].G;
 
                 }
 
@@ -1090,7 +1090,7 @@ namespace ALS.ALSI.Web.view.template
 
                 //remark
                 //lbA42.Text = String.Format(" {0}  ug/part  or {1} ng/cm2.", ftirList[5].B, ftirList[6].B);
-                lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N"+txtDecimal10));
+                lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N" + txtDecimal10));
             }
             gvRefImages.DataSource = this.RefImg;
             gvRefImages.DataBind();
@@ -1135,8 +1135,9 @@ namespace ALS.ALSI.Web.view.template
 
                     new ReportParameter("ResultDesc", lbSpecDesc.Text),
                     new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)),
-                    new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.JobSample.singapore_ref_no) ? String.Empty : this.JobSample.singapore_ref_no))
-                };
+                    new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.JobSample.singapore_ref_no) ? String.Empty : this.JobSample.singapore_ref_no)),
+                    new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo)
+            };
 
                 // Variables
                 string mimeType = string.Empty;
@@ -1164,7 +1165,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
                 }
-                if ((nvrs.Count + ftirs.Count) > 10 && dat.Count>0)
+                if ((nvrs.Count + ftirs.Count) > 10 && dat.Count > 0)
                 {
                     viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", nvrs.ToDataTable())); // Add datasource here
                 }
@@ -1269,7 +1270,7 @@ namespace ALS.ALSI.Web.view.template
 
 
         }
-        
+
         private void DownloadWord()
         {
             HttpContext.Current.Response.Clear();

@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h5>METHOD/PROCEDURE:
-                                     <asp:GridView CssClass="table table-striped table-bordered table-advance table-hover" ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False" DataKeyNames="id" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvMethodProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowDeleting="gvMethodProcedure_RowDeleting" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
+                                     <asp:GridView CssClass="table table-striped table-bordered table-advance table-hover" DataKeyNames="id,status" ID="gvMethodProcedure" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvMethodProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowDeleting="gvMethodProcedure_RowDeleting" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
                                          <Columns>
                                              <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Right">
                                                  <ItemTemplate>
@@ -225,7 +225,14 @@
                                                  </EditItemTemplate>
 
                                              </asp:TemplateField>
-
+                                             <asp:TemplateField HeaderText="Hide">
+                                                 <ItemTemplate>
+                                                     <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="ACTIVE" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                         CommandArgument='<%# Eval("id")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                     <asp:LinkButton ID="btnUndo" runat="server" ToolTip="UnHide" CommandName="IN_ACTIVE" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                         CommandArgument='<%# Eval("id")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                 </ItemTemplate>
+                                             </asp:TemplateField>
                                          </Columns>
                                      </asp:GridView>
 
@@ -447,7 +454,14 @@
                                             </EditItemTemplate>
 
                                         </asp:TemplateField>
-
+                                        <asp:TemplateField HeaderText="Hide">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="ACTIVE" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("id")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="UnHide" CommandName="IN_ACTIVE" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("id")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
                                 <br />
@@ -646,7 +660,14 @@
                                             </EditItemTemplate>
 
                                         </asp:TemplateField>
-
+                                        <asp:TemplateField HeaderText="Hide">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="ACTIVE" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("id")%>'><i class="fa fa-minus"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnUndo" runat="server" ToolTip="UnHide" CommandName="IN_ACTIVE" OnClientClick="return confirm('ยกเลิกการซ่อนแถว ?');"
+                                                    CommandArgument='<%# Eval("id")%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
 
@@ -1187,7 +1208,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                             <div class="col-md-6">
-                                                <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control" TextMode="MultiLine" Columns="150"></asp:TextBox>
                                             </div>
                                         </div>
                                         <%--          </div>

@@ -1678,7 +1678,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("Test", String.Format("{0}\n,{1}", lbA20.Text, lbA20_1.Text)));
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
-
+            reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
 
 
             reportParameters.Add(new ReportParameter("rpt_unit", ddlLiquidParticleUnit.SelectedItem.Text));

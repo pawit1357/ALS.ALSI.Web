@@ -116,6 +116,13 @@ namespace ALS.ALSI.Web.view.request
         {
 
             this.jobSample.date_srchemist_complate = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+            switch (userRole)
+            {
+                case RoleEnum.ADMIN:
+                    this.jobSample.date_admin_word_inprogress = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                    break;
+            }
             this.jobSample.Update();
             job_sample_logs tmp = new job_sample_logs
             {

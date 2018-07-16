@@ -299,16 +299,7 @@ namespace ALS.ALSI.Web.view.request
                             }
                             break;
                         case RoleEnum.ADMIN:
-                            //if (String.IsNullOrEmpty(txtDuedate.Text))
-                            //{
-                            //    jobSample.due_date_lab = null;
-                            //    jobSample.due_date_customer = null;
-                            //}
-                            //else
-                            //{
-                                jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
                                 jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-                            //}
                             break;
                     }
                 }

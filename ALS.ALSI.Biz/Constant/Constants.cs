@@ -33,7 +33,7 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_JOB_REQUEST = APPNAME + "/view/request/JobRequest.aspx";
         public const String LINK_EDIT_SAMPLE = APPNAME + "/view/request/EditSample.aspx";
 
-        
+
         public const String LINK_SEARCH_JOB_REQUEST = APPNAME + "/view/request/SearchJobRequest.aspx";
         public const String LINK_JOB_CHANGE_STATUS = APPNAME + "/view/request/ChangeJobsStatus.aspx";
         public const String LINK_JOB_CHANGE_DUEDATE = APPNAME + "/view/request/ChangeJobDueDate.aspx";
@@ -51,7 +51,7 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_CHANGE_JOB_GROUP = APPNAME + "/view/request/ChangeJobGroup.aspx";
         public const String LINK_VIEW_FILE = APPNAME + "/view/request/ViewFile.aspx";
 
-        
+
 
         public const String LINK_ADMIN_PRINT = APPNAME + "/view/request/AdminPrint.aspx";
         public const String LINK_AMEND = APPNAME + "/view/request/JobAmend.aspx";
@@ -179,7 +179,7 @@ namespace ALS.ALSI.Biz.Constant
         ViewFile = 40,
         ChangeSrChemistStartJobDate = 41,
         ChangeAdminStartJobDate = 42,
-        ChangeSrChemistCompleteDate =43
+        ChangeSrChemistCompleteDate = 43
 
     }
 
@@ -223,8 +223,8 @@ namespace ALS.ALSI.Biz.Constant
         DOUBLE_ANALYSIS = 4,
         DISSOLVING = 5,
         WASHING = 6,
-        SEM_EDX_PARAMETERS =7,
-        ELEMENT_COMPOSITION =8
+        SEM_EDX_PARAMETERS = 7,
+        ELEMENT_COMPOSITION = 8
     }
     public enum ResultEnum
     {
@@ -437,14 +437,18 @@ namespace ALS.ALSI.Biz.Constant
     {
         METHOD_PROCECURE_HEADER = 1,
         METHOD_PROCECURE = 2,
-        CP_ANIONS_HEADER = 3,
-        CP_ANIONS = 4,
-        CP_CATIONS_HEADER = 5,
-        CP_CATIONS = 6,
-        WS_ANIONS_HEADER = 7,
-        WS_ANIONS = 8,
-        WS_CATIONS_HEADER = 9,
-        WS_CATIONS = 10
+        METHOD_PROCECURE_FORMULAR = 3,
+        CP_ANIONS_HEADER = 4,
+        CP_ANIONS = 5,
+        CP_ANIONS_FORMULAR = 6,
+        CP_CATIONS_HEADER = 7,
+        CP_CATIONS = 8,
+        CP_CATIONS_FORMULAR = 9,
+        WS_ANIONS_HEADER = 10,
+        WS_ANIONS = 11,
+        WS_CATIONS_HEADER = 12,
+        WS_CATIONS = 13,
+        SCREEN_VALUE = 14
     }
     public enum FreeTemplateStatusEnum : int
     {

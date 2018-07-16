@@ -49,7 +49,10 @@ namespace ALS.ALSI.Biz.DataAccess
         }
 
         #region "Custom"
-
+        public List<template_f_ic> SelectBySampleID(int _sample_id)
+        {
+            return _repository.Find(x => x.sample_id == _sample_id).ToList();
+        }
         public IEnumerable SearchData()
         {
             //using (ALSIEntities ctx = new ALSIEntities())

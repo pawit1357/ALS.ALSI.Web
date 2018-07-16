@@ -59,11 +59,11 @@ namespace ALS.ALSI.Web.view.template
             set { Session["job_sample"] = value; }
         }
 
-        public List<sample_method_procedure> ListSampleMethodProcedure
-        {
-            get { return (List<sample_method_procedure>)Session[GetType().Name + "sample_method_procedure"]; }
-            set { Session[GetType().Name + "sample_method_procedure"] = value; }
-        }
+        //public List<sample_method_procedure> ListSampleMethodProcedure
+        //{
+        //    get { return (List<sample_method_procedure>)Session[GetType().Name + "sample_method_procedure"]; }
+        //    set { Session[GetType().Name + "sample_method_procedure"] = value; }
+        //}
         public List<template_f_ic> ics
         {
             get { return (List<template_f_ic>)Session[GetType().Name + "ics"]; }
@@ -94,13 +94,13 @@ namespace ALS.ALSI.Web.view.template
 
         private void initialPage()
         {
-            this.CommandName = CommandNameEnum.Add;
-            this.ics = new List<template_f_ic>();
 
             m_template template = new m_template().SelectByID(this.jobSample.template_id);
-
-
-
+            this.ics = new template_f_ic().SelectBySampleID(this.SampleID);
+            if (this.ics == null)
+            {
+                this.ics = new List<template_f_ic>();
+            }
 
             FileInfo fileInfo = new FileInfo(template.path_source_file);
             using (var package = new ExcelPackage(fileInfo))
@@ -111,188 +111,162 @@ namespace ALS.ALSI.Web.view.template
                 ExcelWorksheet wCoverPage = package.Workbook.Worksheets["Coverpage-TH"];
                 ExcelWorksheet wSpecification = package.Workbook.Worksheets["Specification"];
 
-                #region "METHOD/PROCEDURE"
-                String[] methodAndProcedureHaders = configs["method.procedure.header.values"].ToString().Split(FreeTemplateUtil.DELIMITER);
 
-                sample_method_procedure _tmp = new sample_method_procedure();
-                _tmp.id = 1;
-                for (int c = 0; c < gvMethodProcedure.Columns.Count - 1; c++)
+
+                #region "SHOW COMPONENT"
+
+                ddlComponent.Items.Clear();
+                ddlComponent.DataSource = listSpecificatons;
+                ddlComponent.DataBind();
+                ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+                ddlAssignTo.Items.Clear();
+                ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
+                ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
+                ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
+                ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
+                ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
+                ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
+
+
+                tb_unit unit = new tb_unit();
+                ddlUnit.Items.Clear();
+                ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("IC")).ToList();
+                ddlUnit.DataBind();
+                ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+
+
+                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+                RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+
+                switch (userRole)
                 {
-                    if (c < methodAndProcedureHaders.Length)
-                    {
-                        gvMethodProcedure.Columns[c].Visible = true;
-                        gvMethodProcedure.Columns[c].HeaderText = methodAndProcedureHaders[c];
+                    case RoleEnum.LOGIN:
+                        #region "METHOD/PROCEDURE"
+                        String[] methodProcedureRanges = this.configs["method.procedure.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
+                        int colBegin = FreeTemplateUtil.GetColIndex(methodProcedureRanges[0]);
+                        int colEnd = FreeTemplateUtil.GetColIndex(methodProcedureRanges[1]);
+                        int roeBegin = FreeTemplateUtil.GetRowIndex(methodProcedureRanges[0]);
+                        int roeEnd = FreeTemplateUtil.GetRowIndex(methodProcedureRanges[1]);
 
-                        String data = this.configs[String.Format("method.procedure.row.1.col.{0}", (c + 1))].ToString();
-                        switch (c + 1)
+                        for (int r = roeBegin; r <= roeEnd; r++)
                         {
-                            case 1: _tmp.col_1 = data; break;
-                            case 2: _tmp.col_2 = data; break;
-                            case 3: _tmp.col_3 = data; break;
-                            case 4: _tmp.col_4 = data; break;
-                            case 5: _tmp.col_5 = data; break;
-                            case 6: _tmp.col_6 = data; break;
-                            case 7: _tmp.col_7 = data; break;
-                            case 8: _tmp.col_8 = data; break;
-                            case 9: _tmp.col_9 = data; break;
-                            case 10: _tmp.col_10 = data; break;
-                            case 11: _tmp.col_11 = data; break;
-                            case 12: _tmp.col_12 = data; break;
-                            case 13: _tmp.col_13 = data; break;
-                            case 14: _tmp.col_14 = data; break;
-                            case 15: _tmp.col_15 = data; break;
-                            case 16: _tmp.col_16 = data; break;
-                            case 17: _tmp.col_17 = data; break;
-                            case 18: _tmp.col_18 = data; break;
-                            case 19: _tmp.col_19 = data; break;
-                            case 20: _tmp.col_20 = data; break;
+                            template_f_ic ic = new template_f_ic();
+                            template_f_ic ic_formular = new template_f_ic();
+
+                            ic.id = CustomUtils.GetRandomNumberID();
+                            ic_formular.id = CustomUtils.GetRandomNumberID();
+
+                            int colIndex = 1;
+                            for (int c = colBegin; c <= colEnd; c++)
+                            {
+                                String addr = String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), r + 1);
+                                String value = (wCoverPage.Cells[addr].Value == null) ? "" : wCoverPage.Cells[addr].Value.ToString();
+                                if (value.IndexOf("!") != -1)
+                                {
+                                    setValueToTemplate(ref ic_formular, c, value);
+                                    value = "-";
+                                }
+                                setValueToTemplate(ref ic, c, value);
+
+                                colIndex++;
+                            }
+                            ic.row_type = (r == roeBegin) ? Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE);
+                            ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+
+                            if(ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE))
+                            {
+                                ic_formular.row_type = Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE_FORMULAR);
+                                ic_formular.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+                                this.ics.Add(ic_formular);
+
+                            }
+                            this.ics.Add(ic);
                         }
 
-                    }
-                    else
-                    {
-                        gvMethodProcedure.Columns[c].Visible = false;
-                    }
+                        #endregion
+                        break;
+                    case RoleEnum.CHEMIST:
+                        break;
+                    case RoleEnum.SR_CHEMIST:
+                        if (status == StatusEnum.SR_CHEMIST_CHECKING)
+                        {
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
+                            pRemark.Visible = false;
+                            pDisapprove.Visible = false;
+                            pSpecification.Visible = false;
+                            pStatus.Visible = true;
+                            pUploadfile.Visible = false;
+                            pDownload.Visible = false;
+                            btnSubmit.Visible = true;
+                        }
+                        break;
+                    case RoleEnum.ADMIN:
+                        if (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD)
+                        {
+                            pRemark.Visible = false;
+                            pDisapprove.Visible = false;
+                            pSpecification.Visible = false;
+                            pStatus.Visible = false;
+                            pUploadfile.Visible = true;
+                            pDownload.Visible = true;
+                            btnSubmit.Visible = true;
+                        }
+                        break;
+                    case RoleEnum.LABMANAGER:
+                        if (status == StatusEnum.LABMANAGER_CHECKING)
+                        {
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
+                            ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
+                            pRemark.Visible = false;
+                            pDisapprove.Visible = false;
+                            pSpecification.Visible = false;
+                            pStatus.Visible = true;
+                            pUploadfile.Visible = false;
+                            pDownload.Visible = true;
+                            btnSubmit.Visible = true;
+                        }
+                        break;
                 }
-                ListSampleMethodProcedure.Add(_tmp);
-                gvMethodProcedure.DataSource = ListSampleMethodProcedure;
-                gvMethodProcedure.DataBind();
 
+
+
+
+                //Disable Save button
+                btnCoverPage.CssClass = "btn blue";
+                btnWorking.CssClass = "btn green";
+                btnCoverPage.Visible = true;
+                btnWorking.Visible = true;
+
+
+                pCoverpage.Visible = true;
+                pWorkingIC.Visible = false;
+                pLoadFile.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
+                pRemark.Visible = false;
+                pDisapprove.Visible = false;
+                pSpecification.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC);
+                pStatus.Visible = (status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.LABMANAGER_CHECKING);
+                pUploadfile.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD);
+                pDownload.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+                pAnalyzeDate.Visible = (status == StatusEnum.CHEMIST_TESTING);
+                btnSubmit.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
+
+
+                switch (lbJobStatus.Text)
+                {
+                    case "CONVERT_PDF":
+                        litDownloadIcon.Text = "<i class=\"fa fa-file-pdf-o\"></i>";
+                        break;
+                    default:
+                        litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
+                        break;
+                }
                 #endregion
-                //#region "RESULT"
-                //String[] resultGv1 = configs["results.group.1.header.values"].ToString().Split(FreeTemplateUtil.DELIMITER);
 
-                //for (int i = 0; i < GridView1.Columns.Count - 1; i++)
-                //{
-                //    if (i < resultGv1.Length)
-                //    {
-                //        GridView1.Columns[i].Visible = true;
-                //        GridView1.Columns[i].HeaderText = resultGv1[i];
-                //    }
-                //    else
-                //    {
-                //        GridView1.Columns[i].Visible = false;
-                //    }
-                //}
-                //#endregion
-
+                Cal();//
             }
-            //this.listResult.Add(new template_f_ic { id = 0, row_type = 1 });//header
-            //GridView1.DataSource = this.listResult.Where(x => x.row_type == 1);
-            //GridView1.DataBind();
-
-
-
-
-            #region "SHOW COMPONENT"
-
-            ddlComponent.Items.Clear();
-            ddlComponent.DataSource = listSpecificatons;
-            ddlComponent.DataBind();
-            ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-
-            ddlAssignTo.Items.Clear();
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_CHECKING), Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_WORD), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_CHECKING), Convert.ToInt32(StatusEnum.LABMANAGER_CHECKING) + ""));
-            ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.ADMIN_CONVERT_PDF), Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF) + ""));
-
-
-            tb_unit unit = new tb_unit();
-            ddlUnit.Items.Clear();
-            ddlUnit.DataSource = unit.SelectAll().Where(x => x.unit_group.Equals("IC")).ToList();
-            ddlUnit.DataBind();
-            ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
-
-
-
-            StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
-
-            switch (userRole)
-            {
-                case RoleEnum.LOGIN:
-                    break;
-                case RoleEnum.CHEMIST:
-                    break;
-                case RoleEnum.SR_CHEMIST:
-                    if (status == StatusEnum.SR_CHEMIST_CHECKING)
-                    {
-                        ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_APPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_APPROVE) + ""));
-                        ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.SR_CHEMIST_DISAPPROVE), Convert.ToInt32(StatusEnum.SR_CHEMIST_DISAPPROVE) + ""));
-                        pRemark.Visible = false;
-                        pDisapprove.Visible = false;
-                        pSpecification.Visible = false;
-                        pStatus.Visible = true;
-                        pUploadfile.Visible = false;
-                        pDownload.Visible = false;
-                        btnSubmit.Visible = true;
-                    }
-                    break;
-                case RoleEnum.ADMIN:
-                    if (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD)
-                    {
-                        pRemark.Visible = false;
-                        pDisapprove.Visible = false;
-                        pSpecification.Visible = false;
-                        pStatus.Visible = false;
-                        pUploadfile.Visible = true;
-                        pDownload.Visible = true;
-                        btnSubmit.Visible = true;
-                    }
-                    break;
-                case RoleEnum.LABMANAGER:
-                    if (status == StatusEnum.LABMANAGER_CHECKING)
-                    {
-                        ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_APPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_APPROVE) + ""));
-                        ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
-                        pRemark.Visible = false;
-                        pDisapprove.Visible = false;
-                        pSpecification.Visible = false;
-                        pStatus.Visible = true;
-                        pUploadfile.Visible = false;
-                        pDownload.Visible = true;
-                        btnSubmit.Visible = true;
-                    }
-                    break;
-            }
-
-
-
-
-            //Disable Save button
-            btnCoverPage.CssClass = "btn blue";
-            btnWorking.CssClass = "btn green";
-            btnCoverPage.Visible = true;
-            btnWorking.Visible = true;
-
-
-            pCoverpage.Visible = true;
-            pWorkingIC.Visible = false;
-            pLoadFile.Visible = (status == StatusEnum.CHEMIST_TESTING || userLogin.role_id == Convert.ToInt32(RoleEnum.CHEMIST));
-            pRemark.Visible = false;
-            pDisapprove.Visible = false;
-            pSpecification.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC);
-            pStatus.Visible = (status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.LABMANAGER_CHECKING);
-            pUploadfile.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD);
-            pDownload.Visible = (status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
-            pAnalyzeDate.Visible = (status == StatusEnum.CHEMIST_TESTING);
-            btnSubmit.Visible = (status == StatusEnum.LOGIN_SELECT_SPEC || status == StatusEnum.CHEMIST_TESTING || status == StatusEnum.SR_CHEMIST_CHECKING || status == StatusEnum.ADMIN_CONVERT_PDF || status == StatusEnum.ADMIN_CONVERT_WORD || status == StatusEnum.LABMANAGER_CHECKING);
-
-
-            switch (lbJobStatus.Text)
-            {
-                case "CONVERT_PDF":
-                    litDownloadIcon.Text = "<i class=\"fa fa-file-pdf-o\"></i>";
-                    break;
-                default:
-                    litDownloadIcon.Text = "<i class=\"fa fa-file-word-o\"></i>";
-                    break;
-            }
-            #endregion
-
         }
         #endregion
         List<String> errors = new List<string>();
@@ -305,7 +279,7 @@ namespace ALS.ALSI.Web.view.template
 
             if (!Page.IsPostBack)
             {
-                this.ListSampleMethodProcedure = new List<sample_method_procedure>();
+                //this.ListSampleMethodProcedure = new List<sample_method_procedure>();
                 initialPage();
             }
         }
@@ -316,27 +290,26 @@ namespace ALS.ALSI.Web.view.template
         {
             try
             {
-                //if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
-                //{
-                //    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                //    template_pa_detail _cov = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
-                //    if (_cov != null)
-                //    {
-                //        RowTypeEnum cmd = (RowTypeEnum)Enum.Parse(typeof(RowTypeEnum), _cov.row_type.ToString(), true);
-                //        switch (cmd)
-                //        {
-                //            case RowTypeEnum.Hide:
-                //                _cov.row_status = Convert.ToInt32(RowTypeEnum.Hide);
-                //                break;
-                //            case RowTypeEnum.Normal:
-                //                _cov.row_status = Convert.ToInt32(RowTypeEnum.Normal);
-                //                break;
-                //        }
+                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+                {
+                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    template_f_ic _ic = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    if (_ic != null)
+                    {
+                        FreeTemplateStatusEnum cmd = (FreeTemplateStatusEnum)Enum.Parse(typeof(RowTypeEnum), _ic.status.ToString(), true);
+                        switch (cmd)
+                        {
+                            case FreeTemplateStatusEnum.ACTIVE:
+                                _ic.status = Convert.ToInt32(FreeTemplateStatusEnum.IN_ACTIVE);
+                                break;
+                            case FreeTemplateStatusEnum.IN_ACTIVE:
+                                _ic.status = Convert.ToInt32(FreeTemplateStatusEnum.ACTIVE);
+                                break;
+                        }
 
-                //        gvMethodProcedure.DataSource = PaDetail.Where(x => x.row_type == Convert.ToInt32(PAEnum.EVALUATION_OF_PARTICLES)).ToList();
-                //        gvMethodProcedure.DataBind();
-                //    }
-                //}
+                        Cal();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -354,11 +327,11 @@ namespace ALS.ALSI.Web.view.template
 
                 if (_btnHide != null && _btnUndo != null)
                 {
-                    RowTypeEnum cmd = (RowTypeEnum)Enum.ToObject(typeof(RowTypeEnum), (int)gvMethodProcedure.DataKeys[e.Row.RowIndex].Values[1]);
+                    FreeTemplateStatusEnum cmd = (FreeTemplateStatusEnum)Enum.ToObject(typeof(FreeTemplateStatusEnum), (int)gvMethodProcedure.DataKeys[e.Row.RowIndex].Values[1]);
 
                     switch (cmd)
                     {
-                        case RowTypeEnum.Hide:
+                        case FreeTemplateStatusEnum.IN_ACTIVE:
                             _btnHide.Visible = false;
                             _btnUndo.Visible = true;
                             e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -383,8 +356,9 @@ namespace ALS.ALSI.Web.view.template
         protected void gvMethodProcedure_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvMethodProcedure.EditIndex = e.NewEditIndex;
-            gvMethodProcedure.DataSource = this.ListSampleMethodProcedure;
-            gvMethodProcedure.DataBind();
+            Cal();
+            //gvMethodProcedure.DataSource = this.ListSampleMethodProcedure;
+            //gvMethodProcedure.DataBind();
         }
 
         protected void gvMethodProcedure_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -412,7 +386,7 @@ namespace ALS.ALSI.Web.view.template
             TextBox txt_col_20 = (TextBox)gvMethodProcedure.Rows[e.RowIndex].FindControl("txt_col_20");
 
 
-            sample_method_procedure _smp = this.ListSampleMethodProcedure.Where(x => x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            template_f_ic _smp = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
             if (_smp != null)
             {
                 _smp.col_1 = (txt_col_1 != null) ? txt_col_1.Text : String.Empty;
@@ -439,15 +413,15 @@ namespace ALS.ALSI.Web.view.template
 
             }
             gvMethodProcedure.EditIndex = -1;
-            gvMethodProcedure.DataSource = this.ListSampleMethodProcedure;
-            gvMethodProcedure.DataBind();
+            Cal();
         }
 
         protected void gvMethodProcedure_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvMethodProcedure.EditIndex = -1;
-            gvMethodProcedure.DataSource = this.ListSampleMethodProcedure;
-            gvMethodProcedure.DataBind();
+            Cal();
+            //gvMethodProcedure.DataSource = this.ListSampleMethodProcedure;
+            //gvMethodProcedure.DataBind();
         }
         #endregion
 
@@ -965,7 +939,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 ExcelWorksheet wSpecification = package.Workbook.Worksheets["Specification"];
                 ExcelWorksheet wCoverpage = package.Workbook.Worksheets["Coverpage-TH"];
-
                 #region "anions"
                 String[] anionsRanges = this.configs["result.anions.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
                 int anionsColBegin = FreeTemplateUtil.GetColIndex(anionsRanges[0]);
@@ -975,6 +948,11 @@ namespace ALS.ALSI.Web.view.template
                 for (int r = anionsRowBegin; r <= anionsRowEnd; r++)
                 {
                     template_f_ic ic = new template_f_ic();
+                    template_f_ic ic_formular = new template_f_ic();
+
+                    ic.id = CustomUtils.GetRandomNumberID();
+                    ic_formular.id = CustomUtils.GetRandomNumberID();
+
                     int colIndex = 1;
                     for (int c = anionsColBegin; c <= anionsColEnd; c++)
                     {
@@ -987,24 +965,19 @@ namespace ALS.ALSI.Web.view.template
                         {
                             String type = this.configs[String.Format("result.anions.type.col.{0}", colIndex)].ToString();
                             String key = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
-                            String value = String.Empty;
+                            String value = "-";
                             switch (type.ToUpper())
                             {
                                 case "TEXT":
                                     value = key;
                                     break;
                                 case "FORMULA":
-                                    if (key.IndexOf(this.SheetSpecification) != -1)
+                                    if (key.IndexOf("!") != -1)
                                     {
                                         String _key = String.Format("{0}{1}", key.Split(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK)[1], ddlComponent.SelectedValue);
                                         value = wSpecification.Cells[_key].Value.ToString();
                                         value = Regex.IsMatch(value, @"^\d+$") ? String.Format("< {0}", value) : value;
-
-                                        Console.WriteLine();
-                                    }
-                                    else
-                                    {
-                                        value = key;
+                                        setValueToTemplate(ref ic_formular, c, value);
                                     }
                                     break;
                             }
@@ -1014,7 +987,16 @@ namespace ALS.ALSI.Web.view.template
                     }
                     ic.row_type = (r == anionsRowBegin) ? Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS);
                     ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+                    //
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS))
+                    {
+                        ic_formular.row_type = Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_FORMULAR);
+                        ic_formular.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+                        this.ics.Add(ic_formular);
+                    }
                     this.ics.Add(ic);
+
+
                 }
                 #endregion
                 #region "cations"
@@ -1026,6 +1008,10 @@ namespace ALS.ALSI.Web.view.template
                 for (int r = cationsRowBegin; r <= cationsRowEnd; r++)
                 {
                     template_f_ic ic = new template_f_ic();
+                    template_f_ic ic_formular = new template_f_ic();
+                    ic.id = CustomUtils.GetRandomNumberID();
+                    ic_formular.id = CustomUtils.GetRandomNumberID();
+
                     int colIndex = 1;
                     for (int c = cationsColBegin; c <= cationsColEnd; c++)
                     {
@@ -1038,22 +1024,19 @@ namespace ALS.ALSI.Web.view.template
                         {
                             String type = this.configs[String.Format("result.cations.type.col.{0}", colIndex)].ToString();
                             String key = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
-                            String value = String.Empty;
+                            String value = "-";
                             switch (type.ToUpper())
                             {
                                 case "TEXT":
                                     value = key;
                                     break;
                                 case "FORMULA":
-                                    if (key.IndexOf(this.SheetSpecification) != -1)
+                                    if (key.IndexOf("!") != -1)
                                     {
                                         String _key = String.Format("{0}{1}", key.Split(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK)[1], ddlComponent.SelectedValue);
                                         value = wSpecification.Cells[_key].Value.ToString();
                                         value = Regex.IsMatch(value, @"^\d+$") ? String.Format("< {0}", value) : value;
-                                    }
-                                    else
-                                    {
-                                        value = key;
+                                        setValueToTemplate(ref ic_formular, c, value);
                                     }
                                     break;
                             }
@@ -1063,6 +1046,13 @@ namespace ALS.ALSI.Web.view.template
                     }
                     ic.row_type = (r == cationsRowBegin) ? Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS);
                     ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+                    //
+                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS))
+                    {
+                        ic_formular.row_type = Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_FORMULAR);
+                        ic_formular.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+                        this.ics.Add(ic_formular);
+                    }
                     this.ics.Add(ic);
                 }
                 #endregion
@@ -1092,24 +1082,36 @@ namespace ALS.ALSI.Web.view.template
 
         private void Cal()
         {
-            //try
-            //{
+
             #region "render header"
+            template_f_ic mpHeader = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE_HEADER)).FirstOrDefault();
+
             template_f_ic hGv1 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_HEADER)).FirstOrDefault();
             template_f_ic hGv2 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS_HEADER)).FirstOrDefault();
             template_f_ic hGv3 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS_HEADER)).FirstOrDefault();
             template_f_ic hGv4 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS_HEADER)).FirstOrDefault();
 
+            setGridViewHeader(ref gvMethodProcedure, mpHeader);
             setGridViewHeader(ref GridView1, hGv1);
             setGridViewHeader(ref GridView2, hGv2);
             setGridViewHeader(ref GridView3, hGv3);
             setGridViewHeader(ref GridView4, hGv4);
             #endregion
             #region "render data"
+            List<template_f_ic> listMP = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE)).ToList();
             List<template_f_ic> listCpAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS)).ToList();
             List<template_f_ic> listCpCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS)).ToList();
             List<template_f_ic> listWsAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS)).ToList();
             List<template_f_ic> listWsCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS)).ToList();
+
+            for (int r = 0; r < listMP.Count; r++)
+            {
+                setCalValue(listMP[r]);
+            }
+            for (int r = 0; r < listWsAnions.Count; r++)
+            {
+                setCalValue(listWsAnions[r]);
+            }
             for (int r = 0; r < listWsAnions.Count; r++)
             {
                 setCalValue(listWsAnions[r]);
@@ -1128,6 +1130,8 @@ namespace ALS.ALSI.Web.view.template
             }
 
 
+            gvMethodProcedure.DataSource = listMP;
+            gvMethodProcedure.DataBind();
             GridView1.DataSource = listCpAnions;
             GridView1.DataBind();
             GridView2.DataSource = listCpCations;
@@ -1267,7 +1271,7 @@ namespace ALS.ALSI.Web.view.template
         {
             if (_header != null)
             {
-                for (int c = 0; c < gv.Columns.Count - 1; c++)
+                for (int c = 0; c < gv.Columns.Count - 2; c++)
                 {
                     String headerName = String.Empty;
                     switch (c + 1)

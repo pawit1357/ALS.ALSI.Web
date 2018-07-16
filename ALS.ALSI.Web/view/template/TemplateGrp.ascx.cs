@@ -511,6 +511,10 @@ namespace ALS.ALSI.Web.view.template
                     {
                         Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.ad_hoc_tempalte_path));
                     }
+                    else
+                    {
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                    }
                     break;
                 case StatusEnum.LABMANAGER_CHECKING:
                 case StatusEnum.LABMANAGER_APPROVE:

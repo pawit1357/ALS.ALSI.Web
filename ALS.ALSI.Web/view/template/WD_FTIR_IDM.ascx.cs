@@ -862,7 +862,7 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("ResultDesc", String.IsNullOrEmpty(lbSpecDesc.Text)? "-":lbSpecDesc.Text));
                 reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
                 reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
-
+                reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
                 // Variables
                 Warning[] warnings;
                 string[] streamIds;

@@ -477,7 +477,7 @@ namespace ALS.ALSI.Web.view.request
                     DateTime due_date_lab = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][13]);
 
                     Boolean isGroupSubmit = Convert.ToBoolean(gv.DataKeys[e.Row.RowIndex][16]);
-
+                    Boolean isGrp = gv.DataKeys[e.Row.RowIndex][18].Equals("GRP");
 
 
                     LinkButton btnInfo = (LinkButton)e.Row.FindControl("btnInfo");
@@ -547,7 +547,7 @@ namespace ALS.ALSI.Web.view.request
 
                     btnChangeSrChemistStartJobDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold;
                     btnChangeAdminStartJobsDate.Visible = (userRole == RoleEnum.ADMIN) && !isHold;
-                    btnChangeSrChemistCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold;
+                    btnChangeSrChemistCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold && isGrp;
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
@@ -570,15 +570,7 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case RoleEnum.SR_CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.SR_CHEMIST_CHECKING) && !isHold;
-                            //switch (job_status)
-                            //{
-                            //    case StatusEnum.SR_CHEMIST_CHECKING:
-                            //        cbSelect.Visible = true;
-                            //        break;
-                            //    default:
-                            //        cbSelect.Visible = this.isOnSelect;
-                            //        break;
-                            //}
+     
                             cbSelect.Visible = true;
                             break;
                         case RoleEnum.LABMANAGER:
@@ -592,18 +584,6 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case RoleEnum.ADMIN:
                             btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF) && !isHold;
-                            //switch (job_status)
-                            //{
-                            //    case StatusEnum.ADMIN_CONVERT_WORD:
-                            //    case StatusEnum.ADMIN_CONVERT_PDF:
-                            //    case StatusEnum.JOB_COMPLETE:
-                            //        cbSelect.Visible = true && isGroupSubmit;
-                            //        break;
-                            //    case StatusEnum.LOGIN_SELECT_SPEC:
-                            //        cbSelect.Visible = true;
-                            //        Console.WriteLine();
-                            //        break;
-                            //}
                             cbSelect.Visible = true;
 
                             break;
@@ -616,6 +596,7 @@ namespace ALS.ALSI.Web.view.request
                             btnWorkFlow.Visible = false;
                             break;
                     }
+                    //btnChangeSrChemistCompleteDate.Visible = (userRole == RoleEnum.ADMIN) && isGrp;
                     btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN) && !isHold;
                     btnChangeSingaporeRefNo.Visible = (userRole == RoleEnum.CHEMIST) && !isHold;
                     btnChangeDueDate.Visible = ((userRole == RoleEnum.SR_CHEMIST)) && !isHold;

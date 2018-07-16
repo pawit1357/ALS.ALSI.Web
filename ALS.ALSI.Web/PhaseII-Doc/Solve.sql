@@ -6,13 +6,13 @@ from job_sample
 left join m_type_of_test on job_sample.type_of_test_id = m_type_of_test.id
 left join m_status on m_status.ID=job_sample.job_status
 left join m_template on job_sample.template_id = m_template.id
-where m_template.path_url like '%Seagate_HPA_1%' 
+where m_template.path_url like '%Seagate_FTIR_Adhesive%' 
 and m_template.status='A'
 order by job_sample.job_status;
 
 */
 
-select * from m_template where path_url like '%Seagate_HPA_Boyd%';
+select * from m_template where path_url like '%Seagate_FTIR_Adhesive%';
 
 select * from m_template where id=622;
 select * from template_wd_ftir_coverpage where sample_id=8515;

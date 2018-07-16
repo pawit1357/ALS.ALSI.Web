@@ -956,7 +956,8 @@ namespace ALS.ALSI.Web.view.template
                 new ReportParameter("SampleDescription",String.IsNullOrEmpty(reportHeader.description)? " ": reportHeader.description),
                 new ReportParameter("Test", "DHS"),
                 new ReportParameter("ResultDesc",String.IsNullOrEmpty(lbSpecDesc.Text)? " ": lbSpecDesc.Text),
-                new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no))
+                new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)),
+                new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo)
             };
 
 

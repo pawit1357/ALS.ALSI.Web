@@ -891,7 +891,7 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("img01Url", listHpaImg.Count.ToString()));
             reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
-
+            reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
             // Variables
             Warning[] warnings;
             string[] streamIds;

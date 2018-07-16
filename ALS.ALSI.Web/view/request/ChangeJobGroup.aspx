@@ -185,7 +185,7 @@
                                             <asp:RadioButton ID="rdNoReport" GroupName="rdUncertainty" runat="server" Checked="true" OnCheckedChanged="rdNoReport_CheckedChanged" AutoPostBack="true" />No Report
                                         </label>
                                         <label class="radio-inline">
-                                            <asp:RadioButton ID="rdWithReport" GroupName="rdUncertainty" runat="server" OnCheckedChanged="rdWithReport_CheckedChanged" AutoPostBack="true" />Upload with Report ( ใช้ผลทดสอบฉลับเดียวกัน )
+                                            <asp:RadioButton ID="rdWithReport" GroupName="rdUncertainty" runat="server" OnCheckedChanged="rdWithReport_CheckedChanged" AutoPostBack="true" />Upload with Report ( ใช้ผลทดสอบฉบับเดียวกัน )
                                         </label>
 
                                     </div>

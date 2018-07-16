@@ -516,6 +516,10 @@ namespace ALS.ALSI.Web.view.template
             {
                 Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.ad_hoc_tempalte_path));
             }
+            else
+            {
+                Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+            }
 
             //StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             //switch (status)

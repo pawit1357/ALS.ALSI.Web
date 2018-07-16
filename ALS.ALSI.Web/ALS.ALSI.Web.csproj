@@ -2125,7 +2125,9 @@
     <EmbeddedResource Include="ReportObject\ic_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\reportHeader - Copy.rdlc" />
     <EmbeddedResource Include="ReportObject\reportPAHeader.rdlc" />
-    <EmbeddedResource Include="ReportObject\reportHeader.rdlc" />
+    <EmbeddedResource Include="ReportObject\reportHeader.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\rptStricker.rdlc" />
     <EmbeddedResource Include="ReportObject\Signature.rdlc" />
   </ItemGroup>
