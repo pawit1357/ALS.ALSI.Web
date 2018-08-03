@@ -16,6 +16,8 @@ namespace ALS.ALSI.Biz.DataAccess
     {
         public int id { get; set; }
         public Nullable<int> sample_id { get; set; }
+        public Nullable<int> specification_id { get; set; }
+        public Nullable<sbyte> isNoSpec { get; set; }
         public string col_1 { get; set; }
         public string col_2 { get; set; }
         public string col_3 { get; set; }
@@ -36,9 +38,11 @@ namespace ALS.ALSI.Biz.DataAccess
         public string col_18 { get; set; }
         public string col_19 { get; set; }
         public string col_20 { get; set; }
+        public Nullable<int> seq { get; set; }
         public Nullable<int> row_type { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<System.DateTime> create_date { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
+        public Nullable<int> unit { get; set; }
     }
 }

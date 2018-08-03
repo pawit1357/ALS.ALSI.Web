@@ -102,7 +102,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                 String[] tmp = _sample.job_number.Split('-');
                 rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
 
-                rpt.supplementToReportNo = String.IsNullOrEmpty(AmRetest)? String.Empty: String.Format("ATT/{0}/{1}/{2}-{3}", String.Empty, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
+                rpt.supplementToReportNo = String.IsNullOrEmpty(AmRetest)? String.Empty: String.Format("ATT/{0}/{1}/{2}-{3}", tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
 
                 rpt.description = (String.IsNullOrEmpty(_sample.description) ? String.Empty : "Description:" + _sample.description + "\n") +
                                   (String.IsNullOrEmpty(_sample.model) ? String.Empty : "Model:" + _sample.model + "\n") +

@@ -259,7 +259,7 @@
                                     </tr>
                                 </table>
 
-                                <asp:GridView CssClass="table table-striped table-bordered table-advance table-hover" ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="id" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvMethodProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowDeleting="gvMethodProcedure_RowDeleting" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
+                                <asp:GridView CssClass="table table-striped table-bordered table-advance table-hover" ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="id,status" OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
                                     <Columns>
                                         <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
@@ -465,7 +465,7 @@
                                     </Columns>
                                 </asp:GridView>
                                 <br />
-                                <asp:GridView CssClass="table table-striped table-bordered table-advance table-hover" ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="id" OnRowDataBound="gvMethodProcedure_RowDataBound" OnRowCommand="gvMethodProcedure_RowCommand" OnRowCancelingEdit="gvMethodProcedure_RowCancelingEdit" OnRowDeleting="gvMethodProcedure_RowDeleting" OnRowEditing="gvMethodProcedure_RowEditing" OnRowUpdating="gvMethodProcedure_RowUpdating">
+                                <asp:GridView CssClass="table table-striped table-bordered table-advance table-hover" ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="id,status" OnRowDataBound="GridView2_RowDataBound" OnRowCommand="GridView2_RowCommand" OnRowCancelingEdit="GridView2_RowCancelingEdit" OnRowDeleting="GridView2_RowDeleting" OnRowEditing="GridView2_RowEditing" OnRowUpdating="GridView2_RowUpdating">
                                     <Columns>
                                         <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
@@ -670,7 +670,12 @@
                                         </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
-
+                                <h3>Remark</h3><br />
+                                <asp:Label ID="txtRemark1" runat="server"></asp:Label><br />
+                                <asp:Label ID="txtRemark2" runat="server"></asp:Label><br />
+                                <asp:Label ID="txtRemark3" runat="server"></asp:Label><br />
+                                <asp:Label ID="txtRemark4" runat="server"></asp:Label><br />
+                                <asp:Label ID="txtRemark5" runat="server"></asp:Label>
                             </div>
                         </div>
 
@@ -1209,6 +1214,9 @@
                                             <label class="control-label col-md-3">Remark:<span class="required">*</span></label>
                                             <div class="col-md-6">
                                                 <asp:TextBox ID="txtRemark" name="txtRemark" runat="server" CssClass="form-control" TextMode="MultiLine" Columns="150"></asp:TextBox>
+
+
+
                                             </div>
                                         </div>
                                         <%--          </div>

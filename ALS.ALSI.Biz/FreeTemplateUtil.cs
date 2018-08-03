@@ -16,6 +16,7 @@ namespace ALS.ALSI.Biz
         public static char DELIMITER = '#';
         public static char DELIMITER_SEMI_COLON = ':';
         public static char DELIMITER_EXCLAMATION_MARK = '!';
+        public static char DELIMITER_PIPE= '|';
 
 
         private FileInfo fs;
@@ -37,11 +38,12 @@ namespace ALS.ALSI.Biz
                 {
                     String currentVal = (item.Value == null) ? String.Empty : item.Value.ToString();
                     int pos = Convert.ToInt16(Regex.Replace(item.Address, @"[^\d]", ""));
-                    String columnType = sConfig.Cells["C" + pos].Text.ToLower();
-                    String mappingValue = sConfig.Cells["B" + pos].Text.ToLower();
-
-                    hash[currentVal] = String.Format("{0}", mappingValue);
-
+                    String C = sConfig.Cells["C" + pos].Text.ToLower();
+                    String B = sConfig.Cells["B" + pos].Text.ToLower();
+                    if (!B.Equals(""))
+                    {
+                        hash[currentVal] = String.Format("{0}|{1}", B,C);
+                    }
                     Console.WriteLine();
                 }
             }
@@ -56,7 +58,8 @@ namespace ALS.ALSI.Biz
             using (var package = new ExcelPackage(this.fs))
             {
                 ExcelWorksheet wSpecification = package.Workbook.Worksheets["Specification"];
-                var specificatoinList = wSpecification.Cells[configs["specification.range"].ToString()];
+                String ranges = configs["specification.range"].ToString().Split('|')[1].ToUpper();
+                var specificatoinList = wSpecification.Cells[ranges];
                 foreach (var _specification in specificatoinList)
                 {
                     int ID = Convert.ToInt16(Regex.Replace(_specification.Address, @"[^\d]", ""));

@@ -193,7 +193,7 @@ namespace ALS.ALSI.Web.view.request
             btnOperation.Visible = (userRole != RoleEnum.ACCOUNT);
             btnOperationPo.Visible = (userRole == RoleEnum.ADMIN);
             btnOperationDueDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN);
-            btnOperationSentToCus.Visible=(userRole == RoleEnum.ADMIN);
+            btnOperationSentToCus.Visible = (userRole == RoleEnum.ADMIN);
             btnElp.CssClass = "btn blue";
             //btnOperationDueDate.Text =  "Due date" : "";
             btnOperationGroupInvoice.Visible = (userRole == RoleEnum.ACCOUNT);
@@ -547,7 +547,7 @@ namespace ALS.ALSI.Web.view.request
 
                     btnChangeSrChemistStartJobDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold;
                     btnChangeAdminStartJobsDate.Visible = (userRole == RoleEnum.ADMIN) && !isHold;
-                    btnChangeSrChemistCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold && isGrp;
+                    btnChangeSrChemistCompleteDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold || (userRole == RoleEnum.ADMIN && isGrp);
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
@@ -570,7 +570,7 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case RoleEnum.SR_CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.SR_CHEMIST_CHECKING) && !isHold;
-     
+
                             cbSelect.Visible = true;
                             break;
                         case RoleEnum.LABMANAGER:
@@ -624,6 +624,7 @@ namespace ALS.ALSI.Web.view.request
                         case RoleEnum.ADMIN:
                         case RoleEnum.MARKETING:
                         case RoleEnum.BUSINESS_MANAGER:
+                        case RoleEnum.ACCOUNT:
                             litDueDate.Text = due_date_customer.ToString("dd MMM yyyy");
                             break;
                         default:

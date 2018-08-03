@@ -91,6 +91,16 @@ namespace ALS.ALSI.Web.view.template
         private String SheetWorkSheetName = "IC";
 
 
+        //public ExcelWorksheet wSpecification
+        //{
+        //    get { return (ExcelWorksheet)Session[GetType().Name + "wSpecification"]; }
+        //    set { Session[GetType().Name + "wSpecification"] = value; }
+        //}
+        //public ExcelWorksheet wCoverPage
+        //{
+        //    get { return (ExcelWorksheet)Session[GetType().Name + "wCoverPage"]; }
+        //    set { Session[GetType().Name + "wCoverPage"] = value; }
+        //}
 
         private void initialPage()
         {
@@ -110,8 +120,6 @@ namespace ALS.ALSI.Web.view.template
                 this.listSpecificatons = ftu.getSpecification();
                 ExcelWorksheet wCoverPage = package.Workbook.Worksheets["Coverpage-TH"];
                 ExcelWorksheet wSpecification = package.Workbook.Worksheets["Specification"];
-
-
 
                 #region "SHOW COMPONENT"
 
@@ -144,50 +152,70 @@ namespace ALS.ALSI.Web.view.template
                 {
                     case RoleEnum.LOGIN:
                         #region "METHOD/PROCEDURE"
-                        String[] methodProcedureRanges = this.configs["method.procedure.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
-                        int colBegin = FreeTemplateUtil.GetColIndex(methodProcedureRanges[0]);
-                        int colEnd = FreeTemplateUtil.GetColIndex(methodProcedureRanges[1]);
-                        int roeBegin = FreeTemplateUtil.GetRowIndex(methodProcedureRanges[0]);
-                        int roeEnd = FreeTemplateUtil.GetRowIndex(methodProcedureRanges[1]);
+                        //HEADER
+                        String[] headers = this.configs["method.procedure.data.header"].ToString().Split('|')[1].Split(',');
+                        int hc = 0;
+                        template_f_ic hIc = new template_f_ic();
 
-                        for (int r = roeBegin; r <= roeEnd; r++)
+                        foreach (String value in headers)
+                        {
+                            hIc.id = CustomUtils.GetRandomNumberID();
+                            setValueToTemplate(ref hIc, hc, value);
+                            hIc.row_type = Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE_HEADER);
+                            hIc.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+                            hc++;
+                        }
+                        this.ics.Add(hIc);
+
+                        //DETAIL ITEM
+                        String[] itemDetails = this.configs["method.procedure.data.ranges"].ToString().Split('|')[1].Split(':');
+
+                        int colBegin = FreeTemplateUtil.GetColIndex(itemDetails[0]);
+                        int colEnd = FreeTemplateUtil.GetColIndex(itemDetails[1]);
+                        int rowBegin = FreeTemplateUtil.GetRowIndex(itemDetails[0]);
+                        int rowEnd = FreeTemplateUtil.GetRowIndex(itemDetails[1]);
+                        for (int r = rowBegin; r <= rowEnd; r++)
                         {
                             template_f_ic ic = new template_f_ic();
-                            template_f_ic ic_formular = new template_f_ic();
-
                             ic.id = CustomUtils.GetRandomNumberID();
-                            ic_formular.id = CustomUtils.GetRandomNumberID();
-
                             int colIndex = 1;
                             for (int c = colBegin; c <= colEnd; c++)
                             {
-                                String addr = String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), r + 1);
-                                String value = (wCoverPage.Cells[addr].Value == null) ? "" : wCoverPage.Cells[addr].Value.ToString();
-                                if (value.IndexOf("!") != -1)
+                                try
                                 {
-                                    setValueToTemplate(ref ic_formular, c, value);
-                                    value = "-";
-                                }
-                                setValueToTemplate(ref ic, c, value);
+                                    String type = this.configs[String.Format("method.procedure.data.type.col.{0}", colIndex)].ToString().Split('|')[0];
 
+                                    String value = "";
+                                    switch (type)
+                                    {
+                                        case "text":
+                                            value = wCoverPage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
+                                            break;
+                                        case "formula":
+                                            //String detail = this.configs[String.Format("method.procedure.data.type.col.{0}", colIndex)].ToString().Split('|')[1];
+                                            //String _key = String.Format("{0}{1}", detail.Split(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK)[1], ddlComponent.SelectedValue);
+                                            //value = wSpecification.Cells[_key].Value.ToString();
+                                            //value = Regex.IsMatch(value, @"^\d+$") ? String.Format("< {0}", value) : value;
+                                            Console.WriteLine();
+                                            break;
+                                    }
+                                    setValueToTemplate(ref ic, c, value);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine();
+                                }
                                 colIndex++;
                             }
-                            ic.row_type = (r == roeBegin) ? Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE);
+                            ic.row_type = Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE);
                             ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
-
-                            if(ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE))
-                            {
-                                ic_formular.row_type = Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE_FORMULAR);
-                                ic_formular.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
-                                this.ics.Add(ic_formular);
-
-                            }
                             this.ics.Add(ic);
                         }
-
                         #endregion
                         break;
                     case RoleEnum.CHEMIST:
+                        ddlComponent.SelectedValue = this.ics[0].specification_id.ToString();
+                        ddlUnit.SelectedValue = this.ics[0].unit.ToString();
                         break;
                     case RoleEnum.SR_CHEMIST:
                         if (status == StatusEnum.SR_CHEMIST_CHECKING)
@@ -265,6 +293,59 @@ namespace ALS.ALSI.Web.view.template
                 }
                 #endregion
 
+                #region "remark"
+                if (this.configs["remark.item.1"] != null)
+                {
+                    txtRemark1.Text = this.configs["remark.item.1"].ToString().Split('|')[1];
+                }
+                else
+                {
+                    txtRemark1.Visible = false;
+                }
+                if (this.configs["remark.item.2"] != null)
+                {
+                    txtRemark2.Text = this.configs["remark.item.2"].ToString().Split('|')[1];
+                }
+                else
+                {
+                    txtRemark2.Visible = false;
+                }
+                if (this.configs["remark.item.3"] != null)
+                {
+                    txtRemark3.Text = this.configs["remark.item.3"].ToString().Split('|')[1];
+                }
+                else
+                {
+                    txtRemark3.Visible = false;
+                }
+                if (this.configs["remark.item.4"] != null)
+                {
+                    txtRemark4.Text = this.configs["remark.item.4"].ToString().Split('|')[1];
+                }
+                else
+                {
+                    txtRemark4.Visible = false;
+                }
+                if (this.configs["remark.item.5"] != null)
+                {
+                    txtRemark5.Text = this.configs["remark.item.5"].ToString().Split('|')[1];
+                }
+                else
+                {
+                    txtRemark5.Visible = false;
+                }
+
+                #endregion
+                #region "result"
+                if (Convert.ToInt32(ddlComponent.SelectedValue) > 0)
+                {
+                    String param1 = this.configs["result.desc.param.1"].ToString().Split('|')[1];
+                    String param2 = this.configs["result.desc.param.2"].ToString().Split('|')[1];
+                    String _param1 = wSpecification.Cells[param1].Value.ToString();
+                    String _param2 = wSpecification.Cells[String.Format(param2, ddlComponent.SelectedValue)].Value.ToString();
+                    lbSpecDesc.Text = String.Format(this.configs["result.desc"].ToString().Split('|')[1], _param1, _param2);
+                }
+                #endregion
                 Cal();//
             }
         }
@@ -284,8 +365,8 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
-
         #region "METHOD/PROCEDURE GRIDVIEW (EVENT)"
+
         protected void gvMethodProcedure_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
@@ -316,6 +397,7 @@ namespace ALS.ALSI.Web.view.template
                 Console.WriteLine();
             }
         }
+
         protected void gvMethodProcedure_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -423,8 +505,282 @@ namespace ALS.ALSI.Web.view.template
             //gvMethodProcedure.DataSource = this.ListSampleMethodProcedure;
             //gvMethodProcedure.DataBind();
         }
-        #endregion
 
+        #endregion
+        #region "GRIDVIEW-CP-AN (EVENT)"
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+                {
+                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    template_f_ic _ic = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    if (_ic != null)
+                    {
+                        FreeTemplateStatusEnum cmd = (FreeTemplateStatusEnum)Enum.Parse(typeof(RowTypeEnum), _ic.status.ToString(), true);
+                        switch (cmd)
+                        {
+                            case FreeTemplateStatusEnum.ACTIVE:
+                                _ic.status = Convert.ToInt32(FreeTemplateStatusEnum.IN_ACTIVE);
+                                break;
+                            case FreeTemplateStatusEnum.IN_ACTIVE:
+                                _ic.status = Convert.ToInt32(FreeTemplateStatusEnum.ACTIVE);
+                                break;
+                        }
+
+                        Cal();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
+        }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    FreeTemplateStatusEnum cmd = (FreeTemplateStatusEnum)Enum.ToObject(typeof(FreeTemplateStatusEnum), (int)GridView1.DataKeys[e.Row.RowIndex].Values[1]);
+
+                    switch (cmd)
+                    {
+                        case FreeTemplateStatusEnum.IN_ACTIVE:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+
+            }
+        }
+
+        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridView1.EditIndex = e.NewEditIndex;
+            Cal();
+        }
+
+        protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int _id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txt_col_1 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_1");
+            TextBox txt_col_2 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_2");
+            TextBox txt_col_3 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_3");
+            TextBox txt_col_4 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_4");
+            TextBox txt_col_5 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_5");
+            TextBox txt_col_6 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_6");
+            TextBox txt_col_7 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_7");
+            TextBox txt_col_8 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_8");
+            TextBox txt_col_9 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_9");
+            TextBox txt_col_10 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_10");
+            TextBox txt_col_11 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_11");
+            TextBox txt_col_12 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_12");
+            TextBox txt_col_13 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_13");
+            TextBox txt_col_14 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_14");
+            TextBox txt_col_15 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_15");
+            TextBox txt_col_16 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_16");
+            TextBox txt_col_17 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_17");
+            TextBox txt_col_18 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_18");
+            TextBox txt_col_19 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_19");
+            TextBox txt_col_20 = (TextBox)GridView1.Rows[e.RowIndex].FindControl("txt_col_20");
+
+
+            template_f_ic _smp = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            if (_smp != null)
+            {
+                _smp.col_1 = (txt_col_1 != null) ? txt_col_1.Text : String.Empty;
+                _smp.col_2 = (txt_col_2 != null) ? txt_col_2.Text : String.Empty;
+                _smp.col_3 = (txt_col_3 != null) ? txt_col_3.Text : String.Empty;
+                _smp.col_4 = (txt_col_4 != null) ? txt_col_4.Text : String.Empty;
+                _smp.col_5 = (txt_col_5 != null) ? txt_col_5.Text : String.Empty;
+                _smp.col_6 = (txt_col_6 != null) ? txt_col_6.Text : String.Empty;
+                _smp.col_7 = (txt_col_7 != null) ? txt_col_7.Text : String.Empty;
+                _smp.col_8 = (txt_col_8 != null) ? txt_col_8.Text : String.Empty;
+                _smp.col_9 = (txt_col_9 != null) ? txt_col_9.Text : String.Empty;
+                _smp.col_10 = (txt_col_10 != null) ? txt_col_10.Text : String.Empty;
+                _smp.col_11 = (txt_col_11 != null) ? txt_col_11.Text : String.Empty;
+                _smp.col_12 = (txt_col_12 != null) ? txt_col_12.Text : String.Empty;
+                _smp.col_13 = (txt_col_13 != null) ? txt_col_13.Text : String.Empty;
+                _smp.col_14 = (txt_col_14 != null) ? txt_col_14.Text : String.Empty;
+                _smp.col_15 = (txt_col_15 != null) ? txt_col_15.Text : String.Empty;
+                _smp.col_16 = (txt_col_16 != null) ? txt_col_16.Text : String.Empty;
+                _smp.col_17 = (txt_col_17 != null) ? txt_col_17.Text : String.Empty;
+                _smp.col_18 = (txt_col_18 != null) ? txt_col_18.Text : String.Empty;
+                _smp.col_19 = (txt_col_19 != null) ? txt_col_19.Text : String.Empty;
+                _smp.col_20 = (txt_col_20 != null) ? txt_col_20.Text : String.Empty;
+
+
+            }
+            GridView1.EditIndex = -1;
+            Cal();
+        }
+
+        protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridView1.EditIndex = -1;
+            Cal();
+        }
+        #endregion
+        #region "GRIDVIEW-CP-CA (EVENT)"
+
+        protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+                {
+                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    template_f_ic _ic = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+                    if (_ic != null)
+                    {
+                        FreeTemplateStatusEnum cmd = (FreeTemplateStatusEnum)Enum.Parse(typeof(RowTypeEnum), _ic.status.ToString(), true);
+                        switch (cmd)
+                        {
+                            case FreeTemplateStatusEnum.ACTIVE:
+                                _ic.status = Convert.ToInt32(FreeTemplateStatusEnum.IN_ACTIVE);
+                                break;
+                            case FreeTemplateStatusEnum.IN_ACTIVE:
+                                _ic.status = Convert.ToInt32(FreeTemplateStatusEnum.ACTIVE);
+                                break;
+                        }
+
+                        Cal();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
+        }
+
+        protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+
+                LinkButton _btnHide = (LinkButton)e.Row.FindControl("btnHide");
+                LinkButton _btnUndo = (LinkButton)e.Row.FindControl("btnUndo");
+
+                if (_btnHide != null && _btnUndo != null)
+                {
+                    FreeTemplateStatusEnum cmd = (FreeTemplateStatusEnum)Enum.ToObject(typeof(FreeTemplateStatusEnum), (int)GridView2.DataKeys[e.Row.RowIndex].Values[1]);
+
+                    switch (cmd)
+                    {
+                        case FreeTemplateStatusEnum.IN_ACTIVE:
+                            _btnHide.Visible = false;
+                            _btnUndo.Visible = true;
+                            e.Row.ForeColor = System.Drawing.Color.WhiteSmoke;
+                            break;
+                        default:
+                            _btnHide.Visible = true;
+                            _btnUndo.Visible = false;
+                            e.Row.ForeColor = System.Drawing.Color.Black;
+                            break;
+                    }
+                }
+
+
+            }
+        }
+
+        protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void GridView2_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridView2.EditIndex = e.NewEditIndex;
+            Cal();
+        }
+
+        protected void GridView2_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int _id = Convert.ToInt32(GridView2.DataKeys[e.RowIndex].Values[0].ToString());
+            TextBox txt_col_1 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_1");
+            TextBox txt_col_2 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_2");
+            TextBox txt_col_3 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_3");
+            TextBox txt_col_4 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_4");
+            TextBox txt_col_5 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_5");
+            TextBox txt_col_6 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_6");
+            TextBox txt_col_7 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_7");
+            TextBox txt_col_8 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_8");
+            TextBox txt_col_9 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_9");
+            TextBox txt_col_10 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_10");
+            TextBox txt_col_11 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_11");
+            TextBox txt_col_12 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_12");
+            TextBox txt_col_13 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_13");
+            TextBox txt_col_14 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_14");
+            TextBox txt_col_15 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_15");
+            TextBox txt_col_16 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_16");
+            TextBox txt_col_17 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_17");
+            TextBox txt_col_18 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_18");
+            TextBox txt_col_19 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_19");
+            TextBox txt_col_20 = (TextBox)GridView2.Rows[e.RowIndex].FindControl("txt_col_20");
+
+
+            template_f_ic _smp = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS) && x.id == Convert.ToInt32(_id)).FirstOrDefault();
+            if (_smp != null)
+            {
+                _smp.col_1 = (txt_col_1 != null) ? txt_col_1.Text : String.Empty;
+                _smp.col_2 = (txt_col_2 != null) ? txt_col_2.Text : String.Empty;
+                _smp.col_3 = (txt_col_3 != null) ? txt_col_3.Text : String.Empty;
+                _smp.col_4 = (txt_col_4 != null) ? txt_col_4.Text : String.Empty;
+                _smp.col_5 = (txt_col_5 != null) ? txt_col_5.Text : String.Empty;
+                _smp.col_6 = (txt_col_6 != null) ? txt_col_6.Text : String.Empty;
+                _smp.col_7 = (txt_col_7 != null) ? txt_col_7.Text : String.Empty;
+                _smp.col_8 = (txt_col_8 != null) ? txt_col_8.Text : String.Empty;
+                _smp.col_9 = (txt_col_9 != null) ? txt_col_9.Text : String.Empty;
+                _smp.col_10 = (txt_col_10 != null) ? txt_col_10.Text : String.Empty;
+                _smp.col_11 = (txt_col_11 != null) ? txt_col_11.Text : String.Empty;
+                _smp.col_12 = (txt_col_12 != null) ? txt_col_12.Text : String.Empty;
+                _smp.col_13 = (txt_col_13 != null) ? txt_col_13.Text : String.Empty;
+                _smp.col_14 = (txt_col_14 != null) ? txt_col_14.Text : String.Empty;
+                _smp.col_15 = (txt_col_15 != null) ? txt_col_15.Text : String.Empty;
+                _smp.col_16 = (txt_col_16 != null) ? txt_col_16.Text : String.Empty;
+                _smp.col_17 = (txt_col_17 != null) ? txt_col_17.Text : String.Empty;
+                _smp.col_18 = (txt_col_18 != null) ? txt_col_18.Text : String.Empty;
+                _smp.col_19 = (txt_col_19 != null) ? txt_col_19.Text : String.Empty;
+                _smp.col_20 = (txt_col_20 != null) ? txt_col_20.Text : String.Empty;
+
+
+            }
+            GridView2.EditIndex = -1;
+            Cal();
+        }
+
+        protected void GridView2_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridView2.EditIndex = -1;
+            Cal();
+        }
+        #endregion
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -442,20 +798,15 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-                    //foreach (template_wd_ic_coverpage _cover in this.coverpages)
-                    //{
-                    //    _cover.sample_id = this.SampleID;
-                    //    //_cover.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
-                    //    _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                    //    _cover.b12 = txtB12.Text;
-                    //    //_cover.ProcedureNo = txtProcedureNo.Text;
-                    //    _cover.NumOfPiecesUsedForExtraction = txtB13.Text;
-                    //    //_cover.ExtractionMedium = txtExtractionMedium.Text;
-                    //    _cover.ExtractionVolume = txtB11.Text;
-                    //}
-
-                    template_wd_ic_coverpage.DeleteBySampleID(this.SampleID);
-                    //template_wd_ic_coverpage.InsertList(this.coverpages);
+                    foreach (template_f_ic ic in this.ics)
+                    {
+                        ic.sample_id = this.SampleID;
+                        ic.specification_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                        ic.isNoSpec = Convert.ToSByte(cbCheckBox.Checked);
+                        ic.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                    }
+                    template_f_ic.DeleteBySampleID(this.SampleID);
+                    template_f_ic.InsertList(this.ics);
                     this.jobSample.date_login_complete = DateTime.Now;
                     this.jobSample.date_chemist_analyze = DateTime.Now;
                     break;
@@ -938,123 +1289,131 @@ namespace ALS.ALSI.Web.view.template
             using (var package = new ExcelPackage(fileInfo))
             {
                 ExcelWorksheet wSpecification = package.Workbook.Worksheets["Specification"];
-                ExcelWorksheet wCoverpage = package.Workbook.Worksheets["Coverpage-TH"];
+                ExcelWorksheet wCoverPage = package.Workbook.Worksheets["Coverpage-TH"];
                 #region "anions"
-                String[] anionsRanges = this.configs["result.anions.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
-                int anionsColBegin = FreeTemplateUtil.GetColIndex(anionsRanges[0]);
-                int anionsColEnd = FreeTemplateUtil.GetColIndex(anionsRanges[1]);
-                int anionsRowBegin = FreeTemplateUtil.GetRowIndex(anionsRanges[0]);
-                int anionsRowEnd = FreeTemplateUtil.GetRowIndex(anionsRanges[1]);
-                for (int r = anionsRowBegin; r <= anionsRowEnd; r++)
+                //HEADER
+                String[] headers = this.configs["result.anions.data.header"].ToString().Split('|')[1].Split(',');
+                int hc = 0;
+                template_f_ic hIc = new template_f_ic();
+
+                foreach (String value in headers)
+                {
+                    hIc.id = CustomUtils.GetRandomNumberID();
+                    setValueToTemplate(ref hIc, hc, value);
+                    hIc.row_type = Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_HEADER);
+                    hIc.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+                    hc++;
+                }
+                this.ics.Add(hIc);
+
+                //DETAIL ITEM
+                String[] itemDetails = this.configs["result.anions.data.ranges"].ToString().Split('|')[1].Split(':');
+
+                int colBegin = FreeTemplateUtil.GetColIndex(itemDetails[0]);
+                int colEnd = FreeTemplateUtil.GetColIndex(itemDetails[1]);
+                int rowBegin = FreeTemplateUtil.GetRowIndex(itemDetails[0]);
+                int rowEnd = FreeTemplateUtil.GetRowIndex(itemDetails[1]);
+
+                for (int r = rowBegin; r <= rowEnd; r++)
                 {
                     template_f_ic ic = new template_f_ic();
-                    template_f_ic ic_formular = new template_f_ic();
-
                     ic.id = CustomUtils.GetRandomNumberID();
-                    ic_formular.id = CustomUtils.GetRandomNumberID();
-
                     int colIndex = 1;
-                    for (int c = anionsColBegin; c <= anionsColEnd; c++)
+                    for (int c = colBegin; c <= colEnd; c++)
                     {
-                        if (r == anionsRowBegin)
+
+                        String type = this.configs[String.Format("result.anions.type.col.{0}", colIndex)].ToString().Split('|')[0];
+                        String[] formularCell = null;
+                        String value = "";
+                        switch (type)
                         {
-                            String value = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
-                            setValueToTemplate(ref ic, c, value);
+                            case "text":
+                                value = wCoverPage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
+                                break;
+                            case "formula.sp":
+                                formularCell = this.configs[String.Format("result.anions.type.col.{0}", colIndex)].ToString().Split('|')[1].Split(',');
+                                string cell = String.Format("{0}{1}", formularCell[r - rowBegin], ddlComponent.SelectedValue);
+                                value = wSpecification.Cells[cell].Value.ToString();
+                                value = Regex.IsMatch(value, @"^\d+$") ? String.Format("< {0}", value) : value;
+                                Console.WriteLine();
+                                break;
+                            case "formula.ws":
+                                Console.WriteLine();
+                                break;
                         }
-                        else
-                        {
-                            String type = this.configs[String.Format("result.anions.type.col.{0}", colIndex)].ToString();
-                            String key = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
-                            String value = "-";
-                            switch (type.ToUpper())
-                            {
-                                case "TEXT":
-                                    value = key;
-                                    break;
-                                case "FORMULA":
-                                    if (key.IndexOf("!") != -1)
-                                    {
-                                        String _key = String.Format("{0}{1}", key.Split(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK)[1], ddlComponent.SelectedValue);
-                                        value = wSpecification.Cells[_key].Value.ToString();
-                                        value = Regex.IsMatch(value, @"^\d+$") ? String.Format("< {0}", value) : value;
-                                        setValueToTemplate(ref ic_formular, c, value);
-                                    }
-                                    break;
-                            }
-                            setValueToTemplate(ref ic, c, value);
-                        }
+                        setValueToTemplate(ref ic, c, value);
                         colIndex++;
                     }
-                    ic.row_type = (r == anionsRowBegin) ? Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS);
+                    ic.row_type = Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS);
                     ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
-                    //
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS))
-                    {
-                        ic_formular.row_type = Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_FORMULAR);
-                        ic_formular.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
-                        this.ics.Add(ic_formular);
-                    }
                     this.ics.Add(ic);
-
-
                 }
                 #endregion
                 #region "cations"
-                String[] cationsRanges = this.configs["result.cations.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
-                int cationsColBegin = FreeTemplateUtil.GetColIndex(cationsRanges[0]);
-                int cationsColEnd = FreeTemplateUtil.GetColIndex(cationsRanges[1]);
-                int cationsRowBegin = FreeTemplateUtil.GetRowIndex(cationsRanges[0]);
-                int cationsRowEnd = FreeTemplateUtil.GetRowIndex(cationsRanges[1]);
-                for (int r = cationsRowBegin; r <= cationsRowEnd; r++)
+                //HEADER
+                headers = this.configs["result.cations.data.header"].ToString().Split('|')[1].Split(',');
+                hc = 0;
+                hIc = new template_f_ic();
+
+                foreach (String value in headers)
+                {
+                    hIc.id = CustomUtils.GetRandomNumberID();
+                    setValueToTemplate(ref hIc, hc, value);
+                    hIc.row_type = Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS_HEADER);
+                    hIc.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
+                    hc++;
+                }
+                this.ics.Add(hIc);
+
+                //DETAIL ITEM
+                itemDetails = this.configs["result.cations.data.ranges"].ToString().Split('|')[1].Split(':');
+
+                colBegin = FreeTemplateUtil.GetColIndex(itemDetails[0]);
+                colEnd = FreeTemplateUtil.GetColIndex(itemDetails[1]);
+                rowBegin = FreeTemplateUtil.GetRowIndex(itemDetails[0]);
+                rowEnd = FreeTemplateUtil.GetRowIndex(itemDetails[1]);
+                for (int r = rowBegin; r <= rowEnd; r++)
                 {
                     template_f_ic ic = new template_f_ic();
-                    template_f_ic ic_formular = new template_f_ic();
                     ic.id = CustomUtils.GetRandomNumberID();
-                    ic_formular.id = CustomUtils.GetRandomNumberID();
-
                     int colIndex = 1;
-                    for (int c = cationsColBegin; c <= cationsColEnd; c++)
+                    for (int c = colBegin; c <= colEnd; c++)
                     {
-                        if (r == cationsRowBegin)
+
+                        String type = this.configs[String.Format("result.cations.type.col.{0}", colIndex)].ToString().Split('|')[0];
+                        String[] formularCell = null;
+                        String value = "";
+                        switch (type)
                         {
-                            String value = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
-                            setValueToTemplate(ref ic, c, value);
+                            case "text":
+                                value = wCoverPage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
+                                break;
+                            case "formula.sp":
+                                formularCell = this.configs[String.Format("result.cations.type.col.{0}", colIndex)].ToString().Split('|')[1].Split(',');
+                                string cell = String.Format("{0}{1}", formularCell[c], ddlComponent.SelectedValue);
+                                value = wSpecification.Cells[cell].Value.ToString();
+                                value = Regex.IsMatch(value, @"^\d+$") ? String.Format("< {0}", value) : value;
+                                Console.WriteLine();
+                                break;
+                            case "formula.ws":
+                                Console.WriteLine();
+                                break;
                         }
-                        else
-                        {
-                            String type = this.configs[String.Format("result.cations.type.col.{0}", colIndex)].ToString();
-                            String key = wCoverpage.Cells[String.Format("{0}{1}", FreeTemplateUtil.GetColName(c), (r + 1))].Text;
-                            String value = "-";
-                            switch (type.ToUpper())
-                            {
-                                case "TEXT":
-                                    value = key;
-                                    break;
-                                case "FORMULA":
-                                    if (key.IndexOf("!") != -1)
-                                    {
-                                        String _key = String.Format("{0}{1}", key.Split(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK)[1], ddlComponent.SelectedValue);
-                                        value = wSpecification.Cells[_key].Value.ToString();
-                                        value = Regex.IsMatch(value, @"^\d+$") ? String.Format("< {0}", value) : value;
-                                        setValueToTemplate(ref ic_formular, c, value);
-                                    }
-                                    break;
-                            }
-                            setValueToTemplate(ref ic, c, value);
-                        }
+                        setValueToTemplate(ref ic, c, value);
                         colIndex++;
                     }
-                    ic.row_type = (r == cationsRowBegin) ? Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS_HEADER) : Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS);
+                    ic.row_type = Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS);
                     ic.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
-                    //
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS))
-                    {
-                        ic_formular.row_type = Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_FORMULAR);
-                        ic_formular.status = Convert.ToInt16(FreeTemplateStatusEnum.ACTIVE);
-                        this.ics.Add(ic_formular);
-                    }
                     this.ics.Add(ic);
                 }
+
+                #endregion
+                #region "result"
+                String param1 = this.configs["result.desc.param.1"].ToString().Split('|')[1];
+                String param2 = this.configs["result.desc.param.2"].ToString().Split('|')[1];
+                String _param1 = wSpecification.Cells[param1].Value.ToString();
+                String _param2 = wSpecification.Cells[String.Format(param2, ddlComponent.SelectedValue)].Value.ToString();
+                lbSpecDesc.Text = String.Format(this.configs["result.desc"].ToString().Split('|')[1], _param1, _param2);
                 #endregion
             }
             Cal();
@@ -1088,87 +1447,79 @@ namespace ALS.ALSI.Web.view.template
 
             template_f_ic hGv1 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_HEADER)).FirstOrDefault();
             template_f_ic hGv2 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS_HEADER)).FirstOrDefault();
-            template_f_ic hGv3 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS_HEADER)).FirstOrDefault();
-            template_f_ic hGv4 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS_HEADER)).FirstOrDefault();
+            //template_f_ic hGv3 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS_HEADER)).FirstOrDefault();
+            //template_f_ic hGv4 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS_HEADER)).FirstOrDefault();
+
+            //String[] pHeader = this.configs["method.procedure.data.header"].ToString().Split('|')[1].Split(',');
+
+            //String[] aHeader = this.configs["result.anions.data.header"].ToString().Split('|')[1].Split(',');
+            //String[] cHeader = this.configs["result.cations.data.header"].ToString().Split('|')[1].Split(',');
 
             setGridViewHeader(ref gvMethodProcedure, mpHeader);
             setGridViewHeader(ref GridView1, hGv1);
             setGridViewHeader(ref GridView2, hGv2);
-            setGridViewHeader(ref GridView3, hGv3);
-            setGridViewHeader(ref GridView4, hGv4);
+            //setGridViewHeader(ref GridView3, hGv3);
+            //setGridViewHeader(ref GridView4, hGv4);
+            initUnit();
             #endregion
+
             #region "render data"
             List<template_f_ic> listMP = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE)).ToList();
             List<template_f_ic> listCpAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS)).ToList();
             List<template_f_ic> listCpCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS)).ToList();
-            List<template_f_ic> listWsAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS)).ToList();
-            List<template_f_ic> listWsCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS)).ToList();
+            //List<template_f_ic> listWsAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS)).ToList();
+            //List<template_f_ic> listWsCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS)).ToList();
 
-            for (int r = 0; r < listMP.Count; r++)
+            //for (int r = 0; r < listMP.Count; r++)
+            //{
+            //    setCalValue(listMP[r]);
+            //}
+            //for (int r = 0; r < listWsAnions.Count; r++)
+            //{
+            //    setCalValue(listWsAnions[r]);
+            //}
+            //for (int r = 0; r < listWsAnions.Count; r++)
+            //{
+            //    setCalValue(listWsAnions[r]);
+            //}
+            //for (int r = 0; r < listWsCations.Count; r++)
+            //{
+            //    setCalValue(listWsCations[r]);
+            //}
+            //for (int r = 0; r < listCpAnions.Count; r++)
+            //{
+            //    setCalValue(listCpAnions[r]);
+            //}
+            //for (int r = 0; r < listCpCations.Count; r++)
+            //{
+            //    setCalValue(listCpCations[r]);
+            //}
+            try
             {
-                setCalValue(listMP[r]);
-            }
-            for (int r = 0; r < listWsAnions.Count; r++)
-            {
-                setCalValue(listWsAnions[r]);
-            }
-            for (int r = 0; r < listWsAnions.Count; r++)
-            {
-                setCalValue(listWsAnions[r]);
-            }
-            for (int r = 0; r < listWsCations.Count; r++)
-            {
-                setCalValue(listWsCations[r]);
-            }
-            for (int r = 0; r < listCpAnions.Count; r++)
-            {
-                setCalValue(listCpAnions[r]);
-            }
-            for (int r = 0; r < listCpCations.Count; r++)
-            {
-                setCalValue(listCpCations[r]);
-            }
 
 
-            gvMethodProcedure.DataSource = listMP;
-            gvMethodProcedure.DataBind();
-            GridView1.DataSource = listCpAnions;
-            GridView1.DataBind();
-            GridView2.DataSource = listCpCations;
-            GridView2.DataBind();
-            GridView3.DataSource = listWsAnions;
-            GridView3.DataBind();
-            GridView4.DataSource = listWsCations;
-            GridView4.DataBind();
+
+                gvMethodProcedure.DataSource = listMP;
+                gvMethodProcedure.DataBind();
+                GridView1.DataSource = listCpAnions;
+                GridView1.DataBind();
+                GridView2.DataSource = listCpCations;
+                GridView2.DataBind();
+                //    GridView3.DataSource = listWsAnions;
+                //    GridView3.DataBind();
+                //    GridView4.DataSource = listWsCations;
+                //    GridView4.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
             #endregion
-
         }
 
         protected void ddlUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //gvAnionic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //gvAnionic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //gvAnionic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //gvCationic.Columns[1].HeaderText = String.Format("Specification Limits, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //gvCationic.Columns[2].HeaderText = String.Format("Results, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-            //gvCationic.Columns[3].HeaderText = String.Format("Method Detection Limit, ({0})", ddlUnit.SelectedItem.Text);// getUnitText(this.coverpages[0].wunit));
-
-
-            //gvResultAnions.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
-            //gvResultAnions.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
-            //gvResultAnions.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
-            //gvResultAnions.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-            //gvResultAnions.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-            //gvResultAnions.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
-
-            //gvResultCations.Columns[1].HeaderText = String.Format("Conc of water Blankµg/ L(B)", ddlUnit.SelectedItem.Text);
-            //gvResultCations.Columns[2].HeaderText = String.Format("Conc of Sample µg/ L(C)", ddlUnit.SelectedItem.Text);
-            //gvResultCations.Columns[4].HeaderText = String.Format("Raw Results {0}", ddlUnit.SelectedItem.Text);
-            //gvResultCations.Columns[5].HeaderText = String.Format("Method Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-            //gvResultCations.Columns[6].HeaderText = String.Format("Instrument Detection Limit  {0}", ddlUnit.SelectedItem.Text);
-            //gvResultCations.Columns[8].HeaderText = String.Format("Final Conc. of Sample  {0}", ddlUnit.SelectedItem.Text);
-            //ModolPopupExtender.Show();
-            //calculateByFormular();
+            Cal();
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
@@ -1184,18 +1535,30 @@ namespace ALS.ALSI.Web.view.template
 
         protected void cbCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbCheckBox.Checked)
+
+            m_template template = new m_template().SelectByID(this.jobSample.template_id);
+
+            FileInfo fileInfo = new FileInfo(template.path_source_file);
+            using (var package = new ExcelPackage(fileInfo))
             {
-                lbSpecDesc.Text = String.Format("This sample is no {0} specification reference", "WD");
+                ExcelWorksheet wSpecification = package.Workbook.Worksheets["Specification"];
+                if (cbCheckBox.Checked)
+                {
+                    lbSpecDesc.Text = this.configs["result.desc.no"].ToString().Split('|')[1];
+                }
+                else
+                {
+                    #region "result"
+                    String param1 = this.configs["result.desc.param.1"].ToString().Split('|')[1];
+                    String param2 = this.configs["result.desc.param.2"].ToString().Split('|')[1];
+                    String _param1 = wSpecification.Cells[param1].Value.ToString();
+                    String _param2 = wSpecification.Cells[String.Format(param2, ddlComponent.SelectedValue)].Value.ToString();
+                    lbSpecDesc.Text = String.Format(this.configs["result.desc"].ToString().Split('|')[1], _param1, _param2);
+                    #endregion
+                }
+
             }
-            else
-            {
-                //tb_m_detail_spec tem = new tb_m_detail_spec().SelectByID(int.Parse(ddlDetailSpec.SelectedValue));
-                //if (tem != null)
-                //{
-                //    lbSpecDesc.Text = String.Format("The specification is based on Western Digital's document no. {0} {1}", tem.B, tem.A);
-                //}
-            }
+
 
         }
 
@@ -1463,6 +1826,25 @@ namespace ALS.ALSI.Web.view.template
 
             }
             return digit;
+        }
+
+        private void initUnit()
+        {
+            //String[] pHeader = this.configs["method.procedure.data.header"].ToString().Split('|')[1].Split(',');
+            String[] aHeader = this.configs["result.anions.data.header"].ToString().Split('|')[1].Split(',');
+            String[] cHeader = this.configs["result.cations.data.header"].ToString().Split('|')[1].Split(',');
+            //for (int c = 0; c < pHeader.Length; c++)
+            //{
+            //    gvMethodProcedure.Columns[c].HeaderText = String.Format(pHeader[c], ddlUnit.SelectedItem.Text);
+            //}
+            for (int c = 0; c < aHeader.Length; c++)
+            {
+                GridView1.Columns[c].HeaderText = String.Format(aHeader[c], ddlUnit.SelectedItem.Text);
+            }
+            for (int c = 0; c < cHeader.Length; c++)
+            {
+                GridView2.Columns[c].HeaderText = String.Format(cHeader[c], ddlUnit.SelectedItem.Text);
+            }
         }
     }
 }

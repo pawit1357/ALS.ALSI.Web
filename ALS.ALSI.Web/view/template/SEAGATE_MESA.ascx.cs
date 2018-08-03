@@ -782,6 +782,8 @@ namespace ALS.ALSI.Web.view.template
             DataTable dtQ4 = new DataTable();
             DataTable dtQ5 = new DataTable();
             DataTable dtQ6 = new DataTable();
+            DataTable dtQ7 = new DataTable();
+            DataTable dtQ8 = new DataTable();
 
 
             if (dat.Count >= 1)
@@ -819,7 +821,18 @@ namespace ALS.ALSI.Web.view.template
                 tmp.Add(dat[5]);
                 dtQ6 = tmp.ToDataTable();
             }
-
+            if (dat.Count >= 7)
+            {
+                tmp = new List<template_seagate_mesa_img>();
+                tmp.Add(dat[6]);
+                dtQ7 = tmp.ToDataTable();
+            }
+            if (dat.Count >= 7)
+            {
+                tmp = new List<template_seagate_mesa_img>();
+                tmp.Add(dat[7]);
+                dtQ8 = tmp.ToDataTable();
+            }
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", this.coverpages.Where(x => !x.specification.Equals("-")).ToDataTable())); // Add datasource here
 
             if (dtQ1 != null && dtQ1.Rows.Count > 0)
@@ -872,8 +885,22 @@ namespace ALS.ALSI.Web.view.template
             {
                 viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet8", new DataTable())); // Add datasource here
             }
-
-
+            if (dtQ7 != null && dtQ7.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet9", dtQ7)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet9", new DataTable())); // Add datasource here
+            }
+            if (dtQ8 != null && dtQ8.Rows.Count > 0)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet10", dtQ8)); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet10", new DataTable())); // Add datasource here
+            }
 
             string download = String.Empty;
 

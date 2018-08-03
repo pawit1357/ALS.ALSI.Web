@@ -642,6 +642,9 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sample_id" Type="int" />
+          <Property Name="specification_id" Type="int" />
+          <Property Name="isNoSpec" Type="tinyint" />
+          <Property Name="unit" Type="int" />
           <Property Name="col_1" Type="varchar" MaxLength="200" />
           <Property Name="col_2" Type="varchar" MaxLength="200" />
           <Property Name="col_3" Type="varchar" MaxLength="200" />
@@ -662,6 +665,7 @@
           <Property Name="col_18" Type="varchar" MaxLength="200" />
           <Property Name="col_19" Type="varchar" MaxLength="200" />
           <Property Name="col_20" Type="varchar" MaxLength="200" />
+          <Property Name="seq" Type="int" />
           <Property Name="row_type" Type="int" />
           <Property Name="status" Type="int" />
           <Property Name="create_date" Type="datetime" Precision="0" />
@@ -2828,6 +2832,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sample_id" Type="Int32" />
+          <Property Name="specification_id" Type="Int32" />
+          <Property Name="isNoSpec" Type="SByte" />
           <Property Name="col_1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="col_2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="col_3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -2848,10 +2854,12 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="col_18" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="col_19" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="col_20" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="seq" Type="Int32" />
           <Property Name="row_type" Type="Int32" />
           <Property Name="status" Type="Int32" />
           <Property Name="create_date" Type="DateTime" />
           <Property Name="update_date" Type="DateTime" />
+          <Property Name="unit" Type="Int32" />
         </EntityType>
         <EntityType Name="template_img">
           <Key>
@@ -4801,10 +4809,12 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_f_ic">
             <EntityTypeMapping TypeName="alsiModel.template_f_ic">
               <MappingFragment StoreEntitySet="template_f_ic">
+                <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
                 <ScalarProperty Name="col_20" ColumnName="col_20" />
                 <ScalarProperty Name="col_19" ColumnName="col_19" />
                 <ScalarProperty Name="col_18" ColumnName="col_18" />
@@ -4825,6 +4835,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="col_3" ColumnName="col_3" />
                 <ScalarProperty Name="col_2" ColumnName="col_2" />
                 <ScalarProperty Name="col_1" ColumnName="col_1" />
+                <ScalarProperty Name="isNoSpec" ColumnName="isNoSpec" />
+                <ScalarProperty Name="specification_id" ColumnName="specification_id" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

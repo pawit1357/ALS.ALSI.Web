@@ -130,6 +130,51 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.GridView GridView2;
         
         /// <summary>
+        /// txtRemark1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtRemark1;
+        
+        /// <summary>
+        /// txtRemark2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtRemark2;
+        
+        /// <summary>
+        /// txtRemark3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtRemark3;
+        
+        /// <summary>
+        /// txtRemark4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtRemark4;
+        
+        /// <summary>
+        /// txtRemark5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtRemark5;
+        
+        /// <summary>
         /// pWorkingIC control.
         /// </summary>
         /// <remarks>

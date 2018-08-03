@@ -26,7 +26,23 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             return _repository.GetAll().ToList();
         }
+        public static void DeleteBySampleID(int _sampleID)
+        {
+            List<template_f_ic> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
+            foreach (template_f_ic tmp in lists)
+            {
+                _repository.Delete(tmp);
+            }
+        }
 
+        public static void InsertList(List<template_f_ic> _lists)
+        {
+
+            foreach (template_f_ic tmp in _lists)
+            {
+                tmp.Insert();
+            }
+        }
         public template_f_ic SelectByID(int _id)
         {
             
