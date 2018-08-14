@@ -49,11 +49,13 @@ namespace ALS.ALSI.Web.view.template
             get { return (job_sample)Session["job_sample"]; }
             set { Session["job_sample"] = value; }
         }
-        //public List<template_seagate_gcms_coverpage_img> refImg
-        //{
-        //    get { return (List<template_seagate_gcms_coverpage_img>)Session[GetType().Name + "refImg"]; }
-        //    set { Session[GetType().Name + "refImg"] = value; }
-        //}
+
+        public List<ws_hash_value> WsHashValue
+        {
+            get { return (List<ws_hash_value>)Session[GetType().Name + "WsHashValue"]; }
+            set { Session[GetType().Name + "WsHashValue"] = value; }
+        }
+
         public users_login userLogin
         {
             get
@@ -153,7 +155,37 @@ namespace ALS.ALSI.Web.view.template
 
 
             /*INFO*/
-
+            if (this.WsHashValue != null)
+            {
+                try
+                {
+                    this.WsHashValue = new ws_hash_value().SelectBySampleID(this.SampleID);
+                    txtFloatResult01.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult01")).FirstOrDefault().val;
+                    txtFloatResult02.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult02")).FirstOrDefault().val;
+                    txtFloatResult03.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult03")).FirstOrDefault().val;
+                    txtFloatResult04.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult04")).FirstOrDefault().val;
+                    txtFloatResult05.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult05")).FirstOrDefault().val;
+                    txtFloatResult06.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult06")).FirstOrDefault().val;
+                    txtFloatResult07.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult07")).FirstOrDefault().val;
+                    txtFloatResult08.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult08")).FirstOrDefault().val;
+                    txtFloatResult09.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult09")).FirstOrDefault().val;
+                    txtFloatResult10.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult10")).FirstOrDefault().val;
+                    txtFloatResult11.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult11")).FirstOrDefault().val;
+                    txtFloatResult12.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult12")).FirstOrDefault().val;
+                    txtFloatResult13.Text = this.WsHashValue.Where(x => x.key.Equals("txtFloatResult13")).FirstOrDefault().val;
+                    txtDecimal01.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal01")).FirstOrDefault().val;
+                    txtDecimal02.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal02")).FirstOrDefault().val;
+                    txtDecimal06.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal06")).FirstOrDefault().val;
+                    txtDecimal07.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal07")).FirstOrDefault().val;
+                    txtDecimal08.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal08")).FirstOrDefault().val;
+                    txtDecimal09.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal09")).FirstOrDefault().val;
+                    txtDecimal10.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal10")).FirstOrDefault().val;
+                    txtDecimal11.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal11")).FirstOrDefault().val;
+                    txtDecimal12.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal12")).FirstOrDefault().val;
+                }
+                catch (Exception ex) { }
+            }
+            ///////
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             this.coverpages = template_seagate_gcms_coverpage.FindAllBySampleID(this.SampleID);
 
@@ -498,6 +530,7 @@ namespace ALS.ALSI.Web.view.template
             #endregion
 
 
+
             //initial button.
             btnCoverPage.CssClass = "btn blue";
             btnRH.CssClass = "btn green";
@@ -578,6 +611,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_gcms_coverpage.InsertList(this.coverpages);
+
 
                     #endregion
 
@@ -764,6 +798,54 @@ namespace ALS.ALSI.Web.view.template
                             cov.remark5 = lbRemark5.Text;
                         }
                         template_seagate_gcms_coverpage.UpdateList(this.coverpages);
+                        this.WsHashValue = new List<ws_hash_value>();
+                        ws_hash_value ws = new ws_hash_value { id = 1, sample_id = this.SampleID, key = "txtFloatResult01", val = txtFloatResult01.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 2, sample_id = this.SampleID, key = "txtFloatResult02", val = txtFloatResult02.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 3, sample_id = this.SampleID, key = "txtFloatResult03", val = txtFloatResult03.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 4, sample_id = this.SampleID, key = "txtFloatResult04", val = txtFloatResult04.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 5, sample_id = this.SampleID, key = "txtFloatResult05", val = txtFloatResult05.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 6, sample_id = this.SampleID, key = "txtFloatResult06", val = txtFloatResult06.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 7, sample_id = this.SampleID, key = "txtFloatResult07", val = txtFloatResult07.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 8, sample_id = this.SampleID, key = "txtFloatResult08", val = txtFloatResult08.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 9, sample_id = this.SampleID, key = "txtFloatResult09", val = txtFloatResult09.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 10, sample_id = this.SampleID, key = "txtFloatResult10", val = txtFloatResult10.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 11, sample_id = this.SampleID, key = "txtFloatResult11", val = txtFloatResult11.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 12, sample_id = this.SampleID, key = "txtFloatResult12", val = txtFloatResult12.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 13, sample_id = this.SampleID, key = "txtFloatResult13", val = txtFloatResult13.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 14, sample_id = this.SampleID, key = "txtDecimal01", val = txtDecimal01.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 15, sample_id = this.SampleID, key = "txtDecimal02", val = txtDecimal02.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 16, sample_id = this.SampleID, key = "txtDecimal06", val = txtDecimal06.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 17, sample_id = this.SampleID, key = "txtDecimal07", val = txtDecimal07.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 18, sample_id = this.SampleID, key = "txtDecimal08", val = txtDecimal08.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 19, sample_id = this.SampleID, key = "txtDecimal09", val = txtDecimal09.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 20, sample_id = this.SampleID, key = "txtDecimal10", val = txtDecimal10.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 21, sample_id = this.SampleID, key = "txtDecimal11", val = txtDecimal11.Text };
+                        this.WsHashValue.Add(ws);
+                        ws = new ws_hash_value { id = 22, sample_id = this.SampleID, key = "txtDecimal12", val = txtDecimal12.Text };
+                        this.WsHashValue.Add(ws);
+
+                        ws_hash_value.DeleteBySampleID(this.SampleID);
+                        ws_hash_value.InsertList(this.WsHashValue);
 
                         #endregion
                     }
@@ -1279,6 +1361,9 @@ namespace ALS.ALSI.Web.view.template
                             errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
                         }
                         #endregion
+
+
+
                     }
                 }
                 catch (Exception ex)
@@ -1863,8 +1948,6 @@ namespace ALS.ALSI.Web.view.template
             txtB31.Text = String.IsNullOrEmpty(txtB31.Text) ? "" : Convert.ToDouble(txtB31.Text).ToString("N3");
             txtC31.Text = String.IsNullOrEmpty(txtC31.Text) ? "" : Convert.ToDouble(txtC31.Text).ToString("N3");
             txtD31.Text = String.IsNullOrEmpty(txtD31.Text) ? "" : Convert.ToDouble(txtD31.Text).ToString("N3");
-
-
 
 
 

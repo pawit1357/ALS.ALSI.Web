@@ -85,17 +85,17 @@ namespace ALS.ALSI.Biz.DataAccess
                 return menus.ToList();
             }
         }
-        public menu_role getRoleByUserId(int _userId)
-        {
-            using (var ctx = new ALSIEntities())
-            {
-                return (from mr in ctx.menu_role
-                        join ur in ctx.users_role on mr.ROLE_ID equals ur.ROLE_ID
-                        where ur.USER_ID == _userId
-                        select mr).FirstOrDefault();
+        //public menu_role getRoleByUserId(int _userId)
+        //{
+        //    using (var ctx = new ALSIEntities())
+        //    {
+        //        return (from mr in ctx.menu_role
+        //                join ur in ctx.users_role on mr.ROLE_ID equals ur.ROLE_ID
+        //                where ur.USER_ID == _userId
+        //                select mr).FirstOrDefault();
 
-            }
-        }
+        //    }
+        //}
         public List<menu_role> getRoleListByRoleId(int _roleId)
         {
             using (var ctx = new ALSIEntities())

@@ -1219,6 +1219,7 @@
     </Content>
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
+    <Content Include="PhaseII-Doc\holiday-script.sql" />
     <Content Include="PhaseII-Doc\PA-SCRIPT-20171224.sql" />
     <Content Include="PhaseII-Doc\Dump20171206-after-update.sql" />
     <Content Include="PhaseII-Doc\Dump20171206.sql" />
@@ -1250,6 +1251,7 @@
     <Content Include="view\library\Library.aspx" />
     <Content Include="view\library\SearchLibrary.aspx" />
     <Content Include="view\request\ChangeAdminStartJobDate.aspx" />
+    <Content Include="view\request\NoteForLab.aspx" />
     <Content Include="view\request\ChangeSrChemistCompleteDate.aspx" />
     <Content Include="view\request\ChangeSrChemistStartJobDate.aspx" />
     <Content Include="view\request\ChangeJobGroup.aspx" />
@@ -1459,6 +1461,13 @@
     </Compile>
     <Compile Include="view\request\ChangeAdminStartJobDate.aspx.designer.cs">
       <DependentUpon>ChangeAdminStartJobDate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\request\NoteForLab.aspx.cs">
+      <DependentUpon>NoteForLab.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\request\NoteForLab.aspx.designer.cs">
+      <DependentUpon>NoteForLab.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\request\ChangeSrChemistCompleteDate.aspx.cs">
       <DependentUpon>ChangeSrChemistCompleteDate.aspx</DependentUpon>

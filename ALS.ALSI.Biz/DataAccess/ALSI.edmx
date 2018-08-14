@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="alsiModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="holiday_calendar">
+          <Key>
+            <PropertyRef Name="DATE_HOLIDAYS" />
+          </Key>
+          <Property Name="DATE_HOLIDAYS" Type="date" Nullable="false" />
+          <Property Name="YEAR_HOLIDAYS" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="DESCRIPTION_SUMMARY" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="job_info">
           <Key>
             <PropertyRef Name="ID" />
@@ -120,7 +128,8 @@
           <Property Name="sample_prefix" Type="varchar" MaxLength="45" />
           <Property Name="amend_or_retest" Type="varchar" MaxLength="2" />
           <Property Name="last_status" Type="int" />
-          <Property Name="job_samplecol" Type="varchar" MaxLength="45" />
+          <Property Name="note" Type="varchar" MaxLength="200" />
+          <Property Name="note_lab" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -381,6 +390,7 @@
           <Property Name="X" Type="varchar" MaxLength="255" />
           <Property Name="Y" Type="varchar" MaxLength="255" />
           <Property Name="Z" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="tb_m_detail_spec">
           <Key>
@@ -1820,16 +1830,14 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <Property Name="user_id" Type="int" />
           <Property Name="type_of_test_id" Type="int" />
         </EntityType>
-        <EntityType Name="users_role">
+        <EntityType Name="ws_hash_value">
           <Key>
-            <PropertyRef Name="USER_ID" />
-            <PropertyRef Name="ROLE_ID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="USER_ID" Type="int" Nullable="false" />
-          <Property Name="ROLE_ID" Type="int" Nullable="false" />
-          <Property Name="UPDATE_BY" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="CREATE_DATE" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="UPDATE_DATE" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sample_id" Type="int" />
+          <Property Name="key" Type="varchar" MaxLength="45" />
+          <Property Name="val" Type="varchar" MaxLength="45" />
         </EntityType>
         <Association Name="fk_company_id">
           <End Role="m_customer" Type="Self.m_customer" Multiplicity="1" />
@@ -1952,6 +1960,7 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="alsiModelStoreContainer">
+          <EntitySet Name="holiday_calendar" EntityType="Self.holiday_calendar" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_info" EntityType="Self.job_info" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_reiew_requistion" EntityType="Self.job_reiew_requistion" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_running" EntityType="Self.job_running" Schema="alsi" store:Type="Tables" />
@@ -2014,7 +2023,7 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="template_wd_mesa_img" EntityType="Self.template_wd_mesa_img" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_login" EntityType="Self.users_login" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_responsible" EntityType="Self.users_responsible" Schema="alsi" store:Type="Tables" />
-          <EntitySet Name="users_role" EntityType="Self.users_role" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="ws_hash_value" EntityType="Self.ws_hash_value" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_logged" EntityType="Self.users_logged" store:Type="Tables" store:Schema="alsi">
             <DefiningQuery>SELECT
 `users_logged`.`USER_ID`, 
@@ -2072,6 +2081,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="alsiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ALSIEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="holiday_calendar" EntityType="alsiModel.holiday_calendar" />
           <EntitySet Name="job_info" EntityType="alsiModel.job_info" />
           <EntitySet Name="job_reiew_requistion" EntityType="alsiModel.job_reiew_requistion" />
           <EntitySet Name="job_running" EntityType="alsiModel.job_running" />
@@ -2134,7 +2144,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="template_wd_mesa_img" EntityType="alsiModel.template_wd_mesa_img" />
           <EntitySet Name="users_login" EntityType="alsiModel.users_login" />
           <EntitySet Name="users_responsible" EntityType="alsiModel.users_responsible" />
-          <EntitySet Name="users_role" EntityType="alsiModel.users_role" />
+          <EntitySet Name="ws_hash_value" EntityType="alsiModel.ws_hash_value" />
           <EntitySet Name="users_logged" EntityType="alsiModel.users_logged" />
           <AssociationSet Name="fk_contract_person_id" Association="alsiModel.fk_contract_person_id">
             <End Role="m_customer_contract_person" EntitySet="m_customer_contract_person" />
@@ -2177,6 +2187,14 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
             <End Role="users_login" EntitySet="users_login" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="holiday_calendar">
+          <Key>
+            <PropertyRef Name="DATE_HOLIDAYS" />
+          </Key>
+          <Property Name="DATE_HOLIDAYS" Type="DateTime" Nullable="false" />
+          <Property Name="YEAR_HOLIDAYS" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION_SUMMARY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="job_info">
           <Key>
             <PropertyRef Name="ID" />
@@ -2298,7 +2316,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="sample_prefix" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="amend_or_retest" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="last_status" Type="Int32" />
-          <Property Name="job_samplecol" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="note_lab" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="alsiModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
         </EntityType>
         <EntityType Name="job_sample_logs">
@@ -2571,6 +2590,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="X" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Y" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Z" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_m_detail_spec">
           <Key>
@@ -2834,6 +2854,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="sample_id" Type="Int32" />
           <Property Name="specification_id" Type="Int32" />
           <Property Name="isNoSpec" Type="SByte" />
+          <Property Name="unit" Type="Int32" />
           <Property Name="col_1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="col_2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="col_3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -2859,7 +2880,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="status" Type="Int32" />
           <Property Name="create_date" Type="DateTime" />
           <Property Name="update_date" Type="DateTime" />
-          <Property Name="unit" Type="Int32" />
         </EntityType>
         <EntityType Name="template_img">
           <Key>
@@ -3992,16 +4012,14 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="user_id" Type="Int32" />
           <Property Name="type_of_test_id" Type="Int32" />
         </EntityType>
-        <EntityType Name="users_role">
+        <EntityType Name="ws_hash_value">
           <Key>
-            <PropertyRef Name="USER_ID" />
-            <PropertyRef Name="ROLE_ID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="USER_ID" Type="Int32" Nullable="false" />
-          <Property Name="ROLE_ID" Type="Int32" Nullable="false" />
-          <Property Name="UPDATE_BY" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CREATE_DATE" Type="DateTime" Nullable="false" />
-          <Property Name="UPDATE_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sample_id" Type="Int32" />
+          <Property Name="key" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="val" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="users_logged">
           <Key>
@@ -4147,6 +4165,15 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="alsiModelStoreContainer" CdmEntityContainer="ALSIEntities">
+          <EntitySetMapping Name="holiday_calendar">
+            <EntityTypeMapping TypeName="alsiModel.holiday_calendar">
+              <MappingFragment StoreEntitySet="holiday_calendar">
+                <ScalarProperty Name="DESCRIPTION_SUMMARY" ColumnName="DESCRIPTION_SUMMARY" />
+                <ScalarProperty Name="YEAR_HOLIDAYS" ColumnName="YEAR_HOLIDAYS" />
+                <ScalarProperty Name="DATE_HOLIDAYS" ColumnName="DATE_HOLIDAYS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="job_info">
             <EntityTypeMapping TypeName="alsiModel.job_info">
               <MappingFragment StoreEntitySet="job_info">
@@ -4204,7 +4231,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample">
             <EntityTypeMapping TypeName="alsiModel.job_sample">
               <MappingFragment StoreEntitySet="job_sample">
-                <ScalarProperty Name="job_samplecol" ColumnName="job_samplecol" />
+                <ScalarProperty Name="note_lab" ColumnName="note_lab" />
+                <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="last_status" ColumnName="last_status" />
                 <ScalarProperty Name="amend_or_retest" ColumnName="amend_or_retest" />
                 <ScalarProperty Name="sample_prefix" ColumnName="sample_prefix" />
@@ -4514,6 +4542,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="tb_m_component">
             <EntityTypeMapping TypeName="alsiModel.tb_m_component">
               <MappingFragment StoreEntitySet="tb_m_component">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="Z" ColumnName="Z" />
                 <ScalarProperty Name="Y" ColumnName="Y" />
                 <ScalarProperty Name="X" ColumnName="X" />
@@ -4809,7 +4838,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_f_ic">
             <EntityTypeMapping TypeName="alsiModel.template_f_ic">
               <MappingFragment StoreEntitySet="template_f_ic">
-                <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="status" ColumnName="status" />
@@ -4835,6 +4863,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="col_3" ColumnName="col_3" />
                 <ScalarProperty Name="col_2" ColumnName="col_2" />
                 <ScalarProperty Name="col_1" ColumnName="col_1" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="isNoSpec" ColumnName="isNoSpec" />
                 <ScalarProperty Name="specification_id" ColumnName="specification_id" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
@@ -6002,14 +6031,13 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="users_role">
-            <EntityTypeMapping TypeName="alsiModel.users_role">
-              <MappingFragment StoreEntitySet="users_role">
-                <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
-                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
-                <ScalarProperty Name="UPDATE_BY" ColumnName="UPDATE_BY" />
-                <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <EntitySetMapping Name="ws_hash_value">
+            <EntityTypeMapping TypeName="alsiModel.ws_hash_value">
+              <MappingFragment StoreEntitySet="ws_hash_value">
+                <ScalarProperty Name="val" ColumnName="val" />
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

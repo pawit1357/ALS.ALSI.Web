@@ -25,6 +25,7 @@ namespace ALS.ALSI.Biz.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<holiday_calendar> holiday_calendar { get; set; }
         public DbSet<job_info> job_info { get; set; }
         public DbSet<job_reiew_requistion> job_reiew_requistion { get; set; }
         public DbSet<job_running> job_running { get; set; }
@@ -87,7 +88,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<template_wd_mesa_img> template_wd_mesa_img { get; set; }
         public DbSet<users_login> users_login { get; set; }
         public DbSet<users_responsible> users_responsible { get; set; }
-        public DbSet<users_role> users_role { get; set; }
+        public DbSet<ws_hash_value> ws_hash_value { get; set; }
         public DbSet<users_logged> users_logged { get; set; }
     }
 }

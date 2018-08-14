@@ -265,7 +265,9 @@ namespace ALS.ALSI.Web.view.template
                                     X = CustomUtils.GetCellValue(isComponent.GetRow(row).GetCell(23)),
                                     Y = CustomUtils.GetCellValue(isComponent.GetRow(row).GetCell(24)),
                                     Z = CustomUtils.GetCellValue(isComponent.GetRow(row).GetCell(25)),
-                                    RowState = CommandNameEnum.Add
+                                    RowState = CommandNameEnum.Add,
+                                    status = "A",
+
                                 };
 
                                 #region "Add Detail"
@@ -309,7 +311,7 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                         //Delete
-                        //new tb_m_component().DeleteByTemplateID(template_id);
+                        new tb_m_component().DeleteByTemplateID(template_id);
                         //new tb_m_detail_spec_ref().DeleteByTemplateID(template_id);
                         //
                         new tb_m_component().InsertList(components);

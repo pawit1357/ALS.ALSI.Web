@@ -79,7 +79,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public string sample_prefix { get; set; }
         public string amend_or_retest { get; set; }
         public Nullable<int> last_status { get; set; }
-        public string job_samplecol { get; set; }
+        public string note { get; set; }
+        public string note_lab { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

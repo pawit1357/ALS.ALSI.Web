@@ -42,7 +42,7 @@ namespace ALS.ALSI.Web.view.request
                 job.job_number = String.IsNullOrEmpty(txtJob_number.Text) ? 0 : int.Parse(txtJob_number.Text);
                 job.job_prefix = String.IsNullOrEmpty(ddlJobNumber.SelectedValue) ? 0 : Convert.ToInt32(ddlJobNumber.SelectedValue);
                 job.date_of_receive = String.IsNullOrEmpty(txtDate_of_receive.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDate_of_receive.Text);
-               
+
                 //job.s_pore_ref_no = txtS_pore_ref_no.Text;
                 job.spec_ref_rev_no = txtSpecRefRevNo.Text;
                 //job.customer_po_ref = string.Empty;//invoice
@@ -662,9 +662,10 @@ namespace ALS.ALSI.Web.view.request
                                 }
                                 else
                                 {
-                                    jobSample.due_date = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value));
-                                    jobSample.due_date_customer = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date));
-                                    jobSample.due_date_lab = Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date));
+                                    holiday_calendar h = new holiday_calendar();
+                                    jobSample.due_date = h.GetWorkingDay(Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.value)));
+                                    jobSample.due_date_customer = h.GetWorkingDay(Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.customer_due_date)));
+                                    jobSample.due_date_lab = h.GetWorkingDay(Convert.ToDateTime(objJobInfo.date_of_receive.Value).AddDays(Convert.ToInt32(cs.lab_due_date)));
                                 }
                             }
                         }
@@ -853,7 +854,7 @@ namespace ALS.ALSI.Web.view.request
                 jobSample.job_id = objJobInfo.ID;
                 //if (this.CommandName == CommandNameEnum.Add)
                 //{
-                    jobSample.job_number = _txtRefNo.Text;
+                jobSample.job_number = _txtRefNo.Text;
                 //}
                 jobSample.description = _txtDescriptoin.Text;
                 jobSample.model = _txtModel.Text;

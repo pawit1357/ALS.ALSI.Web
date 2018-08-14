@@ -66,6 +66,13 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isSentToCusDateOperation"]; }
             set { Session[GetType().Name + "isSentToCusDateOperation"] = value; }
         }
+        public Boolean isNoteGroupOpeation
+        {
+            get { return (Boolean)Session[GetType().Name + "isNoteGroupOpeation"]; }
+            set { Session[GetType().Name + "isNoteGroupOpeation"] = value; }
+        }
+
+
         private void initialPage()
         {
             btnSave.Enabled = true;
@@ -82,10 +89,10 @@ namespace ALS.ALSI.Web.view.request
             gvSample.DataBind();
 
             btnSave.Visible = this.dataList.Count > 0;
-            pChemist.Visible = (this.dataList.Count > 0) && !this.isChangeDueDateGroup && !this.isPoGroupOperation && !this.isInvoiceGroupOperation && !this.isSentToCusDateOperation;
-            pChangeDueDate.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && (this.isChangeDueDateGroup|| this.isSentToCusDateOperation) && !this.isInvoiceGroupOperation ;
+            pChemist.Visible = (this.dataList.Count > 0) && !this.isChangeDueDateGroup && !this.isPoGroupOperation && !this.isInvoiceGroupOperation && !this.isSentToCusDateOperation && !this.isNoteGroupOpeation;
+            pChangeDueDate.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && (this.isChangeDueDateGroup || this.isSentToCusDateOperation) && !this.isInvoiceGroupOperation && !this.isNoteGroupOpeation;
 
-            pAccount2.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && !this.isChangeDueDateGroup && this.isInvoiceGroupOperation;
+            pAccount2.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && !this.isChangeDueDateGroup && !isNoteGroupOpeation && this.isInvoiceGroupOperation;
             if (!btnSave.Visible)
             {
                 lbDesc.Text = "รายการที่เลือกไม่ได้ถูกกำหนดเป็นงานแบบกลุ่ม";
@@ -115,6 +122,7 @@ namespace ALS.ALSI.Web.view.request
                 this.isChangeDueDateGroup = prvPage.isDuedateGroupOperation;
                 this.isInvoiceGroupOperation = prvPage.isInvoiceGroupOperation;
                 this.isSentToCusDateOperation = prvPage.isSentToCusDateOperation;
+                this.isNoteGroupOpeation = prvPage.isNoteGroupOpeation;
                 this.dataList = job_sample.FindAllByIds(this.selectedList);
 
                 ddlAssignTo.Items.Clear();
@@ -164,7 +172,8 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
                         pAccount2.Visible = false;
-                        lbDesc.Text = "Login: ทำรายการแบบกลุ่ม"+ desc2;
+                        pNote.Visible = false;
+                        lbDesc.Text = "Login: ทำรายการแบบกลุ่ม" + desc2;
                         break;
                     case RoleEnum.CHEMIST:
                         pLogin.Visible = false;
@@ -176,6 +185,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
                         pAccount2.Visible = false;
+                        pNote.Visible = false;
                         lbDesc.Text = "Chemist: ทำรายการแบบกลุ่ม" + desc2;
                         break;
                     case RoleEnum.SR_CHEMIST:
@@ -190,6 +200,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = isChangeDueDateGroup;
                         pAccount2.Visible = false;
+                        pNote.Visible = false;
                         lbDesc.Text = "Sr.Chemist: ทำรายการแบบกลุ่ม" + desc2;
 
                         break;
@@ -205,6 +216,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
                         pAccount2.Visible = false;
+                        pNote.Visible = false;
                         lbDesc.Text = "Lab Mnager: ทำรายการแบบกลุ่ม" + desc2;
 
                         break;
@@ -216,9 +228,10 @@ namespace ALS.ALSI.Web.view.request
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         //Boolean isChangePo = this.dataList.Exists(x => x.job_status == Convert.ToInt16(StatusEnum.JOB_COMPLETE)|| x.job_status == Convert.ToInt16(StatusEnum.LOGIN_SELECT_SPEC));
-                        pChangeDueDate.Visible =  isChangeDueDateGroup|| isSentToCusDateOperation;
+                        pChangeDueDate.Visible = isChangeDueDateGroup || isSentToCusDateOperation;
                         pAccount.Visible = this.isPoGroupOperation;
                         pAccount2.Visible = false;
+                        pNote.Visible = this.isNoteGroupOpeation;
                         lbDesc.Text = "Admin: ทำรายการแบบกลุ่ม" + desc2;
 
                         break;
@@ -230,6 +243,7 @@ namespace ALS.ALSI.Web.view.request
                         pDisapprove.Visible = false;
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
+                        pNote.Visible = this.isNoteGroupOpeation;
                         pAccount2.Visible = this.isInvoiceGroupOperation;
                         lbDesc.Text = "Account: ทำรายการแบบกลุ่ม" + desc2;
                         break;
@@ -243,6 +257,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
                         pAccount2.Visible = false;
+                        pNote.Visible = false;
                         break;
                 }
                 initialPage();
@@ -251,6 +266,8 @@ namespace ALS.ALSI.Web.view.request
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            holiday_calendar hc = new holiday_calendar();
+
             string yyyy = DateTime.Now.ToString("yyyy");
             string MM = DateTime.Now.ToString("MM");
             string dd = DateTime.Now.ToString("dd");
@@ -266,11 +283,11 @@ namespace ALS.ALSI.Web.view.request
                 {
                     switch (userRole)
                     {
+                        case RoleEnum.LOGIN:
                         case RoleEnum.SR_CHEMIST:
                             if (String.IsNullOrEmpty(txtDuedate.Text))
                             {
                                 jobSample.due_date_lab = null;
-
                             }
                             else
                             {
@@ -281,25 +298,23 @@ namespace ALS.ALSI.Web.view.request
                                 }
                                 else
                                 {
-
                                     switch (jobSample.status_completion_scheduled.Value)
                                     {
                                         case 1:
                                         case 2:
-                                            jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-                                            jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text).AddDays(1);
+                                            jobSample.due_date_lab = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
+                                            jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text)).AddDays(1);
                                             break;
                                         case 3:
-                                            jobSample.due_date_lab = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
-                                            jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                                            jobSample.due_date_lab = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
+                                            jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
                                             break;
                                     }
-
                                 }
                             }
                             break;
                         case RoleEnum.ADMIN:
-                                jobSample.due_date_customer = CustomUtils.converFromDDMMYYYY(txtDuedate.Text);
+                            jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
                             break;
                     }
                 }
@@ -322,6 +337,9 @@ namespace ALS.ALSI.Web.view.request
                 else if (this.isInvoiceGroupOperation)
                 {
                     jobSample.sample_invoice = txtInvoice.Text;
+                }else if (this.isNoteGroupOpeation)
+                {
+                    jobSample.note = txtNote.Text;
                 }
                 else
                 {

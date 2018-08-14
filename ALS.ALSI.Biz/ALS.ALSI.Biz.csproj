@@ -153,6 +153,11 @@
       <DependentUpon>ALSI.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\Component.cs" />
+    <Compile Include="DataAccess\holiday_calendar.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\MHolidayCalancar.cs" />
+    <Compile Include="DataAccess\WsHashValue.cs" />
     <Compile Include="DataAccess\TemplateFreeIc.cs" />
     <Compile Include="DataAccess\SampleMethodProcedure.cs" />
     <Compile Include="DataAccess\job_info.cs">
@@ -354,9 +359,6 @@
     <Compile Include="DataAccess\users_responsible.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\users_role.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataAccess\WDCorrosionImg.cs" />
     <Compile Include="DataAccess\WDCorrosion.cs" />
     <Compile Include="DataAccess\SeagateCopperwire.cs" />
@@ -404,6 +406,9 @@
     <Compile Include="DataAccess\SeagateIC.cs" />
     <Compile Include="DataAccess\Users.cs" />
     <Compile Include="DataAccess\GeneralManager.cs" />
+    <Compile Include="DataAccess\ws_hash_value.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="Extenders.cs" />
     <Compile Include="FileList.cs" />
     <Compile Include="FreeTemplateUtil.cs" />

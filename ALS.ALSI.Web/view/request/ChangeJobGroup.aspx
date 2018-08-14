@@ -104,7 +104,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Group Submit</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Group Opeation</span>
                     <span class="caption-helper"></span>
                 </div>
                 <div class="tools">
@@ -257,7 +257,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </asp:Panel>
                     <asp:Panel ID="pAccount2" runat="server">
                         <div class="row">
@@ -293,7 +292,21 @@
                             </div>
                         </div>
                     </asp:Panel>
-
+                                        <asp:Panel ID="pNote" runat="server">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Note for Admin & Account:</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group" style="text-align: left">
+                                            <asp:TextBox ID="txtNote" name="txtNote" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <span class="input-group-btn"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </asp:Panel>
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-6">

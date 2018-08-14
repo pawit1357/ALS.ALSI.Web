@@ -26,7 +26,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public IEnumerable<tb_m_component> SelectAll()
         {
-            IEnumerable<tb_m_component> result = _repository.GetAll().ToList();
+            IEnumerable<tb_m_component> result = _repository.GetAll().Where(x=>x.status.Equals("A")).ToList();
 
             if (this.specification_id > 0)
             {
@@ -42,7 +42,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public tb_m_component SelectByID(int _id)
         {
-            return _repository.Find(x => x.ID == _id).FirstOrDefault();
+            return _repository.Find(x => x.ID == _id && x.status.Equals("A")).FirstOrDefault();
         }
 
         public void Insert()
@@ -89,7 +89,8 @@ namespace ALS.ALSI.Biz.DataAccess
             List<tb_m_component> lists = _repository.Find(x => x.template_id == _template_id).ToList();
             foreach (tb_m_component tmp in lists)
             {
-                _repository.Delete(tmp);
+                tmp.status = "I";
+                //_repository.Delete(tmp);
             }
         }
 

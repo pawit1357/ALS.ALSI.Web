@@ -374,10 +374,25 @@ CREATE TABLE `alsi`.`sample_method_procedure` (
 
 
 ---- 2018-08-03 ------
+CREATE TABLE `alsi`.`ws_hash_value` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `sample_id` INT NULL,
+  `key` VARCHAR(45) NULL,
+  `val` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
 ALTER TABLE `alsi`.`template_f_ic` 
 ADD COLUMN `specification_id` INT NULL AFTER `sample_id`,
 ADD COLUMN `isNoSpec` TINYINT NULL DEFAULT 0 AFTER `specification_id`;
 
 ALTER TABLE `alsi`.`template_f_ic` 
 ADD COLUMN `unit` INT NULL AFTER `isNoSpec`;
+
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `note` VARCHAR(200) NULL AFTER `last_status`;
+
+
+ALTER TABLE `alsi`.`job_sample` 
+CHANGE COLUMN `job_samplecol` `note` VARCHAR(200) NULL DEFAULT NULL ;
+
 */

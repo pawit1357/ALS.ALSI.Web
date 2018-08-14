@@ -12,12 +12,10 @@ namespace ALS.ALSI.Biz.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class users_role
+    public partial class holiday_calendar
     {
-        public int USER_ID { get; set; }
-        public int ROLE_ID { get; set; }
-        public string UPDATE_BY { get; set; }
-        public System.DateTime CREATE_DATE { get; set; }
-        public System.DateTime UPDATE_DATE { get; set; }
+        public System.DateTime DATE_HOLIDAYS { get; set; }
+        public string YEAR_HOLIDAYS { get; set; }
+        public string DESCRIPTION_SUMMARY { get; set; }
     }
 }

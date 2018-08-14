@@ -238,6 +238,7 @@
                             <asp:LinkButton ID="btnOperationDueDate" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group Duedate</asp:LinkButton>
                             <asp:LinkButton ID="btnOperationGroupInvoice" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group Invoice</asp:LinkButton>
                             <asp:LinkButton ID="btnOperationSentToCus" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group Sent to Cus Date</asp:LinkButton>
+                            <asp:LinkButton ID="btnOperationNote" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Note for Admin & Account</asp:LinkButton>
 
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>
                             <asp:LinkButton ID="btnEls" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELS</asp:LinkButton>
@@ -280,6 +281,7 @@
                                         <asp:LinkButton ID="btnChangeSrChemistStartJobDate" runat="server" ToolTip="Change Sr.Chemist start job date" CommandName="ChangeSrChemistStartJobDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeAdminStartJobsDate" runat="server" ToolTip="Change admin start job date" CommandName="ChangeAdminStartJobDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeSrChemistCompleteDate" runat="server" ToolTip="Change Sr.Chemist Complete Date" CommandName="ChangeSrChemistCompleteDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnNoteForLab" runat="server" ToolTip="Note for lab" CommandName="NoteForLab" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-info"></i></asp:LinkButton>
 
                                         
 
@@ -380,14 +382,15 @@
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
                                 <asp:BoundField HeaderText="Type of test" DataField="type_of_test" ItemStyle-HorizontalAlign="Left" SortExpression="type_of_test">
-
-
-
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:BoundField>
+                                <asp:BoundField HeaderText="Note for Admin & Account" DataField="note" ItemStyle-HorizontalAlign="Left" SortExpression="note">
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
 
-
-
+                                    <asp:BoundField HeaderText="Note for lab" DataField="note_lab" ItemStyle-HorizontalAlign="Left" SortExpression="note_lab">
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:BoundField>
                             </Columns>
                             <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
 

@@ -60,6 +60,12 @@ namespace ALS.ALSI.Web.view.request
         {
             get { return (Boolean)Session[GetType().Name + "isSentToCusDateOperation"]; }
             set { Session[GetType().Name + "isSentToCusDateOperation"] = value; }
+
+        }
+        public Boolean isNoteGroupOpeation
+        {
+            get { return (Boolean)Session[GetType().Name + "isNoteGroupOpeation"]; }
+            set { Session[GetType().Name + "isNoteGroupOpeation"] = value; }
         }
         public Boolean isDuedateGroupOperation
         {
@@ -183,17 +189,16 @@ namespace ALS.ALSI.Web.view.request
             {
                 case RoleEnum.LOGIN:
                     lbAddJob.Visible = true;
-                    //btnOperation.Visible = false;
                     break;
                 default:
                     lbAddJob.Visible = false;
-                    //btnOperation.Visible = true;
                     break;
             }
             btnOperation.Visible = (userRole != RoleEnum.ACCOUNT);
             btnOperationPo.Visible = (userRole == RoleEnum.ADMIN);
-            btnOperationDueDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN);
+            btnOperationDueDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LOGIN);
             btnOperationSentToCus.Visible = (userRole == RoleEnum.ADMIN);
+            btnOperationNote.Visible = (userRole == RoleEnum.ADMIN || userRole == RoleEnum.ACCOUNT);
             btnElp.CssClass = "btn blue";
             //btnOperationDueDate.Text =  "Due date" : "";
             btnOperationGroupInvoice.Visible = (userRole == RoleEnum.ACCOUNT);
@@ -259,12 +264,27 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[5].Visible = true;
                         gvJob.Columns[12].Visible = true;
                         gvJob.Columns[13].Visible = true;
+                        gvJob.Columns[20].Visible = true;
+                        gvJob.Columns[21].Visible = false;
+                        break;
+                    case RoleEnum.LOGIN:
+                    case RoleEnum.CHEMIST:
+                    case RoleEnum.SR_CHEMIST:
+                    case RoleEnum.LABMANAGER:
+                        gvJob.Columns[4].Visible = false;
+                        gvJob.Columns[5].Visible = false;
+                        gvJob.Columns[12].Visible = false;
+                        gvJob.Columns[13].Visible = false;
+                        gvJob.Columns[20].Visible = false;
+                        gvJob.Columns[21].Visible = true;
                         break;
                     default:
                         gvJob.Columns[4].Visible = false;
                         gvJob.Columns[5].Visible = false;
                         gvJob.Columns[12].Visible = false;
                         gvJob.Columns[13].Visible = false;
+                        gvJob.Columns[20].Visible = false;
+                        gvJob.Columns[21].Visible = false;
                         break;
                 }
 
@@ -404,6 +424,9 @@ namespace ALS.ALSI.Web.view.request
                         bindingData();
                     }
                     break;
+                case CommandNameEnum.NoteForLab:
+                    Server.Transfer(Constants.LINK_NOTE_FOR_LAB);
+                    break;
                 case CommandNameEnum.UnHold:
                     if (cs != null)
                     {
@@ -496,6 +519,7 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnChangeSrChemistStartJobDate = (LinkButton)e.Row.FindControl("btnChangeSrChemistStartJobDate");
                     LinkButton btnChangeAdminStartJobsDate = (LinkButton)e.Row.FindControl("btnChangeAdminStartJobsDate");
                     LinkButton btnChangeSrChemistCompleteDate = (LinkButton)e.Row.FindControl("btnChangeSrChemistCompleteDate");
+                    LinkButton btnNoteForLab = (LinkButton)e.Row.FindControl("btnNoteForLab");
 
 
 
@@ -552,12 +576,14 @@ namespace ALS.ALSI.Web.view.request
                     {
                         case RoleEnum.LOGIN:
                             btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_SELECT_SPEC) && !isHold;
-                            switch (job_status)
-                            {
-                                case StatusEnum.LOGIN_CONVERT_TEMPLATE:
-                                    cbSelect.Visible = true;
-                                    break;
-                            }
+                            cbSelect.Visible = true;
+
+                            //switch (job_status)
+                            //{
+                            //    case StatusEnum.LOGIN_CONVERT_TEMPLATE:
+                            //        cbSelect.Visible = true;
+                            //        break;
+                            //}
                             break;
                         case RoleEnum.CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.CHEMIST_TESTING) && !isHold;
@@ -608,6 +634,7 @@ namespace ALS.ALSI.Web.view.request
                     btnReTest.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE) && !isHold;
                     btnHold.Visible = ((userRole == RoleEnum.LOGIN) && !isHold);
                     btnUnHold.Visible = ((userRole == RoleEnum.LOGIN) && isHold);
+                    btnNoteForLab.Visible = (userRole == RoleEnum.LOGIN||userRole == RoleEnum.CHEMIST || userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.LABMANAGER) && !isHold;
                     //btnWorkFlow.Visible = !isHold;
 
 
@@ -822,7 +849,23 @@ namespace ALS.ALSI.Web.view.request
                 dt.Columns.Add("date_labman_complete", typeof(DateTime));
                 dt.Columns.Add("date_admin_pdf_inprogress", typeof(DateTime));
                 dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
+                switch (userRole)
+                {
+                    case RoleEnum.ADMIN:
+                    case RoleEnum.ACCOUNT:
+                        dt.Columns.Add("Note for Admin & Account", typeof(string));
+                        break;
+                }
+                switch (userRole)
+                {
+                    case RoleEnum.LOGIN:
+                    case RoleEnum.CHEMIST:
+                    case RoleEnum.SR_CHEMIST:
+                    case RoleEnum.LABMANAGER:
+                        dt.Columns.Add("Note for lab", typeof(string));
 
+                        break;
+                }
                 String conSQL = Configurations.MySQLCon;
                 using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
                 {
@@ -885,16 +928,32 @@ namespace ALS.ALSI.Web.view.request
                      "`Extent2`.`date_labman_analyze` AS `date_labman_inprogress`," +
                      "`Extent2`.`date_labman_complete` AS `date_labman_complete`," +
                      "`Extent2`.`date_admin_pdf_inprogress` AS `date_admin_pdf_inprogress`," +
-                     "`Extent2`.`date_admin_pdf_complete` AS `date_admin_pdf_complete`" +
-                     " FROM `job_info` AS `Extent1`" +
-                     " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
-                     " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
-                     " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
-                     " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
-                     " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
-                     " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
-                     " LEFT OUTER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
-                     " LEFT OUTER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
+                     "`Extent2`.`date_admin_pdf_complete` AS `date_admin_pdf_complete`";
+                    switch (userRole)
+                    {
+                        case RoleEnum.ADMIN:
+                        case RoleEnum.ACCOUNT:
+                            sql += ",`Extent2`.`note` AS `Note for Admin & Account`";
+                            break;
+                    }
+                    switch (userRole)
+                    {
+                        case RoleEnum.LOGIN:
+                        case RoleEnum.CHEMIST:
+                        case RoleEnum.SR_CHEMIST:
+                        case RoleEnum.LABMANAGER:
+                            sql += ",`Extent2`.`note_lab` AS `Note for lab`";
+                            break;
+                    }
+                    sql += " FROM `job_info` AS `Extent1`" +
+                   " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
+                   " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
+                   " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
+                   " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
+                   " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
+                   " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
+                   " LEFT OUTER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
+                   " LEFT OUTER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
 
 
                     StringBuilder sqlCri = new StringBuilder();
@@ -1030,6 +1089,10 @@ namespace ALS.ALSI.Web.view.request
             this.isDuedateGroupOperation = btn.ID.Equals("btnOperationDueDate");
             this.isInvoiceGroupOperation = btn.ID.Equals("btnOperationGroupInvoice");
             this.isSentToCusDateOperation = btn.ID.Equals("btnOperationSentToCus");
+            this.isNoteGroupOpeation = btn.ID.Equals("btnOperationNote");
+
+
+
             foreach (GridViewRow row in gvJob.Rows)
             {
                 CheckBox chk = row.Cells[1].Controls[1] as CheckBox;
@@ -1039,7 +1102,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || this.isNoteGroupOpeation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
                     }

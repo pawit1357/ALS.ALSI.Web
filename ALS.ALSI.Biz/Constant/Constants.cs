@@ -41,8 +41,9 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_JOB_SR_CHEMIST_STARTJOB_DATE = APPNAME + "/view/request/ChangeSrChemistStartJobDate.aspx";
         public const String LINK_JOB_ADMIN_STARTJOB_DATE = APPNAME + "/view/request/ChangeAdminStartJobDate.aspx";
         public const String LINK_JOB_SR_CHEMIST_COMPLATE_DATE = APPNAME + "/view/request/ChangeSrChemistCompleteDate.aspx";
+        public const String LINK_NOTE_FOR_LAB = APPNAME + "/view/request/NoteForLab.aspx";
 
-
+        
 
         public const String LINK_JOB_CHANGE_PO = APPNAME + "/view/request/ChangeJobPo.aspx";
         public const String LINK_REPORT_DATE = APPNAME + "/view/request/ChangeReportDate.aspx";
@@ -179,7 +180,8 @@ namespace ALS.ALSI.Biz.Constant
         ViewFile = 40,
         ChangeSrChemistStartJobDate = 41,
         ChangeAdminStartJobDate = 42,
-        ChangeSrChemistCompleteDate = 43
+        ChangeSrChemistCompleteDate = 43,
+        NoteForLab = 44
 
     }
 

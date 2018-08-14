@@ -183,7 +183,7 @@ namespace ALS.ALSI.Web.view.template
                             {
                                 try
                                 {
-                                    String type = this.configs[String.Format("method.procedure.data.type.col.{0}", colIndex)].ToString().Split('|')[0];
+                                    String type = this.configs[String.Format("method.procedure.type.col.{0}", colIndex)].ToString().Split('|')[0];
 
                                     String value = "";
                                     switch (type)
@@ -821,19 +821,15 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.path_word = String.Empty;
                     this.jobSample.path_pdf = String.Empty;
                     //#endregion
-                    //foreach (template_wd_ic_coverpage _cover in this.coverpages)
-                    //{
-                    //    _cover.sample_id = this.SampleID;
-                    //    //_cover.detail_spec_id = Convert.ToInt32(ddlDetailSpec.SelectedValue);
-                    //    _cover.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
-                    //    _cover.b12 = txtB12.Text;
-                    //    //_cover.ProcedureNo = txtProcedureNo.Text;
-                    //    _cover.NumOfPiecesUsedForExtraction = txtB13.Text;
-                    //    //_cover.ExtractionMedium = txtExtractionMedium.Text;
-                    //    _cover.ExtractionVolume = txtB11.Text;
-                    //    //_cover.wunit = Convert.ToInt32(ddlUnit.SelectedValue);
-                    //}
-                    //template_wd_ic_coverpage.UpdateList(this.coverpages);
+                    foreach (template_f_ic ic in this.ics)
+                    {
+                        ic.sample_id = this.SampleID;
+                        ic.specification_id = Convert.ToInt32(ddlComponent.SelectedValue);
+                        ic.isNoSpec = Convert.ToSByte(cbCheckBox.Checked);
+                        ic.unit = Convert.ToInt16(ddlUnit.SelectedValue);
+                    }
+                    template_f_ic.DeleteBySampleID(this.SampleID);
+                    template_f_ic.InsertList(this.ics);
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
@@ -995,7 +991,7 @@ namespace ALS.ALSI.Web.view.template
                     btnWorking.CssClass = "btn blue";
                     pCoverpage.Visible = true;
                     pWorkingIC.Visible = false;
-                    pSpecification.Visible = true;
+                    //pSpecification.Visible = true;
                     pLoadFile.Visible = false;
                     Cal();
                     break;
@@ -1004,7 +1000,7 @@ namespace ALS.ALSI.Web.view.template
                     btnWorking.CssClass = "btn green";
                     pCoverpage.Visible = false;
                     pWorkingIC.Visible = true;
-                    pSpecification.Visible = false;
+                    //pSpecification.Visible = false;
                     pLoadFile.Visible = true;
                     break;
             }
@@ -1050,19 +1046,25 @@ namespace ALS.ALSI.Web.view.template
                         using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
                         {
                             HSSFWorkbook wb = new HSSFWorkbook(fs);
-                            ISheet isheet = wb.GetSheet("IC");
+                            ISheet isheet = wb.GetSheet(this.SheetWorkSheetName);
                             if (isheet == null)
                             {
                                 errors.Add(String.Format("กรุณาตรวจสอบ WorkSheet จะต้องตั้งชื่อว่า {0}", this.SheetWorkSheetName));
                             }
                             else
                             {
-                                txtB11.Text = FreeTemplateUtil.GetCellValue(isheet, this.configs["ic.total.volume"].ToString());
-                                txtB12.Text = FreeTemplateUtil.GetCellValue(isheet, this.configs["ic.surface.area"].ToString());
-                                txtB13.Text = FreeTemplateUtil.GetCellValue(isheet, this.configs["ic.no.of.parts.extracted"].ToString());
+                                String _b11 = this.configs["ic.total.volume"].ToString().Split('|')[1];
+                                String _b12 = this.configs["ic.surface.area"].ToString().Split('|')[1];
+                                String _b13 = this.configs["ic.no.of.parts.extracted"].ToString().Split('|')[1];
 
+                                txtB11.Text = FreeTemplateUtil.GetCellValue(isheet, _b11);
+                                txtB12.Text = FreeTemplateUtil.GetCellValue(isheet, _b12);
+                                txtB13.Text = FreeTemplateUtil.GetCellValue(isheet, _b13);
+                                this.workSheetData[String.Format("{0}!{1}", this.SheetWorkSheetName, _b11.ToUpper())] = txtB11.Text;
+                                this.workSheetData[String.Format("{0}!{1}", this.SheetWorkSheetName, _b12.ToUpper())] = txtB12.Text;
+                                this.workSheetData[String.Format("{0}!{1}", this.SheetWorkSheetName, _b13.ToUpper())] = txtB13.Text;
                                 #region "anions"
-                                String[] anionsRanges = this.configs["ic.anions.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
+                                String[] anionsRanges = this.configs["ic.anions.data.ranges"].ToString().Split('|')[1].Split(':');
                                 int anionsColBegin = FreeTemplateUtil.GetColIndex(anionsRanges[0]);
                                 int anionsColEnd = FreeTemplateUtil.GetColIndex(anionsRanges[1]);
                                 int anionsRowBegin = FreeTemplateUtil.GetRowIndex(anionsRanges[0]);
@@ -1085,7 +1087,7 @@ namespace ALS.ALSI.Web.view.template
                                 }
                                 #endregion
                                 #region "cations"
-                                String[] cationsRanges = this.configs["ic.cations.data.ranges"].ToString().Split(FreeTemplateUtil.DELIMITER_SEMI_COLON);
+                                String[] cationsRanges = this.configs["ic.cations.data.ranges"].ToString().Split('|')[1].Split(':');
                                 int cationsColBegin = FreeTemplateUtil.GetColIndex(cationsRanges[0]);
                                 int cationsColEnd = FreeTemplateUtil.GetColIndex(cationsRanges[1]);
                                 int cationsRowBegin = FreeTemplateUtil.GetRowIndex(cationsRanges[0]);
@@ -1447,8 +1449,8 @@ namespace ALS.ALSI.Web.view.template
 
             template_f_ic hGv1 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS_HEADER)).FirstOrDefault();
             template_f_ic hGv2 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS_HEADER)).FirstOrDefault();
-            //template_f_ic hGv3 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS_HEADER)).FirstOrDefault();
-            //template_f_ic hGv4 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS_HEADER)).FirstOrDefault();
+            template_f_ic hGv3 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS_HEADER)).FirstOrDefault();
+            template_f_ic hGv4 = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS_HEADER)).FirstOrDefault();
 
             //String[] pHeader = this.configs["method.procedure.data.header"].ToString().Split('|')[1].Split(',');
 
@@ -1458,8 +1460,8 @@ namespace ALS.ALSI.Web.view.template
             setGridViewHeader(ref gvMethodProcedure, mpHeader);
             setGridViewHeader(ref GridView1, hGv1);
             setGridViewHeader(ref GridView2, hGv2);
-            //setGridViewHeader(ref GridView3, hGv3);
-            //setGridViewHeader(ref GridView4, hGv4);
+            setGridViewHeader(ref GridView3, hGv3);
+            setGridViewHeader(ref GridView4, hGv4);
             initUnit();
             #endregion
 
@@ -1467,33 +1469,22 @@ namespace ALS.ALSI.Web.view.template
             List<template_f_ic> listMP = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.METHOD_PROCECURE)).ToList();
             List<template_f_ic> listCpAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS)).ToList();
             List<template_f_ic> listCpCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS)).ToList();
-            //List<template_f_ic> listWsAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS)).ToList();
-            //List<template_f_ic> listWsCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS)).ToList();
+            List<template_f_ic> listWsAnions = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS)).ToList();
+            List<template_f_ic> listWsCations = this.ics.Where(x => x.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS)).ToList();
 
-            //for (int r = 0; r < listMP.Count; r++)
-            //{
-            //    setCalValue(listMP[r]);
-            //}
-            //for (int r = 0; r < listWsAnions.Count; r++)
-            //{
-            //    setCalValue(listWsAnions[r]);
-            //}
-            //for (int r = 0; r < listWsAnions.Count; r++)
-            //{
-            //    setCalValue(listWsAnions[r]);
-            //}
-            //for (int r = 0; r < listWsCations.Count; r++)
-            //{
-            //    setCalValue(listWsCations[r]);
-            //}
-            //for (int r = 0; r < listCpAnions.Count; r++)
-            //{
-            //    setCalValue(listCpAnions[r]);
-            //}
-            //for (int r = 0; r < listCpCations.Count; r++)
-            //{
-            //    setCalValue(listCpCations[r]);
-            //}
+            for (int r = 0; r < listMP.Count; r++)
+            {
+                setCalValue(r, "method.procedure.type.col.{0}", listMP[r]);
+            }
+            for (int r = 0; r < listCpAnions.Count; r++)
+            {
+                setCalValue(r, "result.anions.type.col.{0}", listCpAnions[r]);
+            }
+            for (int r = 0; r < listCpCations.Count; r++)
+            {
+                setCalValue(r, "result.cations.type.col.{0}", listCpCations[r]);
+            }
+
             try
             {
 
@@ -1505,10 +1496,10 @@ namespace ALS.ALSI.Web.view.template
                 GridView1.DataBind();
                 GridView2.DataSource = listCpCations;
                 GridView2.DataBind();
-                //    GridView3.DataSource = listWsAnions;
-                //    GridView3.DataBind();
-                //    GridView4.DataSource = listWsCations;
-                //    GridView4.DataBind();
+                GridView3.DataSource = listWsAnions;
+                GridView3.DataBind();
+                GridView4.DataSource = listWsCations;
+                GridView4.DataBind();
             }
             catch (Exception ex)
             {
@@ -1674,138 +1665,185 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
-        private void setCalValue(template_f_ic ic)
+        private void setCalValue(int r, String prefix, template_f_ic ic)
         {
             if (this.workSheetData != null)
             {
-                if (ic.col_1 != null)
+                String sheet = this.SheetWorkSheetName;
+                String type = String.Empty;
+                String[] value = null;
+                int colIndex = 1;
+                try
                 {
-                    ic.col_1 = ((ic.col_1.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_1] == null) ? null : this.workSheetData[ic.col_1].ToString()) : ic.col_1);
-                    //if(ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_ANIONS)|| ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.CP_CATIONS)
-                    //if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
-                    //{
-                    //    if (Regex.IsMatch(ic.col_1, @"^\d+$"))
-                    //        ic.col_1 = Convert.ToDouble(ic.col_1).ToString("N" + txtDecimal01.Text);
-                    //}
-                }
-                if (ic.col_2 != null)
-                {
-                    ic.col_2 = ((ic.col_2.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_2] == null) ? null : this.workSheetData[ic.col_2].ToString()) : ic.col_2);
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
-                    {
-                        if (Regex.IsMatch(ic.col_2, @"^[0-9][\.\d]*(,\d+)?$"))
 
-                            ic.col_2 = Convert.ToDouble(ic.col_2).ToString("N" + txtDecimal01.Text);
-                    }
-                }
-                if (ic.col_3 != null)
-                {
-                    ic.col_3 = ((ic.col_3.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_3] == null) ? null : this.workSheetData[ic.col_3].ToString()) : ic.col_3);
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+
+                    if (ic.col_1 != null)
                     {
-                        if (Regex.IsMatch(ic.col_3, @"^[0-9][\.\d]*(,\d+)?$"))
-                            ic.col_3 = Convert.ToDouble(ic.col_3).ToString("N" + txtDecimal02.Text);
+                        type = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[0];
+                        switch (type)
+                        {
+                            case "formula.ws":
+                                value = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[1].Split(',');
+                                if (this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())] != null)
+                                {
+                                    ic.col_1 = this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())].ToString();
+                                }
+                                break;
+                        }
+                        colIndex++;
                     }
-                }
-                if (ic.col_4 != null)
-                {
-                    ic.col_4 = ((ic.col_4.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_4] == null) ? null : this.workSheetData[ic.col_4].ToString()) : ic.col_4);
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    if (ic.col_2 != null)
                     {
-                        if (Regex.IsMatch(ic.col_4, @"^[0-9][\.\d]*(,\d+)?$"))
-                            ic.col_4 = Convert.ToDouble(ic.col_4).ToString("N" + txtDecimal03.Text);
+                        type = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[0];
+                        switch (type)
+                        {
+                            case "formula.ws":
+                                value = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[1].Split(',');
+                                if (this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())] != null)
+                                {
+                                    ic.col_2 = this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())].ToString();
+                                }
+                                break;
+                        }
+                        colIndex++;
                     }
-                }
-                if (ic.col_5 != null)
-                {
-                    ic.col_5 = ((ic.col_5.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_5] == null) ? null : this.workSheetData[ic.col_5].ToString()) : ic.col_5);
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    if (ic.col_3 != null)
                     {
-                        if (Regex.IsMatch(ic.col_5, @"^[0-9][\.\d]*(,\d+)?$"))
-                            ic.col_5 = Convert.ToDouble(ic.col_5).ToString("N" + txtDecimal04.Text);
+                        type = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[0];
+                        switch (type)
+                        {
+                            case "formula.ws":
+                                value = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[1].Split(',');
+                                if (this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())] != null)
+                                {
+                                    ic.col_3 = this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())].ToString();
+                                }
+                                break;
+                        }
+                        colIndex++;
                     }
-                }
-                if (ic.col_6 != null)
-                {
-                    ic.col_6 = ((ic.col_6.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_6] == null) ? null : this.workSheetData[ic.col_6].ToString()) : ic.col_6);
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    if (ic.col_4 != null)
                     {
-                        if (Regex.IsMatch(ic.col_6, @"^[0-9][\.\d]*(,\d+)?$"))
-                            ic.col_6 = Convert.ToDouble(ic.col_6).ToString("N" + txtDecimal05.Text);
+                        type = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[0];
+                        switch (type)
+                        {
+                            case "formula.ws":
+                                value = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[1].Split(',');
+                                if (this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())] != null)
+                                {
+                                    ic.col_4 = this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())].ToString();
+                                }
+                                break;
+                        }
+                        colIndex++;
                     }
-                }
-                if (ic.col_7 != null)
-                {
-                    ic.col_7 = ((ic.col_7.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_7] == null) ? null : this.workSheetData[ic.col_7].ToString()) : ic.col_7);
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    if (ic.col_5 != null)
                     {
-                        if (Regex.IsMatch(ic.col_7, @"^[0-9][\.\d]*(,\d+)?$"))
-                            ic.col_7 = Convert.ToDouble(ic.col_7).ToString("N" + txtDecimal06.Text);
+                        type = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[0];
+                        switch (type)
+                        {
+                            case "formula.ws":
+                                value = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[1].Split(',');
+                                if (this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())] != null)
+                                {
+                                    ic.col_5 = this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())].ToString();
+                                }
+                                break;
+                        }
+                        colIndex++;
                     }
-                }
-                if (ic.col_8 != null)
-                {
-                    ic.col_8 = ((ic.col_8.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_8] == null) ? null : this.workSheetData[ic.col_8].ToString()) : ic.col_8);
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                    if (ic.col_6 != null)
                     {
-                        if (Regex.IsMatch(ic.col_8, @"^[0-9][\.\d]*(,\d+)?$"))
-                            ic.col_8 = Convert.ToDouble(ic.col_8).ToString("N" + txtDecimal07.Text);
+                        type = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[0];
+                        switch (type)
+                        {
+                            case "formula.ws":
+                                value = this.configs[String.Format(prefix, colIndex)].ToString().Split('|')[1].Split(',');
+                                if (this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())] != null)
+                                {
+                                    ic.col_6 = this.workSheetData[String.Format("{0}!{1}", sheet, value[r].ToUpper())].ToString();
+                                }
+                                break;
+                        }
+                        colIndex++;
                     }
-                }
-                if (ic.col_9 != null)
+                }catch(Exception ex)
                 {
-                    ic.col_9 = ((ic.col_9.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_9] == null) ? null : this.workSheetData[ic.col_9].ToString()) : ic.col_9);
-                    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
-                    {
-                        if (Regex.IsMatch(ic.col_9, @"^[0-9][\.\d]*(,\d+)?$"))
-                            ic.col_8 = Convert.ToDouble(ic.col_9).ToString("N" + txtDecimal08.Text);
-                    }
-                }
-                if (ic.col_10 != null)
-                {
-                    ic.col_10 = ((ic.col_10.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_10] == null) ? null : this.workSheetData[ic.col_10].ToString()) : ic.col_10);
+                    Console.WriteLine(ex.Message);
                 }
 
-                if (ic.col_11 != null)
-                {
-                    ic.col_11 = ((ic.col_11.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_11] == null) ? null : this.workSheetData[ic.col_11].ToString()) : ic.col_11);
-                }
-                if (ic.col_12 != null)
-                {
-                    ic.col_12 = ((ic.col_12.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_12] == null) ? null : this.workSheetData[ic.col_12].ToString()) : ic.col_12);
-                }
-                if (ic.col_13 != null)
-                {
-                    ic.col_13 = ((ic.col_13.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_13] == null) ? null : this.workSheetData[ic.col_13].ToString()) : ic.col_13);
-                }
-                if (ic.col_14 != null)
-                {
-                    ic.col_14 = ((ic.col_14.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_14] == null) ? null : this.workSheetData[ic.col_14].ToString()) : ic.col_14);
-                }
-                if (ic.col_15 != null)
-                {
-                    ic.col_15 = ((ic.col_15.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_15] == null) ? null : this.workSheetData[ic.col_15].ToString()) : ic.col_15);
-                }
-                if (ic.col_16 != null)
-                {
-                    ic.col_16 = ((ic.col_16.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_16] == null) ? null : this.workSheetData[ic.col_16].ToString()) : ic.col_16);
-                }
-                if (ic.col_17 != null)
-                {
-                    ic.col_17 = ((ic.col_17.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_17] == null) ? null : this.workSheetData[ic.col_17].ToString()) : ic.col_17);
-                }
-                if (ic.col_18 != null)
-                {
-                    ic.col_18 = ((ic.col_18.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_18] == null) ? null : this.workSheetData[ic.col_18].ToString()) : ic.col_18);
-                }
-                if (ic.col_19 != null)
-                {
-                    ic.col_19 = ((ic.col_19.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_19] == null) ? null : this.workSheetData[ic.col_19].ToString()) : ic.col_19);
-                }
-                if (ic.col_20 != null)
-                {
-                    ic.col_20 = ((ic.col_20.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_20] == null) ? null : this.workSheetData[ic.col_20].ToString()) : ic.col_20);
-                }
+                //if (ic.col_7 != null)
+                //{
+                //    ic.col_7 = ((ic.col_7.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_7] == null) ? null : this.workSheetData[ic.col_7].ToString()) : ic.col_7);
+                //    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                //    {
+                //        if (Regex.IsMatch(ic.col_7, @"^[0-9][\.\d]*(,\d+)?$"))
+                //            ic.col_7 = Convert.ToDouble(ic.col_7).ToString("N" + txtDecimal06.Text);
+                //    }
+                //}
+                //if (ic.col_8 != null)
+                //{
+                //    ic.col_8 = ((ic.col_8.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_8] == null) ? null : this.workSheetData[ic.col_8].ToString()) : ic.col_8);
+                //    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                //    {
+                //        if (Regex.IsMatch(ic.col_8, @"^[0-9][\.\d]*(,\d+)?$"))
+                //            ic.col_8 = Convert.ToDouble(ic.col_8).ToString("N" + txtDecimal07.Text);
+                //    }
+                //}
+                //if (ic.col_9 != null)
+                //{
+                //    ic.col_9 = ((ic.col_9.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_9] == null) ? null : this.workSheetData[ic.col_9].ToString()) : ic.col_9);
+                //    if (ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_ANIONS) || ic.row_type == Convert.ToInt16(FreeTemplateIcEnum.WS_CATIONS))
+                //    {
+                //        if (Regex.IsMatch(ic.col_9, @"^[0-9][\.\d]*(,\d+)?$"))
+                //            ic.col_8 = Convert.ToDouble(ic.col_9).ToString("N" + txtDecimal08.Text);
+                //    }
+                //}
+                //if (ic.col_10 != null)
+                //{
+                //    ic.col_10 = ((ic.col_10.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_10] == null) ? null : this.workSheetData[ic.col_10].ToString()) : ic.col_10);
+                //}
+
+                //if (ic.col_11 != null)
+                //{
+                //    ic.col_11 = ((ic.col_11.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_11] == null) ? null : this.workSheetData[ic.col_11].ToString()) : ic.col_11);
+                //}
+                //if (ic.col_12 != null)
+                //{
+                //    ic.col_12 = ((ic.col_12.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_12] == null) ? null : this.workSheetData[ic.col_12].ToString()) : ic.col_12);
+                //}
+                //if (ic.col_13 != null)
+                //{
+                //    ic.col_13 = ((ic.col_13.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_13] == null) ? null : this.workSheetData[ic.col_13].ToString()) : ic.col_13);
+                //}
+                //if (ic.col_14 != null)
+                //{
+                //    ic.col_14 = ((ic.col_14.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_14] == null) ? null : this.workSheetData[ic.col_14].ToString()) : ic.col_14);
+                //}
+                //if (ic.col_15 != null)
+                //{
+                //    ic.col_15 = ((ic.col_15.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_15] == null) ? null : this.workSheetData[ic.col_15].ToString()) : ic.col_15);
+                //}
+                //if (ic.col_16 != null)
+                //{
+                //    ic.col_16 = ((ic.col_16.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_16] == null) ? null : this.workSheetData[ic.col_16].ToString()) : ic.col_16);
+                //}
+                //if (ic.col_17 != null)
+                //{
+                //    ic.col_17 = ((ic.col_17.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_17] == null) ? null : this.workSheetData[ic.col_17].ToString()) : ic.col_17);
+                //}
+                //if (ic.col_18 != null)
+                //{
+                //    ic.col_18 = ((ic.col_18.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_18] == null) ? null : this.workSheetData[ic.col_18].ToString()) : ic.col_18);
+                //}
+                //if (ic.col_19 != null)
+                //{
+                //    ic.col_19 = ((ic.col_19.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_19] == null) ? null : this.workSheetData[ic.col_19].ToString()) : ic.col_19);
+                //}
+                //if (ic.col_20 != null)
+                //{
+                //    ic.col_20 = ((ic.col_20.IndexOf(FreeTemplateUtil.DELIMITER_EXCLAMATION_MARK) > 0) ? ((this.workSheetData[ic.col_20] == null) ? null : this.workSheetData[ic.col_20].ToString()) : ic.col_20);
+                //}
             }
 
         }

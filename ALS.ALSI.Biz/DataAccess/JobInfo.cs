@@ -179,7 +179,7 @@ namespace ALS.ALSI.Biz.DataAccess
                                  s.group_submit,
                                  status_name = ms.name,
                                  s.sample_prefix,
-                                 s.amend_or_retest
+                                 s.amend_or_retest,s.note,s.note_lab
                              };
 
                 if(this.physicalYear > 0)
