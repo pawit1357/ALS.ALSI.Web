@@ -40,13 +40,21 @@ namespace ALS.ALSI.Biz.DataAccess
         }
 
 
-        public DateTime GetWorkingDay(DateTime CalDate)
+        public DateTime GetWorkingDay(DateTime CalDate, int _day)
         {
-            while (IsHoliday(CalDate))
+            int useDay = 1;
+            DateTime result = DateTime.Now;
+            for (int i = 0; i < _day; i++)
             {
+                while (IsHoliday(CalDate))
+                {
+                    CalDate = CalDate.AddDays(1);
+                }
                 CalDate = CalDate.AddDays(1);
+                useDay++;
             }
-            return CalDate;
+            result = CalDate.AddDays(_day- useDay);
+            return result;
         }
 
 

@@ -395,4 +395,12 @@ ADD COLUMN `note` VARCHAR(200) NULL AFTER `last_status`;
 ALTER TABLE `alsi`.`job_sample` 
 CHANGE COLUMN `job_samplecol` `note` VARCHAR(200) NULL DEFAULT NULL ;
 
+
+
+
+
+------------------------ 2018-09-02
+UPDATE `alsi`.`m_completion_scheduled` SET `lab_due_date`='3' WHERE `ID`='3';
+UPDATE `alsi`.`m_completion_scheduled` SET `customer_due_date`='3' WHERE `ID`='3';
+
 */

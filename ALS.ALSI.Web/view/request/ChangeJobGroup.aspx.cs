@@ -185,7 +185,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount.Visible = false;
                         pChangeDueDate.Visible = false;
                         pAccount2.Visible = false;
-                        pNote.Visible = false;
+                        pNote.Visible = this.isNoteGroupOpeation;
                         lbDesc.Text = "Chemist: ทำรายการแบบกลุ่ม" + desc2;
                         break;
                     case RoleEnum.SR_CHEMIST:
@@ -298,23 +298,26 @@ namespace ALS.ALSI.Web.view.request
                                 }
                                 else
                                 {
+                                    //1|Normal
+                                    //2|Urgent
+                                    //3|Express
                                     switch (jobSample.status_completion_scheduled.Value)
                                     {
                                         case 1:
                                         case 2:
-                                            jobSample.due_date_lab = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
-                                            jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text)).AddDays(1);
+                                            jobSample.due_date_lab = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
+                                            jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 2);
                                             break;
                                         case 3:
-                                            jobSample.due_date_lab = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
-                                            jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
+                                            jobSample.due_date_lab = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
+                                            jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
                                             break;
                                     }
                                 }
                             }
                             break;
                         case RoleEnum.ADMIN:
-                            jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
+                            jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 0);
                             break;
                     }
                 }
@@ -339,7 +342,16 @@ namespace ALS.ALSI.Web.view.request
                     jobSample.sample_invoice = txtInvoice.Text;
                 }else if (this.isNoteGroupOpeation)
                 {
-                    jobSample.note = txtNote.Text;
+                    switch (userRole)
+                    {
+                        case RoleEnum.CHEMIST:
+                            jobSample.note_lab = txtNote.Text;
+
+                            break;
+                        default:
+                            jobSample.note = txtNote.Text;
+                            break;
+                    }
                 }
                 else
                 {

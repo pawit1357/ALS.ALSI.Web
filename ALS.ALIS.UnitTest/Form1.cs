@@ -17,10 +17,10 @@ namespace ALS.ALIS.UnitTest
         private void Form1_Load(object sender, EventArgs e)
         {
             //GenerateHtmlBiz.test();
-            DateTime _date = new DateTime(2018, 8, 11);
+            //DateTime _date = new DateTime(2018, 9, 7);
 
-            holiday_calendar h = new holiday_calendar();
-          DateTime dt =  h.GetWorkingDay(_date);
+            //holiday_calendar h = new holiday_calendar();
+            //DateTime dt = h.GetWorkingDay(_date,3);
 
             Console.WriteLine();
         }

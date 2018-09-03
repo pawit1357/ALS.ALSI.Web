@@ -198,7 +198,7 @@ namespace ALS.ALSI.Web.view.request
             btnOperationPo.Visible = (userRole == RoleEnum.ADMIN);
             btnOperationDueDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LOGIN);
             btnOperationSentToCus.Visible = (userRole == RoleEnum.ADMIN);
-            btnOperationNote.Visible = (userRole == RoleEnum.ADMIN || userRole == RoleEnum.ACCOUNT);
+            btnOperationNote.Visible = (userRole == RoleEnum.ADMIN || userRole == RoleEnum.ACCOUNT||userRole== RoleEnum.CHEMIST);
             btnElp.CssClass = "btn blue";
             //btnOperationDueDate.Text =  "Due date" : "";
             btnOperationGroupInvoice.Visible = (userRole == RoleEnum.ACCOUNT);
@@ -577,22 +577,17 @@ namespace ALS.ALSI.Web.view.request
                         case RoleEnum.LOGIN:
                             btnWorkFlow.Visible = (job_status == StatusEnum.LOGIN_SELECT_SPEC) && !isHold;
                             cbSelect.Visible = true;
-
-                            //switch (job_status)
-                            //{
-                            //    case StatusEnum.LOGIN_CONVERT_TEMPLATE:
-                            //        cbSelect.Visible = true;
-                            //        break;
-                            //}
                             break;
                         case RoleEnum.CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.CHEMIST_TESTING) && !isHold;
-                            switch (job_status)
-                            {
-                                case StatusEnum.CHEMIST_TESTING:
-                                    cbSelect.Visible = true;
-                                    break;
-                            }
+                            //switch (job_status)
+                            //{
+                            //    case StatusEnum.CHEMIST_TESTING:
+                            //        cbSelect.Visible = true;
+                            //        break;
+                            //}
+                            cbSelect.Visible = true;
+
                             break;
                         case RoleEnum.SR_CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.SR_CHEMIST_CHECKING) && !isHold;

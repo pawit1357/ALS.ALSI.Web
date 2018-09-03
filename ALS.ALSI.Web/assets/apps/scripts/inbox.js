@@ -238,7 +238,7 @@ var AppInbox = function () {
     }
 
     var toggleButton = function(el) {
-        if (typeof el == 'undefined') {
+        if (typeof el === 'undefined') {
             return;
         }
         if (el.attr("disabled")) {
