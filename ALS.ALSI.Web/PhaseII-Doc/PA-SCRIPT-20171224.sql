@@ -400,6 +400,8 @@ CHANGE COLUMN `job_samplecol` `note` VARCHAR(200) NULL DEFAULT NULL ;
 
 
 ------------------------ 2018-09-02
+select  *  from m_completion_scheduled
+
 UPDATE `alsi`.`m_completion_scheduled` SET `lab_due_date`='3' WHERE `ID`='3';
 UPDATE `alsi`.`m_completion_scheduled` SET `customer_due_date`='3' WHERE `ID`='3';
 
