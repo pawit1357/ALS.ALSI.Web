@@ -6,9 +6,11 @@ using ALS.ALSI.Web.Properties;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Net;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace ALS.ALSI.Web.view.request
 {
@@ -28,7 +30,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (IEnumerable)Session[GetType().Name + "ChangeJobPo"]; }
             set { Session[GetType().Name + "ChangeJobPo"] = value; }
         }
-
+        public DataTable gvFileListResult
+        {
+            get { return (DataTable)Session[GetType().Name + "gvFileListResult"]; }
+            set { Session[GetType().Name + "gvFileListResult"] = value; }
+        }
         public CommandNameEnum CommandName
         {
             get { return (CommandNameEnum)ViewState[Constants.COMMAND_NAME]; }
@@ -173,8 +179,8 @@ namespace ALS.ALSI.Web.view.request
                         listOfFile.Add(fl);
                     }
                 }
-
-                gvFileList.DataSource = listOfFile;
+                this.gvFileListResult = listOfFile.ToDataTable();
+                gvFileList.DataSource = this.gvFileListResult;
                 gvFileList.DataBind();
                 lbShowListText.Text = "";
 
@@ -185,9 +191,6 @@ namespace ALS.ALSI.Web.view.request
 
             }
         }
-
-
-
 
         private void removeSession()
         {
@@ -228,6 +231,37 @@ namespace ALS.ALSI.Web.view.request
 
 
 
+        protected void gvResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0) return;
+            GridView gv = (GridView)sender;
+            gv.DataSource = searchResult;
+            gv.PageIndex = e.NewPageIndex;
+            gv.DataBind();
+        }
+
+        protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowIndex != -1)
+            {
+            }
+        }
+
+        protected void gvFileList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0) return;
+            GridView gv = (GridView)sender;
+            gv.DataSource = this.gvFileListResult;
+            gv.PageIndex = e.NewPageIndex;
+            gv.DataBind();
+        }
+
+        protected void gvFileList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowIndex != -1)
+            {
+            }
+        }
 
     }
 }

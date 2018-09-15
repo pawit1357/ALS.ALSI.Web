@@ -6,7 +6,7 @@ from job_sample
 left join m_type_of_test on job_sample.type_of_test_id = m_type_of_test.id
 left join m_status on m_status.ID=job_sample.job_status
 left join m_template on job_sample.template_id = m_template.id
-where m_template.path_url like '%Seagate_GCMS_3%' 
+where m_template.path_url like '%Seagate_HPA_1.ascx%' 
 and m_template.status='A'
 order by job_sample.job_status;
 
@@ -19,7 +19,7 @@ select * from template_wd_ftir_coverpage where sample_id=8515;
 select * from job_sample where id=13728;
 select * from template_wd_lpc_coverpage where sample_id=11010;
 
-select * from job_sample where job_number='ELP-3160-LB';
+select * from job_sample where job_number='ELP-0469-HB';
 select * from template_seagate_lpc_coverpage where sample_id=11175 ;
 select * from template_seagate_hpa_coverpage where hpa_type=7 and sample_id=10731 and b like '%NiP with AlMgSi%';
 

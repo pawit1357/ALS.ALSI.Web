@@ -470,43 +470,17 @@ namespace ALS.ALSI.Web.view.request
         {
             if (!ddlSecification_id.SelectedValue.Equals(""))
             {
-                //if (ddlSecification_id.SelectedItem.Text.ToUpper().Contains("OTHER"))
-                //{
-                //    txtSpecification_other.Visible = true;
-                //    lbOther.Visible = true;
-                //}
-                //else
-                //{
-                //List<m_type_of_test> disPlayTT = new List<m_type_of_test>();
+
                 List<m_type_of_test> lists = new m_type_of_test().SelectBySpecificationId(int.Parse(ddlSecification_id.SelectedValue));//.SelectParent(int.Parse(ddlSecification_id.SelectedValue));
-                //List<m_type_of_test> parents = lists.FindAll(x => x.parent == -1);
+
                 foreach (m_type_of_test val in lists)
                 {
-
                     val.customName = String.Format("{0}-[{1}]{2}", val.data_group, val.prefix, val.name);
-
-                    //disPlayTT.Add(parent);
-
-                    //List<m_type_of_test> childs = new m_type_of_test().SelectChild(parent.ID);
-                    //if (childs != null)
-                    //{
-                    //    if (childs.Count > 0)
-                    //    {
-                    //        foreach (m_type_of_test child in childs)
-                    //        {
-                    //            child.customName = parent.name + "-" + child.name + "(" + child.prefix + ")";
-                    //            disPlayTT.Add(child);
-                    //        }
-                    //    }
-                    //}
                 }
                 lstTypeOfTest.Attributes.Add("multiple", "");
                 lstTypeOfTest.DataSource = lists;
                 lstTypeOfTest.DataBind();
-                //}
-                //txtSpecification_other.Text = string.Empty;
-                //txtSpecification_other.Visible = false;
-                //lbOther.Visible = false;
+
             }
 
         }
@@ -663,9 +637,8 @@ namespace ALS.ALSI.Web.view.request
                                 else
                                 {
                                     holiday_calendar h = new holiday_calendar();
-                                    jobSample.due_date = h.GetWorkingDay(Convert.ToDateTime(objJobInfo.date_of_receive.Value),(Convert.ToInt32(cs.value)));
                                     jobSample.due_date_lab = h.GetWorkingDay(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date));
-                                    jobSample.due_date_customer = h.GetWorkingDay(Convert.ToDateTime(objJobInfo.date_of_receive.Value),(Convert.ToInt32(cs.customer_due_date)));
+                                    jobSample.due_date_customer = h.GetWorkingDay(Convert.ToDateTime(objJobInfo.date_of_receive.Value), (Convert.ToInt32(cs.customer_due_date)));
                                 }
                             }
                         }
@@ -682,23 +655,11 @@ namespace ALS.ALSI.Web.view.request
                         // not find type of test
                     }
                 }
-
             }
-
             gvSample.DataSource = listSampleShow;
             gvSample.PageIndex = 0;
             gvSample.DataBind();
-            //Clear old value
-
-            //txtDescriptoin.Text = string.Empty;
-            //txtModel.Text = string.Empty;
-            //txtSurfaceArea.Text = string.Empty;
-            //txtRemark.Text = string.Empty;
-            //rdUncertaintyNo.Checked = true;
-            //ddlSecification_id.SelectedIndex = -1;
-            //ddlCompletionScheduled.SelectedIndex = -1;
             lstTypeOfTest.ClearSelection();
-
         }
 
         #region "GV SAMPLE"

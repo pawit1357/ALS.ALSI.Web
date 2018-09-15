@@ -43,7 +43,7 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_JOB_SR_CHEMIST_COMPLATE_DATE = APPNAME + "/view/request/ChangeSrChemistCompleteDate.aspx";
         public const String LINK_NOTE_FOR_LAB = APPNAME + "/view/request/NoteForLab.aspx";
 
-        
+
 
         public const String LINK_JOB_CHANGE_PO = APPNAME + "/view/request/ChangeJobPo.aspx";
         public const String LINK_REPORT_DATE = APPNAME + "/view/request/ChangeReportDate.aspx";
@@ -297,7 +297,9 @@ namespace ALS.ALSI.Biz.Constant
     {
         NORMAL = 1,
         URGENT = 2,
-        EXPRESS = 3
+        EXPRESS = 3,
+        EXTEND1 = 4,
+        EXTEND2 = 5
     }
 
     public enum SpecificationEnum

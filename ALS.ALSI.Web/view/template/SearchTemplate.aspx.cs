@@ -80,7 +80,6 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvResult_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
             CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
             this.CommandName = cmd;
             switch (cmd)
@@ -101,15 +100,8 @@ namespace ALS.ALSI.Web.view.template
 
                         bindingData();
                     }
-                        break;
+                    break;
             }
-
-        }
-
-        protected void lbAdd_Click(object sender, EventArgs e)
-        {
-            this.CommandName = CommandNameEnum.Add;
-            Server.Transfer(Constants.LINK_TEMPLATE);
         }
 
         protected void gvResult_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -133,21 +125,6 @@ namespace ALS.ALSI.Web.view.template
             gv.DataSource = searchResult;
             gv.PageIndex = e.NewPageIndex;
             gv.DataBind();
-        }
-
-
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            //txtName.Text = string.Empty;
-            lbTotalRecords.Text = string.Empty;
-
-            removeSession();
-            bindingData();
-        }
-
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            bindingData();
         }
 
         protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -174,5 +151,27 @@ namespace ALS.ALSI.Web.view.template
                 //}
             }
         }
+
+        protected void lbAdd_Click(object sender, EventArgs e)
+        {
+            this.CommandName = CommandNameEnum.Add;
+            Server.Transfer(Constants.LINK_TEMPLATE);
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            //txtName.Text = string.Empty;
+            lbTotalRecords.Text = string.Empty;
+
+            removeSession();
+            bindingData();
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            bindingData();
+        }
+
+
     }
 }

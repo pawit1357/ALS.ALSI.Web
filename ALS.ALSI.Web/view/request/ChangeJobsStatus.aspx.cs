@@ -91,12 +91,6 @@ namespace ALS.ALSI.Web.view.request
                 StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
                 switch (status)
                 {
-
-                    //case StatusEnum.JOB_HOLD:
-                    //break;
-                    //case StatusEnum.JOB_UNHOLD:
-                    //break;
-
                     case StatusEnum.JOB_CANCEL:
                     case StatusEnum.JOB_COMPLETE:
                         ddlStatus.SelectedValue = Convert.ToInt16(status).ToString();
@@ -156,17 +150,32 @@ namespace ALS.ALSI.Web.view.request
                         this.jobSample.path_pdf = String.Empty;
                     }
 
+                    StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), jobSample.job_status.ToString(), true);
+                    switch (status)
+                    {
+                        case StatusEnum.ADMIN_CONVERT_WORD:
+                        case StatusEnum.ADMIN_CONVERT_PDF:
+                            this.jobSample.date_admin_word_inprogress = null;
+                            this.jobSample.date_admin_word_complete = null;
+                            this.jobSample.date_admin_pdf_inprogress = null;
+                            this.jobSample.date_admin_pdf_complete = null;
+                            this.jobSample.date_admin_sent_to_cus = null;
+                            break;
+                        default:
+                            this.jobSample.date_srchemist_analyze = null;
+                            this.jobSample.date_srchemist_complate = null;
+                            this.jobSample.date_admin_word_inprogress = null;
+                            this.jobSample.date_admin_word_complete = null;
+                            this.jobSample.date_labman_analyze = null;
+                            this.jobSample.date_labman_complete = null;
+                            this.jobSample.date_admin_sent_to_cus = null;
+                            this.jobSample.date_admin_pdf_inprogress = null;
+                            this.jobSample.date_admin_pdf_complete = null;
+                            break;
+                    }
 
 
-                    this.jobSample.date_srchemist_analyze = null;
-                    this.jobSample.date_srchemist_complate = null;
-                    this.jobSample.date_admin_word_inprogress = null;
-                    this.jobSample.date_admin_word_complete = null;
-                    this.jobSample.date_labman_analyze = null;
-                    this.jobSample.date_labman_complete = null;
-                    this.jobSample.date_admin_sent_to_cus = null;
-                    this.jobSample.date_admin_pdf_inprogress = null;
-                    this.jobSample.date_admin_pdf_complete = null;
+
 
 
                     this.jobSample.Update();

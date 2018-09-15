@@ -405,4 +405,16 @@ select  *  from m_completion_scheduled
 UPDATE `alsi`.`m_completion_scheduled` SET `lab_due_date`='3' WHERE `ID`='3';
 UPDATE `alsi`.`m_completion_scheduled` SET `customer_due_date`='3' WHERE `ID`='3';
 
+
+
+
+
+
+
+
+
+------------------------ 2018-09-11 ------------------------
+INSERT INTO `alsi`.`m_completion_scheduled` (`ID`, `name`, `lab_due_date`, `customer_due_date`) VALUES ('4', 'Extend 1', '10', '11');
+INSERT INTO `alsi`.`m_completion_scheduled` (`ID`, `name`, `lab_due_date`, `customer_due_date`) VALUES ('5', 'Extend 2', '15', '16');
+
 */

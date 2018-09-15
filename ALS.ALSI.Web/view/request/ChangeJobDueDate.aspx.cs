@@ -140,11 +140,15 @@ namespace ALS.ALSI.Web.view.request
                 //1|Normal
                 //2|Urgent
                 //3|Express
+                //4|Extend 1
+                //5|Extend 2
 
                 switch (this.jobSample.status_completion_scheduled.Value)
                 {
                     case 1:
                     case 2:
+                    case 4:
+                    case 5:
                         this.jobSample.due_date_lab = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
                         this.jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 2);
                         break;
@@ -153,6 +157,7 @@ namespace ALS.ALSI.Web.view.request
                         this.jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
                         break;
                 }
+
             }
 
             this.jobSample.Update();

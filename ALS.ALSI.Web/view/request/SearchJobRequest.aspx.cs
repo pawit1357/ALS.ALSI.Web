@@ -78,7 +78,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isInvoiceGroupOperation"]; }
             set { Session[GetType().Name + "isInvoiceGroupOperation"] = value; }
         }
-
+        public Boolean isCusRefNoGroupOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isCusRefNoGroupOperation"]; }
+            set { Session[GetType().Name + "isCusRefNoGroupOperation"] = value; }
+        }
         public int JobID { get; set; }
 
         public int SampleID { get; set; }
@@ -154,7 +158,6 @@ namespace ALS.ALSI.Web.view.request
             ddlSpecification.DataBind();
             ddlSpecification.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
-
             ddlTypeOfTest.Items.Clear();
             ddlTypeOfTest.DataSource = new m_type_of_test().SelectDistinct();
             ddlTypeOfTest.DataBind();
@@ -198,7 +201,8 @@ namespace ALS.ALSI.Web.view.request
             btnOperationPo.Visible = (userRole == RoleEnum.ADMIN);
             btnOperationDueDate.Visible = (userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LOGIN);
             btnOperationSentToCus.Visible = (userRole == RoleEnum.ADMIN);
-            btnOperationNote.Visible = (userRole == RoleEnum.ADMIN || userRole == RoleEnum.ACCOUNT||userRole== RoleEnum.CHEMIST);
+            btnOperationNote.Visible = (userRole == RoleEnum.ADMIN || userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.CHEMIST);
+            btnOperationCusRefNo.Visible = (userRole == RoleEnum.MARKETING);
             btnElp.CssClass = "btn blue";
             //btnOperationDueDate.Text =  "Due date" : "";
             btnOperationGroupInvoice.Visible = (userRole == RoleEnum.ACCOUNT);
@@ -217,6 +221,7 @@ namespace ALS.ALSI.Web.view.request
                 btnElwa.CssClass = "btn btn-default btn-sm";
                 btnGrp.CssClass = "btn btn-default btn-sm";
                 btnTrb.CssClass = "btn btn-default btn-sm";
+
                 switch (hPrefix.Value.ToUpper())
                 {
                     case "ELP":
@@ -241,11 +246,90 @@ namespace ALS.ALSI.Web.view.request
                         btnTrb.CssClass = "btn blue";
                         break;
                 }
+
             }
             searchResult = obj.SearchData();
-
-
-
+            /* 
+                ////////////////////////////////////////////////ADMIN////////////////////////////////////////////////
+                |Job Type	
+                |Status	
+                -------------------------
+                3|Job Status	
+                4|Received	
+                5|Report Sent to Customer	
+                6|Receive Date	
+                7|Due Date	
+                8|ALS Ref	No.
+                9|Cus Ref No	
+                10|Other Ref No	
+                11|Company	
+                12|Invoice	
+                13|Po	
+                14|Contact	
+                15|Description	
+                18|Specification	
+                19|Type of test	
+                -------------------------
+                |Data Group	
+                |date_login_complete	
+                |date_chemist_complete	
+                |date_admin_word_complete	
+                |date_labman_complete	
+                |date_admin_pdf_complete	
+                20|Note for Admin & Account
+                |Remark (AM & Retest)
+                ////////////////////////////////////////////////OTHER//////////////////////////////////////////////////////
+                |Job Type	
+                |Status	
+                -------------------------
+                3|Job Status	
+                |Report Sent to Customer	
+                4|Receive Date	
+                |Due Date	
+                |ALS Ref	No.
+                |Cus Ref No	
+                |Other Ref No	
+                |Company	
+                |Description	
+                |Model	
+                |Surface Area	
+                |Specification	
+                |Type of test	
+                -------------------------
+                |Data Group	
+                |date_login_complete	
+                |date_chemist_complete	
+                |date_srchemist_complate	
+                |date_admin_word_complete	
+                |date_labman_complete	
+                |date_admin_pdf_complete	
+                20|Note for lab	
+                |Remark (AM & Retest)
+            */
+            /*                                       
+                0|#                                      |
+                1|Select                                 |
+                2|#                                      |
+                3|Status                                 |
+                4|Received                               |
+                5|Report Sent to Customer                |
+                6|Receive Date.                          |
+                7|Due Date.                              |
+                8|ALS Ref No.                            |
+                9|Cus Ref No.                            |
+                10|Other Ref No                          |
+                11|Company                               |
+                12|Invoice                               |
+                13|Po                                    |
+                14|Contact                               |
+                15|Description                           |
+                16|Model                                 |
+                17|Surface Area                          |
+                18|Specification                         |
+                19|Type of test                          |
+                20|Note for Admin & Account              |
+                21|Note for lab                          |
+            */
 
             gvJob.DataSource = searchResult;
             gvJob.DataBind();
@@ -260,10 +344,28 @@ namespace ALS.ALSI.Web.view.request
                 {
                     case RoleEnum.ACCOUNT:
                     case RoleEnum.ADMIN:
+                    case RoleEnum.BUSINESS_MANAGER:
+                    case RoleEnum.MARKETING:
+                        gvJob.Columns[0].Visible = true;
+                        gvJob.Columns[1].Visible = true;
+                        gvJob.Columns[2].Visible = true;
+                        gvJob.Columns[3].Visible = true;
                         gvJob.Columns[4].Visible = true;
                         gvJob.Columns[5].Visible = true;
+                        gvJob.Columns[6].Visible = true;
+                        gvJob.Columns[7].Visible = true;
+                        gvJob.Columns[8].Visible = true;
+                        gvJob.Columns[9].Visible = true;
+                        gvJob.Columns[10].Visible = true;
+                        gvJob.Columns[11].Visible = true;
                         gvJob.Columns[12].Visible = true;
                         gvJob.Columns[13].Visible = true;
+                        gvJob.Columns[14].Visible = true;
+                        gvJob.Columns[15].Visible = true;
+                        gvJob.Columns[16].Visible = false;
+                        gvJob.Columns[17].Visible = false;
+                        gvJob.Columns[18].Visible = true;
+                        gvJob.Columns[19].Visible = true;
                         gvJob.Columns[20].Visible = true;
                         gvJob.Columns[21].Visible = false;
                         break;
@@ -271,23 +373,54 @@ namespace ALS.ALSI.Web.view.request
                     case RoleEnum.CHEMIST:
                     case RoleEnum.SR_CHEMIST:
                     case RoleEnum.LABMANAGER:
+                        gvJob.Columns[0].Visible = true;
+                        gvJob.Columns[1].Visible = true;
+                        gvJob.Columns[2].Visible = true;
+                        gvJob.Columns[3].Visible = true;
                         gvJob.Columns[4].Visible = false;
-                        gvJob.Columns[5].Visible = false;
+                        gvJob.Columns[5].Visible = true;
+                        gvJob.Columns[6].Visible = true;
+                        gvJob.Columns[7].Visible = true;
+                        gvJob.Columns[8].Visible = true;
+                        gvJob.Columns[9].Visible = true;
+                        gvJob.Columns[10].Visible = true;
+                        gvJob.Columns[11].Visible = true;
                         gvJob.Columns[12].Visible = false;
                         gvJob.Columns[13].Visible = false;
+                        gvJob.Columns[14].Visible = true;
+                        gvJob.Columns[15].Visible = true;
+                        gvJob.Columns[16].Visible = true;
+                        gvJob.Columns[17].Visible = true;
+                        gvJob.Columns[18].Visible = true;
+                        gvJob.Columns[19].Visible = true;
                         gvJob.Columns[20].Visible = false;
                         gvJob.Columns[21].Visible = true;
                         break;
                     default:
+                        gvJob.Columns[0].Visible = false;
+                        gvJob.Columns[1].Visible = false;
+                        gvJob.Columns[2].Visible = false;
+                        gvJob.Columns[3].Visible = false;
                         gvJob.Columns[4].Visible = false;
                         gvJob.Columns[5].Visible = false;
+                        gvJob.Columns[6].Visible = false;
+                        gvJob.Columns[7].Visible = false;
+                        gvJob.Columns[8].Visible = false;
+                        gvJob.Columns[9].Visible = false;
+                        gvJob.Columns[10].Visible = false;
+                        gvJob.Columns[11].Visible = false;
                         gvJob.Columns[12].Visible = false;
                         gvJob.Columns[13].Visible = false;
+                        gvJob.Columns[14].Visible = false;
+                        gvJob.Columns[15].Visible = false;
+                        gvJob.Columns[16].Visible = false;
+                        gvJob.Columns[17].Visible = false;
+                        gvJob.Columns[18].Visible = false;
+                        gvJob.Columns[19].Visible = false;
                         gvJob.Columns[20].Visible = false;
                         gvJob.Columns[21].Visible = false;
                         break;
                 }
-
             }
             else
             {
@@ -381,8 +514,6 @@ namespace ALS.ALSI.Web.view.request
                 case CommandNameEnum.ChangeSrChemistCompleteDate:
                     Server.Transfer(Constants.LINK_JOB_SR_CHEMIST_COMPLATE_DATE);
                     break;
-
-
                 case CommandNameEnum.ChangePo:
                     Server.Transfer(Constants.LINK_JOB_CHANGE_PO);
                     break;
@@ -580,14 +711,7 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case RoleEnum.CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.CHEMIST_TESTING) && !isHold;
-                            //switch (job_status)
-                            //{
-                            //    case StatusEnum.CHEMIST_TESTING:
-                            //        cbSelect.Visible = true;
-                            //        break;
-                            //}
                             cbSelect.Visible = true;
-
                             break;
                         case RoleEnum.SR_CHEMIST:
                             btnWorkFlow.Visible = (job_status == StatusEnum.SR_CHEMIST_CHECKING) && !isHold;
@@ -612,7 +736,9 @@ namespace ALS.ALSI.Web.view.request
                             btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF) && !isHold;
                             cbSelect.Visible = true;
                             break;
-
+                        case RoleEnum.MARKETING:
+                            cbSelect.Visible = true;
+                            break;
                         default:
                             btnWorkFlow.Visible = false;
                             break;
@@ -629,7 +755,7 @@ namespace ALS.ALSI.Web.view.request
                     btnReTest.Visible = (userRole == RoleEnum.LABMANAGER) && (job_status == StatusEnum.JOB_COMPLETE) && !isHold;
                     btnHold.Visible = ((userRole == RoleEnum.LOGIN) && !isHold);
                     btnUnHold.Visible = ((userRole == RoleEnum.LOGIN) && isHold);
-                    btnNoteForLab.Visible = (userRole == RoleEnum.LOGIN||userRole == RoleEnum.CHEMIST || userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.LABMANAGER) && !isHold;
+                    btnNoteForLab.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST || userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.LABMANAGER) && !isHold;
                     //btnWorkFlow.Visible = !isHold;
 
 
@@ -658,11 +784,11 @@ namespace ALS.ALSI.Web.view.request
                     {
                         litDueDate.Text = "TBA";
                     }
-                    else
+                    else { }
+                    if (isHold)
                     {
-
+                        litDueDate.Text = "-";
                     }
-
 
                     #region "Job color status"
 
@@ -677,21 +803,18 @@ namespace ALS.ALSI.Web.view.request
                         case CompletionScheduledEnum.EXPRESS:
                             litStatus.Text = "<span class=\"label label-sm label-warning\">E </span>";
                             break;
+                        case CompletionScheduledEnum.EXTEND1:
+                            litStatus.Text = "<span class=\"label label-sm label-warning\">E1 </span>";
+                            break;
+                        case CompletionScheduledEnum.EXTEND2:
+                            litStatus.Text = "<span class=\"label label-sm label-warning\">E2 </span>";
+                            break;
                     }
 
                     //jobStatus icon
                     e.Row.ForeColor = System.Drawing.Color.Black;
                     litIcon.Visible = isGroupSubmit;
                     litIcon.Text = isGroupSubmit ? "<i class=\"fa fa-object-group\"></i>" : "";
-
-                    //cbSelect.Visible = (job_status == StatusEnum.CHEMIST_TESTING ||
-                    //    job_status == StatusEnum.CHEMIST_TESTING ||
-                    //    job_status == StatusEnum.SR_CHEMIST_CHECKING ||
-                    //    job_status == StatusEnum.LABMANAGER_CHECKING ||
-                    //     job_status == StatusEnum.ADMIN_CONVERT_WORD ||
-                    //      job_status == StatusEnum.ADMIN_CONVERT_PDF);
-
-
 
                     switch (job_status)
                     {
@@ -769,31 +892,6 @@ namespace ALS.ALSI.Web.view.request
             btnGrp.CssClass = (btnGrp.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
             btnTrb.CssClass = (btnTrb.ID == btn.ID) ? "btn blue" : "btn btn-default btn-sm";
 
-            //switch (btn.ID)
-            //{
-            //    case "btnElp":
-            //        hPrefix.Value = "1";
-            //        break;
-            //    case "btnEls":
-            //        hPrefix.Value = "2";
-            //        break;
-            //    case "btnFa":
-            //        hPrefix.Value = "3";
-            //        break;
-            //    case "btnElwa":
-            //        hPrefix.Value = "4";
-            //        break;
-            //    case "btnGrp":
-            //        hPrefix.Value = "5";
-            //        break;
-            //    case "btnTrb":
-            //        hPrefix.Value = "6";
-            //        break;
-            //    case "btnEln":
-            //        hPrefix.Value = "7";
-
-            //        break;
-            //}
             bindingData();
             Console.WriteLine();
         }
@@ -805,152 +903,255 @@ namespace ALS.ALSI.Web.view.request
 
         protected void ExportToExcel()
         {
-            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+            //dt.Columns.Add("Job Type", typeof(string));
+            //dt.Columns.Add("Status", typeof(string));
+            //dt.Columns.Add("Job Status", typeof(string));
+            //dt.Columns.Add("Received", typeof(DateTime));
+            //dt.Columns.Add("Report Sent to Customer", typeof(DateTime));
+            //dt.Columns.Add("Receive Date", typeof(DateTime));
+            //dt.Columns.Add("Due Date", typeof(DateTime));
+            //dt.Columns.Add("TBA FLAG", typeof(string));
+            //dt.Columns.Add("ALS Ref", typeof(string));
+            //dt.Columns.Add("No.Cus Ref No", typeof(string));
+            //dt.Columns.Add("Other Ref No", typeof(string));
+            //dt.Columns.Add("Company", typeof(string));
+            //dt.Columns.Add("Invoice", typeof(string));
+            //dt.Columns.Add("Po", typeof(string));
+            //dt.Columns.Add("Contact", typeof(string));
+            //dt.Columns.Add("Description", typeof(string));
+            //dt.Columns.Add("Model", typeof(string));
+            //dt.Columns.Add("Surface Area", typeof(string));
+            //dt.Columns.Add("Specification", typeof(string));
+            //dt.Columns.Add("Type of test", typeof(string));
+            //dt.Columns.Add("Data Group", typeof(string));
+            //dt.Columns.Add("date_login_inprogress", typeof(DateTime));
+            //dt.Columns.Add("date_login_complete", typeof(DateTime));
+            //dt.Columns.Add("date_chemist_inprogress", typeof(DateTime));
+            //dt.Columns.Add("date_chemist_complete", typeof(DateTime));
+            //dt.Columns.Add("date_srchemist_inprogress", typeof(DateTime));
+            //dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
+            //dt.Columns.Add("date_admin_word_inprogress", typeof(DateTime));
+            //dt.Columns.Add("date_admin_word_complete", typeof(DateTime));
+            //dt.Columns.Add("date_labman_inprogress", typeof(DateTime));
+            //dt.Columns.Add("date_labman_complete", typeof(DateTime));
+            //dt.Columns.Add("date_admin_pdf_inprogress", typeof(DateTime));
+            //dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
+            //dt.Columns.Add("Note for Admin & Account", typeof(string));
+            //dt.Columns.Add("Note for lab", typeof(string));
+            //dt.Columns.Add("Note for Admin & Account", typeof(string));
 
+            RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
             using (XLWorkbook wb = new XLWorkbook())
             {
                 DataTable dt = new DataTable("DT");
-                dt.Columns.Add("Job Type", typeof(string));
-                dt.Columns.Add("Status", typeof(string));
-                dt.Columns.Add("Job Status", typeof(string));
-                dt.Columns.Add("Received", typeof(DateTime));
-                dt.Columns.Add("Report Sent to Customer", typeof(DateTime));
-                dt.Columns.Add("Receive Date", typeof(DateTime));
-                dt.Columns.Add("Due Date", typeof(DateTime));
-                dt.Columns.Add("TBA FLAG", typeof(string));
-                dt.Columns.Add("ALS Ref", typeof(string));
-                dt.Columns.Add("No.Cus Ref No", typeof(string));
-                dt.Columns.Add("Other Ref No", typeof(string));
-                dt.Columns.Add("Company", typeof(string));
-                dt.Columns.Add("Invoice", typeof(string));
-                dt.Columns.Add("Po", typeof(string));
-                dt.Columns.Add("Contact", typeof(string));
-                dt.Columns.Add("Description", typeof(string));
-                dt.Columns.Add("Model", typeof(string));
-                dt.Columns.Add("Surface Area", typeof(string));
-                dt.Columns.Add("Specification", typeof(string));
-                dt.Columns.Add("Type of test", typeof(string));
-                dt.Columns.Add("Data Group", typeof(string));
-                dt.Columns.Add("date_login_inprogress", typeof(DateTime));
-                dt.Columns.Add("date_login_complete", typeof(DateTime));
-                dt.Columns.Add("date_chemist_inprogress", typeof(DateTime));
-                dt.Columns.Add("date_chemist_complete", typeof(DateTime));
-                dt.Columns.Add("date_srchemist_inprogress", typeof(DateTime));
-                dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
-                dt.Columns.Add("date_admin_word_inprogress", typeof(DateTime));
-                dt.Columns.Add("date_admin_word_complete", typeof(DateTime));
-                dt.Columns.Add("date_labman_inprogress", typeof(DateTime));
-                dt.Columns.Add("date_labman_complete", typeof(DateTime));
-                dt.Columns.Add("date_admin_pdf_inprogress", typeof(DateTime));
-                dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
+
                 switch (userRole)
                 {
                     case RoleEnum.ADMIN:
                     case RoleEnum.ACCOUNT:
-                        dt.Columns.Add("Note for Admin & Account", typeof(string));
+                    case RoleEnum.BUSINESS_MANAGER:
+                    case RoleEnum.MARKETING:
+                        dt.Columns.Add("Job_Type", typeof(string));
+                        dt.Columns.Add("Status", typeof(string));
+                        dt.Columns.Add("Job_Status", typeof(string));
+                        dt.Columns.Add("Received", typeof(DateTime));
+                        dt.Columns.Add("Report_Sent_to_Customer", typeof(DateTime));
+                        dt.Columns.Add("Receive_Date", typeof(DateTime));
+                        dt.Columns.Add("Due_Date", typeof(DateTime));
+                        dt.Columns.Add("TBA_FLAG", typeof(string));
+                        dt.Columns.Add("ALS_Ref", typeof(string));
+                        dt.Columns.Add("No_Cus_Ref_No", typeof(string));
+                        dt.Columns.Add("Other_Ref_No", typeof(string));
+                        dt.Columns.Add("Company", typeof(string));
+                        dt.Columns.Add("Invoice", typeof(string));
+                        dt.Columns.Add("Po", typeof(string));
+                        dt.Columns.Add("Contact", typeof(string));
+                        dt.Columns.Add("Description", typeof(string));
+                        dt.Columns.Add("Specification", typeof(string));
+                        dt.Columns.Add("Type_of_test", typeof(string));
+                        dt.Columns.Add("Data_Group", typeof(string));
+                        dt.Columns.Add("date_login_complete", typeof(DateTime));
+                        dt.Columns.Add("date_chemist_complete", typeof(DateTime));
+                        dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
+                        dt.Columns.Add("date_admin_word_complete", typeof(DateTime));
+                        dt.Columns.Add("date_labman_complete", typeof(DateTime));
+                        dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
+                        dt.Columns.Add("Note_for_Admin_Account", typeof(string));
+                        dt.Columns.Add("Remark_AM_Retest)", typeof(string));
                         break;
-                }
-                switch (userRole)
-                {
                     case RoleEnum.LOGIN:
                     case RoleEnum.CHEMIST:
                     case RoleEnum.SR_CHEMIST:
                     case RoleEnum.LABMANAGER:
-                        dt.Columns.Add("Note for lab", typeof(string));
-
+                        dt.Columns.Add("Job_Type", typeof(string));
+                        dt.Columns.Add("Status", typeof(string));
+                        dt.Columns.Add("Job_Status", typeof(string));
+                        dt.Columns.Add("Received", typeof(DateTime));
+                        dt.Columns.Add("Report_Sent_to_Customer", typeof(DateTime));
+                        dt.Columns.Add("Receive_Date", typeof(DateTime));
+                        dt.Columns.Add("Due_Date", typeof(DateTime));
+                        dt.Columns.Add("TBA_FLAG", typeof(string));
+                        dt.Columns.Add("ALS_Ref", typeof(string));
+                        dt.Columns.Add("No_Cus_Ref_No", typeof(string));
+                        dt.Columns.Add("Other_Ref_No", typeof(string));
+                        dt.Columns.Add("Company", typeof(string));
+                        dt.Columns.Add("Description", typeof(string));
+                        dt.Columns.Add("Model", typeof(string));
+                        dt.Columns.Add("Surface_Area", typeof(string));
+                        dt.Columns.Add("Specification", typeof(string));
+                        dt.Columns.Add("Type_of_test", typeof(string));
+                        dt.Columns.Add("Data_Group", typeof(string));
+                        dt.Columns.Add("date_login_complete", typeof(DateTime));
+                        dt.Columns.Add("date_chemist_complete", typeof(DateTime));
+                        dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
+                        dt.Columns.Add("date_admin_word_complete", typeof(DateTime));
+                        dt.Columns.Add("date_labman_complete", typeof(DateTime));
+                        dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
+                        dt.Columns.Add("Note_for_lab", typeof(string));
+                        dt.Columns.Add("Remark_AM_Retest)", typeof(string));
                         break;
                 }
                 String conSQL = Configurations.MySQLCon;
                 using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
                 {
                     conn.Open();
-                    String sql = "SELECT" +
-                                "`Extent2`.`sample_prefix` AS `Job Type`," +
-                                "`Extent7`.`name` AS `Status`," +
-                                "(case when `Extent2`.`is_hold`='1' then 'Hold' else `Extent9`.`name` end) AS `Job Status`," +
-                                "`Extent2`.`date_srchemist_complate` AS `Received`," +
-                                "`Extent2`.`date_admin_sent_to_cus` AS  `Report Sent to Customer`," +
-                                "`Extent1`.`date_of_receive`AS `Receive Date`,";
-                    switch (userRole)
-                    {
-                        case RoleEnum.LOGIN:
-                        case RoleEnum.CHEMIST:
-                        case RoleEnum.SR_CHEMIST:
-                        case RoleEnum.LABMANAGER:
-                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then '0001-01-01' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due Date`,";
-                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else '' end) AS `TBA FLAG`,";
-
-                            break;
-                        case RoleEnum.ADMIN:
-                        case RoleEnum.MARKETING:
-                        case RoleEnum.BUSINESS_MANAGER:
-                            sql += "(CASE WHEN ISNULL(`Extent2`.`due_date_lab`) THEN '0001-01-01' ELSE (case when `Extent2`.`due_date_lab` = '0001-01-01' then '0001-01-01' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then '0001-01-01' else DATE_FORMAT(`Extent2`.`due_date_customer`,'%e %b %Y') end) end) END) AS `Due Date`,";
-                            sql += "(CASE WHEN ISNULL(`Extent2`.`due_date_lab`) THEN 'TBA' ELSE (case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else '' end) end) END) AS `TBA FLAG`,";
-
-
-                            break;
-                        default:
-                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then '0001-01-01' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due Date`,";
-                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else '' end) AS `TBA FLAG`,";
-
-                            break;
-                    }
-
-
-
-                    sql += "(case when isnull(`Extent2`.`amend_or_retest`) then `Extent2`.`job_number` else concat(`Extent2`.`job_number`,(case when `Extent2`.`amend_or_retest` ='AM' then CONCAT('(',`Extent2`.`amend_or_retest`,`Extent2`.`amend_count`,')') else CONCAT('(',`Extent2`.`amend_or_retest`,`Extent2`.`retest_count`,')') end)) end) AS `ALS Ref`," +
-                     "`Extent1`.`customer_ref_no` AS `No.Cus Ref No`," +
-                     "`Extent2`.`other_ref_no` AS `Other Ref No`," +
-                     "`Extent5`.`company_name` AS `Company`," +
-                     "`Extent2`.`sample_invoice` AS `Invoice`," +
-                     "`Extent2`.`sample_po` AS `Po`," +
-                     "`Extent6`.`name` as `Contact`," +
-                     "`Extent2`.`description` AS `Description`," +
-                     "`Extent2`.`model` AS Model," +
-                     "`Extent2`.`surface_area` AS `Surface Area`," +
-                     "`Extent3`.`name` AS `Specification`," +
-                     "`Extent4`.`name` AS `Type of test`," +
-                     "`Extent4`.`data_group` AS `Data Group`," +
-                     "`Extent2`.`date_login_inprogress` AS `date_login_inprogress`," +
-                     "`Extent2`.`date_login_complete` AS `date_login_complete`," +
-                     "`Extent2`.`date_chemist_analyze` AS `date_chemist_inprogress`," +
-                     "`Extent2`.`date_chemist_complete` AS `date_chemist_complete`," +
-                     "`Extent2`.`date_srchemist_analyze` AS `date_srchemist_inprogress`," +
-                     "`Extent2`.`date_srchemist_complate` AS `date_srchemist_complate`," +
-                     "`Extent2`.`date_admin_word_inprogress` AS `date_admin_word_inprogress`," +
-                     "`Extent2`.`date_admin_word_complete` AS `date_admin_word_complete`," +
-                     "`Extent2`.`date_labman_analyze` AS `date_labman_inprogress`," +
-                     "`Extent2`.`date_labman_complete` AS `date_labman_complete`," +
-                     "`Extent2`.`date_admin_pdf_inprogress` AS `date_admin_pdf_inprogress`," +
-                     "`Extent2`.`date_admin_pdf_complete` AS `date_admin_pdf_complete`";
+                    String sql = "SELECT ";
                     switch (userRole)
                     {
                         case RoleEnum.ADMIN:
                         case RoleEnum.ACCOUNT:
-                            sql += ",`Extent2`.`note` AS `Note for Admin & Account`";
+                        case RoleEnum.BUSINESS_MANAGER:
+                        case RoleEnum.MARKETING:
+                            sql += "Job_Type" +
+                                   ",Status" +
+                                   ",Job_Status" +
+                                   ",Received" +
+                                   ",Report_Sent_to_Customer" +
+                                   ",Receive_Date" +
+                                   ",Due_Date" +
+                                   ",TBA_FLAG" +
+                                   ",ALS_Ref" +
+                                   ",No_Cus_Ref_No" +
+                                   ",Other_Ref_No" +
+                                   ",Company" +
+                                   ",Invoice" +
+                                   ",Po" +
+                                   ",Contact" +
+                                   ",Description" +
+                                   ",Specification" +
+                                   ",Type_of_test" +
+                                   ",Data_Group" +
+                                   ",date_login_complete" +
+                                   ",date_chemist_complete" +
+                                   ",date_srchemist_complate" +
+                                   ",date_admin_word_complete" +
+                                   ",date_labman_complete" +
+                                   ",date_admin_pdf_complete" +
+                                   ",Note_for_Admin_Account,Remark_AM_Retest";
                             break;
-                    }
-                    switch (userRole)
-                    {
                         case RoleEnum.LOGIN:
                         case RoleEnum.CHEMIST:
                         case RoleEnum.SR_CHEMIST:
                         case RoleEnum.LABMANAGER:
-                            sql += ",`Extent2`.`note_lab` AS `Note for lab`";
+                            sql += "Job_Type" +
+                                    ",Status" +
+                                    ",Job_Status" +
+                                    ",Received" +
+                                    ",Report_Sent_to_Customer" +
+                                    ",Receive_Date" +
+                                    ",Due_Date" +
+                                    ",TBA_FLAG" +
+                                    ",ALS_Ref" +
+                                    ",No_Cus_Ref_No" +
+                                    ",Other_Ref_No" +
+                                    ",Company" +
+                                    ",Description" +
+                                    ",Model" +
+                                    ",Surface_Area" +
+                                    ",Specification" +
+                                    ",Type_of_test" +
+                                    ",Data_Group" +
+                                    ",date_login_complete" +
+                                    ",date_chemist_complete" +
+                                    ",date_srchemist_complate" +
+                                    ",date_admin_word_complete" +
+                                    ",date_labman_complete" +
+                                    ",date_admin_pdf_complete" +
+                                    ",Note_for_lab,Remark_AM_Retest";
+                            break;
+                        default:
                             break;
                     }
-                    sql += " FROM `job_info` AS `Extent1`" +
-                   " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`" +
-                   " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`" +
-                   " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`" +
-                   " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`" +
-                   " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`" +
-                   " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID` " +
-                   " LEFT OUTER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`" +
-                   " LEFT OUTER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`";
+                    sql += " FROM (SELECT                                                                                                                                              ";
+                    sql += " `Extent2`.`sample_prefix` AS `Job_Type`,                                                                                                           ";
+                    sql += " `Extent7`.`name` AS `Status`,                                                                                                                      ";
+                    sql += " (CASE WHEN `Extent2`.`is_hold` = '1' THEN 'Hold' ELSE `Extent9`.`name` END) AS `Job_Status`,                                                       ";
+                    sql += " `Extent2`.`date_srchemist_complate` AS `Received`,                                                                                                 ";
+                    sql += " `Extent2`.`date_admin_sent_to_cus` AS `Report_Sent_to_Customer`,                                                                                   ";
+                    sql += " `Extent1`.`date_of_receive` AS `Receive_Date`,                                                                                                     ";
+                    sql += " (CASE WHEN `Extent2`.`due_date_lab` = '0001-01-01' THEN '0001-01-01' ELSE DATE_FORMAT(`Extent2`.`due_date_lab`, '%e %b %Y') END) AS `Due_Date`,    ";
+                    sql += " (CASE WHEN `Extent2`.`due_date_lab` = '0001-01-01' THEN 'TBA' ELSE '' END) AS `TBA_FLAG`,                                                          ";
+                    sql += " (CASE                                                                                                                                              ";
+                    sql += "     WHEN ISNULL(`Extent2`.`amend_or_retest`) THEN `Extent2`.`job_number`                                                                           ";
+                    sql += "     ELSE CONCAT(`Extent2`.`job_number`,                                                                                                            ";
+                    sql += "             (CASE                                                                                                                                  ";
+                    sql += "                 WHEN                                                                                                                               ";
+                    sql += "                     `Extent2`.`amend_or_retest` = 'AM'                                                                                             ";
+                    sql += "                 THEN                                                                                                                               ";
+                    sql += "                     CONCAT('(',                                                                                                                    ";
+                    sql += "                             `Extent2`.`amend_or_retest`,                                                                                           ";
+                    sql += "                             `Extent2`.`amend_count`,                                                                                               ";
+                    sql += "                             ')')                                                                                                                   ";
+                    sql += "                 ELSE CONCAT('(',                                                                                                                   ";
+                    sql += "                         `Extent2`.`amend_or_retest`,                                                                                               ";
+                    sql += "                         `Extent2`.`retest_count`,                                                                                                  ";
+                    sql += "                         ')')                                                                                                                       ";
+                    sql += "             END))                                                                                                                                  ";
+                    sql += " END) AS `ALS_Ref`,                                                                                                                                 ";
+                    sql += " `Extent1`.`customer_ref_no` AS `No_Cus_Ref_No`,                                                                                                    ";
+                    sql += " `Extent2`.`other_ref_no` AS `Other_Ref_No`,                                                                                                        ";
+                    sql += " `Extent5`.`company_name` AS `Company`,                                                                                                             ";
+                    sql += " `Extent2`.`sample_invoice` AS `Invoice`,                                                                                                           ";
+                    sql += " `Extent2`.`sample_po` AS `Po`,                                                                                                                     ";
+                    sql += " `Extent6`.`name` AS `Contact`,                                                                                                                     ";
+                    sql += " `Extent2`.`description` AS `Description`,                                                                                                          ";
+                    sql += " `Extent2`.`model` AS Model,                                                                                                                        ";
+                    sql += " `Extent2`.`surface_area` AS `Surface_Area`,                                                                                                        ";
+                    sql += " `Extent3`.`name` AS `Specification`,                                                                                                               ";
+                    sql += " `Extent4`.`name` AS `Type_of_test`,                                                                                                                ";
+                    sql += " `Extent4`.`data_group` AS `Data_Group`,                                                                                                            ";
+                    sql += " `Extent2`.`date_login_inprogress` AS `date_login_inprogress`,                                                                                      ";
+                    sql += " `Extent2`.`date_login_complete` AS `date_login_complete`,                                                                                          ";
+                    sql += " `Extent2`.`date_chemist_analyze` AS `date_chemist_inprogress`,                                                                                     ";
+                    sql += " `Extent2`.`date_chemist_complete` AS `date_chemist_complete`,                                                                                      ";
+                    sql += " `Extent2`.`date_srchemist_analyze` AS `date_srchemist_inprogress`,                                                                                 ";
+                    sql += " `Extent2`.`date_srchemist_complate` AS `date_srchemist_complate`,                                                                                  ";
+                    sql += " `Extent2`.`date_admin_word_inprogress` AS `date_admin_word_inprogress`,                                                                            ";
+                    sql += " `Extent2`.`date_admin_word_complete` AS `date_admin_word_complete`,                                                                                ";
+                    sql += " `Extent2`.`date_labman_analyze` AS `date_labman_inprogress`,                                                                                       ";
+                    sql += " `Extent2`.`date_labman_complete` AS `date_labman_complete`,                                                                                        ";
+                    sql += " `Extent2`.`date_admin_pdf_inprogress` AS `date_admin_pdf_inprogress`,                                                                              ";
+                    sql += " `Extent2`.`date_admin_pdf_complete` AS `date_admin_pdf_complete`,                                                                                  ";
+                    sql += " `Extent2`.`note_lab` AS `Note_for_lab`,                                                                                                             ";
+                    sql += " `Extent2`.`note` AS `Note_for_Admin_Account`,                                                                                                             ";
 
+                    sql += " `Extent1`.`date_of_receive`,";
 
+                    
+                    //sql += " YEAR(`Extent1`.`date_of_receive`) AS physicalYear,";
+                    sql += " `Extent2`.`remarks` AS `Remark_AM_Retest`";
+                    //sql += " `Extent2`.`job_status` AS `job_status_id`,";
+                    //sql += " `Extent5`.`company_name`,`Extent3`.`id` as spec_id,`Extent7`.`id` as jstatus_id,`Extent2`.`job_number`,`Extent2`.`sample_po`,`Extent2`.`sample_invoice`,`Extent2`.`due_date_customer`,`Extent2`.`due_date_lab`,`Extent2`.`date_admin_sent_to_cus`,`Extent2`.`ID` sample_id";
+                    sql += " FROM `job_info` AS `Extent1`                                                                                                                        ";
+                    sql += " INNER JOIN `job_sample` AS `Extent2` ON `Extent1`.`ID` = `Extent2`.`job_id`                                                                         ";
+                    sql += " LEFT OUTER JOIN `m_status` AS `Extent7` ON `Extent2`.`job_status` = `Extent7`.`ID`                                                                  ";
+                    sql += " INNER JOIN `m_specification` AS `Extent3` ON `Extent2`.`specification_id` = `Extent3`.`ID`                                                          ";
+                    sql += " INNER JOIN `m_type_of_test` AS `Extent4` ON `Extent2`.`type_of_test_id` = `Extent4`.`ID`                                                            ";
+                    sql += " INNER JOIN `m_customer` AS `Extent5` ON `Extent1`.`customer_id` = `Extent5`.`ID`                                                                    ";
+                    sql += " INNER JOIN `m_customer_contract_person` AS `Extent6` ON `Extent1`.`contract_person_id` = `Extent6`.`ID`                                             ";
+                    sql += " LEFT OUTER JOIN `users_login` AS `Extent8` ON `Extent2`.`update_by` = `Extent8`.`ID`                                                                ";
+                    sql += " LEFT OUTER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`                                    ";
                     StringBuilder sqlCri = new StringBuilder();
 
                     sqlCri.Append(" YEAR(`Extent1`.`date_of_receive`) = '" + ddlPhysicalYear.SelectedValue + "'");
@@ -1035,7 +1236,9 @@ namespace ALS.ALSI.Web.view.request
                         sqlCri.Append(" AND ");
                     }
                     sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString().Substring(0, sqlCri.ToString().Length - 5) : "";
-                    sql += " ORDER BY `Extent2`.`ID` DESC";
+                    sql += " ORDER BY `Extent2`.`ID` DESC ) TMP";
+
+
 
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
 
@@ -1061,7 +1264,6 @@ namespace ALS.ALSI.Web.view.request
 
         }
 
-
         public override void VerifyRenderingInServerForm(Control control)
         {
             /* Verifies that the control is rendered */
@@ -1085,7 +1287,7 @@ namespace ALS.ALSI.Web.view.request
             this.isInvoiceGroupOperation = btn.ID.Equals("btnOperationGroupInvoice");
             this.isSentToCusDateOperation = btn.ID.Equals("btnOperationSentToCus");
             this.isNoteGroupOpeation = btn.ID.Equals("btnOperationNote");
-
+            this.isCusRefNoGroupOperation = btn.ID.Equals("btnOperationCusRefNo");
 
 
             foreach (GridViewRow row in gvJob.Rows)
@@ -1097,7 +1299,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || this.isNoteGroupOpeation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || this.isNoteGroupOpeation || this.isCusRefNoGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
                     }

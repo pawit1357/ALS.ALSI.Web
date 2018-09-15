@@ -42,18 +42,15 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public DateTime GetWorkingDay(DateTime CalDate, int _day)
         {
-            int useDay = 1;
             DateTime result = DateTime.Now;
-            for (int i = 0; i < _day; i++)
+            DateTime _calDate = new DateTime(CalDate.Year, CalDate.Month, CalDate.Day, 0, 0, 0);
+            int index = 0;
+            while (!IsHoliday(CalDate))
             {
-                while (IsHoliday(CalDate))
-                {
-                    CalDate = CalDate.AddDays(1);
-                }
                 CalDate = CalDate.AddDays(1);
-                useDay++;
+                index++;
             }
-            result = CalDate.AddDays(_day- useDay);
+            result = CalDate.AddDays(_day - index).AddDays(-1);
             return result;
         }
 

@@ -283,7 +283,7 @@
                                             <asp:TextBox ID="txtDuedate" name="txtDuedate" runat="server" class="form-control"></asp:TextBox>
                                             <span class="input-group-btn">
                                                 <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:CheckBox ID="cbIsTba" runat="server" CssClass="checkbox-inline"  Text="TBA(duedate)" />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:CheckBox ID="cbIsTba" runat="server" CssClass="checkbox-inline" Text="TBA(duedate)" />
 
                                             </span>
                                         </div>
@@ -292,7 +292,7 @@
                             </div>
                         </div>
                     </asp:Panel>
-                                        <asp:Panel ID="pNote" runat="server">
+                    <asp:Panel ID="pNote" runat="server">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -300,6 +300,21 @@
                                     <div class="col-md-6">
                                         <div class="input-group" style="text-align: left">
                                             <asp:TextBox ID="txtNote" name="txtNote" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <span class="input-group-btn"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </asp:Panel>
+                    <asp:Panel ID="pCusRefNo" runat="server">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">CusRefNo:</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group" style="text-align: left">
+                                            <asp:TextBox ID="txtCusRefNo" name="txtCusRefNo" runat="server" CssClass="form-control"></asp:TextBox>
                                             <span class="input-group-btn"></span>
                                         </div>
                                     </div>
