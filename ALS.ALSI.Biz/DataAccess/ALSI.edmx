@@ -130,6 +130,7 @@
           <Property Name="last_status" Type="int" />
           <Property Name="note" Type="varchar" MaxLength="200" />
           <Property Name="note_lab" Type="varchar" MaxLength="200" />
+          <Property Name="am_retest_remark" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -2318,6 +2319,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="last_status" Type="Int32" />
           <Property Name="note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="note_lab" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="am_retest_remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="alsiModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
         </EntityType>
         <EntityType Name="job_sample_logs">
@@ -4231,6 +4233,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample">
             <EntityTypeMapping TypeName="alsiModel.job_sample">
               <MappingFragment StoreEntitySet="job_sample">
+                <ScalarProperty Name="am_retest_remark" ColumnName="am_retest_remark" />
                 <ScalarProperty Name="note_lab" ColumnName="note_lab" />
                 <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="last_status" ColumnName="last_status" />

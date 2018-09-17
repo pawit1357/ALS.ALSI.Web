@@ -442,6 +442,13 @@ namespace ALS.ALSI.Web.view.request
 
             Session.Remove(GetType().Name);
             Session.Remove(GetType().Name + "SearchJobRequest");
+            Session.Remove(GetType().Name + "selectedList");
+            Session.Remove(GetType().Name + "isPoGroupOperation");
+            Session.Remove(GetType().Name + "isSentToCusDateOperation");
+            Session.Remove(GetType().Name + "isNoteGroupOpeation");
+            Session.Remove(GetType().Name + "isDuedateGroupOperation");
+            Session.Remove(GetType().Name + "isInvoiceGroupOperation");
+            Session.Remove(GetType().Name + "isCusRefNoGroupOperation");
         }
 
         #endregion
@@ -804,10 +811,10 @@ namespace ALS.ALSI.Web.view.request
                             litStatus.Text = "<span class=\"label label-sm label-warning\">E </span>";
                             break;
                         case CompletionScheduledEnum.EXTEND1:
-                            litStatus.Text = "<span class=\"label label-sm label-warning\">E1 </span>";
+                            litStatus.Text = "<span class=\"label label-sm label-success\">E1 </span>";
                             break;
                         case CompletionScheduledEnum.EXTEND2:
-                            litStatus.Text = "<span class=\"label label-sm label-warning\">E2 </span>";
+                            litStatus.Text = "<span class=\"label label-sm label-success\">E2 </span>";
                             break;
                     }
 
@@ -1090,8 +1097,33 @@ namespace ALS.ALSI.Web.view.request
                     sql += " `Extent2`.`date_srchemist_complate` AS `Received`,                                                                                                 ";
                     sql += " `Extent2`.`date_admin_sent_to_cus` AS `Report_Sent_to_Customer`,                                                                                   ";
                     sql += " `Extent1`.`date_of_receive` AS `Receive_Date`,                                                                                                     ";
-                    sql += " (CASE WHEN `Extent2`.`due_date_lab` = '0001-01-01' THEN '0001-01-01' ELSE DATE_FORMAT(`Extent2`.`due_date_lab`, '%e %b %Y') END) AS `Due_Date`,    ";
-                    sql += " (CASE WHEN `Extent2`.`due_date_lab` = '0001-01-01' THEN 'TBA' ELSE '' END) AS `TBA_FLAG`,                                                          ";
+                    switch (userRole)
+                    {
+                        case RoleEnum.LOGIN:
+                        case RoleEnum.CHEMIST:
+                        case RoleEnum.SR_CHEMIST:
+                        case RoleEnum.LABMANAGER:
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then '0001-01-01' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due_Date`,";
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else '' end) AS `TBA_FLAG`,";
+
+                            break;
+                        case RoleEnum.ADMIN:
+                        case RoleEnum.MARKETING:
+                        case RoleEnum.BUSINESS_MANAGER:
+                            sql += "(CASE WHEN ISNULL(`Extent2`.`due_date_lab`) THEN '0001-01-01' ELSE (case when `Extent2`.`due_date_lab` = '0001-01-01' then '0001-01-01' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then '0001-01-01' else DATE_FORMAT(`Extent2`.`due_date_customer`,'%e %b %Y') end) end) END) AS `Due_Date`,";
+                            sql += "(CASE WHEN ISNULL(`Extent2`.`due_date_lab`) THEN 'TBA' ELSE (case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else (case when `Extent2`.`due_date_customer` = '0001-01-01' then 'TBA' else '' end) end) END) AS `TBA_FLAG`,";
+
+
+                            break;
+                        default:
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then '0001-01-01' else DATE_FORMAT(`Extent2`.`due_date_lab`,'%e %b %Y') end) AS `Due_Date`,";
+                            sql += "(case when `Extent2`.`due_date_lab` = '0001-01-01' then 'TBA' else '' end) AS `TBA_FLAG`,";
+
+                            break;
+                    }
+
+                    //sql += " (CASE WHEN `Extent2`.`due_date_lab` = '0001-01-01' THEN '0001-01-01' ELSE DATE_FORMAT(`Extent2`.`due_date_lab`, '%e %b %Y') END) AS `Due_Date`,    ";
+                    //sql += " (CASE WHEN `Extent2`.`due_date_lab` = '0001-01-01' THEN 'TBA' ELSE '' END) AS `TBA_FLAG`,                                                          ";
                     sql += " (CASE                                                                                                                                              ";
                     sql += "     WHEN ISNULL(`Extent2`.`amend_or_retest`) THEN `Extent2`.`job_number`                                                                           ";
                     sql += "     ELSE CONCAT(`Extent2`.`job_number`,                                                                                                            ";
@@ -1138,9 +1170,9 @@ namespace ALS.ALSI.Web.view.request
 
                     sql += " `Extent1`.`date_of_receive`,";
 
-                    
+
                     //sql += " YEAR(`Extent1`.`date_of_receive`) AS physicalYear,";
-                    sql += " `Extent2`.`remarks` AS `Remark_AM_Retest`";
+                    sql += " `Extent2`.`am_retest_remark` AS `Remark_AM_Retest`";
                     //sql += " `Extent2`.`job_status` AS `job_status_id`,";
                     //sql += " `Extent5`.`company_name`,`Extent3`.`id` as spec_id,`Extent7`.`id` as jstatus_id,`Extent2`.`job_number`,`Extent2`.`sample_po`,`Extent2`.`sample_invoice`,`Extent2`.`due_date_customer`,`Extent2`.`due_date_lab`,`Extent2`.`date_admin_sent_to_cus`,`Extent2`.`ID` sample_id";
                     sql += " FROM `job_info` AS `Extent1`                                                                                                                        ";

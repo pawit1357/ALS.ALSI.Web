@@ -203,104 +203,106 @@ namespace ALS.ALSI.Web.view.request
             }
 
 
-
-            newSample.job_status = Convert.ToInt16(ddlStatus.SelectedValue);
-
-            newSample.path_pdf = String.Empty;
-            newSample.path_word = String.Empty;
-            oldSample.remarks = txtRemark.Text;
-            newSample.Insert();
-            oldSample.Update();
-
-
-            //Commit
-            GeneralManager.Commit();
-            m_template template = new m_template().SelectByID(oldSample.template_id);
-            if (template != null)
+            if (!ddlStatus.SelectedValue.Equals(""))
             {
-                switch (Path.GetFileNameWithoutExtension(template.path_url))
+                newSample.job_status = Convert.ToInt16(ddlStatus.SelectedValue);
+
+                newSample.path_pdf = String.Empty;
+                newSample.path_word = String.Empty;
+                oldSample.am_retest_remark = txtRemark.Text;
+                newSample.Insert();
+                oldSample.Update();
+
+
+                //Commit
+                GeneralManager.Commit();
+                m_template template = new m_template().SelectByID(oldSample.template_id);
+                if (template != null)
                 {
-                    case "Seagate_Copperwire":
-                        template_seagate_copperwire_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        template_seagate_copperwire_img.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "Seagate_Corrosion":
-                        template_seagate_corrosion_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        template_seagate_corrosion_img.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "Seagate_DHS":
-                    case "Seagate_DHS_V2":
-                        template_seagate_dhs_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        tb_m_dhs_cas.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "Seagate_FTIR":
-                    case "Seagate_FTIR_Adhesive":
-                    case "Seagate_FTIR_Damper":
-                    case "Seagate_FTIR_Packing":
-                        template_seagate_ftir_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "Seagate_GCMS":
-                    case "Seagate_GCMS_2":
-                    case "Seagate_GCMS_3":
-                        template_seagate_gcms_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        template_seagate_gcms_coverpage_img.CloneData(oldSample.ID, newSample.ID);
-                        tb_m_gcms_cas.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "Seagate_HPA":
-                    case "Seagate_HPA_1":
-                    case "Seagate_HPA_Boyd":
-                    case "Seagate_HPA_Siam":
-                        template_seagate_hpa_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "Seagate_IC":
-                        template_seagate_ic_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "Seagate_LPC":
-                        template_seagate_lpc_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "WD_Corrosion":
-                        template_wd_corrosion_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        template_wd_corrosion_img.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "WD_DHS":
-                        template_wd_dhs_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        tb_m_dhs_cas.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "WD_FTIR":
-                    case "WD_FTIR_IDM":
-                        template_wd_ftir_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "WD_GCMS":
-                    case "WD_GCMS_CVR":
-                        template_wd_gcms_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        tb_m_gcms_cas.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "WD_HPA_FOR_1":
-                    case "WD_HPA_FOR_1_V2":
-                        template_wd_hpa_for1_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "WD_HPA_FOR_3":
-                        template_wd_hpa_for3_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "WD_IC":
-                        template_wd_ic_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        //template_wd_ir_coverpage template_wd_ir_coverpage = new template_wd_ir_coverpage();
-                        break;
-                    case "WD_LPC":
-                        template_wd_lpc_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        break;
-                    case "WD_MESA":
-                    case "WD_MESA_IDM":
-                    case "WD_MESA_InkRibon":
-                        template_wd_mesa_coverpage.CloneData(oldSample.ID, newSample.ID);
-                        template_wd_mesa_img.CloneData(oldSample.ID, newSample.ID);
-                        break;
+                    switch (Path.GetFileNameWithoutExtension(template.path_url))
+                    {
+                        case "Seagate_Copperwire":
+                            template_seagate_copperwire_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            template_seagate_copperwire_img.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "Seagate_Corrosion":
+                            template_seagate_corrosion_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            template_seagate_corrosion_img.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "Seagate_DHS":
+                        case "Seagate_DHS_V2":
+                            template_seagate_dhs_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            tb_m_dhs_cas.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "Seagate_FTIR":
+                        case "Seagate_FTIR_Adhesive":
+                        case "Seagate_FTIR_Damper":
+                        case "Seagate_FTIR_Packing":
+                            template_seagate_ftir_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "Seagate_GCMS":
+                        case "Seagate_GCMS_2":
+                        case "Seagate_GCMS_3":
+                            template_seagate_gcms_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            template_seagate_gcms_coverpage_img.CloneData(oldSample.ID, newSample.ID);
+                            tb_m_gcms_cas.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "Seagate_HPA":
+                        case "Seagate_HPA_1":
+                        case "Seagate_HPA_Boyd":
+                        case "Seagate_HPA_Siam":
+                            template_seagate_hpa_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "Seagate_IC":
+                            template_seagate_ic_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "Seagate_LPC":
+                            template_seagate_lpc_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "WD_Corrosion":
+                            template_wd_corrosion_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            template_wd_corrosion_img.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "WD_DHS":
+                            template_wd_dhs_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            tb_m_dhs_cas.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "WD_FTIR":
+                        case "WD_FTIR_IDM":
+                            template_wd_ftir_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "WD_GCMS":
+                        case "WD_GCMS_CVR":
+                            template_wd_gcms_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            tb_m_gcms_cas.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "WD_HPA_FOR_1":
+                        case "WD_HPA_FOR_1_V2":
+                            template_wd_hpa_for1_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "WD_HPA_FOR_3":
+                            template_wd_hpa_for3_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "WD_IC":
+                            template_wd_ic_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            //template_wd_ir_coverpage template_wd_ir_coverpage = new template_wd_ir_coverpage();
+                            break;
+                        case "WD_LPC":
+                            template_wd_lpc_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "WD_MESA":
+                        case "WD_MESA_IDM":
+                        case "WD_MESA_InkRibon":
+                            template_wd_mesa_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            template_wd_mesa_img.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                    }
                 }
+                //Commit
+                GeneralManager.Commit();
+                removeSession();
+                MessageBox.Show(this, Resources.MSG_SAVE_SUCCESS, PreviousPath);
             }
-            //Commit
-            GeneralManager.Commit();
-            removeSession();
-            MessageBox.Show(this, Resources.MSG_SAVE_SUCCESS, PreviousPath);
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)

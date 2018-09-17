@@ -417,4 +417,11 @@ UPDATE `alsi`.`m_completion_scheduled` SET `customer_due_date`='3' WHERE `ID`='3
 INSERT INTO `alsi`.`m_completion_scheduled` (`ID`, `name`, `lab_due_date`, `customer_due_date`) VALUES ('4', 'Extend 1', '10', '11');
 INSERT INTO `alsi`.`m_completion_scheduled` (`ID`, `name`, `lab_due_date`, `customer_due_date`) VALUES ('5', 'Extend 2', '15', '16');
 
+
+
+------------------------ 2018-09-17 ------------------------
+
+ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `am_retest_remark` VARCHAR(200) NULL AFTER `note_lab`;
+
 */

@@ -81,6 +81,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> last_status { get; set; }
         public string note { get; set; }
         public string note_lab { get; set; }
+        public string am_retest_remark { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }
