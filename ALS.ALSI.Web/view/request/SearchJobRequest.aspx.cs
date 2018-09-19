@@ -985,7 +985,7 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("date_labman_complete", typeof(DateTime));
                         dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
                         dt.Columns.Add("Note_for_Admin_Account", typeof(string));
-                        dt.Columns.Add("Remark_AM_Retest)", typeof(string));
+                        dt.Columns.Add("Remark_AM_Retest", typeof(string));
                         break;
                     case RoleEnum.LOGIN:
                     case RoleEnum.CHEMIST:
@@ -1016,7 +1016,7 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("date_labman_complete", typeof(DateTime));
                         dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
                         dt.Columns.Add("Note_for_lab", typeof(string));
-                        dt.Columns.Add("Remark_AM_Retest)", typeof(string));
+                        dt.Columns.Add("Remark_AM_Retest", typeof(string));
                         break;
                 }
                 String conSQL = Configurations.MySQLCon;
@@ -1046,6 +1046,8 @@ namespace ALS.ALSI.Web.view.request
                                    ",Po" +
                                    ",Contact" +
                                    ",Description" +
+                                    ",Model" +
+                                    ",Surface_Area" +
                                    ",Specification" +
                                    ",Type_of_test" +
                                    ",Data_Group" +

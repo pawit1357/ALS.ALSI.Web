@@ -56,35 +56,21 @@ namespace ALS.ALSI.Biz.DataAccess
         //    return GetWorkingDay(CalDate,_day);
         //}
 
-        public DateTime GetWorkingDay(DateTime StartDate, int _NumberOfBusinessDays)
+        public DateTime GetWorkingDayLab(DateTime StartDate, int _NumberOfBusinessDays,Boolean isLab)
         {
             int NumberOfBusinessDays = (_NumberOfBusinessDays - 1);
-            //Knock the start date down one day if it is on a weekend.
-            if (StartDate.DayOfWeek == DayOfWeek.Saturday |
-                StartDate.DayOfWeek == DayOfWeek.Sunday)
-            {
-                NumberOfBusinessDays -= 1;
-            }
 
-            int index = 0;
+            StartDate = StartDate.AddDays(NumberOfBusinessDays);
 
-            for (index = 1; index <= NumberOfBusinessDays; index++)
+            if (!isLab)
             {
-                switch (StartDate.DayOfWeek)
+                if (StartDate.DayOfWeek == DayOfWeek.Saturday)
                 {
-                    case DayOfWeek.Sunday:
-                        StartDate = StartDate.AddDays(2);
-                        break;
-                    case DayOfWeek.Monday:
-                    case DayOfWeek.Tuesday:
-                    case DayOfWeek.Wednesday:
-                    case DayOfWeek.Thursday:
-                    case DayOfWeek.Friday:
-                        StartDate = StartDate.AddDays(1);
-                        break;
-                    case DayOfWeek.Saturday:
-                        StartDate = StartDate.AddDays(3);
-                        break;
+                    StartDate = StartDate.AddDays(2);
+                }
+                else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    StartDate = StartDate.AddDays(1);
                 }
                 if (IsThaiHoliday(StartDate))
                 {
@@ -92,21 +78,29 @@ namespace ALS.ALSI.Biz.DataAccess
                 }
             }
 
-            //check to see if the end date is on a weekend.
-            //If so move it ahead to Monday.
-            //You could also bump it back to the Friday before if you desired to. 
-            //Just change the code to -2 and -1.
-            if (StartDate.DayOfWeek == DayOfWeek.Saturday)
-            {
-                StartDate = StartDate.AddDays(2);
-            }
-            else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
-            {
-                StartDate = StartDate.AddDays(1);
-            }
-
             return StartDate;
         }
+
+
+        //public DateTime GetWorkingDay(DateTime StartDate)
+        //{
+        //    StartDate = StartDate.AddDays(-1);
+
+        //    if (StartDate.DayOfWeek == DayOfWeek.Saturday)
+        //    {
+        //        StartDate = StartDate.AddDays(2);
+        //    }
+        //    else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
+        //    {
+        //        StartDate = StartDate.AddDays(1);
+        //    }
+        //    if (IsThaiHoliday(StartDate))
+        //    {
+        //        StartDate = StartDate.AddDays(1);
+        //    }
+        //    return StartDate;
+        //}
+
 
         public bool IsHoliday(DateTime CurrentDate)
         {

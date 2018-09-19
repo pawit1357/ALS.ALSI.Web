@@ -128,7 +128,7 @@ namespace ALS.ALSI.Web.view.request
         protected void btnSave_Click(object sender, EventArgs e)
         {
             holiday_calendar hc = new holiday_calendar();
-            this.jobSample.due_date = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text),0);
+            //this.jobSample.due_date = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text),1,true);
             if (cbIsTba.Checked)
             {
                 this.jobSample.due_date_lab = new DateTime(1, 1, 1);
@@ -149,15 +149,14 @@ namespace ALS.ALSI.Web.view.request
                     case 2:
                     case 4:
                     case 5:
-                        this.jobSample.due_date_lab = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
-                        this.jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 2);
+                        this.jobSample.due_date_lab = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1, true);
+                        this.jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 2, false);
                         break;
                     case 3:
-                        this.jobSample.due_date_lab = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
-                        this.jobSample.due_date_customer = hc.GetWorkingDay(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
+                        this.jobSample.due_date_lab = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1, true);
+                        this.jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1, false);
                         break;
                 }
-
             }
 
             this.jobSample.Update();
