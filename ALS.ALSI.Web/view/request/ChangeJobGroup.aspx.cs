@@ -341,19 +341,19 @@ namespace ALS.ALSI.Web.view.request
                                         case 2:
                                         case 4:
                                         case 5:
-                                            jobSample.due_date_lab = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1, true);
-                                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 2, false);
+                                            jobSample.due_date_lab = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
+                                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 2);
                                             break;
-                                        case 3:
-                                            jobSample.due_date_lab = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1, true);
-                                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1, true);
+                                        case 3://Express
+                                            jobSample.due_date_lab = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
+                                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
                                             break;
                                     }
                                 }
                             }
                             break;
                         case RoleEnum.ADMIN:
-                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1, true);
+                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
                             break;
                     }
                 }

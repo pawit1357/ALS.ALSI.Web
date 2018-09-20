@@ -56,27 +56,26 @@ namespace ALS.ALSI.Biz.DataAccess
         //    return GetWorkingDay(CalDate,_day);
         //}
 
-        public DateTime GetWorkingDayLab(DateTime StartDate, int _NumberOfBusinessDays,Boolean isLab)
+        public DateTime GetWorkingDayLab(DateTime StartDate, int addDay)
         {
-            int NumberOfBusinessDays = (_NumberOfBusinessDays - 1);
+            //int NumberOfBusinessDays = (_NumberOfBusinessDays - 1);
 
-            StartDate = StartDate.AddDays(NumberOfBusinessDays);
+            StartDate = StartDate.AddDays(addDay);
 
-            if (!isLab)
+
+            if (StartDate.DayOfWeek == DayOfWeek.Saturday)
             {
-                if (StartDate.DayOfWeek == DayOfWeek.Saturday)
-                {
-                    StartDate = StartDate.AddDays(2);
-                }
-                else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
-                {
-                    StartDate = StartDate.AddDays(1);
-                }
-                if (IsThaiHoliday(StartDate))
-                {
-                    StartDate = StartDate.AddDays(1);
-                }
+                StartDate = StartDate.AddDays(2);
             }
+            else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
+            {
+                StartDate = StartDate.AddDays(1);
+            }
+            if (IsThaiHoliday(StartDate))
+            {
+                StartDate = StartDate.AddDays(1);
+            }
+
 
             return StartDate;
         }

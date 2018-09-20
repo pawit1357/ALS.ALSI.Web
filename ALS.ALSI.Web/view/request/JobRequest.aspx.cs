@@ -637,8 +637,21 @@ namespace ALS.ALSI.Web.view.request
                                 else
                                 {
                                     holiday_calendar h = new holiday_calendar();
-                                    jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date),true);
-                                    jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value),Convert.ToInt32(cs.customer_due_date),false);
+                                    switch (jobSample.status_completion_scheduled.Value)
+                                    {
+                                        case 1:
+                                        case 2:
+                                        case 4:
+                                        case 5:
+                                            jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date));
+                                            jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date));
+                                            break;
+                                        case 3://Express
+                                            jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date)-1);
+                                            jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date)-1);
+                                            break;
+                                    }
+
                                 }
                             }
                         }
