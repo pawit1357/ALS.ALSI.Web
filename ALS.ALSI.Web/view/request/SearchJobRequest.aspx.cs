@@ -362,8 +362,8 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[13].Visible = true;
                         gvJob.Columns[14].Visible = true;
                         gvJob.Columns[15].Visible = true;
-                        gvJob.Columns[16].Visible = false;
-                        gvJob.Columns[17].Visible = false;
+                        gvJob.Columns[16].Visible = true;
+                        gvJob.Columns[17].Visible = true;
                         gvJob.Columns[18].Visible = true;
                         gvJob.Columns[19].Visible = true;
                         gvJob.Columns[20].Visible = true;
@@ -975,6 +975,8 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("Po", typeof(string));
                         dt.Columns.Add("Contact", typeof(string));
                         dt.Columns.Add("Description", typeof(string));
+                        dt.Columns.Add("Model", typeof(string));
+                        dt.Columns.Add("Surface_Area", typeof(string));
                         dt.Columns.Add("Specification", typeof(string));
                         dt.Columns.Add("Type_of_test", typeof(string));
                         dt.Columns.Add("Data_Group", typeof(string));

@@ -63,7 +63,7 @@ namespace ALS.ALSI.Web.view.request
                 job.update_date = DateTime.Now;
                 job.document_type = "1";
 
-                job.jobSample = listSample;
+                job.jobSample = listSample.Where(x=>x.RowState != CommandNameEnum.Delete).ToList();
                 return job;
             }
         }
