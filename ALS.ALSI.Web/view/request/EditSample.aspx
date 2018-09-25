@@ -33,29 +33,8 @@
                                 <asp:BoundField HeaderText="Specification" DataField="specification" ItemStyle-HorizontalAlign="Left" SortExpression="specification" />
                                 <asp:BoundField HeaderText="Type of test" DataField="type_of_test" ItemStyle-HorizontalAlign="Left" SortExpression="type_of_test" />
                             </Columns>
-                            <PagerTemplate>
-                                <div class="pagination">
-                                    <ul>
-                                        <li>
-                                            <asp:LinkButton ID="btnFirst" runat="server" CommandName="Page" CommandArgument="First"
-                                                CausesValidation="false" ToolTip="First Page"><i class="icon-fast-backward"></i></asp:LinkButton>
-                                        </li>
-                                        <li>
-                                            <asp:LinkButton ID="btnPrev" runat="server" CommandName="Page" CommandArgument="Prev"
-                                                CausesValidation="false" ToolTip="Previous Page"><i class="icon-backward"></i> Prev</asp:LinkButton>
-                                        </li>
-                                        <asp:PlaceHolder ID="pHolderNumberPage" runat="server" />
-                                        <li>
-                                            <asp:LinkButton ID="btnNext" runat="server" CommandName="Page" CommandArgument="Next"
-                                                CausesValidation="false" ToolTip="Next Page">Next <i class="icon-forward"></i></asp:LinkButton>
-                                        </li>
-                                        <li>
-                                            <asp:LinkButton ID="btnLast" runat="server" CommandName="Page" CommandArgument="Last"
-                                                CausesValidation="false" ToolTip="Last Page"><i class="icon-fast-forward"></i></asp:LinkButton>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </PagerTemplate>
+                            <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
+
                             <EmptyDataTemplate>
                                 <div class="data-not-found">
                                     <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />

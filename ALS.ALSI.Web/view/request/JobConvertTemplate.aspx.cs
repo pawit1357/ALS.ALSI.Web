@@ -195,6 +195,14 @@ namespace ALS.ALSI.Web.view.request
             removeSession();
             Response.Redirect(PreviousPath);
         }
+        protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0) return;
+            GridView gv = (GridView)sender;
+            gv.DataSource = searchResult;
+            gv.PageIndex = e.NewPageIndex;
+            gv.DataBind();
+        }
 
         protected void ddlTemplate_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Web.UI;
 using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace ALS.ALSI.Web.view.request
 {
@@ -137,6 +138,15 @@ namespace ALS.ALSI.Web.view.request
             removeSession();
             MessageBox.Show(this, Resources.MSG_SAVE_SUCCESS, PreviousPath);
         }
+        protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0) return;
+            GridView gv = (GridView)sender;
+            gv.DataSource = searchResult;
+            gv.PageIndex = e.NewPageIndex;
+            gv.DataBind();
+        }
+
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {

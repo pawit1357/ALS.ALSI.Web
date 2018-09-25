@@ -785,7 +785,7 @@ namespace ALS.ALSI.Web.view.template
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             //calculateByFormular();
-            Boolean isValid = true;
+            //Boolean isValid = true;
             template_wd_ic_coverpage objWork = new template_wd_ic_coverpage();
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)

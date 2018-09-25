@@ -294,6 +294,14 @@ namespace ALS.ALSI.Web.view.request
                 initialPage();
             }
         }
+        protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0) return;
+            GridView gv = (GridView)sender;
+            gv.DataSource = searchResult;
+            gv.PageIndex = e.NewPageIndex;
+            gv.DataBind();
+        }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {

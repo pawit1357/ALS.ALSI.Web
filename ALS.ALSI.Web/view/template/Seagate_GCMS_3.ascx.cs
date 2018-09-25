@@ -577,7 +577,7 @@ namespace ALS.ALSI.Web.view.template
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
 
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)

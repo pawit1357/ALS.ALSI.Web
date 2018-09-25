@@ -158,7 +158,7 @@ namespace ALS.ALSI.Web.view.request
 
                 DirectoryInfo d = new DirectoryInfo(correctPath);//Assuming Test is your Folder
                 FileInfo[] Files = d.GetFiles("*.*"); //Getting Text files
-                string str = "";
+                //string str = "";
                 int index = 1;
                 List<String> keepExtension = new List<String>();
                 keepExtension.Add(".xls");
@@ -262,6 +262,16 @@ namespace ALS.ALSI.Web.view.request
             {
             }
         }
+
+        protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0) return;
+            GridView gv = (GridView)sender;
+            gv.DataSource = searchResult;
+            gv.PageIndex = e.NewPageIndex;
+            gv.DataBind();
+        }
+
 
     }
 }

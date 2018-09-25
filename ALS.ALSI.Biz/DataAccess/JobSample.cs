@@ -73,7 +73,7 @@ namespace ALS.ALSI.Biz.DataAccess
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
         }
 

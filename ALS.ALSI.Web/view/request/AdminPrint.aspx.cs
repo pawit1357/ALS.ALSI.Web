@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace ALS.ALSI.Web.view.request
 {
@@ -142,6 +143,14 @@ namespace ALS.ALSI.Web.view.request
         }
 
         #endregion
+        protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0) return;
+            GridView gv = (GridView)sender;
+            gv.DataSource = SearchResult;
+            gv.PageIndex = e.NewPageIndex;
+            gv.DataBind();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -186,7 +195,7 @@ namespace ALS.ALSI.Web.view.request
                 List<job_sample> samples = job_sample.FindAllByJobID(jobInfo.ID);
                 if (samples != null && samples.Count > 0)
                 {
-                    int spec_id = 0;
+                    //int spec_id = 0;
                     foreach (job_sample s in samples)
                     {
                         //if (s.ID == 18)
