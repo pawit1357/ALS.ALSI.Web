@@ -76,6 +76,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isCusRefNoGroupOperation"]; }
             set { Session[GetType().Name + "isCusRefNoGroupOperation"] = value; }
         }
+        public Boolean isGroupApproveOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isGroupApproveOperation"]; }
+            set { Session[GetType().Name + "isGroupApproveOperation"] = value; }
+        }
 
 
 
@@ -131,6 +136,8 @@ namespace ALS.ALSI.Web.view.request
                 this.isSentToCusDateOperation = prvPage.isSentToCusDateOperation;
                 this.isNoteGroupOpeation = prvPage.isNoteGroupOpeation;
                 this.isCusRefNoGroupOperation = prvPage.isCusRefNoGroupOperation;
+                this.isGroupApproveOperation = prvPage.isGroupApproveOperation;
+
                 this.dataList = job_sample.FindAllByIds(this.selectedList);
 
                 ddlAssignTo.Items.Clear();
@@ -160,6 +167,8 @@ namespace ALS.ALSI.Web.view.request
                 pChangeDueDate.Visible = false;
                 pAccount2.Visible = false;
                 pCusRefNo.Visible = false;
+                pShowChemistFileUpload.Visible = false;
+
                 String desc2 = String.Empty;
                 if (isPoGroupOperation) desc2 = "(PO)";
                 if (isChangeDueDateGroup) desc2 = "(Duedate)";
@@ -223,7 +232,7 @@ namespace ALS.ALSI.Web.view.request
                         ddlStatus.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LABMANAGER_DISAPPROVE), Convert.ToInt32(StatusEnum.LABMANAGER_DISAPPROVE) + ""));
                         pShowChemistFileUpload.Visible = false;
                         pChemist.Visible = false;
-                        pSrChemist.Visible = false;
+                        pSrChemist.Visible = true;
                         pRemark.Visible = false;
                         pDisapprove.Visible = false;
                         pAccount.Visible = false;
@@ -361,7 +370,7 @@ namespace ALS.ALSI.Web.view.request
                             }
                             break;
                         case RoleEnum.ADMIN:
-                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 1);
+                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 0);
                             break;
                     }
                 }
@@ -406,6 +415,22 @@ namespace ALS.ALSI.Web.view.request
                             jobSample.note = txtNote.Text;
                             break;
                     }
+                }else if (this.isGroupApproveOperation)
+                {
+                    if (!String.IsNullOrEmpty(ddlStatus.SelectedValue))
+                    {
+                        StatusEnum _labmanSelectedStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
+                        switch (_labmanSelectedStatus)
+                        {
+                            case StatusEnum.LABMANAGER_APPROVE:
+                                jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
+                                break;
+                            case StatusEnum.LABMANAGER_DISAPPROVE:
+                                jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
+                                break;
+                        }
+                       
+                    }
                 }
                 else
                 {
@@ -427,22 +452,25 @@ namespace ALS.ALSI.Web.view.request
                                 jobSample.ad_hoc_tempalte_path = source_file_url;
                             }
 
-                            jobSample.template_id = String.IsNullOrEmpty(ddlTemplate.SelectedValue) ? 0 : int.Parse(ddlTemplate.SelectedValue);
-                            switch (int.Parse(ddlTemplate.SelectedValue))
+                            if (!String.IsNullOrEmpty(ddlTemplate.SelectedValue))
                             {
-                                case 901://PA TAMPLATE(BLANK)
-                                    jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
-                                    break;
-                                default:
-                                    if (pUploadfile.Visible)
-                                    {
+                                jobSample.template_id = String.IsNullOrEmpty(ddlTemplate.SelectedValue) ? 0 : int.Parse(ddlTemplate.SelectedValue);
+                                switch (int.Parse(ddlTemplate.SelectedValue))
+                                {
+                                    case 901://PA TAMPLATE(BLANK)
                                         jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
-                                    }
-                                    else
-                                    {
-                                        jobSample.job_status = Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC);
-                                    }
-                                    break;
+                                        break;
+                                    default:
+                                        if (pUploadfile.Visible)
+                                        {
+                                            jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                                        }
+                                        else
+                                        {
+                                            jobSample.job_status = Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC);
+                                        }
+                                        break;
+                                }
                             }
                             break;
                         case StatusEnum.CHEMIST_TESTING:
@@ -484,36 +512,39 @@ namespace ALS.ALSI.Web.view.request
                             }
                             break;
                         case StatusEnum.SR_CHEMIST_CHECKING:
-
-                            StatusEnum _srChemistSelectedStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
-                            switch (_srChemistSelectedStatus)
+                            if (!String.IsNullOrEmpty(ddlStatus.SelectedValue))
                             {
-                                case StatusEnum.SR_CHEMIST_APPROVE:
-                                    jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
-                                    #region ":: STAMP COMPLETE DATE"
-                                    jobSample.date_srchemist_complate = DateTime.Now;
-                                    #endregion
-                                    break;
-                                case StatusEnum.SR_CHEMIST_DISAPPROVE:
-                                    jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
-                                    break;
+                                StatusEnum _srChemistSelectedStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
+                                switch (_srChemistSelectedStatus)
+                                {
+                                    case StatusEnum.SR_CHEMIST_APPROVE:
+                                        jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_WORD);
+                                        #region ":: STAMP COMPLETE DATE"
+                                        jobSample.date_srchemist_complate = DateTime.Now;
+                                        #endregion
+                                        break;
+                                    case StatusEnum.SR_CHEMIST_DISAPPROVE:
+                                        jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
+                                        break;
+                                }
                             }
-
                             break;
 
                         case StatusEnum.LABMANAGER_CHECKING:
 
-                            StatusEnum _labmanSelectedStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
-                            switch (_labmanSelectedStatus)
+                            if (!String.IsNullOrEmpty(ddlStatus.SelectedValue))
                             {
-                                case StatusEnum.LABMANAGER_APPROVE:
-                                    jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
-                                    break;
-                                case StatusEnum.LABMANAGER_DISAPPROVE:
-                                    jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
-                                    break;
+                                StatusEnum _labmanSelectedStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);
+                                switch (_labmanSelectedStatus)
+                                {
+                                    case StatusEnum.LABMANAGER_APPROVE:
+                                        jobSample.job_status = Convert.ToInt32(StatusEnum.ADMIN_CONVERT_PDF);
+                                        break;
+                                    case StatusEnum.LABMANAGER_DISAPPROVE:
+                                        jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
+                                        break;
+                                }
                             }
-
                             break;
                         case StatusEnum.ADMIN_CONVERT_WORD:
 

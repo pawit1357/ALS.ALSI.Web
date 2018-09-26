@@ -435,6 +435,14 @@
     <Content Include="Binaries\DocumentFormat.OpenXml.dll" />
     <Content Include="Binaries\EntityFramework.dll" />
     <Content Include="Binaries\HtmlToOpenXml.dll" />
+    <Content Include="Binaries\Microsoft.ReportViewer.Common.dll" />
+    <Content Include="Binaries\Microsoft.ReportViewer.DataVisualization.dll" />
+    <Content Include="Binaries\Microsoft.ReportViewer.Design.dll" />
+    <Content Include="Binaries\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
+    <Content Include="Binaries\Microsoft.ReportViewer.WebDesign.dll" />
+    <Content Include="Binaries\Microsoft.ReportViewer.WebForms.dll" />
+    <Content Include="Binaries\Microsoft.ReportViewer.WinForms.dll" />
+    <Content Include="Binaries\Microsoft.SqlServer.Types.dll" />
     <Content Include="Binaries\MySql.Data.dll" />
     <Content Include="Binaries\Spire.Doc.dll" />
     <Content Include="Binaries\Spire.License.dll" />

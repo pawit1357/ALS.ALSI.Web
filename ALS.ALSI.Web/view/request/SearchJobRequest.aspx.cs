@@ -83,6 +83,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isCusRefNoGroupOperation"]; }
             set { Session[GetType().Name + "isCusRefNoGroupOperation"] = value; }
         }
+        public Boolean isGroupApproveOperation
+        {
+            get { return (Boolean)Session[GetType().Name + "isGroupApproveOperation"]; }
+            set { Session[GetType().Name + "isGroupApproveOperation"] = value; }
+        }
         public int JobID { get; set; }
 
         public int SampleID { get; set; }
@@ -449,6 +454,9 @@ namespace ALS.ALSI.Web.view.request
             Session.Remove(GetType().Name + "isDuedateGroupOperation");
             Session.Remove(GetType().Name + "isInvoiceGroupOperation");
             Session.Remove(GetType().Name + "isCusRefNoGroupOperation");
+            Session.Remove(GetType().Name + "isGroupApproveOperation");
+
+            
         }
 
         #endregion
@@ -727,12 +735,14 @@ namespace ALS.ALSI.Web.view.request
                             break;
                         case RoleEnum.LABMANAGER:
                             btnWorkFlow.Visible = (job_status == StatusEnum.LABMANAGER_CHECKING) && !isHold;
-                            switch (job_status)
-                            {
-                                case StatusEnum.LABMANAGER_CHECKING:
-                                    cbSelect.Visible = true && isGroupSubmit;
-                                    break;
-                            }
+                            //switch (job_status)
+                            //{
+                            //    case StatusEnum.LABMANAGER_CHECKING:
+                            //        cbSelect.Visible = true && isGroupSubmit;
+                            //        break;
+                            //}
+                            cbSelect.Visible = true;
+
                             break;
                         case RoleEnum.ADMIN:
                             btnWorkFlow.Visible = (job_status == StatusEnum.ADMIN_CONVERT_WORD || job_status == StatusEnum.ADMIN_CONVERT_PDF) && !isHold;
@@ -1324,7 +1334,7 @@ namespace ALS.ALSI.Web.view.request
             this.isSentToCusDateOperation = btn.ID.Equals("btnOperationSentToCus");
             this.isNoteGroupOpeation = btn.ID.Equals("btnOperationNote");
             this.isCusRefNoGroupOperation = btn.ID.Equals("btnOperationCusRefNo");
-
+            this.isGroupApproveOperation = userRole == RoleEnum.LABMANAGER? btn.ID.Equals("btnOperation"):false;
 
             foreach (GridViewRow row in gvJob.Rows)
             {
@@ -1335,7 +1345,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || this.isNoteGroupOpeation || this.isCusRefNoGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST)
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || this.isNoteGroupOpeation || this.isCusRefNoGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST||this.isGroupApproveOperation)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
                     }
