@@ -22,7 +22,7 @@
             <div class="portlet-body form">
                 <div class="form-body">
                     <!-- BEGIN FORM-->
-                                        <div class="row">
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-3">Fiscal Year:</label>
@@ -33,8 +33,8 @@
                                 </div>
                             </div>
                         </div>
-                                            </div>
-                   
+                    </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -199,7 +199,28 @@
                             </div>
                         </div>
                     </div>
-
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">BOI/NON-BOI:</label>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="text-align: left">
+                                        <asp:DropDownList ID="ddlBoiNonBoi" runat="server" class="select2_category form-control"></asp:DropDownList>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="text-align: left">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-6">
@@ -284,7 +305,7 @@
                                         <asp:LinkButton ID="btnChangeSrChemistCompleteDate" runat="server" ToolTip="Change Sr.Chemist Complete Date" CommandName="ChangeSrChemistCompleteDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnNoteForLab" runat="server" ToolTip="Note for lab" CommandName="NoteForLab" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-info"></i></asp:LinkButton>
 
-                                        
+
 
                                         <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
                                         <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Change Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
@@ -389,9 +410,17 @@
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
 
-                                    <asp:BoundField HeaderText="Note for lab" DataField="note_lab" ItemStyle-HorizontalAlign="Left" SortExpression="note_lab">
+                                <asp:BoundField HeaderText="Note for lab" DataField="note_lab" ItemStyle-HorizontalAlign="Left" SortExpression="note_lab">
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
+
+                                <asp:BoundField HeaderText="Invoice Date" DataField="sample_invoice_date" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_date">
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:BoundField>
+                                <asp:BoundField HeaderText="Invoice Amount" DataField="sample_invoice_amount" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount">
+                                    <ItemStyle HorizontalAlign="Left" />
+                                </asp:BoundField>
+
                             </Columns>
                             <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
 

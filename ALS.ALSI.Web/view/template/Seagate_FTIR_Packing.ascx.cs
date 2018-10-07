@@ -949,8 +949,8 @@ namespace ALS.ALSI.Web.view.template
         {
 
 
-            try
-            {
+            //try
+            //{
 
 
                 //DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
@@ -1109,11 +1109,11 @@ namespace ALS.ALSI.Web.view.template
 
                         break;
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine();
+            //}
 
 
 

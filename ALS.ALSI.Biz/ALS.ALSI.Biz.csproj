@@ -164,10 +164,6 @@
     <Compile Include="DataAccess\holiday_calendar.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\MHolidayCalancar.cs" />
-    <Compile Include="DataAccess\WsHashValue.cs" />
-    <Compile Include="DataAccess\TemplateFreeIc.cs" />
-    <Compile Include="DataAccess\SampleMethodProcedure.cs" />
     <Compile Include="DataAccess\job_info.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -189,11 +185,7 @@
     <Compile Include="DataAccess\menu_role.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\MMicroscopicAnalysis.cs" />
-    <Compile Include="DataAccess\MEvaluationOfParticles.cs" />
-    <Compile Include="DataAccess\McustomerAddress.cs" />
-    <Compile Include="DataAccess\MGcmsCas.cs" />
-    <Compile Include="DataAccess\MUnit.cs" />
+    <Compile Include="DataAccess\MHolidayCalancar.cs" />
     <Compile Include="DataAccess\m_completion_scheduled.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -233,17 +225,12 @@
     <Compile Include="DataAccess\m_type_of_test.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\ReportData.cs" />
-    <Compile Include="DataAccess\ReportHeader.cs" />
     <Compile Include="DataAccess\role.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\sample_method_procedure.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\SeagateGcmsImg.cs" />
-    <Compile Include="DataAccess\Pa.cs" />
-    <Compile Include="DataAccess\PaDetail.cs" />
     <Compile Include="DataAccess\tb_m_component.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -367,6 +354,19 @@
     <Compile Include="DataAccess\users_responsible.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\WsHashValue.cs" />
+    <Compile Include="DataAccess\TemplateFreeIc.cs" />
+    <Compile Include="DataAccess\SampleMethodProcedure.cs" />
+    <Compile Include="DataAccess\MMicroscopicAnalysis.cs" />
+    <Compile Include="DataAccess\MEvaluationOfParticles.cs" />
+    <Compile Include="DataAccess\McustomerAddress.cs" />
+    <Compile Include="DataAccess\MGcmsCas.cs" />
+    <Compile Include="DataAccess\MUnit.cs" />
+    <Compile Include="DataAccess\ReportData.cs" />
+    <Compile Include="DataAccess\ReportHeader.cs" />
+    <Compile Include="DataAccess\SeagateGcmsImg.cs" />
+    <Compile Include="DataAccess\Pa.cs" />
+    <Compile Include="DataAccess\PaDetail.cs" />
     <Compile Include="DataAccess\WDCorrosionImg.cs" />
     <Compile Include="DataAccess\WDCorrosion.cs" />
     <Compile Include="DataAccess\SeagateCopperwire.cs" />

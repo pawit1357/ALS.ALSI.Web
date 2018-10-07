@@ -4,19 +4,14 @@ using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
 using ClosedXML.Excel;
 using MySql.Data.MySqlClient;
-using NPOI.HSSF.UserModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace ALS.ALSI.Web.view.request
@@ -98,7 +93,6 @@ namespace ALS.ALSI.Web.view.request
             {
                 job_info tmp = new job_info();
 
-
                 tmp.status = String.IsNullOrEmpty(ddlJobStatus.SelectedValue) ? 0 : int.Parse(ddlJobStatus.SelectedValue);
                 tmp.jobRefNo = txtREfNo.Text.TrimEnd();
                 tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
@@ -124,6 +118,7 @@ namespace ALS.ALSI.Web.view.request
                     case RoleEnum.ADMIN:
                         break;
                 }
+               
                 tmp.sample_po = txtPo.Text;
                 tmp.sample_invoice = txtInvoice.Text;
                 tmp.receive_report_from = String.IsNullOrEmpty(txtReceivedReportFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportFrom.Text);
@@ -136,6 +131,7 @@ namespace ALS.ALSI.Web.view.request
                 tmp.report_to_customer_to = String.IsNullOrEmpty(txtReportToCustomerTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerTo.Text);
                 tmp.userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 tmp.physicalYear = Convert.ToInt16(ddlPhysicalYear.SelectedValue);
+                tmp.section = ddlBoiNonBoi.SelectedValue.ToString();
                 return tmp;
             }
         }
@@ -154,7 +150,7 @@ namespace ALS.ALSI.Web.view.request
 
 
             ddlJobStatus.Items.Clear();
-            ddlJobStatus.DataSource = new m_status().SelectByMainStatus();
+            ddlJobStatus.DataSource = new m_status().SelectByMainStatusNoDelete();
             ddlJobStatus.DataBind();
             ddlJobStatus.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, ""));
 
@@ -189,6 +185,30 @@ namespace ALS.ALSI.Web.view.request
                 ddlPhysicalYear.SelectedValue = (DateTime.Now.Year).ToString();
             }
 
+            //
+            //สถานะการใช้(A = Available, I = ISSUED SOME, N = ISSUED ALL, C = Cancel)
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID", typeof(string));
+            dt.Columns.Add("NAME", typeof(string));
+
+
+            // Here we add five DataRows.
+            dt.Rows.Add("B", "BOI");
+            dt.Rows.Add("NB", "NON-BOI");
+
+            ddlBoiNonBoi.DataSource = dt;
+            ddlBoiNonBoi.DataTextField = "NAME";
+            ddlBoiNonBoi.DataValueField = "ID";
+            ddlBoiNonBoi.DataBind();
+
+            dt.Clear();
+            dt.Dispose();
+
+            ListItem item = new ListItem();
+            item.Text = "";
+            item.Value = "";
+            ddlBoiNonBoi.Items.Insert(0, item);
+            //
             bindingData();
 
 
@@ -348,6 +368,33 @@ namespace ALS.ALSI.Web.view.request
                 switch (userRole)
                 {
                     case RoleEnum.ACCOUNT:
+                        gvJob.Columns[0].Visible = true;
+                        gvJob.Columns[1].Visible = true;
+                        gvJob.Columns[2].Visible = true;
+                        gvJob.Columns[3].Visible = true;
+                        gvJob.Columns[4].Visible = true;
+                        gvJob.Columns[5].Visible = true;
+                        gvJob.Columns[6].Visible = true;
+                        gvJob.Columns[7].Visible = true;
+                        gvJob.Columns[8].Visible = true;
+                        gvJob.Columns[9].Visible = true;
+                        gvJob.Columns[10].Visible = true;
+                        gvJob.Columns[11].Visible = true;
+                        gvJob.Columns[12].Visible = true;
+                        gvJob.Columns[13].Visible = true;
+                        gvJob.Columns[14].Visible = true;
+                        gvJob.Columns[15].Visible = false;
+                        gvJob.Columns[16].Visible = false;
+                        gvJob.Columns[17].Visible = false;
+                        gvJob.Columns[18].Visible = true;
+                        gvJob.Columns[19].Visible = true;
+                        gvJob.Columns[20].Visible = true;
+                        gvJob.Columns[21].Visible = false;
+
+                        gvJob.Columns[22].Visible = true;
+                        gvJob.Columns[23].Visible = true;
+
+                        break;
                     case RoleEnum.ADMIN:
                     case RoleEnum.BUSINESS_MANAGER:
                     case RoleEnum.MARKETING:
@@ -373,6 +420,10 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[19].Visible = true;
                         gvJob.Columns[20].Visible = true;
                         gvJob.Columns[21].Visible = false;
+
+                        gvJob.Columns[22].Visible = false;
+                        gvJob.Columns[23].Visible = false;
+
                         break;
                     case RoleEnum.LOGIN:
                     case RoleEnum.CHEMIST:
@@ -400,6 +451,9 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[19].Visible = true;
                         gvJob.Columns[20].Visible = false;
                         gvJob.Columns[21].Visible = true;
+
+                        gvJob.Columns[22].Visible = false;
+                        gvJob.Columns[23].Visible = false;
                         break;
                     default:
                         gvJob.Columns[0].Visible = false;
@@ -424,6 +478,9 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[19].Visible = false;
                         gvJob.Columns[20].Visible = false;
                         gvJob.Columns[21].Visible = false;
+
+                        gvJob.Columns[22].Visible = false;
+                        gvJob.Columns[23].Visible = false;
                         break;
                 }
             }
@@ -998,6 +1055,9 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
                         dt.Columns.Add("Note_for_Admin_Account", typeof(string));
                         dt.Columns.Add("Remark_AM_Retest", typeof(string));
+                        dt.Columns.Add("Invoice_Date", typeof(DateTime));
+                        dt.Columns.Add("Invoice_Amount", typeof(double));
+
                         break;
                     case RoleEnum.LOGIN:
                     case RoleEnum.CHEMIST:
@@ -1069,7 +1129,7 @@ namespace ALS.ALSI.Web.view.request
                                    ",date_admin_word_complete" +
                                    ",date_labman_complete" +
                                    ",date_admin_pdf_complete" +
-                                   ",Note_for_Admin_Account,Remark_AM_Retest";
+                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount";
                             break;
                         case RoleEnum.LOGIN:
                         case RoleEnum.CHEMIST:
@@ -1159,6 +1219,8 @@ namespace ALS.ALSI.Web.view.request
                     sql += " `Extent2`.`other_ref_no` AS `Other_Ref_No`,                                                                                                        ";
                     sql += " `Extent5`.`company_name` AS `Company`,                                                                                                             ";
                     sql += " `Extent2`.`sample_invoice` AS `Invoice`,                                                                                                           ";
+                    sql += " `Extent2`.`sample_invoice_date` AS `Invoice_Date`,                                                                                                           ";
+                    sql += " `Extent2`.`sample_invoice_amount` AS `Invoice_Amount`,                                                                                                           ";
                     sql += " `Extent2`.`sample_po` AS `Po`,                                                                                                                     ";
                     sql += " `Extent6`.`name` AS `Contact`,                                                                                                                     ";
                     sql += " `Extent2`.`description` AS `Description`,                                                                                                          ";
@@ -1205,6 +1267,21 @@ namespace ALS.ALSI.Web.view.request
                     sqlCri.Append(" `Extent2`.`job_status` <> 0");
                     sqlCri.Append(" AND ");
 
+                    if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))
+                    {
+                        if (ddlBoiNonBoi.SelectedValue.ToString().Equals("NB"))
+                        {
+                            sqlCri.Append(" RIGHT(`Extent2`.`job_number`, 1)  <> 'B'");
+                            sqlCri.Append(" AND ");
+                            
+                        }
+                        else
+                        {
+                            sqlCri.Append(" RIGHT(`Extent2`.`job_number`, 1)  = 'B'");
+                            sqlCri.Append(" AND ");
+                        }
+                    }
+
                     if (!String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue))
                     {
                         sqlCri.Append(" `Extent4`.`data_group` = '" + ddlTypeOfTest.SelectedValue + "'");
@@ -1236,12 +1313,12 @@ namespace ALS.ALSI.Web.view.request
                     }
                     if (!String.IsNullOrEmpty(txtPo.Text))
                     {
-                        sqlCri.Append(" `Extent2`.`sample_po` = '" + txtPo.Text + "'");
+                        sqlCri.Append(" `Extent2`.`sample_po` like '%" + txtPo.Text + "%'");
                         sqlCri.Append(" AND ");
                     }
                     if (!String.IsNullOrEmpty(txtInvoice.Text))
                     {
-                        sqlCri.Append(" `Extent1`.`sample_invoice` = '" + txtInvoice.Text + "'");
+                        sqlCri.Append(" `Extent2`.`sample_invoice` like '%" + txtInvoice.Text + "%'");
                         sqlCri.Append(" AND ");
                     }
                     DateTime receive_report_from = String.IsNullOrEmpty(txtReceivedReportFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportFrom.Text);

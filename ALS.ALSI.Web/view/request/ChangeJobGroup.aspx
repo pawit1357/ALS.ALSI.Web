@@ -251,6 +251,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Invoice Date:</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                            <asp:TextBox ID="txtInvoiceDate" name="txtInvoiceDate" runat="server" class="form-control"></asp:TextBox>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Invoice Amount:</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group" style="text-align: left">
+                                            <asp:TextBox ID="txtInvoiceAmount" name="txtInvoiceAmount" runat="server" class="form-control"></asp:TextBox>
+                                            <span class="input-group-btn"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </asp:Panel>
                     <asp:Panel ID="pChangeDueDate" runat="server">
                         <div class="row">
@@ -278,7 +306,7 @@
                                     <label class="control-label col-md-3">Note for Admin & Account:</label>
                                     <div class="col-md-6">
                                         <div class="input-group" style="text-align: left">
-                                            <asp:TextBox ID="txtNote" name="txtNote" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="txtNote" TextMode="MultiLine" Width="600px" Height="120px" name="txtNote" runat="server" CssClass="form-control"></asp:TextBox>
                                             <span class="input-group-btn"></span>
                                         </div>
                                     </div>

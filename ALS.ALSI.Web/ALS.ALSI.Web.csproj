@@ -86,16 +86,34 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ALS.ALSI.Biz\Binaries\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ALS.ALSI.Biz\Binaries\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design">
+      <HintPath>..\ALS.ALSI.Biz\Binaries\Microsoft.ReportViewer.Design.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ALS.ALSI.Biz\Binaries\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign">
+      <HintPath>..\ALS.ALSI.Biz\Binaries\Microsoft.ReportViewer.WebDesign.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.VS2010.10.0.40219.1\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ALS.ALSI.Biz\Binaries\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ALS.ALSI.Biz\Binaries\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ALS.ALSI.Biz\Binaries\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -1202,6 +1220,7 @@
     <Content Include="view\request\ChangeSrChemistStartJobDate.aspx" />
     <Content Include="view\request\ChangeJobGroup.aspx" />
     <Content Include="view\request\EditSample.aspx" />
+    <Content Include="view\request\SumIncome.aspx" />
     <Content Include="view\request\ViewFile.aspx" />
     <Content Include="view\request\ChangeSingaporeRefNo.aspx" />
     <Content Include="view\request\ChangeOtherRefNo.aspx" />
@@ -1441,6 +1460,13 @@
     </Compile>
     <Compile Include="view\request\EditSample.aspx.designer.cs">
       <DependentUpon>EditSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\request\SumIncome.aspx.cs">
+      <DependentUpon>SumIncome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\request\SumIncome.aspx.designer.cs">
+      <DependentUpon>SumIncome.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\request\ViewFile.aspx.cs">
       <DependentUpon>ViewFile.aspx</DependentUpon>
@@ -2036,6 +2062,7 @@
       <DependentUpon>web - Copy.config</DependentUpon>
     </Content>
     <Content Include="web.config" />
+    <Content Include="template\SumInvoiceTemplate.xlsx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

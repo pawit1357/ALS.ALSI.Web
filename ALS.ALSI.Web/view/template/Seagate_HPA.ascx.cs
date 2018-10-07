@@ -1244,7 +1244,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC03_B16.Text) +
                     Convert.ToDouble(txt_UsLPC03_B17.Text)) / 3).ToString();
 
-                txt_UsLPC03_B18.Text = String.Format("{0:n3}", Math.Round(Convert.ToDouble(txt_UsLPC03_B18.Text), 3));
+                txt_UsLPC03_B18.Text = String.Format("{0:n"+txtUnit.Text+"}", Math.Round(Convert.ToDouble(txt_UsLPC03_B18.Text), 3));
             }
             //=AVERAGE(C15,C16,C17)
             if (!String.IsNullOrEmpty(txt_UsLPC03_C15.Text) &&
@@ -1255,7 +1255,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC03_C15.Text) +
                     Convert.ToDouble(txt_UsLPC03_C16.Text) +
                     Convert.ToDouble(txt_UsLPC03_C17.Text)) / 3).ToString();
-                txt_UsLPC03_C18.Text = String.Format("{0:n3}", Math.Round(Convert.ToDouble(txt_UsLPC03_C18.Text), 3));
+                txt_UsLPC03_C18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC03_C18.Text), 3));
             }
             //=AVERAGE(D15,D16,D17)
             if (!String.IsNullOrEmpty(txt_UsLPC03_D15.Text) &&
@@ -1266,7 +1266,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC03_D15.Text) +
                     Convert.ToDouble(txt_UsLPC03_D16.Text) +
                     Convert.ToDouble(txt_UsLPC03_D17.Text)) / 3).ToString();
-                txt_UsLPC03_D18.Text = String.Format("{0:n2}", Math.Round(Convert.ToDouble(txt_UsLPC03_D18.Text), 2));
+                txt_UsLPC03_D18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC03_D18.Text), 2));
             }
             //=AVERAGE(E15,E16,E17)
             if (!String.IsNullOrEmpty(txt_UsLPC03_E15.Text) &&
@@ -1277,7 +1277,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC03_E15.Text) +
                     Convert.ToDouble(txt_UsLPC03_E16.Text) +
                     Convert.ToDouble(txt_UsLPC03_E17.Text)) / 3).ToString();
-                txt_UsLPC03_E18.Text = String.Format("{0:n2}", Math.Round(Convert.ToDouble(txt_UsLPC03_E18.Text), 2));
+                txt_UsLPC03_E18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC03_E18.Text), 2));
             }
             //=AVERAGE(F15,F16,F17)
             if (!String.IsNullOrEmpty(txt_UsLPC03_F15.Text) &&
@@ -1288,7 +1288,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC03_F15.Text) +
                     Convert.ToDouble(txt_UsLPC03_F16.Text) +
                     Convert.ToDouble(txt_UsLPC03_F17.Text)) / 3).ToString();
-                txt_UsLPC03_F18.Text = String.Format("{0:n2}", Math.Round(Convert.ToDouble(txt_UsLPC03_F18.Text), 2));
+                txt_UsLPC03_F18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC03_F18.Text), 2));
             }
             //=AVERAGE(G15,G16,G17)
             if (!String.IsNullOrEmpty(txt_UsLPC03_G15.Text) &&
@@ -1299,7 +1299,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC03_G15.Text) +
                     Convert.ToDouble(txt_UsLPC03_G16.Text) +
                     Convert.ToDouble(txt_UsLPC03_G17.Text)) / 3).ToString();
-                txt_UsLPC03_G18.Text = String.Format("{0:n2}", Math.Round(Convert.ToDouble(txt_UsLPC03_G18.Text), 2));
+                txt_UsLPC03_G18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC03_G18.Text), 2));
             }
             //FORM COVER PAGE
 
@@ -1361,7 +1361,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC06_B16.Text) +
                     Convert.ToDouble(txt_UsLPC06_B17.Text)) / 3).ToString();
 
-                txt_UsLPC06_B18.Text = String.Format("{0:n3}", Math.Round(Convert.ToDouble(txt_UsLPC06_B18.Text), 3));
+                txt_UsLPC06_B18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC06_B18.Text), 3));
             }
             //=AVERAGE(C15,C16,C17)
             if (!String.IsNullOrEmpty(txt_UsLPC06_C15.Text) &&
@@ -1372,7 +1372,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC06_C15.Text) +
                     Convert.ToDouble(txt_UsLPC06_C16.Text) +
                     Convert.ToDouble(txt_UsLPC06_C17.Text)) / 3).ToString();
-                txt_UsLPC06_C18.Text = String.Format("{0:n3}", Math.Round(Convert.ToDouble(txt_UsLPC06_C18.Text), 3));
+                txt_UsLPC06_C18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC06_C18.Text), 3));
             }
             //=AVERAGE(D15,D16,D17)
             if (!String.IsNullOrEmpty(txt_UsLPC06_D15.Text) &&
@@ -1383,7 +1383,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC06_D15.Text) +
                     Convert.ToDouble(txt_UsLPC06_D16.Text) +
                     Convert.ToDouble(txt_UsLPC06_D17.Text)) / 3).ToString();
-                txt_UsLPC06_D18.Text = String.Format("{0:n2}", Math.Round(Convert.ToDouble(txt_UsLPC06_D18.Text), 2));
+                txt_UsLPC06_D18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC06_D18.Text), 2));
             }
             //=AVERAGE(E15,E16,E17)
             if (!String.IsNullOrEmpty(txt_UsLPC06_E15.Text) &&
@@ -1394,7 +1394,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC06_E15.Text) +
                     Convert.ToDouble(txt_UsLPC06_E16.Text) +
                     Convert.ToDouble(txt_UsLPC06_E17.Text)) / 3).ToString();
-                txt_UsLPC06_E18.Text = String.Format("{0:n2}", Math.Round(Convert.ToDouble(txt_UsLPC06_E18.Text), 2));
+                txt_UsLPC06_E18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC06_E18.Text), 2));
             }
             //=AVERAGE(F15,F16,F17)
             if (!String.IsNullOrEmpty(txt_UsLPC06_F15.Text) &&
@@ -1405,7 +1405,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC06_F15.Text) +
                     Convert.ToDouble(txt_UsLPC06_F16.Text) +
                     Convert.ToDouble(txt_UsLPC06_F17.Text)) / 3).ToString();
-                txt_UsLPC06_F18.Text = String.Format("{0:n2}", Math.Round(Convert.ToDouble(txt_UsLPC06_F18.Text), 2));
+                txt_UsLPC06_F18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC06_F18.Text), 2));
             }
             //=AVERAGE(G15,G16,G17)
             if (!String.IsNullOrEmpty(txt_UsLPC06_G15.Text) &&
@@ -1416,7 +1416,7 @@ namespace ALS.ALSI.Web.view.template
                     Convert.ToDouble(txt_UsLPC06_G15.Text) +
                     Convert.ToDouble(txt_UsLPC06_G16.Text) +
                     Convert.ToDouble(txt_UsLPC06_G17.Text)) / 3).ToString();
-                txt_UsLPC06_G18.Text = String.Format("{0:n2}", Math.Round(Convert.ToDouble(txt_UsLPC06_G18.Text), 2));
+                txt_UsLPC06_G18.Text = String.Format("{0:n" + txtUnit.Text + "}", Math.Round(Convert.ToDouble(txt_UsLPC06_G18.Text), 2));
             }
             //FORM COVER PAGE
 

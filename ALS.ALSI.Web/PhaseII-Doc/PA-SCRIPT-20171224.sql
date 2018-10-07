@@ -424,4 +424,24 @@ INSERT INTO `alsi`.`m_completion_scheduled` (`ID`, `name`, `lab_due_date`, `cust
 ALTER TABLE `alsi`.`job_sample` 
 ADD COLUMN `am_retest_remark` VARCHAR(200) NULL AFTER `note_lab`;
 
+---------------------- 2018-10-04 --------------------------------
+INSERT INTO `alsi`.`menu` (`MENU_ID`, `MENU_NAME`, `URL_NAVIGATE`, `MENU_TAG`, `PREVIOUS_MENU_ID`, `DISPLAY_ORDER`, `UPDATE_BY`, `CREATE_DATE`, `UPDATE_DATE`) VALUES ('13', 'Report', '/alis/view/request/SearchReport.aspx', 'SearchReport|', '1', '1', 'SYSTEM', '2018-10-04', '2018-10-04');
+UPDATE `alsi`.`menu` SET `URL_NAVIGATE`='' WHERE `MENU_ID`='13';
+INSERT INTO `alsi`.`menu` (`MENU_ID`, `MENU_ICON`, `MENU_NAME`, `URL_NAVIGATE`, `PREVIOUS_MENU_ID`, `DISPLAY_ORDER`, `UPDATE_BY`, `CREATE_DATE`, `UPDATE_DATE`) VALUES ('14', 'icon-grid', 'Summary Income', '/alis/view/request/SumIncome.aspx', '13', '1', 'SYSTEM', '2018-10-04', '2018-10-04');
+
+INSERT INTO `alsi`.`menu_role` (`ROLE_ID`, `MENU_ID`, `IS_REQUIRED_ACTION`, `IS_CREATE`, `IS_EDIT`, `IS_DELETE`, `UPDATE_BY`, `CREATE_DATE`, `UPDATE_DATE`) VALUES ('7', '13', '1', '1', '1', '1', 'SYSTEM', '2015-02-13', '2015-02-13');
+INSERT INTO `alsi`.`menu_role` (`ROLE_ID`, `MENU_ID`, `IS_REQUIRED_ACTION`, `IS_CREATE`, `IS_EDIT`, `IS_DELETE`, `UPDATE_BY`, `CREATE_DATE`, `UPDATE_DATE`) VALUES ('7', '14', '1', '1', '1', '1', 'SYSTEM', '2015-02-13', '2015-02-13');
+UPDATE `alsi`.`menu` SET `PREVIOUS_MENU_ID`=NULL WHERE `MENU_ID`='14';
+UPDATE `alsi`.`menu` SET `MENU_ICON`='', `PREVIOUS_MENU_ID`='13' WHERE `MENU_ID`='14';
+UPDATE `alsi`.`menu` SET `MENU_ICON`='icon-grid', `PREVIOUS_MENU_ID`='' WHERE `MENU_ID`='13';
+ update alsi.menu set url_navigate=null,previous_menu_id=null where menu_id=13;
+
+
+
+ ALTER TABLE `alsi`.`job_sample` 
+ADD COLUMN `sample_invoice_date` DATE NULL AFTER `sample_invoice`,
+ADD COLUMN `sample_invoice_amount` DOUBLE NULL AFTER `sample_invoice_date`;
+
+
+
 */

@@ -393,6 +393,11 @@ namespace ALS.ALSI.Web.view.request
                 else if (this.isInvoiceGroupOperation)
                 {
                     jobSample.sample_invoice = txtInvoice.Text;
+                    jobSample.sample_invoice_amount = String.IsNullOrEmpty(txtInvoiceAmount.Text) ? Convert.ToDouble("0") : Convert.ToDouble(txtInvoiceAmount.Text);
+                    if (!String.IsNullOrEmpty(txtInvoiceDate.Text))
+                    {
+                        jobSample.sample_invoice_date = CustomUtils.converFromDDMMYYYY(txtInvoiceDate.Text);
+                    }
                 }
                 else if (this.isCusRefNoGroupOperation)
                 {

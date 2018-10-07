@@ -31,6 +31,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public string remarks { get; set; }
         public string sample_po { get; set; }
         public string sample_invoice { get; set; }
+        public Nullable<System.DateTime> sample_invoice_date { get; set; }
+        public Nullable<double> sample_invoice_amount { get; set; }
         public Nullable<int> no_of_report { get; set; }
         public string uncertainty { get; set; }
         public Nullable<int> job_status { get; set; }

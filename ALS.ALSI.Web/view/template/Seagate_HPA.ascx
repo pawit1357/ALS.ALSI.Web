@@ -974,8 +974,15 @@
                                         <th>
                                             <asp:DropDownList ID="ddlClassificationUnit" runat="server" class="select2_category form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlClassificationUnit_SelectedIndexChanged" DataValueField="ID" DataTextField="Name">
                                             </asp:DropDownList>
-                                        </
-
+                                        </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Average of 3 (0.3 & 0.6)</th>
+                                            <th>
+                                                <asp:TextBox runat="server" ID="txtUnit" TextMode="Number" Text="2"></asp:TextBox>
+                                            </th>
+                                        </tr>
+         
                                 </table>
                             </div>
                             <div class="modal-footer">

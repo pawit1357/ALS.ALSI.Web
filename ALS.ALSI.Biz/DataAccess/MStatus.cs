@@ -33,7 +33,11 @@ namespace ALS.ALSI.Biz.DataAccess
      
             return _repository.GetAll().Where(x=>x.status_group_id == 1  && x.status.Equals("A")).ToList();
         }
+        public IEnumerable<m_status> SelectByMainStatusNoDelete()
+        {
 
+            return _repository.GetAll().Where(x => x.status_group_id == 1 && x.status.Equals("A") && x.ID != 18).ToList();
+        }
         public m_status SelectByID(int _id)
         {
             return _repository.Find(x => x.ID == _id).FirstOrDefault();

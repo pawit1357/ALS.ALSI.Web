@@ -15,6 +15,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public String customerText { get; set; }
         public String preFixText { get; set; }
         public int physicalYear { get; set; }
+        public String section { get; set; }
         public RoleEnum userRole { get; set; }
 
         private static IRepository<job_info> _repository
@@ -103,7 +104,8 @@ namespace ALS.ALSI.Biz.DataAccess
                             sample.Update();
                             break;
                         case CommandNameEnum.Delete:
-                            sample.Delete();
+                            sample.job_status = Convert.ToInt16(StatusEnum.JOB_DELETE);
+                            sample.Update();
                             break;
                     }
                 }
@@ -131,6 +133,7 @@ namespace ALS.ALSI.Biz.DataAccess
                              orderby  s.ID descending
                              select new
                              {
+                                
                                  ID = j.ID,
                                  s.other_ref_no,
                                  s.date_srchemist_complate,
@@ -144,6 +147,8 @@ namespace ALS.ALSI.Biz.DataAccess
                                  s_pore_ref_no = j.s_pore_ref_no,
                                  customer = c.company_name,
                                  s.sample_invoice,
+                                 s.sample_invoice_date,
+                                 s.sample_invoice_amount,
                                  sample_po = s.sample_po,
                                  contract_person = (cp.name==null)? "": cp.name,
                                  description = s.description,
@@ -181,8 +186,18 @@ namespace ALS.ALSI.Biz.DataAccess
                                  s.sample_prefix,
                                  s.amend_or_retest,s.note,s.note_lab,s.am_retest_remark
                              };
-
-                if(this.physicalYear > 0)
+                if (!String.IsNullOrEmpty(section))
+                {
+                    if (section.Equals("NB"))
+                    {
+                        result = result.Where(x => !x.job_number.EndsWith("B"));
+                    }
+                    else
+                    {
+                        result = result.Where(x => x.job_number.EndsWith(section));
+                    }
+                }
+                if (this.physicalYear > 0)
                 {
                     result = result.Where(x=>x.receive_date.Value.Year == this.physicalYear);
                 }
@@ -289,7 +304,7 @@ namespace ALS.ALSI.Biz.DataAccess
                     result = result.Where(x => x.date_admin_sent_to_cus >= this.report_to_customer_from && x.date_admin_sent_to_cus <= this.report_to_customer_to);
                 }
 
-                return result.Where(x=>x.job_status != 0).ToList();// JOB_STATUS EQUAL0 EQUAL "JOB_DELETE"
+                return result.Where(x=>x.job_status != 18).ToList();// JOB_STATUS EQUAL0 EQUAL "JOB_DELETE"
             }
         }
 
