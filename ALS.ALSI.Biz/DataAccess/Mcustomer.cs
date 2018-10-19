@@ -55,7 +55,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public m_customer SelectByID(int _id)
         {
-            return _repository.First(x => x.ID == _id);
+            return _repository.Find(x => x.ID == _id).FirstOrDefault();
         }
 
         public void Insert()

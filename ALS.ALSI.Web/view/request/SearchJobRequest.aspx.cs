@@ -395,6 +395,7 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[23].Visible = true;
 
                         break;
+                    case RoleEnum.ROOT:
                     case RoleEnum.ADMIN:
                     case RoleEnum.BUSINESS_MANAGER:
                     case RoleEnum.MARKETING:
@@ -770,7 +771,7 @@ namespace ALS.ALSI.Web.view.request
                     btnConvertTemplete.Visible = ((userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && job_status == StatusEnum.LOGIN_CONVERT_TEMPLATE) && !isHold;
                     btnChangeStatus.Visible = (userRole == RoleEnum.LOGIN || userRole == RoleEnum.ROOT) && !isHold;
                     cbSelect.Visible = false;
-                    btnViewFile.Visible = job_status == StatusEnum.JOB_COMPLETE || userRole == RoleEnum.BUSINESS_MANAGER || userRole == RoleEnum.LABMANAGER || userRole == RoleEnum.SR_CHEMIST;
+                    btnViewFile.Visible = job_status == StatusEnum.JOB_COMPLETE || userRole == RoleEnum.BUSINESS_MANAGER || userRole == RoleEnum.LABMANAGER || userRole == RoleEnum.SR_CHEMIST || userRole == RoleEnum.ROOT || userRole == RoleEnum.ADMIN;
 
                     btnChangeSrChemistStartJobDate.Visible = (userRole == RoleEnum.SR_CHEMIST) && !isHold;
                     btnChangeAdminStartJobsDate.Visible = (userRole == RoleEnum.ADMIN) && !isHold;

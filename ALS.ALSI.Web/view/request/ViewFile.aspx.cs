@@ -133,20 +133,20 @@ namespace ALS.ALSI.Web.view.request
                 String rootPath = Configurations.PATH_SOURCE.Replace("{0}\\{1}\\{2}\\{3}\\{4}", "");
                 String correctPath = String.Empty;
 
-                for (int y = DateTime.Now.Year; y > DateTime.Now.Year-2; y--)
+                for (int y = DateTime.Now.Year; y > DateTime.Now.Year - 2; y--)
                 {
-                    for(int m = 1; m <= 12; m++)
+                    for (int m = 1; m <= 12; m++)
                     {
-                        for(int dd = 1; dd <= DateTime.DaysInMonth(y,m); dd++)
+                        for (int dd = 1; dd <= DateTime.DaysInMonth(y, m); dd++)
                         {
-                            String checkPath = String.Format("{0}{1}\\{2}\\{3}\\{4}", rootPath, y, m.ToString("00"),dd.ToString("00"), this.jobSample.job_number);
+                            String checkPath = String.Format("{0}{1}\\{2}\\{3}\\{4}", rootPath, y, m.ToString("00"), dd.ToString("00"), this.jobSample.job_number);
                             if (Directory.Exists(checkPath))
                             {
                                 correctPath = String.Format(Configurations.PATH_SOURCE, y, m.ToString("00"), dd.ToString("00"), this.jobSample.job_number, String.Empty);
                                 break;
                             }
                         }
-  
+
                     }
                 }
 
@@ -165,13 +165,25 @@ namespace ALS.ALSI.Web.view.request
                 keepExtension.Add(".jpg");
                 keepExtension.Add(".xlt");
                 keepExtension.Add(".csv");
+                keepExtension.Add(".xlsx");
+
+                if (String.IsNullOrEmpty(this.jobSample.path_word))
+                {
+                    keepExtension.Add(".doc");
+                    keepExtension.Add(".docx");
+                }
+                if (!String.IsNullOrEmpty(this.jobSample.path_pdf))
+                {
+                    keepExtension.Add(".pdf");
+
+                }
 
                 foreach (FileInfo file in Files)
                 {
                     FileList fl = new FileList();
                     fl.order = index;
                     fl.name = Path.GetFileName(file.FullName);
-                    fl.url = String.Concat(Configurations.HOST,"/uploads/", file.FullName.Replace(rootPath, "").Replace("\\","/"));
+                    fl.url = String.Concat(Configurations.HOST, "/uploads/", file.FullName.Replace(rootPath, "").Replace("\\", "/"));
                     //str = str + ", " + file.Name;
                     index++;
                     if (keepExtension.Contains(Path.GetExtension(file.FullName)))

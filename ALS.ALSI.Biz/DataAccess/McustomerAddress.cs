@@ -32,7 +32,7 @@ namespace ALS.ALSI.Biz.DataAccess
         }
         public m_customer_address SelectByID(int _id)
         {
-            return _repository.First(x => x.ID == _id);
+            return _repository.Find(x => x.ID == _id).FirstOrDefault();
         }
         public m_customer_address SelectByCompanyID(int _id)
         {

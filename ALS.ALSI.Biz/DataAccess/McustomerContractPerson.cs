@@ -29,7 +29,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public m_customer_contract_person SelectByID(int _id)
         {
-            return _repository.First(x => x.ID == _id);
+            return _repository.Find(x => x.ID == _id).FirstOrDefault();
         }
         public List<m_customer_contract_person> SelectAllByCusID(int _company_id)
         {
