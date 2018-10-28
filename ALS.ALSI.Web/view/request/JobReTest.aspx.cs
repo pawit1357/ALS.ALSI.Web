@@ -209,7 +209,7 @@ namespace ALS.ALSI.Web.view.request
 
                 newSample.path_pdf = String.Empty;
                 newSample.path_word = String.Empty;
-                oldSample.am_retest_remark = txtRemark.Text;
+                newSample.am_retest_remark = txtRemark.Text;
                 newSample.Insert();
                 oldSample.Update();
 

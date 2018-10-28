@@ -67,9 +67,9 @@ namespace ALS.ALSI.Web
                     /////
                     ///
                     //Console.WriteLine();
-                    //DateTime _date = new DateTime(2018, 10, 5);//yyyyMMdd
+                    //DateTime _date = new DateTime(2018, 10, 11);//yyyyMMdd
                     //holiday_calendar h = new holiday_calendar();
-                    //DateTime dt = h.GetWorkingDayLab(_date, 8);
+                    //DateTime dt = h.GetWorkingDayCustomer(_date, 10);
                     //Console.WriteLine();
 
                 }

@@ -1,6 +1,7 @@
 ﻿using ALS.ALIS.Repository.Interface;
 using StructureMap;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,22 +40,49 @@ namespace ALS.ALSI.Biz.DataAccess
             _repository.Delete(this);
         }
 
+        public static void InsertList(List<holiday_calendar> _lists)
+        {
+            foreach (holiday_calendar tmp in _lists)
+            {
+                _repository.Add(tmp);
+            }
+        }
 
-        //public DateTime GetWorkingDay(DateTime CalDate, int _day)
-        //{
-        //    DateTime result = DateTime.Now;
-        //    DateTime _calDate = new DateTime(CalDate.Year, CalDate.Month, CalDate.Day, 0, 0, 0);
-        //    //_day--;
-        //    //if (_day > 0)
-        //    //{
-        //    //    if (IsHoliday(_calDate))
-        //    //    {
-        //    //    }
-        //    //    _calDate = _calDate.AddDays(1);
-        //    //    return _calDate;
-        //    //}
-        //    return GetWorkingDay(CalDate,_day);
-        //}
+        public holiday_calendar SelectByID(DateTime _date)
+        {
+            return _repository.Find(x => x.DATE_HOLIDAYS.ToString("yyyyMMdd").Equals(_date.ToString("yyyyMMdd"))).FirstOrDefault();//.Year == _date.Year && x.DATE_HOLIDAYS.Month == _date.Month && x.DATE_HOLIDAYS.Day == _date.Day).FirstOrDefault();
+        }
+
+        public static void deleteByYear(int year)
+        {
+            List<holiday_calendar> hcs = _repository.GetAll().Where(x=>Convert.ToInt16(x.YEAR_HOLIDAYS) == year).ToList();
+            foreach(holiday_calendar hc in hcs)
+            {
+                hc.Delete();
+            }
+        }
+
+        public IEnumerable SearchData()
+        {
+
+            //return _repository.GetAll().ToList();
+            using (ALSIEntities ctx = new ALSIEntities())
+            {
+                var result = from j in ctx.holiday_calendar select j;// j.status == "A" select j;
+
+                //if (this.ID > 0)
+                //{
+                //    result = result.Where(x => x.ID == this.ID);
+                //}
+                if (!String.IsNullOrEmpty(this.YEAR_HOLIDAYS))
+                {
+                    result = result.Where(x => x.YEAR_HOLIDAYS.Contains(this.YEAR_HOLIDAYS));
+                }
+                return result.ToList();
+            }
+        }
+
+       
 
         public DateTime GetWorkingDayLab(DateTime StartDate, int addDay)
         {
@@ -80,26 +108,29 @@ namespace ALS.ALSI.Biz.DataAccess
             return StartDate;
         }
 
+        public DateTime GetWorkingDayCustomer(DateTime startDate, int addDay)
+        {
+            DateTime endDate = startDate.AddDays(addDay);
+            int workingDays = Enumerable.Range(0, Convert.ToInt32(endDate.Subtract(startDate).TotalDays)).Select(i => new[] { DayOfWeek.Saturday, DayOfWeek.Sunday }.Contains(startDate.AddDays(i).DayOfWeek) ? 0 : 1).Sum();
 
-        //public DateTime GetWorkingDay(DateTime StartDate)
-        //{
-        //    StartDate = StartDate.AddDays(-1);
 
-        //    if (StartDate.DayOfWeek == DayOfWeek.Saturday)
-        //    {
-        //        StartDate = StartDate.AddDays(2);
-        //    }
-        //    else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
-        //    {
-        //        StartDate = StartDate.AddDays(1);
-        //    }
-        //    if (IsThaiHoliday(StartDate))
-        //    {
-        //        StartDate = StartDate.AddDays(1);
-        //    }
-        //    return StartDate;
-        //}
+            DateTime StartDate = startDate.AddDays(addDay + (addDay - workingDays));
+            if (StartDate.DayOfWeek == DayOfWeek.Saturday)
+            {
+                StartDate = StartDate.AddDays(2);
+            }
+            else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
+            {
+                StartDate = StartDate.AddDays(1);
+            }
+            if (IsThaiHoliday(StartDate))
+            {
+                StartDate = StartDate.AddDays(1);
+            }
 
+
+            return StartDate;
+        }
 
         public bool IsHoliday(DateTime CurrentDate)
         {

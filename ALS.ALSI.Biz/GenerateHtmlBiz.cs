@@ -4,7 +4,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using NotesFor.HtmlToOpenXml;
-using OfficeOpenXml;
+//using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -54,22 +54,22 @@ namespace ALS.ALSI.Biz
 
 
             FileInfo fileInfo = new FileInfo(@"D:\IC.xlsx");
-            using (var package = new ExcelPackage(fileInfo))
-            {
+            //using (var package = new ExcelPackage(fileInfo))
+            //{
 
-                ExcelWorksheet sConfig = package.Workbook.Worksheets["Config"];
+                //ExcelWorksheet sConfig = package.Workbook.Worksheets["Config"];
 
-                ExcelWorksheet sCoverPage = package.Workbook.Worksheets["Coverpage-TH"];
-                var methodProcedureHeaders = sCoverPage.Cells[sConfig.Cells["C3"].Text];
-                foreach (var item in methodProcedureHeaders) 
-                {
-                    //tb_m_specification mSpec = new tb_m_specification
-                    //{
-                    //    ID = Convert.ToInt16(Regex.Replace(item.Address, @"[^\d]", "")),
-                    //    A = (item.Value == null) ? String.Empty : item.Value.ToString()
-                    //};
-                    Console.WriteLine();
-                }
+                //ExcelWorksheet sCoverPage = package.Workbook.Worksheets["Coverpage-TH"];
+                //var methodProcedureHeaders = sCoverPage.Cells[sConfig.Cells["C3"].Text];
+                //foreach (var item in methodProcedureHeaders) 
+                //{
+                //    //tb_m_specification mSpec = new tb_m_specification
+                //    //{
+                //    //    ID = Convert.ToInt16(Regex.Replace(item.Address, @"[^\d]", "")),
+                //    //    A = (item.Value == null) ? String.Empty : item.Value.ToString()
+                //    //};
+                //    Console.WriteLine();
+                //}
 
                 //ExcelWorksheet sSpecification = package.Workbook.Worksheets["Specification"];
                 //var _specifications = sSpecification.Cells[sConfig.Cells["C2"].Text];
@@ -97,7 +97,7 @@ namespace ALS.ALSI.Biz
                 //sheet.Calculate();
                 //String xxx = sheet.Cells["E2"].Text;
                 Console.WriteLine();
-            }
+            //}
 
 
         }

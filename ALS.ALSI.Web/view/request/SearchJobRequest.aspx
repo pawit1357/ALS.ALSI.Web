@@ -283,154 +283,154 @@
                     </div>
                     <div class="portlet-body">
                         <asp:Label ID="lbTotalRecords" runat="server" Text="" Visible="false"></asp:Label>
+                        <div style="width:100%;overflow-x: auto;white-space: nowrap;">
+                            <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False"
+                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,due_date,is_hold,due_date_customer,due_date_lab,amend_count,retest_count,group_submit,amend_or_retest,sample_prefix" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
 
-                        <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False"
-                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,due_date,is_hold,due_date_customer,due_date_lab,amend_count,retest_count,group_submit,amend_or_retest,sample_prefix" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
-                            <Columns>
-                                <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-
-                                        <asp:LinkButton ID="btnInfo" runat="server" ToolTip="Info" CommandName="View" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-search"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-edit"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnConvertTemplete" runat="server" ToolTip="Convert Template" CommandName="ConvertTemplate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tasks"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnWorkFlow" runat="server" ToolTip="Work Flow" CommandName="Workflow" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-briefcase"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeStatus" runat="server" ToolTip="Change Status" CommandName="ChangeStatus" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-refresh"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeDueDate" runat="server" ToolTip="Change DueDate" CommandName="ChangeDueDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeReportDate" runat="server" ToolTip="Change Date sent to Customer" CommandName="ChangeReportDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeOtherRefNo" runat="server" ToolTip="Change Other Ref No" CommandName="ChangeOtherRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-plane"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeSingaporeRefNo" runat="server" ToolTip="Change Singapore RefNo" CommandName="ChangeSingaporeRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnViewFile" runat="server" ToolTip="View File" CommandName="ViewFile" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-laptop"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeSrChemistStartJobDate" runat="server" ToolTip="Change Sr.Chemist start job date" CommandName="ChangeSrChemistStartJobDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeAdminStartJobsDate" runat="server" ToolTip="Change admin start job date" CommandName="ChangeAdminStartJobDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeSrChemistCompleteDate" runat="server" ToolTip="Change Sr.Chemist Complete Date" CommandName="ChangeSrChemistCompleteDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnNoteForLab" runat="server" ToolTip="Note for lab" CommandName="NoteForLab" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-info"></i></asp:LinkButton>
-
-
-
-                                        <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Change Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnPrintLabel" runat="server" ToolTip="Print Label" CommandName="Print" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-print"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnAmend" runat="server" ToolTip="Amend" CommandName="Amend" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-wrench"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnReTest" runat="server" ToolTip="ReTest" CommandName="Retest" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-retweet"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnHold" runat="server" ToolTip="Hold" CommandName="Hold" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-toggle-off"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnUnHold" runat="server" ToolTip="UnHold" CommandName="UnHold" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-toggle-on"></i></asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="cbSelect" runat="server" />
-                                        <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("SN")%>'></asp:HiddenField>
-                                        <asp:HiddenField ID="hIsGroupReport" runat="server" Value='<%# Eval("group_submit")%>'></asp:HiddenField>
-
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:Literal ID="litStatus" runat="server">&nbsp;</asp:Literal>
-
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:Literal ID="ltJobStatus" runat="server" Text="-"></asp:Literal>
-                                        <asp:Literal ID="litIcon" runat="server"></asp:Literal>
-
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField HeaderText="Received." DataField="date_srchemist_complate" ItemStyle-HorizontalAlign="Center" SortExpression="date_srchemist_complate" DataFormatString="{0:d MMM yyyy}">
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>
-
-                                <asp:BoundField HeaderText="Report Sent to Customer" DataField="date_admin_sent_to_cus" ItemStyle-HorizontalAlign="Center" SortExpression="date_admin_sent_to_cus" DataFormatString="{0:d MMM yyyy}">
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>
-
-                                <asp:BoundField HeaderText="Receive Date." DataField="receive_date" ItemStyle-HorizontalAlign="Center" SortExpression="receive_date" DataFormatString="{0:d MMM yyyy}">
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>
-                                <asp:TemplateField HeaderText="Due Date.">
-                                    <ItemTemplate>
-                                        <asp:Literal ID="litDueDate" runat="server" Text="-"></asp:Literal>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-
-                                <asp:TemplateField HeaderText="ALS Ref No.">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lbJobNumber" runat="server" Text='<%# Eval("job_number")%>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField HeaderText="Cus Ref No." DataField="customer_ref_no" ItemStyle-HorizontalAlign="Left" SortExpression="customer_ref_no">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <asp:TemplateField HeaderText="Other Ref No">
-                                    <ItemTemplate>
-                                        <asp:Literal ID="litOtherRefNo" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:Literal>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                            <asp:LinkButton ID="btnInfo" runat="server" ToolTip="Info" CommandName="View" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-search"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnConvertTemplete" runat="server" ToolTip="Convert Template" CommandName="ConvertTemplate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tasks"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnWorkFlow" runat="server" ToolTip="Work Flow" CommandName="Workflow" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-briefcase"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeStatus" runat="server" ToolTip="Change Status" CommandName="ChangeStatus" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-refresh"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeDueDate" runat="server" ToolTip="Change DueDate" CommandName="ChangeDueDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeReportDate" runat="server" ToolTip="Change Date sent to Customer" CommandName="ChangeReportDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-clock-o"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeOtherRefNo" runat="server" ToolTip="Change Other Ref No" CommandName="ChangeOtherRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-plane"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeSingaporeRefNo" runat="server" ToolTip="Change Singapore RefNo" CommandName="ChangeSingaporeRefNo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnViewFile" runat="server" ToolTip="View File" CommandName="ViewFile" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-laptop"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeSrChemistStartJobDate" runat="server" ToolTip="Change Sr.Chemist start job date" CommandName="ChangeSrChemistStartJobDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeAdminStartJobsDate" runat="server" ToolTip="Change admin start job date" CommandName="ChangeAdminStartJobDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeSrChemistCompleteDate" runat="server" ToolTip="Change Sr.Chemist Complete Date" CommandName="ChangeSrChemistCompleteDate" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-calendar-check-o"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnNoteForLab" runat="server" ToolTip="Note for lab" CommandName="NoteForLab" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-info"></i></asp:LinkButton>
 
 
 
-                                <asp:TemplateField HeaderText="Company">
-                                    <ItemTemplate>
-                                        <asp:Literal ID="ltCompany" runat="server" Text='<%# Eval("customer")%>'></asp:Literal>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                            <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Change Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnPrintLabel" runat="server" ToolTip="Print Label" CommandName="Print" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-print"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnAmend" runat="server" ToolTip="Amend" CommandName="Amend" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-wrench"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnReTest" runat="server" ToolTip="ReTest" CommandName="Retest" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-retweet"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnHold" runat="server" ToolTip="Hold" CommandName="Hold" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-toggle-off"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnUnHold" runat="server" ToolTip="UnHold" CommandName="UnHold" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-toggle-on"></i></asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="cbSelect" runat="server" />
+                                            <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("SN")%>'></asp:HiddenField>
+                                            <asp:HiddenField ID="hIsGroupReport" runat="server" Value='<%# Eval("group_submit")%>'></asp:HiddenField>
 
-                                <asp:BoundField HeaderText="Invoice" DataField="sample_invoice" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="litStatus" runat="server">&nbsp;</asp:Literal>
 
-                                <asp:BoundField HeaderText="Po" DataField="sample_po" ItemStyle-HorizontalAlign="Left" SortExpression="sample_po">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="ltJobStatus" runat="server" Text="-"></asp:Literal>
+                                            <asp:Literal ID="litIcon" runat="server"></asp:Literal>
+
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField HeaderText="Received." DataField="date_srchemist_complate" ItemStyle-HorizontalAlign="Center" SortExpression="date_srchemist_complate" DataFormatString="{0:d MMM yyyy}">
+                                        <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+
+                                    <asp:BoundField HeaderText="Report Sent to Customer" DataField="date_admin_sent_to_cus" ItemStyle-HorizontalAlign="Center" SortExpression="date_admin_sent_to_cus" DataFormatString="{0:d MMM yyyy}">
+                                        <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+
+                                    <asp:BoundField HeaderText="Receive Date." DataField="receive_date" ItemStyle-HorizontalAlign="Center" SortExpression="receive_date" DataFormatString="{0:d MMM yyyy}">
+                                        <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                    <asp:TemplateField HeaderText="Due Date.">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="litDueDate" runat="server" Text="-"></asp:Literal>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField HeaderText="ALS Ref No.">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lbJobNumber" runat="server" Text='<%# Eval("job_number")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField HeaderText="Cus Ref No." DataField="customer_ref_no" ItemStyle-HorizontalAlign="Left" SortExpression="customer_ref_no">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:TemplateField HeaderText="Other Ref No">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="litOtherRefNo" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:Literal>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
 
 
 
-                                <asp:BoundField HeaderText="Contact" DataField="contract_person" ItemStyle-HorizontalAlign="Left" SortExpression="contract_person">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <%--<asp:BoundField HeaderText="S/N" DataField="sn" ItemStyle-HorizontalAlign="Left" SortExpression="sn" />--%>
-                                <asp:BoundField HeaderText="Description" DataField="description" ItemStyle-HorizontalAlign="Left" SortExpression="description">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <asp:BoundField HeaderText="Model" DataField="model" ItemStyle-HorizontalAlign="Left" SortExpression="model">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <asp:BoundField HeaderText="Surface Area" DataField="surface_area" ItemStyle-HorizontalAlign="Left" SortExpression="surface_area">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <%--<asp:BoundField HeaderText="Remarks" DataField="remarks" ItemStyle-HorizontalAlign="Left" SortExpression="remarks" />--%>
-                                <asp:BoundField HeaderText="Specification" DataField="specification" ItemStyle-HorizontalAlign="Left" SortExpression="specification">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <asp:BoundField HeaderText="Type of test" DataField="type_of_test" ItemStyle-HorizontalAlign="Left" SortExpression="type_of_test">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <asp:BoundField HeaderText="Note for Admin & Account" DataField="note" ItemStyle-HorizontalAlign="Left" SortExpression="note">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
+                                    <asp:TemplateField HeaderText="Company">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="ltCompany" runat="server" Text='<%# Eval("customer")%>'></asp:Literal>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
 
-                                <asp:BoundField HeaderText="Note for lab" DataField="note_lab" ItemStyle-HorizontalAlign="Left" SortExpression="note_lab">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
+                                    <asp:BoundField HeaderText="Invoice" DataField="sample_invoice" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
 
-                                <asp:BoundField HeaderText="Invoice Date" DataField="sample_invoice_date" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_date">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                <asp:BoundField HeaderText="Invoice Amount" DataField="sample_invoice_amount" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount">
-                                    <ItemStyle HorizontalAlign="Left" />
-                                </asp:BoundField>
+                                    <asp:BoundField HeaderText="Po" DataField="sample_po" ItemStyle-HorizontalAlign="Left" SortExpression="sample_po">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
 
-                            </Columns>
-                            <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
 
-                            <EmptyDataTemplate>
-                                <div class="data-not-found">
-                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                </div>
-                            </EmptyDataTemplate>
-                        </asp:GridView>
 
+                                    <asp:BoundField HeaderText="Contact" DataField="contract_person" ItemStyle-HorizontalAlign="Left" SortExpression="contract_person">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <%--<asp:BoundField HeaderText="S/N" DataField="sn" ItemStyle-HorizontalAlign="Left" SortExpression="sn" />--%>
+                                    <asp:BoundField HeaderText="Description" DataField="description" ItemStyle-HorizontalAlign="Left" SortExpression="description">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:BoundField HeaderText="Model" DataField="model" ItemStyle-HorizontalAlign="Left" SortExpression="model">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:BoundField HeaderText="Surface Area" DataField="surface_area" ItemStyle-HorizontalAlign="Left" SortExpression="surface_area">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <%--<asp:BoundField HeaderText="Remarks" DataField="remarks" ItemStyle-HorizontalAlign="Left" SortExpression="remarks" />--%>
+                                    <asp:BoundField HeaderText="Specification" DataField="specification" ItemStyle-HorizontalAlign="Left" SortExpression="specification">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:BoundField HeaderText="Type of test" DataField="type_of_test" ItemStyle-HorizontalAlign="Left" SortExpression="type_of_test">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:BoundField HeaderText="Note for Admin & Account" DataField="note" ItemStyle-HorizontalAlign="Left" SortExpression="note">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+
+                                    <asp:BoundField HeaderText="Note for lab" DataField="note_lab" ItemStyle-HorizontalAlign="Left" SortExpression="note_lab">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+
+                                    <asp:BoundField HeaderText="Invoice Date" DataField="sample_invoice_date" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_date">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:BoundField HeaderText="Invoice Amount" DataField="sample_invoice_amount" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+
+                                </Columns>
+                                <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
+
+                                <EmptyDataTemplate>
+                                    <div class="data-not-found">
+                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                    </div>
+                                </EmptyDataTemplate>
+                            </asp:GridView>
+                        </div>
                         <!-- STATUS BAR -->
 
                         <br />

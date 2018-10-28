@@ -27,6 +27,10 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_SEARCH_TEMPLATE = APPNAME + "/view/template/SearchTemplate.aspx";
         public const String LINK_TEMPLATE = APPNAME + "/view/template/Template.aspx";
 
+        public const String LINK_SEARCH_HILIDAY_CALENDAR = APPNAME + "/view/maintenance/SearchHolidayCalendar.aspx";
+        public const String LINK_HILIDAY_CALENDAR = APPNAME + "/view/maintenance/HolidayCalendar.aspx";
+
+
         public const String LINK_LOGIN = APPNAME + "/Login.aspx";
         public const String LINK_JOB_WORK_FLOW = APPNAME + "/view/request/JobWorkFlow.aspx";
         public const String LINK_JOB_CONVERT_TEMPLATE = APPNAME + "/view/request/JobConvertTemplate.aspx";

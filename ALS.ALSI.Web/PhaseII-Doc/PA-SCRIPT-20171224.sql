@@ -442,6 +442,9 @@ UPDATE `alsi`.`menu` SET `MENU_ICON`='icon-grid', `PREVIOUS_MENU_ID`='' WHERE `M
 ADD COLUMN `sample_invoice_date` DATE NULL AFTER `sample_invoice`,
 ADD COLUMN `sample_invoice_amount` DOUBLE NULL AFTER `sample_invoice_date`;
 
+==============
+INSERT INTO `alsi`.`menu` (`MENU_ID`, `MENU_ICON`, `MENU_NAME`, `URL_NAVIGATE`, `MENU_TAG`, `PREVIOUS_MENU_ID`, `DISPLAY_ORDER`, `UPDATE_BY`, `CREATE_DATE`, `UPDATE_DATE`) VALUES ('15', 'icon-settings', 'Holiday Calendar', '/alis/view/maintenance/SearchHolidayCalendar.aspx', 'SearchHolidayCalendar|', '3', '6', 'SYSTEM', '2018-10-28', '2018-10-28');
+
 
 
 */
