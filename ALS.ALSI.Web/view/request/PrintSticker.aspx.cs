@@ -81,6 +81,7 @@ namespace ALS.ALSI.Web.view.request
             {
                 job_info tmp = new job_info();
                 tmp.ID = JobID;
+                tmp.bNotShowDelete = true;
                 return tmp;
             }
         }

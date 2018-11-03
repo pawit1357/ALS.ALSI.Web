@@ -17,7 +17,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public int physicalYear { get; set; }
         public String section { get; set; }
         public RoleEnum userRole { get; set; }
-
+        public Boolean bNotShowDelete { get; set; }
         private static IRepository<job_info> _repository
         {
             get { return ObjectFactory.GetInstance<IRepository<job_info>>(); }
@@ -240,6 +240,13 @@ namespace ALS.ALSI.Biz.DataAccess
                 {
                     result = result.Where(x => x.job_status == this.status);
                 }
+
+                if (bNotShowDelete)
+                {
+                    result = result.Where(x => x.job_status > 0);
+
+                }
+
                 if (!String.IsNullOrEmpty(this.jobRefNo))
                 {
                     result = result.Where(x => x.job_number.Contains(this.jobRefNo));
