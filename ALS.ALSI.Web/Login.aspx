@@ -101,7 +101,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <div class="create-account">
                     <p>
-                        <a href="javascript:;" id="register-btn" class="uppercase">Create an account</a>
+                        <a href="/alis/template/ManualALIS.pdf" id="register-btn-" class="uppercase">คู่มือการใช้งานระบบ</a>
                     </p>
                 </div>
             </form>
@@ -401,6 +401,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- END REGISTRATION FORM -->
         </div>
         <div class="copyright"> 2015 &copy;  ALS TESTING SERVICES (THAILAND) CO., LTD.</div>
+        
         <!--[if lt IE 9]>
 <script src="../assets/global/plugins/respond.min.js"></script>
 <script src="../assets/global/plugins/excanvas.min.js"></script> 

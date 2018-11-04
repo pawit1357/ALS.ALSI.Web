@@ -2085,6 +2085,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="template\SumInvoiceTemplate.xlsx" />
+    <Content Include="template\ManualALIS.pdf" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
