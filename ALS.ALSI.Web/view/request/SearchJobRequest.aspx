@@ -307,8 +307,8 @@
 
 
 
-                                            <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Change PO & Invoice" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
-                                            <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Change Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangePo" runat="server" ToolTip="Edit PO" CommandName="ChangePo" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-credit-card"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnChangeInvoice" runat="server" ToolTip="Edit Invoice" CommandName="ChangeInvoice" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-tags"></i></asp:LinkButton>
                                             <asp:LinkButton ID="btnPrintLabel" runat="server" ToolTip="Print Label" CommandName="Print" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-print"></i></asp:LinkButton>
                                             <asp:LinkButton ID="btnAmend" runat="server" ToolTip="Amend" CommandName="Amend" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-wrench"></i></asp:LinkButton>
                                             <asp:LinkButton ID="btnReTest" runat="server" ToolTip="ReTest" CommandName="Retest" CommandArgument='<%# String.Concat(Eval("ID"),ALS.ALSI.Biz.Constant.Constants.CHAR_COMMA,Eval("SN"))%>'><i class="fa fa-retweet"></i></asp:LinkButton>
@@ -421,6 +421,13 @@
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
 
+                                    <asp:TemplateField HeaderText="Payment Status" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="ltPaymentStatus" runat="server" Text='<%# Eval("sample_invoice_status")%>'></asp:Literal>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    
                                 </Columns>
                                 <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
 

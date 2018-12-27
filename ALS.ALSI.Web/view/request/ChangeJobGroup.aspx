@@ -251,6 +251,19 @@
                                 </div>
                             </div>
                         </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Invoice Amount:</label>
+                                <div class="col-md-6">
+                                    <div class="input-group" style="text-align: left">
+                                        <asp:TextBox ID="txtInvoiceAmt" name="txtInvoiceAmt" runat="server" class="form-control"></asp:TextBox>
+                                        <span class="input-group-btn"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

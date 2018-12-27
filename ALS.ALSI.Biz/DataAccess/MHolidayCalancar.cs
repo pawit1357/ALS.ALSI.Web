@@ -42,10 +42,17 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public static void InsertList(List<holiday_calendar> _lists)
         {
-            foreach (holiday_calendar tmp in _lists)
+            try
             {
-                _repository.Add(tmp);
+                foreach (holiday_calendar tmp in _lists)
+                {
+                    _repository.Add(tmp);
+                }
+            }catch(Exception ex)
+            {
+                Console.WriteLine();
             }
+
         }
 
         public holiday_calendar SelectByID(DateTime _date)
@@ -64,7 +71,8 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public IEnumerable SearchData()
         {
-
+            //List<holiday_calendar> hcs = _repository.GetAll().Where(x => x.YEAR_HOLIDAYS.Equals(this.YEAR_HOLIDAYS)).ToList();
+            Console.WriteLine();
             //return _repository.GetAll().ToList();
             using (ALSIEntities ctx = new ALSIEntities())
             {

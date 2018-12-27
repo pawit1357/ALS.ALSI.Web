@@ -43,6 +43,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>1</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -1270,7 +1271,6 @@
     <Content Include="view\template\WD_DHS.ascx" />
     <Content Include="view\template\WD_FTIR.ascx" />
     <Content Include="view\template\WD_GCMS.ascx" />
-    <Content Include="view\template\FT_IC.ascx" />
     <Content Include="view\template\WD_IC.ascx" />
     <Content Include="view\template\WD_LPC.ascx" />
     <Content Include="view\request\ChangeJobDueDate.aspx" />
@@ -1795,13 +1795,6 @@
     <Compile Include="view\template\WD_GCMS.ascx.designer.cs">
       <DependentUpon>WD_GCMS.ascx</DependentUpon>
     </Compile>
-    <Compile Include="view\template\FT_IC.ascx.cs">
-      <DependentUpon>FT_IC.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="view\template\FT_IC.ascx.designer.cs">
-      <DependentUpon>FT_IC.ascx</DependentUpon>
-    </Compile>
     <Compile Include="view\template\WD_IC.ascx.cs">
       <DependentUpon>WD_IC.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2048,9 +2041,6 @@
     <Content Include="assets\global\plugins\uniform\README.md" />
     <Content Include="PhaseII-Doc\alsi-script-1.zip" />
     <Content Include="PhaseII-Doc\alsi-script-2.zip" />
-    <Content Include="packages - Copy.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\ALIS.pubxml" />
     <Content Include="ReportObject\DS.xsc">
@@ -2072,15 +2062,6 @@
     <Content Include="template\Blank Letter Head - EL.doc" />
     <Content Include="template\no_report.doc" />
     <Content Include="template\Blank Letter Head - PA.doc" />
-    <Content Include="web - Copy.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="web - Copy.Debug.config">
-      <DependentUpon>web - Copy.config</DependentUpon>
-    </Content>
-    <Content Include="web - Copy.Release.config">
-      <DependentUpon>web - Copy.config</DependentUpon>
-    </Content>
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2132,7 +2113,9 @@
     <EmbeddedResource Include="ReportObject\gcms_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\pa.rdlc" />
-    <EmbeddedResource Include="ReportObject\ftir_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\ftir_seagate.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\ic_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\reportHeader - Copy.rdlc" />
     <EmbeddedResource Include="ReportObject\reportPAHeader.rdlc" />

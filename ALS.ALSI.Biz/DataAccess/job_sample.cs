@@ -84,6 +84,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public string note { get; set; }
         public string note_lab { get; set; }
         public string am_retest_remark { get; set; }
+        public Nullable<int> sample_invoice_status { get; set; }
+        public Nullable<System.DateTime> sample_invoice_complete_date { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

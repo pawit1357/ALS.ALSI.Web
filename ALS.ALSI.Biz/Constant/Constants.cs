@@ -463,6 +463,17 @@ namespace ALS.ALSI.Biz.Constant
         ACTIVE = 1,
         IN_ACTIVE = 0
     }
+
+
+    public enum PaymentStatus
+    {
+        [Description("In Process")]
+        PAYMENT_INPROCESS = 1,
+        [Description("Complete")]
+        PAYMENT_COMPLETE = 2
+    }
+
+
 }
 
 public class PhysicalYear

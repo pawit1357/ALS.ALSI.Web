@@ -73,6 +73,23 @@ namespace ALS.ALSI.Web.view.request
             {
                 //txtPo.Text = jobSample.sample_po;
                 txtInvoice.Text = jobSample.sample_invoice;
+                txtInvoiceAmt.Text = jobSample.sample_invoice_amount.ToString();
+
+                if (jobSample.sample_invoice_complete_date != null)
+                {
+                    txtPaymentDate.Text = jobSample.sample_invoice_complete_date.Value.ToString("dd/MM/yyyy");
+
+                }
+
+                if (jobSample.sample_invoice_date != null)
+                {
+                    txtInvoiceDate.Text = jobSample.sample_invoice_date.Value.ToString("dd/MM/yyyy");
+
+                }
+                else
+                {
+                    txtInvoiceDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                }
             }
             else
             {
@@ -128,7 +145,17 @@ namespace ALS.ALSI.Web.view.request
         protected void btnSave_Click(object sender, EventArgs e)
         {
             jobSample.sample_invoice = txtInvoice.Text;
-            //jobSample.sample_po = txtPo.Text;
+            if (!String.IsNullOrEmpty(txtInvoiceDate.Text))
+            {
+                jobSample.sample_invoice_date = CustomUtils.converFromDDMMYYYY(txtInvoiceDate.Text);
+            }
+            jobSample.sample_invoice_amount = (CustomUtils.isNumber(txtInvoiceAmt.Text)) ? Convert.ToDouble(txtInvoiceAmt.Text) : 0;
+            jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_INPROCESS);
+            if (!String.IsNullOrEmpty(txtPaymentDate.Text))
+            {
+                jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+                jobSample.sample_invoice_complete_date = CustomUtils.converFromDDMMYYYY(txtInvoiceDate.Text);
+            }
             jobSample.Update();
             //Commit
             GeneralManager.Commit();

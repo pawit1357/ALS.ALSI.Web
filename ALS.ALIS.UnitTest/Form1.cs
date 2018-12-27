@@ -34,7 +34,7 @@ namespace ALS.ALIS.UnitTest
             try
             {
                 //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader("D:\\SO.txt");
+                StreamReader sr = new StreamReader("D:\\Work\\!Document\\ALS\\SO.txt");
 
                 //Read the first line of text
                 line = sr.ReadLine();

@@ -71,7 +71,7 @@ namespace ALS.ALSI.Web.view.request
             if (jobSample != null)
             {
                 txtPo.Text = jobSample.sample_po;
-                txtInvoice.Text = jobSample.sample_invoice;
+                //txtInvoice.Text = jobSample.sample_invoice;
             }
             else
             {
@@ -118,7 +118,7 @@ namespace ALS.ALSI.Web.view.request
         protected void btnSave_Click(object sender, EventArgs e)
         {
 
-            jobSample.sample_invoice = txtInvoice.Text;
+            //jobSample.sample_invoice = txtInvoice.Text;
             jobSample.sample_po = txtPo.Text;
             jobSample.Update();
             //Commit

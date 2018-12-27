@@ -398,6 +398,8 @@ namespace ALS.ALSI.Web.view.request
                     {
                         jobSample.sample_invoice_date = CustomUtils.converFromDDMMYYYY(txtInvoiceDate.Text);
                     }
+                    jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_INPROCESS);
+
                 }
                 else if (this.isCusRefNoGroupOperation)
                 {

@@ -185,7 +185,7 @@ namespace ALS.ALSI.Biz.DataAccess
                                  s.group_submit,
                                  status_name = ms.name,
                                  s.sample_prefix,
-                                 s.amend_or_retest,s.note,s.note_lab,s.am_retest_remark
+                                 s.amend_or_retest,s.note,s.note_lab,s.am_retest_remark,s.sample_invoice_status
                              };
                 if (!String.IsNullOrEmpty(section))
                 {

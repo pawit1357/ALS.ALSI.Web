@@ -73,7 +73,7 @@
                                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="DATE_HOLIDAYS" OnRowCommand="gvResult_RowCommand" OnRowDeleting="gvResult_RowDeleting" OnPageIndexChanging="gvResult_PageIndexChanging" AllowPaging="True" PageSize="50" OnRowDataBound="gvResult_RowDataBound"  >
                                     <Columns>
-                                        <asp:BoundField HeaderText="วันที่" DataField="DATE_HOLIDAYS" ItemStyle-HorizontalAlign="Left" SortExpression="DATE_HOLIDAYS" DataFormatString="{0:dd-M-yyyy}" />
+                                        <asp:BoundField HeaderText="วันที่" DataField="DATE_HOLIDAYS" ItemStyle-HorizontalAlign="Left" SortExpression="DATE_HOLIDAYS" DataFormatString="{0:dd/MM/yyyy}" />
                                         <asp:BoundField HeaderText="ปี" DataField="YEAR_HOLIDAYS" ItemStyle-HorizontalAlign="Left" SortExpression="YEAR_HOLIDAYS" />
                                         <asp:BoundField HeaderText="รายละเอียด" DataField="DESCRIPTION_SUMMARY" ItemStyle-HorizontalAlign="Left" SortExpression="DESCRIPTION_SUMMARY" />
 

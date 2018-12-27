@@ -105,26 +105,34 @@ namespace ALS.ALSI.Web.view.template
                     {
                         List<holiday_calendar> hcs = new List<holiday_calendar>();
 
-                        for (int row = 2; row <= isComponent.LastRowNum; row++)
+                        for (int row = 1; row <= isComponent.LastRowNum; row++)
                         {
                             if (isComponent.GetRow(row) != null) //null is when the row only contains empty cells 
                             {
                                 if (!CustomUtils.GetCellValue(isComponent.GetRow(row).GetCell(0)).Equals(""))
                                 {
-                                    String[] date = CustomUtils.GetCellValue(isComponent.GetRow(row).GetCell(0)).Split(' ')[0].Split('/');
+                                    //String[] date = CustomUtils.GetCellValue(isComponent.GetRow(row).GetCell(0)).Split(' ')[0].Split('/');
+                                    //int year = Convert.ToInt16(date[2]);
+                                    //int day = Convert.ToInt16(date[1]);
+                                    //int month = Convert.ToInt16(date[0]);
+                                    DateTime dh = isComponent.GetRow(row).GetCell(0).DateCellValue;
                                     holiday_calendar tmp = new holiday_calendar
                                     {
-                                        DATE_HOLIDAYS = new DateTime(Convert.ToInt16(date[2]), Convert.ToInt16(date[0]), Convert.ToInt16(date[1])),
-                                        YEAR_HOLIDAYS = date[2],
+                                        DATE_HOLIDAYS = dh,
+                                        YEAR_HOLIDAYS = dh.Year.ToString(),
                                         DESCRIPTION_SUMMARY = CustomUtils.GetCellValue(isComponent.GetRow(row).GetCell(1))
                                     };
+                                    String sql = "insert into holiday_calendar(date_holidays,year_holidays,description_summary) values('{0}','{1}','{2}');";
+
+                                    Boolean bResult = MaintenanceBiz.ExecuteCommand(String.Format(sql,tmp.DATE_HOLIDAYS.ToString("yyyy-MM-dd"), tmp.YEAR_HOLIDAYS,tmp.DESCRIPTION_SUMMARY));
                                     hcs.Add(tmp);
                                 }
                             }
                         }
                         //Delete
-                        holiday_calendar.deleteByYear(Convert.ToInt16(hcs[0].YEAR_HOLIDAYS));
-                        holiday_calendar.InsertList(hcs);
+                        //holiday_calendar.deleteByYear(Convert.ToInt16(hcs[0].YEAR_HOLIDAYS));
+
+                        //holiday_calendar.InsertList(hcs);
                     }
                 }
                 bUploadSuccess = true;
@@ -138,7 +146,7 @@ namespace ALS.ALSI.Web.view.template
             if (bUploadSuccess)
             {
                 //Commit
-                GeneralManager.Commit();
+                //GeneralManager.Commit();
 
                 removeSession();
                 MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);

@@ -393,6 +393,7 @@ namespace ALS.ALSI.Web.view.request
 
                         gvJob.Columns[22].Visible = true;
                         gvJob.Columns[23].Visible = true;
+                        gvJob.Columns[24].Visible = true;
 
                         break;
                     case RoleEnum.ROOT:
@@ -424,6 +425,7 @@ namespace ALS.ALSI.Web.view.request
 
                         gvJob.Columns[22].Visible = false;
                         gvJob.Columns[23].Visible = false;
+                        gvJob.Columns[24].Visible = false;
 
                         break;
                     case RoleEnum.LOGIN:
@@ -455,6 +457,8 @@ namespace ALS.ALSI.Web.view.request
 
                         gvJob.Columns[22].Visible = false;
                         gvJob.Columns[23].Visible = false;
+                        gvJob.Columns[24].Visible = false;
+
                         break;
                     default:
                         gvJob.Columns[0].Visible = false;
@@ -735,8 +739,9 @@ namespace ALS.ALSI.Web.view.request
                     LinkButton btnHold = (LinkButton)e.Row.FindControl("btnHold");
                     LinkButton btnUnHold = (LinkButton)e.Row.FindControl("btnUnHold");
 
-
                     Literal litStatus = (Literal)e.Row.FindControl("litStatus");
+
+                    Literal ltPaymentStatus = (Literal)e.Row.FindControl("ltPaymentStatus");
                     Literal ltJobStatus = (Literal)e.Row.FindControl("ltJobStatus");
                     Literal litDueDate = (Literal)e.Row.FindControl("litDueDate");
                     Label lbJobNumber = (Label)e.Row.FindControl("lbJobNumber");
@@ -761,6 +766,10 @@ namespace ALS.ALSI.Web.view.request
                     #endregion
 
                     CompletionScheduledEnum status_completion_scheduled = (CompletionScheduledEnum)Enum.ToObject(typeof(CompletionScheduledEnum), _valueCompletion_scheduled);
+                    PaymentStatus paymentStatus = (PaymentStatus)Enum.ToObject(typeof(PaymentStatus), Convert.ToInt16(ltPaymentStatus.Text));
+                    ltPaymentStatus.Text = "<span class=\"label label-sm label-"+((paymentStatus== PaymentStatus.PAYMENT_INPROCESS) ? "warning" : "success")+"\">" + Constants.GetEnumDescription(paymentStatus) + " </span>"; ;
+
+
 
                     StatusEnum job_status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), _valueStatus);
                     ltJobStatus.Text = Constants.GetEnumDescription(job_status);
@@ -978,43 +987,7 @@ namespace ALS.ALSI.Web.view.request
 
         protected void ExportToExcel()
         {
-            //dt.Columns.Add("Job Type", typeof(string));
-            //dt.Columns.Add("Status", typeof(string));
-            //dt.Columns.Add("Job Status", typeof(string));
-            //dt.Columns.Add("Received", typeof(DateTime));
-            //dt.Columns.Add("Report Sent to Customer", typeof(DateTime));
-            //dt.Columns.Add("Receive Date", typeof(DateTime));
-            //dt.Columns.Add("Due Date", typeof(DateTime));
-            //dt.Columns.Add("TBA FLAG", typeof(string));
-            //dt.Columns.Add("ALS Ref", typeof(string));
-            //dt.Columns.Add("No.Cus Ref No", typeof(string));
-            //dt.Columns.Add("Other Ref No", typeof(string));
-            //dt.Columns.Add("Company", typeof(string));
-            //dt.Columns.Add("Invoice", typeof(string));
-            //dt.Columns.Add("Po", typeof(string));
-            //dt.Columns.Add("Contact", typeof(string));
-            //dt.Columns.Add("Description", typeof(string));
-            //dt.Columns.Add("Model", typeof(string));
-            //dt.Columns.Add("Surface Area", typeof(string));
-            //dt.Columns.Add("Specification", typeof(string));
-            //dt.Columns.Add("Type of test", typeof(string));
-            //dt.Columns.Add("Data Group", typeof(string));
-            //dt.Columns.Add("date_login_inprogress", typeof(DateTime));
-            //dt.Columns.Add("date_login_complete", typeof(DateTime));
-            //dt.Columns.Add("date_chemist_inprogress", typeof(DateTime));
-            //dt.Columns.Add("date_chemist_complete", typeof(DateTime));
-            //dt.Columns.Add("date_srchemist_inprogress", typeof(DateTime));
-            //dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
-            //dt.Columns.Add("date_admin_word_inprogress", typeof(DateTime));
-            //dt.Columns.Add("date_admin_word_complete", typeof(DateTime));
-            //dt.Columns.Add("date_labman_inprogress", typeof(DateTime));
-            //dt.Columns.Add("date_labman_complete", typeof(DateTime));
-            //dt.Columns.Add("date_admin_pdf_inprogress", typeof(DateTime));
-            //dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
-            //dt.Columns.Add("Note for Admin & Account", typeof(string));
-            //dt.Columns.Add("Note for lab", typeof(string));
-            //dt.Columns.Add("Note for Admin & Account", typeof(string));
-
+           
             RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
             using (XLWorkbook wb = new XLWorkbook())
@@ -1058,6 +1031,7 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("Remark_AM_Retest", typeof(string));
                         dt.Columns.Add("Invoice_Date", typeof(DateTime));
                         dt.Columns.Add("Invoice_Amount", typeof(double));
+                        dt.Columns.Add("Invoice_status", typeof(string));
 
                         break;
                     case RoleEnum.LOGIN:
@@ -1130,7 +1104,7 @@ namespace ALS.ALSI.Web.view.request
                                    ",date_admin_word_complete" +
                                    ",date_labman_complete" +
                                    ",date_admin_pdf_complete" +
-                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount";
+                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount,Invoice_status";
                             break;
                         case RoleEnum.LOGIN:
                         case RoleEnum.CHEMIST:
@@ -1222,6 +1196,9 @@ namespace ALS.ALSI.Web.view.request
                     sql += " `Extent2`.`sample_invoice` AS `Invoice`,                                                                                                           ";
                     sql += " `Extent2`.`sample_invoice_date` AS `Invoice_Date`,                                                                                                           ";
                     sql += " `Extent2`.`sample_invoice_amount` AS `Invoice_Amount`,                                                                                                           ";
+                    //sql += " `Extent2`.`sample_invoice_status` AS `Invoice_status`,                                                                                                           ";
+                    sql += " (CASE WHEN `Extent2`.`sample_invoice_status` = '1' THEN 'In Process' ELSE 'Complete' END) AS `Invoice_status`,                                                       ";
+
                     sql += " `Extent2`.`sample_po` AS `Po`,                                                                                                                     ";
                     sql += " `Extent6`.`name` AS `Contact`,                                                                                                                     ";
                     sql += " `Extent2`.`description` AS `Description`,                                                                                                          ";

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="alsiModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="alsiModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="holiday_calendar">
           <Key>
             <PropertyRef Name="DATE_HOLIDAYS" />
@@ -131,8 +131,10 @@
           <Property Name="amend_or_retest" Type="varchar" MaxLength="2" />
           <Property Name="last_status" Type="int" />
           <Property Name="note" Type="varchar" MaxLength="200" />
-          <Property Name="note_lab" Type="varchar" MaxLength="200" />
+          <Property Name="note_lab" Type="varchar" MaxLength="45" />
           <Property Name="am_retest_remark" Type="varchar" MaxLength="200" />
+          <Property Name="sample_invoice_status" Type="int" />
+          <Property Name="sample_invoice_complete_date" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -201,20 +203,6 @@
           <Property Name="status" Type="varchar" MaxLength="1" />
           <Property Name="email" Type="varchar" MaxLength="45" />
           <Property Name="department" Type="varchar" MaxLength="45" />
-        </EntityType>
-        <EntityType Name="m_evaluation_of_particles">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="template_id" Type="int" />
-        </EntityType>
-        <EntityType Name="m_microscopic_analysis">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="template_id" Type="int" />
         </EntityType>
         <EntityType Name="m_role">
           <Key>
@@ -331,34 +319,6 @@
           <Property Name="UPDATE_BY" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="CREATE_DATE" Type="date" Nullable="false" />
           <Property Name="UPDATE_DATE" Type="date" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sample_method_procedure">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="sample_id" Type="int" />
-          <Property Name="row_type" Type="int" />
-          <Property Name="col_1" Type="varchar" MaxLength="200" />
-          <Property Name="col_2" Type="varchar" MaxLength="200" />
-          <Property Name="col_3" Type="varchar" MaxLength="200" />
-          <Property Name="col_4" Type="varchar" MaxLength="200" />
-          <Property Name="col_5" Type="varchar" MaxLength="200" />
-          <Property Name="col_6" Type="varchar" MaxLength="200" />
-          <Property Name="col_7" Type="varchar" MaxLength="200" />
-          <Property Name="col_8" Type="varchar" MaxLength="200" />
-          <Property Name="col_9" Type="varchar" MaxLength="200" />
-          <Property Name="col_10" Type="varchar" MaxLength="200" />
-          <Property Name="col_11" Type="varchar" MaxLength="200" />
-          <Property Name="col_12" Type="varchar" MaxLength="200" />
-          <Property Name="col_13" Type="varchar" MaxLength="200" />
-          <Property Name="col_14" Type="varchar" MaxLength="200" />
-          <Property Name="col_15" Type="varchar" MaxLength="200" />
-          <Property Name="col_16" Type="varchar" MaxLength="200" />
-          <Property Name="col_17" Type="varchar" MaxLength="200" />
-          <Property Name="col_18" Type="varchar" MaxLength="200" />
-          <Property Name="col_19" Type="varchar" MaxLength="200" />
-          <Property Name="col_20" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="tb_m_component">
           <Key>
@@ -648,41 +608,6 @@
           <Property Name="unit_group" Type="varchar" MaxLength="20" />
           <Property Name="name" Type="varchar" MaxLength="45" />
           <Property Name="value" Type="double" />
-        </EntityType>
-        <EntityType Name="template_f_ic">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="sample_id" Type="int" />
-          <Property Name="specification_id" Type="int" />
-          <Property Name="isNoSpec" Type="tinyint" />
-          <Property Name="unit" Type="int" />
-          <Property Name="col_1" Type="varchar" MaxLength="200" />
-          <Property Name="col_2" Type="varchar" MaxLength="200" />
-          <Property Name="col_3" Type="varchar" MaxLength="200" />
-          <Property Name="col_4" Type="varchar" MaxLength="200" />
-          <Property Name="col_5" Type="varchar" MaxLength="200" />
-          <Property Name="col_6" Type="varchar" MaxLength="200" />
-          <Property Name="col_7" Type="varchar" MaxLength="200" />
-          <Property Name="col_8" Type="varchar" MaxLength="200" />
-          <Property Name="col_9" Type="varchar" MaxLength="200" />
-          <Property Name="col_10" Type="varchar" MaxLength="200" />
-          <Property Name="col_11" Type="varchar" MaxLength="200" />
-          <Property Name="col_12" Type="varchar" MaxLength="200" />
-          <Property Name="col_13" Type="varchar" MaxLength="200" />
-          <Property Name="col_14" Type="varchar" MaxLength="200" />
-          <Property Name="col_15" Type="varchar" MaxLength="200" />
-          <Property Name="col_16" Type="varchar" MaxLength="200" />
-          <Property Name="col_17" Type="varchar" MaxLength="200" />
-          <Property Name="col_18" Type="varchar" MaxLength="200" />
-          <Property Name="col_19" Type="varchar" MaxLength="200" />
-          <Property Name="col_20" Type="varchar" MaxLength="200" />
-          <Property Name="seq" Type="int" />
-          <Property Name="row_type" Type="int" />
-          <Property Name="status" Type="int" />
-          <Property Name="create_date" Type="datetime" Precision="0" />
-          <Property Name="update_date" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="template_img">
           <Key>
@@ -1589,7 +1514,7 @@
           <Property Name="pm_procedure" Type="varchar" MaxLength="45" />
           <Property Name="pm_number_of_pieces" Type="varchar" MaxLength="45" />
           <Property Name="pm_extraction_medium" Type="varchar" MaxLength="255" />
-          <Property Name="pm_extraction_volumn" Type="varchar" MaxLength="255" />
+          <Property Name="pm_extraction_volumn" Type="varchar" MaxLength="45" />
           <Property Name="pm_unit" Type="varchar" MaxLength="45" />
           <Property Name="test" Type="int" />
         </EntityType>
@@ -1833,6 +1758,17 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <Property Name="user_id" Type="int" />
           <Property Name="type_of_test_id" Type="int" />
         </EntityType>
+        <EntityType Name="users_role">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="ROLE_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="ROLE_ID" Type="int" Nullable="false" />
+          <Property Name="UPDATE_BY" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CREATE_DATE" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="UPDATE_DATE" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="ws_hash_value">
           <Key>
             <PropertyRef Name="id" />
@@ -1973,8 +1909,6 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="m_customer" EntityType="Self.m_customer" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_customer_address" EntityType="Self.m_customer_address" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_customer_contract_person" EntityType="Self.m_customer_contract_person" Schema="alsi" store:Type="Tables" />
-          <EntitySet Name="m_evaluation_of_particles" EntityType="Self.m_evaluation_of_particles" Schema="alsi" store:Type="Tables" />
-          <EntitySet Name="m_microscopic_analysis" EntityType="Self.m_microscopic_analysis" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_role" EntityType="Self.m_role" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_specification" EntityType="Self.m_specification" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_status" EntityType="Self.m_status" Schema="alsi" store:Type="Tables" />
@@ -1985,7 +1919,6 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="menu" EntityType="Self.menu" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="menu_role" EntityType="Self.menu_role" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="alsi" store:Type="Tables" />
-          <EntitySet Name="sample_method_procedure" EntityType="Self.sample_method_procedure" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_component" EntityType="Self.tb_m_component" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_detail_spec" EntityType="Self.tb_m_detail_spec" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_detail_spec_ref" EntityType="Self.tb_m_detail_spec_ref" Schema="alsi" store:Type="Tables" />
@@ -1994,7 +1927,6 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="tb_m_gcms_cas" EntityType="Self.tb_m_gcms_cas" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_specification" EntityType="Self.tb_m_specification" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_unit" EntityType="Self.tb_unit" Schema="alsi" store:Type="Tables" />
-          <EntitySet Name="template_f_ic" EntityType="Self.template_f_ic" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_img" EntityType="Self.template_img" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_pa" EntityType="Self.template_pa" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_pa_detail" EntityType="Self.template_pa_detail" Schema="alsi" store:Type="Tables" />
@@ -2026,6 +1958,7 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="template_wd_mesa_img" EntityType="Self.template_wd_mesa_img" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_login" EntityType="Self.users_login" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_responsible" EntityType="Self.users_responsible" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="users_role" EntityType="Self.users_role" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="ws_hash_value" EntityType="Self.ws_hash_value" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_logged" EntityType="Self.users_logged" store:Type="Tables" store:Schema="alsi">
             <DefiningQuery>SELECT
@@ -2094,8 +2027,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="m_customer" EntityType="alsiModel.m_customer" />
           <EntitySet Name="m_customer_address" EntityType="alsiModel.m_customer_address" />
           <EntitySet Name="m_customer_contract_person" EntityType="alsiModel.m_customer_contract_person" />
-          <EntitySet Name="m_evaluation_of_particles" EntityType="alsiModel.m_evaluation_of_particles" />
-          <EntitySet Name="m_microscopic_analysis" EntityType="alsiModel.m_microscopic_analysis" />
           <EntitySet Name="m_role" EntityType="alsiModel.m_role" />
           <EntitySet Name="m_specification" EntityType="alsiModel.m_specification" />
           <EntitySet Name="m_status" EntityType="alsiModel.m_status" />
@@ -2106,7 +2037,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="menus" EntityType="alsiModel.menu" />
           <EntitySet Name="menu_role" EntityType="alsiModel.menu_role" />
           <EntitySet Name="roles" EntityType="alsiModel.role" />
-          <EntitySet Name="sample_method_procedure" EntityType="alsiModel.sample_method_procedure" />
           <EntitySet Name="tb_m_component" EntityType="alsiModel.tb_m_component" />
           <EntitySet Name="tb_m_detail_spec" EntityType="alsiModel.tb_m_detail_spec" />
           <EntitySet Name="tb_m_detail_spec_ref" EntityType="alsiModel.tb_m_detail_spec_ref" />
@@ -2115,7 +2045,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="tb_m_gcms_cas" EntityType="alsiModel.tb_m_gcms_cas" />
           <EntitySet Name="tb_m_specification" EntityType="alsiModel.tb_m_specification" />
           <EntitySet Name="tb_unit" EntityType="alsiModel.tb_unit" />
-          <EntitySet Name="template_f_ic" EntityType="alsiModel.template_f_ic" />
           <EntitySet Name="template_img" EntityType="alsiModel.template_img" />
           <EntitySet Name="template_pa" EntityType="alsiModel.template_pa" />
           <EntitySet Name="template_pa_detail" EntityType="alsiModel.template_pa_detail" />
@@ -2147,6 +2076,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="template_wd_mesa_img" EntityType="alsiModel.template_wd_mesa_img" />
           <EntitySet Name="users_login" EntityType="alsiModel.users_login" />
           <EntitySet Name="users_responsible" EntityType="alsiModel.users_responsible" />
+          <EntitySet Name="users_role" EntityType="alsiModel.users_role" />
           <EntitySet Name="ws_hash_value" EntityType="alsiModel.ws_hash_value" />
           <EntitySet Name="users_logged" EntityType="alsiModel.users_logged" />
           <AssociationSet Name="fk_contract_person_id" Association="alsiModel.fk_contract_person_id">
@@ -2322,8 +2252,10 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="amend_or_retest" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="last_status" Type="Int32" />
           <Property Name="note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="note_lab" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="note_lab" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="am_retest_remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="sample_invoice_status" Type="Int32" />
+          <Property Name="sample_invoice_complete_date" Type="DateTime" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="alsiModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
         </EntityType>
         <EntityType Name="job_sample_logs">
@@ -2399,20 +2331,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="department" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="job_info" Relationship="alsiModel.fk_contract_person_id" FromRole="m_customer_contract_person" ToRole="job_info" />
           <NavigationProperty Name="m_customer" Relationship="alsiModel.fk_company_id" FromRole="m_customer_contract_person" ToRole="m_customer" />
-        </EntityType>
-        <EntityType Name="m_evaluation_of_particles">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="template_id" Type="Int32" />
-        </EntityType>
-        <EntityType Name="m_microscopic_analysis">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="template_id" Type="Int32" />
         </EntityType>
         <EntityType Name="m_role">
           <Key>
@@ -2534,34 +2452,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="UPDATE_BY" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CREATE_DATE" Type="DateTime" Nullable="false" />
           <Property Name="UPDATE_DATE" Type="DateTime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sample_method_procedure">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sample_id" Type="Int32" />
-          <Property Name="row_type" Type="Int32" />
-          <Property Name="col_1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_4" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_5" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_6" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_7" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_8" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_9" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_10" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_11" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_12" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_13" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_14" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_15" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_16" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_17" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_18" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_19" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_20" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_m_component">
           <Key>
@@ -2851,41 +2741,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="unit_group" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="value" Type="Double" />
-        </EntityType>
-        <EntityType Name="template_f_ic">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sample_id" Type="Int32" />
-          <Property Name="specification_id" Type="Int32" />
-          <Property Name="isNoSpec" Type="SByte" />
-          <Property Name="unit" Type="Int32" />
-          <Property Name="col_1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_4" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_5" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_6" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_7" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_8" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_9" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_10" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_11" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_12" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_13" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_14" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_15" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_16" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_17" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_18" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_19" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="col_20" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="seq" Type="Int32" />
-          <Property Name="row_type" Type="Int32" />
-          <Property Name="status" Type="Int32" />
-          <Property Name="create_date" Type="DateTime" />
-          <Property Name="update_date" Type="DateTime" />
         </EntityType>
         <EntityType Name="template_img">
           <Key>
@@ -3792,7 +3647,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="pm_procedure" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="pm_number_of_pieces" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="pm_extraction_medium" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="pm_extraction_volumn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pm_extraction_volumn" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="pm_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="test" Type="Int32" />
         </EntityType>
@@ -4018,6 +3873,17 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="user_id" Type="Int32" />
           <Property Name="type_of_test_id" Type="Int32" />
         </EntityType>
+        <EntityType Name="users_role">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="ROLE_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" />
+          <Property Name="ROLE_ID" Type="Int32" Nullable="false" />
+          <Property Name="UPDATE_BY" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CREATE_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="UPDATE_DATE" Type="DateTime" Nullable="false" />
+        </EntityType>
         <EntityType Name="ws_hash_value">
           <Key>
             <PropertyRef Name="id" />
@@ -4237,6 +4103,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample">
             <EntityTypeMapping TypeName="alsiModel.job_sample">
               <MappingFragment StoreEntitySet="job_sample">
+                <ScalarProperty Name="sample_invoice_complete_date" ColumnName="sample_invoice_complete_date" />
+                <ScalarProperty Name="sample_invoice_status" ColumnName="sample_invoice_status" />
                 <ScalarProperty Name="am_retest_remark" ColumnName="am_retest_remark" />
                 <ScalarProperty Name="note_lab" ColumnName="note_lab" />
                 <ScalarProperty Name="note" ColumnName="note" />
@@ -4378,22 +4246,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="m_evaluation_of_particles">
-            <EntityTypeMapping TypeName="alsiModel.m_evaluation_of_particles">
-              <MappingFragment StoreEntitySet="m_evaluation_of_particles">
-                <ScalarProperty Name="template_id" ColumnName="template_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="m_microscopic_analysis">
-            <EntityTypeMapping TypeName="alsiModel.m_microscopic_analysis">
-              <MappingFragment StoreEntitySet="m_microscopic_analysis">
-                <ScalarProperty Name="template_id" ColumnName="template_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="m_role">
             <EntityTypeMapping TypeName="alsiModel.m_role">
               <MappingFragment StoreEntitySet="m_role">
@@ -4516,35 +4368,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="ROLE_DESC" ColumnName="ROLE_DESC" />
                 <ScalarProperty Name="ROLE_NAME" ColumnName="ROLE_NAME" />
                 <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sample_method_procedure">
-            <EntityTypeMapping TypeName="alsiModel.sample_method_procedure">
-              <MappingFragment StoreEntitySet="sample_method_procedure">
-                <ScalarProperty Name="col_20" ColumnName="col_20" />
-                <ScalarProperty Name="col_19" ColumnName="col_19" />
-                <ScalarProperty Name="col_18" ColumnName="col_18" />
-                <ScalarProperty Name="col_17" ColumnName="col_17" />
-                <ScalarProperty Name="col_16" ColumnName="col_16" />
-                <ScalarProperty Name="col_15" ColumnName="col_15" />
-                <ScalarProperty Name="col_14" ColumnName="col_14" />
-                <ScalarProperty Name="col_13" ColumnName="col_13" />
-                <ScalarProperty Name="col_12" ColumnName="col_12" />
-                <ScalarProperty Name="col_11" ColumnName="col_11" />
-                <ScalarProperty Name="col_10" ColumnName="col_10" />
-                <ScalarProperty Name="col_9" ColumnName="col_9" />
-                <ScalarProperty Name="col_8" ColumnName="col_8" />
-                <ScalarProperty Name="col_7" ColumnName="col_7" />
-                <ScalarProperty Name="col_6" ColumnName="col_6" />
-                <ScalarProperty Name="col_5" ColumnName="col_5" />
-                <ScalarProperty Name="col_4" ColumnName="col_4" />
-                <ScalarProperty Name="col_3" ColumnName="col_3" />
-                <ScalarProperty Name="col_2" ColumnName="col_2" />
-                <ScalarProperty Name="col_1" ColumnName="col_1" />
-                <ScalarProperty Name="row_type" ColumnName="row_type" />
-                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4840,42 +4663,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="value" ColumnName="value" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="unit_group" ColumnName="unit_group" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="template_f_ic">
-            <EntityTypeMapping TypeName="alsiModel.template_f_ic">
-              <MappingFragment StoreEntitySet="template_f_ic">
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="row_type" ColumnName="row_type" />
-                <ScalarProperty Name="seq" ColumnName="seq" />
-                <ScalarProperty Name="col_20" ColumnName="col_20" />
-                <ScalarProperty Name="col_19" ColumnName="col_19" />
-                <ScalarProperty Name="col_18" ColumnName="col_18" />
-                <ScalarProperty Name="col_17" ColumnName="col_17" />
-                <ScalarProperty Name="col_16" ColumnName="col_16" />
-                <ScalarProperty Name="col_15" ColumnName="col_15" />
-                <ScalarProperty Name="col_14" ColumnName="col_14" />
-                <ScalarProperty Name="col_13" ColumnName="col_13" />
-                <ScalarProperty Name="col_12" ColumnName="col_12" />
-                <ScalarProperty Name="col_11" ColumnName="col_11" />
-                <ScalarProperty Name="col_10" ColumnName="col_10" />
-                <ScalarProperty Name="col_9" ColumnName="col_9" />
-                <ScalarProperty Name="col_8" ColumnName="col_8" />
-                <ScalarProperty Name="col_7" ColumnName="col_7" />
-                <ScalarProperty Name="col_6" ColumnName="col_6" />
-                <ScalarProperty Name="col_5" ColumnName="col_5" />
-                <ScalarProperty Name="col_4" ColumnName="col_4" />
-                <ScalarProperty Name="col_3" ColumnName="col_3" />
-                <ScalarProperty Name="col_2" ColumnName="col_2" />
-                <ScalarProperty Name="col_1" ColumnName="col_1" />
-                <ScalarProperty Name="unit" ColumnName="unit" />
-                <ScalarProperty Name="isNoSpec" ColumnName="isNoSpec" />
-                <ScalarProperty Name="specification_id" ColumnName="specification_id" />
-                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6037,6 +5824,17 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="type_of_test_id" ColumnName="type_of_test_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users_role">
+            <EntityTypeMapping TypeName="alsiModel.users_role">
+              <MappingFragment StoreEntitySet="users_role">
+                <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="UPDATE_BY" ColumnName="UPDATE_BY" />
+                <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

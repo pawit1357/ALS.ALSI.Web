@@ -447,4 +447,12 @@ INSERT INTO `alsi`.`menu` (`MENU_ID`, `MENU_ICON`, `MENU_NAME`, `URL_NAVIGATE`, 
 
 
 
+
+#2018-12-25
+
+ALTER TABLE `alsi`.`holiday_calendar` 
+ADD PRIMARY KEY (`DATE_HOLIDAYS`);
+
+
+
 */

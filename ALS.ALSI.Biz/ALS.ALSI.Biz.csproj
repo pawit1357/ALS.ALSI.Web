@@ -200,12 +200,6 @@
     <Compile Include="DataAccess\m_customer_contract_person.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\m_evaluation_of_particles.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\m_microscopic_analysis.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataAccess\m_role.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -230,9 +224,6 @@
     <Compile Include="DataAccess\role.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\sample_method_procedure.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataAccess\tb_m_component.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -255,9 +246,6 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\tb_unit.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\template_f_ic.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\template_img.cs">
@@ -354,6 +342,9 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\users_responsible.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\users_role.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\WsHashValue.cs" />

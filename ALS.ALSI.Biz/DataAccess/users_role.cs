@@ -12,9 +12,12 @@ namespace ALS.ALSI.Biz.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class m_microscopic_analysis
+    public partial class users_role
     {
-        public int id { get; set; }
-        public Nullable<int> template_id { get; set; }
+        public int USER_ID { get; set; }
+        public int ROLE_ID { get; set; }
+        public string UPDATE_BY { get; set; }
+        public System.DateTime CREATE_DATE { get; set; }
+        public System.DateTime UPDATE_DATE { get; set; }
     }
 }

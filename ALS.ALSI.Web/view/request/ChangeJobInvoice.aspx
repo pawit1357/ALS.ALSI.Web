@@ -51,7 +51,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Change Due date</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Add Invoice</span>
                     <span class="caption-helper"></span>
                 </div>
                 <div class="tools">
@@ -74,6 +74,49 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Invoice Amount:</label>
+                                <div class="col-md-6">
+                                    <div class="input-group" style="text-align: left">
+                                        <asp:TextBox ID="txtInvoiceAmt" name="txtInvoiceAmt" runat="server" class="form-control"></asp:TextBox>
+                                        <span class="input-group-btn"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Invoice Date:</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                            <asp:TextBox ID="txtInvoiceDate" name="txtInvoiceDate" runat="server" class="form-control"></asp:TextBox>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Payment Date:</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                            <asp:TextBox ID="txtPaymentDate" name="txtPaymentDate" runat="server" class="form-control"></asp:TextBox>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-6">

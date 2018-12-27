@@ -342,6 +342,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.LOGIN_SELECT_SPEC:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
 
                     foreach (template_wd_hpa_for1_coverpage _cover in this.HpaFor1)
                     {
@@ -364,6 +365,7 @@ namespace ALS.ALSI.Web.view.template
                 case StatusEnum.CHEMIST_TESTING:
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.SR_CHEMIST_CHECKING);
                     this.jobSample.step3owner = userLogin.id;
+                    this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
 
                     //#region ":: STAMP COMPLETE DATE"
                     this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
@@ -992,18 +994,20 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
             reportParameters.Add(new ReportParameter("Test", "-"));
             reportParameters.Add(new ReportParameter("tafdp", txtB23.Text));
+            reportParameters.Add(new ReportParameter("ResultDesc", String.IsNullOrEmpty(lbSpecDesc.Text) ? " " : lbSpecDesc.Text));
+
+            //new ReportParameter("ResultDesc", String.IsNullOrEmpty(lbSpecDesc.Text) ? " " : lbSpecDesc.Text)))
 
 
-
-            tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
-            if (_detailSpec != null)
-            {
-                reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", _detailSpec.B, _detailSpec.A)));
-            }
-            else
-            {
-                reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", "", "")));
-            }
+            //tb_m_detail_spec _detailSpec = new tb_m_detail_spec().SelectByID(this.HpaFor1[0].detail_spec_id.Value);// this.coverpages[0].tb_m_detail_spec;
+            //if (_detailSpec != null)
+            //{
+            //    reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", _detailSpec.B, _detailSpec.A)));
+            //}
+            //else
+            //{
+            //    reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on WD's specification Doc No  {0} for {1}", "", "")));
+            //}
             reportParameters.Add(new ReportParameter("img01Url", listHpaImg.Count.ToString()));
 
             //reportParameters.Add(new ReportParameter("img01Url", (this.HpaFor1[0].img_path == null) ? "-" : this.HpaFor1[0].img_path));

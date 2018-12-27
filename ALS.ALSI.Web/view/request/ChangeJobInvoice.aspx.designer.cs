@@ -40,6 +40,33 @@ namespace ALS.ALSI.Web.view.request {
         protected global::System.Web.UI.WebControls.TextBox txtInvoice;
         
         /// <summary>
+        /// txtInvoiceAmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInvoiceAmt;
+        
+        /// <summary>
+        /// txtInvoiceDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInvoiceDate;
+        
+        /// <summary>
+        /// txtPaymentDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPaymentDate;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
