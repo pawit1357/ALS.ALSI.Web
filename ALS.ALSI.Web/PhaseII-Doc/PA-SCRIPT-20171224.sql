@@ -453,6 +453,16 @@ INSERT INTO `alsi`.`menu` (`MENU_ID`, `MENU_ICON`, `MENU_NAME`, `URL_NAVIGATE`, 
 ALTER TABLE `alsi`.`holiday_calendar` 
 ADD PRIMARY KEY (`DATE_HOLIDAYS`);
 
+CREATE TABLE `alsi`.`tb_m_forcast` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `forcast_year` INT NULL,
+  `forcast_month` INT NULL,
+  `forcast_amt` DOUBLE NULL,
+  PRIMARY KEY (`ID`));
+
+
+
+  INSERT INTO `alsi`.`menu` (`MENU_ID`, `MENU_NAME`, `URL_NAVIGATE`, `MENU_TAG`, `PREVIOUS_MENU_ID`, `DISPLAY_ORDER`, `UPDATE_BY`, `CREATE_DATE`, `UPDATE_DATE`) VALUES ('14', 'Update BI-Report', '/alis/view/maintenance/MaintenanceAccount.aspx', 'MaintenanceAccount|', '3', '8', 'SYSTEM', '2015-02-13', '2015-02-13');
 
 
 */

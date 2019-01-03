@@ -61,7 +61,20 @@ namespace ALS.ALSI.Biz
             //Execute query
             return ds;
         }
+        public static DataTable ExecuteReturnDt(String sql)
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlCon"].ToString()))
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
 
+                da.Fill(dt);
+            }
+            //Execute query
+            return dt;
+        }
 
         public static String GenScript()
         {

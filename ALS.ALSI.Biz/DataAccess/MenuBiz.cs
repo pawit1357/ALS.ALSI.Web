@@ -54,7 +54,12 @@ namespace ALS.ALSI.Biz.DataAccess
                             </ul>
                         </li>
                 */
-                IEnumerable<menu> parentMenus = menus.Where(x => x.PREVIOUS_MENU_ID == null).OrderBy(x => x.DISPLAY_ORDER);
+                var parentMenuIdx = menus.Select(x => x.PREVIOUS_MENU_ID).Distinct().ToArray();
+
+
+                IEnumerable<menu> parentMenus = repo.GetAll().Where(x => parentMenuIdx.Contains(x.MENU_ID)).OrderBy(x => x.DISPLAY_ORDER);
+
+                //IEnumerable<menu> parentMenus = menus.Where(x => parentMenuIdx.Contains(x.MENU_ID)).OrderBy(x => x.DISPLAY_ORDER);
                 foreach (menu _parent in parentMenus)
                 {
                     IEnumerable<menu> menuChilds = menus.Where(x => x.PREVIOUS_MENU_ID == _parent.MENU_ID).OrderBy(x => x.DISPLAY_ORDER);

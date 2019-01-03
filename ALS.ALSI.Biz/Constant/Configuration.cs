@@ -114,6 +114,12 @@ namespace ALS.ALSI.Biz.Constant
         }
         #endregion
 
+        #region "Power-BI"
+        public static String ClientID
+        {
+            get { return ConfigurationManager.AppSettings["powerbi.applicationid"]; }
+        }
+        #endregion
 
         public static String getUnitText(int unit)
         {
