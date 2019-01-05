@@ -163,6 +163,7 @@
       <DependentUpon>ALSI.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\Component.cs" />
+    <Compile Include="DataAccess\CSo.cs" />
     <Compile Include="DataAccess\holiday_calendar.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>

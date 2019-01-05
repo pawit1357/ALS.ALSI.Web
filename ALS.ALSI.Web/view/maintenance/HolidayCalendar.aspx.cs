@@ -63,9 +63,9 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            String _pathSourceFile = String.Format(Configurations.PATH_TEMPLATE, FileUpload1.FileName);
-            String _phisicalPath = String.Format(Configurations.PATH_TEMPLATE, String.Empty);
-            String _savefilePath = String.Format(Configurations.PATH_TEMPLATE, FileUpload1.FileName);
+            String _pathSourceFile = String.Format(Configurations.PATH_TMP, FileUpload1.FileName);
+            String _phisicalPath = String.Format(Configurations.PATH_TMP, String.Empty);
+            String _savefilePath = String.Format(Configurations.PATH_TMP, FileUpload1.FileName);
             //::PROCESS UPLOAD
         
             if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".xls")))

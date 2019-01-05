@@ -766,9 +766,11 @@ namespace ALS.ALSI.Web.view.request
                     #endregion
 
                     CompletionScheduledEnum status_completion_scheduled = (CompletionScheduledEnum)Enum.ToObject(typeof(CompletionScheduledEnum), _valueCompletion_scheduled);
-                    PaymentStatus paymentStatus = (PaymentStatus)Enum.ToObject(typeof(PaymentStatus), Convert.ToInt16(ltPaymentStatus.Text));
-                    ltPaymentStatus.Text = "<span class=\"label label-sm label-"+((paymentStatus== PaymentStatus.PAYMENT_INPROCESS) ? "warning" : "success")+"\">" + Constants.GetEnumDescription(paymentStatus) + " </span>"; ;
-
+                    if (!ltPaymentStatus.Text.Equals(""))
+                    {
+                        PaymentStatus paymentStatus = (PaymentStatus)Enum.ToObject(typeof(PaymentStatus), Convert.ToInt16(ltPaymentStatus.Text));
+                        ltPaymentStatus.Text = "<span class=\"label label-sm label-" + ((paymentStatus == PaymentStatus.PAYMENT_INPROCESS) ? "warning" : "success") + "\">" + Constants.GetEnumDescription(paymentStatus) + " </span>"; ;
+                    }
 
 
                     StatusEnum job_status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), _valueStatus);

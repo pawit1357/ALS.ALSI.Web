@@ -24,7 +24,10 @@ namespace ALS.ALSI.Biz.Constant
         {
             get { return ConfigurationManager.AppSettings["PATH_TEMPLATE"]; }
         }
-
+        public static String PATH_TMP
+        {
+            get { return ConfigurationManager.AppSettings["PATH_TMP"]; }
+        }
         public static String PATH_SOURCE
         {
             get { return ConfigurationManager.AppSettings["PATH_SOURCE"]; }

@@ -48,9 +48,9 @@ namespace ALS.ALSI.Biz.DataAccess
                 {
                     _repository.Add(tmp);
                 }
-            }catch(Exception ex)
+            }catch (Exception)
             {
-                Console.WriteLine();
+                //Console.WriteLine();
             }
 
         }

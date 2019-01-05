@@ -14,14 +14,22 @@ using System.Web.UI;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Newtonsoft.Json;
 using System.Data;
+using System.Text;
+using System.Collections;
+using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
+using System.Net.Http;
+using System.Collections.Specialized;
 
 namespace ALS.ALSI.Web.view.template
 {
     public partial class MaintenanceAccount : System.Web.UI.Page
     {
-        //private string token = string.Empty;
-
-        //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Template));
+        public List<CSo> searchResult
+        {
+            get { return (List<CSo>)Session[GetType().Name + "MaintenanceAccount"]; }
+            set { Session[GetType().Name + "MaintenanceAccount"] = value; }
+        }
 
         #region "Property"
         public users_login UserLogin
@@ -34,7 +42,11 @@ namespace ALS.ALSI.Web.view.template
             get { return (String)Session[GetType().Name + "Message"]; }
             set { Session[GetType().Name + "Message"] = value; }
         }
-
+        protected String Message2
+        {
+            get { return (String)Session[GetType().Name + "Message2"]; }
+            set { Session[GetType().Name + "Message2"] = value; }
+        }
         private void initialPage()
         {
         }
@@ -51,28 +63,34 @@ namespace ALS.ALSI.Web.view.template
         {
             if (!Page.IsPostBack)
             {
+                searchResult = new List<CSo>();
+                pSo.Visible = false;
+                hToken.Value = GetToken();
+                hDataSetId.Text = GetDataset(hToken.Value);
             }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             //Get an authentication access token
-            string token = GetToken();
+            if (!String.IsNullOrEmpty(hDataSetId.Text))
+            {
+                //Add rows to a Power BI table
+                DataTable dt = MaintenanceBiz.ExecuteReturnDt(String.Format("select * from {0}", rdDsBi.SelectedValue));
+                String JSONresult = JsonConvert.SerializeObject(dt);
+                AddRows(hDataSetId.Text, rdDsBi.SelectedValue, JSONresult, hToken.Value);
+                Message = "<div class=\"alert alert-success\"><strong>Info!</strong>ดำเนินการ" + rdDsBiPostType.SelectedItem.Text + "" + rdDsBi.SelectedItem.Text + " เรียบร้อยแล้ว</div>";
+            }
+            else
+            {
+                Message = "<div class=\"alert alert-success\"><strong>Info!</strong>Invalid dataset.</div>";
+            }
+        }
 
-            //Create a dataset in Power BI
-            //CreateDataset();
+        protected void btnSaveSo_Click(object sender, EventArgs e)
+        {
 
-            //Get a dataset to add rows into a Power BI table
-            string datasetId = GetDataset(token);
-
-            //Add rows to a Power BI table
-
-            DataTable dt = MaintenanceBiz.ExecuteReturnDt(String.Format("select * from {0}", rdDsBi.SelectedValue));
-            String JSONresult = JsonConvert.SerializeObject(dt);
-            AddRows(datasetId, rdDsBi.SelectedValue, JSONresult, token);
-
-
-            Message = "<div class=\"alert alert-success\"><strong>Info!</strong>ส่งข้อมูล "+rdDsBi.SelectedItem.Text+" ไปยัง Power-BI เรียบร้อยแล้ว</div>";
+            Message2 = "<div class=\"alert alert-success\"><strong>Info!</strong>บันทึกรายการเรียบร้อย</div>";
 
         }
 
@@ -111,14 +129,17 @@ namespace ALS.ALSI.Web.view.template
             // AcquireToken will acquire an Azure access token
             // Call AcquireToken to get an Azure token from Azure Active Directory token issuance endpoint
             AuthenticationContext authContext = new AuthenticationContext(authorityUri);
-            string token = authContext.AcquireToken(resourceUri, clientID, new Uri(redirectUri)).AccessToken;
+            //string token = authContext.AcquireToken(resourceUri, clientID, new Uri(redirectUri)).AccessToken;
+            string token = authContext.AcquireToken(resourceUri, clientID, new UserCredential("sukanya.dawan@alsglobal.com", "sukanya48")).AccessToken;
 
-            Console.WriteLine(token);
-            //Console.ReadLine();
+            ///
+
+
+            ///
 
             return token;
         }
-
+        
         #endregion
 
         #region Create a dataset in a Power BI
@@ -141,7 +162,7 @@ namespace ALS.ALSI.Web.view.template
             //Create dataset JSON for POST request
 
             //Create dataset JSON for POST request
-            string datasetJson = "{\"name\": \"ALS_ALIS_BI_DS\", \"tables\": " +
+            string datasetJson = "{\"name\": \"ALS_ALIS_BI_DS2\", \"tables\": " +
                 "[" +
                 /* =============== vw_revenue_actual =============== */
                 "{\"name\": \"vw_revenue_actual\", \"columns\": " +
@@ -184,8 +205,15 @@ namespace ALS.ALSI.Web.view.template
             request.ContentLength = byteArray.Length;
 
             //Write JSON byte[] into a Stream
+
+
+
+
+           
+
             using (Stream writer = request.GetRequestStream())
             {
+
                 writer.Write(byteArray, 0, byteArray.Length);
 
                 var response = (HttpWebResponse)request.GetResponse();
@@ -271,6 +299,132 @@ namespace ALS.ALSI.Web.view.template
         }
         #endregion
 
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            String _phisicalPath = String.Format(Configurations.PATH_TMP, String.Empty);
+            String _savefilePath = String.Format(Configurations.PATH_TMP, FileUpload1.FileName);
+            //::PROCESS UPLOAD
+
+            if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".txt")))
+            {
+                if (!Directory.Exists(_phisicalPath))
+                {
+                    Directory.CreateDirectory(_phisicalPath);
+                }
+                FileUpload1.SaveAs(_savefilePath);
+                ProcessUpload(_savefilePath);
+            }
+            else
+            {
+                Message2 = "<div class=\"alert alert-danger\"><strong>Error!</strong>สามารถอัพโหลดได้เฉพาะ ไฟล์ Text(*.txt) </div>";
+            }
+        }
+
+        private void ProcessUpload(String filePath)
+        {
+            Boolean bUploadSuccess = false;
+            String line;
+            StringBuilder sb = new StringBuilder();
+            try
+            {
+
+                StreamReader sr = new StreamReader(filePath);
+
+                //Read the first line of text
+                line = sr.ReadLine();
+
+                //Continue to read until you reach end of file
+                CSo cso = null;
+                int index = 0;
+                while (line != null)
+                {
+
+
+                    //write the lie to console window
+                    if (line.StartsWith("  SO"))
+                    {
+                        cso = new CSo { SO = line.Substring(0, 11).Trim(), _Qty = new List<double>(), _UnitPrice = new List<double>(), _ReportNo = new List<string>() };
+                        if (index > 0)
+                        {
+                            searchResult.Add(cso);
+                        }
+                        Console.WriteLine(line);
+                    }
+                    else if (line.Contains("SAMPLE"))
+                    {
+                        Double qty = Convert.ToDouble(Regex.Replace(line.Substring(50, 15), "[A-Za-z ]", ""));
+                        Double unitPrice = Convert.ToDouble(Regex.Replace(line.Substring(65, 15), "[A-Za-z ]", "").Replace(",", "").Trim());
+                        cso._Qty.Add(qty);
+                        cso._UnitPrice.Add(unitPrice);
+                        Console.WriteLine(line);
+                    }
+                    else if (line.Contains("Report no."))
+                    {
+                        Console.WriteLine(line);
+                        cso._ReportNo.Add(line.Replace("Report no.", "").Trim());
+                    }
+                    else if (line.Contains("ELP-") || line.Contains("ELS-") || line.Contains("ELN-") || line.Contains("FA-") || line.Contains("ELWA-") || line.Contains("GRP-") || line.Contains("TRB-"))
+                    {
+                        Console.WriteLine(line);
+                        cso._ReportNo.Add(line.Replace("Report no.", "").Trim());
+                    }
+
+                    //Read the next line
+                    line = sr.ReadLine();
+                    index++;
+                }
+
+                //close the file
+                sr.Close();
+                bUploadSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                Message2 = "<div class=\"alert alert-danger\"><strong>Error!</strong>" + ex.InnerException + "</div>";
+
+                Console.WriteLine(ex.Message);
+            }
+            if (bUploadSuccess)
+            {
+                pSo.Visible = true;
+                gvJob.DataSource = this.searchResult;
+                gvJob.DataBind();
+                //Commit
+                Message2 = "<div class=\"alert alert-info\"><strong>Info!</strong>อัพโหลดไฟล์ so เรียบร้อยแล้ว <br>" + sb.ToString()+" </div>";
+            }
+            else
+            {
+                pSo.Visible = false;
+                Message2 = "<div class=\"alert alert-danger\"><strong>Error!</strong>Upload Fail.</div>";
+            }
+        }
+
+        #region "GRD"
+        protected void gvResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0) return;
+            GridView gv = (GridView)sender;
+            gv.DataSource = searchResult;
+            gv.PageIndex = e.NewPageIndex;
+            gv.DataBind();
+        }
+
+        protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowIndex != -1)
+            {
+            }
+        }
+
+        protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex < 0) return;
+            GridView gv = (GridView)sender;
+            gv.DataSource = searchResult;
+            gv.PageIndex = e.NewPageIndex;
+            gv.DataBind();
+        }
+        #endregion
     }
 }
 

@@ -12,15 +12,103 @@
             <button class="close" data-close="alert"></button>
             Your form validation is successful!
         </div>
-        <%=Message %>
-
+        <asp:HiddenField ID="hToken" Value="" runat="server" />
 
 
         <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">ส่งข้อมูลไปยัง POWER BI</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">อัพโหลดไฟล์ SO</span>
+                    <span class="caption-helper"></span>
+                </div>
+                <div class="tools">
+                    <a href="#" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="form-body">
+<%=Message2 %>
+
+                    <!-- BEGIN FORM-->
+                    <div class="row fileupload-buttonbar">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">เลือกไฟล์ SO<span class="required">*</span></label>
+                                <div class="col-md-6">
+                                    <span class="btn green fileinput-button">
+                                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                                    </span>
+                                </div>
+                                <div>
+                                    <asp:Button ID="btnUpload" runat="server" class="btn small blue" Text="อัพโหลดไฟล์" OnClick="btnUpload_Click" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <asp:Panel ID="pSo" runat="server">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">ยืนยันข้อมูล SO:</label>
+                                    <div class="col-md-8">
+                                        <div class="form-group" style="text-align: left">
+                                            <br />
+                                            <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False" AllowPaging="True"
+                                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="SO" OnPageIndexChanging="gvJob_PageIndexChanging" PageSize="20" Width="100%">
+                                                <Columns>
+                                                    <asp:BoundField HeaderText="SO" DataField="SO" ItemStyle-HorizontalAlign="Left" SortExpression="SO" />
+                                                    <asp:BoundField HeaderText="PO" DataField="PO" ItemStyle-HorizontalAlign="Left" SortExpression="PO" />
+                                                    <%--                                <asp:BoundField HeaderText="Date" DataField="Date" ItemStyle-HorizontalAlign="Left" SortExpression="Date" />--%>
+                                                    <asp:BoundField HeaderText="Qty" DataField="Qty" ItemStyle-HorizontalAlign="Left" SortExpression="Qty" />
+                                                    <asp:BoundField HeaderText="UnitPrice" DataField="UnitPrice" ItemStyle-HorizontalAlign="Left" SortExpression="UnitPrice" />
+                                                    <asp:BoundField HeaderText="ReportNo" DataField="ReportNo" ItemStyle-HorizontalAlign="Left" SortExpression="ReportNo" />
+
+                                                </Columns>
+                                                <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
+
+                                                <EmptyDataTemplate>
+                                                    <div class="data-not-found">
+                                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                    </div>
+                                                </EmptyDataTemplate>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <asp:Button ID="btnSaveSo" runat="server" class="btn green" Text="Save" OnClick="btnSaveSo_Click" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
+                    </asp:Panel>
+
+
+
+
+
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-equalizer font-red-sunglo"></i>
+                    <span class="caption-subject font-red-sunglo bold uppercase">ส่งข้อมูลไปยัง POWER BI (
+                        <asp:Label ID="hDataSetId" Value="" runat="server" />)</span>
                     <span class="caption-helper"></span>
                 </div>
                 <div class="tools">
@@ -30,6 +118,8 @@
             <div class="portlet-body form">
                 <div class="form-body">
                     <!-- BEGIN FORM-->
+                                         <%=Message %>
+
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
@@ -78,6 +168,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+
                             </div>
                         </div>
                     </div>
@@ -85,7 +176,11 @@
                 </div>
             </div>
         </div>
-        
+
+
+
+
+
     </form>
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
@@ -96,70 +191,6 @@
             var form1 = $('#Form1');
             var error1 = $('.alert-danger', form1);
             var success1 = $('.alert-success', form1);
-
-            //form1.validate({
-            //    errorElement: 'span', //default input error message container
-            //    errorClass: 'help-block help-block-error', // default input error message class
-            //    focusInvalid: false, // do not focus the last invalid input
-            //    ignore: "",  // validate all fields including form hidden input
-            //    messages: {
-            //        select_multi: {
-            //            maxlength: jQuery.validator.format("Max {0} items allowed for selection"),
-            //            minlength: jQuery.validator.format("At least {0} items must be selected")
-            //        }
-            //    },
-            //    rules: {
-
-            //        ctl00$ContentPlaceHolder2$ddlSpecification: {
-            //            required: true,
-            //        },
-            //        ctl00$ContentPlaceHolder2$txtName: {
-            //            minlength: 2,
-            //            required: true,
-            //        },
-            //        ctl00$ContentPlaceHolder2$txtPathUrl: {
-            //            minlength: 2,
-            //            required: true,
-            //        },
-            //        ctl00$ContentPlaceHolder2$txtVersion: {
-            //            minlength: 2,
-            //            required: true,
-            //        }, ctl00$ContentPlaceHolder2$txtDescription: {
-            //            minlength: 2,
-            //            required: true,
-            //        },
-            //        ctl00$ContentPlaceHolder2$txtSpecRef: {
-            //            number: true,
-            //        },
-
-            //    },
-
-            //    invalidHandler: function (event, validator) { //display error alert on form submit              
-            //        success1.hide();
-            //        error1.show();
-            //        Metronic.scrollTo(error1, -200);
-            //    },
-
-            //    highlight: function (element) { // hightlight error inputs
-            //        $(element)
-            //            .closest('.form-group').addClass('has-error'); // set error class to the control group
-            //    },
-
-            //    unhighlight: function (element) { // revert the change done by hightlight
-            //        $(element)
-            //            .closest('.form-group').removeClass('has-error'); // set error class to the control group
-            //    },
-
-            //    success: function (label) {
-            //        label
-            //            .closest('.form-group').removeClass('has-error'); // set success class to the control group
-            //    },
-
-            //    submitHandler: function (form) {
-            //        form.submit();
-            //    }
-            //});
-
         });
     </script>
     <!-- END JAVASCRIPTS -->
