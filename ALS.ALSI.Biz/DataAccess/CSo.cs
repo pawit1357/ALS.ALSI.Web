@@ -14,8 +14,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public List<String> _ReportNo { get; set; }
 
         public String Qty { get { return String.Join(",", _Qty); } }
-        public String UnitPrice { get { return String.Join(",", _UnitPrice); } }
-        public String ReportNo { get { return String.Join(",", _ReportNo); } }
+        public String UnitPrice { get { return String.Join("\r\n", _UnitPrice); } }
+        public String ReportNo { get { return String.Join("\r\n", _ReportNo); } }
 
     }
 }

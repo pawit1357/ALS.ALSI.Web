@@ -10,7 +10,7 @@
 namespace ALS.ALSI.Web.view.template {
     
     
-    public partial class MaintenanceAccount {
+    public partial class ImportSo {
         
         /// <summary>
         /// Form1 control.
@@ -22,57 +22,57 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
         
         /// <summary>
-        /// hToken control.
+        /// lbTotalRecords control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hToken;
+        protected global::System.Web.UI.WebControls.Label lbTotalRecords;
         
         /// <summary>
-        /// hDataSetId control.
+        /// FileUpload1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hDataSetId;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
-        /// rdDsBiPostType control.
+        /// btnUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdDsBiPostType;
+        protected global::System.Web.UI.WebControls.Button btnUpload;
         
         /// <summary>
-        /// rdDsBi control.
+        /// pSo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdDsBi;
+        protected global::System.Web.UI.WebControls.Panel pSo;
         
         /// <summary>
-        /// btnSave control.
+        /// gvJob control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.WebControls.GridView gvJob;
         
         /// <summary>
-        /// btnCancel control.
+        /// btnSaveSo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button btnSaveSo;
     }
 }

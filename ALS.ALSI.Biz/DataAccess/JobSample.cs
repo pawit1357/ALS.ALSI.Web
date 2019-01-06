@@ -40,6 +40,11 @@ namespace ALS.ALSI.Biz.DataAccess
             return _repository.Find(x => x.ID == _id).FirstOrDefault();
         }
 
+        public static job_sample SelectByJobNumber(String _job_number)
+        {
+            return _repository.Find(x => x.job_number.Equals(_job_number) && x.template_id != -1).FirstOrDefault();
+        }
+
         public List<job_sample> findByIdAndStatus(String jobNumber, StatusEnum status )
         {
             return _repository.Find(x => x.job_number == jobNumber && x.job_status == Convert.ToInt16(status)).ToList();

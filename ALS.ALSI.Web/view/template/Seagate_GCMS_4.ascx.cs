@@ -21,7 +21,7 @@ using System.Web.UI.WebControls;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class Seagate_GCMS_3 : System.Web.UI.UserControl
+    public partial class Seagate_GCMS_4 : System.Web.UI.UserControl
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Seagate_GCMS));
@@ -379,17 +379,7 @@ namespace ALS.ALSI.Web.view.template
                     txtB18.Text = cov.B18;
                     txtB19.Text = cov.B19;
 
-                    txtC13.Text = cov.C13;
-                    txtC14.Text = cov.C14;
-                    txtC15.Text = cov.C15;
-                    txtC16.Text = cov.C16;
-                    txtC17.Text = cov.C17;
-                    txtC18.Text = cov.C18;
-                    txtC19.Text = cov.C19;
-
-                    txtB20.Text = cov.B20;
-                    txtB21.Text = cov.B21;
-                    txtB22.Text = cov.B22;
+                    //23 - 37
                     txtB23.Text = cov.B23;
                     txtB24.Text = cov.B24;
                     txtB25.Text = cov.B25;
@@ -400,10 +390,12 @@ namespace ALS.ALSI.Web.view.template
                     txtB30.Text = cov.B30;
                     txtB31.Text = cov.B31;
                     txtB32.Text = cov.B32;
+                    txtB33.Text = cov.B43;
+                    txtB34.Text = cov.B34;
+                    txtB35.Text = cov.B35;
+                    txtB36.Text = cov.B36;
+                    txtB37.Text = cov.B47;
 
-                    txtC20.Text = cov.C20;
-                    txtC21.Text = cov.C21;
-                    txtC22.Text = cov.C22;
                     txtC23.Text = cov.C23;
                     txtC24.Text = cov.C24;
                     txtC25.Text = cov.C25;
@@ -414,10 +406,12 @@ namespace ALS.ALSI.Web.view.template
                     txtC30.Text = cov.C30;
                     txtC31.Text = cov.C31;
                     txtC32.Text = cov.C32;
+                    txtC33.Text = cov.C43;
+                    txtC34.Text = cov.C34;
+                    txtC35.Text = cov.C35;
+                    txtC36.Text = cov.C36;
+                    txtC37.Text = cov.C47;
 
-                    txtD20.Text = cov.D20;
-                    txtD21.Text = cov.D21;
-                    txtD22.Text = cov.D22;
                     txtD23.Text = cov.D23;
                     txtD24.Text = cov.D24;
                     txtD25.Text = cov.D25;
@@ -428,76 +422,11 @@ namespace ALS.ALSI.Web.view.template
                     txtD30.Text = cov.D30;
                     txtD31.Text = cov.D31;
                     txtD32.Text = cov.D32;
-
-                    txtE20.Text = cov.E20;
-                    txtE21.Text = cov.E21;
-                    txtE22.Text = cov.E22;
-                    txtE23.Text = cov.E23;
-                    txtE24.Text = cov.E24;
-                    txtE25.Text = cov.E25;
-                    txtE26.Text = cov.E26;
-                    txtE27.Text = cov.E27;
-                    txtE28.Text = cov.E28;
-                    txtE29.Text = cov.E29;
-                    txtE30.Text = cov.E30;
-                    txtE31.Text = cov.E31;
-                    txtE32.Text = cov.E32;
-
-                    txtF20.Text = cov.F20;
-                    txtF21.Text = cov.F21;
-                    txtF22.Text = cov.F22;
-                    txtF23.Text = cov.F23;
-                    txtF24.Text = cov.F24;
-                    txtF25.Text = cov.F25;
-                    txtF26.Text = cov.F26;
-                    txtF27.Text = cov.F27;
-                    txtF28.Text = cov.F28;
-                    txtF29.Text = cov.F29;
-                    txtF30.Text = cov.F30;
-                    txtF31.Text = cov.F31;
-                    txtF32.Text = cov.F32;
-
-                    txtB40.Text = cov.B40;
-                    txtB41.Text = cov.B41;
-                    txtB42.Text = cov.B42;
-                    txtB43.Text = cov.B43;
-                    txtB44.Text = cov.B44;
-                    txtB45.Text = cov.B45;
-                    txtB46.Text = cov.B46;
-                    txtB47.Text = cov.B47;
-                    txtB48.Text = cov.B48;
-                    txtB49.Text = cov.B49;
-                    txtB50.Text = cov.B50;
-                    txtB51.Text = cov.B51;
-                    txtB52.Text = cov.B52;
-
-                    txtC40.Text = cov.C40;
-                    txtC41.Text = cov.C41;
-                    txtC42.Text = cov.C42;
-                    txtC43.Text = cov.C43;
-                    txtC44.Text = cov.C44;
-                    txtC45.Text = cov.C45;
-                    txtC46.Text = cov.C46;
-                    txtC47.Text = cov.C47;
-                    txtC48.Text = cov.C48;
-                    txtC49.Text = cov.C49;
-                    txtC50.Text = cov.C50;
-                    txtC51.Text = cov.C51;
-                    txtC52.Text = cov.C52;
-
-                    txtD40.Text = cov.D40;
-                    txtD41.Text = cov.D41;
-                    txtD42.Text = cov.D42;
-                    txtD43.Text = cov.D43;
-                    txtD44.Text = cov.D44;
-                    txtD45.Text = cov.D45;
-                    txtD46.Text = cov.D46;
-                    txtD47.Text = cov.D47;
-                    txtD48.Text = cov.D48;
-                    txtD49.Text = cov.D49;
-                    txtD50.Text = cov.D50;
-                    txtD51.Text = cov.D51;
-                    txtD52.Text = cov.D52;
+                    txtD33.Text = cov.D43;
+                    txtD34.Text = cov.D44;
+                    txtD35.Text = cov.D45;
+                    txtD36.Text = cov.D46;
+                    txtD37.Text = cov.D47;
 
                     lbRemark1.Text = cov.remark1;
                     lbRemark2.Text = cov.remark2;
@@ -654,17 +583,6 @@ namespace ALS.ALSI.Web.view.template
                             cov.B18 = txtB18.Text;
                             cov.B19 = txtB19.Text;
 
-                            cov.C13 = txtC13.Text;
-                            cov.C14 = txtC14.Text;
-                            cov.C15 = txtC15.Text;
-                            cov.C16 = txtC16.Text;
-                            cov.C17 = txtC17.Text;
-                            cov.C18 = txtC18.Text;
-                            cov.C19 = txtC19.Text;
-
-                            cov.B20 = txtB20.Text;
-                            cov.B21 = txtB21.Text;
-                            cov.B22 = txtB22.Text;
                             cov.B23 = txtB23.Text;
                             cov.B24 = txtB24.Text;
                             cov.B25 = txtB25.Text;
@@ -675,10 +593,12 @@ namespace ALS.ALSI.Web.view.template
                             cov.B30 = txtB30.Text;
                             cov.B31 = txtB31.Text;
                             cov.B32 = txtB32.Text;
+                            cov.B43 = txtB33.Text;
+                            cov.B34 = txtB34.Text;
+                            cov.B35 = txtB35.Text;
+                            cov.B36 = txtB36.Text;
+                            cov.B47 = txtB37.Text;
 
-                            cov.C20 = txtC20.Text;
-                            cov.C21 = txtC21.Text;
-                            cov.C22 = txtC22.Text;
                             cov.C23 = txtC23.Text;
                             cov.C24 = txtC24.Text;
                             cov.C25 = txtC25.Text;
@@ -689,10 +609,12 @@ namespace ALS.ALSI.Web.view.template
                             cov.C30 = txtC30.Text;
                             cov.C31 = txtC31.Text;
                             cov.C32 = txtC32.Text;
+                            cov.C43 = txtC33.Text;
+                            cov.C34 = txtC34.Text;
+                            cov.C35 = txtC35.Text;
+                            cov.C36 = txtC36.Text;
+                            cov.C47 = txtC37.Text;
 
-                            cov.D20 = txtD20.Text;
-                            cov.D21 = txtD21.Text;
-                            cov.D22 = txtD22.Text;
                             cov.D23 = txtD23.Text;
                             cov.D24 = txtD24.Text;
                             cov.D25 = txtD25.Text;
@@ -703,83 +625,26 @@ namespace ALS.ALSI.Web.view.template
                             cov.D30 = txtD30.Text;
                             cov.D31 = txtD31.Text;
                             cov.D32 = txtD32.Text;
-
-                            cov.E20 = txtE20.Text;
-                            cov.E21 = txtE21.Text;
-                            cov.E22 = txtE22.Text;
-                            cov.E23 = txtE23.Text;
-                            cov.E24 = txtE24.Text;
-                            cov.E25 = txtE25.Text;
-                            cov.E26 = txtE26.Text;
-                            cov.E27 = txtE27.Text;
-                            cov.E28 = txtE28.Text;
-                            cov.E29 = txtE29.Text;
-                            cov.E30 = txtE30.Text;
-                            cov.E31 = txtE31.Text;
-                            cov.E32 = txtE32.Text;
-
-                            cov.F20 = txtF20.Text;
-                            cov.F21 = txtF21.Text;
-                            cov.F22 = txtF22.Text;
-                            cov.F23 = txtF23.Text;
-                            cov.F24 = txtF24.Text;
-                            cov.F25 = txtF25.Text;
-                            cov.F26 = txtF26.Text;
-                            cov.F27 = txtF27.Text;
-                            cov.F28 = txtF28.Text;
-                            cov.F29 = txtF29.Text;
-                            cov.F30 = txtF30.Text;
-                            cov.F31 = txtF31.Text;
-                            cov.F32 = txtF32.Text;
+                            cov.D43 = txtD33.Text;
+                            cov.D44 = txtD34.Text;
+                            cov.D45 = txtD35.Text;
+                            cov.D46 = txtD36.Text;
+                            cov.D47 = txtD37.Text;
 
 
-
-                            cov.B40 = txtB40.Text;
-                            cov.B41 = txtB41.Text;
-                            cov.B42 = txtB42.Text;
-                            cov.B43 = txtB43.Text;
-                            cov.B44 = txtB44.Text;
-                            cov.B45 = txtB45.Text;
-                            cov.B46 = txtB46.Text;
-                            cov.B47 = txtB47.Text;
-                            cov.B48 = txtB48.Text;
-                            cov.B49 = txtB49.Text;
-                            cov.B40 = txtB40.Text;
-                            cov.B50 = txtB50.Text;
-                            cov.B51 = txtB51.Text;
-                            cov.B52 = txtB52.Text;
-
-                            cov.C40 = txtC40.Text;
-                            cov.C41 = txtC41.Text;
-                            cov.C42 = txtC42.Text;
-                            cov.C43 = txtC43.Text;
-                            cov.C44 = txtC44.Text;
-                            cov.C45 = txtC45.Text;
-                            cov.C46 = txtC46.Text;
-                            cov.C47 = txtC47.Text;
-                            cov.C48 = txtC48.Text;
-                            cov.C49 = txtC49.Text;
-                            cov.C40 = txtC40.Text;
-                            cov.C50 = txtC50.Text;
-                            cov.C51 = txtC51.Text;
-                            cov.C52 = txtC52.Text;
-
-
-
-
-                            cov.D40 = (txtD40.Text.Length > 20) ? "" : txtD40.Text;
-                            cov.D41 = (txtD41.Text.Length > 20) ? "" : txtD41.Text;
-                            cov.D42 = (txtD42.Text.Length > 20) ? "" : txtD42.Text;
-                            cov.D43 = (txtD43.Text.Length > 20) ? "" : txtD43.Text;
-                            cov.D44 = (txtD44.Text.Length > 20) ? "" : txtD44.Text;
-                            cov.D45 = (txtD45.Text.Length > 20) ? "" : txtD45.Text;
-                            cov.D46 = (txtD46.Text.Length > 20) ? "" : txtD46.Text;
-                            cov.D47 = (txtD47.Text.Length > 20) ? "" : txtD47.Text;
-                            cov.D48 = (txtD48.Text.Length > 20) ? "" : txtD48.Text;
-                            cov.D49 = (txtD49.Text.Length > 20) ? "" : txtD49.Text;
-                            cov.D50 = (txtD50.Text.Length > 20) ? "" : txtD50.Text;
-                            cov.D51 = (txtD51.Text.Length > 20) ? "" : txtD51.Text;
-                            cov.D52 = (txtD52.Text.Length > 20) ? "" : txtD52.Text;
+                            //cov.D40 = (txtD40.Text.Length > 20) ? "" : txtD40.Text;
+                            //cov.D41 = (txtD41.Text.Length > 20) ? "" : txtD41.Text;
+                            //cov.D42 = (txtD42.Text.Length > 20) ? "" : txtD42.Text;
+                            //cov.D43 = (txtD43.Text.Length > 20) ? "" : txtD43.Text;
+                            //cov.D44 = (txtD44.Text.Length > 20) ? "" : txtD44.Text;
+                            //cov.D45 = (txtD45.Text.Length > 20) ? "" : txtD45.Text;
+                            //cov.D46 = (txtD46.Text.Length > 20) ? "" : txtD46.Text;
+                            //cov.D47 = (txtD47.Text.Length > 20) ? "" : txtD47.Text;
+                            //cov.D48 = (txtD48.Text.Length > 20) ? "" : txtD48.Text;
+                            //cov.D49 = (txtD49.Text.Length > 20) ? "" : txtD49.Text;
+                            //cov.D50 = (txtD50.Text.Length > 20) ? "" : txtD50.Text;
+                            //cov.D51 = (txtD51.Text.Length > 20) ? "" : txtD51.Text;
+                            //cov.D52 = (txtD52.Text.Length > 20) ? "" : txtD52.Text;
 
 
                             cov.UnitMotorOilContamination = Convert.ToInt32(ddlUnitMotorOilContamination.SelectedValue);
@@ -1182,89 +1047,56 @@ namespace ALS.ALSI.Web.view.template
                                     txtB18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B));
                                     txtB19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.B));
 
-                                    txtC13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.C));
-                                    txtC14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.C));
-                                    txtC15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.C));
-                                    txtC16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.C));
-                                    txtC17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.C));
-                                    txtC18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C));
-                                    txtC19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.C));
-
                                     #endregion
                                     #region "Motor Base / Baseplate"
-                                    txtB20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.B));
-                                    txtB21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.B));
-                                    txtB22.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.B));
-                                    txtB23.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.B));
-                                    txtB24.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.B));
-                                    txtB25.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.B));
-                                    txtB26.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.B));
-                                    txtB27.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.B));
-                                    txtB28.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));
-                                    txtB29.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));
-                                    txtB30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));
-                                    txtB31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));
-                                    txtB32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.B));
-
-                                    txtC20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.C));
-                                    txtC21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.C));
-                                    txtC22.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.C));
-                                    txtC23.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.C));
-                                    txtC24.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.C));
-                                    txtC25.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.C));
-                                    txtC26.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.C));
-                                    txtC27.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.C));
-                                    txtC28.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.C));
-                                    txtC29.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.C));
-                                    txtC30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.C));
-                                    txtC31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.C));
-                                    txtC32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.C));
-
-                                    txtD20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.D));
-                                    txtD21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.D));
-                                    txtD22.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.D));
-                                    txtD23.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.D));
-                                    txtD24.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.D));
-                                    txtD25.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.D));
-                                    txtD26.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.D));
-                                    txtD27.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.D));
-                                    txtD28.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.D));
-                                    txtD29.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.D));
-                                    txtD30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.D));
-                                    txtD31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
-                                    txtD32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
-
-                                    txtE20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.E));
-                                    txtE21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.E));
-                                    txtE22.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.E));
-                                    txtE23.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.E));
-                                    txtE24.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.E));
-                                    txtE25.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.E));
-                                    txtE26.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.E));
-                                    txtE27.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.E));
-                                    txtE28.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.E));
-                                    txtE29.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.E));
-                                    txtE30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.E));
-                                    txtE31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.E));
-                                    txtE32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.E));
-
-                                    txtF20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.F));
-                                    txtF21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.F));
-                                    txtF22.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.F));
-                                    txtF23.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.F));
-                                    txtF24.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.F));
-                                    txtF25.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.F));
-                                    txtF26.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.F));
-                                    txtF27.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.F));
-                                    txtF28.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.F));
-                                    txtF29.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.F));
-                                    txtF30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.F));
-                                    txtF31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.F));
-                                    txtF32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.F));
+                                    txtB23.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.B));
+                                    txtB24.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.B));
+                                    txtB25.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.B));
+                                    txtB26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.B));
+                                    txtB27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.B));
+                                    txtB28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.B));
+                                    txtB29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.B));
+                                    txtB30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.B));
+                                    txtB31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));
+                                    txtB32.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));
+                                    txtB33.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));
+                                    txtB34.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));
+                                    txtB35.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.B));
+                                    txtB36.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.B));
+                                    txtB37.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.B));
 
 
+                                    txtC23.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.C));
+                                    txtC24.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.C));
+                                    txtC25.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.C));
+                                    txtC26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.C));
+                                    txtC27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.C));
+                                    txtC28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.C));
+                                    txtC29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.C));
+                                    txtC30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.C));
+                                    txtC31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.C));
+                                    txtC32.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.C));
+                                    txtC33.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.C));
+                                    txtC34.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.C));
+                                    txtC35.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.C));
+                                    txtC36.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.C));
+                                    txtC37.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.C));
 
-
+                                    txtD23.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.D));
+                                    txtD24.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.D));
+                                    txtD25.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.D));
+                                    txtD26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.D));
+                                    txtD27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.D));
+                                    txtD28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.D));
+                                    txtD29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.D));
+                                    txtD30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.D));
+                                    txtD31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.D));
+                                    txtD32.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.D));
+                                    txtD33.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.D));
+                                    txtD34.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
+                                    txtD35.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
+                                    txtD36.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.D));
+                                    txtD37.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.D));
 
                                     #endregion
                                     #region "Motor Hub"
@@ -1387,32 +1219,32 @@ namespace ALS.ALSI.Web.view.template
                 gvRHCHub.DataBind();
 
                 //Note: This report was performed test by ALS Singapore.
-                if (!string.IsNullOrEmpty(txtD31.Text) && String.IsNullOrEmpty(lbRemark1.Text))
+                if (!string.IsNullOrEmpty(txtD36.Text))
                 {
-                    lbRemark1.Text = String.Format("1.) Minimum RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD31.Text), 3), txtD32.Text);
+                    lbRemark1.Text = String.Format("1.) Minimum RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD36.Text), 3), txtD37.Text);
                 }
 
-                if (!string.IsNullOrEmpty(txtC31.Text) && String.IsNullOrEmpty(lbRemark2.Text))
+                if (!string.IsNullOrEmpty(txtC36.Text))
                 {
-                    lbRemark2.Text = String.Format("2.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC31.Text), 3), txtC32.Text);
+                    lbRemark2.Text = String.Format("2.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC36.Text), 3), txtC37.Text);
                 }
-                if (!string.IsNullOrEmpty(txtD51.Text) && String.IsNullOrEmpty(lbRemark3.Text))
+                if (!string.IsNullOrEmpty(txtD51.Text))
                 {
                     lbRemark3.Text = String.Format("3.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
                 }
-                if (!string.IsNullOrEmpty(txtC51.Text) && String.IsNullOrEmpty(lbRemark4.Text))
+                if (!string.IsNullOrEmpty(txtC51.Text) )
                 {
                     lbRemark4.Text = String.Format("4.) Minimum RHC Detection Limit is Hub {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
                 }
-                if (!string.IsNullOrEmpty(txtC51.Text) && String.IsNullOrEmpty(lbRemark5.Text))
+                if (!string.IsNullOrEmpty(txtC51.Text))
                 {
                     lbRemark5.Text = String.Format("5.) Minimum RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
                 }
 
-                gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
-                gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
-                gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB32.Text);
-                gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", txtB32.Text);
+                gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB37.Text);
+                gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", txtB37.Text);
+                gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB37.Text);
+                gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", txtB37.Text);
                 gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
                 gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
                 gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBase.SelectedItem.Text);
@@ -1935,19 +1767,16 @@ namespace ALS.ALSI.Web.view.template
             //set float
 
 
-            txtB25.Text = String.IsNullOrEmpty(txtB25.Text) ? "" : Convert.ToDouble(txtB25.Text).ToString("N3");
-            txtC25.Text = String.IsNullOrEmpty(txtC25.Text) ? "" : Convert.ToDouble(txtC25.Text).ToString("N3");
-            txtD25.Text = String.IsNullOrEmpty(txtD25.Text) ? "" : Convert.ToDouble(txtD25.Text).ToString("N3");
-            txtB30.Text = String.IsNullOrEmpty(txtB30.Text) ? "" : Convert.ToDouble(txtB30.Text).ToString("N3");
-            txtC30.Text = String.IsNullOrEmpty(txtC30.Text) ? "" : Convert.ToDouble(txtC30.Text).ToString("N3");
-            txtD30.Text = String.IsNullOrEmpty(txtD30.Text) ? "" : Convert.ToDouble(txtD30.Text).ToString("N3");
-
-            txtE30.Text = String.IsNullOrEmpty(txtE30.Text) ? "" : Convert.ToDouble(txtE30.Text).ToString("N3");
-            txtF30.Text = String.IsNullOrEmpty(txtF30.Text) ? "" : Convert.ToDouble(txtF30.Text).ToString("N3");
+            txtB28.Text = String.IsNullOrEmpty(txtB28.Text) ? "" : Convert.ToDouble(txtB28.Text).ToString("N3");
+            txtC28.Text = String.IsNullOrEmpty(txtC28.Text) ? "" : Convert.ToDouble(txtC28.Text).ToString("N3");
+            txtD28.Text = String.IsNullOrEmpty(txtD28.Text) ? "" : Convert.ToDouble(txtD28.Text).ToString("N3");
+            txtB33.Text = String.IsNullOrEmpty(txtB33.Text) ? "" : Convert.ToDouble(txtB33.Text).ToString("N3");
+            txtC33.Text = String.IsNullOrEmpty(txtC33.Text) ? "" : Convert.ToDouble(txtC33.Text).ToString("N3");
+            txtD33.Text = String.IsNullOrEmpty(txtD33.Text) ? "" : Convert.ToDouble(txtD33.Text).ToString("N3");
 
             txtB31.Text = String.IsNullOrEmpty(txtB31.Text) ? "" : Convert.ToDouble(txtB31.Text).ToString("N3");
-            txtC31.Text = String.IsNullOrEmpty(txtC31.Text) ? "" : Convert.ToDouble(txtC31.Text).ToString("N3");
-            txtD31.Text = String.IsNullOrEmpty(txtD31.Text) ? "" : Convert.ToDouble(txtD31.Text).ToString("N3");
+            txtC36.Text = String.IsNullOrEmpty(txtC36.Text) ? "" : Convert.ToDouble(txtC36.Text).ToString("N3");
+            txtD36.Text = String.IsNullOrEmpty(txtD36.Text) ? "" : Convert.ToDouble(txtD36.Text).ToString("N3");
 
 
 
@@ -2026,9 +1855,9 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorBases = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE) && !x.A.Equals("-")).ToList();
             if (motorBases.Count > 0)
             {
-                if (!String.IsNullOrEmpty(txtD30.Text))
+                if (!String.IsNullOrEmpty(txtD33.Text))
                 {
-                    motorBases[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    motorBases[0].C = (Convert.ToDecimal(txtD33.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD33.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
                 }
                 gvMotorBase.DataSource = motorBases;
                 gvMotorBase.DataBind();
@@ -2043,8 +1872,8 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorBaseSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-")).ToList();
             if (motorBaseSubs.Count > 0)
             {
-                motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), Convert.ToInt16(txtFloatResult07.Text)) + "";//Compounds with RT ≤ DOP
-                motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), Convert.ToInt16(txtFloatResult08.Text)) + "";//Compounds with RT > DOP
+                motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB33.Text) ? "0" : txtB33.Text), Convert.ToInt16(txtFloatResult07.Text)) + "";//Compounds with RT ≤ DOP
+                motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC33.Text) ? "0" : txtC33.Text), Convert.ToInt16(txtFloatResult08.Text)) + "";//Compounds with RT > DOP
                 motorBaseSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorBaseSubs[1].C) + Convert.ToDecimal(motorBaseSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult09.Text)) + "";//Total Organic Compound (TOC)
 
                 motorBaseSubs[1].C = (Convert.ToDouble(motorBaseSubs[1].C) == 0) ? "Not Detected" : motorBaseSubs[1].C;
@@ -2065,9 +1894,9 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> compounds = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND) && !x.A.Equals("-")).ToList();
             if (compounds.Count > 0)
             {
-                if (!String.IsNullOrEmpty(txtD30.Text))
+                if (!String.IsNullOrEmpty(txtD35.Text))
                 {
-                    compounds[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), Convert.ToInt32(txtFloatResult10.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    compounds[0].C = (Convert.ToDecimal(txtD35.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD35.Text), Convert.ToInt32(txtFloatResult10.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
                 }
                 gvCompound.DataSource = compounds;
                 gvCompound.DataBind();
@@ -2082,12 +1911,12 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
             if (compoundSubs.Count > 0)
             {
-                compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), Convert.ToInt32(txtFloatResult11.Text)) + "";//Compounds with RT > DOP
-                compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), Convert.ToInt32(txtFloatResult12.Text)) + "";//Compounds with RT > DOP
+                compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB35.Text) ? "0" : txtB35.Text), Convert.ToInt32(txtFloatResult11.Text)) + "";//Compounds with RT > DOP
+                compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC35.Text) ? "0" : txtC35.Text), Convert.ToInt32(txtFloatResult12.Text)) + "";//Compounds with RT > DOP
                 compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
                 if (compounds.Count > 3)
                 {
-                    compoundSubs[4].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE30.Text) ? "0" : txtE30.Text), Convert.ToInt32(txtFloatResult13.Text)) + "";//Compounds with RT > DOP
+                    //compoundSubs[4].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE30.Text) ? "0" : txtE30.Text), Convert.ToInt32(txtFloatResult13.Text)) + "";//Compounds with RT > DOP
                 }
 
 

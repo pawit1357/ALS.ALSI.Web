@@ -42,11 +42,7 @@ namespace ALS.ALSI.Web.view.template
             get { return (String)Session[GetType().Name + "Message"]; }
             set { Session[GetType().Name + "Message"] = value; }
         }
-        protected String Message2
-        {
-            get { return (String)Session[GetType().Name + "Message2"]; }
-            set { Session[GetType().Name + "Message2"] = value; }
-        }
+
         private void initialPage()
         {
         }
@@ -64,12 +60,12 @@ namespace ALS.ALSI.Web.view.template
             if (!Page.IsPostBack)
             {
                 searchResult = new List<CSo>();
-                pSo.Visible = false;
                 hToken.Value = GetToken();
                 hDataSetId.Text = GetDataset(hToken.Value);
             }
         }
 
+        #region "BTN"
         protected void btnSave_Click(object sender, EventArgs e)
         {
             //Get an authentication access token
@@ -86,20 +82,14 @@ namespace ALS.ALSI.Web.view.template
                 Message = "<div class=\"alert alert-success\"><strong>Info!</strong>Invalid dataset.</div>";
             }
         }
-
-        protected void btnSaveSo_Click(object sender, EventArgs e)
-        {
-
-            Message2 = "<div class=\"alert alert-success\"><strong>Info!</strong>บันทึกรายการเรียบร้อย</div>";
-
-        }
-
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             removeSession();
             Response.Redirect(Constants.LINK_SEARCH_JOB_REQUEST);
         }
-
+        #endregion
+        
+        #region "Power-BI"
         #region Get an authentication access token
         private static string GetToken()
         {
@@ -139,7 +129,7 @@ namespace ALS.ALSI.Web.view.template
 
             return token;
         }
-        
+
         #endregion
 
         #region Create a dataset in a Power BI
@@ -209,7 +199,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-           
+
 
             using (Stream writer = request.GetRequestStream())
             {
@@ -266,7 +256,7 @@ namespace ALS.ALSI.Web.view.template
         #endregion
 
         #region Add rows to a Power BI table
-        private void AddRows(string datasetId, string tableName, string jsonData,string token)
+        private void AddRows(string datasetId, string tableName, string jsonData, string token)
         {
             string powerBIApiAddRowsUrl = String.Format("https://api.powerbi.com/v1.0/myorg/datasets/{0}/tables/{1}/rows", datasetId, tableName);
 
@@ -298,133 +288,8 @@ namespace ALS.ALSI.Web.view.template
 
         }
         #endregion
-
-        protected void btnUpload_Click(object sender, EventArgs e)
-        {
-            String _phisicalPath = String.Format(Configurations.PATH_TMP, String.Empty);
-            String _savefilePath = String.Format(Configurations.PATH_TMP, FileUpload1.FileName);
-            //::PROCESS UPLOAD
-
-            if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".txt")))
-            {
-                if (!Directory.Exists(_phisicalPath))
-                {
-                    Directory.CreateDirectory(_phisicalPath);
-                }
-                FileUpload1.SaveAs(_savefilePath);
-                ProcessUpload(_savefilePath);
-            }
-            else
-            {
-                Message2 = "<div class=\"alert alert-danger\"><strong>Error!</strong>สามารถอัพโหลดได้เฉพาะ ไฟล์ Text(*.txt) </div>";
-            }
-        }
-
-        private void ProcessUpload(String filePath)
-        {
-            Boolean bUploadSuccess = false;
-            String line;
-            StringBuilder sb = new StringBuilder();
-            try
-            {
-
-                StreamReader sr = new StreamReader(filePath);
-
-                //Read the first line of text
-                line = sr.ReadLine();
-
-                //Continue to read until you reach end of file
-                CSo cso = null;
-                int index = 0;
-                while (line != null)
-                {
-
-
-                    //write the lie to console window
-                    if (line.StartsWith("  SO"))
-                    {
-                        cso = new CSo { SO = line.Substring(0, 11).Trim(), _Qty = new List<double>(), _UnitPrice = new List<double>(), _ReportNo = new List<string>() };
-                        if (index > 0)
-                        {
-                            searchResult.Add(cso);
-                        }
-                        Console.WriteLine(line);
-                    }
-                    else if (line.Contains("SAMPLE"))
-                    {
-                        Double qty = Convert.ToDouble(Regex.Replace(line.Substring(50, 15), "[A-Za-z ]", ""));
-                        Double unitPrice = Convert.ToDouble(Regex.Replace(line.Substring(65, 15), "[A-Za-z ]", "").Replace(",", "").Trim());
-                        cso._Qty.Add(qty);
-                        cso._UnitPrice.Add(unitPrice);
-                        Console.WriteLine(line);
-                    }
-                    else if (line.Contains("Report no."))
-                    {
-                        Console.WriteLine(line);
-                        cso._ReportNo.Add(line.Replace("Report no.", "").Trim());
-                    }
-                    else if (line.Contains("ELP-") || line.Contains("ELS-") || line.Contains("ELN-") || line.Contains("FA-") || line.Contains("ELWA-") || line.Contains("GRP-") || line.Contains("TRB-"))
-                    {
-                        Console.WriteLine(line);
-                        cso._ReportNo.Add(line.Replace("Report no.", "").Trim());
-                    }
-
-                    //Read the next line
-                    line = sr.ReadLine();
-                    index++;
-                }
-
-                //close the file
-                sr.Close();
-                bUploadSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                Message2 = "<div class=\"alert alert-danger\"><strong>Error!</strong>" + ex.InnerException + "</div>";
-
-                Console.WriteLine(ex.Message);
-            }
-            if (bUploadSuccess)
-            {
-                pSo.Visible = true;
-                gvJob.DataSource = this.searchResult;
-                gvJob.DataBind();
-                //Commit
-                Message2 = "<div class=\"alert alert-info\"><strong>Info!</strong>อัพโหลดไฟล์ so เรียบร้อยแล้ว <br>" + sb.ToString()+" </div>";
-            }
-            else
-            {
-                pSo.Visible = false;
-                Message2 = "<div class=\"alert alert-danger\"><strong>Error!</strong>Upload Fail.</div>";
-            }
-        }
-
-        #region "GRD"
-        protected void gvResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            if (e.NewPageIndex < 0) return;
-            GridView gv = (GridView)sender;
-            gv.DataSource = searchResult;
-            gv.PageIndex = e.NewPageIndex;
-            gv.DataBind();
-        }
-
-        protected void gvResult_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowIndex != -1)
-            {
-            }
-        }
-
-        protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            if (e.NewPageIndex < 0) return;
-            GridView gv = (GridView)sender;
-            gv.DataSource = searchResult;
-            gv.PageIndex = e.NewPageIndex;
-            gv.DataBind();
-        }
         #endregion
+
     }
 }
 

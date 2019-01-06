@@ -14,95 +14,6 @@
         </div>
         <asp:HiddenField ID="hToken" Value="" runat="server" />
 
-
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">อัพโหลดไฟล์ SO</span>
-                    <span class="caption-helper"></span>
-                </div>
-                <div class="tools">
-                    <a href="#" class="collapse"></a>
-                </div>
-            </div>
-            <div class="portlet-body form">
-                <div class="form-body">
-<%=Message2 %>
-
-                    <!-- BEGIN FORM-->
-                    <div class="row fileupload-buttonbar">
-                        <div class="col-lg-8">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">เลือกไฟล์ SO<span class="required">*</span></label>
-                                <div class="col-md-6">
-                                    <span class="btn green fileinput-button">
-                                        <asp:FileUpload ID="FileUpload1" runat="server" />
-                                    </span>
-                                </div>
-                                <div>
-                                    <asp:Button ID="btnUpload" runat="server" class="btn small blue" Text="อัพโหลดไฟล์" OnClick="btnUpload_Click" />
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <asp:Panel ID="pSo" runat="server">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">ยืนยันข้อมูล SO:</label>
-                                    <div class="col-md-8">
-                                        <div class="form-group" style="text-align: left">
-                                            <br />
-                                            <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False" AllowPaging="True"
-                                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="SO" OnPageIndexChanging="gvJob_PageIndexChanging" PageSize="20" Width="100%">
-                                                <Columns>
-                                                    <asp:BoundField HeaderText="SO" DataField="SO" ItemStyle-HorizontalAlign="Left" SortExpression="SO" />
-                                                    <asp:BoundField HeaderText="PO" DataField="PO" ItemStyle-HorizontalAlign="Left" SortExpression="PO" />
-                                                    <%--                                <asp:BoundField HeaderText="Date" DataField="Date" ItemStyle-HorizontalAlign="Left" SortExpression="Date" />--%>
-                                                    <asp:BoundField HeaderText="Qty" DataField="Qty" ItemStyle-HorizontalAlign="Left" SortExpression="Qty" />
-                                                    <asp:BoundField HeaderText="UnitPrice" DataField="UnitPrice" ItemStyle-HorizontalAlign="Left" SortExpression="UnitPrice" />
-                                                    <asp:BoundField HeaderText="ReportNo" DataField="ReportNo" ItemStyle-HorizontalAlign="Left" SortExpression="ReportNo" />
-
-                                                </Columns>
-                                                <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
-
-                                                <EmptyDataTemplate>
-                                                    <div class="data-not-found">
-                                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                                    </div>
-                                                </EmptyDataTemplate>
-                                            </asp:GridView>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <asp:Button ID="btnSaveSo" runat="server" class="btn green" Text="Save" OnClick="btnSaveSo_Click" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                </div>
-                            </div>
-                        </div>
-                    </asp:Panel>
-
-
-
-
-
-                    <!-- END FORM-->
-                </div>
-            </div>
-        </div>
-
         <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption">
@@ -118,7 +29,7 @@
             <div class="portlet-body form">
                 <div class="form-body">
                     <!-- BEGIN FORM-->
-                                         <%=Message %>
+                    <%=Message %>
 
                     <div class="row">
                         <div class="col-md-8">
@@ -168,7 +79,6 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-
                             </div>
                         </div>
                     </div>
@@ -176,9 +86,6 @@
                 </div>
             </div>
         </div>
-
-
-
 
 
     </form>
