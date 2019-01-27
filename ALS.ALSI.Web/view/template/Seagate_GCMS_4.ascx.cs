@@ -1921,7 +1921,7 @@ namespace ALS.ALSI.Web.view.template
 
 
 
-
+                compoundSubs[0].C = (Convert.ToDouble(compoundSubs[1].C) == 0) ? "Not Detected" : compoundSubs[0].C;
                 compoundSubs[1].C = (Convert.ToDouble(compoundSubs[1].C) == 0) ? "Not Detected" : compoundSubs[1].C;
                 compoundSubs[2].C = (Convert.ToDouble(compoundSubs[2].C) == 0) ? "Not Detected" : compoundSubs[2].C;
                 if (compounds.Count > 3)

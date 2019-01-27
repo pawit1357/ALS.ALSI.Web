@@ -251,7 +251,7 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="row">
+<div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-3">Invoice Amount:</label>
@@ -279,6 +279,49 @@
                                 </div>
                             </div>
                         </div>
+                                            <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Payment Date:</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                            <asp:TextBox ID="txtPaymentDate" name="txtPaymentDate" runat="server" class="form-control"></asp:TextBox>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<%--                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Invoice Amount:</label>
+                                <div class="col-md-6">
+                                    <div class="input-group" style="text-align: left">
+                                        <asp:TextBox ID="txtInvoiceAmt" name="txtInvoiceAmt" runat="server" class="form-control"></asp:TextBox>
+                                        <span class="input-group-btn"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>--%>
+                        <%--<div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Invoice Date:</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                            <asp:TextBox ID="txtInvoiceDate" name="txtInvoiceDate" runat="server" class="form-control"></asp:TextBox>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -291,7 +334,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </asp:Panel>
                     <asp:Panel ID="pChangeDueDate" runat="server">
                         <div class="row">

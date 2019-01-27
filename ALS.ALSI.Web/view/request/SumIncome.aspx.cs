@@ -146,7 +146,7 @@ namespace ALS.ALSI.Web.view.request
                 "	(TotalSubAmount * 0.03) as WithholdingTax3,                                                    " +
                 "    ((TotalSubAmount + (TotalSubAmount * 0.07)) - (TotalSubAmount * 0.03)) as TotaAmount,         " +
                 "    DeptBOI,                                                                                      " +
-                "    '' as CustomerTypeHDD                                                                         " +
+                "    CustomerTypeHDD                                                                         " +
                 "FROM                                                                                              " +
                 "    (SELECT                                                                                       " +
                 "        s.sample_invoice AS Number,                                                               " +
@@ -158,44 +158,40 @@ namespace ALS.ALSI.Web.view.request
                 "            (CASE                                                                                 " +
                 "                WHEN RIGHT(s.job_number, 1) = 'B' THEN 'BOI'                                      " +
                 "                ELSE 'NBOI'                                                                       " +
-                "            END) AS DeptBOI                                                                       " +
+                "            END) AS DeptBOI," +
+                "(case when SUBSTRING_INDEX(s.job_number, '-', 1) = 'ELN' then 'non-HDD' when SUBSTRING_INDEX(s.job_number, '-', 1) = 'ELP' then 'HDD' when SUBSTRING_INDEX(s.job_number, '-', 1) = 'GRP' then 'HDD' when SUBSTRING_INDEX(s.job_number, '-', 1) = 'ELWA' then 'HDD' else '' end) as CustomerTypeHDD" +
                 "    FROM                                                                                          " +
                 "        job_sample s                                                                              " +
                 "    LEFT JOIN job_info i ON s.job_id = i.id                                                       " +
                 "    LEFT JOIN m_customer c ON i.customer_id = c.id                                                " +
+                "    LEFT JOIN m_type_of_test tot ON tot.ID = s.type_of_test_id                                                " +
+
                 "    WHERE                                                                                         " +
                 "        s.sample_po IS NOT NULL                                                                   " +
-                "            AND s.sample_po) x                                                                    " +
-                "GROUP BY x.InvoiceDate , x.Terms , x.PurchaseOrder , x.Customer , x.TotalSubAmount , x.DeptBOI) X   ";
+                "            ) x                                                                    " +
+                "GROUP BY x.InvoiceDate , x.Terms , x.PurchaseOrder , x.Customer , x.TotalSubAmount , x.DeptBOI order by SUBSTRING(x.Number,3) asc) X  where 1 = 1";
 
-
-                sqlCri.Append(" YEAR(X.InvoiceDate) = '" + ddlPhysicalYear.SelectedValue + "'");
-                sqlCri.Append(" AND ");
+                sqlCri.Append(" AND YEAR(X.InvoiceDate) = '" + ddlPhysicalYear.SelectedValue + "'");
 
 
                 if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))
                 {
                     if (ddlBoiNonBoi.SelectedValue.ToString().Equals("NB"))
                     {
-                        sqlCri.Append(" X.DeptBOI  <> 'BOI'");
-                        sqlCri.Append(" AND ");
-
+                        sqlCri.Append(" AND X.DeptBOI  <> 'BOI'");
                     }
                     else
                     {
-                        sqlCri.Append(" X.DeptBOI  = 'BOI'");
-                        sqlCri.Append(" AND ");
+                        sqlCri.Append(" AND X.DeptBOI  = 'BOI'");
                     }
                 }
                 if (!String.IsNullOrEmpty(txtSamplePo.Text))
                 {
-                    sqlCri.Append(" X.PurchaseOrder like '%" + txtSamplePo.Text + "%'");
-                    sqlCri.Append(" AND ");
+                    sqlCri.Append(" AND X.PurchaseOrder like '%" + txtSamplePo.Text + "%'");
                 }
                 if (!String.IsNullOrEmpty(txtInvoice.Text))
                 {
-                    sqlCri.Append(" X.Number like '%" + txtInvoice.Text + "%'");
-                    sqlCri.Append(" AND ");
+                    sqlCri.Append(" AND X.Number like '%" + txtInvoice.Text + "%'");
                 }
 
 
@@ -203,12 +199,11 @@ namespace ALS.ALSI.Web.view.request
                 DateTime receive_report_to = String.IsNullOrEmpty(txtInvoiceDateTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtInvoiceDateTo.Text);
                 if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
                 {
-                    sqlCri.Append(" X.InvoiceDate between'" + receive_report_from.ToString("yyyy-MM-dd") + "' AND '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
-                    sqlCri.Append(" AND ");
+                    sqlCri.Append(" AND X.InvoiceDate between'" + receive_report_from.ToString("yyyy-MM-dd") + "' AND '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
                 }
 
 
-                sql += (sqlCri.ToString().Length > 0) ? " WHERE " + sqlCri.ToString().Substring(0, sqlCri.ToString().Length - 5) : "";
+                sql += (sqlCri.ToString());
 
 
 
@@ -309,6 +304,7 @@ namespace ALS.ALSI.Web.view.request
                     int startIndex = 5;
                     int runningRow = 5;
                     var ws = xPackage.Workbook.Worksheets["Template"];
+                    ws.Cells["A1"].Value = "Summary Invoice on "+ Convert.ToDateTime(this.searchResult.Rows[0][0]).ToString("MMMM yyyy");
                     foreach (DataRow row in this.searchResult.Rows)
                     {
                         ws.Cells["A" + runningRow].Value = Convert.ToDateTime(row.ItemArray.GetValue(0));
@@ -319,10 +315,17 @@ namespace ALS.ALSI.Web.view.request
                         ws.Cells["F" + runningRow].Value = Convert.ToDouble(row.ItemArray.GetValue(5));
                         ws.Cells["G" + runningRow].Formula = "=F" + runningRow + "*0.07";
                         ws.Cells["H" + runningRow].Formula = "=F" + runningRow + "+G" + runningRow + "";
-                        ws.Cells["I" + runningRow].Formula = "=F" + runningRow + "*0.03";
+
+                        ws.Cells["I" + runningRow].Formula = "=F" + runningRow + "*0.03";//WithholdingTax(3 %)
                         ws.Cells["J" + runningRow].Formula = "=H" + runningRow + "-I" + runningRow + "";
-                        ws.Cells["K" + runningRow].Value = row.ItemArray.GetValue(10).ToString(); ;
-                        ws.Cells["L" + runningRow].Value = row.ItemArray.GetValue(11).ToString(); ;
+                        ws.Cells["K" + runningRow].Value = row.ItemArray.GetValue(10).ToString(); //BOI/NBOI
+                        ws.Cells["L" + runningRow].Value = row.ItemArray.GetValue(11).ToString(); 
+
+                        if(!ws.Cells["K" + runningRow].Value.Equals("NBOI"))
+                        {
+                            ws.Cells["I" + runningRow].Value = "0";
+                        }
+
                         runningRow++;
                     }
                     ws.Cells["F" + runningRow].Formula = "=SUM(F" + startIndex + ":F" + (runningRow-1) + ")";

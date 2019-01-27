@@ -393,12 +393,18 @@ namespace ALS.ALSI.Web.view.request
                 else if (this.isInvoiceGroupOperation)
                 {
                     jobSample.sample_invoice = txtInvoice.Text;
-                    jobSample.sample_invoice_amount = String.IsNullOrEmpty(txtInvoiceAmount.Text) ? Convert.ToDouble("0") : Convert.ToDouble(txtInvoiceAmount.Text);
+                    jobSample.sample_invoice_amount = String.IsNullOrEmpty(txtInvoiceAmt.Text) ? Convert.ToDouble("0") : Convert.ToDouble(txtInvoiceAmt.Text);
                     if (!String.IsNullOrEmpty(txtInvoiceDate.Text))
                     {
                         jobSample.sample_invoice_date = CustomUtils.converFromDDMMYYYY(txtInvoiceDate.Text);
+                        jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_INPROCESS);
                     }
-                    jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_INPROCESS);
+                    if (!String.IsNullOrEmpty(txtPaymentDate.Text))
+                    {
+                        jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+                        jobSample.sample_invoice_complete_date = CustomUtils.converFromDDMMYYYY(txtInvoiceDate.Text);
+                    }
+
 
                 }
                 else if (this.isCusRefNoGroupOperation)

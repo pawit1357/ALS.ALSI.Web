@@ -1,125 +1,270 @@
 using ALS.ALSI.Biz;
 using ALS.ALSI.Biz.Constant;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Net.Http;
+using System.IO;
+using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ALS_Synchronize_BI
 {
     class Program
     {
-        // Use class-level Random for best results
-        static Random random = new Random();
-
-        // Use class-level HttpClient as a best practice
-        static HttpClient client = new HttpClient();
-        //static List<SampleRevenue> weatherStation;
-        static string powerBiPostUrl = "";
-
+        private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Program));
 
         static void Main(string[] args)
         {
-
-            powerBiPostUrl = ConfigurationManager.AppSettings["powerBiPostUrl"];
-
-
-
-            const int duration = 60; // Length of time in minutes to push data
-            const int pauseInterval = 2; // Frequency in seconds that data will be pushed
-            const string timeFormat = "yyyy-MM-ddTHH:mm:ss.fffZ"; // Time format required by Power BI
-
-            //weatherStation = new List<SampleRevenue>();
-            //weatherStation.Add(new SampleRevenue { sample_date = "Jan", sample_amount = 500, sample_amount_actual = 450 });
-            //weatherStation.Add(new SampleRevenue { sample_date = "Feb", sample_amount = 600, sample_amount_actual = 600 });
-            //weatherStation.Add(new SampleRevenue { sample_date = "Mar", sample_amount = 400, sample_amount_actual = 450 });
-            //weatherStation.Add(new SampleRevenue { sample_date = "May", sample_amount = 450, sample_amount_actual = 450 });
-            //weatherStation.Add(new SampleRevenue { sample_date = "Jun", sample_amount = 600, sample_amount_actual = 600 });
-            //weatherStation.Add(new SampleRevenue { sample_date = "Jul", sample_amount = 400, sample_amount_actual = 450 });
-            //weatherStation.Add(new SampleRevenue { sample_date = "Aug", sample_amount = 200, sample_amount_actual = 800 });
-
-            GenerateObservations(duration, pauseInterval, timeFormat);
-
-
-            Console.WriteLine();
-
-        }
-
-
-
-        public static void GenerateObservations(int duration, int pauseInterval, string timeFormat)
-        {
-            DateTime startTime = GetDateTimeUtc();
-            DateTime currentTime;
-            String sql = "select " +
-            " year(sample_invoice_complete_date) as y," +
-            " month(sample_invoice_complete_date) as m," +
-            " sum(sample_invoice_amount) as revenue " +
-            " from alsi.job_sample" +
-            " where sample_invoice_status = 2" +
-            " group by year(sample_invoice_complete_date),month(sample_invoice_complete_date);";
-            DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
-            Console.WriteLine();
-
-            SampleRevenue sampleRevenue = new SampleRevenue { y = "2018", m = "Jan", revenue = 450 };
-
-            var jsonString = JsonConvert.SerializeObject(sampleRevenue);
-
-            //string jsonString = JsonConvert.SerializeObject(dt, Formatting.Indented);
-
-            do
+            if (args.Length > 0)
             {
-                jsonString = "[{\"y\":\"2018\",\"m\":\"Jan\",\"revenue\":1},{\"y\":\"2018\",\"m\":\"Feb\",\"revenue\":11},{\"y\":\"2018\",\"m\":\"Mar\",\"revenue\":111},{\"y\":\"2018\",\"m\":\"May\",\"revenue\":1111}s]";
-                //foreach (var station in weatherStation)
-                //{
-                //    SampleRevenue sampleRevenue = new SampleRevenue
-                //    {
-                //        sample_date = station.sample_date,
-                //        sample_amount = station.sample_amount,
-                //        sample_amount_actual = station.sample_amount_actual,
-                //    };
+                int index = Convert.ToInt16(args[0])-1;
+                String tokenId = GetToken();
+                String datasetId = GetDataset(tokenId);
 
-                //    var jsonString = JsonConvert.SerializeObject(sampleRevenue);
-                //for(int i = 0; i < 10; i++)
-                //{
-                    var postToPowerBi = HttpPostAsync(powerBiPostUrl, "[" + jsonString + "]"); // Add brackets for Power BI
-                    Console.WriteLine(jsonString);
-                //}
+                String[] vwList = { "vw_revenue_actual", "vw_forcast_budget", "vw_outstanding_balance", "vw_summary_inv_status" };
+                String[] method = { "DELETE", "POST" };
 
-                //}
+                logger.Debug("Start update to power-bi datasetId=" + datasetId);
+                Console.WriteLine("Start update to power-bi datasetId=" + datasetId);
+                if (!String.IsNullOrEmpty(datasetId))
+                {
+                    //for (int i = 0; i < vwList.Length; i++)
+                    //{
+                        DataTable dt = MaintenanceBiz.ExecuteReturnDt(String.Format("select * from {0}", vwList[index]));
+                        String JSONresult = JsonConvert.SerializeObject(dt);
+                        for (int j = 0; j < method.Length; j++)
+                        {
+                            AddRows(datasetId, vwList[index], JSONresult, tokenId, method[j]);
+                            logger.Debug(String.Format("Send {0} with method {1}", vwList[index], method[j]));
+                            Console.WriteLine(String.Format("Send {0} with method {1}", vwList[index], method[j]));
+                        }
+                    //}
+                    logger.Debug("End");
+                    Console.WriteLine("End");
+                }
+                else
+                {
+                    logger.Debug("Invalid dataset");
+                    Console.WriteLine("Invalid dataset");
+                }
+            }
+            else
+            {
+                logger.Debug("Invalid argument");
 
+            }
+            Console.WriteLine();
 
-                Thread.Sleep(pauseInterval * 1000); // Pause for n seconds. Not highly accurate.
-                currentTime = GetDateTimeUtc();
-            } while ((currentTime - startTime).TotalMinutes <= duration);
         }
-        public class SampleRevenue
+
+        #region "Power-BI"
+        #region Get an authentication access token
+        private static string GetToken()
         {
-            public string y { get; set; }
-            public string m { get; set; }
-            public int revenue { get; set; }
+            // TODO: Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory -Version 2.21.301221612
+            // and add using Microsoft.IdentityModel.Clients.ActiveDirectory
 
+            //The client id that Azure AD created when you registered your client app.
+            string clientID = Configurations.ClientID;//APPLICATION ID
+
+            //RedirectUri you used when you register your app.
+            //For a client app, a redirect uri gives Azure AD more details on the application that it will authenticate.
+            // You can use this redirect uri for your client app
+            //string redirectUri = "https://login.live.com/oauth20_desktop.srf";
+
+            //Resource Uri for Power BI API
+            string resourceUri = "https://analysis.windows.net/powerbi/api";
+
+            //OAuth2 authority Uri
+            string authorityUri = "https://login.windows.net/common/oauth2/authorize";
+
+            //Get access token:
+            // To call a Power BI REST operation, create an instance of AuthenticationContext and call AcquireToken
+            // AuthenticationContext is part of the Active Directory Authentication Library NuGet package
+            // To install the Active Directory Authentication Library NuGet package in Visual Studio,
+            //  run "Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory" from the nuget Package Manager Console.
+
+            // AcquireToken will acquire an Azure access token
+            // Call A cquireToken to get an Azure token from Azure Active Directory token issuance endpoint
+            AuthenticationContext authContext = new AuthenticationContext(authorityUri);
+            //string token = authContext.AcquireToken(resourceUri, clientID, new Uri(redirectUri)).AccessToken;
+
+            string token = authContext.AcquireToken(resourceUri, clientID, new UserCredential(Configurations.AzureUsername, Configurations.AzurePassword)).AccessToken;
+
+            ///
+
+
+            ///
+
+            return token;
         }
 
+        #endregion
 
-        static async Task<HttpResponseMessage> HttpPostAsync(string url, string data)
+        #region Create a dataset in a Power BI
+        private static void CreateDataset(string token)
         {
-            // Construct an HttpContent object from StringContent
-            HttpContent content = new StringContent(data);
-            HttpResponseMessage response = await client.PostAsync(url, content);
-            response.EnsureSuccessStatusCode();
-            return response;
-        }
+            //TODO: Add using System.Net and using System.IO
 
-        static DateTime GetDateTimeUtc()
+            string powerBIDatasetsApiUrl = "https://api.powerbi.com/v1.0/myorg/datasets";
+            //POST web request to create a dataset.
+            //To create a Dataset in a group, use the Groups uri: https://api.PowerBI.com/v1.0/myorg/groups/{group_id}/datasets
+            HttpWebRequest request = System.Net.WebRequest.Create(powerBIDatasetsApiUrl) as System.Net.HttpWebRequest;
+            request.KeepAlive = true;
+            request.Method = "POST";
+            request.ContentLength = 0;
+            request.ContentType = "application/json";
+
+            //Add token to the request header
+            request.Headers.Add("Authorization", String.Format("Bearer {0}", token));
+
+            //Create dataset JSON for POST request
+
+            //Create dataset JSON for POST request
+            string datasetJson = "{\"name\": \"ALS_ALIS_BI_DS2\", \"tables\": " +
+                "[" +
+                /* =============== vw_revenue_actual =============== */
+                "{\"name\": \"vw_revenue_actual\", \"columns\": " +
+                "[{ \"name\": \"rev_year\", \"dataType\": \"Int64\"}, " +
+                "{ \"name\": \"rev_month\", \"dataType\": \"string\"}, " +
+                "{ \"name\": \"rev_type\", \"dataType\": \"string\"}," +
+                "{ \"name\": \"rev_amt\", \"dataType\": \"Int64\"}]" +
+                "}," +
+                /* =============== vw_forcast_budget =============== */
+                "{\"name\": \"vw_forcast_budget\", \"columns\": " +
+                "[{ \"name\": \"rev_date\", \"dataType\": \"DateTime\"}, " +
+                "{ \"name\": \"rev_amt\", \"dataType\": \"Int64\"}]" +
+                "}," +
+                /* =============== vw_outstanding_balance =============== */
+                "{\"name\": \"vw_outstanding_balance\", \"columns\": " +
+                "[{ \"name\": \"company_id\", \"dataType\": \"Int64\"}, " +
+                "{ \"name\": \"company_name\", \"dataType\": \"string\"}, " +
+                "{ \"name\": \"sample_invoice\", \"dataType\": \"string\"}, " +
+                "{ \"name\": \"overdue_date\", \"dataType\": \"Int64\"}," +
+                "{ \"name\": \"outstanding_balance\", \"dataType\": \"Int64\"}]" +
+                "}," +
+                /* =============== vw_dinv =============== */
+                "{\"name\": \"vw_dinv\", \"columns\": " +
+                "[{ \"name\": \"sample_invoice_date\", \"dataType\": \"DateTime\"}, " +
+                "{ \"name\": \"countInv\", \"dataType\": \"Int64\"}, " +
+                "{ \"name\": \"outstanding_balance\", \"dataType\": \"Int64\"}, " +
+                "{ \"name\": \"overdue_date\", \"dataType\": \"Int64\"}," +
+                "{ \"name\": \"inv_status\", \"dataType\": \"string\"}]" +
+                "}," +
+                /* =============== vw_summary_inv_status =============== */
+                "{\"name\": \"vw_summary_inv_status\", \"columns\": " +
+                "[{ \"name\": \"inv_status\", \"dataType\": \"string\"}, " +
+                "{ \"name\": \"countInv\", \"dataType\": \"Int64\"}, " +
+                "{ \"name\": \"outstanding_balance\", \"dataType\": \"Int64\"}]" +
+                "}" +
+                "]}";
+
+            //POST web request
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(datasetJson);
+            request.ContentLength = byteArray.Length;
+
+            //Write JSON byte[] into a Stream
+
+
+
+
+
+
+            using (Stream writer = request.GetRequestStream())
+            {
+
+                writer.Write(byteArray, 0, byteArray.Length);
+
+                var response = (HttpWebResponse)request.GetResponse();
+
+                Console.WriteLine(string.Format("Dataset {0}", response.StatusCode.ToString()));
+
+                //Console.ReadLine();
+            }
+        }
+        #endregion
+
+        #region Get a dataset to add rows into a Power BI table
+        private static string GetDataset(string token)
         {
-            return DateTime.UtcNow;
+            string powerBIDatasetsApiUrl = "https://api.powerbi.com/v1.0/myorg/datasets";
+            //POST web request to create a dataset.
+            //To create a Dataset in a group, use the Groups uri: https://api.PowerBI.com/v1.0/myorg/groups/{group_id}/datasets
+            HttpWebRequest request = System.Net.WebRequest.Create(powerBIDatasetsApiUrl) as System.Net.HttpWebRequest;
+            request.KeepAlive = true;
+            request.Method = "GET";
+            request.ContentLength = 0;
+            request.ContentType = "application/json";
+
+            //Add token to the request header
+            request.Headers.Add("Authorization", String.Format("Bearer {0}", token));
+
+            string datasetId = string.Empty;
+            //Get HttpWebResponse from GET request
+            using (HttpWebResponse httpResponse = request.GetResponse() as System.Net.HttpWebResponse)
+            {
+                //Get StreamReader that holds the response stream
+                using (StreamReader reader = new System.IO.StreamReader(httpResponse.GetResponseStream()))
+                {
+                    string responseContent = reader.ReadToEnd();
+
+                    //TODO: Install NuGet Newtonsoft.Json package: Install-Package Newtonsoft.Json
+                    //and add using Newtonsoft.Json
+                    var results = JsonConvert.DeserializeObject<dynamic>(responseContent);
+
+                    //Get the first id
+                    datasetId = results["value"][0]["id"];
+
+                    //Console.WriteLine(String.Format("Dataset ID: {0}", datasetId));
+                    //Console.ReadLine();
+
+                    return datasetId;
+                }
+            }
         }
+        #endregion
+
+        #region Add rows to a Power BI table
+        private static void AddRows(string datasetId, string tableName, string jsonData, string token,String method)
+        {
+            string powerBIApiAddRowsUrl = String.Format("https://api.powerbi.com/v1.0/myorg/datasets/{0}/tables/{1}/rows", datasetId, tableName);
+
+            //POST web request to add rows.
+            //To add rows to a dataset in a group, use the Groups uri: https://api.powerbi.com/v1.0/myorg/groups/{group_id}/datasets/{dataset_id}/tables/{table_name}/rows
+            //Change request method to "POST"
+            HttpWebRequest request = System.Net.WebRequest.Create(powerBIApiAddRowsUrl) as System.Net.HttpWebRequest;
+            request.KeepAlive = true;
+            request.Method = method;
+            request.ContentLength = 0;
+            request.ContentType = "application/json";
+
+            //Add token to the request header
+            request.Headers.Add("Authorization", String.Format("Bearer {0}", token));
+
+            //JSON content for product row
+            string rowsJson = "{\"rows\":" + jsonData + "}";
+
+            //POST web request
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(rowsJson);
+            request.ContentLength = byteArray.Length;
+
+            //Write JSON byte[] into a Stream
+            using (Stream writer = request.GetRequestStream())
+            {
+                writer.Write(byteArray, 0, byteArray.Length);
+                var response = (HttpWebResponse)request.GetResponse();
+            }
+
+        }
+        #endregion
+        #endregion
 
 
+        static void StartJobBi()
+        {
+            Thread.Sleep(100);
+            Console.WriteLine('A');
+        }
     }
 }

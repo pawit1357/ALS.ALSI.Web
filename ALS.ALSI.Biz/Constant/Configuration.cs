@@ -122,6 +122,15 @@ namespace ALS.ALSI.Biz.Constant
         {
             get { return ConfigurationManager.AppSettings["powerbi.applicationid"]; }
         }
+
+        public static String AzureUsername
+        {
+            get { return ConfigurationManager.AppSettings["powerbi.azure.username"]; }
+        }
+        public static String AzurePassword
+        {
+            get { return ConfigurationManager.AppSettings["powerbi.azure.password"]; }
+        }
         #endregion
 
         public static String getUnitText(int unit)
