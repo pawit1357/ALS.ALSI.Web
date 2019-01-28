@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading;
 
@@ -15,6 +16,34 @@ namespace ALS_Synchronize_BI
         private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Program));
 
         static void Main(string[] args)
+        {
+            //double[] x = { 1, 2, 3, 4, 5 };
+            //double[] y = { 99, 98, 92, 97, 95 };
+            //double xx = Forecast(x, y, 20);
+            //Console.WriteLine();
+
+
+        }
+
+        static double Forecast(double[] xValues, double[] yValues, double forecastPoint)
+        {
+            var xAverage = xValues.Average();
+            var yAverage = yValues.Average();
+
+            var bounds = yValues
+                .Select((y, i) => new { Value = y, Index = i })
+                .Aggregate(new { Top = 0.0, Bottom = 0.0 }, (acc, cur) =>
+                    new
+                    {
+                        Top = acc.Top + (xValues[cur.Index] - xAverage) * (yValues[cur.Index] - yAverage),
+                        Bottom = acc.Bottom + Math.Pow(xValues[cur.Index] - xAverage, 2.0)
+                    });
+
+            var level = bounds.Top / bounds.Bottom;
+
+            return (yAverage - level * xAverage) + level * forecastPoint;
+        }
+        static void Main2(string[] args)
         {
             if (args.Length > 0)
             {

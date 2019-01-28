@@ -94,6 +94,10 @@
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms, Version=2.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.22.302111727\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ALS.ALSI.Biz\Binaries\Microsoft.ReportViewer.Common.dll</HintPath>
@@ -1225,6 +1229,7 @@
     <Content Include="UserControls\SampleInfo.ascx" />
     <Content Include="view\customer\Customer.aspx" />
     <Content Include="view\customer\SearchCustomer.aspx" />
+    <Content Include="view\dashboard\Dashboard.aspx" />
     <Content Include="view\maintenance\ImportSo.aspx" />
     <Content Include="view\maintenance\MaintenanceAccount.aspx" />
     <Content Include="view\maintenance\Maintenance.aspx" />
@@ -1403,6 +1408,13 @@
     </Compile>
     <Compile Include="view\customer\SearchCustomer.aspx.designer.cs">
       <DependentUpon>SearchCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\dashboard\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\dashboard\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\maintenance\ImportSo.aspx.cs">
       <DependentUpon>ImportSo.aspx</DependentUpon>
@@ -2037,7 +2049,6 @@
     <Folder Include="assets\pages\media\" />
     <Folder Include="Report\" />
     <Folder Include="uploads\" />
-    <Folder Include="view\dashboard\" />
     <Folder Include="view\permission\" />
   </ItemGroup>
   <ItemGroup>
