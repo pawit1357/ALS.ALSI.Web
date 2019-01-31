@@ -704,6 +704,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <table class="table table-striped table-hover table-bordered">
+                                    <tbody>
                                         <tr>
                                             <td>&nbsp;</td>
                                             <td>Crash Stop</td>
@@ -1182,7 +1183,45 @@
                         </div>
                     </asp:Panel>
 
+<div class="row">
+                        <div class="col-md-3">
+                            <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
+                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting" OnRowCancelingEdit="gvRefImages_RowCancelingEdit" OnRowDataBound="gvRefImages_RowDataBound" OnRowEditing="gvRefImages_RowEditing" OnRowUpdating="gvRefImages_RowUpdating">
+                                <Columns>
 
+                                        <asp:TemplateField HeaderText="#" HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Container.DataItemIndex + 1 %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>  
+                                    <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Image ID="img_path" runat="server" ImageUrl='<%# Eval("img_path")%>' Width="120" Height="120" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Edit">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
+
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                        </EditItemTemplate>
+
+                                    </asp:TemplateField>
+
+                                </Columns>
+                                <EmptyDataTemplate>
+                                    <div class="data-not-found">
+                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                    </div>
+                                </EmptyDataTemplate>
+                            </asp:GridView>
+                        </div>
+                    </div>
                     <!-- END FORM-->
                     <div class="row">
                         <div class="col-md-12">

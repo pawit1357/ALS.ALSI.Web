@@ -27,6 +27,13 @@ namespace ALS.ALSI.Web.view.template
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Seagate_GCMS));
 
         #region "Property"
+
+        public List<template_img> refImg
+        {
+            get { return (List<template_img>)Session[GetType().Name + "refImg"]; }
+            set { Session[GetType().Name + "refImg"] = value; }
+        }
+
         public CommandNameEnum CommandName
         {
             get { return (CommandNameEnum)ViewState[Constants.COMMAND_NAME]; }
@@ -498,6 +505,14 @@ namespace ALS.ALSI.Web.view.template
             if (!Page.IsPostBack)
             {
                 initialPage();
+                #region "IMG"
+                this.refImg = template_img.FindAllBySampleID(this.SampleID);
+                if (this.refImg != null && this.refImg.Count > 0)
+                {
+                    gvRefImages.DataSource = this.refImg;
+                    gvRefImages.DataBind();
+                }
+                #endregion
             }
         }
 
@@ -540,6 +555,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_gcms_coverpage.InsertList(this.coverpages);
+                    //template_img.InsertList(this.refImg);
 
 
                     #endregion
@@ -711,6 +727,7 @@ namespace ALS.ALSI.Web.view.template
 
                         ws_hash_value.DeleteBySampleID(this.SampleID);
                         ws_hash_value.InsertList(this.WsHashValue);
+                        template_img.InsertList(this.refImg);
 
                         #endregion
                     }
@@ -868,6 +885,7 @@ namespace ALS.ALSI.Web.view.template
         protected void btnLoadFile_Click(object sender, EventArgs e)
         {
             String sheetName = string.Empty;
+            Boolean isLoadExcel = false;
 
             List<tb_m_gcms_cas> _cas = new List<tb_m_gcms_cas>();
             String yyyMMdd = DateTime.Now.ToString("yyyyMMdd");
@@ -883,6 +901,7 @@ namespace ALS.ALSI.Web.view.template
                         string dd = DateTime.Now.ToString("dd");
 
                         String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName)));
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
@@ -1187,13 +1206,27 @@ namespace ALS.ALSI.Web.view.template
                                 #endregion
                                 Console.WriteLine();
                             }
+                            isLoadExcel = true;
                         }
-                        else
-                        {
-                            errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
-                        }
+                        //else
+                        //{
+                        //    errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
+                        //}
                         #endregion
 
+                        #region "IMG"
+                        if ((Path.GetExtension(_postedFile.FileName).Equals(".png")))
+                        {
+                            template_img _img = new template_img();
+                            _img.id = CustomUtils.GetRandomNumberID();
+                            _img.sample_id = this.SampleID;
+                            _img.img_path = source_file_url;
+                            this.refImg.Add(_img);
+
+                            gvRefImages.DataSource = this.refImg;
+                            gvRefImages.DataBind();
+                        }
+                        #endregion
 
 
                     }
@@ -1212,51 +1245,53 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 litErrorMessage.Text = String.Empty;
-                this.tbCas = _cas;
-                gvRHCBase.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt32(GcmsSeagateEnum.RHC_BASE) && !x.library_id.Equals("0")).ToList();
-                gvRHCBase.DataBind();
-                gvRHCHub.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt32(GcmsSeagateEnum.RHC_HUB) && !x.library_id.Equals("0")).ToList();
-                gvRHCHub.DataBind();
-
-                //Note: This report was performed test by ALS Singapore.
-                if (!string.IsNullOrEmpty(txtD36.Text))
+                if (isLoadExcel)
                 {
-                    lbRemark1.Text = String.Format("1.) Minimum RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD36.Text), 3), txtD37.Text);
-                }
+                    this.tbCas = _cas;
+                    gvRHCBase.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt32(GcmsSeagateEnum.RHC_BASE) && !x.library_id.Equals("0")).ToList();
+                    gvRHCBase.DataBind();
+                    gvRHCHub.DataSource = this.tbCas.Where(x => x.cas_group == Convert.ToInt32(GcmsSeagateEnum.RHC_HUB) && !x.library_id.Equals("0")).ToList();
+                    gvRHCHub.DataBind();
 
-                if (!string.IsNullOrEmpty(txtC36.Text))
-                {
-                    lbRemark2.Text = String.Format("2.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC36.Text), 3), txtC37.Text);
-                }
-                if (!string.IsNullOrEmpty(txtD51.Text))
-                {
-                    lbRemark3.Text = String.Format("3.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
-                }
-                if (!string.IsNullOrEmpty(txtC51.Text) )
-                {
-                    lbRemark4.Text = String.Format("4.) Minimum RHC Detection Limit is Hub {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
-                }
-                if (!string.IsNullOrEmpty(txtC51.Text))
-                {
-                    lbRemark5.Text = String.Format("5.) Minimum RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
-                }
+                    //Note: This report was performed test by ALS Singapore.
+                    if (!string.IsNullOrEmpty(txtD36.Text))
+                    {
+                        lbRemark1.Text = String.Format("1.) Minimum RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD36.Text), 3), txtD37.Text);
+                    }
 
-                gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB37.Text);
-                gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", txtB37.Text);
-                gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB37.Text);
-                gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", txtB37.Text);
-                gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
-                gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
-                gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBase.SelectedItem.Text);
-                gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBase.SelectedItem.Text);
-                gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
-                gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
-                gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHub.SelectedItem.Text);
-                gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
-                gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
-                gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+                    if (!string.IsNullOrEmpty(txtC36.Text))
+                    {
+                        lbRemark2.Text = String.Format("2.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC36.Text), 3), txtC37.Text);
+                    }
+                    if (!string.IsNullOrEmpty(txtD51.Text))
+                    {
+                        lbRemark3.Text = String.Format("3.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
+                    }
+                    if (!string.IsNullOrEmpty(txtC51.Text))
+                    {
+                        lbRemark4.Text = String.Format("4.) Minimum RHC Detection Limit is Hub {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
+                    }
+                    if (!string.IsNullOrEmpty(txtC51.Text))
+                    {
+                        lbRemark5.Text = String.Format("5.) Minimum RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
+                    }
 
+                    gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB37.Text);
+                    gvCompoundSub.Columns[2].HeaderText = String.Format("Results,({0})", txtB37.Text);
+                    gvCompound.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB37.Text);
+                    gvCompound.Columns[2].HeaderText = String.Format("Results,({0})", txtB37.Text);
+                    gvMotorBaseSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                    gvMotorBaseSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBaseSub.SelectedItem.Text);
+                    gvMotorBase.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorBase.SelectedItem.Text);
+                    gvMotorBase.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorBase.SelectedItem.Text);
+                    gvMotorHubSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                    gvMotorHubSub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHubSub.SelectedItem.Text);
+                    gvMotorHub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorHub.SelectedItem.Text);
+                    gvMotorHub.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorHub.SelectedItem.Text);
+                    gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
+                    gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
 
+                }
                 GenerrateCoverPage();
             }
         }
@@ -2419,6 +2454,86 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
             GenerrateCoverPage();
         }
+
+
+
+        #region "IMG"
+
+        protected void gvRefImages_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_img _mesa = this.refImg.Find(x => x.id == PKID);
+                if (_mesa != null)
+                {
+                    switch (cmd)
+                    {
+                        case CommandNameEnum.Delete:
+                            this.refImg.Remove(_mesa);
+                            break;
+
+                    }
+                    gvRefImages.DataSource = this.refImg;
+                    gvRefImages.DataBind();
+                }
+            }
+        }
+
+        protected void gvRefImages_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void gvRefImages_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+
+            gvRefImages.EditIndex = e.NewEditIndex;
+            gvRefImages.DataSource = this.refImg;
+            gvRefImages.DataBind();
+
+        }
+
+        protected void gvRefImages_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg;
+            gvRefImages.DataBind();
+        }
+
+        protected void gvRefImages_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //HiddenField _hImgType = (HiddenField)e.Row.FindControl("hImgType");
+                //Literal _litImgType = (Literal)e.Row.FindControl("litImgType");
+                //if (!String.IsNullOrEmpty(_hImgType.Value) && _litImgType != null)
+                //{
+                //    IMAGE_ORDER_TYPE imgOrderType = (IMAGE_ORDER_TYPE)Enum.ToObject(typeof(IMAGE_ORDER_TYPE), Convert.ToInt32(_hImgType.Value));
+                //    _litImgType.Text = imgOrderType.ToString();
+                //}
+            }
+        }
+        protected void gvRefImages_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int _id = Convert.ToInt32(gvRefImages.DataKeys[e.RowIndex].Values[0].ToString());
+            //DropDownList _ddlImgType = (DropDownList)gvRefImages.Rows[e.RowIndex].FindControl("ddlImgType");
+            //if (_ddlImgType != null)
+            //{
+            //    template_img _tmp = this.refImg.Find(x => x.id == _id);
+            //    if (_tmp != null)
+            //    {
+            //        _tmp.img_type = Convert.ToInt32(_ddlImgType.SelectedValue);
+            //    }
+            //}
+
+            //gvRefImages.EditIndex = -1;
+            //gvRefImages.DataSource = this.refImg;
+            //gvRefImages.DataBind();
+        }
+        #endregion
+
     }
 }
 

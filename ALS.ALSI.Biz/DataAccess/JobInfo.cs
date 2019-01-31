@@ -185,8 +185,19 @@ namespace ALS.ALSI.Biz.DataAccess
                                  s.group_submit,
                                  status_name = ms.name,
                                  s.sample_prefix,
-                                 s.amend_or_retest,s.note,s.note_lab,s.am_retest_remark,s.sample_invoice_status
+                                 s.amend_or_retest,s.note,s.note_lab,s.am_retest_remark,s.sample_invoice_status,
+                                 fisicalY = (j.date_of_receive.Value.Month < 4)? j.date_of_receive.Value.Year-1:j.date_of_receive.Value.Year
                              };
+
+                //if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
+                //{
+                //    ddlPhysicalYear.SelectedValue = (DateTime.Now.Year - 1).ToString();
+                //}
+                //else
+                //{
+                //    ddlPhysicalYear.SelectedValue = (DateTime.Now.Year).ToString();
+                //}
+
                 if (!String.IsNullOrEmpty(section))
                 {
                     if (section.Equals("NB"))
@@ -200,7 +211,7 @@ namespace ALS.ALSI.Biz.DataAccess
                 }
                 if (this.physicalYear > 0)
                 {
-                    result = result.Where(x=>x.receive_date.Value.Year == this.physicalYear);
+                    result = result.Where(x=>x.fisicalY == this.physicalYear);
                 }
                 if (this.ID > 0)
                 {

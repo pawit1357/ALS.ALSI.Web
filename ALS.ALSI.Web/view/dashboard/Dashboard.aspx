@@ -52,7 +52,7 @@
                         <br />       <br />
                         <br />       <br />
                         <br />
-                        xx
+                        
                         <div class="col-lg-6 col-xs-12 col-sm-12">
                             <div class="portlet light bordered">
                                 <div class="portlet-title">

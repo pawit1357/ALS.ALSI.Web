@@ -118,7 +118,7 @@ namespace ALS.ALSI.Web.view.request
                     case RoleEnum.ADMIN:
                         break;
                 }
-               
+
                 tmp.sample_po = txtPo.Text;
                 tmp.sample_invoice = txtInvoice.Text;
                 tmp.receive_report_from = String.IsNullOrEmpty(txtReceivedReportFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportFrom.Text);
@@ -175,7 +175,7 @@ namespace ALS.ALSI.Web.view.request
             ddlPhysicalYear.Items.Clear();
             ddlPhysicalYear.DataSource = yesrList;
             ddlPhysicalYear.DataBind();
-
+            
             if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
             {
                 ddlPhysicalYear.SelectedValue = (DateTime.Now.Year - 1).ToString();
@@ -518,7 +518,7 @@ namespace ALS.ALSI.Web.view.request
             Session.Remove(GetType().Name + "isCusRefNoGroupOperation");
             Session.Remove(GetType().Name + "isGroupApproveOperation");
 
-            
+
         }
 
         #endregion
@@ -989,7 +989,7 @@ namespace ALS.ALSI.Web.view.request
 
         protected void ExportToExcel()
         {
-           
+
             RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
             using (XLWorkbook wb = new XLWorkbook())
@@ -1228,7 +1228,8 @@ namespace ALS.ALSI.Web.view.request
 
 
                     //sql += " YEAR(`Extent1`.`date_of_receive`) AS physicalYear,";
-                    sql += " `Extent2`.`am_retest_remark` AS `Remark_AM_Retest`";
+                    sql += " `Extent2`.`am_retest_remark` AS `Remark_AM_Retest`,";
+                    sql += " (case when  MONTH(`Extent1`.`date_of_receive`) <4 then YEAR(`Extent1`.`date_of_receive`)-1 else YEAR(`Extent1`.`date_of_receive`) end) as fisYear";
                     //sql += " `Extent2`.`job_status` AS `job_status_id`,";
                     //sql += " `Extent5`.`company_name`,`Extent3`.`id` as spec_id,`Extent7`.`id` as jstatus_id,`Extent2`.`job_number`,`Extent2`.`sample_po`,`Extent2`.`sample_invoice`,`Extent2`.`due_date_customer`,`Extent2`.`due_date_lab`,`Extent2`.`date_admin_sent_to_cus`,`Extent2`.`ID` sample_id";
                     sql += " FROM `job_info` AS `Extent1`                                                                                                                        ";
@@ -1242,7 +1243,7 @@ namespace ALS.ALSI.Web.view.request
                     sql += " LEFT OUTER JOIN `m_completion_scheduled` AS `Extent9` ON `Extent2`.`status_completion_scheduled` = `Extent9`.`ID`                                    ";
                     StringBuilder sqlCri = new StringBuilder();
 
-                    sqlCri.Append(" YEAR(`Extent1`.`date_of_receive`) = '" + ddlPhysicalYear.SelectedValue + "'");
+                    sqlCri.Append(" (case when  MONTH(`Extent1`.`date_of_receive`) <4 then YEAR(`Extent1`.`date_of_receive`)-1 else YEAR(`Extent1`.`date_of_receive`) end)= '" + ddlPhysicalYear.SelectedValue + "'");
                     sqlCri.Append(" AND ");
                     sqlCri.Append(" `Extent2`.`job_status` <> 0");
                     sqlCri.Append(" AND ");
@@ -1253,7 +1254,7 @@ namespace ALS.ALSI.Web.view.request
                         {
                             sqlCri.Append(" RIGHT(`Extent2`.`job_number`, 1)  <> 'B'");
                             sqlCri.Append(" AND ");
-                            
+
                         }
                         else
                         {
@@ -1391,7 +1392,7 @@ namespace ALS.ALSI.Web.view.request
             this.isSentToCusDateOperation = btn.ID.Equals("btnOperationSentToCus");
             this.isNoteGroupOpeation = btn.ID.Equals("btnOperationNote");
             this.isCusRefNoGroupOperation = btn.ID.Equals("btnOperationCusRefNo");
-            this.isGroupApproveOperation = userRole == RoleEnum.LABMANAGER? btn.ID.Equals("btnOperation"):false;
+            this.isGroupApproveOperation = userRole == RoleEnum.LABMANAGER ? btn.ID.Equals("btnOperation") : false;
 
             foreach (GridViewRow row in gvJob.Rows)
             {
@@ -1402,7 +1403,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || this.isNoteGroupOpeation || this.isCusRefNoGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST||this.isGroupApproveOperation)
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || this.isNoteGroupOpeation || this.isCusRefNoGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST || this.isGroupApproveOperation)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
                     }
