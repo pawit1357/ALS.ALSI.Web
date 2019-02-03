@@ -244,54 +244,54 @@ namespace ALS.ALSI.Web.view.dashboard
                 data += "]}";
 
                 #region "Forecast(Amout)"
-                data += ",{name: \"Forecast(Amout)\",data: [";
-                Hashtable listForecastAmtDate = new Hashtable();
-                listForecastAmtDate[new DateTime(2019, 02, 12, 0, 0, 0)] = 17000;
-                listForecastAmtDate[new DateTime(2019, 02, 17, 0, 0, 0)] = 18000;
-                listForecastAmtDate[new DateTime(2019, 02, 19, 0, 0, 0)] = 19000;
-                listForecastAmtDate[new DateTime(2019, 02, 25, 0, 0, 0)] = 22000;
-                listForecastAmtDate[new DateTime(2019, 02, 27, 0, 0, 0)] = 24000;
-                foreach (DictionaryEntry entry in listForecastAmtDate)
-                {
-                    DateTime epochDate = Convert.ToDateTime(entry.Key);
-                    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
-                }
-                data = data.Substring(0, data.Length - 1);
-                data += "]}";
+                //data += ",{name: \"Forecast(Amout)\",data: [";
+                //Hashtable listForecastAmtDate = new Hashtable();
+                //listForecastAmtDate[new DateTime(2019, 02, 12, 0, 0, 0)] = 17000;
+                //listForecastAmtDate[new DateTime(2019, 02, 17, 0, 0, 0)] = 18000;
+                //listForecastAmtDate[new DateTime(2019, 02, 19, 0, 0, 0)] = 19000;
+                //listForecastAmtDate[new DateTime(2019, 02, 25, 0, 0, 0)] = 22000;
+                //listForecastAmtDate[new DateTime(2019, 02, 27, 0, 0, 0)] = 24000;
+                //foreach (DictionaryEntry entry in listForecastAmtDate)
+                //{
+                //    DateTime epochDate = Convert.ToDateTime(entry.Key);
+                //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
+                //}
+                //data = data.Substring(0, data.Length - 1);
+                //data += "]}";
                 #endregion
                 #region "Lower Confidence Bound(Amout)"
-                data += ",{name: \"Lower Confidence Bound(Amout)\",data: [";
+                //data += ",{name: \"Lower Confidence Bound(Amout)\",data: [";
 
-                Hashtable listLowerConfidenceBoundAmout = new Hashtable();
-                listLowerConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 170000;
-                listLowerConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 180000;
-                listLowerConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 190000;
-                listLowerConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 220000;
-                listLowerConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 240000;
-                foreach (DictionaryEntry entry in listLowerConfidenceBoundAmout)
-                {
-                    DateTime epochDate = Convert.ToDateTime(entry.Key);
-                    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
-                }
-                data = data.Substring(0, data.Length - 1);
-                data += "]}";
+                //Hashtable listLowerConfidenceBoundAmout = new Hashtable();
+                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 170000;
+                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 180000;
+                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 190000;
+                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 220000;
+                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 240000;
+                //foreach (DictionaryEntry entry in listLowerConfidenceBoundAmout)
+                //{
+                //    DateTime epochDate = Convert.ToDateTime(entry.Key);
+                //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
+                //}
+                //data = data.Substring(0, data.Length - 1);
+                //data += "]}";
                 #endregion
                 #region "Upper Confidence Bound(Amout)"
-                data += ",{name: \"Upper Confidence Bound(Amout)\",data: [";
+                //data += ",{name: \"Upper Confidence Bound(Amout)\",data: [";
 
-                Hashtable listUpperConfidenceBoundAmout = new Hashtable();
-                listUpperConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 19000;
-                listUpperConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 22000;
-                listUpperConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 30000;
-                listUpperConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 35000;
-                listUpperConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 44000;
-                foreach (DictionaryEntry entry in listUpperConfidenceBoundAmout)
-                {
-                    DateTime epochDate = Convert.ToDateTime(entry.Key);
-                    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
-                }
-                data = data.Substring(0, data.Length - 1);
-                data += "]}";
+                //Hashtable listUpperConfidenceBoundAmout = new Hashtable();
+                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 19000;
+                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 22000;
+                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 30000;
+                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 35000;
+                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 44000;
+                //foreach (DictionaryEntry entry in listUpperConfidenceBoundAmout)
+                //{
+                //    DateTime epochDate = Convert.ToDateTime(entry.Key);
+                //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
+                //}
+                //data = data.Substring(0, data.Length - 1);
+                //data += "]}";
                 #endregion
             }
             #endregion

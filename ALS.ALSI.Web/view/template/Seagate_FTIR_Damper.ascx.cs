@@ -1007,10 +1007,10 @@ namespace ALS.ALSI.Web.view.template
 
                 List<template_img> dat = this.refImg.OrderBy(x => x.seq).ToList();
 
-                foreach (template_img _i in dat)
-                {
-                    _i.img1 = CustomUtils.GetBytesFromImage(_i.img_path);
-                }
+                //foreach (template_img _i in dat)
+                //{
+                //    _i.img1 = CustomUtils.GetBytesFromImage(_i.img_path);
+                //}
 
 
                 ReportParameterCollection reportParameters = new ReportParameterCollection
@@ -1103,6 +1103,47 @@ namespace ALS.ALSI.Web.view.template
                 {
                     viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
                 }
+                if (dat.Count >= 1)
+                {
+                    List<template_img> datImg1 = new List<template_img>();
+                    datImg1.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[0].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet10", datImg1.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet10", new DataTable())); // Add datasource here
+                }
+                if (dat.Count >= 2)
+                {
+                    List<template_img> datImg2 = new List<template_img>();
+                    datImg2.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[1].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet11", datImg2.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet11", new DataTable())); // Add datasource here
+                }
+                if (dat.Count >= 3)
+                {
+                    List<template_img> datImg3 = new List<template_img>();
+                    datImg3.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[2].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet12", datImg3.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet12", new DataTable())); // Add datasource here
+                }
+                if (dat.Count >= 4)
+                {
+                    List<template_img> datImg4 = new List<template_img>();
+                    datImg4.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[3].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet13", datImg4.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet13", new DataTable())); // Add datasource here
+                }
+
 
 
                 string download = String.Empty;
@@ -1385,7 +1426,7 @@ namespace ALS.ALSI.Web.view.template
                         //}
                         #endregion
                         #region "IMG"
-                        if ((Path.GetExtension(_postedFile.FileName).ToLower().Equals(".jpg")))
+                        if ((Path.GetExtension(_postedFile.FileName).ToLower().Equals(".jpg"))|| (Path.GetExtension(_postedFile.FileName).ToLower().Equals(".png")))
                         {
                             template_img _img = new template_img
                             {

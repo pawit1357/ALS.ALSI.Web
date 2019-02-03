@@ -1215,7 +1215,7 @@ namespace ALS.ALSI.Web.view.template
                         #endregion
 
                         #region "IMG"
-                        if ((Path.GetExtension(_postedFile.FileName).Equals(".png")))
+                        if ((Path.GetExtension(_postedFile.FileName).Equals(".png"))|| (Path.GetExtension(_postedFile.FileName).Equals(".jpg")))
                         {
                             template_img _img = new template_img();
                             _img.id = CustomUtils.GetRandomNumberID();
@@ -2239,6 +2239,9 @@ namespace ALS.ALSI.Web.view.template
                     item.C = item.C.Replace("&lt;", "<");
                 }
 
+
+
+
                 DataTable dt2 = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList().ToDataTable();
                 DataTable dt3 = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-")).ToList().ToDataTable();
                 DataTable dt4 = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB) && !x.A.Equals("-")).ToList().ToDataTable();
@@ -2264,6 +2267,50 @@ namespace ALS.ALSI.Web.view.template
                     viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet9", new DataTable()));
 
                 }
+
+                List<template_img> dat = this.refImg.OrderBy(x => x.seq).ToList();
+                if (dat.Count >= 1)
+                {
+                    List<template_img> datImg1 = new List<template_img>();
+                    datImg1.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[0].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet10", datImg1.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet10", new DataTable())); // Add datasource here
+                }
+                if (dat.Count >= 2)
+                {
+                    List<template_img> datImg2 = new List<template_img>();
+                    datImg2.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[1].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet11", datImg2.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet11", new DataTable())); // Add datasource here
+                }
+                if (dat.Count >= 3)
+                {
+                    List<template_img> datImg3 = new List<template_img>();
+                    datImg3.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[2].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet12", datImg3.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet12", new DataTable())); // Add datasource here
+                }
+                if (dat.Count >= 4)
+                {
+                    List<template_img> datImg4 = new List<template_img>();
+                    datImg4.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[3].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet13", datImg4.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet13", new DataTable())); // Add datasource here
+                }
+
+
 
                 //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND)).ToList().ToDataTable()));
 
