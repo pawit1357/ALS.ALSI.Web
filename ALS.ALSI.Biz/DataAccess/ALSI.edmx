@@ -5,9 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="alsiModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="holiday_calendar">
           <Key>
             <PropertyRef Name="DATE_HOLIDAYS" />
+            <PropertyRef Name="YEAR_HOLIDAYS" />
           </Key>
           <Property Name="DATE_HOLIDAYS" Type="date" Nullable="false" />
           <Property Name="YEAR_HOLIDAYS" Type="varchar" MaxLength="4" Nullable="false" />
@@ -1126,6 +1129,7 @@
           <Property Name="remark4" Type="varchar" MaxLength="150" />
           <Property Name="remark5" Type="varchar" MaxLength="150" />
           <Property Name="UnitCompoundSub" Type="int" />
+          <Property Name="cp_value" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -1899,7 +1903,6 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="alsiModelStoreContainer">
-          <EntitySet Name="holiday_calendar" EntityType="Self.holiday_calendar" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_info" EntityType="Self.job_info" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_reiew_requistion" EntityType="Self.job_reiew_requistion" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_running" EntityType="Self.job_running" Schema="alsi" store:Type="Tables" />
@@ -1960,6 +1963,13 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="users_responsible" EntityType="Self.users_responsible" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_role" EntityType="Self.users_role" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="ws_hash_value" EntityType="Self.ws_hash_value" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="holiday_calendar" EntityType="Self.holiday_calendar" store:Type="Tables" store:Schema="alsi">
+            <DefiningQuery>SELECT
+`holiday_calendar`.`DATE_HOLIDAYS`, 
+`holiday_calendar`.`YEAR_HOLIDAYS`, 
+`holiday_calendar`.`DESCRIPTION_SUMMARY`
+FROM `holiday_calendar` AS `holiday_calendar`</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="users_logged" EntityType="Self.users_logged" store:Type="Tables" store:Schema="alsi">
             <DefiningQuery>SELECT
 `users_logged`.`USER_ID`, 
@@ -2017,7 +2027,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="alsiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ALSIEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="holiday_calendar" EntityType="alsiModel.holiday_calendar" />
           <EntitySet Name="job_info" EntityType="alsiModel.job_info" />
           <EntitySet Name="job_reiew_requistion" EntityType="alsiModel.job_reiew_requistion" />
           <EntitySet Name="job_running" EntityType="alsiModel.job_running" />
@@ -2078,6 +2087,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="users_responsible" EntityType="alsiModel.users_responsible" />
           <EntitySet Name="users_role" EntityType="alsiModel.users_role" />
           <EntitySet Name="ws_hash_value" EntityType="alsiModel.ws_hash_value" />
+          <EntitySet Name="holiday_calendar" EntityType="alsiModel.holiday_calendar" />
           <EntitySet Name="users_logged" EntityType="alsiModel.users_logged" />
           <AssociationSet Name="fk_contract_person_id" Association="alsiModel.fk_contract_person_id">
             <End Role="m_customer_contract_person" EntitySet="m_customer_contract_person" />
@@ -2120,14 +2130,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
             <End Role="users_login" EntitySet="users_login" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="holiday_calendar">
-          <Key>
-            <PropertyRef Name="DATE_HOLIDAYS" />
-          </Key>
-          <Property Name="DATE_HOLIDAYS" Type="DateTime" Nullable="false" />
-          <Property Name="YEAR_HOLIDAYS" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPTION_SUMMARY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="job_info">
           <Key>
             <PropertyRef Name="ID" />
@@ -3259,6 +3261,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="remark4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="remark5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="UnitCompoundSub" Type="Int32" />
+          <Property Name="cp_value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_img">
           <Key>
@@ -3893,6 +3896,15 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="key" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="val" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="holiday_calendar">
+          <Key>
+            <PropertyRef Name="DATE_HOLIDAYS" />
+            <PropertyRef Name="YEAR_HOLIDAYS" />
+          </Key>
+          <Property Name="DATE_HOLIDAYS" Type="DateTime" Nullable="false" />
+          <Property Name="YEAR_HOLIDAYS" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION_SUMMARY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="users_logged">
           <Key>
             <PropertyRef Name="USER_ID" />
@@ -4037,15 +4049,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="alsiModelStoreContainer" CdmEntityContainer="ALSIEntities">
-          <EntitySetMapping Name="holiday_calendar">
-            <EntityTypeMapping TypeName="alsiModel.holiday_calendar">
-              <MappingFragment StoreEntitySet="holiday_calendar">
-                <ScalarProperty Name="DESCRIPTION_SUMMARY" ColumnName="DESCRIPTION_SUMMARY" />
-                <ScalarProperty Name="YEAR_HOLIDAYS" ColumnName="YEAR_HOLIDAYS" />
-                <ScalarProperty Name="DATE_HOLIDAYS" ColumnName="DATE_HOLIDAYS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="job_info">
             <EntityTypeMapping TypeName="alsiModel.job_info">
               <MappingFragment StoreEntitySet="job_info">
@@ -5032,6 +5035,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_gcms_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_gcms_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_gcms_coverpage">
+                <ScalarProperty Name="cp_value" ColumnName="cp_value" />
                 <ScalarProperty Name="UnitCompoundSub" ColumnName="UnitCompoundSub" />
                 <ScalarProperty Name="remark5" ColumnName="remark5" />
                 <ScalarProperty Name="remark4" ColumnName="remark4" />
@@ -5845,6 +5849,15 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="key" ColumnName="key" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="holiday_calendar">
+            <EntityTypeMapping TypeName="alsiModel.holiday_calendar">
+              <MappingFragment StoreEntitySet="holiday_calendar">
+                <ScalarProperty Name="DESCRIPTION_SUMMARY" ColumnName="DESCRIPTION_SUMMARY" />
+                <ScalarProperty Name="YEAR_HOLIDAYS" ColumnName="YEAR_HOLIDAYS" />
+                <ScalarProperty Name="DATE_HOLIDAYS" ColumnName="DATE_HOLIDAYS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

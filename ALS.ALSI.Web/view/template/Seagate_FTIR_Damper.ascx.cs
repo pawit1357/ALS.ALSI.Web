@@ -1319,7 +1319,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                         _postedFile.SaveAs(source_file);
                         #region "XLS"
-                        if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")))
+                        if ((Path.GetExtension(_postedFile.FileName).Equals(".xls"))|| (Path.GetExtension(_postedFile.FileName).Equals(".xlt")))
                         {
                             using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
                             {

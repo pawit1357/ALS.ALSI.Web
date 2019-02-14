@@ -8,8 +8,10 @@ using ALS.ALSI.Web.view.request;
 using Microsoft.Reporting.WebForms;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.SS.Util;
 using Spire.Doc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -1056,33 +1058,33 @@ namespace ALS.ALSI.Web.view.template
                                 else
                                 {
                                     sheetName = isheet.SheetName;
-
                                     #region "Results: Surface Extraction Method (MBA, Baseplate)"
-                                    txtB13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B));
-                                    txtB14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.B));
-                                    txtB15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.B));
-                                    txtB16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.B));
-                                    txtB17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B));
-                                    txtB18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B));
-                                    txtB19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.B));
+                                    txtB13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B));//Internal Standard Recovery(R) :
+                                    txtB14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.B));//pA of C14D10 in sample(X) :
+                                    txtB15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.B));//pA of C14D10 in working standard(Y) :
+                                    txtB16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.B));//Concentration of C14D10(C) :
+                                    txtB17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.B));//Total Concentration of C14D10(A) :
+                                    txtB18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.B));//Dilution factor(D) :
+                                    txtB19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.B));//IDL of RHC:
 
                                     #endregion
                                     #region "Motor Base / Baseplate"
-                                    txtB23.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.B));
-                                    txtB24.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.B));
-                                    txtB25.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.B));
-                                    txtB26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.B));
-                                    txtB27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.B));
-                                    txtB28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.B));
-                                    txtB29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.B));
-                                    txtB30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.B));
-                                    txtB31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));
-                                    txtB32.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));
-                                    txtB33.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));
-                                    txtB34.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));
-                                    txtB35.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.B));
-                                    txtB36.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.B));
-                                    txtB37.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.B));
+
+                                    txtB23.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.B));//Surface area of sample(cm2) :
+                                    txtB24.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.B));//No.of extracted sample(N) :
+                                    txtB25.Text = CustomUtils.GetCellValue(isheet.GetRow(25 - 1).GetCell(ExcelColumn.B));//Total surface area of sample:
+                                    txtB26.Text = CustomUtils.GetCellValue(isheet.GetRow(26 - 1).GetCell(ExcelColumn.B));//Concentration of C16H34(C) :
+                                    txtB27.Text = CustomUtils.GetCellValue(isheet.GetRow(27 - 1).GetCell(ExcelColumn.B));//Dilution factor(D) :
+                                    txtB28.Text = CustomUtils.GetCellValue(isheet.GetRow(28 - 1).GetCell(ExcelColumn.B));//Internal Standard Recovery(R) :
+                                    txtB29.Text = CustomUtils.GetCellValue(isheet.GetRow(29 - 1).GetCell(ExcelColumn.B));//pA of C16H34(Z) :
+                                    txtB30.Text = CustomUtils.GetCellValue(isheet.GetRow(30 - 1).GetCell(ExcelColumn.B));//pA of Motor Base :
+                                    txtB31.Text = CustomUtils.GetCellValue(isheet.GetRow(31 - 1).GetCell(ExcelColumn.B));//pA of C14D10 in sample Base(Pbs) :
+                                    txtB32.Text = CustomUtils.GetCellValue(isheet.GetRow(32 - 1).GetCell(ExcelColumn.B));//pA of Blank:
+                                    txtB33.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));//pA of C14D10 in Blank(Pbb) :
+                                    txtB34.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));//pA of sample(Y) :
+                                    txtB35.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.B));//
+                                    txtB36.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.B));//Method Detection Limit(MDL) :
+                                    txtB37.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.B));//
 
 
                                     txtC23.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.C));
@@ -1118,7 +1120,8 @@ namespace ALS.ALSI.Web.view.template
                                     txtD37.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.D));
 
                                     #endregion
-                                    #region "Motor Hub"
+                                    #region "Motor Hub
+
                                     txtB40.Text = isheet.GetRow(40 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(40 - 1).GetCell(ExcelColumn.B));
                                     txtB41.Text = isheet.GetRow(41 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(41 - 1).GetCell(ExcelColumn.B));
                                     txtB42.Text = isheet.GetRow(42 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(42 - 1).GetCell(ExcelColumn.B));
@@ -1204,6 +1207,27 @@ namespace ALS.ALSI.Web.view.template
                                     }
                                 }
                                 #endregion
+                                #region "Binding"
+                                for (int ci = 1; ci <= this.coverpages.Count; ci++)
+                                {
+                                    String mappingVal = FreeTemplateUtil.GetGCMSMapping()[ci.ToString()].ToString();
+                                    if (!mappingVal.Equals(""))
+                                    {
+                                        String v = CustomUtils.GetCellValue2(wb, mappingVal);
+                                        if (!String.IsNullOrEmpty(v))
+                                        {
+                                            this.coverpages[ci - 1].C = !CustomUtils.isNumber(v)? v: Convert.ToDouble(v).ToString("N2");
+                                        }
+                                        else
+                                        {
+                                            this.coverpages[ci - 1].C = "0";
+
+                                        }
+                                        Console.WriteLine();
+
+                                    }
+                                }
+                                #endregion
                                 Console.WriteLine();
                             }
                             isLoadExcel = true;
@@ -1215,7 +1239,7 @@ namespace ALS.ALSI.Web.view.template
                         #endregion
 
                         #region "IMG"
-                        if ((Path.GetExtension(_postedFile.FileName).Equals(".png"))|| (Path.GetExtension(_postedFile.FileName).Equals(".jpg")))
+                        if ((Path.GetExtension(_postedFile.FileName).Equals(".png")) || (Path.GetExtension(_postedFile.FileName).Equals(".jpg")))
                         {
                             template_img _img = new template_img();
                             _img.id = CustomUtils.GetRandomNumberID();
@@ -1227,6 +1251,7 @@ namespace ALS.ALSI.Web.view.template
                             gvRefImages.DataBind();
                         }
                         #endregion
+
 
 
                     }
@@ -1256,24 +1281,29 @@ namespace ALS.ALSI.Web.view.template
                     //Note: This report was performed test by ALS Singapore.
                     if (!string.IsNullOrEmpty(txtD36.Text))
                     {
-                        lbRemark1.Text = String.Format("1.) Minimum RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD36.Text), 3), txtD37.Text);
+                        String d36 = !CustomUtils.isNumber(txtD36.Text) ? txtD36.Text : Math.Round(Convert.ToDecimal(txtD36.Text), 3).ToString();
+                        lbRemark1.Text = String.Format("1.) Minimum RHC Detection Limit is {0} {1}", d36, txtD37.Text);
                     }
 
                     if (!string.IsNullOrEmpty(txtC36.Text))
                     {
-                        lbRemark2.Text = String.Format("2.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC36.Text), 3), txtC37.Text);
+                        String c36 = !CustomUtils.isNumber(txtC36.Text) ? txtC36.Text : Math.Round(Convert.ToDecimal(txtC36.Text), 3).ToString();
+                        lbRemark2.Text = String.Format("2.) Minimum RHC Detection Limit of Base is {0} {1}", c36, txtC37.Text);
                     }
                     if (!string.IsNullOrEmpty(txtD51.Text))
                     {
-                        lbRemark3.Text = String.Format("3.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
+                        String d51 = !CustomUtils.isNumber(txtD51.Text) ? txtD51.Text : Math.Round(Convert.ToDecimal(txtD51.Text), 3).ToString();
+                        lbRemark3.Text = String.Format("3.) Minimum RHC Detection Limit of Base is {0} {1}", d51, txtD52.Text);
                     }
                     if (!string.IsNullOrEmpty(txtC51.Text))
                     {
-                        lbRemark4.Text = String.Format("4.) Minimum RHC Detection Limit is Hub {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
+                        String c51 = !CustomUtils.isNumber(txtC51.Text) ? txtC51.Text : Math.Round(Convert.ToDecimal(txtC51.Text), 3).ToString();
+                        lbRemark4.Text = String.Format("4.) Minimum RHC Detection Limit is Hub {0} {1}", c51, txtC52.Text);
                     }
                     if (!string.IsNullOrEmpty(txtC51.Text))
                     {
-                        lbRemark5.Text = String.Format("5.) Minimum RHC Detection Limit of Hub is {0} {1}", Math.Round(Convert.ToDecimal(txtC51.Text), 3), txtC52.Text);
+                        String c51 = !CustomUtils.isNumber(txtC51.Text) ? txtC51.Text : Math.Round(Convert.ToDecimal(txtC51.Text), 3).ToString();
+                        lbRemark5.Text = String.Format("5.) Minimum RHC Detection Limit of Hub is {0} {1}", c51, txtC52.Text);
                     }
 
                     gvCompoundSub.Columns[1].HeaderText = String.Format("Maximum Allowable Amount,({0})", txtB37.Text);
@@ -1802,21 +1832,42 @@ namespace ALS.ALSI.Web.view.template
             //set float
 
 
-            txtB28.Text = String.IsNullOrEmpty(txtB28.Text) ? "" : Convert.ToDouble(txtB28.Text).ToString("N3");
-            txtC28.Text = String.IsNullOrEmpty(txtC28.Text) ? "" : Convert.ToDouble(txtC28.Text).ToString("N3");
-            txtD28.Text = String.IsNullOrEmpty(txtD28.Text) ? "" : Convert.ToDouble(txtD28.Text).ToString("N3");
-            txtB33.Text = String.IsNullOrEmpty(txtB33.Text) ? "" : Convert.ToDouble(txtB33.Text).ToString("N3");
-            txtC33.Text = String.IsNullOrEmpty(txtC33.Text) ? "" : Convert.ToDouble(txtC33.Text).ToString("N3");
-            txtD33.Text = String.IsNullOrEmpty(txtD33.Text) ? "" : Convert.ToDouble(txtD33.Text).ToString("N3");
+            txtB28.Text = !CustomUtils.isNumber(txtB28.Text) ? txtB28.Text : String.IsNullOrEmpty(txtB28.Text) ? "" : Convert.ToDouble(txtB28.Text).ToString("N3");
+            txtC28.Text = !CustomUtils.isNumber(txtC28.Text) ? txtC28.Text : String.IsNullOrEmpty(txtC28.Text) ? "" : Convert.ToDouble(txtC28.Text).ToString("N3");
+            txtD28.Text = !CustomUtils.isNumber(txtD28.Text) ? txtD28.Text : String.IsNullOrEmpty(txtD28.Text) ? "" : Convert.ToDouble(txtD28.Text).ToString("N3");
+            txtB33.Text = !CustomUtils.isNumber(txtB33.Text) ? txtB33.Text : String.IsNullOrEmpty(txtB33.Text) ? "" : Convert.ToDouble(txtB33.Text).ToString("N3");
+            txtC33.Text = !CustomUtils.isNumber(txtC33.Text) ? txtC33.Text : String.IsNullOrEmpty(txtC33.Text) ? "" : Convert.ToDouble(txtC33.Text).ToString("N3");
+            txtD33.Text = !CustomUtils.isNumber(txtD33.Text) ? txtD33.Text : String.IsNullOrEmpty(txtD33.Text) ? "" : Convert.ToDouble(txtD33.Text).ToString("N3");
 
-            txtB31.Text = String.IsNullOrEmpty(txtB31.Text) ? "" : Convert.ToDouble(txtB31.Text).ToString("N3");
-            txtC36.Text = String.IsNullOrEmpty(txtC36.Text) ? "" : Convert.ToDouble(txtC36.Text).ToString("N3");
-            txtD36.Text = String.IsNullOrEmpty(txtD36.Text) ? "" : Convert.ToDouble(txtD36.Text).ToString("N3");
+            txtB31.Text = !CustomUtils.isNumber(txtB31.Text) ? txtB31.Text : String.IsNullOrEmpty(txtB31.Text) ? "" : Convert.ToDouble(txtB31.Text).ToString("N3");
+            txtC36.Text = !CustomUtils.isNumber(txtC36.Text) ? txtC36.Text : String.IsNullOrEmpty(txtC36.Text) ? "" : Convert.ToDouble(txtC36.Text).ToString("N3");
+            txtD36.Text = !CustomUtils.isNumber(txtD36.Text) ? txtD36.Text : String.IsNullOrEmpty(txtD36.Text) ? "" : Convert.ToDouble(txtD36.Text).ToString("N3");
 
 
 
 
             #region "Binding"
+
+            //newCoverPage[0].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
+            //newCoverPage[1].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
+            //newCoverPage[2].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB);
+            //newCoverPage[3].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+            //newCoverPage[4].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+            //newCoverPage[5].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+            //newCoverPage[6].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
+            //newCoverPage[7].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+            //newCoverPage[8].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+            //newCoverPage[9].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+            //newCoverPage[10].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
+            //newCoverPage[11].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+            //newCoverPage[12].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+            //newCoverPage[13].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+            //newCoverPage[14].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+            //newCoverPage[15].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+            //newCoverPage[16].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+            //newCoverPage[17].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+            //newCoverPage[18].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+            //newCoverPage[19].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
 
             #region "MOTOR OILS"
             List<template_seagate_gcms_coverpage> motorOils = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
@@ -1850,10 +1901,11 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorHubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-")).ToList();
             if (motorHubs.Count > 0)
             {
-                if (!String.IsNullOrEmpty(txtD50.Text) && !String.IsNullOrEmpty(txtD50.Text))
-                {
-                    motorHubs[0].C = (Convert.ToDecimal(txtD50.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD50.Text), Convert.ToInt16(txtFloatResult02.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
-                }
+                //if (!String.IsNullOrEmpty(txtD50.Text) && !String.IsNullOrEmpty(txtD50.Text))
+                //{
+                //    motorHubs[0].C = (Convert.ToDecimal(txtD50.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD50.Text), Convert.ToInt16(txtFloatResult02.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                //}
+                motorHubs[0].C = (Convert.ToDouble(motorHubs[0].C) == 0) ? "Not Detected" : motorHubs[0].C;
                 gvMotorHub.DataSource = motorHubs;
                 gvMotorHub.DataBind();
                 gvMotorHub.Visible = true;
@@ -1866,8 +1918,8 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorHubSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB) && !x.A.Equals("-")).ToList();
             if (motorHubSubs.Count > 0)
             {
-                motorHubSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB50.Text) ? "0" : txtB50.Text), Convert.ToInt16(txtFloatResult03.Text)) + "";//Compounds with RT ≤ DOP
-                motorHubSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC50.Text) ? "0" : txtC50.Text), Convert.ToInt16(txtFloatResult04.Text)) + "";//Compounds with RT > DOP
+                //motorHubSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB50.Text) ? "0" : txtB50.Text), Convert.ToInt16(txtFloatResult03.Text)) + "";//Compounds with RT ≤ DOP
+                //motorHubSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC50.Text) ? "0" : txtC50.Text), Convert.ToInt16(txtFloatResult04.Text)) + "";//Compounds with RT > DOP
                 motorHubSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorHubSubs[1].C) + Convert.ToDecimal(motorHubSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult05.Text)) + "";//Total Organic Compound (TOC)
 
                 motorHubSubs[1].C = (Convert.ToDouble(motorHubSubs[1].C) == 0) ? "Not Detected" : motorHubSubs[1].C;
@@ -1890,10 +1942,10 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorBases = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE) && !x.A.Equals("-")).ToList();
             if (motorBases.Count > 0)
             {
-                if (!String.IsNullOrEmpty(txtD33.Text))
-                {
-                    motorBases[0].C = (Convert.ToDecimal(txtD33.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD33.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
-                }
+                //if (!String.IsNullOrEmpty(txtD33.Text))
+                //{
+                //    motorBases[0].C = (Convert.ToDecimal(txtD33.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD33.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                //}
                 gvMotorBase.DataSource = motorBases;
                 gvMotorBase.DataBind();
                 gvMotorBase.Visible = true;
@@ -1907,8 +1959,8 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorBaseSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-")).ToList();
             if (motorBaseSubs.Count > 0)
             {
-                motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB33.Text) ? "0" : txtB33.Text), Convert.ToInt16(txtFloatResult07.Text)) + "";//Compounds with RT ≤ DOP
-                motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC33.Text) ? "0" : txtC33.Text), Convert.ToInt16(txtFloatResult08.Text)) + "";//Compounds with RT > DOP
+                //motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB33.Text) ? "0" : txtB33.Text), Convert.ToInt16(txtFloatResult07.Text)) + "";//Compounds with RT ≤ DOP
+                //motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC33.Text) ? "0" : txtC33.Text), Convert.ToInt16(txtFloatResult08.Text)) + "";//Compounds with RT > DOP
                 motorBaseSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorBaseSubs[1].C) + Convert.ToDecimal(motorBaseSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult09.Text)) + "";//Total Organic Compound (TOC)
 
                 motorBaseSubs[1].C = (Convert.ToDouble(motorBaseSubs[1].C) == 0) ? "Not Detected" : motorBaseSubs[1].C;
@@ -2425,7 +2477,6 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
-
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             ModolPopupExtender.Show();
@@ -2447,8 +2498,6 @@ namespace ALS.ALSI.Web.view.template
             }
 
         }
-
-
 
         protected void ddlUnitMotorOilContamination_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2501,8 +2550,6 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
             GenerrateCoverPage();
         }
-
-
 
         #region "IMG"
 

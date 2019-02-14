@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.Web.UI.WebControls;
+using NPOI.HSSF.UserModel;
 
 namespace ALS.ALSI.Utils
 {
@@ -126,6 +127,21 @@ namespace ALS.ALSI.Utils
             return sb.ToString();
 
         }
+        public static String GetCellValue2(HSSFWorkbook wb,String _cellValue)
+        {
+            String[] cVals = _cellValue.Split('!');
+            String shName = cVals[0];
+            String cellValue = cVals[1];
+
+            ISheet isheet = wb.GetSheet(shName);
+            if (isheet == null)
+            {
+                isheet = wb.GetSheet(shName+" ");
+            }
+            int column = ExcelColumn.getColInt(Regex.Replace(cellValue, "[^a-zA-Z]", ""));
+            int row = Convert.ToInt16(Regex.Replace(cellValue, "[^0-9]", ""))-1;
+            return isheet.GetRow(row)==null? "": GetCellValue(isheet.GetRow(row).GetCell(column));
+        }
 
         public static String GetCellValue(ICell _cell)
         {
@@ -193,7 +209,6 @@ namespace ALS.ALSI.Utils
             //}
             return returnValue;//_cell.ToString();// returnValue.Length>255 ? returnValue.Substring(0,255):returnValue;
         }
-
 
         public static Double GetMax(Double _value)
         {

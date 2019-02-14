@@ -16,7 +16,7 @@ namespace ALS.ALSI.Biz
         public static char DELIMITER = '#';
         public static char DELIMITER_SEMI_COLON = ':';
         public static char DELIMITER_EXCLAMATION_MARK = '!';
-        public static char DELIMITER_PIPE= '|';
+        public static char DELIMITER_PIPE = '|';
 
 
         private FileInfo fs;
@@ -42,7 +42,7 @@ namespace ALS.ALSI.Biz
                     String B = sConfig.Cells["B" + pos].Text.ToLower();
                     if (!B.Equals(""))
                     {
-                        hash[currentVal] = String.Format("{0}|{1}", B,C);
+                        hash[currentVal] = String.Format("{0}|{1}", B, C);
                     }
                     Console.WriteLine();
                 }
@@ -161,6 +161,77 @@ namespace ALS.ALSI.Biz
             }
             //}
             return returnValue;//_cell.ToString();// returnValue.Length>255 ? returnValue.Substring(0,255):returnValue;
+        }
+
+
+        public static Hashtable GetGCMSMapping()
+        {
+
+            /*------------------------------
+            1 |Workingpg - Motor Oil '!$D$33
+            2 |Workingpg - Motor Oil '!$D$35
+            3 |Workingpg - Extractable'!$D$54
+            4 |
+            5 |Workingpg - Extractable'!$B$54
+            6 |Workingpg - Extractable'!$C$54
+            7 |Workingpg - Extractable'!D35
+            8 |
+            9 |Workingpg - Extractable'!$B$35
+            10|Workingpg - Extractable'!$C$35
+            11|Workingpg - Extractable'!D35
+            12|Workingpg - Extractable'!$B$35
+            13|Workingpg - Extractable'!$C$35
+            14|
+            15|
+            16|
+            17|
+            18|
+            19|
+            20|
+            -------------------------------*/
+            //1 |-
+            //2 |-
+            //3 |-
+            //4 |-
+            //5 |-
+            //6 |-
+            //7 |-
+            //8 |-
+            //9 |-
+            //10|-
+            //11|Repeated Hydrocarbon(C20 - C40 Alkanes)
+            //12|Total Organic Compound(TOC)
+            //13|Compounds with RT ≤ DOP
+            //14|Compounds with RT > DOP
+            //15|Compound with m / z 155, 271, 425
+            //16|Compound with m / z 283, 311 & Compound with m/ z 311
+            //17|Compound with m / z 138
+            //18|  -
+            //19|  -
+            //20|  -
+
+            Hashtable ht = new Hashtable();
+            ht.Add("1", "Workingpg - Motor Oil!D33");
+            ht.Add("2", "Workingpg - Motor Oil!D35");
+            ht.Add("3", "Workingpg - Extractable!D54");
+            ht.Add("4", "");
+            ht.Add("5", "Workingpg - Extractable!B54");
+            ht.Add("6", "Workingpg - Extractable!C54");
+            ht.Add("7", "Workingpg - Extractable!D35");
+            ht.Add("8", "");
+            ht.Add("9", "Workingpg - Extractable!B35");
+            ht.Add("10", "Workingpg - Extractable!C35");
+            ht.Add("11", "Workingpg - Extractable!D35");
+            ht.Add("12", "Workingpg - Extractable!B35");
+            ht.Add("13", "Workingpg - Extractable!C35");
+            ht.Add("14", "Workingpg - Extractable!C35");
+            ht.Add("15", "Workingpg - Extractable!B33");
+            ht.Add("16", "");
+            ht.Add("17", "");
+            ht.Add("18", "");
+            ht.Add("19", "");
+            ht.Add("20", "");
+            return ht;
         }
     }
 

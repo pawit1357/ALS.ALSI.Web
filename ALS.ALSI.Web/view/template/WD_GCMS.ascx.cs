@@ -468,6 +468,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.date_srchemist_analyze = DateTime.Now;
                         this.jobSample.path_word = String.Empty;
                         this.jobSample.path_pdf = String.Empty;
+                        this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         //#endregion
                         #region "CAS#"
 

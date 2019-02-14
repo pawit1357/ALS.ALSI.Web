@@ -174,5 +174,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string remark4 { get; set; }
         public string remark5 { get; set; }
         public Nullable<int> UnitCompoundSub { get; set; }
+        public string cp_value { get; set; }
     }
 }

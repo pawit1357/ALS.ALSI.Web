@@ -647,7 +647,7 @@ namespace ALS.ALSI.Web.view.request
                                             break;
                                         case 4://Extend 1
                                             jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date));
-                                            jobSample.due_date_customer = h.GetWorkingDayCustomer(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date));
+                                            jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date));
                                             break;
                                         case 3://Express
                                             jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date)-1);

@@ -224,6 +224,9 @@ namespace ALS.ALSI.Web.view.dashboard
         }
         public String Report4()
         {
+            try
+            {
+
 
             String sql = "select sample_invoice_date,sum(sample_invoice_amount) amt FROM job_sample where sample_invoice_date is not null  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc;";
             DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
@@ -299,7 +302,12 @@ namespace ALS.ALSI.Web.view.dashboard
             sbResultJson.Append(data);
             return sbResultJson.ToString();
 
+            }
+            catch (Exception)
+            {
+                return "[]";
 
+            }
 
 
             //MyApp = new Excel.Application();
