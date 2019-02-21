@@ -80,7 +80,14 @@ namespace ALS.ALSI.Biz.DataAccess
                         sample.Update();
                         break;
                     case CommandNameEnum.Delete:
-                        sample.Delete();
+
+                        job_sample deleteSample = new job_sample().SelectByID(sample.ID);
+                        if(deleteSample != null)
+                        {
+                            deleteSample.Delete();
+
+                        }
+
                         break;
                 }
             }

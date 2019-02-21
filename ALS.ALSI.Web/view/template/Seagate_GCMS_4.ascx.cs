@@ -1831,18 +1831,22 @@ namespace ALS.ALSI.Web.view.template
         {
             //set float
 
+            try
+            {
+                txtB28.Text = !CustomUtils.isNumber(txtB28.Text) ? txtB28.Text : String.IsNullOrEmpty(txtB28.Text) ? "" : Convert.ToDouble(txtB28.Text).ToString("N3");
+                txtC28.Text = !CustomUtils.isNumber(txtC28.Text) ? txtC28.Text : String.IsNullOrEmpty(txtC28.Text) ? "" : Convert.ToDouble(txtC28.Text).ToString("N3");
+                txtD28.Text = !CustomUtils.isNumber(txtD28.Text) ? txtD28.Text : String.IsNullOrEmpty(txtD28.Text) ? "" : Convert.ToDouble(txtD28.Text).ToString("N3");
+                txtB33.Text = !CustomUtils.isNumber(txtB33.Text) ? txtB33.Text : String.IsNullOrEmpty(txtB33.Text) ? "" : Convert.ToDouble(txtB33.Text).ToString("N3");
+                txtC33.Text = !CustomUtils.isNumber(txtC33.Text) ? txtC33.Text : String.IsNullOrEmpty(txtC33.Text) ? "" : Convert.ToDouble(txtC33.Text).ToString("N3");
+                txtD33.Text = !CustomUtils.isNumber(txtD33.Text) ? txtD33.Text : String.IsNullOrEmpty(txtD33.Text) ? "" : Convert.ToDouble(txtD33.Text).ToString("N3");
 
-            txtB28.Text = !CustomUtils.isNumber(txtB28.Text) ? txtB28.Text : String.IsNullOrEmpty(txtB28.Text) ? "" : Convert.ToDouble(txtB28.Text).ToString("N3");
-            txtC28.Text = !CustomUtils.isNumber(txtC28.Text) ? txtC28.Text : String.IsNullOrEmpty(txtC28.Text) ? "" : Convert.ToDouble(txtC28.Text).ToString("N3");
-            txtD28.Text = !CustomUtils.isNumber(txtD28.Text) ? txtD28.Text : String.IsNullOrEmpty(txtD28.Text) ? "" : Convert.ToDouble(txtD28.Text).ToString("N3");
-            txtB33.Text = !CustomUtils.isNumber(txtB33.Text) ? txtB33.Text : String.IsNullOrEmpty(txtB33.Text) ? "" : Convert.ToDouble(txtB33.Text).ToString("N3");
-            txtC33.Text = !CustomUtils.isNumber(txtC33.Text) ? txtC33.Text : String.IsNullOrEmpty(txtC33.Text) ? "" : Convert.ToDouble(txtC33.Text).ToString("N3");
-            txtD33.Text = !CustomUtils.isNumber(txtD33.Text) ? txtD33.Text : String.IsNullOrEmpty(txtD33.Text) ? "" : Convert.ToDouble(txtD33.Text).ToString("N3");
-
-            txtB31.Text = !CustomUtils.isNumber(txtB31.Text) ? txtB31.Text : String.IsNullOrEmpty(txtB31.Text) ? "" : Convert.ToDouble(txtB31.Text).ToString("N3");
-            txtC36.Text = !CustomUtils.isNumber(txtC36.Text) ? txtC36.Text : String.IsNullOrEmpty(txtC36.Text) ? "" : Convert.ToDouble(txtC36.Text).ToString("N3");
-            txtD36.Text = !CustomUtils.isNumber(txtD36.Text) ? txtD36.Text : String.IsNullOrEmpty(txtD36.Text) ? "" : Convert.ToDouble(txtD36.Text).ToString("N3");
-
+                txtB31.Text = !CustomUtils.isNumber(txtB31.Text) ? txtB31.Text : String.IsNullOrEmpty(txtB31.Text) ? "" : Convert.ToDouble(txtB31.Text).ToString("N3");
+                txtC36.Text = !CustomUtils.isNumber(txtC36.Text) ? txtC36.Text : String.IsNullOrEmpty(txtC36.Text) ? "" : Convert.ToDouble(txtC36.Text).ToString("N3");
+                txtD36.Text = !CustomUtils.isNumber(txtD36.Text) ? txtD36.Text : String.IsNullOrEmpty(txtD36.Text) ? "" : Convert.ToDouble(txtD36.Text).ToString("N3");
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
 
 
 
@@ -1905,7 +1909,9 @@ namespace ALS.ALSI.Web.view.template
                 //{
                 //    motorHubs[0].C = (Convert.ToDecimal(txtD50.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD50.Text), Convert.ToInt16(txtFloatResult02.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
                 //}
-                motorHubs[0].C = (Convert.ToDouble(motorHubs[0].C) == 0) ? "Not Detected" : motorHubs[0].C;
+
+                motorHubs[0].C = (Convert.ToDouble(!CustomUtils.isNumber(motorHubs[0].C) ? "0" : motorHubs[0].C) == 0) ? "Not Detected" : motorHubs[0].C;
+
                 gvMotorHub.DataSource = motorHubs;
                 gvMotorHub.DataBind();
                 gvMotorHub.Visible = true;
@@ -1920,11 +1926,12 @@ namespace ALS.ALSI.Web.view.template
             {
                 //motorHubSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB50.Text) ? "0" : txtB50.Text), Convert.ToInt16(txtFloatResult03.Text)) + "";//Compounds with RT ≤ DOP
                 //motorHubSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC50.Text) ? "0" : txtC50.Text), Convert.ToInt16(txtFloatResult04.Text)) + "";//Compounds with RT > DOP
-                motorHubSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorHubSubs[1].C) + Convert.ToDecimal(motorHubSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult05.Text)) + "";//Total Organic Compound (TOC)
 
-                motorHubSubs[1].C = (Convert.ToDouble(motorHubSubs[1].C) == 0) ? "Not Detected" : motorHubSubs[1].C;
-                motorHubSubs[2].C = (Convert.ToDouble(motorHubSubs[2].C) == 0) ? "Not Detected" : motorHubSubs[2].C;
-                motorHubSubs[0].C = (Convert.ToDouble(motorHubSubs[0].C) == 0) ? "Not Detected" : motorHubSubs[0].C;
+                motorHubSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(!CustomUtils.isNumber(motorHubSubs[1].C) ? "0" : motorHubSubs[1].C) + Convert.ToDecimal(!CustomUtils.isNumber(motorHubSubs[2].C) ? "0" : motorHubSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult05.Text)) + "";//Total Organic Compound (TOC)
+
+                motorHubSubs[1].C = (Convert.ToDouble(!CustomUtils.isNumber(motorHubSubs[1].C) ? "0" : motorHubSubs[1].C) == 0) ? "Not Detected" : motorHubSubs[1].C;
+                motorHubSubs[2].C = (Convert.ToDouble(!CustomUtils.isNumber(motorHubSubs[2].C) ? "0" : motorHubSubs[2].C) == 0) ? "Not Detected" : motorHubSubs[2].C;
+                motorHubSubs[0].C = (Convert.ToDouble(!CustomUtils.isNumber(motorHubSubs[0].C) ? "0" : motorHubSubs[0].C) == 0) ? "Not Detected" : motorHubSubs[0].C;
 
                 gvMotorHubSub.DataSource = motorHubSubs;
                 gvMotorHubSub.DataBind();
@@ -1961,11 +1968,11 @@ namespace ALS.ALSI.Web.view.template
             {
                 //motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB33.Text) ? "0" : txtB33.Text), Convert.ToInt16(txtFloatResult07.Text)) + "";//Compounds with RT ≤ DOP
                 //motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC33.Text) ? "0" : txtC33.Text), Convert.ToInt16(txtFloatResult08.Text)) + "";//Compounds with RT > DOP
-                motorBaseSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorBaseSubs[1].C) + Convert.ToDecimal(motorBaseSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult09.Text)) + "";//Total Organic Compound (TOC)
+                motorBaseSubs[0].C = Math.Round((Convert.ToDecimal(!CustomUtils.isNumber(motorBaseSubs[1].C) ? "0": motorBaseSubs[1].C) + Convert.ToDecimal(!CustomUtils.isNumber(motorBaseSubs[2].C) ? "0" : motorBaseSubs[2].C)) , Convert.ToInt16(txtFloatResult09.Text)) + "";//Total Organic Compound (TOC)
 
-                motorBaseSubs[1].C = (Convert.ToDouble(motorBaseSubs[1].C) == 0) ? "Not Detected" : motorBaseSubs[1].C;
-                motorBaseSubs[2].C = (Convert.ToDouble(motorBaseSubs[2].C) == 0) ? "Not Detected" : motorBaseSubs[2].C;
-                motorBaseSubs[0].C = (Convert.ToDouble(motorBaseSubs[0].C) == 0) ? "Not Detected" : motorBaseSubs[0].C;
+                motorBaseSubs[1].C = (Convert.ToDouble(!CustomUtils.isNumber(motorBaseSubs[1].C) ? "0" :motorBaseSubs[1].C) == 0) ? "Not Detected" : motorBaseSubs[1].C;
+                motorBaseSubs[2].C = (Convert.ToDouble(!CustomUtils.isNumber(motorBaseSubs[2].C) ? "0" :motorBaseSubs[2].C) == 0) ? "Not Detected" : motorBaseSubs[2].C;
+                motorBaseSubs[0].C = (Convert.ToDouble(!CustomUtils.isNumber(motorBaseSubs[0].C) ? "0" : motorBaseSubs[0].C) == 0) ? "Not Detected" : motorBaseSubs[0].C;
 
                 gvMotorBaseSub.DataSource = motorBaseSubs;
                 gvMotorBaseSub.DataBind();
