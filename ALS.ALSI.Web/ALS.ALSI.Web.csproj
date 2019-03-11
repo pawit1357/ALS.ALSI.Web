@@ -1291,6 +1291,7 @@
     <Content Include="view\template\WD_DHS.ascx" />
     <Content Include="view\template\WD_FTIR.ascx" />
     <Content Include="view\template\WD_GCMS.ascx" />
+    <Content Include="view\template\WD_IC_UNKNOW.ascx" />
     <Content Include="view\template\WD_IC.ascx" />
     <Content Include="view\template\WD_LPC.ascx" />
     <Content Include="view\request\ChangeJobDueDate.aspx" />
@@ -1842,6 +1843,13 @@
     </Compile>
     <Compile Include="view\template\WD_GCMS.ascx.designer.cs">
       <DependentUpon>WD_GCMS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\WD_IC_UNKNOW.ascx.cs">
+      <DependentUpon>WD_IC_UNKNOW.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\WD_IC_UNKNOW.ascx.designer.cs">
+      <DependentUpon>WD_IC_UNKNOW.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\WD_IC.ascx.cs">
       <DependentUpon>WD_IC.ascx</DependentUpon>

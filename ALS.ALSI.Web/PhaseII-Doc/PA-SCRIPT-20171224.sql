@@ -472,6 +472,35 @@ CREATE TABLE `alsi`.`tb_m_forcast` (
 INSERT INTO `alsi`.`menu` (`MENU_ID`, `MENU_NAME`, `URL_NAVIGATE`, `MENU_TAG`, `PREVIOUS_MENU_ID`, `DISPLAY_ORDER`, `UPDATE_BY`, `CREATE_DATE`, `UPDATE_DATE`) VALUES ('17', 'Import SO', '/alis/view/maintenance/ImportSo.aspx', 'ImportSo|', '3', '8', 'SYSTEM', '2015-02-13', '2015-02-13');
 
 
+
+
+- 2019-02-28
+
+ALTER TABLE `alsi`.`template_seagate_mesa_coverpage` 
+CHANGE COLUMN `ProcedureNo_Extraction` `ProcedureNo_Extraction` VARCHAR(200) NULL DEFAULT NULL ,
+CHANGE COLUMN `ExtractionMedium_Extraction` `ExtractionMedium_Extraction` VARCHAR(200) NULL DEFAULT NULL ,
+CHANGE COLUMN `SampleSize_Extraction` `SampleSize_Extraction` VARCHAR(200) NULL DEFAULT NULL ;
+
+
+
+
+
+- 2019-03-10
+
+
+CREATE TABLE `alsi`.`job_sample_group_so` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `so` VARCHAR(45) NULL,
+  `unit_price` VARCHAR(300) NULL,
+  `report_no` VARCHAR(300) NULL,
+  `status` VARCHAR(1) NULL DEFAULT 'I',
+  `create_date` VARCHAR(1) DATETIME,
+  PRIMARY KEY (`id`));
+
+ALTER TABLE `alsi`.`job_sample_group_so` 
+ADD COLUMN `create_date` DATETIME NULL AFTER `status`;
+
+
 */
 
 

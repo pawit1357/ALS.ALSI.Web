@@ -21,7 +21,7 @@ using Spire.Doc;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class WD_IC : System.Web.UI.UserControl
+    public partial class WD_IC_UNKNOW : System.Web.UI.UserControl
     {
 
         #region "Property"
@@ -933,18 +933,18 @@ namespace ALS.ALSI.Web.view.template
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 listCover.Add(_tmp);
-                //_tmp = new template_wd_ic_coverpage();
-                //_tmp.id = 8;
-                //_tmp.A = "Sum Unknown";
-                //_tmp.B = tem.J;
-                //_tmp.wunitText = tem.C;
-                //_tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
-                //_tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                listCover.Add(_tmp);
                 _tmp = new template_wd_ic_coverpage();
                 _tmp.id = 8;
-                _tmp.A = "Total Anions";
+                _tmp.A = "Sum Unknown";
                 _tmp.B = tem.K;
+                _tmp.wunitText = tem.C;
+                _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
+                _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
+                listCover.Add(_tmp);
+                _tmp = new template_wd_ic_coverpage();
+                _tmp.id = 9;
+                _tmp.A = "Total Anions";
+                _tmp.B = tem.L;
                 _tmp.wunitText = tem.C;
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);

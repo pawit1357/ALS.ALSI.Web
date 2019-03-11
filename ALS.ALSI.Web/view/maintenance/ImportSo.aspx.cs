@@ -26,10 +26,10 @@ namespace ALS.ALSI.Web.view.template
     public partial class ImportSo : System.Web.UI.Page
     {
 
-        public List<CSo> searchResult
+        public IEnumerable searchResult
         {
-            get { return (List<CSo>)Session[GetType().Name + "MaintenanceAccount"]; }
-            set { Session[GetType().Name + "MaintenanceAccount"] = value; }
+            get { return (IEnumerable)Session[GetType().Name + "job_sample_group_so"]; }
+            set { Session[GetType().Name + "job_sample_group_so"] = value; }
         }
 
         #region "Property"
@@ -58,8 +58,9 @@ namespace ALS.ALSI.Web.view.template
         {
             if (!Page.IsPostBack)
             {
-                searchResult = new List<CSo>();
-                pSo.Visible = false;
+                //pSo.Visible = false;
+                bindingData();
+                Message = "";
             }
         }
 
@@ -68,29 +69,29 @@ namespace ALS.ALSI.Web.view.template
         {
             int total = 0;
             int success = 0;
-            foreach(CSo cso in searchResult)
-            {
-                String[] vals = cso.ReportNo.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
-                for (int i = 0; i < vals.Length; i++)
-                {
-                    Double amt = cso._UnitPrice[i];
-                    String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
-                    foreach (String job_number in ReportNos)
-                    {
-                        job_sample js = job_sample.SelectByJobNumber(job_number);
-                        if (js != null)
-                        {
-                            js.sample_invoice_amount = amt;
-                            js.sample_invoice_complete_date = DateTime.Now;
-                            js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
-                            success++;
-                        }
-                        total++;
-                    }
-                }
-            }
+            //foreach (CSo cso in searchResult)
+            //{
+            //    String[] vals = cso.ReportNo.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+            //    for (int i = 0; i < vals.Length; i++)
+            //    {
+            //        Double amt = cso._UnitPrice[i];
+            //        String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
+            //        foreach (String job_number in ReportNos)
+            //        {
+            //            job_sample js = job_sample.SelectByJobNumber(job_number);
+            //            if (js != null)
+            //            {
+            //                js.sample_invoice_amount = amt;
+            //                js.sample_invoice_complete_date = DateTime.Now;
+            //                js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+            //                success++;
+            //            }
+            //            total++;
+            //        }
+            //    }
+            //}
             GeneralManager.Commit();
-            Message = "<div class=\"alert alert-success\"><strong></strong>Job Number ทั้งหมด "+total+" นำเข้าได้ "+success+" นำเข้าไม่ได้ "+(total-success)+"</div>";
+            Message = "<div class=\"alert alert-success\"><strong></strong>Job Number ทั้งหมด " + total + " นำเข้าได้ " + success + " นำเข้าไม่ได้ " + (total - success) + "</div>";
 
         }
 
@@ -112,7 +113,10 @@ namespace ALS.ALSI.Web.view.template
                 {
                     Directory.CreateDirectory(_phisicalPath);
                 }
-                FileUpload1.SaveAs(_savefilePath);
+                if (!File.Exists(_savefilePath))
+                {
+                    FileUpload1.SaveAs(_savefilePath);
+                }
                 ProcessUpload(_savefilePath);
             }
             else
@@ -125,7 +129,9 @@ namespace ALS.ALSI.Web.view.template
         #region "GRD"
         private void bindingData()
         {
-            gvJob.DataSource = this.searchResult;
+            job_sample_group_so so = new job_sample_group_so();
+            searchResult = so.SelectAll();
+            gvJob.DataSource = searchResult;
             gvJob.DataBind();
         }
         protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -139,8 +145,20 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvJob_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowIndex != -1)
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                //LinkButton btnLoad = (LinkButton)e.Row.FindControl("btnLoad");
+                //LinkButton btn_Edit = (LinkButton)e.Row.FindControl("btn_Edit");
+
+                //Literal status = (Literal)e.Row.FindControl("ltStatus");
+                //if (btnLoad != null)
+                //{
+                //    btnLoad.Visible = status.Text.Equals("I");
+                //}
+                //if (btn_Edit != null)
+                //{
+                //    btn_Edit.Visible = status.Text.Equals("I");
+                //}
             }
         }
 
@@ -153,33 +171,100 @@ namespace ALS.ALSI.Web.view.template
         protected void gvJob_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
         {
             ////Finding the controls from Gridview for the row which is going to update  
-            string SO = gvJob.DataKeys[e.RowIndex].Values[0].ToString();
+            int id = Convert.ToInt32(gvJob.DataKeys[e.RowIndex].Values[1].ToString());
             TextBox txtUnitPrice = gvJob.Rows[e.RowIndex].FindControl("txtUnitPrice") as TextBox;
             TextBox txtReportNo = gvJob.Rows[e.RowIndex].FindControl("txtReportNo") as TextBox;
-            CSo _updateCso = this.searchResult.Find(x => x.SO.Equals(SO));
+
+            job_sample_group_so _updateCso = new job_sample_group_so().SelectByID(id);
             if (_updateCso != null)
             {
                 List<Double> _UnitPrice = new List<Double>();
                 String[] UnitPrice = txtUnitPrice.Text.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
                 foreach (String up in UnitPrice)
                 {
-                    _UnitPrice.Add(Convert.ToDouble(up));
+                    if (CustomUtils.isNumber(up))
+                    {
+                        _UnitPrice.Add(Convert.ToDouble(up));
+                    }
                 }
                 List<String> _ReportNo = new List<String>();
                 String[] ReportNo = txtReportNo.Text.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
                 foreach (String rn in ReportNo)
                 {
-                    _ReportNo.Add(rn);
+                    if (!rn.Equals(""))
+                    {
+                        _ReportNo.Add(rn);
+                    }
                 }
 
-                _updateCso._UnitPrice = _UnitPrice;
-                _updateCso._ReportNo = _ReportNo;
+                _updateCso.unit_price = String.Join(Environment.NewLine, _UnitPrice);
+                _updateCso.report_no = String.Join(Environment.NewLine, _ReportNo);
+                _updateCso.Update();
+                GeneralManager.Commit();
             }
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
             gvJob.EditIndex = -1;
             //Call ShowData method for displaying updated data  
             bindingData();
         }
+        protected void gvJob_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+
+
+
+            switch (cmd)
+            {
+                case CommandNameEnum.View:
+                    StringBuilder sbJobFail = new StringBuilder();
+                    int total = 0;
+                    int fail = 0;
+                    int id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+
+                    job_sample_group_so _updateCso = new job_sample_group_so().SelectByID(id);
+                    if (_updateCso != null)
+                    {
+                        String[] UnitPrice = _updateCso.unit_price.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+                        String[] vals = _updateCso.report_no.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+                        total = vals.Length;
+
+                        for (int i = 0; i < vals.Length; i++)
+                        {
+                            if (!vals[i].Equals(""))
+                            {
+                                Double amt = Convert.ToDouble(UnitPrice[i]);
+                                String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
+                                foreach (String job_number in ReportNos)
+                                {
+                                    job_sample js = job_sample.SelectByJobNumber(job_number);
+                                    if (js != null)
+                                    {
+
+                                        js.sample_invoice_amount = amt;
+                                        js.sample_invoice_complete_date = DateTime.Now;
+                                        js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+                                        js.Update();
+                                    }
+                                    else
+                                    {
+                                        sbJobFail.Append(job_number + ",");
+
+                                        fail++;
+                                    }
+                                }
+                            }
+                        }
+                        _updateCso.status = fail > 0 ? "I" : "C";
+                        GeneralManager.Commit();
+                        String errList = (sbJobFail.Length == 0) ? "" : "\nรายการ Job ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
+                        Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล Job\n ทั้งหมด" + total + " รายการ\n สำเร็จ " + (total - fail) + " รายการ " + errList + " </div>";
+
+                    }
+                    bindingData();
+                    break;
+            }
+        }
+
         protected void gvJob_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
@@ -189,65 +274,68 @@ namespace ALS.ALSI.Web.view.template
 
 
         #endregion
-
-
         private void ProcessUpload(String filePath)
         {
             Boolean bUploadSuccess = false;
-            String line;
-            StringBuilder sb = new StringBuilder();
+            List<job_sample_group_so> listGroupSo = new List<job_sample_group_so>();
+
+            //StringBuilder sb = new StringBuilder();
             try
             {
 
-                StreamReader sr = new StreamReader(filePath);
-
-                //Read the first line of text
-                line = sr.ReadLine();
-
-                //Continue to read until you reach end of file
-                CSo cso = null;
+                job_sample_group_so cso = null;
                 int index = 0;
-                string poNo = "";
-                while (line != null)
+                string so = "";
+                string[] lines = System.IO.File.ReadAllLines(filePath);
+                foreach (string line in lines)
                 {
-                    //write the lie to console window
-                    if (line.StartsWith("  SO"))
+                    if (!line.Equals("") && !line.Equals("\f"))
                     {
-                        cso = new CSo { SO = line.Substring(0, 11).Trim(), _Qty = new List<double>(), _UnitPrice = new List<double>(), _ReportNo = new List<string>() };
-                        if (index > 0)
+                        if (line.StartsWith("  SO") || line.Substring(10, 2).Equals("SO"))
                         {
-                            searchResult.Add(cso);
+                            if (index == 0)
+                            {
+                                so = line.Substring(10, 10).Trim();
+                                cso = new job_sample_group_so { so = so };
+                            }
+                            if (index > 0)
+                            {
+                                cso.status = "I";
+                                cso.create_date = DateTime.Now;
+                                if (!job_sample_group_so.FindBySO(so))
+                                {
+                                    listGroupSo.Add(cso);
+                                }
+                            }
+                            if (!so.Equals(line.Substring(10, 10).Trim()))
+                            {
+                                so = line.Substring(10, 10).Trim();
+                                cso = new job_sample_group_so { so = so };
+                            }
+                            index++;
+                        }
+                        else if (line.Contains("SAMPLE"))
+                        {
+                            Double unitPrice = Convert.ToDouble(Regex.Replace(line.Substring(65, 15), "[A-Za-z ]", "").Replace(",", "").Trim());
+                            cso.unit_price += (unitPrice) + System.Environment.NewLine;
+                        }
+                        else if (line.Contains("Report no."))
+                        {
+                            cso.report_no += (line.Replace("Report no.", "").Trim()) + System.Environment.NewLine;
+                        }
+                        else if (line.Contains("ELP-") || line.Contains("ELS-") || line.Contains("ELN-") || line.Contains("FA-") || line.Contains("ELWA-") || line.Contains("GRP-") || line.Contains("TRB-"))
+                        {
+                            cso.report_no += (line.Replace("Report no.", "").Trim()) + System.Environment.NewLine;
                         }
                     }
-                    else if (line.Contains("PO NO."))
-                    {
-                        poNo = line.Replace("PO NO.", "").Trim();
-                    }
-                    else if (line.Contains("SAMPLE"))
-                    {
-                        Double qty = Convert.ToDouble(Regex.Replace(line.Substring(50, 15), "[A-Za-z ]", ""));
-                        Double unitPrice = Convert.ToDouble(Regex.Replace(line.Substring(65, 15), "[A-Za-z ]", "").Replace(",", "").Trim());
-                        cso._Qty.Add(qty);
-                        cso._UnitPrice.Add(unitPrice);
-                    }
-                    else if (line.Contains("Report no."))
-                    {
-                        cso._ReportNo.Add(line.Replace("Report no.", "").Trim());
-                        //cso._ReportNo.Add(poNo + ":" + line.Replace("Report no.", "").Trim());
-                    }
-                    else if (line.Contains("ELP-") || line.Contains("ELS-") || line.Contains("ELN-") || line.Contains("FA-") || line.Contains("ELWA-") || line.Contains("GRP-") || line.Contains("TRB-"))
-                    {
-                        cso._ReportNo.Add(line.Replace("Report no.", "").Trim());
-                        //cso._ReportNo.Add(poNo + ":" + line.Replace("Report no.", "").Trim());
-                    }
-
-                    //Read the next line
-                    line = sr.ReadLine();
-                    index++;
                 }
-
-                //close the file
-                sr.Close();
+                //add last item
+                cso.status = "I";
+                cso.create_date = DateTime.Now;
+                if (!job_sample_group_so.FindBySO(so))
+                {
+                    listGroupSo.Add(cso);
+                }
                 bUploadSuccess = true;
             }
             catch (Exception ex)
@@ -259,9 +347,16 @@ namespace ALS.ALSI.Web.view.template
             if (bUploadSuccess)
             {
                 pSo.Visible = true;
+                //insert to db
+                foreach (job_sample_group_so so in listGroupSo)
+                {
+                    so.Insert();
+                }
+                GeneralManager.Commit();
+
                 bindingData();
                 //Commit
-                Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูลเรียบแล้วทั้งหมด " + this.searchResult.Count + " รายการ</div>";
+                Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูลเรียบแล้วทั้งหมด " + listGroupSo.Count + " รายการ</div>";
             }
             else
             {
@@ -269,6 +364,7 @@ namespace ALS.ALSI.Web.view.template
                 Message = "<div class=\"alert alert-danger\"><strong>Error!</strong>เกิดความผิดพลาดในการโหลดข้อมูล SO กรุณาตรวจสอบไฟล์</div>";
             }
         }
+
 
     }
 }

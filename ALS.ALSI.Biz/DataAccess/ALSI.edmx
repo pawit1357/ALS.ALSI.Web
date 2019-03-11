@@ -139,6 +139,17 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="sample_invoice_status" Type="int" />
           <Property Name="sample_invoice_complete_date" Type="datetime" Precision="0" />
         </EntityType>
+        <EntityType Name="job_sample_group_so">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="so" Type="varchar" MaxLength="45" />
+          <Property Name="unit_price" Type="varchar" MaxLength="300" />
+          <Property Name="report_no" Type="varchar" MaxLength="300" />
+          <Property Name="status" Type="varchar" MaxLength="1" />
+          <Property Name="create_date" Type="datetime" Precision="0" />
+        </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
             <PropertyRef Name="ID" />
@@ -1352,9 +1363,9 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="specification" Type="varchar" MaxLength="255" />
           <Property Name="result" Type="varchar" MaxLength="45" />
           <Property Name="pass_fail" Type="varchar" MaxLength="45" />
-          <Property Name="ProcedureNo_Extraction" Type="varchar" MaxLength="45" />
-          <Property Name="ExtractionMedium_Extraction" Type="varchar" MaxLength="45" />
-          <Property Name="SampleSize_Extraction" Type="varchar" MaxLength="45" />
+          <Property Name="ProcedureNo_Extraction" Type="varchar" MaxLength="200" />
+          <Property Name="ExtractionMedium_Extraction" Type="varchar" MaxLength="200" />
+          <Property Name="SampleSize_Extraction" Type="varchar" MaxLength="200" />
           <Property Name="OvenCondition_Extraction" Type="varchar" MaxLength="200" />
           <Property Name="ProcedureNo_IndirectMaterials" Type="varchar" MaxLength="200" />
           <Property Name="SampleSize_IndirectMaterials" Type="varchar" MaxLength="45" />
@@ -1907,6 +1918,7 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="job_reiew_requistion" EntityType="Self.job_reiew_requistion" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_running" EntityType="Self.job_running" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_sample" EntityType="Self.job_sample" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="job_sample_group_so" EntityType="Self.job_sample_group_so" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_sample_logs" EntityType="Self.job_sample_logs" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_completion_scheduled" EntityType="Self.m_completion_scheduled" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="m_customer" EntityType="Self.m_customer" Schema="alsi" store:Type="Tables" />
@@ -2031,6 +2043,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="job_reiew_requistion" EntityType="alsiModel.job_reiew_requistion" />
           <EntitySet Name="job_running" EntityType="alsiModel.job_running" />
           <EntitySet Name="job_sample" EntityType="alsiModel.job_sample" />
+          <EntitySet Name="job_sample_group_so" EntityType="alsiModel.job_sample_group_so" />
           <EntitySet Name="job_sample_logs" EntityType="alsiModel.job_sample_logs" />
           <EntitySet Name="m_completion_scheduled" EntityType="alsiModel.m_completion_scheduled" />
           <EntitySet Name="m_customer" EntityType="alsiModel.m_customer" />
@@ -2259,6 +2272,17 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="sample_invoice_status" Type="Int32" />
           <Property Name="sample_invoice_complete_date" Type="DateTime" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="alsiModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
+        </EntityType>
+        <EntityType Name="job_sample_group_so">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="so" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="unit_price" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="report_no" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -3484,9 +3508,9 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="specification" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="result" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="pass_fail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ProcedureNo_Extraction" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ExtractionMedium_Extraction" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="SampleSize_Extraction" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ProcedureNo_Extraction" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ExtractionMedium_Extraction" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SampleSize_Extraction" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="OvenCondition_Extraction" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ProcedureNo_IndirectMaterials" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="SampleSize_IndirectMaterials" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -4173,6 +4197,18 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="specification_id" ColumnName="specification_id" />
                 <ScalarProperty Name="job_id" ColumnName="job_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="job_sample_group_so">
+            <EntityTypeMapping TypeName="alsiModel.job_sample_group_so">
+              <MappingFragment StoreEntitySet="job_sample_group_so">
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="report_no" ColumnName="report_no" />
+                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+                <ScalarProperty Name="so" ColumnName="so" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

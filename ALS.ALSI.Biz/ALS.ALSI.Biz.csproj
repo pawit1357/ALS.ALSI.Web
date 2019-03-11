@@ -167,6 +167,7 @@
     <Compile Include="DataAccess\holiday_calendar.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\JobSampleGroupSO.cs" />
     <Compile Include="DataAccess\job_info.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -177,6 +178,9 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\job_sample.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\job_sample_group_so.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\job_sample_logs.cs">
