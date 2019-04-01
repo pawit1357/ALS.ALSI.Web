@@ -341,7 +341,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="specification_id" Type="int" />
           <Property Name="template_id" Type="int" />
-          <Property Name="A" Type="varchar" MaxLength="255" />
+          <Property Name="A" Type="varchar" MaxLength="500" />
           <Property Name="B" Type="varchar" MaxLength="255" />
           <Property Name="C" Type="varchar" MaxLength="255" />
           <Property Name="D" Type="varchar" MaxLength="255" />
@@ -1134,6 +1134,200 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="F31" Type="varchar" MaxLength="20" />
           <Property Name="F32" Type="varchar" MaxLength="20" />
           <Property Name="C13" Type="varchar" MaxLength="20" />
+          <Property Name="remark1" Type="varchar" MaxLength="150" />
+          <Property Name="remark2" Type="varchar" MaxLength="150" />
+          <Property Name="remark3" Type="varchar" MaxLength="150" />
+          <Property Name="remark4" Type="varchar" MaxLength="150" />
+          <Property Name="remark5" Type="varchar" MaxLength="150" />
+          <Property Name="UnitCompoundSub" Type="int" />
+          <Property Name="cp_value" Type="varchar" MaxLength="100" />
+          <Property Name="E13" Type="varchar" MaxLength="20" />
+          <Property Name="E14" Type="varchar" MaxLength="20" />
+          <Property Name="E15" Type="varchar" MaxLength="20" />
+          <Property Name="E16" Type="varchar" MaxLength="20" />
+          <Property Name="E17" Type="varchar" MaxLength="20" />
+          <Property Name="E18" Type="varchar" MaxLength="20" />
+          <Property Name="E19" Type="varchar" MaxLength="20" />
+          <Property Name="F13" Type="varchar" MaxLength="20" />
+          <Property Name="F14" Type="varchar" MaxLength="20" />
+          <Property Name="F15" Type="varchar" MaxLength="20" />
+          <Property Name="F16" Type="varchar" MaxLength="20" />
+          <Property Name="F17" Type="varchar" MaxLength="20" />
+          <Property Name="F18" Type="varchar" MaxLength="20" />
+          <Property Name="F19" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="template_seagate_gcms_coverpage_2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="component_id" Type="int" />
+          <Property Name="procedure_no" Type="varchar" MaxLength="45" />
+          <Property Name="sample_id" Type="int" />
+          <Property Name="sample_size" Type="varchar" MaxLength="45" />
+          <Property Name="extraction_medium" Type="varchar" MaxLength="45" />
+          <Property Name="extraction_volumn" Type="varchar" MaxLength="45" />
+          <Property Name="UnitMotorOilContamination" Type="int" />
+          <Property Name="UnitMotorHub" Type="int" />
+          <Property Name="UnitMotorHubSub" Type="int" />
+          <Property Name="UnitMotorBase" Type="int" />
+          <Property Name="UnitMotorBaseSub" Type="int" />
+          <Property Name="UnitCompound" Type="int" />
+          <Property Name="row_type" Type="int" />
+          <Property Name="A" Type="varchar" MaxLength="255" />
+          <Property Name="B" Type="varchar" MaxLength="255" />
+          <Property Name="C" Type="varchar" MaxLength="255" />
+          <Property Name="B13" Type="varchar" MaxLength="20" />
+          <Property Name="B14" Type="varchar" MaxLength="20" />
+          <Property Name="B15" Type="varchar" MaxLength="20" />
+          <Property Name="B16" Type="varchar" MaxLength="20" />
+          <Property Name="B17" Type="varchar" MaxLength="20" />
+          <Property Name="B18" Type="varchar" MaxLength="20" />
+          <Property Name="B19" Type="varchar" MaxLength="20" />
+          <Property Name="B20" Type="varchar" MaxLength="20" />
+          <Property Name="B21" Type="varchar" MaxLength="20" />
+          <Property Name="B22" Type="varchar" MaxLength="20" />
+          <Property Name="B23" Type="varchar" MaxLength="20" />
+          <Property Name="B24" Type="varchar" MaxLength="20" />
+          <Property Name="B25" Type="varchar" MaxLength="20" />
+          <Property Name="B26" Type="varchar" MaxLength="20" />
+          <Property Name="B27" Type="varchar" MaxLength="20" />
+          <Property Name="B28" Type="varchar" MaxLength="20" />
+          <Property Name="B29" Type="varchar" MaxLength="20" />
+          <Property Name="B30" Type="varchar" MaxLength="20" />
+          <Property Name="B31" Type="varchar" MaxLength="20" />
+          <Property Name="B32" Type="varchar" MaxLength="20" />
+          <Property Name="B34" Type="varchar" MaxLength="20" />
+          <Property Name="B35" Type="varchar" MaxLength="20" />
+          <Property Name="B36" Type="varchar" MaxLength="20" />
+          <Property Name="B39" Type="varchar" MaxLength="20" />
+          <Property Name="B40" Type="varchar" MaxLength="20" />
+          <Property Name="B41" Type="varchar" MaxLength="20" />
+          <Property Name="B42" Type="varchar" MaxLength="20" />
+          <Property Name="B43" Type="varchar" MaxLength="20" />
+          <Property Name="B44" Type="varchar" MaxLength="20" />
+          <Property Name="B45" Type="varchar" MaxLength="20" />
+          <Property Name="B46" Type="varchar" MaxLength="20" />
+          <Property Name="B47" Type="varchar" MaxLength="20" />
+          <Property Name="B48" Type="varchar" MaxLength="20" />
+          <Property Name="B49" Type="varchar" MaxLength="20" />
+          <Property Name="B50" Type="varchar" MaxLength="20" />
+          <Property Name="B51" Type="varchar" MaxLength="20" />
+          <Property Name="B52" Type="varchar" MaxLength="20" />
+          <Property Name="C40" Type="varchar" MaxLength="20" />
+          <Property Name="C41" Type="varchar" MaxLength="20" />
+          <Property Name="C42" Type="varchar" MaxLength="20" />
+          <Property Name="B53" Type="varchar" MaxLength="20" />
+          <Property Name="B54" Type="varchar" MaxLength="20" />
+          <Property Name="B55" Type="varchar" MaxLength="20" />
+          <Property Name="B56" Type="varchar" MaxLength="20" />
+          <Property Name="B57" Type="varchar" MaxLength="20" />
+          <Property Name="B58" Type="varchar" MaxLength="20" />
+          <Property Name="B59" Type="varchar" MaxLength="20" />
+          <Property Name="B60" Type="varchar" MaxLength="20" />
+          <Property Name="B61" Type="varchar" MaxLength="20" />
+          <Property Name="B62" Type="varchar" MaxLength="20" />
+          <Property Name="C23" Type="varchar" MaxLength="20" />
+          <Property Name="C24" Type="varchar" MaxLength="20" />
+          <Property Name="C25" Type="varchar" MaxLength="20" />
+          <Property Name="C26" Type="varchar" MaxLength="20" />
+          <Property Name="C27" Type="varchar" MaxLength="20" />
+          <Property Name="C28" Type="varchar" MaxLength="20" />
+          <Property Name="C30" Type="varchar" MaxLength="20" />
+          <Property Name="C31" Type="varchar" MaxLength="20" />
+          <Property Name="C32" Type="varchar" MaxLength="20" />
+          <Property Name="C34" Type="varchar" MaxLength="20" />
+          <Property Name="C35" Type="varchar" MaxLength="20" />
+          <Property Name="C36" Type="varchar" MaxLength="20" />
+          <Property Name="C43" Type="varchar" MaxLength="20" />
+          <Property Name="C44" Type="varchar" MaxLength="20" />
+          <Property Name="C45" Type="varchar" MaxLength="20" />
+          <Property Name="C46" Type="varchar" MaxLength="20" />
+          <Property Name="C47" Type="varchar" MaxLength="20" />
+          <Property Name="C48" Type="varchar" MaxLength="20" />
+          <Property Name="C49" Type="varchar" MaxLength="20" />
+          <Property Name="C50" Type="varchar" MaxLength="20" />
+          <Property Name="C51" Type="varchar" MaxLength="20" />
+          <Property Name="C52" Type="varchar" MaxLength="20" />
+          <Property Name="D40" Type="varchar" MaxLength="20" />
+          <Property Name="D41" Type="varchar" MaxLength="20" />
+          <Property Name="D42" Type="varchar" MaxLength="20" />
+          <Property Name="D43" Type="varchar" MaxLength="20" />
+          <Property Name="D44" Type="varchar" MaxLength="20" />
+          <Property Name="D45" Type="varchar" MaxLength="20" />
+          <Property Name="D46" Type="varchar" MaxLength="20" />
+          <Property Name="D47" Type="varchar" MaxLength="20" />
+          <Property Name="D48" Type="varchar" MaxLength="20" />
+          <Property Name="D49" Type="varchar" MaxLength="20" />
+          <Property Name="D50" Type="varchar" MaxLength="20" />
+          <Property Name="D51" Type="varchar" MaxLength="20" />
+          <Property Name="D52" Type="varchar" MaxLength="20" />
+          <Property Name="selected_base" Type="int" />
+          <Property Name="data_type" Type="int" />
+          <Property Name="C20" Type="varchar" MaxLength="20" />
+          <Property Name="C21" Type="varchar" MaxLength="20" />
+          <Property Name="C22" Type="varchar" MaxLength="20" />
+          <Property Name="C29" Type="varchar" MaxLength="20" />
+          <Property Name="D20" Type="varchar" MaxLength="20" />
+          <Property Name="D21" Type="varchar" MaxLength="20" />
+          <Property Name="D22" Type="varchar" MaxLength="20" />
+          <Property Name="D23" Type="varchar" MaxLength="20" />
+          <Property Name="D24" Type="varchar" MaxLength="20" />
+          <Property Name="D25" Type="varchar" MaxLength="20" />
+          <Property Name="D26" Type="varchar" MaxLength="20" />
+          <Property Name="D27" Type="varchar" MaxLength="20" />
+          <Property Name="D28" Type="varchar" MaxLength="20" />
+          <Property Name="D29" Type="varchar" MaxLength="20" />
+          <Property Name="D30" Type="varchar" MaxLength="20" />
+          <Property Name="D31" Type="varchar" MaxLength="20" />
+          <Property Name="D32" Type="varchar" MaxLength="20" />
+          <Property Name="C14" Type="varchar" MaxLength="20" />
+          <Property Name="C15" Type="varchar" MaxLength="20" />
+          <Property Name="C16" Type="varchar" MaxLength="20" />
+          <Property Name="C17" Type="varchar" MaxLength="20" />
+          <Property Name="C18" Type="varchar" MaxLength="20" />
+          <Property Name="C19" Type="varchar" MaxLength="20" />
+          <Property Name="E20" Type="varchar" MaxLength="20" />
+          <Property Name="E21" Type="varchar" MaxLength="20" />
+          <Property Name="E22" Type="varchar" MaxLength="20" />
+          <Property Name="E23" Type="varchar" MaxLength="20" />
+          <Property Name="E24" Type="varchar" MaxLength="20" />
+          <Property Name="E25" Type="varchar" MaxLength="20" />
+          <Property Name="E26" Type="varchar" MaxLength="20" />
+          <Property Name="E27" Type="varchar" MaxLength="20" />
+          <Property Name="E28" Type="varchar" MaxLength="20" />
+          <Property Name="E29" Type="varchar" MaxLength="20" />
+          <Property Name="E30" Type="varchar" MaxLength="20" />
+          <Property Name="E31" Type="varchar" MaxLength="20" />
+          <Property Name="E32" Type="varchar" MaxLength="20" />
+          <Property Name="F20" Type="varchar" MaxLength="20" />
+          <Property Name="F21" Type="varchar" MaxLength="20" />
+          <Property Name="F22" Type="varchar" MaxLength="20" />
+          <Property Name="F23" Type="varchar" MaxLength="20" />
+          <Property Name="F24" Type="varchar" MaxLength="20" />
+          <Property Name="F25" Type="varchar" MaxLength="20" />
+          <Property Name="F26" Type="varchar" MaxLength="20" />
+          <Property Name="F27" Type="varchar" MaxLength="20" />
+          <Property Name="F28" Type="varchar" MaxLength="20" />
+          <Property Name="F29" Type="varchar" MaxLength="20" />
+          <Property Name="F30" Type="varchar" MaxLength="20" />
+          <Property Name="F31" Type="varchar" MaxLength="20" />
+          <Property Name="F32" Type="varchar" MaxLength="20" />
+          <Property Name="C13" Type="varchar" MaxLength="20" />
+          <Property Name="E13" Type="varchar" MaxLength="20" />
+          <Property Name="E14" Type="varchar" MaxLength="20" />
+          <Property Name="E15" Type="varchar" MaxLength="20" />
+          <Property Name="E16" Type="varchar" MaxLength="20" />
+          <Property Name="E17" Type="varchar" MaxLength="20" />
+          <Property Name="E18" Type="varchar" MaxLength="20" />
+          <Property Name="E19" Type="varchar" MaxLength="20" />
+          <Property Name="F13" Type="varchar" MaxLength="20" />
+          <Property Name="F14" Type="varchar" MaxLength="20" />
+          <Property Name="F15" Type="varchar" MaxLength="20" />
+          <Property Name="F16" Type="varchar" MaxLength="20" />
+          <Property Name="F17" Type="varchar" MaxLength="20" />
+          <Property Name="F18" Type="varchar" MaxLength="20" />
+          <Property Name="F19" Type="varchar" MaxLength="20" />
           <Property Name="remark1" Type="varchar" MaxLength="150" />
           <Property Name="remark2" Type="varchar" MaxLength="150" />
           <Property Name="remark3" Type="varchar" MaxLength="150" />
@@ -1952,6 +2146,7 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="template_seagate_dhs_coverpage" EntityType="Self.template_seagate_dhs_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_ftir_coverpage" EntityType="Self.template_seagate_ftir_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_gcms_coverpage" EntityType="Self.template_seagate_gcms_coverpage" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="template_seagate_gcms_coverpage_2" EntityType="Self.template_seagate_gcms_coverpage_2" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_gcms_coverpage_img" EntityType="Self.template_seagate_gcms_coverpage_img" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_hpa_coverpage" EntityType="Self.template_seagate_hpa_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_seagate_ic_coverpage" EntityType="Self.template_seagate_ic_coverpage" Schema="alsi" store:Type="Tables" />
@@ -2077,6 +2272,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="template_seagate_dhs_coverpage" EntityType="alsiModel.template_seagate_dhs_coverpage" />
           <EntitySet Name="template_seagate_ftir_coverpage" EntityType="alsiModel.template_seagate_ftir_coverpage" />
           <EntitySet Name="template_seagate_gcms_coverpage" EntityType="alsiModel.template_seagate_gcms_coverpage" />
+          <EntitySet Name="template_seagate_gcms_coverpage_2" EntityType="alsiModel.template_seagate_gcms_coverpage_2" />
           <EntitySet Name="template_seagate_gcms_coverpage_img" EntityType="alsiModel.template_seagate_gcms_coverpage_img" />
           <EntitySet Name="template_seagate_hpa_coverpage" EntityType="alsiModel.template_seagate_hpa_coverpage" />
           <EntitySet Name="template_seagate_ic_coverpage" EntityType="alsiModel.template_seagate_ic_coverpage" />
@@ -2486,7 +2682,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="specification_id" Type="Int32" />
           <Property Name="template_id" Type="Int32" />
-          <Property Name="A" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="A" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="B" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="C" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="D" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -3279,6 +3475,200 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="F31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="F32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="C13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="remark1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="remark5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="UnitCompoundSub" Type="Int32" />
+          <Property Name="cp_value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="E13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E14" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E15" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E16" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E17" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E18" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E19" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F14" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F15" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F16" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F17" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F18" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F19" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="template_seagate_gcms_coverpage_2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="component_id" Type="Int32" />
+          <Property Name="procedure_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="sample_id" Type="Int32" />
+          <Property Name="sample_size" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="extraction_medium" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="extraction_volumn" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="UnitMotorOilContamination" Type="Int32" />
+          <Property Name="UnitMotorHub" Type="Int32" />
+          <Property Name="UnitMotorHubSub" Type="Int32" />
+          <Property Name="UnitMotorBase" Type="Int32" />
+          <Property Name="UnitMotorBaseSub" Type="Int32" />
+          <Property Name="UnitCompound" Type="Int32" />
+          <Property Name="row_type" Type="Int32" />
+          <Property Name="A" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="C" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="B13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B14" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B15" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B16" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B17" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B18" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B19" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B20" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B21" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B22" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B23" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B24" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B25" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B26" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B27" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B28" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B29" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B30" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B34" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B35" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B36" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B39" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B40" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B41" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B42" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B43" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B44" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B45" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B46" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B47" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B48" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B49" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B50" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B51" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B52" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C40" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C41" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C42" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B53" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B54" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B55" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B56" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B57" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B58" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B59" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B60" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B61" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B62" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C23" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C24" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C25" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C26" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C27" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C28" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C30" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C34" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C35" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C36" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C43" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C44" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C45" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C46" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C47" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C48" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C49" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C50" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C51" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C52" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D40" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D41" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D42" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D43" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D44" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D45" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D46" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D47" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D48" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D49" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D50" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D51" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D52" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="selected_base" Type="Int32" />
+          <Property Name="data_type" Type="Int32" />
+          <Property Name="C20" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C21" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C22" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C29" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D20" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D21" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D22" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D23" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D24" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D25" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D26" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D27" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D28" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D29" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D30" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="D32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C14" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C15" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C16" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C17" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C18" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C19" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E20" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E21" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E22" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E23" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E24" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E25" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E26" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E27" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E28" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E29" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E30" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F20" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F21" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F22" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F23" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F24" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F25" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F26" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F27" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F28" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F29" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F30" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F31" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F32" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E14" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E15" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E16" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E17" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E18" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="E19" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F13" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F14" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F15" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F16" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F17" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F18" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="F19" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="remark1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="remark2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="remark3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -5071,6 +5461,20 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_gcms_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_gcms_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_gcms_coverpage">
+                <ScalarProperty Name="F19" ColumnName="F19" />
+                <ScalarProperty Name="F18" ColumnName="F18" />
+                <ScalarProperty Name="F17" ColumnName="F17" />
+                <ScalarProperty Name="F16" ColumnName="F16" />
+                <ScalarProperty Name="F15" ColumnName="F15" />
+                <ScalarProperty Name="F14" ColumnName="F14" />
+                <ScalarProperty Name="F13" ColumnName="F13" />
+                <ScalarProperty Name="E19" ColumnName="E19" />
+                <ScalarProperty Name="E18" ColumnName="E18" />
+                <ScalarProperty Name="E17" ColumnName="E17" />
+                <ScalarProperty Name="E16" ColumnName="E16" />
+                <ScalarProperty Name="E15" ColumnName="E15" />
+                <ScalarProperty Name="E14" ColumnName="E14" />
+                <ScalarProperty Name="E13" ColumnName="E13" />
                 <ScalarProperty Name="cp_value" ColumnName="cp_value" />
                 <ScalarProperty Name="UnitCompoundSub" ColumnName="UnitCompoundSub" />
                 <ScalarProperty Name="remark5" ColumnName="remark5" />
@@ -5078,6 +5482,187 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="remark3" ColumnName="remark3" />
                 <ScalarProperty Name="remark2" ColumnName="remark2" />
                 <ScalarProperty Name="remark1" ColumnName="remark1" />
+                <ScalarProperty Name="C13" ColumnName="C13" />
+                <ScalarProperty Name="F32" ColumnName="F32" />
+                <ScalarProperty Name="F31" ColumnName="F31" />
+                <ScalarProperty Name="F30" ColumnName="F30" />
+                <ScalarProperty Name="F29" ColumnName="F29" />
+                <ScalarProperty Name="F28" ColumnName="F28" />
+                <ScalarProperty Name="F27" ColumnName="F27" />
+                <ScalarProperty Name="F26" ColumnName="F26" />
+                <ScalarProperty Name="F25" ColumnName="F25" />
+                <ScalarProperty Name="F24" ColumnName="F24" />
+                <ScalarProperty Name="F23" ColumnName="F23" />
+                <ScalarProperty Name="F22" ColumnName="F22" />
+                <ScalarProperty Name="F21" ColumnName="F21" />
+                <ScalarProperty Name="F20" ColumnName="F20" />
+                <ScalarProperty Name="E32" ColumnName="E32" />
+                <ScalarProperty Name="E31" ColumnName="E31" />
+                <ScalarProperty Name="E30" ColumnName="E30" />
+                <ScalarProperty Name="E29" ColumnName="E29" />
+                <ScalarProperty Name="E28" ColumnName="E28" />
+                <ScalarProperty Name="E27" ColumnName="E27" />
+                <ScalarProperty Name="E26" ColumnName="E26" />
+                <ScalarProperty Name="E25" ColumnName="E25" />
+                <ScalarProperty Name="E24" ColumnName="E24" />
+                <ScalarProperty Name="E23" ColumnName="E23" />
+                <ScalarProperty Name="E22" ColumnName="E22" />
+                <ScalarProperty Name="E21" ColumnName="E21" />
+                <ScalarProperty Name="E20" ColumnName="E20" />
+                <ScalarProperty Name="C19" ColumnName="C19" />
+                <ScalarProperty Name="C18" ColumnName="C18" />
+                <ScalarProperty Name="C17" ColumnName="C17" />
+                <ScalarProperty Name="C16" ColumnName="C16" />
+                <ScalarProperty Name="C15" ColumnName="C15" />
+                <ScalarProperty Name="C14" ColumnName="C14" />
+                <ScalarProperty Name="D32" ColumnName="D32" />
+                <ScalarProperty Name="D31" ColumnName="D31" />
+                <ScalarProperty Name="D30" ColumnName="D30" />
+                <ScalarProperty Name="D29" ColumnName="D29" />
+                <ScalarProperty Name="D28" ColumnName="D28" />
+                <ScalarProperty Name="D27" ColumnName="D27" />
+                <ScalarProperty Name="D26" ColumnName="D26" />
+                <ScalarProperty Name="D25" ColumnName="D25" />
+                <ScalarProperty Name="D24" ColumnName="D24" />
+                <ScalarProperty Name="D23" ColumnName="D23" />
+                <ScalarProperty Name="D22" ColumnName="D22" />
+                <ScalarProperty Name="D21" ColumnName="D21" />
+                <ScalarProperty Name="D20" ColumnName="D20" />
+                <ScalarProperty Name="C29" ColumnName="C29" />
+                <ScalarProperty Name="C22" ColumnName="C22" />
+                <ScalarProperty Name="C21" ColumnName="C21" />
+                <ScalarProperty Name="C20" ColumnName="C20" />
+                <ScalarProperty Name="data_type" ColumnName="data_type" />
+                <ScalarProperty Name="selected_base" ColumnName="selected_base" />
+                <ScalarProperty Name="D52" ColumnName="D52" />
+                <ScalarProperty Name="D51" ColumnName="D51" />
+                <ScalarProperty Name="D50" ColumnName="D50" />
+                <ScalarProperty Name="D49" ColumnName="D49" />
+                <ScalarProperty Name="D48" ColumnName="D48" />
+                <ScalarProperty Name="D47" ColumnName="D47" />
+                <ScalarProperty Name="D46" ColumnName="D46" />
+                <ScalarProperty Name="D45" ColumnName="D45" />
+                <ScalarProperty Name="D44" ColumnName="D44" />
+                <ScalarProperty Name="D43" ColumnName="D43" />
+                <ScalarProperty Name="D42" ColumnName="D42" />
+                <ScalarProperty Name="D41" ColumnName="D41" />
+                <ScalarProperty Name="D40" ColumnName="D40" />
+                <ScalarProperty Name="C52" ColumnName="C52" />
+                <ScalarProperty Name="C51" ColumnName="C51" />
+                <ScalarProperty Name="C50" ColumnName="C50" />
+                <ScalarProperty Name="C49" ColumnName="C49" />
+                <ScalarProperty Name="C48" ColumnName="C48" />
+                <ScalarProperty Name="C47" ColumnName="C47" />
+                <ScalarProperty Name="C46" ColumnName="C46" />
+                <ScalarProperty Name="C45" ColumnName="C45" />
+                <ScalarProperty Name="C44" ColumnName="C44" />
+                <ScalarProperty Name="C43" ColumnName="C43" />
+                <ScalarProperty Name="C36" ColumnName="C36" />
+                <ScalarProperty Name="C35" ColumnName="C35" />
+                <ScalarProperty Name="C34" ColumnName="C34" />
+                <ScalarProperty Name="C32" ColumnName="C32" />
+                <ScalarProperty Name="C31" ColumnName="C31" />
+                <ScalarProperty Name="C30" ColumnName="C30" />
+                <ScalarProperty Name="C28" ColumnName="C28" />
+                <ScalarProperty Name="C27" ColumnName="C27" />
+                <ScalarProperty Name="C26" ColumnName="C26" />
+                <ScalarProperty Name="C25" ColumnName="C25" />
+                <ScalarProperty Name="C24" ColumnName="C24" />
+                <ScalarProperty Name="C23" ColumnName="C23" />
+                <ScalarProperty Name="B62" ColumnName="B62" />
+                <ScalarProperty Name="B61" ColumnName="B61" />
+                <ScalarProperty Name="B60" ColumnName="B60" />
+                <ScalarProperty Name="B59" ColumnName="B59" />
+                <ScalarProperty Name="B58" ColumnName="B58" />
+                <ScalarProperty Name="B57" ColumnName="B57" />
+                <ScalarProperty Name="B56" ColumnName="B56" />
+                <ScalarProperty Name="B55" ColumnName="B55" />
+                <ScalarProperty Name="B54" ColumnName="B54" />
+                <ScalarProperty Name="B53" ColumnName="B53" />
+                <ScalarProperty Name="C42" ColumnName="C42" />
+                <ScalarProperty Name="C41" ColumnName="C41" />
+                <ScalarProperty Name="C40" ColumnName="C40" />
+                <ScalarProperty Name="B52" ColumnName="B52" />
+                <ScalarProperty Name="B51" ColumnName="B51" />
+                <ScalarProperty Name="B50" ColumnName="B50" />
+                <ScalarProperty Name="B49" ColumnName="B49" />
+                <ScalarProperty Name="B48" ColumnName="B48" />
+                <ScalarProperty Name="B47" ColumnName="B47" />
+                <ScalarProperty Name="B46" ColumnName="B46" />
+                <ScalarProperty Name="B45" ColumnName="B45" />
+                <ScalarProperty Name="B44" ColumnName="B44" />
+                <ScalarProperty Name="B43" ColumnName="B43" />
+                <ScalarProperty Name="B42" ColumnName="B42" />
+                <ScalarProperty Name="B41" ColumnName="B41" />
+                <ScalarProperty Name="B40" ColumnName="B40" />
+                <ScalarProperty Name="B39" ColumnName="B39" />
+                <ScalarProperty Name="B36" ColumnName="B36" />
+                <ScalarProperty Name="B35" ColumnName="B35" />
+                <ScalarProperty Name="B34" ColumnName="B34" />
+                <ScalarProperty Name="B32" ColumnName="B32" />
+                <ScalarProperty Name="B31" ColumnName="B31" />
+                <ScalarProperty Name="B30" ColumnName="B30" />
+                <ScalarProperty Name="B29" ColumnName="B29" />
+                <ScalarProperty Name="B28" ColumnName="B28" />
+                <ScalarProperty Name="B27" ColumnName="B27" />
+                <ScalarProperty Name="B26" ColumnName="B26" />
+                <ScalarProperty Name="B25" ColumnName="B25" />
+                <ScalarProperty Name="B24" ColumnName="B24" />
+                <ScalarProperty Name="B23" ColumnName="B23" />
+                <ScalarProperty Name="B22" ColumnName="B22" />
+                <ScalarProperty Name="B21" ColumnName="B21" />
+                <ScalarProperty Name="B20" ColumnName="B20" />
+                <ScalarProperty Name="B19" ColumnName="B19" />
+                <ScalarProperty Name="B18" ColumnName="B18" />
+                <ScalarProperty Name="B17" ColumnName="B17" />
+                <ScalarProperty Name="B16" ColumnName="B16" />
+                <ScalarProperty Name="B15" ColumnName="B15" />
+                <ScalarProperty Name="B14" ColumnName="B14" />
+                <ScalarProperty Name="B13" ColumnName="B13" />
+                <ScalarProperty Name="C" ColumnName="C" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="row_type" ColumnName="row_type" />
+                <ScalarProperty Name="UnitCompound" ColumnName="UnitCompound" />
+                <ScalarProperty Name="UnitMotorBaseSub" ColumnName="UnitMotorBaseSub" />
+                <ScalarProperty Name="UnitMotorBase" ColumnName="UnitMotorBase" />
+                <ScalarProperty Name="UnitMotorHubSub" ColumnName="UnitMotorHubSub" />
+                <ScalarProperty Name="UnitMotorHub" ColumnName="UnitMotorHub" />
+                <ScalarProperty Name="UnitMotorOilContamination" ColumnName="UnitMotorOilContamination" />
+                <ScalarProperty Name="extraction_volumn" ColumnName="extraction_volumn" />
+                <ScalarProperty Name="extraction_medium" ColumnName="extraction_medium" />
+                <ScalarProperty Name="sample_size" ColumnName="sample_size" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="procedure_no" ColumnName="procedure_no" />
+                <ScalarProperty Name="component_id" ColumnName="component_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="template_seagate_gcms_coverpage_2">
+            <EntityTypeMapping TypeName="alsiModel.template_seagate_gcms_coverpage_2">
+              <MappingFragment StoreEntitySet="template_seagate_gcms_coverpage_2">
+                <ScalarProperty Name="cp_value" ColumnName="cp_value" />
+                <ScalarProperty Name="UnitCompoundSub" ColumnName="UnitCompoundSub" />
+                <ScalarProperty Name="remark5" ColumnName="remark5" />
+                <ScalarProperty Name="remark4" ColumnName="remark4" />
+                <ScalarProperty Name="remark3" ColumnName="remark3" />
+                <ScalarProperty Name="remark2" ColumnName="remark2" />
+                <ScalarProperty Name="remark1" ColumnName="remark1" />
+                <ScalarProperty Name="F19" ColumnName="F19" />
+                <ScalarProperty Name="F18" ColumnName="F18" />
+                <ScalarProperty Name="F17" ColumnName="F17" />
+                <ScalarProperty Name="F16" ColumnName="F16" />
+                <ScalarProperty Name="F15" ColumnName="F15" />
+                <ScalarProperty Name="F14" ColumnName="F14" />
+                <ScalarProperty Name="F13" ColumnName="F13" />
+                <ScalarProperty Name="E19" ColumnName="E19" />
+                <ScalarProperty Name="E18" ColumnName="E18" />
+                <ScalarProperty Name="E17" ColumnName="E17" />
+                <ScalarProperty Name="E16" ColumnName="E16" />
+                <ScalarProperty Name="E15" ColumnName="E15" />
+                <ScalarProperty Name="E14" ColumnName="E14" />
+                <ScalarProperty Name="E13" ColumnName="E13" />
                 <ScalarProperty Name="C13" ColumnName="C13" />
                 <ScalarProperty Name="F32" ColumnName="F32" />
                 <ScalarProperty Name="F31" ColumnName="F31" />

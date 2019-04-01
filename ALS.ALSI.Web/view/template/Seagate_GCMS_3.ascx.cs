@@ -505,6 +505,28 @@ namespace ALS.ALSI.Web.view.template
                     lbRemark4.Text = cov.remark4;
                     lbRemark5.Text = cov.remark5;
 
+
+                    //
+                    txtE13.Text=cov.E13;
+                    txtE14.Text=cov.E14;
+                    txtE15.Text=cov.E15;
+                    txtE16.Text=cov.E16;
+                    txtE17.Text=cov.E17;
+                    txtE18.Text=cov.E18;
+                    txtE19.Text= cov.E19;
+                    //
+                    txtF13.Text=cov.F13;
+                    txtF14.Text=cov.F14;
+                    txtF15.Text=cov.F15;
+                    txtF16.Text=cov.F16;
+                    txtF17.Text=cov.F17;
+                    txtF18.Text=cov.F18;
+                    txtF19.Text= cov.F19;
+                    //
+
+
+
+
                     #region "Unit"
                     gvMotorOil.Columns[1].HeaderText = String.Format("Maximum Allowable Amount ({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
                     gvMotorOil.Columns[2].HeaderText = String.Format("Results,({0})", ddlUnitMotorOilContamination.SelectedItem.Text);
@@ -732,8 +754,6 @@ namespace ALS.ALSI.Web.view.template
                             cov.F31 = txtF31.Text;
                             cov.F32 = txtF32.Text;
 
-
-
                             cov.B40 = txtB40.Text;
                             cov.B41 = txtB41.Text;
                             cov.B42 = txtB42.Text;
@@ -764,9 +784,6 @@ namespace ALS.ALSI.Web.view.template
                             cov.C51 = txtC51.Text;
                             cov.C52 = txtC52.Text;
 
-
-
-
                             cov.D40 = (txtD40.Text.Length > 20) ? "" : txtD40.Text;
                             cov.D41 = (txtD41.Text.Length > 20) ? "" : txtD41.Text;
                             cov.D42 = (txtD42.Text.Length > 20) ? "" : txtD42.Text;
@@ -782,6 +799,26 @@ namespace ALS.ALSI.Web.view.template
                             cov.D52 = (txtD52.Text.Length > 20) ? "" : txtD52.Text;
 
 
+                            //
+                            cov.E13 = (String.IsNullOrEmpty(txtE13.Text)) ? "" : txtE13.Text;
+                            cov.E14 = (String.IsNullOrEmpty(txtE14.Text)) ? "" : txtE14.Text;
+                            cov.E15 = (String.IsNullOrEmpty(txtE15.Text)) ? "" : txtE15.Text;
+                            cov.E16 = (String.IsNullOrEmpty(txtE16.Text)) ? "" : txtE16.Text;
+                            cov.E17 = (String.IsNullOrEmpty(txtE17.Text)) ? "" : txtE17.Text;
+                            cov.E18 = (String.IsNullOrEmpty(txtE18.Text)) ? "" : txtE18.Text;
+                            cov.E19 = (String.IsNullOrEmpty(txtE19.Text)) ? "" : txtE19.Text;
+                            //
+                            cov.F13 = (String.IsNullOrEmpty(txtF13.Text)) ? "" : txtF13.Text;
+                            cov.F14 = (String.IsNullOrEmpty(txtF14.Text)) ? "" : txtF14.Text;
+                            cov.F15 = (String.IsNullOrEmpty(txtF15.Text)) ? "" : txtF15.Text;
+                            cov.F16 = (String.IsNullOrEmpty(txtF16.Text)) ? "" : txtF16.Text;
+                            cov.F17 = (String.IsNullOrEmpty(txtF17.Text)) ? "" : txtF17.Text;
+                            cov.F18 = (String.IsNullOrEmpty(txtF18.Text)) ? "" : txtF18.Text;
+                            cov.F19 = (String.IsNullOrEmpty(txtF19.Text)) ? "" : txtF19.Text;
+                            //
+
+
+
                             cov.UnitMotorOilContamination = Convert.ToInt32(ddlUnitMotorOilContamination.SelectedValue);
                             cov.UnitMotorHub = Convert.ToInt32(ddlUnitMotorHub.SelectedValue);
                             cov.UnitMotorHubSub = Convert.ToInt32(ddlUnitMotorHubSub.SelectedValue);
@@ -790,7 +827,6 @@ namespace ALS.ALSI.Web.view.template
                             cov.UnitCompound = Convert.ToInt32(ddlUnitCompound.SelectedValue);
                             cov.UnitCompoundSub = Convert.ToInt32(ddlUnitCompoundSub.SelectedValue);
 
-                            //cov.selected_base = Convert.ToInt32(ddlBase.SelectedValue);
                             cov.remark1 = lbRemark1.Text;
                             cov.remark2 = lbRemark2.Text;
                             cov.remark3 = lbRemark3.Text;
@@ -1263,7 +1299,23 @@ namespace ALS.ALSI.Web.view.template
                                     txtF32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.F));
 
 
-
+                                    //
+                                    txtE13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.E));
+                                    txtE14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.E));
+                                    txtE15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.E));
+                                    txtE16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.E));
+                                    txtE17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.E));
+                                    txtE18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.E));
+                                    txtE19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.E));
+                                    //
+                                    txtF13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.F));
+                                    txtF14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.F));
+                                    txtF15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.F));
+                                    txtF16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.F));
+                                    txtF17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.F));
+                                    txtF18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.F));
+                                    txtF19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.F));
+                                    //
 
 
                                     #endregion
@@ -1398,7 +1450,10 @@ namespace ALS.ALSI.Web.view.template
                 }
                 if (!string.IsNullOrEmpty(txtD51.Text) && String.IsNullOrEmpty(lbRemark3.Text))
                 {
-                    lbRemark3.Text = String.Format("3.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
+                    if (CustomUtils.isNumber(txtD51.Text))
+                    {
+                        lbRemark3.Text = String.Format("3.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtD51.Text), 3), txtD52.Text);
+                    }
                 }
                 if (!string.IsNullOrEmpty(txtC51.Text) && String.IsNullOrEmpty(lbRemark4.Text))
                 {

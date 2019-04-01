@@ -940,7 +940,7 @@ namespace ALS.ALSI.Web.view.template
                 //_tmp.wunitText = tem.C;
                 //_tmp.ic_type = Convert.ToInt32(ICTypeEnum.ANIONIC);
                 //_tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
-                listCover.Add(_tmp);
+                //listCover.Add(_tmp);
                 _tmp = new template_wd_ic_coverpage();
                 _tmp.id = 8;
                 _tmp.A = "Total Anions";

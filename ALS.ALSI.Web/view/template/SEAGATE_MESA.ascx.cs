@@ -1174,7 +1174,6 @@ namespace ALS.ALSI.Web.view.template
         {
             if (cbCheckBox.Checked)
             {
-                //lbSpecDesc.Text = "There is no Seagate's Specification for Reference.";
                 lbSpecDesc.Text = "There is no Seagate's Specification for Reference.";
             }
             else
@@ -1184,7 +1183,6 @@ namespace ALS.ALSI.Web.view.template
                     tb_m_component component = new tb_m_component().SelectByID(Convert.ToInt32(this.coverpages[0].component_id));
                     if (component != null)
                     {
-                        //lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
                         lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", component.B, component.A);
                     }
                 }

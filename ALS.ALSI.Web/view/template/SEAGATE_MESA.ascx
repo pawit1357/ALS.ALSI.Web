@@ -103,7 +103,7 @@ Room Temperature for 24 hours
                                         <td>
                                             <asp:Label ID="lbSpecDesc" runat="server" Text="There is no Seagate's Specification for Reference."></asp:Label></td>
                                         <td>
-                                            <asp:CheckBox ID="cbCheckBox" Checked="true" runat="server" Text="No spec." OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                            <asp:CheckBox ID="cbCheckBox" runat="server" Text="No spec." OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
                                     </tr>
                                 </table>
                                 <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="False"

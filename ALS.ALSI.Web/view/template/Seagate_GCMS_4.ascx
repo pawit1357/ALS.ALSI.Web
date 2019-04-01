@@ -61,9 +61,6 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <h6>Results:</h6>
-                                <%--      <h6>
-                                    <asp:Label ID="lbDescription" runat="server" Text=""></asp:Label>
-                                </h6>--%>
                                 <table>
                                     <tr>
                                         <td>
@@ -512,17 +509,8 @@
                         <asp:Label ID="lbRemark5" runat="server" Text=""></asp:Label>--%>
                     </asp:Panel>
 
-
                     <asp:Panel ID="pLoadFile" runat="server">
 
-                        <%--                  <div class="form-group">
-                            <label class="control-label col-md-3">ทศนิยม</label>
-                            <div class="col-md-9">
-                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <asp:LinkButton ID="lbDecimal" runat="server" OnClick="LinkButton1_Click" CssClass="btn btn-default"> <i class="fa fa-sort-numeric-asc"></i> ตั้งค่า</asp:LinkButton>
-                                </div>
-                            </div>
-                        </div>--%>
                         <div class="form-group">
                             <label class="control-label col-md-3">Select Worksheet: </label>
 
@@ -556,7 +544,6 @@
                         </div>
 
                     </asp:Panel>
-
 
                     <asp:Panel ID="pRH" runat="server">
                         <h4 class="form-section">Manage CAS# Data</h4>
@@ -718,13 +705,13 @@
                                             <td style="text-align: right">pA of C14D10 in sample (X) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB14" runat="server"></asp:TextBox></td>
-            
+
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">pA of C14D10 in working standard (Y) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB15" runat="server"></asp:TextBox></td>
-  
+
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Concentration of C14D10 (C) :</td>
@@ -752,7 +739,7 @@
                                         </td>
 
                                     </tr>
-                          
+
                                 </table>
                                 <br />
                                 <br />
@@ -1147,7 +1134,6 @@
                         </div>
                     </asp:Panel>
 
-
                     <asp:Panel ID="pMotorOil" runat="server">
                         <h4 class="form-section">Motor Oil Comtamination</h4>
                         <div class="row">
@@ -1183,17 +1169,17 @@
                         </div>
                     </asp:Panel>
 
-<div class="row">
+                    <div class="row">
                         <div class="col-md-3">
                             <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
                                 CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting" OnRowCancelingEdit="gvRefImages_RowCancelingEdit" OnRowDataBound="gvRefImages_RowDataBound" OnRowEditing="gvRefImages_RowEditing" OnRowUpdating="gvRefImages_RowUpdating">
                                 <Columns>
 
-                                        <asp:TemplateField HeaderText="#" HeaderStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <%# Container.DataItemIndex + 1 %>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>  
+                                    <asp:TemplateField HeaderText="#" HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <%# Container.DataItemIndex + 1 %>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Right">
                                         <ItemTemplate>
                                             <asp:Image ID="img_path" runat="server" ImageUrl='<%# Eval("img_path")%>' Width="120" Height="120" />
@@ -1459,12 +1445,12 @@
                                             <td>
                                                 <asp:TextBox ID="txtFloatResult12" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
-                                                              <tr>
+                                        <tr>
                                             <td>Total Organic Compound (TOC)</td>
                                             <td>
                                                 <asp:TextBox ID="txtFloatResult13" runat="server" TextMode="Number" CssClass="form-control" Text="2"></asp:TextBox></td>
                                         </tr>
-                                                                                <tr>
+                                        <tr>
                                             <td colspan="2">&nbsp;</td>
                                         </tr>
                                         <tr>

@@ -12,7 +12,7 @@ namespace ALS.ALSI.Biz.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class template_seagate_gcms_coverpage
+    public partial class template_seagate_gcms_coverpage_2
     {
         public int ID { get; set; }
         public Nullable<int> component_id { get; set; }
@@ -168,13 +168,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string F31 { get; set; }
         public string F32 { get; set; }
         public string C13 { get; set; }
-        public string remark1 { get; set; }
-        public string remark2 { get; set; }
-        public string remark3 { get; set; }
-        public string remark4 { get; set; }
-        public string remark5 { get; set; }
-        public Nullable<int> UnitCompoundSub { get; set; }
-        public string cp_value { get; set; }
         public string E13 { get; set; }
         public string E14 { get; set; }
         public string E15 { get; set; }
@@ -189,5 +182,12 @@ namespace ALS.ALSI.Biz.DataAccess
         public string F17 { get; set; }
         public string F18 { get; set; }
         public string F19 { get; set; }
+        public string remark1 { get; set; }
+        public string remark2 { get; set; }
+        public string remark3 { get; set; }
+        public string remark4 { get; set; }
+        public string remark5 { get; set; }
+        public Nullable<int> UnitCompoundSub { get; set; }
+        public string cp_value { get; set; }
     }
 }

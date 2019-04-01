@@ -63,6 +63,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<template_seagate_dhs_coverpage> template_seagate_dhs_coverpage { get; set; }
         public DbSet<template_seagate_ftir_coverpage> template_seagate_ftir_coverpage { get; set; }
         public DbSet<template_seagate_gcms_coverpage> template_seagate_gcms_coverpage { get; set; }
+        public DbSet<template_seagate_gcms_coverpage_2> template_seagate_gcms_coverpage_2 { get; set; }
         public DbSet<template_seagate_gcms_coverpage_img> template_seagate_gcms_coverpage_img { get; set; }
         public DbSet<template_seagate_hpa_coverpage> template_seagate_hpa_coverpage { get; set; }
         public DbSet<template_seagate_ic_coverpage> template_seagate_ic_coverpage { get; set; }

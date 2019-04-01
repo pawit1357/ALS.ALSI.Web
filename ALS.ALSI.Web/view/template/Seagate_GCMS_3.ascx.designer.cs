@@ -355,6 +355,24 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtC13;
         
         /// <summary>
+        /// txtE13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtE13;
+        
+        /// <summary>
+        /// txtF13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtF13;
+        
+        /// <summary>
         /// txtB14 control.
         /// </summary>
         /// <remarks>
@@ -371,6 +389,24 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtC14;
+        
+        /// <summary>
+        /// txtE14 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtE14;
+        
+        /// <summary>
+        /// txtF14 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtF14;
         
         /// <summary>
         /// txtB15 control.
@@ -391,6 +427,24 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtC15;
         
         /// <summary>
+        /// txtE15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtE15;
+        
+        /// <summary>
+        /// txtF15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtF15;
+        
+        /// <summary>
         /// txtB16 control.
         /// </summary>
         /// <remarks>
@@ -407,6 +461,24 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtC16;
+        
+        /// <summary>
+        /// txtE16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtE16;
+        
+        /// <summary>
+        /// txtF16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtF16;
         
         /// <summary>
         /// txtB17 control.
@@ -427,6 +499,24 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtC17;
         
         /// <summary>
+        /// txtE17 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtE17;
+        
+        /// <summary>
+        /// txtF17 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtF17;
+        
+        /// <summary>
         /// txtB18 control.
         /// </summary>
         /// <remarks>
@@ -445,6 +535,24 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtC18;
         
         /// <summary>
+        /// txtE18 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtE18;
+        
+        /// <summary>
+        /// txtF18 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtF18;
+        
+        /// <summary>
         /// txtB19 control.
         /// </summary>
         /// <remarks>
@@ -461,6 +569,24 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtC19;
+        
+        /// <summary>
+        /// txtE19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtE19;
+        
+        /// <summary>
+        /// txtF19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtF19;
         
         /// <summary>
         /// txtB20 control.

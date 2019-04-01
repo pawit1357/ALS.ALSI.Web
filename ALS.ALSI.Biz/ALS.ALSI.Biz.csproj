@@ -283,6 +283,9 @@
     <Compile Include="DataAccess\template_seagate_gcms_coverpage.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\template_seagate_gcms_coverpage_2.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\template_seagate_gcms_coverpage_img.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>

@@ -18,6 +18,7 @@ using System.Data;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
 using Spire.Doc;
+using System.Collections;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -655,7 +656,7 @@ namespace ALS.ALSI.Web.view.template
                                         if (isheet.GetRow(row) != null)
                                         {
                                             String data_type = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.A));
-                                            if (ic.A.Equals(data_type))
+                                            if (ic.A.Equals(GetMapping(data_type)))
                                             {
                                                 ic.wb = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.B));
                                                 ic.wc = CustomUtils.GetCellValue(isheet.GetRow(row).GetCell(ExcelColumn.C));
@@ -1267,5 +1268,12 @@ namespace ALS.ALSI.Web.view.template
         }
 
 
+
+        private string GetMapping(string val)
+        {
+            Hashtable hashtable = new Hashtable();
+            hashtable["Unknown"] = "Sum Unknown";
+            return hashtable[val] == null ? val : hashtable[val].ToString();
+        }
     }
 }

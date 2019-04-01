@@ -1,6 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_GCMS_3.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_GCMS_3" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
+<style type="text/css">
+    .auto-style1 {
+        height: 29px;
+    }
+</style>
+
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <asp:ToolkitScriptManager ID="ToolkitScript1" runat="server" />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -709,6 +715,9 @@
                                             <td>&nbsp;</td>
                                             <td>Motor Base / Baseplate</td>
                                             <td>Irgafos &amp; Irgafos oxidize</td>
+                                            <td>&nbsp;</td>
+                                            <td>Blank Baseplate</td>
+                                            <td>Blank Hub</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">Internal Standard Recovery (R) :</td>
@@ -716,6 +725,13 @@
                                                 <asp:TextBox ID="txtB13" runat="server"></asp:TextBox></td>
                                             <td>
                                                 <asp:TextBox ID="txtC13" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtE13" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF13" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -725,6 +741,13 @@
                                             <td>
                                                 <asp:TextBox ID="txtC14" runat="server"></asp:TextBox>
                                             </td>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtE14" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF14" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">pA of C14D10 in working standard (Y) :</td>
@@ -732,6 +755,13 @@
                                                 <asp:TextBox ID="txtB15" runat="server"></asp:TextBox></td>
                                             <td>
                                                 <asp:TextBox ID="txtC15" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtE15" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF15" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -742,14 +772,28 @@
                                             <td>
                                                 <asp:TextBox ID="txtC16" runat="server"></asp:TextBox>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: right">Total Concentration of C14D10 (A) :</td>
+                                            <td>&nbsp;</td>
                                             <td>
-                                                <asp:TextBox ID="txtB17" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtE16" runat="server"></asp:TextBox>
                                             </td>
                                             <td>
+                                                <asp:TextBox ID="txtF16" runat="server"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right" class="auto-style1">Total Concentration of C14D10 (A) :</td>
+                                            <td class="auto-style1">
+                                                <asp:TextBox ID="txtB17" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="auto-style1">
                                                 <asp:TextBox ID="txtC17" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="auto-style1"></td>
+                                            <td class="auto-style1">
+                                                <asp:TextBox ID="txtE17" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="auto-style1">
+                                                <asp:TextBox ID="txtF17" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -760,6 +804,13 @@
                                             <td>
                                                 <asp:TextBox ID="txtC18" runat="server"></asp:TextBox>
                                             </td>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtE18" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF18" runat="server"></asp:TextBox>
+                                            </td>
                                         </tr>
                                     </tbody>
                                     <tr>
@@ -769,6 +820,13 @@
                                         </td>
                                         <td>
                                             <asp:TextBox ID="txtC19" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td>
+                                            <asp:TextBox ID="txtE19" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtF19" runat="server"></asp:TextBox>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -1680,13 +1738,8 @@
 
         </Triggers>
     </asp:UpdatePanel>
-    <%--           <asp:DropDownList ID="ddlUnitMotorBaseSub" runat="server" class="select2_category form-control">
-                                                    <asp:ListItem Selected="True" Value="1">ug/sq cm</asp:ListItem>
-                                                    <asp:ListItem Value="2">ng/cm2</asp:ListItem>
-                                                    <asp:ListItem Value="3">mg/g</asp:ListItem>
-                                                    <asp:ListItem Value="4">mg</asp:ListItem>
-
-                                                </asp:DropDownList>--%>
+    <%--    <div class="row">
+                                            <div class="col-md-6">--%>
 </form>
 
 <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
