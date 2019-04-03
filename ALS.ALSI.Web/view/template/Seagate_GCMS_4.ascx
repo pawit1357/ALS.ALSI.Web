@@ -1,6 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Seagate_GCMS_4.ascx.cs" Inherits="ALS.ALSI.Web.view.template.Seagate_GCMS_4" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
+<style type="text/css">
+    .auto-style1 {
+        height: 29px;
+    }
+</style>
+
 <form runat="server" id="Form1" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <asp:ToolkitScriptManager ID="ToolkitScript1" runat="server" />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -885,14 +891,14 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right">pA of C14D10 in Blank (Pbb) :</td>
-                                            <td>
+                                            <td style="text-align: right" class="auto-style1">pA of C14D10 in Blank (Pbb) :</td>
+                                            <td class="auto-style1">
                                                 <asp:TextBox ID="txtB33" runat="server"></asp:TextBox>
                                             </td>
-                                            <td>
+                                            <td class="auto-style1">
                                                 <asp:TextBox ID="txtC33" runat="server"></asp:TextBox>
                                             </td>
-                                            <td>
+                                            <td class="auto-style1">
                                                 <asp:TextBox ID="txtD33" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>

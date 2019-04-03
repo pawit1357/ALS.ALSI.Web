@@ -58,43 +58,12 @@ namespace ALS.ALSI.Web.view.template
         {
             if (!Page.IsPostBack)
             {
-                //pSo.Visible = false;
                 bindingData();
                 Message = "";
             }
         }
 
         #region "BTN"
-        protected void btnSaveSo_Click(object sender, EventArgs e)
-        {
-            int total = 0;
-            int success = 0;
-            //foreach (CSo cso in searchResult)
-            //{
-            //    String[] vals = cso.ReportNo.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
-            //    for (int i = 0; i < vals.Length; i++)
-            //    {
-            //        Double amt = cso._UnitPrice[i];
-            //        String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
-            //        foreach (String job_number in ReportNos)
-            //        {
-            //            job_sample js = job_sample.SelectByJobNumber(job_number);
-            //            if (js != null)
-            //            {
-            //                js.sample_invoice_amount = amt;
-            //                js.sample_invoice_complete_date = DateTime.Now;
-            //                js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
-            //                success++;
-            //            }
-            //            total++;
-            //        }
-            //    }
-            //}
-            GeneralManager.Commit();
-            Message = "<div class=\"alert alert-success\"><strong></strong>Job Number ทั้งหมด " + total + " นำเข้าได้ " + success + " นำเข้าไม่ได้ " + (total - success) + "</div>";
-
-        }
-
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             removeSession();
@@ -134,6 +103,7 @@ namespace ALS.ALSI.Web.view.template
             gvJob.DataSource = searchResult;
             gvJob.DataBind();
         }
+
         protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             if (e.NewPageIndex < 0) return;
@@ -168,6 +138,7 @@ namespace ALS.ALSI.Web.view.template
             gvJob.EditIndex = e.NewEditIndex;
             bindingData();
         }
+
         protected void gvJob_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
         {
             ////Finding the controls from Gridview for the row which is going to update  
@@ -207,6 +178,7 @@ namespace ALS.ALSI.Web.view.template
             //Call ShowData method for displaying updated data  
             bindingData();
         }
+
         protected void gvJob_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
@@ -236,20 +208,39 @@ namespace ALS.ALSI.Web.view.template
                                 String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
                                 foreach (String job_number in ReportNos)
                                 {
-                                    job_sample js = job_sample.SelectByJobNumber(job_number);
-                                    if (js != null)
+                                    #region "FIND JOB NUMBER"
+                                    List<string> jobNumbers = new List<string>();
+                                    string[] _val = job_number.Split('-');
+                                    if (_val.Length == 4)
                                     {
-
-                                        js.sample_invoice_amount = amt;
-                                        js.sample_invoice_complete_date = DateTime.Now;
-                                        js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
-                                        js.Update();
+                                        int startJob = Convert.ToInt32(_val[1]);
+                                        int endJob = Convert.ToInt32(_val[2]);
+                                        for (int idx = startJob; idx <= endJob; idx++)
+                                        {
+                                            jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], idx, _val[3]));
+                                        }
                                     }
                                     else
                                     {
-                                        sbJobFail.Append(job_number + ",");
+                                        jobNumbers.Add(job_number);
+                                    }
+                                    #endregion
 
-                                        fail++;
+                                    foreach(var jn in jobNumbers)
+                                    {
+                                        job_sample js = job_sample.SelectByJobNumber(job_number);
+                                        if (js != null)
+                                        {
+                                            js.sample_invoice_amount = amt;
+                                            js.sample_invoice_complete_date = DateTime.Now;
+                                            js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+                                            js.Update();
+                                        }
+                                        else
+                                        {
+                                            sbJobFail.Append(job_number + ",");
+                                            fail++;
+                                        }
                                     }
                                 }
                             }
@@ -271,7 +262,6 @@ namespace ALS.ALSI.Web.view.template
             gvJob.EditIndex = -1;
             bindingData();
         }
-
 
         #endregion
         private void ProcessUpload(String filePath)
@@ -365,9 +355,5 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
-
     }
 }
-
-
-

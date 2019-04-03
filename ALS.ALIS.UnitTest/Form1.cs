@@ -16,7 +16,7 @@ namespace ALS.ALIS.UnitTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Console.WriteLine();
             //GenerateHtmlBiz.test();
 
 
@@ -29,85 +29,101 @@ namespace ALS.ALIS.UnitTest
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<CSo> csos = new List<CSo>();
-            String line;
-            try
+            Console.WriteLine();
+
+            List<string> jobNumbers = new List<string>();
+            string[] reportNos = "ELP-3894-3897-G,ELP-4046-4047-D,ELP-5555-D".Split(',');
+
+            foreach(var reportNo in reportNos)
             {
-
-                //SO,Date,Qty,Unit,ReportNo
-
-                //String[] prefix = { "ELP-", "ELS-", "ELN-", "FA-", "ELWA-", "GRP-", "TRB-"};
-                //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader("D:\\SO.txt");
-
-                //Read the first line of text
-                line = sr.ReadLine();
-
-                //Continue to read until you reach end of file
-                CSo cso = null;
-                int index = 0;
-                while (line != null)
+                string[] _val = reportNo.Split('-');
+                if (_val.Length == 4)
                 {
-
-
-                    //write the lie to console window
-                    if (line.StartsWith("  SO"))
+                    int startJob = Convert.ToInt32(_val[1]);
+                    int endJob = Convert.ToInt32(_val[2]);
+                    for(int i = startJob; i <= endJob; i++)
                     {
-                        cso = new CSo { SO = line.Substring(0, 11).Trim(), _Qty = new List<double>(), _UnitPrice = new List<double>(), _ReportNo = new List<string>() };
-                        if (index > 0)
-                        {
-                            csos.Add(cso);
-                        }
-                        Console.WriteLine(line);
+                        jobNumbers.Add(string.Format("{0}-{1}-{2}",_val[0], i,_val[3]));
                     }
-                    else if (line.Contains("SAMPLE"))
-                    {
-                        Double qty = Convert.ToDouble(Regex.Replace(line.Substring(50, 15), "[A-Za-z ]", ""));
-                        Double unitPrice = Convert.ToDouble(Regex.Replace(line.Substring(65, 15), "[A-Za-z ]", "").Replace(",", "").Trim());
-                        cso._Qty.Add(qty);
-                        cso._UnitPrice.Add(unitPrice);
-                        Console.WriteLine(line);
-                    }
-                    else if (line.Contains("Report no."))
-                    {
-                        Console.WriteLine(line);
-                        cso._ReportNo.Add(line.Replace("Report no.","").Trim());
-                    }
-                    else if (line.Contains("ELP-") || line.Contains("ELS-") || line.Contains("ELN-") || line.Contains("FA-") || line.Contains("ELWA-") || line.Contains("GRP-") || line.Contains("TRB-"))
-                    {
-                        Console.WriteLine(line);
-                        cso._ReportNo.Add(line.Replace("Report no.", "").Trim());
-                    }
-
-                    //Read the next line
-                    line = sr.ReadLine();
-                    index++;
                 }
+                else
+                {
+                    jobNumbers.Add(reportNo);
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
 
-                //close the file
-                sr.Close();
-                Console.ReadLine();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception: " + ex.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
+            //List<CSo> csos = new List<CSo>();
+            //String line;
+            //try
+            //{
+
+            //    //SO,Date,Qty,Unit,ReportNo
+
+            //    //String[] prefix = { "ELP-", "ELS-", "ELN-", "FA-", "ELWA-", "GRP-", "TRB-"};
+            //    //Pass the file path and file name to the StreamReader constructor
+            //    StreamReader sr = new StreamReader("D:\\SO.txt");
+
+            //    //Read the first line of text
+            //    line = sr.ReadLine();
+
+            //    //Continue to read until you reach end of file
+            //    CSo cso = null;
+            //    int index = 0;
+            //    while (line != null)
+            //    {
+
+
+            //        //write the lie to console window
+            //        if (line.StartsWith("  SO"))
+            //        {
+            //            cso = new CSo { SO = line.Substring(0, 11).Trim(), _Qty = new List<double>(), _UnitPrice = new List<double>(), _ReportNo = new List<string>() };
+            //            if (index > 0)
+            //            {
+            //                csos.Add(cso);
+            //            }
+            //            Console.WriteLine(line);
+            //        }
+            //        else if (line.Contains("SAMPLE"))
+            //        {
+            //            Double qty = Convert.ToDouble(Regex.Replace(line.Substring(50, 15), "[A-Za-z ]", ""));
+            //            Double unitPrice = Convert.ToDouble(Regex.Replace(line.Substring(65, 15), "[A-Za-z ]", "").Replace(",", "").Trim());
+            //            cso._Qty.Add(qty);
+            //            cso._UnitPrice.Add(unitPrice);
+            //            Console.WriteLine(line);
+            //        }
+            //        else if (line.Contains("Report no."))
+            //        {
+            //            Console.WriteLine(line);
+            //            cso._ReportNo.Add(line.Replace("Report no.","").Trim());
+            //        }
+            //        else if (line.Contains("ELP-") || line.Contains("ELS-") || line.Contains("ELN-") || line.Contains("FA-") || line.Contains("ELWA-") || line.Contains("GRP-") || line.Contains("TRB-"))
+            //        {
+            //            Console.WriteLine(line);
+            //            cso._ReportNo.Add(line.Replace("Report no.", "").Trim());
+            //        }
+
+            //        //Read the next line
+            //        line = sr.ReadLine();
+            //        index++;
+            //    }
+
+            //    //close the file
+            //    sr.Close();
+            //    Console.ReadLine();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Exception: " + ex.Message);
+            //}
+            //finally
+            //{
+            //    Console.WriteLine("Executing finally block.");
+            //}
         }
 
 
     }
-    //public class CSo
-    //{
-    //    public String SO { get; set; }
-    //    public String PO { get; set; }
-    //    public String Date { get; set; }
-    //    public List<Double> Qty { get; set; }
-    //    public List<Double> UnitPrice { get; set; }
-    //    public List<String> ReportNo { get; set; }
 
-    //}
 }

@@ -1005,7 +1005,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right">pA of Blank :</td>
+                                            <td style="text-align: right">pA of C14D10 in sample Base(Pbs) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB28" runat="server"></asp:TextBox>
                                             </td>
@@ -1022,9 +1022,8 @@
                                                 <asp:TextBox ID="txtF28" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
-                                        <!-- PART 3 -->
                                         <tr>
-                                            <td style="text-align: right">pA of sample (Y) :</td>
+                                            <td style="text-align: right">pA of Blank :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB29" runat="server"></asp:TextBox>
                                             </td>
@@ -1041,8 +1040,9 @@
                                                 <asp:TextBox ID="txtF29" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
+                                        <!-- PART 3 -->
                                         <tr>
-                                            <td>&nbsp;</td>
+                                            <td style="text-align: right">pA of C14D10 in Blank (Pbb) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB30" runat="server"></asp:TextBox>
                                             </td>
@@ -1060,7 +1060,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right">Method Detection Limit (MDL) :</td>
+                                            <td style="text-align: right">pA of sample (Y) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB31" runat="server"></asp:TextBox>
                                             </td>
@@ -1077,9 +1077,8 @@
                                                 <asp:TextBox ID="txtF31" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
-
                                         <tr>
-                                            <td style="text-align: right">&nbsp;</td>
+                                            <td>&nbsp;</td>
                                             <td>
                                                 <asp:TextBox ID="txtB32" runat="server"></asp:TextBox>
                                             </td>
@@ -1094,6 +1093,43 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtF32" runat="server"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right" class="auto-style1">Method Detection Limit (MDL) :</td>
+                                            <td class="auto-style1">
+                                                <asp:TextBox ID="txtB33" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="auto-style1">
+                                                <asp:TextBox ID="txtC33" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="auto-style1">
+                                                <asp:TextBox ID="txtD33" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="auto-style1">
+                                                <asp:TextBox ID="txtE33" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="auto-style1">
+                                                <asp:TextBox ID="txtF33" runat="server"></asp:TextBox>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="text-align: right">&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtB34" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtC34" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD34" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtE34" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtF34" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
 
@@ -1216,6 +1252,12 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td style="text-align: right">pA of C14D10 in sample Hub (Pbs) :</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
                                             <td style="text-align: right">pA of Blank :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB48" runat="server"></asp:TextBox>
@@ -1228,6 +1270,12 @@
                                             </td>
                                         </tr>
                                         <!-- PART 3 -->
+                                        <tr>
+                                            <td style="text-align: right">pA of C14D10 in Blank (Pbh) :</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
                                         <tr>
                                             <td style="text-align: right">pA of sample (Y) :</td>
                                             <td>
@@ -1320,7 +1368,45 @@
                         </div>
                     </asp:Panel>
 
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:GridView ID="gvRefImages" runat="server" AutoGenerateColumns="False"
+                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" ShowFooter="true" DataKeyNames="id,sample_id" OnRowCommand="gvRefImages_RowCommand" OnRowDeleting="gvRefImages_RowDeleting" OnRowCancelingEdit="gvRefImages_RowCancelingEdit" OnRowDataBound="gvRefImages_RowDataBound" OnRowEditing="gvRefImages_RowEditing" OnRowUpdating="gvRefImages_RowUpdating">
+                                <Columns>
 
+                                    <asp:TemplateField HeaderText="#" HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <%# Container.DataItemIndex + 1 %>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Image ID="img_path" runat="server" ImageUrl='<%# Eval("img_path")%>' Width="120" Height="120" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Edit">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnDelete" runat="server" ToolTip="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-trash-o"></i></asp:LinkButton>
+
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                                CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                                CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                        </EditItemTemplate>
+
+                                    </asp:TemplateField>
+
+                                </Columns>
+                                <EmptyDataTemplate>
+                                    <div class="data-not-found">
+                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                    </div>
+                                </EmptyDataTemplate>
+                            </asp:GridView>
+                        </div>
+                    </div>
                     <!-- END FORM-->
                     <div class="row">
                         <div class="col-md-12">

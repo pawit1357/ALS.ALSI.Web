@@ -189,5 +189,13 @@ namespace ALS.ALSI.Biz.DataAccess
         public string F17 { get; set; }
         public string F18 { get; set; }
         public string F19 { get; set; }
+        public string B33 { get; set; }
+        public string C33 { get; set; }
+        public string D33 { get; set; }
+        public string D34 { get; set; }
+        public string E33 { get; set; }
+        public string E34 { get; set; }
+        public string F33 { get; set; }
+        public string F34 { get; set; }
     }
 }

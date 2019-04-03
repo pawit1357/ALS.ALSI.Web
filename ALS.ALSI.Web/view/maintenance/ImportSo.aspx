@@ -60,15 +60,12 @@
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btn_Edit" runat="server" ToolTip="แก้ไข" CommandName="Edit" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-edit"></i></asp:LinkButton>
 
-<%--                                                <asp:Button ID="btn_Edit" runat="server" Text="แก้ไข" CommandName="Edit" />--%>
                                             </ItemTemplate>
                                             <EditItemTemplate>
                                                 <asp:LinkButton ID="btn_Update" runat="server" ToolTip="อัพเดท" CommandName="Update" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-save"></i></asp:LinkButton>
                                                 &nbsp;&nbsp; 
                                                 <asp:LinkButton ID="btn_Cancel" runat="server" ToolTip="ยกเลิก" CommandName="Cancel" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-undo"></i></asp:LinkButton>
 
-<%--                                                <asp:Button ID="btn_Update" runat="server" Text="อัพเดท" CommandName="Update" />--%>
-<%--                                                <asp:Button ID="btn_Cancel" runat="server" Text="ยกเลิก" CommandName="Cancel" />--%>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="#" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
@@ -117,19 +114,6 @@
                             </asp:Panel>
                         </div>
 
-                        <div class="form-actions">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <asp:Button ID="btnSaveSo" runat="server" class="btn green" Text="บันทึกรายการ" OnClick="btnSaveSo_Click" Visible="false" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

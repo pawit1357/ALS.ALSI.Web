@@ -1155,6 +1155,14 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="F17" Type="varchar" MaxLength="20" />
           <Property Name="F18" Type="varchar" MaxLength="20" />
           <Property Name="F19" Type="varchar" MaxLength="20" />
+          <Property Name="B33" Type="varchar" MaxLength="45" />
+          <Property Name="C33" Type="varchar" MaxLength="45" />
+          <Property Name="D33" Type="varchar" MaxLength="45" />
+          <Property Name="D34" Type="varchar" MaxLength="45" />
+          <Property Name="E33" Type="varchar" MaxLength="45" />
+          <Property Name="E34" Type="varchar" MaxLength="45" />
+          <Property Name="F33" Type="varchar" MaxLength="45" />
+          <Property Name="F34" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_2">
           <Key>
@@ -3496,6 +3504,14 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="F17" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="F18" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="F19" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="B33" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="C33" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="D33" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="D34" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="E33" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="E34" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="F33" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="F34" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_seagate_gcms_coverpage_2">
           <Key>
@@ -5461,6 +5477,14 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_seagate_gcms_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_seagate_gcms_coverpage">
               <MappingFragment StoreEntitySet="template_seagate_gcms_coverpage">
+                <ScalarProperty Name="F34" ColumnName="F34" />
+                <ScalarProperty Name="F33" ColumnName="F33" />
+                <ScalarProperty Name="E34" ColumnName="E34" />
+                <ScalarProperty Name="E33" ColumnName="E33" />
+                <ScalarProperty Name="D34" ColumnName="D34" />
+                <ScalarProperty Name="D33" ColumnName="D33" />
+                <ScalarProperty Name="C33" ColumnName="C33" />
+                <ScalarProperty Name="B33" ColumnName="B33" />
                 <ScalarProperty Name="F19" ColumnName="F19" />
                 <ScalarProperty Name="F18" ColumnName="F18" />
                 <ScalarProperty Name="F17" ColumnName="F17" />

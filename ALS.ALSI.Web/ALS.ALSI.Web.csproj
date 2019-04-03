@@ -2114,7 +2114,7 @@
     <Content Include="ReportObject\DS.xss">
       <DependentUpon>DS.xsd</DependentUpon>
     </Content>
-    <Content Include="template\Blank Letter Head - EL.doc" />
+    <Content Include="template\Blank Letter Head - EL-2018.doc" />
     <Content Include="template\no_report.doc" />
     <Content Include="template\Blank Letter Head - PA.doc" />
     <Content Include="web.config">
@@ -2122,6 +2122,7 @@
     </Content>
     <Content Include="template\SumInvoiceTemplate.xlsx" />
     <Content Include="template\ManualALIS.pdf" />
+    <Content Include="template\Blank Letter Head - EL.doc" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

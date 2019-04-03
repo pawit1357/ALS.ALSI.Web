@@ -83,9 +83,15 @@ namespace ALS.ALSI.Biz.ReportObjects
                 //ATT / ELP / 16 / XXXX(เลขจ็อบ) - XX(Test)
 
                 int phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2));
-                if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
+
+                if (rpt.dateOfDampleRecieve.Month < Constants.PHYSICAL_YEAR)
                 {
-                    phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2)) - 1;
+                    phisicalYear = Convert.ToInt16(rpt.dateOfDampleRecieve.Year.ToString().Substring(2)) - 1;
+                }
+                else
+                {
+                    phisicalYear = Convert.ToInt16(rpt.dateOfDampleRecieve.Year.ToString().Substring(2));
+
                 }
 
                 String AmRetest = String.Empty;

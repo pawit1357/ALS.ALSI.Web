@@ -43,6 +43,11 @@ namespace ALS.ALSI.Web.view.template
             get { return (List<template_seagate_gcms_coverpage>)Session[GetType().Name + "coverpages"]; }
             set { Session[GetType().Name + "coverpages"] = value; }
         }
+        public List<template_img> refImg
+        {
+            get { return (List<template_img>)Session[GetType().Name + "refImg"]; }
+            set { Session[GetType().Name + "refImg"] = value; }
+        }
 
         public job_sample jobSample
         {
@@ -400,6 +405,9 @@ namespace ALS.ALSI.Web.view.template
                     txtB30.Text = cov.B30;
                     txtB31.Text = cov.B31;
                     txtB32.Text = cov.B32;
+                    txtB33.Text = cov.B33;
+                    txtB34.Text = cov.B34;
+
 
                     txtC20.Text = cov.C20;
                     txtC21.Text = cov.C21;
@@ -414,6 +422,9 @@ namespace ALS.ALSI.Web.view.template
                     txtC30.Text = cov.C30;
                     txtC31.Text = cov.C31;
                     txtC32.Text = cov.C32;
+                    txtC33.Text = cov.C33;
+                    txtC34.Text = cov.C34;
+
 
                     txtD20.Text = cov.D20;
                     txtD21.Text = cov.D21;
@@ -428,6 +439,9 @@ namespace ALS.ALSI.Web.view.template
                     txtD30.Text = cov.D30;
                     txtD31.Text = cov.D31;
                     txtD32.Text = cov.D32;
+                    txtD33.Text = cov.D33;
+                    txtD34.Text = cov.D34;
+
 
                     txtE20.Text = cov.E20;
                     txtE21.Text = cov.E21;
@@ -442,6 +456,9 @@ namespace ALS.ALSI.Web.view.template
                     txtE30.Text = cov.E30;
                     txtE31.Text = cov.E31;
                     txtE32.Text = cov.E32;
+                    txtE33.Text = cov.E33;
+                    txtE34.Text = cov.E34;
+
 
                     txtF20.Text = cov.F20;
                     txtF21.Text = cov.F21;
@@ -456,6 +473,8 @@ namespace ALS.ALSI.Web.view.template
                     txtF30.Text = cov.F30;
                     txtF31.Text = cov.F31;
                     txtF32.Text = cov.F32;
+                    txtF33.Text = cov.F33;
+                    txtF34.Text = cov.F34;
 
                     txtB40.Text = cov.B40;
                     txtB41.Text = cov.B41;
@@ -591,6 +610,14 @@ namespace ALS.ALSI.Web.view.template
             if (!Page.IsPostBack)
             {
                 initialPage();
+                #region "IMG"
+                this.refImg = template_img.FindAllBySampleID(this.SampleID);
+                if (this.refImg != null && this.refImg.Count > 0)
+                {
+                    gvRefImages.DataSource = this.refImg;
+                    gvRefImages.DataBind();
+                }
+                #endregion
             }
         }
 
@@ -697,6 +724,11 @@ namespace ALS.ALSI.Web.view.template
                             cov.B30 = txtB30.Text;
                             cov.B31 = txtB31.Text;
                             cov.B32 = txtB32.Text;
+                            cov.B33=txtB33.Text ;
+                            cov.B34= txtB34.Text;
+
+
+
 
                             cov.C20 = txtC20.Text;
                             cov.C21 = txtC21.Text;
@@ -711,6 +743,9 @@ namespace ALS.ALSI.Web.view.template
                             cov.C30 = txtC30.Text;
                             cov.C31 = txtC31.Text;
                             cov.C32 = txtC32.Text;
+                            cov.C33=txtC33.Text;
+                            cov.C34= txtC34.Text;
+
 
                             cov.D20 = txtD20.Text;
                             cov.D21 = txtD21.Text;
@@ -725,6 +760,9 @@ namespace ALS.ALSI.Web.view.template
                             cov.D30 = txtD30.Text;
                             cov.D31 = txtD31.Text;
                             cov.D32 = txtD32.Text;
+                            cov.D33=txtD33.Text;
+                            cov.D34= txtD34.Text;
+
 
                             cov.E20 = txtE20.Text;
                             cov.E21 = txtE21.Text;
@@ -739,6 +777,9 @@ namespace ALS.ALSI.Web.view.template
                             cov.E30 = txtE30.Text;
                             cov.E31 = txtE31.Text;
                             cov.E32 = txtE32.Text;
+                            cov.E33 = txtE33.Text;
+                            cov.E34 = txtE34.Text;
+
 
                             cov.F20 = txtF20.Text;
                             cov.F21 = txtF21.Text;
@@ -753,6 +794,9 @@ namespace ALS.ALSI.Web.view.template
                             cov.F30 = txtF30.Text;
                             cov.F31 = txtF31.Text;
                             cov.F32 = txtF32.Text;
+                            cov.F33=txtF33.Text;
+                            cov.F34= txtF34.Text;
+
 
                             cov.B40 = txtB40.Text;
                             cov.B41 = txtB41.Text;
@@ -1054,6 +1098,7 @@ namespace ALS.ALSI.Web.view.template
                         string dd = DateTime.Now.ToString("dd");
 
                         String source_file = String.Format(ALS.ALSI.Biz.Constant.Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
+                        String source_file_url = String.Concat(Configurations.HOST, String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName)));
 
                         if (!Directory.Exists(Path.GetDirectoryName(source_file)))
                         {
@@ -1241,6 +1286,11 @@ namespace ALS.ALSI.Web.view.template
                                     txtB30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.B));
                                     txtB31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.B));
                                     txtB32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.B));
+                                    txtB33.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.B));
+                                    txtB34.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.B));
+
+
+
 
                                     txtC20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.C));
                                     txtC21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.C));
@@ -1255,6 +1305,8 @@ namespace ALS.ALSI.Web.view.template
                                     txtC30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.C));
                                     txtC31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.C));
                                     txtC32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.C));
+                                    txtC33.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.C));
+                                    txtC34.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.C));
 
                                     txtD20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.D));
                                     txtD21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.D));
@@ -1269,6 +1321,8 @@ namespace ALS.ALSI.Web.view.template
                                     txtD30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.D));
                                     txtD31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
                                     txtD32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
+                                    txtD33.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.D));
+                                    txtD34.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.D));
 
                                     txtE20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.E));
                                     txtE21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.E));
@@ -1283,6 +1337,8 @@ namespace ALS.ALSI.Web.view.template
                                     txtE30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.E));
                                     txtE31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.E));
                                     txtE32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.E));
+                                    txtE33.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.E));
+                                    txtE34.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.E));
 
                                     txtF20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.F));
                                     txtF21.Text = CustomUtils.GetCellValue(isheet.GetRow(24 - 1).GetCell(ExcelColumn.F));
@@ -1297,6 +1353,8 @@ namespace ALS.ALSI.Web.view.template
                                     txtF30.Text = CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.F));
                                     txtF31.Text = CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.F));
                                     txtF32.Text = CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.F));
+                                    txtF33.Text = CustomUtils.GetCellValue(isheet.GetRow(36 - 1).GetCell(ExcelColumn.F));
+                                    txtF34.Text = CustomUtils.GetCellValue(isheet.GetRow(37 - 1).GetCell(ExcelColumn.F));
 
 
                                     //
@@ -1414,7 +1472,19 @@ namespace ALS.ALSI.Web.view.template
                         }
                         #endregion
 
+                        #region "IMG"
+                        if ((Path.GetExtension(_postedFile.FileName).Equals(".png")) || (Path.GetExtension(_postedFile.FileName).Equals(".jpg")))
+                        {
+                            template_img _img = new template_img();
+                            _img.id = CustomUtils.GetRandomNumberID();
+                            _img.sample_id = this.SampleID;
+                            _img.img_path = source_file_url;
+                            this.refImg.Add(_img);
 
+                            gvRefImages.DataSource = this.refImg;
+                            gvRefImages.DataBind();
+                        }
+                        #endregion
 
                     }
                 }
@@ -1439,14 +1509,14 @@ namespace ALS.ALSI.Web.view.template
                 gvRHCHub.DataBind();
 
                 //Note: This report was performed test by ALS Singapore.
-                if (!string.IsNullOrEmpty(txtD31.Text) && String.IsNullOrEmpty(lbRemark1.Text))
+                if (!string.IsNullOrEmpty(txtD33.Text) && String.IsNullOrEmpty(lbRemark1.Text))
                 {
-                    lbRemark1.Text = String.Format("1.) Minimum RHC Detection Limit is {0} {1}", Math.Round(Convert.ToDecimal(txtD31.Text), 3), txtD32.Text);
+                    lbRemark1.Text = String.Format("1.) Minimum RHC Detection Limit is {0} {1}", Convert.ToDecimal(txtD33.Text).ToString("N3"), txtD34.Text);
                 }
 
-                if (!string.IsNullOrEmpty(txtC31.Text) && String.IsNullOrEmpty(lbRemark2.Text))
+                if (!string.IsNullOrEmpty(txtC33.Text) && String.IsNullOrEmpty(lbRemark2.Text))
                 {
-                    lbRemark2.Text = String.Format("2.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC31.Text), 3), txtC32.Text);
+                    lbRemark2.Text = String.Format("2.) Minimum RHC Detection Limit of Base is {0} {1}", Math.Round(Convert.ToDecimal(txtC33.Text), 3), txtC34.Text);
                 }
                 if (!string.IsNullOrEmpty(txtD51.Text) && String.IsNullOrEmpty(lbRemark3.Text))
                 {
@@ -2022,10 +2092,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        item.C = String.IsNullOrEmpty(item.C) ? String.Empty : item.C;
+                        item.C = String.IsNullOrEmpty(item.C) ? "Not Detected" : item.C;
 
                     }
-
                 }
                 gvMotorOil.DataSource = motorOils;
                 gvMotorOil.DataBind();
@@ -2081,9 +2150,9 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorBases = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE) && !x.A.Equals("-")).ToList();
             if (motorBases.Count > 0)
             {
-                if (!String.IsNullOrEmpty(txtD30.Text))
+                if (!String.IsNullOrEmpty(txtD32.Text))
                 {
-                    motorBases[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    motorBases[0].C = (Convert.ToDecimal(txtD32.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD32.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
                 }
                 gvMotorBase.DataSource = motorBases;
                 gvMotorBase.DataBind();
@@ -2098,8 +2167,8 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorBaseSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB) && !x.A.Equals("-")).ToList();
             if (motorBaseSubs.Count > 0)
             {
-                motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), Convert.ToInt16(txtFloatResult07.Text)) + "";//Compounds with RT ≤ DOP
-                motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), Convert.ToInt16(txtFloatResult08.Text)) + "";//Compounds with RT > DOP
+                motorBaseSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB32.Text) ? "0" : txtB32.Text), Convert.ToInt16(txtFloatResult07.Text)) + "";//Compounds with RT ≤ DOP
+                motorBaseSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC32.Text) ? "0" : txtC32.Text), Convert.ToInt16(txtFloatResult08.Text)) + "";//Compounds with RT > DOP
                 motorBaseSubs[0].C = Math.Round(Convert.ToDecimal((Convert.ToDecimal(motorBaseSubs[1].C) + Convert.ToDecimal(motorBaseSubs[2].C)) + ""), Convert.ToInt16(txtFloatResult09.Text)) + "";//Total Organic Compound (TOC)
 
                 motorBaseSubs[1].C = (Convert.ToDouble(motorBaseSubs[1].C) == 0) ? "Not Detected" : motorBaseSubs[1].C;
@@ -2120,9 +2189,9 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> compounds = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND) && !x.A.Equals("-")).ToList();
             if (compounds.Count > 0)
             {
-                if (!String.IsNullOrEmpty(txtD30.Text))
+                if (!String.IsNullOrEmpty(txtD32.Text))
                 {
-                    compounds[0].C = (Convert.ToDecimal(txtD30.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD30.Text), Convert.ToInt32(txtFloatResult10.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    compounds[0].C = (Convert.ToDecimal(txtD32.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD32.Text), Convert.ToInt32(txtFloatResult10.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
                 }
                 gvCompound.DataSource = compounds;
                 gvCompound.DataBind();
@@ -2137,12 +2206,12 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
             if (compoundSubs.Count > 0)
             {
-                compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB30.Text) ? "0" : txtB30.Text), Convert.ToInt32(txtFloatResult11.Text)) + "";//Compounds with RT > DOP
-                compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC30.Text) ? "0" : txtC30.Text), Convert.ToInt32(txtFloatResult12.Text)) + "";//Compounds with RT > DOP
+                compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB32.Text) ? "0" : txtB32.Text), Convert.ToInt32(txtFloatResult11.Text)) + "";//Compounds with RT > DOP
+                compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC32.Text) ? "0" : txtC32.Text), Convert.ToInt32(txtFloatResult12.Text)) + "";//Compounds with RT > DOP
                 compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
                 if (compounds.Count > 3)
                 {
-                    compoundSubs[4].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE30.Text) ? "0" : txtE30.Text), Convert.ToInt32(txtFloatResult13.Text)) + "";//Compounds with RT > DOP
+                    compoundSubs[4].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE32.Text) ? "0" : txtE32.Text), Convert.ToInt32(txtFloatResult13.Text)) + "";//Compounds with RT > DOP
                 }
 
 
@@ -2455,7 +2524,47 @@ namespace ALS.ALSI.Web.view.template
                     viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet9", new DataTable()));
 
                 }
-
+                List<template_img> dat = this.refImg.OrderBy(x => x.seq).ToList();
+                if (dat.Count >= 1)
+                {
+                    List<template_img> datImg1 = new List<template_img>();
+                    datImg1.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[0].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet10", datImg1.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet10", new DataTable())); // Add datasource here
+                }
+                if (dat.Count >= 2)
+                {
+                    List<template_img> datImg2 = new List<template_img>();
+                    datImg2.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[1].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet11", datImg2.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet11", new DataTable())); // Add datasource here
+                }
+                if (dat.Count >= 3)
+                {
+                    List<template_img> datImg3 = new List<template_img>();
+                    datImg3.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[2].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet12", datImg3.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet12", new DataTable())); // Add datasource here
+                }
+                if (dat.Count >= 4)
+                {
+                    List<template_img> datImg4 = new List<template_img>();
+                    datImg4.Add(new template_img { img1 = CustomUtils.GetBytesFromImage(dat[3].img_path) });
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet13", datImg4.ToDataTable())); // Add datasource here
+                }
+                else
+                {
+                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet13", new DataTable())); // Add datasource here
+                }
                 //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND)).ToList().ToDataTable()));
 
 
@@ -2645,6 +2754,85 @@ namespace ALS.ALSI.Web.view.template
             ModolPopupExtender.Show();
             GenerrateCoverPage();
         }
+
+
+        #region "IMG"
+
+        protected void gvRefImages_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+            if (!String.IsNullOrEmpty(e.CommandArgument.ToString()))
+            {
+                int PKID = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                template_img _mesa = this.refImg.Find(x => x.id == PKID);
+                if (_mesa != null)
+                {
+                    switch (cmd)
+                    {
+                        case CommandNameEnum.Delete:
+                            this.refImg.Remove(_mesa);
+                            break;
+
+                    }
+                    gvRefImages.DataSource = this.refImg;
+                    gvRefImages.DataBind();
+                }
+            }
+        }
+
+        protected void gvRefImages_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void gvRefImages_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+
+            gvRefImages.EditIndex = e.NewEditIndex;
+            gvRefImages.DataSource = this.refImg;
+            gvRefImages.DataBind();
+
+        }
+
+        protected void gvRefImages_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvRefImages.EditIndex = -1;
+            gvRefImages.DataSource = this.refImg;
+            gvRefImages.DataBind();
+        }
+
+        protected void gvRefImages_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //HiddenField _hImgType = (HiddenField)e.Row.FindControl("hImgType");
+                //Literal _litImgType = (Literal)e.Row.FindControl("litImgType");
+                //if (!String.IsNullOrEmpty(_hImgType.Value) && _litImgType != null)
+                //{
+                //    IMAGE_ORDER_TYPE imgOrderType = (IMAGE_ORDER_TYPE)Enum.ToObject(typeof(IMAGE_ORDER_TYPE), Convert.ToInt32(_hImgType.Value));
+                //    _litImgType.Text = imgOrderType.ToString();
+                //}
+            }
+        }
+        protected void gvRefImages_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int _id = Convert.ToInt32(gvRefImages.DataKeys[e.RowIndex].Values[0].ToString());
+            //DropDownList _ddlImgType = (DropDownList)gvRefImages.Rows[e.RowIndex].FindControl("ddlImgType");
+            //if (_ddlImgType != null)
+            //{
+            //    template_img _tmp = this.refImg.Find(x => x.id == _id);
+            //    if (_tmp != null)
+            //    {
+            //        _tmp.img_type = Convert.ToInt32(_ddlImgType.SelectedValue);
+            //    }
+            //}
+
+            //gvRefImages.EditIndex = -1;
+            //gvRefImages.DataSource = this.refImg;
+            //gvRefImages.DataBind();
+        }
+        #endregion
+
     }
 }
 
