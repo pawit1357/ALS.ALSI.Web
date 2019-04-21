@@ -30,6 +30,8 @@ namespace ALS.ALSI.Web.view.dashboard
         protected string jsonSeriesRpt01;
         protected string jsonSeriesRpt02;
         protected string jsonSeriesRpt03;
+        protected string jsonSeriesRpt031;
+
         protected string jsonSeriesRpt04;
 
         private static Excel.Workbook MyBook = null;
@@ -44,10 +46,12 @@ namespace ALS.ALSI.Web.view.dashboard
                 Console.WriteLine();
                 try
                 {
+
                     jsonSeriesRpt01 = Report1();
                     jsonSeriesRpt02 = Report2();
-
                     Report3();
+                    jsonSeriesRpt031 = Report31();
+
                     jsonSeriesRpt04 = Report4();
                 }
                 catch (Exception ex)
@@ -205,23 +209,86 @@ namespace ALS.ALSI.Web.view.dashboard
 
         public void Report3()
         {
-            String sql = "" +
-                        "SELECT                                                                                                          " +
-                        "    `mc`.`ID` AS `company_id`,                                                                                  " +
-                        "    `mc`.`company_name` AS `company_name`,                                                                      " +
-                        "    `s`.`sample_invoice` AS `sample_invoice`,                                                                   " +
-                        "    SUM((TO_DAYS(`s`.`sample_invoice_complete_date`) - TO_DAYS(`s`.`sample_invoice_date`))) AS `overdue_date`,  " +
-                        "    SUM(`s`.`sample_invoice_amount`) AS `outstanding_balance`                                                   " +
-                        "FROM                                                                                                            " +
-                        "    ((`job_sample` `s`                                                                                          " +
-                        "    LEFT JOIN `job_info` `j` ON((`j`.`ID` = `s`.`job_id`)))                                                     " +
-                        "    LEFT JOIN `m_customer` `mc` ON((`mc`.`ID` = `j`.`customer_id`)))                                            " +
-                        "GROUP BY `mc`.`ID` , `s`.`sample_invoice`                                                                       ";
+            String sql = "";
+            sql += " select                                                               ";
+            sql += " j.customer_id,                                                      ";
+            sql += " c.company_name,                                                      ";
+            sql += " s.job_number,                                                        ";
+            sql += " s.sample_invoice,                                                    ";
+            sql += " s.sample_invoice_date,                                               ";
+            //sql += "--s.sample_invoice_complete_date,                                    ";
+            sql += " TO_DAYS(Now()) - TO_DAYS(s.sample_invoice_date) as overdue_date,     ";
+            sql += " s.sample_invoice_amount                                              ";
+            sql += " from job_sample s                                                    ";
+            sql += " left join job_info j on j.ID = s.job_id                              ";
+            sql += " left join m_customer c on c.ID = j.customer_id                       ";
+            sql += " where s.sample_invoice is not null                                   ";
+            sql += " and s.sample_invoice <> ''                                           ";
+            sql += " and s.sample_invoice_complete_date is null                           ";
+            sql += " and s.sample_invoice_date is not null;                               ";
 
             searchResult = MaintenanceBiz.ExecuteReturnDt(sql);
             gvRpt3.DataSource = searchResult;
             gvRpt3.DataBind();
         }
+
+        public String Report31()
+        {
+            try
+            {
+                String sql = "";
+                sql += " select                                                            ";
+                sql += " c.company_name,                                                   ";
+                //sql += " --s.job_number,                                                   ";
+                //sql += " --s.sample_invoice,                                               ";
+                //sql += " --s.sample_invoice_date,                                          ";
+                //sql += " --s.sample_invoice_complete_date,                                 ";
+                sql += " sum(TO_DAYS(Now()) - TO_DAYS(s.sample_invoice_date)) as overDue,  ";
+                sql += " sum(s.sample_invoice_amount) as sumAmout                          ";
+                sql += " from job_sample s                                                 ";
+                sql += " left                                                              ";
+                sql += " join job_info j on j.ID = s.job_id                                ";
+                sql += " left                                                              ";
+                sql += " join m_customer c on c.ID = j.customer_id                         ";
+                sql += " where s.sample_invoice is not null                                ";
+                sql += " and s.sample_invoice <> ''                                        ";
+                sql += " and s.sample_invoice_date is not null                             ";
+                sql += " and s.sample_invoice_complete_date is null                        ";
+                sql += " group by c.ID;                                                    ";
+
+
+                DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
+                StringBuilder sbResultJson = new StringBuilder();
+
+
+                String data = "[";
+                #region "Amout"
+                if (dt.Rows.Count > 0)
+                {
+                    data += "{name: \"Customer\",colorByPoint: true,data: [";
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        string company_name = dr["company_name"].ToString();
+                        int sumAmout = Convert.ToInt32(dr["sumAmout"].ToString());
+
+                        data += "{name: '" + company_name + "',y: " + sumAmout + "},";
+                    }
+                    data = data.Substring(0, data.Length - 1);
+                    data += "]}";
+                }
+                #endregion
+                data += "]";
+                sbResultJson.Append(data);
+                return sbResultJson.ToString();
+
+            }
+            catch (Exception)
+            {
+                return "[]";
+
+            }
+        }
+
         public String Report4()
         {
             try
@@ -246,57 +313,57 @@ namespace ALS.ALSI.Web.view.dashboard
                 data = data.Substring(0, data.Length - 1);
                 data += "]}";
 
-                #region "Forecast(Amout)"
-                //data += ",{name: \"Forecast(Amout)\",data: [";
-                //Hashtable listForecastAmtDate = new Hashtable();
-                //listForecastAmtDate[new DateTime(2019, 02, 12, 0, 0, 0)] = 17000;
-                //listForecastAmtDate[new DateTime(2019, 02, 17, 0, 0, 0)] = 18000;
-                //listForecastAmtDate[new DateTime(2019, 02, 19, 0, 0, 0)] = 19000;
-                //listForecastAmtDate[new DateTime(2019, 02, 25, 0, 0, 0)] = 22000;
-                //listForecastAmtDate[new DateTime(2019, 02, 27, 0, 0, 0)] = 24000;
-                //foreach (DictionaryEntry entry in listForecastAmtDate)
-                //{
-                //    DateTime epochDate = Convert.ToDateTime(entry.Key);
-                //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
-                //}
-                //data = data.Substring(0, data.Length - 1);
-                //data += "]}";
-                #endregion
-                #region "Lower Confidence Bound(Amout)"
-                //data += ",{name: \"Lower Confidence Bound(Amout)\",data: [";
+                    #region "Forecast(Amout)"
+                    //data += ",{name: \"Forecast(Amout)\",data: [";
+                    //Hashtable listForecastAmtDate = new Hashtable();
+                    //listForecastAmtDate[new DateTime(2019, 02, 12, 0, 0, 0)] = 17000;
+                    //listForecastAmtDate[new DateTime(2019, 02, 17, 0, 0, 0)] = 18000;
+                    //listForecastAmtDate[new DateTime(2019, 02, 19, 0, 0, 0)] = 19000;
+                    //listForecastAmtDate[new DateTime(2019, 02, 25, 0, 0, 0)] = 22000;
+                    //listForecastAmtDate[new DateTime(2019, 02, 27, 0, 0, 0)] = 24000;
+                    //foreach (DictionaryEntry entry in listForecastAmtDate)
+                    //{
+                    //    DateTime epochDate = Convert.ToDateTime(entry.Key);
+                    //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
+                    //}
+                    //data = data.Substring(0, data.Length - 1);
+                    //data += "]}";
+                    #endregion
+                    #region "Lower Confidence Bound(Amout)"
+                    //data += ",{name: \"Lower Confidence Bound(Amout)\",data: [";
 
-                //Hashtable listLowerConfidenceBoundAmout = new Hashtable();
-                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 170000;
-                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 180000;
-                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 190000;
-                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 220000;
-                //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 240000;
-                //foreach (DictionaryEntry entry in listLowerConfidenceBoundAmout)
-                //{
-                //    DateTime epochDate = Convert.ToDateTime(entry.Key);
-                //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
-                //}
-                //data = data.Substring(0, data.Length - 1);
-                //data += "]}";
-                #endregion
-                #region "Upper Confidence Bound(Amout)"
-                //data += ",{name: \"Upper Confidence Bound(Amout)\",data: [";
+                    //Hashtable listLowerConfidenceBoundAmout = new Hashtable();
+                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 170000;
+                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 180000;
+                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 190000;
+                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 220000;
+                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 240000;
+                    //foreach (DictionaryEntry entry in listLowerConfidenceBoundAmout)
+                    //{
+                    //    DateTime epochDate = Convert.ToDateTime(entry.Key);
+                    //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
+                    //}
+                    //data = data.Substring(0, data.Length - 1);
+                    //data += "]}";
+                    #endregion
+                    #region "Upper Confidence Bound(Amout)"
+                    //data += ",{name: \"Upper Confidence Bound(Amout)\",data: [";
 
-                //Hashtable listUpperConfidenceBoundAmout = new Hashtable();
-                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 19000;
-                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 22000;
-                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 30000;
-                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 35000;
-                //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 44000;
-                //foreach (DictionaryEntry entry in listUpperConfidenceBoundAmout)
-                //{
-                //    DateTime epochDate = Convert.ToDateTime(entry.Key);
-                //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
-                //}
-                //data = data.Substring(0, data.Length - 1);
-                //data += "]}";
-                #endregion
-            }
+                    //Hashtable listUpperConfidenceBoundAmout = new Hashtable();
+                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 19000;
+                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 22000;
+                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 30000;
+                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 35000;
+                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 44000;
+                    //foreach (DictionaryEntry entry in listUpperConfidenceBoundAmout)
+                    //{
+                    //    DateTime epochDate = Convert.ToDateTime(entry.Key);
+                    //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
+                    //}
+                    //data = data.Substring(0, data.Length - 1);
+                    //data += "]}";
+                    #endregion
+                }
             #endregion
             data += "]";
             sbResultJson.Append(data);
@@ -327,7 +394,6 @@ namespace ALS.ALSI.Web.view.dashboard
             //}
         }
 
-
         protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             if (e.NewPageIndex < 0) return;
@@ -338,6 +404,7 @@ namespace ALS.ALSI.Web.view.dashboard
 
             jsonSeriesRpt01 = Report1();
             jsonSeriesRpt02 = Report2();
+            jsonSeriesRpt031 = Report31();
             jsonSeriesRpt04 = Report4();
         }
 

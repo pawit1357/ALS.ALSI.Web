@@ -3,6 +3,7 @@ using ALS.ALSI.Biz.DataAccess;
 using System;
 using System.Collections;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ALS.ALSI.Biz.ReportObjects
 {
@@ -98,17 +99,17 @@ namespace ALS.ALSI.Biz.ReportObjects
                 switch (_sample.amend_or_retest)
                 {
                     case "AM":
-                        AmRetest = (_sample.amend_count > 0) ? "AM" + ((_sample.amend_count==1)? "":_sample.amend_count+"") + "/" : String.Empty;
+                        AmRetest = (_sample.amend_count > 0) ? "AM" + ((_sample.amend_count == 1) ? "" : _sample.amend_count + "") + "/" : String.Empty;
                         break;
                     case "R":
-                        AmRetest = (_sample.retest_count > 0) ? "R" + ((_sample.retest_count==1)? "": _sample.retest_count+"") + "/" : String.Empty;
+                        AmRetest = (_sample.retest_count > 0) ? "R" + ((_sample.retest_count == 1) ? "" : _sample.retest_count + "") + "/" : String.Empty;
                         break;
                 }
 
                 String[] tmp = _sample.job_number.Split('-');
                 rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
 
-                rpt.supplementToReportNo = String.IsNullOrEmpty(AmRetest)? String.Empty: String.Format("ATT/{0}/{1}/{2}-{3}", tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
+                rpt.supplementToReportNo = String.IsNullOrEmpty(AmRetest) ? String.Empty : String.Format("{0}ATT/{1}/{2}/{3}-{4}", RemoveIntegers(AmRetest), tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
 
                 rpt.description = (String.IsNullOrEmpty(_sample.description) ? String.Empty : "Description:" + _sample.description + "\n") +
                                   (String.IsNullOrEmpty(_sample.model) ? String.Empty : "Model:" + _sample.model + "\n") +
@@ -122,5 +123,11 @@ namespace ALS.ALSI.Biz.ReportObjects
             return rpt;
         }
         #endregion
+
+
+        public static string RemoveIntegers(string input)
+        {
+            return Regex.Replace(input, @"[\d-]", string.Empty);
+        }
     }
 }

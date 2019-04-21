@@ -2096,6 +2096,7 @@
     <Content Include="assets\global\plugins\uniform\README.md" />
     <Content Include="PhaseII-Doc\alsi-script-1.zip" />
     <Content Include="PhaseII-Doc\alsi-script-2.zip" />
+    <Content Include="libman.json" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\ALIS.pubxml" />
     <Content Include="ReportObject\DS.xsc">
@@ -2114,7 +2115,6 @@
     <Content Include="ReportObject\DS.xss">
       <DependentUpon>DS.xsd</DependentUpon>
     </Content>
-    <Content Include="template\Blank Letter Head - EL-2018.doc" />
     <Content Include="template\no_report.doc" />
     <Content Include="template\Blank Letter Head - PA.doc" />
     <Content Include="web.config">
@@ -2153,7 +2153,6 @@
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_seagate.rdlc" />
-    <EmbeddedResource Include="ReportObject\pa03_edit.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_03.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_02.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_wd.rdlc">
@@ -2163,7 +2162,6 @@
     <EmbeddedResource Include="ReportObject\lpc_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\lpc_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\dhs_wd.rdlc" />
-    <EmbeddedResource Include="ReportObject\!dhs_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_wd.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd.rdlc" />
@@ -2173,7 +2171,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\ic_wd.rdlc" />
-    <EmbeddedResource Include="ReportObject\reportHeader - Copy.rdlc" />
     <EmbeddedResource Include="ReportObject\reportPAHeader.rdlc" />
     <EmbeddedResource Include="ReportObject\reportHeader.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

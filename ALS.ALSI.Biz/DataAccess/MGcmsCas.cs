@@ -93,6 +93,7 @@ namespace ALS.ALSI.Biz.DataAccess
             {
                 _repository.Delete(tmp);
             }
+
         }
 
         public static void InsertList(List<tb_m_gcms_cas> _lists)

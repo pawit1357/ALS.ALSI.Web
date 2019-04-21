@@ -964,7 +964,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp = new template_wd_ic_coverpage();
                 _tmp.id = 9;
                 _tmp.A = "Sodium as Na";
-                _tmp.B = tem.P;
+                _tmp.B = tem.N;
                 _tmp.wunitText = tem.C;
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
@@ -972,7 +972,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp = new template_wd_ic_coverpage();
                 _tmp.id = 10;
                 _tmp.A = "Ammonium as NH4";
-                _tmp.B = tem.L;
+                _tmp.B = tem.O;
                 _tmp.wunitText = tem.C;
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
@@ -980,7 +980,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp = new template_wd_ic_coverpage();
                 _tmp.id = 11;
                 _tmp.A = "Potassium as K";
-                _tmp.B = tem.O;
+                _tmp.B = tem.P;
                 _tmp.wunitText = tem.C;
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
@@ -996,7 +996,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp = new template_wd_ic_coverpage();
                 _tmp.id = 13;
                 _tmp.A = "Calcium as Ca";
-                _tmp.B = tem.N;
+                _tmp.B = tem.R;
                 _tmp.wunitText = tem.C;
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
@@ -1004,7 +1004,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp = new template_wd_ic_coverpage();
                 _tmp.id = 14;
                 _tmp.A = "Total Cations";
-                _tmp.B = tem.R;
+                _tmp.B = tem.S;
                 _tmp.wunitText = tem.C;
                 _tmp.ic_type = Convert.ToInt32(ICTypeEnum.CATIONIC);
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);

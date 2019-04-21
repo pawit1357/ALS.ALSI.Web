@@ -23,8 +23,7 @@
                     <div class="row">
                         <!-- RPT1 -->
                         <div class="col-lg-6 col-xs-12 col-sm-12">
-                            <div class="portlet light ">
-
+                            <div class="portlet light bordered">
                                 <div class="portlet-title">
                                     <div class="actions"></div>
                                 </div>
@@ -35,7 +34,7 @@
                         </div>
                         <!-- RPT2 -->
                         <div class="col-lg-6 col-xs-12 col-sm-12">
-                            <div class="portlet light ">
+                            <div class="portlet light bordered">
                                 <div class="portlet-title">
                                     <div class="actions"></div>
                                 </div>
@@ -44,50 +43,58 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
                         <!-- RPT3 -->
-                        <br />
-                        <br />       <br />
-                        <br />       <br />
-                        <br />
-                        
                         <div class="col-lg-6 col-xs-12 col-sm-12">
                             <div class="portlet light bordered">
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-chemistry font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">Turn Around Time (TAT)</span>
+                                        <span class="caption-subject font-green bold uppercase">รายงานยอดเงินลูกค้ารอชำระ/จำวนวันค้าง</span>
                                     </div>
                                     <div class="actions">
-  
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="table-scrollable">
-                                        <asp:GridView ID="gvRpt3" runat="server" AutoGenerateColumns="False" AllowPaging="True"
-                                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="company_id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvRpt3_RowDataBound" PageSize="5">
-                                            <Columns>
-                                                <asp:BoundField HeaderText="Company Name" DataField="company_name" ItemStyle-HorizontalAlign="Left" SortExpression="company_name" />
-                                                <asp:BoundField HeaderText="Invoice" DataField="sample_invoice" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice" />
-                                                <asp:BoundField HeaderText="Overdue Date" DataField="overdue_date" ItemStyle-HorizontalAlign="Left" SortExpression="overdue_date" />
-                                                <asp:BoundField HeaderText="Balance" DataField="outstanding_balance" ItemStyle-HorizontalAlign="Left" SortExpression="outstanding_balance" />
-                                            </Columns>
-                                            <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
+                                        <div style="width:100%;overflow-x: auto;white-space: nowrap;">
+                                            <asp:GridView ID="gvRpt3" runat="server" AutoGenerateColumns="False" AllowPaging="True"
+                                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="customer_id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvRpt3_RowDataBound" PageSize="5">
+                                                <Columns>
+                                                    <asp:BoundField ItemStyle-Width="300" HeaderText="Company Name" DataField="company_name" ItemStyle-HorizontalAlign="Left" SortExpression="company_name" />
+                                                    <asp:BoundField ItemStyle-Width="130" HeaderText="Job Number" DataField="job_number" ItemStyle-HorizontalAlign="Left" SortExpression="job_number" />
+                                                    <asp:BoundField ItemStyle-Width="120" HeaderText="Invoice" DataField="sample_invoice" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice" />
+                                                    <asp:BoundField ItemStyle-Width="150" HeaderText="Invoice Date" DataField="sample_invoice_date" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_date" DataFormatString="{0:d MMM yyyy}" />
+                                                    <asp:BoundField ItemStyle-Width="80" HeaderText="Overdue Date" DataField="overdue_date" ItemStyle-HorizontalAlign="Left" SortExpression="overdue_date" />
+                                                    <asp:BoundField ItemStyle-Width="100" HeaderText="Balance" DataField="sample_invoice_amount" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount" />
+                                                </Columns>
+                                                <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
 
-                                            <EmptyDataTemplate>
-                                                <div class="data-not-found">
-                                                    <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
-                                                </div>
-                                            </EmptyDataTemplate>
-                                        </asp:GridView>
-
-                                    </div>
+                                                <EmptyDataTemplate>
+                                                    <div class="data-not-found">
+                                                        <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
+                                                    </div>
+                                                </EmptyDataTemplate>
+                                            </asp:GridView>
+                                        </div>
                                 </div>
                             </div>
 
                         </div>
+                        <!-- RPT4 -->
+                        <div class="col-lg-6 col-xs-12 col-sm-12">
+                            <div class="portlet light ">
+                                <div class="portlet-title">
+                                    <div class="actions"></div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
                         <!-- RPT4 -->
                         <div class="col-lg-6 col-xs-12 col-sm-12">
                             <div class="portlet light ">
@@ -212,7 +219,93 @@
 
 
         /* -report4:Forecast And Budget- */
-
+        /*
+        Highcharts.setOptions({
+            colors: [
+                'rgba(90,155,212,.75)',
+                'rgba(241,90,96,.75)',
+                'rgba(158,103,171,.75)'
+            ]
+        });
+        var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container4',
+            },
+            title: {
+                text: 'Forecast And Budget'
+            },
+            credits: { enabled: false },
+            legend: {
+            },
+            plotOptions: {
+                series: {
+                    fillOpacity: .15,
+                    shadow: false,
+                    borderWidth: 0,
+                    stacking: 'normal',
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle'
+                    }
+                }
+            },
+            xAxis: {
+                lineColor: '#999',
+                lineWidth: 1,
+                tickColor: '#666',
+                tickLength: 3,
+                title: {
+                    text: 'X Axis Title'
+                }
+            },
+            yAxis: {
+                lineColor: '#999',
+                lineWidth: 1,
+                tickColor: '#666',
+                tickWidth: 1,
+                tickLength: 3,
+                gridLineColor: '#ddd',
+                title: {
+                    text: 'Y Axis Title',
+                    rotation: 0,
+                    margin: 50,
+                }
+            },
+            series: [{
+                type: 'area',
+                stack: 'A',
+                data: [5, 8, 9, 6, 3]
+            }, {
+                type: 'area',
+                stack: 'A',
+                data: [5, 8, 9, 6, 3]
+            }, {
+                type: 'area',
+                stack: 'A',
+                data: [5, 8, 9, 6, 3]
+            } , {
+                color: '#185aa9',
+                type: 'line',
+                dashStyle: 'dash',
+                stack: 'B',
+                data: [4, 7, 8, 5, 4]
+            }, {
+                color: '#a21d21',
+                type: 'line',
+                dashStyle: 'dash',
+                stack: 'B',
+                data: [4, 7, 8, 5, 4]
+            }, {
+                color: '#662c91',
+                type: 'line',
+                dashStyle: 'dash',
+                stack: 'B',
+                data: [4, 7, 8, 5, 4]
+                }
+                
+            ]
+        });
+   */
         Highcharts.chart('container4', {
             chart: {
                 type: 'line'
@@ -253,63 +346,75 @@
             },
 
             colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000'],
-
-            // Define the data points. All series have a dummy year
-            // of 1970/71 in order to be compared on the same x axis. Note
-            // that in JavaScript, months start at 0 for January, 1 for February etc.
             series: <%= jsonSeriesRpt04 %>
 
         });
 
-        /*
-        Highcharts.chart('container4', {
-
+/* xxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+        Highcharts.chart('container5', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
             title: {
-                text: 'Solar Employment Growth by Sector, 2010-2016'
+                text: 'รายงานยอดเงินลูกค้ารอชำระ'
             },
-
-            subtitle: {
-                text: 'Source: thesolarfoundation.com'
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
-
-            yAxis: {
-                title: {
-                    text: 'Number of Employees'
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle'
-            },
-
             plotOptions: {
-                series: {
-                    label: {
-                        connectorAllowed: false
-                    },
-                    pointStart: 2010
-                }
-            },
-
-            series: ,
-
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxWidth: 500
-                    },
-                    chartOptions: {
-                        legend: {
-                            layout: 'horizontal',
-                            align: 'center',
-                            verticalAlign: 'bottom'
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         }
                     }
-                }]
-            }
+                }
+            },
+            series: <%= jsonSeriesRpt031 %>
 
+            /*
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Chrome',
+                    y: 61.41,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Internet Explorer',
+                    y: 11.84
+                }, {
+                    name: 'Firefox',
+                    y: 10.85
+                }, {
+                    name: 'Edge',
+                    y: 4.67
+                }, {
+                    name: 'Safari',
+                    y: 4.18
+                }, {
+                    name: 'Sogou Explorer',
+                    y: 1.64
+                }, {
+                    name: 'Opera',
+                    y: 1.6
+                }, {
+                    name: 'QQ',
+                    y: 1.2
+                }, {
+                    name: 'Other',
+                    y: 2.61
+                }]
+            }]
+            */
         });
-        */
     </script>
 </asp:Content>

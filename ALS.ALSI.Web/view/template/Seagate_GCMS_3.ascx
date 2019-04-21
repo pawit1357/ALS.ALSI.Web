@@ -1253,12 +1253,6 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">pA of C14D10 in sample Hub (Pbs) :</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: right">pA of Blank :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB48" runat="server"></asp:TextBox>
                                             </td>
@@ -1269,15 +1263,8 @@
                                                 <asp:TextBox ID="txtD48" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
-                                        <!-- PART 3 -->
                                         <tr>
-                                            <td style="text-align: right">pA of C14D10 in Blank (Pbh) :</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: right">pA of sample (Y) :</td>
+                                            <td style="text-align: right">pA of Blank :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB49" runat="server"></asp:TextBox>
                                             </td>
@@ -1288,8 +1275,9 @@
                                                 <asp:TextBox ID="txtD49" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
+                                        <!-- PART 3 -->
                                         <tr>
-                                            <td>&nbsp;</td>
+                                            <td style="text-align: right">pA of C14D10 in Blank (Pbh) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB50" runat="server"></asp:TextBox>
                                             </td>
@@ -1301,7 +1289,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right">Method Detection Limit (MDL) :</td>
+                                            <td style="text-align: right">pA of sample (Y) :</td>
                                             <td>
                                                 <asp:TextBox ID="txtB51" runat="server"></asp:TextBox>
                                             </td>
@@ -1312,9 +1300,8 @@
                                                 <asp:TextBox ID="txtD51" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
-
                                         <tr>
-                                            <td style="text-align: right">&nbsp;</td>
+                                            <td>&nbsp;</td>
                                             <td>
                                                 <asp:TextBox ID="txtB52" runat="server"></asp:TextBox>
                                             </td>
@@ -1323,6 +1310,31 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtD52" runat="server"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Method Detection Limit (MDL) :</td>
+                                            <td>
+                                                <asp:TextBox ID="txtB53" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtC53" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD53" runat="server"></asp:TextBox>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="text-align: right">&nbsp;</td>
+                                            <td>
+                                                <asp:TextBox ID="txtB54" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtC54" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtD54" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
 

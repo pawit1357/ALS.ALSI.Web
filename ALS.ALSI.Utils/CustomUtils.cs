@@ -127,7 +127,7 @@ namespace ALS.ALSI.Utils
             return sb.ToString();
 
         }
-        public static String GetCellValue2(HSSFWorkbook wb,String _cellValue)
+        public static String GetCellValue2(HSSFWorkbook wb, String _cellValue)
         {
             String[] cVals = _cellValue.Split('!');
             String shName = cVals[0];
@@ -136,11 +136,11 @@ namespace ALS.ALSI.Utils
             ISheet isheet = wb.GetSheet(shName);
             if (isheet == null)
             {
-                isheet = wb.GetSheet(shName+" ");
+                isheet = wb.GetSheet(shName + " ");
             }
             int column = ExcelColumn.getColInt(Regex.Replace(cellValue, "[^a-zA-Z]", ""));
-            int row = Convert.ToInt16(Regex.Replace(cellValue, "[^0-9]", ""))-1;
-            return isheet.GetRow(row)==null? "": GetCellValue(isheet.GetRow(row).GetCell(column));
+            int row = Convert.ToInt16(Regex.Replace(cellValue, "[^0-9]", "")) - 1;
+            return isheet.GetRow(row) == null ? "" : GetCellValue(isheet.GetRow(row).GetCell(column));
         }
 
         public static String GetCellValue(ICell _cell)
@@ -237,7 +237,7 @@ namespace ALS.ALSI.Utils
 
         public static double StandardDeviation(List<Double> valueList)
         {
-            if(valueList.Count == 0)
+            if (valueList.Count == 0)
             {
                 return 0.0;
             }
@@ -491,7 +491,7 @@ namespace ALS.ALSI.Utils
         /// <returns>the number of seconds since Unix Epoch.</returns>
         public static long GetIntDate(DateTime datetime)
         {
-            DateTime dateTimeUtc = new DateTime(datetime.Year,datetime.Month,datetime.Day,0,0,0);
+            DateTime dateTimeUtc = new DateTime(datetime.Year, datetime.Month, datetime.Day, 0, 0, 0);
             if (datetime.Kind != DateTimeKind.Utc)
             {
                 dateTimeUtc = datetime.ToUniversalTime();
@@ -505,9 +505,13 @@ namespace ALS.ALSI.Utils
             return (long)(dateTimeUtc - UnixEpoch).TotalSeconds;
         }
 
+
+
+
+
     }
 
-
+ 
 }
 
 

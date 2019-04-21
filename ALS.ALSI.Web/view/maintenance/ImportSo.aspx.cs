@@ -228,7 +228,7 @@ namespace ALS.ALSI.Web.view.template
 
                                     foreach(var jn in jobNumbers)
                                     {
-                                        job_sample js = job_sample.SelectByJobNumber(job_number);
+                                        job_sample js = job_sample.SelectByJobNumber(jn);
                                         if (js != null)
                                         {
                                             js.sample_invoice_amount = amt;

@@ -1615,6 +1615,60 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.TextBox txtD52;
         
         /// <summary>
+        /// txtB53 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtB53;
+        
+        /// <summary>
+        /// txtC53 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtC53;
+        
+        /// <summary>
+        /// txtD53 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtD53;
+        
+        /// <summary>
+        /// txtB54 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtB54;
+        
+        /// <summary>
+        /// txtC54 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtC54;
+        
+        /// <summary>
+        /// txtD54 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtD54;
+        
+        /// <summary>
         /// pMotorOil control.
         /// </summary>
         /// <remarks>
