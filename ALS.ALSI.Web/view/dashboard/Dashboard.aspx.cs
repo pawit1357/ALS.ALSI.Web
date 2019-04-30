@@ -253,7 +253,7 @@ namespace ALS.ALSI.Web.view.dashboard
                 sql += " where s.sample_invoice is not null                                ";
                 sql += " and s.sample_invoice <> ''                                        ";
                 sql += " and s.sample_invoice_date is not null                             ";
-                sql += " and s.sample_invoice_complete_date is null                        ";
+                //sql += " and s.sample_invoice_complete_date is null                        ";
                 sql += " group by c.ID;                                                    ";
 
 

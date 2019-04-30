@@ -219,93 +219,7 @@
 
 
         /* -report4:Forecast And Budget- */
-        /*
-        Highcharts.setOptions({
-            colors: [
-                'rgba(90,155,212,.75)',
-                'rgba(241,90,96,.75)',
-                'rgba(158,103,171,.75)'
-            ]
-        });
-        var chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container4',
-            },
-            title: {
-                text: 'Forecast And Budget'
-            },
-            credits: { enabled: false },
-            legend: {
-            },
-            plotOptions: {
-                series: {
-                    fillOpacity: .15,
-                    shadow: false,
-                    borderWidth: 0,
-                    stacking: 'normal',
-                    marker: {
-                        enabled: false,
-                        symbol: 'circle'
-                    }
-                }
-            },
-            xAxis: {
-                lineColor: '#999',
-                lineWidth: 1,
-                tickColor: '#666',
-                tickLength: 3,
-                title: {
-                    text: 'X Axis Title'
-                }
-            },
-            yAxis: {
-                lineColor: '#999',
-                lineWidth: 1,
-                tickColor: '#666',
-                tickWidth: 1,
-                tickLength: 3,
-                gridLineColor: '#ddd',
-                title: {
-                    text: 'Y Axis Title',
-                    rotation: 0,
-                    margin: 50,
-                }
-            },
-            series: [{
-                type: 'area',
-                stack: 'A',
-                data: [5, 8, 9, 6, 3]
-            }, {
-                type: 'area',
-                stack: 'A',
-                data: [5, 8, 9, 6, 3]
-            }, {
-                type: 'area',
-                stack: 'A',
-                data: [5, 8, 9, 6, 3]
-            } , {
-                color: '#185aa9',
-                type: 'line',
-                dashStyle: 'dash',
-                stack: 'B',
-                data: [4, 7, 8, 5, 4]
-            }, {
-                color: '#a21d21',
-                type: 'line',
-                dashStyle: 'dash',
-                stack: 'B',
-                data: [4, 7, 8, 5, 4]
-            }, {
-                color: '#662c91',
-                type: 'line',
-                dashStyle: 'dash',
-                stack: 'B',
-                data: [4, 7, 8, 5, 4]
-                }
-                
-            ]
-        });
-   */
+     
         Highcharts.chart('container4', {
             chart: {
                 type: 'line'
@@ -350,7 +264,6 @@
 
         });
 
-/* xxxxxxxxxxxxxxxxxxxxxxxxxxxx */
         Highcharts.chart('container5', {
             chart: {
                 plotBackgroundColor: null,
@@ -362,7 +275,7 @@
                 text: 'รายงานยอดเงินลูกค้ารอชำระ'
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                pointFormat: '<b>{point.name}</b>:{point.y}</b> {point.percentage:.1f} %'
             },
             plotOptions: {
                 pie: {
@@ -370,7 +283,7 @@
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        format: '<b>{point.name}</b>:{point.y}</b> {point.percentage:.1f} %',
                         style: {
                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         }
@@ -379,42 +292,6 @@
             },
             series: <%= jsonSeriesRpt031 %>
 
-            /*
-            series: [{
-                name: 'Brands',
-                colorByPoint: true,
-                data: [{
-                    name: 'Chrome',
-                    y: 61.41,
-                    sliced: true,
-                    selected: true
-                }, {
-                    name: 'Internet Explorer',
-                    y: 11.84
-                }, {
-                    name: 'Firefox',
-                    y: 10.85
-                }, {
-                    name: 'Edge',
-                    y: 4.67
-                }, {
-                    name: 'Safari',
-                    y: 4.18
-                }, {
-                    name: 'Sogou Explorer',
-                    y: 1.64
-                }, {
-                    name: 'Opera',
-                    y: 1.6
-                }, {
-                    name: 'QQ',
-                    y: 1.2
-                }, {
-                    name: 'Other',
-                    y: 2.61
-                }]
-            }]
-            */
         });
     </script>
 </asp:Content>

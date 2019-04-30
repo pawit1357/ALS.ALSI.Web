@@ -43,6 +43,8 @@
                                         </div>
                                         <div>
                                             <asp:Button ID="btnUpload" runat="server" class="btn small blue" Text="โหลดข้อมูล" OnClick="btnUpload_Click" />
+                                            <asp:Button ID="btnBatchLoad" runat="server" class="btn small" Text="อัพโหลดทั้งหมด" OnClick="btnBatchLoad_Click" />
+
                                         </div>
                                     </div>
                                 </div>

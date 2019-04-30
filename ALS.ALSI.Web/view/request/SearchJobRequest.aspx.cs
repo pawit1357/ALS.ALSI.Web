@@ -29,9 +29,9 @@ namespace ALS.ALSI.Web.view.request
             }
         }
 
-        public IEnumerable searchResult
+        public IEnumerable<SearchResult> searchResult
         {
-            get { return (IEnumerable)Session[GetType().Name + "SearchJobRequest"]; }
+            get { return (IEnumerable<SearchResult>)Session[GetType().Name + "SearchJobRequest"]; }
             set { Session[GetType().Name + "SearchJobRequest"] = value; }
         }
 
@@ -83,6 +83,13 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isGroupApproveOperation"]; }
             set { Session[GetType().Name + "isGroupApproveOperation"] = value; }
         }
+
+        public SortDirection SortDirection
+        {
+            get { return (SortDirection)Session[GetType().Name + "SortDirection"]; }
+            set { Session[GetType().Name + "SortDirection"] = value; }
+        }
+
         public int JobID { get; set; }
 
         public int SampleID { get; set; }
@@ -142,7 +149,7 @@ namespace ALS.ALSI.Web.view.request
         private void initialPage()
         {
             this.selectedList = new List<int>();
-
+            SortDirection = new SortDirection();
             ddlCompany.Items.Clear();
             ddlCompany.DataSource = new m_customer().SelectAll().OrderBy(x => x.company_name);
             ddlCompany.DataBind();
@@ -175,7 +182,7 @@ namespace ALS.ALSI.Web.view.request
             ddlPhysicalYear.Items.Clear();
             ddlPhysicalYear.DataSource = yesrList;
             ddlPhysicalYear.DataBind();
-            
+
             if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
             {
                 ddlPhysicalYear.SelectedValue = (DateTime.Now.Year - 1).ToString();
@@ -424,7 +431,7 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[21].Visible = false;
 
                         gvJob.Columns[22].Visible = false;
-                        gvJob.Columns[23].Visible = false;
+                        gvJob.Columns[23].Visible = true;
                         gvJob.Columns[24].Visible = false;
 
                         break;
@@ -559,8 +566,8 @@ namespace ALS.ALSI.Web.view.request
             m_completion_scheduled cs = new m_completion_scheduled().SelectByID(Convert.ToInt32(CompletionScheduledEnum.NORMAL));
 
             this.CommandName = cmd;
-            this.JobID = (cmd == CommandNameEnum.Page) ? 0 : int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-            this.SampleID = (cmd == CommandNameEnum.Page) ? 0 : int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
+            this.JobID = (cmd == CommandNameEnum.Page || cmd == CommandNameEnum.Sort) ? 0 : int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+            this.SampleID = (cmd == CommandNameEnum.Page || cmd == CommandNameEnum.Sort) ? 0 : int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[1]);
 
             switch (cmd)
             {
@@ -640,9 +647,11 @@ namespace ALS.ALSI.Web.view.request
                     {
                         job_sample jobSample = new job_sample().SelectByID(this.SampleID);
                         jobSample.update_date = DateTime.Now;
-                        jobSample.due_date = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.value.Value) : jobSample.update_date.Value.AddDays(cs.value.Value);
-                        jobSample.due_date_customer = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.lab_due_date.Value) : jobSample.update_date.Value.AddDays(cs.lab_due_date.Value);
-                        jobSample.due_date_lab = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.customer_due_date.Value) : jobSample.update_date.Value.AddDays(cs.customer_due_date.Value);
+
+                        jobSample.due_date = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.lab_due_date.Value) : jobSample.update_date.Value.AddDays(cs.lab_due_date.Value);
+                        jobSample.due_date_customer = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.customer_due_date.Value) : jobSample.update_date.Value.AddDays(cs.customer_due_date.Value);
+                        jobSample.due_date_lab = (jobSample.update_date == null) ? DateTime.Now.AddDays(cs.lab_due_date.Value) : jobSample.update_date.Value.AddDays(cs.lab_due_date.Value);
+
                         jobSample.is_hold = "0";
                         jobSample.job_status = Convert.ToInt16(StatusEnum.CHEMIST_TESTING);
                         jobSample.Update();
@@ -963,6 +972,105 @@ namespace ALS.ALSI.Web.view.request
                 }
             }
         }
+
+
+        protected void gvJob_Sorting(object sender, GridViewSortEventArgs e)
+        {
+
+            Func<SearchResult, object> prop = null;
+            switch (e.SortExpression)
+            {
+                case "ID": prop = p => p.ID; break;
+                case "other_ref_no": prop = p => p.other_ref_no; break;
+                case "date_srchemist_complate": prop = p => p.date_srchemist_complate; break;
+                case "date_admin_sent_to_cus": prop = p => p.date_admin_sent_to_cus; break;
+                case "receive_date": prop = p => p.receive_date; break;
+                case "due_date": prop = p => p.due_date; break;
+                case "due_date_customer": prop = p => p.due_date_customer; break;
+                case "due_date_lab": prop = p => p.due_date_lab; break;
+                case "job_number": prop = p => p.job_number; break;
+                case "customer_ref_no": prop = p => p.customer_ref_no; break;
+                case "s_pore_ref_no": prop = p => p.s_pore_ref_no; break;
+                case "customer": prop = p => p.customer; break;
+                case "sample_invoice": prop = p => p.sample_invoice; break;
+                case "sample_invoice_date": prop = p => p.sample_invoice_date; break;
+                case "sample_invoice_amount": prop = p => p.sample_invoice_amount; break;
+                case "sample_po": prop = p => p.sample_po; break;
+                case "contract_person": prop = p => p.contract_person; break;
+                case "description": prop = p => p.description; break;
+                case "model": prop = p => p.model; break;
+                case "surface_area": prop = p => p.surface_area; break;
+                case "specification": prop = p => p.specification; break;
+                case "type_of_test": prop = p => p.type_of_test; break;
+                case "customer_id": prop = p => p.customer_id; break;
+                case "job_status": prop = p => p.job_status; break;
+                case "create_date": prop = p => p.create_date; break;
+                case "sn": prop = p => p.sn; break;
+                case "remarks": prop = p => p.remarks; break;
+                case "contract_person_id": prop = p => p.contract_person_id; break;
+                case "job_role": prop = p => p.job_role; break;
+                case "status_completion_scheduled": prop = p => p.status_completion_scheduled; break;
+                case "step1owner": prop = p => p.step1owner; break;
+                case "step2owner": prop = p => p.step2owner; break;
+                case "step3owner": prop = p => p.step3owner; break;
+                case "step4owner": prop = p => p.step4owner; break;
+                case "step5owner": prop = p => p.step5owner; break;
+                case "step6owner": prop = p => p.step6owner; break;
+                case "job_prefix": prop = p => p.job_prefix; break;
+                case "data_group": prop = p => p.data_group; break;
+                case "type_of_test_id": prop = p => p.type_of_test_id; break;
+                case "type_of_test_name": prop = p => p.type_of_test_name; break;
+                case "spec_id": prop = p => p.spec_id; break;
+                case "date_login_inprogress": prop = p => p.date_login_inprogress; break;
+                case "date_chemist_analyze": prop = p => p.date_chemist_analyze; break;
+                case "date_labman_complete": prop = p => p.date_labman_complete; break;
+                case "is_hold": prop = p => p.is_hold; break;
+                case "amend_count": prop = p => p.amend_count; break;
+                case "retest_count": prop = p => p.retest_count; break;
+                case "group_submit": prop = p => p.group_submit; break;
+                case "status_name": prop = p => p.status_name; break;
+                case "sample_prefix": prop = p => p.sample_prefix; break;
+                case "amend_or_retest": prop = p => p.amend_or_retest; break;
+                case "note": prop = p => p.note; break;
+                case "note_lab": prop = p => p.note_lab; break;
+                case "am_retest_remark": prop = p => p.am_retest_remark; break;
+                case "sample_invoice_status": prop = p => p.sample_invoice_status; break;
+                case "fisicalY": prop = p => p.fisicalY; break;
+
+            }
+
+            Func<IEnumerable<SearchResult>, Func<SearchResult, object>, IEnumerable<SearchResult>> func = null;
+
+            
+
+
+
+            switch (SortDirection)
+            {
+                case SortDirection.Ascending:
+                    {
+                        func = (c, p) => c.OrderBy(p);
+                        SortDirection = SortDirection.Descending;
+                        break;
+                    }
+                case SortDirection.Descending:
+                    {
+                        func = (c, p) => c.OrderByDescending(p);
+                        SortDirection = SortDirection.Ascending;
+
+                        break;
+                    }
+            }
+
+
+            IEnumerable<SearchResult> persons = this.searchResult;
+            persons = func(persons, prop);
+
+            gvJob.DataSource = persons.ToArray();
+            gvJob.DataBind();
+
+        }
+
 
         protected void btnElp_Click(object sender, EventArgs e)
         {

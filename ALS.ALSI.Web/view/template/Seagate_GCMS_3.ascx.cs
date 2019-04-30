@@ -536,6 +536,14 @@ namespace ALS.ALSI.Web.view.template
 
 
                     //
+                    txtD13.Text=cov.D13;
+                    txtD14.Text=cov.D14;
+                    txtD15.Text=cov.D15;
+                    txtD16.Text=cov.D16;
+                    txtD17.Text=cov.D17;
+                    txtD18.Text=cov.D18;
+                    txtD19.Text= cov.D19;
+                    //
                     txtE13.Text=cov.E13;
                     txtE14.Text=cov.E14;
                     txtE15.Text=cov.E15;
@@ -543,14 +551,6 @@ namespace ALS.ALSI.Web.view.template
                     txtE17.Text=cov.E17;
                     txtE18.Text=cov.E18;
                     txtE19.Text= cov.E19;
-                    //
-                    txtF13.Text=cov.F13;
-                    txtF14.Text=cov.F14;
-                    txtF15.Text=cov.F15;
-                    txtF16.Text=cov.F16;
-                    txtF17.Text=cov.F17;
-                    txtF18.Text=cov.F18;
-                    txtF19.Text= cov.F19;
                     //
 
 
@@ -860,6 +860,14 @@ namespace ALS.ALSI.Web.view.template
 
 
                             //
+                            cov.D13 = (String.IsNullOrEmpty(txtD13.Text)) ? "" : txtD13.Text;
+                            cov.D14 = (String.IsNullOrEmpty(txtD14.Text)) ? "" : txtD14.Text;
+                            cov.D15 = (String.IsNullOrEmpty(txtD15.Text)) ? "" : txtD15.Text;
+                            cov.D16 = (String.IsNullOrEmpty(txtD16.Text)) ? "" : txtD16.Text;
+                            cov.D17 = (String.IsNullOrEmpty(txtD17.Text)) ? "" : txtD17.Text;
+                            cov.D18 = (String.IsNullOrEmpty(txtD18.Text)) ? "" : txtD18.Text;
+                            cov.D19 = (String.IsNullOrEmpty(txtD19.Text)) ? "" : txtD19.Text;
+                            //
                             cov.E13 = (String.IsNullOrEmpty(txtE13.Text)) ? "" : txtE13.Text;
                             cov.E14 = (String.IsNullOrEmpty(txtE14.Text)) ? "" : txtE14.Text;
                             cov.E15 = (String.IsNullOrEmpty(txtE15.Text)) ? "" : txtE15.Text;
@@ -867,14 +875,6 @@ namespace ALS.ALSI.Web.view.template
                             cov.E17 = (String.IsNullOrEmpty(txtE17.Text)) ? "" : txtE17.Text;
                             cov.E18 = (String.IsNullOrEmpty(txtE18.Text)) ? "" : txtE18.Text;
                             cov.E19 = (String.IsNullOrEmpty(txtE19.Text)) ? "" : txtE19.Text;
-                            //
-                            cov.F13 = (String.IsNullOrEmpty(txtF13.Text)) ? "" : txtF13.Text;
-                            cov.F14 = (String.IsNullOrEmpty(txtF14.Text)) ? "" : txtF14.Text;
-                            cov.F15 = (String.IsNullOrEmpty(txtF15.Text)) ? "" : txtF15.Text;
-                            cov.F16 = (String.IsNullOrEmpty(txtF16.Text)) ? "" : txtF16.Text;
-                            cov.F17 = (String.IsNullOrEmpty(txtF17.Text)) ? "" : txtF17.Text;
-                            cov.F18 = (String.IsNullOrEmpty(txtF18.Text)) ? "" : txtF18.Text;
-                            cov.F19 = (String.IsNullOrEmpty(txtF19.Text)) ? "" : txtF19.Text;
                             //
 
 
@@ -1291,6 +1291,23 @@ namespace ALS.ALSI.Web.view.template
                                     txtC18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.C));
                                     txtC19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.C));
 
+
+                                    txtD13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.D));
+                                    txtD14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.D));
+                                    txtD15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.D));
+                                    txtD16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.D));
+                                    txtD17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D));
+                                    txtD18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D));
+                                    txtD19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.D));
+
+                                    txtE13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.E));
+                                    txtE14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.E));
+                                    txtE15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.E));
+                                    txtE16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.E));
+                                    txtE17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.E));
+                                    txtE18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.E));
+                                    txtE19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.E));
+
                                     #endregion
                                     #region "Motor Base / Baseplate"
                                     txtB20.Text = CustomUtils.GetCellValue(isheet.GetRow(23 - 1).GetCell(ExcelColumn.B));
@@ -1378,6 +1395,14 @@ namespace ALS.ALSI.Web.view.template
 
 
                                     //
+                                    txtD13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.D));
+                                    txtD14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.D));
+                                    txtD15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.D));
+                                    txtD16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.D));
+                                    txtD17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.D));
+                                    txtD18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.D));
+                                    txtD19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.D));
+                                    //
                                     txtE13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.E));
                                     txtE14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.E));
                                     txtE15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.E));
@@ -1385,14 +1410,6 @@ namespace ALS.ALSI.Web.view.template
                                     txtE17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.E));
                                     txtE18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.E));
                                     txtE19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.E));
-                                    //
-                                    txtF13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.F));
-                                    txtF14.Text = CustomUtils.GetCellValue(isheet.GetRow(14 - 1).GetCell(ExcelColumn.F));
-                                    txtF15.Text = CustomUtils.GetCellValue(isheet.GetRow(15 - 1).GetCell(ExcelColumn.F));
-                                    txtF16.Text = CustomUtils.GetCellValue(isheet.GetRow(16 - 1).GetCell(ExcelColumn.F));
-                                    txtF17.Text = CustomUtils.GetCellValue(isheet.GetRow(17 - 1).GetCell(ExcelColumn.F));
-                                    txtF18.Text = CustomUtils.GetCellValue(isheet.GetRow(18 - 1).GetCell(ExcelColumn.F));
-                                    txtF19.Text = CustomUtils.GetCellValue(isheet.GetRow(19 - 1).GetCell(ExcelColumn.F));
                                     //
 
 
@@ -1461,30 +1478,34 @@ namespace ALS.ALSI.Web.view.template
                                     sheetName = isheet.SheetName;
 
 
-                                    String txtMotorOilHub = isheet.GetRow(33 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.D));
-                                    String txtMotorOilBase25 = isheet.GetRow(34 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
-                                    String txtMotorOilBase35 = isheet.GetRow(35 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
+                                    String _txtMotorOilHub = isheet.GetRow(33 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(33 - 1).GetCell(ExcelColumn.D));
+                                    String _txtMotorOilBase25 = isheet.GetRow(34 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(34 - 1).GetCell(ExcelColumn.D));
+                                    String _txtMotorOilBase35 = isheet.GetRow(35 - 1) == null ? "" : CustomUtils.GetCellValue(isheet.GetRow(35 - 1).GetCell(ExcelColumn.D));
 
-                                    txtMotorOilHub = CustomUtils.showOnCoverPageValue(txtMotorOilHub, Convert.ToInt16(txtFloatResult01.Text));// String.IsNullOrEmpty(txtMotorOilHub)|| txtMotorOilHub.Equals("0.00") ? "" : txtMotorOilHub.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilHub) ? txtMotorOilHub : Convert.ToDouble(txtMotorOilHub).ToString("N2");
-                                    txtMotorOilBase25 = CustomUtils.showOnCoverPageValue(txtMotorOilBase25, Convert.ToInt16(txtFloatResult01.Text));//String.IsNullOrEmpty(txtMotorOilBase25)|| txtMotorOilBase25.Equals("0.00") ? "" : txtMotorOilBase25.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase25) ? txtMotorOilBase25 : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
-                                    txtMotorOilBase35 = CustomUtils.showOnCoverPageValue(txtMotorOilBase35, Convert.ToInt16(txtFloatResult01.Text));//String.IsNullOrEmpty(txtMotorOilBase35) || txtMotorOilBase35.Equals("0.00") ? "":"";// : txtMotorOilBase35.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase35) ? txtMotorOilBase35 : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
+                                    txtMotorOilHub.Text = CustomUtils.showOnCoverPageValue(_txtMotorOilHub, Convert.ToInt16(txtFloatResult01.Text));// String.IsNullOrEmpty(txtMotorOilHub)|| txtMotorOilHub.Equals("0.00") ? "" : txtMotorOilHub.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilHub) ? txtMotorOilHub : Convert.ToDouble(txtMotorOilHub).ToString("N2");
+                                    txtMotorOilBase25.Text = CustomUtils.showOnCoverPageValue(_txtMotorOilBase25, Convert.ToInt16(txtFloatResult01.Text));//String.IsNullOrEmpty(txtMotorOilBase25)|| txtMotorOilBase25.Equals("0.00") ? "" : txtMotorOilBase25.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase25) ? txtMotorOilBase25 : Convert.ToDouble(txtMotorOilBase25).ToString("N2");
+                                    txtMotorOilBase35.Text = CustomUtils.showOnCoverPageValue(_txtMotorOilBase35, Convert.ToInt16(txtFloatResult01.Text));//String.IsNullOrEmpty(txtMotorOilBase35) || txtMotorOilBase35.Equals("0.00") ? "":"";// : txtMotorOilBase35.Equals("Not Detected") ? "Not Detected" : "<MDL".Equals(txtMotorOilBase35) ? txtMotorOilBase35 : Convert.ToDouble(txtMotorOilBase35).ToString("N2");
 
                                     List<template_seagate_gcms_coverpage> motorOilsUpdate = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL) && !x.A.Equals("-")).ToList();
                                     if (motorOilsUpdate.Count > 0)
                                     {
-                                        if (!String.IsNullOrEmpty(txtMotorOilHub))
+                                        if (!String.IsNullOrEmpty(_txtMotorOilHub))
                                         {
-                                            motorOilsUpdate[0].C = txtMotorOilHub.Replace("<", "&lt;");
+                                            motorOilsUpdate[0].C = _txtMotorOilHub.Replace("<", "&lt;");
+                                        }
+        
+                                        if(motorOilsUpdate.Count >= 2)
+                                        {
+                                            if (!String.IsNullOrEmpty(_txtMotorOilBase25))
+                                            {
+                                                motorOilsUpdate[1].C = _txtMotorOilBase25.Replace("<", "&lt;");
+                                            }
+                                            if (!String.IsNullOrEmpty(_txtMotorOilBase35))
+                                            {
+                                                motorOilsUpdate[1].C = _txtMotorOilBase35.Replace("<", "&lt;");
+                                            }
                                         }
 
-                                        if (!String.IsNullOrEmpty(txtMotorOilBase25))
-                                        {
-                                            motorOilsUpdate[1].C = txtMotorOilBase25.Replace("<", "&lt;");
-                                        }
-                                        if (!String.IsNullOrEmpty(txtMotorOilBase35))
-                                        {
-                                            motorOilsUpdate[1].C = txtMotorOilBase35.Replace("<", "&lt;");
-                                        }
 
                                     }
                                 }
@@ -2250,6 +2271,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     compoundSubs[4].C = (Convert.ToDouble(compoundSubs[4].C) == 0) ? "Not Detected" : compoundSubs[4].C;
                 }
+                compoundSubs[0].C = (Convert.ToDouble(compoundSubs[0].C) == 0) ? "Not Detected" : compoundSubs[0].C;
 
                 gvCompoundSub.DataSource = compoundSubs;
                 gvCompoundSub.DataBind();

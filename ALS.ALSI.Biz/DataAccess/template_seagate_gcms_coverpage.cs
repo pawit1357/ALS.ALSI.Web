@@ -201,5 +201,12 @@ namespace ALS.ALSI.Biz.DataAccess
         public string C54 { get; set; }
         public string D53 { get; set; }
         public string D54 { get; set; }
+        public string D13 { get; set; }
+        public string D14 { get; set; }
+        public string D15 { get; set; }
+        public string D16 { get; set; }
+        public string D17 { get; set; }
+        public string D18 { get; set; }
+        public string D19 { get; set; }
     }
 }

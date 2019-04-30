@@ -728,10 +728,10 @@
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
-                                                <asp:TextBox ID="txtE13" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtD13" runat="server"></asp:TextBox>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtF13" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtE13" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -743,10 +743,10 @@
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
-                                                <asp:TextBox ID="txtE14" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtD14" runat="server"></asp:TextBox>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtF14" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtE14" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -758,10 +758,10 @@
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
-                                                <asp:TextBox ID="txtE15" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtD15" runat="server"></asp:TextBox>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtF15" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtE15" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -774,10 +774,10 @@
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
-                                                <asp:TextBox ID="txtE16" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtD16" runat="server"></asp:TextBox>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtF16" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtE16" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -790,10 +790,10 @@
                                             </td>
                                             <td class="auto-style1"></td>
                                             <td class="auto-style1">
-                                                <asp:TextBox ID="txtE17" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtD17" runat="server"></asp:TextBox>
                                             </td>
                                             <td class="auto-style1">
-                                                <asp:TextBox ID="txtF17" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtE17" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -806,10 +806,10 @@
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
-                                                <asp:TextBox ID="txtE18" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtD18" runat="server"></asp:TextBox>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtF18" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtE18" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -823,10 +823,10 @@
                                         </td>
                                         <td>&nbsp;</td>
                                         <td>
-                                            <asp:TextBox ID="txtE19" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="txtD19" runat="server"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtF19" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="txtE19" runat="server"></asp:TextBox>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -1836,8 +1836,8 @@
 
         </Triggers>
     </asp:UpdatePanel>
-    <%--    <div class="row">
-                                            <div class="col-md-6">--%>
+    <%--   </div>
+                                        </div>--%>
 </form>
 
 <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>

@@ -26,9 +26,9 @@ namespace ALS.ALSI.Web.view.template
     public partial class ImportSo : System.Web.UI.Page
     {
 
-        public IEnumerable searchResult
+        public IEnumerable<job_sample_group_so> searchResult
         {
-            get { return (IEnumerable)Session[GetType().Name + "job_sample_group_so"]; }
+            get { return (IEnumerable<job_sample_group_so>)Session[GetType().Name + "job_sample_group_so"]; }
             set { Session[GetType().Name + "job_sample_group_so"] = value; }
         }
 
@@ -91,6 +91,86 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 Message = "<div class=\"alert alert-danger\"><strong>Error!</strong>สามารถอัพโหลดได้เฉพาะ ไฟล์ Text(*.txt) </div>";
+            }
+        }
+        protected void btnBatchLoad_Click(object sender, EventArgs e)
+        {
+            if (searchResult.ToDataTable().Rows.Count > 0)
+            {
+                StringBuilder sbJobFail = new StringBuilder();
+                int total = searchResult.ToDataTable().Rows.Count;
+                int fail = 0;
+
+                foreach (job_sample_group_so _updateCso in this.searchResult)
+                {
+                    if (_updateCso != null && _updateCso.status.Equals("I") && _updateCso.report_no != null)
+                    {
+                        String[] UnitPrice = _updateCso.unit_price.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+                        String[] vals = _updateCso.report_no.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+
+                        if (UnitPrice.Length == vals.Length)
+                        {
+                            Boolean isComplete = true;
+
+                            for (int i = 0; i < vals.Length; i++)
+                            {
+                                if (!vals[i].Equals(""))
+                                {
+                                    Double amt = Convert.ToDouble(UnitPrice[i]);
+                                    String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
+                                    foreach (String job_number in ReportNos)
+                                    {
+                                        #region "FIND JOB NUMBER"
+                                        List<string> jobNumbers = new List<string>();
+                                        string[] _val = job_number.Split('-');
+                                        if (_val.Length == 4)
+                                        {
+                                            int startJob = Convert.ToInt32(_val[1]);
+                                            int endJob = Convert.ToInt32(_val[2]);
+                                            for (int idx = startJob; idx <= endJob; idx++)
+                                            {
+                                                jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], getNum(idx.ToString()), _val[3]));
+                                            }
+                                        }
+                                        else
+                                        {
+                                            jobNumbers.Add(job_number);
+                                        }
+                                        #endregion
+
+                                        foreach (var jn in jobNumbers)
+                                        {
+                                            job_sample js = job_sample.SelectByJobNumber(jn);
+                                            if (js != null)
+                                            {
+                                                js.sample_invoice_amount = amt;
+                                                js.sample_invoice_complete_date = DateTime.Now;
+                                                js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+                                                js.Update();
+                                            }
+                                            else
+                                            {
+                                                sbJobFail.Append(_updateCso.so + ",");
+                                                isComplete = false;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            _updateCso.status = !isComplete ? "I" : "C";
+                            _updateCso.Update();
+                            if (!isComplete)
+                            {
+                                fail++;
+                            }
+                        }
+                    }
+                }
+                GeneralManager.Commit();
+
+                String errList = (sbJobFail.Length == 0) ? "" : "\nรายการ SO ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
+                Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล Job\n ทั้งหมด" + total + " รายการ\n สำเร็จ " + (total - fail) + " รายการ " + ((errList.Length > 0) ? errList.Substring(0, errList.Length - 1) : errList) + " </div>";
+                bindingData();
             }
         }
         #endregion
@@ -217,7 +297,7 @@ namespace ALS.ALSI.Web.view.template
                                         int endJob = Convert.ToInt32(_val[2]);
                                         for (int idx = startJob; idx <= endJob; idx++)
                                         {
-                                            jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], idx, _val[3]));
+                                            jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], getNum(idx.ToString()), _val[3]));
                                         }
                                     }
                                     else
@@ -226,7 +306,7 @@ namespace ALS.ALSI.Web.view.template
                                     }
                                     #endregion
 
-                                    foreach(var jn in jobNumbers)
+                                    foreach (var jn in jobNumbers)
                                     {
                                         job_sample js = job_sample.SelectByJobNumber(jn);
                                         if (js != null)
@@ -248,7 +328,7 @@ namespace ALS.ALSI.Web.view.template
                         _updateCso.status = fail > 0 ? "I" : "C";
                         GeneralManager.Commit();
                         String errList = (sbJobFail.Length == 0) ? "" : "\nรายการ Job ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
-                        Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล Job\n ทั้งหมด" + total + " รายการ\n สำเร็จ " + (total - fail) + " รายการ " + errList + " </div>";
+                        Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล Job\n ทั้งหมด" + total + " รายการ\n สำเร็จ " + (total - fail) + " รายการ " + ((errList.Length > 0) ? errList.Substring(0, errList.Length - 1) : errList) + " </div>";
 
                     }
                     bindingData();
@@ -355,5 +435,26 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
+
+        private string getNum(string num)
+        {
+            string number = "";
+            switch (num.Length)
+            {
+                case 1:
+                    number = string.Format("000{0}", num);
+                    break;
+                case 2:
+                    number = string.Format("00{0}", num);
+                    break;
+                case 3:
+                    number = string.Format("0{0}", num);
+                    break;
+                case 4:
+                    number = string.Format("{0}", num);
+                    break;
+            }
+            return number;
+        }
     }
 }

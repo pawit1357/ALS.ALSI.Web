@@ -285,7 +285,7 @@
                         <asp:Label ID="lbTotalRecords" runat="server" Text="" Visible="false"></asp:Label>
                         <div style="width:100%;overflow-x: auto;white-space: nowrap;">
                             <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False"
-                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,due_date,is_hold,due_date_customer,due_date_lab,amend_count,retest_count,group_submit,amend_or_retest,sample_prefix" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
+                                CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_status,job_role,status_completion_scheduled,step1owner,step2owner,step3owner,step4owner,step5owner,step6owner,due_date,is_hold,due_date_customer,due_date_lab,amend_count,retest_count,group_submit,amend_or_retest,sample_prefix" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" OnSorting="gvJob_Sorting" AllowPaging="True" AllowSorting="true" PageSize="50">
                                 <Columns>
                                     <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
@@ -348,13 +348,13 @@
                                     <asp:BoundField HeaderText="Receive Date." DataField="receive_date" ItemStyle-HorizontalAlign="Center" SortExpression="receive_date" DataFormatString="{0:d MMM yyyy}">
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
-                                    <asp:TemplateField HeaderText="Due Date.">
+                                    <asp:TemplateField HeaderText="Due Date." SortExpression="due_date">
                                         <ItemTemplate>
                                             <asp:Literal ID="litDueDate" runat="server" Text="-"></asp:Literal>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
-                                    <asp:TemplateField HeaderText="ALS Ref No.">
+                                    <asp:TemplateField HeaderText="ALS Ref No." SortExpression="job_number">
                                         <ItemTemplate>
                                             <asp:Label ID="lbJobNumber" runat="server" Text='<%# Eval("job_number")%>'></asp:Label>
                                         </ItemTemplate>
@@ -362,7 +362,7 @@
                                     <asp:BoundField HeaderText="Cus Ref No." DataField="customer_ref_no" ItemStyle-HorizontalAlign="Left" SortExpression="customer_ref_no">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
-                                    <asp:TemplateField HeaderText="Other Ref No">
+                                    <asp:TemplateField HeaderText="Other Ref No" SortExpression="other_ref_no">
                                         <ItemTemplate>
                                             <asp:Literal ID="litOtherRefNo" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:Literal>
                                         </ItemTemplate>
@@ -370,7 +370,7 @@
 
 
 
-                                    <asp:TemplateField HeaderText="Company">
+                                    <asp:TemplateField HeaderText="Company" SortExpression="customer">
                                         <ItemTemplate>
                                             <asp:Literal ID="ltCompany" runat="server" Text='<%# Eval("customer")%>'></asp:Literal>
                                         </ItemTemplate>
@@ -421,7 +421,7 @@
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
 
-                                    <asp:TemplateField HeaderText="Payment Status" ItemStyle-HorizontalAlign="Center">
+                                    <asp:TemplateField HeaderText="Payment Status" ItemStyle-HorizontalAlign="Center" SortExpression="sample_invoice_status">
                                         <ItemTemplate>
                                             <asp:Literal ID="ltPaymentStatus" runat="server" Text='<%# Eval("sample_invoice_status")%>'></asp:Literal>
                                         </ItemTemplate>

@@ -29,7 +29,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public job_sample_group_so SelectByID(int _id)
         {
-            return _repository.Find(x => x.id == _id).FirstOrDefault();
+            return _repository.Find(x => x.id == _id).OrderByDescending(x=>x.id).FirstOrDefault();
         }
         public static Boolean FindBySO(String _so)
         {

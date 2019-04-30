@@ -185,7 +185,8 @@ namespace ALS.ALSI.Biz.Constant
         ChangeSrChemistStartJobDate = 41,
         ChangeAdminStartJobDate = 42,
         ChangeSrChemistCompleteDate = 43,
-        NoteForLab = 44
+        NoteForLab = 44,
+
 
     }
 

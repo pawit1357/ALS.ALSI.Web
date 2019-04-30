@@ -126,44 +126,44 @@ namespace ALS.ALSI.Biz.DataAccess
         }
 
         #region "Custom"
-        public IEnumerable SearchData()
+        public IEnumerable<SearchResult> SearchData()
         {
             using (ALSIEntities ctx = new ALSIEntities())
             {
-             
+
                 var result = from j in ctx.job_info
                              join s in ctx.job_sample on j.ID equals s.job_id
                              join ms in ctx.m_status on s.job_status equals ms.ID
-                             join sp in ctx.m_specification on s.specification_id equals sp.ID 
+                             join sp in ctx.m_specification on s.specification_id equals sp.ID
                              join tt in ctx.m_type_of_test on s.type_of_test_id equals tt.ID
                              join c in ctx.m_customer on j.customer_id equals c.ID
                              join cp in ctx.m_customer_contract_person on j.contract_person_id equals cp.ID
-                             orderby  s.ID descending
-                             select new
+                             orderby s.ID descending
+                             select new SearchResult
                              {
-                                
+
                                  ID = j.ID,
-                                 s.other_ref_no,
-                                 s.date_srchemist_complate,
-                                 s.date_admin_sent_to_cus,
+                                 other_ref_no = s.other_ref_no,
+                                 date_srchemist_complate = s.date_srchemist_complate,
+                                 date_admin_sent_to_cus = s.date_admin_sent_to_cus,
                                  receive_date = j.date_of_receive,
                                  due_date = s.due_date,
-                                 s.due_date_customer,
-                                 s.due_date_lab,
+                                 due_date_customer = s.due_date_customer,
+                                 due_date_lab = s.due_date_lab,
                                  job_number = s.job_number,
                                  customer_ref_no = j.customer_ref_no,
                                  s_pore_ref_no = j.s_pore_ref_no,
                                  customer = c.company_name,
-                                 s.sample_invoice,
-                                 s.sample_invoice_date,
-                                 s.sample_invoice_amount,
+                                 sample_invoice = s.sample_invoice,
+                                 sample_invoice_date = s.sample_invoice_date,
+                                 sample_invoice_amount = s.sample_invoice_amount,
                                  sample_po = s.sample_po,
-                                 contract_person = (cp.name==null)? "": cp.name,
+                                 contract_person = (cp.name == null) ? "" : cp.name,
                                  description = s.description,
                                  model = s.model,
                                  surface_area = s.surface_area,
-                                 specification = (sp.name == null)? "" : sp.name,
-                                 type_of_test = (tt.name == null)? "": tt.name,
+                                 specification = (sp.name == null) ? "" : sp.name,
+                                 type_of_test = (tt.name == null) ? "" : tt.name,
                                  customer_id = c.ID,
                                  job_status = s.job_status,
                                  create_date = j.create_date,
@@ -172,28 +172,32 @@ namespace ALS.ALSI.Biz.DataAccess
                                  contract_person_id = cp.ID,
                                  job_role = s.job_role,
                                  status_completion_scheduled = s.status_completion_scheduled,
-                                 s.step1owner,
-                                 s.step2owner,
-                                 s.step3owner,
-                                 s.step4owner,
-                                 s.step5owner,
-                                 s.step6owner,
-                                 j.job_prefix,
-                                 tt.data_group,
+                                 step1owner = s.step1owner,
+                                 step2owner = s.step2owner,
+                                 step3owner = s.step3owner,
+                                 step4owner = s.step4owner,
+                                 step5owner = s.step5owner,
+                                 step6owner = s.step6owner,
+                                 job_prefix = j.job_prefix,
+                                 data_group = tt.data_group,
                                  type_of_test_id = tt.ID,
                                  type_of_test_name = tt.name,
                                  spec_id = sp.ID,
-                                 s.date_login_inprogress,
-                                 s.date_chemist_analyze,
-                                 s.date_labman_complete,
-                                 s.is_hold,
-                                 s.amend_count,
-                                 s.retest_count,
-                                 s.group_submit,
+                                 date_login_inprogress = s.date_login_inprogress,
+                                 date_chemist_analyze = s.date_chemist_analyze,
+                                 date_labman_complete = s.date_labman_complete,
+                                 is_hold = s.is_hold,
+                                 amend_count = s.amend_count,
+                                 retest_count = s.retest_count,
+                                 group_submit = s.group_submit,
                                  status_name = ms.name,
-                                 s.sample_prefix,
-                                 s.amend_or_retest,s.note,s.note_lab,s.am_retest_remark,s.sample_invoice_status,
-                                 fisicalY = (j.date_of_receive.Value.Month < 4)? j.date_of_receive.Value.Year-1:j.date_of_receive.Value.Year
+                                 sample_prefix = s.sample_prefix,
+                                 amend_or_retest = s.amend_or_retest,
+                                 note = s.note,
+                                 note_lab = s.note_lab,
+                                 am_retest_remark = s.am_retest_remark,
+                                 sample_invoice_status = s.sample_invoice_status,
+                                 fisicalY = (j.date_of_receive.Value.Month < 4) ? j.date_of_receive.Value.Year - 1 : j.date_of_receive.Value.Year
                              };
 
                 //if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)

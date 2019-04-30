@@ -429,6 +429,7 @@
     <Compile Include="PivotTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportBiz.cs" />
+    <Compile Include="SearchResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Binaries\AjaxControlToolkit.dll" />
