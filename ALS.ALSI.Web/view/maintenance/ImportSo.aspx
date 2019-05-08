@@ -53,6 +53,13 @@
                                 <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False" AllowPaging="True"
                                     CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="so,id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowEditing="gvJob_RowEditing" OnRowUpdating="gvJob_RowUpdating" OnRowCancelingEdit="gvJob_RowCancelingEdit" OnRowCommand="gvJob_RowCommand" OnRowDataBound="gvJob_RowDataBound" PageSize="20" Width="100%">
                                     <Columns>
+                                    <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="cbSelect" runat="server" />
+                                            <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>'></asp:HiddenField>
+
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                         <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnLoad" runat="server" ToolTip="Load" CommandName="View" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-cog"></i></asp:LinkButton>

@@ -1083,11 +1083,11 @@ namespace ALS.ALSI.Web.view.template
             {
                 string specificationLimits = _cover.C.Replace("<", "").Trim();
 
-                if (!specificationLimits.StartsWith("-") && !specificationLimits.Equals("NA") && !specificationLimits.Equals(""))
+                if (!specificationLimits.StartsWith("-")  && !specificationLimits.Equals(""))
                 {
                     if (!String.IsNullOrEmpty(_cover.D))
                     {
-                        _cover.E = _cover.D.Equals("Not Detected") ? "PASS" : (Convert.ToDecimal(_cover.D) < Convert.ToDecimal(specificationLimits) ? "PASS" : "FAIL");
+                        _cover.E = _cover.C.Equals("NA")? "NA": (_cover.D.Equals("Not Detected") ? "PASS" : (Convert.ToDecimal(_cover.D) < Convert.ToDecimal(specificationLimits) ? "PASS" : "FAIL"));
                     }
                 }
                 else

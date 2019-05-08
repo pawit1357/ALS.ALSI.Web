@@ -95,21 +95,141 @@ namespace ALS.ALSI.Biz.ReportObjects
 
                 }
 
-                String AmRetest = String.Empty;
+                #region "ALS-REF-NO"
+                String _alsRefNo = String.Empty;
                 switch (_sample.amend_or_retest)
                 {
                     case "AM":
-                        AmRetest = (_sample.amend_count > 0) ? "AM" + ((_sample.amend_count == 1) ? "" : _sample.amend_count + "") + "/" : String.Empty;
+                        switch (_sample.amend_count)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                _alsRefNo = "AM/";
+                                break;
+                            default:
+                                _alsRefNo = string.Format("AM{0}/", _sample.amend_count);
+                                break;
+                        }
+                        switch (_sample.retest_count)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                _alsRefNo += "R/";
+                                break;
+                            default:
+                                _alsRefNo += string.Format("R{0}/", _sample.retest_count);
+                                break;
+                        }
                         break;
                     case "R":
-                        AmRetest = (_sample.retest_count > 0) ? "R" + ((_sample.retest_count == 1) ? "" : _sample.retest_count + "") + "/" : String.Empty;
+                        switch (_sample.retest_count)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                _alsRefNo = "R/";
+                                break;
+                            default:
+                                _alsRefNo = string.Format("R{0}/", _sample.retest_count);
+                                break;
+                        }
+                        switch (_sample.amend_count)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                _alsRefNo += "AM/";
+                                break;
+                            default:
+                                _alsRefNo += string.Format("AM{0}/", _sample.amend_count);
+                                break;
+                        }
                         break;
                 }
+                #endregion
+                #region "SUPPLEMENT REPORT NO"
+                String _sRptNo = String.Empty;
+                switch (_sample.amend_or_retest)
+                {
+                    case "AM":
+                        switch (_sample.amend_count)
+                        {
+                            case 0:
+                            case 1:
+                                _sRptNo = "";
+                                switch (_sample.retest_count)
+                                {
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        _sRptNo += "R/";
+                                        break;
+                                    default:
+                                        _sRptNo += string.Format("R{0}/", _sample.retest_count);
+                                        break;
+                                }
+                                break;
+                            default:
+                                _sRptNo = string.Format("AM/", _sample.amend_count);
+                                switch (_sample.retest_count)
+                                {
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        _sRptNo += "R/";
+                                        break;
+                                    default:
+                                        _sRptNo += string.Format("R{0}/", _sample.retest_count);
+                                        break;
+                                }
+                                break;
+                        }
+
+                        break;
+                    case "R":
+                        switch (_sample.retest_count)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                _sRptNo = "";
+                                switch (_sample.amend_count)
+                                {
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        _sRptNo += "AM/";
+                                        break;
+                                    default:
+                                        _sRptNo += string.Format("AM{0}/", _sample.amend_count);
+                                        break;
+                                }
+                                break;
+                            default:
+                                _sRptNo = string.Format("R/", _sample.retest_count);
+                                switch (_sample.amend_count)
+                                {
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        _sRptNo += "AM/";
+                                        break;
+                                    default:
+                                        _sRptNo += string.Format("AM{0}/", _sample.retest_count);
+                                        break;
+                                }
+                                break;
+                        }
+                        break;
+                }
+                #endregion
 
                 String[] tmp = _sample.job_number.Split('-');
-                rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
+                rpt.alsRefNo = String.Format("{0}ATT/{1}/{2}/{3}-{4}", _alsRefNo, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
 
-                rpt.supplementToReportNo = String.IsNullOrEmpty(AmRetest) ? String.Empty : String.Format("{0}ATT/{1}/{2}/{3}-{4}", RemoveIntegers(AmRetest), tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
+                rpt.supplementToReportNo = String.IsNullOrEmpty(_alsRefNo) ? String.Empty : String.Format("{0}ATT/{1}/{2}/{3}-{4}", _sRptNo, tmp[0], phisicalYear, tmp[1], tmp[2]);// _sample.job_number.ToString();
 
                 rpt.description = (String.IsNullOrEmpty(_sample.description) ? String.Empty : "Description:" + _sample.description + "\n") +
                                   (String.IsNullOrEmpty(_sample.model) ? String.Empty : "Model:" + _sample.model + "\n") +

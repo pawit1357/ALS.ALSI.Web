@@ -15,10 +15,10 @@
         <EntityTypeShape EntityType="alsiModel.m_customer" Width="1.5" PointX="0.75" PointY="5.5" />
         <EntityTypeShape EntityType="alsiModel.m_customer_address" Width="1.5" PointX="3" PointY="16" />
         <EntityTypeShape EntityType="alsiModel.m_customer_contract_person" Width="1.5" PointX="3" PointY="5.125" />
-        <EntityTypeShape EntityType="alsiModel.m_role" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="alsiModel.m_role" Width="1.5" PointX="0.75" PointY="12.25" />
         <EntityTypeShape EntityType="alsiModel.m_specification" Width="1.5" PointX="12.75" PointY="3.75" />
         <EntityTypeShape EntityType="alsiModel.m_status" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="alsiModel.m_status_group" Width="1.5" PointX="0.75" PointY="12.125" />
+        <EntityTypeShape EntityType="alsiModel.m_status_group" Width="1.5" PointX="0.75" PointY="1.125" />
         <EntityTypeShape EntityType="alsiModel.m_template" Width="1.5" PointX="5.75" PointY="12.75" />
         <EntityTypeShape EntityType="alsiModel.m_title" Width="1.5" PointX="7.75" PointY="2.125" />
         <EntityTypeShape EntityType="alsiModel.m_type_of_test" Width="1.5" PointX="13.75" PointY="6.75" />

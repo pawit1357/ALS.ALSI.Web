@@ -195,9 +195,10 @@ namespace ALS.ALSI.Web.view.request
             {
                 case "AM":
                     newSample.amend_count = newSample.findAmendOrRetestCount(newSample.job_number, newSample.amend_or_retest)+1;
-
+                    newSample.retest_count = newSample.findAmendOrRetestCount(newSample.job_number, "R");
                     break;
                 case "R":
+                    newSample.amend_count = newSample.findAmendOrRetestCount(newSample.job_number, "AM");
                     newSample.retest_count = newSample.findAmendOrRetestCount(newSample.job_number, newSample.amend_or_retest)+1;
                     break;
             }

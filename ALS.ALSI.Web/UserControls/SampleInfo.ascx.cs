@@ -1,5 +1,6 @@
 ﻿using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
+using ALS.ALSI.Biz.ReportObjects;
 using System;
 
 namespace ALS.ALSI.Web.UserControls
@@ -29,28 +30,36 @@ namespace ALS.ALSI.Web.UserControls
                 lbDateSampleReceived.Text = Convert.ToDateTime(_job.date_of_receive).ToString("MM/dd/yyyy");
                 //String[] tmp = _sample.job_number.Split('-');
 
-                int phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2));
-                if (DateTime.Now.Month < 4)
-                {
-                    phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2)) - 1;
-                }
+                //int phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2));
+                //if (DateTime.Now.Month < 4)
+                //{
+                //    phisicalYear = Convert.ToInt16(DateTime.Now.Year.ToString().Substring(2)) - 1;
+                //}
 
-                String AmRetest = String.Empty;
-                switch (_sample.amend_or_retest)
-                {
-                    case "AM":
-                        AmRetest = (_sample.amend_count > 0) ? "AM" + ((_sample.amend_count == 1) ? "" : _sample.amend_count + "") + "/" : String.Empty;
-                        break;
-                    case "R":
-                        AmRetest = (_sample.retest_count > 0) ? "R" + ((_sample.retest_count == 1) ? "" : _sample.retest_count + "") + "/" : String.Empty;
-                        break;
-                }
+                //String AmRetest = String.Empty;
+                //switch (_sample.amend_or_retest)
+                //{
+                //    case "AM":
+                //        AmRetest = (_sample.amend_count > 0) ? "AM" + ((_sample.amend_count == 1) ? "" : _sample.amend_count + "") + "/" : String.Empty;
+                //        break;
+                //    case "R":
+                //        AmRetest = (_sample.retest_count > 0) ? "R" + ((_sample.retest_count == 1) ? "" : _sample.retest_count + "") + "/" : String.Empty;
+                //        break;
+                //}
+                //String[] tmp = _sample.job_number.Split('-');
+                //lbRefNo.Text = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);
+
+                //lbSupplementToReportNo.Text = String.IsNullOrEmpty(AmRetest) ? "-" : String.Format("ATT/{0}/{1}/{2}-{3}", tmp[0], phisicalYear, tmp[1], tmp[2]);
 
 
-                String[] tmp = _sample.job_number.Split('-');
-                lbRefNo.Text = String.Format("{0}ATT/{1}/{2}/{3}-{4}", AmRetest, tmp[0], phisicalYear, tmp[1], tmp[2]);
-                
-                lbSupplementToReportNo.Text = String.IsNullOrEmpty(AmRetest)? "-": String.Format("ATT/{0}/{1}/{2}-{3}",  tmp[0], phisicalYear, tmp[1], tmp[2]);
+
+                ReportHeader reportHeader = ReportHeader.getReportHeder(_sample);
+
+                lbRefNo.Text = reportHeader.alsRefNo;
+                lbSupplementToReportNo.Text = reportHeader.supplementToReportNo;
+
+
+
 
 
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
