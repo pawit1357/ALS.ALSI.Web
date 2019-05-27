@@ -400,7 +400,8 @@ namespace ALS.ALSI.Utils
                     if (ExcelColumn.dataIndex.Contains(dcOrder.ToString()))
                     {
                         String order = dtRow[dcOrder].ToString();
-                        if (String.IsNullOrEmpty(order)) continue;
+                        if (String.IsNullOrEmpty(order)||!CustomUtils.isNumber(order)) continue;
+
 
                         spec.order = Convert.ToInt16(order);
                         //----

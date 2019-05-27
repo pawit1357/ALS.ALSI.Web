@@ -326,6 +326,7 @@ namespace ALS.ALSI.Web.view.template
                 lbAmide.Text = this.Ftir[0].amide_unit;
                 lbSilicone.Text = this.Ftir[0].silicone_unit;
                 lbDopUnit.Text = this.Ftir[0].dop_unit;
+                txtDecimal09.Text = (this.Ftir[0].silicone_unit_2 == null)? "2": this.Ftir[0].silicone_unit_2;
                 #endregion
 
                 CalculateCas();
@@ -500,6 +501,7 @@ namespace ALS.ALSI.Web.view.template
                         item.amide_unit = lbAmide.Text;
                         item.silicone_unit = lbSilicone.Text;
                         item.dop_unit = lbDopUnit.Text;
+                        item.silicone_unit_2 = txtDecimal09.Text;
 
                     }
 
@@ -967,148 +969,6 @@ namespace ALS.ALSI.Web.view.template
             {
                 Console.WriteLine();
             }
-
-            //char[] item = this.Ftir.item_visible.ToCharArray();
-
-            //DataTable dtHeader = new DataTable("MethodProcedure");
-
-            //// Define all the columns once.
-            //DataColumn[] cols ={ new DataColumn("ProcedureNo",typeof(String)),
-            //                      new DataColumn("NumOfPiecesUsedForExtraction",typeof(String)),
-            //                      new DataColumn("ExtractionMedium",typeof(String)),
-            //                      new DataColumn("ExtractionVolume",typeof(String)),
-            //                  };
-            //dtHeader.Columns.AddRange(cols);
-            //DataRow row = dtHeader.NewRow();
-            //row["ProcedureNo"] = item[0] == '1' ? txtB21.Text : item[1] == '1' ? txtB22.Text : txtB23.Text;
-            //row["NumOfPiecesUsedForExtraction"] = item[0] == '1' ? txtC21.Text : item[1] == '1' ? txtC22.Text : txtC23.Text;
-            //row["ExtractionMedium"] = item[0] == '1' ? txtD21_1.Text : item[1] == '1' ? txtD22.Text : txtD23.Text;
-            //row["ExtractionVolume"] = item[0] == '1' ? txtE21.Text : item[1] == '1' ? txtE22.Text : txtE23.Text;
-            //dtHeader.Rows.Add(row);
-            //ReportHeader reportHeader = new ReportHeader();
-            //reportHeader = reportHeader.getReportHeder(this.jobSample);
-
-            //List<ReportData> reportList = new List<ReportData>();
-            ////Create ReportData NVR
-            //ReportData tmp = new ReportData
-            //{
-
-            //    A = "Non-Volatile Residue (NVR)",
-            //    B = lbC28.Text,
-            //    C = lbD28.Text,
-            //    D = lbE28.Text
-            //};
-            //if (item[3] == '1')
-            //{
-            //    reportList.Add(tmp);
-            //}
-            //tmp = new ReportData
-            //{
-
-            //    A = "Silicone at Wave No:2962, 1261, 1092, 1022 & 800cm-1",
-            //    B = lbC30.Text,
-            //    C = lbD30.Text,
-            //    D = lbE30.Text
-            //};
-            //if (item[4] == '1')
-            //{
-            //    reportList.Add(tmp);
-            //}
-
-
-            //ReportParameterCollection reportParameters = new ReportParameterCollection();
-
-            //reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-            //reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-            //reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date + ""));
-            //reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-            //reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2)); reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve + ""));
-            //reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze + ""));
-            //reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfAnalyze + ""));
-            //reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-            //reportParameters.Add(new ReportParameter("Test", item[0] == '1' ? "NVR/FTIR" : item[1] == '1' ? "NVR" : "FTIR"));
-            //reportParameters.Add(new ReportParameter("ResultDesc", String.Format("The Specification is based on Western Digital's Doc {0} for {1}", lbDocRev.Text, lbDesc.Text)));
-            //reportParameters.Add(new ReportParameter("Remarks", String.Format("Remarks: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
-
-            //// Variables
-            //Warning[] warnings;
-            //string[] streamIds;
-            //string mimeType = string.Empty;
-            //string encoding = string.Empty;
-            //string extension = string.Empty;
-
-
-            //// Setup the report viewer object and get the array of bytes
-            //ReportViewer viewer = new ReportViewer();
-            //viewer.ProcessingMode = ProcessingMode.Local;
-            //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_wd.rdlc");
-            //viewer.LocalReport.SetParameters(reportParameters);
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dtHeader)); // Add datasource here
-            //viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", reportList.ToDataTable())); // Add datasource here
-
-
-
-            //string download = String.Empty;
-
-            //StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-            //switch (status)
-            //{
-            //    case StatusEnum.ADMIN_CONVERT_WORD:
-            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        {
-            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-            //        }
-            //        else
-            //        {
-            //            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            //            // Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            //            Response.Buffer = true;
-            //            Response.Clear();
-            //            Response.ContentType = mimeType;
-            //            Response.AddHeader("content-disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-            //            Response.BinaryWrite(bytes); // create the file
-            //            Response.Flush(); // send it to the client to download
-            //        }
-            //        break;
-            //    case StatusEnum.LABMANAGER_CHECKING:
-            //    case StatusEnum.LABMANAGER_APPROVE:
-            //    case StatusEnum.LABMANAGER_DISAPPROVE:
-            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        {
-            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-            //        }
-            //        break;
-            //    case StatusEnum.ADMIN_CONVERT_PDF:
-            //        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        {
-            //            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-            //        }
-
-            //        //if (!String.IsNullOrEmpty(this.jobSample.path_word))
-            //        //{
-            //        //    Word2Pdf objWorPdf = new Word2Pdf();
-            //        //    objWorPdf.InputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word);
-            //        //    objWorPdf.OutputLocation = String.Format("{0}{1}", Configurations.PATH_DRIVE, this.jobSample.path_word).Replace("doc", "pdf");
-            //        //    try
-            //        //    {
-            //        //        objWorPdf.Word2PdfCOnversion();
-            //        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word).Replace("doc", "pdf"));
-
-            //        //    }
-            //        //    catch (Exception ex)
-            //        //    {
-            //        //        Console.WriteLine();
-            //        //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-
-            //        //    }
-            //        //}
-            //        break;
-            //}
-
-
-
-
         }
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -1296,50 +1156,10 @@ namespace ALS.ALSI.Web.view.template
 
             this.Ftir[3].E = String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("NA") || this.Ftir[3].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
             this.Ftir[4].E = String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") || this.Ftir[4].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-
-            //if (!this.Ftir[5].C.Equals("Not Detected"))
-            //{
             this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") || this.Ftir[5].C.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : this.Ftir[5].D.ToUpper().Equals("Not Detected".ToUpper()) || this.Ftir[5].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //}
-            //if (!this.Ftir[6].C.Equals("Not Detected"))
-            //{
             this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("Detected") ? "FAIL" : this.Ftir[6].D.Equals("NA") || this.Ftir[6].C.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : this.Ftir[6].D.Equals("Not Detected") || this.Ftir[6].C.Equals("Not Detected") || (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //}
-            //if (!this.Ftir[7].C.Equals("Not Detected"))
-            //{
             this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") || this.Ftir[7].C.Equals("NA") ? "NA" : (this.Ftir[7].D.ToUpper().Equals("Not Detected".ToUpper())) ? "PASS" : this.Ftir[7].D.ToUpper().Equals("Not Detected".ToUpper()) || this.Ftir[7].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //}
-            //List<template_wd_ftir_coverpage> tmps = this.Ftir;
-            //tmps[3].D = lbC26.Text;
-            //tmps[4].D = lbC26.Text;
-            //if (tmps.Count >= 6)
-            //{
-            //    tmps[5].D = txtC41.Text;
-            //}
-            //if (tmps.Count >= 7)
-            //{
-            //    tmps[6].D = txtC53.Text;
-            //}
-            //if (tmps.Count >= 8)
-            //{
-            //    tmps[7].D = txtFTIR_C63.Text;
-            //}
-            //////
 
-            //tmps[3].E = String.IsNullOrEmpty(tmps[3].D) ? "" : tmps[3].D.Equals("NA") || tmps[3].C.Equals("NA") ? "NA" : ((Convert.ToDouble(tmps[3].D) < Convert.ToDouble(tmps[3].C.Replace("<", "").Trim()) || tmps[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-            //tmps[4].E = String.IsNullOrEmpty(tmps[4].D) ? "" : tmps[4].D.Equals("NA") || tmps[4].C.Equals("NA") ? "NA" : ((Convert.ToDouble(tmps[4].D) < Convert.ToDouble(tmps[4].C.Replace("<", "").Trim()) || tmps[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-            //if (tmps.Count >= 6)
-            //{
-            //    tmps[5].E = String.IsNullOrEmpty(tmps[5].D) ? "" : tmps[5].D.Equals("NA") || tmps[5].C.Equals("NA") ? "NA" : (tmps[5].D.Equals("< MDL")) ? "PASS" : tmps[5].D.ToUpper().Equals("Not Detected".ToUpper()) || tmps[5].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(tmps[5].D) < Convert.ToDouble(tmps[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //}
-            //if (tmps.Count >= 7)
-            //{
-            //    tmps[6].E = String.IsNullOrEmpty(tmps[6].D) ? "" : tmps[6].D.Equals("Detected") ? "FAIL" : tmps[6].D.Equals("NA") || tmps[6].C.Equals("NA") ? "NA" : (tmps[6].D.Equals("< MDL")) ? "PASS" : tmps[6].D.Equals("Not Detected") || tmps[6].C.Equals("Not Detected") || (Convert.ToDouble(tmps[6].D) < Convert.ToDouble(tmps[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //}
-            //if (tmps.Count >= 8)
-            //{
-            //    tmps[7].E = String.IsNullOrEmpty(tmps[7].D) ? "" : tmps[7].D.Equals("NA") || tmps[7].C.Equals("NA") ? "NA" : (tmps[7].D.ToUpper().Equals("Not Detected".ToUpper())) ? "PASS" : tmps[7].D.ToUpper().Equals("Not Detected".ToUpper()) || tmps[7].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(tmps[7].D) < Convert.ToDouble(tmps[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            //}
             foreach (var item in this.Ftir.Where(x => x.data_type == 2).ToList())
             {
                 if (item.C.Equals("NA"))

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="ImportSo.aspx.cs" Inherits="ALS.ALSI.Web.view.template.ImportSo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="ImportInv.aspx.cs" Inherits="ALS.ALSI.Web.view.template.ImportInv" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -29,11 +29,13 @@
                     <div class="portlet-body">
                         <asp:Label ID="lbTotalRecords" runat="server" Text="" Visible="false"></asp:Label>
                         <div style="width: 100%; overflow-x: auto; white-space: nowrap;">
-                            <%=Message%>
-                            <div class="row">
+                            <%=MessageINv%>
+
+                            <!-- BEGIN FORM-->
+<div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label col-md-3">เลือกไฟล์ SO(*.txt)<span class="required"></span></label>
+                                        <label class="control-label col-md-3">เลือกไฟล์ Invoice(*.txt)<span class="required"></span></label>
                                         <div class="col-md-6">
                                             <span class="btn green fileinput-button">
                                                 <asp:FileUpload ID="FileUpload1" runat="server" />
@@ -76,53 +78,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- BEGIN FORM-->
-
                             <asp:Panel ID="pSo" runat="server">
                                 <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False" AllowPaging="True"
                                     CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="so,id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowEditing="gvJob_RowEditing" OnRowUpdating="gvJob_RowUpdating" OnRowCancelingEdit="gvJob_RowCancelingEdit" OnRowCommand="gvJob_RowCommand" OnRowDataBound="gvJob_RowDataBound" PageSize="20" Width="80%">
                                     <Columns>
-                                    <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
-                                        <ItemTemplate>
-                                            <asp:CheckBox ID="cbSelect" runat="server" />
-                                            <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>'></asp:HiddenField>
-
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="btnLoad" runat="server" ToolTip="Load" CommandName="View" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-cog"></i></asp:LinkButton>
+                                                <asp:CheckBox ID="cbSelect" runat="server" />
+                                                <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>'></asp:HiddenField>
                                             </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btn_Edit" runat="server" ToolTip="แก้ไข" CommandName="Edit" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-edit"></i></asp:LinkButton>
-
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:LinkButton ID="btn_Update" runat="server" ToolTip="อัพเดท" CommandName="Update" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-save"></i></asp:LinkButton>
-                                                &nbsp;&nbsp; 
-                                                <asp:LinkButton ID="btn_Cancel" runat="server" ToolTip="ยกเลิก" CommandName="Cancel" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-undo"></i></asp:LinkButton>
-
-                                            </EditItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <%# Container.DataItemIndex + 1 %>
                                             </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="so" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Label ID="ltSO" runat="server" Text='<%#Eval("so") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Unit/Price" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <asp:Label ID="ltUnitPrice" runat="server" Text='<%#Eval("unit_price") %>'></asp:Label>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtUnitPrice" runat="server" Text='<%#Eval("unit_price") %>' CssClass="form-control" TextMode="MultiLine" Rows="10"></asp:TextBox>
-                                            </EditItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="ReportNo" HeaderStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
@@ -132,23 +101,45 @@
                                                 <asp:TextBox ID="txtReportNo" runat="server" Text='<%#Eval("report_no") %>' CssClass="form-control" TextMode="MultiLine" Rows="10"></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center">
-                                        <ItemTemplate>
-                                            <asp:Literal ID="ltStatus" runat="server" Text='<%#Eval("status") %>'></asp:Literal>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
+                                        <asp:TemplateField HeaderText="so" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Label ID="ltSO" runat="server" Text='<%#Eval("so") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Invoice No" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Label ID="ltInvNo" runat="server" Text='<%#Eval("inv_no") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtInvNo" runat="server" Text='<%#Eval("inv_no") %>' CssClass="form-control" TextMode="MultiLine" Rows="10"></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Invoice Amount" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Label ID="ltInvAmt" runat="server" Text='<%#Eval("inv_amt") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtInvAmt" runat="server" Text='<%#Eval("inv_amt") %>' CssClass="form-control" TextMode="MultiLine" Rows="10"></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Invoice Date" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Label ID="ltInvDate" runat="server" Text='<%#Eval("inv_date") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Status" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="ltInvStatus" runat="server" Text='<%#Eval("inv_status") %>'></asp:Literal>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                     </Columns>
                                     <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
-
                                     <EmptyDataTemplate>
                                         <div class="data-not-found">
                                             <asp:Literal ID="libDataNotFound" runat="server" Text="Data Not found" />
                                         </div>
                                     </EmptyDataTemplate>
                                 </asp:GridView>
-
-
                             </asp:Panel>
                         </div>
 

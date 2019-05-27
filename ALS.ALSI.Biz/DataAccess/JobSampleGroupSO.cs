@@ -22,9 +22,21 @@ namespace ALS.ALSI.Biz.DataAccess
         #endregion
 
 
-        public IEnumerable<job_sample_group_so> SelectAll()
+        public IEnumerable<job_sample_group_so> SelectAll(string status ="")
         {
-            return _repository.GetAll().Where(x=>x.status!= null).ToList();
+            if (!string.IsNullOrEmpty(status))
+            {
+                return _repository.GetAll().Where(x => x.status.Equals(status)).ToList();
+            }
+            else
+            {
+                return _repository.GetAll().Where(x => x.status != null).ToList();
+            }
+        }
+
+        public IEnumerable<job_sample_group_so> SelectInvAll()
+        {
+            return _repository.GetAll().ToList();
         }
 
         public job_sample_group_so SelectByID(int _id)

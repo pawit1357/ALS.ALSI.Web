@@ -145,10 +145,16 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="so" Type="varchar" MaxLength="45" />
-          <Property Name="unit_price" Type="varchar" MaxLength="300" />
-          <Property Name="report_no" Type="varchar" MaxLength="300" />
+          <Property Name="unit_price" Type="varchar" MaxLength="1000" />
+          <Property Name="report_no" Type="varchar" MaxLength="1000" />
+          <Property Name="inv_no" Type="varchar" MaxLength="45" />
+          <Property Name="inv_date" Type="datetime" Precision="0" />
+          <Property Name="inv_duedate" Type="datetime" Precision="0" />
+          <Property Name="inv_amt" Type="double" />
+          <Property Name="inv_status" Type="varchar" MaxLength="1" />
           <Property Name="status" Type="varchar" MaxLength="1" />
           <Property Name="create_date" Type="datetime" Precision="0" />
+          <Property Name="update_date" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -1684,6 +1690,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="row_type" Type="int" />
           <Property Name="amide_unit" Type="varchar" MaxLength="45" />
           <Property Name="silicone_unit" Type="varchar" MaxLength="45" />
+          <Property Name="silicone_unit_2" Type="varchar" MaxLength="45" />
           <Property Name="dop_unit" Type="varchar" MaxLength="45" />
           <Property Name="ftir_unit" Type="int" />
           <Property Name="ftr_b53" Type="varchar" MaxLength="45" />
@@ -2494,10 +2501,16 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="so" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="unit_price" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="report_no" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="unit_price" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="report_no" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="inv_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="inv_date" Type="DateTime" />
+          <Property Name="inv_duedate" Type="DateTime" />
+          <Property Name="inv_amt" Type="Double" />
+          <Property Name="inv_status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" />
+          <Property Name="update_date" Type="DateTime" />
         </EntityType>
         <EntityType Name="job_sample_logs">
           <Key>
@@ -4044,6 +4057,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="row_type" Type="Int32" />
           <Property Name="amide_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="silicone_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="silicone_unit_2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="dop_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ftir_unit" Type="Int32" />
           <Property Name="ftr_b53" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -4631,8 +4645,14 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample_group_so">
             <EntityTypeMapping TypeName="alsiModel.job_sample_group_so">
               <MappingFragment StoreEntitySet="job_sample_group_so">
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="inv_status" ColumnName="inv_status" />
+                <ScalarProperty Name="inv_amt" ColumnName="inv_amt" />
+                <ScalarProperty Name="inv_duedate" ColumnName="inv_duedate" />
+                <ScalarProperty Name="inv_date" ColumnName="inv_date" />
+                <ScalarProperty Name="inv_no" ColumnName="inv_no" />
                 <ScalarProperty Name="report_no" ColumnName="report_no" />
                 <ScalarProperty Name="unit_price" ColumnName="unit_price" />
                 <ScalarProperty Name="so" ColumnName="so" />
@@ -6186,6 +6206,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="ftr_b53" ColumnName="ftr_b53" />
                 <ScalarProperty Name="ftir_unit" ColumnName="ftir_unit" />
                 <ScalarProperty Name="dop_unit" ColumnName="dop_unit" />
+                <ScalarProperty Name="silicone_unit_2" ColumnName="silicone_unit_2" />
                 <ScalarProperty Name="silicone_unit" ColumnName="silicone_unit" />
                 <ScalarProperty Name="amide_unit" ColumnName="amide_unit" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
