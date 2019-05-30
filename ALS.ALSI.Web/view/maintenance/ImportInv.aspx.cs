@@ -2,25 +2,14 @@
 using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
-using ALS.ALSI.Web.Properties;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Newtonsoft.Json;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Data;
 using System.IO;
-using System.Net;
-using System.Net.Http;
+using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Linq;
 
 namespace ALS.ALSI.Web.view.template
 {
@@ -121,10 +110,12 @@ namespace ALS.ALSI.Web.view.template
         #region "GRD"
         private void bindingData()
         {
+
             job_sample_group_so so = new job_sample_group_so();
-            searchResult = so.SelectInvAll();
+            searchResult = so.SelectAllInv(ddlStatus.SelectedValue);
             gvJob.DataSource = searchResult;
             gvJob.DataBind();
+
         }
 
         protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -309,7 +300,7 @@ namespace ALS.ALSI.Web.view.template
 
 
                 IEnumerable<job_sample_group_so> soGroup = this.searchResult;
-                if (soIds !=null)
+                if (soIds != null)
                 {
                     soGroup = this.searchResult.Where(x => soIds.Contains(x.id)).ToList();
                 }
@@ -330,67 +321,68 @@ namespace ALS.ALSI.Web.view.template
                     String[] UnitPrice = _updateCso.unit_price.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
                     String[] vals = _updateCso.report_no.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
 
-                    if (UnitPrice.Length == vals.Length)
-                    {
-                        Boolean isComplete = true;
+                    //if (UnitPrice.Length == vals.Length)
+                    //{
+                    Boolean isComplete = true;
 
-                        for (int i = 0; i < vals.Length; i++)
+                    for (int i = 0; i < UnitPrice.Length; i++)
+                    {
+                        if (!UnitPrice[i].Equals(""))
                         {
-                            if (!vals[i].Equals(""))
+                            Double amt = Convert.ToDouble(UnitPrice[i]);
+                            String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
+                            foreach (String job_number in ReportNos)
                             {
-                                Double amt = Convert.ToDouble(UnitPrice[i]);
-                                String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
-                                foreach (String job_number in ReportNos)
+                                #region "FIND JOB NUMBER"
+                                List<string> jobNumbers = new List<string>();
+                                string[] _val = job_number.Split('-');
+                                if (_val.Length == 4)
                                 {
-                                    #region "FIND JOB NUMBER"
-                                    List<string> jobNumbers = new List<string>();
-                                    string[] _val = job_number.Split('-');
-                                    if (_val.Length == 4)
+                                    int startJob = Convert.ToInt32(_val[1]);
+                                    int endJob = Convert.ToInt32(_val[2]);
+                                    for (int idx = startJob; idx <= endJob; idx++)
                                     {
-                                        int startJob = Convert.ToInt32(_val[1]);
-                                        int endJob = Convert.ToInt32(_val[2]);
-                                        for (int idx = startJob; idx <= endJob; idx++)
-                                        {
-                                            jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], getNum(idx.ToString()), _val[3]));
-                                        }
+                                        jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], getNum(idx.ToString()), _val[3]));
+                                    }
+                                }
+                                else
+                                {
+                                    jobNumbers.Add(job_number);
+                                }
+                                #endregion
+
+                                foreach (var jn in jobNumbers)
+                                {
+                                    job_sample js = job_sample.SelectByJobNumber(jn);
+                                    if (js != null)
+                                    {
+                                        
+                                        js.sample_invoice = _updateCso.inv_no;
+                                        js.sample_invoice_complete_date = _updateCso.inv_date;
+                                        js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+                                        js.Update();
                                     }
                                     else
                                     {
-                                        jobNumbers.Add(job_number);
-                                    }
-                                    #endregion
-
-                                    foreach (var jn in jobNumbers)
-                                    {
-                                        job_sample js = job_sample.SelectByJobNumber(jn);
-                                        if (js != null)
-                                        {
-                                            //js.sample_invoice_amount = _updateCso.inv_amt;
-                                            js.sample_invoice_complete_date = _updateCso.inv_date;
-                                            js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
-                                            js.Update();
-                                        }
-                                        else
-                                        {
-                                            sbJobFail.Append(_updateCso.so + ",");
-                                            isComplete = false;
-                                        }
+                                        sbJobFail.Append(_updateCso.so + ",");
+                                        isComplete = false;
                                     }
                                 }
                             }
                         }
-                        _updateCso.inv_status = !isComplete ? "I" : "C";
-                        _updateCso.Update();
-                        if (!isComplete)
-                        {
-                            fail++;
-                        }
                     }
-                    else
+                    _updateCso.inv_status = !isComplete ? "I" : "C";
+                    _updateCso.Update();
+                    if (!isComplete)
                     {
                         fail++;
-                        sbJobFail.Append(_updateCso.so + ",");
                     }
+                    //}
+                    //else
+                    //{
+                    //    fail++;
+                    //    sbJobFail.Append(_updateCso.so + ",");
+                    //}
                 }
 
                 GeneralManager.Commit();
@@ -417,6 +409,11 @@ namespace ALS.ALSI.Web.view.template
                 return DateTime.Now;
 
             }
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            bindingData();
         }
     }
 }

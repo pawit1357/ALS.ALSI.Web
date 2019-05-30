@@ -30,6 +30,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<job_running> job_running { get; set; }
         public DbSet<job_sample> job_sample { get; set; }
         public DbSet<job_sample_group_so> job_sample_group_so { get; set; }
+        public DbSet<job_sample_group_so_ignore_code> job_sample_group_so_ignore_code { get; set; }
         public DbSet<job_sample_logs> job_sample_logs { get; set; }
         public DbSet<m_completion_scheduled> m_completion_scheduled { get; set; }
         public DbSet<m_customer> m_customer { get; set; }

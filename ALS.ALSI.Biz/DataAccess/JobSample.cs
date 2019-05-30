@@ -42,7 +42,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public static job_sample SelectByJobNumber(String _job_number)
         {
-            return _repository.Find(x => x.job_number.ToUpper().Equals(_job_number.ToUpper()) && x.template_id != -1).OrderByDescending(x=>x.ID).FirstOrDefault();
+            return _repository.Find(x => x.job_number.ToUpper().Equals(_job_number.ToUpper())).OrderByDescending(x=>x.ID).FirstOrDefault();
         }
 
         public List<job_sample> findByIdAndStatus(String jobNumber, StatusEnum status )

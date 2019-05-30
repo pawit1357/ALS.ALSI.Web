@@ -33,7 +33,17 @@ namespace ALS.ALSI.Biz.DataAccess
                 return _repository.GetAll().Where(x => x.status != null).ToList();
             }
         }
-
+        public IEnumerable<job_sample_group_so> SelectAllInv(string status = "")
+        {
+            if (!string.IsNullOrEmpty(status))
+            {
+                return _repository.GetAll().Where(x =>x.inv_status!=null && x.inv_status.Equals(status)).ToList();
+            }
+            else
+            {
+                return _repository.GetAll().Where(x => x.status != null).ToList();
+            }
+        }
         public IEnumerable<job_sample_group_so> SelectInvAll()
         {
             return _repository.GetAll().ToList();
@@ -48,7 +58,10 @@ namespace ALS.ALSI.Biz.DataAccess
             return _repository.Find(x => x.so.Equals(_so)).Any();
         }
 
-
+        public static job_sample_group_so getBySo(String _so)
+        {
+            return _repository.Find(x => x.so.Equals(_so)).FirstOrDefault();
+        }
 
         public void Insert()
         {

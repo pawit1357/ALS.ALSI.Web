@@ -128,10 +128,8 @@ namespace ALS.ALSI.Web.view.dashboard
             "  job_sample s                                                                                                             " +
             "WHERE YEAR(s.sample_invoice_date) is not null " +
             " and s.sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'"+
-
-            "AND YEAR(s.sample_invoice_date) ={0}                                                                                       " +
             "GROUP BY  YEAR(s.sample_invoice_date)                                                                                      ";
-            DataTable dt = MaintenanceBiz.ExecuteReturnDt(String.Format(sql, 2018));
+            DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
 
             StringBuilder sbResultJson = new StringBuilder();
             String data = "[";
@@ -209,7 +207,8 @@ namespace ALS.ALSI.Web.view.dashboard
             String sql = "";
             String data = "[";
             #region "Incomplete"
-            sql = "select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and (sample_invoice_status=1 or sample_invoice_status is null) and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc;";
+            //sql = "select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and (sample_invoice_status=1 or sample_invoice_status is null) and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc;";
+            sql = "select * from (select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and (sample_invoice_status=1 or sample_invoice_status is null) and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc limit 15) tmp order by  sample_invoice_date;";
             DataTable dtIncomplete = MaintenanceBiz.ExecuteReturnDt(sql);
 
             if (dtIncomplete.Rows.Count > 0)
@@ -227,7 +226,8 @@ namespace ALS.ALSI.Web.view.dashboard
             #endregion
 
             #region "dtComplete"
-            sql = "select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and sample_invoice_status=2 and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc;";
+            //sql = "select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and sample_invoice_status=2 and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc;";
+            sql = "select * from (select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and sample_invoice_status=2 and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc limit 15) tmp order by  sample_invoice_date;";
             DataTable dtComplete = MaintenanceBiz.ExecuteReturnDt(sql);
 
             if (dtComplete.Rows.Count > 0)
@@ -340,7 +340,8 @@ namespace ALS.ALSI.Web.view.dashboard
             {
 
 
-            String sql = "select sample_invoice_date,sum(sample_invoice_amount) amt FROM job_sample where sample_invoice_date is not null and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc;";
+            //String sql = "select sample_invoice_date,sum(sample_invoice_amount) amt FROM job_sample where sample_invoice_date is not null and sample_invoice_date between '" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc";
+                String sql = "select * from (select sample_invoice_date,sum(sample_invoice_amount) amt FROM job_sample where sample_invoice_date is not null and sample_invoice_date between '" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date desc limit 15) x order by sample_invoice_date asc";
             DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
             StringBuilder sbResultJson = new StringBuilder();
 

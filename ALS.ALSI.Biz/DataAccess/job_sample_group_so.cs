@@ -16,6 +16,7 @@ namespace ALS.ALSI.Biz.DataAccess
     {
         public int id { get; set; }
         public string so { get; set; }
+        public string so_desc { get; set; }
         public string unit_price { get; set; }
         public string report_no { get; set; }
         public string inv_no { get; set; }

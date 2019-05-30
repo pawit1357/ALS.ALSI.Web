@@ -20,7 +20,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class=" icon-layers font-green"></i>
-                            <span class="captione">อัพโหลดไฟล์ SO</span>
+                            <span class="captione">อัพโหลดไฟล์ Invoice</span>
 
                         </div>
                         <div class="actions">
@@ -69,7 +69,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3"></label>
                                         <div class="col-md-6">
-                                            <asp:Button ID="Button2" runat="server" class="btn green" Text="ค้นหา" OnClick="btnBatchLoad_Click" />&nbsp;&nbsp;
+                                            <asp:Button ID="btnSearch" runat="server" class="btn green" Text="ค้นหา" OnClick="btnSearch_Click" />&nbsp;&nbsp;
 
                                         </div>
                                         <div>

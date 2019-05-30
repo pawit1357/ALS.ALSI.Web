@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3"></label>
                                         <div class="col-md-6">
-                                            <asp:Button ID="Button2" runat="server" class="btn green" Text="ค้นหา" OnClick="btnBatchLoad_Click" />&nbsp;&nbsp;
+                                            <asp:Button ID="Button2" runat="server" class="btn green" Text="ค้นหา" OnClick="Button2_Click" />&nbsp;&nbsp;
 
                                         </div>
                                         <div>
