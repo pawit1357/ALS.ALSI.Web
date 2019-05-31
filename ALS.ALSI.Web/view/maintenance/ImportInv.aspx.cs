@@ -304,7 +304,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     soGroup = this.searchResult.Where(x => soIds.Contains(x.id)).ToList();
                 }
-                soGroup = soGroup.Where(x => x.inv_status.Equals("I") && x.inv_no != null).ToList();
+                soGroup = soGroup.Where(x => x.inv_no != null).ToList();
 
                 int total = soGroup.Count();
                 int fail = 0;
@@ -358,7 +358,8 @@ namespace ALS.ALSI.Web.view.template
                                     {
                                         
                                         js.sample_invoice = _updateCso.inv_no;
-                                        js.sample_invoice_complete_date = _updateCso.inv_date;
+                                        js.sample_invoice_date = _updateCso.inv_date;
+                                        js.sample_invoice_complete_date = _updateCso.inv_duedate;
                                         js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
                                         js.Update();
                                     }

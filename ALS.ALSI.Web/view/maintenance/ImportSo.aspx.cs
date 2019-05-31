@@ -252,12 +252,19 @@ namespace ALS.ALSI.Web.view.template
                             }
                             if (index > 0)
                             {
+                                if(cso.report_no == null && cso.report_no == null && cso.report_no == null)
+                                {
+                                    Console.WriteLine();
+                                }
+                                else
+                                {
+                                    cso.unit_price = cso.unit_price.TrimEnd(Environment.NewLine.ToCharArray());
+                                    cso.so_desc = cso.so_desc.TrimEnd(Environment.NewLine.ToCharArray());
+                                    cso.report_no = cso.report_no.TrimEnd(Environment.NewLine.ToCharArray());
+                                }
                                 cso.status = "I";
                                 cso.create_date = DateTime.Now;
-                                //if (!job_sample_group_so.FindBySO(so))
-                                //{
-                                    listGroupSo.Add(cso);
-                                //}
+                                listGroupSo.Add(cso);
                             }
                             if (!so.Equals(line.Substring(10, 10).Trim()))
                             {
@@ -287,7 +294,7 @@ namespace ALS.ALSI.Web.view.template
                 cso.create_date = DateTime.Now;
                 //if (!job_sample_group_so.FindBySO(so))
                 //{
-                    listGroupSo.Add(cso);
+                listGroupSo.Add(cso);
                 //}
                 bUploadSuccess = true;
             }
@@ -304,7 +311,7 @@ namespace ALS.ALSI.Web.view.template
                 foreach (job_sample_group_so so in listGroupSo)
                 {
                     job_sample_group_so updateSo = job_sample_group_so.getBySo(so.so);
-                    if(updateSo == null)
+                    if (updateSo == null)
                     {
                         so.Insert();
                     }
@@ -366,7 +373,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     soGroup = this.searchResult.Where(x => soIds.Contains(x.id)).ToList();
                 }
-                soGroup = soGroup.Where(x => x.status.Equals("I") && x.report_no != null).ToList();
+                soGroup = soGroup.Where(x =>  x.report_no != null).ToList();
                 int total = soGroup.Count();
                 int fail = 0;
                 foreach (job_sample_group_so _updateCso in soGroup)
@@ -390,32 +397,37 @@ namespace ALS.ALSI.Web.view.template
                             string soDesc = descs[i];
 
                             Double amt = Convert.ToDouble(UnitPrice[i]);
-                            String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
-                            if (ignoreCode.Exists(x => x.code.Equals(soDesc)))
+                            if (ignoreCode.Exists(x => x.code.Equals(soDesc)) && UnitPrice.Count() != vals.Count())
                             {
                                 string jobNumber = "#" + DateTime.Now.Ticks;
-                                makeTempJob(jobNumber, amt, _updateCso+","+soDesc).Insert();
+                                makeTempJob(jobNumber, amt, _updateCso.so+","+soDesc).Insert();
                                 jobIgnoreList.Add(jobNumber);
                             }
                             else
                             {
+                                String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
+
                                 foreach (String job_number in ReportNos)
                                 {
-                                    #region "FIND JOB NUMBER"
                                     List<string> jobNumbers = new List<string>();
-                                    string[] _val = job_number.Split('-');
-                                    if (_val.Length == 4)
+
+                                    #region "FIND JOB NUMBER"
+                                    if (!String.IsNullOrEmpty(job_number))
                                     {
-                                        int startJob = Convert.ToInt32(_val[1]);
-                                        int endJob = Convert.ToInt32(_val[2]);
-                                        for (int idx = startJob; idx <= endJob; idx++)
+                                        string[] _val = job_number.Split('-');
+                                        if (_val.Length == 4)
                                         {
-                                            jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], getNum(idx.ToString()), _val[3]));
+                                            int startJob = Convert.ToInt32(_val[1]);
+                                            int endJob = Convert.ToInt32(_val[2]);
+                                            for (int idx = startJob; idx <= endJob; idx++)
+                                            {
+                                                jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], getNum(idx.ToString()), _val[3]));
+                                            }
                                         }
-                                    }
-                                    else
-                                    {
-                                        jobNumbers.Add(job_number);
+                                        else
+                                        {
+                                            jobNumbers.Add(job_number);
+                                        }
                                     }
                                     #endregion
 
@@ -434,12 +446,13 @@ namespace ALS.ALSI.Web.view.template
                                         }
                                     }
                                 }
+                                //
                             }
                         }
                     }
                     if (jobIgnoreList.Count > 0)
                     {
-                        _updateCso.report_no += string.Join(System.Environment.NewLine, jobIgnoreList);
+                        _updateCso.report_no += System.Environment.NewLine + string.Join(System.Environment.NewLine, jobIgnoreList);
                         Console.WriteLine();
                     }
                     _updateCso.status = !isComplete ? "I" : "C";

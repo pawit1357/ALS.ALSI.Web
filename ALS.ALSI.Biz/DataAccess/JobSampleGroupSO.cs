@@ -37,11 +37,11 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             if (!string.IsNullOrEmpty(status))
             {
-                return _repository.GetAll().Where(x =>x.inv_status!=null && x.inv_status.Equals(status)).ToList();
+                return _repository.GetAll().Where(x => x.status.Equals("C") && x.inv_status!=null && x.inv_status.Equals(status)).ToList();
             }
             else
             {
-                return _repository.GetAll().Where(x => x.status != null).ToList();
+                return _repository.GetAll().Where(x => x.status.Equals("C")).ToList();
             }
         }
         public IEnumerable<job_sample_group_so> SelectInvAll()
