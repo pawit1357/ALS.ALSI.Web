@@ -314,7 +314,7 @@ namespace ALS.ALSI.Web.view.dashboard
                     foreach (DataRow dr in dt.Rows)
                     {
                         string company_name = dr["company_name"].ToString();
-                        int sumAmout = Convert.ToInt32(dr["sumAmout"].ToString());
+                        double sumAmout = Convert.ToDouble(dr["sumAmout"].ToString());
 
                         data += "{name: '" + company_name + "',y: " + sumAmout + "},";
                     }
@@ -340,9 +340,10 @@ namespace ALS.ALSI.Web.view.dashboard
             {
 
 
-            //String sql = "select sample_invoice_date,sum(sample_invoice_amount) amt FROM job_sample where sample_invoice_date is not null and sample_invoice_date between '" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc";
-                String sql = "select * from (select sample_invoice_date,sum(sample_invoice_amount) amt FROM job_sample where sample_invoice_date is not null and sample_invoice_date between '" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date desc limit 15) x order by sample_invoice_date asc";
-            DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
+                String sql = "select * from (select sample_invoice_date,sum(sample_invoice_amount) amt FROM job_sample where sample_invoice_date is not null and sample_invoice_date between '" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date desc limit 30) x order by sample_invoice_date asc";
+
+                //String sql = "SELECT date as sample_invoice_date,value as amt FROM alsi.tmp_rpt_4 limit 30;";
+                DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
             StringBuilder sbResultJson = new StringBuilder();
 
             String data = "[";
@@ -353,7 +354,7 @@ namespace ALS.ALSI.Web.view.dashboard
                 foreach (DataRow dr in dt.Rows)
                 {
                     DateTime epochDate = Convert.ToDateTime(dr["sample_invoice_date"].ToString());
-                    int count = Convert.ToInt32(dr["amt"].ToString());
+                    double count = Convert.ToDouble(dr["amt"].ToString());
                     data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + count + "],";
                 }
                 data = data.Substring(0, data.Length - 1);
@@ -416,7 +417,7 @@ namespace ALS.ALSI.Web.view.dashboard
             return sbResultJson.ToString();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "[]";
 

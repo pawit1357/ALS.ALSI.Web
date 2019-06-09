@@ -90,6 +90,10 @@ namespace ALS.ALSI.Biz.Constant
         public const String LINK_TYPE_OF_TEST = APPNAME + "/view/type_of_test/TypeOfTest.aspx";
 
 
+        public const String LINK_SEARCH_SO_CODE = APPNAME + "/view/soCode/SearchSoCode.aspx";
+        public const String LINK_SO_CODE = APPNAME + "/view/soCode/SoCode.aspx";
+
+
         public const int PHYSICAL_YEAR = 4;
 
 

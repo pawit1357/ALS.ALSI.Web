@@ -2,6 +2,7 @@
 using ALS.ALSI.Biz.Constant;
 using StructureMap;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,17 +23,41 @@ namespace ALS.ALSI.Biz.DataAccess
         #endregion
 
 
-        //public IEnumerable<job_sample_group_so_ignore_code> SelectAll(string status ="")
-        //{
-        //    if (!string.IsNullOrEmpty(status))
-        //    {
-        //        return _repository.GetAll().Where(x => x.isActive.Equals(status)).ToList();
-        //    }
-        //    else
-        //    {
-        //        return _repository.GetAll().Where(x => x.status != null).ToList();
-        //    }
-        //}
+
+
+        public IEnumerable SearchData()
+        {
+            using (ALSIEntities ctx = new ALSIEntities())
+            {
+                var result = from j in ctx.job_sample_group_so_ignore_code
+                             select new
+                             {
+                                 ID = j.id,
+                                 name = j.name,
+                                 code = j.code
+                             };
+
+                if (this.id > 0)
+                {
+                    result = result.Where(x => x.ID == this.id);
+                }
+
+                if (!String.IsNullOrEmpty(this.code))
+                {
+                    result = result.Where(x => x.code == this.code);
+                }
+
+                if (!String.IsNullOrEmpty(this.name))
+                {
+                    result = result.Where(x => x.name == this.name);
+                }
+
+                return result.ToList();
+            }
+            
+        }
+
+
 
         public List<job_sample_group_so_ignore_code> SelectInvAll()
         {
@@ -43,10 +68,6 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             return _repository.Find(x => x.id == _id).OrderByDescending(x=>x.id).FirstOrDefault();
         }
-        //public static Boolean FindBySO(String _so)
-        //{
-        //    return _repository.Find(x => x.so.Equals(_so)).Any();
-        //}
 
 
 

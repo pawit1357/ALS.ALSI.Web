@@ -373,21 +373,18 @@ namespace ALS.ALSI.Web.view.template
                 {
                     soGroup = this.searchResult.Where(x => soIds.Contains(x.id)).ToList();
                 }
-                soGroup = soGroup.Where(x =>  x.report_no != null).ToList();
+                soGroup = soGroup.Where(x => (x.unit_price!=null)).ToList();
                 int total = soGroup.Count();
                 int fail = 0;
                 foreach (job_sample_group_so _updateCso in soGroup)
                 {
                     List<string> jobIgnoreList = new List<string>();
 
-                    //if (_updateCso != null && _updateCso.status.Equals("I") && _updateCso.report_no != null)
-                    //{
-                    String[] UnitPrice = _updateCso.unit_price.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
-                    String[] vals = _updateCso.report_no.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
-                    String[] descs = _updateCso.so_desc.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
 
-                    //if (UnitPrice.Length == vals.Length)
-                    //{
+                    String[] UnitPrice = _updateCso.unit_price.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+                    String[] vals = _updateCso.report_no == null ? createEmptyArray(UnitPrice.Length) : _updateCso.report_no.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+                    String[] descs = _updateCso.so_desc.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+                    
                     Boolean isComplete = true;
 
                     for (int i = 0; i < UnitPrice.Length; i++)
@@ -397,7 +394,7 @@ namespace ALS.ALSI.Web.view.template
                             string soDesc = descs[i];
 
                             Double amt = Convert.ToDouble(UnitPrice[i]);
-                            if (ignoreCode.Exists(x => x.code.Equals(soDesc)) && UnitPrice.Count() != vals.Count())
+                            if (ignoreCode.Exists(x => x.code.Equals(soDesc)) && String.IsNullOrEmpty(vals[i]))
                             {
                                 string jobNumber = "#" + DateTime.Now.Ticks;
                                 makeTempJob(jobNumber, amt, _updateCso.so+","+soDesc).Insert();
@@ -409,41 +406,50 @@ namespace ALS.ALSI.Web.view.template
 
                                 foreach (String job_number in ReportNos)
                                 {
-                                    List<string> jobNumbers = new List<string>();
-
-                                    #region "FIND JOB NUMBER"
                                     if (!String.IsNullOrEmpty(job_number))
                                     {
-                                        string[] _val = job_number.Split('-');
-                                        if (_val.Length == 4)
+                                        List<string> jobNumbers = new List<string>();
+
+                                        #region "FIND JOB NUMBER"
+                                        if (!String.IsNullOrEmpty(job_number))
                                         {
-                                            int startJob = Convert.ToInt32(_val[1]);
-                                            int endJob = Convert.ToInt32(_val[2]);
-                                            for (int idx = startJob; idx <= endJob; idx++)
+                                            string[] _val = job_number.Split('-');
+                                            if (_val.Length == 4)
                                             {
-                                                jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], getNum(idx.ToString()), _val[3]));
+                                                int startJob = Convert.ToInt32(_val[1]);
+                                                int endJob = Convert.ToInt32(_val[2]);
+                                                for (int idx = startJob; idx <= endJob; idx++)
+                                                {
+                                                    jobNumbers.Add(string.Format("{0}-{1}-{2}", _val[0], getNum(idx.ToString()), _val[3]));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                jobNumbers.Add(job_number);
                                             }
                                         }
-                                        else
-                                        {
-                                            jobNumbers.Add(job_number);
-                                        }
-                                    }
-                                    #endregion
+                                        #endregion
 
-                                    foreach (var jn in jobNumbers)
+                                        foreach (var jn in jobNumbers)
+                                        {
+                                            job_sample js = job_sample.SelectByJobNumber(jn);
+                                            if (js != null)
+                                            {
+                                                js.sample_invoice_amount = amt;
+                                                js.Update();
+                                            }
+                                            else
+                                            {
+                                                sbJobFail.Append(_updateCso.so + ",");
+                                                isComplete = false;
+                                            }
+                                        }
+
+                                    }
+                                    else
                                     {
-                                        job_sample js = job_sample.SelectByJobNumber(jn);
-                                        if (js != null)
-                                        {
-                                            js.sample_invoice_amount = amt;
-                                            js.Update();
-                                        }
-                                        else
-                                        {
-                                            sbJobFail.Append(_updateCso.so + ",");
-                                            isComplete = false;
-                                        }
+                                        isComplete = false;
+                                        break;
                                     }
                                 }
                                 //
@@ -452,22 +458,16 @@ namespace ALS.ALSI.Web.view.template
                     }
                     if (jobIgnoreList.Count > 0)
                     {
-                        _updateCso.report_no += System.Environment.NewLine + string.Join(System.Environment.NewLine, jobIgnoreList);
+                        _updateCso.report_no += (_updateCso.report_no == null)? string.Join(System.Environment.NewLine, jobIgnoreList) : System.Environment.NewLine + string.Join(System.Environment.NewLine, jobIgnoreList);
                         Console.WriteLine();
                     }
                     _updateCso.status = !isComplete ? "I" : "C";
+                    _updateCso.inv_status = _updateCso.status.Equals("C") ? "I" : null;
                     _updateCso.Update();
                     if (!isComplete)
                     {
                         fail++;
                     }
-                    //}
-                    //else
-                    //{
-                    //    fail++;
-                    //    sbJobFail.Append(_updateCso.so + ",");
-                    //}
-                    //}
                 }
                 GeneralManager.Commit();
 
@@ -522,6 +522,15 @@ namespace ALS.ALSI.Web.view.template
 
         }
 
+        public String[] createEmptyArray(int size)
+        {
+            String[] data = new String[size];
+            for(int i = 0; i < size; i++)
+            {
+                data[i] = String.Empty;
+            }
+            return data;
+        }
 
     }
 }

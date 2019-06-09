@@ -253,7 +253,11 @@ namespace ALS.ALSI.Web.view.template
                     }
                     GeneralManager.Commit();
 
-                    bindingData();
+
+                    //transfer
+                    batchUpload();
+
+
                     //Commit
                     MessageINv = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูลเรียบแล้วทั้งหมด " + groupInv.Count() + " รายการ</div>";
                 }
@@ -321,8 +325,7 @@ namespace ALS.ALSI.Web.view.template
                     String[] UnitPrice = _updateCso.unit_price.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
                     String[] vals = _updateCso.report_no.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
 
-                    //if (UnitPrice.Length == vals.Length)
-                    //{
+
                     Boolean isComplete = true;
 
                     for (int i = 0; i < UnitPrice.Length; i++)
@@ -378,12 +381,6 @@ namespace ALS.ALSI.Web.view.template
                     {
                         fail++;
                     }
-                    //}
-                    //else
-                    //{
-                    //    fail++;
-                    //    sbJobFail.Append(_updateCso.so + ",");
-                    //}
                 }
 
                 GeneralManager.Commit();

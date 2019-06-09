@@ -41,7 +41,7 @@
                                                 <asp:FileUpload ID="FileUpload1" runat="server" />
                                             </span>&nbsp;&nbsp;
                                             <asp:Button ID="btnUpload" runat="server" class="btn small blue" Text="โหลดไฟล์" OnClick="btnUpload_Click" />&nbsp;&nbsp;
-                                            <asp:Button ID="Button1" runat="server" class="btn small" Text="โหลดข้อมูล(กลุ่ม)" OnClick="btnBatchLoad_Click" />
+<%--                                            <asp:Button ID="Button1" runat="server" class="btn small" Text="โหลดข้อมูล(กลุ่ม)" OnClick="btnBatchLoad_Click" />--%>
 
                                         </div>
                                     </div>
@@ -82,12 +82,12 @@
                                 <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False" AllowPaging="True"
                                     CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="so,id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowEditing="gvJob_RowEditing" OnRowUpdating="gvJob_RowUpdating" OnRowCancelingEdit="gvJob_RowCancelingEdit" OnRowCommand="gvJob_RowCommand" OnRowDataBound="gvJob_RowDataBound" PageSize="20" Width="80%">
                                     <Columns>
-                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
+  <%--                                      <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="cbSelect" runat="server" />
                                                 <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>'></asp:HiddenField>
                                             </ItemTemplate>
-                                        </asp:TemplateField>
+                                        </asp:TemplateField>--%>
                                         <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <%# Container.DataItemIndex + 1 %>
