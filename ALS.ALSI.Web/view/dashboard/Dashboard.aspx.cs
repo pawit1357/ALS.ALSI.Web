@@ -21,6 +21,9 @@ namespace ALS.ALSI.Web.view.dashboard
     public partial class Dashboard : System.Web.UI.Page
     {
 
+        //http://jsfiddle.net/3y84ne8z/1/ --- sample filter
+
+
         public DataTable searchResult
         {
             get { return (DataTable)Session[GetType().Name + "Dashboard"]; }

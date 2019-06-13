@@ -151,12 +151,12 @@
 
                             </asp:Panel>
                         </div>
-
+                        <%=MsgLogs%>
                     </div>
                 </div>
             </div>
         </div>
-
+        
     </form>
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>

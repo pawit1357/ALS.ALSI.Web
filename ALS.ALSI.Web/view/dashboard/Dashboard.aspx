@@ -363,7 +363,10 @@
                 headerFormat: '<b>{series.name}</b><br>',
                 pointFormat: '{point.x:%e. %b}: {point.y:.0f} Baht'
             },
-
+            //rangeSelector: {
+            //    enabled: true,
+            //    selected: 1
+            //},
             plotOptions: {
                 spline: {
                     marker: {

@@ -41,6 +41,12 @@ namespace ALS.ALSI.Web.view.template
             set { Session[GetType().Name + "Message"] = value; }
         }
 
+        protected String MsgLogs
+        {
+            get { return (String)Session[GetType().Name + "MsgLogs"]; }
+            set { Session[GetType().Name + "MsgLogs"] = value; }
+        }
+        
         private void initialPage()
         {
         }
@@ -361,6 +367,8 @@ namespace ALS.ALSI.Web.view.template
 
         public void batchUpload(List<int> soIds = null)
         {
+            StringBuilder logs = new StringBuilder();
+
             if (searchResult.ToDataTable().Rows.Count > 0)
             {
                 StringBuilder sbJobFail = new StringBuilder();
@@ -376,21 +384,52 @@ namespace ALS.ALSI.Web.view.template
                 soGroup = soGroup.Where(x => (x.unit_price!=null)).ToList();
                 int total = soGroup.Count();
                 int fail = 0;
+                logs.Append("<br>------------------"+DateTime.Now.ToString("yyyy-MM-dd HH:mm")+ "------------------<br>");
                 foreach (job_sample_group_so _updateCso in soGroup)
                 {
+                    logs.Append("#SO :" + _updateCso.so+"<br>");
+                    logs.Append("----------------------------------------<br>");
+
                     List<string> jobIgnoreList = new List<string>();
 
 
                     String[] UnitPrice = _updateCso.unit_price.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
                     String[] vals = _updateCso.report_no == null ? createEmptyArray(UnitPrice.Length) : _updateCso.report_no.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
                     String[] descs = _updateCso.so_desc.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
-                    
+
+
+
+                    if (vals.Length < UnitPrice.Length)
+                    {
+                        String[] _vals = new String[UnitPrice.Length];
+
+                        for (int j = 0; j < vals.Length; j++)
+                        {
+                            _vals[j] = vals[j];
+
+                        }
+
+                        int val = (UnitPrice.Length - vals.Length);
+                        for(int i =0; i < val; i++)
+                        {
+                            _vals[(vals.Length)+i] = String.Empty;
+
+                        }
+                        vals = _vals;
+                    }
+                    logs.Append("#UnitPrice :" + String.Join(",", UnitPrice) + "<br>");
+                    logs.Append("#Vals :" + String.Join(",", vals) + "<br>");
+                    logs.Append("#Code :" + String.Join(",", vals) + "<br>");
+                    //logs.Append("----------------------------------------<br>");
+
                     Boolean isComplete = true;
 
                     for (int i = 0; i < UnitPrice.Length; i++)
                     {
                         if (!UnitPrice[i].Equals(""))
                         {
+                            logs.Append("#JobNumber list:<br>");
+
                             string soDesc = descs[i];
 
                             Double amt = Convert.ToDouble(UnitPrice[i]);
@@ -399,10 +438,13 @@ namespace ALS.ALSI.Web.view.template
                                 string jobNumber = "#" + DateTime.Now.Ticks;
                                 makeTempJob(jobNumber, amt, _updateCso.so+","+soDesc).Insert();
                                 jobIgnoreList.Add(jobNumber);
+                                logs.Append(" - "+jobNumber+"[x],");
+
                             }
                             else
                             {
                                 String[] ReportNos = vals[i].Split(new[] { "," }, StringSplitOptions.None);
+
 
                                 foreach (String job_number in ReportNos)
                                 {
@@ -430,28 +472,35 @@ namespace ALS.ALSI.Web.view.template
                                         }
                                         #endregion
 
+
                                         foreach (var jn in jobNumbers)
                                         {
+
                                             job_sample js = job_sample.SelectByJobNumber(jn);
                                             if (js != null)
                                             {
                                                 js.sample_invoice_amount = amt;
                                                 js.Update();
+                                                logs.Append(" - " + jn + "[x],");
+
                                             }
                                             else
                                             {
                                                 sbJobFail.Append(_updateCso.so + ",");
                                                 isComplete = false;
+                                                logs.Append(" - " + jn + "[ ],");
+
                                             }
                                         }
 
                                     }
-                                    else
-                                    {
-                                        isComplete = false;
-                                        break;
-                                    }
+                                    //else
+                                    //{
+                                    //    isComplete = false;
+                                    //    break;
+                                    //}
                                 }
+                                logs.Append(logs.ToString().Substring(0, logs.ToString().Length-1));
                                 //
                             }
                         }
@@ -468,9 +517,13 @@ namespace ALS.ALSI.Web.view.template
                     {
                         fail++;
                     }
-                }
-                GeneralManager.Commit();
+                    logs.Append("<br>#Status :" + _updateCso.status + "<br>");
 
+                }
+                logs.Append("----------------------------------------<br>");
+
+                GeneralManager.Commit();
+                MsgLogs = logs.ToString();
                 String errList = (sbJobFail.Length == 0) ? "" : "\nรายการ SO ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
                 Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล Job\n ทั้งหมด" + total + " รายการ\n สำเร็จ " + (total - fail) + " รายการ " + ((errList.Length > 0) ? errList.Substring(0, errList.Length - 1) : errList) + " </div>";
                 bindingData();
