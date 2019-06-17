@@ -167,7 +167,7 @@ namespace ALS.ALSI.Web.view.request
                 "    LEFT JOIN m_type_of_test tot ON tot.ID = s.type_of_test_id                                                " +
 
                 "    WHERE                                                                                         " +
-                "        s.sample_po IS NOT NULL                                                                   " +
+                "        s.sample_invoice IS NOT NULL                                                                   " +
                 "            ) x                                                                    " +
                 "GROUP BY x.InvoiceDate , x.Terms , x.PurchaseOrder , x.Customer , x.TotalSubAmount , x.DeptBOI order by SUBSTRING(x.Number,3) asc) X  where 1 = 1";
 

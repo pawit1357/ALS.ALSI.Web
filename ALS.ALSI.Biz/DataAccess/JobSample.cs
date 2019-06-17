@@ -44,6 +44,10 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             return _repository.Find(x => x.job_number.ToUpper().Equals(_job_number.ToUpper())).OrderByDescending(x=>x.ID).FirstOrDefault();
         }
+        public static List<job_sample> selectByRemark(String _remarks)
+        {
+            return _repository.GetAll().Where(x =>x.remarks!=null && x.remarks.Equals(_remarks)).ToList();
+        }
 
         public List<job_sample> findByIdAndStatus(String jobNumber, StatusEnum status )
         {
@@ -114,6 +118,12 @@ namespace ALS.ALSI.Biz.DataAccess
             return _repository.GetAll().Where(x => x.job_id == _job_id).ToList();
         }
 
+
+
+        public static List<job_sample> FindAllBySos(List<string> sos)
+        {
+            return _repository.GetAll().Where(x => x.sample_so != null && sos.Contains(x.sample_so)).ToList();
+        }
         #endregion
     }
 }

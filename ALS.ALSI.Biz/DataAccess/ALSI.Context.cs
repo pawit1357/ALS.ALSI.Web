@@ -29,6 +29,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<job_reiew_requistion> job_reiew_requistion { get; set; }
         public DbSet<job_running> job_running { get; set; }
         public DbSet<job_sample> job_sample { get; set; }
+        public DbSet<job_sample_group_invoice> job_sample_group_invoice { get; set; }
         public DbSet<job_sample_group_so> job_sample_group_so { get; set; }
         public DbSet<job_sample_group_so_ignore_code> job_sample_group_so_ignore_code { get; set; }
         public DbSet<job_sample_logs> job_sample_logs { get; set; }
@@ -84,6 +85,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<template_wd_lpc_coverpage> template_wd_lpc_coverpage { get; set; }
         public DbSet<template_wd_mesa_coverpage> template_wd_mesa_coverpage { get; set; }
         public DbSet<template_wd_mesa_img> template_wd_mesa_img { get; set; }
+        public DbSet<tmp_rpt_4> tmp_rpt_4 { get; set; }
         public DbSet<users_login> users_login { get; set; }
         public DbSet<users_responsible> users_responsible { get; set; }
         public DbSet<users_role> users_role { get; set; }

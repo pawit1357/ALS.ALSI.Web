@@ -167,6 +167,7 @@
     <Compile Include="DataAccess\holiday_calendar.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\JobSampleGroupInvoice.cs" />
     <Compile Include="DataAccess\JobSampleGroupSODesc.cs" />
     <Compile Include="DataAccess\JobSampleGroupSO.cs" />
     <Compile Include="DataAccess\job_info.cs">
@@ -179,6 +180,9 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\job_sample.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\job_sample_group_invoice.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\job_sample_group_so.cs">
@@ -345,6 +349,9 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\template_wd_mesa_img.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\tmp_rpt_4.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\users_logged.cs">

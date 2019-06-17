@@ -138,6 +138,23 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="am_retest_remark" Type="varchar" MaxLength="200" />
           <Property Name="sample_invoice_status" Type="int" />
           <Property Name="sample_invoice_complete_date" Type="datetime" Precision="0" />
+          <Property Name="sample_so" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="job_sample_group_invoice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="so" Type="varchar" MaxLength="45" />
+          <Property Name="inv_no" Type="varchar" MaxLength="45" />
+          <Property Name="inv_date" Type="datetime" Precision="0" />
+          <Property Name="inv_duedate" Type="datetime" Precision="0" />
+          <Property Name="inv_amt" Type="double" />
+          <Property Name="inv_status" Type="varchar" MaxLength="1" />
+          <Property Name="report_no" Type="varchar" MaxLength="1000" />
+          <Property Name="filename" Type="varchar" MaxLength="200" />
+          <Property Name="create_date" Type="datetime" Precision="0" />
+          <Property Name="update_date" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="job_sample_group_so">
           <Key>
@@ -156,6 +173,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="status" Type="varchar" MaxLength="1" />
           <Property Name="create_date" Type="datetime" Precision="0" />
           <Property Name="update_date" Type="datetime" Precision="0" />
+          <Property Name="filename" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="job_sample_group_so_ignore_code">
           <Key>
@@ -1955,6 +1973,14 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="path_sem_image_at_2000x" Type="varchar" MaxLength="255" />
           <Property Name="path_edx_spectrum" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="tmp_rpt_4">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Precision="0" />
+          <Property Name="value" Type="double" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="users_logged">
@@ -2148,6 +2174,7 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="job_reiew_requistion" EntityType="Self.job_reiew_requistion" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_running" EntityType="Self.job_running" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_sample" EntityType="Self.job_sample" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="job_sample_group_invoice" EntityType="Self.job_sample_group_invoice" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_sample_group_so" EntityType="Self.job_sample_group_so" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_sample_group_so_ignore_code" EntityType="Self.job_sample_group_so_ignore_code" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="job_sample_logs" EntityType="Self.job_sample_logs" Schema="alsi" store:Type="Tables" />
@@ -2203,6 +2230,7 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="template_wd_lpc_coverpage" EntityType="Self.template_wd_lpc_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_mesa_coverpage" EntityType="Self.template_wd_mesa_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_mesa_img" EntityType="Self.template_wd_mesa_img" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="tmp_rpt_4" EntityType="Self.tmp_rpt_4" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_login" EntityType="Self.users_login" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_responsible" EntityType="Self.users_responsible" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_role" EntityType="Self.users_role" Schema="alsi" store:Type="Tables" />
@@ -2275,6 +2303,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="job_reiew_requistion" EntityType="alsiModel.job_reiew_requistion" />
           <EntitySet Name="job_running" EntityType="alsiModel.job_running" />
           <EntitySet Name="job_sample" EntityType="alsiModel.job_sample" />
+          <EntitySet Name="job_sample_group_invoice" EntityType="alsiModel.job_sample_group_invoice" />
           <EntitySet Name="job_sample_group_so" EntityType="alsiModel.job_sample_group_so" />
           <EntitySet Name="job_sample_group_so_ignore_code" EntityType="alsiModel.job_sample_group_so_ignore_code" />
           <EntitySet Name="job_sample_logs" EntityType="alsiModel.job_sample_logs" />
@@ -2330,6 +2359,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="template_wd_lpc_coverpage" EntityType="alsiModel.template_wd_lpc_coverpage" />
           <EntitySet Name="template_wd_mesa_coverpage" EntityType="alsiModel.template_wd_mesa_coverpage" />
           <EntitySet Name="template_wd_mesa_img" EntityType="alsiModel.template_wd_mesa_img" />
+          <EntitySet Name="tmp_rpt_4" EntityType="alsiModel.tmp_rpt_4" />
           <EntitySet Name="users_login" EntityType="alsiModel.users_login" />
           <EntitySet Name="users_responsible" EntityType="alsiModel.users_responsible" />
           <EntitySet Name="users_role" EntityType="alsiModel.users_role" />
@@ -2505,7 +2535,24 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="am_retest_remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="sample_invoice_status" Type="Int32" />
           <Property Name="sample_invoice_complete_date" Type="DateTime" />
+          <Property Name="sample_so" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="alsiModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
+        </EntityType>
+        <EntityType Name="job_sample_group_invoice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="so" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="inv_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="inv_date" Type="DateTime" />
+          <Property Name="inv_duedate" Type="DateTime" />
+          <Property Name="inv_amt" Type="Double" />
+          <Property Name="inv_status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="report_no" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="filename" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" />
+          <Property Name="update_date" Type="DateTime" />
         </EntityType>
         <EntityType Name="job_sample_group_so">
           <Key>
@@ -2524,6 +2571,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" />
           <Property Name="update_date" Type="DateTime" />
+          <Property Name="filename" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="job_sample_group_so_ignore_code">
           <Key>
@@ -4335,6 +4383,14 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="path_sem_image_at_2000x" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="path_edx_spectrum" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="tmp_rpt_4">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" />
+          <Property Name="value" Type="Double" />
+        </EntityType>
         <EntityType Name="users_login">
           <Key>
             <PropertyRef Name="id" />
@@ -4594,6 +4650,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample">
             <EntityTypeMapping TypeName="alsiModel.job_sample">
               <MappingFragment StoreEntitySet="job_sample">
+                <ScalarProperty Name="sample_so" ColumnName="sample_so" />
                 <ScalarProperty Name="sample_invoice_complete_date" ColumnName="sample_invoice_complete_date" />
                 <ScalarProperty Name="sample_invoice_status" ColumnName="sample_invoice_status" />
                 <ScalarProperty Name="am_retest_remark" ColumnName="am_retest_remark" />
@@ -4664,9 +4721,27 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="job_sample_group_invoice">
+            <EntityTypeMapping TypeName="alsiModel.job_sample_group_invoice">
+              <MappingFragment StoreEntitySet="job_sample_group_invoice">
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="report_no" ColumnName="report_no" />
+                <ScalarProperty Name="inv_status" ColumnName="inv_status" />
+                <ScalarProperty Name="inv_amt" ColumnName="inv_amt" />
+                <ScalarProperty Name="inv_duedate" ColumnName="inv_duedate" />
+                <ScalarProperty Name="inv_date" ColumnName="inv_date" />
+                <ScalarProperty Name="inv_no" ColumnName="inv_no" />
+                <ScalarProperty Name="so" ColumnName="so" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="job_sample_group_so">
             <EntityTypeMapping TypeName="alsiModel.job_sample_group_so">
               <MappingFragment StoreEntitySet="job_sample_group_so">
+                <ScalarProperty Name="filename" ColumnName="filename" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="status" ColumnName="status" />
@@ -6529,6 +6604,15 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="area" ColumnName="area" />
                 <ScalarProperty Name="seq" ColumnName="seq" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tmp_rpt_4">
+            <EntityTypeMapping TypeName="alsiModel.tmp_rpt_4">
+              <MappingFragment StoreEntitySet="tmp_rpt_4">
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

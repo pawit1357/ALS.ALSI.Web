@@ -64,6 +64,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 bindingData();
                 Message = "";
+                MsgLogs = "";
             }
         }
 
@@ -237,7 +238,6 @@ namespace ALS.ALSI.Web.view.template
             Boolean bUploadSuccess = false;
             List<job_sample_group_so> listGroupSo = new List<job_sample_group_so>();
 
-            //StringBuilder sb = new StringBuilder();
             try
             {
 
@@ -298,10 +298,10 @@ namespace ALS.ALSI.Web.view.template
                 //add last item
                 cso.status = "I";
                 cso.create_date = DateTime.Now;
-                //if (!job_sample_group_so.FindBySO(so))
-                //{
                 listGroupSo.Add(cso);
-                //}
+
+
+
                 bUploadSuccess = true;
             }
             catch (Exception ex)
@@ -319,14 +319,21 @@ namespace ALS.ALSI.Web.view.template
                     job_sample_group_so updateSo = job_sample_group_so.getBySo(so.so);
                     if (updateSo == null)
                     {
+                        so.filename = Path.GetFileName(filePath);
                         so.Insert();
                     }
                     else
                     {
+                        updateSo.filename = Path.GetFileName(filePath);
                         updateSo.unit_price = so.unit_price;
                         updateSo.so_desc = so.so_desc;
                         updateSo.report_no = so.report_no;
                         updateSo.status = so.status = "I";
+                        updateSo.inv_status = "I";
+                        updateSo.inv_no = null;
+                        updateSo.inv_date = null;
+                        updateSo.inv_duedate = null;
+                        updateSo.inv_amt = null;
                         updateSo.update_date = DateTime.Now;
                         updateSo.Update();
                     }
@@ -367,6 +374,9 @@ namespace ALS.ALSI.Web.view.template
 
         public void batchUpload(List<int> soIds = null)
         {
+            Message = "";
+            MsgLogs = "";
+
             StringBuilder logs = new StringBuilder();
 
             if (searchResult.ToDataTable().Rows.Count > 0)
@@ -384,11 +394,13 @@ namespace ALS.ALSI.Web.view.template
                 soGroup = soGroup.Where(x => (x.unit_price!=null)).ToList();
                 int total = soGroup.Count();
                 int fail = 0;
-                logs.Append("<br>------------------"+DateTime.Now.ToString("yyyy-MM-dd HH:mm")+ "------------------<br>");
+                logs.Append("<br>--------------------------------------------------------------------------------");
+                logs.Append("<br>############ Load 'SO' List ############");
+                logs.Append("<br>--------------------------------------------------------------------------------");
+
                 foreach (job_sample_group_so _updateCso in soGroup)
                 {
-                    logs.Append("#SO :" + _updateCso.so+"<br>");
-                    logs.Append("----------------------------------------<br>");
+                    logs.Append("<br>#SO = " + _updateCso.so + "<br>");
 
                     List<string> jobIgnoreList = new List<string>();
 
@@ -397,7 +409,7 @@ namespace ALS.ALSI.Web.view.template
                     String[] vals = _updateCso.report_no == null ? createEmptyArray(UnitPrice.Length) : _updateCso.report_no.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
                     String[] descs = _updateCso.so_desc.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
 
-
+                    Console.WriteLine();
 
                     if (vals.Length < UnitPrice.Length)
                     {
@@ -420,7 +432,7 @@ namespace ALS.ALSI.Web.view.template
                     logs.Append("#UnitPrice :" + String.Join(",", UnitPrice) + "<br>");
                     logs.Append("#Vals :" + String.Join(",", vals) + "<br>");
                     logs.Append("#Code :" + String.Join(",", vals) + "<br>");
-                    //logs.Append("----------------------------------------<br>");
+                    logs.Append("#JobNumber list:");
 
                     Boolean isComplete = true;
 
@@ -428,7 +440,6 @@ namespace ALS.ALSI.Web.view.template
                     {
                         if (!UnitPrice[i].Equals(""))
                         {
-                            logs.Append("#JobNumber list:<br>");
 
                             string soDesc = descs[i];
 
@@ -436,7 +447,21 @@ namespace ALS.ALSI.Web.view.template
                             if (ignoreCode.Exists(x => x.code.Equals(soDesc)) && String.IsNullOrEmpty(vals[i]))
                             {
                                 string jobNumber = "#" + DateTime.Now.Ticks;
-                                makeTempJob(jobNumber, amt, _updateCso.so+","+soDesc).Insert();
+                                string remark = _updateCso.so + "," + soDesc;
+
+                                List< job_sample> listDels = job_sample.selectByRemark(remark);
+                                foreach(job_sample delS in listDels)
+                                {
+                                    delS.Delete();
+                                    job_info delJInfo = new job_info().SelectByID(delS.job_id);
+                                    if (delJInfo != null)
+                                    {
+                                        delJInfo.Delete();
+                                    }
+                                }
+                                GeneralManager.Commit();
+
+                                makeTempJob(jobNumber, amt, remark, _updateCso.so).Insert();
                                 jobIgnoreList.Add(jobNumber);
                                 logs.Append(" - "+jobNumber+"[x],");
 
@@ -479,6 +504,7 @@ namespace ALS.ALSI.Web.view.template
                                             job_sample js = job_sample.SelectByJobNumber(jn);
                                             if (js != null)
                                             {
+                                                js.sample_so = _updateCso.so;
                                                 js.sample_invoice_amount = amt;
                                                 js.Update();
                                                 logs.Append(" - " + jn + "[x],");
@@ -494,15 +520,9 @@ namespace ALS.ALSI.Web.view.template
                                         }
 
                                     }
-                                    //else
-                                    //{
-                                    //    isComplete = false;
-                                    //    break;
-                                    //}
                                 }
-                                logs.Append(logs.ToString().Substring(0, logs.ToString().Length-1));
-                                //
                             }
+                            //
                         }
                     }
                     if (jobIgnoreList.Count > 0)
@@ -518,9 +538,9 @@ namespace ALS.ALSI.Web.view.template
                         fail++;
                     }
                     logs.Append("<br>#Status :" + _updateCso.status + "<br>");
+                    logs.Append("--------------------------------------------------------------------------------<br>");
 
                 }
-                logs.Append("----------------------------------------<br>");
 
                 GeneralManager.Commit();
                 MsgLogs = logs.ToString();
@@ -530,7 +550,7 @@ namespace ALS.ALSI.Web.view.template
             }
         }
 
-        public job_info makeTempJob(string so,double amt,string remark)
+        public job_info makeTempJob(string jn,double amt,string remark,string so)
         {
 
             List<job_sample> js = new List<job_sample>();
@@ -538,7 +558,7 @@ namespace ALS.ALSI.Web.view.template
 
             jobSample.ID = CustomUtils.GetRandomNumberID();
             jobSample.template_id = -1;
-            jobSample.job_number = so;
+            jobSample.job_number = jn;
             jobSample.RowState = CommandNameEnum.Add;
             jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
             jobSample.job_role = userLogin.role_id;
@@ -547,6 +567,7 @@ namespace ALS.ALSI.Web.view.template
             jobSample.update_by = userLogin.id;
             jobSample.is_hold = "0";//0=Unhold
             jobSample.sample_invoice_amount = amt;
+            jobSample.sample_so = so;
             jobSample.remarks = remark;
             js.Add(jobSample);
 

@@ -12,21 +12,18 @@ namespace ALS.ALSI.Biz.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class job_sample_group_so
+    public partial class job_sample_group_invoice
     {
         public int id { get; set; }
         public string so { get; set; }
-        public string so_desc { get; set; }
-        public string unit_price { get; set; }
-        public string report_no { get; set; }
         public string inv_no { get; set; }
         public Nullable<System.DateTime> inv_date { get; set; }
         public Nullable<System.DateTime> inv_duedate { get; set; }
         public Nullable<double> inv_amt { get; set; }
         public string inv_status { get; set; }
-        public string status { get; set; }
+        public string report_no { get; set; }
+        public string filename { get; set; }
         public Nullable<System.DateTime> create_date { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
-        public string filename { get; set; }
     }
 }

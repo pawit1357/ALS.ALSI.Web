@@ -41,7 +41,7 @@
                                                 <asp:FileUpload ID="FileUpload1" runat="server" />
                                             </span>&nbsp;&nbsp;
                                             <asp:Button ID="btnUpload" runat="server" class="btn small blue" Text="โหลดไฟล์" OnClick="btnUpload_Click" />&nbsp;&nbsp;
-<%--                                            <asp:Button ID="Button1" runat="server" class="btn small" Text="โหลดข้อมูล(กลุ่ม)" OnClick="btnBatchLoad_Click" />--%>
+                                            <asp:Button ID="btnProcess" runat="server" class="btn small" Text="โหลดข้อมูลเข้าระบบ" OnClick="btnBatchLoad_Click" />
 
                                         </div>
                                     </div>
