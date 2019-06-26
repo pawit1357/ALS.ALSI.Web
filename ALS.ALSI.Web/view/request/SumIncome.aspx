@@ -158,7 +158,7 @@
                             CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="" OnRowCommand="gvJob_RowCommand" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvJob_RowDataBound" AllowPaging="True" PageSize="50">
                             <Columns>
 
-                                <asp:BoundField HeaderText="Invoice Date" DataField="InvoiceDate" ItemStyle-HorizontalAlign="Center" SortExpression="InvoiceDate" DataFormatString="{0:d MMM yyyy}">
+                                <asp:BoundField HeaderText="Invoice Date" DataField="InvoiceDate" ItemStyle-HorizontalAlign="Center" SortExpression="InvoiceDate" DataFormatString="{0:d MMM yyyy}" ItemStyle-Width="150">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
 

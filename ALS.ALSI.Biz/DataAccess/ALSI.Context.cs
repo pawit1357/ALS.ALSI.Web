@@ -85,7 +85,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<template_wd_lpc_coverpage> template_wd_lpc_coverpage { get; set; }
         public DbSet<template_wd_mesa_coverpage> template_wd_mesa_coverpage { get; set; }
         public DbSet<template_wd_mesa_img> template_wd_mesa_img { get; set; }
-        public DbSet<tmp_rpt_4> tmp_rpt_4 { get; set; }
         public DbSet<users_login> users_login { get; set; }
         public DbSet<users_responsible> users_responsible { get; set; }
         public DbSet<users_role> users_role { get; set; }

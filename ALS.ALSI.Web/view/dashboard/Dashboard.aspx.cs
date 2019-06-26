@@ -296,8 +296,9 @@ namespace ALS.ALSI.Web.view.dashboard
                 sql += " left                                                              ";
                 sql += " join m_customer c on c.ID = j.customer_id                         ";
                 sql += " where s.sample_invoice is not null                                ";
-                sql += " and s.sample_invoice <> ''                                        ";
-                sql += " and s.sample_invoice_date is not null                             ";
+                sql += " and s.sample_invoice <> ''                                          ";
+                sql += " and s.sample_invoice_complete_date is null                          ";
+                sql += " and s.sample_invoice_date is not null                               ";
                 sql += " and s.sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'";
                 sql += " group by c.ID) tmp order by sumAmout desc limit "+ddlPeriod.SelectedValue;
 

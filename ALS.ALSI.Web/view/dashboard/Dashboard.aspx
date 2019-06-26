@@ -180,7 +180,7 @@
                                                 <label class="control-label col-md-6">ช่วงข้อมูลที่จะแสดง (จากมากไปหาน้อย):</label>
                                                 <div class="col-md-4">
                                                     <asp:DropDownList ID="ddlPeriod" runat="server" class="select2_category form-control" Width="200px" OnSelectedIndexChanged="ddlPeriod_SelectedIndexChanged" AutoPostBack="true">
-                                                        <asp:ListItem Value="1,20"> 1-20</asp:ListItem>
+                                                        <asp:ListItem Value="0,20"> 1-20</asp:ListItem>
                                                         <asp:ListItem Value="20,40">20-40</asp:ListItem>
                                                         <asp:ListItem Value="40,60">40-60</asp:ListItem>
                                                         <asp:ListItem Value="60,80">60-80</asp:ListItem>

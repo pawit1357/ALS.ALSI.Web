@@ -64,15 +64,24 @@ namespace ALS.ALSI.Biz
         public static DataTable ExecuteReturnDt(String sql)
         {
             DataTable dt = new DataTable();
-            using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlCon"].ToString()))
-            {
-                connection.Open();
-                MySqlCommand cmd = new MySqlCommand(sql, connection);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
 
-                da.Fill(dt);
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlCon"].ToString()))
+                {
+                    connection.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, connection);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+
+                    da.Fill(dt);
+                }
+                //Execute query
             }
-            //Execute query
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
             return dt;
         }
 

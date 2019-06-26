@@ -113,6 +113,16 @@ namespace ALS.ALSI.Biz.DataAccess
             return _repository.GetAll().Where(x => ids.Contains(x.ID)).ToList();
         }
 
+        public static List<job_sample> FindAllByJobNumbers(List<string> jns)
+        {
+            var result = _repository.GetAll().Where(x => jns.Contains(x.job_number));
+
+            var q = result.GroupBy(x => x.job_number).Select(g => g.OrderByDescending(i => i.ID).First());
+
+
+            return q.ToList();
+        }
+
         public static List<job_sample> FindAllByJobID(int _job_id)
         {
             return _repository.GetAll().Where(x => x.job_id == _job_id).ToList();
@@ -120,7 +130,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
 
 
-        public static List<job_sample> FindAllBySos(List<string> sos)
+        public static List<job_sample> FindAllBySos(IEnumerable<string> sos)
         {
             return _repository.GetAll().Where(x => x.sample_so != null && sos.Contains(x.sample_so)).ToList();
         }

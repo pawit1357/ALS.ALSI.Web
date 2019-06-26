@@ -65,6 +65,19 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label col-md-3">So Code.:</label>
+                                        <div class="col-md-6">
+                                            <asp:TextBox ID="txtSoCode" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                        <div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="control-label col-md-3"></label>
                                         <div class="col-md-6">
                                             <asp:Button ID="Button2" runat="server" class="btn green" Text="ค้นหา" OnClick="Button2_Click" />&nbsp;&nbsp;
@@ -79,65 +92,101 @@
                             <!-- BEGIN FORM-->
 
                             <asp:Panel ID="pSo" runat="server">
-                                <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False" AllowPaging="True"
+                                <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False" AllowPaging="True" AlternatingRowStyle-HorizontalAlign="Center"
                                     CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="so,id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowEditing="gvJob_RowEditing" OnRowUpdating="gvJob_RowUpdating" OnRowCancelingEdit="gvJob_RowCancelingEdit" OnRowCommand="gvJob_RowCommand" OnRowDataBound="gvJob_RowDataBound" PageSize="20" Width="80%">
+                                    <AlternatingRowStyle HorizontalAlign="Center" />
                                     <Columns>
-                                    <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
-                                        <ItemTemplate>
-                                            <asp:CheckBox ID="cbSelect" runat="server" />
-                                            <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>'></asp:HiddenField>
+                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
+                                            <HeaderTemplate>
+                                                <asp:CheckBox ID="chkAllSign" runat="server" AutoPostBack="true" Text="Check All" OnCheckedChanged="chkAllSign_CheckedChanged"/>
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="cbSelect" runat="server" />
+                                                <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>' />
+                                            </ItemTemplate>
 
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="btnLoad" runat="server" ToolTip="Load" CommandName="View" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-cog"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnLoad" runat="server" CommandArgument='<%# String.Concat(Eval("id")) %>' CommandName="View" ToolTip="Load"><i class="fa fa-cog"></i></asp:LinkButton>
                                             </ItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
                                         <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="btn_Edit" runat="server" ToolTip="แก้ไข" CommandName="Edit" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-edit"></i></asp:LinkButton>
-
+                                                <asp:LinkButton ID="btn_Edit" runat="server" CommandArgument='<%# String.Concat(Eval("id")) %>' CommandName="Edit" ToolTip="แก้ไข"><i class="fa fa-edit"></i></asp:LinkButton>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:LinkButton ID="btn_Update" runat="server" ToolTip="อัพเดท" CommandName="Update" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-save"></i></asp:LinkButton>
-                                                &nbsp;&nbsp; 
-                                                <asp:LinkButton ID="btn_Cancel" runat="server" ToolTip="ยกเลิก" CommandName="Cancel" CommandArgument='<%# String.Concat(Eval("id")) %>'><i class="fa fa-undo"></i></asp:LinkButton>
-
+                                                <asp:LinkButton ID="btn_Update" runat="server" CommandArgument='<%# String.Concat(Eval("id")) %>' CommandName="Update" ToolTip="อัพเดท"><i class="fa fa-save"></i></asp:LinkButton>
+                                                &nbsp;&nbsp;
+                                                <asp:LinkButton ID="btn_Cancel" runat="server" CommandArgument='<%# String.Concat(Eval("id")) %>' CommandName="Cancel" ToolTip="ยกเลิก"><i class="fa fa-undo"></i></asp:LinkButton>
                                             </EditItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Center" HeaderText="" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <%# Container.DataItemIndex + 1 %>
                                             </ItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="so" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Center" HeaderText="so" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="ltSO" runat="server" Text='<%#Eval("so") %>'></asp:Label>
                                             </ItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Unit/Price" HeaderStyle-HorizontalAlign="Left">
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Code">
                                             <ItemTemplate>
-                                                <asp:Label ID="ltUnitPrice" runat="server" Text='<%#Eval("unit_price") %>'></asp:Label>
+                                                <asp:Label ID="ltSoDesc" runat="server" Text='<%#Eval("so_desc") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="txtUnitPrice" runat="server" Text='<%#Eval("unit_price") %>' CssClass="form-control" TextMode="MultiLine" Rows="10"></asp:TextBox>
+                                                <asp:TextBox ID="txtSoDesc" runat="server" CssClass="form-control" Rows="10" Text='<%#Eval("so_desc") %>' TextMode="MultiLine"></asp:TextBox>
                                             </EditItemTemplate>
+                                            <FooterStyle HorizontalAlign="Center" />
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Left" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="ReportNo" HeaderStyle-HorizontalAlign="Left">
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="ReportNo">
                                             <ItemTemplate>
                                                 <asp:Label ID="ltReportNo" runat="server" Text='<%#Eval("report_no") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="txtReportNo" runat="server" Text='<%#Eval("report_no") %>' CssClass="form-control" TextMode="MultiLine" Rows="10"></asp:TextBox>
+                                                <asp:TextBox ID="txtReportNo" runat="server" CssClass="form-control" Rows="10" Text='<%#Eval("report_no") %>' TextMode="MultiLine"></asp:TextBox>
                                             </EditItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Left" />
                                         </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center">
-                                        <ItemTemplate>
-                                            <asp:Literal ID="ltStatus" runat="server" Text='<%#Eval("status") %>'></asp:Literal>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Quantity">
+                                            <ItemTemplate>
+                                                <asp:Label ID="ltQuantity" runat="server" Text='<%#Eval("quantity") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtQuantity" runat="server" CssClass="form-control" Rows="10" Text='<%#Eval("quantity") %>' TextMode="MultiLine"></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Unit/Price">
+                                            <ItemTemplate>
+                                                <asp:Label ID="ltUnitPrice" runat="server" Text='<%#Eval("unit_price") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtUnitPrice" runat="server" CssClass="form-control" Rows="10" Text='<%#Eval("unit_price") %>' TextMode="MultiLine"></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="ltStatus" runat="server" Text='<%#Eval("status") %>'></asp:Literal>
+                                            </ItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
                                     </Columns>
                                     <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
 

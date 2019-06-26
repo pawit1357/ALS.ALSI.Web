@@ -22,16 +22,20 @@ namespace ALS.ALSI.Biz.DataAccess
         #endregion
 
 
-        public IEnumerable<job_sample_group_so> SelectAll(string status ="")
+        public IEnumerable<job_sample_group_so> SelectAll(string status = "", string soCode = "")
         {
+            var result = _repository.GetAll();
+
             if (!string.IsNullOrEmpty(status))
             {
-                return _repository.GetAll().Where(x => x.status.Equals(status)).ToList();
+                result = result.Where(x => x.status.Equals(status));
             }
-            else
+            if (!string.IsNullOrEmpty(soCode))
             {
-                return _repository.GetAll().Where(x => x.status != null).ToList();
+                result = result.Where(x => x.so.Equals(soCode));
             }
+            return result.ToList();
+
         }
         public IEnumerable<job_sample_group_so> SelectAllInv(string status = "")
         {

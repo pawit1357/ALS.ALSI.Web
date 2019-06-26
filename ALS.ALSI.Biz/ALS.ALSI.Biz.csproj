@@ -351,9 +351,6 @@
     <Compile Include="DataAccess\template_wd_mesa_img.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\tmp_rpt_4.cs">
-      <DependentUpon>ALSI.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataAccess\users_logged.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>

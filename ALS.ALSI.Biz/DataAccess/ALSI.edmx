@@ -164,7 +164,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="so" Type="varchar" MaxLength="45" />
           <Property Name="so_desc" Type="varchar" MaxLength="1000" />
           <Property Name="unit_price" Type="varchar" MaxLength="1000" />
-          <Property Name="report_no" Type="varchar" MaxLength="1000" />
+          <Property Name="report_no" Type="varchar" MaxLength="2000" />
           <Property Name="inv_no" Type="varchar" MaxLength="45" />
           <Property Name="inv_date" Type="datetime" Precision="0" />
           <Property Name="inv_duedate" Type="datetime" Precision="0" />
@@ -173,7 +173,8 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="status" Type="varchar" MaxLength="1" />
           <Property Name="create_date" Type="datetime" Precision="0" />
           <Property Name="update_date" Type="datetime" Precision="0" />
-          <Property Name="filename" Type="varchar" MaxLength="200" />
+          <Property Name="filename" Type="varchar" MaxLength="45" />
+          <Property Name="quantity" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="job_sample_group_so_ignore_code">
           <Key>
@@ -1973,14 +1974,6 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="path_sem_image_at_2000x" Type="varchar" MaxLength="255" />
           <Property Name="path_edx_spectrum" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="tmp_rpt_4">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="date" Type="datetime" Precision="0" />
-          <Property Name="value" Type="double" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="users_logged">
@@ -2230,7 +2223,6 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="template_wd_lpc_coverpage" EntityType="Self.template_wd_lpc_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_mesa_coverpage" EntityType="Self.template_wd_mesa_coverpage" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="template_wd_mesa_img" EntityType="Self.template_wd_mesa_img" Schema="alsi" store:Type="Tables" />
-          <EntitySet Name="tmp_rpt_4" EntityType="Self.tmp_rpt_4" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_login" EntityType="Self.users_login" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_responsible" EntityType="Self.users_responsible" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="users_role" EntityType="Self.users_role" Schema="alsi" store:Type="Tables" />
@@ -2359,7 +2351,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="template_wd_lpc_coverpage" EntityType="alsiModel.template_wd_lpc_coverpage" />
           <EntitySet Name="template_wd_mesa_coverpage" EntityType="alsiModel.template_wd_mesa_coverpage" />
           <EntitySet Name="template_wd_mesa_img" EntityType="alsiModel.template_wd_mesa_img" />
-          <EntitySet Name="tmp_rpt_4" EntityType="alsiModel.tmp_rpt_4" />
           <EntitySet Name="users_login" EntityType="alsiModel.users_login" />
           <EntitySet Name="users_responsible" EntityType="alsiModel.users_responsible" />
           <EntitySet Name="users_role" EntityType="alsiModel.users_role" />
@@ -2562,7 +2553,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="so" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="so_desc" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="unit_price" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="report_no" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="report_no" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="inv_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="inv_date" Type="DateTime" />
           <Property Name="inv_duedate" Type="DateTime" />
@@ -2571,7 +2562,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" />
           <Property Name="update_date" Type="DateTime" />
-          <Property Name="filename" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="filename" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="job_sample_group_so_ignore_code">
           <Key>
@@ -4383,14 +4375,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="path_sem_image_at_2000x" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="path_edx_spectrum" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="tmp_rpt_4">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="date" Type="DateTime" />
-          <Property Name="value" Type="Double" />
-        </EntityType>
         <EntityType Name="users_login">
           <Key>
             <PropertyRef Name="id" />
@@ -4741,6 +4725,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample_group_so">
             <EntityTypeMapping TypeName="alsiModel.job_sample_group_so">
               <MappingFragment StoreEntitySet="job_sample_group_so">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="filename" ColumnName="filename" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
@@ -6604,15 +6589,6 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="area" ColumnName="area" />
                 <ScalarProperty Name="seq" ColumnName="seq" />
                 <ScalarProperty Name="sample_id" ColumnName="sample_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tmp_rpt_4">
-            <EntityTypeMapping TypeName="alsiModel.tmp_rpt_4">
-              <MappingFragment StoreEntitySet="tmp_rpt_4">
-                <ScalarProperty Name="value" ColumnName="value" />
-                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

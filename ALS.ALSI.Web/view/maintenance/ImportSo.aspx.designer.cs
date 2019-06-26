@@ -67,6 +67,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
         
         /// <summary>
+        /// txtSoCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSoCode;
+        
+        /// <summary>
         /// Button2 control.
         /// </summary>
         /// <remarks>

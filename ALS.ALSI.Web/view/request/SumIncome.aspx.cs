@@ -113,7 +113,7 @@ namespace ALS.ALSI.Web.view.request
 
             DataTable dt = new DataTable("DT");
 
-            dt.Columns.Add("InvoiceDate", typeof(string));
+            dt.Columns.Add("InvoiceDate", typeof(DateTime));
             dt.Columns.Add("Terms", typeof(string));
             dt.Columns.Add("Number", typeof(string));
             dt.Columns.Add("PurchaseOrder", typeof(string));
