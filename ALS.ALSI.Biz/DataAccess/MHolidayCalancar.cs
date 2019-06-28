@@ -90,29 +90,32 @@ namespace ALS.ALSI.Biz.DataAccess
             }
         }
 
-       
 
-        public DateTime GetWorkingDayLab(DateTime StartDate, int addDay)
+
+        public DateTime GetWorkingDayLab(DateTime StartDate, int addDay, bool isUrgent = false)
         {
             //int NumberOfBusinessDays = (_NumberOfBusinessDays - 1);
 
-            StartDate = StartDate.AddDays(addDay);
-
-
-            if (StartDate.DayOfWeek == DayOfWeek.Saturday)
+            if (isUrgent)
             {
-                StartDate = StartDate.AddDays(2);
+                StartDate = StartDate.AddDays(addDay+1);
             }
-            else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
+            else
             {
-                StartDate = StartDate.AddDays(1);
+                StartDate = StartDate.AddDays(addDay);
+                if (StartDate.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    StartDate = StartDate.AddDays(2);
+                }
+                else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    StartDate = StartDate.AddDays(1);
+                }
+                if (IsThaiHoliday(StartDate))
+                {
+                    StartDate = StartDate.AddDays(1);
+                }
             }
-            if (IsThaiHoliday(StartDate))
-            {
-                StartDate = StartDate.AddDays(1);
-            }
-
-
             return StartDate;
         }
 
@@ -139,7 +142,29 @@ namespace ALS.ALSI.Biz.DataAccess
 
             return StartDate;
         }
+        public DateTime GetWorkingDayCustomerOnlyUrgent(DateTime startDate, int addDay)
+        {
+            DateTime endDate = startDate.AddDays(addDay);
+            //int workingDays = Enumerable.Range(0, Convert.ToInt32(endDate.Subtract(startDate).TotalDays)).Select(i => new[] { DayOfWeek.Saturday, DayOfWeek.Sunday }.Contains(startDate.AddDays(i).DayOfWeek) ? 0 : 1).Sum();
 
+
+            //DateTime StartDate = startDate.AddDays(addDay + (addDay - workingDays));
+            //if (StartDate.DayOfWeek == DayOfWeek.Saturday)
+            //{
+            //    StartDate = StartDate.AddDays(2);
+            //}
+            //else if (StartDate.DayOfWeek == DayOfWeek.Sunday)
+            //{
+            //    StartDate = StartDate.AddDays(1);
+            //}
+            //if (IsThaiHoliday(StartDate))
+            //{
+            //    StartDate = StartDate.AddDays(1);
+            //}
+
+
+            return endDate;
+        }
         public bool IsHoliday(DateTime CurrentDate)
         {
 

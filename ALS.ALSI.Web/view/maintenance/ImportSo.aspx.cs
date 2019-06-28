@@ -529,43 +529,46 @@ namespace ALS.ALSI.Web.view.template
         {
 
             List<job_sample> js = new List<job_sample>();
-            job_sample jobSample = new job_sample();
-
-            jobSample.ID = CustomUtils.GetRandomNumberID();
-            jobSample.template_id = -1;
-            jobSample.job_number = jn;
-            jobSample.RowState = CommandNameEnum.Add;
-            jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-            jobSample.job_role = userLogin.role_id;
-            jobSample.date_login_inprogress = DateTime.Now;
-            jobSample.update_date = DateTime.Now;
-            jobSample.update_by = userLogin.id;
-            jobSample.is_hold = "0";//0=Unhold
-            jobSample.sample_invoice_amount = amt;
-            jobSample.sample_so = so;
-            jobSample.remarks = remark;
+            job_sample jobSample = new job_sample
+            {
+                ID = CustomUtils.GetRandomNumberID(),
+                template_id = -1,
+                job_number = jn,
+                RowState = CommandNameEnum.Add,
+                job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE),
+                job_role = userLogin.role_id,
+                date_login_inprogress = DateTime.Now,
+                update_date = DateTime.Now,
+                update_by = userLogin.id,
+                is_hold = "0",//0=Unhold
+                sample_invoice_amount = amt,
+                sample_so = so,
+                remarks = remark
+            };
             js.Add(jobSample);
 
-            job_info job = new job_info();
-            job.ID = 0;
-            job.contract_person_id = 16;// <----------------#1#
+            job_info job = new job_info
+            {
+                ID = 0,
+                contract_person_id = 16,// <----------------#1#
 
-            job.customer_id = 4;// <----------------#2#
-            job.date_of_request = DateTime.Now;
-            job.customer_ref_no = "";
-            job.company_name_to_state_in_report = "";
-            job.job_number = 0;
-            job.job_prefix = 1;// <----------------#3#
-            job.date_of_receive = DateTime.Now;
-            job.spec_ref_rev_no = "0";
+                customer_id = 4,// <----------------#2#
+                date_of_request = DateTime.Now,
+                customer_ref_no = "",
+                company_name_to_state_in_report = "",
+                job_number = 0,
+                job_prefix = 1,// <----------------#3#
+                date_of_receive = DateTime.Now,
+                spec_ref_rev_no = "0",
 
-            job.create_by = userLogin.id;
-            job.update_by = userLogin.id;
-            job.create_date = DateTime.Now;
-            job.update_date = DateTime.Now;
-            job.document_type = "1";
+                create_by = userLogin.id,
+                update_by = userLogin.id,
+                create_date = DateTime.Now,
+                update_date = DateTime.Now,
+                document_type = "1",
 
-            job.jobSample = js;
+                jobSample = js
+            };
             return job;
 
 
@@ -629,7 +632,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     string jobNumber = "#" + DateTime.Now.Ticks;
                     string remark = jobSampleGroupSo.so + "," + soDesc;
-                    makeTempJob(jobNumber, amt, remark, jobSampleGroupSo.so).Insert();
+                    makeTempJob(jobNumber, amt, remark, jobSampleGroupSo.so).Insert(false);
                     results.Add(jobNumber);
                 }
             }

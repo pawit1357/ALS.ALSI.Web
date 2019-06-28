@@ -1142,6 +1142,8 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("Invoice_Date", typeof(DateTime));
                         dt.Columns.Add("Invoice_Amount", typeof(double));
                         dt.Columns.Add("Invoice_status", typeof(string));
+                        dt.Columns.Add("remarks", typeof(string));
+
 
                         break;
                     case RoleEnum.LOGIN:
@@ -1174,6 +1176,8 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
                         dt.Columns.Add("Note_for_lab", typeof(string));
                         dt.Columns.Add("Remark_AM_Retest", typeof(string));
+                        dt.Columns.Add("remarks", typeof(string));
+
                         break;
                 }
                 String conSQL = Configurations.MySQLCon;
@@ -1214,7 +1218,7 @@ namespace ALS.ALSI.Web.view.request
                                    ",date_admin_word_complete" +
                                    ",date_labman_complete" +
                                    ",date_admin_pdf_complete" +
-                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount,Invoice_status";
+                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount,Invoice_status,remarks";
                             break;
                         case RoleEnum.LOGIN:
                         case RoleEnum.CHEMIST:
@@ -1244,12 +1248,12 @@ namespace ALS.ALSI.Web.view.request
                                     ",date_admin_word_complete" +
                                     ",date_labman_complete" +
                                     ",date_admin_pdf_complete" +
-                                    ",Note_for_lab,Remark_AM_Retest";
+                                    ",Note_for_lab,Remark_AM_Retest,remarks";
                             break;
                         default:
                             break;
                     }
-                    sql += " FROM (SELECT                                                                                                                                              ";
+                    sql += " FROM (SELECT      `Extent2`.`remarks`,                                                                                                                                        ";
                     sql += " `Extent2`.`sample_prefix` AS `Job_Type`,                                                                                                           ";
                     sql += " `Extent7`.`name` AS `Status`,                                                                                                                      ";
                     sql += " (CASE WHEN `Extent2`.`is_hold` = '1' THEN 'Hold' ELSE `Extent9`.`name` END) AS `Job_Status`,                                                       ";

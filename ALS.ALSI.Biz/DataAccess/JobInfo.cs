@@ -60,12 +60,15 @@ namespace ALS.ALSI.Biz.DataAccess
 
         }
 
-        public void Insert()
+        public void Insert(bool genRunning = true)
         {
             _repository.Add(this);
             GeneralManager.Commit();
 
-            job_running.IncrementRunning(this.job_prefix);
+            if (genRunning)
+            {
+                job_running.IncrementRunning(this.job_prefix);
+            }
 
             foreach (job_sample sample in this.jobSample)
             {
@@ -82,7 +85,7 @@ namespace ALS.ALSI.Biz.DataAccess
                     case CommandNameEnum.Delete:
 
                         job_sample deleteSample = new job_sample().SelectByID(sample.ID);
-                        if(deleteSample != null)
+                        if (deleteSample != null)
                         {
                             deleteSample.Delete();
 

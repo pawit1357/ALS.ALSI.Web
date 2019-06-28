@@ -2513,6 +2513,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\rptStricker.rdlc" />
+    <EmbeddedResource Include="ReportObject\Signature2.rdlc" />
     <EmbeddedResource Include="ReportObject\Signature.rdlc" />
   </ItemGroup>
   <ItemGroup>
