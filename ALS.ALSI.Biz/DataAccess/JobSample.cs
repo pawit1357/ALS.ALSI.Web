@@ -129,6 +129,10 @@ namespace ALS.ALSI.Biz.DataAccess
         }
 
 
+        public static List<job_sample> FindAllBySo(string so)
+        {
+            return _repository.GetAll().Where(x => x.sample_so != null && x.sample_so.Equals(so)).ToList();
+        }
 
         public static List<job_sample> FindAllBySos(IEnumerable<string> sos)
         {

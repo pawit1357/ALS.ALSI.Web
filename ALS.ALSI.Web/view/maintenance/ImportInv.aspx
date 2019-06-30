@@ -67,6 +67,28 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label col-md-3">So Code.:</label>
+                                        <div class="col-md-6">
+                                            <asp:TextBox ID="txtSoCode" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                        <div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Invoice.:</label>
+                                        <div class="col-md-6">
+                                            <asp:TextBox ID="txtInvoice" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                        <div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="control-label col-md-3"></label>
                                         <div class="col-md-6">
                                             <asp:Button ID="btnSearch" runat="server" class="btn green" Text="ค้นหา" OnClick="btnSearch_Click" />&nbsp;&nbsp;
@@ -82,12 +104,16 @@
                                 <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False" AllowPaging="True"
                                     CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="so,id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowEditing="gvJob_RowEditing" OnRowUpdating="gvJob_RowUpdating" OnRowCancelingEdit="gvJob_RowCancelingEdit" OnRowCommand="gvJob_RowCommand" OnRowDataBound="gvJob_RowDataBound" PageSize="20" Width="80%">
                                     <Columns>
-  <%--                                      <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
+                                    <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
+                                            <HeaderTemplate>
+                                                <asp:CheckBox ID="chkAllSign" runat="server" AutoPostBack="true" Text="Check All" OnCheckedChanged="chkAllSign_CheckedChanged"/>
+                                            </HeaderTemplate>
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="cbSelect" runat="server" />
-                                                <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>'></asp:HiddenField>
+                                                <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>' />
                                             </ItemTemplate>
-                                        </asp:TemplateField>--%>
+
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <%# Container.DataItemIndex + 1 %>
@@ -142,6 +168,7 @@
                                 </asp:GridView>
                             </asp:Panel>
                         </div>
+                        <%=MsgLogs%>
 
                     </div>
                 </div>

@@ -33,7 +33,11 @@ namespace ALS.ALSI.Web.view.template
             get { return (String)Session[GetType().Name + "MessageINv"]; }
             set { Session[GetType().Name + "MessageINv"] = value; }
         }
-
+        protected String MsgLogs
+        {
+            get { return (String)Session[GetType().Name + "MsgLogs"]; }
+            set { Session[GetType().Name + "MsgLogs"] = value; }
+        }
         private void initialPage()
         {
         }
@@ -51,6 +55,7 @@ namespace ALS.ALSI.Web.view.template
             {
                 bindingData();
                 MessageINv = "";
+                MsgLogs = "";
             }
         }
 
@@ -92,18 +97,18 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnBatchLoad_Click(object sender, EventArgs e)
         {
-            //List<int> ids = new List<int>();
-            //foreach (GridViewRow row in gvJob.Rows)
-            //{
-            //    CheckBox chk = row.Cells[0].Controls[1] as CheckBox;
+            List<int> ids = new List<int>();
+            foreach (GridViewRow row in gvJob.Rows)
+            {
+                CheckBox chk = row.Cells[0].Controls[1] as CheckBox;
 
-            //    if (chk != null && chk.Checked)
-            //    {
-            //        HiddenField hf = row.Cells[0].FindControl("hid") as HiddenField;
-            //        ids.Add(Convert.ToInt32(hf.Value));
-            //    }
-            //}
-            batchUpload();
+                if (chk != null && chk.Checked)
+                {
+                    HiddenField hf = row.Cells[0].FindControl("hid") as HiddenField;
+                    ids.Add(Convert.ToInt32(hf.Value));
+                }
+            }
+            batchUpload(ids);
         }
         #endregion
 
@@ -112,7 +117,7 @@ namespace ALS.ALSI.Web.view.template
         {
 
             job_sample_group_invoice soList = new job_sample_group_invoice();
-            searchResult = soList.SelectAll(ddlStatus.SelectedValue);
+            searchResult = soList.SelectAll(ddlStatus.SelectedValue, txtSoCode.Text, txtInvoice.Text);
             gvJob.DataSource = searchResult;
             gvJob.DataBind();
 
@@ -312,47 +317,67 @@ namespace ALS.ALSI.Web.view.template
 
         public void batchUpload(List<int> soIds = null)
         {
+            MsgLogs = "";
+            StringBuilder logs = new StringBuilder();
+
             //Boolean isComplete = true;
             StringBuilder sbJobFail = new StringBuilder();
 
             if (searchResult.ToDataTable().Rows.Count > 0)
             {
-                int total = searchResult.ToDataTable().Rows.Count;
-                //int fail = 0;
+
+
 
                 List<job_sample_group_invoice> listInvUpdates = new List<job_sample_group_invoice>();
 
-                IEnumerable<job_sample_group_invoice> invGroup = this.searchResult.Where(x => x.inv_status.Equals("I"));
-                IEnumerable<string> ids = this.searchResult.Select(x => x.so);
+                IEnumerable<job_sample_group_invoice> invGroups = this.searchResult.Where(x => soIds.Contains(x.id)).ToList();
 
-                List<job_sample> listOfSample = job_sample.FindAllBySos(ids);
-                foreach (job_sample js in listOfSample)
+                logs.Append("<br>--------------------------------------------------------------------------------");
+                logs.Append("<br>############ Load 'Invoice' List ############");
+                logs.Append("<br>--------------------------------------------------------------------------------");
+                logs.Append("<br>Total INV: " + invGroups.Count());
+                int total = invGroups.Count();
+                int fail = 0;
+
+                foreach (job_sample_group_invoice invData in invGroups)
                 {
-                    job_sample_group_invoice invData = invGroup.Where(x => x.so.Equals(js.sample_so)).FirstOrDefault();
-                    if (invData != null)
+                    logs.Append("<br>Inv number: " + invData.inv_no);
+                    List<job_sample> listOfSample = job_sample.FindAllBySo(invData.so);
+                    if (listOfSample.Count() > 0)
                     {
-                        js.sample_invoice = invData.inv_no;
-                        js.sample_invoice_date = invData.inv_date;
-                        js.sample_invoice_complete_date = invData.inv_duedate;
-                        js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
-                        js.Update();
-                        if (!listInvUpdates.Contains(invData))
+                        logs.Append("<br>Total Sample: " + listOfSample.Count() + "<br> Upload jobNumber List : ");
+                        foreach (job_sample js in listOfSample)
                         {
-                            invData.report_no += js.job_number + ",";
-                            listInvUpdates.Add(invData);
+                            js.sample_invoice = invData.inv_no;
+                            js.sample_invoice_date = invData.inv_date;
+                            js.sample_invoice_complete_date = invData.inv_duedate;
+                            js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+                            js.Update();
+                            logs.Append(js.job_number + "[X],");
+                            //
+                            invData.inv_status = "C";
+                            invData.Update();
                         }
                     }
-                }
-                //Console.WriteLine();
-                foreach (job_sample_group_invoice jsgi in listInvUpdates)
-                {
-                    jsgi.inv_status = "C";
-                    jsgi.Update();
+                    else
+                    {
+                        sbJobFail.Append(invData.inv_no + ",");
+                        logs.Append("<br>Total Sample: 0 <br> Upload jobNumber List : ");
+
+                        fail++;
+                        //
+                        invData.inv_status = "I";
+                        invData.Update();
+                    }
                 }
 
+
+
                 GeneralManager.Commit();
-                String errList = (sbJobFail.Length == 0) ? "" : "\nรายการ Invoice ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
-                MessageINv = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล Job\n ทั้งหมด" + total + " รายการ\n สำเร็จ " + (total - (total - listInvUpdates.Count)) + " รายการ " + ((errList.Length > 0) ? errList.Substring(0, errList.Length - 1) : errList) + " </div>";
+                String errList = (sbJobFail.Length == 0) ? "" : "<br>รายการ Invoice ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
+                MessageINv = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล ทั้งหมด " + total + " รายการ สำเร็จ " + (total - fail) + " รายการ" + ((fail == 0) ? "" : (" ไม่สำเร็จ " + fail + " รายการ") + errList) + " </div>";
+                MsgLogs = logs.ToString();
+
             }
             bindingData();
 
@@ -379,6 +404,16 @@ namespace ALS.ALSI.Web.view.template
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             bindingData();
+        }
+
+        protected void chkAllSign_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            foreach (GridViewRow row in gvJob.Rows)
+            {
+                CheckBox chkcheck = (CheckBox)row.FindControl("cbSelect");
+                chkcheck.Checked = cb.Checked;
+            }
         }
     }
 }

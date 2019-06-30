@@ -140,11 +140,11 @@ namespace ALS.ALSI.Web.view.request
                 "                    Number,                                                                       " +
                 "                    PurchaseOrder,                                                                " +
                 "                    Customer,                                                                     " +
-                "                    TotalSubAmount,                                                               " +
-                "                    (TotalSubAmount * 0.07) as Vat7,                                              " +
-                "    (TotalSubAmount + (TotalSubAmount * 0.07)) as GrandTotalAmountVat,                            " +
-                "	(TotalSubAmount * 0.03) as WithholdingTax3,                                                    " +
-                "    ((TotalSubAmount + (TotalSubAmount * 0.07)) - (TotalSubAmount * 0.03)) as TotaAmount,         " +
+                "                    sum(TotalSubAmount) TotalSubAmount,                                                               " +
+                "                    (sum(TotalSubAmount) * 0.07) as Vat7,                                              " +
+                "    (sum(TotalSubAmount) + (sum(TotalSubAmount) * 0.07)) as GrandTotalAmountVat,                            " +
+                "	(sum(TotalSubAmount) * 0.03) as WithholdingTax3,                                                    " +
+                "    ((sum(TotalSubAmount) + (sum(TotalSubAmount) * 0.07)) - (TotalSubAmount * 0.03)) as TotaAmount,         " +
                 "    DeptBOI,                                                                                      " +
                 "    CustomerTypeHDD                                                                         " +
                 "FROM                                                                                              " +

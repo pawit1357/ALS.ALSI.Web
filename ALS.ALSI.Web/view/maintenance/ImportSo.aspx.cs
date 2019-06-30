@@ -495,6 +495,7 @@ namespace ALS.ALSI.Web.view.template
                                         logs.Append(","+o+"[ ]");
                                     }
                                 }
+                                fail++;
                                 isComplete = false;
                             }
 
@@ -519,8 +520,8 @@ namespace ALS.ALSI.Web.view.template
 
                 GeneralManager.Commit();
                 MsgLogs = logs.ToString();
-                String errList = (sbJobFail.Length == 0) ? "" : "\nรายการ SO ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
-                Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล Job\n ทั้งหมด" + total + " รายการ\n สำเร็จ " + (total - fail) + " รายการ " + ((errList.Length > 0) ? errList.Substring(0, errList.Length - 1) : errList) + " </div>";
+                String errList = (sbJobFail.Length == 0) ? "" : "<br>รายการ SO ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
+                Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล ทั้งหมด " + total + " รายการ สำเร็จ " + (total - fail) + " รายการ" + ((fail == 0) ? "" : (" ไม่สำเร็จ " + fail + " รายการ") + errList) + " </div>";
                 bindingData();
             }
         }
@@ -609,6 +610,11 @@ namespace ALS.ALSI.Web.view.template
                 for (int i = 0; i < _val.Length; i++)
                 {
                     string[] jn = _val[i].Split('-');
+                    if (jn.Length == 2)
+                    {
+                        _val[i] = _val[i] + "-";
+                        jn = _val[i].Split('-');
+                    }
 
 
                     if (jn.Length == 4 || (jn[0].Equals("GRP") && CustomUtils.isNumber(jn[2])))
