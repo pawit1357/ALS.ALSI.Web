@@ -90,10 +90,23 @@
                                 </div>
                             </div>
                             <!-- BEGIN FORM-->
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Notes</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>##วิธีการแก้ไข</li>
+                                        <li>Code,Quantity,Unit/Price ใช้วิธี Enter อีก 1 บันทัดในการแบ่งกลุ่ม</li>
+                                        <li>ReportNo ใช้ | ในการแบ่งกลุ่มไม่ต้อง  Enter แบ่งกลุ่ม</li>
+
+                                    </ul>
+                                </div>
+                            </div>
 
                             <asp:Panel ID="pSo" runat="server">
                                 <asp:GridView ID="gvJob" runat="server" AutoGenerateColumns="False" AllowPaging="True" AlternatingRowStyle-HorizontalAlign="Center"
-                                    CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="so,id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowEditing="gvJob_RowEditing" OnRowUpdating="gvJob_RowUpdating" OnRowCancelingEdit="gvJob_RowCancelingEdit" OnRowCommand="gvJob_RowCommand" OnRowDataBound="gvJob_RowDataBound" PageSize="20" Width="80%">
+                                    CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="so,id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowEditing="gvJob_RowEditing" OnRowUpdating="gvJob_RowUpdating" OnRowCancelingEdit="gvJob_RowCancelingEdit" OnRowCommand="gvJob_RowCommand" OnRowDataBound="gvJob_RowDataBound" OnRowDeleting="gvJob_RowDeleting" PageSize="20" Width="80%">
                                     <AlternatingRowStyle HorizontalAlign="Center" />
                                     <Columns>
                                         <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
@@ -104,16 +117,22 @@
                                                 <asp:CheckBox ID="cbSelect" runat="server" />
                                                 <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>' />
                                             </ItemTemplate>
-
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="ลบ" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnDel" runat="server" CommandArgument='<%# String.Concat(Eval("id")) %>' CommandName="Delete" ToolTip="Delete"><i class="fa fa-trash-o" onclick='return confirm("ต้องการลบ So รายการนี้ใช่หรือไม่ ?");'></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="โหลดข้อมูล" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnLoad" runat="server" CommandArgument='<%# String.Concat(Eval("id")) %>' CommandName="View" ToolTip="Load"><i class="fa fa-cog"></i></asp:LinkButton>
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="แก้ไข">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btn_Edit" runat="server" CommandArgument='<%# String.Concat(Eval("id")) %>' CommandName="Edit" ToolTip="แก้ไข"><i class="fa fa-edit"></i></asp:LinkButton>
                                             </ItemTemplate>
@@ -196,8 +215,6 @@
                                         </div>
                                     </EmptyDataTemplate>
                                 </asp:GridView>
-
-
                             </asp:Panel>
                         </div>
                         <%=MsgLogs%>

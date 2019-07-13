@@ -423,7 +423,7 @@ namespace ALS.ALSI.Web.view.template
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
 
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -798,7 +798,7 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                 }
@@ -1046,7 +1046,10 @@ namespace ALS.ALSI.Web.view.template
             {
                 //String result = "Not Detected";
 
-
+                if(_cover.ID== 71464)
+                {
+                    Console.WriteLine();
+                }
                 tb_m_gcms_cas tmp = this.tbCas.Find(x => _cover.B.Equals(x.classification) && x.row_type == Convert.ToInt32(RowTypeEnum.TotalRow));
                 if (tmp != null)
                 {

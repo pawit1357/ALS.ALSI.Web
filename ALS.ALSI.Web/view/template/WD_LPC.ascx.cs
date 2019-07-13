@@ -332,7 +332,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Boolean isValid = true;
+            //Boolean isValid = true;
             template_wd_lpc_coverpage objWork = new template_wd_lpc_coverpage();
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -348,13 +348,13 @@ namespace ALS.ALSI.Web.view.template
                     {
                         ScriptManager.RegisterClientScriptBlock((sender as Control), this.GetType(), "alert", String.Format("alert('{0}')", "ยังไม่ได้เลือก Specificaton"), true);
                         ddlSpecification.Focus();
-                        isValid = false;
+                        //isValid = false;
                     }
                     else if (Convert.ToInt32(ddlComponent.SelectedValue) == 0)
                     {
                         ScriptManager.RegisterClientScriptBlock((sender as Control), this.GetType(), "alert", String.Format("alert('{0}')", "ยังไมได้เลือก Component"), true);
                         ddlComponent.Focus();
-                        isValid = false;
+                        //isValid = false;
                     }
                     else
                     {
@@ -534,7 +534,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                         //lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
@@ -690,7 +690,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     Console.WriteLine();
                 }
-                catch (Exception Ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                     //logger.Error(Ex.Message);
@@ -1468,7 +1468,9 @@ namespace ALS.ALSI.Web.view.template
                     }
                     catch (Exception ex)
                     {
+                       
                         Console.WriteLine();
+                        throw ex;
                     }
                 }
             }

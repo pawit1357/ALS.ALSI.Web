@@ -729,7 +729,7 @@ namespace ALS.ALSI.Web.view.request
                         btnEdit.Visible = !(this.CommandName == CommandNameEnum.View);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     Console.WriteLine();
                 }

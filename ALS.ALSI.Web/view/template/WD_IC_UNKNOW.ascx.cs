@@ -368,7 +368,7 @@ namespace ALS.ALSI.Web.view.template
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             calculateByFormular();
-            Boolean isValid = true;
+            //Boolean isValid = true;
             template_wd_ic_coverpage objWork = new template_wd_ic_coverpage();
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -646,7 +646,7 @@ namespace ALS.ALSI.Web.view.template
                                 txtB11.Text = CustomUtils.GetCellValue(isheet.GetRow(11 - 1).GetCell(ExcelColumn.B));
                                 txtB12.Text = CustomUtils.GetCellValue(isheet.GetRow(12 - 1).GetCell(ExcelColumn.B));
                                 txtB13.Text = CustomUtils.GetCellValue(isheet.GetRow(13 - 1).GetCell(ExcelColumn.B));
-                                int lpc_type = 1;
+                                //int lpc_type = 1;
 
                                 foreach (template_wd_ic_coverpage ic in this.coverpages)
                                 {
@@ -697,7 +697,7 @@ namespace ALS.ALSI.Web.view.template
                         errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
                     }
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                 }
@@ -1200,7 +1200,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                     }
                 }
-            }catch(Exception ex)
+            }catch(Exception )
             {
                 Console.WriteLine("");
             }

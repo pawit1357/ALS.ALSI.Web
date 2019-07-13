@@ -151,7 +151,7 @@ namespace ALS.ALSI.Web.view.customer
                     GeneralManager.Commit();
                     bindingData();
                 }
-                catch (Exception ex) {
+                catch (Exception) {
                     Console.WriteLine();
                     MessageBox.Show(this.Page, Resources.MSG_BE_USED);
                 }

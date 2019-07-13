@@ -467,7 +467,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Boolean isValid = true;
+            //Boolean isValid = true;
             template_seagate_lpc_coverpage objWork = new template_seagate_lpc_coverpage();
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -663,7 +663,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                         //lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
@@ -833,7 +833,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     Console.WriteLine();
                 }
-                catch (Exception Ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                     //logger.Error(Ex.Message);

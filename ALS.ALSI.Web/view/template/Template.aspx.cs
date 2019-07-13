@@ -179,7 +179,7 @@ namespace ALS.ALSI.Web.view.template
                         this.PKID = Obj.InsertGetLastID();
 
                     }
-                    catch (Exception ex)
+                    catch (Exception )
                     {
                         Console.WriteLine();
                     }

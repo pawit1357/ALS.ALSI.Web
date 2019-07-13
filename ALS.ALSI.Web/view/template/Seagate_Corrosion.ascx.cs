@@ -875,7 +875,7 @@ namespace ALS.ALSI.Web.view.template
                 }
                 dat.Add(tmp);
             }
-            catch (Exception ex) { }
+            catch (Exception ) { }
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;

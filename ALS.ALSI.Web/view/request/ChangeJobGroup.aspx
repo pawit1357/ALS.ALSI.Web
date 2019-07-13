@@ -28,6 +28,34 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
+                                <asp:TemplateField HeaderText="Sample SO" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litSampleSo" runat="server" Text='<%# Eval("sample_so")%>' />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Sample Invoice" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litSampleInvoice" runat="server" Text='<%# Eval("sample_invoice")%>' />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Invoice Date" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litSampleInvoiceDate" runat="server" Text='<%# Eval("sample_invoice_date")%>' />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Sample Invoice Amount" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litSampleInvoiceAmount" runat="server" Text='<%# Eval("sample_invoice_amount")%>' />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Payment Date" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Literal ID="litSampleInvoiceCompleteDate" runat="server" Text='<%# Eval("sample_invoice_complete_date")%>' />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                
+
+
                                 <asp:TemplateField HeaderText="Sample Description (Part description, Part no. etc.)" ItemStyle-HorizontalAlign="left">
                                     <ItemTemplate>
                                         <asp:Literal ID="litDescriptoin" runat="server" Text='<%# Eval("description")%>' />

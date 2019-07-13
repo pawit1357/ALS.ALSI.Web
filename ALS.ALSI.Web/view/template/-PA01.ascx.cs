@@ -696,7 +696,7 @@ namespace ALS.ALSI.Web.view.template
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
 
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -1369,7 +1369,7 @@ namespace ALS.ALSI.Web.view.template
 
                     }
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
 
@@ -1618,7 +1618,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1721,7 +1721,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1758,7 +1758,7 @@ namespace ALS.ALSI.Web.view.template
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1804,7 +1804,7 @@ namespace ALS.ALSI.Web.view.template
 
                 //gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1824,7 +1824,7 @@ namespace ALS.ALSI.Web.view.template
                 gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
                 gvMicroscopicAnalysis.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1896,7 +1896,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -2004,7 +2004,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }

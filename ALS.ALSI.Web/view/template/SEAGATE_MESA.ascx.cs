@@ -330,7 +330,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -466,7 +466,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                         //lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     this.jobSample.date_admin_word_complete = DateTime.Now;

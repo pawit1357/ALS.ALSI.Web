@@ -115,7 +115,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public static List<job_sample> FindAllByJobNumbers(List<string> jns)
         {
-            var result = _repository.GetAll().Where(x => jns.Contains(x.job_number));
+            var result = _repository.GetAll().Where(x => jns.Contains(x.job_number)  && String.IsNullOrEmpty(x.amend_or_retest));
 
             var q = result.GroupBy(x => x.job_number).Select(g => g.OrderByDescending(i => i.ID).First());
 

@@ -547,7 +547,7 @@ namespace ALS.ALSI.Web.view.template
         {
             template_seagate_hpa_coverpage objWork = new template_seagate_hpa_coverpage();
 
-            Boolean isValid = true;
+            //Boolean isValid = true;
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
             {
@@ -821,7 +821,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         errors.Add("Invalid File. Please upload a File with extension .pdf");
                         //lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        //isValid = false;
                     }
 
                     break;
@@ -1038,7 +1038,7 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                     }
-                    catch (Exception Ex)
+                    catch (Exception )
                     {
                         errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                         Console.WriteLine();

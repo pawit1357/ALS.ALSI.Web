@@ -177,6 +177,7 @@ namespace ALS.ALSI.Web.view.template
             TextBox txtUnitPrice = gvJob.Rows[e.RowIndex].FindControl("txtUnitPrice") as TextBox;
             TextBox txtReportNo = gvJob.Rows[e.RowIndex].FindControl("txtReportNo") as TextBox;
             TextBox txtSoDesc = gvJob.Rows[e.RowIndex].FindControl("txtSoDesc") as TextBox;
+            TextBox txtQuantity = gvJob.Rows[e.RowIndex].FindControl("txtQuantity") as TextBox;
 
             job_sample_group_so _updateCso = new job_sample_group_so().SelectByID(id);
             if (_updateCso != null)
@@ -208,9 +209,19 @@ namespace ALS.ALSI.Web.view.template
                         _SoDesc.Add(rn);
                     }
                 }
+                List<String> _Quantity = new List<String>();
+                String[] Quantity = txtQuantity.Text.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+                foreach (String rn in Quantity)
+                {
+                    if (!rn.Equals(""))
+                    {
+                        _Quantity.Add(rn);
+                    }
+                }
                 _updateCso.unit_price = String.Join(Environment.NewLine, _UnitPrice);
                 _updateCso.report_no = String.Join("|", _ReportNo);
                 _updateCso.so_desc = String.Join(Environment.NewLine, _SoDesc);
+                _updateCso.quantity = String.Join(Environment.NewLine, _Quantity);
 
 
                 _updateCso.Update();
@@ -224,6 +235,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvJob_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+
             CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
             switch (cmd)
             {
@@ -232,6 +244,16 @@ namespace ALS.ALSI.Web.view.template
                     List<int> ids = new List<int>();
                     ids.Add(id);
                     batchUpload(ids);
+                    break;
+                case CommandNameEnum.Delete:
+                    int _id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+                    job_sample_group_so jobSampleGS = this.searchResult.Where(x => x.id == _id).FirstOrDefault();
+                    if (jobSampleGS != null)
+                    {
+                        jobSampleGS.Delete();
+                        GeneralManager.Commit();
+                        bindingData();
+                    }
                     break;
             }
         }
@@ -277,7 +299,7 @@ namespace ALS.ALSI.Web.view.template
                             if (index == 0)
                             {
                                 so = line.Substring(10, 10).Trim();
-                                cso = new job_sample_group_so { so = so };
+                                cso = new job_sample_group_so { so = so, so_company = line.Substring(23, 30) };
 
                             }
                             if (index > 0)
@@ -299,7 +321,7 @@ namespace ALS.ALSI.Web.view.template
                             if (!so.Equals(line.Substring(10, 10).Trim()))
                             {
                                 so = line.Substring(10, 10).Trim();
-                                cso = new job_sample_group_so { so = so };
+                                cso = new job_sample_group_so { so = so, so_company = line.Substring(23, 30) };
 
                             }
                             index++;
@@ -355,6 +377,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
+                        updateSo.so_company = so.so_company;
                         updateSo.filename = Path.GetFileName(filePath);
                         updateSo.unit_price = so.unit_price;
                         updateSo.so_desc = so.so_desc;
@@ -377,7 +400,10 @@ namespace ALS.ALSI.Web.view.template
                 MaintenanceBiz.ExecuteReturnDt(sqlDelJobInfo);
                 string sqlDelSample = "delete from job_sample where template_id=-1 and job_status=3 and sample_so in (" + ids + ")";
                 MaintenanceBiz.ExecuteReturnDt(sqlDelSample);
+                string clearSql = "update job_sample set sample_so = '', sample_invoice = '' where sample_so in (" + ids + ")";
+                MaintenanceBiz.ExecuteReturnDt(clearSql);
 
+                
                 GeneralManager.Commit();
 
                 bindingData();
@@ -459,7 +485,7 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                     _updateCso.report_no = "";//clear
-                    for (int i = 0; i < Quantitys.Length - 1; i++)
+                    for (int i = 0; i < Quantitys.Length; i++)
                     {
                         if (!string.IsNullOrEmpty(Quantitys[i]))
                         {
@@ -544,7 +570,9 @@ namespace ALS.ALSI.Web.view.template
                 is_hold = "0",//0=Unhold
                 sample_invoice_amount = amt,
                 sample_so = so,
-                remarks = remark
+                remarks = remark,
+                specification_id= 29,
+                type_of_test_id = 324
             };
             js.Add(jobSample);
 
@@ -568,6 +596,7 @@ namespace ALS.ALSI.Web.view.template
                 update_date = DateTime.Now,
                 document_type = "1",
 
+                
                 jobSample = js
             };
             return job;
@@ -645,6 +674,11 @@ namespace ALS.ALSI.Web.view.template
             GeneralManager.Commit();
 
             return results;
+
+        }
+
+        protected void gvJob_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
 
         }
     }

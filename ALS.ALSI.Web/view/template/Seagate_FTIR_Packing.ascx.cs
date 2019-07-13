@@ -435,7 +435,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -987,11 +987,9 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
                 reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
                 reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
-                // Variables
-                Warning[] warnings;
-                string[] streamIds;
-                string mimeType = string.Empty;
-                string encoding = string.Empty;
+            // Variables
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
                 string extension = string.Empty;
 
 
@@ -1079,7 +1077,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                         else
                         {
-                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out string[] streamIds, out Warning[] warnings);
 
                             if (!Directory.Exists(Server.MapPath("~/Report/")))
                             {
@@ -1467,7 +1465,7 @@ namespace ALS.ALSI.Web.view.template
                         #endregion
                     }
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                     Console.WriteLine();

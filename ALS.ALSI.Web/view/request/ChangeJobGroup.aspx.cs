@@ -110,6 +110,27 @@ namespace ALS.ALSI.Web.view.request
                 lbDesc.Text = "รายการที่เลือกไม่ได้ถูกกำหนดเป็นงานแบบกลุ่ม";
 
             }
+
+            if (isInvoiceGroupOperation && this.dataList.Count > 0)
+            {
+                txtInvoice.Text = this.dataList[0].sample_invoice;
+                txtInvoiceAmt.Text = this.dataList[0].sample_invoice_amount.ToString();
+                txtInvoiceDate.Text = this.dataList[0].sample_invoice_date.Value.ToString("dd/MM/yyyy");
+                txtPaymentDate.Text = this.dataList[0].sample_invoice_complete_date.Value.ToString("dd/MM/yyyy");
+            }
+            else
+            {
+                gvSample.Columns[0].Visible = true;
+                gvSample.Columns[1].Visible = false;
+                gvSample.Columns[2].Visible = false;
+                gvSample.Columns[3].Visible = false;
+                gvSample.Columns[4].Visible = false;
+                gvSample.Columns[5].Visible = false;
+                gvSample.Columns[6].Visible = true;
+                gvSample.Columns[7].Visible = true;
+                gvSample.Columns[8].Visible = true;
+                gvSample.Columns[9].Visible = true;
+            }
         }
 
         private void removeSession()

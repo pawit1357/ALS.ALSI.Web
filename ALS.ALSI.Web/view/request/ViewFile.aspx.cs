@@ -197,7 +197,7 @@ namespace ALS.ALSI.Web.view.request
                 lbShowListText.Text = "";
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 lbShowListText.Text = "-";
 

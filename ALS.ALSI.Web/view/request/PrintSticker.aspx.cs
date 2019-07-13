@@ -13,8 +13,8 @@ namespace ALS.ALSI.Web.view.request
     {
 
         //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(PrintSticker));
-        private int m_currentPageIndex;
-        private IList<Stream> m_streams;
+        //private int m_currentPageIndex;
+        //private IList<Stream> m_streams;
 
         #region "Property"
         protected String type_of_test
@@ -169,8 +169,8 @@ namespace ALS.ALSI.Web.view.request
 
 
                 // Variables
-                Warning[] warnings;
-                string[] streamIds;
+                //Warning[] warnings;
+                //string[] streamIds;
                 string mimeType = string.Empty;
                 string encoding = string.Empty;
                 string extension = string.Empty;

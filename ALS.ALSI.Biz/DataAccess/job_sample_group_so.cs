@@ -29,5 +29,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<System.DateTime> update_date { get; set; }
         public string filename { get; set; }
         public string quantity { get; set; }
+        public string so_company { get; set; }
     }
 }

@@ -352,7 +352,7 @@ namespace ALS.ALSI.Web.view.template
         {
             template_wd_hpa_for3_coverpage objWork = new template_wd_hpa_for3_coverpage();
 
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -496,7 +496,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         errors.Add("Invalid File. Please upload a File with extension .doc|.docx");
                         //lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        //isValid = false;
                     }
                     this.jobSample.step6owner = userLogin.id;
                     break;
@@ -525,7 +525,7 @@ namespace ALS.ALSI.Web.view.template
                     {
                         errors.Add("Invalid File. Please upload a File with extension .pdf");
                         //lbMessage.Attributes["class"] = "alert alert-error";
-                        isValid = false;
+                        //isValid = false;
                     }
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -755,7 +755,7 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                 }
-                catch (Exception Ex)
+                catch (Exception )
                 {
                     ////logger.Error(Ex.Message);
                     Console.WriteLine();
@@ -1178,7 +1178,7 @@ namespace ALS.ALSI.Web.view.template
                 _tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                 list.Add(_tmp);
 
-                int seq = 7;
+                //int seq = 7;
 
 
                 list.AddRange(getArmElementalComposition(list.Count));

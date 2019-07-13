@@ -34,6 +34,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public int spec_id { get; set; }
         public String dataGroup { get; set; }
 
+        public String sample_so { get; set; }
         public String sample_po { get; set; }
         public String sample_invoice { get; set; }
 
@@ -161,6 +162,7 @@ namespace ALS.ALSI.Biz.DataAccess
                                  sample_invoice_date = s.sample_invoice_date,
                                  sample_invoice_amount = s.sample_invoice_amount,
                                  sample_po = s.sample_po,
+                                 sample_so = s.sample_so,
                                  contract_person = (cp.name == null) ? "" : cp.name,
                                  description = s.description,
                                  model = s.model,
@@ -203,14 +205,6 @@ namespace ALS.ALSI.Biz.DataAccess
                                  fisicalY = (j.date_of_receive.Value.Month < 4) ? j.date_of_receive.Value.Year - 1 : j.date_of_receive.Value.Year
                              };
 
-                //if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
-                //{
-                //    ddlPhysicalYear.SelectedValue = (DateTime.Now.Year - 1).ToString();
-                //}
-                //else
-                //{
-                //    ddlPhysicalYear.SelectedValue = (DateTime.Now.Year).ToString();
-                //}
 
                 if (!String.IsNullOrEmpty(section))
                 {
@@ -236,9 +230,12 @@ namespace ALS.ALSI.Biz.DataAccess
                     result = result.Where(x => x.sn == this.sample_id);
                 }
 
-                if (!String.IsNullOrEmpty(this.preFixText))
+                if (string.IsNullOrEmpty(this.sample_so))
                 {
-                    result = result.Where(x => x.sample_prefix.Trim().Contains(this.preFixText.Trim()));
+                    if (!String.IsNullOrEmpty(this.preFixText))
+                    {
+                        result = result.Where(x => x.sample_prefix.Trim().Contains(this.preFixText.Trim()));
+                    }
                 }
 
                 //if (this.date_of_receive != null && this.date_of_receive !=DateTime.MinValue)
@@ -306,7 +303,10 @@ namespace ALS.ALSI.Biz.DataAccess
                 {
                     result = result.Where(x => x.sample_invoice.Contains(this.sample_invoice));
                 }
-
+                if (!String.IsNullOrEmpty(this.sample_so))
+                {
+                    result = result.Where(x => x.sample_so.Contains(this.sample_so));
+                }
                 if (this.receive_report_from != DateTime.MinValue && this.receive_report_to != DateTime.MinValue)
                 {
                     result = result.Where(x => x.receive_date >= this.receive_report_from && x.receive_date <= this.receive_report_to);
@@ -337,7 +337,7 @@ namespace ALS.ALSI.Biz.DataAccess
                     result = result.Where(x => x.date_admin_sent_to_cus >= this.report_to_customer_from && x.date_admin_sent_to_cus <= this.report_to_customer_to);
                 }
 
-                return result.Where(x=>x.job_status != 18).ToList();// JOB_STATUS EQUAL0 EQUAL "JOB_DELETE"
+                return result.Where(x=>x.job_status != 18 && !x.job_number.StartsWith("#")).ToList();// JOB_STATUS EQUAL0 EQUAL "JOB_DELETE"
             }
         }
 

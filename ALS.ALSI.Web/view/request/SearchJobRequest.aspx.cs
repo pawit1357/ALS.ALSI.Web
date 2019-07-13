@@ -99,46 +99,53 @@ namespace ALS.ALSI.Web.view.request
             get
             {
                 job_info tmp = new job_info();
-
-                tmp.status = String.IsNullOrEmpty(ddlJobStatus.SelectedValue) ? 0 : int.Parse(ddlJobStatus.SelectedValue);
-                tmp.jobRefNo = txtREfNo.Text.TrimEnd();
-                tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
-                tmp.customerText = ddlCompany.SelectedItem.Text;
-                tmp.spec_id = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : int.Parse(ddlSpecification.SelectedValue);
-                tmp.dataGroup = String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue) ? "" : ddlTypeOfTest.SelectedItem.Text;
-
-                tmp.preFixText = hPrefix.Value;// String.IsNullOrEmpty(hPrefix.Value) ? 1 : Convert.ToInt16(hPrefix.Value);
-                RoleEnum role = (RoleEnum)Enum.ToObject(typeof(RoleEnum), userLogin.role_id);
-                switch (role)
+                try
                 {
-                    case RoleEnum.LOGIN:
-                        break;
-                    case RoleEnum.ROOT:
-                        break;
-                    case RoleEnum.CHEMIST:
-                        tmp.responsible_test = userLogin.responsible_test.Split(Constants.CHAR_COMMA);
-                        break;
-                    case RoleEnum.SR_CHEMIST:
-                        break;
-                    case RoleEnum.LABMANAGER:
-                        break;
-                    case RoleEnum.ADMIN:
-                        break;
+
+                    tmp.status = String.IsNullOrEmpty(ddlJobStatus.SelectedValue) ? 0 : int.Parse(ddlJobStatus.SelectedValue);
+                    tmp.jobRefNo = txtREfNo.Text.TrimEnd();
+                    tmp.customer_id = String.IsNullOrEmpty(ddlCompany.SelectedValue) ? 0 : int.Parse(ddlCompany.SelectedValue);
+                    tmp.customerText = ddlCompany.SelectedItem.Text;
+                    tmp.spec_id = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : int.Parse(ddlSpecification.SelectedValue);
+                    tmp.dataGroup = String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue) ? "" : ddlTypeOfTest.SelectedItem.Text;
+
+                    tmp.preFixText = hPrefix.Value;// String.IsNullOrEmpty(hPrefix.Value) ? 1 : Convert.ToInt16(hPrefix.Value);
+                    RoleEnum role = (RoleEnum)Enum.ToObject(typeof(RoleEnum), userLogin.role_id);
+                    switch (role)
+                    {
+                        case RoleEnum.LOGIN:
+                            break;
+                        case RoleEnum.ROOT:
+                            break;
+                        case RoleEnum.CHEMIST:
+                            tmp.responsible_test = userLogin.responsible_test.Split(Constants.CHAR_COMMA);
+                            break;
+                        case RoleEnum.SR_CHEMIST:
+                            break;
+                        case RoleEnum.LABMANAGER:
+                            break;
+                        case RoleEnum.ADMIN:
+                            break;
+                    }
+
+                    tmp.sample_so = txtSo.Text;
+                    tmp.sample_po = txtPo.Text;
+
+
+                    tmp.sample_invoice = txtInvoice.Text;
+                    tmp.receive_report_from = String.IsNullOrEmpty(txtReceivedReportFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportFrom.Text);
+                    tmp.receive_report_to = String.IsNullOrEmpty(txtReceivedReportTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportTo.Text);
+
+                    tmp.duedate_from = String.IsNullOrEmpty(txtDuedateFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateFrom.Text);
+                    tmp.duedate_to = String.IsNullOrEmpty(txtDuedateTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateTo.Text);
+
+                    tmp.report_to_customer_from = String.IsNullOrEmpty(txtReportToCustomerFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerFrom.Text);
+                    tmp.report_to_customer_to = String.IsNullOrEmpty(txtReportToCustomerTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerTo.Text);
+                    tmp.userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
+                    tmp.physicalYear = Convert.ToInt16(ddlPhysicalYear.SelectedValue);
+                    tmp.section = ddlBoiNonBoi.SelectedValue.ToString();
                 }
-
-                tmp.sample_po = txtPo.Text;
-                tmp.sample_invoice = txtInvoice.Text;
-                tmp.receive_report_from = String.IsNullOrEmpty(txtReceivedReportFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportFrom.Text);
-                tmp.receive_report_to = String.IsNullOrEmpty(txtReceivedReportTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReceivedReportTo.Text);
-
-                tmp.duedate_from = String.IsNullOrEmpty(txtDuedateFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateFrom.Text);
-                tmp.duedate_to = String.IsNullOrEmpty(txtDuedateTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtDuedateTo.Text);
-
-                tmp.report_to_customer_from = String.IsNullOrEmpty(txtReportToCustomerFrom.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerFrom.Text);
-                tmp.report_to_customer_to = String.IsNullOrEmpty(txtReportToCustomerTo.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtReportToCustomerTo.Text);
-                tmp.userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
-                tmp.physicalYear = Convert.ToInt16(ddlPhysicalYear.SelectedValue);
-                tmp.section = ddlBoiNonBoi.SelectedValue.ToString();
+                catch (Exception ) { }
                 return tmp;
             }
         }
@@ -717,7 +724,7 @@ namespace ALS.ALSI.Web.view.request
                     DateTime due_date_lab = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][13]);
 
                     Boolean isGroupSubmit = Convert.ToBoolean(gv.DataKeys[e.Row.RowIndex][16]);
-                    Boolean isGrp = gv.DataKeys[e.Row.RowIndex][18].Equals("GRP");
+                    Boolean isGrp = gv.DataKeys[e.Row.RowIndex][18] == null ? false: gv.DataKeys[e.Row.RowIndex][18].Equals("GRP");
 
 
                     LinkButton btnInfo = (LinkButton)e.Row.FindControl("btnInfo");

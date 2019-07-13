@@ -225,6 +225,8 @@ namespace ALS.ALSI.Web.view.template
                         if (line.IndexOf("SO") != -1)
                         {
                             string so = line.Substring(line.IndexOf("SO"), 9);
+                            string company = line.Substring(24, 49).Trim();
+
                             string inv_no = line.Substring(line.IndexOf("IV"), 9);
                             string inv_date = line.Substring(15, 8);
                             string inv_duedate = line.Substring(128, 9);
@@ -238,6 +240,7 @@ namespace ALS.ALSI.Web.view.template
                             tmp.inv_amt = inv_amt;
                             tmp.inv_status = "I";
                             tmp.update_date = DateTime.Now;
+                            tmp.company = company;
                             groupInv.Add(tmp);
 
                             index++;
@@ -259,6 +262,7 @@ namespace ALS.ALSI.Web.view.template
                             tmp.filename = Path.GetFileName(filePath);
                             tmp.inv_status = "I";
                             tmp.report_no = "";
+                            tmp.company = sgInv.company;
                             tmp.update_date = DateTime.Now;
                             tmp.Update();
                         }
@@ -270,6 +274,12 @@ namespace ALS.ALSI.Web.view.template
                             sgInv.Insert();
                         }
                     }
+                    string invNos = string.Join(",", groupInv.Select(x => "'" + x.inv_no + "'"));
+
+                    string clearSql = "update job_sample set sample_invoice = '' where sample_invoice in (" + invNos + ")";
+                    MaintenanceBiz.ExecuteReturnDt(clearSql);
+
+
                     GeneralManager.Commit();
 
 

@@ -17,6 +17,7 @@ namespace ALS.ALSI.Biz
         public string s_pore_ref_no { get; set; }
         public string customer { get; set; }
         public string sample_invoice { get; set; }
+        public string sample_so { get; set; }
         public DateTime? sample_invoice_date { get; set; }
         public double? sample_invoice_amount { get; set; }
         public string sample_po { get; set; }

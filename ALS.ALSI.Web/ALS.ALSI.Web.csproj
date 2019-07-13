@@ -1224,6 +1224,7 @@
     <Content Include="PhaseII-Doc\script02.sql" />
     <Content Include="PhaseII-Doc\Solve.sql" />
     <Content Include="PhaseII-Doc\ตรวจสอบ due_date แบบ normal ที่เกิน 8 วัน.sql" />
+    <Content Include="ReadMe.txt" />
     <Content Include="ReadMe\script-solve.sql" />
     <Content Include="Scripts\AjaxControlToolkit\Debug\Accordion.debug.js" />
     <Content Include="Scripts\AjaxControlToolkit\Debug\AjaxFileUpload.debug.js" />

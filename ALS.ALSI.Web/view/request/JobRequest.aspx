@@ -312,7 +312,7 @@
                                 <label class="control-label col-md-3">
                                     Part no:<span class="required">&nbsp; </span>
                                 </label>
-                                <div class="col-md-6" id="divSurfaceArea">
+                                <div class="col-md-6" id="divPartNo">
                                     <asp:TextBox ID="txtPartNo" CssClass="form-control" runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -332,7 +332,7 @@
                                 <label class="control-label col-md-3">
                                     Lot no:<span class="required">&nbsp; </span>
                                 </label>
-                                <div class="col-md-6" id="divSurfaceArea">
+                                <div class="col-md-6" id="divLotNo">
                                     <asp:TextBox ID="txtLotNo" CssClass="form-control" runat="server"></asp:TextBox>
                                 </div>
                             </div>

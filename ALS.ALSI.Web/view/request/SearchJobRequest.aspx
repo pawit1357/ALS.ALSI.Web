@@ -112,6 +112,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">SO:</label>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="text-align: left">
+                                        <asp:TextBox ID="txtSo" runat="server" class="form-control"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">

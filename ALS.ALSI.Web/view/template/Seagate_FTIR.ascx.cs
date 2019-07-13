@@ -444,7 +444,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -903,8 +903,6 @@ namespace ALS.ALSI.Web.view.template
                 reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
 
                 // Variables
-                Warning[] warnings;
-                string[] streamIds;
                 string mimeType = string.Empty;
                 string encoding = string.Empty;
                 string extension = string.Empty;
@@ -996,7 +994,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                         else
                         {
-                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out string[] streamIds, out Warning[] warnings);
 
                             if (!Directory.Exists(Server.MapPath("~/Report/")))
                             {
@@ -1066,7 +1064,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1283,7 +1281,7 @@ namespace ALS.ALSI.Web.view.template
 
                     }
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                     Console.WriteLine();

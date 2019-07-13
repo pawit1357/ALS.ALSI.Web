@@ -40,9 +40,9 @@ namespace ALS.ALSI.Web.view.dashboard
 
         protected string jsonSeriesRpt04;
 
-        private static Excel.Workbook MyBook = null;
-        private static Excel.Application MyApp = null;
-        private static Excel.Worksheet MySheet = null;
+        //private static Excel.Workbook MyBook = null;
+        //private static Excel.Application MyApp = null;
+        //private static Excel.Worksheet MySheet = null;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -421,7 +421,7 @@ namespace ALS.ALSI.Web.view.dashboard
             return sbResultJson.ToString();
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return "[]";
 

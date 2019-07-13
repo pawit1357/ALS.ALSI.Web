@@ -718,7 +718,7 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
 

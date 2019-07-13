@@ -192,7 +192,7 @@ namespace ALS.ALSI.Web.view.template
                     txtDecimal11.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal11")).FirstOrDefault().val;
                     txtDecimal12.Text = this.WsHashValue.Where(x => x.key.Equals("txtDecimal12")).FirstOrDefault().val;
                 }
-                catch (Exception ex) { }
+                catch (Exception ) { }
             }
             ///////
             this.jobSample = new job_sample().SelectByID(this.SampleID);
@@ -1256,7 +1256,7 @@ namespace ALS.ALSI.Web.view.template
 
                     }
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                     Console.WriteLine();
@@ -2477,7 +2477,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }

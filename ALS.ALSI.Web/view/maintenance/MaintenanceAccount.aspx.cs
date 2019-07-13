@@ -102,7 +102,7 @@ namespace ALS.ALSI.Web.view.template
             //RedirectUri you used when you register your app.
             //For a client app, a redirect uri gives Azure AD more details on the application that it will authenticate.
             // You can use this redirect uri for your client app
-            string redirectUri = "https://login.live.com/oauth20_desktop.srf";
+            //string redirectUri = "https://login.live.com/oauth20_desktop.srf";
 
             //Resource Uri for Power BI API
             string resourceUri = "https://analysis.windows.net/powerbi/api";

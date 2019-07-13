@@ -376,7 +376,7 @@ namespace ALS.ALSI.Web.view.template
             //calculateByFormular();
             template_seagate_ic_coverpage objWork = new template_seagate_ic_coverpage();
 
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -1181,7 +1181,7 @@ namespace ALS.ALSI.Web.view.template
                                 txtB9.Text = CustomUtils.GetCellValue(isheet.GetRow(9 - 1).GetCell(ExcelColumn.B));
                                 txtB10.Text = CustomUtils.GetCellValue(isheet.GetRow(10 - 1).GetCell(ExcelColumn.B));
                                 txtB11.Text = CustomUtils.GetCellValue(isheet.GetRow(11 - 1).GetCell(ExcelColumn.B));
-                                int lpc_type = 1;
+                                //int lpc_type = 1;
 
                                 foreach (template_seagate_ic_coverpage ic in this.coverpages)
                                 {
@@ -1226,7 +1226,7 @@ namespace ALS.ALSI.Web.view.template
                         errors.Add(String.Format("นามสกุลไฟล์จะต้องเป็น *.xls"));
                     }
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                 }

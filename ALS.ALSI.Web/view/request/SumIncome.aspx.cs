@@ -111,6 +111,39 @@ namespace ALS.ALSI.Web.view.request
         private void bindingData()
         {
 
+            Hashtable hCustomers = new Hashtable();
+            Hashtable hInv = new Hashtable();
+            //Hashtable hSampleGroupSo = new Hashtable();
+            //List<string> hCustomers = new List<string>();
+
+            //#region "Customer"
+            //m_customer mCustomer = new m_customer();
+            //List<m_customer> listCustomer = mCustomer.SelectAll().ToList();
+            //foreach (m_customer c in listCustomer)
+            //{
+            //    hCustomers.Add(c.company_name);
+            //    //hCustomers[c.company_name] = c.company_name;
+            //}
+            //#endregion
+            //#region "SampleSo"
+            //job_sample_group_so sampleGroupSo = new job_sample_group_so();
+            //List<job_sample_group_so> litSampleGroupSo = sampleGroupSo.SelectAll().ToList();
+            //foreach (job_sample_group_so c in litSampleGroupSo)
+            //{
+            //    hSampleGroupSo[c.so] = c.so_company;
+            //}
+            //#endregion
+            #region "SampleSo"
+            job_sample_group_invoice sampleGroupSo = new job_sample_group_invoice();
+            List<job_sample_group_invoice> litSampleGroupSo = sampleGroupSo.SelectAll().ToList();
+            foreach (job_sample_group_invoice c in litSampleGroupSo)
+            {
+                hInv[c.inv_no] = c.company;
+                hCustomers[c.so] = c.company;
+            }
+            #endregion
+
+
             DataTable dt = new DataTable("DT");
 
             dt.Columns.Add("InvoiceDate", typeof(DateTime));
@@ -139,7 +172,7 @@ namespace ALS.ALSI.Web.view.request
                 "                    Terms,                                                                        " +
                 "                    Number,                                                                       " +
                 "                    PurchaseOrder,                                                                " +
-                "                    Customer,                                                                     " +
+                "                    Customer,sampleSo,                                                                     " +
                 "                    sum(TotalSubAmount) TotalSubAmount,                                                               " +
                 "                    (sum(TotalSubAmount) * 0.07) as Vat7,                                              " +
                 "    (sum(TotalSubAmount) + (sum(TotalSubAmount) * 0.07)) as GrandTotalAmountVat,                            " +
@@ -153,7 +186,7 @@ namespace ALS.ALSI.Web.view.request
                 "            s.sample_invoice_date AS InvoiceDate,                                                 " +
                 "            '' AS Terms,                                                                          " +
                 "            s.sample_po AS PurchaseOrder,                                                         " +
-                "            c.company_name AS Customer,                                                           " +
+                "            (case when (sgi.company is null or sgi.company ='') then c.company_name else sgi.company end)  AS Customer,s.sample_so as sampleSo,                                                           " +
                 "            ifnull(s.sample_invoice_amount, 0) AS TotalSubAmount,                                 " +
                 "            (CASE                                                                                 " +
                 "                WHEN RIGHT(s.job_number, 1) = 'B' THEN 'BOI'                                      " +
@@ -163,8 +196,9 @@ namespace ALS.ALSI.Web.view.request
                 "    FROM                                                                                          " +
                 "        job_sample s                                                                              " +
                 "    LEFT JOIN job_info i ON s.job_id = i.id                                                       " +
-                "    LEFT JOIN m_customer c ON i.customer_id = c.id                                                " +
+                "    LEFT JOIN job_sample_group_invoice sgi ON  s.sample_invoice = sgi.inv_no                                                " +
                 "    LEFT JOIN m_type_of_test tot ON tot.ID = s.type_of_test_id                                                " +
+                " left join m_customer c on s.id = i.customer_id " +
 
                 "    WHERE                                                                                         " +
                 "        s.sample_invoice IS NOT NULL                                                                   " +
@@ -211,7 +245,23 @@ namespace ALS.ALSI.Web.view.request
 
                 MySqlDataReader sdr = cmd.ExecuteReader();
                 dt.Load(sdr);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    String sampleSo = dr["sampleSo"].ToString();
+                    if (!string.IsNullOrEmpty(sampleSo))
+                    {
+                        string _companyName = hCustomers[sampleSo].ToString();
+                        if (!string.IsNullOrEmpty(_companyName))
+                        {
+                            dr["Customer"] = _companyName;
+
+                        }
+                    }
+                }
+
                 this.searchResult = dt;
+
 
                 gvJob.DataSource = this.searchResult;
                 gvJob.DataBind();
@@ -237,6 +287,23 @@ namespace ALS.ALSI.Web.view.request
 
         #endregion
 
+
+
+        private string checkContain(List<string> hCustomers, string compareValue)
+        {
+            string result = compareValue;
+
+            foreach (string s in hCustomers)
+            {
+                if (s.StartsWith(compareValue.Trim()))
+                {
+                    result = s;
+                    break;
+                }
+            }
+
+            return result;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (userLogin == null) Response.Redirect(Constants.LINK_LOGIN);
@@ -294,7 +361,9 @@ namespace ALS.ALSI.Web.view.request
 
         protected void ExportToExcel()
         {
-            String tmpFile = Server.MapPath("~/Report/") + "SumInv_" + DateTime.Now.ToString("yyyyMMdd")+".xlsx";
+
+
+            String tmpFile = Server.MapPath("~/Report/") + "SumInv_" + DateTime.Now.ToString("yyyyMMdd") + ".xlsx";
             String pathTemplate = Server.MapPath("~/template/") + "SumInvoiceTemplate.xlsx";
             byte[] TemplateFile = System.IO.File.ReadAllBytes(pathTemplate);
             using (MemoryStream stream = new MemoryStream(TemplateFile))
@@ -304,13 +373,13 @@ namespace ALS.ALSI.Web.view.request
                     int startIndex = 5;
                     int runningRow = 5;
                     var ws = xPackage.Workbook.Worksheets["Template"];
-                    ws.Cells["A1"].Value = "Summary Invoice on "+ Convert.ToDateTime(this.searchResult.Rows[0][0]).ToString("MMMM yyyy");
+                    ws.Cells["A1"].Value = "Summary Invoice on " + Convert.ToDateTime(this.searchResult.Rows[0][0]).ToString("MMMM yyyy");
                     foreach (DataRow row in this.searchResult.Rows)
                     {
                         ws.Cells["A" + runningRow].Value = Convert.ToDateTime(row.ItemArray.GetValue(0));
                         ws.Cells["B" + runningRow].Value = row.ItemArray.GetValue(1).ToString();
                         ws.Cells["C" + runningRow].Value = row.ItemArray.GetValue(2).ToString();
-                        ws.Cells["D" + runningRow].Value = row.ItemArray.GetValue(3).ToString()+" ";
+                        ws.Cells["D" + runningRow].Value = row.ItemArray.GetValue(3).ToString() + " ";
                         ws.Cells["E" + runningRow].Value = row.ItemArray.GetValue(4).ToString();
                         ws.Cells["F" + runningRow].Value = Convert.ToDouble(row.ItemArray.GetValue(5));
                         ws.Cells["G" + runningRow].Formula = "=F" + runningRow + "*0.07";
@@ -319,20 +388,20 @@ namespace ALS.ALSI.Web.view.request
                         ws.Cells["I" + runningRow].Formula = "=F" + runningRow + "*0.03";//WithholdingTax(3 %)
                         ws.Cells["J" + runningRow].Formula = "=H" + runningRow + "-I" + runningRow + "";
                         ws.Cells["K" + runningRow].Value = row.ItemArray.GetValue(10).ToString(); //BOI/NBOI
-                        ws.Cells["L" + runningRow].Value = row.ItemArray.GetValue(11).ToString(); 
+                        ws.Cells["L" + runningRow].Value = row.ItemArray.GetValue(11).ToString();
 
-                        if(!ws.Cells["K" + runningRow].Value.Equals("NBOI"))
+                        if (!ws.Cells["K" + runningRow].Value.Equals("NBOI"))
                         {
                             ws.Cells["I" + runningRow].Value = "0";
                         }
 
                         runningRow++;
                     }
-                    ws.Cells["F" + runningRow].Formula = "=SUM(F" + startIndex + ":F" + (runningRow-1) + ")";
-                    ws.Cells["G" + runningRow].Formula = "=SUM(G" + startIndex + ":G" + (runningRow-1) + ")";
-                    ws.Cells["H" + runningRow].Formula = "=SUM(H" + startIndex + ":H" + (runningRow-1) + ")";
-                    ws.Cells["I" + runningRow].Formula = "=SUM(I" + startIndex + ":I" + (runningRow-1) + ")";
-                    ws.Cells["J" + runningRow].Formula = "=SUM(J" + startIndex + ":J" + (runningRow-1) + ")";
+                    ws.Cells["F" + runningRow].Formula = "=SUM(F" + startIndex + ":F" + (runningRow - 1) + ")";
+                    ws.Cells["G" + runningRow].Formula = "=SUM(G" + startIndex + ":G" + (runningRow - 1) + ")";
+                    ws.Cells["H" + runningRow].Formula = "=SUM(H" + startIndex + ":H" + (runningRow - 1) + ")";
+                    ws.Cells["I" + runningRow].Formula = "=SUM(I" + startIndex + ":I" + (runningRow - 1) + ")";
+                    ws.Cells["J" + runningRow].Formula = "=SUM(J" + startIndex + ":J" + (runningRow - 1) + ")";
 
 
                     if (File.Exists(tmpFile))
@@ -346,7 +415,7 @@ namespace ALS.ALSI.Web.view.request
                 }
 
                 Response.ContentType = "application/vnd.ms-excel";
-                Response.AddHeader("Content-Disposition", "attachment; filename=" +Path.GetFileName(tmpFile));
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(tmpFile));
                 Response.WriteFile(tmpFile);
                 Response.Flush();
 

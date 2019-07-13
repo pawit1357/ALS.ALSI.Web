@@ -421,7 +421,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Boolean isValid = true;
+            //Boolean isValid = true;
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
             {
@@ -817,9 +817,10 @@ namespace ALS.ALSI.Web.view.template
                 }
                 catch (Exception ex)
                 {
-                    errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
+                    errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1} [{2}]", sheetName, CustomUtils.ErrorIndex,ex.Message));
 
                     Console.WriteLine();
+
                 }
             }
 
@@ -965,7 +966,7 @@ namespace ALS.ALSI.Web.view.template
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }

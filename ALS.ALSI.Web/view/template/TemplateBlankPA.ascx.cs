@@ -294,14 +294,14 @@ namespace ALS.ALSI.Web.view.template
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
 
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
             {
                 case StatusEnum.CHEMIST_TESTING:
 
-                    if (FileUpload2.HasFile) ;// && (Path.GetExtension(FileUpload2.FileName).Equals(".xls") || Path.GetExtension(FileUpload2.FileName).Equals(".xlt")))
+                    if (FileUpload2.HasFile) // && (Path.GetExtension(FileUpload2.FileName).Equals(".xls") || Path.GetExtension(FileUpload2.FileName).Equals(".xlt")))
                     {
                         string yyyy = DateTime.Now.ToString("yyyy");
                         string MM = DateTime.Now.ToString("MM");

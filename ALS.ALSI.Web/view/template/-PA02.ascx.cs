@@ -735,7 +735,7 @@ namespace ALS.ALSI.Web.view.template
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
 
-            Boolean isValid = true;
+            //Boolean isValid = true;
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -1345,7 +1345,7 @@ namespace ALS.ALSI.Web.view.template
                             Double value = 0;
                             using (var reader = new StreamReader(_postedFile.FileName))
                             {
-                                int row = 0;
+                                //int row = 0;
                                 while (!reader.EndOfStream)
                                 {
                                     var line = reader.ReadLine();
@@ -1445,7 +1445,7 @@ namespace ALS.ALSI.Web.view.template
 
                     }
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
 
@@ -1695,7 +1695,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1798,7 +1798,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1835,7 +1835,7 @@ namespace ALS.ALSI.Web.view.template
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1881,7 +1881,7 @@ namespace ALS.ALSI.Web.view.template
 
                 //gvMicroscopicAnalysis.HeaderRow.Parent.Controls.AddAt(0, row);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1901,7 +1901,7 @@ namespace ALS.ALSI.Web.view.template
                 gvMicroscopicAnalysis.DataSource = paDetail.Where(x => x.row_type == Convert.ToInt16(PAEnum.MICROSCOPIC_ANALLYSIS)).ToList();
                 gvMicroscopicAnalysis.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -1973,7 +1973,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -2081,7 +2081,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Console.WriteLine();
             }
@@ -2260,8 +2260,6 @@ namespace ALS.ALSI.Web.view.template
 
 
             // Variables
-            Warning[] warnings;
-            string[] streamIds;
             string mimeType = string.Empty;
             string encoding = string.Empty;
             string extension = string.Empty;
@@ -2376,7 +2374,7 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+                        byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out string[] streamIds, out Warning[] warnings);
 
                         if (!Directory.Exists(Server.MapPath("~/Report/")))
                         {

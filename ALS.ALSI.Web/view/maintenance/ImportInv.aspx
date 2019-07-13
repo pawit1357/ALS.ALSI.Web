@@ -32,7 +32,7 @@
                             <%=MessageINv%>
 
                             <!-- BEGIN FORM-->
-<div class="row">
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label col-md-3">เลือกไฟล์ Invoice(*.txt)<span class="required"></span></label>
@@ -110,6 +110,7 @@
                                             </HeaderTemplate>
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="cbSelect" runat="server" />
+
                                                 <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>' />
                                             </ItemTemplate>
 
@@ -158,6 +159,12 @@
                                                 <asp:Literal ID="ltInvStatus" runat="server" Text='<%#Eval("inv_status") %>'></asp:Literal>
                                             </ItemTemplate>
                                         </asp:TemplateField>
+<%--                                        <asp:TemplateField HeaderText="แยก Invoice" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnLoad" runat="server" CommandArgument='<%# String.Concat(Eval("id")) %>' CommandName="View" ToolTip="Load"><i class="fa fa-cog"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>--%>
+
                                     </Columns>
                                     <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
                                     <EmptyDataTemplate>
@@ -169,7 +176,6 @@
                             </asp:Panel>
                         </div>
                         <%=MsgLogs%>
-
                     </div>
                 </div>
             </div>
