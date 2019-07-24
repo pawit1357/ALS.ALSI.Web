@@ -1364,7 +1364,7 @@ namespace ALS.ALSI.Web.view.request
 
                     sqlCri.Append(" (case when  MONTH(`Extent1`.`date_of_receive`) <4 then YEAR(`Extent1`.`date_of_receive`)-1 else YEAR(`Extent1`.`date_of_receive`) end)= '" + ddlPhysicalYear.SelectedValue + "'");
                     sqlCri.Append(" AND ");
-                    sqlCri.Append(" `Extent2`.`job_status` <> 0");
+                    sqlCri.Append(" `Extent2`.`job_status` <> 0 and lower(substr(`Extent2`.`job_number`,1,1)) <> '#'  ");
                     sqlCri.Append(" AND ");
 
                     if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))

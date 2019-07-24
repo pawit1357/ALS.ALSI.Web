@@ -251,7 +251,7 @@ namespace ALS.ALSI.Web.view.request
                     String sampleSo = dr["sampleSo"].ToString();
                     if (!string.IsNullOrEmpty(sampleSo))
                     {
-                        string _companyName = hCustomers[sampleSo].ToString();
+                        string _companyName =(hCustomers[sampleSo]==null)? "": hCustomers[sampleSo].ToString();
                         if (!string.IsNullOrEmpty(_companyName))
                         {
                             dr["Customer"] = _companyName;

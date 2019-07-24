@@ -166,9 +166,6 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            String _pathSourceFile = String.Format(Configurations.PATH_TEMPLATE, FileUpload1.FileName);
-            String _phisicalPath = String.Format(Configurations.PATH_TEMPLATE, String.Empty);
-            String _savefilePath = String.Format(Configurations.PATH_TEMPLATE, FileUpload1.FileName);
             //::PROCESS UPLOAD
             switch (CommandName)
             {
@@ -187,16 +184,32 @@ namespace ALS.ALSI.Web.view.template
                 case CommandNameEnum.Edit:
                     break;
             }
+            String _phisicalPath = String.Format(Configurations.PATH_TMP, String.Empty);
+            String _savefilePath = String.Format(Configurations.PATH_TMP, FileUpload1.FileName);
+            //::PROCESS UPLOAD
+
             if (FileUpload1.HasFile && (Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".xls") || Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".xlt") || Path.GetExtension(FileUpload1.FileName).ToLower().Equals(".xlsx")))
             {
                 if (!Directory.Exists(_phisicalPath))
                 {
                     Directory.CreateDirectory(_phisicalPath);
                 }
-                hPathSourceFile.Value = _pathSourceFile;
-                FileUpload1.SaveAs(_savefilePath);
+                if (!File.Exists(_savefilePath))
+                {
+                    FileUpload1.SaveAs(_savefilePath);
+                }
+                else
+                {
+                    File.Delete(_savefilePath);
+                    FileUpload1.SaveAs(_savefilePath);
+                }
                 ProcessUpload(this.PKID, _savefilePath);
             }
+            else
+            {
+                Message = "<div class=\"alert alert-danger\"><strong>Error!</strong>สามารถอัพโหลดได้เฉพาะ ไฟล์ Excel(*.xlsx|xls|xlt) </div>";
+            }
+
             removeSession();
             MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
         }

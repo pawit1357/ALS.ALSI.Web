@@ -1,21 +1,12 @@
 ﻿using ALS.ALSI.Biz;
 using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
-using ALS.ALSI.Biz.ReportObjects;
 using ALS.ALSI.Utils;
 using ALS.ALSI.Web.Properties;
 using ALS.ALSI.Web.view.request;
-using Microsoft.Reporting.WebForms;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -552,6 +543,7 @@ namespace ALS.ALSI.Web.view.template
         //        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.ad_hoc_tempalte_path));
         //    }
         //}
+
     }
 }
 
