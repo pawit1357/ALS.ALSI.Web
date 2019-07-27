@@ -369,17 +369,18 @@ namespace ALS.ALSI.Web.view.template
                         _cover.SampleSize_IndirectMaterials = txtSampleSize_IndirectMaterials.Text;
                         _cover.OvenCondition_IndirectMaterials = txtOvenCondition_IndirectMaterials.Text;
                     }
-                    switch (this.CommandName)
-                    {
-                        case CommandNameEnum.Add:
-                            template_wd_mesa_coverpage.InsertList(this.coverpages);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_coverpage where sample_id={0}", this.SampleID));
+                    template_wd_mesa_coverpage.InsertList(this.coverpages);
+                    //switch (this.CommandName)
+                    //{
+                    //    case CommandNameEnum.Add:
+                    //        template_wd_mesa_coverpage.InsertList(this.coverpages);
+                    //        break;
+                    //    case CommandNameEnum.Edit:
+                    //        template_wd_mesa_coverpage.UpdateList(this.coverpages);
 
-                            break;
-                        case CommandNameEnum.Edit:
-                            template_wd_mesa_coverpage.UpdateList(this.coverpages);
-
-                            break;
-                    }
+                    //        break;
+                    //}
                     this.jobSample.date_login_complete = DateTime.Now;
                     this.jobSample.date_chemist_analyze = DateTime.Now;
                     break;
@@ -404,7 +405,10 @@ namespace ALS.ALSI.Web.view.template
                         _cover.SampleSize_IndirectMaterials = txtSampleSize_IndirectMaterials.Text;
                         _cover.OvenCondition_IndirectMaterials = txtOvenCondition_IndirectMaterials.Text;
                     }
-                    template_wd_mesa_coverpage.UpdateList(this.coverpages);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_coverpage where sample_id={0}", this.SampleID));
+                    template_wd_mesa_coverpage.InsertList(this.coverpages);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_img where sample_id={0}", this.SampleID));
+                    //template_wd_mesa_coverpage.UpdateList(this.coverpages);
                     template_wd_mesa_img.InsertList(this.refImg);
 
                     break;

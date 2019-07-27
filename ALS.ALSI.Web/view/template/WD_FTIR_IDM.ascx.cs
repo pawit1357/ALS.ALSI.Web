@@ -446,7 +446,9 @@ namespace ALS.ALSI.Web.view.template
                         item.ftir_unit = Convert.ToInt32(ddlUnit.SelectedValue);
 
                     }
-                    template_wd_ftir_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_ftir_coverpage where sample_id={0}", this.SampleID));
+
+                    //template_wd_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_wd_ftir_coverpage.InsertList(this.Ftir);
                     break;
                 case StatusEnum.CHEMIST_TESTING:
@@ -504,8 +506,10 @@ namespace ALS.ALSI.Web.view.template
                         item.silicone_unit_2 = txtDecimal09.Text;
 
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_ftir_coverpage where sample_id={0}", this.SampleID));
+                    template_wd_ftir_coverpage.InsertList(this.Ftir);
 
-                    template_wd_ftir_coverpage.UpdateList(this.Ftir);
+                    //template_wd_ftir_coverpage.UpdateList(this.Ftir);
                     this.jobSample.date_chemist_analyze = CustomUtils.converFromDDMMYYYY(txtDateAnalyzed.Text);
                     this.jobSample.date_chemist_complete = DateTime.Now;
                     this.jobSample.date_srchemist_analyze = DateTime.Now;

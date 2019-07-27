@@ -553,7 +553,8 @@ namespace ALS.ALSI.Web.view.template
 
 
                     }
-                    template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_gcms_coverpage where sample_id={0}", this.SampleID));
+                    //template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_gcms_coverpage.InsertList(this.coverpages);
                     this.jobSample.date_login_complete = DateTime.Now;
                     this.jobSample.date_chemist_analyze = DateTime.Now;
@@ -574,7 +575,8 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.path_pdf = String.Empty;
                         #endregion
                         #region "CAS#"
-                        tb_m_gcms_cas.DeleteBySampleID(this.SampleID);
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_gcms_cas where sample_id={0}", this.SampleID));
+                        //tb_m_gcms_cas.DeleteBySampleID(this.SampleID);
                         tb_m_gcms_cas.InsertList(this.tbCas);
                         #endregion
                         #region "Cover Page#"

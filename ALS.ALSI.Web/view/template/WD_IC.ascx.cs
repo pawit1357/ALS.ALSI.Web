@@ -391,8 +391,9 @@ namespace ALS.ALSI.Web.view.template
                         _cover.ExtractionMedium = txtExtractionMedium.Text;
                         _cover.ExtractionVolume = txtB11.Text;
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_ic_coverpage where sample_id={0}", this.SampleID));
 
-                    template_wd_ic_coverpage.DeleteBySampleID(this.SampleID);
+                    //template_wd_ic_coverpage.DeleteBySampleID(this.SampleID);
                     template_wd_ic_coverpage.InsertList(this.coverpages);
                     this.jobSample.date_login_complete = DateTime.Now;
                     this.jobSample.date_chemist_analyze = DateTime.Now;
@@ -420,7 +421,11 @@ namespace ALS.ALSI.Web.view.template
                         _cover.ExtractionVolume = txtB11.Text;
                         _cover.wunit = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
-                    template_wd_ic_coverpage.UpdateList(this.coverpages);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_ic_coverpage where sample_id={0}", this.SampleID));
+
+                    //template_wd_ic_coverpage.DeleteBySampleID(this.SampleID);
+                    template_wd_ic_coverpage.InsertList(this.coverpages);
+                    //template_wd_ic_coverpage.UpdateList(this.coverpages);
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);

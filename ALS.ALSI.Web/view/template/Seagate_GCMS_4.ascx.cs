@@ -555,7 +555,8 @@ namespace ALS.ALSI.Web.view.template
 
 
                     }
-                    template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_gcms_coverpage where sample_id={0}", this.SampleID));
+                    //template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_gcms_coverpage.InsertList(this.coverpages);
                     //template_img.InsertList(this.refImg);
 
@@ -680,7 +681,10 @@ namespace ALS.ALSI.Web.view.template
                             cov.remark4 = lbRemark4.Text;
                             cov.remark5 = lbRemark5.Text;
                         }
-                        template_seagate_gcms_coverpage.UpdateList(this.coverpages);
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_gcms_coverpage where sample_id={0}", this.SampleID));
+                        template_seagate_gcms_coverpage.InsertList(this.coverpages);
+
+                        //template_seagate_gcms_coverpage.UpdateList(this.coverpages);
                         this.WsHashValue = new List<ws_hash_value>();
                         ws_hash_value ws = new ws_hash_value { id = 1, sample_id = this.SampleID, key = "txtFloatResult01", val = txtFloatResult01.Text };
                         this.WsHashValue.Add(ws);
@@ -726,8 +730,8 @@ namespace ALS.ALSI.Web.view.template
                         this.WsHashValue.Add(ws);
                         ws = new ws_hash_value { id = 22, sample_id = this.SampleID, key = "txtDecimal12", val = txtDecimal12.Text };
                         this.WsHashValue.Add(ws);
-
-                        ws_hash_value.DeleteBySampleID(this.SampleID);
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from ws_hash_value where sample_id={0}", this.SampleID));
+                        //ws_hash_value.DeleteBySampleID(this.SampleID);
                         ws_hash_value.InsertList(this.WsHashValue);
                         template_img.InsertList(this.refImg);
 

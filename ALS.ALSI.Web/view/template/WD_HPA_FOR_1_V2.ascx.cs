@@ -348,7 +348,9 @@ namespace ALS.ALSI.Web.view.template
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         _cover.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
-                    objWork.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_hpa_for1_coverpage where sample_id={0}", this.SampleID));
+
+                    //objWork.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.HpaFor1);
                     this.jobSample.date_login_complete = DateTime.Now;
                     this.jobSample.date_chemist_analyze = DateTime.Now;
@@ -378,8 +380,11 @@ namespace ALS.ALSI.Web.view.template
                         _cover.detail_spec_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         _cover.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_hpa_for1_coverpage where sample_id={0}", this.SampleID));
 
-                    objWork.UpdateList(this.HpaFor1);
+                    //objWork.DeleteBySampleID(this.SampleID);
+                    objWork.InsertList(this.HpaFor1);
+                    //objWork.UpdateList(this.HpaFor1);
 
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:

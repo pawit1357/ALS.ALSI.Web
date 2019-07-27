@@ -495,7 +495,9 @@ namespace ALS.ALSI.Web.view.template
                         _tmp.row_type = 1;//Cover Page
                         _tmp.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
-                    objWork.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_lpc_coverpage where sample_id={0}", this.SampleID));
+
+                    //objWork.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.Lpcs);
                     this.jobSample.date_login_complete = DateTime.Now;
                     this.jobSample.date_chemist_analyze = DateTime.Now;
@@ -558,8 +560,9 @@ namespace ALS.ALSI.Web.view.template
                             _tmp.template_type = !CustomUtils.isNumber(ddlTemplateType.SelectedValue) ? 0 : Convert.ToInt32(ddlTemplateType.SelectedValue);
                             _tmp.unit = !CustomUtils.isNumber(ddlUnit.SelectedValue) ? 0 : Convert.ToInt32(ddlUnit.SelectedValue);
                         }
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_lpc_coverpage where sample_id={0}", this.SampleID));
 
-                        objWork.DeleteBySampleID(this.SampleID);
+                        //objWork.DeleteBySampleID(this.SampleID);
                         List<String> listOfParitcleSelected = new List<String>();
                         for (int i = 0; i < CheckBoxList1.Items.Count; i++)
 

@@ -389,7 +389,9 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-                    template_seagate_ic_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_ic_coverpage where sample_id={0}", this.SampleID));
+
+                    //template_seagate_ic_coverpage.DeleteBySampleID(this.SampleID);
                     foreach (template_seagate_ic_coverpage _cover in this.coverpages)
                     {
                         _cover.procedure_no = txtB18.Text;
@@ -427,7 +429,9 @@ namespace ALS.ALSI.Web.view.template
                         _cover.b10 = txtB10.Text;
                         _cover.wunit = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
-                    template_seagate_ic_coverpage.UpdateList(this.coverpages);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_ic_coverpage where sample_id={0}", this.SampleID));
+
+                    template_seagate_ic_coverpage.InsertList(this.coverpages);
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:
                     StatusEnum srChemistApproveStatus = (StatusEnum)Enum.Parse(typeof(StatusEnum), ddlStatus.SelectedValue, true);

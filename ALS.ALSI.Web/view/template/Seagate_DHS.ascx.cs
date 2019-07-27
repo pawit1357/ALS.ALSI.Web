@@ -393,7 +393,8 @@ namespace ALS.ALSI.Web.view.template
                         _val.sampleSize = txtSampleSize.Text;
                         _val.SamplingTime = txtSamplingTime.Text;
                     }
-                    template_seagate_dhs_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_dhs_coverpage where sample_id={0}", this.SampleID));
+                    //template_seagate_dhs_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_dhs_coverpage.InsertList(this.coverpages);
                     #endregion
                     this.jobSample.date_login_complete = DateTime.Now;
@@ -415,7 +416,8 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.path_pdf = String.Empty;
                         //#endregion
                         #region "CAS#"
-                        tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_dhs_cas where sample_id={0}", this.SampleID));
+                        //tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
                         tb_m_dhs_cas.InsertList(this.tbCas);
                         #endregion
                         #region "Cover Page#"

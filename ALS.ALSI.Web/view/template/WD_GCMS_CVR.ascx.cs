@@ -434,7 +434,9 @@ namespace ALS.ALSI.Web.view.template
                             _cov.RowState = this.CommandName;
                         }
                     }
-                    template_wd_gcms_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_gcms_coverpage where sample_id={0}", this.SampleID));
+
+                    //template_wd_gcms_coverpage.DeleteBySampleID(this.SampleID);
                     template_wd_gcms_coverpage.InsertList(this.coverpages);
                     #endregion
                     this.jobSample.date_login_complete = DateTime.Now;
@@ -472,7 +474,10 @@ namespace ALS.ALSI.Web.view.template
 
                         //_cov.RowState = this.CommandName;
                     }
-                    template_wd_gcms_coverpage.UpdateList(this.coverpages);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_gcms_coverpage where sample_id={0}", this.SampleID));
+                    template_wd_gcms_coverpage.InsertList(this.coverpages);
+
+                    //template_wd_gcms_coverpage.UpdateList(this.coverpages);
                     #endregion
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:

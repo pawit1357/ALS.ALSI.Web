@@ -366,8 +366,9 @@ namespace ALS.ALSI.Web.view.template
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
 
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_coverpage where sample_id={0}", this.SampleID));
 
-                    template_wd_mesa_coverpage.DeleteBySampleID(this.SampleID);
+                    //template_wd_mesa_coverpage.DeleteBySampleID(this.SampleID);
                     template_wd_mesa_coverpage.InsertList(this.coverpages);
 
                     this.jobSample.date_login_complete = DateTime.Now;
@@ -391,11 +392,13 @@ namespace ALS.ALSI.Web.view.template
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
 
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_coverpage where sample_id={0}", this.SampleID));
 
-                    template_wd_mesa_coverpage.DeleteBySampleID(this.SampleID);
+                    //template_wd_mesa_coverpage.DeleteBySampleID(this.SampleID);
                     template_wd_mesa_coverpage.InsertList(this.coverpages);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_img where sample_id={0}", this.SampleID));
 
-                    template_wd_mesa_img.DeleteBySampleID(this.SampleID);
+                    //template_wd_mesa_img.DeleteBySampleID(this.SampleID);
                     template_wd_mesa_img.InsertList(this.refImg);
 
                     break;

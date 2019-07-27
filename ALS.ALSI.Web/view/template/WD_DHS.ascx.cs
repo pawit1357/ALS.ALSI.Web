@@ -406,8 +406,9 @@ namespace ALS.ALSI.Web.view.template
                         _val.pm_extraction_medium = txtExtractionMedium.Text;
                         _val.pm_extraction_volume = txtExtractionVolume.Text;
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_dhs_coverpage where sample_id={0}", this.SampleID));
 
-                    template_wd_dhs_coverpage.DeleteBySampleID(this.SampleID);
+                    //template_wd_dhs_coverpage.DeleteBySampleID(this.SampleID);
                     template_wd_dhs_coverpage.InsertList(this.coverpages);
 
                     #endregion
@@ -442,7 +443,10 @@ namespace ALS.ALSI.Web.view.template
                             _val.pm_extraction_volume = txtExtractionVolume.Text;
                             _val.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                         }
-                        template_wd_dhs_coverpage.UpdateList(this.coverpages);
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_dhs_coverpage where sample_id={0}", this.SampleID));
+                        template_wd_dhs_coverpage.InsertList(this.coverpages);
+
+                        //template_wd_dhs_coverpage.UpdateList(this.coverpages);
                     }
                     else
                     {

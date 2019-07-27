@@ -492,7 +492,9 @@ namespace ALS.ALSI.Web.view.template
                         ws.unit2 = Convert.ToInt32(ddlHardParticleAlalysisUnit.SelectedValue);
                         ws.unit3 = Convert.ToInt32(ddlClassificationUnit.SelectedValue);
                     }
-                    template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_hpa_coverpage where sample_id={0}", this.SampleID));
+
+                    //template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
                     objWork.InsertList(this.Hpas);
                     this.jobSample.date_login_complete = DateTime.Now;
                     this.jobSample.date_chemist_analyze = DateTime.Now;
@@ -606,7 +608,9 @@ namespace ALS.ALSI.Web.view.template
                             #endregion
 
                         }
-                        template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_hpa_coverpage where sample_id={0}", this.SampleID));
+
+                        //template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
                         objWork.InsertList(this.Hpas);
                     }
                     else

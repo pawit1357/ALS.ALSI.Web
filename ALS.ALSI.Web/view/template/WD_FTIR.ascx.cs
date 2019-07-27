@@ -417,7 +417,9 @@ namespace ALS.ALSI.Web.view.template
                         item.component_id = Convert.ToInt32(ddlComponent.SelectedValue);
                         item.ftir_unit = Convert.ToInt32(ddlFtirUnit.SelectedValue);
                     }
-                    template_wd_ftir_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_ftir_coverpage where sample_id={0}", this.SampleID));
+
+                    //template_wd_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_wd_ftir_coverpage.InsertList(this.Ftir);
                     break;
                 case StatusEnum.CHEMIST_TESTING:
@@ -467,8 +469,10 @@ namespace ALS.ALSI.Web.view.template
                         //item.amide_unit = lbAmide.Text;
                         item.silicone_unit = lbSilicone.Text;
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_ftir_coverpage where sample_id={0}", this.SampleID));
+                    template_wd_ftir_coverpage.InsertList(this.Ftir);
 
-                    template_wd_ftir_coverpage.UpdateList(this.Ftir);
+                    //template_wd_ftir_coverpage.UpdateList(this.Ftir);
 
                     break;
                 case StatusEnum.SR_CHEMIST_CHECKING:

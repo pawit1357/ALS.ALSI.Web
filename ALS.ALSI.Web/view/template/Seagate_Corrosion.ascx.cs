@@ -357,7 +357,9 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.CHEMIST_TESTING);
                     this.jobSample.step2owner = userLogin.id;
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
-                    template_seagate_corrosion_coverpage.DeleteBySampleID(this.SampleID);
+
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_corrosion_coverpage where sample_id={0}", this.SampleID));
+                    //template_seagate_corrosion_coverpage.DeleteBySampleID(this.SampleID);
                     foreach (template_seagate_corrosion_coverpage _cover in this.coverpages)
                     {
                         _cover.procedureNo_id = Convert.ToInt32(ddlMethod.SelectedValue);
@@ -389,7 +391,8 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                     template_seagate_corrosion_coverpage.UpdateList(this.coverpages);
-                    template_seagate_corrosion_img.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_corrosion_img where sample_id={0}", this.SampleID));
+                    //template_seagate_corrosion_img.DeleteBySampleID(this.SampleID);
                     template_seagate_corrosion_img.InsertList(this.refImg);
 
                     break;

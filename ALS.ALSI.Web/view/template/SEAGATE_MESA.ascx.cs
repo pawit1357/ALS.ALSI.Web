@@ -349,9 +349,11 @@ namespace ALS.ALSI.Web.view.template
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_mesa_coverpage where sample_id={0}", this.SampleID));
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_mesa_img where sample_id={0}", this.SampleID));
 
-                    template_seagate_mesa_coverpage.DeleteBySampleID(this.SampleID);
-                    template_seagate_mesa_img.DeleteBySampleID(this.SampleID);
+                    //template_seagate_mesa_coverpage.DeleteBySampleID(this.SampleID);
+                    //template_seagate_mesa_img.DeleteBySampleID(this.SampleID);
 
                     template_seagate_mesa_coverpage.InsertList(this.coverpages);
                     template_seagate_mesa_img.InsertList(this.refImg);
@@ -375,9 +377,11 @@ namespace ALS.ALSI.Web.view.template
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_mesa_coverpage where sample_id={0}", this.SampleID));
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_mesa_img where sample_id={0}", this.SampleID));
 
-                    template_seagate_mesa_coverpage.DeleteBySampleID(this.SampleID);
-                    template_seagate_mesa_img.DeleteBySampleID(this.SampleID);
+                    //template_seagate_mesa_coverpage.DeleteBySampleID(this.SampleID);
+                    //template_seagate_mesa_img.DeleteBySampleID(this.SampleID);
 
                     template_seagate_mesa_coverpage.InsertList(this.coverpages);
                     template_seagate_mesa_img.InsertList(this.refImg);

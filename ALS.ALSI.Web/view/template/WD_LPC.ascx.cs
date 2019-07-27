@@ -379,7 +379,9 @@ namespace ALS.ALSI.Web.view.template
                             cov.WashMethod = ddlWashMethod.SelectedValue;
                             cov.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                         }
-                        objWork.DeleteBySampleID(this.SampleID);
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_lpc_coverpage where sample_id={0}", this.SampleID));
+
+                        //objWork.DeleteBySampleID(this.SampleID);
                         objWork.InsertList(this.Lpc.ToList());
                     }
                     this.jobSample.date_login_complete = DateTime.Now;
@@ -443,7 +445,9 @@ namespace ALS.ALSI.Web.view.template
                                 cov.unit4 = Convert.ToInt32(ddlUnit4.SelectedValue);
 
                             }
-                            objWork.DeleteBySampleID(this.SampleID);
+                            MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_lpc_coverpage where sample_id={0}", this.SampleID));
+
+                            //objWork.DeleteBySampleID(this.SampleID);
                             objWork.InsertList(this.Lpc.ToList());
                         }
                         else

@@ -511,7 +511,8 @@ namespace ALS.ALSI.Web.view.template
                         item.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         item.selected_unit_ftir = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
-                    template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_ftir_coverpage where sample_id={0}", this.SampleID));
+                    //template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_ftir_coverpage.InsertList(this.Ftir);
                     this.jobSample.date_login_complete = DateTime.Now;
                     this.jobSample.date_chemist_analyze = DateTime.Now;
@@ -541,7 +542,8 @@ namespace ALS.ALSI.Web.view.template
                         item.w_d15 = txtWD15.Text;
                     }
                     //template_seagate_ftir_coverpage.UpdateList(this.Ftir);
-                    template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_ftir_coverpage where sample_id={0}", this.SampleID));
+                    //template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
                     template_seagate_ftir_coverpage.InsertList(this.Ftir);
 
                     template_img.DeleteBySampleID(this.SampleID);
