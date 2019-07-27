@@ -250,6 +250,18 @@ namespace ALS.ALSI.Web.view.template
                     job_sample_group_so jobSampleGS = this.searchResult.Where(x => x.id == _id).FirstOrDefault();
                     if (jobSampleGS != null)
                     {
+                        List<string> soList = new List<string>();
+                        soList.Add("'"+jobSampleGS.so+"'");
+
+                        string clearSql = "update job_sample set sample_so = '', sample_invoice = '' where sample_so in (" + string.Join(",", soList) + ")";
+                        MaintenanceBiz.ExecuteReturnDt(clearSql);
+                        //delete batch jobSample by condition
+                        string sqlDelJobInfo = "delete from job_info where id in (select job_id from job_sample where template_id=-1 and job_status=3 and sample_so in (" + string.Join(",", soList) + "))";
+                        MaintenanceBiz.ExecuteReturnDt(sqlDelJobInfo);
+                        string sqlDelSample = "delete from job_sample where template_id=-1 and job_status=3 and sample_so in (" + string.Join(",", soList) + ")";
+                        MaintenanceBiz.ExecuteReturnDt(sqlDelSample);
+
+
                         jobSampleGS.Delete();
                         GeneralManager.Commit();
                         bindingData();
@@ -282,9 +294,11 @@ namespace ALS.ALSI.Web.view.template
         {
             Boolean bUploadSuccess = false;
             List<job_sample_group_so> listGroupSo = new List<job_sample_group_so>();
+            List<string> ignoreSoCode = new job_sample_group_so_ignore_code().SelectInvAll().Select(x => x.code).ToList<string>();
 
             try
             {
+                List<string> soList = new List<string>();
 
                 job_sample_group_so cso = null;
                 int index = 0;
@@ -296,11 +310,28 @@ namespace ALS.ALSI.Web.view.template
                     {
                         if (line.StartsWith("  SO") || line.Substring(10, 2).Equals("SO"))
                         {
+                            string _so = line.Substring(10, 10).Trim();
+                            soList.Add("'"+_so+"'");
+                        }
+                    }
+                }
+                //delete batch jobSample by condition
+                string sqlDelJobInfo = "delete from job_info where id in (select job_id from job_sample where template_id=-1 and job_status=3 and sample_so in (" + string.Join(",", soList) + "))";
+                MaintenanceBiz.ExecuteReturnDt(sqlDelJobInfo);
+                string sqlDelSample = "delete from job_sample where template_id=-1 and job_status=3 and sample_so in (" + string.Join(",", soList) + ")";
+                MaintenanceBiz.ExecuteReturnDt(sqlDelSample);
+
+                Console.WriteLine();
+                foreach (string line in lines)
+                {
+                    if (!line.Equals("") && !line.Equals("\f"))
+                    {
+                        if (line.StartsWith("  SO") || line.Substring(10, 2).Equals("SO"))
+                        {
                             if (index == 0)
                             {
                                 so = line.Substring(10, 10).Trim();
                                 cso = new job_sample_group_so { so = so, so_company = line.Substring(23, 30) };
-
                             }
                             if (index > 0)
                             {
@@ -314,6 +345,10 @@ namespace ALS.ALSI.Web.view.template
                                     cso.so_desc = cso.so_desc.TrimEnd(Environment.NewLine.ToCharArray());
                                     cso.report_no = cso.report_no.TrimEnd(Environment.NewLine.ToCharArray());
                                 }
+                                cso.quantity = cso.quantity.TrimEnd('\n').TrimEnd('\r');
+                                cso.unit_price = cso.unit_price.TrimEnd('\n').TrimEnd('\r');
+                                cso.so_desc = cso.so_desc.TrimEnd('\n').TrimEnd('\r');
+
                                 cso.status = "I";
                                 cso.create_date = DateTime.Now;
                                 listGroupSo.Add(cso);
@@ -328,11 +363,13 @@ namespace ALS.ALSI.Web.view.template
                         }
                         else if (line.Contains("SAMPLE") || line.Contains("Each") || line.Contains("Pack"))
                         {
+                            string soCode = Regex.Replace(line.Substring(7, 12), @"[^0-9a-zA-Z\._-]", string.Empty);
                             Double _quantity = Convert.ToDouble(Regex.Replace(line.Substring(54, 5), "[A-Za-z ]", "").Replace(",", "").Trim());
                             Double unitPrice = Convert.ToDouble(Regex.Replace(line.Substring(65, 15), "[A-Za-z ]", "").Replace(",", "").Trim());
                             cso.unit_price += (unitPrice) + System.Environment.NewLine;
-                            cso.so_desc += Regex.Replace(line.Substring(7, 12), @"[^0-9a-zA-Z\._-]", string.Empty) + System.Environment.NewLine;
+                            cso.so_desc += soCode + System.Environment.NewLine;
                             cso.quantity += Convert.ToInt16(_quantity) + System.Environment.NewLine;
+
                         }
                         else if (line.Contains("Report no."))
                         {
@@ -351,8 +388,12 @@ namespace ALS.ALSI.Web.view.template
                 //add last item
                 cso.status = "I";
                 cso.create_date = DateTime.Now;
-                listGroupSo.Add(cso);
 
+                cso.quantity = cso.quantity.TrimEnd('\n').TrimEnd('\r');
+                cso.unit_price = cso.unit_price.TrimEnd('\n').TrimEnd('\r');
+                cso.so_desc = cso.so_desc.TrimEnd('\n').TrimEnd('\r');
+
+                listGroupSo.Add(cso);
 
 
                 bUploadSuccess = true;
@@ -394,16 +435,6 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
 
-                //delete batch jobSample by condition
-                string ids = string.Join(",", listGroupSo.Select(x => "'" + x.so + "'"));
-                string sqlDelJobInfo = "delete from job_info where id in (select job_id from job_sample where template_id=-1 and job_status=3 and sample_so in (" + ids + "))";
-                MaintenanceBiz.ExecuteReturnDt(sqlDelJobInfo);
-                string sqlDelSample = "delete from job_sample where template_id=-1 and job_status=3 and sample_so in (" + ids + ")";
-                MaintenanceBiz.ExecuteReturnDt(sqlDelSample);
-                string clearSql = "update job_sample set sample_so = '', sample_invoice = '' where sample_so in (" + ids + ")";
-                MaintenanceBiz.ExecuteReturnDt(clearSql);
-
-                
                 GeneralManager.Commit();
 
                 bindingData();
@@ -451,13 +482,15 @@ namespace ALS.ALSI.Web.view.template
 
 
                 IEnumerable<job_sample_group_so> soGroup = this.searchResult;
+                List<string> soList = new List<string>();
 
-                List<job_sample_group_so_ignore_code> ignoreCode = new job_sample_group_so_ignore_code().SelectInvAll();
                 if (soIds != null)
                 {
                     soGroup = this.searchResult.Where(x => soIds.Contains(x.id)).ToList();
                 }
                 soGroup = soGroup.Where(x => (x.unit_price != null)).ToList();
+                soList = soGroup.Select(x => "'" + x.so + "'").ToList<string>();
+
                 int total = soGroup.Count();
                 int fail = 0;
                 logs.Append("<br>--------------------------------------------------------------------------------");
@@ -465,7 +498,13 @@ namespace ALS.ALSI.Web.view.template
                 logs.Append("<br>--------------------------------------------------------------------------------");
 
 
-
+                string clearSql = "update job_sample set sample_so = '', sample_invoice = '' where sample_so in (" + string.Join(",", soList) + ")";
+                MaintenanceBiz.ExecuteReturnDt(clearSql);
+                //delete batch jobSample by condition
+                string sqlDelJobInfo = "delete from job_info where id in (select job_id from job_sample where template_id=-1 and job_status=3 and sample_so in (" + string.Join(",", soList) + "))";
+                MaintenanceBiz.ExecuteReturnDt(sqlDelJobInfo);
+                string sqlDelSample = "delete from job_sample where template_id=-1 and job_status=3 and sample_so in (" + string.Join(",", soList) + ")";
+                MaintenanceBiz.ExecuteReturnDt(sqlDelSample);
                 Console.WriteLine();
 
 
@@ -476,62 +515,67 @@ namespace ALS.ALSI.Web.view.template
                     logs.Append("<br>#SO = " + _updateCso.so + "<br>");
                     String[] Quantitys = _updateCso.quantity.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
                     String[] UnitPrices = _updateCso.unit_price.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
-                    String[] ReportNoLists = _updateCso.report_no == null ? createEmptyArray(Quantitys.Length) : _updateCso.report_no.Split(new[] { "|" }, StringSplitOptions.None);
+                    String[] ReportNoLists = createEmptyArray(Quantitys.Length, _updateCso);// _updateCso.report_no == null ? createEmptyArray(Quantitys.Length) : _updateCso.report_no.Split(new[] { "|" }, StringSplitOptions.None);
                     String[] descs = _updateCso.so_desc.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);
+                    Console.WriteLine();
 
                     if (ReportNoLists.Count() != Quantitys.Count())
                     {
-                        ReportNoLists = createEmptyArray(Quantitys.Length, _updateCso);
+                        //ReportNoLists = createEmptyArray(Quantitys.Length, _updateCso);
+                        isComplete = false;
                     }
-
-                    _updateCso.report_no = "";//clear
-                    for (int i = 0; i < Quantitys.Length; i++)
+                    else
                     {
-                        if (!string.IsNullOrEmpty(Quantitys[i]))
+
+                        //_updateCso.report_no = "";//clear
+                        for (int i = 0; i < Quantitys.Length; i++)
                         {
-                            string soDesc = descs[i];
-                            string rptNo = ReportNoLists[i];
-                            double amt = Convert.ToDouble(UnitPrices[i]);
-                            int quantity = Convert.ToInt16(Quantitys[i]);
-
-                            List<string> jobNumbers = getJobNumFromList(rptNo, quantity, _updateCso, soDesc, amt);
-
-                            List<job_sample> listUpdates = job_sample.FindAllByJobNumbers(jobNumbers);
-                            foreach(job_sample js in listUpdates)
+                            if (!string.IsNullOrEmpty(Quantitys[i]))
                             {
-                                js.sample_so = _updateCso.so;
-                                js.sample_invoice_amount = amt;
-                                js.Update();
-                                logs.Append(" - " + js.job_number + "[x],");
-                            }
+                                string soDesc = descs[i];
+                                string rptNo = ReportNoLists[i];
+                                double amt = Convert.ToDouble(UnitPrices[i]);
+                                int quantity = Convert.ToInt16(Quantitys[i]);
 
-                            if (listUpdates.Count() < jobNumbers.Count())
-                            {
-                                logs.Append(" - ");
-                                sbJobFail.Append(_updateCso.so + ",");
+                                List<string> jobNumbers = getJobNumFromList(rptNo, quantity, _updateCso, soDesc, amt);
 
-                                List<string> updated = listUpdates.Select(x => x.job_number).ToList<string>();
-
-                                List<string> xxx = new List<string>();
-                                foreach(string o in jobNumbers)
+                                List<job_sample> listUpdates = job_sample.FindAllByJobNumbers(jobNumbers);
+                                foreach (job_sample js in listUpdates)
                                 {
-                                    if (!updated.Contains(o))
-                                    {
-                                        xxx.Add(o);
-                                        logs.Append(","+o+"[ ]");
-                                    }
+                                    js.sample_so = _updateCso.so;
+                                    js.sample_invoice_amount = amt;
+                                    js.Update();
+                                    logs.Append(" - " + js.job_number + "[x],");
                                 }
-                                fail++;
-                                isComplete = false;
-                            }
 
-                            _updateCso.report_no += string.Join(",", jobNumbers) + "|";
+                                if (listUpdates.Count() < jobNumbers.Count())
+                                {
+                                    logs.Append(" - ");
+                                    sbJobFail.Append(_updateCso.so + ",");
+
+                                    List<string> updated = listUpdates.Select(x => x.job_number).ToList<string>();
+
+                                    List<string> xxx = new List<string>();
+                                    foreach (string o in jobNumbers)
+                                    {
+                                        if (!updated.Contains(o))
+                                        {
+                                            xxx.Add(o);
+                                            logs.Append("," + o + "[ ]");
+                                        }
+                                    }
+                                    fail++;
+                                    isComplete = false;
+                                }
+
+                                //_updateCso.report_no += string.Join(",", jobNumbers) + "|";
+                            }
+                            else
+                            {
+                                //quantiy is empty.
+                                Console.WriteLine();
+                            }
                         }
-                        else
-                        {
-                            //quantiy is empty.
-                        }
-                        Console.WriteLine();
                     }
 
                     _updateCso.status = !isComplete ? "I" : "C";
@@ -610,11 +654,22 @@ namespace ALS.ALSI.Web.view.template
 
             if (_updateCso != null)
             {
-                String[] ReportNoLists = _updateCso.report_no.Split(new[] { "|" }, StringSplitOptions.None);
-                for (int i = 0; i < size; i++)
+                if (_updateCso.report_no == null)
                 {
-                    data[i] = (i < ReportNoLists.Length) ? ReportNoLists[i] : string.Empty;
+                    for (int i = 0; i < size; i++)
+                    {
+                        data[i] = string.Empty;
+                    }
                 }
+                else
+                {
+                    String[] ReportNoLists = _updateCso.report_no.Split(new[] { "|" }, StringSplitOptions.None);
+                    for (int i = 0; i < size; i++)
+                    {
+                        data[i] = (i < ReportNoLists.Length) ? ReportNoLists[i] : string.Empty;
+                    }
+                }
+
             }
             else
             {
@@ -652,7 +707,7 @@ namespace ALS.ALSI.Web.view.template
                         int endJob = Convert.ToInt32(jn[2]);
                         for (int idx = startJob; idx <= endJob; idx++)
                         {
-                            results.Add(string.Format("{0}-{1}-{2}", jn[0], getNum(idx.ToString()), jn.Length == 4 ? jn[3] : ""));
+                            results.Add(string.Format("{0}-{1}-{2}", jn[0], getNum(idx.ToString()), jn.Length == 4 ? jn[3].ToUpper() : ""));
                         }
                     }
                     else

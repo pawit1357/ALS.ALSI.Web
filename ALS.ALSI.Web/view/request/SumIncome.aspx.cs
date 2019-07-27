@@ -203,7 +203,7 @@ namespace ALS.ALSI.Web.view.request
                 "    WHERE                                                                                         " +
                 "        s.sample_invoice IS NOT NULL                                                                   " +
                 "            ) x                                                                    " +
-                "GROUP BY x.Number,x.InvoiceDate , x.PurchaseOrder , x.Customer order by SUBSTRING(x.Number,3) asc) X  where 1 = 1";
+                "GROUP BY x.Number,x.InvoiceDate , x.Customer order by SUBSTRING(x.Number,3) asc) X  where 1 = 1";
 
                 sqlCri.Append(" AND YEAR(X.InvoiceDate) = '" + ddlPhysicalYear.SelectedValue + "'");
 
