@@ -15,6 +15,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -637,6 +638,8 @@ namespace ALS.ALSI.Web.view.template
         {
 
             //Boolean isValid = true;
+            //DateTime dtStart = DateTime.Now;
+            //StringBuilder sbLog = new StringBuilder();
 
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
             switch (status)
@@ -668,7 +671,8 @@ namespace ALS.ALSI.Web.view.template
 
 
                     }
-                    template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
+                    //template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_gcms_coverpage where sample_id={0}", this.SampleID));
                     template_seagate_gcms_coverpage.InsertList(this.coverpages);
 
 
@@ -692,8 +696,12 @@ namespace ALS.ALSI.Web.view.template
                         #endregion
                         #region "CAS#"
 
-                        tb_m_gcms_cas.DeleteBySampleID(this.SampleID);
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_gcms_cas where sample_id={0}", this.SampleID));
+
+                        //tb_m_gcms_cas.DeleteBySampleID(this.SampleID);
+                        //sbLog.Append("tb_m_gcms_cas time(del):" + DateTime.Now.Subtract(dtStart).TotalMinutes + "\r\n");
                         tb_m_gcms_cas.InsertList(this.tbCas);
+                        //sbLog.Append("tb_m_gcms_cas time:" + DateTime.Now.Subtract(dtStart).TotalMinutes + "\r\n");
 
                         #endregion
                         #region "Cover Page#"
@@ -893,9 +901,12 @@ namespace ALS.ALSI.Web.view.template
                             cov.remark4 = lbRemark4.Text;
                             cov.remark5 = lbRemark5.Text;
                         }
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_gcms_coverpage where sample_id={0}", this.SampleID));
 
-                        template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
+                        //template_seagate_gcms_coverpage.DeleteBySampleID(this.SampleID);
+                        //sbLog.Append("template_seagate_gcms_coverpage time(del):" + DateTime.Now.Subtract(dtStart).TotalMinutes + "\r\n");
                         template_seagate_gcms_coverpage.InsertList(this.coverpages);
+                        //sbLog.Append("template_seagate_gcms_coverpage time:" + DateTime.Now.Subtract(dtStart).TotalMinutes + "\r\n");
 
                         //template_seagate_gcms_coverpage.UpdateList(this.coverpages);
                         this.WsHashValue = new List<ws_hash_value>();
@@ -944,9 +955,14 @@ namespace ALS.ALSI.Web.view.template
                         ws = new ws_hash_value { id = 22, sample_id = this.SampleID, key = "txtDecimal12", val = txtDecimal12.Text };
                         this.WsHashValue.Add(ws);
 
-                        ws_hash_value.DeleteBySampleID(this.SampleID);
-                        ws_hash_value.InsertList(this.WsHashValue);
+                        MaintenanceBiz.ExecuteReturnDt(string.Format("delete from ws_hash_value where sample_id={0}", this.SampleID));
 
+                        //ws_hash_value.DeleteBySampleID(this.SampleID);
+                        //sbLog.Append("ws_hash_value time(del):" + DateTime.Now.Subtract(dtStart).TotalMinutes + "\r\n");
+                        ws_hash_value.InsertList(this.WsHashValue);
+                        //sbLog.Append("ws_hash_value time:" + DateTime.Now.Subtract(dtStart).TotalMinutes + "\r\n");
+
+                        Console.WriteLine();
                         #endregion
                     }
                     else
@@ -1088,6 +1104,7 @@ namespace ALS.ALSI.Web.view.template
                 GeneralManager.Commit();
 
                 removeSession();
+                //Console.WriteLine(sbLog.ToString());
                 MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
             }
 
