@@ -120,15 +120,8 @@
                                                 <%# Container.DataItemIndex + 1 %>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="ReportNo" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <asp:Label ID="ltReportNo" runat="server" Text='<%#Eval("report_no") %>'></asp:Label>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtReportNo" runat="server" Text='<%#Eval("report_no") %>' CssClass="form-control" TextMode="MultiLine" Rows="10"></asp:TextBox>
-                                            </EditItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="so" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+
+                                        <asp:TemplateField HeaderText="SO No." HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="ltSO" runat="server" Text='<%#Eval("so") %>'></asp:Label>
                                             </ItemTemplate>

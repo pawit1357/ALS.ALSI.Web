@@ -195,10 +195,10 @@ namespace ALS.ALSI.Web.view.template
                 String[] ReportNo = txtReportNo.Text.Split(new[] { "|" }, StringSplitOptions.None);
                 foreach (String rn in ReportNo)
                 {
-                    if (!rn.Equals(""))
-                    {
+                    //if (!rn.Equals(""))
+                    //{
                         _ReportNo.Add(rn);
-                    }
+                    //}
                 }
                 List<String> _SoDesc = new List<String>();
                 String[] SoDesc = txtSoDesc.Text.Split(new[] { "\n", "\r\n" }, StringSplitOptions.None);

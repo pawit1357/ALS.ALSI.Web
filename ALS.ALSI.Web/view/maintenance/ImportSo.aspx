@@ -151,12 +151,22 @@
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Center" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Center" HeaderText="so" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Center" HeaderText="SO No." ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="ltSO" runat="server" Text='<%#Eval("so") %>'></asp:Label>
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="ReportNo">
+                                            <ItemTemplate>
+                                                <asp:Label ID="ltReportNo" runat="server" Text='<%#Eval("report_no") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtReportNo" runat="server" CssClass="form-control" Rows="10" Text='<%#Eval("report_no") %>' TextMode="MultiLine"></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Center" />
+                                            <ItemStyle HorizontalAlign="Left" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Code">
                                             <ItemTemplate>
@@ -169,16 +179,7 @@
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Left" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="ReportNo">
-                                            <ItemTemplate>
-                                                <asp:Label ID="ltReportNo" runat="server" Text='<%#Eval("report_no") %>'></asp:Label>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtReportNo" runat="server" CssClass="form-control" Rows="10" Text='<%#Eval("report_no") %>' TextMode="MultiLine"></asp:TextBox>
-                                            </EditItemTemplate>
-                                            <HeaderStyle HorizontalAlign="Center" />
-                                            <ItemStyle HorizontalAlign="Left" />
-                                        </asp:TemplateField>
+
                                         <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Quantity">
                                             <ItemTemplate>
                                                 <asp:Label ID="ltQuantity" runat="server" Text='<%#Eval("quantity") %>'></asp:Label>
