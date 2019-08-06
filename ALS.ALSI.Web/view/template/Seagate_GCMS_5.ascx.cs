@@ -944,9 +944,9 @@ namespace ALS.ALSI.Web.view.template
                         //sbLog.Append("template_seagate_gcms_coverpage time:" + DateTime.Now.Subtract(dtStart).TotalMinutes + "\r\n");
 
                         template_seagate_gcms_coverpage_2 cov2 = new template_seagate_gcms_coverpage_2();
-                        if (cov2 != null)
-                        {
-                            cov2.G20 = txtG20.Text;
+                        cov2.sample_id = this.SampleID;
+                        cov2.component_id= Convert.ToInt32(ddlComponent.SelectedValue);
+                        cov2.G20 = txtG20.Text;
                             cov2.G21 = txtG21.Text;
                             cov2.G22 = txtG22.Text;
                             cov2.G23 = txtG23.Text;
@@ -977,7 +977,7 @@ namespace ALS.ALSI.Web.view.template
                             cov2.E52 = txtE52.Text;
                             cov2.E53 = txtE53.Text;
                             cov2.E54 = txtE54.Text;
-                        }
+                        
                         List<template_seagate_gcms_coverpage_2> cov2s = new List<template_seagate_gcms_coverpage_2>();
                         cov2s.Add(cov2);
                         template_seagate_gcms_coverpage_2.InsertList(cov2s);
@@ -2281,9 +2281,11 @@ namespace ALS.ALSI.Web.view.template
             List<template_seagate_gcms_coverpage> motorHubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB) && !x.A.Equals("-")).ToList();
             if (motorHubs.Count > 0)
             {
-                if (!String.IsNullOrEmpty(txtD52.Text) && !String.IsNullOrEmpty(txtD52.Text))
+                if (!String.IsNullOrEmpty(txtD52.Text) && !String.IsNullOrEmpty(txtD52.Text)&&!String.IsNullOrEmpty(txtE52.Text) && !String.IsNullOrEmpty(txtE52.Text))
                 {
                     motorHubs[0].C = (Convert.ToDecimal(txtD52.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD52.Text), Convert.ToInt16(txtFloatResult02.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    motorHubs[1].C = (Convert.ToDecimal(txtE52.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtE52.Text), Convert.ToInt16(txtFloatResult02.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+
                 }
                 gvMotorHub.DataSource = motorHubs;
                 gvMotorHub.DataBind();
@@ -2324,6 +2326,8 @@ namespace ALS.ALSI.Web.view.template
                 if (!String.IsNullOrEmpty(txtD32.Text))
                 {
                     motorBases[0].C = (Convert.ToDecimal(txtD32.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD32.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    motorBases[1].C = (Convert.ToDecimal(txtE32.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtE32.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+
                 }
                 gvMotorBase.DataSource = motorBases;
                 gvMotorBase.DataBind();
