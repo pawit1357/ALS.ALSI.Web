@@ -7,26 +7,26 @@ using System.Linq;
 
 namespace ALS.ALSI.Biz.DataAccess
 {
-    public partial class template_seagate_gcms_coverpage_2
+    public partial class template_seagate_gcms_coverpage
     {
-        //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(template_seagate_gcms_coverpage_2));
+        //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(template_seagate_gcms_coverpage));
 
         #region "Property"
         public int order { get; set; }
         public CommandNameEnum RowState { get; set; }
         #endregion
 
-        private static IRepository<template_seagate_gcms_coverpage_2> _repository
+        private static IRepository<template_seagate_gcms_coverpage> _repository
         {
-            get { return ObjectFactory.GetInstance<IRepository<template_seagate_gcms_coverpage_2>>(); }
+            get { return ObjectFactory.GetInstance<IRepository<template_seagate_gcms_coverpage>>(); }
         }
 
-        public IEnumerable<template_seagate_gcms_coverpage_2> SelectAll()
+        public IEnumerable<template_seagate_gcms_coverpage> SelectAll()
         {
             return _repository.GetAll().ToList();
         }
 
-        public template_seagate_gcms_coverpage_2 SelectByID(int _id)
+        public template_seagate_gcms_coverpage SelectByID(int _id)
         {
             return _repository.First(x => x.ID == _id);
         }
@@ -38,7 +38,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public void Update()
         {
-            template_seagate_gcms_coverpage_2 existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
+            template_seagate_gcms_coverpage existing = _repository.Find(x => x.ID == this.ID).FirstOrDefault();
             _repository.Edit(existing, this);
         }
 
@@ -50,10 +50,10 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             try
             {
-                List<template_seagate_gcms_coverpage_2> lists = _repository.Find(x => x.sample_id == oldSampleId).ToList();
+                List<template_seagate_gcms_coverpage> lists = _repository.Find(x => x.sample_id == oldSampleId).ToList();
                 if (null != lists && lists.Count > 0)
                 {
-                    foreach (template_seagate_gcms_coverpage_2 item in lists)
+                    foreach (template_seagate_gcms_coverpage item in lists)
                     {
                         item.sample_id = newSampleId;
                         item.Insert();
@@ -70,37 +70,32 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public static void DeleteBySampleID(int _sampleID)
         {
-            List<template_seagate_gcms_coverpage_2> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
-            foreach (template_seagate_gcms_coverpage_2 tmp in lists)
+            List<template_seagate_gcms_coverpage> lists = _repository.Find(x => x.sample_id == _sampleID).ToList();
+            foreach (template_seagate_gcms_coverpage tmp in lists)
             {
                 _repository.Delete(tmp);
             }
         }
 
-        public static void InsertList(List<template_seagate_gcms_coverpage_2> _lists)
+        public static void InsertList(List<template_seagate_gcms_coverpage> _lists)
         {
-            foreach (template_seagate_gcms_coverpage_2 tmp in _lists)
+            foreach (template_seagate_gcms_coverpage tmp in _lists)
             {
 
                 tmp.Insert();
             }
 
         }
-        public static void UpdateList(List<template_seagate_gcms_coverpage_2> _lists)
+        public static void UpdateList(List<template_seagate_gcms_coverpage> _lists)
         {
-            foreach (template_seagate_gcms_coverpage_2 tmp in _lists)
+            foreach (template_seagate_gcms_coverpage tmp in _lists)
             {
                 tmp.Update();
             }
         }
-        public static List<template_seagate_gcms_coverpage_2> FindAllBySampleID(int _sampleID)
+        public static List<template_seagate_gcms_coverpage> FindAllBySampleID(int _sampleID)
         {
             return _repository.GetAll().Where(x => x.sample_id == _sampleID).ToList();
-        }
-
-        public static template_seagate_gcms_coverpage_2 FindBySampleID(int _sampleID)
-        {
-            return _repository.GetAll().Where(x => x.sample_id == _sampleID).FirstOrDefault();
         }
 
         #endregion

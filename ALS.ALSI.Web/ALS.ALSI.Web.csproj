@@ -1574,6 +1574,7 @@
     <Content Include="view\template\Seagate_FTIR_Damper.ascx" />
     <Content Include="view\template\Seagate_FTIR_Adhesive.ascx" />
     <Content Include="view\template\Seagate_FTIR_Packing.ascx" />
+    <Content Include="view\template\Seagate_GCMS_5.ascx" />
     <Content Include="view\template\Seagate_GCMS_4.ascx" />
     <Content Include="view\template\Seagate_GCMS_3.ascx" />
     <Content Include="view\template\Seagate_GCMS_2.ascx" />
@@ -1949,6 +1950,13 @@
     </Compile>
     <Compile Include="view\template\Seagate_FTIR_Packing.ascx.designer.cs">
       <DependentUpon>Seagate_FTIR_Packing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\Seagate_GCMS_5.ascx.cs">
+      <DependentUpon>Seagate_GCMS_5.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\Seagate_GCMS_5.ascx.designer.cs">
+      <DependentUpon>Seagate_GCMS_5.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\Seagate_GCMS_4.ascx.cs">
       <DependentUpon>Seagate_GCMS_4.ascx</DependentUpon>
