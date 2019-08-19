@@ -2367,6 +2367,8 @@ namespace ALS.ALSI.Web.view.template
                 if (!String.IsNullOrEmpty(txtD32.Text))
                 {
                     compounds[0].C = (Convert.ToDecimal(txtD32.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtD32.Text), Convert.ToInt32(txtFloatResult10.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+                    compounds[1].C = (Convert.ToDecimal(txtE32.Text) == 0) ? "Not Detected" : Math.Round(Convert.ToDecimal(txtE32.Text), Convert.ToInt16(txtFloatResult06.Text)) + "";//Repeated Hydrocarbon (C20-C40 Alkanes)
+
                 }
                 gvCompound.DataSource = compounds;
                 gvCompound.DataBind();
@@ -2379,7 +2381,7 @@ namespace ALS.ALSI.Web.view.template
             }
 
             List<template_seagate_gcms_coverpage> compoundSubs = this.coverpages.Where(x => x.data_type == Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB) && !x.A.Equals("-")).ToList();
-            if (compoundSubs.Count > 0&& compoundSubs.Count ==3)
+            if (compoundSubs.Count > 0&& compoundSubs.Count >=3)
             {
                 compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB32.Text) ? "0" : txtB32.Text), Convert.ToInt32(txtFloatResult11.Text)) + "";//Compounds with RT > DOP
                 compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC32.Text) ? "0" : txtC32.Text), Convert.ToInt32(txtFloatResult12.Text)) + "";//Compounds with RT > DOP
@@ -2471,32 +2473,66 @@ namespace ALS.ALSI.Web.view.template
                 17|Compound with m/z 138
                     */
 
-                    newCoverPage[0].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
-                    newCoverPage[1].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
-                    //-----------------------------------------------
-                    newCoverPage[2].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB);
-                    newCoverPage[3].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB);
-                    newCoverPage[4].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
-                    newCoverPage[5].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
-                    newCoverPage[6].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
-                    //-----------------------------------------------
-                    newCoverPage[7].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
-                    newCoverPage[8].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
-                    newCoverPage[9].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
-                    newCoverPage[10].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
-                    newCoverPage[11].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
-                    //-----------------------------------------------
-                    newCoverPage[12].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
-                    newCoverPage[13].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[14].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[15].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[16].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[17].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[18].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                    newCoverPage[19].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                    //newCoverPage[20].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                    //newCoverPage[22].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                    //newCoverPage[23].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    int[] fixLayout = { 1, 3, 5, 7, 9, 12, 23, 26, 28, 31, 33, 35, 41 };//FILE: Seagate-GCMS_component (FM510.01.09) BN.xlt
+                    if (fixLayout.Contains(Convert.ToInt16(component.E)))
+                    {
+                        newCoverPage[0].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
+                        newCoverPage[1].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
+                        //-----------------------------------------------
+                        newCoverPage[2].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB);
+                        newCoverPage[3].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB);
+                        newCoverPage[4].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                        newCoverPage[5].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                        newCoverPage[6].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                        //-----------------------------------------------
+                        newCoverPage[7].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
+                        newCoverPage[8].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
+                        newCoverPage[9].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                        //-----------------------------------------------
+                        newCoverPage[10].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
+                        newCoverPage[11].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
+                        newCoverPage[12].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[13].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[14].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[15].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[16].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[17].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[18].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[19].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        //newCoverPage[20].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        //newCoverPage[22].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        //newCoverPage[23].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    }
+                    else
+                    {
+                        newCoverPage[0].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
+                        newCoverPage[1].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
+                        //-----------------------------------------------
+                        newCoverPage[2].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB);
+                        newCoverPage[3].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB);
+                        newCoverPage[4].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                        newCoverPage[5].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                        newCoverPage[6].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_HUB_SUB);
+                        //-----------------------------------------------
+                        newCoverPage[7].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
+                        newCoverPage[8].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
+                        newCoverPage[9].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                        newCoverPage[10].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                        newCoverPage[11].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                        //-----------------------------------------------
+                        newCoverPage[12].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
+                        newCoverPage[13].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[14].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[15].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[16].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[17].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[18].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[19].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        //newCoverPage[20].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        //newCoverPage[22].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        //newCoverPage[23].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                    }
+
 
                     Console.WriteLine();
 

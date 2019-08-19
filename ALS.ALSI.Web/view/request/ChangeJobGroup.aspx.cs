@@ -114,9 +114,9 @@ namespace ALS.ALSI.Web.view.request
             if (isInvoiceGroupOperation && this.dataList.Count > 0)
             {
                 txtInvoice.Text = this.dataList[0].sample_invoice;
-                txtInvoiceAmt.Text = this.dataList[0].sample_invoice_amount.ToString();
-                txtInvoiceDate.Text = this.dataList[0].sample_invoice_date.Value.ToString("dd/MM/yyyy");
-                txtPaymentDate.Text = this.dataList[0].sample_invoice_complete_date.Value.ToString("dd/MM/yyyy");
+                txtInvoiceAmt.Text = (this.dataList[0].sample_invoice_amount==null)? "":this.dataList[0].sample_invoice_amount.ToString();
+                txtInvoiceDate.Text = (this.dataList[0].sample_invoice_date ==null)? "": this.dataList[0].sample_invoice_date.Value.ToString("dd/MM/yyyy");
+                txtPaymentDate.Text = (this.dataList[0].sample_invoice_complete_date==null)? "":this.dataList[0].sample_invoice_complete_date.Value.ToString("dd/MM/yyyy");
             }
             else
             {

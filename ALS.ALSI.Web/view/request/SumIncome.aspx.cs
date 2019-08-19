@@ -173,7 +173,7 @@ namespace ALS.ALSI.Web.view.request
                 "                    Number,                                                                       " +
                 "                    PurchaseOrder,                                                                " +
                 "                    Customer,sampleSo,                                                                     " +
-                "                    sum(TotalSubAmount) TotalSubAmount,                                                               " +
+                "                    TotalSubAmount,                                                               " +
                 "                    (sum(TotalSubAmount) * 0.07) as Vat7,                                              " +
                 "    (sum(TotalSubAmount) + (sum(TotalSubAmount) * 0.07)) as GrandTotalAmountVat,                            " +
                 "	(sum(TotalSubAmount) * 0.03) as WithholdingTax3,                                                    " +
@@ -187,7 +187,7 @@ namespace ALS.ALSI.Web.view.request
                 "            '' AS Terms,                                                                          " +
                 "            s.sample_po AS PurchaseOrder,                                                         " +
                 "            (case when (sgi.company is null or sgi.company ='') then c.company_name else sgi.company end)  AS Customer,s.sample_so as sampleSo,                                                           " +
-                "            ifnull(s.sample_invoice_amount, 0) AS TotalSubAmount,                                 " +
+                "            ifnull(s.sample_invoice_amount_rpt, 0) AS TotalSubAmount,                                 " +
                 "            (CASE                                                                                 " +
                 "                WHEN RIGHT(s.job_number, 1) = 'B' THEN 'BOI'                                      " +
                 "                ELSE 'NBOI'                                                                       " +
@@ -203,7 +203,7 @@ namespace ALS.ALSI.Web.view.request
                 "    WHERE                                                                                         " +
                 "        s.sample_invoice IS NOT NULL                                                                   " +
                 "            ) x                                                                    " +
-                "GROUP BY x.Number,x.InvoiceDate , x.Customer order by SUBSTRING(x.Number,3) asc) X  where 1 = 1";
+                "GROUP BY x.Number,x.InvoiceDate , x.Customer order by SUBSTRING(x.Number,3) asc,x.InvoiceDate asc) X  where 1 = 1";
 
                 sqlCri.Append(" AND YEAR(X.InvoiceDate) = '" + ddlPhysicalYear.SelectedValue + "'");
 

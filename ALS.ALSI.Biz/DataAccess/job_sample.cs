@@ -33,6 +33,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public string sample_invoice { get; set; }
         public Nullable<System.DateTime> sample_invoice_date { get; set; }
         public Nullable<double> sample_invoice_amount { get; set; }
+        public string sample_invoice_package { get; set; }
         public Nullable<int> no_of_report { get; set; }
         public string uncertainty { get; set; }
         public Nullable<int> job_status { get; set; }
@@ -87,6 +88,7 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> sample_invoice_status { get; set; }
         public Nullable<System.DateTime> sample_invoice_complete_date { get; set; }
         public string sample_so { get; set; }
+        public Nullable<double> sample_invoice_amount_rpt { get; set; }
     
         public virtual ICollection<template_wd_ir_coverpage> template_wd_ir_coverpage { get; set; }
     }

@@ -361,6 +361,7 @@ namespace ALS.ALSI.Web.view.template
                             js.sample_invoice = invData.inv_no;
                             js.sample_invoice_date = invData.inv_date;
                             js.sample_invoice_complete_date = invData.inv_duedate;
+                            js.sample_invoice_amount_rpt = invData.inv_amt;
                             js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
                             js.Update();
                             logs.Append(js.job_number + "[X],");

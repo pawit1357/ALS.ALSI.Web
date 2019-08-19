@@ -61,5 +61,6 @@ namespace ALS.ALSI.Biz
         public string am_retest_remark { get; set; }
         public int? sample_invoice_status { get; set; }
         public int fisicalY { get; set; }
+        public string sample_invoice_package { get; set; }
     }
 }

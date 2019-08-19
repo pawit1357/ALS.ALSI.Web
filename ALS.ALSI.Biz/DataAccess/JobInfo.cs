@@ -202,6 +202,7 @@ namespace ALS.ALSI.Biz.DataAccess
                                  note_lab = s.note_lab,
                                  am_retest_remark = s.am_retest_remark,
                                  sample_invoice_status = s.sample_invoice_status,
+                                 sample_invoice_package = ((s.sample_invoice_package == null) ? "" : (s.sample_invoice_package.Equals("Y") ? "Y" : "")),
                                  fisicalY = (j.date_of_receive.Value.Month < 4) ? j.date_of_receive.Value.Year - 1 : j.date_of_receive.Value.Year
                              };
 

@@ -430,7 +430,9 @@
                                     <asp:BoundField HeaderText="Invoice Amount" DataField="sample_invoice_amount" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
-
+                                    <asp:BoundField HeaderText="Package Cost" DataField="sample_invoice_package" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_package">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
                                     <asp:TemplateField HeaderText="Payment Status" ItemStyle-HorizontalAlign="Center" SortExpression="sample_invoice_status">
                                         <ItemTemplate>
                                             <asp:Literal ID="ltPaymentStatus" runat="server" Text='<%# Eval("sample_invoice_status")%>'></asp:Literal>

@@ -408,7 +408,7 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[22].Visible = true;
                         gvJob.Columns[23].Visible = true;
                         gvJob.Columns[24].Visible = true;
-
+                        gvJob.Columns[25].Visible = true;
                         break;
                     case RoleEnum.ROOT:
                     case RoleEnum.ADMIN:
@@ -440,6 +440,7 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[22].Visible = false;
                         gvJob.Columns[23].Visible = true;
                         gvJob.Columns[24].Visible = false;
+                        gvJob.Columns[25].Visible = false;
 
                         break;
                     case RoleEnum.LOGIN:
@@ -472,6 +473,7 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[22].Visible = false;
                         gvJob.Columns[23].Visible = false;
                         gvJob.Columns[24].Visible = false;
+                        gvJob.Columns[25].Visible = false;
 
                         break;
                     default:
@@ -500,6 +502,8 @@ namespace ALS.ALSI.Web.view.request
 
                         gvJob.Columns[22].Visible = false;
                         gvJob.Columns[23].Visible = false;
+                        gvJob.Columns[24].Visible = false;
+                        gvJob.Columns[25].Visible = false;
                         break;
                 }
             }
@@ -1148,6 +1152,7 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("Remark_AM_Retest", typeof(string));
                         dt.Columns.Add("Invoice_Date", typeof(DateTime));
                         dt.Columns.Add("Invoice_Amount", typeof(double));
+                        dt.Columns.Add("Package_Cost", typeof(string));
                         dt.Columns.Add("Invoice_status", typeof(string));
                         dt.Columns.Add("remarks", typeof(string));
 
@@ -1225,7 +1230,7 @@ namespace ALS.ALSI.Web.view.request
                                    ",date_admin_word_complete" +
                                    ",date_labman_complete" +
                                    ",date_admin_pdf_complete" +
-                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount,Invoice_status,remarks";
+                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount,Invoice_status,Package_Cost,remarks";
                             break;
                         case RoleEnum.LOGIN:
                         case RoleEnum.CHEMIST:
@@ -1317,7 +1322,7 @@ namespace ALS.ALSI.Web.view.request
                     sql += " `Extent2`.`sample_invoice` AS `Invoice`,                                                                                                           ";
                     sql += " `Extent2`.`sample_invoice_date` AS `Invoice_Date`,                                                                                                           ";
                     sql += " `Extent2`.`sample_invoice_amount` AS `Invoice_Amount`,                                                                                                           ";
-                    //sql += " `Extent2`.`sample_invoice_status` AS `Invoice_status`,                                                                                                           ";
+                    sql += " (CASE WHEN `Extent2`.`sample_invoice_package` = 'Y' THEN 'Y' ELSE '' END) AS `Package_Cost`,                                                                                                           ";
                     sql += " (CASE WHEN `Extent2`.`sample_invoice_status` = '1' THEN 'In Process' ELSE 'Complete' END) AS `Invoice_status`,                                                       ";
 
                     sql += " `Extent2`.`sample_po` AS `Po`,                                                                                                                     ";

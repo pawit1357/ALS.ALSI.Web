@@ -536,7 +536,11 @@ namespace ALS.ALSI.Web.view.template
                                 string rptNo = ReportNoLists[i];
                                 double amt = Convert.ToDouble(UnitPrices[i]);
                                 int quantity = Convert.ToInt16(Quantitys[i]);
-
+                                bool isPackageCost = rptNo.EndsWith("*");
+                                if (isPackageCost)
+                                {
+                                    rptNo = rptNo.Substring(0, rptNo.Length - 1);
+                                }
                                 List<string> jobNumbers = getJobNumFromList(rptNo, quantity, _updateCso, soDesc, amt);
 
                                 List<job_sample> listUpdates = job_sample.FindAllByJobNumbers(jobNumbers);
@@ -544,6 +548,7 @@ namespace ALS.ALSI.Web.view.template
                                 {
                                     js.sample_so = _updateCso.so;
                                     js.sample_invoice_amount = amt;
+                                    js.sample_invoice_package = (isPackageCost) ? "Y" : "N";
                                     js.Update();
                                     logs.Append(" - " + js.job_number + "[x],");
                                 }

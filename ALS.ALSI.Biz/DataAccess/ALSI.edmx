@@ -85,6 +85,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="sample_invoice" Type="varchar" MaxLength="45" />
           <Property Name="sample_invoice_date" Type="date" />
           <Property Name="sample_invoice_amount" Type="double" />
+          <Property Name="sample_invoice_package" Type="varchar" MaxLength="1" />
           <Property Name="no_of_report" Type="int" />
           <Property Name="uncertainty" Type="varchar" MaxLength="1" />
           <Property Name="job_status" Type="int" />
@@ -139,6 +140,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="sample_invoice_status" Type="int" />
           <Property Name="sample_invoice_complete_date" Type="datetime" Precision="0" />
           <Property Name="sample_so" Type="varchar" MaxLength="45" />
+          <Property Name="sample_invoice_amount_rpt" Type="double" />
         </EntityType>
         <EntityType Name="job_sample_group_invoice">
           <Key>
@@ -2333,6 +2335,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="sample_invoice" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="sample_invoice_date" Type="DateTime" />
           <Property Name="sample_invoice_amount" Type="Double" />
+          <Property Name="sample_invoice_package" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="no_of_report" Type="Int32" />
           <Property Name="uncertainty" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="job_status" Type="Int32" />
@@ -2387,6 +2390,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="sample_invoice_status" Type="Int32" />
           <Property Name="sample_invoice_complete_date" Type="DateTime" />
           <Property Name="sample_so" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="sample_invoice_amount_rpt" Type="Double" />
           <NavigationProperty Name="template_wd_ir_coverpage" Relationship="alsiModel.fk_sample_idx_4" FromRole="job_sample" ToRole="template_wd_ir_coverpage" />
         </EntityType>
         <EntityType Name="job_sample_group_invoice">
@@ -4354,6 +4358,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="job_sample">
             <EntityTypeMapping TypeName="alsiModel.job_sample">
               <MappingFragment StoreEntitySet="job_sample">
+                <ScalarProperty Name="sample_invoice_amount_rpt" ColumnName="sample_invoice_amount_rpt" />
                 <ScalarProperty Name="sample_so" ColumnName="sample_so" />
                 <ScalarProperty Name="sample_invoice_complete_date" ColumnName="sample_invoice_complete_date" />
                 <ScalarProperty Name="sample_invoice_status" ColumnName="sample_invoice_status" />
@@ -4408,6 +4413,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
                 <ScalarProperty Name="job_status" ColumnName="job_status" />
                 <ScalarProperty Name="uncertainty" ColumnName="uncertainty" />
                 <ScalarProperty Name="no_of_report" ColumnName="no_of_report" />
+                <ScalarProperty Name="sample_invoice_package" ColumnName="sample_invoice_package" />
                 <ScalarProperty Name="sample_invoice_amount" ColumnName="sample_invoice_amount" />
                 <ScalarProperty Name="sample_invoice_date" ColumnName="sample_invoice_date" />
                 <ScalarProperty Name="sample_invoice" ColumnName="sample_invoice" />
