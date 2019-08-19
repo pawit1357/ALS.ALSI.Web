@@ -140,7 +140,7 @@
                                                                     <asp:Label ID="lblFooterAmount" runat="server" Text=""></asp:Label>
                                                                 </FooterTemplate>
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lbBalance" runat="server" Text='<%# Bind("sample_invoice_amount") %>'></asp:Label>
+                                                                    <asp:Label ID="lbBalance" runat="server" Text='<%# Bind("sample_invoice_amount_rpt") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle Width="100px" />
                                                                 <ItemStyle HorizontalAlign="Right" />

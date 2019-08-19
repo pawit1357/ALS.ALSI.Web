@@ -115,18 +115,18 @@ namespace ALS.ALSI.Web.view.dashboard
             String sql = "" +
             "SELECT                                                                                                                     " +
             "  (case when s.sample_invoice_status is null or s.sample_invoice_status = 1 then 'revenue' else 'actual' end) invoice_type," +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 1  THEN s.sample_invoice_amount END, 0)) AS 'Jan',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 2  THEN s.sample_invoice_amount END, 0)) AS 'Feb',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 3  THEN s.sample_invoice_amount END, 0)) AS 'Mar',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 4  THEN s.sample_invoice_amount END, 0)) AS 'Apr',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 5  THEN s.sample_invoice_amount END, 0)) AS 'May',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 6  THEN s.sample_invoice_amount END, 0)) AS 'Jun',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 7  THEN s.sample_invoice_amount END, 0)) AS 'Jul',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 8  THEN s.sample_invoice_amount END, 0)) AS 'Aug',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 9  THEN s.sample_invoice_amount END, 0)) AS 'Sep',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 10 THEN s.sample_invoice_amount END, 0)) AS 'Oct',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 11 THEN s.sample_invoice_amount END, 0)) AS 'Nov',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 12 THEN s.sample_invoice_amount END, 0)) AS 'Dec'                    " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 1  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Jan',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 2  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Feb',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 3  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Mar',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 4  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Apr',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 5  THEN s.sample_invoice_amount_rpt END, 0)) AS 'May',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 6  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Jun',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 7  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Jul',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 8  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Aug',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 9  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Sep',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 10 THEN s.sample_invoice_amount_rpt END, 0)) AS 'Oct',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 11 THEN s.sample_invoice_amount_rpt END, 0)) AS 'Nov',                   " +
+            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 12 THEN s.sample_invoice_amount_rpt END, 0)) AS 'Dec'                    " +
             "FROM                                                                                                                       " +
             "  job_sample s                                                                                                             " +
             "WHERE YEAR(s.sample_invoice_date) is not null " +
@@ -264,7 +264,7 @@ namespace ALS.ALSI.Web.view.dashboard
             sql += " s.sample_invoice,                                                   ";
             sql += " s.sample_invoice_date,                                              ";
             sql += " TO_DAYS(Now()) - TO_DAYS(s.sample_invoice_date) as overdue_date,    ";
-            sql += " sum(s.sample_invoice_amount) sample_invoice_amount                  ";
+            sql += " sum(s.sample_invoice_amount_rpt) sample_invoice_amount_rpt                  ";
             sql += " from job_sample s                                                   ";
             sql += " left join job_info j on j.ID = s.job_id                             ";
             sql += " left join m_customer c on c.ID = j.customer_id                      ";
@@ -289,7 +289,7 @@ namespace ALS.ALSI.Web.view.dashboard
                 sql += " select * from  (select                                            ";
                 sql += " c.company_name,                                                   ";
                 sql += " sum(TO_DAYS(Now()) - TO_DAYS(s.sample_invoice_date)) as overDue,  ";
-                sql += " sum(s.sample_invoice_amount) as sumAmout                          ";
+                sql += " sum(s.sample_invoice_amount_rpt) as sumAmout                          ";
                 sql += " from job_sample s                                                 ";
                 sql += " left                                                              ";
                 sql += " join job_info j on j.ID = s.job_id                                ";
@@ -344,7 +344,7 @@ namespace ALS.ALSI.Web.view.dashboard
             {
 
 
-                String sql = "select * from (select sample_invoice_date,sum(sample_invoice_amount) amt FROM job_sample where sample_invoice_date is not null and sample_invoice_date between '" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date desc limit 30) x order by sample_invoice_date asc";
+                String sql = "select * from (select sample_invoice_date,sum(sample_invoice_amount_rpt) amt FROM job_sample where sample_invoice_date is not null and sample_invoice_date between '" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date desc limit 30) x order by sample_invoice_date asc";
 
                 //String sql = "SELECT date as sample_invoice_date,value as amt FROM alsi.tmp_rpt_4 limit 30;";
                 DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
@@ -503,7 +503,7 @@ namespace ALS.ALSI.Web.view.dashboard
                 double dblGrandTotal = 0;
                 foreach (DataRow dr in searchResult.Rows)
                 {
-                    dblGrandTotal += Convert.ToDouble(dr["sample_invoice_amount"]);
+                    dblGrandTotal += Convert.ToDouble(dr["sample_invoice_amount_rpt"]);
                 }
 
                 // First cell is used for specifying the Total text
