@@ -4,3 +4,4 @@
    use <<database name>>;
    set global optimizer_switch='derived_merge=off';
 3. Update the .edmx.
+

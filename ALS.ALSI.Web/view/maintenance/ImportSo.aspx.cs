@@ -542,36 +542,59 @@ namespace ALS.ALSI.Web.view.template
                                     rptNo = rptNo.Substring(0, rptNo.Length - 1);
                                 }
                                 List<string> jobNumbers = getJobNumFromList(rptNo, quantity, _updateCso, soDesc, amt);
-
-                                List<job_sample> listUpdates = job_sample.FindAllByJobNumbers(jobNumbers);
-                                foreach (job_sample js in listUpdates)
+                                string jns = "";
+                                foreach (string s in jobNumbers)
                                 {
-                                    js.sample_so = _updateCso.so;
-                                    js.sample_invoice_amount = amt;
-                                    js.sample_invoice_package = (isPackageCost) ? "Y" : "N";
-                                    js.Update();
-                                    logs.Append(" - " + js.job_number + "[x],");
+                                    jns += "'" + s + "',";
                                 }
+                                jns = jns.EndsWith(",") ? jns.Substring(0, jns.Length - 1) : jns;
 
-                                if (listUpdates.Count() < jobNumbers.Count())
+                                string sqlUploadBySo = "update job_sample set sample_so='{1}',sample_invoice_amount={2},sample_invoice_package='{3}' where   job_number in ({0});";
+                                int result = MaintenanceBiz.ExecuteCommandReturnResult(string.Format(sqlUploadBySo, jns, _updateCso.so, amt, (isPackageCost) ? "Y" : "N"));
+                                Console.WriteLine();
+
+
+                                if (result < jobNumbers.Count())
                                 {
                                     logs.Append(" - ");
-                                    sbJobFail.Append(_updateCso.so + ",");
-
-                                    List<string> updated = listUpdates.Select(x => x.job_number).ToList<string>();
-
-                                    List<string> xxx = new List<string>();
-                                    foreach (string o in jobNumbers)
-                                    {
-                                        if (!updated.Contains(o))
-                                        {
-                                            xxx.Add(o);
-                                            logs.Append("," + o + "[ ]");
-                                        }
-                                    }
+                                    sbJobFail.Append(_updateCso.so+":"+_updateCso.report_no + ",");
                                     fail++;
                                     isComplete = false;
                                 }
+                                else
+                                {
+                                    logs.Append(" - " + jns + "[x],");
+                                }
+
+                                //List<job_sample> listUpdates = job_sample.FindAllByJobNumbers(jobNumbers);
+                                //foreach (job_sample js in listUpdates)
+                                //{
+                                //    js.sample_so = _updateCso.so;
+                                //    js.sample_invoice_amount = amt;
+                                //    js.sample_invoice_package = (isPackageCost) ? "Y" : "N";
+                                //    js.Update();
+                                //    logs.Append(" - " + js.job_number + "[x],");
+                                //}
+
+                                //if (listUpdates.Count() < jobNumbers.Count())
+                                //{
+                                //    logs.Append(" - ");
+                                //    sbJobFail.Append(_updateCso.so + ",");
+
+                                //    List<string> updated = listUpdates.Select(x => x.job_number).ToList<string>();
+
+                                //    List<string> xxx = new List<string>();
+                                //    foreach (string o in jobNumbers)
+                                //    {
+                                //        if (!updated.Contains(o))
+                                //        {
+                                //            xxx.Add(o);
+                                //            logs.Append("," + o + "[ ]");
+                                //        }
+                                //    }
+                                //    fail++;
+                                //    isComplete = false;
+                                //}
 
                                 //_updateCso.report_no += string.Join(",", jobNumbers) + "|";
                             }
@@ -594,9 +617,14 @@ namespace ALS.ALSI.Web.view.template
 
 
                 GeneralManager.Commit();
-                MsgLogs = logs.ToString();
                 String errList = (sbJobFail.Length == 0) ? "" : "<br>รายการ SO ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
-                Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล ทั้งหมด " + total + " รายการ สำเร็จ " + (total - fail) + " รายการ" + ((fail == 0) ? "" : (" ไม่สำเร็จ " + fail + " รายการ") + errList) + " </div>";
+
+                Message = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล ทั้งหมด " + total + " รายการ สำเร็จ " + (total - fail) + " รายการ" + ((fail == 0) ? "" : (" ไม่สำเร็จ " + fail + " รายการ")) + " </div>";
+                if (sbJobFail.Length > 0)
+                {
+                    MsgLogs = errList;
+
+                }
                 bindingData();
             }
         }

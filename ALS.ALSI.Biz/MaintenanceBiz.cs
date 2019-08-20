@@ -17,6 +17,37 @@ namespace ALS.ALSI.Biz
 
         public static Boolean ExecuteCommand(String sql)
         {
+            
+            try
+            {
+                //ConfigurationManager.ConnectionStrings["MySqlCon"];
+                using (MySqlConnection connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlCon"].ToString()))
+                {
+                    connection.Open();
+                    //create mysql command
+                    MySqlCommand cmd = new MySqlCommand
+                    {
+
+                        //Assign the query using CommandText
+                        CommandText = sql,
+                        //Assign the connection using Connection
+                        Connection = connection
+                    };
+
+                    //Execute query
+                    int _result =cmd.ExecuteNonQuery();
+                    return (_result > 0);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+        }
+        public static int ExecuteCommandReturnResult(String sql)
+        {
 
             try
             {
@@ -35,18 +66,17 @@ namespace ALS.ALSI.Biz
                     };
 
                     //Execute query
-                    cmd.ExecuteNonQuery();
-                    return true;
+                    return  cmd.ExecuteNonQuery();
+
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                return 0;
             }
 
         }
-
         public static DataSet ExecuteReturnDs(String sql)
         {
             DataSet ds = new DataSet();

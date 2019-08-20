@@ -274,6 +274,8 @@ namespace ALS.ALSI.Web.view.template
                             sgInv.Insert();
                         }
                     }
+
+                    Console.WriteLine();
                     string invNos = string.Join(",", groupInv.Select(x => "'" + x.inv_no + "'"));
 
                     string clearSql = "update job_sample set sample_invoice = '' where sample_invoice in (" + invNos + ")";
@@ -351,43 +353,63 @@ namespace ALS.ALSI.Web.view.template
 
                 foreach (job_sample_group_invoice invData in invGroups)
                 {
-                    logs.Append("<br>Inv number: " + invData.inv_no);
-                    List<job_sample> listOfSample = job_sample.FindAllBySo(invData.so);
-                    if (listOfSample.Count() > 0)
+                    //update job_sample
+                    string sqlUploadBySo = "update job_sample set sample_invoice='{0}',sample_invoice_date='{1}',sample_invoice_complete_date='{2}',sample_invoice_amount_rpt='{3}',sample_invoice_status={4} where sample_so='{5}';";
+                    bool result =MaintenanceBiz.ExecuteCommand(string.Format(sqlUploadBySo, invData.inv_no, invData.inv_date.Value.ToString("yyyy-MM-dd"), invData.inv_duedate.Value.ToString("yyyy-MM-dd HH:mm:ss"), invData.inv_amt, Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE),invData.so));
+                    //update job_sample_group_invoice
+                   
+                    string sqlUploadInvG = "update job_sample_group_invoice set inv_status='{0}' where so='{1}'";
+                    MaintenanceBiz.ExecuteCommand(string.Format(sqlUploadInvG, result? "C":"I",invData.so));
+                    if (result)
                     {
-                        logs.Append("<br>Total Sample: " + listOfSample.Count() + "<br> Upload jobNumber List : ");
-                        foreach (job_sample js in listOfSample)
-                        {
-                            js.sample_invoice = invData.inv_no;
-                            js.sample_invoice_date = invData.inv_date;
-                            js.sample_invoice_complete_date = invData.inv_duedate;
-                            js.sample_invoice_amount_rpt = invData.inv_amt;
-                            js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
-                            js.Update();
-                            logs.Append(js.job_number + "[X],");
-                            //
-                            invData.inv_status = "C";
-                            invData.Update();
-                        }
+                        logs.Append(invData.so + "[X],");
                     }
                     else
                     {
-                        sbJobFail.Append(invData.inv_no + ",");
-                        logs.Append("<br>Total Sample: 0 <br> Upload jobNumber List : ");
-
+                        logs.Append(invData.so + "[ ],");
                         fail++;
-                        //
-                        invData.inv_status = "I";
-                        invData.Update();
                     }
+
+                    //logs.Append("<br>Inv number: " + invData.inv_no);
+                    //List<job_sample> listOfSample = job_sample.FindAllBySo(invData.so);
+                    //if (listOfSample.Count() > 0)
+                    //{
+                    //    logs.Append("<br>Total Sample: " + listOfSample.Count() + "<br> Upload jobNumber List : ");
+                    //    foreach (job_sample js in listOfSample)
+                    //    {
+                    //        js.sample_invoice = invData.inv_no;
+                    //        js.sample_invoice_date = invData.inv_date;
+                    //        js.sample_invoice_complete_date = invData.inv_duedate;
+                    //        js.sample_invoice_amount_rpt = invData.inv_amt;
+                    //js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+                    //        js.Update();
+                    //        logs.Append(js.job_number + "[X],");
+                    //        //
+                    //        invData.inv_status = "C";
+                    //        invData.Update();
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    sbJobFail.Append(invData.inv_no + ",");
+                    //    logs.Append("<br>Total Sample: 0 <br> Upload jobNumber List : ");
+
+                    //    fail++;
+                    //    //
+                    //    invData.inv_status = "I";
+                    //    invData.Update();
+                    //}
                 }
 
 
 
-                GeneralManager.Commit();
+                //GeneralManager.Commit();
                 String errList = (sbJobFail.Length == 0) ? "" : "<br>รายการ Invoice ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
-                MessageINv = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล ทั้งหมด " + total + " รายการ สำเร็จ " + (total - fail) + " รายการ" + ((fail == 0) ? "" : (" ไม่สำเร็จ " + fail + " รายการ") + errList) + " </div>";
-                MsgLogs = logs.ToString();
+                MessageINv = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล ทั้งหมด " + total + " รายการ สำเร็จ " + (total - fail) + " รายการ" + ((fail == 0) ? "" : (" ไม่สำเร็จ " + fail + " รายการ")) + " </div>";
+                if (sbJobFail.Length > 0)
+                {
+                    MsgLogs = errList;
+                }
 
             }
             bindingData();
