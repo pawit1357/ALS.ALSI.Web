@@ -1547,6 +1547,16 @@ namespace ALS.ALSI.Web.view.request
             Server.Transfer(Constants.LINK_CHANGE_JOB_GROUP);
         }
 
+        protected void chkAllSign_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            foreach (GridViewRow row in gvJob.Rows)
+            {
+                CheckBox chkcheck = (CheckBox)row.FindControl("cbSelect");
+                chkcheck.Checked = cb.Checked;
+            }
+        }
+
 
     }
 }

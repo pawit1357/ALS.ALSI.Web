@@ -327,6 +327,9 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                                <asp:CheckBox ID="chkAllSign" runat="server" AutoPostBack="true" Text="Check All" OnCheckedChanged="chkAllSign_CheckedChanged"/>
+                                        </HeaderTemplate>
                                         <ItemTemplate>
                                             <asp:CheckBox ID="cbSelect" runat="server" />
                                             <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("SN")%>'></asp:HiddenField>

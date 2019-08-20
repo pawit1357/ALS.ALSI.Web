@@ -114,9 +114,9 @@ namespace ALS.ALSI.Web.view.request
             if (isInvoiceGroupOperation && this.dataList.Count > 0)
             {
                 txtInvoice.Text = this.dataList[0].sample_invoice;
-                txtInvoiceAmt.Text = (this.dataList[0].sample_invoice_amount==null)? "":this.dataList[0].sample_invoice_amount.ToString();
-                txtInvoiceDate.Text = (this.dataList[0].sample_invoice_date ==null)? "": this.dataList[0].sample_invoice_date.Value.ToString("dd/MM/yyyy");
-                txtPaymentDate.Text = (this.dataList[0].sample_invoice_complete_date==null)? "":this.dataList[0].sample_invoice_complete_date.Value.ToString("dd/MM/yyyy");
+                txtInvoiceAmt.Text = (this.dataList[0].sample_invoice_amount == null) ? "" : this.dataList[0].sample_invoice_amount.ToString();
+                txtInvoiceDate.Text = (this.dataList[0].sample_invoice_date == null) ? "" : this.dataList[0].sample_invoice_date.Value.ToString("dd/MM/yyyy");
+                txtPaymentDate.Text = (this.dataList[0].sample_invoice_complete_date == null) ? "" : this.dataList[0].sample_invoice_complete_date.Value.ToString("dd/MM/yyyy");
             }
             else
             {
@@ -384,7 +384,7 @@ namespace ALS.ALSI.Web.view.request
                                             break;
                                         case 3://Express
                                             jobSample.due_date_lab = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 0);
-                                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text),0);
+                                            jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 0);
                                             break;
                                     }
                                 }
@@ -449,7 +449,8 @@ namespace ALS.ALSI.Web.view.request
                             jobSample.note = txtNote.Text;
                             break;
                     }
-                }else if (this.isGroupApproveOperation)
+                }
+                else if (this.isGroupApproveOperation)
                 {
                     if (!String.IsNullOrEmpty(ddlStatus.SelectedValue))
                     {
@@ -463,7 +464,7 @@ namespace ALS.ALSI.Web.view.request
                                 jobSample.job_status = Convert.ToInt32(ddlAssignTo.SelectedValue);
                                 break;
                         }
-                       
+
                     }
                 }
                 else
@@ -656,6 +657,45 @@ namespace ALS.ALSI.Web.view.request
             {
                 pUploadfile.Visible = false;
             }
+        }
+
+        protected void gvSample_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvSample.EditIndex = -1;
+            gvSample.DataSource = dataList;
+            gvSample.DataBind();
+        }
+        protected void gvSample_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvSample.EditIndex = e.NewEditIndex;
+            gvSample.DataSource = dataList;
+            gvSample.DataBind();
+        }
+        protected void gvSample_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            String jobNumber = gvSample.DataKeys[e.RowIndex].Values[1].ToString();
+            int Id = Convert.ToInt32(gvSample.DataKeys[e.RowIndex].Values[0].ToString());
+
+            TextBox txt_sample_so = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txt_sample_so");
+            TextBox txt_sample_invoice = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txt_sample_invoice");
+            TextBox txt_sample_invoice_date = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txt_sample_invoice_date");
+            TextBox txt_sample_invoice_amount = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txt_sample_invoice_amount");
+            TextBox txt_sample_invoice_complete_date = (TextBox)gvSample.Rows[e.RowIndex].FindControl("txt_sample_invoice_complete_date");
+
+            job_sample jobSample = this.dataList.Find(x => x.ID == Id);
+            if (jobSample != null)
+            {
+                jobSample.sample_so = txt_sample_so.Text;
+                jobSample.sample_invoice = txt_sample_invoice.Text;
+                jobSample.sample_invoice_date = CustomUtils.converFromDDMMYYYY(txt_sample_invoice_date.Text);
+                jobSample.sample_invoice_amount = CustomUtils.isNumber(txt_sample_invoice_amount.Text) ? Convert.ToDouble(txt_sample_invoice_amount.Text) : 0;
+                jobSample.sample_invoice_complete_date = CustomUtils.converFromDDMMYYYY(txt_sample_invoice_complete_date.Text);
+                jobSample.Update();
+                GeneralManager.Commit();
+            }
+            gvSample.EditIndex = -1;
+            gvSample.DataSource = this.dataList;
+            gvSample.DataBind();
         }
     }
 }

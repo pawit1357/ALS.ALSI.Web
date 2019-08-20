@@ -20,8 +20,19 @@
                         <!-- BEGIN FORM-->
 
                         <asp:GridView ID="gvSample" runat="server" AutoGenerateColumns="False" AllowPaging="True"
-                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID"  OnPageIndexChanging="gvJob_PageIndexChanging" PageSize="20">
+                            CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_number" OnRowCancelingEdit="gvSample_RowCancelingEdit"  OnPageIndexChanging="gvJob_PageIndexChanging" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" PageSize="20">
                             <Columns>
+                                <asp:TemplateField HeaderText="">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
+                                            CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
+                                            CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Ref No." ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="litRefNo" runat="server" Text='<%# Eval("job_number")%>' />
@@ -32,26 +43,51 @@
                                     <ItemTemplate>
                                         <asp:Literal ID="litSampleSo" runat="server" Text='<%# Eval("sample_so")%>' />
                                     </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txt_sample_so" CssClass="form-control" runat="server" Text='<%# Eval("sample_so")%>'></asp:TextBox>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Sample Invoice" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="litSampleInvoice" runat="server" Text='<%# Eval("sample_invoice")%>' />
                                     </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txt_sample_invoice" CssClass="form-control" runat="server" Text='<%# Eval("sample_invoice")%>'></asp:TextBox>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Invoice Date" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:Literal ID="litSampleInvoiceDate" runat="server" Text='<%# Eval("sample_invoice_date")%>' />
+                                        <asp:Literal ID="litSampleInvoiceDate" runat="server" Text='<%# Eval("sample_invoice_date", "{0:dd/MM/yyyy}")%>'  />
                                     </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                            <asp:TextBox ID="txt_sample_invoice_date" runat="server" class="form-control" Text='<%# Eval("sample_invoice_date", "{0:dd/MM/yyyy}")%>'></asp:TextBox>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Sample Invoice Amount" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="litSampleInvoiceAmount" runat="server" Text='<%# Eval("sample_invoice_amount")%>' />
                                     </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txt_sample_invoice_amount" CssClass="form-control" runat="server" Text='<%# Eval("sample_invoice_amount")%>'></asp:TextBox>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Payment Date" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:Literal ID="litSampleInvoiceCompleteDate" runat="server" Text='<%# Eval("sample_invoice_complete_date")%>' />
+                                        <asp:Literal ID="litSampleInvoiceCompleteDate" runat="server" Text='<%# Eval("sample_invoice_complete_date", "{0:dd/MM/yyyy}")%>'  />
                                     </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                            <asp:TextBox ID="txt_sample_invoice_complete_date" runat="server" class="form-control" Text='<%# Eval("sample_invoice_complete_date", "{0:dd/MM/yyyy}")%>'></asp:TextBox>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 
 
