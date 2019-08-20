@@ -23,6 +23,7 @@ namespace ALS.ALSI.Biz.ReportObjects
         public String model { get; set; }
         public String surface_areas { get; set; }
         public String remark { get; set; }
+        public String remarkAmendRetest { get; set; }
 
         #region "Custom"
         public IEnumerable getReportHeader(int sample_id)
@@ -239,6 +240,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                 rpt.model = _sample.model;
                 rpt.surface_areas = _sample.surface_area;
                 rpt.remark = _sample.remarks;
+                rpt.remarkAmendRetest = _sample.am_retest_remark;
             }
             return rpt;
         }
