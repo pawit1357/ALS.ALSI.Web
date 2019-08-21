@@ -161,6 +161,7 @@ namespace ALS.ALSI.Biz.DataAccess
                                  sample_invoice = s.sample_invoice,
                                  sample_invoice_date = s.sample_invoice_date,
                                  sample_invoice_amount = s.sample_invoice_amount,
+                                 sample_invoice_amount_rpt = s.sample_invoice_amount_rpt,
                                  sample_po = s.sample_po,
                                  sample_so = s.sample_so,
                                  contract_person = (cp.name == null) ? "" : cp.name,

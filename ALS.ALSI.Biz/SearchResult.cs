@@ -20,6 +20,7 @@ namespace ALS.ALSI.Biz
         public string sample_so { get; set; }
         public DateTime? sample_invoice_date { get; set; }
         public double? sample_invoice_amount { get; set; }
+        public double? sample_invoice_amount_rpt { get; set; }
         public string sample_po { get; set; }
         public string contract_person { get; set; }
         public string description { get; set; }

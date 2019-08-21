@@ -70,7 +70,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Sample Invoice Amount" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:Literal ID="litSampleInvoiceAmount" runat="server" Text='<%# Eval("sample_invoice_amount")%>' />
+                                        <asp:Literal ID="litSampleInvoiceAmount" runat="server" Text='<%# Eval("sample_invoice_amount_rpt")%>' />
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txt_sample_invoice_amount" CssClass="form-control" runat="server" Text='<%# Eval("sample_invoice_amount")%>'></asp:TextBox>

@@ -1321,7 +1321,7 @@ namespace ALS.ALSI.Web.view.request
                     sql += " `Extent5`.`company_name` AS `Company`,                                                                                                             ";
                     sql += " `Extent2`.`sample_invoice` AS `Invoice`,                                                                                                           ";
                     sql += " `Extent2`.`sample_invoice_date` AS `Invoice_Date`,                                                                                                           ";
-                    sql += " `Extent2`.`sample_invoice_amount` AS `Invoice_Amount`,                                                                                                           ";
+                    sql += " `Extent2`.`sample_invoice_amount_rpt` AS `Invoice_Amount`,                                                                                                           ";
                     sql += " (CASE WHEN `Extent2`.`sample_invoice_package` = 'Y' THEN 'Y' ELSE '' END) AS `Package_Cost`,                                                                                                           ";
                     sql += " (CASE WHEN `Extent2`.`sample_invoice_status` = '1' THEN 'In Process' ELSE 'Complete' END) AS `Invoice_status`,                                                       ";
 

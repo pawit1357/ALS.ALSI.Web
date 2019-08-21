@@ -688,7 +688,7 @@ namespace ALS.ALSI.Web.view.request
                 jobSample.sample_so = txt_sample_so.Text;
                 jobSample.sample_invoice = txt_sample_invoice.Text;
                 jobSample.sample_invoice_date = CustomUtils.converFromDDMMYYYY(txt_sample_invoice_date.Text);
-                jobSample.sample_invoice_amount = CustomUtils.isNumber(txt_sample_invoice_amount.Text) ? Convert.ToDouble(txt_sample_invoice_amount.Text) : 0;
+                jobSample.sample_invoice_amount_rpt = CustomUtils.isNumber(txt_sample_invoice_amount.Text) ? Convert.ToDouble(txt_sample_invoice_amount.Text) : 0;
                 jobSample.sample_invoice_complete_date = CustomUtils.converFromDDMMYYYY(txt_sample_invoice_complete_date.Text);
                 jobSample.Update();
                 GeneralManager.Commit();

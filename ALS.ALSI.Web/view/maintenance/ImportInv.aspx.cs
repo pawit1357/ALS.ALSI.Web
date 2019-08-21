@@ -355,17 +355,18 @@ namespace ALS.ALSI.Web.view.template
                 {
                     //update job_sample
                     string sqlUploadBySo = "update job_sample set sample_invoice='{0}',sample_invoice_date='{1}',sample_invoice_complete_date='{2}',sample_invoice_amount_rpt='{3}',sample_invoice_status={4} where sample_so='{5}';";
-                    bool result =MaintenanceBiz.ExecuteCommand(string.Format(sqlUploadBySo, invData.inv_no, invData.inv_date.Value.ToString("yyyy-MM-dd"), invData.inv_duedate.Value.ToString("yyyy-MM-dd HH:mm:ss"), invData.inv_amt, Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE),invData.so));
+                    bool result = MaintenanceBiz.ExecuteCommand(string.Format(sqlUploadBySo, invData.inv_no, invData.inv_date.Value.ToString("yyyy-MM-dd"), invData.inv_duedate.Value.ToString("yyyy-MM-dd HH:mm:ss"), invData.inv_amt, Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE), invData.so));
                     //update job_sample_group_invoice
-                   
+
                     string sqlUploadInvG = "update job_sample_group_invoice set inv_status='{0}' where so='{1}'";
-                    MaintenanceBiz.ExecuteCommand(string.Format(sqlUploadInvG, result? "C":"I",invData.so));
+                    MaintenanceBiz.ExecuteCommand(string.Format(sqlUploadInvG, result ? "C" : "I", invData.so));
                     if (result)
                     {
                         logs.Append(invData.so + "[X],");
                     }
                     else
                     {
+                        sbJobFail.Append(""+invData.so + ",");
                         logs.Append(invData.so + "[ ],");
                         fail++;
                     }
@@ -404,7 +405,7 @@ namespace ALS.ALSI.Web.view.template
 
 
                 //GeneralManager.Commit();
-                String errList = (sbJobFail.Length == 0) ? "" : "<br>รายการ Invoice ที่โหลดไม่สำเร็จ คือ " + String.Join(",", sbJobFail.ToString().Split(','));
+                String errList = (sbJobFail.Length == 0) ? "" : "<br>ไม่พบหมาย Job_number ที่ถูกผูกด้วย So ดังนี้ " + String.Join(",", sbJobFail.ToString().Split(','));
                 MessageINv = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูล ทั้งหมด " + total + " รายการ สำเร็จ " + (total - fail) + " รายการ" + ((fail == 0) ? "" : (" ไม่สำเร็จ " + fail + " รายการ")) + " </div>";
                 if (sbJobFail.Length > 0)
                 {

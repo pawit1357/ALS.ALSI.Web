@@ -430,7 +430,7 @@
                                     <asp:BoundField HeaderText="Invoice Date" DataField="sample_invoice_date" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_date">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
-                                    <asp:BoundField HeaderText="Invoice Amount" DataField="sample_invoice_amount" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount">
+                                    <asp:BoundField HeaderText="Invoice Amount" DataField="sample_invoice_amount_rpt" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount_rpt">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
                                     <asp:BoundField HeaderText="Package Cost" DataField="sample_invoice_package" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_package">

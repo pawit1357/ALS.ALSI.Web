@@ -550,19 +550,23 @@ namespace ALS.ALSI.Web.view.template
                                 jns = jns.EndsWith(",") ? jns.Substring(0, jns.Length - 1) : jns;
 
                                 string sqlUploadBySo = "update job_sample set sample_so='{1}',sample_invoice_amount={2},sample_invoice_package='{3}' where   job_number in ({0});";
+
                                 int result = MaintenanceBiz.ExecuteCommandReturnResult(string.Format(sqlUploadBySo, jns, _updateCso.so, amt, (isPackageCost) ? "Y" : "N"));
                                 Console.WriteLine();
 
 
                                 if (result < jobNumbers.Count())
                                 {
+                                    //string sqlNotIn = "select * from job_sample where   job_number not in ({0});";
+                                    //DataTable dtNotExists = MaintenanceBiz.ExecuteReturnDt(string.Format(sqlNotIn, jns));
                                     logs.Append(" - ");
-                                    sbJobFail.Append(_updateCso.so+":"+_updateCso.report_no + ",");
+                                    sbJobFail.Append(_updateCso.so+"["+ jns + "],");
                                     fail++;
                                     isComplete = false;
                                 }
                                 else
                                 {
+
                                     logs.Append(" - " + jns + "[x],");
                                 }
 
