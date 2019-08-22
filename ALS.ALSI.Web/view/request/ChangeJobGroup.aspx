@@ -22,17 +22,17 @@
                         <asp:GridView ID="gvSample" runat="server" AutoGenerateColumns="False" AllowPaging="True"
                             CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="ID,job_number" OnRowCancelingEdit="gvSample_RowCancelingEdit"  OnPageIndexChanging="gvJob_PageIndexChanging" OnRowEditing="gvSample_RowEditing" OnRowUpdating="gvSample_RowUpdating" PageSize="20">
                             <Columns>
-                                <asp:TemplateField HeaderText="">
+
+                                <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="Center">
+                                    <HeaderTemplate>
+                                            <asp:CheckBox ID="chkAllSign" runat="server" AutoPostBack="true" Text="" OnCheckedChanged="chkAllSign_CheckedChanged"/>
+                                    </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnEdit" runat="server" ToolTip="Edit" CommandName="Edit" CommandArgument='<%# Eval("ID")%>'><i class="fa fa-edit"></i></asp:LinkButton>
+                                        <asp:CheckBox ID="cbSelect" runat="server" OnCheckedChanged="cbSelect_CheckedChanged" AutoPostBack="true" />
+                                        <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("ID")%>'></asp:HiddenField>
                                     </ItemTemplate>
-                                    <EditItemTemplate>
-                                        <asp:LinkButton ID="btnUpdate" runat="server" ToolTip="Update" ValidationGroup="CreditLineGrid"
-                                            CommandName="Update"><i class="fa fa-save"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="LinkCancel" runat="server" ToolTip="Cancel" CausesValidation="false"
-                                            CommandName="Cancel"><i class="fa fa-remove"></i></asp:LinkButton>
-                                    </EditItemTemplate>
                                 </asp:TemplateField>
+                              
                                 <asp:TemplateField HeaderText="Ref No." ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Literal ID="litRefNo" runat="server" Text='<%# Eval("job_number")%>' />

@@ -18,6 +18,8 @@ namespace ALS.ALSI.Biz.DataAccess
         public String section { get; set; }
         public RoleEnum userRole { get; set; }
         public Boolean bNotShowDelete { get; set; }
+        public Boolean ignorePrefix { get; set; }
+
         private static IRepository<job_info> _repository
         {
             get { return ObjectFactory.GetInstance<IRepository<job_info>>(); }
@@ -232,13 +234,13 @@ namespace ALS.ALSI.Biz.DataAccess
                     result = result.Where(x => x.sn == this.sample_id);
                 }
 
-                if (string.IsNullOrEmpty(this.sample_so))
-                {
-                    if (!String.IsNullOrEmpty(this.preFixText))
+                //if (string.IsNullOrEmpty(this.sample_so))
+                //{
+                    if (!String.IsNullOrEmpty(this.preFixText) && !ignorePrefix)
                     {
                         result = result.Where(x => x.sample_prefix.Trim().Contains(this.preFixText.Trim()));
                     }
-                }
+                //}
 
                 //if (this.date_of_receive != null && this.date_of_receive !=DateTime.MinValue)
                 //{

@@ -27,6 +27,7 @@ namespace ALS.ALSI.Biz.DataAccess
         //}
         #region "Property"
         public CommandNameEnum RowState { get; set; }
+        public Boolean isChecked { get; set; }
         #endregion
 
 

@@ -328,13 +328,12 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="Center">
                                         <HeaderTemplate>
-                                                <asp:CheckBox ID="chkAllSign" runat="server" AutoPostBack="true" Text="Check All" OnCheckedChanged="chkAllSign_CheckedChanged"/>
+                                                <asp:CheckBox ID="chkAllSign" runat="server" AutoPostBack="true" Text="" OnCheckedChanged="chkAllSign_CheckedChanged"/>
                                         </HeaderTemplate>
                                         <ItemTemplate>
                                             <asp:CheckBox ID="cbSelect" runat="server" />
                                             <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("SN")%>'></asp:HiddenField>
                                             <asp:HiddenField ID="hIsGroupReport" runat="server" Value='<%# Eval("group_submit")%>'></asp:HiddenField>
-
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
@@ -430,10 +429,13 @@
                                     <asp:BoundField HeaderText="Invoice Date" DataField="sample_invoice_date" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_date">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
-                                    <asp:BoundField HeaderText="Invoice Amount" DataField="sample_invoice_amount_rpt" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount_rpt">
+                                    <asp:BoundField HeaderText="Invoice Amount" DataField="sample_invoice_amount" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
                                     <asp:BoundField HeaderText="Package Cost" DataField="sample_invoice_package" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_package">
+                                        <ItemStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:BoundField HeaderText="Invoice Amount (Report)" DataField="sample_invoice_amount_rpt" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount_rpt">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
                                     <asp:TemplateField HeaderText="Payment Status" ItemStyle-HorizontalAlign="Center" SortExpression="sample_invoice_status">

@@ -100,6 +100,16 @@ namespace ALS.ALSI.Web.view.request
             gvSample.DataSource = this.dataList;
             gvSample.DataBind();
 
+            foreach(job_sample js in this.dataList)
+            {
+                js.isChecked = true;
+            }
+            foreach (GridViewRow row in gvSample.Rows)
+            {
+                CheckBox chkcheck = (CheckBox)row.FindControl("cbSelect");
+                chkcheck.Checked = true;
+            }
+
             btnSave.Visible = this.dataList.Count > 0;
             pChemist.Visible = (this.dataList.Count > 0) && !this.isChangeDueDateGroup && !this.isPoGroupOperation && !this.isInvoiceGroupOperation && !this.isSentToCusDateOperation && !this.isNoteGroupOpeation && !this.isCusRefNoGroupOperation;
             pChangeDueDate.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && (this.isChangeDueDateGroup || this.isSentToCusDateOperation) && !this.isInvoiceGroupOperation && !this.isNoteGroupOpeation && !this.isCusRefNoGroupOperation;
@@ -413,20 +423,26 @@ namespace ALS.ALSI.Web.view.request
                 }
                 else if (this.isInvoiceGroupOperation)
                 {
-                    jobSample.sample_invoice = txtInvoice.Text;
-                    jobSample.sample_invoice_amount = String.IsNullOrEmpty(txtInvoiceAmt.Text) ? Convert.ToDouble("0") : Convert.ToDouble(txtInvoiceAmt.Text);
-                    if (!String.IsNullOrEmpty(txtInvoiceDate.Text))
+                    //CheckBox chk = row.Cells[1].Controls[1] as CheckBox;
+                    
+                    Console.WriteLine();
+                    if (jobSample.isChecked)
                     {
-                        jobSample.sample_invoice_date = CustomUtils.converFromDDMMYYYY(txtInvoiceDate.Text);
-                        jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_INPROCESS);
-                    }
-                    if (!String.IsNullOrEmpty(txtPaymentDate.Text))
-                    {
-                        jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
-                        jobSample.sample_invoice_complete_date = CustomUtils.converFromDDMMYYYY(txtInvoiceDate.Text);
-                    }
+                        jobSample.sample_invoice = txtInvoice.Text;
+                        jobSample.sample_invoice_amount = String.IsNullOrEmpty(txtInvoiceAmt.Text) ? Convert.ToDouble("0") : Convert.ToDouble(txtInvoiceAmt.Text);
+                        jobSample.sample_invoice_amount_rpt = String.IsNullOrEmpty(txtInvoiceAmt.Text) ? Convert.ToDouble("0") : Convert.ToDouble(txtInvoiceAmt.Text);
 
-
+                        if (!String.IsNullOrEmpty(txtInvoiceDate.Text))
+                        {
+                            jobSample.sample_invoice_date = CustomUtils.converFromDDMMYYYY(txtInvoiceDate.Text);
+                            jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_INPROCESS);
+                        }
+                        if (!String.IsNullOrEmpty(txtPaymentDate.Text))
+                        {
+                            jobSample.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
+                            jobSample.sample_invoice_complete_date = CustomUtils.converFromDDMMYYYY(txtPaymentDate.Text);
+                        }
+                    }
                 }
                 else if (this.isCusRefNoGroupOperation)
                 {
@@ -690,12 +706,41 @@ namespace ALS.ALSI.Web.view.request
                 jobSample.sample_invoice_date = CustomUtils.converFromDDMMYYYY(txt_sample_invoice_date.Text);
                 jobSample.sample_invoice_amount_rpt = CustomUtils.isNumber(txt_sample_invoice_amount.Text) ? Convert.ToDouble(txt_sample_invoice_amount.Text) : 0;
                 jobSample.sample_invoice_complete_date = CustomUtils.converFromDDMMYYYY(txt_sample_invoice_complete_date.Text);
+                jobSample.isChecked = true;
                 jobSample.Update();
                 GeneralManager.Commit();
             }
             gvSample.EditIndex = -1;
             gvSample.DataSource = this.dataList;
             gvSample.DataBind();
+        }
+
+        protected void chkAllSign_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            foreach (GridViewRow row in gvSample.Rows)
+            {
+                CheckBox chkcheck = (CheckBox)row.FindControl("cbSelect");
+                chkcheck.Checked = cb.Checked;
+
+                HiddenField sample_id = (HiddenField)row.FindControl("hid");
+                job_sample jobSample = this.dataList.Find(x => x.ID == Convert.ToInt32(sample_id.Value));
+                if (jobSample != null)
+                {
+                    jobSample.isChecked = cb.Checked;
+                }
+            }
+        }
+
+        protected void cbSelect_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            var sample_id = cb.Parent.FindControl("hid") as HiddenField;
+            job_sample jobSample = this.dataList.Find(x => x.ID == Convert.ToInt32(sample_id.Value));
+            if (jobSample != null)
+            {
+                jobSample.isChecked = cb.Checked;
+            }
         }
     }
 }
