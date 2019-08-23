@@ -2488,11 +2488,11 @@ namespace ALS.ALSI.Web.view.template
                         newCoverPage[7].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
                         newCoverPage[8].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
                         newCoverPage[9].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                        newCoverPage[10].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
+                        newCoverPage[11].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
                         //-----------------------------------------------
-                        newCoverPage[10].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
-                        newCoverPage[11].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
-                        newCoverPage[12].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
-                        newCoverPage[13].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+                        newCoverPage[12].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
+                        newCoverPage[13].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
                         newCoverPage[14].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
                         newCoverPage[15].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
                         newCoverPage[16].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
@@ -2502,9 +2502,11 @@ namespace ALS.ALSI.Web.view.template
                         //newCoverPage[20].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
                         //newCoverPage[22].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
                         //newCoverPage[23].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
+
                     }
                     else
                     {
+
                         newCoverPage[0].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
                         newCoverPage[1].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_OIL);
                         //-----------------------------------------------
@@ -2517,10 +2519,10 @@ namespace ALS.ALSI.Web.view.template
                         newCoverPage[7].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
                         newCoverPage[8].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE);
                         newCoverPage[9].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
-                        newCoverPage[10].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
-                        newCoverPage[11].data_type = Convert.ToInt32(SeagateGcmsEnum.MOTOR_BASE_SUB);
                         //-----------------------------------------------
-                        newCoverPage[12].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
+                        newCoverPage[10].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
+                        newCoverPage[11].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND);
+                        newCoverPage[12].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
                         newCoverPage[13].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
                         newCoverPage[14].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);
                         newCoverPage[15].data_type = Convert.ToInt32(SeagateGcmsEnum.COMPOUND_SUB);

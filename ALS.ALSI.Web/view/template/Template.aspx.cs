@@ -228,8 +228,11 @@ namespace ALS.ALSI.Web.view.template
             Boolean bUploadSuccess = false;
             try
             {
+                MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_component where template_id={0}", template_id));
                 MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_detail_spec_ref where template_id={0}", template_id));
+                MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_specification where template_id={0}", template_id));
 
+                
                 List<int> listOfSpec = new List<int>();
 
                 using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))

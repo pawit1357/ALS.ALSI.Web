@@ -308,7 +308,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     if (!line.Equals("") && !line.Equals("\f"))
                     {
-                        if (line.StartsWith("  SO") || line.Substring(10, 2).Equals("SO"))
+                        if (line.StartsWith("  SO") || (line.Length < 10 ? "" : line.Substring(10, 2)).Equals("SO"))
                         {
                             string _so = line.Substring(10, 10).Trim();
                             soList.Add("'"+_so+"'");
@@ -326,7 +326,7 @@ namespace ALS.ALSI.Web.view.template
                 {
                     if (!line.Equals("") && !line.Equals("\f"))
                     {
-                        if (line.StartsWith("  SO") || line.Substring(10, 2).Equals("SO"))
+                        if (line.StartsWith("  SO") || (line.Length < 10 ? "" : line.Substring(10, 2)).Equals("SO"))
                         {
                             if (index == 0)
                             {
@@ -397,7 +397,7 @@ namespace ALS.ALSI.Web.view.template
 
 
                 bUploadSuccess = true;
-            }
+        }
             catch (Exception ex)
             {
                 Message = "<div class=\"alert alert-danger\"><strong>Error!</strong>" + ex.InnerException + "</div>";
