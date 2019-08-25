@@ -240,7 +240,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                 rpt.model = _sample.model;
                 rpt.surface_areas = _sample.surface_area;
                 rpt.remark = _sample.remarks;
-                rpt.remarkAmendRetest = _sample.am_retest_remark;
+                rpt.remarkAmendRetest = String.IsNullOrEmpty(_sample.am_retest_remark) ? "" : ("Note:" + System.Environment.NewLine + "1. " + _sample.am_retest_remark);
             }
             return rpt;
         }

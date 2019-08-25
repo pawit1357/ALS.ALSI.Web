@@ -160,7 +160,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>3.40535cm</Top>
-            <Left>0.05098cm</Left>
+            <Left>0.10309cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.39034cm</Width>
             <Style>
@@ -826,7 +826,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.61832in</Top>
-            <Left>0.02007in</Left>
+            <Left>0.04058in</Left>
             <Height>0.71875in</Height>
             <Width>7.2403in</Width>
             <ZIndex>1</ZIndex>
@@ -893,7 +893,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>5.93617cm</Top>
-            <Left>0.05098cm</Left>
+            <Left>0.10309cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.39034cm</Width>
             <ZIndex>2</ZIndex>
@@ -1321,7 +1321,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet3</DataSetName>
             <Top>2.54527in</Top>
-            <Left>0.02007in</Left>
+            <Left>0.04058in</Left>
             <Height>0.71875in</Height>
             <Width>7.24029in</Width>
             <ZIndex>3</ZIndex>
@@ -1368,7 +1368,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Remarks</rd:DefaultName>
-            <Top>3.26402in</Top>
+            <Top>3.58346in</Top>
             <Left>0.02007in</Left>
             <Height>0.19565in</Height>
             <Width>7.24029in</Width>
@@ -1385,7 +1385,7 @@
           </Textbox>
           <Subreport Name="Subreport1">
             <ReportName>Signature2</ReportName>
-            <Top>3.45967in</Top>
+            <Top>3.77911in</Top>
             <Height>0.82428in</Height>
             <Width>7.26036in</Width>
             <ZIndex>5</ZIndex>
@@ -1432,7 +1432,7 @@
                 <Value>=Parameters!SupplementToReportNo.Value</Value>
               </Parameter>
             </Parameters>
-            <Left>0.02871in</Left>
+            <Left>0.04922in</Left>
             <Height>1.34069in</Height>
             <Width>7.23165in</Width>
             <ZIndex>6</ZIndex>
@@ -1465,7 +1465,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>10.88123cm</Top>
+            <Top>11.69262cm</Top>
             <Left>0cm</Left>
             <Height>0.37654cm</Height>
             <Width>18.44131cm</Width>
@@ -1480,11 +1480,44 @@
               <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="RemarkAmendRetest">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!RemarkAmendRetest.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>RemarkAmendRetest</rd:DefaultName>
+            <Top>3.2918in</Top>
+            <Left>0.04922in</Left>
+            <Height>0.25in</Height>
+            <Width>7.23165in</Width>
+            <ZIndex>8</ZIndex>
+            <Visibility>
+              <Hidden>=IsNothing(Parameters!RemarkAmendRetest.Value)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>4.45591in</Height>
+        <Height>4.75164in</Height>
         <Style />
       </Body>
-      <Width>7.26037in</Width>
+      <Width>7.31048in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -1566,11 +1599,16 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="RemarkAmendRetest">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>7</NumberOfRows>
+      <NumberOfRows>8</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1641,6 +1679,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>SupplementToReportNo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>RemarkAmendRetest</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

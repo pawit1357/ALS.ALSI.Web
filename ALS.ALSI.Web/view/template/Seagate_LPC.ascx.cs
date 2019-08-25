@@ -1329,7 +1329,7 @@ namespace ALS.ALSI.Web.view.template
             };
             breakLines.Add(_breakLineTmp);
 
-
+            reportParameters.Add(new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest));
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
             reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));

@@ -801,7 +801,7 @@ namespace ALS.ALSI.Web.view.template
                 List<template_wd_ftir_coverpage> ds = this.Ftir.Where(x => x.data_type == 2 && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
 
                 ReportParameterCollection reportParameters = new ReportParameterCollection();
-
+                reportParameters.Add(new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest));
                 reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo + " "));
                 reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
                 reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));

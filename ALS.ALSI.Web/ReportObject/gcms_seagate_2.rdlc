@@ -264,7 +264,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>3.58174cm</Top>
-            <Left>0.05782cm</Left>
+            <Left>0.05785cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.36839cm</Width>
             <Style>
@@ -916,6 +916,7 @@ used for extraction</Value>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.68777in</Top>
+            <Left>0.00001in</Left>
             <Height>0.71875in</Height>
             <Width>7.2544in</Width>
             <ZIndex>1</ZIndex>
@@ -982,7 +983,7 @@ used for extraction</Value>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>6.18312cm</Top>
-            <Left>0cm</Left>
+            <Left>0.00003cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.42621cm</Width>
             <ZIndex>2</ZIndex>
@@ -1016,7 +1017,7 @@ used for extraction</Value>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>10.89235cm</Top>
-            <Left>0.00655cm</Left>
+            <Left>0.00658cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.41966cm</Width>
             <ZIndex>3</ZIndex>
@@ -1486,6 +1487,7 @@ used for extraction</Value>
             </TablixRowHierarchy>
             <DataSetName>DataSet5</DataSetName>
             <Top>2.71194in</Top>
+            <Left>0.00001in</Left>
             <Height>0.71875in</Height>
             <Width>7.25441in</Width>
             <ZIndex>4</ZIndex>
@@ -1974,6 +1976,7 @@ used for extraction</Value>
             </TablixRowHierarchy>
             <DataSetName>DataSet6</DataSetName>
             <Top>3.50013in</Top>
+            <Left>0.00001in</Left>
             <Height>0.71875in</Height>
             <Width>7.25441in</Width>
             <ZIndex>5</ZIndex>
@@ -2026,7 +2029,7 @@ used for extraction</Value>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>11.45644cm</Top>
-            <Left>0.00655cm</Left>
+            <Left>0.00658cm</Left>
             <Height>0.52881cm</Height>
             <Width>18.41966cm</Width>
             <ZIndex>6</ZIndex>
@@ -2042,7 +2045,7 @@ used for extraction</Value>
           </Textbox>
           <Subreport Name="Subreport1">
             <ReportName>Signature</ReportName>
-            <Top>4.78804in</Top>
+            <Top>5.01027in</Top>
             <Height>1.04167in</Height>
             <Width>7.25441in</Width>
             <ZIndex>7</ZIndex>
@@ -2089,6 +2092,7 @@ used for extraction</Value>
                 <Value>=Parameters!SupplementToReportNo.Value</Value>
               </Parameter>
             </Parameters>
+            <Left>0.00001in</Left>
             <Height>1.34069in</Height>
             <Width>7.25442in</Width>
             <ZIndex>8</ZIndex>
@@ -2098,11 +2102,44 @@ used for extraction</Value>
               </Border>
             </Style>
           </Subreport>
+          <Textbox Name="RemarkAmendRetest">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!RemarkAmendRetest.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>RemarkAmendRetest</rd:DefaultName>
+            <Top>4.74638in</Top>
+            <Left>0.02276in</Left>
+            <Height>0.25in</Height>
+            <Width>7.23165in</Width>
+            <ZIndex>9</ZIndex>
+            <Visibility>
+              <Hidden>=IsNothing(Parameters!RemarkAmendRetest.Value)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>5.9388in</Height>
+        <Height>6.05194in</Height>
         <Style />
       </Body>
-      <Width>7.25442in</Width>
+      <Width>7.25443in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -2194,11 +2231,16 @@ used for extraction</Value>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="RemarkAmendRetest">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>8</NumberOfRows>
+      <NumberOfRows>9</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -2279,6 +2321,11 @@ used for extraction</Value>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>7</RowIndex>
           <ParameterName>SupplementToReportNo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>8</RowIndex>
+          <ParameterName>RemarkAmendRetest</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

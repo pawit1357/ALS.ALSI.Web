@@ -855,6 +855,7 @@ namespace ALS.ALSI.Web.view.template
                 var testName = ds.GroupBy(cc => cc.A).Select(dd => new { n = string.Join("/", ds.Select(ee => ee.A).ToList().Distinct()) }).FirstOrDefault();
 
                 ReportParameterCollection reportParameters = new ReportParameterCollection();
+                reportParameters.Add(new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest));
                 reportParameters.Add(new ReportParameter("CustomerPoNo", String.IsNullOrEmpty(reportHeader.cusRefNo) ? "-" : reportHeader.cusRefNo));
                 reportParameters.Add(new ReportParameter("AlsThailandRefNo", String.IsNullOrEmpty(reportHeader.alsRefNo) ? "-" : reportHeader.alsRefNo));
                 reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));

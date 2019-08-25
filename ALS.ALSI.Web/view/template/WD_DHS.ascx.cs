@@ -944,6 +944,7 @@ namespace ALS.ALSI.Web.view.template
 
             ReportParameterCollection reportParameters = new ReportParameterCollection
             {
+                new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest),
                 new ReportParameter("CustomerPoNo",String.IsNullOrEmpty(reportHeader.cusRefNo)? " ": reportHeader.cusRefNo),
                 new ReportParameter("AlsThailandRefNo",String.IsNullOrEmpty(reportHeader.alsRefNo)? " ": reportHeader.alsRefNo),
 

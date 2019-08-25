@@ -1017,6 +1017,8 @@ namespace ALS.ALSI.Web.view.template
 
                 ReportParameterCollection reportParameters = new ReportParameterCollection
                 {
+                                        new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest),
+
                     new ReportParameter("CustomerPoNo", reportHeader.cusRefNo),
                     new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo),
                     new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""),

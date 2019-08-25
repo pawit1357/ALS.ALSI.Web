@@ -788,9 +788,8 @@ namespace ALS.ALSI.Web.view.template
 
             ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
 
-
             ReportParameterCollection reportParameters = new ReportParameterCollection();
-            //reportParameters.Add(new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest));
+            reportParameters.Add(new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest));
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
             reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
