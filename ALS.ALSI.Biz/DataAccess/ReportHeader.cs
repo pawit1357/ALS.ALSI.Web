@@ -24,6 +24,7 @@ namespace ALS.ALSI.Biz.ReportObjects
         public String surface_areas { get; set; }
         public String remark { get; set; }
         public String remarkAmendRetest { get; set; }
+        public String remarkAmendRetestRaw { get; set; }
 
         #region "Custom"
         public IEnumerable getReportHeader(int sample_id)
@@ -241,6 +242,7 @@ namespace ALS.ALSI.Biz.ReportObjects
                 rpt.surface_areas = _sample.surface_area;
                 rpt.remark = _sample.remarks;
                 rpt.remarkAmendRetest = String.IsNullOrEmpty(_sample.am_retest_remark) ? "" : ("Note:" + System.Environment.NewLine + "1. " + _sample.am_retest_remark);
+                rpt.remarkAmendRetestRaw = String.IsNullOrEmpty(_sample.am_retest_remark) ? "" : (System.Environment.NewLine + "         2. " + _sample.am_retest_remark);
             }
             return rpt;
         }

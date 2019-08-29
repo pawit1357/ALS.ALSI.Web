@@ -801,7 +801,7 @@ namespace ALS.ALSI.Web.view.template
                 List<template_wd_ftir_coverpage> ds = this.Ftir.Where(x => x.data_type == 2 && x.row_type == Convert.ToInt32(RowTypeEnum.Normal)).ToList();
 
                 ReportParameterCollection reportParameters = new ReportParameterCollection();
-                reportParameters.Add(new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest));
+                //reportParameters.Add(new ReportParameter("RemarkAmendRetest", ""));
                 reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo + " "));
                 reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
                 reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
@@ -816,7 +816,7 @@ namespace ALS.ALSI.Web.view.template
 
                 reportParameters.Add(new ReportParameter("Test", "FTIR"));
                 reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-                reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {0} {1}", lbA31.Text, lbB31.Text)));
+                reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: {0} The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory.The instrument detection limit for silicone oil is  {1} {2}{3}",(String.IsNullOrEmpty(reportHeader.remarkAmendRetest)? "":"1."), lbA31.Text, lbB31.Text, reportHeader.remarkAmendRetestRaw)));
                 reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
                 reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
                 // Variables

@@ -833,13 +833,13 @@ namespace ALS.ALSI.Web.view.template
                     Boolean con1 = ftirList[ftirList.Count - 1].A.Replace("Amount", "").Replace("(", "").Replace(")", "").Trim().Equals(ddlUnit.SelectedItem.Text.ToLower());
                     Boolean con2 = ftirList[ftirList.Count - 2].A.Replace("Amount", "").Replace("(", "").Replace(")", "").Trim().Equals(ddlUnit.SelectedItem.Text.ToLower());
 
-//B|Silicone 
-//F|Silicone(release side)
-//G|Silicone(non - release side)
-//E|Hydrocarbon 
-//B|Silicone Oil  
-//D|Phthalate   
-//C|Amide
+                    //B|Silicone 
+                    //F|Silicone(release side)
+                    //G|Silicone(non - release side)
+                    //E|Hydrocarbon 
+                    //B|Silicone Oil  
+                    //D|Phthalate   
+                    //C|Amide
                     try
                     {
 
@@ -853,7 +853,8 @@ namespace ALS.ALSI.Web.view.template
                         ftir2[6].C = (con1) ? ftirList[ftirList.Count - 1].C : ftirList[ftirList.Count - 2].C;
 
                     }
-                    catch (Exception ex) {
+                    catch (Exception ex)
+                    {
                         Console.WriteLine(ex.Message);
                     }
 
@@ -955,11 +956,11 @@ namespace ALS.ALSI.Web.view.template
             //{
 
 
-                //DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
-                List<template_seagate_ftir_coverpage> methods = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
-                List<template_seagate_ftir_coverpage> ftirs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
-                List<template_seagate_ftir_coverpage> nvrs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
-                ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
+            //DataTable dt = Extenders.ObjectToDataTable(this.Ftir[0]);
+            List<template_seagate_ftir_coverpage> methods = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.METHOD_PROCEDURE)).ToList();
+            List<template_seagate_ftir_coverpage> ftirs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_SPEC)).ToList();
+            List<template_seagate_ftir_coverpage> nvrs = this.Ftir.Where(x => x.row_type == Convert.ToInt32(RowTypeEnum.Normal) && x.data_type == Convert.ToInt32(FtirNvrEnum.NVR_SPEC)).ToList();
+            ReportHeader reportHeader = ReportHeader.getReportHeder(this.jobSample);
 
 
             List<template_img> dat = this.refImg.OrderBy(x => x.seq).ToList();
@@ -970,59 +971,60 @@ namespace ALS.ALSI.Web.view.template
             //}
 
             ReportParameterCollection reportParameters = new ReportParameterCollection();
-            reportParameters.Add(new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest));
+            //reportParameters.Add(new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest));
 
             reportParameters.Add(new ReportParameter("CustomerPoNo", reportHeader.cusRefNo));
-                reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
-                reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
-                reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
+            reportParameters.Add(new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo));
+            reportParameters.Add(new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("Company", reportHeader.addr1));
+            reportParameters.Add(new ReportParameter("Company_addr", reportHeader.addr2));
 
-                reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
-                reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
-                reportParameters.Add(new ReportParameter("Test", " "));
-                reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
-                reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnitNvr.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("DateSampleReceived", reportHeader.dateOfDampleRecieve.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateAnalyzed", reportHeader.dateOfAnalyze.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("DateTestCompleted", reportHeader.dateOfTestComplete.ToString("dd MMMM yyyy") + ""));
+            reportParameters.Add(new ReportParameter("SampleDescription", reportHeader.description));
+            reportParameters.Add(new ReportParameter("Test", " "));
+            reportParameters.Add(new ReportParameter("rpt_unit", ddlUnit.SelectedItem.Text));
+            reportParameters.Add(new ReportParameter("rpt_unit2", ddlUnitNvr.SelectedItem.Text));
 
-                reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
-                reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
-                reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
-                reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
+            reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
+            //reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)));
+            reportParameters.Add(new ReportParameter("Remarks", String.Format("Note: {0} The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {1}{2}", (String.IsNullOrEmpty(reportHeader.remarkAmendRetest) ? "" : "1."), lbA42.Text, reportHeader.remarkAmendRetestRaw)));
+            reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
+            reportParameters.Add(new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo));
             // Variables
             string mimeType = string.Empty;
             string encoding = string.Empty;
-                string extension = string.Empty;
+            string extension = string.Empty;
 
 
-                // Setup the report viewer object and get the array of bytes
-                ReportViewer viewer = new ReportViewer();
-                viewer.ProcessingMode = ProcessingMode.Local;
-                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_nvr_seagate.rdlc");
-                viewer.LocalReport.SetParameters(reportParameters);
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", methods.ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.ToDataTable())); // Add datasource here
-                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
+            // Setup the report viewer object and get the array of bytes
+            ReportViewer viewer = new ReportViewer();
+            viewer.ProcessingMode = ProcessingMode.Local;
+            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ftir_nvr_seagate.rdlc");
+            viewer.LocalReport.SetParameters(reportParameters);
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", methods.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", nvrs.ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", ftirs.ToDataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", dat.ToDataTable())); // Add datasource here
 
             if ((nvrs.Count + ftirs.Count) >= 4)
-                {
-                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", nvrs.ToDataTable())); // Add datasource here
-                }
-                else
-                {
-                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
-                }
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", nvrs.ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
+            }
 
-                if ((nvrs.Count + ftirs.Count) > 10)
-                {
-                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", nvrs.ToDataTable())); // Add datasource here
-                }
-                else
-                {
-                    viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
-                }
+            if ((nvrs.Count + ftirs.Count) > 10)
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", nvrs.ToDataTable())); // Add datasource here
+            }
+            else
+            {
+                viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
+            }
 
             if (dat.Count >= 1)
             {
@@ -1070,86 +1072,86 @@ namespace ALS.ALSI.Web.view.template
 
             string download = String.Empty;
 
-                StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
-                switch (status)
-                {
-                    case StatusEnum.ADMIN_CONVERT_WORD:
-                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
+            StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
+            switch (status)
+            {
+                case StatusEnum.ADMIN_CONVERT_WORD:
+                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    {
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                    }
+                    else
+                    {
+                        byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out string[] streamIds, out Warning[] warnings);
+
+                        if (!Directory.Exists(Server.MapPath("~/Report/")))
                         {
-                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                            Directory.CreateDirectory(Server.MapPath("~/Report/"));
                         }
-                        else
+                        using (FileStream fs = File.Create(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension))
                         {
-                            byte[] bytes = viewer.LocalReport.Render("Word", null, out mimeType, out encoding, out extension, out string[] streamIds, out Warning[] warnings);
-
-                            if (!Directory.Exists(Server.MapPath("~/Report/")))
-                            {
-                                Directory.CreateDirectory(Server.MapPath("~/Report/"));
-                            }
-                            using (FileStream fs = File.Create(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension))
-                            {
-                                fs.Write(bytes, 0, bytes.Length);
-                            }
-
-
-                            #region "Insert Footer & Header from template"
-                            Document doc1 = new Document();
-                            doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
-                            Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
-                            Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
-                            Document doc2 = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
-                            foreach (Section section in doc2.Sections)
-                            {
-                                foreach (DocumentObject obj in header.ChildObjects)
-                                {
-                                    section.HeadersFooters.Header.ChildObjects.Add(obj.Clone());
-                                }
-                                foreach (DocumentObject obj in footer.ChildObjects)
-                                {
-                                    section.HeadersFooters.Footer.ChildObjects.Add(obj.Clone());
-                                }
-                            }
-
-
-
-                            doc2.SaveToFile(Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension);
-                            #endregion
-                            Response.ContentType = mimeType;
-                            Response.AddHeader("Content-Disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
-                            Response.WriteFile(Server.MapPath("~/Report/" + this.jobSample.job_number + "." + extension));
-                            Response.Flush();
-
-                            #region "Delete After Download"
-                            String deleteFile1 = Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension;
-                            String deleteFile2 = Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension;
-
-                            if (File.Exists(deleteFile1))
-                            {
-                                File.Delete(deleteFile1);
-                            }
-                            if (File.Exists(deleteFile2))
-                            {
-                                File.Delete(deleteFile2);
-                            }
-                            #endregion
-                        }
-                        break;
-                    case StatusEnum.LABMANAGER_CHECKING:
-                    case StatusEnum.LABMANAGER_APPROVE:
-                    case StatusEnum.LABMANAGER_DISAPPROVE:
-                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                        {
-                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
-                        }
-                        break;
-                    case StatusEnum.ADMIN_CONVERT_PDF:
-                        if (!String.IsNullOrEmpty(this.jobSample.path_word))
-                        {
-                            Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                            fs.Write(bytes, 0, bytes.Length);
                         }
 
-                        break;
-                }
+
+                        #region "Insert Footer & Header from template"
+                        Document doc1 = new Document();
+                        doc1.LoadFromFile(Server.MapPath("~/template/") + "Blank Letter Head - EL.doc");
+                        Spire.Doc.HeaderFooter header = doc1.Sections[0].HeadersFooters.Header;
+                        Spire.Doc.HeaderFooter footer = doc1.Sections[0].HeadersFooters.Footer;
+                        Document doc2 = new Document(Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension);
+                        foreach (Section section in doc2.Sections)
+                        {
+                            foreach (DocumentObject obj in header.ChildObjects)
+                            {
+                                section.HeadersFooters.Header.ChildObjects.Add(obj.Clone());
+                            }
+                            foreach (DocumentObject obj in footer.ChildObjects)
+                            {
+                                section.HeadersFooters.Footer.ChildObjects.Add(obj.Clone());
+                            }
+                        }
+
+
+
+                        doc2.SaveToFile(Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension);
+                        #endregion
+                        Response.ContentType = mimeType;
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + this.jobSample.job_number + "." + extension);
+                        Response.WriteFile(Server.MapPath("~/Report/" + this.jobSample.job_number + "." + extension));
+                        Response.Flush();
+
+                        #region "Delete After Download"
+                        String deleteFile1 = Server.MapPath("~/Report/") + this.jobSample.job_number + "." + extension;
+                        String deleteFile2 = Server.MapPath("~/Report/") + this.jobSample.job_number + "_orginal." + extension;
+
+                        if (File.Exists(deleteFile1))
+                        {
+                            File.Delete(deleteFile1);
+                        }
+                        if (File.Exists(deleteFile2))
+                        {
+                            File.Delete(deleteFile2);
+                        }
+                        #endregion
+                    }
+                    break;
+                case StatusEnum.LABMANAGER_CHECKING:
+                case StatusEnum.LABMANAGER_APPROVE:
+                case StatusEnum.LABMANAGER_DISAPPROVE:
+                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    {
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                    }
+                    break;
+                case StatusEnum.ADMIN_CONVERT_PDF:
+                    if (!String.IsNullOrEmpty(this.jobSample.path_word))
+                    {
+                        Response.Redirect(String.Format("{0}{1}", Configurations.HOST, this.jobSample.path_word));
+                    }
+
+                    break;
+            }
             //}
             //catch (Exception ex)
             //{
@@ -1338,7 +1340,7 @@ namespace ALS.ALSI.Web.view.template
                                                 tmp.F = (String.IsNullOrEmpty(tmp.F)) ? "" : tmp.F.Equals("Detected") ? tmp.F : tmp.F.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.F : (tmp.F.Trim().Equals("<IDL") || tmp.F.Trim().Equals("< IDL")) ? tmp.F : Convert.ToDouble(tmp.F).ToString("N" + txtDecimal07.Text);
                                                 tmp.G = (String.IsNullOrEmpty(tmp.G)) ? "" : tmp.G.Equals("Detected") ? tmp.G : tmp.G.ToUpper().Equals("Not Detected".ToUpper()) ? tmp.G : (tmp.G.Trim().Equals("<IDL") || tmp.G.Trim().Equals("< IDL")) ? tmp.G : Convert.ToDouble(tmp.G).ToString("N" + txtDecimal07.Text);
                                                 break;
-                                            }
+                                        }
                                         tmp.row_type = Convert.ToInt32(RowTypeEnum.Normal);
                                         tmp.data_type = Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA);
                                         if (!String.IsNullOrEmpty(tmp.A))
@@ -1446,7 +1448,7 @@ namespace ALS.ALSI.Web.view.template
                         //}
                         #endregion
                         #region "IMG"
-                        if ((Path.GetExtension(_postedFile.FileName).ToLower().Equals(".jpg"))|| Path.GetExtension(_postedFile.FileName).ToLower().Equals(".png"))
+                        if ((Path.GetExtension(_postedFile.FileName).ToLower().Equals(".jpg")) || Path.GetExtension(_postedFile.FileName).ToLower().Equals(".png"))
                         {
                             template_img _img = new template_img();
                             _img.id = CustomUtils.GetRandomNumberID();
@@ -1468,7 +1470,7 @@ namespace ALS.ALSI.Web.view.template
                         #endregion
                     }
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     errors.Add(String.Format("กรุณาตรวจสอบ {0}:{1}", sheetName, CustomUtils.ErrorIndex));
                     Console.WriteLine();

@@ -98,7 +98,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
             if (isUrgent)
             {
-                StartDate = StartDate.AddDays(addDay+1);
+                StartDate = StartDate.AddDays(addDay-1);
             }
             else
             {

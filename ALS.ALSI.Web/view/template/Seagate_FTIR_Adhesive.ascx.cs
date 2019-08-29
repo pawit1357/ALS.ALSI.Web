@@ -1121,7 +1121,7 @@ namespace ALS.ALSI.Web.view.template
 
                 ReportParameterCollection reportParameters = new ReportParameterCollection
                 {
-                    new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest),
+                    //new ReportParameter("RemarkAmendRetest", reportHeader.remarkAmendRetest),
                     new ReportParameter("CustomerPoNo", reportHeader.cusRefNo),
                     new ReportParameter("AlsThailandRefNo", reportHeader.alsRefNo),
                     new ReportParameter("Date", reportHeader.cur_date.ToString("dd MMMM yyyy") + ""),
@@ -1137,8 +1137,10 @@ namespace ALS.ALSI.Web.view.template
                     new ReportParameter("rpt_unit2", ddlUnit.SelectedItem.Text),
 
                     new ReportParameter("ResultDesc", lbSpecDesc.Text),
-                    new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)),
-                    new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.JobSample.singapore_ref_no) ? String.Empty : this.JobSample.singapore_ref_no)),
+                    //new ReportParameter("Remarks", String.Format("Note: The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {0}", lbA42.Text)),
+                    new ReportParameter("Remarks", String.Format("Note: {0} The above analysis was carried out using FTIR spectrometer equipped with a MCT detector & a VATR  accessory. The instrument detection limit for Silicone Oil is {1}{2}", (String.IsNullOrEmpty(reportHeader.remarkAmendRetest) ? "" : "1."), lbA42.Text, reportHeader.remarkAmendRetestRaw)),
+
+                new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.JobSample.singapore_ref_no) ? String.Empty : this.JobSample.singapore_ref_no)),
                     new ReportParameter("SupplementToReportNo", reportHeader.supplementToReportNo)
             };
 
