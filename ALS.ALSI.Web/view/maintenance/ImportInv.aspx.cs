@@ -276,9 +276,9 @@ namespace ALS.ALSI.Web.view.template
                     }
 
                     Console.WriteLine();
-                    string invNos = string.Join(",", groupInv.Select(x => "'" + x.inv_no + "'"));
+                    string inSOs = string.Join(",", groupInv.Select(x => "'" + x.so + "'"));
 
-                    string clearSql = "update job_sample set sample_invoice = '' where sample_invoice in (" + invNos + ")";
+                    string clearSql = "update job_sample set sample_invoice = '' where sample_so in (" + inSOs + ")";
                     MaintenanceBiz.ExecuteReturnDt(clearSql);
 
 

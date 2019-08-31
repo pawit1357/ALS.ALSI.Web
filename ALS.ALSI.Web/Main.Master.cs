@@ -65,7 +65,7 @@ namespace ALS.ALSI.Web
                     renderAlert();
 
                     //(ยกตัวอย่าง งานเข้าวันพฤหัสฯ ที่ 27 มิ.ย ดิวแลปจะเป็น 3 ก.ค ดิวแอดมินก็จะเป็น 3 ก.ค
-                    //DateTime _date = new DateTime(2019, 08, 26);//yyyyMMdd
+                    //DateTime _date = new DateTime(2019, 08, 29);//yyyyMMdd
                     //holiday_calendar h = new holiday_calendar();
                     //DateTime dt = h.GetWorkingDayLab(_date, 5, true);
                     //Console.WriteLine();
