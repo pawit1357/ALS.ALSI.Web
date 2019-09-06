@@ -121,7 +121,7 @@ namespace ALS.ALSI.Web.view.request
 
             }
 
-            if (isInvoiceGroupOperation && this.dataList.Count > 0)
+            if (isPoGroupOperation || isInvoiceGroupOperation && this.dataList.Count > 0)
             {
                 txtInvoice.Text = this.dataList[0].sample_invoice;
                 txtInvoiceAmt.Text = (this.dataList[0].sample_invoice_amount == null) ? "" : this.dataList[0].sample_invoice_amount.ToString();
