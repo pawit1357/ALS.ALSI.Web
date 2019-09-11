@@ -100,15 +100,27 @@ namespace ALS.ALSI.Biz.DataAccess
                 if (isUrgent)
                 {
                     //find holiday in period
-                    DateTime dtStartDate = StartDate;
-                    DateTime dtEndDate = StartDate.AddDays(addDay - 1); ;
                     List<DateTime> excludedDates = SelectAll().Select(x => x.DATE_HOLIDAYS).ToList();
-                    int holiday = CalendarUtils.GetWorkingDays(dtStartDate, dtEndDate, excludedDates);
-                    StartDate = StartDate.AddDays((addDay + holiday) - 1);
+
+                    int index = 0;
+                    DateTime dtEndDate = StartDate.AddDays(addDay - 1);
+                    for (DateTime date = StartDate; date.Date <= dtEndDate.Date; date = date.AddDays(1))
+                    {
+
+                        if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday || excludedDates.Contains(date))
+                        {
+                            Console.WriteLine();
+                            index++;
+                        }
+                    }
+                    Console.WriteLine();
+                    StartDate = StartDate.AddDays((addDay+index) - 1);
                     while (StartDate.DayOfWeek == DayOfWeek.Saturday || StartDate.DayOfWeek == DayOfWeek.Sunday || excludedDates.Contains(StartDate))
                     {
                         StartDate = StartDate.AddDays(1);
                     }
+                    Console.WriteLine();
+ 
 
                 }
                 else

@@ -1,5 +1,6 @@
 ﻿using ALS.ALSI.Biz;
 using ALS.ALSI.Biz.Constant;
+using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
 using Newtonsoft.Json;
 using NPOI.HSSF.UserModel;
@@ -12,6 +13,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -51,28 +54,83 @@ namespace ALS.ALSI.Web.view.dashboard
             {
                 try
                 {
+                    #region "Initial "
                     int year = DateTime.Now.Year;
                     if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
                     {
-                        year= (DateTime.Now.Year - 1);
+                        year = (DateTime.Now.Year - 1);
                     }
                     else
                     {
                         year = (DateTime.Now.Year);
                     }
 
+                    ddlCompany.Items.Clear();
+                    ddlCompany.DataSource = new m_customer().SelectAll().OrderBy(x => x.company_name);
+                    ddlCompany.DataBind();
+                    ddlCompany.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
-                    txtStartDate.Text = new DateTime(year, 4, 1).ToString("dd/MM/yyyy");
-                    txtEndDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                    DateTime dtStartDate = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
-                    DateTime dtEndDate = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
 
-                    jsonSeriesRpt01 = Report1(dtStartDate, dtEndDate);
-                    jsonSeriesRpt02 = Report2(dtStartDate, dtEndDate);
-                    jsonSeriesRpt031 = Report31(dtStartDate, dtEndDate);
-                    jsonSeriesRpt04 = Report4(dtStartDate, dtEndDate);
+                    List<PhysicalYear> yesrList = new List<PhysicalYear>();
+                    for (int i = DateTime.Now.Year - 3; i < DateTime.Now.Year + 3; i++)
+                    {
+                        PhysicalYear _year = new PhysicalYear();
+                        _year.year = i;
+                        yesrList.Add(_year);
+                    }
+
+                    ddlPhysicalYear.Items.Clear();
+                    ddlPhysicalYear.DataSource = yesrList;
+                    ddlPhysicalYear.DataBind();
+
+                    if (DateTime.Now.Month < Constants.PHYSICAL_YEAR)
+                    {
+                        ddlPhysicalYear.SelectedValue = (DateTime.Now.Year - 1).ToString();
+                    }
+                    else
+                    {
+                        ddlPhysicalYear.SelectedValue = (DateTime.Now.Year).ToString();
+                    }
+
                     //
-                    Report3(dtStartDate, dtEndDate);
+                    //สถานะการใช้(A = Available, I = ISSUED SOME, N = ISSUED ALL, C = Cancel)
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("ID", typeof(string));
+                    dt.Columns.Add("NAME", typeof(string));
+
+                    // Here we add five DataRows.
+                    dt.Rows.Add("B", "BOI");
+                    dt.Rows.Add("NB", "NON-BOI");
+
+                    ddlBoiNonBoi.DataSource = dt;
+                    ddlBoiNonBoi.DataTextField = "NAME";
+                    ddlBoiNonBoi.DataValueField = "ID";
+                    ddlBoiNonBoi.DataBind();
+
+                    dt.Clear();
+                    dt.Dispose();
+
+                    ListItem item = new ListItem();
+                    item.Text = "";
+                    item.Value = "";
+                    ddlBoiNonBoi.Items.Insert(0, item);
+                    #endregion
+
+                    #region "Binding Report"
+                    //txtStartDate.Text = new DateTime(year, 4, 1).ToString("dd/MM/yyyy");
+                    //txtEndDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                    //DateTime dtStartDate = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
+                    //DateTime dtEndDate = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+
+                    jsonSeriesRpt01 = rptRevenueActual();
+                    jsonSeriesRpt02 = "[]";// Report2(dtStartDate, dtEndDate);
+                    jsonSeriesRpt031 = "[]";//Report31(dtStartDate, dtEndDate);
+                    jsonSeriesRpt04 = "[]";//Report4(dtStartDate, dtEndDate);
+                    //
+                    //Report3(dtStartDate, dtEndDate);
+                    #endregion
+
+
 
                 }
                 catch (Exception ex)
@@ -83,124 +141,124 @@ namespace ALS.ALSI.Web.view.dashboard
             Console.WriteLine();
         }
 
+
+
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            DateTime dtStartDate = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
-            DateTime dtEndDate = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
 
-            jsonSeriesRpt01 = Report1(dtStartDate, dtEndDate);
-            jsonSeriesRpt02 = Report2(dtStartDate, dtEndDate);
-            jsonSeriesRpt031 = Report31(dtStartDate, dtEndDate);
-            jsonSeriesRpt04 = Report4(dtStartDate, dtEndDate);
+            //DateTime dtStartDate = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
+            //DateTime dtEndDate = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+
+            jsonSeriesRpt01 = rptRevenueActual();
+            //jsonSeriesRpt02 = Report2(dtStartDate, dtEndDate);
+            //jsonSeriesRpt031 = Report31(dtStartDate, dtEndDate);
+            //jsonSeriesRpt04 = Report4(dtStartDate, dtEndDate);
             //
-            Report3(dtStartDate, dtEndDate);
+            //Report3(dtStartDate, dtEndDate);
         }
 
         protected void ddlPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DateTime dtStartDate = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
-            DateTime dtEndDate = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+            //DateTime dtStartDate = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
+            //DateTime dtEndDate = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
 
-            jsonSeriesRpt01 = Report1(dtStartDate, dtEndDate);
-            jsonSeriesRpt02 = Report2(dtStartDate, dtEndDate);
-            jsonSeriesRpt031 = Report31(dtStartDate, dtEndDate);
-            jsonSeriesRpt04 = Report4(dtStartDate, dtEndDate);
-            //
-            Report3(dtStartDate, dtEndDate);
+            //jsonSeriesRpt01 = Report1(dtStartDate, dtEndDate);
+            //jsonSeriesRpt02 = Report2(dtStartDate, dtEndDate);
+            //jsonSeriesRpt031 = Report31(dtStartDate, dtEndDate);
+            //jsonSeriesRpt04 = Report4(dtStartDate, dtEndDate);
+            ////
+            //Report3(dtStartDate, dtEndDate);
 
         }
 
-        public String Report1(DateTime s, DateTime e)
+        public String rptRevenueActual()
         {
-            String sql = "" +
-            "SELECT                                                                                                                     " +
-            "  (case when s.sample_invoice_status is null or s.sample_invoice_status = 1 then 'revenue' else 'actual' end) invoice_type," +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 1  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Jan',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 2  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Feb',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 3  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Mar',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 4  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Apr',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 5  THEN s.sample_invoice_amount_rpt END, 0)) AS 'May',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 6  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Jun',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 7  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Jul',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 8  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Aug',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 9  THEN s.sample_invoice_amount_rpt END, 0)) AS 'Sep',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 10 THEN s.sample_invoice_amount_rpt END, 0)) AS 'Oct',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 11 THEN s.sample_invoice_amount_rpt END, 0)) AS 'Nov',                   " +
-            "  SUM(IFNULL(CASE WHEN MONTH(s.sample_invoice_date) = 12 THEN s.sample_invoice_amount_rpt END, 0)) AS 'Dec'                    " +
-            "FROM                                                                                                                       " +
-            "  job_sample s                                                                                                             " +
-            "WHERE YEAR(s.sample_invoice_date) is not null " +
-            " and s.sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'"+
-            "GROUP BY  YEAR(s.sample_invoice_date)                                                                                      ";
-            DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
+            StringBuilder sqlCri = new StringBuilder();
 
-            StringBuilder sbResultJson = new StringBuilder();
-            String data = "[";
-            string type = "";
-            string Jan = "";
-            string Feb = "";
-            string Mar = "";
-            string Apr = "";
-            string May = "";
-            string Jun = "";
-            string Jul = "";
-            string Aug = "";
-            string Sep = "";
-            string Oct = "";
-            string Nov = "";
-            string Dec = "";
-            switch (dt.Rows.Count)
+            string sql = "select" +
+            " year(x.InvoiceDate) as xYear," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 1 THEN TotalSubAmount END, 0)) AS 'Jan'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 2 THEN TotalSubAmount END, 0)) AS 'Feb'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 3 THEN TotalSubAmount END, 0)) AS 'Mar'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 4 THEN TotalSubAmount END, 0)) AS 'Apr'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 5 THEN TotalSubAmount END, 0)) AS 'May'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 6 THEN TotalSubAmount END, 0)) AS 'Jun'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 7 THEN TotalSubAmount END, 0)) AS 'Jul'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 8 THEN TotalSubAmount END, 0)) AS 'Aug'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 9 THEN TotalSubAmount END, 0)) AS 'Sep'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 10 THEN TotalSubAmount END, 0)) AS 'Oct'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 11 THEN TotalSubAmount END, 0)) AS 'Nov'," +
+            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 12 THEN TotalSubAmount END, 0)) AS 'Dec'" +
+            " from(" +
+            "     select * from (select" +
+            "         s.sample_invoice_date as InvoiceDate," +
+            "         s.sample_invoice as sInvoice," +
+            "         s.sample_po as PurchaseOrder," +
+            "         s.sample_so as sampleSo," +
+            "         ifnull(s.sample_invoice_amount_rpt, 0) as TotalSubAmount," +
+            "         (case when right(s.job_number, 1) = 'B' then 'BOI' else 'NBOI' end) as DeptBOI," +
+            "         (case" +
+            "             when substring_index(s.job_number, '-', 1) = 'ELN' then 'non-HDD'" +
+            "             when substring_index(s.job_number, '-', 1) = 'ELP' then 'HDD'" +
+            "             when substring_index(s.job_number, '-', 1) = 'GRP' then 'HDD'" +
+            "             when substring_index(s.job_number, '-', 1) = 'ELWA' then 'HDD' else ''" +
+            "         end) as CustomerTypeHDD" +
+            "     from job_sample s" +
+            "     left join job_info i on s.job_id = i.id" +
+            " left join job_sample_group_invoice sgi on s.sample_invoice = sgi.inv_no" +
+            " left join m_type_of_test tot on tot.ID = s.type_of_test_id" +
+            " left join m_customer c on s.id = i.customer_id" +
+            " where s.sample_invoice <> '' and s.sample_invoice_status = 2 and s.sample_invoice_date is not null) tmp where 1=1 {0}" +
+            " ) x" +
+            " GROUP BY year(x.InvoiceDate)";
+
+
+
+            //sqlCri.Append(" and YEAR(tmp.InvoiceDate) = '" + ddlPhysicalYear.SelectedValue + "'");
+            if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))
             {
-                case 1:
-                    type = dt.Rows[0]["invoice_type"].ToString();
-                    Jan = dt.Rows[0]["Jan"].ToString();
-                    Feb = dt.Rows[0]["Feb"].ToString();
-                    Mar = dt.Rows[0]["Mar"].ToString();
-                    Apr = dt.Rows[0]["Apr"].ToString();
-                    May = dt.Rows[0]["May"].ToString();
-                    Jun = dt.Rows[0]["Jun"].ToString();
-                    Jul = dt.Rows[0]["Jul"].ToString();
-                    Aug = dt.Rows[0]["Aug"].ToString();
-                    Sep = dt.Rows[0]["Sep"].ToString();
-                    Oct = dt.Rows[0]["Oct"].ToString();
-                    Nov = dt.Rows[0]["Nov"].ToString();
-                    Dec = dt.Rows[0]["Dec"].ToString();
-                    data += "{name : '" + type + "', data: [" + Jan + "," + Feb + "," + Mar + "," + Apr + "," + May + "," + Jun + "," + Jul + "," + Aug + "," + Sep + "," + Oct + "," + Nov + "," + Dec + "]}";
-                    break;
-                case 2:
-                    type = dt.Rows[0]["invoice_type"].ToString();
-                    Jan = dt.Rows[0]["Jan"].ToString();
-                    Feb = dt.Rows[0]["Feb"].ToString();
-                    Mar = dt.Rows[0]["Mar"].ToString();
-                    Apr = dt.Rows[0]["Apr"].ToString();
-                    May = dt.Rows[0]["May"].ToString();
-                    Jun = dt.Rows[0]["Jun"].ToString();
-                    Jul = dt.Rows[0]["Jul"].ToString();
-                    Aug = dt.Rows[0]["Aug"].ToString();
-                    Sep = dt.Rows[0]["Sep"].ToString();
-                    Oct = dt.Rows[0]["Oct"].ToString();
-                    Nov = dt.Rows[0]["Nov"].ToString();
-                    Dec = dt.Rows[0]["Dec"].ToString();
-                    data += "{name : '" + type + "', data: [" + Jan + "," + Feb + "," + Mar + "," + Apr + "," + May + "," + Jun + "," + Jul + "," + Aug + "," + Sep + "," + Oct + "," + Nov + "," + Dec + "]},";
-                    type = dt.Rows[1]["invoice_type"].ToString();
-                    Jan = dt.Rows[1]["Jan"].ToString();
-                    Feb = dt.Rows[1]["Feb"].ToString();
-                    Mar = dt.Rows[1]["Mar"].ToString();
-                    Apr = dt.Rows[1]["Apr"].ToString();
-                    May = dt.Rows[1]["May"].ToString();
-                    Jun = dt.Rows[1]["Jun"].ToString();
-                    Jul = dt.Rows[1]["Jul"].ToString();
-                    Aug = dt.Rows[1]["Aug"].ToString();
-                    Sep = dt.Rows[1]["Sep"].ToString();
-                    Oct = dt.Rows[1]["Oct"].ToString();
-                    Nov = dt.Rows[1]["Nov"].ToString();
-                    Dec = dt.Rows[1]["Dec"].ToString();
-                    data += "{name : '" + type + "', data: [" + Jan + "," + Feb + "," + Mar + "," + Apr + "," + May + "," + Jun + "," + Jul + "," + Aug + "," + Sep + "," + Oct + "," + Nov + "," + Dec + "]},";
-                    break;
-                default:
-                    break;
+                if (ddlBoiNonBoi.SelectedValue.ToString().Equals("NB"))
+                {
+                    sqlCri.Append(" and tmp.DeptBOI  <> 'BOI'");
+                }
+                else
+                {
+                    sqlCri.Append(" and tmp.DeptBOI  = 'BOI'");
+                }
             }
 
+            DateTime receive_report_from = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
+            DateTime receive_report_to = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+            if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
+            {
+                sqlCri.Append(" and tmp.InvoiceDate between'" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
+            }
+
+
+
+
+            DataTable dt = MaintenanceBiz.ExecuteReturnDt(string.Format(sql,sqlCri.ToString()));
+            StringBuilder sbResultJson = new StringBuilder();
+            String data = "[";
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                string xYear = dr["xYear"].ToString();
+                string Jan = dr["Jan"].ToString();
+                string Feb = dr["Feb"].ToString();
+                string Mar = dr["Mar"].ToString();
+                string Apr = dr["Apr"].ToString();
+                string May = dr["May"].ToString();
+                string Jun = dr["Jun"].ToString();
+                string Jul = dr["Jul"].ToString();
+                string Aug = dr["Aug"].ToString();
+                string Sep = dr["Sep"].ToString();
+                string Oct = dr["Oct"].ToString();
+                string Nov = dr["Nov"].ToString();
+                string Dec = dr["Dec"].ToString();
+                data += "{name : '" + xYear + "', data: [" + Jan + "," + Feb + "," + Mar + "," + Apr + "," + May + "," + Jun + "," + Jul + "," + Aug + "," + Sep + "," + Oct + "," + Nov + "," + Dec + "]},";
+            }
+            data = data.Remove(data.Length - 1, 1);
             data += "]";
             return data;
         }
@@ -516,6 +574,8 @@ namespace ALS.ALSI.Web.view.dashboard
             }
         }
         #endregion
+
+
 
 
     }
