@@ -70,11 +70,13 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">Invoice date (From):</label>
                                 <div class="col-md-6">
-                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
-                                        <asp:TextBox ID="txtStartDate" runat="server" class="form-control"></asp:TextBox>
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                        </span>
+                                    <div class="form-group" style="text-align: left">
+                                        <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                            <asp:TextBox ID="txtStartDate" runat="server" class="form-control"></asp:TextBox>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -83,11 +85,13 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">Invoice date (To):</label>
                                 <div class="col-md-6">
-                                    <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
-                                        <asp:TextBox ID="txtEndDate" runat="server" class="form-control"></asp:TextBox>
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                        </span>
+                                    <div class="form-group" style="text-align: left">
+                                        <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="dd/mm/yyyy" data-date-viewmode="years" data-date-minviewmode="months">
+                                            <asp:TextBox ID="txtEndDate" runat="server" class="form-control"></asp:TextBox>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -254,27 +258,41 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
 
+
+                            <div class="row">
+                        <!-- RPT4 -->
+                        <div class="col-lg-6 col-xs-12 col-sm-12">
+                            <div class="portlet light ">
+                                <div class="portlet-title">
+                                    <div class="actions"></div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div id="container55" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     </form>
+
     <script>
 
-        jQuery(document).ready(function () {
-            $.ajax({
-                type: "POST",
-                url: "API.aspx/HelloWorld",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function(response) {
-                    alert(response.d);
-                }
-            });
-        });
+        //jQuery(document).ready(function () {
+            //$.ajax({
+            //    type: "POST",
+            //    url: "API.aspx/HelloWorld",
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: OnSuccess,
+            //    failure: function(response) {
+            //        alert(response.d);
+            //    }
+            //});
+        //});
         /* -report1:Revenue-Actual- */
         Highcharts.chart('container', {
             chart: {
@@ -327,9 +345,10 @@
         });
 
         /* -report2:Daily invoice vs work inprocess- */
+
         Highcharts.chart('container2', {
             chart: {
-                type: 'areaspline'
+                type: 'line'
             },
             title: {
                 text: 'Daily invoice vs work inprocess'
@@ -345,7 +364,9 @@
                 },
                 title: {
                     text: 'Date'
-                }
+                },
+                categories:  <%= jsonSeriesRpt02Categories %>
+
             },
             yAxis: {
                 title: {
@@ -368,9 +389,6 @@
 
             colors: ['#e77378', '#d3d3d'],
 
-            // Define the data points. All series have a dummy year
-            // of 1970/71 in order to be compared on the same x axis. Note
-            // that in JavaScript, months start at 0 for January, 1 for February etc.
             series: <%= jsonSeriesRpt02 %>
                
         });
@@ -454,5 +472,9 @@
             series: <%= jsonSeriesRpt031 %>
 
         });
+
+       
+
+
     </script>
 </asp:Content>

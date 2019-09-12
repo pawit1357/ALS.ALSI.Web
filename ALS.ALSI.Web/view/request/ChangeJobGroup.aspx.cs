@@ -131,7 +131,7 @@ namespace ALS.ALSI.Web.view.request
             else
             {
                 gvSample.Columns[0].Visible = true;
-                gvSample.Columns[1].Visible = false;
+                gvSample.Columns[1].Visible = true;
                 gvSample.Columns[2].Visible = false;
                 gvSample.Columns[3].Visible = false;
                 gvSample.Columns[4].Visible = false;

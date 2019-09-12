@@ -38,6 +38,8 @@ namespace ALS.ALSI.Web.view.dashboard
 
         protected string jsonSeriesRpt01;
         protected string jsonSeriesRpt02;
+        protected string jsonSeriesRpt02Categories;
+
         protected string jsonSeriesRpt03;
         protected string jsonSeriesRpt031;
 
@@ -117,20 +119,16 @@ namespace ALS.ALSI.Web.view.dashboard
                     #endregion
 
                     #region "Binding Report"
-                    //txtStartDate.Text = new DateTime(year, 4, 1).ToString("dd/MM/yyyy");
-                    //txtEndDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                    //DateTime dtStartDate = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
-                    //DateTime dtEndDate = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+                    txtStartDate.Text = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).ToString("dd/MM/yyyy");
+                    txtEndDate.Text = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).ToString("dd/MM/yyyy");
 
-                    jsonSeriesRpt01 = rptRevenueActual();
-                    jsonSeriesRpt02 = "[]";// Report2(dtStartDate, dtEndDate);
+                    rptRevenueActual();
+                    rptDailyInvoice();
                     jsonSeriesRpt031 = "[]";//Report31(dtStartDate, dtEndDate);
                     jsonSeriesRpt04 = "[]";//Report4(dtStartDate, dtEndDate);
                     //
                     //Report3(dtStartDate, dtEndDate);
                     #endregion
-
-
 
                 }
                 catch (Exception ex)
@@ -145,11 +143,15 @@ namespace ALS.ALSI.Web.view.dashboard
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            rptRevenueActual();
+            rptDailyInvoice();
+            jsonSeriesRpt031 = "[]";//Report31(dtStartDate, dtEndDate);
+            jsonSeriesRpt04 = "[]";//Report4(dtStartDate, dtEndDate);
 
             //DateTime dtStartDate = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
             //DateTime dtEndDate = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
 
-            jsonSeriesRpt01 = rptRevenueActual();
+            //jsonSeriesRpt01 = rptRevenueActual();
             //jsonSeriesRpt02 = Report2(dtStartDate, dtEndDate);
             //jsonSeriesRpt031 = Report31(dtStartDate, dtEndDate);
             //jsonSeriesRpt04 = Report4(dtStartDate, dtEndDate);
@@ -171,7 +173,7 @@ namespace ALS.ALSI.Web.view.dashboard
 
         }
 
-        public String rptRevenueActual()
+        public void rptRevenueActual()
         {
             StringBuilder sqlCri = new StringBuilder();
 
@@ -237,7 +239,7 @@ namespace ALS.ALSI.Web.view.dashboard
 
 
 
-            DataTable dt = MaintenanceBiz.ExecuteReturnDt(string.Format(sql,sqlCri.ToString()));
+            DataTable dt = MaintenanceBiz.ExecuteReturnDt(string.Format(sql, sqlCri.ToString()));
             StringBuilder sbResultJson = new StringBuilder();
             String data = "[";
 
@@ -260,60 +262,164 @@ namespace ALS.ALSI.Web.view.dashboard
             }
             data = data.Remove(data.Length - 1, 1);
             data += "]";
-            return data;
+            jsonSeriesRpt01 = data;
         }
 
-        public String Report2(DateTime s, DateTime e)
+        public void rptDailyInvoice()
         {
-            String sql = "";
-            String data = "[";
+            StringBuilder sqlCriIncomplete = new StringBuilder();
+
+            Hashtable htInv = new Hashtable();
+
             #region "Incomplete"
-            //sql = "select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and (sample_invoice_status=1 or sample_invoice_status is null) and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc;";
-            sql = "select * from (select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and (sample_invoice_status=1 or sample_invoice_status is null) and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc limit 15) tmp order by  sample_invoice_date;";
-            DataTable dtIncomplete = MaintenanceBiz.ExecuteReturnDt(sql);
+            string sql = "select" +
+            " 'WIP' as xType,InvoiceDate,count(sInvoice) iCount" +
+            " from(" +
+            "     select * from (select" +
+            "         s.sample_invoice_date as InvoiceDate," +
+            "         s.sample_invoice as sInvoice," +
+            "         s.sample_po as PurchaseOrder," +
+            "         s.sample_so as sampleSo," +
+            "         ifnull(s.sample_invoice_amount_rpt, 0) as TotalSubAmount," +
+            "         (case when right(s.job_number, 1) = 'B' then 'BOI' else 'NBOI' end) as DeptBOI," +
+            "         (case" +
+            "             when substring_index(s.job_number, '-', 1) = 'ELN' then 'non-HDD'" +
+            "             when substring_index(s.job_number, '-', 1) = 'ELP' then 'HDD'" +
+            "             when substring_index(s.job_number, '-', 1) = 'GRP' then 'HDD'" +
+            "             when substring_index(s.job_number, '-', 1) = 'ELWA' then 'HDD' else ''" +
+            "         end) as CustomerTypeHDD" +
+            "     from job_sample s" +
+            " left join job_info i on s.job_id = i.id" +
+            " left join job_sample_group_invoice sgi on s.sample_invoice = sgi.inv_no" +
+            " left join m_type_of_test tot on tot.ID = s.type_of_test_id" +
+            " left join m_customer c on s.id = i.customer_id" +
+            " where s.sample_invoice <> '' and s.sample_invoice_status in ( 1,2) and s.sample_invoice_date is not null) tmp where 1=1 {0}" +
+            " ) x" +
+            " GROUP BY  x.InvoiceDate";
 
-            if (dtIncomplete.Rows.Count > 0)
+            string sql2 = "select" +
+            " 'TIV' as xType,InvoiceDate,count(sInvoice) iCount" +
+            " from(" +
+            "     select * from (select" +
+            "         s.sample_invoice_date as InvoiceDate," +
+            "         s.sample_invoice as sInvoice," +
+            "         s.sample_po as PurchaseOrder," +
+            "         s.sample_so as sampleSo," +
+            "         ifnull(s.sample_invoice_amount_rpt, 0) as TotalSubAmount," +
+            "         (case when right(s.job_number, 1) = 'B' then 'BOI' else 'NBOI' end) as DeptBOI," +
+            "         (case" +
+            "             when substring_index(s.job_number, '-', 1) = 'ELN' then 'non-HDD'" +
+            "             when substring_index(s.job_number, '-', 1) = 'ELP' then 'HDD'" +
+            "             when substring_index(s.job_number, '-', 1) = 'GRP' then 'HDD'" +
+            "             when substring_index(s.job_number, '-', 1) = 'ELWA' then 'HDD' else ''" +
+            "         end) as CustomerTypeHDD" +
+            "     from job_sample s" +
+            " left join job_info i on s.job_id = i.id" +
+            " left join job_sample_group_invoice sgi on s.sample_invoice = sgi.inv_no" +
+            " left join m_type_of_test tot on tot.ID = s.type_of_test_id" +
+            " left join m_customer c on s.id = i.customer_id" +
+            " where s.sample_so <> '') tmp where 1=1 {0}" +
+            " ) x" +
+            " GROUP BY  x.InvoiceDate";
+
+            sql = string.Format("{0} union {1}", sql, sql2);
+
+            if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))
             {
-                data += "{name: \"Incomplete\",data: [";
-                foreach (DataRow dr in dtIncomplete.Rows)
+                if (ddlBoiNonBoi.SelectedValue.ToString().Equals("NB"))
                 {
-                    DateTime epochDate = Convert.ToDateTime(dr["sample_invoice_date"].ToString());
-                    int count = Convert.ToInt32(dr["iCount"].ToString());
-                    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + count + "],";
+                    sqlCriIncomplete.Append(" and tmp.DeptBOI  <> 'BOI'");
                 }
-                data = data.Substring(0, data.Length - 1);
-                data += "]},";
+                else
+                {
+                    sqlCriIncomplete.Append(" and tmp.DeptBOI  = 'BOI'");
+                }
             }
+
+            DateTime receive_report_from = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
+            DateTime receive_report_to = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+            if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
+            {
+                sqlCriIncomplete.Append(" and tmp.InvoiceDate between'" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
+            }
+
+            DataTable dtIncomplete = MaintenanceBiz.ExecuteReturnDt(string.Format(sql, sqlCriIncomplete.ToString()));
+
+            String dataCat = "";
+            String dataTiv = "";
+            String dataWip = "";
+
+            foreach (DataRow dr in dtIncomplete.Rows)
+            {
+                try
+                {
+                    string invDate = dr["InvoiceDate"] == DBNull.Value ? "" : Convert.ToDateTime(dr["InvoiceDate"]).ToString("yyyyMMdd");
+                    string xType = dr["xType"].ToString();
+                    int iCount = Convert.ToInt32(dr["iCount"].ToString());
+
+                    if (htInv.ContainsKey(invDate))
+                    {
+                        CWipTiv objEdit = (CWipTiv)htInv[invDate];
+                        switch (xType)
+                        {
+                            case "TIV":
+                                objEdit.tiv = iCount;
+                                break;
+                            case "WIP":
+                                objEdit.wip = iCount;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        CWipTiv objNew = new CWipTiv();
+                        switch (xType)
+                        {
+                            case "TIV":
+                                objNew.tiv = iCount;
+                                break;
+                            case "WIP":
+                                objNew.wip = iCount;
+                                break;
+                        }
+                        htInv.Add(invDate, objNew);
+
+                    }
+
+                    //dataCat += string.Format("'{0}',", invDate);
+                    //data += string.Format("{0},", dr["iCount"].ToString());
+                }
+                catch (Exception ex)
+                {
+                    continue;
+                }
+            }
+
+            foreach (DictionaryEntry de in htInv)
+            {
+                dataCat += string.Format("'{0}',", de.Key);
+
+                CWipTiv cWipTiv = (CWipTiv)de.Value;
+
+                dataWip += string.Format("{0},", cWipTiv.wip);
+                dataTiv += string.Format("{0},", cWipTiv.tiv);
+
+                //data += string.Format("{0},", de.Value);
+
+                //Console.WriteLine("Key = {0}, Value = {1}", de.Key, de.Value);
+            }
+
+            dataCat = dataCat.Length == 0 ? "" : dataCat.Remove(dataCat.Length - 1, 1);
+            dataWip = dataWip.Length == 0 ? "" : dataWip.Remove(dataWip.Length - 1, 1);
+            dataTiv = dataTiv.Length == 0 ? "" : dataTiv.Remove(dataTiv.Length - 1, 1);
+
             #endregion
 
-            #region "dtComplete"
-            //sql = "select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and sample_invoice_status=2 and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc;";
-            sql = "select * from (select sample_invoice_date,count(sample_invoice) icount FROM job_sample where sample_invoice_date is not null and sample_invoice_status=2 and sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "' GROUP BY DATE(sample_invoice_date) order by sample_invoice_date asc limit 15) tmp order by  sample_invoice_date;";
-            DataTable dtComplete = MaintenanceBiz.ExecuteReturnDt(sql);
-
-            if (dtComplete.Rows.Count > 0)
-            {
-                data += "{name: \"Complete\",data: [";
-                foreach (DataRow dr in dtComplete.Rows)
-                {
-                    DateTime epochDate = Convert.ToDateTime(dr["sample_invoice_date"].ToString());
-                    int count = Convert.ToInt32(dr["iCount"].ToString());
-                    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + count + "],";
-                }
-                data = data.Substring(0, data.Length - 1);
-                data += "]}";
-            }
-            #endregion
-
-            data += "]";
-
-
-
-
-            return data;
+            jsonSeriesRpt02Categories = "[" + dataCat + "]";
+            jsonSeriesRpt02 = "[{name : 'Invoice', data: [" + dataWip + "]},{name : 'Total Invoice', data: [" + dataTiv + "]}]";
         }
 
-        public void Report3(DateTime s,DateTime e)
+        public void Report3(DateTime s, DateTime e)
         {
             String sql = "";
             sql += " select                                                              ";
@@ -358,7 +464,7 @@ namespace ALS.ALSI.Web.view.dashboard
                 sql += " and s.sample_invoice_complete_date is null                          ";
                 sql += " and s.sample_invoice_date is not null                               ";
                 sql += " and s.sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'";
-                sql += " group by c.ID) tmp order by sumAmout desc limit "+ddlPeriod.SelectedValue;
+                sql += " group by c.ID) tmp order by sumAmout desc limit " + ddlPeriod.SelectedValue;
 
 
                 DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
@@ -406,21 +512,21 @@ namespace ALS.ALSI.Web.view.dashboard
 
                 //String sql = "SELECT date as sample_invoice_date,value as amt FROM alsi.tmp_rpt_4 limit 30;";
                 DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
-            StringBuilder sbResultJson = new StringBuilder();
+                StringBuilder sbResultJson = new StringBuilder();
 
-            String data = "[";
-            #region "Amout"
-            if (dt.Rows.Count > 0)
-            {
-                data += "{name: \"Amout\",data: [";
-                foreach (DataRow dr in dt.Rows)
+                String data = "[";
+                #region "Amout"
+                if (dt.Rows.Count > 0)
                 {
-                    DateTime epochDate = Convert.ToDateTime(dr["sample_invoice_date"].ToString());
-                    double count = Convert.ToDouble(dr["amt"].ToString());
-                    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + count + "],";
-                }
-                data = data.Substring(0, data.Length - 1);
-                data += "]}";
+                    data += "{name: \"Amout\",data: [";
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        DateTime epochDate = Convert.ToDateTime(dr["sample_invoice_date"].ToString());
+                        double count = Convert.ToDouble(dr["amt"].ToString());
+                        data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + count + "],";
+                    }
+                    data = data.Substring(0, data.Length - 1);
+                    data += "]}";
 
                     #region "Forecast(Amout)"
                     //data += ",{name: \"Forecast(Amout)\",data: [";
@@ -473,13 +579,13 @@ namespace ALS.ALSI.Web.view.dashboard
                     //data += "]}";
                     #endregion
                 }
-            #endregion
-            data += "]";
-            sbResultJson.Append(data);
-            return sbResultJson.ToString();
+                #endregion
+                data += "]";
+                sbResultJson.Append(data);
+                return sbResultJson.ToString();
 
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return "[]";
 
@@ -575,11 +681,13 @@ namespace ALS.ALSI.Web.view.dashboard
         }
         #endregion
 
-
-
-
     }
 }
 
+public class CWipTiv
+{
+    public int wip { get; set; }
+    public int tiv { get; set; }
 
-                    
+}
+

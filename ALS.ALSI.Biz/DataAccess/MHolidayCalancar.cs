@@ -109,19 +109,14 @@ namespace ALS.ALSI.Biz.DataAccess
 
                         if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday || excludedDates.Contains(date))
                         {
-                            Console.WriteLine();
                             index++;
                         }
                     }
-                    Console.WriteLine();
                     StartDate = StartDate.AddDays((addDay+index) - 1);
                     while (StartDate.DayOfWeek == DayOfWeek.Saturday || StartDate.DayOfWeek == DayOfWeek.Sunday || excludedDates.Contains(StartDate))
                     {
                         StartDate = StartDate.AddDays(1);
                     }
-                    Console.WriteLine();
- 
-
                 }
                 else
                 {
