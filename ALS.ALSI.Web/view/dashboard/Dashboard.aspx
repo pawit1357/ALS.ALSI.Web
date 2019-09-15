@@ -143,7 +143,7 @@
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-chemistry font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">รายงานยอดเงินลูกค้ารอชำระ/จำวนวันค้าง</span>
+                                        <span class="caption-subject font-green bold uppercase">รายงาน Turn Around Time </span>
                                     </div>
                                     <div class="actions">
                                     </div>
@@ -153,45 +153,30 @@
                                         <asp:UpdatePanel ID="upnlpB" runat="server" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView ID="gvRpt3" runat="server" AutoGenerateColumns="False" AllowPaging="True" ShowFooter="true"
-                                                    CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="customer_id" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvRpt3_RowDataBound" OnRowCreated="gvRpt3_RowCreated" PageSize="5">
+                                                    CssClass="table table-striped table-hover table-bordered" ShowHeaderWhenEmpty="True" DataKeyNames="job_number" OnPageIndexChanging="gvJob_PageIndexChanging" OnRowDataBound="gvRpt3_RowDataBound" OnRowCreated="gvRpt3_RowCreated" PageSize="5">
                                                     <Columns>
                                                         <asp:TemplateField>
                                                             <ItemTemplate>
                                                                 <%# Container.DataItemIndex + 1 %>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:BoundField ItemStyle-Width="300" HeaderText="Company Name" DataField="company_name" ItemStyle-HorizontalAlign="Left" SortExpression="company_name" />
-                                                        <%--                                                            <asp:BoundField ItemStyle-Width="130" HeaderText="Job Number" DataField="job_number" ItemStyle-HorizontalAlign="Left" SortExpression="job_number" />--%>
-                                                        <asp:BoundField ItemStyle-Width="120" HeaderText="Invoice" DataField="sample_invoice" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice" />
-                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="Invoice Date" DataField="sample_invoice_date" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_date" DataFormatString="{0:d MMM yyyy}" />
-                                                        <asp:TemplateField HeaderText="Overdue Date">
-                                                            <ItemTemplate>
-                                                                <%# Convert.ToDecimal(Eval("overdue_date")).ToString("N0") %>
-                                                            </ItemTemplate>
-                                                            <FooterTemplate>
-                                                                Total :
-                                                            </FooterTemplate>
-                                                            <ItemStyle HorizontalAlign="Right" />
-                                                            <FooterStyle HorizontalAlign="Right" />
-                                                        </asp:TemplateField>
-                                                        <%--                                                            <asp:BoundField ItemStyle-Width="80" HeaderText="Overdue Date" DataField="overdue_date" ItemStyle-HorizontalAlign="Left" SortExpression="overdue_date" />--%>
-                                                        <%--                                                            <asp:BoundField ItemStyle-Width="100" HeaderText="Balance" DataField="sample_invoice_amount" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice_amount" DataFormatString="{0:###,###}" />--%>
-                                                        <asp:TemplateField HeaderText="Balance" SortExpression="sample_invoice_amount">
-                                                            <FooterTemplate>
-                                                                <asp:Label ID="lblFooterAmount" runat="server" Text=""></asp:Label>
-                                                            </FooterTemplate>
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lbBalance" runat="server" Text='<%# Bind("sample_invoice_amount_rpt") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                            <ItemStyle Width="100px" />
-                                                            <ItemStyle HorizontalAlign="Right" />
-
-                                                        </asp:TemplateField>
+                                                        <asp:BoundField ItemStyle-Width="300" HeaderText="Job No." DataField="job_number" ItemStyle-HorizontalAlign="Left" SortExpression="job_number" />
+                                                        <asp:BoundField ItemStyle-Width="120" HeaderText="Job Type" DataField="jobType" ItemStyle-HorizontalAlign="Left" SortExpression="jobType" />
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="jobStatus" DataField="jobStatus" ItemStyle-HorizontalAlign="Left" SortExpression="jobStatus"/>
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="Date Of Receive" DataField="date_of_receive" ItemStyle-HorizontalAlign="Left" SortExpression="date_of_receive" DataFormatString="{0:d MMM yyyy}" />
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="Login" DataField="Login" ItemStyle-HorizontalAlign="Left" SortExpression="Login"/>
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="Chemist" DataField="Chemist" ItemStyle-HorizontalAlign="Left" SortExpression="Chemist"/>
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="SRChemist" DataField="SRChemist" ItemStyle-HorizontalAlign="Left" SortExpression="SRChemist"/>
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="AdminWord" DataField="AdminWord" ItemStyle-HorizontalAlign="Left" SortExpression="AdminWord"/>
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="LabManager" DataField="LabManager" ItemStyle-HorizontalAlign="Left" SortExpression="LabManager"/>
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="AdminPdf" DataField="AdminPdf" ItemStyle-HorizontalAlign="Left" SortExpression="AdminPdf"/>                                                        
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="AdminPdf" DataField="AdminPdf" ItemStyle-HorizontalAlign="Left" SortExpression="AdminPdf"/>
+                                                        <asp:BoundField ItemStyle-Width="150" HeaderText="date_admin_sent_to_cus" DataField="date_admin_sent_to_cus" ItemStyle-HorizontalAlign="Left" SortExpression="date_admin_sent_to_cus" DataFormatString="{0:d MMM yyyy}" />
 
                                                     </Columns>
                                                     <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
                                                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                                    <%--                                                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Right" />--%>
+                                                    <%-- <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Right" />--%>
                                                     <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                                                     <EmptyDataTemplate>
                                                         <div class="data-not-found">
@@ -207,14 +192,13 @@
 
                         </div>
                         <!-- RPT4 -->
+                        <!--
                         <div class="col-lg-6 col-xs-12 col-sm-12">
                             <div class="portlet light ">
                                 <div class="portlet-title">
                                     <div class="actions"></div>
                                 </div>
                                 <div class="portlet-body">
-                                    <%--                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>--%>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -239,12 +223,10 @@
                                         </div>
                                     </div>
                                     <div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-                                    <%--                          </ContentTemplate>
-                                    </asp:UpdatePanel>--%>
                                 </div>
                             </div>
                         </div>
-
+                        -->
                     </div>
                     <div class="row">
                         <!-- RPT4 -->
@@ -281,18 +263,6 @@
 
     <script>
 
-        //jQuery(document).ready(function () {
-            //$.ajax({
-            //    type: "POST",
-            //    url: "API.aspx/HelloWorld",
-            //    contentType: "application/json; charset=utf-8",
-            //    dataType: "json",
-            //    success: OnSuccess,
-            //    failure: function(response) {
-            //        alert(response.d);
-            //    }
-            //});
-        //});
         /* -report1:Revenue-Actual- */
         Highcharts.chart('container', {
             chart: {
@@ -345,7 +315,6 @@
         });
 
         /* -report2:Daily invoice vs work inprocess- */
-
         Highcharts.chart('container2', {
             chart: {
                 type: 'line'
@@ -393,9 +362,7 @@
                
         });
 
-
         /* -report4:Forecast And Budget- */
-
         Highcharts.chart('container4', {
             chart: {
                 type: 'line'
@@ -414,7 +381,9 @@
                 },
                 title: {
                     text: 'Date'
-                }
+                },
+                categories:  <%= jsonSeriesRpt04Categories %>
+
             },
             yAxis: {
                 title: {
@@ -472,9 +441,6 @@
             series: <%= jsonSeriesRpt031 %>
 
         });
-
-       
-
 
     </script>
 </asp:Content>

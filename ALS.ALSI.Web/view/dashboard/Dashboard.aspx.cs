@@ -44,10 +44,7 @@ namespace ALS.ALSI.Web.view.dashboard
         protected string jsonSeriesRpt031;
 
         protected string jsonSeriesRpt04;
-
-        //private static Excel.Workbook MyBook = null;
-        //private static Excel.Application MyApp = null;
-        //private static Excel.Worksheet MySheet = null;
+        protected string jsonSeriesRpt04Categories;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -124,10 +121,10 @@ namespace ALS.ALSI.Web.view.dashboard
 
                     rptRevenueActual();
                     rptDailyInvoice();
+                    rptForecastAndBudget();
                     jsonSeriesRpt031 = "[]";//Report31(dtStartDate, dtEndDate);
-                    jsonSeriesRpt04 = "[]";//Report4(dtStartDate, dtEndDate);
                     //
-                    //Report3(dtStartDate, dtEndDate);
+                    Report3();
                     #endregion
 
                 }
@@ -136,7 +133,6 @@ namespace ALS.ALSI.Web.view.dashboard
                     Console.WriteLine(ex);
                 }
             }
-            Console.WriteLine();
         }
 
 
@@ -145,18 +141,13 @@ namespace ALS.ALSI.Web.view.dashboard
         {
             rptRevenueActual();
             rptDailyInvoice();
-            jsonSeriesRpt031 = "[]";//Report31(dtStartDate, dtEndDate);
-            jsonSeriesRpt04 = "[]";//Report4(dtStartDate, dtEndDate);
+            rptForecastAndBudget();
+            Report3();
 
-            //DateTime dtStartDate = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
-            //DateTime dtEndDate = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+            //Report31();
+            //Report4();
+            jsonSeriesRpt031 = "[]";
 
-            //jsonSeriesRpt01 = rptRevenueActual();
-            //jsonSeriesRpt02 = Report2(dtStartDate, dtEndDate);
-            //jsonSeriesRpt031 = Report31(dtStartDate, dtEndDate);
-            //jsonSeriesRpt04 = Report4(dtStartDate, dtEndDate);
-            //
-            //Report3(dtStartDate, dtEndDate);
         }
 
         protected void ddlPeriod_SelectedIndexChanged(object sender, EventArgs e)
@@ -175,71 +166,60 @@ namespace ALS.ALSI.Web.view.dashboard
 
         public void rptRevenueActual()
         {
-            StringBuilder sqlCri = new StringBuilder();
+            DateTime receive_report_from = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
+            DateTime receive_report_to = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
 
-            string sql = "select" +
-            " year(x.InvoiceDate) as xYear," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 1 THEN TotalSubAmount END, 0)) AS 'Jan'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 2 THEN TotalSubAmount END, 0)) AS 'Feb'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 3 THEN TotalSubAmount END, 0)) AS 'Mar'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 4 THEN TotalSubAmount END, 0)) AS 'Apr'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 5 THEN TotalSubAmount END, 0)) AS 'May'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 6 THEN TotalSubAmount END, 0)) AS 'Jun'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 7 THEN TotalSubAmount END, 0)) AS 'Jul'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 8 THEN TotalSubAmount END, 0)) AS 'Aug'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 9 THEN TotalSubAmount END, 0)) AS 'Sep'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 10 THEN TotalSubAmount END, 0)) AS 'Oct'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 11 THEN TotalSubAmount END, 0)) AS 'Nov'," +
-            " SUM(IFNULL(CASE WHEN MONTH(InvoiceDate) = 12 THEN TotalSubAmount END, 0)) AS 'Dec'" +
-            " from(" +
-            "     select * from (select" +
-            "         s.sample_invoice_date as InvoiceDate," +
-            "         s.sample_invoice as sInvoice," +
-            "         s.sample_po as PurchaseOrder," +
-            "         s.sample_so as sampleSo," +
-            "         ifnull(s.sample_invoice_amount_rpt, 0) as TotalSubAmount," +
-            "         (case when right(s.job_number, 1) = 'B' then 'BOI' else 'NBOI' end) as DeptBOI," +
-            "         (case" +
-            "             when substring_index(s.job_number, '-', 1) = 'ELN' then 'non-HDD'" +
-            "             when substring_index(s.job_number, '-', 1) = 'ELP' then 'HDD'" +
-            "             when substring_index(s.job_number, '-', 1) = 'GRP' then 'HDD'" +
-            "             when substring_index(s.job_number, '-', 1) = 'ELWA' then 'HDD' else ''" +
-            "         end) as CustomerTypeHDD" +
-            "     from job_sample s" +
-            "     left join job_info i on s.job_id = i.id" +
-            " left join job_sample_group_invoice sgi on s.sample_invoice = sgi.inv_no" +
-            " left join m_type_of_test tot on tot.ID = s.type_of_test_id" +
-            " left join m_customer c on s.id = i.customer_id" +
-            " where s.sample_invoice <> '' and s.sample_invoice_status = 2 and s.sample_invoice_date is not null) tmp where 1=1 {0}" +
-            " ) x" +
-            " GROUP BY year(x.InvoiceDate)";
-
-
-
-            //sqlCri.Append(" and YEAR(tmp.InvoiceDate) = '" + ddlPhysicalYear.SelectedValue + "'");
+            string sql = "";
+            sql += "select year(tmp.InvoiceDate) as xYear,";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 1 then TotalSubAmount end, 0)) as 'Jan',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 2 then TotalSubAmount end, 0)) as 'Feb',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 3 then TotalSubAmount end, 0)) as 'Mar',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 4 then TotalSubAmount end, 0)) as 'Apr',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 5 then TotalSubAmount end, 0)) as 'May',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 6 then TotalSubAmount end, 0)) as 'Jun',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 7 then TotalSubAmount end, 0)) as 'Jul',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 8 then TotalSubAmount end, 0)) as 'Aug',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 9 then TotalSubAmount end, 0)) as 'Sep',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 10 then TotalSubAmount end, 0)) as 'Oct',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 11 then TotalSubAmount end, 0)) as 'Nov',";
+            sql += " sum(ifnull(case when month(InvoiceDate) = 12 then TotalSubAmount end, 0)) as 'Dec'";
+            sql += " from(";
+            sql += "    select";
+            sql += "        s.sample_invoice_date as InvoiceDate,";
+            sql += "        s.sample_invoice as Invoice,";
+            sql += "        max(s.sample_invoice_amount_rpt) as TotalSubAmount";
+            sql += "    from job_sample s";
+            sql += "    left";
+            sql += "    join job_info i on s.job_id = i.id";
+            sql += " left";
+            sql += "    join m_customer c on c.id = i.customer_id";
+            sql += "    where 1 = 1";
+            sql += "    and s.sample_so <> ''";
             if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))
             {
-                if (ddlBoiNonBoi.SelectedValue.ToString().Equals("NB"))
+                if (ddlBoiNonBoi.SelectedValue.ToString().Equals("B"))
                 {
-                    sqlCri.Append(" and tmp.DeptBOI  <> 'BOI'");
+                    sql += " and right(s.job_number, 1) <> 'B'";
                 }
                 else
                 {
-                    sqlCri.Append(" and tmp.DeptBOI  = 'BOI'");
+                    sql += " and right(s.job_number, 1) <> 'B'";
                 }
             }
-
-            DateTime receive_report_from = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
-            DateTime receive_report_to = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+            if (!ddlCompany.SelectedValue.ToString().Equals("0"))
+            {
+                sql += " and i.customer_id  = " + ddlCompany.SelectedValue;
+            }
             if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
             {
-                sqlCri.Append(" and tmp.InvoiceDate between'" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
+                sql += " and s.sample_invoice_date between '" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'";
             }
+            sql += "    group by s.sample_invoice_date, s.sample_invoice";
+            sql += " ) tmp";
+            sql += " group by year(tmp.InvoiceDate)";
 
 
-
-
-            DataTable dt = MaintenanceBiz.ExecuteReturnDt(string.Format(sql, sqlCri.ToString()));
+            DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
             StringBuilder sbResultJson = new StringBuilder();
             String data = "[";
 
@@ -267,83 +247,82 @@ namespace ALS.ALSI.Web.view.dashboard
 
         public void rptDailyInvoice()
         {
+            DateTime receive_report_from = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
+            DateTime receive_report_to = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
             StringBuilder sqlCriIncomplete = new StringBuilder();
 
             Hashtable htInv = new Hashtable();
 
             #region "Incomplete"
-            string sql = "select" +
-            " 'WIP' as xType,InvoiceDate,count(sInvoice) iCount" +
-            " from(" +
-            "     select * from (select" +
-            "         s.sample_invoice_date as InvoiceDate," +
-            "         s.sample_invoice as sInvoice," +
-            "         s.sample_po as PurchaseOrder," +
-            "         s.sample_so as sampleSo," +
-            "         ifnull(s.sample_invoice_amount_rpt, 0) as TotalSubAmount," +
-            "         (case when right(s.job_number, 1) = 'B' then 'BOI' else 'NBOI' end) as DeptBOI," +
-            "         (case" +
-            "             when substring_index(s.job_number, '-', 1) = 'ELN' then 'non-HDD'" +
-            "             when substring_index(s.job_number, '-', 1) = 'ELP' then 'HDD'" +
-            "             when substring_index(s.job_number, '-', 1) = 'GRP' then 'HDD'" +
-            "             when substring_index(s.job_number, '-', 1) = 'ELWA' then 'HDD' else ''" +
-            "         end) as CustomerTypeHDD" +
-            "     from job_sample s" +
-            " left join job_info i on s.job_id = i.id" +
-            " left join job_sample_group_invoice sgi on s.sample_invoice = sgi.inv_no" +
-            " left join m_type_of_test tot on tot.ID = s.type_of_test_id" +
-            " left join m_customer c on s.id = i.customer_id" +
-            " where s.sample_invoice <> '' and s.sample_invoice_status in ( 1,2) and s.sample_invoice_date is not null) tmp where 1=1 {0}" +
-            " ) x" +
-            " GROUP BY  x.InvoiceDate";
-
-            string sql2 = "select" +
-            " 'TIV' as xType,InvoiceDate,count(sInvoice) iCount" +
-            " from(" +
-            "     select * from (select" +
-            "         s.sample_invoice_date as InvoiceDate," +
-            "         s.sample_invoice as sInvoice," +
-            "         s.sample_po as PurchaseOrder," +
-            "         s.sample_so as sampleSo," +
-            "         ifnull(s.sample_invoice_amount_rpt, 0) as TotalSubAmount," +
-            "         (case when right(s.job_number, 1) = 'B' then 'BOI' else 'NBOI' end) as DeptBOI," +
-            "         (case" +
-            "             when substring_index(s.job_number, '-', 1) = 'ELN' then 'non-HDD'" +
-            "             when substring_index(s.job_number, '-', 1) = 'ELP' then 'HDD'" +
-            "             when substring_index(s.job_number, '-', 1) = 'GRP' then 'HDD'" +
-            "             when substring_index(s.job_number, '-', 1) = 'ELWA' then 'HDD' else ''" +
-            "         end) as CustomerTypeHDD" +
-            "     from job_sample s" +
-            " left join job_info i on s.job_id = i.id" +
-            " left join job_sample_group_invoice sgi on s.sample_invoice = sgi.inv_no" +
-            " left join m_type_of_test tot on tot.ID = s.type_of_test_id" +
-            " left join m_customer c on s.id = i.customer_id" +
-            " where s.sample_so <> '') tmp where 1=1 {0}" +
-            " ) x" +
-            " GROUP BY  x.InvoiceDate";
-
-            sql = string.Format("{0} union {1}", sql, sql2);
-
+            string sql = "";
+            sql += "select 'WIP' as xType,InvoiceDate, count(Invoice) as iCount from(";
+            sql += "    select";
+            sql += "        s.sample_invoice_date as InvoiceDate,";
+            sql += "        s.sample_invoice as Invoice,";
+            sql += "        max(s.sample_invoice_amount_rpt) as TotalSubAmount";
+            sql += "    from job_sample s";
+            sql += "    left join job_info i on s.job_id = i.id";
+            sql += "    left join m_customer c on c.id = i.customer_id";
+            sql += "    where 1 = 1";
+            sql += "    and s.sample_invoice <> '' and s.sample_invoice_status in (1, 2) and s.sample_invoice_date is not null";
             if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))
             {
-                if (ddlBoiNonBoi.SelectedValue.ToString().Equals("NB"))
+                if (ddlBoiNonBoi.SelectedValue.ToString().Equals("B"))
                 {
-                    sqlCriIncomplete.Append(" and tmp.DeptBOI  <> 'BOI'");
+                    sql += " and right(s.job_number, 1) <> 'B'";
                 }
                 else
                 {
-                    sqlCriIncomplete.Append(" and tmp.DeptBOI  = 'BOI'");
+                    sql += " and right(s.job_number, 1) <> 'B'";
                 }
             }
-
-            DateTime receive_report_from = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
-            DateTime receive_report_to = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+            if (!ddlCompany.SelectedValue.ToString().Equals("0"))
+            {
+                sql += " and i.customer_id  = " + ddlCompany.SelectedValue;
+            }
             if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
             {
-                sqlCriIncomplete.Append(" and tmp.InvoiceDate between'" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'");
+                sql += " and s.sample_invoice_date between '" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'";
             }
+            sql += "    group by s.sample_invoice_date, s.sample_invoice";
+            sql += ") tmp";
+            sql += " group by tmp.InvoiceDate";
+            sql += " union";
+            sql += " select 'TIV' as xType,InvoiceDate, count(Invoice) as iCount from(";
+            sql += "    select";
+            sql += "        s.sample_invoice_date as InvoiceDate,";
+            sql += "        s.sample_invoice as Invoice,";
+            sql += "        max(s.sample_invoice_amount_rpt) as TotalSubAmount";
+            sql += "    from job_sample s";
+            sql += "    left join job_info i on s.job_id = i.id";
+            sql += "    left join m_customer c on c.id = i.customer_id";
+            sql += "    where 1 = 1";
+            sql += "    and s.sample_so <> ''";
+            if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))
+            {
+                if (ddlBoiNonBoi.SelectedValue.ToString().Equals("B"))
+                {
+                    sql += " and right(s.job_number, 1) <> 'B'";
+                }
+                else
+                {
+                    sql += " and right(s.job_number, 1) <> 'B'";
+                }
+            }
+            if (!ddlCompany.SelectedValue.ToString().Equals("0"))
+            {
+                sql += " and i.customer_id  = " + ddlCompany.SelectedValue;
+            }
+            if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
+            {
+                sql += " and s.sample_invoice_date between'" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'";
+            }
+            sql += "    group by s.sample_invoice_date, s.sample_invoice";
+            sql += ") tmp";
+            sql += " group by tmp.InvoiceDate";
 
-            DataTable dtIncomplete = MaintenanceBiz.ExecuteReturnDt(string.Format(sql, sqlCriIncomplete.ToString()));
+
+            DataTable dtIncomplete = MaintenanceBiz.ExecuteReturnDt(sql);
 
             String dataCat = "";
             String dataTiv = "";
@@ -385,9 +364,6 @@ namespace ALS.ALSI.Web.view.dashboard
                         htInv.Add(invDate, objNew);
 
                     }
-
-                    //dataCat += string.Format("'{0}',", invDate);
-                    //data += string.Format("{0},", dr["iCount"].ToString());
                 }
                 catch (Exception ex)
                 {
@@ -398,15 +374,9 @@ namespace ALS.ALSI.Web.view.dashboard
             foreach (DictionaryEntry de in htInv)
             {
                 dataCat += string.Format("'{0}',", de.Key);
-
                 CWipTiv cWipTiv = (CWipTiv)de.Value;
-
                 dataWip += string.Format("{0},", cWipTiv.wip);
                 dataTiv += string.Format("{0},", cWipTiv.tiv);
-
-                //data += string.Format("{0},", de.Value);
-
-                //Console.WriteLine("Key = {0}, Value = {1}", de.Key, de.Value);
             }
 
             dataCat = dataCat.Length == 0 ? "" : dataCat.Remove(dataCat.Length - 1, 1);
@@ -419,25 +389,76 @@ namespace ALS.ALSI.Web.view.dashboard
             jsonSeriesRpt02 = "[{name : 'Invoice', data: [" + dataWip + "]},{name : 'Total Invoice', data: [" + dataTiv + "]}]";
         }
 
-        public void Report3(DateTime s, DateTime e)
+        public void Report3()
         {
+
+            DateTime receive_report_from = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
+            DateTime receive_report_to = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+
             String sql = "";
-            sql += " select                                                              ";
-            sql += " j.customer_id,                                                      ";
-            sql += " c.company_name,                                                     ";
-            sql += " s.sample_invoice,                                                   ";
-            sql += " s.sample_invoice_date,                                              ";
-            sql += " TO_DAYS(Now()) - TO_DAYS(s.sample_invoice_date) as overdue_date,    ";
-            sql += " sum(s.sample_invoice_amount_rpt) sample_invoice_amount_rpt                  ";
-            sql += " from job_sample s                                                   ";
-            sql += " left join job_info j on j.ID = s.job_id                             ";
-            sql += " left join m_customer c on c.ID = j.customer_id                      ";
-            sql += " where s.sample_invoice is not null                                  ";
-            sql += " and s.sample_invoice <> ''                                          ";
-            sql += " and s.sample_invoice_complete_date is null                          ";
-            sql += " and s.sample_invoice_date is not null                               ";
-            sql += " and s.sample_invoice_date between'" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'";
-            sql += " group by s.sample_invoice_date,j.customer_id,s.sample_invoice;      ";
+            sql += "select";
+            sql += " s.job_number,";
+            //sql += "--s.status_completion_scheduled,                                                           ";
+            //sql += "--s.job_status,                                                                            ";
+            sql += " cs.name as jobType,";
+            sql += " ms.name as jobStatus,";
+            sql += " s.sample_invoice,";
+            sql += " i.date_of_receive,";
+            sql += " datediff(s.date_login_complete, s.date_login_inprogress) + 1 as 'Login',";
+            //sql += " --s.date_login_inprogress,";
+            //sql += " --s.date_login_complete,";
+            sql += " datediff(s.date_chemist_complete, s.date_chemist_analyze) + 1 as 'Chemist',";
+            //sql += "--s.date_chemist_analyze,";
+            //sql += "--s.date_chemist_complete,";
+            sql += " datediff(s.date_srchemist_complate, s.date_srchemist_analyze) + 1 as 'SRChemist',";
+            //sql += "--s.date_srchemist_analyze,";
+            //sql += "--s.date_srchemist_complate,";
+            sql += " datediff(s.date_admin_word_complete, s.date_admin_word_inprogress) + 1 as 'AdminWord',";
+            //sql += "--s.date_admin_word_inprogress,";
+            //sql += "--s.date_admin_word_complete,";
+            sql += " datediff(s.date_labman_complete, s.date_labman_analyze) + 1 as 'LabManager',";
+            //sql += "--s.date_labman_analyze,";
+            //sql += "--s.date_labman_complete,";
+            sql += " datediff(s.date_admin_pdf_complete, s.date_admin_pdf_inprogress) + 1 as 'AdminPdf',";
+            sql += " s.date_admin_sent_to_cus";
+            //sql += "-- s.date_admin_pdf_inprogress,";
+            //sql += "--s.date_admin_pdf_complete";
+            sql += " from job_sample s";
+            sql += " left join m_status ms on s.job_status = ms.ID";
+            sql += " left join job_info i on i.ID = s.job_id";
+            sql += " left join m_completion_scheduled cs on cs.ID = s.status_completion_scheduled";
+            sql += " where 1=1";
+            if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))
+            {
+                if (ddlBoiNonBoi.SelectedValue.ToString().Equals("B"))
+                {
+                    sql += " and right(s.job_number, 1) <> 'B'";
+                }
+                else
+                {
+                    sql += " and right(s.job_number, 1) <> 'B'";
+                }
+            }
+            if (!ddlCompany.SelectedValue.ToString().Equals("0"))
+            {
+                sql += " and i.customer_id  = " + ddlCompany.SelectedValue;
+            }
+            if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
+            {
+                sql += " and s.sample_invoice_date between '" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'";
+            }
+            sql += " order by s.job_number desc";
+
+
+
+
+            //if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
+            //{
+            //    sql += " and s.sample_invoice_date between'" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'";
+            //}
+
+            //sql += " group by s.sample_invoice_date,j.customer_id,s.sample_invoice;";
+
 
             searchResult = MaintenanceBiz.ExecuteReturnDt(sql);
 
@@ -502,112 +523,72 @@ namespace ALS.ALSI.Web.view.dashboard
             }
         }
 
-        public String Report4(DateTime s, DateTime e)
+        public void rptForecastAndBudget()
         {
-            try
+
+            DateTime receive_report_from = String.IsNullOrEmpty(txtStartDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtStartDate.Text);
+            DateTime receive_report_to = String.IsNullOrEmpty(txtEndDate.Text) ? DateTime.MinValue : CustomUtils.converFromDDMMYYYY(txtEndDate.Text);
+
+            Hashtable htInv = new Hashtable();
+
+            string sql = "";
+            sql += " select InvoiceDate,sum(TotalSubAmount) as TotalSubAmount from (";
+            sql += " select s.sample_invoice_date as InvoiceDate,s.sample_invoice as Invoice,max(s.sample_invoice_amount_rpt) as TotalSubAmount";
+            sql += " from job_sample s";
+            sql += " left join job_info i on s.job_id = i.id";
+            sql += " left join m_customer c on c.id = i.customer_id";
+            sql += " where 1 = 1";
+            if (!String.IsNullOrEmpty(ddlBoiNonBoi.SelectedValue.ToString()))
             {
-
-
-                String sql = "select * from (select sample_invoice_date,sum(sample_invoice_amount_rpt) amt FROM job_sample where sample_invoice_date is not null and sample_invoice_date between '" + s.ToString("yyyy-MM-dd") + "' AND '" + e.ToString("yyyy-MM-dd") + "'  GROUP BY DATE(sample_invoice_date) order by sample_invoice_date desc limit 30) x order by sample_invoice_date asc";
-
-                //String sql = "SELECT date as sample_invoice_date,value as amt FROM alsi.tmp_rpt_4 limit 30;";
-                DataTable dt = MaintenanceBiz.ExecuteReturnDt(sql);
-                StringBuilder sbResultJson = new StringBuilder();
-
-                String data = "[";
-                #region "Amout"
-                if (dt.Rows.Count > 0)
+                if (ddlBoiNonBoi.SelectedValue.ToString().Equals("B"))
                 {
-                    data += "{name: \"Amout\",data: [";
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        DateTime epochDate = Convert.ToDateTime(dr["sample_invoice_date"].ToString());
-                        double count = Convert.ToDouble(dr["amt"].ToString());
-                        data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + count + "],";
-                    }
-                    data = data.Substring(0, data.Length - 1);
-                    data += "]}";
-
-                    #region "Forecast(Amout)"
-                    //data += ",{name: \"Forecast(Amout)\",data: [";
-                    //Hashtable listForecastAmtDate = new Hashtable();
-                    //listForecastAmtDate[new DateTime(2019, 02, 12, 0, 0, 0)] = 17000;
-                    //listForecastAmtDate[new DateTime(2019, 02, 17, 0, 0, 0)] = 18000;
-                    //listForecastAmtDate[new DateTime(2019, 02, 19, 0, 0, 0)] = 19000;
-                    //listForecastAmtDate[new DateTime(2019, 02, 25, 0, 0, 0)] = 22000;
-                    //listForecastAmtDate[new DateTime(2019, 02, 27, 0, 0, 0)] = 24000;
-                    //foreach (DictionaryEntry entry in listForecastAmtDate)
-                    //{
-                    //    DateTime epochDate = Convert.ToDateTime(entry.Key);
-                    //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
-                    //}
-                    //data = data.Substring(0, data.Length - 1);
-                    //data += "]}";
-                    #endregion
-                    #region "Lower Confidence Bound(Amout)"
-                    //data += ",{name: \"Lower Confidence Bound(Amout)\",data: [";
-
-                    //Hashtable listLowerConfidenceBoundAmout = new Hashtable();
-                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 170000;
-                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 180000;
-                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 190000;
-                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 220000;
-                    //listLowerConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 240000;
-                    //foreach (DictionaryEntry entry in listLowerConfidenceBoundAmout)
-                    //{
-                    //    DateTime epochDate = Convert.ToDateTime(entry.Key);
-                    //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
-                    //}
-                    //data = data.Substring(0, data.Length - 1);
-                    //data += "]}";
-                    #endregion
-                    #region "Upper Confidence Bound(Amout)"
-                    //data += ",{name: \"Upper Confidence Bound(Amout)\",data: [";
-
-                    //Hashtable listUpperConfidenceBoundAmout = new Hashtable();
-                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 12, 0, 0, 0)] = 19000;
-                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 17, 0, 0, 0)] = 22000;
-                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 19, 0, 0, 0)] = 30000;
-                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 25, 0, 0, 0)] = 35000;
-                    //listUpperConfidenceBoundAmout[new DateTime(2019, 02, 27, 0, 0, 0)] = 44000;
-                    //foreach (DictionaryEntry entry in listUpperConfidenceBoundAmout)
-                    //{
-                    //    DateTime epochDate = Convert.ToDateTime(entry.Key);
-                    //    data += "[Date.UTC(" + epochDate.Year + ", " + epochDate.Month + ", " + epochDate.Day + "), " + entry.Value + "],";
-                    //}
-                    //data = data.Substring(0, data.Length - 1);
-                    //data += "]}";
-                    #endregion
+                    sql += " and right(s.job_number, 1) <> 'B'";
                 }
-                #endregion
-                data += "]";
-                sbResultJson.Append(data);
-                return sbResultJson.ToString();
-
+                else
+                {
+                    sql += " and right(s.job_number, 1) <> 'B'";
+                }
             }
-            catch (Exception)
+            if (!ddlCompany.SelectedValue.ToString().Equals("0"))
             {
-                return "[]";
+                sql += " and i.customer_id  = " + ddlCompany.SelectedValue;
+            }
+            if (receive_report_from != DateTime.MinValue && receive_report_to != DateTime.MinValue)
+            {
+                sql += " and s.sample_invoice_date between '" + receive_report_from.ToString("yyyy-MM-dd") + "' and '" + receive_report_to.ToString("yyyy-MM-dd") + "'";
+            }
+            sql += " group by s.sample_invoice_date,s.sample_invoice) tmp";
+            sql += " group by tmp.InvoiceDate";
 
+            DataTable dtIncomplete = MaintenanceBiz.ExecuteReturnDt(sql);
+
+            String dataCat = "";
+            String dataTiv = "";
+
+            foreach (DataRow dr in dtIncomplete.Rows)
+            {
+                try
+                {
+                    string invDate = dr["InvoiceDate"] == DBNull.Value ? "" : Convert.ToDateTime(dr["InvoiceDate"]).ToString("yyyyMMdd");
+                    double iCount = Convert.ToDouble(dr["TotalSubAmount"].ToString());
+
+                    dataCat += string.Format("'{0}',", invDate);
+                    dataTiv += string.Format("{0},", iCount);
+                }
+                catch (Exception ex)
+                {
+                    continue;
+                }
             }
 
+            dataCat = dataCat.Length == 0 ? "" : dataCat.Remove(dataCat.Length - 1, 1);
+            dataTiv = dataTiv.Length == 0 ? "" : dataTiv.Remove(dataTiv.Length - 1, 1);
 
-            //MyApp = new Excel.Application();
-            //MyApp.Visible = false;
-            //MyBook = MyApp.Workbooks.Open("D:\\Forecast_ets_example.xlsx");
-            //MySheet = (Excel.Worksheet)MyBook.Sheets[1]; // Explicit cast is not required here
-            //lastRow = MySheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell).Row;
+            jsonSeriesRpt04Categories = "[" + dataCat + "]";
+            jsonSeriesRpt04 = "[{name : 'Amout', data: [" + dataTiv + "]}]";
 
-            //using (FileStream fs = new FileStream("D:\\Forecast_ets_example.xlsx", FileMode.Open, FileAccess.Read))
-            //{
-            //    HSSFWorkbook wd = new HSSFWorkbook(fs);
-            //    ISheet isComponent = wd.GetSheet("Sheet1");
-            //    if (isComponent != null)
-            //    {
-
-            //    }
-            //}
         }
+
 
         #region "Gridview"
         protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -624,12 +605,12 @@ namespace ALS.ALSI.Web.view.dashboard
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                // Get the Row Amount
-                Label lbBalance = ((Label)e.Row.FindControl("lbBalance"));
+                //// Get the Row Amount
+                //Label lbBalance = ((Label)e.Row.FindControl("lbBalance"));
 
-                // Each Row Amount values are added to the footer Amount variable
-                dblFooterAmount = dblFooterAmount + Convert.ToDouble(lbBalance.Text);
-                lbBalance.Text = Convert.ToDouble(lbBalance.Text).ToString("N0");
+                //// Each Row Amount values are added to the footer Amount variable
+                //dblFooterAmount = dblFooterAmount + Convert.ToDouble(lbBalance.Text);
+                //lbBalance.Text = Convert.ToDouble(lbBalance.Text).ToString("N0");
             }
             if (e.Row.RowType == DataControlRowType.Footer)
             {
@@ -641,42 +622,42 @@ namespace ALS.ALSI.Web.view.dashboard
 
             if (e.Row.RowType == DataControlRowType.Footer)
             {
-                int intNoOfMergeCol = e.Row.Cells.Count - 1; /*except last column */
+                //int intNoOfMergeCol = e.Row.Cells.Count - 1; /*except last column */
 
-                GridViewRow footerRow = new GridViewRow(0, 0, DataControlRowType.Footer, DataControlRowState.Insert);
+                //GridViewRow footerRow = new GridViewRow(0, 0, DataControlRowType.Footer, DataControlRowState.Insert);
 
-                //Adding Footer Total Text Column
-                TableCell cell = new TableCell();
-                cell.Text = "Total : ";
-                cell.HorizontalAlign = HorizontalAlign.Right;
-                cell.ColumnSpan = intNoOfMergeCol;
+                ////Adding Footer Total Text Column
+                //TableCell cell = new TableCell();
+                //cell.Text = "Total : ";
+                //cell.HorizontalAlign = HorizontalAlign.Right;
+                //cell.ColumnSpan = intNoOfMergeCol;
 
-                footerRow.Cells.Add(cell);
+                //footerRow.Cells.Add(cell);
 
-                //Adding Footer Total Amount Column
-                cell = new TableCell();
-                Label lbl = new Label();
-                lbl.ID = "lblFooterAmount";
-                lbl.Text = dblFooterAmount.ToString("N0");
-                cell.Controls.Add(lbl);
-                cell.HorizontalAlign = HorizontalAlign.Right;
+                ////Adding Footer Total Amount Column
+                //cell = new TableCell();
+                //Label lbl = new Label();
+                //lbl.ID = "lblFooterAmount";
+                //lbl.Text = dblFooterAmount.ToString("N0");
+                //cell.Controls.Add(lbl);
+                //cell.HorizontalAlign = HorizontalAlign.Right;
 
-                footerRow.Cells.Add(cell);
+                //footerRow.Cells.Add(cell);
 
-                gvRpt3.Controls[0].Controls.Add(footerRow);
-                double dblGrandTotal = 0;
-                foreach (DataRow dr in searchResult.Rows)
-                {
-                    dblGrandTotal += Convert.ToDouble(dr["sample_invoice_amount_rpt"]);
-                }
+                //gvRpt3.Controls[0].Controls.Add(footerRow);
+                //double dblGrandTotal = 0;
+                //foreach (DataRow dr in searchResult.Rows)
+                //{
+                //    dblGrandTotal += Convert.ToDouble(dr["sample_invoice_amount_rpt"]);
+                //}
 
-                // First cell is used for specifying the Total text
-                for (int intCellCol = 1; intCellCol < intNoOfMergeCol; intCellCol++)
-                    e.Row.Cells.RemoveAt(1);
-                e.Row.Cells[0].ColumnSpan = intNoOfMergeCol;
-                e.Row.Cells[0].Text = "Grand Total : ";
-                e.Row.Cells[0].HorizontalAlign = HorizontalAlign.Right;
-                e.Row.Cells[1].Text = dblGrandTotal.ToString("N0");
+                //// First cell is used for specifying the Total text
+                //for (int intCellCol = 1; intCellCol < intNoOfMergeCol; intCellCol++)
+                //    e.Row.Cells.RemoveAt(1);
+                //e.Row.Cells[0].ColumnSpan = intNoOfMergeCol;
+                //e.Row.Cells[0].Text = "Grand Total : ";
+                //e.Row.Cells[0].HorizontalAlign = HorizontalAlign.Right;
+                //e.Row.Cells[1].Text = dblGrandTotal.ToString("N0");
             }
         }
         #endregion

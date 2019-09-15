@@ -198,7 +198,7 @@ namespace ALS.ALSI.Web.view.request
                 "    LEFT JOIN job_info i ON s.job_id = i.id                                                       " +
                 "    LEFT JOIN job_sample_group_invoice sgi ON  s.sample_invoice = sgi.inv_no                                                " +
                 "    LEFT JOIN m_type_of_test tot ON tot.ID = s.type_of_test_id                                                " +
-                " left join m_customer c on s.id = i.customer_id " +
+                " left join m_customer c on c.id = i.customer_id " +
 
                 "    WHERE                                                                                         " +
                 "        s.sample_invoice IS NOT NULL                                                                   " +
