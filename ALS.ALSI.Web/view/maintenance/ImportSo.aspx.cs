@@ -316,10 +316,12 @@ namespace ALS.ALSI.Web.view.template
                     }
                 }
                 //delete batch jobSample by condition
+                #region "Delete mockup file in job_info,job_sample
                 string sqlDelJobInfo = "delete from job_info where id in (select job_id from job_sample where template_id=-1 and job_status=3 and sample_so in (" + string.Join(",", soList) + "))";
                 MaintenanceBiz.ExecuteReturnDt(sqlDelJobInfo);
                 string sqlDelSample = "delete from job_sample where template_id=-1 and job_status=3 and sample_so in (" + string.Join(",", soList) + ")";
                 MaintenanceBiz.ExecuteReturnDt(sqlDelSample);
+                #endregion
 
                 Console.WriteLine();
                 foreach (string line in lines)
@@ -510,6 +512,11 @@ namespace ALS.ALSI.Web.view.template
                 MaintenanceBiz.ExecuteReturnDt(sqlDelSample);
                 Console.WriteLine();
 
+                //update job_sample_group_invoice flag to "I"
+                string sqlUploadInvG = "update job_sample_group_invoice set inv_status='{0}' where so='{1}'";
+                MaintenanceBiz.ExecuteCommand(string.Format(sqlUploadInvG, "I", string.Join(",", soList)));
+
+
 
                 foreach (job_sample_group_so _updateCso in soGroup)
                 {
@@ -556,6 +563,8 @@ namespace ALS.ALSI.Web.view.template
 
                                 int result = MaintenanceBiz.ExecuteCommandReturnResult(string.Format(sqlUploadBySo, jns, _updateCso.so, amt, (isPackageCost) ? "Y" : "N"));
                                 Console.WriteLine();
+
+
 
 
                                 if (result < jobNumbers.Count())

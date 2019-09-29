@@ -3,6 +3,7 @@ using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -37,6 +38,11 @@ namespace ALS.ALSI.Web.view.template
         {
             get { return (String)Session[GetType().Name + "MsgLogs"]; }
             set { Session[GetType().Name + "MsgLogs"] = value; }
+        }
+        protected Hashtable ListMoreOneInv
+        {
+            get { return (Hashtable)Session[GetType().Name + "ListMoreOneInv"]; }
+            set { Session[GetType().Name + "ListMoreOneInv"] = value; }
         }
         private void initialPage()
         {
@@ -116,11 +122,36 @@ namespace ALS.ALSI.Web.view.template
         private void bindingData()
         {
 
-            job_sample_group_invoice soList = new job_sample_group_invoice();
-            searchResult = soList.SelectAll(ddlStatus.SelectedValue, txtSoCode.Text, txtInvoice.Text);
+            job_sample_group_invoice soLists = new job_sample_group_invoice();
+            searchResult = soLists.SelectAll(ddlStatus.SelectedValue, txtSoCode.Text, txtInvoice.Text);
+
+            #region "Check One SO Has More One Inovice"
+            if (this.searchResult.Count() > 0)
+            {
+                List<string> soList = new List<string>();
+                ListMoreOneInv = new Hashtable();
+
+                IEnumerable<job_sample_group_invoice> invGroups = this.searchResult.ToList();
+                soList = invGroups.Select(x => "'" + x.so + "'").ToList<string>();
+                string sqlCheckOneSOHasMoreOneInovice = "select sample_so, count(sample_so) as iCount from(select sample_so from job_sample where sample_so in (" + string.Join(",", soList) + ") group by sample_invoice) x group by x.sample_so";
+
+                DataTable dt = MaintenanceBiz.ExecuteReturnDt(sqlCheckOneSOHasMoreOneInovice);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (!ListMoreOneInv.ContainsKey(dr["sample_so"].ToString()))
+                    {
+                        ListMoreOneInv.Add(dr["sample_so"].ToString(), Convert.ToInt32(dr["iCount"].ToString()));
+                    }
+                }
+            }
+            #endregion
+
+
             gvJob.DataSource = searchResult;
             gvJob.DataBind();
 
+
+            Console.WriteLine();
         }
 
         protected void gvJob_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -136,7 +167,21 @@ namespace ALS.ALSI.Web.view.template
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                string _sampleSo = gvJob.DataKeys[e.Row.RowIndex][0].ToString();
+                CheckBox cbSelect = (CheckBox)e.Row.FindControl("cbSelect");
+                LinkButton btnLoad = (LinkButton)e.Row.FindControl("btnLoad");
 
+                if (null != this.ListMoreOneInv && this.ListMoreOneInv[_sampleSo] != null)
+                {
+                    int count = Convert.ToInt32(this.ListMoreOneInv[_sampleSo]);
+                    cbSelect.Enabled = (count == 1);
+                    btnLoad.Visible = (count > 1);
+                }
+                else
+                {
+                    btnLoad.Visible = false;
+
+                }
             }
         }
 
@@ -255,7 +300,7 @@ namespace ALS.ALSI.Web.view.template
                     //insert to db
                     foreach (job_sample_group_invoice sgInv in groupInv)
                     {
-                        
+
                         job_sample_group_invoice tmp = job_sample_group_invoice.getBySo(sgInv.so);
                         if (tmp != null)
                         {
@@ -338,8 +383,6 @@ namespace ALS.ALSI.Web.view.template
             if (searchResult.ToDataTable().Rows.Count > 0)
             {
 
-
-
                 List<job_sample_group_invoice> listInvUpdates = new List<job_sample_group_invoice>();
 
                 IEnumerable<job_sample_group_invoice> invGroups = this.searchResult.Where(x => soIds.Contains(x.id)).ToList();
@@ -350,6 +393,8 @@ namespace ALS.ALSI.Web.view.template
                 logs.Append("<br>Total INV: " + invGroups.Count());
                 int total = invGroups.Count();
                 int fail = 0;
+
+
 
                 foreach (job_sample_group_invoice invData in invGroups)
                 {
@@ -366,43 +411,11 @@ namespace ALS.ALSI.Web.view.template
                     }
                     else
                     {
-                        sbJobFail.Append(""+invData.so + ",");
+                        sbJobFail.Append("" + invData.so + ",");
                         logs.Append(invData.so + "[ ],");
                         fail++;
                     }
-
-                    //logs.Append("<br>Inv number: " + invData.inv_no);
-                    //List<job_sample> listOfSample = job_sample.FindAllBySo(invData.so);
-                    //if (listOfSample.Count() > 0)
-                    //{
-                    //    logs.Append("<br>Total Sample: " + listOfSample.Count() + "<br> Upload jobNumber List : ");
-                    //    foreach (job_sample js in listOfSample)
-                    //    {
-                    //        js.sample_invoice = invData.inv_no;
-                    //        js.sample_invoice_date = invData.inv_date;
-                    //        js.sample_invoice_complete_date = invData.inv_duedate;
-                    //        js.sample_invoice_amount_rpt = invData.inv_amt;
-                    //js.sample_invoice_status = Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE);
-                    //        js.Update();
-                    //        logs.Append(js.job_number + "[X],");
-                    //        //
-                    //        invData.inv_status = "C";
-                    //        invData.Update();
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    sbJobFail.Append(invData.inv_no + ",");
-                    //    logs.Append("<br>Total Sample: 0 <br> Upload jobNumber List : ");
-
-                    //    fail++;
-                    //    //
-                    //    invData.inv_status = "I";
-                    //    invData.Update();
-                    //}
                 }
-
-
 
                 //GeneralManager.Commit();
                 String errList = (sbJobFail.Length == 0) ? "" : "<br>ไม่พบหมาย Job_number ที่ถูกผูกด้วย So ดังนี้ " + String.Join(",", sbJobFail.ToString().Split(','));
@@ -421,7 +434,7 @@ namespace ALS.ALSI.Web.view.template
         public DateTime parseDateFromStr(string date)
         {
             // : 03/04/19
-            if(date.Length == 8)
+            if (date.Length == 8)
             {
                 int day = Convert.ToInt16(date.Split('/')[0]);
                 int month = Convert.ToInt16(date.Split('/')[1]);
@@ -431,7 +444,6 @@ namespace ALS.ALSI.Web.view.template
             else
             {
                 return DateTime.Now;
-
             }
         }
 

@@ -162,7 +162,7 @@
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
 
-                                <asp:BoundField HeaderText="Termsr" DataField="Terms" ItemStyle-HorizontalAlign="Center" SortExpression="Terms">
+                                <asp:BoundField HeaderText="Terms" DataField="Terms" ItemStyle-HorizontalAlign="Center" SortExpression="Terms">
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
 
