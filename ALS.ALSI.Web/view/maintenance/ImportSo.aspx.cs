@@ -253,8 +253,8 @@ namespace ALS.ALSI.Web.view.template
                         List<string> soList = new List<string>();
                         soList.Add("'"+jobSampleGS.so+"'");
 
-                        string clearSql = "update job_sample set sample_so = '', sample_invoice = '' where sample_so in (" + string.Join(",", soList) + ")";
-                        MaintenanceBiz.ExecuteReturnDt(clearSql);
+                        //string clearSql = "update job_sample set sample_so = '', sample_invoice = '' where sample_so in (" + string.Join(",", soList) + ")";
+                        //MaintenanceBiz.ExecuteReturnDt(clearSql);
                         //delete batch jobSample by condition
                         string sqlDelJobInfo = "delete from job_info where id in (select job_id from job_sample where template_id=-1 and job_status=3 and sample_so in (" + string.Join(",", soList) + "))";
                         MaintenanceBiz.ExecuteReturnDt(sqlDelJobInfo);
@@ -500,8 +500,8 @@ namespace ALS.ALSI.Web.view.template
                 logs.Append("<br>--------------------------------------------------------------------------------");
 
 
-                string clearSql = "update job_sample set sample_so = '', sample_invoice = '' where sample_so in (" + string.Join(",", soList) + ")";
-                MaintenanceBiz.ExecuteReturnDt(clearSql);
+                //string clearSql = "update job_sample set sample_so = '', sample_invoice = '' where sample_so in (" + string.Join(",", soList) + ")";
+                //MaintenanceBiz.ExecuteReturnDt(clearSql);
                 string clearGinvSql = "update job_sample_group_invoice set inv_status = 'I' where so in (" + string.Join(",", soList) + ")";
                 MaintenanceBiz.ExecuteReturnDt(clearGinvSql);
                 

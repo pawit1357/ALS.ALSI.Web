@@ -244,6 +244,7 @@ namespace ALS.ALSI.Web.view.request
                         case "Seagate_GCMS":
                         case "Seagate_GCMS_2":
                         case "Seagate_GCMS_3":
+                        case "Seagate_GCMS_5":
                             template_seagate_gcms_coverpage.CloneData(oldSample.ID, newSample.ID);
                             template_seagate_gcms_coverpage_img.CloneData(oldSample.ID, newSample.ID);
                             tb_m_gcms_cas.CloneData(oldSample.ID, newSample.ID);

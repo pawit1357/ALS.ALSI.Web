@@ -39,11 +39,11 @@ namespace ALS.ALSI.Web.view.template
             get { return (String)Session[GetType().Name + "MsgLogs"]; }
             set { Session[GetType().Name + "MsgLogs"] = value; }
         }
-        protected Hashtable ListMoreOneInv
-        {
-            get { return (Hashtable)Session[GetType().Name + "ListMoreOneInv"]; }
-            set { Session[GetType().Name + "ListMoreOneInv"] = value; }
-        }
+        //protected Hashtable ListMoreOneInv
+        //{
+        //    get { return (Hashtable)Session[GetType().Name + "ListMoreOneInv"]; }
+        //    set { Session[GetType().Name + "ListMoreOneInv"] = value; }
+        //}
         private void initialPage()
         {
         }
@@ -103,7 +103,7 @@ namespace ALS.ALSI.Web.view.template
 
         protected void btnBatchLoad_Click(object sender, EventArgs e)
         {
-            List<int> ids = new List<int>();
+            List<string> ids = new List<string>();
             foreach (GridViewRow row in gvJob.Rows)
             {
                 CheckBox chk = row.Cells[0].Controls[1] as CheckBox;
@@ -111,7 +111,7 @@ namespace ALS.ALSI.Web.view.template
                 if (chk != null && chk.Checked)
                 {
                     HiddenField hf = row.Cells[0].FindControl("hid") as HiddenField;
-                    ids.Add(Convert.ToInt32(hf.Value));
+                    ids.Add(hf.Value);
                 }
             }
             batchUpload(ids);
@@ -126,24 +126,24 @@ namespace ALS.ALSI.Web.view.template
             searchResult = soLists.SelectAll(ddlStatus.SelectedValue, txtSoCode.Text, txtInvoice.Text);
 
             #region "Check One SO Has More One Inovice"
-            if (this.searchResult.Count() > 0)
-            {
-                List<string> soList = new List<string>();
-                ListMoreOneInv = new Hashtable();
+            //if (this.searchResult.Count() > 0)
+            //{
+            //    List<string> soList = new List<string>();
+            //    ListMoreOneInv = new Hashtable();
 
-                IEnumerable<job_sample_group_invoice> invGroups = this.searchResult.ToList();
-                soList = invGroups.Select(x => "'" + x.so + "'").ToList<string>();
-                string sqlCheckOneSOHasMoreOneInovice = "select sample_so, count(sample_so) as iCount from(select sample_so from job_sample where sample_so in (" + string.Join(",", soList) + ") group by sample_invoice) x group by x.sample_so";
+            //    IEnumerable<job_sample_group_invoice> invGroups = this.searchResult.ToList();
+            //    soList = invGroups.Select(x => "'" + x.so + "'").ToList<string>();
+            //    string sqlCheckOneSOHasMoreOneInovice = "select sample_so, count(sample_so) as iCount from(select sample_so from job_sample where sample_so in (" + string.Join(",", soList) + ") group by sample_invoice) x group by x.sample_so";
 
-                DataTable dt = MaintenanceBiz.ExecuteReturnDt(sqlCheckOneSOHasMoreOneInovice);
-                foreach (DataRow dr in dt.Rows)
-                {
-                    if (!ListMoreOneInv.ContainsKey(dr["sample_so"].ToString()))
-                    {
-                        ListMoreOneInv.Add(dr["sample_so"].ToString(), Convert.ToInt32(dr["iCount"].ToString()));
-                    }
-                }
-            }
+            //    DataTable dt = MaintenanceBiz.ExecuteReturnDt(sqlCheckOneSOHasMoreOneInovice);
+            //    foreach (DataRow dr in dt.Rows)
+            //    {
+            //        if (!ListMoreOneInv.ContainsKey(dr["sample_so"].ToString()))
+            //        {
+            //            ListMoreOneInv.Add(dr["sample_so"].ToString(), Convert.ToInt32(dr["iCount"].ToString()));
+            //        }
+            //    }
+            //}
             #endregion
 
 
@@ -167,21 +167,21 @@ namespace ALS.ALSI.Web.view.template
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                string _sampleSo = gvJob.DataKeys[e.Row.RowIndex][0].ToString();
-                CheckBox cbSelect = (CheckBox)e.Row.FindControl("cbSelect");
-                LinkButton btnLoad = (LinkButton)e.Row.FindControl("btnLoad");
+                //string _sampleSo = gvJob.DataKeys[e.Row.RowIndex][0].ToString();
+                //CheckBox cbSelect = (CheckBox)e.Row.FindControl("cbSelect");
+                //LinkButton btnLoad = (LinkButton)e.Row.FindControl("btnLoad");
 
-                if (null != this.ListMoreOneInv && this.ListMoreOneInv[_sampleSo] != null)
-                {
-                    int count = Convert.ToInt32(this.ListMoreOneInv[_sampleSo]);
-                    cbSelect.Enabled = (count == 1);
-                    btnLoad.Visible = (count > 1);
-                }
-                else
-                {
-                    btnLoad.Visible = false;
+                //if (null != this.ListMoreOneInv && this.ListMoreOneInv[_sampleSo] != null)
+                //{
+                //    int count = Convert.ToInt32(this.ListMoreOneInv[_sampleSo]);
+                //    cbSelect.Enabled = (count == 1);
+                //    btnLoad.Visible = (count > 1);
+                //}
+                //else
+                //{
+                //    btnLoad.Visible = false;
 
-                }
+                //}
             }
         }
 
@@ -234,16 +234,16 @@ namespace ALS.ALSI.Web.view.template
 
         protected void gvJob_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
-            switch (cmd)
-            {
-                case CommandNameEnum.View:
-                    int id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
-                    List<int> ids = new List<int>();
-                    ids.Add(id);
-                    batchUpload(ids);
-                    break;
-            }
+            //CommandNameEnum cmd = (CommandNameEnum)Enum.Parse(typeof(CommandNameEnum), e.CommandName, true);
+            //switch (cmd)
+            //{
+            //    case CommandNameEnum.View:
+            //        int id = int.Parse(e.CommandArgument.ToString().Split(Constants.CHAR_COMMA)[0]);
+            //        List<int> ids = new List<int>();
+            //        ids.Add(id);
+            //        batchUpload(ids);
+            //        break;
+            //}
         }
 
         protected void gvJob_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
@@ -258,8 +258,8 @@ namespace ALS.ALSI.Web.view.template
         private void ProcessUpload(String filePath)
         {
             Boolean bUploadSuccess = false;
-            try
-            {
+            //try
+            //{
                 List<job_sample_group_invoice> groupInv = new List<job_sample_group_invoice>();
                 int index = 0;
                 string[] lines = System.IO.File.ReadAllLines(filePath);
@@ -297,42 +297,76 @@ namespace ALS.ALSI.Web.view.template
                 if (bUploadSuccess)
                 {
                     pSo.Visible = true;
+                    //delete old before
+                    string inSOs = string.Join(",", groupInv.Select(x => "'" + x.so + "'"));
+                    string delOld = "delete from job_sample_group_invoice where so in (" + inSOs + ")";
+                    MaintenanceBiz.ExecuteReturnDt(delOld);
                     //insert to db
                     foreach (job_sample_group_invoice sgInv in groupInv)
                     {
-
-                        job_sample_group_invoice tmp = job_sample_group_invoice.getBySo(sgInv.so);
-                        if (tmp != null)
-                        {
-                            tmp.filename = Path.GetFileName(filePath);
-                            tmp.inv_status = "I";
-                            tmp.report_no = "";
-                            tmp.company = sgInv.company;
-                            tmp.update_date = DateTime.Now;
-                            tmp.Update();
-                        }
-                        else
-                        {
-                            sgInv.report_no = "";
-                            sgInv.filename = Path.GetFileName(filePath);
-                            sgInv.create_date = DateTime.Now;
-                            sgInv.Insert();
-                        }
+                        sgInv.filename = Path.GetFileName(filePath);
+                        sgInv.update_date = DateTime.Now;
+                        sgInv.Insert();
                     }
 
-                    Console.WriteLine();
-                    string inSOs = string.Join(",", groupInv.Select(x => "'" + x.so + "'"));
+                        //insert to db
+                        //foreach (job_sample_group_invoice sgInv in groupInv)
+                        //{
 
-                    string clearSql = "update job_sample set sample_invoice = '' where sample_so in (" + inSOs + ")";
-                    MaintenanceBiz.ExecuteReturnDt(clearSql);
+                        //    job_sample_group_invoice tmp = job_sample_group_invoice.getBySo(sgInv.so);
+                        //    if (tmp != null)
+                        //    {
+                        //        tmp.filename = Path.GetFileName(filePath);
+                        //        tmp.inv_status = "I";
+                        //        tmp.report_no = "";
+                        //        tmp.company = sgInv.company;
+                        //        tmp.update_date = DateTime.Now;
+                        //        tmp.Update();
+                        //    }
+                        //    else
+                        //    {
+                        //        sgInv.report_no = "";
+                        //        sgInv.filename = Path.GetFileName(filePath);
+                        //        sgInv.create_date = DateTime.Now;
+                        //        sgInv.Insert();
+                        //    }
+                        //}
+
+                        //Console.WriteLine();
+                        //string inSOs = string.Join(",", groupInv.Select(x => "'" + x.so + "'"));
+                        //string clearSql = "update job_sample set sample_invoice = '' where sample_so in (" + inSOs + ")";
+                        //MaintenanceBiz.ExecuteReturnDt(clearSql);
 
 
-                    GeneralManager.Commit();
+                        GeneralManager.Commit();
 
 
                     //transfer
-                    bindingData();
+                    //bindingData();
+                    this.searchResult = groupInv;
+                    #region "Check One SO Has More One Inovice"
+                    //if (this.searchResult.Count() > 0)
+                    //{
+                    //    List<string> soList = new List<string>();
+                    //    ListMoreOneInv = new Hashtable();
 
+                    //    IEnumerable<job_sample_group_invoice> invGroups = this.searchResult.ToList();
+                    //    soList = invGroups.Select(x => "'" + x.so + "'").ToList<string>();
+                    //    string sqlCheckOneSOHasMoreOneInovice = "select sample_so, count(sample_so) as iCount from(select sample_so from job_sample where sample_so in (" + string.Join(",", soList) + ") group by sample_invoice) x group by x.sample_so";
+
+                    //    DataTable dt = MaintenanceBiz.ExecuteReturnDt(sqlCheckOneSOHasMoreOneInovice);
+                    //    foreach (DataRow dr in dt.Rows)
+                    //    {
+                    //        if (!ListMoreOneInv.ContainsKey(dr["sample_so"].ToString()))
+                    //        {
+                    //            ListMoreOneInv.Add(dr["sample_so"].ToString(), Convert.ToInt32(dr["iCount"].ToString()));
+                    //        }
+                    //    }
+                    //}
+                    #endregion
+
+                    gvJob.DataSource = this.searchResult;
+                    gvJob.DataBind();
 
                     //Commit
                     MessageINv = "<div class=\"alert alert-info\"><strong>Info!</strong>โหลดข้อมูลเรียบแล้วทั้งหมด " + groupInv.Count() + " รายการ</div>";
@@ -342,13 +376,13 @@ namespace ALS.ALSI.Web.view.template
                     pSo.Visible = false;
                     MessageINv = "<div class=\"alert alert-danger\"><strong>Error!</strong>เกิดความผิดพลาดในการโหลดข้อมูล SO กรุณาตรวจสอบไฟล์</div>";
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageINv = "<div class=\"alert alert-danger\"><strong>Error!</strong>" + ex.InnerException + "</div>";
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageINv = "<div class=\"alert alert-danger\"><strong>Error!</strong>" + ex.InnerException + "</div>";
 
-                Console.WriteLine(ex.Message);
-            }
+            //    Console.WriteLine(ex.Message);
+            //}
         }
 
         private string getNum(string num)
@@ -372,7 +406,7 @@ namespace ALS.ALSI.Web.view.template
             return number;
         }
 
-        public void batchUpload(List<int> soIds = null)
+        public void batchUpload(List<string> soIds = null)
         {
             MsgLogs = "";
             StringBuilder logs = new StringBuilder();
@@ -383,9 +417,9 @@ namespace ALS.ALSI.Web.view.template
             if (searchResult.ToDataTable().Rows.Count > 0)
             {
 
-                List<job_sample_group_invoice> listInvUpdates = new List<job_sample_group_invoice>();
+                //List<job_sample_group_invoice> listInvUpdates = new List<job_sample_group_invoice>();
 
-                IEnumerable<job_sample_group_invoice> invGroups = this.searchResult.Where(x => soIds.Contains(x.id)).ToList();
+                IEnumerable<job_sample_group_invoice> invGroups = this.searchResult.Where(x => soIds.Contains(x.so)).ToList();
 
                 logs.Append("<br>--------------------------------------------------------------------------------");
                 logs.Append("<br>############ Load 'Invoice' List ############");
@@ -463,3 +497,13 @@ namespace ALS.ALSI.Web.view.template
         }
     }
 }
+
+                                        
+//<asp:TemplateField HeaderText = "Force Load" ItemStyle-HorizontalAlign="Center">
+//    <ItemTemplate>
+//        <asp:LinkButton ID = "btnLoad" runat="server" CommandArgument='<%# String.Concat(Eval("so")) %>' CommandName="View" ToolTip="Force Load"><i class="fa fa-rocket"  onclick='return confirm("คุณต้องการที่จะโหลดข้อมูล SO/Invoice ใหม่ จะทำให้ข้อมูลใน SO ที่มีมากว่า 1 Invoice หาย ?");'></i></asp:LinkButton>
+//    </ItemTemplate>
+//    <HeaderStyle HorizontalAlign = "Center" />
+//    < ItemStyle HorizontalAlign="Center" />
+//</asp:TemplateField>
+                                  

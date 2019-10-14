@@ -111,16 +111,10 @@
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="cbSelect" runat="server" />
 
-                                                <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("id")%>' />
+                                                <asp:HiddenField ID="hid" runat="server" Value='<%# Eval("so")%>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Force Load" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnLoad" runat="server" CommandArgument='<%# String.Concat(Eval("id")) %>' CommandName="View" ToolTip="Force Load"><i class="fa fa-rocket"  onclick='return confirm("คุณต้องการที่จะโหลดข้อมูล SO/Invoice ใหม่ จะทำให้ข้อมูลใน SO ที่มีมากว่า 1 Invoice หาย ?");'></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                            <HeaderStyle HorizontalAlign="Center" />
-                                            <ItemStyle HorizontalAlign="Center" />
-                                        </asp:TemplateField>
+
                                         <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <%# Container.DataItemIndex + 1 %>
