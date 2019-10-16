@@ -79,7 +79,12 @@ namespace ALS.ALSI.Web.view.template
             {
                 try
                 {
-                    template.Delete();
+                    int year = template.DATE_HOLIDAYS.Year;
+                    int month = template.DATE_HOLIDAYS.Month;
+                    int day = template.DATE_HOLIDAYS.Day;
+                    string delSql = "delete from holiday_calendar where year(DATE_HOLIDAYS) ={0} and month(DATE_HOLIDAYS)={1} and day(DATE_HOLIDAYS)={2}";
+                    MaintenanceBiz.ExecuteCommand(string.Format(delSql, year, month, day));
+                    //template.Delete();
                 }
                 catch(Exception ex)
                 {
@@ -87,7 +92,7 @@ namespace ALS.ALSI.Web.view.template
                 }
             }
             //Commit
-            GeneralManager.Commit();
+            //GeneralManager.Commit();
             bindingData();
         }
 
