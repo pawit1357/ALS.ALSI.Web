@@ -165,7 +165,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="so" Type="varchar" MaxLength="45" />
-          <Property Name="so_desc" Type="varchar" MaxLength="1000" />
+          <Property Name="so_desc" Type="text" />
           <Property Name="unit_price" Type="text" />
           <Property Name="report_no" Type="text" />
           <Property Name="inv_no" Type="varchar" MaxLength="45" />
@@ -178,7 +178,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="update_date" Type="datetime" Precision="0" />
           <Property Name="filename" Type="varchar" MaxLength="200" />
           <Property Name="quantity" Type="text" />
-          <Property Name="so_company" Type="varchar" MaxLength="2000" />
+          <Property Name="so_company" Type="text" />
         </EntityType>
         <EntityType Name="job_sample_group_so_ignore_code">
           <Key>
@@ -2416,7 +2416,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="so" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="so_desc" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="so_desc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="unit_price" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="report_no" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="inv_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -2429,7 +2429,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="update_date" Type="DateTime" />
           <Property Name="filename" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="quantity" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="so_company" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="so_company" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="job_sample_group_so_ignore_code">
           <Key>
