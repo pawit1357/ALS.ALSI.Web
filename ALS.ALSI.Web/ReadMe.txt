@@ -17,4 +17,6 @@
 ALTER TABLE `alsi`.`job_sample_group_so` 
 CHANGE COLUMN `unit_price` `unit_price` TEXT NULL DEFAULT NULL ,
 CHANGE COLUMN `report_no` `report_no` TEXT NULL DEFAULT NULL ,
-CHANGE COLUMN `quantity` `quantity` TEXT NULL DEFAULT NULL ;
+CHANGE COLUMN `quantity` `quantity` TEXT NULL DEFAULT NULL ,
+CHANGE COLUMN `so_desc` `so_desc` TEXT NULL DEFAULT NULL ,
+CHANGE COLUMN `so_company` `so_company` TEXT NULL DEFAULT NULL ;
