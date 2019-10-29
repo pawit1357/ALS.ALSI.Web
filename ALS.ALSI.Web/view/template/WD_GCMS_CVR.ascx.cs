@@ -984,13 +984,14 @@ namespace ALS.ALSI.Web.view.template
             {
                 lbSpecDesc.Text = String.Format("The Specification is based on Western Digital's Doc {0} {1}", detailSpec.B, detailSpec.A);
 
-                List<int> ignoreIndex = new List<int>() { 0, 4 };
+                //List<int> ignoreIndex = new List<int>() { 0, 4 };
+                List<string> ignoreCol = new List<string>() { "Spec / Rev", "Unit"};
 
                 List<tb_m_detail_spec> headerDs = detailSpec.SelectAll().Take(2).ToList();
                 int index = 1;
                 this.coverpages = new List<template_wd_gcms_coverpage>();
 
-                foreach (DetailSpecComponent item in CustomUtils.GetComponent(headerDs, detailSpec, ignoreIndex))
+                foreach (DetailSpecComponent item in CustomUtils.GetComponent(headerDs, detailSpec, ignoreCol))
                 {
                     template_wd_gcms_coverpage work = new template_wd_gcms_coverpage();
                     //work.ID = (this.CommandName == CommandNameEnum.Add) ? index : this.coverpages[index - 1].ID;

@@ -18,11 +18,11 @@ namespace ALS.ALSI.Utils
 {
     public class CustomUtils
     {
-
         public static String ErrorIndex;
 
         private static readonly Random getrandom = new Random();
         private static readonly object syncLock = new object();
+
         public static int GetRandomNumber(int min, int max)
         {
             lock (syncLock)
@@ -33,7 +33,6 @@ namespace ALS.ALSI.Utils
         public static int GetRandomNumberID()
         {
             return GetRandomNumber(1, 1000); //Convert.ToInt32(DateTime.Now.Ticks);
-
         }
         public static int GenerateRandom(int min, int max)
         {
@@ -56,62 +55,28 @@ namespace ALS.ALSI.Utils
             }
 
         }
+
         public static byte[] GetBytesFromImage(String imageFile)
         {
+            try
+            {
 
-            //string path = HttpContext.Current.Server.MapPath(imageFile);
-            //byte[] photo = File.ReadAllBytes(path);
-            if (imageFile == null) return null;
-            var webClient = new WebClient();
+                if (imageFile == null) return null;
+                var webClient = new WebClient();
 
-            byte[] photo = webClient.DownloadData(imageFile);
+                byte[] photo = webClient.DownloadData(imageFile);
 
+                return photo;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
 
-            return photo;
         }
 
-        //public static byte[] GetBytesFromPhisicalPath(String imageFile)
-        //{
-        //    byte[] photo = null;
-        //    string path = String.Format("{0}/{1}", Configurations.PATH_DRIVE, imageFile);
-
-        //    photo = File.ReadAllBytes(path);
-
-
-        //    return photo;
-        //}
-        //private static Image resizeImage(Image imgToResize, Size size)
-        //{
-        //    int sourceWidth = imgToResize.Width;
-        //    int sourceHeight = imgToResize.Height;
-
-        //    float nPercent = 0;
-        //    float nPercentW = 0;
-        //    float nPercentH = 0;
-
-        //    nPercentW = ((float)size.Width / (float)sourceWidth);
-        //    nPercentH = ((float)size.Height / (float)sourceHeight);
-
-        //    if (nPercentH < nPercentW)
-        //        nPercent = nPercentH;
-        //    else
-        //        nPercent = nPercentW;
-
-        //    int destWidth = (int)(sourceWidth * nPercent);
-        //    int destHeight = (int)(sourceHeight * nPercent);
-
-        //    Bitmap b = new Bitmap(destWidth, destHeight);
-        //    Graphics g = Graphics.FromImage((Image)b);
-        //    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-        //    g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
-        //    g.Dispose();
-
-        //    return (Image)b;
-        //}
         public static String EncodeMD5(String password)
         {
-
 
             // step 1, calculate MD5 hash from input
             MD5 md5 = System.Security.Cryptography.MD5.Create();
@@ -127,6 +92,7 @@ namespace ALS.ALSI.Utils
             return sb.ToString();
 
         }
+
         public static String GetCellValue2(HSSFWorkbook wb, String _cellValue)
         {
             String[] cVals = _cellValue.Split('!');
@@ -145,17 +111,8 @@ namespace ALS.ALSI.Utils
 
         public static String GetCellValue(ICell _cell)
         {
-
             String returnValue = String.Empty;
 
-            //if(_cell.CachedFormulaResultType == CellType.Unknown)
-            //{
-            //    Console.WriteLine();
-            //}
-
-
-            //if (_cell.CachedFormulaResultType != CellType.Error)
-            //{
             if (_cell == null) return "";
             if (_cell != null)
             {
@@ -206,8 +163,7 @@ namespace ALS.ALSI.Utils
 
                 ErrorIndex = String.Empty;
             }
-            //}
-            return returnValue;//_cell.ToString();// returnValue.Length>255 ? returnValue.Substring(0,255):returnValue;
+            return returnValue;
         }
 
         public static Double GetMax(Double _value)
@@ -234,7 +190,6 @@ namespace ALS.ALSI.Utils
             }
             return result / valueList.Count;
         }
-
         public static double StandardDeviation(List<Double> valueList)
         {
             if (valueList.Count == 0)
@@ -253,7 +208,6 @@ namespace ALS.ALSI.Utils
             }
             return Math.Sqrt(S / (k - 2));
         }
-
         public static double Sum(String[] valueList)
         {
             double result = 0.0;
@@ -266,7 +220,6 @@ namespace ALS.ALSI.Utils
             }
             return result;
         }
-
         public static double ValueIfNullToZero(String value)
         {
             double result = 0.0;
@@ -278,7 +231,6 @@ namespace ALS.ALSI.Utils
 
             return result;
         }
-
         public static DateTime converFromDDMMYYYY(String _val)
         {
             //26/01/2015
@@ -294,7 +246,6 @@ namespace ALS.ALSI.Utils
 
 
         }
-
         public static String removeSpacialCharacter(String originalStr)
         {
             String returnStr = originalStr;
@@ -305,13 +256,11 @@ namespace ALS.ALSI.Utils
             }
             return returnStr.Trim();
         }
-
         private static long GenerateId()
         {
             byte[] buffer = Guid.NewGuid().ToByteArray();
             return BitConverter.ToInt64(buffer, 0);
         }
-
         public static int getUnitByName(String _name)
         {
             int result = 0;
@@ -332,7 +281,6 @@ namespace ALS.ALSI.Utils
             }
             return result;
         }
-
         public static String getUnitText(int unit)
         {
             String result = String.Empty;
@@ -352,7 +300,6 @@ namespace ALS.ALSI.Utils
 
             return result;
         }
-
         public static String showOnCoverPageValue(String val, int digit)
         {
             String returnResult = String.Empty;
@@ -375,8 +322,74 @@ namespace ALS.ALSI.Utils
             return returnResult;
 
         }
+        public static List<DetailSpecComponent> GetComponent(List<tb_m_detail_spec> _data, tb_m_detail_spec _value, List<string> ignoreOrder)
+        {
+            List<DetailSpecComponent> specs = new List<DetailSpecComponent>();
+
+            List<tb_m_detail_spec> listOrder = new List<tb_m_detail_spec>();
+            listOrder.Add(_data[0]);
+            List<tb_m_detail_spec> listHeader = new List<tb_m_detail_spec>();
+            listHeader.Add(_data[1]);
+            List<tb_m_detail_spec> listValue = new List<tb_m_detail_spec>();
+            listValue.Add(_value);
+
+            DataTable dtOrder = listOrder.ToDataTable();
+            DataTable dtHeader = listHeader.ToDataTable();
+            DataTable dtValue = listValue.ToDataTable();
+
+            foreach (DataRow dtRow in dtOrder.Rows)
+            {
+                foreach (DataColumn dcOrder in dtOrder.Columns)
+                {
+                    DetailSpecComponent spec = new DetailSpecComponent();
+                    if (ExcelColumn.dataIndex.Contains(dcOrder.ToString()))
+                    {
+                        String order = dtRow[dcOrder].ToString();
+                        if (String.IsNullOrEmpty(order) || !CustomUtils.isNumber(order)) continue;
 
 
+                        spec.order = Convert.ToInt16(order);
+                        //----
+                        foreach (DataRow dtRowHeader in dtHeader.Rows)
+                        {
+                            foreach (DataColumn dcHeader in dtHeader.Columns)
+                            {
+                                if (dcOrder.ToString().Equals(dcHeader.ToString()))
+                                {
+                                    String specName = dtRowHeader[dcHeader].ToString();
+                                    if (specName.Equals("Total Silanes (ng/cm2)"))
+                                    {
+                                        spec.name = specName;
+                                    }
+                                    else
+                                    {
+                                        spec.name = specName.Substring(0, specName.IndexOf('(') == -1 ? specName.Length : specName.IndexOf('(')).Trim();
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        //----
+                        //----
+                        foreach (DataRow dtRowValue in dtValue.Rows)
+                        {
+                            foreach (DataColumn dcValue in dtValue.Columns)
+                            {
+                                if (dcOrder.ToString().Equals(dcValue.ToString()))
+                                {
+                                    String value = dtRowValue[dcValue].ToString();
+                                    spec.value = value;
+                                    break;
+                                }
+                            }
+                        }
+                        //----
+                    }
+                    specs.Add(spec);
+                }
+            }
+            return specs.Where(x => !ignoreOrder.Contains(x.name) && x.order != 0).OrderBy(x => x.order).ToList();
+        }
         public static List<DetailSpecComponent> GetComponent(List<tb_m_detail_spec> _data, tb_m_detail_spec _value, List<int> ignoreOrder)
         {
             List<DetailSpecComponent> specs = new List<DetailSpecComponent>();
@@ -400,7 +413,7 @@ namespace ALS.ALSI.Utils
                     if (ExcelColumn.dataIndex.Contains(dcOrder.ToString()))
                     {
                         String order = dtRow[dcOrder].ToString();
-                        if (String.IsNullOrEmpty(order)||!CustomUtils.isNumber(order)) continue;
+                        if (String.IsNullOrEmpty(order) || !CustomUtils.isNumber(order)) continue;
 
 
                         spec.order = Convert.ToInt16(order);
@@ -445,8 +458,6 @@ namespace ALS.ALSI.Utils
             }
             return specs.Where(x => !ignoreOrder.Contains(x.order)).OrderBy(x => x.order).ToList();
         }
-
-
         public static String getCheckBoxListValue(CheckBoxList cb)
         {
             String returnMsg = String.Empty;
@@ -460,7 +471,6 @@ namespace ALS.ALSI.Utils
             }
             return returnMsg.Length > 0 ? returnMsg.Substring(0, returnMsg.Length - 1) : String.Empty;
         }
-
         public static void setCheckBoxListValue(ref CheckBoxList cb, String _selectedValue)
         {
             if (_selectedValue != null)
@@ -477,6 +487,7 @@ namespace ALS.ALSI.Utils
                 }
             }
         }
+
 
         /// <summary>
         /// DateTime as UTV for UnixEpoch
@@ -506,13 +517,7 @@ namespace ALS.ALSI.Utils
             return (long)(dateTimeUtc - UnixEpoch).TotalSeconds;
         }
 
-
-
-
-
     }
-
- 
 }
 
 

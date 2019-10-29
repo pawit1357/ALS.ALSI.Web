@@ -253,7 +253,12 @@ namespace ALS.ALSI.Web.view.request
                         case "Seagate_HPA_1":
                         case "Seagate_HPA_Boyd":
                         case "Seagate_HPA_Siam":
+                        case "Seagate_HPA_SWAP":
                             template_seagate_hpa_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            break;
+                        case "SEAGATE_MESA":
+                            template_seagate_mesa_coverpage.CloneData(oldSample.ID, newSample.ID);
+                            template_seagate_mesa_img.CloneData(oldSample.ID, newSample.ID);
                             break;
                         case "Seagate_IC":
                             template_seagate_ic_coverpage.CloneData(oldSample.ID, newSample.ID);
@@ -286,6 +291,7 @@ namespace ALS.ALSI.Web.view.request
                             template_wd_hpa_for3_coverpage.CloneData(oldSample.ID, newSample.ID);
                             break;
                         case "WD_IC":
+                        case "WD_IC_UNKNOW":
                             template_wd_ic_coverpage.CloneData(oldSample.ID, newSample.ID);
                             //template_wd_ir_coverpage template_wd_ir_coverpage = new template_wd_ir_coverpage();
                             break;
@@ -298,6 +304,7 @@ namespace ALS.ALSI.Web.view.request
                             template_wd_mesa_coverpage.CloneData(oldSample.ID, newSample.ID);
                             template_wd_mesa_img.CloneData(oldSample.ID, newSample.ID);
                             break;
+
                     }
                 }
                 //Commit

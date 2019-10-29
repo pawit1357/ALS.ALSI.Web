@@ -33,10 +33,10 @@
 
                             <!-- BEGIN FORM-->
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label class="control-label col-md-3">เลือกไฟล์ Invoice(*.txt)<span class="required"></span></label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <span class="btn green fileinput-button">
                                                 <asp:FileUpload ID="FileUpload1" runat="server" />
                                             </span>&nbsp;&nbsp;
@@ -48,10 +48,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Status.:</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <asp:DropDownList ID="ddlStatus" runat="server" class="select2_category form-control" Width="200px">
                                                 <asp:ListItem Value=""><--- ทั้งหมด ---></asp:ListItem>
                                                 <asp:ListItem Value="I" Selected="True">In Complete</asp:ListItem>
@@ -65,10 +65,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label class="control-label col-md-3">So Code.:</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <asp:TextBox ID="txtSoCode" runat="server" CssClass="form-control"></asp:TextBox>
                                         </div>
                                         <div>

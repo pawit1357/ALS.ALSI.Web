@@ -433,7 +433,7 @@ namespace ALS.ALSI.Web.view.template
                 foreach (job_sample_group_invoice invData in invGroups)
                 {
                     //update job_sample
-                    string sqlUploadBySo = "update job_sample set sample_invoice='{0}',sample_invoice_date='{1}',sample_invoice_complete_date='{2}',sample_invoice_amount_rpt='{3}',sample_invoice_status={4} where sample_so='{5}';";
+                    string sqlUploadBySo = "update job_sample set sample_invoice='{0}',sample_invoice_date='{1}',sample_invoice_complete_date='{2}',sample_invoice_amount_rpt='{3}',sample_invoice_status={4} where sample_so='{5}' and sample_invoice='';";
                     bool result = MaintenanceBiz.ExecuteCommand(string.Format(sqlUploadBySo, invData.inv_no, invData.inv_date.Value.ToString("yyyy-MM-dd"), invData.inv_duedate.Value.ToString("yyyy-MM-dd HH:mm:ss"), invData.inv_amt, Convert.ToInt16(PaymentStatus.PAYMENT_COMPLETE), invData.so));
                     //update job_sample_group_invoice
 
