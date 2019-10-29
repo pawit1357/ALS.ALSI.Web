@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7ee8e83e0e494beaa10046c60f4bea16" Name="Diagram1" ZoomLevel="37">
+      <Diagram DiagramId="7ee8e83e0e494beaa10046c60f4bea16" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="alsiModel.job_info" Width="1.5" PointX="5.25" PointY="7" />
         <EntityTypeShape EntityType="alsiModel.job_reiew_requistion" Width="1.5" PointX="7.5" PointY="9" />
         <EntityTypeShape EntityType="alsiModel.job_running" Width="1.5" PointX="3" PointY="9.5" />
