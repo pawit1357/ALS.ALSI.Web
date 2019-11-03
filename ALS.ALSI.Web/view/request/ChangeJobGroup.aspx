@@ -14,6 +14,7 @@
                             <i class="fa fa-cogs"></i>Sample Detail
                         </div>
                         <div class="actions">
+                            <asp:LinkButton ID="btnExportExcel" runat="server" class="btn btn-block btn-default" OnClick="btnExportExcel_Click"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -302,6 +303,24 @@
                         </div>
                     </asp:Panel>
                     <asp:Panel ID="pAccount2" runat="server">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">เลือกไฟล์:</label>
+                                                                            <div class="col-md-6">
+                                        <div class="input-group" style="text-align: left">
+                                        <asp:FileUpload ID="FileUpload3" runat="server" />
+                                            </div>
+
+<p style="color:red;"><small>สำหรับอัพโหลดไฟล์ที่แก้ไข 1 SO มีมากกว่า 1 Invoice</small></p>
+                            <%=Message%>
+
+                                                                                </div>
+                                        <div><asp:Button ID="btnUpload" runat="server" class="btn btn-default btn-sm" Text="อัพโหลด" OnClick="btnUpload_Click" />&nbsp;&nbsp;
+</div>
+                                    </div>
+                                </div>
+                            </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

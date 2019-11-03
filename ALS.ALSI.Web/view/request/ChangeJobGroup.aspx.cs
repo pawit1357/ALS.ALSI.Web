@@ -3,10 +3,18 @@ using ALS.ALSI.Biz.Constant;
 using ALS.ALSI.Biz.DataAccess;
 using ALS.ALSI.Utils;
 using ALS.ALSI.Web.Properties;
+using ClosedXML.Excel;
+using MySql.Data.MySqlClient;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using OfficeOpenXml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -83,7 +91,11 @@ namespace ALS.ALSI.Web.view.request
         }
 
 
-
+        protected String Message
+        {
+            get { return (String)Session[GetType().Name + "Message"]; }
+            set { Session[GetType().Name + "Message"] = value; }
+        }
 
         private void initialPage()
         {
@@ -100,7 +112,7 @@ namespace ALS.ALSI.Web.view.request
             gvSample.DataSource = this.dataList;
             gvSample.DataBind();
 
-            foreach(job_sample js in this.dataList)
+            foreach (job_sample js in this.dataList)
             {
                 js.isChecked = true;
             }
@@ -424,7 +436,7 @@ namespace ALS.ALSI.Web.view.request
                 else if (this.isInvoiceGroupOperation)
                 {
                     //CheckBox chk = row.Cells[1].Controls[1] as CheckBox;
-                    
+
                     Console.WriteLine();
                     if (jobSample.isChecked)
                     {
@@ -742,5 +754,120 @@ namespace ALS.ALSI.Web.view.request
                 jobSample.isChecked = cb.Checked;
             }
         }
+
+
+        protected void ExportToExcel()
+        {
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                DataTable dt = new DataTable("INV");
+
+
+                dt.Columns.Add("job_number", typeof(string));
+                dt.Columns.Add("sample_so", typeof(string));
+                dt.Columns.Add("sample_invoice", typeof(string));
+                dt.Columns.Add("sample_invoice_date", typeof(string));
+                dt.Columns.Add("sample_invoice_amount_rpt", typeof(Double));
+                dt.Columns.Add("sample_invoice_complete_date", typeof(string));
+
+                //this.searchResult
+
+                String conSQL = Configurations.MySQLCon;
+                using (MySqlConnection conn = new MySqlConnection("server = " + conSQL.Split(';')[2].Split('=')[2] + "; " + conSQL.Split(';')[3] + "; " + conSQL.Split(';')[4] + "; " + conSQL.Split(';')[5]))
+                {
+                    conn.Open();
+                    String sql = string.Format("select job_number,sample_so,sample_invoice,DATE_FORMAT(sample_invoice_date, '%Y-%m-%d') as sample_invoice_date,sample_invoice_amount_rpt,DATE_FORMAT(sample_invoice_complete_date, '%Y-%m-%d') as sample_invoice_complete_date from job_sample where sample_so='{0}'", this.dataList[0].sample_so);
+
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    MySqlDataReader sdr = cmd.ExecuteReader();
+                    dt.Load(sdr);
+                    Console.WriteLine();
+                }
+                wb.Worksheets.Add(dt);
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                Response.AddHeader("content-disposition", "attachment;filename=jobListBy_" + (this.dataList[0].sample_so == null ? "" : this.dataList[0].sample_so) + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx");
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+        }
+
+        protected void btnExportExcel_Click(object sender, EventArgs e)
+        {
+            ExportToExcel();
+        }
+
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+
+                List<string> extension = new List<string>() { ".xls", ".xlsx" };
+
+                if (extension.Contains(Path.GetExtension(FileUpload3.FileName)))
+                {
+                    string yyyy = DateTime.Now.ToString("yyyy");
+                    string MM = DateTime.Now.ToString("MM");
+                    string dd = DateTime.Now.ToString("dd");
+
+                    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.dataList[0].sample_so, Path.GetFileName(FileUpload3.FileName));
+
+                    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
+                    }
+                    FileUpload3.SaveAs(source_file);
+
+                    FileInfo excel = new FileInfo(source_file);
+                    using (var package = new ExcelPackage(excel))
+                    {
+                        var workbook = package.Workbook;
+
+                        //*** Sheet 1
+                        var worksheet = workbook.Worksheets.First();
+
+                        //*** Result
+                        int totalRows = worksheet.Dimension.End.Row;
+                        for (int i = 2; i <= totalRows; i++)
+                        {
+                            string job_number = worksheet.Cells[i, 1].Text.ToString();
+                            string sample_so = worksheet.Cells[i, 2].Text.ToString();
+                            string sample_invoice = worksheet.Cells[i, 3].Text.ToString();
+                            string sample_invoice_date = Convert.ToDateTime(worksheet.Cells[i, 4].Value).ToString("yyyy-MM-dd");
+                            Double sample_invoice_amount_rpt = Convert.ToDouble(worksheet.Cells[i, 5].Text.ToString());
+                            string sample_invoice_complete_date = Convert.ToDateTime(worksheet.Cells[i, 6].Value).ToString("yyyy-MM-dd");
+
+                            string updateSQL = "UPDATE job_sample SET sample_invoice_date = '{0}', sample_invoice_complete_date = '{1}', sample_so = '{2}', sample_invoice_amount_rpt = '{3}',sample_invoice = '{4}' WHERE(job_number = '{5}' and sample_so = '{6}')";
+                            updateSQL = string.Format(updateSQL, sample_invoice_date, sample_invoice_complete_date, sample_so, sample_invoice_amount_rpt, sample_invoice, job_number, sample_so);
+                            MaintenanceBiz.ExecuteReturnDt(updateSQL);
+
+                        }
+                        removeSession();
+                        MessageBox.Show(this.Page, Resources.MSG_SAVE_SUCCESS, PreviousPath);
+                    }
+                }
+                else
+                {
+                    Message = "<div class=\"alert alert-danger\"><strong>Error!</strong>สามารถอัพโหลดได้เฉพาะ ไฟล์ *.xls|xlxs </div>";
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(this.Page, "เกิดข้อผิดพลาดในการอัพโหลดไฟล์ กรุณาตรวจสอบความถูกต้องของข้อมูล");
+            }
+        }
+
     }
 }

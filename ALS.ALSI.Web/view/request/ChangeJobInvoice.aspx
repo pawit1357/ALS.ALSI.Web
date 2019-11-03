@@ -56,6 +56,7 @@
                 </div>
                 <div class="tools">
                     <%--<a href="#" class="collapse"></a>--%>
+
                 </div>
             </div>
             <div class="portlet-body form">
