@@ -401,7 +401,6 @@
                                     <asp:BoundField HeaderText="Contact" DataField="contract_person" ItemStyle-HorizontalAlign="Left" SortExpression="contract_person">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
-                                    <%--<asp:BoundField HeaderText="S/N" DataField="sn" ItemStyle-HorizontalAlign="Left" SortExpression="sn" />--%>
                                     <asp:BoundField HeaderText="Description" DataField="description" ItemStyle-HorizontalAlign="Left" SortExpression="description">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
@@ -411,7 +410,6 @@
                                     <asp:BoundField HeaderText="Surface Area" DataField="surface_area" ItemStyle-HorizontalAlign="Left" SortExpression="surface_area">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
-                                    <%--<asp:BoundField HeaderText="Remarks" DataField="remarks" ItemStyle-HorizontalAlign="Left" SortExpression="remarks" />--%>
                                     <asp:BoundField HeaderText="Specification" DataField="specification" ItemStyle-HorizontalAlign="Left" SortExpression="specification">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
@@ -440,11 +438,10 @@
                                     </asp:BoundField>
                                     <asp:TemplateField HeaderText="Payment Status" ItemStyle-HorizontalAlign="Center" SortExpression="sample_invoice_status">
                                         <ItemTemplate>
-                                            <asp:Literal ID="ltPaymentStatus" runat="server" Text='<%# Eval("sample_invoice_status")%>'></asp:Literal>
+                                            <asp:Literal ID="ltPaymentStatu1" runat="server" Text='<%# Eval("sample_invoice_status")%>'></asp:Literal>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
-                                    
                                 </Columns>
                                 <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />
 

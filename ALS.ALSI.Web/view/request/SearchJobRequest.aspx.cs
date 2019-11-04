@@ -108,7 +108,7 @@ namespace ALS.ALSI.Web.view.request
                     tmp.customerText = ddlCompany.SelectedItem.Text;
                     tmp.spec_id = String.IsNullOrEmpty(ddlSpecification.SelectedValue) ? 0 : int.Parse(ddlSpecification.SelectedValue);
                     tmp.dataGroup = String.IsNullOrEmpty(ddlTypeOfTest.SelectedValue) ? "" : ddlTypeOfTest.SelectedItem.Text;
-                    
+
                     tmp.preFixText = hPrefix.Value;// String.IsNullOrEmpty(hPrefix.Value) ? 1 : Convert.ToInt16(hPrefix.Value);
                     tmp.ignorePrefix = false;
                     RoleEnum role = (RoleEnum)Enum.ToObject(typeof(RoleEnum), userLogin.role_id);
@@ -148,7 +148,7 @@ namespace ALS.ALSI.Web.view.request
                     tmp.physicalYear = Convert.ToInt16(ddlPhysicalYear.SelectedValue);
                     tmp.section = ddlBoiNonBoi.SelectedValue.ToString();
                 }
-                catch (Exception ) { }
+                catch (Exception) { }
                 return tmp;
             }
         }
@@ -291,6 +291,8 @@ namespace ALS.ALSI.Web.view.request
 
             }
             searchResult = obj.SearchData();
+
+            #region "Header"
             /* 
                 ////////////////////////////////////////////////ADMIN////////////////////////////////////////////////
                 |Job Type	
@@ -372,6 +374,7 @@ namespace ALS.ALSI.Web.view.request
                 20|Note for Admin & Account              |
                 21|Note for lab                          |
             */
+            #endregion
 
             gvJob.DataSource = searchResult;
             gvJob.DataBind();
@@ -389,18 +392,18 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[1].Visible = true;
                         gvJob.Columns[2].Visible = true;
                         gvJob.Columns[3].Visible = true;
-                        gvJob.Columns[4].Visible = true;
-                        gvJob.Columns[5].Visible = true;
-                        gvJob.Columns[6].Visible = true;
-                        gvJob.Columns[7].Visible = true;
-                        gvJob.Columns[8].Visible = true;
-                        gvJob.Columns[9].Visible = true;
-                        gvJob.Columns[10].Visible = true;
+                        gvJob.Columns[4].Visible = false;//4#Received
+                        gvJob.Columns[5].Visible = false;//5#Report Send to Customer
+                        gvJob.Columns[6].Visible = false;//6#Receive Date
+                        gvJob.Columns[7].Visible = false;//7#Duedate
+                        gvJob.Columns[8].Visible = false;
+                        gvJob.Columns[9].Visible = false;//9#CustRefNo
+                        gvJob.Columns[10].Visible = false;//10#Other RefNo
                         gvJob.Columns[11].Visible = true;
                         gvJob.Columns[12].Visible = true;
                         gvJob.Columns[13].Visible = true;
                         gvJob.Columns[14].Visible = true;
-                        gvJob.Columns[15].Visible = false;
+                        gvJob.Columns[15].Visible = false;//15#Specification
                         gvJob.Columns[16].Visible = false;
                         gvJob.Columns[17].Visible = false;
                         gvJob.Columns[18].Visible = true;
@@ -409,10 +412,15 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[21].Visible = false;
 
                         gvJob.Columns[22].Visible = true;
+
                         gvJob.Columns[23].Visible = true;
                         gvJob.Columns[24].Visible = true;
                         gvJob.Columns[25].Visible = true;
                         gvJob.Columns[26].Visible = true;
+                        gvJob.Columns[27].Visible = true;
+                        gvJob.Columns[28].Visible = true;
+                        gvJob.Columns[29].Visible = true;
+                        gvJob.Columns[30].Visible = true;
 
                         break;
                     case RoleEnum.ROOT:
@@ -423,18 +431,18 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[1].Visible = true;
                         gvJob.Columns[2].Visible = true;
                         gvJob.Columns[3].Visible = true;
-                        gvJob.Columns[4].Visible = true;
-                        gvJob.Columns[5].Visible = true;
-                        gvJob.Columns[6].Visible = true;
-                        gvJob.Columns[7].Visible = true;
+                        gvJob.Columns[4].Visible = true;//4#Received
+                        gvJob.Columns[5].Visible = true;//5#Report Send to Customer
+                        gvJob.Columns[6].Visible = true;//6#Receive Date
+                        gvJob.Columns[7].Visible = true;//7#Duedate
                         gvJob.Columns[8].Visible = true;
-                        gvJob.Columns[9].Visible = true;
-                        gvJob.Columns[10].Visible = true;
+                        gvJob.Columns[9].Visible = true;//9#CustRefNo
+                        gvJob.Columns[10].Visible = true;//10#Other RefNo
                         gvJob.Columns[11].Visible = true;
                         gvJob.Columns[12].Visible = true;
                         gvJob.Columns[13].Visible = true;
                         gvJob.Columns[14].Visible = true;
-                        gvJob.Columns[15].Visible = true;
+                        gvJob.Columns[15].Visible = true; //15#Specification
                         gvJob.Columns[16].Visible = true;
                         gvJob.Columns[17].Visible = true;
                         gvJob.Columns[18].Visible = true;
@@ -443,10 +451,14 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[21].Visible = false;
 
                         gvJob.Columns[22].Visible = false;
-                        gvJob.Columns[23].Visible = true;
+                        gvJob.Columns[23].Visible = false;
                         gvJob.Columns[24].Visible = false;
                         gvJob.Columns[25].Visible = false;
                         gvJob.Columns[26].Visible = false;
+                        gvJob.Columns[27].Visible = false;
+                        gvJob.Columns[28].Visible = false;
+                        gvJob.Columns[29].Visible = false;
+                        gvJob.Columns[30].Visible = false;
 
                         break;
                     case RoleEnum.LOGIN:
@@ -457,18 +469,18 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[1].Visible = true;
                         gvJob.Columns[2].Visible = true;
                         gvJob.Columns[3].Visible = true;
-                        gvJob.Columns[4].Visible = false;
-                        gvJob.Columns[5].Visible = true;
-                        gvJob.Columns[6].Visible = true;
-                        gvJob.Columns[7].Visible = true;
+                        gvJob.Columns[4].Visible = false;//4#Received
+                        gvJob.Columns[5].Visible = true;//5#Report Send to Customer
+                        gvJob.Columns[6].Visible = true;//6#Receive Date
+                        gvJob.Columns[7].Visible = true;//7#Duedate
                         gvJob.Columns[8].Visible = true;
-                        gvJob.Columns[9].Visible = true;
-                        gvJob.Columns[10].Visible = true;
+                        gvJob.Columns[9].Visible = true;//9#CustRefNo
+                        gvJob.Columns[10].Visible = true;//10#Other RefNo
                         gvJob.Columns[11].Visible = true;
                         gvJob.Columns[12].Visible = false;
                         gvJob.Columns[13].Visible = false;
                         gvJob.Columns[14].Visible = true;
-                        gvJob.Columns[15].Visible = true;
+                        gvJob.Columns[15].Visible = true;//15#Specification
                         gvJob.Columns[16].Visible = true;
                         gvJob.Columns[17].Visible = true;
                         gvJob.Columns[18].Visible = true;
@@ -481,6 +493,10 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[24].Visible = false;
                         gvJob.Columns[25].Visible = false;
                         gvJob.Columns[26].Visible = false;
+                        gvJob.Columns[27].Visible = false;
+                        gvJob.Columns[28].Visible = false;
+                        gvJob.Columns[29].Visible = false;
+                        gvJob.Columns[30].Visible = false;
 
                         break;
                     default:
@@ -488,18 +504,18 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[1].Visible = false;
                         gvJob.Columns[2].Visible = false;
                         gvJob.Columns[3].Visible = false;
-                        gvJob.Columns[4].Visible = false;
-                        gvJob.Columns[5].Visible = false;
-                        gvJob.Columns[6].Visible = false;
-                        gvJob.Columns[7].Visible = false;
+                        gvJob.Columns[4].Visible = false;//4#Received
+                        gvJob.Columns[5].Visible = false;//5#Report Send to Customer
+                        gvJob.Columns[6].Visible = false;//6#Receive Date
+                        gvJob.Columns[7].Visible = false;//7#Duedate
                         gvJob.Columns[8].Visible = false;
-                        gvJob.Columns[9].Visible = false;
-                        gvJob.Columns[10].Visible = false;
+                        gvJob.Columns[9].Visible = false;//9#CustRefNo
+                        gvJob.Columns[10].Visible = false;//10#Other RefNo
                         gvJob.Columns[11].Visible = false;
                         gvJob.Columns[12].Visible = false;
                         gvJob.Columns[13].Visible = false;
                         gvJob.Columns[14].Visible = false;
-                        gvJob.Columns[15].Visible = false;
+                        gvJob.Columns[15].Visible = false;//15#Specification
                         gvJob.Columns[16].Visible = false;
                         gvJob.Columns[17].Visible = false;
                         gvJob.Columns[18].Visible = false;
@@ -512,6 +528,10 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[24].Visible = false;
                         gvJob.Columns[25].Visible = false;
                         gvJob.Columns[26].Visible = false;
+                        gvJob.Columns[27].Visible = false;
+                        gvJob.Columns[28].Visible = false;
+                        gvJob.Columns[29].Visible = false;
+                        gvJob.Columns[30].Visible = false;
 
                         break;
                 }
@@ -737,7 +757,7 @@ namespace ALS.ALSI.Web.view.request
                     DateTime due_date_lab = Convert.ToDateTime(gv.DataKeys[e.Row.RowIndex][13]);
 
                     Boolean isGroupSubmit = Convert.ToBoolean(gv.DataKeys[e.Row.RowIndex][16]);
-                    Boolean isGrp = gv.DataKeys[e.Row.RowIndex][18] == null ? false: gv.DataKeys[e.Row.RowIndex][18].Equals("GRP");
+                    Boolean isGrp = gv.DataKeys[e.Row.RowIndex][18] == null ? false : gv.DataKeys[e.Row.RowIndex][18].Equals("GRP");
 
 
                     LinkButton btnInfo = (LinkButton)e.Row.FindControl("btnInfo");
@@ -1061,7 +1081,7 @@ namespace ALS.ALSI.Web.view.request
 
             Func<IEnumerable<SearchResult>, Func<SearchResult, object>, IEnumerable<SearchResult>> func = null;
 
-            
+
 
 
 
@@ -1334,7 +1354,7 @@ namespace ALS.ALSI.Web.view.request
                     sql += " `Extent2`.`sample_invoice_amount` AS `Invoice_Amount`,                                                                                                           ";
                     sql += " `Extent2`.`sample_invoice_amount_rpt` AS `Invoice_Amount_For_Report`,                                                                                                           ";
 
-                    
+
                     sql += " (CASE WHEN `Extent2`.`sample_invoice_package` = 'Y' THEN 'Y' ELSE '' END) AS `Package_Cost`,                                                                                                           ";
                     sql += " (CASE WHEN `Extent2`.`sample_invoice_status` = '1' THEN 'In Process' ELSE 'Complete' END) AS `Invoice_status`,                                                       ";
 
