@@ -400,8 +400,8 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[9].Visible = false;//9#CustRefNo
                         gvJob.Columns[10].Visible = false;//10#Other RefNo
                         gvJob.Columns[11].Visible = true;
-                        gvJob.Columns[12].Visible = true;
-                        gvJob.Columns[13].Visible = true;
+                        gvJob.Columns[12].Visible = false;//Invoice
+                        gvJob.Columns[13].Visible = false;//PO
                         gvJob.Columns[14].Visible = true;
                         gvJob.Columns[15].Visible = false;//15#Specification
                         gvJob.Columns[16].Visible = false;
@@ -421,6 +421,7 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[28].Visible = true;
                         gvJob.Columns[29].Visible = true;
                         gvJob.Columns[30].Visible = true;
+                        gvJob.Columns[31].Visible = true;
 
                         break;
                     case RoleEnum.ROOT:
@@ -451,6 +452,7 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[21].Visible = false;
 
                         gvJob.Columns[22].Visible = false;
+
                         gvJob.Columns[23].Visible = false;
                         gvJob.Columns[24].Visible = false;
                         gvJob.Columns[25].Visible = false;
@@ -459,6 +461,14 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[28].Visible = false;
                         gvJob.Columns[29].Visible = false;
                         gvJob.Columns[30].Visible = false;
+                        gvJob.Columns[31].Visible = false;
+
+
+                        //gvJob.Columns[30].Visible = false;
+                        //gvJob.Columns[31].Visible = false;
+                        //gvJob.Columns[32].Visible = false;
+                        //gvJob.Columns[33].Visible = false;
+
 
                         break;
                     case RoleEnum.LOGIN:
@@ -488,7 +498,6 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[20].Visible = false;
                         gvJob.Columns[21].Visible = true;
 
-                        gvJob.Columns[22].Visible = false;
                         gvJob.Columns[23].Visible = false;
                         gvJob.Columns[24].Visible = false;
                         gvJob.Columns[25].Visible = false;
@@ -497,6 +506,7 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[28].Visible = false;
                         gvJob.Columns[29].Visible = false;
                         gvJob.Columns[30].Visible = false;
+                        gvJob.Columns[31].Visible = false;
 
                         break;
                     default:
@@ -523,7 +533,6 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[20].Visible = false;
                         gvJob.Columns[21].Visible = false;
 
-                        gvJob.Columns[22].Visible = false;
                         gvJob.Columns[23].Visible = false;
                         gvJob.Columns[24].Visible = false;
                         gvJob.Columns[25].Visible = false;
@@ -532,6 +541,7 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[28].Visible = false;
                         gvJob.Columns[29].Visible = false;
                         gvJob.Columns[30].Visible = false;
+                        gvJob.Columns[31].Visible = false;
 
                         break;
                 }
@@ -1153,22 +1163,15 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("Job_Type", typeof(string));
                         dt.Columns.Add("Status", typeof(string));
                         dt.Columns.Add("Job_Status", typeof(string));
-                        dt.Columns.Add("Received", typeof(DateTime));
-                        dt.Columns.Add("Report_Sent_to_Customer", typeof(DateTime));
-                        dt.Columns.Add("Receive_Date", typeof(DateTime));
-                        dt.Columns.Add("Due_Date", typeof(DateTime));
+                        
                         dt.Columns.Add("TBA_FLAG", typeof(string));
                         dt.Columns.Add("ALS_Ref", typeof(string));
-                        dt.Columns.Add("No_Cus_Ref_No", typeof(string));
-                        dt.Columns.Add("Other_Ref_No", typeof(string));
+
                         dt.Columns.Add("Company", typeof(string));
-                        dt.Columns.Add("Invoice", typeof(string));
-                        dt.Columns.Add("Po", typeof(string));
                         dt.Columns.Add("Contact", typeof(string));
                         dt.Columns.Add("Description", typeof(string));
                         dt.Columns.Add("Model", typeof(string));
                         dt.Columns.Add("Surface_Area", typeof(string));
-                        dt.Columns.Add("Specification", typeof(string));
                         dt.Columns.Add("Type_of_test", typeof(string));
                         dt.Columns.Add("Data_Group", typeof(string));
                         dt.Columns.Add("date_login_complete", typeof(DateTime));
@@ -1184,6 +1187,18 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("Package_Cost", typeof(string));
                         dt.Columns.Add("Invoice_Amount_For_Report", typeof(double));
                         dt.Columns.Add("Invoice_status", typeof(string));
+                        dt.Columns.Add("Po", typeof(string));
+                        dt.Columns.Add("So", typeof(string));
+                        dt.Columns.Add("Invoice", typeof(string));
+                        dt.Columns.Add("Received", typeof(DateTime));
+                        dt.Columns.Add("Report_Sent_to_Customer", typeof(DateTime));
+                        dt.Columns.Add("Receive_Date", typeof(DateTime));
+                        dt.Columns.Add("Due_Date", typeof(DateTime));
+                        dt.Columns.Add("No_Cus_Ref_No", typeof(string));
+                        dt.Columns.Add("Other_Ref_No", typeof(string));
+                        dt.Columns.Add("Specification", typeof(string));
+
+
                         dt.Columns.Add("remarks", typeof(string));
 
 
@@ -1236,22 +1251,14 @@ namespace ALS.ALSI.Web.view.request
                             sql += "Job_Type" +
                                    ",Status" +
                                    ",Job_Status" +
-                                   ",Received" +
-                                   ",Report_Sent_to_Customer" +
-                                   ",Receive_Date" +
-                                   ",Due_Date" +
                                    ",TBA_FLAG" +
                                    ",ALS_Ref" +
-                                   ",No_Cus_Ref_No" +
-                                   ",Other_Ref_No" +
                                    ",Company" +
-                                   ",Invoice" +
-                                   ",Po" +
+
                                    ",Contact" +
                                    ",Description" +
                                     ",Model" +
                                     ",Surface_Area" +
-                                   ",Specification" +
                                    ",Type_of_test" +
                                    ",Data_Group" +
                                    ",date_login_complete" +
@@ -1260,7 +1267,20 @@ namespace ALS.ALSI.Web.view.request
                                    ",date_admin_word_complete" +
                                    ",date_labman_complete" +
                                    ",date_admin_pdf_complete" +
-                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount,Invoice_status,Package_Cost,Invoice_Amount_For_Report,remarks";
+                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount,Invoice_status" +
+                                   ",Po" +
+                                   ",So" +
+                                   ",Invoice" +
+                                    ",Received" +
+                                   ",Report_Sent_to_Customer" +
+                                   ",Receive_Date" +
+                                   ",Due_Date" +
+
+                                   ",No_Cus_Ref_No" +
+                                   ",Other_Ref_No" +
+                                   ",Specification" +
+
+                                   ",Package_Cost,Invoice_Amount_For_Report,remarks";
                             break;
                         case RoleEnum.LOGIN:
                         case RoleEnum.CHEMIST:
@@ -1359,6 +1379,7 @@ namespace ALS.ALSI.Web.view.request
                     sql += " (CASE WHEN `Extent2`.`sample_invoice_status` = '1' THEN 'In Process' ELSE 'Complete' END) AS `Invoice_status`,                                                       ";
 
                     sql += " `Extent2`.`sample_po` AS `Po`,                                                                                                                     ";
+                    sql += " `Extent2`.`sample_so` AS `So`,                                                                                                                     ";
                     sql += " `Extent6`.`name` AS `Contact`,                                                                                                                     ";
                     sql += " `Extent2`.`description` AS `Description`,                                                                                                          ";
                     sql += " `Extent2`.`model` AS Model,                                                                                                                        ";
