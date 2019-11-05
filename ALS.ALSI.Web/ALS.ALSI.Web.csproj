@@ -1590,6 +1590,7 @@
     <Content Include="view\template\Seagate_GCMS_2.ascx" />
     <Content Include="view\template\Seagate_HPA_SWAP.ascx" />
     <Content Include="view\template\Seagate_HPA_1.ascx" />
+    <Content Include="view\template\SEAGATE_MESA_2.ascx" />
     <Content Include="view\template\TemplateBlankPA.ascx" />
     <Content Include="view\template\TemplateElwa.ascx" />
     <Content Include="view\template\TemplateGrp.ascx" />
@@ -2009,6 +2010,13 @@
     </Compile>
     <Compile Include="view\template\Seagate_HPA_1.ascx.designer.cs">
       <DependentUpon>Seagate_HPA_1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\SEAGATE_MESA_2.ascx.cs">
+      <DependentUpon>SEAGATE_MESA_2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\SEAGATE_MESA_2.ascx.designer.cs">
+      <DependentUpon>SEAGATE_MESA_2.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\TemplateBlankPA.ascx.cs">
       <DependentUpon>TemplateBlankPA.ascx</DependentUpon>
@@ -2516,6 +2524,7 @@
     <EmbeddedResource Include="ReportObject\hpa_seagate_swap.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\mesa_seagate_2.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_03.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_02.rdlc" />
