@@ -444,21 +444,27 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
+                                    <%-- For Account --%>
+                                    <asp:TemplateField HeaderText="#" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="litStatus2" runat="server">&nbsp;</asp:Literal>
 
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="ltJobStatus2" runat="server" Text="-"></asp:Literal>
+                                            <asp:Literal ID="litIcon2" runat="server"></asp:Literal>
 
-                                    <asp:BoundField HeaderText="PO" DataField="sample_po" ItemStyle-HorizontalAlign="Left" SortExpression="sample_po">
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                    <asp:BoundField HeaderText="SO" DataField="sample_so" ItemStyle-HorizontalAlign="Left" SortExpression="sample_so">
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-                                    <asp:BoundField HeaderText="Invoice" DataField="sample_invoice" ItemStyle-HorizontalAlign="Left" SortExpression="sample_invoice">
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:BoundField>
-
-		                            <asp:BoundField HeaderText="Received." DataField="date_srchemist_complate" ItemStyle-HorizontalAlign="Center" SortExpression="date_srchemist_complate" DataFormatString="{0:d MMM yyyy}">
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField HeaderText="SO." DataField="sample_so" ItemStyle-HorizontalAlign="Center" SortExpression="sample_so" >
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
+                                    <asp:BoundField HeaderText="Received." DataField="date_srchemist_complate" ItemStyle-HorizontalAlign="Center" SortExpression="date_srchemist_complate" DataFormatString="{0:d MMM yyyy}">
+                                        <ItemStyle HorizontalAlign="Center" />
+                                    </asp:BoundField>
+
                                     <asp:BoundField HeaderText="Report Sent to Customer" DataField="date_admin_sent_to_cus" ItemStyle-HorizontalAlign="Center" SortExpression="date_admin_sent_to_cus" DataFormatString="{0:d MMM yyyy}">
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
@@ -468,7 +474,7 @@
                                     </asp:BoundField>
                                     <asp:TemplateField HeaderText="Due Date." SortExpression="due_date">
                                         <ItemTemplate>
-                                            <asp:Literal ID="litDueDate1" runat="server" Text="-"></asp:Literal>
+                                            <asp:Literal ID="litDueDate2" runat="server" Text="-"></asp:Literal>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField HeaderText="Cus Ref No." DataField="customer_ref_no" ItemStyle-HorizontalAlign="Left" SortExpression="customer_ref_no">
@@ -476,12 +482,14 @@
                                     </asp:BoundField>
                                     <asp:TemplateField HeaderText="Other Ref No" SortExpression="other_ref_no">
                                         <ItemTemplate>
-                                            <asp:Literal ID="litOtherRefNo1" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:Literal>
+                                            <asp:Literal ID="litOtherRefNo2" runat="server" Text='<%# Eval("other_ref_no")%>'></asp:Literal>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField HeaderText="Specification" DataField="specification" ItemStyle-HorizontalAlign="Left" SortExpression="specification">
                                         <ItemStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
+
+
 
                                 </Columns>
                                 <PagerStyle HorizontalAlign="Right" CssClass="pagination-ys" />

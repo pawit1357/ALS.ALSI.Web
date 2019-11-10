@@ -291,8 +291,6 @@ namespace ALS.ALSI.Web.view.request
 
             }
             searchResult = obj.SearchData();
-
-            #region "Header"
             /* 
                 ////////////////////////////////////////////////ADMIN////////////////////////////////////////////////
                 |Job Type	
@@ -374,7 +372,6 @@ namespace ALS.ALSI.Web.view.request
                 20|Note for Admin & Account              |
                 21|Note for lab                          |
             */
-            #endregion
 
             gvJob.DataSource = searchResult;
             gvJob.DataBind();
@@ -387,7 +384,52 @@ namespace ALS.ALSI.Web.view.request
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
                 switch (userRole)
                 {
+                    case RoleEnum.ACCOUNT:
+                        gvJob.Columns[0].Visible = true;
+                        gvJob.Columns[1].Visible = true;
+                        gvJob.Columns[2].Visible = true;//
+                        gvJob.Columns[3].Visible = true;//
+                        gvJob.Columns[4].Visible = false;//
+                        gvJob.Columns[5].Visible = false;//
+                        gvJob.Columns[6].Visible = false;//
+                        gvJob.Columns[7].Visible = false;//
+                        gvJob.Columns[8].Visible = true;
+                        gvJob.Columns[9].Visible = false;//
+                        gvJob.Columns[10].Visible = false;//
+                        gvJob.Columns[11].Visible = true;
+                        gvJob.Columns[12].Visible = true;
+                        gvJob.Columns[13].Visible = true;
+                        gvJob.Columns[14].Visible = true;
+                        gvJob.Columns[15].Visible = false;//
+                        gvJob.Columns[16].Visible = false;
+                        gvJob.Columns[17].Visible = false;
+                        gvJob.Columns[18].Visible = false;
+                        gvJob.Columns[19].Visible = true;
+                        gvJob.Columns[20].Visible = true;
+                        gvJob.Columns[21].Visible = false;
+
+                        gvJob.Columns[22].Visible = true;
+                        gvJob.Columns[23].Visible = true;
+                        gvJob.Columns[24].Visible = true;
+                        gvJob.Columns[25].Visible = true;
+                        gvJob.Columns[26].Visible = true;
+
+                        gvJob.Columns[27].Visible = false;
+                        gvJob.Columns[28].Visible = false;
+                        gvJob.Columns[29].Visible = true;
+                        gvJob.Columns[30].Visible = true;
+                        gvJob.Columns[31].Visible = true;
+                        gvJob.Columns[32].Visible = true;
+                        gvJob.Columns[33].Visible = true;
+                        gvJob.Columns[34].Visible = true;
+                        gvJob.Columns[35].Visible = true;
+                        gvJob.Columns[36].Visible = true;
+
+                        break;
+                    case RoleEnum.ROOT:
                     case RoleEnum.ADMIN:
+                    case RoleEnum.BUSINESS_MANAGER:
+                    case RoleEnum.MARKETING:
                         gvJob.Columns[0].Visible = true;
                         gvJob.Columns[1].Visible = true;
                         gvJob.Columns[2].Visible = true;
@@ -412,98 +454,21 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[21].Visible = false;
 
                         gvJob.Columns[22].Visible = false;
-                        gvJob.Columns[23].Visible = false;
-                        gvJob.Columns[24].Visible = false;
-                        gvJob.Columns[25].Visible = false;
-                        gvJob.Columns[26].Visible = false;
-                        gvJob.Columns[27].Visible = false;
-                        gvJob.Columns[28].Visible = false;
-                        gvJob.Columns[29].Visible = false;
-                        gvJob.Columns[30].Visible = false;
-                        gvJob.Columns[31].Visible = false;
-                        break;
-                    case RoleEnum.ACCOUNT:
-                        gvJob.Columns[0].Visible = true;
-                        gvJob.Columns[1].Visible = true;
-                        gvJob.Columns[2].Visible = true;
-                        gvJob.Columns[3].Visible = true;
-                        gvJob.Columns[4].Visible = false;//4#Received
-                        gvJob.Columns[5].Visible = false;//5#Report Send to Customer
-                        gvJob.Columns[6].Visible = false;//6#Receive Date
-                        gvJob.Columns[7].Visible = false;//7#Duedate
-                        gvJob.Columns[8].Visible = false;
-                        gvJob.Columns[9].Visible = false;//9#CustRefNo
-                        gvJob.Columns[10].Visible = false;//10#Other RefNo
-                        gvJob.Columns[11].Visible = true;
-                        gvJob.Columns[12].Visible = false;//Invoice
-                        gvJob.Columns[13].Visible = false;//PO
-                        gvJob.Columns[14].Visible = true;
-                        gvJob.Columns[15].Visible = false;//15#Specification
-                        gvJob.Columns[16].Visible = false;
-                        gvJob.Columns[17].Visible = false;
-                        gvJob.Columns[18].Visible = true;
-                        gvJob.Columns[19].Visible = true;
-                        gvJob.Columns[20].Visible = true;
-                        gvJob.Columns[21].Visible = false;
-
-                        gvJob.Columns[22].Visible = true;
-
                         gvJob.Columns[23].Visible = true;
-                        gvJob.Columns[24].Visible = true;
-                        gvJob.Columns[25].Visible = true;
-                        gvJob.Columns[26].Visible = true;
-                        gvJob.Columns[27].Visible = true;
-                        gvJob.Columns[28].Visible = true;
-                        gvJob.Columns[29].Visible = true;
-                        gvJob.Columns[30].Visible = true;
-                        gvJob.Columns[31].Visible = true;
-
-                        break;
-                    case RoleEnum.ROOT:
-                    case RoleEnum.BUSINESS_MANAGER:
-                    case RoleEnum.MARKETING:
-                        gvJob.Columns[0].Visible = true;
-                        gvJob.Columns[1].Visible = true;
-                        gvJob.Columns[2].Visible = true;
-                        gvJob.Columns[3].Visible = true;
-                        gvJob.Columns[4].Visible = true;//4#Received
-                        gvJob.Columns[5].Visible = true;//5#Report Send to Customer
-                        gvJob.Columns[6].Visible = true;//6#Receive Date
-                        gvJob.Columns[7].Visible = true;//7#Duedate
-                        gvJob.Columns[8].Visible = true;
-                        gvJob.Columns[9].Visible = true;//9#CustRefNo
-                        gvJob.Columns[10].Visible = true;//10#Other RefNo
-                        gvJob.Columns[11].Visible = true;
-                        gvJob.Columns[12].Visible = true;
-                        gvJob.Columns[13].Visible = true;
-                        gvJob.Columns[14].Visible = true;
-                        gvJob.Columns[15].Visible = true; //15#Specification
-                        gvJob.Columns[16].Visible = true;
-                        gvJob.Columns[17].Visible = true;
-                        gvJob.Columns[18].Visible = true;
-                        gvJob.Columns[19].Visible = true;
-                        gvJob.Columns[20].Visible = true;
-                        gvJob.Columns[21].Visible = false;
-
-                        gvJob.Columns[22].Visible = false;
-
-                        gvJob.Columns[23].Visible = false;
                         gvJob.Columns[24].Visible = false;
                         gvJob.Columns[25].Visible = false;
                         gvJob.Columns[26].Visible = false;
+
                         gvJob.Columns[27].Visible = false;
                         gvJob.Columns[28].Visible = false;
                         gvJob.Columns[29].Visible = false;
                         gvJob.Columns[30].Visible = false;
                         gvJob.Columns[31].Visible = false;
-
-
-                        //gvJob.Columns[30].Visible = false;
-                        //gvJob.Columns[31].Visible = false;
-                        //gvJob.Columns[32].Visible = false;
-                        //gvJob.Columns[33].Visible = false;
-
-
+                        gvJob.Columns[32].Visible = false;
+                        gvJob.Columns[33].Visible = false;
+                        gvJob.Columns[34].Visible = false;
+                        gvJob.Columns[35].Visible = false;
+                        gvJob.Columns[36].Visible = false;
                         break;
                     case RoleEnum.LOGIN:
                     case RoleEnum.CHEMIST:
@@ -513,18 +478,18 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[1].Visible = true;
                         gvJob.Columns[2].Visible = true;
                         gvJob.Columns[3].Visible = true;
-                        gvJob.Columns[4].Visible = false;//4#Received
-                        gvJob.Columns[5].Visible = true;//5#Report Send to Customer
-                        gvJob.Columns[6].Visible = true;//6#Receive Date
-                        gvJob.Columns[7].Visible = true;//7#Duedate
+                        gvJob.Columns[4].Visible = false;
+                        gvJob.Columns[5].Visible = true;
+                        gvJob.Columns[6].Visible = true;
+                        gvJob.Columns[7].Visible = true;
                         gvJob.Columns[8].Visible = true;
-                        gvJob.Columns[9].Visible = true;//9#CustRefNo
-                        gvJob.Columns[10].Visible = true;//10#Other RefNo
+                        gvJob.Columns[9].Visible = true;
+                        gvJob.Columns[10].Visible = true;
                         gvJob.Columns[11].Visible = true;
                         gvJob.Columns[12].Visible = false;
                         gvJob.Columns[13].Visible = false;
                         gvJob.Columns[14].Visible = true;
-                        gvJob.Columns[15].Visible = true;//15#Specification
+                        gvJob.Columns[15].Visible = true;
                         gvJob.Columns[16].Visible = true;
                         gvJob.Columns[17].Visible = true;
                         gvJob.Columns[18].Visible = true;
@@ -532,34 +497,40 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[20].Visible = false;
                         gvJob.Columns[21].Visible = true;
 
+                        gvJob.Columns[22].Visible = false;
                         gvJob.Columns[23].Visible = false;
                         gvJob.Columns[24].Visible = false;
                         gvJob.Columns[25].Visible = false;
                         gvJob.Columns[26].Visible = false;
+
                         gvJob.Columns[27].Visible = false;
                         gvJob.Columns[28].Visible = false;
                         gvJob.Columns[29].Visible = false;
                         gvJob.Columns[30].Visible = false;
                         gvJob.Columns[31].Visible = false;
-
+                        gvJob.Columns[32].Visible = false;
+                        gvJob.Columns[33].Visible = false;
+                        gvJob.Columns[34].Visible = false;
+                        gvJob.Columns[35].Visible = false;
+                        gvJob.Columns[36].Visible = false;
                         break;
                     default:
                         gvJob.Columns[0].Visible = false;
                         gvJob.Columns[1].Visible = false;
                         gvJob.Columns[2].Visible = false;
                         gvJob.Columns[3].Visible = false;
-                        gvJob.Columns[4].Visible = false;//4#Received
-                        gvJob.Columns[5].Visible = false;//5#Report Send to Customer
-                        gvJob.Columns[6].Visible = false;//6#Receive Date
-                        gvJob.Columns[7].Visible = false;//7#Duedate
+                        gvJob.Columns[4].Visible = false;
+                        gvJob.Columns[5].Visible = false;
+                        gvJob.Columns[6].Visible = false;
+                        gvJob.Columns[7].Visible = false;
                         gvJob.Columns[8].Visible = false;
-                        gvJob.Columns[9].Visible = false;//9#CustRefNo
-                        gvJob.Columns[10].Visible = false;//10#Other RefNo
+                        gvJob.Columns[9].Visible = false;
+                        gvJob.Columns[10].Visible = false;
                         gvJob.Columns[11].Visible = false;
                         gvJob.Columns[12].Visible = false;
                         gvJob.Columns[13].Visible = false;
                         gvJob.Columns[14].Visible = false;
-                        gvJob.Columns[15].Visible = false;//15#Specification
+                        gvJob.Columns[15].Visible = false;
                         gvJob.Columns[16].Visible = false;
                         gvJob.Columns[17].Visible = false;
                         gvJob.Columns[18].Visible = false;
@@ -567,16 +538,22 @@ namespace ALS.ALSI.Web.view.request
                         gvJob.Columns[20].Visible = false;
                         gvJob.Columns[21].Visible = false;
 
+                        gvJob.Columns[22].Visible = false;
                         gvJob.Columns[23].Visible = false;
                         gvJob.Columns[24].Visible = false;
                         gvJob.Columns[25].Visible = false;
                         gvJob.Columns[26].Visible = false;
+
                         gvJob.Columns[27].Visible = false;
                         gvJob.Columns[28].Visible = false;
                         gvJob.Columns[29].Visible = false;
                         gvJob.Columns[30].Visible = false;
                         gvJob.Columns[31].Visible = false;
-
+                        gvJob.Columns[32].Visible = false;
+                        gvJob.Columns[33].Visible = false;
+                        gvJob.Columns[34].Visible = false;
+                        gvJob.Columns[35].Visible = false;
+                        gvJob.Columns[36].Visible = false;
                         break;
                 }
             }
@@ -1190,34 +1167,34 @@ namespace ALS.ALSI.Web.view.request
 
                 switch (userRole)
                 {
-                    case RoleEnum.ADMIN:
+                    case RoleEnum.ACCOUNT:
                         dt.Columns.Add("Job_Type", typeof(string));
                         dt.Columns.Add("Status", typeof(string));
                         dt.Columns.Add("Job_Status", typeof(string));
-                        dt.Columns.Add("Received", typeof(DateTime));
-                        dt.Columns.Add("Report_Sent_to_Customer", typeof(DateTime));
-                        dt.Columns.Add("Receive_Date", typeof(DateTime));
-                        dt.Columns.Add("Due_Date", typeof(DateTime));
-                        dt.Columns.Add("TBA_FLAG", typeof(string));
+                        //dt.Columns.Add("Received", typeof(DateTime));
+                        //dt.Columns.Add("Report_Sent_to_Customer", typeof(DateTime));
+                        //dt.Columns.Add("Receive_Date", typeof(DateTime));
+                        //dt.Columns.Add("Due_Date", typeof(DateTime));
+                        //dt.Columns.Add("TBA_FLAG", typeof(string));
                         dt.Columns.Add("ALS_Ref", typeof(string));
-                        dt.Columns.Add("No_Cus_Ref_No", typeof(string));
-                        dt.Columns.Add("Other_Ref_No", typeof(string));
+                        //dt.Columns.Add("No_Cus_Ref_No", typeof(string));
+                        //dt.Columns.Add("Other_Ref_No", typeof(string));
                         dt.Columns.Add("Company", typeof(string));
                         dt.Columns.Add("Invoice", typeof(string));
                         dt.Columns.Add("Po", typeof(string));
                         dt.Columns.Add("Contact", typeof(string));
-                        dt.Columns.Add("Description", typeof(string));
-                        dt.Columns.Add("Model", typeof(string));
-                        dt.Columns.Add("Surface_Area", typeof(string));
-                        dt.Columns.Add("Specification", typeof(string));
+                        //dt.Columns.Add("Description", typeof(string));
+                        //dt.Columns.Add("Model", typeof(string));
+                        //dt.Columns.Add("Surface_Area", typeof(string));
+                        //dt.Columns.Add("Specification", typeof(string));
                         dt.Columns.Add("Type_of_test", typeof(string));
                         dt.Columns.Add("Data_Group", typeof(string));
-                        dt.Columns.Add("date_login_complete", typeof(DateTime));
-                        dt.Columns.Add("date_chemist_complete", typeof(DateTime));
-                        dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
-                        dt.Columns.Add("date_admin_word_complete", typeof(DateTime));
-                        dt.Columns.Add("date_labman_complete", typeof(DateTime));
-                        dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
+                        //dt.Columns.Add("date_login_complete", typeof(DateTime));
+                        //dt.Columns.Add("date_chemist_complete", typeof(DateTime));
+                        //dt.Columns.Add("date_srchemist_complate", typeof(DateTime));
+                        //dt.Columns.Add("date_admin_word_complete", typeof(DateTime));
+                        //dt.Columns.Add("date_labman_complete", typeof(DateTime));
+                        //dt.Columns.Add("date_admin_pdf_complete", typeof(DateTime));
                         dt.Columns.Add("Note_for_Admin_Account", typeof(string));
                         dt.Columns.Add("Remark_AM_Retest", typeof(string));
                         dt.Columns.Add("Invoice_Date", typeof(DateTime));
@@ -1225,21 +1202,41 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("Package_Cost", typeof(string));
                         dt.Columns.Add("Invoice_Amount_For_Report", typeof(double));
                         dt.Columns.Add("Invoice_status", typeof(string));
-                        dt.Columns.Add("remarks", typeof(string));
+                        //dt.Columns.Add("remarks", typeof(string));
+                        //Add new
+                        dt.Columns.Add("So", typeof(string));
+                        dt.Columns.Add("Received", typeof(DateTime));
+                        dt.Columns.Add("Due_Date", typeof(DateTime));
+                        dt.Columns.Add("No_Cus_Ref_No", typeof(string));
+                        dt.Columns.Add("Other_Ref_No", typeof(string));
+                        dt.Columns.Add("Specification", typeof(string));
+
+                        //dt.Columns.Add("Report_Sent_to_Customer", typeof(DateTime));
+                        //dt.Columns.Add("Receive_Date", typeof(DateTime));
+                        //dt.Columns.Add("TBA_FLAG", typeof(string));
                         break;
-                    case RoleEnum.ACCOUNT:
+                    case RoleEnum.ADMIN:
                     case RoleEnum.BUSINESS_MANAGER:
                     case RoleEnum.MARKETING:
                         dt.Columns.Add("Job_Type", typeof(string));
                         dt.Columns.Add("Status", typeof(string));
                         dt.Columns.Add("Job_Status", typeof(string));
+                        dt.Columns.Add("Received", typeof(DateTime));
+                        dt.Columns.Add("Report_Sent_to_Customer", typeof(DateTime));
+                        dt.Columns.Add("Receive_Date", typeof(DateTime));
+                        dt.Columns.Add("Due_Date", typeof(DateTime));
                         dt.Columns.Add("TBA_FLAG", typeof(string));
                         dt.Columns.Add("ALS_Ref", typeof(string));
+                        dt.Columns.Add("No_Cus_Ref_No", typeof(string));
+                        dt.Columns.Add("Other_Ref_No", typeof(string));
                         dt.Columns.Add("Company", typeof(string));
+                        dt.Columns.Add("Invoice", typeof(string));
+                        dt.Columns.Add("Po", typeof(string));
                         dt.Columns.Add("Contact", typeof(string));
                         dt.Columns.Add("Description", typeof(string));
                         dt.Columns.Add("Model", typeof(string));
                         dt.Columns.Add("Surface_Area", typeof(string));
+                        dt.Columns.Add("Specification", typeof(string));
                         dt.Columns.Add("Type_of_test", typeof(string));
                         dt.Columns.Add("Data_Group", typeof(string));
                         dt.Columns.Add("date_login_complete", typeof(DateTime));
@@ -1255,18 +1252,6 @@ namespace ALS.ALSI.Web.view.request
                         dt.Columns.Add("Package_Cost", typeof(string));
                         dt.Columns.Add("Invoice_Amount_For_Report", typeof(double));
                         dt.Columns.Add("Invoice_status", typeof(string));
-                        dt.Columns.Add("Po", typeof(string));
-                        dt.Columns.Add("So", typeof(string));
-                        dt.Columns.Add("Invoice", typeof(string));
-                        dt.Columns.Add("Received", typeof(DateTime));
-                        dt.Columns.Add("Report_Sent_to_Customer", typeof(DateTime));
-                        dt.Columns.Add("Receive_Date", typeof(DateTime));
-                        dt.Columns.Add("Due_Date", typeof(DateTime));
-                        dt.Columns.Add("No_Cus_Ref_No", typeof(string));
-                        dt.Columns.Add("Other_Ref_No", typeof(string));
-                        dt.Columns.Add("Specification", typeof(string));
-
-
                         dt.Columns.Add("remarks", typeof(string));
 
 
@@ -1312,7 +1297,53 @@ namespace ALS.ALSI.Web.view.request
                     String sql = "SELECT ";
                     switch (userRole)
                     {
+                        case RoleEnum.ACCOUNT:
+                            sql += "Job_Type" +
+                                   ",Status" +
+                                   ",Job_Status" +
+                                   //",Received" +
+                                   //",Report_Sent_to_Customer" +
+                                   //",Receive_Date" +
+                                   //",Due_Date" +
+                                   //",TBA_FLAG" +
+                                   ",ALS_Ref" +
+                                   //",No_Cus_Ref_No" +
+                                   //",Other_Ref_No" +
+                                   ",Company" +
+                                   ",Invoice" +
+                                   ",Po" +
+                                   ",Contact" +
+                                   //",Description" +
+                                   // ",Model" +
+                                   // ",Surface_Area" +
+                                   //",Specification" +
+                                   ",Type_of_test" +
+                                   ",Data_Group" +
+                                   //",date_login_complete" +
+                                   //",date_chemist_complete" +
+                                   //",date_srchemist_complate" +
+                                   //",date_admin_word_complete" +
+                                   //",date_labman_complete" +
+                                   //",date_admin_pdf_complete" +
+                                   ",Note_for_Admin_Account" +
+                                   ",Remark_AM_Retest" +
+                                   ",Invoice_Date" +
+                                   ",Invoice_Amount" +
+                                   ",Package_Cost" +
+                                   ",Invoice_status" +
+                                   ",So" +
+                                   ",Received" +
+                                   ",Due_Date" +
+                                   ",No_Cus_Ref_No" +
+                                   ",Other_Ref_No" +
+                                   ",Specification";
+
+                                   //",Invoice_Amount_For_Report" +
+                                   //",remarks";
+                            break;
                         case RoleEnum.ADMIN:
+                        case RoleEnum.BUSINESS_MANAGER:
+                        case RoleEnum.MARKETING:
                             sql += "Job_Type" +
                                    ",Status" +
                                    ",Job_Status" +
@@ -1341,43 +1372,6 @@ namespace ALS.ALSI.Web.view.request
                                    ",date_labman_complete" +
                                    ",date_admin_pdf_complete" +
                                    ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount,Invoice_status,Package_Cost,Invoice_Amount_For_Report,remarks";
-                            break;
-                        case RoleEnum.ACCOUNT:
-                        case RoleEnum.BUSINESS_MANAGER:
-                        case RoleEnum.MARKETING:
-                            sql += "Job_Type" +
-                                   ",Status" +
-                                   ",Job_Status" +
-                                   ",TBA_FLAG" +
-                                   ",ALS_Ref" +
-                                   ",Company" +
-
-                                   ",Contact" +
-                                   ",Description" +
-                                    ",Model" +
-                                    ",Surface_Area" +
-                                   ",Type_of_test" +
-                                   ",Data_Group" +
-                                   ",date_login_complete" +
-                                   ",date_chemist_complete" +
-                                   ",date_srchemist_complate" +
-                                   ",date_admin_word_complete" +
-                                   ",date_labman_complete" +
-                                   ",date_admin_pdf_complete" +
-                                   ",Note_for_Admin_Account,Remark_AM_Retest,Invoice_Date,Invoice_Amount,Invoice_status" +
-                                   ",Po" +
-                                   ",So" +
-                                   ",Invoice" +
-                                    ",Received" +
-                                   ",Report_Sent_to_Customer" +
-                                   ",Receive_Date" +
-                                   ",Due_Date" +
-
-                                   ",No_Cus_Ref_No" +
-                                   ",Other_Ref_No" +
-                                   ",Specification" +
-
-                                   ",Package_Cost,Invoice_Amount_For_Report,remarks";
                             break;
                         case RoleEnum.LOGIN:
                         case RoleEnum.CHEMIST:
@@ -1477,6 +1471,7 @@ namespace ALS.ALSI.Web.view.request
 
                     sql += " `Extent2`.`sample_po` AS `Po`,                                                                                                                     ";
                     sql += " `Extent2`.`sample_so` AS `So`,                                                                                                                     ";
+
                     sql += " `Extent6`.`name` AS `Contact`,                                                                                                                     ";
                     sql += " `Extent2`.`description` AS `Description`,                                                                                                          ";
                     sql += " `Extent2`.`model` AS Model,                                                                                                                        ";
