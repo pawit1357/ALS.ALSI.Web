@@ -90,8 +90,8 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="uncertainty" Type="varchar" MaxLength="1" />
           <Property Name="job_status" Type="int" />
           <Property Name="job_role" Type="int" />
-          <Property Name="path_word" Type="varchar" MaxLength="100" />
-          <Property Name="path_pdf" Type="varchar" MaxLength="100" />
+          <Property Name="path_word" Type="varchar" MaxLength="500" />
+          <Property Name="path_pdf" Type="varchar" MaxLength="500" />
           <Property Name="status_completion_scheduled" Type="int" />
           <Property Name="step1owner" Type="int" />
           <Property Name="step2owner" Type="int" />
@@ -118,7 +118,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="date_admin_pdf_inprogress" Type="date" />
           <Property Name="date_admin_pdf_complete" Type="date" />
           <Property Name="sr_approve_date" Type="date" />
-          <Property Name="ad_hoc_tempalte_path" Type="varchar" MaxLength="200" />
+          <Property Name="ad_hoc_tempalte_path" Type="varchar" MaxLength="500" />
           <Property Name="is_no_spec" Type="varchar" MaxLength="1" />
           <Property Name="update_date" Type="datetime" Precision="0" />
           <Property Name="is_hold" Type="varchar" MaxLength="1" />
@@ -1527,16 +1527,16 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="sample_id" Type="int" />
           <Property Name="detail_spec_id" Type="int" />
           <Property Name="component_id" Type="int" />
-          <Property Name="analytes" Type="varchar" MaxLength="255" />
-          <Property Name="specification_limits" Type="varchar" MaxLength="45" />
-          <Property Name="result" Type="varchar" MaxLength="45" />
-          <Property Name="result_pass_or_false" Type="varchar" MaxLength="45" />
+          <Property Name="analytes" Type="varchar" MaxLength="500" />
+          <Property Name="specification_limits" Type="varchar" MaxLength="500" />
+          <Property Name="result" Type="varchar" MaxLength="500" />
+          <Property Name="result_pass_or_false" Type="varchar" MaxLength="500" />
           <Property Name="row_type" Type="int" />
-          <Property Name="pm_procedure_no" Type="varchar" MaxLength="45" />
-          <Property Name="pm_number_of_pieces_used_for_extraction" Type="varchar" MaxLength="45" />
-          <Property Name="pm_extraction_medium" Type="varchar" MaxLength="45" />
-          <Property Name="pm_extraction_volume" Type="varchar" MaxLength="45" />
-          <Property Name="sample_size" Type="varchar" MaxLength="45" />
+          <Property Name="pm_procedure_no" Type="varchar" MaxLength="500" />
+          <Property Name="pm_number_of_pieces_used_for_extraction" Type="varchar" MaxLength="500" />
+          <Property Name="pm_extraction_medium" Type="varchar" MaxLength="500" />
+          <Property Name="pm_extraction_volume" Type="varchar" MaxLength="500" />
+          <Property Name="sample_size" Type="varchar" MaxLength="500" />
           <Property Name="unit" Type="int" />
           <Property Name="digit1" Type="int" />
         </EntityType>
@@ -2340,8 +2340,8 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="uncertainty" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="job_status" Type="Int32" />
           <Property Name="job_role" Type="Int32" />
-          <Property Name="path_word" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="path_pdf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="path_word" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="path_pdf" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="status_completion_scheduled" Type="Int32" />
           <Property Name="step1owner" Type="Int32" />
           <Property Name="step2owner" Type="Int32" />
@@ -2368,7 +2368,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="date_admin_pdf_inprogress" Type="DateTime" />
           <Property Name="date_admin_pdf_complete" Type="DateTime" />
           <Property Name="sr_approve_date" Type="DateTime" />
-          <Property Name="ad_hoc_tempalte_path" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ad_hoc_tempalte_path" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="is_no_spec" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="update_date" Type="DateTime" />
           <Property Name="is_hold" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
@@ -3789,16 +3789,16 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="sample_id" Type="Int32" />
           <Property Name="detail_spec_id" Type="Int32" />
           <Property Name="component_id" Type="Int32" />
-          <Property Name="analytes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="specification_limits" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="result" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="result_pass_or_false" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="analytes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="specification_limits" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="result" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="result_pass_or_false" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="row_type" Type="Int32" />
-          <Property Name="pm_procedure_no" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="pm_number_of_pieces_used_for_extraction" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="pm_extraction_medium" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="pm_extraction_volume" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="sample_size" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pm_procedure_no" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pm_number_of_pieces_used_for_extraction" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pm_extraction_medium" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pm_extraction_volume" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="sample_size" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="unit" Type="Int32" />
           <Property Name="digit1" Type="Int32" />
         </EntityType>
