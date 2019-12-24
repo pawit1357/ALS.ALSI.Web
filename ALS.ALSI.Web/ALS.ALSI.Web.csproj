@@ -1225,6 +1225,7 @@
     </Content>
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
+    <Content Include="PhaseII-Doc\20191203-Migration-Server\script_migration_server_20191203.sql" />
     <Content Include="PhaseII-Doc\holiday-script.sql" />
     <Content Include="PhaseII-Doc\PA-SCRIPT-20171224.sql" />
     <Content Include="PhaseII-Doc\Dump20171206-after-update.sql" />
@@ -2468,6 +2469,9 @@
     <Content Include="PhaseII-Doc\alsi-script-2.zip" />
     <Content Include="libman.json" />
     <None Include="packages.config" />
+    <Content Include="PhaseII-Doc\20191203-Migration-Server\migration_manual.docx" />
+    <Content Include="PhaseII-Doc\20191203-Migration-Server\migration_manual.pdf" />
+    <Content Include="PhaseII-Doc\20191203-Migration-Server\Database_Backup_And_Recovery.docx" />
     <None Include="Properties\PublishProfiles\ALIS.pubxml" />
     <Content Include="ReportObject\DS.xsc">
       <DependentUpon>DS.xsd</DependentUpon>
