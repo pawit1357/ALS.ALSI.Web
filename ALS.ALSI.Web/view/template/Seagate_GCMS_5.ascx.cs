@@ -2386,9 +2386,9 @@ namespace ALS.ALSI.Web.view.template
                 compoundSubs[1].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtB32.Text) ? "0" : txtB32.Text), Convert.ToInt32(txtFloatResult11.Text)) + "";//Compounds with RT > DOP
                 compoundSubs[2].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtC32.Text) ? "0" : txtC32.Text), Convert.ToInt32(txtFloatResult12.Text)) + "";//Compounds with RT > DOP
                 compoundSubs[0].C = (Convert.ToDecimal(compoundSubs[1].C) + Convert.ToDecimal(compoundSubs[2].C)) + "";
-                if (compounds.Count > 3)
+                if (compoundSubs.Count > 3)
                 {
-                    compoundSubs[4].C = Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE32.Text) ? "0" : txtE32.Text), Convert.ToInt32(txtFloatResult13.Text)) + "";//Compounds with RT > DOP
+                    compoundSubs[3].C = compoundSubs[0].C;// Math.Round(Convert.ToDecimal(String.IsNullOrEmpty(txtE32.Text) ? "0" : txtE32.Text), Convert.ToInt32(txtFloatResult13.Text)) + "";//Compounds with RT > DOP
                 }
 
 
@@ -2396,9 +2396,9 @@ namespace ALS.ALSI.Web.view.template
 
                 compoundSubs[1].C = (Convert.ToDouble(compoundSubs[1].C) == 0) ? "Not Detected" : compoundSubs[1].C;
                 compoundSubs[2].C = (Convert.ToDouble(compoundSubs[2].C) == 0) ? "Not Detected" : compoundSubs[2].C;
-                if (compounds.Count > 3)
+                if (compoundSubs.Count > 3)
                 {
-                    compoundSubs[4].C = (Convert.ToDouble(compoundSubs[4].C) == 0) ? "Not Detected" : compoundSubs[4].C;
+                    compoundSubs[3].C = (Convert.ToDouble(compoundSubs[3].C) == 0) ? "Not Detected" : compoundSubs[3].C;
                 }
                 compoundSubs[0].C = (Convert.ToDouble(compoundSubs[0].C) == 0) ? "Not Detected" : compoundSubs[0].C;
 
