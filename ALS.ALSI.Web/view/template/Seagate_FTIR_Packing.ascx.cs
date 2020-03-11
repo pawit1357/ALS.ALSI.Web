@@ -860,7 +860,7 @@ namespace ALS.ALSI.Web.view.template
 
 
                     //remark
-                    lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N" + txtDecimal10.Text));
+                    lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B) + "");//.ToString("N" + txtDecimal10.Text));
                 }
             }
             #endregion
@@ -1236,7 +1236,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                         _postedFile.SaveAs(source_file);
                         #region "XLS"
-                        if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")))
+                        if ((Path.GetExtension(_postedFile.FileName).ToLower().Equals(".xls")))
                         {
                             using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
                             {
@@ -1786,7 +1786,13 @@ namespace ALS.ALSI.Web.view.template
         }
         protected void txtDecimal10_TextChanged(object sender, EventArgs e)
         {
-            CalculateCas();
+            //CalculateCas();
+            List<template_seagate_ftir_coverpage> ftirList = this.Ftir.Where(x => x.data_type == Convert.ToInt32(FtirNvrEnum.FTIR_RAW_DATA)).ToList();
+            if (ftirList.Count > 0)
+            {
+                lbA42.Text = String.Format(" {0}  ug/part", String.IsNullOrEmpty(ftirList[5].B) ? String.Empty : Convert.ToDouble(ftirList[5].B).ToString("N" + txtDecimal10.Text));
+            }
+
         }
     }
 

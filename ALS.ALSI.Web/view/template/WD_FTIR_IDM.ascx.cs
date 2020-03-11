@@ -693,7 +693,7 @@ namespace ALS.ALSI.Web.view.template
                         }
                         _postedFile.SaveAs(source_file);
                         #region "XLS"
-                        if ((Path.GetExtension(_postedFile.FileName).Equals(".xls")) || (Path.GetExtension(_postedFile.FileName).Equals(".xlsx")))
+                        if ((Path.GetExtension(_postedFile.FileName).ToLower().Equals(".xls")) || (Path.GetExtension(_postedFile.FileName).ToLower().Equals(".xlsx")))
                         {
                             using (FileStream fs = new FileStream(source_file, FileMode.Open, FileAccess.Read))
                             {
@@ -1147,25 +1147,111 @@ namespace ALS.ALSI.Web.view.template
             HttpContext.Current.Response.Flush();
         }
 
+        private String prepareUtil(String valC, String valD)
+        {
+            String result = valD;
+            if (!String.IsNullOrEmpty(valD))
+            {
+                //String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("PASS") ? this.Ftir[3].D : this.Ftir[3].D.Equals("NA") || this.Ftir[3].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL")
+
+                switch (valD.ToUpper())
+                {
+                    case "PASS":
+                    case "NA":
+                        result = valD;
+                        break;
+                    case "NOT DETECTED":
+                        result = "PASS";
+                        break;
+                    case "DETECTED":
+                        result = "FAIL";
+                        break;
+                    case "< MDL":
+                        result = "PASS";
+                        break;
+                    default:
+                        if (CustomUtils.isNumber(valD))
+                        {
+                            if (Convert.ToDouble(valD) < Convert.ToDouble(valC.Replace("<", "").Trim()))
+                            {
+                                result = "PASS";
+                            }
+                            else
+                            {
+                                result = "FAIL";
+                            }
+                        }
+                        else
+                        {
+                            result = valD;
+                        }
+                        break;
+                }
+            }
+            return result;
+        }
+
 
         private void CalculateCas()
         {
 
 
-            this.Ftir[3].D = lbC26.Text;
-            this.Ftir[4].D = lbC26.Text;
+            //this.Ftir[3].D = lbC26.Text;
+            //if (this.Ftir.Count > 5)
+            //{
+            //    this.Ftir[4].D = lbC26.Text;
+            //}
+            //if (this.Ftir.Count > 6)
+            //{
+            //    this.Ftir[5].D = txtC41.Text;
+            //}
+            //if (this.Ftir.Count > 7)
+            //{
+            //    this.Ftir[6].D = txtC53.Text;
+            //}
+            //if (this.Ftir.Count > 8)
+            //{
+            //    this.Ftir[7].D = txtFTIR_C63.Text;
+            //}
 
-            this.Ftir[5].D = txtC41.Text;
-            this.Ftir[6].D = txtC53.Text;
-            this.Ftir[7].D = txtFTIR_C63.Text;
+            foreach(var item in this.Ftir)
+            {
+                if (item.B.ToLower().Contains("Silicone".ToLower())){
+                    item.D = txtC41.Text;
+                    item.E = prepareUtil(item.D, item.C);
+                }
+                else if (item.B.ToLower().Contains("Amide".ToLower()))
+                {
+                    item.D = txtC53.Text;
+                    item.E = prepareUtil(item.D, item.C);
+                }
+                else if (item.B.ToLower().Contains("DOP".ToLower()))
+                {
+                    item.D = txtFTIR_C63.Text;
+                    item.E = prepareUtil(item.D, item.C);
+                }
+            }
+
+
             ////
 
-            this.Ftir[3].E = String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("NA") || this.Ftir[3].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-            this.Ftir[4].E = String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") || this.Ftir[4].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
-            this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") || this.Ftir[5].C.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : this.Ftir[5].D.ToUpper().Equals("Not Detected".ToUpper()) || this.Ftir[5].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("Detected") ? "FAIL" : this.Ftir[6].D.Equals("NA") || this.Ftir[6].C.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : this.Ftir[6].D.Equals("Not Detected") || this.Ftir[6].C.Equals("Not Detected") || (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-            this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") || this.Ftir[7].C.Equals("NA") ? "NA" : (this.Ftir[7].D.ToUpper().Equals("Not Detected".ToUpper())) ? "PASS" : this.Ftir[7].D.ToUpper().Equals("Not Detected".ToUpper()) || this.Ftir[7].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
-
+            //this.Ftir[3].E = prepareUtil(this.Ftir[3].D, this.Ftir[3].C);// String.IsNullOrEmpty(this.Ftir[3].D) ? "" : this.Ftir[3].D.Equals("PASS")? this.Ftir[3].D: this.Ftir[3].D.Equals("NA") || this.Ftir[3].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[3].D) < Convert.ToDouble(this.Ftir[3].C.Replace("<", "").Trim()) || this.Ftir[3].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+            //if (this.Ftir.Count > 5)
+            //{
+            //    this.Ftir[4].E = String.IsNullOrEmpty(this.Ftir[4].D) ? "" : this.Ftir[4].D.Equals("NA") || this.Ftir[4].C.Equals("NA") ? "NA" : ((Convert.ToDouble(this.Ftir[4].D) < Convert.ToDouble(this.Ftir[4].C.Replace("<", "").Trim()) || this.Ftir[4].D.Equals("Not Detected")) ? "PASS" : "FAIL");
+            //}
+            //if (this.Ftir.Count > 6)
+            //{
+            //    this.Ftir[5].E = String.IsNullOrEmpty(this.Ftir[5].D) ? "" : this.Ftir[5].D.Equals("NA") || this.Ftir[5].C.Equals("NA") ? "NA" : (this.Ftir[5].D.Equals("< MDL")) ? "PASS" : this.Ftir[5].D.ToUpper().Equals("Not Detected".ToUpper()) || this.Ftir[5].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(this.Ftir[5].D) < Convert.ToDouble(this.Ftir[5].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            //}
+            //if (this.Ftir.Count > 7)
+            //{
+            //    this.Ftir[6].E = String.IsNullOrEmpty(this.Ftir[6].D) ? "" : this.Ftir[6].D.Equals("Detected") ? "FAIL" : this.Ftir[6].D.Equals("NA") || this.Ftir[6].C.Equals("NA") ? "NA" : (this.Ftir[6].D.Equals("< MDL")) ? "PASS" : this.Ftir[6].D.Equals("Not Detected") || this.Ftir[6].C.Equals("Not Detected") || (Convert.ToDouble(this.Ftir[6].D) < Convert.ToDouble(this.Ftir[6].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            //}
+            //if (this.Ftir.Count > 8)
+            //{
+            //    this.Ftir[7].E = String.IsNullOrEmpty(this.Ftir[7].D) ? "" : this.Ftir[7].D.Equals("NA") || this.Ftir[7].C.Equals("NA") ? "NA" : (this.Ftir[7].D.ToUpper().Equals("Not Detected".ToUpper())) ? "PASS" : this.Ftir[7].D.ToUpper().Equals("Not Detected".ToUpper()) || this.Ftir[7].C.ToUpper().Equals("Not Detected".ToUpper()) || (Convert.ToDouble(this.Ftir[7].D) < Convert.ToDouble(this.Ftir[7].C.Replace("<", "").Trim())) ? "PASS" : "FAIL";
+            //}
             foreach (var item in this.Ftir.Where(x => x.data_type == 2).ToList())
             {
                 if (item.C.Equals("NA"))

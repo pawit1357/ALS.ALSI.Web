@@ -1113,7 +1113,7 @@ namespace ALS.ALSI.Web.view.template
             lbA31.Text = txtFTIR_B35.Text;
             lbB31.Text = lbSilicone.Text;
 
-            lbA31.Text = String.IsNullOrEmpty(lbA31.Text) ? String.Empty : Convert.ToDouble(lbA31.Text).ToString("N" + txtDecimal09.Text);
+            lbA31.Text = String.IsNullOrEmpty(lbA31.Text) ? String.Empty : Convert.ToDouble(lbA31.Text)+"";//.ToString("N" + txtDecimal09.Text);
 
 
             btnSubmit.Enabled = true;
@@ -1308,6 +1308,10 @@ namespace ALS.ALSI.Web.view.template
 
         protected void txtDecimal08_TextChanged(object sender, EventArgs e)
         {
+            txtFTIR_B35.Text = Convert.ToDouble(txtFTIR_B35.Text).ToString("N" + txtDecimal09.Text);
+
+            lbA31.Text = String.IsNullOrEmpty(lbA31.Text) ? String.Empty : txtFTIR_B35.Text;
+
             CalculateCas();
         }
     }
