@@ -1218,17 +1218,17 @@ namespace ALS.ALSI.Web.view.template
             {
                 if (item.B.ToLower().Contains("Silicone".ToLower())){
                     item.D = txtC41.Text;
-                    item.E = prepareUtil(item.D, item.C);
+                    item.E = prepareUtil(item.C, item.D);
                 }
                 else if (item.B.ToLower().Contains("Amide".ToLower()))
                 {
                     item.D = txtC53.Text;
-                    item.E = prepareUtil(item.D, item.C);
+                    item.E = prepareUtil(item.C, item.D);
                 }
                 else if (item.B.ToLower().Contains("DOP".ToLower()))
                 {
                     item.D = txtFTIR_C63.Text;
-                    item.E = prepareUtil(item.D, item.C);
+                    item.E = prepareUtil(item.C, item.D);
                 }
             }
 
