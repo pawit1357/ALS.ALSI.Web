@@ -670,6 +670,11 @@ namespace ALS.ALSI.Web.view.template
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal01.Text)).ToString();
                                                     break;
                                                 case "00110011":
+                                                    tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalRow);
+
+                                                    tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal01.Text)).ToString();
+
+                                                    break;
                                                 case "00100011"://TOTAL OUT GAS
                                                     tmp.row_type = Convert.ToInt32(RowTypeEnum.TotalOutGas);
                                                     tmp.amount = Math.Round(Convert.ToDecimal(CustomUtils.GetCellValue(isheet.GetRow(j).GetCell(7))), Convert.ToInt32(txtDecimal02.Text)).ToString();

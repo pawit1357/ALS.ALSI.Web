@@ -2496,9 +2496,10 @@
     </Content>
     <Content Include="template\SumInvoiceTemplate.xlsx" />
     <Content Include="template\ManualALIS.pdf" />
-    <Content Include="template\Blank Letter Head - EL.doc" />
+    <Content Include="template\Blank Letter Head - EL - 20200331.doc" />
     <Content Include="template\Blank Letter Head - EL - 20190904.doc" />
     <Content Include="template\Blank Letter Head - EL - 20190929.doc" />
+    <Content Include="template\Blank Letter Head - EL.doc" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

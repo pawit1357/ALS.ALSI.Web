@@ -1172,13 +1172,20 @@ namespace ALS.ALSI.Web.view.template
                     default:
                         if (CustomUtils.isNumber(valD))
                         {
-                            if (Convert.ToDouble(valD) < Convert.ToDouble(valC.Replace("<", "").Trim()))
+                            if (valC.Equals("NA"))
                             {
-                                result = "PASS";
+                                result = "NA";
                             }
                             else
                             {
-                                result = "FAIL";
+                                if (Convert.ToDouble(valD) < Convert.ToDouble(valC.Replace("<", "").Trim()))
+                                {
+                                    result = "PASS";
+                                }
+                                else
+                                {
+                                    result = "FAIL";
+                                }
                             }
                         }
                         else
