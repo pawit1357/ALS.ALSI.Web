@@ -337,19 +337,19 @@ namespace ALS.ALSI.Web.view.template
                             }
                             if (index > 0)
                             {
-                                if (cso.report_no == null && cso.report_no == null && cso.report_no == null)
-                                {
-                                    Console.WriteLine();
-                                }
-                                else
-                                {
-                                    cso.unit_price = cso.unit_price.TrimEnd(Environment.NewLine.ToCharArray());
-                                    cso.so_desc = cso.so_desc.TrimEnd(Environment.NewLine.ToCharArray());
-                                    cso.report_no = cso.report_no.TrimEnd(Environment.NewLine.ToCharArray());
-                                }
-                                cso.quantity = cso.quantity.TrimEnd('\n').TrimEnd('\r');
-                                cso.unit_price = cso.unit_price.TrimEnd('\n').TrimEnd('\r');
-                                cso.so_desc = cso.so_desc.TrimEnd('\n').TrimEnd('\r');
+                                //if (cso.unit_price == null && cso.so_desc == null && cso.report_no == null)
+                                //{
+                                //    Console.WriteLine();
+                                //}
+                                //else
+                                //{
+                                //    cso.unit_price = cso.unit_price.TrimEnd(Environment.NewLine.ToCharArray());
+                                //    cso.so_desc = cso.so_desc.TrimEnd(Environment.NewLine.ToCharArray());
+                                //    cso.report_no = cso.report_no.TrimEnd(Environment.NewLine.ToCharArray());
+                                //}
+                                cso.quantity = (cso.quantity == null)? "" : cso.quantity.TrimEnd('\n').TrimEnd('\r');
+                                cso.unit_price = (cso.unit_price == null)? "" :cso.unit_price.TrimEnd('\n').TrimEnd('\r');
+                                cso.so_desc = (cso.so_desc == null)? "":cso.so_desc.TrimEnd('\n').TrimEnd('\r');
 
                                 cso.status = "I";
                                 cso.create_date = DateTime.Now;

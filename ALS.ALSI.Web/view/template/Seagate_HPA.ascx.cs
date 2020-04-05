@@ -1830,9 +1830,9 @@ namespace ALS.ALSI.Web.view.template
 
             List<template_seagate_hpa_coverpage> ds5 = this.Hpas.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.CLASSIFICATION_ITEM)).OrderBy(x => x.seq).ToList();
 
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 30).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(30, 30).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(60, ds5.Count - 60).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", ds5.GetRange(0, 27).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", ds5.GetRange(27, 27).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", ds5.GetRange(54, ds5.Count - 54).ToDataTable())); // Add datasource here
 
 
 

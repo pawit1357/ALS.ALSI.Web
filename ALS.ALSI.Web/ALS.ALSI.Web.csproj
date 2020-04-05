@@ -2526,6 +2526,7 @@
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v3.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
+    <EmbeddedResource Include="ReportObject\hpa_seagate_2.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate_swap.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
