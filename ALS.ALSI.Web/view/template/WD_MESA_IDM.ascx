@@ -72,6 +72,8 @@
                                             <%--<th>Extraction Medium</th>--%>
                                             <th>Sample Size</th>
                                             <th>Oven Condition</th>
+                                            <th runat="server" id="thCorrelationDueDate">Correlation Due Date</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -96,6 +98,9 @@
                                                 <asp:Label ID="lbOvenCondition_Extraction" runat="server"> </asp:Label>
                                                 <asp:TextBox ID="txtOvenCondition_Extraction" runat="server" Text="70degC, 24hrs Room temperature. at 24 hrs." CssClass="form-control"></asp:TextBox>
 
+                                            </td>
+                                            <td runat="server" id="tdCorrelationDueDate">
+                                                <asp:TextBox ID="txtCorrelationDueDate" runat="server" Text="" CssClass="form-control"></asp:TextBox>
                                             </td>
                                         </tr>
                                     </tbody>

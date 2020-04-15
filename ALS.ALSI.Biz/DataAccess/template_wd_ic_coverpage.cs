@@ -40,5 +40,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string wi { get; set; }
         public string wj { get; set; }
         public Nullable<int> wunit { get; set; }
+        public string correlation_due_date { get; set; }
     }
 }

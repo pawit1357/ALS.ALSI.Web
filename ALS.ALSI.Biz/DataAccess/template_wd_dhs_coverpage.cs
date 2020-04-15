@@ -30,5 +30,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string sample_size { get; set; }
         public Nullable<int> unit { get; set; }
         public Nullable<int> digit1 { get; set; }
+        public string correlation_due_date { get; set; }
     }
 }

@@ -139,6 +139,15 @@ namespace ALS.ALSI.Web.view.template {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl invDiv;
         
         /// <summary>
+        /// thCorrelationDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell thCorrelationDueDate;
+        
+        /// <summary>
         /// txtProcedureNo control.
         /// </summary>
         /// <remarks>
@@ -173,6 +182,24 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtExtractionVolume;
+        
+        /// <summary>
+        /// tdCorrelationDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell tdCorrelationDueDate;
+        
+        /// <summary>
+        /// txtCorrelationDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCorrelationDueDate;
         
         /// <summary>
         /// lbSpecDesc control.

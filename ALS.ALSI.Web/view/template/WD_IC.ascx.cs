@@ -100,7 +100,8 @@ namespace ALS.ALSI.Web.view.template
             ddlUnit.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
 
-
+            tdCorrelationDueDate.Visible = false;
+            thCorrelationDueDate.Visible = false;
 
 
             #region "SAMPLE"
@@ -241,7 +242,17 @@ namespace ALS.ALSI.Web.view.template
                 txtNumOfPiecesUsedForExtraction.Text = ic.NumOfPiecesUsedForExtraction;
                 txtExtractionMedium.Text = ic.ExtractionMedium;
                 txtExtractionVolume.Text = (String.IsNullOrEmpty(ic.ExtractionVolume) ? String.Empty : String.Format("{0}mL", Convert.ToInt32((1000 * Convert.ToDouble(ic.ExtractionVolume)))));
-
+                if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+                {
+                    txtCorrelationDueDate.Text = this.coverpages[0].correlation_due_date;
+                    tdCorrelationDueDate.Visible = true;
+                    thCorrelationDueDate.Visible = true;
+                }
+                else
+                {
+                    tdCorrelationDueDate.Visible = false;
+                    thCorrelationDueDate.Visible = false;
+                }
                 ddlComponent.SelectedValue = ic.component_id.ToString();
                 ddlDetailSpec.SelectedValue = ic.detail_spec_id.ToString();
 
@@ -390,6 +401,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.NumOfPiecesUsedForExtraction = txtB13.Text;
                         _cover.ExtractionMedium = txtExtractionMedium.Text;
                         _cover.ExtractionVolume = txtB11.Text;
+                        _cover.correlation_due_date = txtCorrelationDueDate.Text;
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_ic_coverpage where sample_id={0}", this.SampleID));
 
@@ -419,6 +431,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.NumOfPiecesUsedForExtraction = txtB13.Text;
                         _cover.ExtractionMedium = txtExtractionMedium.Text;
                         _cover.ExtractionVolume = txtB11.Text;
+                        _cover.correlation_due_date = txtCorrelationDueDate.Text;
                         _cover.wunit = Convert.ToInt32(ddlUnit.SelectedValue);
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_ic_coverpage where sample_id={0}", this.SampleID));
@@ -768,7 +781,14 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ic_wd.rdlc");
+            if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ic_wd_v2.rdlc");
+            }
+            else
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/ic_wd.rdlc");
+            }
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", anionic.ToDataTable())); // Add datasource here
@@ -1033,7 +1053,17 @@ namespace ALS.ALSI.Web.view.template
                 txtNumOfPiecesUsedForExtraction.Text = comp.E;
                 txtExtractionMedium.Text = comp.F;
                 txtExtractionVolume.Text = comp.G;
-
+                if (!String.IsNullOrEmpty(comp.H))
+                {
+                    txtCorrelationDueDate.Text = comp.H;
+                    tdCorrelationDueDate.Visible = true;
+                    thCorrelationDueDate.Visible = true;
+                }
+                else
+                {
+                    tdCorrelationDueDate.Visible = false;
+                    thCorrelationDueDate.Visible = false;
+                }
                 btnSubmit.Enabled = true;
 
             }

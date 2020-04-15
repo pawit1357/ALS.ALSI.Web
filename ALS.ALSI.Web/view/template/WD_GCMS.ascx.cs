@@ -353,7 +353,17 @@ namespace ALS.ALSI.Web.view.template
                     txtExtractionVolumn.Text = this.coverpages[0].pm_extraction_volumn;
 
                     hProcedureUnit.Value = this.coverpages[0].pm_unit;
-
+                    if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+                    {
+                        txtCorrelationDueDate.Text = this.coverpages[0].correlation_due_date;
+                        tdCorrelationDueDate.Visible = true;
+                        thCorrelationDueDate.Visible = true;
+                    }
+                    else
+                    {
+                        tdCorrelationDueDate.Visible = false;
+                        thCorrelationDueDate.Visible = false;
+                    }
 
                     //
 
@@ -447,6 +457,7 @@ namespace ALS.ALSI.Web.view.template
                             _cov.pm_extraction_medium = txtExtractionMedium.Text;
                             _cov.pm_extraction_volumn = txtExtractionVolumn.Text;
                             _cov.pm_unit = hProcedureUnit.Value;
+                            _cov.correlation_due_date = txtCorrelationDueDate.Text;
                             //_cov.test = Convert.ToInt32(ddlTest.SelectedValue);
                             _cov.RowState = this.CommandName;
                         }
@@ -470,6 +481,7 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.date_srchemist_analyze = DateTime.Now;
                         this.jobSample.path_word = String.Empty;
                         this.jobSample.path_pdf = String.Empty;
+                        
                         this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
                         //#endregion
                         #region "CAS#"
@@ -485,6 +497,7 @@ namespace ALS.ALSI.Web.view.template
                             _cov.pm_extraction_medium = txtExtractionMedium.Text;
                             _cov.pm_extraction_volumn = txtExtractionVolumn.Text;
                             _cov.pm_unit = hProcedureUnit.Value;
+                            _cov.correlation_due_date = txtCorrelationDueDate.Text;
                         }
                         MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_gcms_coverpage where sample_id={0}", this.SampleID));
 
@@ -1015,6 +1028,17 @@ namespace ALS.ALSI.Web.view.template
                 gvCoverPages.Columns[2].HeaderText = String.Format("Specification Limits ,({0})", component.C);
                 gvCoverPages.Columns[3].HeaderText = String.Format("Results({0})", component.C);
                 gvMajorCompounds.Columns[2].HeaderText = String.Format("Result({0})", component.C);
+                if (!String.IsNullOrEmpty(component.G))
+                {
+                    txtCorrelationDueDate.Text = component.G;
+                    tdCorrelationDueDate.Visible = true;
+                    thCorrelationDueDate.Visible = true;
+                }
+                else
+                {
+                    tdCorrelationDueDate.Visible = false;
+                    thCorrelationDueDate.Visible = false;
+                }
             }
         }
 
@@ -1168,7 +1192,15 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/gcms_wd.rdlc");
+            if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/gcms_wd_v2.rdlc");
+            }
+            else
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/gcms_wd.rdlc");
+            }
+
             viewer.LocalReport.SetParameters(reportParameters);
 
             List<template_wd_gcms_coverpage> ds3 = this.coverpages.Where(x => x.row_type.Value == Convert.ToInt32(RowTypeEnum.Normal)).ToList();

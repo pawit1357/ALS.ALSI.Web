@@ -29,5 +29,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string SampleSize_IndirectMaterials { get; set; }
         public string OvenCondition_IndirectMaterials { get; set; }
         public Nullable<int> row_type { get; set; }
+        public string correlation_due_date { get; set; }
     }
 }

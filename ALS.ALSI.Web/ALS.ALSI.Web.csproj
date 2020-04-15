@@ -2520,8 +2520,10 @@
     <EmbeddedResource Include="ReportObject\dhs_seagate_v2.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportObject\dhs_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate_damper.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_seagate_2.rdlc" />
+    <EmbeddedResource Include="ReportObject\gcms_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v3.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v2.rdlc" />
@@ -2530,8 +2532,13 @@
     <EmbeddedResource Include="ReportObject\hpa_seagate_swap.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_seagate.rdlc" />
     <EmbeddedResource Include="ReportObject\ic_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\ic_wd_v2.rdlc" />
+    <EmbeddedResource Include="ReportObject\lpc_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_seagate_2.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_seagate.rdlc" />
+    <EmbeddedResource Include="ReportObject\mesa_wd_v2.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportObject\pa_03.rdlc" />
     <EmbeddedResource Include="ReportObject\pa_02.rdlc" />
     <EmbeddedResource Include="ReportObject\mesa_wd.rdlc">

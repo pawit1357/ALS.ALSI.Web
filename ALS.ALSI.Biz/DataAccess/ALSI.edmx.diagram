@@ -55,18 +55,18 @@
         <EntityTypeShape EntityType="alsiModel.template_wd_corrosion_coverpage" Width="1.5" PointX="26.75" PointY="0.75" />
         <EntityTypeShape EntityType="alsiModel.template_wd_corrosion_img" Width="1.5" PointX="26.75" PointY="4.75" />
         <EntityTypeShape EntityType="alsiModel.template_wd_dhs_coverpage" Width="1.5" PointX="26.75" PointY="7.75" />
-        <EntityTypeShape EntityType="alsiModel.template_wd_ftir_coverpage" Width="1.5" PointX="26.75" PointY="12.75" />
-        <EntityTypeShape EntityType="alsiModel.template_wd_ftir_coverpage_tmp" Width="1.5" PointX="26.75" PointY="23.75" />
+        <EntityTypeShape EntityType="alsiModel.template_wd_ftir_coverpage" Width="1.5" PointX="26.75" PointY="13.75" />
+        <EntityTypeShape EntityType="alsiModel.template_wd_ftir_coverpage_tmp" Width="1.5" PointX="26.75" PointY="24.75" />
         <EntityTypeShape EntityType="alsiModel.template_wd_gcms_coverpage" Width="1.5" PointX="28.75" PointY="0.75" />
-        <EntityTypeShape EntityType="alsiModel.template_wd_hpa_for1_coverpage" Width="1.5" PointX="28.75" PointY="5.75" />
-        <EntityTypeShape EntityType="alsiModel.template_wd_hpa_for3_coverpage" Width="1.5" PointX="28.75" PointY="11.75" />
+        <EntityTypeShape EntityType="alsiModel.template_wd_hpa_for1_coverpage" Width="1.5" PointX="28.75" PointY="6.75" />
+        <EntityTypeShape EntityType="alsiModel.template_wd_hpa_for3_coverpage" Width="1.5" PointX="28.75" PointY="12.75" />
         <EntityTypeShape EntityType="alsiModel.template_wd_ic_coverpage" Width="1.5" PointX="13.75" PointY="28.75" />
         <EntityTypeShape EntityType="alsiModel.template_wd_ir_coverpage" Width="1.5" PointX="12" PointY="11.75" />
         <EntityTypeShape EntityType="alsiModel.template_wd_lpc_coverpage" Width="1.5" PointX="18.75" PointY="28.75" />
-        <EntityTypeShape EntityType="alsiModel.template_wd_mesa_coverpage" Width="1.5" PointX="28.75" PointY="19.75" />
-        <EntityTypeShape EntityType="alsiModel.template_wd_mesa_img" Width="1.5" PointX="28.75" PointY="24.75" />
+        <EntityTypeShape EntityType="alsiModel.template_wd_mesa_coverpage" Width="1.5" PointX="28.75" PointY="20.75" />
+        <EntityTypeShape EntityType="alsiModel.template_wd_mesa_img" Width="1.5" PointX="28.75" PointY="25.75" />
         <EntityTypeShape EntityType="alsiModel.users_login" Width="1.5" PointX="8" PointY="1" />
-        <EntityTypeShape EntityType="alsiModel.users_responsible" Width="1.5" PointX="28.75" PointY="28.75" />
+        <EntityTypeShape EntityType="alsiModel.users_responsible" Width="1.5" PointX="28.75" PointY="29.75" />
         <EntityTypeShape EntityType="alsiModel.users_role" Width="1.5" PointX="30.75" PointY="0.75" />
         <EntityTypeShape EntityType="alsiModel.ws_hash_value" Width="1.5" PointX="30.75" PointY="3.75" />
         <EntityTypeShape EntityType="alsiModel.holiday_calendar" Width="1.5" PointX="4.75" PointY="30.75" />

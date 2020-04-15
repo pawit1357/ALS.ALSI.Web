@@ -1539,6 +1539,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="sample_size" Type="varchar" MaxLength="500" />
           <Property Name="unit" Type="int" />
           <Property Name="digit1" Type="int" />
+          <Property Name="correlation_due_date" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="template_wd_ftir_coverpage">
           <Key>
@@ -1643,6 +1644,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="pm_extraction_volumn" Type="varchar" MaxLength="45" />
           <Property Name="pm_unit" Type="varchar" MaxLength="45" />
           <Property Name="test" Type="int" />
+          <Property Name="correlation_due_date" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="template_wd_hpa_for1_coverpage">
           <Key>
@@ -1738,6 +1740,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="wi" Type="varchar" MaxLength="45" />
           <Property Name="wj" Type="varchar" MaxLength="45" />
           <Property Name="wunit" Type="int" />
+          <Property Name="correlation_due_date" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="template_wd_ir_coverpage">
           <Key>
@@ -1801,6 +1804,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="unit2" Type="int" />
           <Property Name="unit3" Type="int" />
           <Property Name="unit4" Type="int" />
+          <Property Name="correlation_due_date" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="template_wd_mesa_coverpage">
           <Key>
@@ -1821,6 +1825,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="SampleSize_IndirectMaterials" Type="varchar" MaxLength="45" />
           <Property Name="OvenCondition_IndirectMaterials" Type="varchar" MaxLength="45" />
           <Property Name="row_type" Type="int" />
+          <Property Name="correlation_due_date" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="template_wd_mesa_img">
           <Key>
@@ -3801,6 +3806,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="sample_size" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="unit" Type="Int32" />
           <Property Name="digit1" Type="Int32" />
+          <Property Name="correlation_due_date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_ftir_coverpage">
           <Key>
@@ -3905,6 +3911,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="pm_extraction_volumn" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="pm_unit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="test" Type="Int32" />
+          <Property Name="correlation_due_date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_hpa_for1_coverpage">
           <Key>
@@ -4000,6 +4007,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="wi" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="wj" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="wunit" Type="Int32" />
+          <Property Name="correlation_due_date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_ir_coverpage">
           <Key>
@@ -4064,6 +4072,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="unit2" Type="Int32" />
           <Property Name="unit3" Type="Int32" />
           <Property Name="unit4" Type="Int32" />
+          <Property Name="correlation_due_date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_mesa_coverpage">
           <Key>
@@ -4084,6 +4093,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="SampleSize_IndirectMaterials" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="OvenCondition_IndirectMaterials" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="row_type" Type="Int32" />
+          <Property Name="correlation_due_date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_mesa_img">
           <Key>
@@ -5854,6 +5864,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_dhs_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_dhs_coverpage">
               <MappingFragment StoreEntitySet="template_wd_dhs_coverpage">
+                <ScalarProperty Name="correlation_due_date" ColumnName="correlation_due_date" />
                 <ScalarProperty Name="digit1" ColumnName="digit1" />
                 <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="sample_size" ColumnName="sample_size" />
@@ -5961,6 +5972,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_gcms_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_gcms_coverpage">
               <MappingFragment StoreEntitySet="template_wd_gcms_coverpage">
+                <ScalarProperty Name="correlation_due_date" ColumnName="correlation_due_date" />
                 <ScalarProperty Name="test" ColumnName="test" />
                 <ScalarProperty Name="pm_unit" ColumnName="pm_unit" />
                 <ScalarProperty Name="pm_extraction_volumn" ColumnName="pm_extraction_volumn" />
@@ -6049,6 +6061,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_ic_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_ic_coverpage">
               <MappingFragment StoreEntitySet="template_wd_ic_coverpage">
+                <ScalarProperty Name="correlation_due_date" ColumnName="correlation_due_date" />
                 <ScalarProperty Name="wunit" ColumnName="wunit" />
                 <ScalarProperty Name="wj" ColumnName="wj" />
                 <ScalarProperty Name="wi" ColumnName="wi" />
@@ -6114,6 +6127,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_lpc_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_lpc_coverpage">
               <MappingFragment StoreEntitySet="template_wd_lpc_coverpage">
+                <ScalarProperty Name="correlation_due_date" ColumnName="correlation_due_date" />
                 <ScalarProperty Name="unit4" ColumnName="unit4" />
                 <ScalarProperty Name="unit3" ColumnName="unit3" />
                 <ScalarProperty Name="unit2" ColumnName="unit2" />
@@ -6146,6 +6160,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_mesa_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_mesa_coverpage">
               <MappingFragment StoreEntitySet="template_wd_mesa_coverpage">
+                <ScalarProperty Name="correlation_due_date" ColumnName="correlation_due_date" />
                 <ScalarProperty Name="row_type" ColumnName="row_type" />
                 <ScalarProperty Name="OvenCondition_IndirectMaterials" ColumnName="OvenCondition_IndirectMaterials" />
                 <ScalarProperty Name="SampleSize_IndirectMaterials" ColumnName="SampleSize_IndirectMaterials" />

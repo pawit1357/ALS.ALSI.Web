@@ -120,7 +120,8 @@ namespace ALS.ALSI.Web.view.template
             };
 
             this.coverpages = template_wd_dhs_coverpage.FindAllBySampleID(this.SampleID);
-
+            tdCorrelationDueDate.Visible = false;
+            thCorrelationDueDate.Visible = false;
             ddlAssignTo.Items.Clear();
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.LOGIN_SELECT_SPEC), Convert.ToInt32(StatusEnum.LOGIN_SELECT_SPEC) + ""));
             ddlAssignTo.Items.Add(new ListItem(Constants.GetEnumDescription(StatusEnum.CHEMIST_TESTING), Convert.ToInt32(StatusEnum.CHEMIST_TESTING) + ""));
@@ -329,7 +330,18 @@ namespace ALS.ALSI.Web.view.template
                     txtNumberOfPiecesUsedForExtraction.Text = this.coverpages[0].pm_number_of_pieces_used_for_extraction;
                     txtExtractionMedium.Text = this.coverpages[0].pm_extraction_medium;
                     txtExtractionVolume.Text = this.coverpages[0].pm_extraction_volume;
+                    if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+                    {
+                        txtCorrelationDueDate.Text = this.coverpages[0].correlation_due_date;
+                        tdCorrelationDueDate.Visible = true;
+                        thCorrelationDueDate.Visible = true;
+                    }
+                    else
+                    {
+                        tdCorrelationDueDate.Visible = false;
+                        thCorrelationDueDate.Visible = false;
 
+                    }
 
                     cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
                     if (cbCheckBox.Checked)
@@ -405,6 +417,7 @@ namespace ALS.ALSI.Web.view.template
                         _val.pm_number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                         _val.pm_extraction_medium = txtExtractionMedium.Text;
                         _val.pm_extraction_volume = txtExtractionVolume.Text;
+                        _val.correlation_due_date = txtCorrelationDueDate.Text;
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_dhs_coverpage where sample_id={0}", this.SampleID));
 
@@ -441,6 +454,7 @@ namespace ALS.ALSI.Web.view.template
                             _val.pm_number_of_pieces_used_for_extraction = txtNumberOfPiecesUsedForExtraction.Text;
                             _val.pm_extraction_medium = txtExtractionMedium.Text;
                             _val.pm_extraction_volume = txtExtractionVolume.Text;
+                            _val.correlation_due_date = txtCorrelationDueDate.Text;
                             _val.unit = Convert.ToInt32(ddlUnit.SelectedValue);
                         }
                         MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_dhs_coverpage where sample_id={0}", this.SampleID));
@@ -901,6 +915,20 @@ namespace ALS.ALSI.Web.view.template
                 txtProcedureNo.Text = component.B;
                 txtNumberOfPiecesUsedForExtraction.Text = component.D;
                 txtExtractionVolume.Text = component.E;
+
+                if(!String.IsNullOrEmpty(component.F))
+                {
+                    txtCorrelationDueDate.Text = component.F;
+                    tdCorrelationDueDate.Visible = true;
+                    thCorrelationDueDate.Visible = true;
+
+                }
+                else
+                {
+                    tdCorrelationDueDate.Visible = false;
+                    thCorrelationDueDate.Visible = false;
+
+                }
             }
         }
 
@@ -979,7 +1007,14 @@ namespace ALS.ALSI.Web.view.template
             {
                 ProcessingMode = ProcessingMode.Local
             };
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_wd.rdlc");
+            if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_wd_v2.rdlc");
+            }
+            else
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/dhs_wd.rdlc");
+            }
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
 

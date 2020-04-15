@@ -102,6 +102,9 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tdCorrelationDueDate.Visible = false;
+            thCorrelationDueDate.Visible = false;
+
             #region "SAMPLE"
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -229,7 +232,17 @@ namespace ALS.ALSI.Web.view.template
                     //lbProcedureNo_IndirectMaterials.Text = txtProcedureNo_IndirectMaterials.Text;
                     //lbSampleSize_IndirectMaterials.Text = txtSampleSize_IndirectMaterials.Text;
                     //lbOvenCondition_IndirectMaterials.Text = txtOvenCondition_IndirectMaterials.Text;
-
+                    if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+                    {
+                        txtCorrelationDueDate.Text = this.coverpages[0].correlation_due_date;
+                        tdCorrelationDueDate.Visible = true;
+                        thCorrelationDueDate.Visible = true;
+                    }
+                    else
+                    {
+                        tdCorrelationDueDate.Visible = false;
+                        thCorrelationDueDate.Visible = false;
+                    }
                 }
 
                 cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
@@ -364,6 +377,8 @@ namespace ALS.ALSI.Web.view.template
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
+                        _cover.correlation_due_date = txtCorrelationDueDate.Text;
+
 
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_coverpage where sample_id={0}", this.SampleID));
@@ -390,6 +405,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
+                        _cover.correlation_due_date = txtCorrelationDueDate.Text;
 
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_coverpage where sample_id={0}", this.SampleID));
@@ -566,7 +582,17 @@ namespace ALS.ALSI.Web.view.template
                 //txtProcedureNo_IndirectMaterials.Text = String.Empty;
                 //txtSampleSize_IndirectMaterials.Text = component.D;
                 //txtOvenCondition_IndirectMaterials.Text = String.Empty;
-
+                if (!String.IsNullOrEmpty(component.H))
+                {
+                    txtCorrelationDueDate.Text = component.H;
+                    tdCorrelationDueDate.Visible = true;
+                    thCorrelationDueDate.Visible = true;
+                }
+                else
+                {
+                    tdCorrelationDueDate.Visible = false;
+                    thCorrelationDueDate.Visible = false;
+                }
 
                 tb_m_detail_spec_ref detailSpecRef = new tb_m_detail_spec_ref();
                 detailSpecRef.spec_ref = Convert.ToInt32(component.E);
@@ -721,7 +747,14 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
+            if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd_v2.rdlc");
+            }
+            else
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
+            }
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6",this.coverpages.Where(x=>!x.location_of_parts.Equals("-")))); // Add datasource here

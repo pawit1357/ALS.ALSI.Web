@@ -40,5 +40,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> unit2 { get; set; }
         public Nullable<int> unit3 { get; set; }
         public Nullable<int> unit4 { get; set; }
+        public string correlation_due_date { get; set; }
     }
 }

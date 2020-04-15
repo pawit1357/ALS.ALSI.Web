@@ -1270,6 +1270,10 @@ namespace ALS.ALSI.Web.ReportObject {
             
             private global::System.Data.DataColumn columnextraction_volumn;
             
+            private global::System.Data.DataColumn columncorrelation_due_date;
+            
+            private global::System.Data.DataColumn columnpm_extraction_volumn;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public method_procedureDataTable() {
@@ -1577,6 +1581,22 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn correlation_due_dateColumn {
+                get {
+                    return this.columncorrelation_due_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn pm_extraction_volumnColumn {
+                get {
+                    return this.columnpm_extraction_volumn;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1646,7 +1666,9 @@ namespace ALS.ALSI.Web.ReportObject {
                         string ExtractionMedium_Extraction, 
                         string OvenCondition_Extraction, 
                         string TemperatureHumidityParameters, 
-                        string extraction_volumn) {
+                        string extraction_volumn, 
+                        string correlation_due_date, 
+                        string pm_extraction_volumn) {
                 method_procedureRow rowmethod_procedureRow = ((method_procedureRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         procedure_no,
@@ -1682,7 +1704,9 @@ namespace ALS.ALSI.Web.ReportObject {
                         ExtractionMedium_Extraction,
                         OvenCondition_Extraction,
                         TemperatureHumidityParameters,
-                        extraction_volumn};
+                        extraction_volumn,
+                        correlation_due_date,
+                        pm_extraction_volumn};
                 rowmethod_procedureRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowmethod_procedureRow);
                 return rowmethod_procedureRow;
@@ -1739,6 +1763,8 @@ namespace ALS.ALSI.Web.ReportObject {
                 this.columnOvenCondition_Extraction = base.Columns["OvenCondition_Extraction"];
                 this.columnTemperatureHumidityParameters = base.Columns["TemperatureHumidityParameters"];
                 this.columnextraction_volumn = base.Columns["extraction_volumn"];
+                this.columncorrelation_due_date = base.Columns["correlation_due_date"];
+                this.columnpm_extraction_volumn = base.Columns["pm_extraction_volumn"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1812,6 +1838,10 @@ namespace ALS.ALSI.Web.ReportObject {
                 base.Columns.Add(this.columnTemperatureHumidityParameters);
                 this.columnextraction_volumn = new global::System.Data.DataColumn("extraction_volumn", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnextraction_volumn);
+                this.columncorrelation_due_date = new global::System.Data.DataColumn("correlation_due_date", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncorrelation_due_date);
+                this.columnpm_extraction_volumn = new global::System.Data.DataColumn("pm_extraction_volumn", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpm_extraction_volumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8077,6 +8107,40 @@ namespace ALS.ALSI.Web.ReportObject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string correlation_due_date {
+                get {
+                    try {
+                        return ((string)(this[this.tablemethod_procedure.correlation_due_dateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'correlation_due_date\' in table \'method_procedure\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablemethod_procedure.correlation_due_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string pm_extraction_volumn {
+                get {
+                    try {
+                        return ((string)(this[this.tablemethod_procedure.pm_extraction_volumnColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'pm_extraction_volumn\' in table \'method_procedure\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablemethod_procedure.pm_extraction_volumnColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool Isprocedure_noNull() {
                 return this.IsNull(this.tablemethod_procedure.procedure_noColumn);
             }
@@ -8481,6 +8545,30 @@ namespace ALS.ALSI.Web.ReportObject {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setextraction_volumnNull() {
                 this[this.tablemethod_procedure.extraction_volumnColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Iscorrelation_due_dateNull() {
+                return this.IsNull(this.tablemethod_procedure.correlation_due_dateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setcorrelation_due_dateNull() {
+                this[this.tablemethod_procedure.correlation_due_dateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Ispm_extraction_volumnNull() {
+                return this.IsNull(this.tablemethod_procedure.pm_extraction_volumnColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setpm_extraction_volumnNull() {
+                this[this.tablemethod_procedure.pm_extraction_volumnColumn] = global::System.Convert.DBNull;
             }
         }
         

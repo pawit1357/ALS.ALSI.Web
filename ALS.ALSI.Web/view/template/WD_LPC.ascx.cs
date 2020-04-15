@@ -141,6 +141,10 @@ namespace ALS.ALSI.Web.view.template
 
             RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
 
+            tdCorrelationDueDate.Visible = false;
+            thCorrelationDueDate.Visible = false;
+
+
             #region "SAMPLE"
             if (this.jobSample != null)
             {
@@ -212,7 +216,17 @@ namespace ALS.ALSI.Web.view.template
                 txtC21.Text = _lpc.NumberOfPieces;
                 txtD21.Text = _lpc.ExtractionMedium;
                 txtE21.Text = _lpc.ExtractionVolume;
-
+                if (!String.IsNullOrEmpty(_lpc.correlation_due_date))
+                {
+                    txtCorrelationDueDate.Text = _lpc.correlation_due_date;
+                    tdCorrelationDueDate.Visible = true;
+                    thCorrelationDueDate.Visible = true;
+                }
+                else
+                {
+                    tdCorrelationDueDate.Visible = false;
+                    thCorrelationDueDate.Visible = false;
+                }
                 lbTestMethod.Text = txtB21.Text;
 
                 #region "Test Method: 92-004230 Rev. AK"
@@ -371,6 +385,8 @@ namespace ALS.ALSI.Web.view.template
                             cov.NumberOfPieces = txtC21.Text;
                             cov.ExtractionMedium = txtD21.Text;
                             cov.ExtractionVolume = txtE21.Text;
+                            cov.correlation_due_date = txtCorrelationDueDate.Text;
+
                             #region "Tank Conditions"
                             cov.ws_b21 = txtB54.Text;
                             cov.ws_c21 = txtC54.Text;
@@ -427,9 +443,10 @@ namespace ALS.ALSI.Web.view.template
                                 cov.NumberOfPieces = txtC21.Text;
                                 cov.ExtractionMedium = txtD21.Text;
                                 cov.ExtractionVolume = txtE21.Text;
+                                cov.correlation_due_date = txtCorrelationDueDate.Text;
                                 #region "Test Method: 92-004230 Rev. AK"
                                 cov.ws_b15 = txtB48.Text;
-                                cov.ExtractionVolume = txtB49.Text;
+                                //cov.ExtractionVolume = txtB49.Text;
                                 cov.ws_b17 = txtB50.Text;
                                 cov.NumberOfPieces = txtB51.Text;
                                 #endregion
@@ -882,7 +899,17 @@ namespace ALS.ALSI.Web.view.template
                 txtC21.Text = tem.D;
                 txtD21.Text = tem.E;
                 txtE21.Text = tem.F;
-
+                if (!String.IsNullOrEmpty(tem.G))
+                {
+                    txtCorrelationDueDate.Text = tem.G;
+                    tdCorrelationDueDate.Visible = true;
+                    thCorrelationDueDate.Visible = true;
+                }
+                else
+                {
+                    tdCorrelationDueDate.Visible = false;
+                    thCorrelationDueDate.Visible = false;
+                }
                 txtB49.Text = txtE21.Text;
                 txtB51.Text = txtC21.Text;
 
@@ -1053,7 +1080,15 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/lpc_wd.rdlc");
+
+            if (!String.IsNullOrEmpty(this.Lpc[0].correlation_due_date))
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/lpc_wd_v2.rdlc");
+            }
+            else
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/lpc_wd.rdlc");
+            }
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", specs.ToDataTable())); // Add datasource here

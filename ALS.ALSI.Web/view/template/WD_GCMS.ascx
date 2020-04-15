@@ -178,6 +178,7 @@
                                                         Medium</th>
                                                     <th>Extraction<br />
                                                         Volume</th>
+                                                    <th runat="server" id="thCorrelationDueDate">Correlation Due Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -200,6 +201,9 @@
                                                     </td>
                                                     <td>
                                                         <asp:TextBox ID="txtExtractionVolumn" runat="server" Text="" CssClass="form-control"></asp:TextBox>
+                                                    </td>
+                                                    <td runat="server" id="tdCorrelationDueDate">
+                                                        <asp:TextBox ID="txtCorrelationDueDate" runat="server" Text="" CssClass="form-control"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                             </tbody>
