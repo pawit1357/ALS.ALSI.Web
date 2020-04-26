@@ -64,10 +64,16 @@ namespace ALS.ALSI.Web
                     //Generate Alert
                     renderAlert();
 
+//1   Normal    8   7   8
+//2   Urgent    5   5   5
+//3   Express   3   3   3
+//4   Extend 1      9   10
+//5   Extend 2      14  15
+
                     //(ยกตัวอย่าง งานเข้าวันพฤหัสฯ ที่ 27 มิ.ย ดิวแลปจะเป็น 3 ก.ค ดิวแอดมินก็จะเป็น 3 ก.ค
-                    //DateTime _date = new DateTime(2019, 12, 24);//yyyyMMdd
+                    //DateTime _date = new DateTime(2020, 05, 01);//yyyyMMdd
                     //holiday_calendar h = new holiday_calendar();
-                    //DateTime dt = h.GetWorkingDayLab(_date,5, true);
+                    //DateTime dt = h.GetWorkingDayLab(_date, 9);
                     //Console.WriteLine();
 
                 }

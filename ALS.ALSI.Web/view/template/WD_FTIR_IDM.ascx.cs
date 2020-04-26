@@ -1175,6 +1175,9 @@ namespace ALS.ALSI.Web.view.template
                             if (valC.Equals("NA"))
                             {
                                 result = "NA";
+                            }else if(valC.Equals("Not Detected"))
+                            {
+                                result = "PASS";
                             }
                             else
                             {

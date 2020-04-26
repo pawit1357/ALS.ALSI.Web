@@ -419,6 +419,7 @@ namespace ALS.ALSI.Web.view.template
                         _val.pm_extraction_volume = txtExtractionVolume.Text;
                         _val.correlation_due_date = txtCorrelationDueDate.Text;
                     }
+                    MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_dhs_cas where sample_id={0}", this.SampleID));
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_dhs_coverpage where sample_id={0}", this.SampleID));
 
                     //template_wd_dhs_coverpage.DeleteBySampleID(this.SampleID);
@@ -442,7 +443,6 @@ namespace ALS.ALSI.Web.view.template
                         this.jobSample.path_pdf = String.Empty;
                         //#endregion
                         #region "CAS#"
-                        tb_m_dhs_cas.DeleteBySampleID(this.SampleID);
                         tb_m_dhs_cas.InsertList(this.tbCas);
 
                         #endregion
@@ -460,7 +460,6 @@ namespace ALS.ALSI.Web.view.template
                         MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_dhs_coverpage where sample_id={0}", this.SampleID));
                         template_wd_dhs_coverpage.InsertList(this.coverpages);
 
-                        //template_wd_dhs_coverpage.UpdateList(this.coverpages);
                     }
                     else
                     {
@@ -745,6 +744,11 @@ namespace ALS.ALSI.Web.view.template
             }
             else
             {
+                //clear old data
+                MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_dhs_cas where sample_id={0}", this.SampleID));
+                //Commit
+                GeneralManager.Commit();
+
                 litErrorMessage.Text = String.Empty;
                 this.tbCas = _cas;
                 gvResult.DataSource = this.tbCas;

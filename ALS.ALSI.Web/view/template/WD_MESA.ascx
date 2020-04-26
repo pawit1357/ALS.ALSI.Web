@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="_WD_MESA.ascx.cs" Inherits="ALS.ALSI.Web.view.template._WD_MESA" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="WD_MESA.ascx.cs" Inherits="ALS.ALSI.Web.view.template.WD_MESA" %>
 <script src="<%= ResolveUrl("~/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
@@ -89,6 +89,7 @@
                                             <th>Procedure No</th>
                                             <th>Sample Size</th>
                                             <th>Oven Condition</th>
+                                            <th runat="server" id="thCorrelationDueDate">Correlation Due Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -107,8 +108,11 @@
                                             <td>
                                                 <asp:Label ID="lbOvenCondition_Extraction" runat="server"> </asp:Label>
                                                 <asp:TextBox ID="txtOvenCondition_Extraction" runat="server" Text="Temperature 70oC for 24 hours
-Room Temperature for 24 hours" CssClass="form-control"></asp:TextBox>
-
+Room Temperature for 24 hours" CssClass="form-control">
+                                                </asp:TextBox>
+                                            </td>
+                                            <td runat="server" id="tdCorrelationDueDate">
+                                                <asp:TextBox ID="txtCorrelationDueDate" runat="server" Text="" CssClass="form-control"></asp:TextBox>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -19,10 +19,9 @@ using Spire.Doc.Documents;
 
 namespace ALS.ALSI.Web.view.template
 {
-    public partial class _WD_MESA : System.Web.UI.UserControl
+    public partial class WD_MESA : System.Web.UI.UserControl
     {
 
-        //private static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WD_MESA));
 
         #region "Property"
 
@@ -102,6 +101,10 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataSource = comp.SelectAll();
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
+
+            tdCorrelationDueDate.Visible = false;
+            thCorrelationDueDate.Visible = false;
+
 
             #region "SAMPLE"
             this.jobSample = new job_sample().SelectByID(this.SampleID);
@@ -226,6 +229,18 @@ namespace ALS.ALSI.Web.view.template
                     lbProcedureNo_Extraction.Text = txtProcedureNo_Extraction.Text;
                     lbSampleSize_Extraction.Text = txtSampleSize_Extraction.Text;
                     lbOvenCondition_Extraction.Text = txtOvenCondition_Extraction.Text;
+
+                    if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+                    {
+                        txtCorrelationDueDate.Text = this.coverpages[0].correlation_due_date;
+                        tdCorrelationDueDate.Visible = true;
+                        thCorrelationDueDate.Visible = true;
+                    }
+                    else
+                    {
+                        tdCorrelationDueDate.Visible = false;
+                        thCorrelationDueDate.Visible = false;
+                    }
 
                 }
 
@@ -352,6 +367,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
+                        _cover.correlation_due_date = txtCorrelationDueDate.Text;
                     }
                     switch (this.CommandName)
                     {
@@ -380,6 +396,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.ProcedureNo_Extraction = txtProcedureNo_Extraction.Text;
                         _cover.SampleSize_Extraction = txtSampleSize_Extraction.Text;
                         _cover.OvenCondition_Extraction = txtOvenCondition_Extraction.Text;
+                        _cover.correlation_due_date = txtCorrelationDueDate.Text;
                     }
                     template_wd_mesa_coverpage.UpdateList(this.coverpages);
                     template_wd_mesa_img.InsertList(this.refImg);
@@ -472,31 +489,7 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.step6owner = userLogin.id;
                     break;
                 case StatusEnum.ADMIN_CONVERT_PDF:
-                    //if (btnUpload.HasFile && (Path.GetExtension(btnUpload.FileName).Equals(".pdf")))
-                    //{
-                    //    string yyyy = DateTime.Now.ToString("yyyy");
-                    //    string MM = DateTime.Now.ToString("MM");
-                    //    string dd = DateTime.Now.ToString("dd");
 
-                    //    String source_file = String.Format(Configurations.PATH_SOURCE, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-                    //    String source_file_url = String.Format(Configurations.PATH_URL, yyyy, MM, dd, this.jobSample.job_number, Path.GetFileName(btnUpload.FileName));
-
-
-                    //    if (!Directory.Exists(Path.GetDirectoryName(source_file)))
-                    //    {
-                    //        Directory.CreateDirectory(Path.GetDirectoryName(source_file));
-                    //    }
-                    //    btnUpload.SaveAs(source_file);
-                    //    this.jobSample.path_pdf = source_file_url;
-                    //    this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
-                    //    //lbMessage.Text = string.Empty;
-                    //}
-                    //else
-                    //{
-                    //    errors.Add("Invalid File. Please upload a File with extension .pdf");
-                    //    //lbMessage.Attributes["class"] = "alert alert-error";
-                    //    //isValid = false;
-                    //}
                     this.jobSample.job_status = Convert.ToInt32(StatusEnum.JOB_COMPLETE);
                     this.jobSample.step7owner = userLogin.id;
                     break;
@@ -539,6 +532,27 @@ namespace ALS.ALSI.Web.view.template
                 lbSpecDesc.Text = String.Format("The Specification is based on Western Digital 's Doc {0} {1}", component.B, component.A);
 
                 txtSampleSize_Extraction.Text = component.D;
+                if (!String.IsNullOrEmpty(component.G))
+                {
+                    txtOvenCondition_Extraction.Text = component.G;
+                    txtOvenCondition_Extraction.Visible = true;
+                }
+                else
+                {
+                    txtOvenCondition_Extraction.Visible = false;
+                }
+
+                if (!String.IsNullOrEmpty(component.H))
+                {
+                    txtCorrelationDueDate.Text = component.H;
+                    tdCorrelationDueDate.Visible = true;
+                    thCorrelationDueDate.Visible = true;
+                }
+                else
+                {
+                    tdCorrelationDueDate.Visible = false;
+                    thCorrelationDueDate.Visible = false;
+                }
 
                 tb_m_detail_spec_ref detailSpecRef = new tb_m_detail_spec_ref();
                 detailSpecRef.spec_ref = Convert.ToInt32(component.E);
@@ -717,37 +731,6 @@ namespace ALS.ALSI.Web.view.template
             reportParameters.Add(new ReportParameter("ResultDesc", lbSpecDesc.Text));
             reportParameters.Add(new ReportParameter("AlsSingaporeRefNo", (String.IsNullOrEmpty(this.jobSample.singapore_ref_no) ? String.Empty : this.jobSample.singapore_ref_no)));
 
-            //List<template_wd_mesa_img> imgList = this.refImg.OrderBy(x => x.area).OrderBy(x => x.descripton).ToList();
-            //List<template_wd_mesa_img> tmpImg1 = new List<template_wd_mesa_img>();
-            //if (imgList.Count >= 1)
-            //{
-            //    tmpImg1.Add(imgList[0]);
-            //}
-
-            //List<template_wd_mesa_img> tmpImg2 = new List<template_wd_mesa_img>();
-            //if (imgList.Count >= 2)
-            //{
-            //    tmpImg2.Add(imgList[1]);
-            //}
-
-            //List<template_wd_mesa_img> tmpImg3 = new List<template_wd_mesa_img>();
-            //if (imgList.Count >= 3)
-            //{
-            //    tmpImg3.Add(imgList[2]);
-            //}
-
-            //List<template_wd_mesa_img> tmpImg4 = new List<template_wd_mesa_img>();
-            //if (imgList.Count >= 4)
-            //{
-            //    tmpImg4.Add(imgList[3]);
-            //}
-
-            //reportParameters.Add(new ReportParameter("area1_desc", (imgList.Count >= 1) ? imgList[0].descripton : " "));
-            //reportParameters.Add(new ReportParameter("area2_desc", (imgList.Count >= 2) ? imgList[1].descripton : " "));
-            //reportParameters.Add(new ReportParameter("area3_desc", (imgList.Count >= 3) ? imgList[2].descripton : " "));
-            //reportParameters.Add(new ReportParameter("area4_desc", (imgList.Count >= 4) ? imgList[3].descripton : " "));
-
-
             // Variables
             Warning[] warnings;
             string[] streamIds;
@@ -779,8 +762,15 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
             //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
+            if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd_v2.rdlc");
+            }
+            else
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
+            }
 
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here

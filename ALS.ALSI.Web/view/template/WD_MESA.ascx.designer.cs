@@ -10,8 +10,7 @@
 namespace ALS.ALSI.Web.view.template {
     
     
-    public partial class _WD_MESA
-    {
+    public partial class WD_MESA {
         
         /// <summary>
         /// Form1 control.
@@ -57,6 +56,15 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PWorking;
+        
+        /// <summary>
+        /// thCorrelationDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell thCorrelationDueDate;
         
         /// <summary>
         /// lbProcedureNo_Extraction control.
@@ -111,6 +119,24 @@ namespace ALS.ALSI.Web.view.template {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtOvenCondition_Extraction;
+        
+        /// <summary>
+        /// tdCorrelationDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell tdCorrelationDueDate;
+        
+        /// <summary>
+        /// txtCorrelationDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCorrelationDueDate;
         
         /// <summary>
         /// lbSpecDesc control.

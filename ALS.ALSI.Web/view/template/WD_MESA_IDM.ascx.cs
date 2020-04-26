@@ -577,8 +577,15 @@ namespace ALS.ALSI.Web.view.template
                 //txtProcedureNo_Extraction.Text = String.Empty;
                 //txtExtractionMedium_Extraction.Text = String.Empty;
                 txtSampleSize_Extraction.Text = component.D;
-                //txtOvenCondition_Extraction.Text = String.Empty;
-
+                if (!String.IsNullOrEmpty(component.G))
+                {
+                    txtOvenCondition_Extraction.Text = component.G;
+                    txtOvenCondition_Extraction.Visible = true;
+                }
+                else
+                {
+                    txtOvenCondition_Extraction.Visible = false;
+                }
                 //txtProcedureNo_IndirectMaterials.Text = String.Empty;
                 //txtSampleSize_IndirectMaterials.Text = component.D;
                 //txtOvenCondition_IndirectMaterials.Text = String.Empty;

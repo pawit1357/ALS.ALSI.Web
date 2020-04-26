@@ -102,6 +102,9 @@ namespace ALS.ALSI.Web.view.template
             ddlComponent.DataBind();
             ddlComponent.Items.Insert(0, new ListItem(Constants.PLEASE_SELECT, "0"));
 
+            tdCorrelationDueDate.Visible = false;
+            thCorrelationDueDate.Visible = false;
+
             #region "SAMPLE"
             this.jobSample = new job_sample().SelectByID(this.SampleID);
             StatusEnum status = (StatusEnum)Enum.Parse(typeof(StatusEnum), this.jobSample.job_status.ToString(), true);
@@ -229,7 +232,17 @@ namespace ALS.ALSI.Web.view.template
                     lbProcedureNo_IndirectMaterials.Text = txtProcedureNo_IndirectMaterials.Text;
                     lbSampleSize_IndirectMaterials.Text = txtSampleSize_IndirectMaterials.Text;
                     lbOvenCondition_IndirectMaterials.Text = txtOvenCondition_IndirectMaterials.Text;
-
+                    if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+                    {
+                        txtCorrelationDueDate.Text = this.coverpages[0].correlation_due_date;
+                        tdCorrelationDueDate.Visible = true;
+                        thCorrelationDueDate.Visible = true;
+                    }
+                    else
+                    {
+                        tdCorrelationDueDate.Visible = false;
+                        thCorrelationDueDate.Visible = false;
+                    }
                 }
 
                 cbCheckBox.Checked = (this.jobSample.is_no_spec == null) ? false : this.jobSample.is_no_spec.Equals("1") ? true : false;
@@ -368,6 +381,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.ProcedureNo_IndirectMaterials = txtProcedureNo_IndirectMaterials.Text;
                         _cover.SampleSize_IndirectMaterials = txtSampleSize_IndirectMaterials.Text;
                         _cover.OvenCondition_IndirectMaterials = txtOvenCondition_IndirectMaterials.Text;
+                        _cover.correlation_due_date = txtCorrelationDueDate.Text;
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_coverpage where sample_id={0}", this.SampleID));
                     template_wd_mesa_coverpage.InsertList(this.coverpages);
@@ -404,6 +418,7 @@ namespace ALS.ALSI.Web.view.template
                         _cover.ProcedureNo_IndirectMaterials = txtProcedureNo_IndirectMaterials.Text;
                         _cover.SampleSize_IndirectMaterials = txtSampleSize_IndirectMaterials.Text;
                         _cover.OvenCondition_IndirectMaterials = txtOvenCondition_IndirectMaterials.Text;
+                        _cover.correlation_due_date = txtCorrelationDueDate.Text;
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_wd_mesa_coverpage where sample_id={0}", this.SampleID));
                     template_wd_mesa_coverpage.InsertList(this.coverpages);
@@ -571,8 +586,26 @@ namespace ALS.ALSI.Web.view.template
                 //txtProcedureNo_Extraction.Text = String.Empty;
                 //txtExtractionMedium_Extraction.Text = String.Empty;
                 txtSampleSize_Extraction.Text = component.D;
-                //txtOvenCondition_Extraction.Text = String.Empty;
-
+                if (!String.IsNullOrEmpty(component.G))
+                {
+                    txtOvenCondition_Extraction.Text = component.G;
+                    txtOvenCondition_Extraction.Visible = true;
+                }
+                else
+                {
+                    txtOvenCondition_Extraction.Visible = false;
+                }
+                if (!String.IsNullOrEmpty(component.H))
+                {
+                    txtCorrelationDueDate.Text = component.H;
+                    tdCorrelationDueDate.Visible = true;
+                    thCorrelationDueDate.Visible = true;
+                }
+                else
+                {
+                    tdCorrelationDueDate.Visible = false;
+                    thCorrelationDueDate.Visible = false;
+                }
                 //txtProcedureNo_IndirectMaterials.Text = String.Empty;
                 txtSampleSize_IndirectMaterials.Text = component.D;
                 //txtOvenCondition_IndirectMaterials.Text = String.Empty;
@@ -728,7 +761,15 @@ namespace ALS.ALSI.Web.view.template
             // Setup the report viewer object and get the array of bytes
             ReportViewer viewer = new ReportViewer();
             viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
+            //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
+            if (!String.IsNullOrEmpty(this.coverpages[0].correlation_due_date))
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd_v2.rdlc");
+            }
+            else
+            {
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/mesa_wd.rdlc");
+            }
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
 
