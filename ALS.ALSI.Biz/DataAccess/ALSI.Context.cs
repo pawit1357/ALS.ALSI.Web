@@ -47,6 +47,9 @@ namespace ALS.ALSI.Biz.DataAccess
         public DbSet<menu> menus { get; set; }
         public DbSet<menu_role> menu_role { get; set; }
         public DbSet<role> roles { get; set; }
+        public DbSet<tb_ft_cfg_parameter> tb_ft_cfg_parameter { get; set; }
+        public DbSet<tb_ft_sample_mp> tb_ft_sample_mp { get; set; }
+        public DbSet<tb_ft_sample_result> tb_ft_sample_result { get; set; }
         public DbSet<tb_m_component> tb_m_component { get; set; }
         public DbSet<tb_m_detail_spec> tb_m_detail_spec { get; set; }
         public DbSet<tb_m_detail_spec_ref> tb_m_detail_spec_ref { get; set; }

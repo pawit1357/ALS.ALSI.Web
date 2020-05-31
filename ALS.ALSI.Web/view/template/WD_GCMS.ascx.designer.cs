@@ -10,7 +10,8 @@
 namespace ALS.ALSI.Web.view.template {
     
     
-    public partial class WD_GCMS {
+    public partial class WD_GCMS
+    {
         
         /// <summary>
         /// Form1 control.

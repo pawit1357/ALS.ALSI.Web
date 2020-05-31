@@ -118,58 +118,57 @@
                                     <table>
                                          <tr>
                                              <td>
-                                                 <img src="/alis/images/als_logo.jpg" alt="" style="width:30px;height:30px;"></image>
+                                                 <img src="/alis/images/als_logo.jpg" alt="" style="width:30px;height:30px;">
                                                  </td>
-                                             <td class="text-left">ALS Testing Services (Thailand)</td>
+                                             <td class="text-left"><asp:Label ID="Label1" runat="server" Font-Bold="True" Text="ALS Testing Services (Thailand)"></asp:Label></td>
                                              </tr>
                                         <tr>
-                                            <td class="text-right"> Job No:&nbsp;&nbsp;&nbsp; </td>
+                                            <td class="text-right"> <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Job No:"></asp:Label>&nbsp;&nbsp;&nbsp; </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lbJobNo" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="text-right">Client:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-right"><asp:Label ID="Label3" runat="server" Font-Bold="True" Text="Client:"></asp:Label>&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
                                                 <asp:Label ID="lbClient" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="text-right">Contract:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-right"><asp:Label ID="Label4" runat="server" Font-Bold="True" Text="Contract:"></asp:Label>&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
                                                 <asp:Label ID="lbContract" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="text-right">Sample:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-right"><asp:Label ID="Label5" runat="server" Font-Bold="True" Text="Sample:"></asp:Label>&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
                                                 <asp:Label ID="lbSample" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="text-right">Spec:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-right"><asp:Label ID="Label6" runat="server" Font-Bold="True" Text="Spec:"></asp:Label>&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
                                                 <asp:Label ID="lbSpec" runat="server" Font-Bold="True"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="text-right">Test:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-right"><asp:Label ID="Label7" runat="server" Font-Bold="True" Text="Test:"></asp:Label>&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
                                               <asp:Label ID="lbTot" runat="server" Font-Bold="True"></asp:Label>  
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="text-right">Sample:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-right"><asp:Label ID="Label8" runat="server" Font-Bold="True" Text="Sample:"></asp:Label>&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
                                                 <asp:Label ID="lbSd" runat="server" Font-Bold="True"></asp:Label>
                                             
                                             </td>
                                         </tr>
                                                                                 <tr>
-                                            <td class="text-right">Surface Area:&nbsp;&nbsp;&nbsp;</td>
+                                            <td class="text-right"><asp:Label ID="Label9" runat="server" Font-Bold="True" Text="Surface Area:"></asp:Label>&nbsp;&nbsp;&nbsp;</td>
                                             <td class="text-left">
                                                 <asp:Label ID="lbSa" runat="server" Font-Bold="True"></asp:Label>
-                                            
                                             </td>
                                         </tr>
                                     </table>

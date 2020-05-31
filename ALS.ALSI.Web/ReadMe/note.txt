@@ -1,0 +1,45 @@
+﻿-- Find template & user
+select 
+year(js.date_login_complete ) as jobYear
+,js.job_number as jobNumber 
+,ms.name as jobStatus
+,mt.id as templateId
+-- ,mt.name as templateName 
+,mt.path_url as template_path_url
+-- mtot.data_group,
+, 'pikul.totassa' as loginUsr,
+(
+	SELECT  username -- GROUP_CONCAT(username SEPARATOR ', ')
+	FROM users_login ul  
+	where ul.responsible_test like CONCAT('%', mtot.data_group, '%') limit 1
+) as chemUsr
+, 'rossukhon.khongphuwet' as srChemUsr
+, 'orapin.maliwan' as adminUsr
+, 'warunee.maneesuwan' as labManagerUsr
+, 'chayan.jutaphan' as managerUsr
+, 'wanwisa.phasang,pornpan' as accountUsr
+, 'kamonworanee.theptaranonth' as marketingUsr
+from job_sample js
+left join m_status ms on ms.ID = js.job_status 
+left join m_template mt on mt.ID = js.template_id 
+left join m_type_of_test  mtot on mtot.ID = js.type_of_test_id 
+where 1=1
+and mt.path_url like '%WD_KPA%'
+and mt.status ='A' 
+-- and js.job_number  like'%ELP-1445-DB%'
+order by js.ID desc
+
+
+ -- test template 
+ -- wd_mesa [ ELP-4578-MB ] attapon.otprapai
+ 
+-- TemplateLayout > ELP-1166-FB
+
+ 
+
+
+ #2020-05-31
+ - อัพโหลด template แล้ว inactive ของเดิมด้วย
+ALTER TABLE alsi.tb_m_detail_spec ADD status varchar(1) DEFAULT 'Y' NULL;
+ALTER TABLE alsi.tb_m_detail_spec_ref ADD status varchar(1) DEFAULT 'Y' NULL;
+ALTER TABLE alsi.template_wd_hpa_for1_coverpage ADD correlation_due_date varchar(100) NULL;

@@ -22,5 +22,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public string B { get; set; }
         public string C { get; set; }
         public string D { get; set; }
+        public string status { get; set; }
     }
 }

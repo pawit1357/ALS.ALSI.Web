@@ -100,7 +100,7 @@ namespace ALS.ALSI.Biz.DataAccess
         {
             foreach (tb_m_gcms_cas tmp in _lists)
             {
-                tmp.area = tmp.area.Trim();
+                //tmp.area = tmp.area.Trim();
                 if (!String.IsNullOrEmpty(tmp.amount)&& tmp.amount!=null)
                 {
                     tmp.amount = tmp.amount.Trim();

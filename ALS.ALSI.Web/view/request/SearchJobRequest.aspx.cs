@@ -62,6 +62,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isNoteGroupOpeation"]; }
             set { Session[GetType().Name + "isNoteGroupOpeation"] = value; }
         }
+        public Boolean isOtherRefGroupOpeation
+        {
+            get { return (Boolean)Session[GetType().Name + "isOtherRefGroupOpeation"]; }
+            set { Session[GetType().Name + "isOtherRefGroupOpeation"] = value; }
+        }
         public Boolean isDuedateGroupOperation
         {
             get { return (Boolean)Session[GetType().Name + "isDuedateGroupOperation"]; }
@@ -585,8 +590,9 @@ namespace ALS.ALSI.Web.view.request
             Session.Remove(GetType().Name + "isInvoiceGroupOperation");
             Session.Remove(GetType().Name + "isCusRefNoGroupOperation");
             Session.Remove(GetType().Name + "isGroupApproveOperation");
+            Session.Remove(GetType().Name + "isOtherRefGroupOpeation");
 
-
+            
         }
 
         #endregion
@@ -900,7 +906,7 @@ namespace ALS.ALSI.Web.view.request
                             break;
                     }
                     //btnChangeSrChemistCompleteDate.Visible = (userRole == RoleEnum.ADMIN) && isGrp;
-                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN) && !isHold;
+                    btnChangeOtherRefNo.Visible = (userRole == RoleEnum.LOGIN||userRole == RoleEnum.MARKETING) && !isHold;
                     btnChangeSingaporeRefNo.Visible = (userRole == RoleEnum.CHEMIST) && !isHold;
                     btnChangeDueDate.Visible = ((userRole == RoleEnum.SR_CHEMIST)) && !isHold;
                     btnChangePo.Visible = ((userRole == RoleEnum.ACCOUNT || userRole == RoleEnum.ROOT || userRole == RoleEnum.ADMIN || userRole == RoleEnum.LABMANAGER)) && !isHold;
@@ -1661,6 +1667,9 @@ namespace ALS.ALSI.Web.view.request
             this.isInvoiceGroupOperation = btn.ID.Equals("btnOperationGroupInvoice");
             this.isSentToCusDateOperation = btn.ID.Equals("btnOperationSentToCus");
             this.isNoteGroupOpeation = btn.ID.Equals("btnOperationNote");
+            this.isOtherRefGroupOpeation = btn.ID.Equals("btnOperationOtherRef");
+
+            
             this.isCusRefNoGroupOperation = btn.ID.Equals("btnOperationCusRefNo");
             this.isGroupApproveOperation = userRole == RoleEnum.LABMANAGER ? btn.ID.Equals("btnOperation") : false;
 
@@ -1673,7 +1682,7 @@ namespace ALS.ALSI.Web.view.request
                     HiddenField hf = row.Cells[1].Controls[3] as HiddenField;
                     HiddenField hIsGroup = row.Cells[1].Controls[5] as HiddenField;
 
-                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || this.isNoteGroupOpeation || this.isCusRefNoGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST || this.isGroupApproveOperation)
+                    if (this.isPoGroupOperation || this.isDuedateGroupOperation || this.isInvoiceGroupOperation || this.isSentToCusDateOperation || this.isNoteGroupOpeation || this.isCusRefNoGroupOperation || userRole == RoleEnum.LOGIN || userRole == RoleEnum.CHEMIST || this.isGroupApproveOperation||this.isOtherRefGroupOpeation)
                     {
                         this.selectedList.Add(Convert.ToInt32(hf.Value));
                     }

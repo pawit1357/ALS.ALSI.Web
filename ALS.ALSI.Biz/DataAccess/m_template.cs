@@ -20,10 +20,10 @@ namespace ALS.ALSI.Biz.DataAccess
         public string description { get; set; }
         public string path_url { get; set; }
         public string path_source_file { get; set; }
-        public Nullable<int> requestor { get; set; }
-        public Nullable<int> modified_by { get; set; }
-        public Nullable<int> verified_by { get; set; }
-        public Nullable<int> validated_by { get; set; }
+        public string requestor { get; set; }
+        public string modified_by { get; set; }
+        public string verified_by { get; set; }
+        public string validated_by { get; set; }
         public Nullable<System.DateTime> modified_date { get; set; }
         public Nullable<System.DateTime> create_date { get; set; }
         public string status { get; set; }

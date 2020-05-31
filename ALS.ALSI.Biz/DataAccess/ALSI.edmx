@@ -302,10 +302,10 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="description" Type="varchar" MaxLength="255" />
           <Property Name="path_url" Type="varchar" MaxLength="100" />
           <Property Name="path_source_file" Type="varchar" MaxLength="100" />
-          <Property Name="requestor" Type="int" />
-          <Property Name="modified_by" Type="int" />
-          <Property Name="verified_by" Type="int" />
-          <Property Name="validated_by" Type="int" />
+          <Property Name="requestor" Type="varchar" MaxLength="100" />
+          <Property Name="modified_by" Type="varchar" MaxLength="100" />
+          <Property Name="verified_by" Type="varchar" MaxLength="100" />
+          <Property Name="validated_by" Type="varchar" MaxLength="100" />
           <Property Name="modified_date" Type="date" />
           <Property Name="create_date" Type="date" />
           <Property Name="status" Type="varchar" MaxLength="1" />
@@ -372,6 +372,54 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="UPDATE_BY" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="CREATE_DATE" Type="date" Nullable="false" />
           <Property Name="UPDATE_DATE" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_ft_cfg_parameter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="template_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="param_group" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="param_seq" Type="int" />
+          <Property Name="param_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="param_value" Type="varchar" MaxLength="100" />
+          <Property Name="is_formular" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="formular_sheet" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="created_by" Type="varchar" MaxLength="100" />
+          <Property Name="created_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_ft_sample_mp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sample_id" Type="int" Nullable="false" />
+          <Property Name="column_seq" Type="int" Nullable="false" />
+          <Property Name="column_index" Type="int" Nullable="false" />
+          <Property Name="column_value" Type="varchar" MaxLength="200" />
+          <Property Name="column_display_flag" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="created_by" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="updated_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updated_by" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_ft_sample_result">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mp_id" Type="int" Nullable="false" />
+          <Property Name="column_seq" Type="int" />
+          <Property Name="column_index" Type="int" />
+          <Property Name="column_value" Type="varchar" MaxLength="100" />
+          <Property Name="column_display_flag" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="created_by" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="updated_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updated_by" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_m_component">
           <Key>
@@ -493,6 +541,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="BX" Type="varchar" MaxLength="255" />
           <Property Name="BY" Type="varchar" MaxLength="255" />
           <Property Name="BZ" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="tb_m_detail_spec_ref">
           <Key>
@@ -506,6 +555,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="B" Type="varchar" MaxLength="255" />
           <Property Name="C" Type="varchar" MaxLength="255" />
           <Property Name="D" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="tb_m_dhs_cas">
           <Key>
@@ -1674,6 +1724,7 @@ warning 6002: The table/view 'def.alsi.holiday_calendar' does not have a primary
           <Property Name="hpa_type" Type="int" />
           <Property Name="data_group" Type="varchar" MaxLength="150" />
           <Property Name="note" Type="varchar" MaxLength="255" />
+          <Property Name="correlation_due_date" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="template_wd_hpa_for3_coverpage">
           <Key>
@@ -2054,6 +2105,9 @@ warning 6002: The table/view 'def.alsi.users_logged' does not have a primary key
           <EntitySet Name="menu" EntityType="Self.menu" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="menu_role" EntityType="Self.menu_role" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="tb_ft_cfg_parameter" EntityType="Self.tb_ft_cfg_parameter" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="tb_ft_sample_mp" EntityType="Self.tb_ft_sample_mp" Schema="alsi" store:Type="Tables" />
+          <EntitySet Name="tb_ft_sample_result" EntityType="Self.tb_ft_sample_result" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_component" EntityType="Self.tb_m_component" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_detail_spec" EntityType="Self.tb_m_detail_spec" Schema="alsi" store:Type="Tables" />
           <EntitySet Name="tb_m_detail_spec_ref" EntityType="Self.tb_m_detail_spec_ref" Schema="alsi" store:Type="Tables" />
@@ -2182,6 +2236,9 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySet Name="menus" EntityType="alsiModel.menu" />
           <EntitySet Name="menu_role" EntityType="alsiModel.menu_role" />
           <EntitySet Name="roles" EntityType="alsiModel.role" />
+          <EntitySet Name="tb_ft_cfg_parameter" EntityType="alsiModel.tb_ft_cfg_parameter" />
+          <EntitySet Name="tb_ft_sample_mp" EntityType="alsiModel.tb_ft_sample_mp" />
+          <EntitySet Name="tb_ft_sample_result" EntityType="alsiModel.tb_ft_sample_result" />
           <EntitySet Name="tb_m_component" EntityType="alsiModel.tb_m_component" />
           <EntitySet Name="tb_m_detail_spec" EntityType="alsiModel.tb_m_detail_spec" />
           <EntitySet Name="tb_m_detail_spec_ref" EntityType="alsiModel.tb_m_detail_spec_ref" />
@@ -2570,10 +2627,10 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="path_url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="path_source_file" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="requestor" Type="Int32" />
-          <Property Name="modified_by" Type="Int32" />
-          <Property Name="verified_by" Type="Int32" />
-          <Property Name="validated_by" Type="Int32" />
+          <Property Name="requestor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="modified_by" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="verified_by" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="validated_by" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="modified_date" Type="DateTime" />
           <Property Name="create_date" Type="DateTime" />
           <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
@@ -2641,6 +2698,54 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="UPDATE_BY" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CREATE_DATE" Type="DateTime" Nullable="false" />
           <Property Name="UPDATE_DATE" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_ft_cfg_parameter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="template_id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="param_group" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="param_seq" Type="Int32" />
+          <Property Name="param_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="param_value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="is_formular" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="formular_sheet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_ft_sample_mp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sample_id" Type="Int32" Nullable="false" />
+          <Property Name="column_seq" Type="Int32" Nullable="false" />
+          <Property Name="column_index" Type="Int32" Nullable="false" />
+          <Property Name="column_value" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="column_display_flag" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="created_date" Type="DateTime" Nullable="false" />
+          <Property Name="created_by" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="updated_date" Type="DateTime" Nullable="false" />
+          <Property Name="updated_by" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_ft_sample_result">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mp_id" Type="Int32" Nullable="false" />
+          <Property Name="column_seq" Type="Int32" />
+          <Property Name="column_index" Type="Int32" />
+          <Property Name="column_value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="column_display_flag" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="created_date" Type="DateTime" Nullable="false" />
+          <Property Name="created_by" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="updated_date" Type="DateTime" Nullable="false" />
+          <Property Name="updated_by" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_m_component">
           <Key>
@@ -2762,6 +2867,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="BX" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="BY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="BZ" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_m_detail_spec_ref">
           <Key>
@@ -2775,6 +2881,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="B" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="C" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="D" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_m_dhs_cas">
           <Key>
@@ -3943,6 +4050,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <Property Name="hpa_type" Type="Int32" />
           <Property Name="data_group" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="correlation_due_date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="template_wd_hpa_for3_coverpage">
           <Key>
@@ -4693,6 +4801,57 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tb_ft_cfg_parameter">
+            <EntityTypeMapping TypeName="alsiModel.tb_ft_cfg_parameter">
+              <MappingFragment StoreEntitySet="tb_ft_cfg_parameter">
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="formular_sheet" ColumnName="formular_sheet" />
+                <ScalarProperty Name="is_formular" ColumnName="is_formular" />
+                <ScalarProperty Name="param_value" ColumnName="param_value" />
+                <ScalarProperty Name="param_name" ColumnName="param_name" />
+                <ScalarProperty Name="param_seq" ColumnName="param_seq" />
+                <ScalarProperty Name="param_group" ColumnName="param_group" />
+                <ScalarProperty Name="template_id" ColumnName="template_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ft_sample_mp">
+            <EntityTypeMapping TypeName="alsiModel.tb_ft_sample_mp">
+              <MappingFragment StoreEntitySet="tb_ft_sample_mp">
+                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="column_display_flag" ColumnName="column_display_flag" />
+                <ScalarProperty Name="column_value" ColumnName="column_value" />
+                <ScalarProperty Name="column_index" ColumnName="column_index" />
+                <ScalarProperty Name="column_seq" ColumnName="column_seq" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ft_sample_result">
+            <EntityTypeMapping TypeName="alsiModel.tb_ft_sample_result">
+              <MappingFragment StoreEntitySet="tb_ft_sample_result">
+                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="column_display_flag" ColumnName="column_display_flag" />
+                <ScalarProperty Name="column_value" ColumnName="column_value" />
+                <ScalarProperty Name="column_index" ColumnName="column_index" />
+                <ScalarProperty Name="column_seq" ColumnName="column_seq" />
+                <ScalarProperty Name="mp_id" ColumnName="mp_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tb_m_component">
             <EntityTypeMapping TypeName="alsiModel.tb_m_component">
               <MappingFragment StoreEntitySet="tb_m_component">
@@ -4732,6 +4891,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="tb_m_detail_spec">
             <EntityTypeMapping TypeName="alsiModel.tb_m_detail_spec">
               <MappingFragment StoreEntitySet="tb_m_detail_spec">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="BZ" ColumnName="BZ" />
                 <ScalarProperty Name="BY" ColumnName="BY" />
                 <ScalarProperty Name="BX" ColumnName="BX" />
@@ -4819,6 +4979,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="tb_m_detail_spec_ref">
             <EntityTypeMapping TypeName="alsiModel.tb_m_detail_spec_ref">
               <MappingFragment StoreEntitySet="tb_m_detail_spec_ref">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="D" ColumnName="D" />
                 <ScalarProperty Name="C" ColumnName="C" />
                 <ScalarProperty Name="B" ColumnName="B" />
@@ -6001,6 +6162,7 @@ FROM `users_logged` AS `users_logged`</DefiningQuery>
           <EntitySetMapping Name="template_wd_hpa_for1_coverpage">
             <EntityTypeMapping TypeName="alsiModel.template_wd_hpa_for1_coverpage">
               <MappingFragment StoreEntitySet="template_wd_hpa_for1_coverpage">
+                <ScalarProperty Name="correlation_due_date" ColumnName="correlation_due_date" />
                 <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="data_group" ColumnName="data_group" />
                 <ScalarProperty Name="hpa_type" ColumnName="hpa_type" />

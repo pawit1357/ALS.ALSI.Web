@@ -270,6 +270,8 @@
                             <asp:LinkButton ID="btnOperationGroupInvoice" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group Invoice</asp:LinkButton>
                             <asp:LinkButton ID="btnOperationSentToCus" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group Sent to Cus Date</asp:LinkButton>
                             <asp:LinkButton ID="btnOperationNote" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group Note</asp:LinkButton>
+                            <asp:LinkButton ID="btnOperationOtherRef" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group OtherRef</asp:LinkButton>
+
                             <asp:LinkButton ID="btnOperationCusRefNo" runat="server" class="btn green-meadow" OnClick="btnOperation_Click"> Group CusRefNo</asp:LinkButton>
 
                             <asp:LinkButton ID="btnElp" runat="server" class="btn btn-default btn-sm" OnClick="btnElp_Click"> ELP</asp:LinkButton>

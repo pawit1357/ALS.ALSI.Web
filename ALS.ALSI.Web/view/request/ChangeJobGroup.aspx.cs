@@ -84,6 +84,11 @@ namespace ALS.ALSI.Web.view.request
             get { return (Boolean)Session[GetType().Name + "isCusRefNoGroupOperation"]; }
             set { Session[GetType().Name + "isCusRefNoGroupOperation"] = value; }
         }
+        public Boolean isOtherRefGroupOpeation
+        {
+            get { return (Boolean)Session[GetType().Name + "isOtherRefGroupOpeation"]; }
+            set { Session[GetType().Name + "isOtherRefGroupOpeation"] = value; }
+        }
         public Boolean isGroupApproveOperation
         {
             get { return (Boolean)Session[GetType().Name + "isGroupApproveOperation"]; }
@@ -123,10 +128,12 @@ namespace ALS.ALSI.Web.view.request
             }
 
             btnSave.Visible = this.dataList.Count > 0;
-            pChemist.Visible = (this.dataList.Count > 0) && !this.isChangeDueDateGroup && !this.isPoGroupOperation && !this.isInvoiceGroupOperation && !this.isSentToCusDateOperation && !this.isNoteGroupOpeation && !this.isCusRefNoGroupOperation;
+            pChemist.Visible = (this.dataList.Count > 0) && !this.isChangeDueDateGroup && !this.isPoGroupOperation && !this.isInvoiceGroupOperation && !this.isSentToCusDateOperation && !this.isNoteGroupOpeation && !this.isCusRefNoGroupOperation && !this.isOtherRefGroupOpeation;
             pChangeDueDate.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && (this.isChangeDueDateGroup || this.isSentToCusDateOperation) && !this.isInvoiceGroupOperation && !this.isNoteGroupOpeation && !this.isCusRefNoGroupOperation;
             pAccount2.Visible = (this.dataList.Count > 0) && !this.isPoGroupOperation && !this.isChangeDueDateGroup && !isNoteGroupOpeation && this.isInvoiceGroupOperation && !this.isCusRefNoGroupOperation;
             pCusRefNo.Visible = this.isCusRefNoGroupOperation;
+            pOtherRef.Visible = this.isOtherRefGroupOpeation;
+
             if (!btnSave.Visible)
             {
                 lbDesc.Text = "รายการที่เลือกไม่ได้ถูกกำหนดเป็นงานแบบกลุ่ม";
@@ -180,6 +187,7 @@ namespace ALS.ALSI.Web.view.request
                 this.isNoteGroupOpeation = prvPage.isNoteGroupOpeation;
                 this.isCusRefNoGroupOperation = prvPage.isCusRefNoGroupOperation;
                 this.isGroupApproveOperation = prvPage.isGroupApproveOperation;
+                this.isOtherRefGroupOpeation = prvPage.isOtherRefGroupOpeation;
 
                 this.dataList = job_sample.FindAllByIds(this.selectedList);
 
@@ -211,6 +219,7 @@ namespace ALS.ALSI.Web.view.request
                 pAccount2.Visible = false;
                 pCusRefNo.Visible = false;
                 pShowChemistFileUpload.Visible = false;
+                pOtherRef.Visible = false;
 
                 String desc2 = String.Empty;
                 if (isPoGroupOperation) desc2 = "(PO)";
@@ -218,7 +227,7 @@ namespace ALS.ALSI.Web.view.request
                 if (isInvoiceGroupOperation) desc2 = "(Invoice)";
                 if (isSentToCusDateOperation) desc2 = "(Date Admin Sent to Customer)";
                 if (isCusRefNoGroupOperation) desc2 = "(Customer ref no)";
-
+                if (isOtherRefGroupOpeation) desc2 = "(Other Ref No)";
                 pCusRefNo.Visible = this.isCusRefNoGroupOperation;
 
                 RoleEnum userRole = (RoleEnum)Enum.Parse(typeof(RoleEnum), userLogin.role_id.ToString(), true);
@@ -236,6 +245,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount2.Visible = false;
                         pNote.Visible = false;
                         pCusRefNo.Visible = false;
+                        pOtherRef.Visible = false;
                         lbDesc.Text = "Login: ทำรายการแบบกลุ่ม" + desc2;
                         break;
                     case RoleEnum.CHEMIST:
@@ -250,6 +260,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount2.Visible = false;
                         pNote.Visible = this.isNoteGroupOpeation;
                         pCusRefNo.Visible = false;
+                        pOtherRef.Visible = false;
                         lbDesc.Text = "Chemist: ทำรายการแบบกลุ่ม" + desc2;
                         break;
                     case RoleEnum.SR_CHEMIST:
@@ -266,6 +277,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount2.Visible = false;
                         pNote.Visible = false;
                         pCusRefNo.Visible = false;
+                        pOtherRef.Visible = false;
                         lbDesc.Text = "Sr.Chemist: ทำรายการแบบกลุ่ม" + desc2;
 
                         break;
@@ -283,6 +295,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount2.Visible = false;
                         pNote.Visible = false;
                         pCusRefNo.Visible = false;
+                        pOtherRef.Visible = false;
                         lbDesc.Text = "Lab Mnager: ทำรายการแบบกลุ่ม" + desc2;
 
                         break;
@@ -299,6 +312,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount2.Visible = false;
                         pNote.Visible = this.isNoteGroupOpeation;
                         pCusRefNo.Visible = false;
+                        pOtherRef.Visible = false;
                         lbDesc.Text = "Admin: ทำรายการแบบกลุ่ม" + desc2;
 
                         break;
@@ -313,6 +327,7 @@ namespace ALS.ALSI.Web.view.request
                         pNote.Visible = this.isNoteGroupOpeation;
                         pAccount2.Visible = this.isInvoiceGroupOperation;
                         pCusRefNo.Visible = false;
+                        pOtherRef.Visible = false;
                         lbDesc.Text = "Account: ทำรายการแบบกลุ่ม" + desc2;
                         break;
                     case RoleEnum.MARKETING:
@@ -327,6 +342,7 @@ namespace ALS.ALSI.Web.view.request
                         pAccount2.Visible = false;
                         pNote.Visible = false;
                         pCusRefNo.Visible = true;
+                        pOtherRef.Visible = true;
                         lbDesc.Text = "Marketting: ทำรายการแบบกลุ่ม" + desc2;
                         break;
                     default:
@@ -372,6 +388,9 @@ namespace ALS.ALSI.Web.view.request
                 }
                 else if (this.isChangeDueDateGroup)
                 {
+                    holiday_calendar h = new holiday_calendar();
+                    //DateTime[] dt = h.GetDueDate(Convert.ToInt32(jobSample.status_completion_scheduled), CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
+
                     switch (userRole)
                     {
                         case RoleEnum.LOGIN:
@@ -393,7 +412,10 @@ namespace ALS.ALSI.Web.view.request
                                     //2|Urgent
                                     //3|Express
                                     //4|Extend 1
-                                    //5|Extend 2
+
+
+                                    //jobSample.due_date_lab = dt[0];
+
 
                                     switch (jobSample.status_completion_scheduled.Value)
                                     {
@@ -413,6 +435,7 @@ namespace ALS.ALSI.Web.view.request
                             }
                             break;
                         case RoleEnum.ADMIN:
+                            //jobSample.due_date_customer = dt[1];
                             jobSample.due_date_customer = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text), 0);
                             break;
                     }
@@ -494,6 +517,10 @@ namespace ALS.ALSI.Web.view.request
                         }
 
                     }
+                }
+                else if (this.isOtherRefGroupOpeation)
+                {
+                    jobSample.other_ref_no = txtOtherRefNo.Text;
                 }
                 else
                 {

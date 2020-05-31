@@ -137,7 +137,6 @@ namespace ALS.ALSI.Web.view.request
         protected void btnSave_Click(object sender, EventArgs e)
         {
             holiday_calendar hc = new holiday_calendar();
-            //this.jobSample.due_date = hc.GetWorkingDayLab(CustomUtils.converFromDDMMYYYY(txtDuedate.Text),1,true);
             if (cbIsTba.Checked)
             {
                 this.jobSample.due_date_lab = new DateTime(1, 1, 1);
@@ -151,6 +150,10 @@ namespace ALS.ALSI.Web.view.request
                 //3|Express
                 //4|Extend 1
                 //5|Extend 2
+                //holiday_calendar h = new holiday_calendar();
+                //DateTime[] dt = h.GetDueDate(Convert.ToInt32(jobSample.status_completion_scheduled), CustomUtils.converFromDDMMYYYY(txtDuedate.Text));
+                //jobSample.due_date_lab = dt[0];
+                //jobSample.due_date_customer = dt[1];
 
                 switch (this.jobSample.status_completion_scheduled.Value)
                 {

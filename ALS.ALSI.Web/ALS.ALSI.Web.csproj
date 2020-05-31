@@ -1581,6 +1581,7 @@
     <Content Include="view\template\PA03.ascx" />
     <Content Include="view\template\-PA02.ascx" />
     <Content Include="view\template\Seagate_Copperwire.ascx" />
+    <Content Include="view\template\TemplateLayout.ascx" />
     <Content Include="view\template\Seagate_DHS_V2.ascx" />
     <Content Include="view\template\Seagate_FTIR_Damper.ascx" />
     <Content Include="view\template\Seagate_FTIR_Adhesive.ascx" />
@@ -1603,7 +1604,9 @@
     <Content Include="view\template\Seagate_HPA.ascx" />
     <Content Include="view\template\Seagate_HPA_Siam.ascx" />
     <Content Include="view\template\WD_Corrosion.ascx" />
+    <Content Include="view\template\WD_GCMS_Unified.ascx" />
     <Content Include="view\template\WD_GCMS_CVR.ascx" />
+    <Content Include="view\template\WD_KPA.ascx" />
     <Content Include="view\template\WD_HPA_FOR_1_V2.ascx" />
     <Content Include="view\template\WD_HPA_FOR_3.ascx" />
     <Content Include="view\template\WD_HPA_FOR_1.ascx" />
@@ -1942,6 +1945,13 @@
     <Compile Include="view\template\Seagate_Copperwire.ascx.designer.cs">
       <DependentUpon>Seagate_Copperwire.ascx</DependentUpon>
     </Compile>
+    <Compile Include="view\template\TemplateLayout.ascx.cs">
+      <DependentUpon>TemplateLayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\TemplateLayout.ascx.designer.cs">
+      <DependentUpon>TemplateLayout.ascx</DependentUpon>
+    </Compile>
     <Compile Include="view\template\Seagate_DHS_V2.ascx.cs">
       <DependentUpon>Seagate_DHS_V2.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2096,12 +2106,26 @@
     <Compile Include="view\template\WD_Corrosion.ascx.designer.cs">
       <DependentUpon>WD_Corrosion.ascx</DependentUpon>
     </Compile>
+    <Compile Include="view\template\WD_GCMS_Unified.ascx.cs">
+      <DependentUpon>WD_GCMS_Unified.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\WD_GCMS_Unified.ascx.designer.cs">
+      <DependentUpon>WD_GCMS_Unified.ascx</DependentUpon>
+    </Compile>
     <Compile Include="view\template\WD_GCMS_CVR.ascx.cs">
       <DependentUpon>WD_GCMS_CVR.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="view\template\WD_GCMS_CVR.ascx.designer.cs">
       <DependentUpon>WD_GCMS_CVR.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="view\template\WD_KPA.ascx.cs">
+      <DependentUpon>WD_KPA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\WD_KPA.ascx.designer.cs">
+      <DependentUpon>WD_KPA.ascx</DependentUpon>
     </Compile>
     <Compile Include="view\template\WD_HPA_FOR_1_V2.ascx.cs">
       <DependentUpon>WD_HPA_FOR_1_V2.ascx</DependentUpon>
@@ -2523,6 +2547,7 @@
     <EmbeddedResource Include="ReportObject\dhs_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\ftir_nvr_seagate_damper.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_seagate_2.rdlc" />
+    <EmbeddedResource Include="ReportObject\gcms_wd_unified.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v3.rdlc" />

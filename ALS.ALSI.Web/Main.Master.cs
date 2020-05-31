@@ -64,16 +64,36 @@ namespace ALS.ALSI.Web
                     //Generate Alert
                     renderAlert();
 
-//1   Normal    8   7   8
-//2   Urgent    5   5   5
-//3   Express   3   3   3
-//4   Extend 1      9   10
-//5   Extend 2      14  15
-
-                    //(ยกตัวอย่าง งานเข้าวันพฤหัสฯ ที่ 27 มิ.ย ดิวแลปจะเป็น 3 ก.ค ดิวแอดมินก็จะเป็น 3 ก.ค
-                    //DateTime _date = new DateTime(2020, 05, 01);//yyyyMMdd
+                    //1   Normal    8   8   8
+                    //2   Urgent    5   5   5
+                    //3   Express   3   3   3
+                    //4   Extend 1      10   10
+                    //5   Extend 2      15  15
+                    /*
+                     * เข้า 13/05/2020
+                        ดิวแลป
+                            (/) - normal (เข้าพุธ ออก พุธ) ดิวจะเป็น 20 (8วัน นับตั้งแต่วันเข้ารวมเสาร์ อาทิตย์ด้วย)
+                            (/) - extren1 ดิวจะเป็น 22 (10วัน นับตั้งแต่วันเข้ารวมเสาร์ อาทิตย์ด้วย)
+                            (/) - extren2 ดิวจะเป็น 27 (15วัน นับตั้งแต่วันเข้ารวมเสาร์ อาทิตย์ด้วย)
+                        ดิวแอดมิน
+                            - จะบวกเพิ่มจากแลป 1วันค่ะ
+                                - Express 3 วัน ไม่นับเสาร์ อาทิตย์
+                                - Urgent 5 วัน ไม่นับ เสาร์ อาทิตย์
+                            - กรณี เข้า 13/05
+                                Express (3 วัน) จะออก 15 //
+                                Urgent (5 วัน) จะออก 19 /
+                            - กรณีเข้า 14/05
+                                Express (3 วัน) จะออก 18 /
+                                Urgent (5 วัน) จะออก 20 //
+                            - กรณี เข้า 11/05
+                                Express (3 วัน) จะออก 13 //
+                                Urgent (5 วัน) จะออก 15 //
+                            - กรณี เข้า 15/05
+                                Express (3 วัน) จะออก 19 //
+                                Urgent (5 วัน) จะออก 21 //
+                    */
                     //holiday_calendar h = new holiday_calendar();
-                    //DateTime dt = h.GetWorkingDayLab(_date, 9);
+                    //DateTime[] dt = h.GetDueDate(2, new DateTime(2020, 05, 13));//unit test
                     //Console.WriteLine();
 
                 }

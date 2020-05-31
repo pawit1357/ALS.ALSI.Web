@@ -148,6 +148,7 @@
     <Compile Include="Constant\Configuration.cs" />
     <Compile Include="Constant\Constants.cs" />
     <Compile Include="Constant\ExcelColumn.cs" />
+    <Compile Include="DataAccessV2\TbFtCfgParameter.cs" />
     <Compile Include="DataAccess\ALSI.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -202,6 +203,8 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\MHolidayCalancar.cs" />
+    <Compile Include="DataAccessV2\TbFtSampleResult.cs" />
+    <Compile Include="DataAccessV2\TbFtSampleMp.cs" />
     <Compile Include="DataAccess\m_completion_scheduled.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
@@ -239,6 +242,15 @@
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\SeagateGCMS2.cs" />
+    <Compile Include="DataAccess\tb_ft_cfg_parameter.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\tb_ft_sample_mp.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\tb_ft_sample_result.cs">
+      <DependentUpon>ALSI.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\tb_m_component.cs">
       <DependentUpon>ALSI.tt</DependentUpon>
     </Compile>

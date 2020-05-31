@@ -366,6 +366,12 @@ namespace ALS.ALSI.Web.view.template
                 txtExtractionMedium_hpa.Text = _cover.ExtractionMedium_hpa;
                 txtExtractionVolume_hpa.Text = _cover.ExtractionVolume_hpa;
                 ddlLpcType.SelectedValue = _cover.lpc_type.ToString();
+                if (!String.IsNullOrEmpty(_cover.Magnification))
+                {
+                    lbC149.Text = _cover.Magnification;
+                }
+                
+
 
                 tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(_cover.specification_id));
                 if (tem != null)
@@ -466,22 +472,6 @@ namespace ALS.ALSI.Web.view.template
                 txtB8.Text = _cover.ws_b8;
                 txtB9.Text = _cover.ws_b9;
                 #endregion
-
-                //#region "Header Text"
-                //gvLpc03.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                //gvLpc03.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                //gvLpc03.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
-
-                //gvLpc06.Columns[0].HeaderText = String.Format("Liquid Particle Count ({0})", ddlLpcType.SelectedItem.Text);
-                //gvLpc06.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                //gvLpc06.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
-
-                //gvHpa.Columns[0].HeaderText = String.Format("Hard Particle Analysis({0})", ddlLpcType.SelectedItem.Text);
-                //gvHpa.Columns[1].HeaderText = String.Format("Specification Limit,({0})", tem.C);
-                //gvHpa.Columns[2].HeaderText = String.Format("Results,({0})", tem.C);
-                //#endregion
-
-
 
 
                 #region "Unit"
@@ -589,6 +579,8 @@ namespace ALS.ALSI.Web.view.template
                         ws.unit = Convert.ToInt32(ddlLiquidParticleUnit.SelectedValue);
                         ws.unit2 = Convert.ToInt32(ddlHardParticleAlalysisUnit.SelectedValue);
                         ws.unit3 = Convert.ToInt32(ddlClassificationUnit.SelectedValue);
+                        ws.Magnification = lbC149.Text;
+
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_hpa_coverpage where sample_id={0}", this.SampleID));
                     //template_seagate_hpa_coverpage.DeleteBySampleID(this.SampleID);
@@ -621,7 +613,7 @@ namespace ALS.ALSI.Web.view.template
                         ws.unit3 = Convert.ToInt32(ddlClassificationUnit.SelectedValue);
                         ws.show_note_pzt = Convert.ToSByte(cbNotePZT.Checked);
                         ws.note_pzt = lbNotePZT.Text;
-
+                        ws.Magnification = lbC149.Text;
                         #region "Method/Procedure"
                         ws.ProcedureNo = txtProcedureNo.Text;
                         ws.NumberOfPieces = txtNumberOfPieces.Text;

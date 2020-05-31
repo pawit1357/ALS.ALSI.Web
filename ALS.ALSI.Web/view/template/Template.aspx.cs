@@ -60,10 +60,10 @@ namespace ALS.ALSI.Web.view.template
                     path_source_file = String.Format(Configurations.PATH_TEMPLATE, FileUpload1.FileName),
                     path_url = txtPathUrl.Text,
                     description = txtDescription.Text,
-                    requestor = UserLogin.id,
-                    modified_by = UserLogin.id,
-                    verified_by = UserLogin.id,
-                    validated_by = UserLogin.id,
+                    requestor = UserLogin.id.ToString(),
+                    modified_by = UserLogin.id.ToString(),
+                    verified_by = UserLogin.id.ToString(),
+                    validated_by = UserLogin.id.ToString(),
                     modified_date = DateTime.Now,
                     create_date = DateTime.Now,
                     version = txtVersion.Text,
@@ -228,9 +228,9 @@ namespace ALS.ALSI.Web.view.template
             Boolean bUploadSuccess = false;
             try
             {
-                MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_component where template_id={0}", template_id));
-                MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_detail_spec_ref where template_id={0}", template_id));
-                MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_specification where template_id={0}", template_id));
+                //MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_component where template_id={0}", template_id));
+                //MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_detail_spec_ref where template_id={0}", template_id));
+                //MaintenanceBiz.ExecuteReturnDt(string.Format("delete from tb_m_specification where template_id={0}", template_id));
 
                 
                 List<int> listOfSpec = new List<int>();
@@ -331,7 +331,10 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                         //Delete
-                        new tb_m_component().DeleteByTemplateID(template_id);
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_component set status = 'N' where template_id = "+ template_id);
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_detail_spec_ref set status = 'N' where template_id = " + template_id);
+
+                        //new tb_m_component().DeleteByTemplateID(template_id);
                         //new tb_m_detail_spec_ref().DeleteByTemplateID(template_id);
                         //
                         new tb_m_component().InsertList(components);
@@ -468,6 +471,7 @@ namespace ALS.ALSI.Web.view.template
                             //
                             new tb_m_detail_spec().InsertList(detailSpecs);
                         }
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_detail_spec set status = 'N' where template_id = " + template_id);
                     }
                     #endregion
                     #region "Specification"
@@ -545,7 +549,8 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                         //Delete
-                        new tb_m_specification().DeleteByTemplateID(template_id);
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_specification set status = 'N' where template_id = " + template_id);
+                        //new tb_m_specification().DeleteByTemplateID(template_id);
                         new tb_m_specification().InsertList(specifications);
                     }
                     #endregion
@@ -625,7 +630,8 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                         //Delete
-                        new tb_m_specification().DeleteByTemplateID(template_id);
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_specification set status = 'N' where template_id = " + template_id);
+                        //new tb_m_specification().DeleteByTemplateID(template_id);
                         new tb_m_specification().InsertList(specifications);
                     }
                     #endregion
@@ -704,6 +710,7 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                         //Delete
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_specification set status = 'N' where template_id = " + template_id);
                         //new tb_m_specification().DeleteByTemplateID(template_id);
                         new tb_m_specification().InsertList(specifications);
                     }

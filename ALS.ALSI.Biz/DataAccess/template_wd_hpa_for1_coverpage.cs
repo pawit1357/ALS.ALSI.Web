@@ -36,5 +36,6 @@ namespace ALS.ALSI.Biz.DataAccess
         public Nullable<int> hpa_type { get; set; }
         public string data_group { get; set; }
         public string note { get; set; }
+        public string correlation_due_date { get; set; }
     }
 }

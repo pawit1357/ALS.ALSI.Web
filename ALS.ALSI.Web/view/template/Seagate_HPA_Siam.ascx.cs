@@ -342,7 +342,13 @@ namespace ALS.ALSI.Web.view.template
                 ddlLiquidParticleUnit.SelectedValue = this.Hpas[0].unit == null ? "0" : this.Hpas[0].unit.Value.ToString();
                 ddlHardParticleAlalysisUnit.SelectedValue = this.Hpas[0].unit2 == null ? "0" : this.Hpas[0].unit2.Value.ToString();
                 ddlClassificationUnit.SelectedValue = this.Hpas[0].unit3 == null ? "0" : this.Hpas[0].unit3.Value.ToString();
+                if (!String.IsNullOrEmpty(_cover.Magnification))
+                {
+                    lbC149.Text = _cover.Magnification;
+                }
 
+
+               
 
                 tb_m_specification tem = new tb_m_specification().SelectByID(Convert.ToInt32(_cover.specification_id));
                 if (tem != null)
@@ -607,6 +613,7 @@ namespace ALS.ALSI.Web.view.template
                             ws.unit = Convert.ToInt32(ddlLiquidParticleUnit.SelectedValue);
                             ws.unit2 = Convert.ToInt32(ddlHardParticleAlalysisUnit.SelectedValue);
                             ws.unit3 = Convert.ToInt32(ddlClassificationUnit.SelectedValue);
+                            ws.Magnification = lbC149.Text;
 
                             #region "Method/Procedure"
                             ws.ProcedureNo = txtProcedureNo.Text;

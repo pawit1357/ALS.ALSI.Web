@@ -637,26 +637,30 @@ namespace ALS.ALSI.Web.view.request
                                 else
                                 {
                                     holiday_calendar h = new holiday_calendar();
-                                    switch (jobSample.status_completion_scheduled.Value)
-                                    {
-                                        case 2://Urgent
-                                            jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date), true);
-                                            jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date), true);
-                                            break;
-                                        case 1://Normal
-                                        case 5://Extend 2
-                                            jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date));
-                                            jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date));
-                                            break;
-                                        case 4://Extend 1
-                                            jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date));
-                                            jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date));
-                                            break;
-                                        case 3://Express
-                                            jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date)-1);
-                                            jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date)-1);
-                                            break;
-                                    }
+                                    DateTime[] dt = h.GetDueDate(Convert.ToInt32(jobSample.status_completion_scheduled), Convert.ToDateTime(objJobInfo.date_of_receive.Value));
+                                    jobSample.due_date_lab = dt[0];
+                                    jobSample.due_date_customer = dt[1];
+
+                                    //switch (jobSample.status_completion_scheduled.Value)
+                                    //{
+                                    //    case 2://Urgent
+                                    //        jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date), true);
+                                    //        jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date), true);
+                                    //        break;
+                                    //    case 1://Normal
+                                    //    case 5://Extend 2
+                                    //        jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date));
+                                    //        jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date));
+                                    //        break;
+                                    //    case 4://Extend 1
+                                    //        jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date));
+                                    //        jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date));
+                                    //        break;
+                                    //    case 3://Express
+                                    //        jobSample.due_date_lab = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.lab_due_date)-1);
+                                    //        jobSample.due_date_customer = h.GetWorkingDayLab(Convert.ToDateTime(objJobInfo.date_of_receive.Value), Convert.ToInt32(cs.customer_due_date)-1);
+                                    //        break;
+                                    //}
 
                                 }
                             }

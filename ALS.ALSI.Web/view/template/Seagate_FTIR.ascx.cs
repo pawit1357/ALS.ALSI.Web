@@ -467,14 +467,14 @@ namespace ALS.ALSI.Web.view.template
                     this.jobSample.is_no_spec = cbCheckBox.Checked ? "1" : "0";
 
 
-                    tb_m_specification mSpec = new tb_m_specification().SelectByID(this.Ftir[0].specification_id.Value);
+                    //tb_m_specification mSpec = new tb_m_specification().SelectByID(this.Ftir[0].specification_id.Value);
                     foreach (template_seagate_ftir_coverpage item in this.Ftir)
                     {
                         item.sample_id = this.SampleID;
                         item.specification_id = Convert.ToInt32(ddlSpecification.SelectedValue);
                         item.selected_unit_ftir = Convert.ToInt32(ddlUnit.SelectedValue);
-                        item.spec_c = mSpec.C;
-                        item.spec_b = mSpec.B;
+                        //item.spec_c = mSpec.C;
+                        //item.spec_b = mSpec.B;
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_ftir_coverpage where sample_id={0}", this.SampleID));
                     //template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
@@ -535,7 +535,7 @@ namespace ALS.ALSI.Web.view.template
                     //this.Ftir.nvrc37 = nvrC37.Text;
 
                     #endregion
-                    tb_m_specification mSpec1 = new tb_m_specification().SelectByID(this.Ftir[0].specification_id.Value);
+                    //tb_m_specification mSpec1 = new tb_m_specification().SelectByID(this.Ftir[0].specification_id.Value);
                     foreach (template_seagate_ftir_coverpage item in this.Ftir)
                     {
                         item.sample_id = this.SampleID;
@@ -544,8 +544,8 @@ namespace ALS.ALSI.Web.view.template
                         item.w_b13 = txtWB13.Text;
                         item.w_b14 = txtWB14.Text;
                         item.w_b15 = txtWB15.Text;
-                        item.spec_c = mSpec1.C;
-                        item.spec_b = mSpec1.B;
+                        //item.spec_c = mSpec1.C;
+                        //item.spec_b = mSpec1.B;
                     }
                     MaintenanceBiz.ExecuteReturnDt(string.Format("delete from template_seagate_ftir_coverpage where sample_id={0}", this.SampleID));
                     //template_seagate_ftir_coverpage.DeleteBySampleID(this.SampleID);
@@ -728,7 +728,11 @@ namespace ALS.ALSI.Web.view.template
             if (item != null)
             {
                 lbSpecDesc.Text = String.Format("The Specification is based on Seagate's Doc {0} {1}", item.C, item.B);
-
+                foreach (template_seagate_ftir_coverpage _ftir in this.Ftir)
+                {
+                    _ftir.spec_c = item.C;
+                    _ftir.spec_b = item.B;
+                }
                 #region "FTIR"
                 template_seagate_ftir_coverpage tmp = new template_seagate_ftir_coverpage();
                 tmp.ID = this.Ftir.Count + 1;
