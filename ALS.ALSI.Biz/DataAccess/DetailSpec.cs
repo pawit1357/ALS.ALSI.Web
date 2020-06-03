@@ -40,7 +40,7 @@ namespace ALS.ALSI.Biz.DataAccess
 
         public tb_m_detail_spec SelectByID(int _id)
         {
-            return _repository.Find(x => x.ID == _id).FirstOrDefault();
+            return _repository.Find(x => x.ID == _id && x.status.Equals('Y')).FirstOrDefault();
         }
         public List<tb_m_detail_spec> SelectByTemplateID(int _id)
         {

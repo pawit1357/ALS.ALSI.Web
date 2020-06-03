@@ -87,7 +87,6 @@
                                                         </EditItemTemplate>
                                                         <ItemStyle HorizontalAlign="Left" />
                                                     </asp:TemplateField>
-                                                    <!-- Action -->
                                                     <asp:TemplateField HeaderText="Hide">
                                                         <ItemTemplate>
                                                             <asp:LinkButton ID="btnHide" runat="server" ToolTip="Hide" CommandName="Hide" OnClientClick="return confirm('ต้องการซ่อนแถว ?');"

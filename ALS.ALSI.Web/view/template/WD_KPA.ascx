@@ -70,11 +70,11 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <asp:Label ID="lbSpecDesc" runat="server" Text=""></asp:Label></td>
+                                                    <asp:Label ID="lbSpecDesc" runat="server" Text="" Visible="false"></asp:Label></td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" /></td>
+                                                    <asp:CheckBox ID="cbCheckBox" runat="server" Text="No Spec" OnCheckedChanged="cbCheckBox_CheckedChanged" AutoPostBack="true" Visible="false" /></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -136,9 +136,9 @@
 
                                 <h5>Stage Mimic of
                     <asp:Label ID="lbA34" runat="server" Text=""></asp:Label><br />
-                                    <asp:Label ID="lbImgPath1" runat="server" Text=""></asp:Label>
+                                    <asp:Label ID="lbImgPath1" runat="server" Text="" Visible="true"></asp:Label>
                                     <br />
-                                    <asp:Image ID="Image1" runat="server" Height="150px" Width="150px" />
+                                    <asp:Image ID="Image1" runat="server" Height="150px" Width="150px" Visible="true" />
                                 </h5>
 
                                 <%--                                <asp:Image ID="img1" runat="server" Width="120" Height="120" />--%>
@@ -157,22 +157,22 @@
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Test" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
-                                                        <asp:Literal ID="litB" runat="server" Text='<%# Eval("B")%>' />
+                                                        <asp:Literal ID="litB" runat="server" Text='<%# Eval("A")%>' />
                                                         <asp:HiddenField ID="hParent" runat="server" Value='<%# Eval("Parent")%>' />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Particle Classification" ItemStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
-                                                        <asp:Literal ID="litC" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
+                                                        <asp:Literal ID="litC" runat="server" Text='<%# Eval("B")%>'></asp:Literal>
                                                     </ItemTemplate>
                                                     <EditItemTemplate>
-                                                        <asp:TextBox ID="txtC" runat="server" Text='<%# Eval("C")%>'></asp:TextBox>
+                                                        <asp:TextBox ID="txtC" runat="server" Text='<%# Eval("B")%>'></asp:TextBox>
 
                                                     </EditItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
-                                                        <asp:Literal ID="litD" runat="server" Text='<%# Eval("D")%>'></asp:Literal>
+                                                        <asp:Literal ID="litD" runat="server" Text='<%# Eval("C")%>'></asp:Literal>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Edit">

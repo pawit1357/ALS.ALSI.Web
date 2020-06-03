@@ -799,7 +799,7 @@ namespace ALS.ALSI.Web.view.template
             gvResult.DataSource = this.HpaFor1.Where(x => x.hpa_type == Convert.ToInt32(GVTypeEnum.HPA) && !x.A.Equals("0")).OrderBy(x => x.seq).ToList();
             gvResult.DataBind();
 
-            gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != Convert.ToInt32(GVTypeEnum.HPA)).OrderBy(x => x.seq).ToList();
+            gvResult_1.DataSource = this.HpaFor1.Where(x => x.hpa_type != Convert.ToInt32(GVTypeEnum.HPA) && x.seq>1).OrderBy(x => x.seq).ToList();
             gvResult_1.DataBind();
 
             lbA34.Text = txtB23.Text;
@@ -1022,19 +1022,19 @@ namespace ALS.ALSI.Web.view.template
             //viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd_v2.rdlc");
             if (!String.IsNullOrEmpty(this.HpaFor1[0].correlation_due_date))
             {
-                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd_v2.rdlc");
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/wd_kpa.rdlc");
             }
             else
             {
-                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/hpa_for_1_wd_v2.rdlc");
+                viewer.LocalReport.ReportPath = Server.MapPath("~/ReportObject/wd_kpa.rdlc");
             }
             viewer.LocalReport.SetParameters(reportParameters);
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt)); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", listHpa.ToDataTable())); // Add datasource here
 
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.GetRange(0, 38).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", listElementalComposition.GetRange(38, 31).ToDataTable())); // Add datasource here
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", listElementalComposition.GetRange(69, listElementalComposition.Count - 69).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet3", listElementalComposition.GetRange(0, 35).ToDataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet4", new DataTable())); // Add datasource here
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet5", new DataTable())); // Add datasource here
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet6", new DataTable())); // Add datasource here
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet7", listHpaImg.ToDataTable())); // Add datasource here

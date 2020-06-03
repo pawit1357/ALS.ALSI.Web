@@ -2552,6 +2552,7 @@
     <EmbeddedResource Include="ReportObject\gcms_wd_unified.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
+    <EmbeddedResource Include="ReportObject\wd_kpa.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v3.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_3_wd.rdlc" />
