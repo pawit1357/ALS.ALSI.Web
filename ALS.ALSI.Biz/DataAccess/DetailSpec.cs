@@ -35,16 +35,16 @@ namespace ALS.ALSI.Biz.DataAccess
             {
                 result = result.Where(x => x.template_id == this.template_id);
             }
-            return result.ToList();
+            return result.Where(x=>x.status.Equals("A")).ToList();
         }
 
         public tb_m_detail_spec SelectByID(int _id)
         {
-            return _repository.Find(x => x.ID == _id && x.status.Equals('Y')).FirstOrDefault();
+            return _repository.Find(x => x.ID == _id && x.status.Equals("A")).FirstOrDefault();
         }
         public List<tb_m_detail_spec> SelectByTemplateID(int _id)
         {
-            return _repository.Find(x => x.template_id == _id).ToList();
+            return _repository.Find(x => x.template_id == _id && x.status.Equals("A")).ToList();
         }
 
         public void Insert()

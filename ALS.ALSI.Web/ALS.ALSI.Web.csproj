@@ -1624,6 +1624,7 @@
     <Content Include="view\template\WD_GCMS.ascx" />
     <Content Include="view\template\WD_IC_UNKNOW.ascx" />
     <Content Include="view\template\WD_IC.ascx" />
+    <Content Include="view\template\WD_LPC_Unified.ascx" />
     <Content Include="view\template\WD_LPC.ascx" />
     <Content Include="view\request\ChangeJobDueDate.aspx" />
     <Content Include="view\request\ChangeJobInvoice.aspx" />
@@ -2240,6 +2241,13 @@
     <Compile Include="view\template\WD_IC.ascx.designer.cs">
       <DependentUpon>WD_IC.ascx</DependentUpon>
     </Compile>
+    <Compile Include="view\template\WD_LPC_Unified.ascx.cs">
+      <DependentUpon>WD_LPC_Unified.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\template\WD_LPC_Unified.ascx.designer.cs">
+      <DependentUpon>WD_LPC_Unified.ascx</DependentUpon>
+    </Compile>
     <Compile Include="view\template\WD_LPC.ascx.cs">
       <DependentUpon>WD_LPC.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2552,6 +2560,7 @@
     <EmbeddedResource Include="ReportObject\gcms_wd_unified.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_v2.rdlc" />
     <EmbeddedResource Include="ReportObject\gcms_wd_cvr.rdlc" />
+    <EmbeddedResource Include="ReportObject\lpc_wd_v3.rdlc" />
     <EmbeddedResource Include="ReportObject\wd_kpa.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v3.rdlc" />
     <EmbeddedResource Include="ReportObject\hpa_for_1_wd_v2.rdlc" />

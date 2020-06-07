@@ -331,8 +331,8 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                         //Delete
-                        MaintenanceBiz.ExecuteCommand("update from tb_m_component set status = 'N' where template_id = "+ template_id);
-                        MaintenanceBiz.ExecuteCommand("update from tb_m_detail_spec_ref set status = 'N' where template_id = " + template_id);
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_component set status = 'I' where template_id = "+ template_id);
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_detail_spec_ref set status = 'I' where template_id = " + template_id);
 
                         //new tb_m_component().DeleteByTemplateID(template_id);
                         //new tb_m_detail_spec_ref().DeleteByTemplateID(template_id);
@@ -461,7 +461,7 @@ namespace ALS.ALSI.Web.view.template
                                     detailSpec.BX = CustomUtils.GetCellValue(isDetailSpec.GetRow(row).GetCell(101));
                                     detailSpec.BY = CustomUtils.GetCellValue(isDetailSpec.GetRow(row).GetCell(102));
                                     detailSpec.BZ = CustomUtils.GetCellValue(isDetailSpec.GetRow(row).GetCell(103));
-
+                                    detailSpec.status = "A";
                                     detailSpec.RowState = CommandNameEnum.Add;
                                     detailSpecs.Add(detailSpec);
                                 }
@@ -471,7 +471,7 @@ namespace ALS.ALSI.Web.view.template
                             //
                             new tb_m_detail_spec().InsertList(detailSpecs);
                         }
-                        MaintenanceBiz.ExecuteCommand("update from tb_m_detail_spec set status = 'N' where template_id = " + template_id);
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_detail_spec set status = 'I' where template_id = " + template_id);
                     }
                     #endregion
                     #region "Specification"
@@ -549,7 +549,7 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                         //Delete
-                        MaintenanceBiz.ExecuteCommand("update from tb_m_specification set status = 'N' where template_id = " + template_id);
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_specification set status = 'I' where template_id = " + template_id);
                         //new tb_m_specification().DeleteByTemplateID(template_id);
                         new tb_m_specification().InsertList(specifications);
                     }
@@ -710,7 +710,7 @@ namespace ALS.ALSI.Web.view.template
                             }
                         }
                         //Delete
-                        MaintenanceBiz.ExecuteCommand("update from tb_m_specification set status = 'N' where template_id = " + template_id);
+                        MaintenanceBiz.ExecuteCommand("update from tb_m_specification set status = 'I' where template_id = " + template_id);
                         //new tb_m_specification().DeleteByTemplateID(template_id);
                         new tb_m_specification().InsertList(specifications);
                     }
